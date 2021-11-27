@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" crossorigin="anonymous"></script>
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Noto+Sans+JP&family=Open+Sans&display=swap" rel="stylesheet"> 
+
+    <link href="css/site.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid p-0 h-100" style="min-height: 100vh;">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <div class="container-xl">
+                <a class="navbar-brand" href="#">
+                    <img src="images/schale.png" alt="" width="37" height="23" class="d-inline-block align-text-top">
+                    SCHALE
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">
+                        <img src="images/Common_Icon_Student.png" alt="" width="18.45" height="24" class="d-inline-block align-text-top">
+                        Students
+                    </a>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-xl my-4">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div style="display: flex; justify-content: center;">
+                        <img id="ba-student-img" src="">
+                    </div>
+                    <div class="row" style="position: relative;">
+                        <div class="col">
+                            <button type="button" class="btn btn-light btn-sm" onclick="studentSelectorModal.show()"><img src="images/ui/Common_Icon_Change_Blue.png" style="height: auto; height: 28px; object-fit: contain;"> Change Student</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="container" id=student_info>
+                        <div class="card">
+                            <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab"  aria-current="true" href="#ba-student-page-stats">Info</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-skills">Skills</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-weapon">Weapon</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Profile</a>
+                                    </li>
+                                  </ul>
+                            </div>
+                            <div class="card-body">
+                                <div class="tab-content">
+
+                                    <div id="ba-student-page-stats" class="tab-pane fade show active container p-3" style="background-color: #fff; border-radius: .25em;">
+                                        <div class="d-flex flex-row align-items-end">
+                                            <span class="flex-grow-1">
+                                                <h1 id="ba-student-name-en" style="display: inline; font-weight: bold;"></h1>
+                                                <h4 id="ba-student-name-jp" class="px-2" style="display: inline; font-family: 'Noto Sans JP', sans-serif;"></h4>
+                                            </span>
+                                            <span class="">
+                                                <img id="ba-student-stars" src="images/ui/Star_3.png" style="height: 28px; width:auto; margin-bottom: 0.25rem;">
+                                            </span>
+                                        </div>
+        
+                                        <div class="row g-1 mt-3">
+                                            <div class="col-6 col-md-3">
+                                                <span id="ba-student-class" class="ba-type-info ba-type-striker ba-type-position d-inline-block align-text-top text-center" style="font-weight: bold; font-style: italic;"></span>
+                                                <span id="ba-student-position" class="ba-type-info ba-type-position d-inline-block align-text-top text-center" style="font-weight: bold; font-style: italic;"></span>
+                                            </div>
+                                            <div class="col-6 col-md-3">
+                                                <span id="ba-student-role" class="ba-type-info ba-type-role d-inline-block align-text-top"><img id="ba-student-role-icon" class="me-1" src="" style="height: 18px; width:auto;"><span id="ba-student-role-label"></span></span>
+                                                <span id="ba-student-school" class="ba-type-info ba-type-role d-inline-block align-text-top"><img id="ba-student-school-icon" class="me-1" src="" style="height: 18px; width:auto;"><span id="ba-student-school-label"></span></span>
+                                            </div>
+                                            <div class="col-6 col-md-3">
+                                                <span id="ba-student-attacktype" class="ba-type-info d-inline-block align-text-top"><img class="me-2" src="images/tactical/StrategyObjectBuff_Attack.png" style="height: 18px; width:auto;"><span id="ba-student-attacktype-label" style="font-weight: bold;"></span></span>
+                                                <span id="ba-student-defensetype" class="ba-type-info d-inline-block align-text-top"><img class="me-2" src="images/tactical/StrategyObjectBuff_Defense.png" style="height: 18px; width:auto;"><span id="ba-student-defensetype-label" style="font-weight: bold;"></span></span>
+                                            </div>
+                                            <div class="col-6 col-md-3">
+                                                <div class="row g-1">
+                                                    <div class="col-4">
+                                                        <div class="ba-type-terrain"><span class=""><img class="" src="images/tactical/Common_Icon_Street_g.png" style="height: auto; width:100%;"><img id="ba-student-terrain-street" class="" src="" style="margin-top: 4px; height: auto; width: 100%; padding: 1px;"></span></div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="ba-type-terrain"><span class=""><img class="" src="images/tactical/Common_Icon_Outdoor_g.png" style="height: auto; width:100%;"><img id="ba-student-terrain-outdoor" class="" src="" style="margin-top: 4px; height: auto; width: 100%; padding: 1px;"></span></div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <div class="ba-type-terrain"><span class=""><img class="" src="images/tactical/Common_Icon_Indoor_g.png" style="height: auto; width:100%;"><img id="ba-student-terrain-indoor" class="" src="" style="margin-top: 4px; height: auto; width: 100%; padding: 1px;"></span></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+        
+                                        </div>
+        
+                                        <div class="row g-1 mt-3">
+                                            <div class="col d-flex">
+                                                <span class="ba-type-info ba-type-weapon d-inline-block align-text-top flex-grow-1 me-4" style="height: 74px;">
+                                                    <img id="ba-student-usescover-icon" src="images/tactical/Combat_Icon_Cover_Ally.png" style="height: 24px; width:auto; margin-top: -4px;">
+                                                    <p id="ba-student-weapontype-label" class="d-inline-block" style="font-weight: bold; font-style: italic; font-size: large;"></p>
+                                                </span>
+    
+                                                <span><img id="ba-student-gear-1" class="ba-item-icon" src=""></span>
+                                                <span><img id="ba-student-gear-2" class="ba-item-icon" src=""></span>
+                                                <span><img id="ba-student-gear-3" class="ba-item-icon" src=""></span>
+    
+                                            </div>
+                                        </div>
+    
+                                        <div class="row g-1 mt-3">
+                                            <div class="d-flex flex-row">
+                                                <img id="ba-statpreview-star-1" class="ba-statpreview-star" onclick="changeStatPreviewStars(1)" src="images/ui/Common_Icon_Formation_Star.png">
+                                                <img id="ba-statpreview-star-2" class="ba-statpreview-star" onclick="changeStatPreviewStars(2)" src="images/ui/Common_Icon_Formation_Star.png">
+                                                <img id="ba-statpreview-star-3" class="ba-statpreview-star" onclick="changeStatPreviewStars(3)" src="images/ui/Common_Icon_Formation_Star.png">
+                                                <img id="ba-statpreview-star-4" class="ba-statpreview-star" onclick="changeStatPreviewStars(4)" src="images/ui/Common_Icon_Formation_Star_Disable.png">
+                                                <img id="ba-statpreview-star-5" class="ba-statpreview-star" onclick="changeStatPreviewStars(5)" src="images/ui/Common_Icon_Formation_Star_Disable.png">
+                                                <span class="mx-2 flex-fill"><input id="ba-statpreview-levelrange" oninput="changeStatPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="75"></span>
+                                                <span id="ba-statpreview-level">Level 75</span>
+                                            </div>
+                                        </div>
+    
+                                        <div class="row g-1 mt-2">
+                                            <div class="col">
+                                                <table class="table ba-stats">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="30%">Max HP</td>
+                                                            <td id="ba-student-stat-maxhp" width="20%"></td>
+                                                            <td width="30%">Attack</td>
+                                                            <td id="ba-student-stat-attack" width="20%"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Defense </td>
+                                                            <td id="ba-student-stat-defense"></td>
+                                                            <td>Healing</td>
+                                                            <td id="ba-student-stat-healing"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Accuracy</td>
+                                                            <td id="ba-student-stat-accuracy"></td>
+                                                            <td>Evasion</td>
+                                                            <td id="ba-student-stat-evasion"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Crit Chance</td>
+                                                            <td id="ba-student-stat-crit"></td>
+                                                            <td>Crit DMG</td>
+                                                            <td id="ba-student-stat-critdmg"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Stability</td>
+                                                            <td id="ba-student-stat-stability"></td>
+                                                            <td>Range</td>
+                                                            <td id="ba-student-stat-range"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>CC Power</td>
+                                                            <td id="ba-student-stat-ccpower"></td>
+                                                            <td>CC Resistance</td>
+                                                            <td id="ba-student-stat-ccresist"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Weapon Ammo</td>
+                                                            <td id="ba-student-stat-ammo"></td>
+                                                            <td>Cost Recovery</td>
+                                                            <td id="ba-student-stat-costrecovery"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+
+                                    <div id="ba-student-page-skills" class="tab-pane fade container p-3" style="background-color: #fff; border-radius: .25em;">
+
+                                        <div class="mb-3 p-2 d-flex flex-row ba-skill-panel">
+                                            <img id="ba-skill-ex-icon" class="ba-skill d-inline-block me-3" src="">
+                                            <div class="align-top">
+                                                <div>
+                                                    <h4 id="ba-skill-ex-name" class="me-2 d-inline"></h4>
+                                                </div>
+                                                <div class="mt-1">
+                                                    <p class="d-inline" style="font-style: italic;">EX Skill</p><img src="images/ui/Image_Cost_Font.png" style="height: 13px; width: 44px; margin-top: -3px; margin-left: 10px; margin-right: 6px;"><span id="ba-skill-ex-cost" class="ba-skill-emphasis" style="font-weight: bold;"></span>
+                                                </div>
+                                                <p id="ba-skill-ex-description" class="mb-0 mt-1"></p>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row g-1 my-1">
+                                            <div class="d-flex flex-row">
+                                                <span class="mx-2 flex-fill"><input id="ba-skillpreview-exrange" oninput="changeEXSkillPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="5"></span>
+                                                <span id="ba-skill-ex-level">Lv.1</span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="mb-3 p-2 d-flex flex-row ba-skill-panel">
+                                            <img id="ba-skill-normal-icon" class="ba-skill d-inline-block me-3" src="">
+                                            <div class="align-top">
+                                                <div>
+                                                    <h4 id="ba-skill-normal-name" class="me-2 d-inline"></h4>
+                                                </div>
+                                                <div class="mt-1">
+                                                    <p class="d-inline" style="font-style: italic;">Normal Skill</p>
+                                                </div>
+                                                <p id="ba-skill-normal-description" class="mb-0 mt-1"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 p-2 d-flex flex-row ba-skill-panel">
+                                            <img id="ba-skill-passive-icon" class="ba-skill d-inline-block me-3" src="">
+                                            <div class="align-top">
+                                                <div>
+                                                    <h4 id="ba-skill-passive-name" class="me-2 d-inline"></h4>
+                                                </div>
+                                                <div class="mt-1">
+                                                    <p class="d-inline" style="font-style: italic;">Passive Skill</p>
+                                                </div>                                                
+                                                <p id="ba-skill-passive-description" class="mb-0 mt-1"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3 p-2 d-flex flex-row ba-skill-panel">
+                                            <img id="ba-skill-sub-icon" class="ba-skill d-inline-block me-3" src="">
+                                            <div class="align-top">
+                                                <div>
+                                                    <h4 id="ba-skill-sub-name" class="me-2 d-inline"></h4>
+                                                </div>
+                                                <div class="mt-1">
+                                                    <p class="d-inline" style="font-style: italic;">Sub Skill</p>
+                                                </div>
+                                                <p id="ba-skill-sub-description" class="mb-0 mt-1"></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row g-1 my-1">
+                                            <div class="d-flex flex-row">
+                                                <span class="mx-2 flex-fill"><input id="ba-skillpreview-range" oninput="changeSkillPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="10"></span>
+                                                <span id="ba-skill-level">Lv.1</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div id="ba-student-page-weapon" class="tab-pane fade container p-3" style="background-color: #fff; border-radius: .25em;">
+
+                                        <div class="d-flex flex-row align-items-end">
+                                            <span class="flex-grow-1">
+                                                <h2 id="ba-student-weapon-name" style="display: inline; font-weight: bold;"></h2>
+                                            </span>
+                                            <span class="">
+                                                <img id="ba-student-stars" src="images/ui/Common_Icon_CharacterWeapon_on.png" style="height: 28px; width:auto; margin-bottom: 0.25rem;">
+                                            </span>
+                                        </div>
+                                        
+                                        <div class="mt-3">
+                                            <img id="ba-student-weapon-img" src="">
+                                        </div>
+
+                                        <div class="row g-1 mt-2">
+                                            <div class="col">
+                                                <table class="table ba-stats">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td id="ba-weapon-stat-1" width="30%"></td>
+                                                            <td id="ba-weapon-stat-1-amount" width="20%"></td>
+                                                            <td id="ba-weapon-stat-2" width="30%"></td>
+                                                            <td id="ba-weapon-stat-2-amount" width="20%"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="ba-weapon-stat-3" width="30%"></td>
+                                                            <td id="ba-weapon-stat-3-amount" width="20%"></td>
+                                                            <td id="ba-weapon-stat-4" width="30%"></td>
+                                                            <td id="ba-weapon-stat-4-amount" width="20%"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <img id="ba-student-weapon-img" src="">
+                                        </div>
+
+                                        <!-- <div class="mb-3 p-2 d-flex flex-row ba-skill-panel">
+                                            <img id="ba-weapon-skill-passive-icon" class="ba-skill d-inline-block me-3" src="">
+                                            <div class="align-top">
+                                                <div>
+                                                    <h4 id="ba-skill-passive-name" class="me-2 d-inline"></h4>
+                                                </div>
+                                                <div class="mt-1">
+                                                    <p class="d-inline" style="font-style: italic;">Passive Skill +</p>
+                                                </div>                                                
+                                                <p id="ba-skill-passive-description" class="mb-0 mt-1"></p>
+                                            </div>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Select Modal -->
+    <div class="modal" id="modStudents" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title me-3" id="exampleModalLabel">Select Student</h4>
+                    <span class="btn-group" role="group">
+                        <button type="button" onclick="populateStudentList('none')" class="btn btn-dark">A - Z</button>
+                        <button type="button" onclick="populateStudentList('rarity')" class="btn btn-dark">Rarity</button>
+                        <button type="button" onclick="populateStudentList('school')" class="btn btn-dark">School</button>
+                        <button type="button" onclick="populateStudentList('class')" class="btn btn-dark">Class</button>
+                        <button type="button" onclick="populateStudentList('role')" class="btn btn-dark">Role</button>
+                        <button type="button" onclick="populateStudentList('weapon')" class="btn btn-dark">Weapon</button>
+                    </span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="ba-student-search-results" class="modal-body pt-0">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="js/student.js"></script>
+
+</html>

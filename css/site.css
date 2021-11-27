@@ -1,0 +1,220 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: url("../images/background/BG_Gehenna_Collection.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.card {
+    background-color: rgba(0,0,0,0);
+}
+
+.card-header {
+    background-color: rgba(15, 8, 54, 0.6);
+}
+
+.card-body {
+    background-color: rgb(214, 234, 242);
+    border-radius: 0rem 0rem 0.25rem 0.25rem;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: rgb(214, 234, 242);
+    border-color: rgb(214, 234, 242);
+}
+
+.nav-link {
+    color: #fff;
+}
+
+.nav-link:hover {
+    color: #fff;
+    border-color: transparent !important;
+}
+
+
+.ba-type-info {
+    border: 1px solid transparent;
+    border-radius: .25em;
+    padding: .375rem .75rem;
+    width: 100%;
+}
+
+.ba-type-school {
+    border-color: #000;
+    background-color: #fff;
+    color: #000;
+}
+
+.ba-type-role {
+    border-color: rgb(47, 80, 120);
+    background-color: #fff;
+    color: rgb(47, 80, 120);
+}
+
+.ba-type-weapon {
+    border-color: #fff;
+    border-radius: 0.75em;
+    background-color: rgb(214, 234, 242);
+    color: rgb(47, 80, 120);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.ba-type-position {
+    border-color: rgb(44, 69, 99);
+    background-color: rgb(44, 69, 99);
+    color: #fff
+}
+
+.ba-type-striker {
+    border-color: rgb(246, 75, 35);
+    background-color: rgb(246, 75, 35);
+    color: #fff;
+}
+
+.ba-type-special {
+    border-color: rgb(0, 125, 255);
+    background-color: rgb(0, 125, 255);
+    color: #fff;
+}
+
+.ba-type-explosive {
+    border-color: rgb(146, 0, 8);
+    background-color: rgb(146, 0, 8);
+    color: #fff;
+}
+
+.ba-type-mystic {
+    border-color: rgb(34, 111, 155);
+    background-color: rgb(34, 111, 155);
+    color: #fff;
+}
+
+.ba-type-pierce {
+    border-color: rgb(190, 137, 1);
+    background-color: rgb(190, 137, 1);
+    color: #fff;
+}
+
+.ba-type-terrain {
+    border: 1px solid transparent;
+    border-color: grey;
+    border-radius: .25em;
+    padding: 2px;
+    margin: auto;
+}
+
+.ba-student-icon {
+    height: 74px;
+    padding: 3px;
+    margin: 0px 0px 0px -10px;
+    width: auto;
+    object-fit: contain;
+    background-image: url("../images/ui/Card_Bg.png");
+    background-size: cover;
+    cursor: pointer;
+}
+
+.ba-item-icon {
+    height: 74px;
+    padding: 3px;
+    margin-bottom: 6px;
+    margin-left: -10px;
+    width: auto;
+    object-fit: contain;
+    background-image: url("../images/ui/Card_Bg.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+.ba-skill {
+    image-rendering: -webkit-optimize-contrast;
+    height: auto;
+    width: 80px;
+    object-fit: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.ba-skill-red {
+    background-image: url("../images/ui/Common_Main_SkillBG_red.png");
+}
+
+.ba-skill-yellow {
+    background-image: url("../images/ui/Common_Main_SkillBG_yellow.png");
+}
+
+.ba-skill-blue {
+    background-image: url("../images/ui/Common_Main_SkillBG_blue.png");
+}
+
+.ba-skill-panel {
+    border: 1px solid;
+    border-color: lightgrey;
+    border-radius: 0.25rem;
+}
+
+.ba-stats {
+    background-color: rgb(214, 234, 242);
+    border-color: #fff !important;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    color: rgb(44, 69, 99);
+    table-layout: fixed;
+    margin-bottom: 0px !important;
+}
+
+.ba-skill-emphasis {
+    font-weight: bold;
+    color: rgb(0, 125, 255);
+}
+
+.ba-buff-icon {
+    image-rendering: -webkit-optimize-contrast;
+    height: 22px;
+    margin-top: -4px;
+    width: auto;
+}
+
+.ba-statpreview-star {
+    height: 22px;
+    width:auto;
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+}
+
+#ba-student-img {
+    position: absolute;
+    margin-top: auto;
+    max-height: calc(100% - 60px - 1.5rem);
+    width: auto;
+}
+
+#ba-student-weapon-img {
+    width: 100%;
+    border: 1px solid;
+    border-color: lightgrey;
+    border-radius: 0.25rem;
+}
+
+.ba-student-searchresult-item {
+    display: inline-grid;
+}
+
+.ba-student-searchresult-grid {
+    text-align: center;
+    padding-left: 10px;
+    margin-top: 6px;
+    margin-bottom: 0px;
+}
+
+.ba-student-searchresult-groupseparator {
+    height: 1px;
+    background-color: #dee2e6;
+}
