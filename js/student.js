@@ -3,6 +3,7 @@ $.holdReady(true)
 const starscale_hp      = [1, 1.05,  1.12,  1.21,  1.35 ]
 const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445]
+const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Academy", "Hyakkiyako": "Allied Hyakkiyako Academy", "Millennium": "Millennium Science School", "RedWinter": "Red Winter Federal Academy", "Shanhaijing": "Shanhaijing Senior Secondary School", "Trinity": "Trinity General School", "Valkyrie": "Valkyrie Police Academy", "ETC": "Others"}
 
 var student_db = {}
 var pathJSON = "./data/"
@@ -19,8 +20,23 @@ var stat_preview_stars = 3
 
 $(document).ready(function() {
     studentSelectorModal = new bootstrap.Modal(document.getElementById("modStudents"), {})
+
+    var urlVars = new URL(window.location.href).searchParams
+
+    $(window).on('popstate', function() {
+        var urlVars = new URL(window.location.href).searchParams
+        loadStudent(urlVars.get("chara"))
+    })
+
+    if (urlVars.has("chara")) {
+        loadStudent(urlVars.get("chara"))
+    } else if (localStorage.getItem("chara")) {
+        loadStudent(localStorage.getItem("chara"))
+    } else {
+        loadStudent("Haruna")
+    }
+
     populateStudentList("none")
-    loadStudent("Haruna")
 })
 
 function hookTooltips() {
@@ -58,7 +74,7 @@ function populateStudentList(grouping = "none") {
             `
         $("#ba-student-search-results").append(resultsHTML)
     } else if (grouping == "school") {
-        var groupedResults = {"Abydos": [], "Gehenna": [], "Hyakkiyako": [], "Millennium": [], "Red Winter": [], "Shanhaijing": [], "Trinity": [], "Valkyrie": [], "Others": []}
+        var groupedResults = {"Abydos": [], "Gehenna": [], "Hyakkiyako": [], "Millennium": [], "RedWinter": [], "Shanhaijing": [], "Trinity": [], "Valkyrie": [], "ETC": []}
         $.each(student_db.students, function(i, el){
             groupedResults[el.school].push(el)
         })
@@ -67,11 +83,11 @@ function populateStudentList(grouping = "none") {
     
         var resultsHTML = ''
 
-        $.each(["Abydos", "Gehenna", "Hyakkiyako", "Millennium", "Red Winter", "Shanhaijing", "Trinity", "Valkyrie", "Others"], function(i, el){
+        $.each(["Abydos", "Gehenna", "Hyakkiyako", "Millennium", "RedWinter", "Shanhaijing", "Trinity", "Valkyrie", "ETC"], function(i, el){
 
             resultsHTML += `
             <div class="d-flex flex-row">
-            <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el}" src="images/schoolicon/School_Icon_${el.toUpperCase().replace(" ","").replace("OTHERS", "ETC")}.png" style="height: 72px; width: auto; object-fit: contain;">
+            <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${school_longname[el]}" src="images/schoolicon/School_Icon_${el.toUpperCase()}.png" style="height: 72px; width: auto; object-fit: contain;">
             <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
             `
             groupedResults[el].sort((a,b) => a.name_en > b.name_en)
@@ -258,8 +274,12 @@ function loadStudent(studentName) {
         student = student[0]
 
         $('#ba-student-img').attr('src', 'images/student/' + student.student_img)
-        //$('#ba-student-spr').style.setProperty('--student-spr', url("images/student/' + student.student_img + '"))
-        $("body").css('background-image', 'url("images/background/' + student.background_img + '.jpg")')
+
+        var bgimg = new Image()
+        bgimg.onload = function(){
+            $("body").css('background-image', `url('${bgimg.src}')`)
+        }
+        bgimg.src = `images/background/${student.background_img}.jpg`
 
         $('#ba-student-name-en').text(student.name_en)
         $('#ba-student-name-jp').text(student.name_jp)
@@ -290,6 +310,7 @@ function loadStudent(studentName) {
         
         $("#ba-student-school-label").text(student.school)
         $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","").replace("OTHERS", "ETC") + ".png")
+        $('#ba-student-school-img').tooltip('dispose').tooltip({title: school_longname[student.school], placement: 'bottom'})
         $("#ba-student-position").text(student.position.toUpperCase())
         $("#ba-student-attacktype-label").text(student.attack_type)
         $("#ba-student-defensetype-label").text(student.defense_type)
@@ -297,9 +318,9 @@ function loadStudent(studentName) {
         $("#ba-student-terrain-street").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.street_adaption + ".png")
         $("#ba-student-terrain-outdoor").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.outdoor_adaption + ".png")
         $("#ba-student-terrain-indoor").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.indoor_adaption + ".png")
-        $('#ba-student-terrain-street').tooltip('dispose').tooltip({title: getAdaptionText('street', student.street_adaption), placement: 'Left'})
-        $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getAdaptionText('outdoor', student.outdoor_adaption), placement: 'Left'})
-        $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getAdaptionText('indoor', student.indoor_adaption), placement: 'Left'})
+        $('#ba-student-terrain-street').tooltip('dispose').tooltip({title: getAdaptionText('street', student.street_adaption), placement: 'left'})
+        $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getAdaptionText('outdoor', student.outdoor_adaption), placement: 'left'})
+        $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getAdaptionText('indoor', student.indoor_adaption), placement: 'left'})
 
         if (student.uses_cover) {
             $("#ba-student-usescover-icon").show()
@@ -315,9 +336,9 @@ function loadStudent(studentName) {
         $("#ba-student-gear-1").attr("src", "images/equipment/Equipment_Icon_" + student.gear_1 + "_Tier1.png")
         $("#ba-student-gear-2").attr("src", "images/equipment/Equipment_Icon_" + student.gear_2 + "_Tier1.png")
         $("#ba-student-gear-3").attr("src", "images/equipment/Equipment_Icon_" + student.gear_3 + "_Tier1.png")
-        $('#ba-student-gear-1').tooltip('dispose').tooltip({title: student.gear_1})
-        $('#ba-student-gear-2').tooltip('dispose').tooltip({title: student.gear_2})
-        $('#ba-student-gear-3').tooltip('dispose').tooltip({title: student.gear_3})
+        $('#ba-student-gear-1').tooltip('dispose').tooltip({title: student.gear_1, placement: 'bottom'})
+        $('#ba-student-gear-2').tooltip('dispose').tooltip({title: student.gear_2, placement: 'bottom'})
+        $('#ba-student-gear-3').tooltip('dispose').tooltip({title: student.gear_3, placement: 'bottom'})
 
 
         //Skills
@@ -337,18 +358,26 @@ function loadStudent(studentName) {
         //Weapon
         $("#ba-student-weapon-name").text(student.weapon_name)
         $("#ba-student-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
-        
 
+        var url = new URL(window.location.href)
+
+        if (url.searchParams.get("chara") !== student.name_dev) {
+            url.searchParams.set("chara", student.name_dev)
+            history.pushState(null, '', url)
+        }
+        
+        document.title = `Schale DB | ${student.name_en}`
 
         recalculateStatPreview()
         recalculateSkillPreview()
 
+        localStorage.setItem("chara", student.name_dev)
         studentSelectorModal.hide()
     }
 }
 
 function getAdaptionText(terrain, rank) {
-    var text = 'Student deals '
+    var text = 'Deals '
     switch (rank) {
         case "D":
             text += `20% less damage in ${terrain} terrain. `

@@ -1,11 +1,11 @@
 body {
     font-family: 'Open Sans', sans-serif;
-    background: url("../images/background/BG_Gehenna_Collection.png") no-repeat center center fixed;
+    background: url("../images/background/BG_Gehenna_Collection.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    overflow-x: hidden;
+    background-attachment: fixed;
 }
 
 .card {
@@ -35,6 +35,9 @@ body {
     border-color: transparent !important;
 }
 
+.flex-basis-50 {
+    flex-basis: 50%;
+}
 
 .ba-type-school {
     border-color: #000;
@@ -85,7 +88,7 @@ body {
     position: absolute;
     height: 24px;
     width: auto;
-    left: 4px !important;
+    left: 8px !important;
     top: 6px !important;
 }
 
@@ -99,6 +102,9 @@ body {
 }
 
 .ba-type-weapon {
+    height: 74px;
+    max-width: 156px;
+    min-width: 156px;
     border-color: #2f6283;
     border-radius: 0.25em;
     padding: .1rem .25rem !important;
