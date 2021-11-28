@@ -14,8 +14,8 @@
     <link href="css/site.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid p-0 h-100" style="min-height: 100vh; overflow-x: hidden; position: relative;">
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div id="ba-student-container" class="container-fluid p-0 h-100" style="min-height: 100vh; overflow-x: hidden; position: relative; padding-top: 58px !important;">
+        <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
             <div class="container-xl">
                 <a class="navbar-brand" href="#">
                     <img src="images/schale.png" alt="" width="37" height="23" class="d-inline-block align-text-top">
@@ -40,16 +40,20 @@
         <div class="container-xl my-4">
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <div style="display: flex; justify-content: center;">
+                    <div class="d-none d-md-flex" style="justify-content: center;">
                         <img id="ba-student-img" src="">
                     </div>
-                    <div class="container mb-3" style="position: relative;">
+                    <div class="d-flex d-md-none mb-2" style="justify-content: center;">
+                        <img id="ba-student-img-sm" src="">
+                    </div>
+                    <div class="container" style="position: relative;">
                         <div class="row">
                             <div class="col">
                                 <button type="button" class="btn btn-light btn-sm" onclick="studentSelectorModal.show()"><img src="images/ui/Common_Icon_Change_Blue.png" style="height: auto; height: 28px; object-fit: contain;"> Change Student</button>
                             </div>
                         </div>
                     </div>
+                    <div class="d-block d-md-none" style="height: 400px;"></div>
                 </div>
                 <div class="col-12 col-md-6 px-0 px-md-2">
                     <div class="container px-0 px-xl-4" id=student_info>
@@ -109,7 +113,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="flex-fill ps-3" style="min-width: fit-content;">
+                                            <div class="ps-3" style="min-width: fit-content;">
                                                 <span><img id="ba-student-gear-1" class="ba-item-icon" src=""></span>
                                                 <span><img id="ba-student-gear-2" class="ba-item-icon" src=""></span>
                                                 <span><img id="ba-student-gear-3" class="ba-item-icon" src=""></span>
@@ -117,19 +121,7 @@
 
     
                                         </div>
-    
-                                        <div class="row g-1 mt-3">
-                                            <div class="d-flex flex-row">
-                                                <img id="ba-statpreview-star-1" class="ba-statpreview-star" onclick="changeStatPreviewStars(1)" src="images/ui/Common_Icon_Formation_Star.png">
-                                                <img id="ba-statpreview-star-2" class="ba-statpreview-star" onclick="changeStatPreviewStars(2)" src="images/ui/Common_Icon_Formation_Star.png">
-                                                <img id="ba-statpreview-star-3" class="ba-statpreview-star" onclick="changeStatPreviewStars(3)" src="images/ui/Common_Icon_Formation_Star.png">
-                                                <img id="ba-statpreview-star-4" class="ba-statpreview-star" onclick="changeStatPreviewStars(4)" src="images/ui/Common_Icon_Formation_Star_Disable.png">
-                                                <img id="ba-statpreview-star-5" class="ba-statpreview-star" onclick="changeStatPreviewStars(5)" src="images/ui/Common_Icon_Formation_Star_Disable.png">
-                                                <span class="mx-2 flex-fill"><input id="ba-statpreview-levelrange" oninput="changeStatPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="75"></span>
-                                                <span id="ba-statpreview-level">Level 75</span>
-                                            </div>
-                                        </div>
-    
+       
                                         <div class="row g-1 mt-2">
                                             <div class="col">
                                                 <table class="table ba-stats mb-0">
@@ -178,6 +170,18 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="row g-1 mt-3">
+                                            <div class="d-flex flex-row">
+                                                <img id="ba-statpreview-star-1" class="ba-statpreview-star" onclick="changeStatPreviewStars(1)" src="images/ui/Common_Icon_Formation_Star.png">
+                                                <img id="ba-statpreview-star-2" class="ba-statpreview-star" onclick="changeStatPreviewStars(2)" src="images/ui/Common_Icon_Formation_Star.png">
+                                                <img id="ba-statpreview-star-3" class="ba-statpreview-star" onclick="changeStatPreviewStars(3)" src="images/ui/Common_Icon_Formation_Star.png">
+                                                <img id="ba-statpreview-star-4" class="ba-statpreview-star" onclick="changeStatPreviewStars(4)" src="images/ui/Common_Icon_Formation_Star_Disable.png">
+                                                <img id="ba-statpreview-star-5" class="ba-statpreview-star" onclick="changeStatPreviewStars(5)" src="images/ui/Common_Icon_Formation_Star_Disable.png">
+                                                <span class="mx-2 flex-fill"><input id="ba-statpreview-levelrange" oninput="changeStatPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="75"></span>
+                                                <span id="ba-statpreview-level">Level 75</span>
                                             </div>
                                         </div>
     

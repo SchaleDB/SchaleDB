@@ -1,11 +1,5 @@
 body {
     font-family: 'Open Sans', sans-serif;
-    background: url("../images/background/BG_Gehenna_Collection.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-attachment: fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -41,6 +35,15 @@ h1, h2, h3, h4, h5, h6 {
 
 .flex-basis-50 {
     flex-basis: 50%;
+}
+
+#ba-student-container {
+    background: url("../images/background/BG_Gehenna_Collection.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .ba-type-school {
@@ -250,8 +253,13 @@ h1, h2, h3, h4, h5, h6 {
 #ba-student-img {
     position: absolute;
     margin-top: auto;
-    max-height: calc(100% - 60px - 1.5rem);
+    height: calc(100vh - 60px - 1.5rem);
     width: auto;
+}
+
+#ba-student-img-sm {
+    position: fixed;
+    height: 450px;
 }
 
 #ba-student-weapon-img {

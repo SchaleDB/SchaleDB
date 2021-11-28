@@ -273,18 +273,17 @@ function loadStudent(studentName) {
         console.log(student[0])
         student = student[0]
 
-        $('#ba-student-img').attr('src', 'images/student/' + student.student_img)
+        $('#ba-student-img, #ba-student-img-sm').attr('src', 'images/student/' + student.student_img)
 
         var bgimg = new Image()
         bgimg.onload = function(){
-            $("body").css('background-image', `url('${bgimg.src}')`)
+            $("#ba-student-container").css('background-image', `url('${bgimg.src}')`)
         }
         bgimg.src = `images/background/${student.background_img}.jpg`
 
         $('#ba-student-name-en').text(student.name_en)
         $('#ba-student-name-jp').text(student.name_jp)
         $("#ba-student-class").attr("src", `images/ui/Class_${student.type}.png`)
-        
 
         $("#ba-student-role-label").text(student.role)
         $("#ba-student-role-icon").attr("src", `images/tactical/Role_${student.role.replace("T.S.", "TacticalSupport")}.png`)
@@ -354,7 +353,7 @@ function loadStudent(studentName) {
         $('#ba-skill-level').text("Lv." + $("#ba-skillpreview-range").val())
         $('#ba-skill-ex-level').text("Lv." + $("#ba-skillpreview-exrange").val())
         $('#ba-weaponpreview-level').text("Lv." + $("#ba-weaponpreview-levelrange").val())
-        $('#ba-bond-level').text("Lv." + $("#ba-bond-levelrange").val())
+        $('#ba-bond-level').text($("#ba-bond-levelrange").val())
 
         //Weapon
         $("#ba-student-weapon-name").text(student.weapon_name_en)
