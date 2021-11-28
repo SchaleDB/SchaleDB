@@ -8,6 +8,10 @@ body {
     background-attachment: fixed;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Comfortaa', sans-serif;
+}
+
 .card {
     background-color: rgba(0,0,0,0);
 }
@@ -58,8 +62,12 @@ body {
     margin: 4px 4px 0.25rem 4px;
 }
 
-.ba-role-info {
+.ba-role-info, .ba-type-info, .ba-position-info {
     width: calc(50% - 0.25rem);
+    max-height: 38px;
+}
+
+.ba-role-info {
     position: relative;
     border: 1px solid rgb(47, 80, 120);
     border-radius: .25em;
@@ -77,7 +85,6 @@ body {
 }
 
 .ba-type-info {
-    width: calc(50% - 0.25rem);
     position: relative;
     border: 1px solid transparent;
     border-radius: .25em;
@@ -93,7 +100,6 @@ body {
 }
 
 .ba-position-info {
-    width: calc(50% - 0.25rem);
     border: 1px solid rgb(44, 69, 99);
     background-color: rgb(44, 69, 99);
     color: #fff;
@@ -102,9 +108,9 @@ body {
 }
 
 .ba-type-weapon {
-    height: 74px;
-    max-width: 156px;
-    min-width: 156px;
+    font-family: 'Comfortaa';
+    height: 78px;
+    min-width: 162px;
     border-color: #2f6283;
     border-radius: 0.25em;
     padding: .1rem .25rem !important;
@@ -215,10 +221,11 @@ body {
     background-color: rgb(214, 234, 242);
     border-color: #fff !important;
     border-radius: 0.25rem;
-    font-weight: bold;
     color: rgb(44, 69, 99);
     table-layout: fixed;
-    margin-bottom: 0px !important;
+}
+.ba-stats td:nth-child(even) {
+    font-weight: bold;
 }
 
 .ba-skill-emphasis {
@@ -268,4 +275,29 @@ body {
 .ba-student-searchresult-groupseparator {
     height: 1px;
     background-color: #dee2e6;
+}
+
+.ba-student-lobby {
+    position: relative;
+}
+
+#ba-student-lobby-img {
+    height: 72px;
+    width: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+#ba-student-lobby-unlock {
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-image: url('../images/ui/School_Icon_Schedule_Favor.png');
+    background-size: contain;
+    text-align: center;
+    color: #fff;
+    line-height: 40px;
+    position: absolute;
+    left: 62px;
+    top: 42px;
 }

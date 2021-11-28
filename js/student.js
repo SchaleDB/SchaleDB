@@ -353,10 +353,13 @@ function loadStudent(studentName) {
         $('#ba-statpreview-level').text("Lv." + $("#ba-statpreview-levelrange").val())
         $('#ba-skill-level').text("Lv." + $("#ba-skillpreview-range").val())
         $('#ba-skill-ex-level').text("Lv." + $("#ba-skillpreview-exrange").val())
-
+        $('#ba-weaponpreview-level').text("Lv." + $("#ba-weaponpreview-levelrange").val())
+        $('#ba-bond-level').text("Lv." + $("#ba-bond-levelrange").val())
 
         //Weapon
-        $("#ba-student-weapon-name").text(student.weapon_name)
+        $("#ba-student-weapon-name").text(student.weapon_name_en)
+        $("#ba-weapon-name-jp").text(student.weapon_name_jp)
+        
         $("#ba-student-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
 
         var url = new URL(window.location.href)
@@ -366,10 +369,47 @@ function loadStudent(studentName) {
             history.pushState(null, '', url)
         }
         
+        $.each(student.weapon_bonus_stats, function(i, el) {
+            $(`#ba-weapon-stat-${i+1}`).text(getStatName(student.weapon_bonus_stats[i]))
+            $(`#ba-weapon-stat-${i+1}-amount`).text(student.weapon_bonus_stats_parameters[i][0])
+        }) 
+
+        if (student.weapon_bonus_stats.length > 2) {
+            $('#ba-weapon-stat-row2').show()
+        } else {
+            $('#ba-weapon-stat-row2').hide()
+        }
+
+        //Profile
+        $('#ba-student-fullname-en').text(student.fullname_en)
+        $('#ba-student-fullname-jp').text(student.fullname_jp)
+        $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","").replace("OTHERS", "ETC") + ".png")
+        $('#ba-student-schoolclub-label').text(`${school_longname[student.school]} / ${student.club_en}`)
+        
+        if (student.recollection_lobby) {
+            $(".ba-student-lobby").show()
+            $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.name_dev}_01_Small.png`)
+            $("#ba-student-lobby-unlock").text(student.recollection_lobby)
+        } else {
+            $(".ba-student-lobby").hide()
+        }
+        
+        $('#ba-student-profile-age').text(student.age)
+        $('#ba-student-profile-birthday').text(student.birthday)
+        $('#ba-student-profile-hobbies').text(student.hobbies)
+        $('#ba-student-profile-height').text(student.height)
+        $('#ba-student-profile-cv').text(student.cv)
+        $('#ba-student-profile-illustrator').text(student.illustrator)
+
+        $('#ba-student-bond-1').text(getStatName(student.bond_stat[0]))
+        $('#ba-student-bond-2').text(getStatName(student.bond_stat[1]))
+
         document.title = `Schale DB | ${student.name_en}`
 
+        recalculateWeaponPreview()
         recalculateStatPreview()
         recalculateSkillPreview()
+        recalculateBondPreview()
 
         localStorage.setItem("chara", student.name_dev)
         studentSelectorModal.hide()
@@ -401,6 +441,21 @@ function getAdaptionText(terrain, rank) {
     return text
 }
 
+function getStatName(stat) {
+    switch (stat) {
+        case "maxhp":
+            return "Max HP"
+        case "attack_power":
+            return "Attack"
+        case "defense_power":
+            return "Defense"
+        case "heal_power":
+            return "Healing Power"
+        default:
+            return null
+    }
+}
+
 function changeStatPreviewLevel(el) {
     $('#ba-statpreview-level').text("Lv." + el.value)
     recalculateStatPreview()
@@ -414,6 +469,28 @@ function changeSkillPreviewLevel(el) {
 function changeEXSkillPreviewLevel(el) {
     $('#ba-skill-ex-level').text("Lv." + el.value)
     recalculateSkillPreview()
+}
+
+function changeWeaponPreviewLevel(el) {
+    $('#ba-weaponpreview-level').text("Lv." + el.value)
+    recalculateWeaponPreview()
+}
+
+function changeBondLevel(el) {
+    $('#ba-bond-level').text(el.value)
+    recalculateBondPreview()
+}
+
+function recalculateWeaponPreview() {
+
+    var level = $("#ba-weaponpreview-levelrange").val()
+
+    var levelscale = ((level-1)/99).toFixed(4)
+
+    $.each(student.weapon_bonus_stats, function(i, el) {
+        $(`#ba-weapon-stat-${i+1}-amount`).text(Math.round(student.weapon_bonus_stats_parameters[i][0] + (student.weapon_bonus_stats_parameters[i][1]-student.weapon_bonus_stats_parameters[i][0]) * levelscale))
+    }) 
+
 }
 
 function recalculateStatPreview() {
@@ -463,6 +540,19 @@ function recalculateSkillPreview() {
 
     $('#ba-skill-ex-cost').text(student.skill_ex_cost[skillLevelEX-1])
     
+}
+
+function recalculateBondPreview() {
+    var level = $("#ba-bond-levelrange").val()
+    var stat1 = 0, stat2 = 0
+
+    for (let i = 1; i < Math.min(level,20); i++) {
+        stat1 += student.bond_stat_value[i-1][0]
+        stat2 += student.bond_stat_value[i-1][1]
+    }
+
+    $("#ba-student-bond-1-amount").text(stat1)
+    $("#ba-student-bond-2-amount").text(stat2)    
 }
 
 function getSkillText(text, params, level) {

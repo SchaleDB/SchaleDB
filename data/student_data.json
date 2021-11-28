@@ -71,8 +71,19 @@
             "skill_sub_name": "Total Suppression",
             "skill_sub_description": "Attacks have a 10% chance to decrease the target's evasion <d:Dodge> by <?1> for 30s. 5s cooldown between activations.",
             "skill_sub_parameters": [["6.7%", "7%", "7.4%", "8.7%", "9%", "9.4%", "10.7%", "11%", "11.4%", "12.7%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATDEBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STATDEBUFF.png",
+
+            "recollection_lobby": 9,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[2,64],[2,64],[2,64],[2,64],[2,64],[2,77],[2,77],[2,77],[2,77],[2,77]],
+            "eleph_sources": "Total Assault shop",
+
+            "weapon_name_jp": "サイレントソリューション",
+            "weapon_name_en": "Silent Solution",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 13002,
@@ -145,8 +156,19 @@
             "skill_sub_name": "I Still Got Room for More!",
             "skill_sub_description": "Attacks have a 10% chance to increase attack <b:ATK> by <?1> for 26s. 18s cooldown between activations.",
             "skill_sub_parameters": [["34.4%", "36.2%", "37.9%", "44.8%", "46.5%", "48.2%", "55.1%", "56.8%", "58.6%", "65.5%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[6,57],[6,57],[6,57],[6,57],[6,57],[7,68],[7,68],[7,68],[7,68],[7,68]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ボトムレス",
+            "weapon_name_en": "Bottomless",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "A",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 20008,
@@ -221,13 +243,18 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
         
-            "weapon_img": "Weapon_Icon_20008.png",
-            "weapon_name": "ホットショット",
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[3,40],[3,40],[3,40],[3,40],[3,40],[4,48],[4,48],[4,48],[4,48],[4,48]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ホットショット",
+            "weapon_name_en": "Hot Shot",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
-            "weapon_bonus_stats_parameters": [[0, 0], [0, 0], [0,0]]
-        
+            "weapon_bonus_stats_parameters": [[65, 649], [462, 4622], [200, 1997]],
+            "weapon_bonus_passiveskill_parameters": ["680", "714", "748", "884", "918", "952", "1088", "1122", "1156", "1292"]
         },
         {
             "id": 10015,
@@ -252,7 +279,7 @@
             "gear_3": "Charm",
         
             "club_en": "Game Development Department",
-            "fullname_en": "Aris Tendou",
+            "fullname_en": "Alice Tendou",
             "fullname_jp": "天童アリス",
             "age": "Unknown",
             "birthday": "March 25",
@@ -302,8 +329,13 @@
             "skill_sub_parameters": [["12.1%", "12.7%", "13.3%", "15.7%", "16.3%", "16.9%", "19.3%", "19.9%", "20.5%", "22.9%"]],
             "skill_sub_icon": "SKILLICON_ARIS_EXTRAPASSIVESKILL.png",
         
-            "weapon_img": "Weapon_Icon_10015.png",
-            "weapon_name": "光の剣：スーパーノヴァ",
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[7,43],[7,43],[7,43],[7,43],[7,43],[9,51],[9,51],[9,51],[9,51],[9,51]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "光の剣：スーパーノヴァ",
+            "weapon_name_en": "Sword of Light: Supernova",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -383,13 +415,17 @@
             "skill_sub_parameters": [["20.1%", "21.1%", "22.1%", "26.2%", "27.2%", "28.2%", "32.2%", "33.2%", "34.2%", "38.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
         
-            "weapon_img": "Weapon_Icon_10000.png",
-            "weapon_name": "ワインレッド・アドマイアー",
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[4,0],[4,0],[4,0],[4,0],[6,0],[6,0],[6,0],[6,0],[6,0],[7,48],[7,48],[7,48],[7,48],[7,48],[9,58],[9,58],[9,58],[9,58],[9,58]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ワインレッド・アドマイアー",
+            "weapon_name_en": "Wine-Red Admire",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 16001,
@@ -464,8 +500,13 @@
             "skill_sub_parameters": [["20.1%", "21.1%", "22.1%", "26.2%", "27.2%", "28.2%", "32.2%", "33.2%", "34.2%", "38.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
         
-            "weapon_img": "Weapon_Icon_16001.png",
-            "weapon_name": "サプライズパーティー",
+            "recollection_lobby": 0,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[5,58],[5,58],[5,58],[5,58],[5,58],[7,69],[7,69],[7,69],[7,69],[7,69]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "サプライズパーティー",
+            "weapon_name_en": "Surprise Party",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "A",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -545,8 +586,13 @@
             "skill_sub_parameters": [["20.1%", "21.1%", "22.1%", "26.2%", "27.2%", "28.2%", "32.2%", "33.2%", "34.2%", "38.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
         
-            "weapon_img": "Weapon_Icon_10028.png",
-            "weapon_name": "サプライズパーティー",
+            "recollection_lobby": 2,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,58],[4,58],[4,58],[4,58],[4,58],[5,69],[5,69],[5,69],[5,69],[5,69]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "サプライズパーティー",
+            "weapon_name_en": "Surprise Party",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -626,8 +672,13 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
         
-            "weapon_img": "Weapon_Icon_23005.png",
-            "weapon_name": "コモンセンス",
+            "recollection_lobby": 5,
+            "bond_stat": ["heal_power", "maxhp"],
+            "bond_stat_value": [[7,0],[7,0],[7,0],[7,0],[11,0],[11,0],[11,0],[11,0],[11,0],[14,48],[14,48],[14,48],[14,48],[14,48],[18,57],[18,57],[18,57],[18,57],[18,57]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "コモンセンス",
+            "weapon_name_en": "Common Sense",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -707,8 +758,13 @@
             "skill_sub_parameters": [["46.6%", "49%", "51.2%", "60.6%", "62.9%", "65.2%", "74.6%", "76.9%", "79.2%", "88.5%"]],
             "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
         
-            "weapon_img": "Weapon_Icon_10019.png",
-            "weapon_name": "Et Omnia Vanitas",
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,55],[4,55],[4,55],[4,55],[4,55],[5,67],[5,67],[5,67],[5,67]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "Et Omnia Vanitas",
+            "weapon_name_en": "Et Omnia Vanitas",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -787,8 +843,13 @@
             "skill_sub_parameters": [["8%", "8.4%", "8.8%", "10.4%", "10.8%", "11.2%", "12.8%", "13.3%", "13.7%", "15.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATDEBUFF.png",
         
-            "weapon_img": "Weapon_Icon_10021.png",
-            "weapon_name": "Et Omnia Vanitas",
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,50],[4,50],[4,50],[4,50],[4,50],[5,59],[5,59],[5,59],[5,59],[5,59]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "Et Omnia Vanitas",
+            "weapon_name_en": "Et Omnia Vanitas",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -867,9 +928,14 @@
             "skill_sub_description": "Increases skill cost recovery speed by <?1>. Effect is increased by <?2> for every other Red Winter student in the team (up to a maximum of 3 times).",
             "skill_sub_parameters": [["269", "283", "296", "350", "363", "377", "431", "444", "457", "511"], ["77", "80", "85", "100", "104", "107", "122", "127", "131", "146"]],
             "skill_sub_icon": "SKILLICON_CHERINO_EXTRAPASSIVESKILL.png",
-        
-            "weapon_img": "Weapon_Icon_10017.png",
-            "weapon_name": "チーストカ",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,64],[4,64],[4,64],[4,64],[4,64],[5,77],[5,77],[5,77],[5,77],[5,77]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "チーストカ",
+            "weapon_name_en": "Chystoka",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -947,8 +1013,19 @@
             "skill_sub_name": "Reinforced Defenses",
             "skill_sub_description": "Increases all allies' defense <b:DEF> by <?1>.",
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
+
+            "recollection_lobby": 0,
+            "bond_stat": ["heal_power", "maxhp"],
+            "bond_stat_value": [[7,0],[7,0],[7,0],[7,0],[11,0],[11,0],[11,0],[11,0],[11,0],[14,47],[14,47],[14,47],[14,47],[14,47],[18,57],[18,57],[18,57],[18,57],[18,57]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "サポートポインター",
+            "weapon_name_en": "Support Pointer",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "A",
+            "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0], [0,0]]
         },
         {
             "id": 13001,
@@ -1021,8 +1098,19 @@
             "skill_sub_name": "This Is Gonna Sting!",
             "skill_sub_description": "Attacks have a 10% chance to deal an additional <?1> burn damage over time <d:Burn> for 20s. 5s cooldown between activations.",
             "skill_sub_parameters": [["53.7%", "56.4%", "59.1%", "69.8%", "72.5%", "75.2%", "85.9%", "88.6%", "91.3%", "102%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_BURNNIG.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_BURNNIG.png",
+
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,57],[4,57],[4,57],[4,57],[4,57],[6,68],[6,68],[6,68],[6,68],[6,68]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "五七五式榴弾砲",
+            "weapon_name_en": "Type 575 Howitzer",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10001,
@@ -1095,8 +1183,19 @@
             "skill_sub_name": "Iron Will",
             "skill_sub_description": "Increases crowd-control resistance <b:OppressionResist> by <?1> while Eimi's HP is below 50%.",
             "skill_sub_parameters": [["20.1%", "21.1%", "22.1%", "26.2%", "27.2%", "28.2%", "32.2%", "33.2%", "34.2%", "38.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["defense_power", "maxhp"],
+            "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,128],[2,128],[2,128],[2,128],[2,128],[3,153],[3,153],[3,153],[3,153],[3,153]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "マルチタクティカル",
+            "weapon_name_en": "Multi-Tactical",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0], [0, 0]]
         },
         {
             "id": 23001,
@@ -1169,8 +1268,19 @@
             "skill_sub_name": "Pride of the School Lunch Club",
             "skill_sub_description": "Increases all allies' critical resistance <b:CriticalChanceResistPoint> by <?1>.",
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["heal_power", "maxhp"],
+            "bond_stat_value": [[7,0],[7,0],[7,0],[7,0],[11,0],[11,0],[11,0],[11,0],[11,0],[14,48],[14,48],[14,48],[14,48],[14,48],[18,57],[18,57],[18,57],[18,57],[18,57]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "給食部の護身用銃typeA",
+            "weapon_name_en": "School Lunch Club Type-A Defense Weapon",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0], [0, 0]]
         },
         {
             "id": 16000,
@@ -1243,8 +1353,19 @@
             "skill_sub_name": "Hauugh?!",
             "skill_sub_description": "Whenever Haruka takes damage, 5% chance to increase defense <b:DEF> by <?1> for 15s. 10s cooldown between activations.",
             "skill_sub_parameters": [["18.1%", "19%", "19.9%", "23.5%", "24.5%", "25.4%", "29%", "29.9%", "30.8%", "34.4%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
+
+            "recollection_lobby": 0,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,127],[2,127],[2,127],[2,127],[2,127],[3,152],[3,152],[3,152],[3,152],[3,152]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ブローアウェイ",
+            "weapon_name_en": "Blow Away",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10002,
@@ -1273,7 +1394,7 @@
             "fullname_jp": "黒舘ハルナ",
             "age": "17",
             "birthday": "March 1",
-            "height": "163cm / 5'4\"",
+            "height": "163cm",
             "hobbies": "Looking for delicious things",
             "illustrator": "whoisshe",
             "cv": "Azusa Tadokoro",
@@ -1317,7 +1438,19 @@
             "skill_sub_name": "Prudent Connoisseur",
             "skill_sub_description": "Increases attack <b:ATK> by <?1> when Haruna is standing still.",
             "skill_sub_parameters": [["10%", "10.5%", "11%", "13.1%", "13.6%", "14.1%", "16.1%", "16.6%", "17.1%", "19.1%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[4,0],[4,0],[4,0],[4,0],[6,0],[6,0],[6,0],[6,0],[6,0],[7,47],[7,47],[7,47],[7,47],[7,47],[9,57],[9,57],[9,57],[9,57],[9,57]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "アイディール",
+            "weapon_name_en": "Ideal",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         
         },
         {
@@ -1391,7 +1524,19 @@
             "skill_sub_name": "初音ミクの祝福",
             "skill_sub_description": "Increases all allies' healing received <b:HealEffectiveness> by <?1>.",
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
-            "skill_sub_icon": "SKILLICON_CH9999_EXTRAPASSIVESKILL.png"
+            "skill_sub_icon": "SKILLICON_CH9999_EXTRAPASSIVESKILL.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["heal_power", "maxhp"],
+            "bond_stat_value": [[5,0],[5,0],[5,0],[5,0],[8,0],[8,0],[8,0],[8,0],[8,0],[11,38],[11,38],[11,38],[11,38],[11,38],[13,45],[13,45],[13,45],[13,45],[13,45]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ライブ用Tシャツキャノン",
+            "weapon_name_en": "Live T-shirt Cannon",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0], [0, 0]]
         
         },
         {
@@ -1465,8 +1610,19 @@
             "skill_sub_name": "Agile Collector",
             "skill_sub_description": "Increases skill cost recovery speed by <?1> for 5s after using Hifumi's EX skill.",
             "skill_sub_parameters": [["980", "1029", "1078", "1273", "1322", "1371", "1567", "1616", "1665", "1861"]],
-            "skill_sub_icon": "COMMON_SKILLICON_REGENCOST.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_REGENCOST.png",
+
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,57],[4,57],[4,57],[4,57],[4,57],[5,68],[5,68],[5,68],[5,68],[5,68]],
+            "eleph_sources": "5-3 Hard\n10-3 Hard",
+
+            "weapon_name_jp": "マイ・ネセシティ",
+            "weapon_name_en": "My Necessity",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 20005,
@@ -1539,8 +1695,19 @@
             "skill_sub_name": "アングリーアデリーさんの加護",
             "skill_sub_description": "Increases all allies' attack speed <b:AttackSpeed> by <?1>.",
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[6,40],[6,40],[6,40],[6,40],[6,40],[7,48],[7,48],[7,48],[7,48],[7,48]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "マイ・ネセシティ",
+            "weapon_name_en": "My Necessity",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10004,
@@ -1613,7 +1780,19 @@
             "skill_sub_name": "Out-and-Out",
             "skill_sub_description": "Deals an additional <?1> damage to enemies not in cover.",
             "skill_sub_parameters": [["2.7%", "2.8%", "3%", "3.5%", "3.6%", "3.8%", "4.3%", "4.4%", "4.6%", "5.2%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png"
+            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
+
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[5,49],[5,49],[5,49],[5,49],[5,49],[6,59],[6,59],[6,59],[6,59],[6,59]],
+            "eleph_sources": "16-3 Hard",
+
+            "weapon_name_jp": "終幕：デストロイヤー",
+            "weapon_name_en": "Denouement: Destroyer",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         
         },
         {
@@ -1687,7 +1866,19 @@
             "skill_sub_name": "実力行使",
             "skill_sub_description": "When Hina uses her EX skill, increases attack <b:ATK> by <?1> until the end of battle. Effect can stack up to 5 times.",
             "skill_sub_parameters": [["8.7%", "9.1%", "9.5%", "11.3%", "11.7%", "12.2%", "13.9%", "14.3%", "14.8%", "16.5%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[6,48],[6,48],[6,48],[6,48],[6,48],[8,57],[8,57],[8,57],[8,57],[8,57]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "終幕：デストロイヤー",
+            "weapon_name_en": "Denouement: Destroyer",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         
         },
         {
@@ -1761,8 +1952,19 @@
             "skill_sub_name": "Expert Suppression",
             "skill_sub_description": "While using her EX skill, Hoshino gains a shield <b:Shield> with HP equal to <?1> of healing power. Shield is dispelled once EX skill has finished.",
             "skill_sub_parameters": [["108%", "113%", "118%", "140%", "145%", "151%", "172%", "178%", "183%", "205%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_SHIELD.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_SHIELD.png",
+
+            "recollection_lobby": 9,
+            "bond_stat": ["defense_power", "maxhp"],
+            "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,122],[2,122],[2,122],[2,122],[2,122],[3,147],[3,147],[3,147],[3,147],[3,147]],
+            "eleph_sources": "7-3 Hard\n11-3 Hard",
+
+            "weapon_name_jp": "Eye of Horus",
+            "weapon_name_en": "Eye of Horus",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10006,
@@ -1835,8 +2037,19 @@
             "skill_sub_name": "Prefect Team Nerve",
             "skill_sub_description": "Deals an additional <?1> damage to enemies when Iori is not taking cover.",
             "skill_sub_parameters": [["22.6%", "23.8%", "24.9%", "29.4%", "30.6%", "31.7%", "36.2%", "37.4%", "38.5%", "43.1%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[6,50],[6,50],[6,50],[6,50],[6,50],[8,60],[8,60],[8,60],[8,60],[8,60]],
+            "eleph_sources": "14-3 Hard",
+
+            "weapon_name_jp": "クラックショット",
+            "weapon_name_en": "Crack Shot",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]        
         },
         {
             "id": 10023,
@@ -1909,8 +2122,19 @@
             "skill_sub_name": "スペシャリストの威力",
             "skill_sub_description": "Attacks have a 25% chance to deal an additional <?1> chill damage over time <d:Chill> for 20s. 10s cooldown between activations.",
             "skill_sub_parameters": [["34.1%", "35.8%", "37.5%", "44.3%", "46%", "47.7%", "54.5%", "56.3%", "58%", "64.8%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_CHILL.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_CHILL.png",
+
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[7,45],[7,45],[7,45],[7,45],[7,45],[8,55],[8,55],[8,55],[8,55],[8,55]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "クラックショット",
+            "weapon_name_en": "Crack Shot",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]        
         },
         {
             "id": 10009,
@@ -1983,8 +2207,19 @@
             "skill_sub_name": "Savor the Flavor!",
             "skill_sub_description": "Deals between <?1> ~ <?2> additional damage based on Izumi's current HP.",
             "skill_sub_parameters": [["0.4%", "0.4%", "0.4%", "0.5%", "0.5%", "0.5%", "0.6%", "0.6%", "0.7%", "0.7%"], ["2.2%", "2.3%", "2.4%", "2.8%", "2.9%", "3%", "3.5%", "3.6%", "3.7%", "4.1%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
+
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,50],[4,50],[4,50],[4,50],[4,50],[5,60],[5,60],[5,60],[5,60],[5,60]],
+            "eleph_sources": "13-3 Hard",
+
+            "weapon_name_jp": "デイリーカトラリー",
+            "weapon_name_en": "Everyday Cutlery",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]        
         },
         {
             "id": 16006,
@@ -2057,8 +2292,19 @@
             "skill_sub_name": "美味しいけどキーンってなるね~",
             "skill_sub_description": "Attacks have a 10% chance to stun <c:Stunned> the target for <?1>. 20s cooldown between activations.",
             "skill_sub_parameters": [["1.23s", "1.3s", "1.36s", "1.6s", "1.66s", "1.73s", "1.97s", "2.03s", "2.09s", "2.34s"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STUNNED.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STUNNED.png",
+            
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[5,47],[5,47],[5,47],[5,47],[5,47],[6,56],[6,56],[6,56],[6,56],[6,56]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "デイリーカトラリー",
+            "weapon_name_en": "Everyday Cutlery",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]        
         },
         {
             "id": 10014,
@@ -2088,7 +2334,7 @@
             "age": "15",
             "birthday": "December 16",
             "height": "155cm",
-            "hobbies": "",
+            "hobbies": "Studying ninja arts, escorting her master",
             "illustrator": "はねこと",
             "cv": "Kana Asumi",
         
@@ -2133,13 +2379,17 @@
             "skill_sub_parameters": [["20.1%", "21.1%", "22.1%", "26.2%", "27.2%", "28.2%", "32.2%", "33.2%", "34.2%", "38.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
         
-            "weapon_img": "Weapon_Icon_10014.png",
-            "weapon_name": "イズナ流スーパー忍具",
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,88],[4,88],[4,88],[4,88],[4,88],[5,105],[5,105],[5,105],[5,105],[5,105]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "イズナ流スーパー忍具",
+            "weapon_name_en": "Izuna-style Super Ninjutsu",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 13007,
@@ -2212,8 +2462,19 @@
             "skill_sub_name": "Hungry Foodie",
             "skill_sub_description": "Deals between <?1> ~ <?2> additional damage based on Junko's missing HP.",
             "skill_sub_parameters": [["0.9%", "0.9%", "1%", "1.2%", "1.2%", "1.2%", "1.4%", "1.5%", "1.5%", "1.7%"], ["4.9%", "5.2%", "5.4%", "6.4%", "6.6%", "6.9%", "7.9%", "8.1%", "8.4%", "9.4%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
+
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[5,57],[5,57],[5,57],[5,57],[5,57],[7,68],[7,68],[7,68],[7,68],[7,68]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ダイナーズアウトロー",
+            "weapon_name_en": "Diner's Outlaw",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "A",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]        
         },
         {
             "id": 26002,
@@ -2286,8 +2547,19 @@
             "skill_sub_name": "Juri's Mealtime!",
             "skill_sub_description": "Increases all allies' max HP <b:MAXHP> by <?1>.",
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
+
+            "recollection_lobby": 0,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,42],[3,42],[3,42],[3,42],[3,42],[4,50],[4,50],[4,50],[4,50],[4,50]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "給食部の護身用銃typeB",
+            "weapon_name_en": "School Lunch Club Type-B Defense Weapon",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 13005,
@@ -2360,8 +2632,19 @@
             "skill_sub_name": "Oh, Well...",
             "skill_sub_description": "Deals an additional <?1> damage to enemies inflicted with a crowd-control effect.",
             "skill_sub_parameters": [["74.8%", "78.5%", "82.2%", "97.2%", "100%", "104%", "119%", "123%", "127%", "142%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,65],[2,65],[2,65],[2,65],[2,65],[3,79],[3,79],[3,79],[3,79],[3,79]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "デモンズロア",
+            "weapon_name_en": "Demon's Roar",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 13012,
@@ -2434,8 +2717,19 @@
             "skill_sub_name": "なんていられません!",
             "skill_sub_description": "Attacks have a 30% chance to decrease the target's healing received <d:HealEffectiveness> by <?1> for 13s. 5s cooldown between activations.",
             "skill_sub_parameters": [["22.7%", "23.8%", "25%", "29.5%", "30.7%", "31.8%", "36.3%", "37.5%", "38.6%", "43.2%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATDEBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STATDEBUFF.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,59],[2,59],[2,59],[2,59],[2,59],[3,71],[3,71],[3,71],[3,71],[3,71]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "第3号ヴァルキューレ制式拳銃",
+            "weapon_name_en": "No. 3 Valkyrie Service Weapon",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10007,
@@ -2508,8 +2802,19 @@
             "skill_sub_name": "Suffering for Art",
             "skill_sub_description": "Deals an additional <?1> damage to enemies marked by Maki.",
             "skill_sub_parameters": [["14.9%", "15.7%", "16.4%", "19.4%", "20.1%", "20.8%", "23.8%", "24.6%", "25.3%", "28.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
+
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[5,50],[5,50],[5,50],[5,50],[5,50],[6,60],[6,60],[6,60],[6,60],[6,60]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "オートラッカー",
+            "weapon_name_en": "Autolacquer",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 23008,
@@ -2582,7 +2887,19 @@
             "skill_sub_name": "慈愛の心",
             "skill_sub_description": "Increases all allies' max HP <b:MAXHP> by <?1>.",
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png"
+            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
+
+            "recollection_lobby": 3,
+            "bond_stat": ["heal_power", "maxhp"],
+            "bond_stat_value": [[5,0],[5,0],[5,0],[5,0],[8,0],[8,0],[8,0],[8,0],[8,0],[10,40],[10,40],[10,40],[10,40],[10,40],[13,48],[13,48],[13,48],[13,48],[13,48]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "パイエティー",
+            "weapon_name_en": "Piety",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         
         },
         {
@@ -2656,8 +2973,19 @@
             "skill_sub_name": "開発者シナジー：モモイ",
             "skill_sub_description": "Increases attack speed <b:AttackSpeed> by <?1>. If Momoi is in the team, increases by <?2> instead.",
             "skill_sub_parameters": [["15.1%", "15.8%", "16.6%", "19.6%", "20.4%", "21.1%", "24.2%", "24.9%", "25.7%", "28.7%"], ["18.1%", "19%", "19.9%", "23.5%", "24.5%", "25.4%", "29%", "29.9%", "30.8%", "34.4%"]],
-            "skill_sub_icon": "SKILLICON_MIDORI_EXTRAPASSIVESKILL.png"
-        
+            "skill_sub_icon": "SKILLICON_MIDORI_EXTRAPASSIVESKILL.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[6,45],[6,45],[6,45],[6,45],[6,45],[8,55],[8,55],[8,55],[8,55],[8,55]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "フレッシュ・インスピレーション",
+            "weapon_name_en": "Fresh Inspiration",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 13006,
@@ -2730,8 +3058,19 @@
             "skill_sub_name": "Wanna Have Some Fun?",
             "skill_sub_description": "Attacks have a 25% chance to increase accuracy <b:HIT> by <?1> for 30s. 25s cooldown between activations.",
             "skill_sub_parameters": [["30.2%", "31.7%", "33.2%", "39.3%", "40.8%", "42.3%", "48.3%", "49.9%", "51.4%", "57.4%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,49],[4,49],[4,49],[4,49],[4,49],[5,59],[5,59],[5,59],[5,59],[5,59]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "トリックオアトリック",
+            "weapon_name_en": "Trick or Trick",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10029,
@@ -2804,8 +3143,19 @@
             "skill_sub_name": "お口いっぱいの幸せ",
             "skill_sub_description": "When Natsu uses her EX skill, increases healing received <b:HealEffectiveness> by <?1> until the end of battle. Effect can stack up to 3 times.",
             "skill_sub_parameters": [["7.2%", "7.6%", "7.9%", "9.4%", "9.8%", "10.1%", "11.6%", "12%", "12.3%", "13.8%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
+
+            "recollection_lobby": 5,
+            "bond_stat": ["maxhp", "attack_power"],
+            "bond_stat_value": [[42,0],[42,0],[42,0],[42,0],[63,0],[63,0],[63,0],[63,0],[63,0],[85,3],[85,3],[85,3],[85,3],[85,3],[106,4],[106,4],[106,4],[106,4],[106,4]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ビヨンド・ザ・ルミネーション",
+            "weapon_name_en": "Beyond the Rumination",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10008,
@@ -2878,8 +3228,19 @@
             "skill_sub_name": "Enhanced Rage",
             "skill_sub_description": "Whenever Neru becomes enraged <s:Fury>, increases attack <b:ATK> by <?1> for 30s.",
             "skill_sub_parameters": [["16.8%", "17.6%", "18.4%", "21.8%", "22.6%", "23.5%", "26.8%", "27.7%", "28.5%", "31.9%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,78],[4,78],[4,78],[4,78],[4,78],[5,93],[5,93],[5,93],[5,93],[5,93]],
+            "eleph_sources": "15-3 Hard",
+
+            "weapon_name_jp": "ツイン・ドラゴン",
+            "weapon_name_en": "Twin Dragons",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10026,
@@ -2952,8 +3313,19 @@
             "skill_sub_name": "もっと痛いのが好きか？",
             "skill_sub_description": "Deals an additional <?1> damage to medium-sized enemies.",
             "skill_sub_parameters": [["3.2%", "3.4%", "3.5%", "4.2%", "4.4%", "4.5%", "5.2%", "5.4%", "5.5%", "6.2%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
+
+            "recollection_lobby": 4,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[4,0],[4,0],[4,0],[4,0],[4,0],[5,78],[5,78],[5,78],[5,78],[5,78],[6,93],[6,93],[6,93],[6,93],[6,93]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ツイン・ドラゴン",
+            "weapon_name_en": "Twin Dragons",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]        
         },
         {
             "id": 13004,
@@ -3026,8 +3398,19 @@
             "skill_sub_name": "Squeaky-Clean Sweep",
             "skill_sub_description": "Deals an additional <?1> damage to large-sized enemies.",
             "skill_sub_parameters": [["6.7%", "7.1%", "7.4%", "8.7%", "9.1%", "9.4%", "10.8%", "11.1%", "11.4%", "12.8%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
+
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[5,49],[5,49],[5,49],[5,49],[5,49],[7,59],[7,59],[7,59],[7,59],[7,59]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "リトルマシンガンⅤ",
+            "weapon_name_en": "Little Machine Gun V",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]   
         },
         {
             "id": 16004,
@@ -3100,8 +3483,19 @@
             "skill_sub_name": "Ready, Set, Spray!",
             "skill_sub_description": "Increases attack speed <b:AttackSpeed> by <?1> after standing still for 10s.",
             "skill_sub_parameters": [["20.1%", "21.1%", "22.1%", "26.2%", "27.2%", "28.2%", "32.2%", "33.2%", "34.2%", "38.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+            
+            "recollection_lobby": 0,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[5,50],[5,50],[5,50],[5,50],[5,50],[6,60],[6,60],[6,60],[6,60],[6,60]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "仁義なき撃ち合い",
+            "weapon_name_en": "Shooting Without Honor",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 13008,
@@ -3174,8 +3568,19 @@
             "skill_sub_name": "Wrath of the Task Force",
             "skill_sub_description": "Increases attack speed <b:AttackSpeed> by <?1> for 30s after Serika uses her EX skill.",
             "skill_sub_parameters": [["20.1%", "21.1%", "22.1%", "26.2%", "27.2%", "28.2%", "32.2%", "33.2%", "34.2%", "38.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 9,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[6,55],[6,55],[6,55],[6,55],[6,55],[7,66],[7,66],[7,66],[7,66],[7,66]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "シンシアリティ",
+            "weapon_name_en": "Sincerity",
+            "weapon_bonus_terrain_type": "outdoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10010,
@@ -3248,8 +3653,19 @@
             "skill_sub_name": "Very Rapid Fire",
             "skill_sub_description": "Attacks have a 20% chance to increase attack speed <b:AttackSpeed> by <?1> for 30s. 25s cooldown between activations.",
             "skill_sub_parameters": [["30.2%", "31.7%", "33.2%", "39.3%", "40.8%", "42.3%", "48.3%", "49.9%", "51.4%", "57.4%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 9,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[6,55],[6,55],[6,55],[6,55],[6,55],[7,67],[7,67],[7,67],[7,67],[7,67]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "WHITE FANG 465",
+            "weapon_name_en": "WHITE FANG 465",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10024,
@@ -3322,8 +3738,19 @@
             "skill_sub_name": "桐眼",
             "skill_sub_description": "Deals an additional <?1> damage to enemies inflicted with a debuff.",
             "skill_sub_parameters": [["3.8%", "4%", "4.2%", "5%", "5.2%", "5.4%", "6.2%", "6.4%", "6.5%", "7.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
+
+            "recollection_lobby": 3,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[6,53],[6,53],[6,53],[6,53],[6,53],[7,63],[7,63],[7,63],[7,63],[7,63]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "WHITE FANG 465",
+            "weapon_name_en": "WHITE FANG 465",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 23006,
@@ -3396,8 +3823,19 @@
             "skill_sub_name": "にゃんにゃんっ！",
             "skill_sub_description": "Increases all allies' critical chance <b:CriticalChance> by <?1>.",
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[3,81],[3,81],[3,81],[3,81],[3,81],[4,97],[4,97],[4,97],[4,97],[4,97]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "桜ボンボン",
+            "weapon_name_en": "Sakura Bonbon",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "A",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 10011,
@@ -3472,7 +3910,13 @@
             "skill_sub_parameters": [["50.7%", "53.3%", "55.8%", "66%", "68.5%", "71%", "81.2%", "83.7%", "86.3%", "96.4%"]],
             "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
 
-            "weapon_name": "愛のムチ",
+            "recollection_lobby": 9,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[6,48],[6,48],[6,48],[6,48],[6,48],[8,58],[8,58],[8,58],[8,58],[8,58]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "愛のムチ",
+            "weapon_name_en": "Love Whip",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -3550,8 +3994,19 @@
             "skill_sub_name": "Expert Reload",
             "skill_sub_description": "Reduces damage taken <b:DamagedRatio> by <?1> while reloading.",
             "skill_sub_parameters": [["24%", "25.2%", "26.4%", "31.2%", "32.4%", "33.6%", "38.4%", "39.6%", "40.8%", "45.6%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
+
+            "recollection_lobby": 6,
+            "bond_stat": ["maxhp", "attack_power"],
+            "bond_stat_value": [[51,0],[51,0],[51,0],[51,0],[76,0],[76,0],[76,0],[76,0],[76,0],[102,5],[102,5],[102,5],[102,5],[102,5],[127,5],[127,5],[127,5],[127,5],[127,5]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "安眠のお供Ⅱ",
+            "weapon_name_en": "Sleeping Companion Ⅱ",
+            "weapon_bonus_terrain_type": "indoor",
+            "weapon_bonus_terrain_adaption": "B",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 20000,
@@ -3624,8 +4079,19 @@
             "skill_sub_name": "Hope That Helps",
             "skill_sub_description": "Increases all allies' critical damage <b:CriticalDamage> by <?1>.",
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
-            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png"
-        
+            "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
+
+            "recollection_lobby": 9,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[4,0],[4,0],[4,0],[4,0],[4,0],[5,42],[5,42],[5,42],[5,42],[5,42],[6,50],[6,50],[6,50],[6,50],[6,50]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ファンシーライト",
+            "weapon_name_en": "Fancy Light",
+            "weapon_bonus_terrain_type": "street",
+            "weapon_bonus_terrain_adaption": "SS",
+            "weapon_bonus_stats": ["attack_power", "maxhp"],
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
         },
         {
             "id": 20001,
@@ -3699,8 +4165,14 @@
             "skill_sub_description": "Increases all allies' attack <b:ATK> by <?1>.",
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
-        
-            "weapon_name": "ホークアイ",
+
+            "recollection_lobby": 9,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[6,43],[6,43],[6,43],[6,43],[6,43],[7,52],[7,52],[7,52],[7,52],[7,52]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ホークアイ",
+            "weapon_name_en": "Hawkeye",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -3778,8 +4250,14 @@
             "skill_sub_description": "Increases critical chance <b:CriticalChance> by <?1> for 40s after Karin uses her EX skill.",
             "skill_sub_parameters": [["12.9%", "13.5%", "14.2%", "16.7%", "17.4%", "18.1%", "20.6%", "21.3%", "22%", "24.5%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
-        
-            "weapon_name": "ホークアイ",
+
+            "recollection_lobby": 2,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[7,50],[7,50],[7,50],[7,50],[7,50],[8,60],[8,60],[8,60],[8,60],[8,60]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ホークアイ",
+            "weapon_name_en": "Hawkeye",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -3858,7 +4336,13 @@
             "skill_sub_parameters": [["13.4%", "14.1%", "14.7%", "17.4%", "18.1%", "18.8%", "21.5%", "22.1%", "22.8%", "25.5%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
         
-            "weapon_name": "ミレニアム製最新型ダンベル",
+            "recollection_lobby": 5,
+            "bond_stat": ["defense_power", "maxhp"],
+            "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,0],[1,78],[1,78],[1,78],[1,78],[1,78],[2,94],[2,94],[2,94],[2,94],[2,94]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ミレニアム製最新型ダンベル",
+            "weapon_name_en": "Newest Millennium Dumbbell",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -3936,8 +4420,14 @@
             "skill_sub_description": "When Yuzu uses either her Normal or EX Skill, increases critical damage <b:CriticalDamage> by <?1> for 6s.",
             "skill_sub_parameters": [["22.3%", "23.4%", "24.5%", "29%", "30.1%", "31.2%", "35.7%", "36.8%", "37.9%", "42.4%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
-        
-            "weapon_name": "にゃん's ダッシュ",
+
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[4,0],[4,0],[4,0],[4,0],[5,0],[5,0],[5,0],[5,0],[5,0],[7,55],[7,55],[7,55],[7,55],[7,55],[9,66],[9,66],[9,66],[9,66],[9,66]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "にゃん's ダッシュ",
+            "weapon_name_en": "Nyan's Dash",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -4016,7 +4506,13 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
         
-            "weapon_name": "オートエイマー",
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,41],[4,41],[4,41],[4,41],[4,41],[5,49],[5,49],[5,49],[5,49],[5,49]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "オートエイマー",
+            "weapon_name_en": "AutoAimer",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "A",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -4095,7 +4591,13 @@
             "skill_sub_parameters": [["15.1%", "15.8%", "16.6%", "19.6%", "20.4%", "21.1%", "24.2%", "24.9%", "25.7%", "28.7%"], ["18.1%", "19%", "19.9%", "23.5%", "24.5%", "25.4%", "29%", "29.9%", "30.8%", "34.4%"]],
             "skill_sub_icon": "SKILLICON_MOMOI_EXTRAPASSIVESKILL.png",
         
-            "weapon_name": "ユニーク・アイディア",
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,60],[4,60],[4,60],[4,60],[4,60],[5,72],[5,72],[5,72],[5,72],[5,72]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ユニーク・アイディア",
+            "weapon_name_en": "Unique Idea",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
@@ -4174,7 +4676,13 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
         
-            "weapon_name": "サジタリウスナイト",
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,0],[3,43],[3,43],[3,43],[3,43],[3,43],[4,51],[4,51],[4,51],[4,51],[4,51]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "サジタリウスナイト",
+            "weapon_name_en": "Sagittarius Night",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "A",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -4253,7 +4761,13 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
         
-            "weapon_name": "ぼく様特製拳銃",
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,43],[4,43],[4,43],[4,43],[4,43],[5,51],[5,51],[5,51],[5,51],[5,51]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ぼく様特製拳銃",
+            "weapon_name_en": "My Special Pistol",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -4332,7 +4846,13 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
         
-            "weapon_name": "ぼく様特製拳銃",
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,40],[4,40],[4,40],[4,40],[4,40],[5,48],[5,48],[5,48],[5,48],[5,48]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ぼく様特製拳銃",
+            "weapon_name_en": "My Special Pistol",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -4411,12 +4931,17 @@
             "skill_sub_parameters": [["34.6%", "36.3%", "38%", "44.9%", "46.7%", "48.4%", "55.3%", "57%", "58.8%", "65.7%"]],
             "skill_sub_icon": "SKILLICON_CH0066_EXTRAPASSIVESKILL.png",
 
-            "weapon_name": "愛のムチ",
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[4,0],[4,0],[4,0],[4,0],[6,0],[6,0],[6,0],[6,0],[6,0],[8,48],[8,48],[8,48],[8,48],[8,48],[10,58],[10,58],[10,58],[10,58],[10,58]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "愛のムチ",
+            "weapon_name_en": "Love Whip",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
-            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
+            "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]        
         },
         {
             "id": 23004,
@@ -4491,7 +5016,13 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
 
-            "weapon_name": "マイスター・ゼロ",
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[5,43],[5,43],[5,43],[5,43],[5,43],[6,51],[6,51],[6,51],[6,51],[6,51]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "マイスター・ゼロ",
+            "weapon_name_en": "Meister Zero",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -4571,7 +5102,13 @@
             "skill_sub_parameters": [["75%", "78.7%", "82.5%", "97.5%", "101%", "105%", "120%", "123%", "127%", "142%"]],
             "skill_sub_icon": "COMMON_SKILLICON_HEAL.png",
 
-            "weapon_name": "ロジック＆リーズン",
+            "recollection_lobby": 1,
+            "bond_stat": ["maxhp", "attack_power"],
+            "bond_stat_value": [[50,0],[50,0],[50,0],[50,0],[75,0],[75,0],[75,0],[75,0],[75,0],[100,3],[100,3],[100,3],[100,3],[100,3],[125,3],[125,3],[125,3],[125,3],[125,3]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ロジック＆リーズン",
+            "weapon_name_en": "Logic & Reason",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "A",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -4651,12 +5188,17 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
 
-            "weapon_name": "エコーリンク",
+            "recollection_lobby": 0,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[3,42],[3,42],[3,42],[3,42],[3,42],[4,51],[4,51],[4,51],[4,51],[4,51]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "エコーリンク",
+            "weapon_name_en": "Echolink",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0], [0,0]]
-        
         },
         {
             "id": 16002,
@@ -4731,12 +5273,17 @@
             "skill_sub_parameters": [["20.1%", "21.1%", "22.1%", "26.2%", "27.2%", "28.2%", "32.2%", "33.2%", "34.2%", "38.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
 
-            "weapon_name": "プロフェッサーK",
+            "recollection_lobby": 0,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,49],[4,49],[4,49],[4,49],[4,49],[5,59],[5,59],[5,59],[5,59],[5,59]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "プロフェッサーK",
+            "weapon_name_en": "Professor K",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "A",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0], [0,0]]
-        
         },
         {
             "id": 10020,
@@ -4811,7 +5358,13 @@
             "skill_sub_parameters": [["21.5%", "22.6%", "23.7%", "28%", "29.1%", "30.2%", "34.5%", "35.6%", "36.6%", "41%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
 
-            "weapon_name": "ジャスティス・ブラック",
+            "recollection_lobby": 6,
+            "bond_stat": ["heal_power", "maxhp"],
+            "bond_stat_value": [[6,0],[6,0],[6,0],[6,0],[10,0],[10,0],[10,0],[10,0],[10,0],[13,53],[13,53],[13,53],[13,53],[13,53],[16,63],[16,63],[16,63],[16,63],[16,63]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ジャスティス・ブラック",
+            "weapon_name_en": "Justice Black",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -4891,7 +5444,13 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
 
-            "weapon_name": "正義の顕現",
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[6,53],[6,53],[6,53],[6,53],[6,53],[7,63],[7,63],[7,63],[7,63],[7,63]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "正義の顕現",
+            "weapon_name_en": "Manifestation of Justice",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
@@ -4971,12 +5530,17 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
 
-            "weapon_name": "正義の顕現",
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[6,37],[6,37],[6,37],[6,37],[6,37],[8,45],[8,45],[8,45],[8,45],[8,45]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "正義の顕現",
+            "weapon_name_en": "Manifestation of Justice",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp", "heal_power"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0], [0,0]]
-        
         },
         {
             "id": 10013,
@@ -5051,12 +5615,17 @@
             "skill_sub_parameters": [["30%", "33%", "36%", "39%", "42%", "45%", "48%", "51%", "54%", "57%"]],
             "skill_sub_icon": "COMMON_SKILLICON_RELOAD.png",
 
-            "weapon_name": "ブラッド＆ガンパウダー",
+            "recollection_lobby": 5,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[4,0],[4,0],[4,0],[4,0],[6,0],[6,0],[6,0],[6,0],[6,0],[8,89],[8,89],[8,89],[8,89],[8,89],[10,107],[10,107],[10,107],[10,107],[10,107]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ブラッド＆ガンパウダー",
+            "weapon_name_en": "Blood & Gunpowder",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "SS",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 16005,
@@ -5131,12 +5700,17 @@
             "skill_sub_parameters": [["16.8%", "17.6%", "18.4%", "21.8%", "22.6%", "23.5%", "26.8%", "27.7%", "28.5%", "31.9%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
 
-            "weapon_name": "ブラッド＆ガンパウダー",
+            "recollection_lobby": 3,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[7,88],[7,88],[7,88],[7,88],[7,88],[9,105],[9,105],[9,105],[9,105],[9,105]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ブラッド＆ガンパウダー",
+            "weapon_name_en": "Blood & Gunpowder",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 23000,
@@ -5211,12 +5785,17 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
 
-            "weapon_name": "爽やかチョコミント",
+            "recollection_lobby": 6,
+            "bond_stat": ["maxhp", "attack_power"],
+            "bond_stat_value": [[17,0],[17,0],[17,0],[17,0],[25,0],[25,0],[25,0],[25,0],[25,0],[34,5],[34,5],[34,5],[34,5],[34,5],[42,5],[42,5],[42,5],[42,5],[42,5]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "爽やかチョコミント",
+            "weapon_name_en": "Refreshing Mint Chocolate",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 23002,
@@ -5291,12 +5870,17 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
 
-            "weapon_name": "ハッピースマイリー",
+            "recollection_lobby": 6,
+            "bond_stat": ["heal_power", "maxhp"],
+            "bond_stat_value": [[7,0],[7,0],[7,0],[7,0],[11,0],[11,0],[11,0],[11,0],[11,0],[14,48],[14,48],[14,48],[14,48],[14,48],[18,57],[18,57],[18,57],[18,57],[18,57]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ハッピースマイリー",
+            "weapon_name_en": "Happy Smiley",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 23007,
@@ -5371,12 +5955,17 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
 
-            "weapon_name": "オネストウィッシュ",
+            "recollection_lobby": 2,
+            "bond_stat": ["heal_power", "maxhp"],
+            "bond_stat_value": [[7,0],[7,0],[7,0],[7,0],[11,0],[11,0],[11,0],[11,0],[11,0],[14,47],[14,47],[14,47],[14,47],[14,47],[18,57],[18,57],[18,57],[18,57],[18,57]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "オネストウィッシュ",
+            "weapon_name_en": "Honest Wish",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 13003,
@@ -5451,12 +6040,17 @@
             "skill_sub_parameters": [["50%", "52.5%", "55%", "65%", "67.5%", "70%", "80%", "82.5%", "85%", "95%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
 
-            "weapon_name": "インペイルメント",
+            "recollection_lobby": 8,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[5,0],[5,0],[5,0],[5,0],[5,0],[7,49],[7,49],[7,49],[7,49],[7,49],[9,59],[9,59],[9,59],[9,59],[9,59]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "インペイルメント",
+            "weapon_name_en": "Impalement",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "A",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 26003,
@@ -5531,12 +6125,17 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
 
-            "weapon_name": "タクティカルセラピー",
+            "recollection_lobby": 6,
+            "bond_stat": ["heal_power", "maxhp"],
+            "bond_stat_value": [[7,0],[7,0],[7,0],[7,0],[11,0],[11,0],[11,0],[11,0],[11,0],[15,47],[15,47],[15,47],[15,47],[15,47],[18,56],[18,56],[18,56],[18,56],[18,56]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "タクティカルセラピー",
+            "weapon_name_en": "Tactical Therapy",
             "weapon_bonus_terrain_type": "outdoor",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 26004,
@@ -5611,12 +6210,17 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
 
-            "weapon_name": "ライブラリールーラー",
+            "recollection_lobby": 0,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,42],[4,42],[4,42],[4,42],[4,42],[5,50],[5,50],[5,50],[5,50],[5,50]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "ライブラリールーラー",
+            "weapon_name_en": "Library Ruler",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "B",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 16003,
@@ -5691,12 +6295,17 @@
             "skill_sub_parameters": [["27.5%", "28.9%", "30.3%", "35.8%", "37.2%", "38.6%", "44.1%", "45.5%", "46.8%", "52.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_EXTRADAMAGE.png",
 
-            "weapon_name": "セーフティー",
+            "recollection_lobby": 0,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,57],[4,57],[4,57],[4,57],[4,57],[5,69],[5,69],[5,69],[5,69],[5,69]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "セーフティー",
+            "weapon_name_en": "Safety",
             "weapon_bonus_terrain_type": "street",
             "weapon_bonus_terrain_adaption": "A",
             "weapon_bonus_stats": ["attack_power", "maxhp"],
             "weapon_bonus_stats_parameters": [[0, 0], [0, 0]]
-        
         },
         {
             "id": 26005,
@@ -5771,7 +6380,13 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
 
-            "weapon_name": "スイーツドライバー",
+            "recollection_lobby": 6,
+            "bond_stat": ["attack_power", "maxhp"],
+            "bond_stat_value": [[3,0],[3,0],[3,0],[3,0],[4,0],[4,0],[4,0],[4,0],[4,0],[5,42],[5,42],[5,42],[5,42],[5,42],[6,50],[6,50],[6,50],[6,50],[6,50]],
+            "eleph_sources": "",
+
+            "weapon_name_jp": "スイーツドライバー",
+            "weapon_name_en": "Sweets Driver",
             "weapon_bonus_terrain_type": "indoor",
             "weapon_bonus_terrain_adaption": "A",
             "weapon_bonus_stats": ["attack_power", "maxhp"],

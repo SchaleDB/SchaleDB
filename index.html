@@ -3,19 +3,18 @@
 <head>
     <title>Schale DB | Students</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Noto+Sans+JP&family=Open+Sans&display=swap" rel="stylesheet"> 
-
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
     <link href="css/site.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container-fluid p-0 h-100" style="min-height: 100vh; overflow-x: hidden;">
+    <div class="container-fluid p-0 h-100" style="min-height: 100vh; overflow-x: hidden; position: relative;">
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
             <div class="container-xl">
                 <a class="navbar-brand" href="#">
@@ -67,7 +66,7 @@
                                         <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-weapon">Weapon</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#">Profile</a>
+                                        <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-profile">Profile</a>
                                     </li>
                                   </ul>
                             </div>
@@ -92,13 +91,12 @@
                                             </div>
                                             <div class="flex-grow-1 mb-2 flex-basis-50">
                                                 <span>
-                                                    <span id="ba-student-role" class="ba-role-info d-inline-block align-text-top text-center" style="margin-top: -1px;"><img id="ba-student-role-icon" src=""><span id="ba-student-role-label" style="margin-left: 32px; font-weight: bold;"></span></span>
+                                                    <span id="ba-student-role" class="ba-role-info d-inline-block align-text-top text-center" style="margin-top: -1px;"><img id="ba-student-role-icon" src=""><span id="ba-student-role-label" style="margin-left: 28px; font-weight: bold;"></span></span>
                                                     <span id="ba-student-attacktype" class="ba-type-info d-inline-block align-text-top text-center" style="margin-top: -1px;"><img src="images/tactical/StrategyObjectBuff_Attack.png"><span id="ba-student-attacktype-label" style="margin-left: 24px; font-weight: bold;"></span></span>
                                                     <span id="ba-student-position" class="ba-position-info ba-type-position d-inline-block align-text-top text-center" style="margin-top: 1px; font-weight: bold; font-style: italic;"></span>
                                                     <span id="ba-student-defensetype" class="ba-type-info d-inline-block align-text-top text-center" style="margin-top: 1px;"><img src="images/tactical/StrategyObjectBuff_Defense.png"><span id="ba-student-defensetype-label" style="margin-left: 24px; font-weight: bold;"></span></span>
                                                 </span>
                                             </div>
-
                                             <div class="me-1 mb-2" style="min-width: fit-content;">
                                                 <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Common_Icon_Street_g.png"><br><img id="ba-student-terrain-street" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
                                                 <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Common_Icon_Outdoor_g.png"><br><img id="ba-student-terrain-outdoor" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
@@ -134,7 +132,7 @@
     
                                         <div class="row g-1 mt-2">
                                             <div class="col">
-                                                <table class="table ba-stats">
+                                                <table class="table ba-stats mb-0">
                                                     <tbody>
                                                         <tr>
                                                             <td width="30%">Max HP</td>
@@ -267,6 +265,10 @@
                                                 <img id="ba-student-stars" src="images/ui/Common_Icon_CharacterWeapon_on.png" style="height: 28px; width:auto; margin-bottom: 0.25rem;">
                                             </span>
                                         </div>
+
+                                        <div class="row mt-1">
+                                            <h4 id="ba-weapon-name-jp" class="" style="display: inline; font-family: 'Noto Sans JP', sans-serif;"></h4>
+                                        </div>
                                         
                                         <div class="mt-3">
                                             <img id="ba-student-weapon-img" src="">
@@ -282,7 +284,7 @@
                                                             <td id="ba-weapon-stat-2" width="30%"></td>
                                                             <td id="ba-weapon-stat-2-amount" width="20%"></td>
                                                         </tr>
-                                                        <tr>
+                                                        <tr id="ba-weapon-stat-row2">
                                                             <td id="ba-weapon-stat-3" width="30%"></td>
                                                             <td id="ba-weapon-stat-3-amount" width="20%"></td>
                                                             <td id="ba-weapon-stat-4" width="30%"></td>
@@ -293,8 +295,11 @@
                                             </div>
                                         </div>
 
-                                        <div class="mt-3">
-                                            <img id="ba-student-weapon-img" src="">
+                                        <div class="row g-1 my-1">
+                                            <div class="d-flex flex-row">
+                                                <span class="mx-2 flex-fill"><input id="ba-weaponpreview-levelrange" oninput="changeWeaponPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="50"></span>
+                                                <span id="ba-weaponpreview-level">Lv.1</span>
+                                            </div>
                                         </div>
 
                                         <!-- <div class="mb-3 p-2 d-flex flex-row ba-skill-panel">
@@ -311,8 +316,74 @@
                                         </div> -->
 
                                     </div>
-                                </div>
 
+                                    <div id="ba-student-page-profile" class="tab-pane fade container p-3" style="background-color: #fff; border-radius: .25em;">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <h2 id="ba-student-fullname-en" class="me-2" style="display: inline; font-weight: bold;"></h2>
+                                            <h4 id="ba-student-fullname-jp" class="" style="display: inline; font-family: 'Noto Sans JP', sans-serif;"></h4>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <img id="ba-profile-school-img" src="" style="height:42px; width: auto;">
+                                            <p id="ba-student-schoolclub-label" style="font-style: italic; margin-bottom: 0px;"></p>
+                                        </div>
+
+                                        <table class="table ba-stats mt-2 mb-4">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="20%">Age</td>
+                                                    <td width="30%" id="ba-student-profile-age"></td>
+                                                    <td width="20%">Birthday</td>
+                                                    <td width="30%" id="ba-student-profile-birthday"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Hobbies</td>
+                                                    <td id="ba-student-profile-hobbies"></td>
+                                                    <td>Height</td>
+                                                    <td id="ba-student-profile-height"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CV</td>
+                                                    <td id="ba-student-profile-cv"></td>
+                                                    <td>Illust.</td>
+                                                    <td id="ba-student-profile-illustrator"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <div class="row">
+                                            <h5>Affection Bonus</h5>
+                                        </div>
+
+                                        <div class="row g-1 my-1">
+                                            <div class="d-flex flex-row">
+                                                <div class="flex-grow-1">
+                                                    <table class="table ba-stats mb-2">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td width="33%" id="ba-student-bond-1"></td>
+                                                                <td width="17%" id="ba-student-bond-1-amount"></td>
+                                                                <td width="33%" id="ba-student-bond-2"></td>
+                                                                <td width="17%" id="ba-student-bond-2-amount"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="d-flex flex-row">
+                                                        <span class="mx-2 flex-fill"><input id="ba-bond-levelrange" oninput="changeBondLevel(this)" type="range" class="form-range" value="20" min="1" max="20"></span>
+                                                        <img src="images/ui/School_Icon_Schedule_Favor.png" style="height:24px; width:auto;"></span><span id="ba-bond-level" style="font-weight: bold;"></span>
+                                                    </div>
+                                                </div>
+                                                
+
+
+                                                <div class="ba-student-lobby ms-4">
+                                                    <img id="ba-student-lobby-img" src="">
+                                                    <span id="ba-student-lobby-unlock"></span>
+                                                 </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -328,7 +399,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title me-3" id="exampleModalLabel">Select Student</h4>
                     <span class="btn-group" role="group">
-                        <button type="button" onclick="populateStudentList('none')" class="btn btn-dark">A - Z</button>
+                        <button type="button" onclick="populateStudentList('none')" class="btn btn-dark">A-Z</button>
                         <button type="button" onclick="populateStudentList('rarity')" class="btn btn-dark">Rarity</button>
                         <button type="button" onclick="populateStudentList('school')" class="btn btn-dark">School</button>
                         <button type="button" onclick="populateStudentList('class')" class="btn btn-dark">Class</button>
