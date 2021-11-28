@@ -263,14 +263,8 @@ function loadStudent(studentName) {
 
         $('#ba-student-name-en').text(student.name_en)
         $('#ba-student-name-jp').text(student.name_jp)
-
-        if (student.type == "Striker") {
-            $("#ba-student-class").text("STRIKER")
-            $("#ba-student-class").removeClass("ba-type-special").addClass("ba-type-striker")
-        } else if (student.type == "Special") {
-            $("#ba-student-class").text("SPECIAL")
-            $("#ba-student-class").removeClass("ba-type-striker").addClass("ba-type-special")
-        }
+        $("#ba-student-class").attr("src", `images/ui/Class_${student.type}.png`)
+        
 
         $("#ba-student-role-label").text(student.role)
         $("#ba-student-role-icon").attr("src", `images/tactical/Role_${student.role.replace("T.S.", "TacticalSupport")}.png`)
@@ -295,6 +289,7 @@ function loadStudent(studentName) {
         }
         
         $("#ba-student-school-label").text(student.school)
+        $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","").replace("OTHERS", "ETC") + ".png")
         $("#ba-student-position").text(student.position.toUpperCase())
         $("#ba-student-attacktype-label").text(student.attack_type)
         $("#ba-student-defensetype-label").text(student.defense_type)
@@ -302,7 +297,9 @@ function loadStudent(studentName) {
         $("#ba-student-terrain-street").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.street_adaption + ".png")
         $("#ba-student-terrain-outdoor").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.outdoor_adaption + ".png")
         $("#ba-student-terrain-indoor").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.indoor_adaption + ".png")
-
+        $('#ba-student-terrain-street').tooltip('dispose').tooltip({title: getAdaptionText('street', student.street_adaption), placement: 'Left'})
+        $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getAdaptionText('outdoor', student.outdoor_adaption), placement: 'Left'})
+        $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getAdaptionText('indoor', student.indoor_adaption), placement: 'Left'})
 
         if (student.uses_cover) {
             $("#ba-student-usescover-icon").show()
@@ -314,8 +311,6 @@ function loadStudent(studentName) {
         $(".ba-type-weapon").css("background-image", "url('images/weapontype/Weapon_Icon_" + student.weapon_type_img + ".png')")
 
         $("#ba-student-stars").attr("src", "images/ui/Star_" + student.stars + ".png")
-        
-
 
         $("#ba-student-gear-1").attr("src", "images/equipment/Equipment_Icon_" + student.gear_1 + "_Tier1.png")
         $("#ba-student-gear-2").attr("src", "images/equipment/Equipment_Icon_" + student.gear_2 + "_Tier1.png")
@@ -350,6 +345,31 @@ function loadStudent(studentName) {
 
         studentSelectorModal.hide()
     }
+}
+
+function getAdaptionText(terrain, rank) {
+    var text = 'Student deals '
+    switch (rank) {
+        case "D":
+            text += `20% less damage in ${terrain} terrain. `
+            break
+        case "C":
+            text += `10% less damage in ${terrain} terrain.`
+            break
+        case "B":
+            text += `normal damage in ${terrain} terrain.` 
+            break
+        case "A":
+            text += `10% more damage in ${terrain} terrain.`
+            break
+        case "S":
+            text += `20% more damage in ${terrain} terrain.` 
+            break
+        case "SS":
+            text += `30% more damage in ${terrain} terrain.` 
+            break
+    }
+    return text
 }
 
 function changeStatPreviewLevel(el) {

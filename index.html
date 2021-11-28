@@ -43,9 +43,11 @@
                     <div style="display: flex; justify-content: center;">
                         <img id="ba-student-img" src="">
                     </div>
-                    <div class="row" style="position: relative;">
-                        <div class="col">
-                            <button type="button" class="btn btn-light btn-sm" onclick="studentSelectorModal.show()"><img src="images/ui/Common_Icon_Change_Blue.png" style="height: auto; height: 28px; object-fit: contain;"> Change Student</button>
+                    <div class="container mb-3" style="position: relative;">
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-light btn-sm" onclick="studentSelectorModal.show()"><img src="images/ui/Common_Icon_Change_Blue.png" style="height: auto; height: 28px; object-fit: contain;"> Change Student</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,48 +74,41 @@
                                 <div class="tab-content">
 
                                     <div id="ba-student-page-stats" class="tab-pane fade show active container p-3" style="background-color: #fff; border-radius: .25em;">
-                                        <div class="d-flex flex-row align-items-end">
+
+                                        <h1 id="ba-student-name-en" class="" style="display: inline; font-weight: bold;"></h1>
+                                        <div class="d-flex flex-row align-items-end mt-1">
                                             <span class="flex-grow-1">
-                                                <h1 id="ba-student-name-en" style="display: inline; font-weight: bold;"></h1>
-                                                <h4 id="ba-student-name-jp" class="px-2" style="display: inline; font-family: 'Noto Sans JP', sans-serif;"></h4>
+                                                <h4 id="ba-student-name-jp" class="" style="display: inline; font-family: 'Noto Sans JP', sans-serif;"></h4>
                                             </span>
                                             <span class="">
-                                                <img id="ba-student-stars" src="images/ui/Star_3.png" style="height: 28px; width:auto; margin-bottom: 0.25rem;">
+                                                <img id="ba-student-class" src="">
+                                                <img id="ba-student-stars" src="" style="height: 28px; width: auto; margin-bottom: 0.25rem;">
                                             </span>
                                         </div>
-        
-                                        <div class="row g-1 mt-3">
-                                            <div class="col-6 col-md-3">
-                                                <span id="ba-student-class" class="ba-type-info ba-type-striker ba-type-position d-inline-block align-text-top text-center" style="font-weight: bold; font-style: italic;"></span>
-                                                <span id="ba-student-position" class="ba-type-info ba-type-position d-inline-block align-text-top text-center" style="font-weight: bold; font-style: italic;"></span>
+                                        <div class="d-flex flex-row flex-wrap flex-xxl-nowrap align-items-stretch mt-3">
+                                            <div class="me-1 mb-1">
+                                                <img id="ba-student-school-img" class="" src="">
                                             </div>
-                                            <div class="col-6 col-md-3">
-                                                <span id="ba-student-role" class="ba-type-info ba-type-role d-inline-block align-text-top"><img id="ba-student-role-icon" class="me-1" src="" style="height: 18px; width:auto;"><span id="ba-student-role-label"></span></span>
-                                                <span id="ba-student-school" class="ba-type-info ba-type-role d-inline-block align-text-top"><img id="ba-student-school-icon" class="me-1" src="" style="height: 18px; width:auto;"><span id="ba-student-school-label"></span></span>
+                                            <div class="flex-grow-1 mb-1">
+                                                <span>
+                                                    <span id="ba-student-role" class="ba-role-info d-inline-block align-text-top text-center" style="margin-top: -1px;"><img id="ba-student-role-icon" src=""><span id="ba-student-role-label" style="margin-left: 32px; font-weight: bold;"></span></span>
+                                                    <span id="ba-student-attacktype" class="ba-type-info d-inline-block align-text-top text-center" style="margin-top: -1px;"><img src="images/tactical/StrategyObjectBuff_Attack.png"><span id="ba-student-attacktype-label" style="margin-left: 24px; font-weight: bold;"></span></span>
+                                                    <span id="ba-student-position" class="ba-position-info ba-type-position d-inline-block align-text-top text-center" style="font-weight: bold; font-style: italic;"></span>
+                                                    <span id="ba-student-defensetype" class="ba-type-info d-inline-block align-text-top text-center"><img src="images/tactical/StrategyObjectBuff_Defense.png"><span id="ba-student-defensetype-label" style="margin-left: 24px; font-weight: bold;"></span></span>
+                                                </span>
                                             </div>
-                                            <div class="col-6 col-md-3">
-                                                <span id="ba-student-attacktype" class="ba-type-info d-inline-block align-text-top"><img class="me-2" src="images/tactical/StrategyObjectBuff_Attack.png" style="height: 18px; width:auto;"><span id="ba-student-attacktype-label" style="font-weight: bold;"></span></span>
-                                                <span id="ba-student-defensetype" class="ba-type-info d-inline-block align-text-top"><img class="me-2" src="images/tactical/StrategyObjectBuff_Defense.png" style="height: 18px; width:auto;"><span id="ba-student-defensetype-label" style="font-weight: bold;"></span></span>
+                                            <div class="mb-1" style="min-width: fit-content;">
+                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Common_Icon_Street_g.png"><br><img id="ba-student-terrain-street" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
+                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Common_Icon_Outdoor_g.png"><br><img id="ba-student-terrain-outdoor" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
+                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Common_Icon_Indoor_g.png"><br><img id="ba-student-terrain-indoor" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
                                             </div>
-                                            <div class="col-6 col-md-3">
-                                                <div class="row g-1">
-                                                    <div class="col-4">
-                                                        <div class="ba-type-terrain"><span class=""><img class="" src="images/tactical/Common_Icon_Street_g.png" style="height: auto; width:100%;"><img id="ba-student-terrain-street" class="" src="" style="margin-top: 4px; height: auto; width: 100%; padding: 1px;"></span></div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="ba-type-terrain"><span class=""><img class="" src="images/tactical/Common_Icon_Outdoor_g.png" style="height: auto; width:100%;"><img id="ba-student-terrain-outdoor" class="" src="" style="margin-top: 4px; height: auto; width: 100%; padding: 1px;"></span></div>
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="ba-type-terrain"><span class=""><img class="" src="images/tactical/Common_Icon_Indoor_g.png" style="height: auto; width:100%;"><img id="ba-student-terrain-indoor" class="" src="" style="margin-top: 4px; height: auto; width: 100%; padding: 1px;"></span></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-        
                                         </div>
-        
-                                        <div class="row g-1 mt-3">
+                                        <!-- <span id="ba-student-school" class="d-inline-block align-text-bottom"><span id="ba-student-school-label"></span></span> -->
+                                        <div class="row g-1 mt-1">
                                             <div class="col d-flex">
-                                                <span class="ba-type-info ba-type-weapon d-inline-block align-text-top flex-grow-1 me-4" style="height: 74px;">
+
+
+                                                <span class="ba-type-weapon d-inline-block align-text-top flex-grow-1 me-4" style="height: 74px;">
                                                     <img id="ba-student-usescover-icon" src="images/tactical/Combat_Icon_Cover_Ally.png" style="height: 24px; width:auto; margin-top: -4px;">
                                                     <p id="ba-student-weapontype-label" class="d-inline-block" style="font-weight: bold; font-style: italic; font-size: large;"></p>
                                                 </span>

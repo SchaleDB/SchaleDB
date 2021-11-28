@@ -5,6 +5,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    overflow-x: hidden;
 }
 
 .card {
@@ -35,39 +36,77 @@ body {
 }
 
 
-.ba-type-info {
-    border: 1px solid transparent;
-    border-radius: .25em;
-    padding: .375rem .75rem;
-    width: 100%;
-}
-
 .ba-type-school {
     border-color: #000;
     background-color: #fff;
     color: #000;
 }
 
-.ba-type-role {
-    border-color: rgb(47, 80, 120);
+#ba-student-school-img {
+    border: 1px solid rgb(17, 33, 52);
+    border-radius: .25em;
+    height: 78px;
+    width: auto;
+}
+
+#ba-student-class {
+    height: 18px;
+    width: 80px;
+    margin: 4px 4px 0.25rem 4px;
+}
+
+.ba-role-info {
+    width: calc(50% - 0.25rem);
+    position: relative;
+    border: 1px solid rgb(47, 80, 120);
+    border-radius: .25em;
     background-color: #fff;
+    padding: .375rem .75rem;
     color: rgb(47, 80, 120);
 }
 
+.ba-role-info img {
+    position: absolute;
+    height: 32px;
+    width: auto;
+    left: 4px !important;
+    top: 2px !important;
+}
+
+.ba-type-info {
+    width: calc(50% - 0.25rem);
+    position: relative;
+    border: 1px solid transparent;
+    border-radius: .25em;
+    padding: .375rem .75rem;
+}
+
+.ba-type-info img {
+    position: absolute;
+    height: 24px;
+    width: auto;
+    left: 4px !important;
+    top: 6px !important;
+}
+
+.ba-position-info {
+    width: calc(50% - 0.25rem);
+    border: 1px solid rgb(44, 69, 99);
+    background-color: rgb(44, 69, 99);
+    color: #fff;
+    border-radius: .25em;
+    padding: .375rem .75rem;
+}
+
 .ba-type-weapon {
-    border-color: #fff;
-    border-radius: 0.75em;
+    border-color: #2f6283;
+    border-radius: 0.25em;
+    padding: .1rem .25rem !important;
     background-color: rgb(214, 234, 242);
     color: rgb(47, 80, 120);
     background-size: contain;
     background-repeat: no-repeat;
-    background-position: right;
-}
-
-.ba-type-position {
-    border-color: rgb(44, 69, 99);
-    background-color: rgb(44, 69, 99);
-    color: #fff
+    background-position: left;
 }
 
 .ba-type-striker {
@@ -101,11 +140,17 @@ body {
 }
 
 .ba-type-terrain {
+    display: inline-block;
     border: 1px solid transparent;
     border-color: grey;
     border-radius: .25em;
     padding: 2px;
     margin: auto;
+}
+
+.ba-student-terrain-icon {
+    height: 34px;
+    width: 34px;
 }
 
 .ba-student-icon {
@@ -135,7 +180,7 @@ body {
 .ba-skill {
     image-rendering: -webkit-optimize-contrast;
     height: auto;
-    width: 80px;
+    width: 70px;
     object-fit: contain;
     background-size: contain;
     background-repeat: no-repeat;
