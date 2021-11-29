@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
     <link href="css/site.css" rel="stylesheet">
 </head>
 <body>
@@ -61,7 +61,7 @@
                             <div class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-bs-toggle="tab"  aria-current="true" href="#ba-student-page-stats">Info</a>
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#ba-student-page-stats">Info</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-skills">Skills</a>
@@ -102,9 +102,9 @@
                                                 </span>
                                             </div>
                                             <div class="me-1 mb-2" style="min-width: fit-content;">
-                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Common_Icon_Street_g.png"><br><img id="ba-student-terrain-street" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
-                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Common_Icon_Outdoor_g.png"><br><img id="ba-student-terrain-outdoor" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
-                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Common_Icon_Indoor_g.png"><br><img id="ba-student-terrain-indoor" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
+                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_urban.png"><br><img id="ba-student-terrain-urban" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
+                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_field.png"><br><img id="ba-student-terrain-field" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
+                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_indoor.png"><br><img id="ba-student-terrain-indoor" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
                                             </div>
                                             <div class="flex-fill me-1 mb-2">
                                                 <div class="ba-type-weapon d-inline-block align-text-top">
@@ -299,26 +299,82 @@
                                             </div>
                                         </div>
 
-                                        <div class="row g-1 my-1">
+                                        <div class="row g-1 mb-3">
                                             <div class="d-flex flex-row">
                                                 <span class="mx-2 flex-fill"><input id="ba-weaponpreview-levelrange" oninput="changeWeaponPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="50"></span>
                                                 <span id="ba-weaponpreview-level">Lv.1</span>
                                             </div>
                                         </div>
 
-                                        <!-- <div class="mb-3 p-2 d-flex flex-row ba-skill-panel">
-                                            <img id="ba-weapon-skill-passive-icon" class="ba-skill d-inline-block me-3" src="">
-                                            <div class="align-top">
-                                                <div>
-                                                    <h4 id="ba-skill-passive-name" class="me-2 d-inline"></h4>
-                                                </div>
-                                                <div class="mt-1">
-                                                    <p class="d-inline" style="font-style: italic;">Passive Skill +</p>
-                                                </div>                                                
-                                                <p id="ba-skill-passive-description" class="mb-0 mt-1"></p>
-                                            </div>
-                                        </div> -->
+                                        <ul class="nav nav-tabs justify-content-left">
+                                            <li class="nav-item flex-grow-1">
+                                                <h5 style="margin-bottom: 0px; margin-top: 0.5rem; font-weight: bold;">Weapon Rank Bonus</h5>
+                                            </li>
+                                            <li class="nav-item ba-weapon-rank-tab">
+                                                <a class="nav-link active" data-bs-toggle="tab" href="#ba-weapon-page-2star"><img src="images/ui/Common_Icon_Formation_Star_2.png" style="height: 24px; width:auto; margin-top: -6px; margin-right: 0.35rem;">2</a>
+                                            </li>
+                                            <li class="nav-item ba-weapon-rank-tab">
+                                                <a class="nav-link" data-bs-toggle="tab" href="#ba-weapon-page-3star"><img src="images/ui/Common_Icon_Formation_Star_2.png" style="height: 24px; width:auto; margin-top: -6px; margin-right: 0.35rem;">3</a>
+                                            </li>
+                                            <li class="nav-item ba-weapon-rank-tab">
+                                                <a class="nav-link disabled" data-bs-toggle="tab" href="#ba-weapon-page-4star"><img src="images/ui/Common_Icon_Formation_Star_2.png" style="height: 24px; width:auto; margin-top: -6px; margin-right: 0.35rem;">4</a>
+                                            </li>
+                                            <li class="nav-item ba-weapon-rank-tab">
+                                                <a class="nav-link disabled" data-bs-toggle="tab" href="#ba-weapon-page-5star"><img src="images/ui/Common_Icon_Formation_Star_2.png" style="height: 24px; width:auto; margin-top: -6px; margin-right: 0.35rem;">5</a>
+                                            </li>
+                                        </ul>
 
+                                        <div class="tab-content">
+
+                                            <div id="ba-weapon-page-2star" class="tab-pane fade show active">
+
+                                                <div class="d-flex flex-row align-items-end my-3">
+                                                    <span class="flex-grow-1">
+                                                        <large style="display: inline;">Maximum Weapon Level Lv.30 → <b>Lv.40</b> / Improves Passive Skill:</large>
+                                                    </span>
+                                                </div>
+        
+                                                <div class="mb-3 p-2 d-flex flex-row ba-skill-panel">
+                                                    <img id="ba-weapon-skill-passive-icon" class="ba-skill d-inline-block me-3" src="">
+                                                    <div class="align-top">
+                                                        <div>
+                                                            <h4 id="ba-weapon-skill-passive-name" class="me-2 d-inline"></h4>
+                                                        </div>
+                                                        <div class="mt-1">
+                                                            <p class="d-inline" style="font-style: italic;">Passive Skill</p>
+                                                        </div>                                                
+                                                        <p id="ba-weapon-skill-passive-description" class="mb-0 mt-1"></p>
+                                                    </div>
+                                                </div>
+        
+                                                <div class="row g-1 my-1">
+                                                    <div class="d-flex flex-row">
+                                                        <span class="mx-2 flex-fill"><input id="ba-weapon-skillpreview-range" oninput="changeWeaponSkillPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="10"></span>
+                                                        <span id="ba-weapon-skill-level">Lv.1</span>
+                                                    </div>
+                                                </div>
+    
+                                            </div>
+    
+                                            <div id="ba-weapon-page-3star" class="tab-pane fade">
+    
+                                                <div class="d-flex flex-row align-items-end my-3">
+                                                    <span class="flex-grow-1">
+                                                        <large style="display: inline;">Maximum Weapon Level Lv.40 → <b>Lv.50</b> / Improves terrain affinity:</large>
+                                                    </span>
+                                                </div>
+
+                                                <div class="mb-3 p-2 d-flex flex-row align-items-center ba-skill-panel">
+                                                    
+                                                    <img id="ba-weapon-bonus-terrain-type" class="d-inline-block me-2" style="height:48px; width: auto;" src="">
+                                                    <img id="ba-weapon-bonus-terrain-adaption" class="d-inline-block me-4" style="height:48px; width: auto;" src="">
+                                                    <span id="ba-weapon-bonus-terrain-adaption-description"></span>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
                                     </div>
 
                                     <div id="ba-student-page-profile" class="tab-pane fade container p-3" style="background-color: #fff; border-radius: .25em;">
@@ -327,7 +383,7 @@
                                             <h4 id="ba-student-fullname-jp" class="" style="display: inline; font-family: 'Noto Sans JP', sans-serif;"></h4>
                                         </div>
                                         <div class="d-flex flex-row align-items-center">
-                                            <img id="ba-profile-school-img" src="" style="height:42px; width: auto;">
+                                            <img id="ba-profile-school-img" class="me-1" src="" style="height:42px; width: auto;">
                                             <p id="ba-student-schoolclub-label" style="font-style: italic; margin-bottom: 0px;"></p>
                                         </div>
 
@@ -355,7 +411,7 @@
                                         </table>
 
                                         <div class="row">
-                                            <h5>Affection Bonus</h5>
+                                            <h5 style="font-weight: bold;">Affection Bonus</h5>
                                         </div>
 
                                         <div class="row g-1 my-1">

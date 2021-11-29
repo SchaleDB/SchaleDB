@@ -53,7 +53,7 @@ function populateStudentList(grouping = "none") {
     if (grouping == "none") {
         var groupedResults
         groupedResults = student_db.students
-        groupedResults.sort((a,b) => a.name_en > b.name_en)
+        groupedResults.sort((a,b) => a.name_en.localeCompare(b.name_en))
     
         $("#ba-student-search-results").empty()
     
@@ -90,7 +90,7 @@ function populateStudentList(grouping = "none") {
             <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${school_longname[el]}" src="images/schoolicon/School_Icon_${el.toUpperCase()}.png" style="height: 72px; width: auto; object-fit: contain;">
             <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
             `
-            groupedResults[el].sort((a,b) => a.name_en > b.name_en)
+            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
             $.each(groupedResults[el], function(i2, el2){
                 resultsHTML += `
                 <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
@@ -127,7 +127,7 @@ function populateStudentList(grouping = "none") {
             <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el}" src="images/weapontype/Weapon_Icon_${el}.png" style="height: 60px; width: auto; object-fit: contain;">
             <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
             `
-            groupedResults[el].sort((a,b) => a.name_en > b.name_en)
+            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
             $.each(groupedResults[el], function(i2, el2){
                 resultsHTML += `
                 <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
@@ -164,7 +164,7 @@ function populateStudentList(grouping = "none") {
             <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el}" src="images/ui/Star_${el}.png" style="height: 32px; width: auto; object-fit: contain;">
             <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
             `
-            groupedResults[el].sort((a,b) => a.name_en > b.name_en)
+            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
             $.each(groupedResults[el], function(i2, el2){
                 resultsHTML += `
                 <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
@@ -201,7 +201,7 @@ function populateStudentList(grouping = "none") {
             <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el}" src="images/tactical/Role_${el.replace("T.S.","TacticalSupport")}.png" style="height: 58px; width: auto; object-fit: contain;">
             <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
             `
-            groupedResults[el].sort((a,b) => a.name_en > b.name_en)
+            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
             $.each(groupedResults[el], function(i2, el2){
                 resultsHTML += `
                 <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
@@ -238,7 +238,7 @@ function populateStudentList(grouping = "none") {
             <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el}" src="images/ui/Class_${el}.png" style="height: 22px; width: 80px; object-fit: contain;">
             <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
             `
-            groupedResults[el].sort((a,b) => a.name_en > b.name_en)
+            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
             $.each(groupedResults[el], function(i2, el2){
                 resultsHTML += `
                 <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
@@ -315,12 +315,12 @@ function loadStudent(studentName) {
         $("#ba-student-attacktype-label").text(student.attack_type)
         $("#ba-student-defensetype-label").text(student.defense_type)
 
-        $("#ba-student-terrain-street").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.street_adaption + ".png")
-        $("#ba-student-terrain-outdoor").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.outdoor_adaption + ".png")
+        $("#ba-student-terrain-urban").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.urban_adaption + ".png")
+        $("#ba-student-terrain-field").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.field_adaption + ".png")
         $("#ba-student-terrain-indoor").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.indoor_adaption + ".png")
-        $('#ba-student-terrain-street').tooltip('dispose').tooltip({title: getAdaptionText('street', student.street_adaption), placement: 'left'})
-        $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getAdaptionText('outdoor', student.outdoor_adaption), placement: 'left'})
-        $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getAdaptionText('indoor', student.indoor_adaption), placement: 'left'})
+        $('#ba-student-terrain-urban').tooltip('dispose').tooltip({title: getAdaptionText('urban', student.urban_adaption), placement: 'left', html: true})
+        $('#ba-student-terrain-field').tooltip('dispose').tooltip({title: getAdaptionText('field', student.field_adaption), placement: 'left', html: true})
+        $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getAdaptionText('indoor', student.indoor_adaption), placement: 'left', html: true})
 
         if (student.uses_cover) {
             $("#ba-student-usescover-icon").show()
@@ -342,10 +342,15 @@ function loadStudent(studentName) {
 
 
         //Skills
-        $("#ba-skill-ex-name").text(student.skill_ex_name)
-        $("#ba-skill-normal-name").text(student.skill_normal_name)
-        $("#ba-skill-passive-name").text(student.skill_passive_name)
-        $("#ba-skill-sub-name").text(student.skill_sub_name)
+        $("#ba-skill-ex-name").text(student.skill_ex_name_en != null ? student.skill_ex_name_en : student.skill_ex_name_jp)
+        $("#ba-skill-normal-name").text(student.skill_normal_name_en != null ? student.skill_normal_name_en : student.skill_normal_name_jp)
+        $("#ba-skill-passive-name").text(student.skill_passive_name_en != null ? student.skill_passive_name_en : student.skill_passive_name_jp)
+        $("#ba-skill-sub-name").text(student.skill_sub_name_en != null ? student.skill_sub_name_en : student.skill_sub_name_jp)
+
+        $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon)
+        $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon)
+        $('#ba-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
+        $('#ba-skill-sub-icon').attr("src", "images/skill/" + student.skill_sub_icon)
 
         student.skill_ex_cost[0] == student.skill_ex_cost[4] ? $("#ba-skill-ex-cost").removeClass("ba-skill-emphasis") : $("#ba-skill-ex-cost").addClass("ba-skill-emphasis")
 
@@ -354,13 +359,23 @@ function loadStudent(studentName) {
         $('#ba-skill-level').text("Lv." + $("#ba-skillpreview-range").val())
         $('#ba-skill-ex-level').text("Lv." + $("#ba-skillpreview-exrange").val())
         $('#ba-weaponpreview-level').text("Lv." + $("#ba-weaponpreview-levelrange").val())
+        $('#ba-weapon-skill-level').text("Lv." + $("#ba-weapon-skillpreview-range").val())
         $('#ba-bond-level').text($("#ba-bond-levelrange").val())
 
         //Weapon
         $("#ba-student-weapon-name").text(student.weapon_name_en)
         $("#ba-weapon-name-jp").text(student.weapon_name_jp)
-        
         $("#ba-student-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
+
+        if (student.weapon_skill_passive_description != null) {
+            $("#ba-weapon-skill-passive-name").text(student.skill_passive_name_en != null ? student.skill_passive_name_en + '＋' : student.skill_passive_name_jp + '＋')
+            $('#ba-weapon-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
+            recalculateWeaponSkillPreview()
+        }
+
+        $('#ba-weapon-bonus-terrain-type').attr("src", `images/tactical/Terrain_${student.weapon_bonus_terrain_type}.png`)
+        $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/tactical/Ingame_Emo_Adaptresult${student.weapon_bonus_terrain_adaption}.png`)
+        $('#ba-weapon-bonus-terrain-adaption-description').html(getAdaptionText(student.weapon_bonus_terrain_type, student.weapon_bonus_terrain_adaption))
 
         var url = new URL(window.location.href)
 
@@ -410,7 +425,7 @@ function loadStudent(studentName) {
         recalculateStatPreview()
         recalculateSkillPreview()
         recalculateBondPreview()
-
+        
         localStorage.setItem("chara", student.name_dev)
         studentSelectorModal.hide()
     }
@@ -420,22 +435,22 @@ function getAdaptionText(terrain, rank) {
     var text = 'Deals '
     switch (rank) {
         case "D":
-            text += `20% less damage in ${terrain} terrain. `
+            text += `<b>20% less</b> damage in ${terrain} terrain.`
             break
         case "C":
-            text += `10% less damage in ${terrain} terrain.`
+            text += `<b>10% less</b> damage in ${terrain} terrain.<br>Cover is <b>15%</b> more effective.`
             break
         case "B":
-            text += `normal damage in ${terrain} terrain.` 
+            text += `normal damage in ${terrain} terrain.<br>Cover is <b>30%</b> more effective.` 
             break
         case "A":
-            text += `10% more damage in ${terrain} terrain.`
+            text += `<b>10% more</b> damage in ${terrain} terrain.<br>Cover is <b>45%</b> more effective.`
             break
         case "S":
-            text += `20% more damage in ${terrain} terrain.` 
+            text += `<b>20% more</b> damage in ${terrain} terrain.<br>Cover is <b>60%</b> more effective.` 
             break
         case "SS":
-            text += `30% more damage in ${terrain} terrain.` 
+            text += `<b>30% more</b> damage in ${terrain} terrain.<br>Cover is <b>75%</b> more effective.` 
             break
     }
     return text
@@ -464,6 +479,11 @@ function changeStatPreviewLevel(el) {
 function changeSkillPreviewLevel(el) {
     $('#ba-skill-level').text("Lv." + el.value)
     recalculateSkillPreview()
+}
+
+function changeWeaponSkillPreviewLevel(el) {
+    $('#ba-weapon-skill-level').text("Lv." + el.value)
+    recalculateWeaponSkillPreview()
 }
 
 function changeEXSkillPreviewLevel(el) {
@@ -528,11 +548,6 @@ function recalculateSkillPreview() {
     var skillLevel = $("#ba-skillpreview-range").val()
     var skillLevelEX = $("#ba-skillpreview-exrange").val()
 
-    $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon)
-    $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon)
-    $('#ba-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
-    $('#ba-skill-sub-icon').attr("src", "images/skill/" + student.skill_sub_icon)
-
     $('#ba-skill-ex-description').html(getSkillText(student.skill_ex_description, student.skill_ex_parameters, skillLevelEX))
     $('#ba-skill-normal-description').html(getSkillText(student.skill_normal_description, student.skill_normal_parameters, skillLevel))
     $('#ba-skill-passive-description').html(getSkillText(student.skill_passive_description, student.skill_passive_parameters, skillLevel))
@@ -540,6 +555,11 @@ function recalculateSkillPreview() {
 
     $('#ba-skill-ex-cost').text(student.skill_ex_cost[skillLevelEX-1])
     
+}
+
+function recalculateWeaponSkillPreview() {
+    var skillLevel = $("#ba-weapon-skillpreview-range").val()
+    $('#ba-weapon-skill-passive-description').html(getSkillText(student.weapon_skill_passive_description, student.weapon_skill_passive_parameters, skillLevel))
 }
 
 function recalculateBondPreview() {

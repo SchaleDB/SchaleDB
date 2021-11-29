@@ -2,9 +2,9 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* h1, h2, h3, h4, h5, h6 {
     font-family: 'Comfortaa', sans-serif;
-}
+} */
 
 .card {
     background-color: rgba(0,0,0,0);
@@ -19,18 +19,31 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 0rem 0rem 0.25rem 0.25rem;
 }
 
-.nav-tabs .nav-link.active {
+.card-header .nav-tabs .nav-link.active {
     background-color: rgb(214, 234, 242);
     border-color: rgb(214, 234, 242);
 }
 
-.nav-link {
+.card-header .nav-link {
     color: #fff;
 }
 
-.nav-link:hover {
+.card-header .nav-link:hover {
     color: #fff;
     border-color: transparent !important;
+}
+
+.card-header .nav-link.active:hover {
+    color: #495057 !important;
+    border-color: transparent !important;
+}
+
+.nav-link.disabled img{
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%); 
 }
 
 .flex-basis-50 {
@@ -63,6 +76,21 @@ h1, h2, h3, h4, h5, h6 {
     height: 18px;
     width: 80px;
     margin: 4px 4px 0.25rem 4px;
+}
+
+.ba-weapon-rank-tab a {
+    color: #000;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 0.2rem 0.5rem;
+}
+
+.ba-weapon-rank-tab a:hover {
+    color: #000;
+}
+
+.ba-weapon-rank-tab a.disabled {
+    color: #6c757d !important;
 }
 
 .ba-role-info, .ba-type-info, .ba-position-info {
@@ -111,7 +139,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .ba-type-weapon {
-    font-family: 'Comfortaa';
     height: 78px;
     min-width: 162px;
     border-color: #2f6283;
