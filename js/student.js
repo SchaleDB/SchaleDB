@@ -273,8 +273,9 @@ function loadStudent(studentName) {
         console.log(student[0])
         student = student[0]
 
-        $('#ba-student-img, #ba-student-img-sm').attr('src', 'images/student/' + student.student_img)
-
+        $('#ba-student-img').attr('src', 'images/student/' + student.student_img)
+        $('#ba-student-img-sm').attr('src', 'images/student/' + student.student_img)
+        
         var bgimg = new Image()
         bgimg.onload = function(){
             $("#ba-student-container").css('background-image', `url('${bgimg.src}')`)
