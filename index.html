@@ -222,7 +222,8 @@
                                             <div class="d-flex flex-row">
                                                 <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-ex-materials-page">Materials</button>
                                                 <span class="mx-2 flex-fill"><input id="ba-skillpreview-exrange" oninput="changeEXSkillPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="5"></span>
-                                                <span id="ba-skill-ex-level">Lv.1</span>
+                                                <img id="ba-skill-ex-level-max" src="images/ui/ImageFont_Max.png" style="height: 20px;width: auto;margin-top: 3px;">
+                                                <span id="ba-skill-ex-level" style="font-weight: bold;">Lv.1</span>
                                             </div>
                                         </div>
 
@@ -281,7 +282,8 @@
                                             <div class="d-flex flex-row">
                                                 <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-materials-page">Materials</button>
                                                 <span class="mx-2 flex-fill"><input id="ba-skillpreview-range" oninput="changeSkillPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="10"></span>
-                                                <span id="ba-skill-level">Lv.1</span>
+                                                <img id="ba-skill-level-max" src="images/ui/ImageFont_Max.png" style="height: 20px;width: auto;margin-top: 3px;">
+                                                <span id="ba-skill-level" style="font-weight: bold;">Lv.1</span>
                                             </div>
                                         </div>
 
@@ -336,7 +338,7 @@
                                         <div class="row g-1 mb-3">
                                             <div class="d-flex flex-row">
                                                 <span class="mx-2 flex-fill"><input id="ba-weaponpreview-levelrange" oninput="changeWeaponPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="50"></span>
-                                                <span id="ba-weaponpreview-level">Lv.1</span>
+                                                <span id="ba-weaponpreview-level" style="font-weight: bold;">Lv.1</span>
                                             </div>
                                         </div>
 
@@ -386,7 +388,8 @@
                                                 <div class="row g-1 my-1">
                                                     <div class="d-flex flex-row">
                                                         <span class="mx-2 flex-fill"><input id="ba-weapon-skillpreview-range" oninput="changeWeaponSkillPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="10"></span>
-                                                        <span id="ba-weapon-skill-level">Lv.1</span>
+                                                        <img id="ba-weapon-skill-level-max" src="images/ui/ImageFont_Max.png" style="height: 20px;width: auto;margin-top: 3px;">
+                                                        <span id="ba-weapon-skill-level" style="font-weight: bold;">Lv.1</span>
                                                     </div>
                                                 </div>
     
@@ -487,8 +490,8 @@
     </div>
 
     <!-- Student Select Modal -->
-    <div class="modal" id="modStudents" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+    <div class="modal fade" id="modStudents" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" style="transition: transform .15s ease-out;">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title me-3" id="exampleModalLabel">Select Student</h4>

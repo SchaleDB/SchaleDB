@@ -39,6 +39,8 @@ $(document).ready(function() {
     populateStudentList("none")
 
     window.setTimeout(function(){$("#loading-cover").fadeOut()},500)
+
+    $('input[type=range]').trigger('oninput')
 })
 
 function hookTooltips() {
@@ -339,7 +341,6 @@ function loadStudent(studentName) {
         $('#ba-student-gear-2').tooltip('dispose').tooltip({title: student.gear_2, placement: 'bottom'})
         $('#ba-student-gear-3').tooltip('dispose').tooltip({title: student.gear_3, placement: 'bottom'})
 
-
         //Skills
         $("#ba-skill-ex-name").text(student.skill_ex_name_en != null ? student.skill_ex_name_en : student.skill_ex_name_jp)
         $("#ba-skill-normal-name").text(student.skill_normal_name_en != null ? student.skill_normal_name_en : student.skill_normal_name_jp)
@@ -352,14 +353,6 @@ function loadStudent(studentName) {
         $('#ba-skill-sub-icon').attr("src", "images/skill/" + student.skill_sub_icon)
 
         student.skill_ex_cost[0] == student.skill_ex_cost[4] ? $("#ba-skill-ex-cost").removeClass("ba-skill-emphasis") : $("#ba-skill-ex-cost").addClass("ba-skill-emphasis")
-
-        //Stats
-        $('#ba-statpreview-level').text("Lv." + $("#ba-statpreview-levelrange").val())
-        $('#ba-skill-level').text("Lv." + $("#ba-skillpreview-range").val())
-        $('#ba-skill-ex-level').text("Lv." + $("#ba-skillpreview-exrange").val())
-        $('#ba-weaponpreview-level').text("Lv." + $("#ba-weaponpreview-levelrange").val())
-        $('#ba-weapon-skill-level').text("Lv." + $("#ba-weapon-skillpreview-range").val())
-        $('#ba-bond-level').text($("#ba-bond-levelrange").val())
 
         //Weapon
         $("#ba-student-weapon-name").text(student.weapon_name_en)
@@ -477,17 +470,36 @@ function changeStatPreviewLevel(el) {
 }
 
 function changeSkillPreviewLevel(el) {
-    $('#ba-skill-level').text("Lv." + el.value)
+    if (el.value == el.max) {
+        $('#ba-skill-level').text("")
+        $('#ba-skill-level-max').show()
+    } else {
+        $('#ba-skill-level').text("Lv." + el.value)
+        $('#ba-skill-level-max').hide()
+    }
     recalculateSkillPreview()
 }
 
 function changeWeaponSkillPreviewLevel(el) {
     $('#ba-weapon-skill-level').text("Lv." + el.value)
+    if (el.value == el.max) {
+        $('#ba-weapon-skill-level').text("")
+        $('#ba-weapon-skill-level-max').show()
+    } else {
+        $('#ba-weapon-skill-level').text("Lv." + el.value)
+        $('#ba-weapon-skill-level-max').hide()
+    }
     recalculateWeaponSkillPreview()
 }
 
 function changeEXSkillPreviewLevel(el) {
-    $('#ba-skill-ex-level').text("Lv." + el.value)
+    if (el.value == el.max) {
+        $('#ba-skill-ex-level').text("")
+        $('#ba-skill-ex-level-max').show()
+    } else {
+        $('#ba-skill-ex-level').text("Lv." + el.value)
+        $('#ba-skill-ex-level-max').hide()
+    }
     recalculateEXSkillPreview()
 }
 
