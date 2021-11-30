@@ -51,7 +51,7 @@ body {
 }
 
 #ba-student-container {
-    background: url("../images/background/BG_Gehenna_Collection.jpg") no-repeat center center fixed;
+    background: #000 no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -195,6 +195,12 @@ body {
     width: 34px;
 }
 
+.ba-student-page {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    max-height: calc(100vh - 190px);
+}
+
 .ba-student-icon {
     height: 74px;
     padding: 3px;
@@ -219,10 +225,31 @@ body {
     background-position-x: center;
 }
 
+.ba-material-icon {
+    height: 64px;
+    padding: 3px;
+    margin-right: 0.5rem;
+    margin-bottom: 4px;
+    width: auto;
+    object-fit: contain;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+.ba-material-label {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 1rem;
+    left: 50px;
+    padding: 0.1rem 0.25rem;
+    top: 40px;
+    border: 1px solid #d4d9e2;
+}
+
 .ba-skill {
-    image-rendering: -webkit-optimize-contrast;
     height: auto;
-    width: 70px;
+    width: 60px;
     object-fit: contain;
     background-size: contain;
     background-repeat: no-repeat;
@@ -335,4 +362,22 @@ body {
     position: absolute;
     left: 62px;
     top: 42px;
+}
+
+#ba-skill-materials, #ba-skill-ex-materials {
+    min-height: 68px;
+}
+
+#loading-cover {
+    width: 100vw;
+    height: 100vh;
+    padding-top: 50vh;
+    position: absolute;
+    top: 0px;
+    z-index: 9999;
+    background-color: rgb(33, 37, 41);
+    /*background-image: url("../images/Image_Deco_Circleasd.png");*/
+    background-size: 60vh auto;
+    background-position: center center;
+    background-repeat: no-repeat;
 }

@@ -37,6 +37,8 @@ $(document).ready(function() {
     }
 
     populateStudentList("none")
+
+    window.setTimeout(function(){$("#loading-cover").fadeOut()},500)
 })
 
 function hookTooltips() {
@@ -259,9 +261,6 @@ function populateStudentList(grouping = "none") {
         $("#ba-student-search-results").append(resultsHTML)
 
     }
-
-
-
     hookTooltips()
 }
 
@@ -424,6 +423,7 @@ function loadStudent(studentName) {
         recalculateWeaponPreview()
         recalculateStatPreview()
         recalculateSkillPreview()
+        recalculateEXSkillPreview()
         recalculateBondPreview()
         
         localStorage.setItem("chara", student.name_dev)
@@ -488,7 +488,7 @@ function changeWeaponSkillPreviewLevel(el) {
 
 function changeEXSkillPreviewLevel(el) {
     $('#ba-skill-ex-level').text("Lv." + el.value)
-    recalculateSkillPreview()
+    recalculateEXSkillPreview()
 }
 
 function changeWeaponPreviewLevel(el) {
@@ -543,18 +543,64 @@ function recalculateStatPreview() {
     $('#ba-student-stat-costrecovery').text(student.cost_recovery)
 }
 
-function recalculateSkillPreview() {
-    
-    var skillLevel = $("#ba-skillpreview-range").val()
+function recalculateEXSkillPreview() {
     var skillLevelEX = $("#ba-skillpreview-exrange").val()
 
     $('#ba-skill-ex-description').html(getSkillText(student.skill_ex_description, student.skill_ex_parameters, skillLevelEX))
+    $('#ba-skill-ex-materials').empty()
+
+    if (skillLevelEX >= 2) {
+        var html = ''
+        $.each(student.skill_ex_upgrade_material[skillLevelEX-2], function(i, el) {
+            var item = find(student_db.items,"id",el)[0]
+            html += `<div class="me-2" style="position: relative;">
+            <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png');"
+            src="/images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;${student.skill_ex_upgrade_amount[skillLevelEX-2][i]}</span></div>
+            `
+        })
+        $('#ba-skill-ex-materials').html(html)
+        $('#ba-skill-ex-materials .ba-material-icon').each(function(i,el) {
+            $(el).tooltip()
+        })
+    }
+    $('#ba-skill-ex-cost').text(student.skill_ex_cost[skillLevelEX-1])
+
+}
+
+
+function recalculateSkillPreview() {
+    var skillLevel = $("#ba-skillpreview-range").val()
+
     $('#ba-skill-normal-description').html(getSkillText(student.skill_normal_description, student.skill_normal_parameters, skillLevel))
     $('#ba-skill-passive-description').html(getSkillText(student.skill_passive_description, student.skill_passive_parameters, skillLevel))
     $('#ba-skill-sub-description').html(getSkillText(student.skill_sub_description, student.skill_sub_parameters, skillLevel))
 
-    $('#ba-skill-ex-cost').text(student.skill_ex_cost[skillLevelEX-1])
-    
+    $('#ba-skill-materials').empty()
+    if (skillLevel >= 2 && skillLevel < 10) {
+        var html = ''
+        $.each(student.skill_upgrade_material[skillLevel-2], function(i, el) {
+            var item = find(student_db.items,"id",el)[0]
+            html += `<div class="me-2" style="position: relative;">
+            <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png');"
+            src="/images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;${student.skill_upgrade_amount[skillLevel-2][i]}</span></div>
+            `
+        })
+        $('#ba-skill-materials').html(html)
+        $('#ba-skill-materials .ba-material-icon').each(function(i,el) {
+            $(el).tooltip()
+        })
+    } else if (skillLevel == 10) {
+        var html = ''
+        var item = find(student_db.items,"id",9999)[0]
+        html += `<div class="me-2" style="position: relative;">
+        <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png');"
+        src="/images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;1</span></div>
+        `
+        $('#ba-skill-materials').html(html)
+        $('#ba-skill-materials .ba-material-icon').each(function(i,el) {
+            $(el).tooltip()
+        })
+    }
 }
 
 function recalculateWeaponSkillPreview() {
