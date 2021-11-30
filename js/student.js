@@ -555,7 +555,7 @@ function recalculateEXSkillPreview() {
             var item = find(student_db.items,"id",el)[0]
             html += `<div class="me-2" style="position: relative;">
             <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png');"
-            src="/images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;${student.skill_ex_upgrade_amount[skillLevelEX-2][i]}</span></div>
+            src="images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;${student.skill_ex_upgrade_amount[skillLevelEX-2][i]}</span></div>
             `
         })
         $('#ba-skill-ex-materials').html(html)
@@ -582,7 +582,7 @@ function recalculateSkillPreview() {
             var item = find(student_db.items,"id",el)[0]
             html += `<div class="me-2" style="position: relative;">
             <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png');"
-            src="/images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;${student.skill_upgrade_amount[skillLevel-2][i]}</span></div>
+            src="images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;${student.skill_upgrade_amount[skillLevel-2][i]}</span></div>
             `
         })
         $('#ba-skill-materials').html(html)
@@ -594,7 +594,7 @@ function recalculateSkillPreview() {
         var item = find(student_db.items,"id",9999)[0]
         html += `<div class="me-2" style="position: relative;">
         <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png');"
-        src="/images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;1</span></div>
+        src="images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;1</span></div>
         `
         $('#ba-skill-materials').html(html)
         $('#ba-skill-materials .ba-material-icon').each(function(i,el) {
