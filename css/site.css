@@ -1,10 +1,6 @@
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', 'Noto Sans JP', sans-serif;
 }
-
-/* h1, h2, h3, h4, h5, h6 {
-    font-family: 'Comfortaa', sans-serif;
-} */
 
 .card {
     background-color: rgba(0,0,0,0);
@@ -229,7 +225,7 @@ body {
     height: 64px;
     padding: 3px;
     margin-right: 0.5rem;
-    margin-bottom: 4px;
+    margin-bottom: calc(0.5rem + 4px);
     width: auto;
     object-fit: contain;
     background-size: contain;
@@ -241,7 +237,7 @@ body {
     position: absolute;
     background-color: #fff;
     border-radius: 1rem;
-    left: 50px;
+    right: 0px;
     padding: 0.1rem 0.25rem;
     top: 40px;
     border: 1px solid #d4d9e2;
@@ -364,9 +360,9 @@ body {
     top: 42px;
 }
 
-#ba-skill-materials, #ba-skill-ex-materials {
+/* #ba-skill-materials, #ba-skill-ex-materials {
     min-height: 68px;
-}
+} */
 
 #loading-cover {
     width: 100vw;
@@ -381,3 +377,7 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
 }
+
+/* #ba-skill-ex-name, #ba-skill-normal-name, #ba-skill-passive-name, #ba-skill-sub-name {
+    font-weight: 700;
+} */

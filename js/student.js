@@ -5,6 +5,9 @@ const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445]
 const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Academy", "Hyakkiyako": "Allied Hyakkiyako Academy", "Millennium": "Millennium Science School", "RedWinter": "Red Winter Federal Academy", "Shanhaijing": "Shanhaijing Senior Secondary School", "Trinity": "Trinity General School", "Valkyrie": "Valkyrie Police Academy", "ETC": "Others"}
 
+const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
+const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000, 2400000, 4000000]
+
 var student_db = {}
 var pathJSON = "./data/"
 
@@ -311,17 +314,17 @@ function loadStudent(studentName) {
         
         $("#ba-student-school-label").text(student.school)
         $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","").replace("OTHERS", "ETC") + ".png")
-        $('#ba-student-school-img').tooltip('dispose').tooltip({title: school_longname[student.school], placement: 'bottom'})
+        //$('#ba-student-school-img').tooltip('dispose').tooltip({title: school_longname[student.school], placement: 'bottom'})
         $("#ba-student-position").text(student.position.toUpperCase())
         $("#ba-student-attacktype-label").text(student.attack_type)
         $("#ba-student-defensetype-label").text(student.defense_type)
 
-        $("#ba-student-terrain-urban").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.urban_adaption + ".png")
-        $("#ba-student-terrain-field").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.field_adaption + ".png")
-        $("#ba-student-terrain-indoor").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.indoor_adaption + ".png")
-        $('#ba-student-terrain-urban').tooltip('dispose').tooltip({title: getAdaptionText('urban', student.urban_adaption), placement: 'left', html: true})
-        $('#ba-student-terrain-field').tooltip('dispose').tooltip({title: getAdaptionText('field', student.field_adaption), placement: 'left', html: true})
-        $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getAdaptionText('indoor', student.indoor_adaption), placement: 'left', html: true})
+        $("#ba-student-terrain-urban-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.urban_adaption + ".png")
+        $("#ba-student-terrain-field-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.field_adaption + ".png")
+        $("#ba-student-terrain-indoor-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.indoor_adaption + ".png")
+        $('#ba-student-terrain-urban').tooltip('dispose').tooltip({title: getAdaptionText('urban', student.urban_adaption), placement: 'top', html: true})
+        $('#ba-student-terrain-field').tooltip('dispose').tooltip({title: getAdaptionText('field', student.field_adaption), placement: 'top', html: true})
+        $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getAdaptionText('indoor', student.indoor_adaption), placement: 'top', html: true})
 
         if (student.uses_cover) {
             $("#ba-student-usescover-icon").show()
@@ -345,7 +348,7 @@ function loadStudent(studentName) {
         $("#ba-skill-ex-name").text(student.skill_ex_name_en != null ? student.skill_ex_name_en : student.skill_ex_name_jp)
         $("#ba-skill-normal-name").text(student.skill_normal_name_en != null ? student.skill_normal_name_en : student.skill_normal_name_jp)
         $("#ba-skill-passive-name").text(student.skill_passive_name_en != null ? student.skill_passive_name_en : student.skill_passive_name_jp)
-        $("#ba-skill-sub-name").text(student.skill_sub_name_en != null ? student.skill_sub_name_en : student.skill_sub_name_jp)
+        $("#ba-skill-sub-name").text(student.skill_sub_name_en != null ? student.skill_sub_name_en : student.skill_sub_name_jp)     
 
         $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon)
         $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon)
@@ -565,20 +568,30 @@ function recalculateEXSkillPreview() {
         var html = ''
         $.each(student.skill_ex_upgrade_material[skillLevelEX-2], function(i, el) {
             var item = find(student_db.items,"id",el)[0]
-            html += `<div class="me-2" style="position: relative;">
-            <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png');"
-            src="images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;${student.skill_ex_upgrade_amount[skillLevelEX-2][i]}</span></div>
-            `
+            html += getMaterialIconHTML(item.rarity, item.icon, item.name_en, student.skill_ex_upgrade_amount[skillLevelEX - 2][i])
         })
+        html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_ex_upgrade_credits[skillLevelEX - 2]))
+
         $('#ba-skill-ex-materials').html(html)
-        $('#ba-skill-ex-materials .ba-material-icon').each(function(i,el) {
+        $('#ba-skill-ex-materials div').each(function(i,el) {
             $(el).tooltip()
         })
+    } else {
+        $('#ba-skill-ex-materials').html('<span class="pb-2">No materials required.</span>')
     }
     $('#ba-skill-ex-cost').text(student.skill_ex_cost[skillLevelEX-1])
 
 }
 
+
+function getMaterialIconHTML(rarity, icon, name, amount) {
+    var html
+    html = `<div class="me-2" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${name}">
+            <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${rarity}.png');"
+            src="images/items/${icon}.png"><span class="ba-material-label">&times;${amount}</span></div>
+            `
+    return html
+}
 
 function recalculateSkillPreview() {
     var skillLevel = $("#ba-skillpreview-range").val()
@@ -592,11 +605,10 @@ function recalculateSkillPreview() {
         var html = ''
         $.each(student.skill_upgrade_material[skillLevel-2], function(i, el) {
             var item = find(student_db.items,"id",el)[0]
-            html += `<div class="me-2" style="position: relative;">
-            <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png');"
-            src="images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;${student.skill_upgrade_amount[skillLevel-2][i]}</span></div>
-            `
+            html += getMaterialIconHTML(item.rarity, item.icon, item.name_en, student.skill_upgrade_amount[skillLevel - 2][i])
         })
+        html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_upgrade_credits[skillLevel - 2]))
+
         $('#ba-skill-materials').html(html)
         $('#ba-skill-materials .ba-material-icon').each(function(i,el) {
             $(el).tooltip()
@@ -604,14 +616,15 @@ function recalculateSkillPreview() {
     } else if (skillLevel == 10) {
         var html = ''
         var item = find(student_db.items,"id",9999)[0]
-        html += `<div class="me-2" style="position: relative;">
-        <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png');"
-        src="images/items/${item.icon}.png" data-bs-toggle="tooltip" data-bs-placement="top" title="${item.name_en}"><span class="ba-material-label">&times;1</span></div>
-        `
+        html += getMaterialIconHTML(item.rarity, item.icon, item.name_en, 1)
+        html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_upgrade_credits[skillLevel - 2]))
+
         $('#ba-skill-materials').html(html)
-        $('#ba-skill-materials .ba-material-icon').each(function(i,el) {
+        $('#ba-skill-materials div').each(function(i,el) {
             $(el).tooltip()
         })
+    } else {
+        $('#ba-skill-materials').html('<span class="pb-2">No materials required.</span>')
     }
 }
 
@@ -678,4 +691,13 @@ function find(obj, key, value) {
     })
 
     return result
+}
+
+function abbreviateNumber(number) {
+    var result = number, th = 0, suffix = ['', 'K', 'M', 'B']
+    while (result >= 1000) {
+        th++
+        result /= 1000
+    }
+    return result + suffix[th]
 }

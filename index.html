@@ -92,7 +92,7 @@
                                         <h1 id="ba-student-name-en" class="" style="display: inline; font-weight: bold;"></h1>
                                         <div class="d-flex flex-row align-items-end mt-1">
                                             <span class="flex-grow-1">
-                                                <h4 id="ba-student-name-jp" class="" style="display: inline; font-family: 'Noto Sans JP', sans-serif;"></h4>
+                                                <h4 id="ba-student-name-jp" class="d-inline"></h4>
                                             </span>
                                             <span class="">
                                                 <img id="ba-student-class" src="">
@@ -112,9 +112,9 @@
                                                 </span>
                                             </div>
                                             <div class="me-1 mb-2" style="min-width: fit-content;">
-                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_urban.png"><br><img id="ba-student-terrain-urban" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
-                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_field.png"><br><img id="ba-student-terrain-field" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
-                                                <div class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_indoor.png"><br><img id="ba-student-terrain-indoor" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
+                                                <div id="ba-student-terrain-urban" class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_urban.png"><br><img id="ba-student-terrain-urban-icon" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
+                                                <div id="ba-student-terrain-field" class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_field.png"><br><img id="ba-student-terrain-field-icon" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
+                                                <div id="ba-student-terrain-indoor" class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_indoor.png"><br><img id="ba-student-terrain-indoor-icon" class="ba-student-terrain-icon" src="" style="margin-top: 4px;"></div>
                                             </div>
                                             <div class="flex-fill me-1 mb-2">
                                                 <div class="ba-type-weapon d-inline-block align-text-top">
@@ -147,9 +147,9 @@
                                                             <td id="ba-student-stat-attack" width="20%"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Defense </td>
+                                                            <td>Defense</td>
                                                             <td id="ba-student-stat-defense"></td>
-                                                            <td>Healing</td>
+                                                            <td>Healing Power</td>
                                                             <td id="ba-student-stat-healing"></td>
                                                         </tr>
                                                         <tr>
@@ -159,9 +159,9 @@
                                                             <td id="ba-student-stat-evasion"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Crit Chance</td>
+                                                            <td>Critical Chance</td>
                                                             <td id="ba-student-stat-crit"></td>
-                                                            <td>Crit DMG</td>
+                                                            <td>Critical Damage</td>
                                                             <td id="ba-student-stat-critdmg"></td>
                                                         </tr>
                                                         <tr>
@@ -195,7 +195,7 @@
                                                 <img id="ba-statpreview-star-4" class="ba-statpreview-star" onclick="changeStatPreviewStars(4)" src="images/ui/Common_Icon_Formation_Star_Disable.png">
                                                 <img id="ba-statpreview-star-5" class="ba-statpreview-star" onclick="changeStatPreviewStars(5)" src="images/ui/Common_Icon_Formation_Star_Disable.png">
                                                 <span class="mx-2 flex-fill"><input id="ba-statpreview-levelrange" oninput="changeStatPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="75"></span>
-                                                <span id="ba-statpreview-level">Level 75</span>
+                                                <span id="ba-statpreview-level" style="font-weight: bold;"></span>
                                             </div>
                                         </div>
     
@@ -228,7 +228,7 @@
                                         </div>
 
                                         <div class="collapse" id="ba-skill-ex-materials-page">
-                                            <div class="ba-skill-panel mt-3 p-2">
+                                            <div class="ba-skill-panel mt-3 px-2 pt-2">
                                                 <div id="ba-skill-ex-materials" class="d-flex flex-row flex-wrap justify-content-center"></div>
                                             </div>
                                         </div>
@@ -288,7 +288,7 @@
                                         </div>
 
                                         <div class="collapse" id="ba-skill-materials-page">
-                                            <div class="ba-skill-panel mt-3 p-2">
+                                            <div class="ba-skill-panel mt-3 px-2 pt-2">
                                                 <div id="ba-skill-materials" class="d-flex flex-row flex-wrap justify-content-center"></div>
                                             </div>
                                         </div>
@@ -307,7 +307,7 @@
                                         </div>
 
                                         <div class="row mt-1">
-                                            <h4 id="ba-weapon-name-jp" class="" style="display: inline; font-family: 'Noto Sans JP', sans-serif;"></h4>
+                                            <h4 id="ba-weapon-name-jp" class="d-inline"></h4>
                                         </div>
                                         
                                         <div class="mt-3">
@@ -417,7 +417,7 @@
                                     <div id="ba-student-page-profile" class="tab-pane fade container p-3 ba-student-page" style="background-color: #fff; border-radius: .25em;">
                                         <div class="d-flex flex-row align-items-center">
                                             <h2 id="ba-student-fullname-en" class="me-2" style="display: inline; font-weight: bold;"></h2>
-                                            <h4 id="ba-student-fullname-jp" class="" style="display: inline; font-family: 'Noto Sans JP', sans-serif;"></h4>
+                                            <h4 id="ba-student-fullname-jp" class="d-inline"></h4>
                                         </div>
                                         <div class="d-flex flex-row align-items-center">
                                             <img id="ba-profile-school-img" class="me-1" src="" style="height:42px; width: auto;">

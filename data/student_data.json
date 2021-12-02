@@ -52,23 +52,23 @@
             "range": 550,
             "cost_recovery": 700,
         
-            "skill_ex_name_jp": "Elegant Removal",
+            "skill_ex_name_en": "Elegant Removal",
             "skill_ex_description": "Deals <?1> damage to one enemy and decreases their defense <d:DEF> by <?2> for 30s.",
             "skill_ex_cost": [2,2,2,2,2],
             "skill_ex_parameters": [["547%", "630%", "712%", "794%", "876%"], ["29%", "29%", "33.3%", "33.3%", "37.7%"]],
             "skill_ex_icon": "COMMON_SKILLICON_STATDEBUFF.png",
         
-            "skill_normal_name_jp": "Elegant Infiltration",
+            "skill_normal_name_en": "Elegant Infiltration",
             "skill_normal_description": "Every 40s, deals <?1> damage to one enemy.",
             "skill_normal_parameters": [["396%", "416%", "436%", "515%", "535%", "555%", "634%", "654%", "674%", "753%"]],
             "skill_normal_icon": "COMMON_SKILLICON_TARGET.png",
         
-            "skill_passive_name_jp": "Agile Advancement",
+            "skill_passive_name_en": "Agile Advancement",
             "skill_passive_description": "Increases movement speed <b:MoveSpeed> by <?1>.",
             "skill_passive_parameters": [["14%", "14.7%", "15.4%", "18.2%", "18.9%", "19.6%", "22.4%", "23.1%", "23.8%", "26.6%"]],
             "skill_passive_icon": "COMMON_SKILLICON_STATBUFF.png",
         
-            "skill_sub_name_jp": "Total Suppression",
+            "skill_sub_name_en": "Total Suppression",
             "skill_sub_description": "Attacks have a 10% chance to decrease the target's evasion <d:Dodge> by <?1> for 30s. 5s cooldown between activations.",
             "skill_sub_parameters": [["6.7%", "7%", "7.4%", "8.7%", "9%", "9.4%", "10.7%", "11%", "11.4%", "12.7%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATDEBUFF.png",
@@ -1201,8 +1201,8 @@
             "urban_adaption": "S",
             "field_adaption": "B",
             "indoor_adaption": "D",
-            "weapon_type": "AR",
-            "weapon_type_img": "AR",
+            "weapon_type": "SG",
+            "weapon_type_img": "SG",
             "uses_cover": true,
             "gear_1": "Shoes",
             "gear_2": "Bag",
@@ -6885,13 +6885,13 @@
             "evasion": 190,
             "accuracy": 944,
             "critical": 209,
-            "ammo_count": 0,
-            "ammo_cost": 0,
+            "ammo_count": 5,
+            "ammo_cost": 1,
             "range": 750,
             "cost_recovery": 700,
         
             "skill_ex_name_jp": "みなさん、こちらに耳を傾けてください！",
-            "skill_ex_description": "Increases the critical chance <b:CriticalChance> and critical damage <b:CriticalDamage> by <?1>, movement speed <b:MoveSpeed> by 30.8% but decreases range <d:Range> by 38.5% for all allies in a circular area for 30s.",
+            "skill_ex_description": "Increases the critical chance <b:CriticalChance> and critical damage <b:CriticalDamage> by <?1>, movement speed <b:MoveSpeed> by 30.8% but decreases range <d:Range> by 38.5% of all allies in a circular area centered on Tomoe for 30s.",
             "skill_ex_cost": [3,3,3,3,3],
             "skill_ex_parameters": [["13.9%", "14.9%", "17%", "18%", "20.1%"]],
             "skill_ex_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
@@ -7002,7 +7002,7 @@
             "skill_sub_parameters": [["9.1%", "9.5%", "10%", "11.8%", "12.3%", "12.7%", "14.5%", "15%", "15.5%", "17.3%"]],
             "skill_sub_icon": "COMMON_SKILLICON_WEAPONBUFF.png",
 
-            "recollection_lobby": 1,
+            "recollection_lobby": 6,
             "bond_stat": ["attack_power", "maxhp"],
             "bond_stat_value": [[2,0],[2,0],[2,0],[2,0],[3,0],[3,0],[3,0],[3,0],[3,0],[4,64],[4,64],[4,64],[4,64],[4,64],[5,77],[5,77],[5,77],[5,77],[5,77]],
             "eleph_sources": "",
@@ -7067,7 +7067,7 @@
             "evasion": 1002,
             "accuracy": 108,
             "critical": 217,
-            "ammo_count": 15,
+            "ammo_count": 10,
             "ammo_cost": 1,
             "range": 650,
             "cost_recovery": 700,
@@ -7093,7 +7093,7 @@
             "skill_sub_parameters": [["108%", "113%", "118%", "140%", "145%", "151%", "172%", "178%", "183%", "205%"]],
             "skill_sub_icon": "COMMON_SKILLICON_STATBUFF.png",
 
-            "recollection_lobby": 1,
+            "recollection_lobby": 6,
             "bond_stat": ["attack_power", "heal_power"],
             "bond_stat_value": [[1,0],[1,0],[1,0],[1,0],[2,0],[2,0],[2,0],[2,0],[2,0],[2,12],[2,12],[2,12],[2,12],[2,12],[3,14],[3,14],[3,14],[3,14],[3,14]],
             "eleph_sources": "",
@@ -7382,19 +7382,19 @@
             "id": 210,
             "rarity": "N",
             "icon": "Item_Icon_Material_TotemPole_0",
-            "name_en": "Totem Pole Piece"
+            "name_en": "Totem Pole Fragment"
         },
         {
             "id": 211,
             "rarity": "R",
             "icon": "Item_Icon_Material_TotemPole_1",
-            "name_en": "Broken Totem Pole"
+            "name_en": "Damaged Totem Pole"
         },
         {
             "id": 212,
             "rarity": "SR",
             "icon": "Item_Icon_Material_TotemPole_2",
-            "name_en": "Damaged Totem Pole"
+            "name_en": "Repaired Totem Pole"
         },
         {
             "id": 213,
