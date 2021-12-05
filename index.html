@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Open+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"> 
     <link href="css/site.css" rel="stylesheet">
 </head>
 <body>
@@ -203,7 +203,7 @@
 
                                     <div id="ba-student-page-skills" class="tab-pane fade container p-3 ba-student-page" style="background-color: #fff; border-radius: .25em;">
 
-                                        <div class="mb-3 p-2 d-flex flex-column ba-skill-panel align-items-start">
+                                        <div class="mb-3 p-2 pb-0 d-flex flex-column ba-skill-panel align-items-start">
                                             <div class="d-flex flex-row align-items-center">
                                                 <img id="ba-skill-ex-icon" class="ba-skill d-inline-block me-3" src="">
                                                 <div class="d-inline-block">
@@ -215,7 +215,13 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p id="ba-skill-ex-description" class="mb-0 mt-1 p-1"></p>
+                                            <p id="ba-skill-ex-description" class="mb-2 mt-1 p-1"></p>
+                                            <div class="collapse" id="ba-skill-ex-materials-page" style="min-width: 100%;">
+                                                <div style="border-top: lightgrey 1px solid; min-width: 100%"></div>
+                                                <div class="my-1 px-2 pt-2">
+                                                    <div id="ba-skill-ex-materials" class="d-flex flex-row flex-wrap justify-content-center"></div>
+                                                </div>
+                                            </div>
                                         </div>
 
                                         <div class="row g-1">
@@ -227,13 +233,13 @@
                                             </div>
                                         </div>
 
-                                        <div class="collapse" id="ba-skill-ex-materials-page">
+                                        <!-- <div class="collapse" id="ba-skill-ex-materials-page">
                                             <div class="ba-skill-panel mt-3 px-2 pt-2">
                                                 <div id="ba-skill-ex-materials" class="d-flex flex-row flex-wrap justify-content-center"></div>
                                             </div>
-                                        </div>
+                                        </div> -->
 
-                                        <div class="my-3 p-2 d-flex flex-column ba-skill-panel align-items-start">
+                                        <div class="my-3 p-2 pb-0 d-flex flex-column ba-skill-panel align-items-start">
                                             <div class="d-flex flex-row align-items-center">
                                                 <img id="ba-skill-normal-icon" class="ba-skill d-inline-block me-3" src="">
                                                 <div class="d-inline-block">
@@ -245,9 +251,41 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p id="ba-skill-normal-description" class="mb-0 mt-1 p-1"></p>
+                                            <p id="ba-skill-normal-description" class="mt-1 mb-2 p-1"></p>
+                                            <div style="border-top: lightgrey 1px solid; min-width: 100%"></div>
+                                            <div class="mt-2 d-flex flex-row align-items-center">
+                                                <img id="ba-skill-passive-icon" class="ba-skill d-inline-block me-3" src="">
+                                                <div class="d-inline-block">
+                                                    <div>
+                                                        <h4 id="ba-skill-passive-name" class="me-2 d-inline"></h4>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <p class="d-inline" style="font-style: italic;">Passive Skill</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p id="ba-skill-passive-description" class="mt-1 mb-2 p-1"></p>
+                                            <div style="border-top: lightgrey 1px solid; min-width: 100%"></div>
+                                            <div class="mt-2 d-flex flex-row align-items-center">
+                                                <img id="ba-skill-sub-icon" class="ba-skill d-inline-block me-3" src="">
+                                                <div class="d-inline-block">
+                                                    <div>
+                                                        <h4 id="ba-skill-sub-name" class="me-2 d-inline"></h4>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <p class="d-inline" style="font-style: italic;">Sub Skill</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p id="ba-skill-sub-description" class="mt-1 mb-2 p-1"></p>
+                                            <div class="collapse" id="ba-skill-materials-page" style="min-width: 100%;">
+                                                <div style="border-top: lightgrey 1px solid; min-width: 100%"></div>
+                                                <div class="my-1 px-2 pt-2">
+                                                    <div id="ba-skill-materials" class="d-flex flex-row flex-wrap justify-content-center"></div>
+                                                </div>
+                                            </div>
                                         </div>
-
+<!-- 
                                         <div class="mb-3 p-2 d-flex flex-column ba-skill-panel align-items-start">
                                             <div class="d-flex flex-row align-items-center">
                                                 <img id="ba-skill-passive-icon" class="ba-skill d-inline-block me-3" src="">
@@ -276,7 +314,7 @@
                                                 </div>
                                             </div>
                                             <p id="ba-skill-sub-description" class="mb-0 mt-1 p-1"></p>
-                                        </div>
+                                        </div> -->
 
                                         <div class="row g-1">
                                             <div class="d-flex flex-row">
@@ -286,13 +324,6 @@
                                                 <span id="ba-skill-level" style="font-weight: bold;">Lv.1</span>
                                             </div>
                                         </div>
-
-                                        <div class="collapse" id="ba-skill-materials-page">
-                                            <div class="ba-skill-panel mt-3 px-2 pt-2">
-                                                <div id="ba-skill-materials" class="d-flex flex-row flex-wrap justify-content-center"></div>
-                                            </div>
-                                        </div>
-
                                     </div>
 
                                     <div id="ba-student-page-weapon" class="tab-pane fade container p-3 ba-student-page" style="background-color: #fff; border-radius: .25em;">
@@ -444,8 +475,14 @@
                                                     <td>Illust.</td>
                                                     <td id="ba-student-profile-illustrator"></td>
                                                 </tr>
+                                                <tr>
+                                                    <td colspan="4" id="ba-student-profile-text" style="white-space: pre-line;"></td>
+                                                </tr>
                                             </tbody>
                                         </table>
+
+                                        <!-- <div class="ba-student-panel p-2 my-2" id="ba-student-profile-text">
+                                        </div> -->
 
                                         <div class="row">
                                             <h5 style="font-weight: bold;">Affection Bonus</h5>
@@ -492,20 +529,40 @@
     <!-- Student Select Modal -->
     <div class="modal fade" id="modStudents" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl" style="transition: transform .15s ease-out;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title me-3" id="exampleModalLabel">Select Student</h4>
-                    <span class="btn-group" role="group">
-                        <button type="button" onclick="populateStudentList('none')" class="btn btn-dark">A-Z</button>
-                        <button type="button" onclick="populateStudentList('rarity')" class="btn btn-dark">Rarity</button>
-                        <button type="button" onclick="populateStudentList('school')" class="btn btn-dark">School</button>
-                        <button type="button" onclick="populateStudentList('class')" class="btn btn-dark">Class</button>
-                        <button type="button" onclick="populateStudentList('role')" class="btn btn-dark">Role</button>
-                        <button type="button" onclick="populateStudentList('weapon')" class="btn btn-dark">Weapon</button>
-                    </span>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content" style="background-color: transparent;">
+                <div class="modal-header" style="border-bottom: none;">
+                    <button type="button" class="btn btn-dark me-3" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters">Filters</button>
+                    <div class="me-3">
+                        <input type="search" class="form-control" id="ba-student-search-text" placeholder="Search Students..." onkeyup="populateStudentList('none')">
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div id="ba-student-search-results" class="modal-body pt-0">
+                <div class="modal-body">
+                    <div id="ba-student-modal-page">
+
+                        <div id="ba-student-search-filters" class="collapse" style="min-width: 100%;">
+                            <div class="container px-4 py-2" style="overflow-x: auto;">
+                                <div class="d-flex flex-row">
+                                    <div class="">
+                                        <span class="me-2">Group By</span>
+                                        <span class="btn-group me-4" role="group">
+                                            <button type="button" onclick="populateStudentList('none')" class="btn btn-dark">None</button>
+                                            <button type="button" onclick="populateStudentList('rarity')" class="btn btn-dark">Rarity</button>
+                                            <button type="button" onclick="populateStudentList('school')" class="btn btn-dark">School</button>
+                                            <button type="button" onclick="populateStudentList('class')" class="btn btn-dark">Class</button>
+                                            <button type="button" onclick="populateStudentList('role')" class="btn btn-dark">Role</button>
+                                            <button type="button" onclick="populateStudentList('weapon')" class="btn btn-dark">Weapon</button>
+                                            <button type="button" onclick="populateStudentList('attacktype')" class="btn btn-dark">Attack Type</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="ba-student-search-results" class="px-2 pt-2">
+                            
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

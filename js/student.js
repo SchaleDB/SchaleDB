@@ -3,7 +3,7 @@ $.holdReady(true)
 const starscale_hp      = [1, 1.05,  1.12,  1.21,  1.35 ]
 const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445]
-const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Academy", "Hyakkiyako": "Allied Hyakkiyako Academy", "Millennium": "Millennium Science School", "RedWinter": "Red Winter Federal Academy", "Shanhaijing": "Shanhaijing Senior Secondary School", "Trinity": "Trinity General School", "Valkyrie": "Valkyrie Police Academy", "ETC": "Others"}
+const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Academy", "Hyakkiyako": "Allied Hyakkiyako Academy", "Millennium": "Millennium Science School", "RedWinter": "Red Winter Federal Academy", "Shanhaijing": "Shanhaijing Senior Secondary School", "Trinity": "Trinity General School", "Valkyrie": "Valkyrie Police School", "Arius": "Arius Satellite School", "ETC": "Others"}
 
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
 const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000, 2400000, 4000000]
@@ -23,6 +23,10 @@ var stat_preview_stars = 3
 
 $(document).ready(function() {
     studentSelectorModal = new bootstrap.Modal(document.getElementById("modStudents"), {})
+
+    document.getElementById("modStudents").addEventListener('shown.bs.modal', function (event) {
+        $('#ba-student-search-text').focus()
+    })
 
     var urlVars = new URL(window.location.href).searchParams
 
@@ -58,19 +62,21 @@ function hookTooltips() {
 function populateStudentList(grouping = "none") {
     
     if (grouping == "none") {
-        var groupedResults
+        var groupedResults, searchTerm
+        searchTerm = $('#ba-student-search-text').val()
         groupedResults = student_db.students
         groupedResults.sort((a,b) => a.name_en.localeCompare(b.name_en))
     
         $("#ba-student-search-results").empty()
     
-        var resultsHTML = `<div class="d-flex flex-row p-2">
+        var resultsHTML = `<div class="d-flex flex-row justify-content-center p-2">
         <ul class="ba-student-searchresult-grid align-top">
         `
     
         $.each(groupedResults, function(i, el){
+            if (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase()))
             resultsHTML += `
-            <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el["name_en"]}" src="images/student/icon/Student_Portrait_${el["name_dev"]}.png"></li>
+            <li class="ba-student-searchresult-item"><div onclick="loadStudent('${el["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el["name_en"]}"><img src="images/student/icon/Student_Portrait_${el["name_dev"]}.png"></div></li>
             `
         })
     
@@ -80,34 +86,107 @@ function populateStudentList(grouping = "none") {
             </div>
             `
         $("#ba-student-search-results").append(resultsHTML)
-    } else if (grouping == "school") {
-        var groupedResults = {"Abydos": [], "Gehenna": [], "Hyakkiyako": [], "Millennium": [], "RedWinter": [], "Shanhaijing": [], "Trinity": [], "Valkyrie": [], "ETC": []}
-        $.each(student_db.students, function(i, el){
-            groupedResults[el.school].push(el)
-        })
+    } else {
+        var groupedResults = {}
+        switch (grouping) {
+            case "school":
+                groupedResults = {"Abydos": [], "Gehenna": [], "Hyakkiyako": [], "Millennium": [], "RedWinter": [], "Shanhaijing": [], "Trinity": [], "Valkyrie": [], "ETC": []}
+                $.each(student_db.students, function(i, el){
+                    groupedResults[el.school].push(el)
+                })
+                break
+            case "weapon":
+                groupedResults = {"SG": [], "SMG": [], "AR": [], "GL": [], "HG": [], "SR": [], "RG": [], "MG": [], "MT": []}
+                $.each(student_db.students, function(i, el){
+                    groupedResults[el.weapon_type].push(el)
+                })
+                break
+            case "rarity":
+                groupedResults = {"3": [], "2": [], "1": []}
+                $.each(student_db.students, function(i, el){
+                    groupedResults[el.stars.toString()].push(el)
+                })
+                break
+            case "role":
+                groupedResults = {"Tank": [], "Attacker": [], "Healer": [], "Support": [], "T.S.": []}
+                $.each(student_db.students, function(i, el){
+                    groupedResults[el.role].push(el)
+                })
+                break
+            case "class":
+                groupedResults = {"Striker": [], "Special": []}
+                $.each(student_db.students, function(i, el){
+                    groupedResults[el.type].push(el)
+                })
+                break
+            case "attacktype":
+                groupedResults = {"Explosive": [], "Piercing": [], "Mystic": []}
+                $.each(student_db.students, function(i, el){
+                    groupedResults[el.attack_type].push(el)
+                })
+                break
+        }
 
         $("#ba-student-search-results").empty()
     
         var resultsHTML = ''
 
-        $.each(["Abydos", "Gehenna", "Hyakkiyako", "Millennium", "RedWinter", "Shanhaijing", "Trinity", "Valkyrie", "ETC"], function(i, el){
+        $.each(groupedResults, function(key, val){
+            
+            var groupIcon, groupName, groupIconStyle
+
+            switch (grouping) {
+                case "school":
+                    groupIcon = `images/schoolicon/School_Icon_${key.toUpperCase()}.png`
+                    groupIconStyle= 'height:42px; width: auto; margin-bottom: -2px;'
+                    groupName = school_longname[key]
+                    break
+                case "weapon":
+                    groupIcon = `images/weapontype/Weapon_Icon_${key.toUpperCase()}.png`
+                    groupIconStyle= 'height:42px; width: auto;'
+                    groupName = key
+                    break
+                case "rarity":
+                    groupIcon = `images/ui/Star_${key.toUpperCase()}.png`
+                    groupIconStyle= 'height:26px; width: auto; margin-bottom: 2px;'
+                    groupName = ""
+                    break
+                case "role":
+                    groupIcon = `images/tactical/Role_${key.replace("T.S.","TacticalSupport")}.png`
+                    groupIconStyle= 'height:34px; width: auto;'
+                    groupName = key
+                    break
+                case "class":
+                    groupIcon = `images/ui/Class_${key}.png`
+                    groupIconStyle= 'height: 18px; width: 80px; margin-bottom: 4px;'
+                    groupName = ""
+                    break
+                case "attacktype":
+                    groupIcon = ''
+                    groupIconStyle = ''
+                    groupName = key
+                    break
+            }
 
             resultsHTML += `
-            <div class="d-flex flex-row">
-            <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${school_longname[el]}" src="images/schoolicon/School_Icon_${el.toUpperCase()}.png" style="height: 72px; width: auto; object-fit: contain;">
-            <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
+            <div class="d-flex flex-row align-items-center justify-content-center ba-student-search-group ${grouping == "attacktype" || grouping == "class" ? 'ba-student-search-group-'+key.toLowerCase() : ''}">
+            <img class="d-inline-block align-self-center me-2" src="${groupIcon}" style="${groupIconStyle}">
+            <p style="font-size: larger; font-weight: 500; margin-bottom: 0px;">${groupName}</p>
+            </div>
+            <div class="d-flex flex-row justify-content-center p-2">
+
+            <ul class="ba-student-searchresult-grid align-top">
             `
-            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
-            $.each(groupedResults[el], function(i2, el2){
+            groupedResults[key].sort((a,b) => a.name_en.localeCompare(b.name_en))
+            $.each(groupedResults[key], function(i2, el2){
                 resultsHTML += `
-                <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
+                <li class="ba-student-searchresult-item"><div onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}"><img src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></div></li>
                 `
             })
 
             resultsHTML +=
             `
             </ul></div></div>
-            <div class="ba-student-searchresult-groupseparator"></div>
             `
         }) 
 
@@ -116,157 +195,11 @@ function populateStudentList(grouping = "none") {
             </div>
             `
         $("#ba-student-search-results").append(resultsHTML)
-
-    } else if (grouping == "weapon") {
-        var groupedResults = {"SG": [], "SMG": [], "AR": [], "GL": [], "HG": [], "SR": [], "RG": [], "MG": [], "MT": []}
-        $.each(student_db.students, function(i, el){
-            groupedResults[el.weapon_type].push(el)
-        })
-
-        $("#ba-student-search-results").empty()
-    
-        var resultsHTML = ''
-
-        $.each(["SG", "SMG", "AR", "GL", "HG", "SR", "RG", "MG", "MT"], function(i, el){
-
-            resultsHTML += `
-            <div class="d-flex flex-row">
-            <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el}" src="images/weapontype/Weapon_Icon_${el}.png" style="height: 60px; width: auto; object-fit: contain;">
-            <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
-            `
-            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
-            $.each(groupedResults[el], function(i2, el2){
-                resultsHTML += `
-                <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
-                `
-            })
-
-            resultsHTML +=
-            `
-            </ul></div></div>
-            <div class="ba-student-searchresult-groupseparator"></div>
-            `
-        }) 
-
-        resultsHTML +=
-            `
-            </div>
-            `
-        $("#ba-student-search-results").append(resultsHTML)
-
-    } else if (grouping == "rarity") {
-        var groupedResults = {"3": [], "2": [], "1": []}
-        $.each(student_db.students, function(i, el){
-            groupedResults[el.stars.toString()].push(el)
-        })
-
-        $("#ba-student-search-results").empty()
-    
-        var resultsHTML = ''
-
-        $.each(["3", "2", "1"], function(i, el){
-
-            resultsHTML += `
-            <div class="d-flex flex-row">
-            <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el}" src="images/ui/Star_${el}.png" style="height: 32px; width: auto; object-fit: contain;">
-            <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
-            `
-            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
-            $.each(groupedResults[el], function(i2, el2){
-                resultsHTML += `
-                <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
-                `
-            })
-
-            resultsHTML +=
-            `
-            </ul></div></div>
-            <div class="ba-student-searchresult-groupseparator"></div>
-            `
-        }) 
-
-        resultsHTML +=
-            `
-            </div>
-            `
-        $("#ba-student-search-results").append(resultsHTML)
-
-    } else if (grouping == "role") {
-        var groupedResults = {"Tank": [], "Attacker": [], "Healer": [], "Support": [], "T.S.": []}
-        $.each(student_db.students, function(i, el){
-            groupedResults[el.role].push(el)
-        })
-
-        $("#ba-student-search-results").empty()
-    
-        var resultsHTML = ''
-
-        $.each(["Tank", "Attacker", "Healer", "Support", "T.S."], function(i, el){
-
-            resultsHTML += `
-            <div class="d-flex flex-row">
-            <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el}" src="images/tactical/Role_${el.replace("T.S.","TacticalSupport")}.png" style="height: 58px; width: auto; object-fit: contain;">
-            <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
-            `
-            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
-            $.each(groupedResults[el], function(i2, el2){
-                resultsHTML += `
-                <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
-                `
-            })
-
-            resultsHTML +=
-            `
-            </ul></div></div>
-            <div class="ba-student-searchresult-groupseparator"></div>
-            `
-        }) 
-
-        resultsHTML +=
-            `
-            </div>
-            `
-        $("#ba-student-search-results").append(resultsHTML)
-
-    } else if (grouping == "class") {
-        var groupedResults = {"Striker": [], "Special": []}
-        $.each(student_db.students, function(i, el){
-            groupedResults[el.type].push(el)
-        })
-
-        $("#ba-student-search-results").empty()
-    
-        var resultsHTML = ''
-
-        $.each(["Striker", "Special"], function(i, el){
-
-            resultsHTML += `
-            <div class="d-flex flex-row">
-            <img class="d-inline-block align-self-center me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el}" src="images/ui/Class_${el}.png" style="height: 22px; width: 80px; object-fit: contain;">
-            <div class="flex-grow-1" ><ul class="ba-student-searchresult-grid align-top">
-            `
-            groupedResults[el].sort((a,b) => a.name_en.localeCompare(b.name_en))
-            $.each(groupedResults[el], function(i2, el2){
-                resultsHTML += `
-                <li class="ba-student-searchresult-item"><img onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}" src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></li>
-                `
-            })
-
-            resultsHTML +=
-            `
-            </ul></div></div>
-            <div class="ba-student-searchresult-groupseparator"></div>
-            `
-        }) 
-
-        resultsHTML +=
-            `
-            </div>
-            `
-        $("#ba-student-search-results").append(resultsHTML)
-
     }
-    hookTooltips()
+ 
+    $(".ba-student-icon").each(function(i,el) {
+        $(el).tooltip()
+    })
 }
 
 function loadStudent(studentName) {
@@ -395,7 +328,13 @@ function loadStudent(studentName) {
         $('#ba-student-fullname-jp').text(student.fullname_jp)
         $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","").replace("OTHERS", "ETC") + ".png")
         $('#ba-student-schoolclub-label').text(`${school_longname[student.school]} / ${student.club_en}`)
-        
+
+        if (student.profile_en) {
+            $('#ba-student-profile-text').text(student.profile_en)
+        } else {
+            $('#ba-student-profile-text').text("")
+        }     
+
         if (student.recollection_lobby) {
             $(".ba-student-lobby").show()
             $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.name_dev}_01_Small.png`)
@@ -547,7 +486,7 @@ function recalculateStatPreview() {
     $('#ba-student-stat-accuracy').text(student.accuracy)
     $('#ba-student-stat-evasion').text(student.evasion)
     $('#ba-student-stat-crit').text(student.critical)
-    $('#ba-student-stat-critdmg').text("200%")
+    $('#ba-student-stat-critdmg').text(`${student.critical_dmg/100}%`)
 
     $('#ba-student-stat-stability').text(student.stability)
     $('#ba-student-stat-range').text(student.range)
@@ -562,6 +501,9 @@ function recalculateEXSkillPreview() {
     var skillLevelEX = $("#ba-skillpreview-exrange").val()
 
     $('#ba-skill-ex-description').html(getSkillText(student.skill_ex_description, student.skill_ex_parameters, skillLevelEX))
+    $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+        $(el).tooltip()
+    })
     $('#ba-skill-ex-materials').empty()
 
     if (skillLevelEX >= 2) {
@@ -600,6 +542,10 @@ function recalculateSkillPreview() {
     $('#ba-skill-passive-description').html(getSkillText(student.skill_passive_description, student.skill_passive_parameters, skillLevel))
     $('#ba-skill-sub-description').html(getSkillText(student.skill_sub_description, student.skill_sub_parameters, skillLevel))
 
+    $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+        $(el).tooltip()
+    })
+
     $('#ba-skill-materials').empty()
     if (skillLevel >= 2 && skillLevel < 10) {
         var html = ''
@@ -610,7 +556,7 @@ function recalculateSkillPreview() {
         html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_upgrade_credits[skillLevel - 2]))
 
         $('#ba-skill-materials').html(html)
-        $('#ba-skill-materials .ba-material-icon').each(function(i,el) {
+        $('#ba-skill-materials div').each(function(i,el) {
             $(el).tooltip()
         })
     } else if (skillLevel == 10) {
@@ -631,6 +577,9 @@ function recalculateSkillPreview() {
 function recalculateWeaponSkillPreview() {
     var skillLevel = $("#ba-weapon-skillpreview-range").val()
     $('#ba-weapon-skill-passive-description').html(getSkillText(student.weapon_skill_passive_description, student.weapon_skill_passive_parameters, skillLevel))
+    $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+        $(el).tooltip()
+    })
 }
 
 function recalculateBondPreview() {
@@ -651,22 +600,30 @@ function getSkillText(text, params, level) {
     var result = text
     var paramCount = 1
     var regex
+
+    regex = /[0-9.]+[%s]/g
+    result = result.replaceAll(regex, function(match) {return `<strong>${match}</strong>`})
+
     while (result.includes("<?"+paramCount+">")) {
         result = result.replace("<?"+paramCount+">", "<span class=\"ba-skill-emphasis\">" + params[paramCount-1][level-1] + "</span>")
         paramCount += 1
     }
 
     regex = /<d:(\w+)>/g
-    result = result.replaceAll(regex, "<img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Debuff_$1.png\">")
+    result = result.replaceAll(regex, function(match, capture) {return `<span class="ba-skill-debuff" data-bs-toggle="tooltip" data-bs-placement="top" title="${student_db.buffs['Debuff_'+capture].tooltip}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Debuff_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${student_db.buffs['Debuff_'+capture].name}</span>`})
+    //result = result.replaceAll(regex, "<img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Debuff_$1.png\">")
 
     regex = /<b:(\w+)>/g
-    result = result.replaceAll(regex, "<img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Buff_$1.png\">")
+    result = result.replaceAll(regex, function(match, capture) {return `<span class="ba-skill-buff" data-bs-toggle="tooltip" data-bs-placement="top" title="${student_db.buffs['Buff_'+capture].tooltip}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Buff_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${student_db.buffs['Buff_'+capture].name}</span>`})
+    //result = result.replaceAll(regex, "<img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Buff_$1.png\">")
 
     regex = /<c:(\w+)>/g
-    result = result.replaceAll(regex, "<img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_CC_$1.png\">")
+    result = result.replaceAll(regex, function(match, capture) {return `<span class="ba-skill-cc" data-bs-toggle="tooltip" data-bs-placement="top" title="${student_db.buffs['CC_'+capture].tooltip}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_CC_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${student_db.buffs['CC_'+capture].name}</span>`})
+    //result = result.replaceAll(regex, "<img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_CC_$1.png\">")
 
     regex = /<s:(\w+)>/g
-    result = result.replaceAll(regex, "<img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Special_$1.png\">")
+    result = result.replaceAll(regex, function(match, capture) {return `<span class="ba-skill-special" data-bs-toggle="tooltip" data-bs-placement="top" title="${student_db.buffs['Special_'+capture].tooltip}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Special_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${student_db.buffs['Special_'+capture].name}</span>`})
+    //result = result.replaceAll(regex, "<img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Special_$1.png\">")
 
     return result
 }

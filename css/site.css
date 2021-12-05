@@ -34,6 +34,22 @@ body {
     border-color: transparent !important;
 }
 
+.modal-header {
+    background-color: rgba(15, 8, 54, 0.9);
+    color: #fff;
+    border-radius: 0.3rem 0.3rem 0rem 0rem;
+}
+
+.modal-body {
+    background-color: rgb(214, 234, 242);
+    border-radius: 0rem 0rem 0.3rem 0.3rem;
+}
+
+#ba-student-modal-page {
+    background-color: #fff;
+    border-radius: 0.25rem;
+}
+
 .nav-link.disabled img{
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
@@ -197,15 +213,38 @@ body {
     max-height: calc(100vh - 190px);
 }
 
-.ba-student-icon {
-    height: 74px;
-    padding: 3px;
-    margin: 0px 0px 0px -10px;
-    width: auto;
-    object-fit: contain;
+.ba-student-icon::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0; left: 0;
     background-image: url("../images/ui/Card_Bg.png");
     background-size: cover;
+    transition-duration: 300ms;
+}
+
+.ba-student-icon:hover::before {
+    filter: brightness(70%);
+    transition-duration: 300ms;
+}
+
+.ba-student-icon {
+    position: relative;
+    height: 74px;
+    padding: 3px;
+    margin: 0px 0px 6px -10px;
+    width: auto;
+    object-fit: contain;
+    /* background-image: url("../images/ui/Card_Bg.png");
+    background-size: cover; */
     cursor: pointer;
+}
+
+.ba-student-icon img {
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 
 .ba-item-icon {
@@ -288,8 +327,9 @@ body {
 
 .ba-buff-icon {
     image-rendering: -webkit-optimize-contrast;
+    position: absolute;
+    top: 0px;
     height: 22px;
-    margin-top: -4px;
     width: auto;
 }
 
@@ -378,6 +418,67 @@ body {
     background-repeat: no-repeat;
 }
 
-/* #ba-skill-ex-name, #ba-skill-normal-name, #ba-skill-passive-name, #ba-skill-sub-name {
-    font-weight: 700;
-} */
+.ba-skill-buff, .ba-skill-debuff, .ba-skill-cc, .ba-skill-special {
+    position: relative;
+    font-weight: 500;
+    border-radius: 0.25rem;
+    padding: 0rem 0.25rem;
+    white-space: nowrap;
+}
+
+.ba-skill-buff {
+    background-color: #ff4f321f;
+    color: #4b100d;
+}
+
+.ba-skill-debuff {
+    background-color: #3f9eee1f;
+    color: #0c274c;
+}
+
+.ba-skill-cc {
+    background-color: #af69f61f;
+    color: #2f0c4c;
+}
+
+.ba-skill-special {
+    background-color: #ffc8321f;
+    color: #4c260c;
+}
+
+.ba-buff-icon-spacer {
+    display: inline-block;
+    width: 22px;
+}
+
+.ba-student-panel {
+    background-color: rgb(214, 234, 242);
+    border-color: #fff !important;
+    border-radius: 0.25rem;
+    color: rgb(44, 69, 99);
+    white-space: pre-line;
+}
+
+.ba-student-search-group {
+    border-bottom: lightgrey 2px solid;
+}
+
+.ba-student-search-group-explosive {
+    border-color: rgb(146, 0, 8);
+}
+
+.ba-student-search-group-piercing {
+    border-color: rgb(190, 137, 1);
+}
+
+.ba-student-search-group-mystic {
+    border-color: rgb(34, 111, 155);
+}
+
+.ba-student-search-group-striker {
+    border-color: rgb(246, 75, 35);
+}
+
+.ba-student-search-group-special {
+    border-color: rgb(0, 125, 255);
+}
