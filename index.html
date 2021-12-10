@@ -124,9 +124,9 @@
                                             </div>
 
                                             <div class="ps-3" style="min-width: fit-content;">
-                                                <span><img id="ba-student-gear-1" class="ba-item-icon" src=""></span>
-                                                <span><img id="ba-student-gear-2" class="ba-item-icon" src=""></span>
-                                                <span><img id="ba-student-gear-3" class="ba-item-icon" src=""></span>
+                                                <div class="d-inline-block position-relative"><img id="ba-student-gear-1" class="ba-gear-icon" src=""></div>
+                                                <div class="d-inline-block position-relative"><img id="ba-student-gear-2" class="ba-gear-icon" src=""></div>
+                                                <div class="d-inline-block position-relative"><img id="ba-student-gear-3" class="ba-gear-icon" src=""></div>
                                             </div>
 
     
@@ -372,9 +372,9 @@
                                                 <span id="ba-weaponpreview-level" style="font-weight: bold;">Lv.1</span>
                                             </div>
                                         </div>
-
+                                        <h5 class="d-block d-md-none" style="margin-top: 0.5rem; font-weight: bold;">Weapon Rank Bonus</h5>
                                         <ul class="nav nav-tabs justify-content-left">
-                                            <li class="nav-item flex-grow-1">
+                                            <li class="nav-item flex-grow-1 d-none d-md-flex">
                                                 <h5 style="margin-bottom: 0px; margin-top: 0.5rem; font-weight: bold;">Weapon Rank Bonus</h5>
                                             </li>
                                             <li class="nav-item ba-weapon-rank-tab">
@@ -435,8 +435,10 @@
                                                 </div>
 
                                                 <div class="mb-3 p-2 d-flex flex-row align-items-center ba-skill-panel">
-                                                    <img id="ba-weapon-bonus-terrain-type" class="d-inline-block me-2" style="height:48px; width: auto;" src="">
-                                                    <img id="ba-weapon-bonus-terrain-adaption" class="d-inline-block me-4" style="height:48px; width: auto;" src="">
+                                                    <div class="position-relative">
+                                                        <img id="ba-weapon-bonus-terrain-type" class="d-inline-block" style="height:48px; width: auto; margin-bottom: 24px; margin-right: calc(28px + 1rem)" src="">
+                                                        <img id="ba-weapon-bonus-terrain-adaption" class="d-inline-block position-absolute" style="height:48px; width: auto; top: 22px; left: 28px;" src="">    
+                                                    </div>
                                                     <span id="ba-weapon-bonus-terrain-adaption-description"></span>
                                                 </div>
 
@@ -481,9 +483,6 @@
                                             </tbody>
                                         </table>
 
-                                        <!-- <div class="ba-student-panel p-2 my-2" id="ba-student-profile-text">
-                                        </div> -->
-
                                         <div class="row">
                                             <h5 style="font-weight: bold;">Affection Bonus</h5>
                                         </div>
@@ -506,14 +505,10 @@
                                                         <img src="images/ui/School_Icon_Schedule_Favor.png" style="height:24px; width:auto;"></span><span id="ba-bond-level" style="font-weight: bold;"></span>
                                                     </div>
                                                 </div>
-                                                
-
-
                                                 <div class="ba-student-lobby ms-4">
                                                     <img id="ba-student-lobby-img" src="">
                                                     <span id="ba-student-lobby-unlock"></span>
                                                  </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -553,6 +548,8 @@
                                             <button type="button" onclick="populateStudentList('role')" class="btn btn-dark">Role</button>
                                             <button type="button" onclick="populateStudentList('weapon')" class="btn btn-dark">Weapon</button>
                                             <button type="button" onclick="populateStudentList('attacktype')" class="btn btn-dark">Attack Type</button>
+                                            <button type="button" onclick="populateStudentList('defensetype')" class="btn btn-dark">Defense Type</button>
+                                            <button type="button" onclick="populateStudentList('excost')" class="btn btn-dark">EX Cost</button>
                                         </span>
                                     </div>
                                 </div>

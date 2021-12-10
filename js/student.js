@@ -69,7 +69,7 @@ function populateStudentList(grouping = "none") {
     
         $("#ba-student-search-results").empty()
     
-        var resultsHTML = `<div class="d-flex flex-row justify-content-center p-2">
+        var resultsHTML = `<div class="d-flex flex-row justify-content-center">
         <ul class="ba-student-searchresult-grid align-top">
         `
     
@@ -102,9 +102,9 @@ function populateStudentList(grouping = "none") {
                 })
                 break
             case "rarity":
-                groupedResults = {"3": [], "2": [], "1": []}
+                groupedResults = {"_3": [], "_2": [], "_1": []}
                 $.each(student_db.students, function(i, el){
-                    groupedResults[el.stars.toString()].push(el)
+                    groupedResults['_'+el.stars.toString()].push(el)
                 })
                 break
             case "role":
@@ -123,6 +123,18 @@ function populateStudentList(grouping = "none") {
                 groupedResults = {"Explosive": [], "Piercing": [], "Mystic": []}
                 $.each(student_db.students, function(i, el){
                     groupedResults[el.attack_type].push(el)
+                })
+                break
+            case "defensetype":
+                groupedResults = {"Light": [], "Heavy": [], "Special": []}
+                $.each(student_db.students, function(i, el){
+                    groupedResults[el.defense_type].push(el)
+                })
+                break
+            case "excost":
+                groupedResults = {"_2": [], "_3": [], "_4": [], "_5": [], "_6": [], "_7": [], "_10": []}
+                $.each(student_db.students, function(i, el){
+                    groupedResults['_'+el.skill_ex_cost[4]].push(el)
                 })
                 break
         }
@@ -147,7 +159,7 @@ function populateStudentList(grouping = "none") {
                     groupName = key
                     break
                 case "rarity":
-                    groupIcon = `images/ui/Star_${key.toUpperCase()}.png`
+                    groupIcon = `images/ui/Star${key}.png`
                     groupIconStyle= 'height:26px; width: auto; margin-bottom: 2px;'
                     groupName = ""
                     break
@@ -166,10 +178,20 @@ function populateStudentList(grouping = "none") {
                     groupIconStyle = ''
                     groupName = key
                     break
+                case "defensetype":
+                    groupIcon = ''
+                    groupIconStyle = ''
+                    groupName = key
+                    break
+                case "excost":
+                    groupIcon = ''
+                    groupIconStyle = ''
+                    groupName = key.substr(1)
+                    break
             }
 
             resultsHTML += `
-            <div class="d-flex flex-row align-items-center justify-content-center ba-student-search-group ${grouping == "attacktype" || grouping == "class" ? 'ba-student-search-group-'+key.toLowerCase() : ''}">
+            <div class="d-flex flex-row align-items-center justify-content-center ba-student-search-group ${grouping == "attacktype" || grouping == "defensetype" || grouping == "class" ? 'ba-student-search-group-'+key.toLowerCase() : ''}">
             <img class="d-inline-block align-self-center me-2" src="${groupIcon}" style="${groupIconStyle}">
             <p style="font-size: larger; font-weight: 500; margin-bottom: 0px;">${groupName}</p>
             </div>
@@ -303,7 +325,7 @@ function loadStudent(studentName) {
 
         $('#ba-weapon-bonus-terrain-type').attr("src", `images/tactical/Terrain_${student.weapon_bonus_terrain_type}.png`)
         $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/tactical/Ingame_Emo_Adaptresult${student.weapon_bonus_terrain_adaption}.png`)
-        $('#ba-weapon-bonus-terrain-adaption-description').html(getAdaptionText(student.weapon_bonus_terrain_type, student.weapon_bonus_terrain_adaption))
+        $('#ba-weapon-bonus-terrain-adaption-description').html(`${student.weapon_bonus_terrain_type.charAt(0).toUpperCase()+student.weapon_bonus_terrain_type.substr(1)} terrain affinity ${eval('student.'+student.weapon_bonus_terrain_type+'_adaption')} → <b>${student.weapon_bonus_terrain_adaption}</b><br>(${getAdaptionText(student.weapon_bonus_terrain_type, student.weapon_bonus_terrain_adaption)})`)
 
         var url = new URL(window.location.href)
 

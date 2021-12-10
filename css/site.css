@@ -78,7 +78,8 @@ body {
 }
 
 #ba-student-school-img {
-    border: 1px solid rgb(17, 33, 52);
+    /*border: 1px solid rgb(17, 33, 52);*/
+    border: 1px solid grey;
     border-radius: .25em;
     height: 78px;
     width: auto;
@@ -112,7 +113,8 @@ body {
 
 .ba-role-info {
     position: relative;
-    border: 1px solid rgb(47, 80, 120);
+    /* border: 1px solid rgb(47, 80, 120); */
+    border: 1px solid grey;
     border-radius: .25em;
     background-color: #fff;
     padding: .375rem .75rem;
@@ -247,10 +249,10 @@ body {
     width: 100%;
 }
 
-.ba-item-icon {
-    height: 74px;
+.ba-gear-icon {
+    height: 78px;
     padding: 3px;
-    margin-bottom: 6px;
+    margin-bottom: 0px;
     margin-left: -10px;
     width: auto;
     object-fit: contain;
@@ -258,6 +260,16 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: center;
+}
+
+.ba-gear-label {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 1rem;
+    right: 0px;
+    padding: 0.1rem 0.25rem;
+    top: 54px;
+    border: 1px solid #d4d9e2;
 }
 
 .ba-material-icon {
@@ -463,15 +475,15 @@ body {
     border-bottom: lightgrey 2px solid;
 }
 
-.ba-student-search-group-explosive {
+.ba-student-search-group-explosive, .ba-student-search-group-light {
     border-color: rgb(146, 0, 8);
 }
 
-.ba-student-search-group-piercing {
+.ba-student-search-group-piercing, .ba-student-search-group-heavy {
     border-color: rgb(190, 137, 1);
 }
 
-.ba-student-search-group-mystic {
+.ba-student-search-group-mystic, .ba-student-search-group-special {
     border-color: rgb(34, 111, 155);
 }
 
