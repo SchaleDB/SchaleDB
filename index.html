@@ -132,8 +132,62 @@
     
                                         </div>
        
-                                        <div class="row mt-2">
-                                            <h5 style="font-weight: bold;">Student Stats</h5>
+                                        <div class="mt-2 d-flex flex-row align-items-end">
+                                            <span class="flex-grow-1">
+                                                <h5 style="display: inline; font-weight: bold;">Student Stats</h5>
+                                            </span>
+                                            <span>
+                                                <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#ba-info-gear-panel">Gear Details</button>
+                                            </span>
+                                        </div>
+
+                                        <div id="ba-info-gear-panel" class="collapse">
+                                            <div class="py-2">
+                                                <div class="px-2 pt-2 d-flex flex-column ba-skill-panel">
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <div class="me-2" style="position: relative;">
+                                                            <img id="ba-info-gear1-icon" class="ba-gear-icon ms-0" style="background-image: url('images/ui/Card_Bg.png');">
+                                                            <span id="ba-info-gear1-icon-label" class="ba-gear-label"></span>
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <h5 id="ba-info-gear1-name" class="d-inline"></h5>
+                                                            <p id="ba-info-gear1-description" class="mb-2"></p>
+                                                            <div class="mx-2">
+                                                                <input id="ba-info-gear1-range" oninput="changeGearLevel(1, this)" type="range" class="form-range" value="6" min="1" max="6">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="border-top: lightgrey 1px solid; min-width: 100%"></div>
+                                                    <div class="mt-2 d-flex flex-row align-items-center">
+                                                        <div class="me-2" style="position: relative;">
+                                                            <img id="ba-info-gear2-icon" class="ba-gear-icon ms-0" style="background-image: url('images/ui/Card_Bg.png');">
+                                                            <span id="ba-info-gear2-icon-label" class="ba-gear-label"></span>
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <h5 id="ba-info-gear2-name" class="d-inline"></h5>
+                                                            <p id="ba-info-gear2-description" class="mb-2"></p>
+                                                            <div class="mx-2">
+                                                                <input id="ba-info-gear2-range" oninput="changeGearLevel(2, this)" type="range" class="form-range" value="6" min="1" max="6">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div style="border-top: lightgrey 1px solid; min-width: 100%"></div>
+                                                    <div class="mt-2 d-flex flex-row align-items-center">
+                                                        <div class="me-2" style="position: relative;">
+                                                            <img id="ba-info-gear3-icon" class="ba-gear-icon ms-0" style="background-image: url('images/ui/Card_Bg.png');">
+                                                            <span id="ba-info-gear3-icon-label" class="ba-gear-label"></span>
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <h5 id="ba-info-gear3-name" class="d-inline"></h5>
+                                                            <p id="ba-info-gear3-description" class="mb-2"></p>
+                                                            <div class="mx-2">
+                                                                <input id="ba-info-gear3-range" oninput="changeGearLevel(3, this)" type="range" class="form-range" value="5" min="1" max="5">
+                                                            </div>
+                                                        </div>  
+                                                    </div>                                                 
+                                                </div>
+                                            </div>
+
                                         </div>
 
                                         <div class="row g-1 mt-1">
@@ -196,6 +250,30 @@
                                                 <img id="ba-statpreview-star-5" class="ba-statpreview-star" onclick="changeStatPreviewStars(5)" src="images/ui/Common_Icon_Formation_Star_Disable.png">
                                                 <span class="mx-2 flex-fill"><input id="ba-statpreview-levelrange" oninput="changeStatPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="75"></span>
                                                 <span id="ba-statpreview-level" style="font-weight: bold;"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="row g-1 mt-0">
+                                            <div class="d-flex flex-row">
+                                                <b class="me-3">Include bonuses from:</b>
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="checkbox" value="" onchange="recalculateStatPreview()" id="ba-statpreview-includegear">
+                                                    <label class="form-check-label" for="ba-statpreview-includegear">
+                                                        Gear
+                                                    </label>
+                                                </div>
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="checkbox" value="" onchange="recalculateStatPreview()" id="ba-statpreview-includeweapon">
+                                                    <label class="form-check-label" for="ba-statpreview-includeweapon">
+                                                        Weapon
+                                                    </label>
+                                                </div>
+                                                <div class="form-check me-3">
+                                                    <input class="form-check-input" type="checkbox" value="" onchange="recalculateStatPreview()" id="ba-statpreview-includebond">
+                                                    <label class="form-check-label" for="ba-statpreview-includebond">
+                                                        Affection
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
     
@@ -285,36 +363,6 @@
                                                 </div>
                                             </div>
                                         </div>
-<!-- 
-                                        <div class="mb-3 p-2 d-flex flex-column ba-skill-panel align-items-start">
-                                            <div class="d-flex flex-row align-items-center">
-                                                <img id="ba-skill-passive-icon" class="ba-skill d-inline-block me-3" src="">
-                                                <div class="d-inline-block">
-                                                    <div>
-                                                        <h4 id="ba-skill-passive-name" class="me-2 d-inline"></h4>
-                                                    </div>
-                                                    <div class="mt-1">
-                                                        <p class="d-inline" style="font-style: italic;">Passive Skill</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p id="ba-skill-passive-description" class="mb-0 mt-1 p-1"></p>
-                                        </div>
-
-                                        <div class="mb-3 p-2 d-flex flex-column ba-skill-panel align-items-start">
-                                            <div class="d-flex flex-row align-items-center">
-                                                <img id="ba-skill-sub-icon" class="ba-skill d-inline-block me-3" src="">
-                                                <div class="d-inline-block">
-                                                    <div>
-                                                        <h4 id="ba-skill-sub-name" class="me-2 d-inline"></h4>
-                                                    </div>
-                                                    <div class="mt-1">
-                                                        <p class="d-inline" style="font-style: italic;">Sub Skill</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p id="ba-skill-sub-description" class="mb-0 mt-1 p-1"></p>
-                                        </div> -->
 
                                         <div class="row g-1">
                                             <div class="d-flex flex-row">
@@ -333,7 +381,7 @@
                                                 <h2 id="ba-student-weapon-name" style="display: inline; font-weight: bold;"></h2>
                                             </span>
                                             <span class="">
-                                                <img id="ba-student-stars" src="images/ui/Common_Icon_CharacterWeapon_on.png" style="height: 28px; width:auto; margin-bottom: 0.25rem;">
+                                                <img src="images/ui/Common_Icon_CharacterWeapon_on.png" style="height: 28px; width:auto; margin-bottom: 0.25rem;">
                                             </span>
                                         </div>
 

@@ -8,6 +8,24 @@ const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Aca
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
 const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000, 2400000, 4000000]
 
+const stat_friendlyname = {
+    "maxhp": "Max HP",
+    "attack_power": "Attack",
+    "defense_power": "Defense",
+    "heal_power": "Healing Power",
+    "maxhp_percent": "Max HP",
+    "attack_power_percent": "Attack",
+    "heal_power_percent": "Healing Power",
+    "accuracy": "Accuracy",
+    "critical": "Critical Chance",
+    "critical_damage": "Critical Damage",
+    "healing_received": "Healing Received",
+    "cc_power_percent": "CC Power",
+    "cc_resist_percent": "CC Resistance",
+    "critical_resist": "Critical Resistance",
+    "critical_damage_resist": "Critical Damage Resistance"
+}
+
 var student_db = {}
 var pathJSON = "./data/"
 
@@ -25,7 +43,9 @@ $(document).ready(function() {
     studentSelectorModal = new bootstrap.Modal(document.getElementById("modStudents"), {})
 
     document.getElementById("modStudents").addEventListener('shown.bs.modal', function (event) {
-        $('#ba-student-search-text').focus()
+        if (window.matchMedia('(min-width: 768px)').matches) {
+            $('#ba-student-search-text').focus()
+        }
     })
 
     var urlVars = new URL(window.location.href).searchParams
@@ -382,6 +402,10 @@ function loadStudent(studentName) {
         recalculateSkillPreview()
         recalculateEXSkillPreview()
         recalculateBondPreview()
+
+        changeGearLevel(1, document.getElementById('ba-info-gear1-range'))
+        changeGearLevel(2, document.getElementById('ba-info-gear2-range'))
+        changeGearLevel(3, document.getElementById('ba-info-gear3-range'))
         
         localStorage.setItem("chara", student.name_dev)
         studentSelectorModal.hide()
@@ -414,18 +438,27 @@ function getAdaptionText(terrain, rank) {
 }
 
 function getStatName(stat) {
-    switch (stat) {
-        case "maxhp":
-            return "Max HP"
-        case "attack_power":
-            return "Attack"
-        case "defense_power":
-            return "Defense"
-        case "heal_power":
-            return "Healing Power"
-        default:
-            return null
-    }
+    return stat_friendlyname[stat]
+}
+
+function getFormattedStatAmount(val) {
+    return Number.isInteger(val) ? val : `${parseFloat((val*100).toFixed(2))}%`
+}
+
+function changeGearLevel(slot, el) {
+    var geartype = eval('student.gear_'+slot)
+    var gearobj = find(student_db.gear, "type", geartype)[0]
+    $(`#ba-info-gear${slot}-icon`).attr("src", `images/equipment/Equipment_Icon_${geartype}_Tier${el.value}.png`)
+    $(`#ba-info-gear${slot}-icon-label`).text(`T${el.value}`)
+    $(`#ba-info-gear${slot}-name`).text(`${gearobj.items[el.value-1].name_en}`)
+    var desc = ""
+    $(gearobj.items[el.value-1].bonus_stats).each(function(i){
+        desc += `${getStatName(gearobj.items[el.value-1].bonus_stats[i])} <b>+${getFormattedStatAmount(gearobj.items[el.value-1].bonus_stats_parameters[i][1])}</b>, `
+    })
+    $(`#ba-info-gear${slot}-description`).html(desc.substring(0, desc.length-2))
+    if ($('#ba-statpreview-includegear').prop('checked')) {
+        recalculateStatPreview()
+    }    
 }
 
 function changeStatPreviewLevel(el) {
@@ -491,8 +524,25 @@ function recalculateWeaponPreview() {
 
 function recalculateStatPreview() {
 
-    var level = $("#ba-statpreview-levelrange").val()
+    var bonus = {
+        "maxhp_percent": 1,
+        "attack_power_percent": 1,
+        "heal_power_percent": 1,
+        "maxhp": 0,
+        "attack_power": 0,
+        "defense_power": 0,
+        "heal_power": 0,
+        "accuracy": 0,
+        "critical": 0,
+        "critical_damage": 0,
+        "healing_received": 0,
+        "cc_power_percent": 1,
+        "cc_resist_percent": 1,
+        "critical_resist": 0,
+        "critical_damage_resist": 0
+    }
 
+    var level = $("#ba-statpreview-levelrange").val()
     var levelscale = ((level-1)/99).toFixed(4)
 
     var maxHP = Math.ceil(Math.round(student.maxhp_1 + (student.maxhp_100-student.maxhp_1) * levelscale) * starscale_hp[stat_preview_stars-1])
@@ -500,20 +550,52 @@ function recalculateStatPreview() {
     var defense = Math.round(student.defense_power_1 + (student.defense_power_100-student.defense_power_1) * levelscale)
     var healing = Math.ceil(Math.round(student.heal_power_1 + (student.heal_power_100-student.heal_power_1) * levelscale) * starscale_healing[stat_preview_stars-1])
 
-    $('#ba-student-stat-maxhp').text(maxHP)
-    $('#ba-student-stat-attack').text(attack)
-    $('#ba-student-stat-defense').text(defense)
-    $('#ba-student-stat-healing').text(healing)
+    if ($('#ba-statpreview-includegear').prop('checked')) {
+        var gear = []
+        var tier = 1
 
-    $('#ba-student-stat-accuracy').text(student.accuracy)
+        gear[0] = find(student_db.gear,"type",student.gear_1)[0]
+        gear[1] = find(student_db.gear,"type",student.gear_2)[0]
+        gear[2] = find(student_db.gear,"type",student.gear_3)[0]
+
+        $.each(gear, function(i, el) {
+            tier = $(`#ba-info-gear${i+1}-range`).val()
+            for (let j = 0; j < el.items[tier-1].bonus_stats.length; j++) {
+                bonus[el.items[tier-1].bonus_stats[j]] += el.items[tier-1].bonus_stats_parameters[j][1]    
+            }
+        })
+    }
+
+    if ($('#ba-statpreview-includebond').prop('checked')) {
+        var bondlevel = $("#ba-bond-levelrange").val()
+        for (let i = 1; i < Math.min(bondlevel,20); i++) {
+            bonus[student.bond_stat[0]] += student.bond_stat_value[i-1][0]
+            bonus[student.bond_stat[1]] += student.bond_stat_value[i-1][1]
+        }
+    }
+
+    if ($('#ba-statpreview-includeweapon').prop('checked')) {
+        var weaponlevel = $("#ba-weaponpreview-levelrange").val()
+        var weaponlevelscale = ((weaponlevel-1)/99).toFixed(4)
+        $.each(student.weapon_bonus_stats, function(i, el) {
+            bonus[student.weapon_bonus_stats[i]] += Math.round(student.weapon_bonus_stats_parameters[i][0] + (student.weapon_bonus_stats_parameters[i][1]-student.weapon_bonus_stats_parameters[i][0]) * weaponlevelscale)
+        }) 
+    }
+
+    $('#ba-student-stat-maxhp').text(Math.round((maxHP+bonus["maxhp"])*bonus["maxhp_percent"]))
+    $('#ba-student-stat-attack').text(Math.round((attack+bonus["attack_power"])*bonus["attack_power_percent"]))
+    $('#ba-student-stat-defense').text(defense+bonus["defense_power"])
+    $('#ba-student-stat-healing').text(Math.round((healing+bonus["heal_power"])*bonus["heal_power_percent"]))
+
+    $('#ba-student-stat-accuracy').text(student.accuracy+bonus["accuracy"])
     $('#ba-student-stat-evasion').text(student.evasion)
-    $('#ba-student-stat-crit').text(student.critical)
-    $('#ba-student-stat-critdmg').text(`${student.critical_dmg/100}%`)
+    $('#ba-student-stat-crit').text(student.critical+bonus["critical"])
+    $('#ba-student-stat-critdmg').text(`${(student.critical_dmg+bonus["critical_damage"])/100}%`)
 
     $('#ba-student-stat-stability').text(student.stability)
     $('#ba-student-stat-range').text(student.range)
-    $('#ba-student-stat-ccpower').text("100%")
-    $('#ba-student-stat-ccresist').text("100%")
+    $('#ba-student-stat-ccpower').text(`${(10000*bonus["cc_power_percent"])/100}%`)
+    $('#ba-student-stat-ccresist').text(`${(10000*bonus["cc_resist_percent"])/100}%`)
 
     $('#ba-student-stat-ammo').text(student.ammo_count + " (" + student.ammo_cost + ")")
     $('#ba-student-stat-costrecovery').text(student.cost_recovery)

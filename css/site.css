@@ -2,6 +2,10 @@ body {
     font-family: 'Open Sans', 'Noto Sans JP', sans-serif;
 }
 
+p {
+    white-space: pre-line;
+}
+
 .card {
     background-color: rgba(0,0,0,0);
 }
@@ -41,7 +45,8 @@ body {
 }
 
 .modal-body {
-    background-color: rgb(214, 234, 242);
+    /* background-color: rgb(214, 234, 242); */
+    background-color: #fff;
     border-radius: 0rem 0rem 0.3rem 0.3rem;
 }
 
@@ -252,7 +257,7 @@ body {
 .ba-gear-icon {
     height: 78px;
     padding: 3px;
-    margin-bottom: 0px;
+    margin-bottom: calc(0.5rem + 4px);
     margin-left: -10px;
     width: auto;
     object-fit: contain;
@@ -263,6 +268,7 @@ body {
 }
 
 .ba-gear-label {
+    font-weight: bold;
     position: absolute;
     background-color: #fff;
     border-radius: 1rem;
@@ -468,7 +474,6 @@ body {
     border-color: #fff !important;
     border-radius: 0.25rem;
     color: rgb(44, 69, 99);
-    white-space: pre-line;
 }
 
 .ba-student-search-group {
