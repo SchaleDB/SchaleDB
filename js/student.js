@@ -215,7 +215,7 @@ function populateStudentList(grouping = "none") {
             <img class="d-inline-block align-self-center me-2" src="${groupIcon}" style="${groupIconStyle}">
             <p style="font-size: larger; font-weight: 500; margin-bottom: 0px;">${groupName}</p>
             </div>
-            <div class="d-flex flex-row justify-content-center p-2">
+            <div class="d-flex flex-row justify-content-center py-2">
 
             <ul class="ba-student-searchresult-grid align-top">
             `
@@ -264,6 +264,26 @@ function loadStudent(studentName) {
         $('#ba-student-name-en').text(student.name_en)
         $('#ba-student-name-jp').text(student.name_jp)
         $("#ba-student-class").attr("src", `images/ui/Class_${student.type}.png`)
+
+        $("#ba-student-limited").removeClass("ba-type-striker ba-type-special")
+        switch (student.is_limited) {
+            case 0:
+                $("#ba-student-limited").hide()
+                break;
+            case 1:
+                $("#ba-student-limited").show()
+                $("#ba-student-limited").addClass("ba-type-striker")
+                $("#ba-student-limited").text("LIM")
+                $("#ba-student-limited").tooltip('dispose').tooltip({title: 'Student only available for a limited time through a recruitment banner.', placement: 'top', html: true})
+                break;
+            case 2:
+                $("#ba-student-limited").show()
+                $("#ba-student-limited").addClass("ba-type-special")
+                $("#ba-student-limited").text("EVT")
+                $("#ba-student-limited").tooltip('dispose').tooltip({title: 'Student only available for a limited time as an event reward.', placement: 'top', html: true})
+                break;
+        }
+        
 
         $("#ba-student-role-label").text(student.role)
         $("#ba-student-role-icon").attr("src", `images/tactical/Role_${student.role.replace("T.S.", "TacticalSupport")}.png`)
