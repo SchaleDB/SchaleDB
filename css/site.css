@@ -67,6 +67,11 @@ p {
     flex-basis: 50%;
 }
 
+.dropdown-menu-dark .dropdown-item.active, .dropdown-menu-dark .dropdown-item:active {
+    color: #343a40;
+    background-color: #fff;
+}
+
 #ba-student-container {
     background: #000 no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -232,8 +237,18 @@ p {
     transition-duration: 300ms;
 }
 
-.ba-student-icon:hover::before {
+.ba-student-icon:hover::before, .ba-student-icon:hover .ba-student-icon-role-bg, .ba-student-icon-large:hover .ba-student-icon-portrait {
     filter: brightness(70%);
+    transition-duration: 300ms;
+}
+
+.ba-student-icon:hover .ba-student-icon-label {
+    background-color: #233955;
+    transition-duration: 300ms;
+}
+
+.ba-student-icon-large:hover .ba-student-icon-label-large {
+    background-color: #233955cb;
     transition-duration: 300ms;
 }
 
@@ -241,7 +256,7 @@ p {
     position: relative;
     height: 74px;
     padding: 3px;
-    margin: 0px 0px 6px -10px;
+    margin: 0px 0px 36px -10px;
     width: auto;
     object-fit: contain;
     /* background-image: url("../images/ui/Card_Bg.png");
@@ -249,10 +264,73 @@ p {
     cursor: pointer;
 }
 
-.ba-student-icon img {
+.ba-student-icon-large {
+    position: relative;
+    width: 100px;
+    height: auto;
+    margin: 0px 0px 8px 0px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.ba-student-icon-portrait {
     position: relative;
     height: 100%;
     width: 100%;
+}
+
+.ba-student-icon-role-bg {
+    width: 26px;
+    height: auto;
+    position: absolute;
+    bottom: 2px;
+    right: 10px;
+    transition-duration: 300ms;
+}
+
+.ba-student-icon-role {
+    width: 20px;
+    height: auto;
+    position: absolute;
+    bottom: 2px;
+    right: 13px;
+}
+
+.ba-student-icon-label {
+    background-color: #32527a;
+    color: #fff;
+    border-radius: 0.5rem;
+    font-size: small;
+    position: absolute;
+    width: 78px;
+    height: 26px;
+    top: 77px;
+    left: 2px;
+    transition-duration: 300ms;
+}
+
+.ba-student-icon-label-large {
+    background-color: #32527acb;
+    color: #fff;
+    border-radius: 0px 0px 4px 4px;
+    font-size: default;
+    font-weight: 500;
+    position: absolute;
+    width: 100px;
+    height: 28px;
+    bottom: 0px;
+    left: 0px;
+    transition-duration: 300ms;
+}
+
+.ba-student-icon-label-large.smalltext {
+    font-size: small !important;
+    line-height: 12px;
+}
+
+.smalltext {
+    font-size: x-small;
+    line-height: 10px;
 }
 
 .ba-gear-icon {
@@ -299,6 +377,7 @@ p {
     padding: 0.1rem 0.25rem;
     top: 40px;
     border: 1px solid #d4d9e2;
+    cursor: default;
 }
 
 .ba-skill {
@@ -419,6 +498,27 @@ p {
     top: 42px;
 }
 
+#ba-student-favoured-item-icon {
+    height: 64px;
+    padding: 3px;
+    background-image: url('../images/ui/Card_Bg.png');
+    width: auto;
+    margin-right: 4px;
+    margin-bottom: 10px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+#ba-student-favoured-item-rank {
+    height: 28px;
+    width: auto;
+    display: inline-block;
+    position: absolute;
+    right: 4px;
+    top: 42px;
+}
+
 /* #ba-skill-materials, #ba-skill-ex-materials {
     min-height: 68px;
 } */
@@ -443,6 +543,7 @@ p {
     border-radius: 0.25rem;
     padding: 0rem 0.25rem;
     white-space: nowrap;
+    cursor: help;
 }
 
 .ba-skill-buff {

@@ -95,9 +95,7 @@ function populateStudentList(grouping = "none") {
     
         $.each(groupedResults, function(i, el){
             if (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase()))
-            resultsHTML += `
-            <li class="ba-student-searchresult-item"><div onclick="loadStudent('${el["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el["name_en"]}"><img src="images/student/icon/Student_Portrait_${el["name_dev"]}.png"></div></li>
-            `
+            resultsHTML += getStudentListIconHTMLLarge(el)
         })
     
         resultsHTML +=
@@ -221,9 +219,7 @@ function populateStudentList(grouping = "none") {
             `
             groupedResults[key].sort((a,b) => a.name_en.localeCompare(b.name_en))
             $.each(groupedResults[key], function(i2, el2){
-                resultsHTML += `
-                <li class="ba-student-searchresult-item"><div onclick="loadStudent('${el2["name_dev"]}')" class="ba-student-icon" data-bs-toggle="tooltip" data-bs-placement="bottom" title="${el2["name_en"]}"><img src="images/student/icon/Student_Portrait_${el2["name_dev"]}.png"></div></li>
-                `
+                resultsHTML += getStudentListIconHTML(el2)
             })
 
             resultsHTML +=
@@ -411,6 +407,15 @@ function loadStudent(studentName) {
         $('#ba-student-profile-height').text(student.height)
         $('#ba-student-profile-cv').text(student.cv)
         $('#ba-student-profile-illustrator').text(student.illustrator)
+
+        var favItemsHtml = ""
+        $(student.favoured_items[0]).each(function(i,el){
+            favItemsHtml += getFavourIconHTML(el, "Favour Item", 3)
+        })
+        $(student.favoured_items[1]).each(function(i,el){
+            favItemsHtml += getFavourIconHTML(el, "Favour Item", 2)
+        })
+        $('#ba-student-favoured-items').empty().html(favItemsHtml)
 
         $('#ba-student-bond-1').text(getStatName(student.bond_stat[0]))
         $('#ba-student-bond-2').text(getStatName(student.bond_stat[1]))
@@ -649,12 +654,50 @@ function recalculateEXSkillPreview() {
 
 }
 
+function getStudentListIconHTML(student) {
+    return `
+    <li class="ba-student-searchresult-item">
+        <div onclick="loadStudent('${student["name_dev"]}')" class="ba-student-icon" style="margin-bottom: 36px;">
+            <img class="ba-student-icon-portrait" src="images/student/icon/Student_Portrait_${student["name_dev"]}.png">
+            <img class="ba-student-icon-role-bg" src="images/ui/Card_Role_Bg.png">
+            <img class="ba-student-icon-role" src="images/tactical/Role_${student["role"].replace("T.S.", "TacticalSupport")}.png">
+            <div class="d-flex align-items-center px-1 ba-student-icon-label${student["name_en"].length > 10 ? " smalltext" : ""}">
+                <span class="align-middle" style="width: 100%">${student["name_en"]}</span>
+            </div>
+        </div>
+    </li>
+    `
+    //<img class="ba-student-icon-role" src="images/schoolicon/School_Icon_${student["school"].toUpperCase().replace(" ","").replace("OTHERS", "ETC")}.png">
+    //<img class="ba-student-icon-role" src="images/tactical/Role_${student["role"].replace("T.S.", "TacticalSupport")}.png">
+}
+
+function getStudentListIconHTMLLarge(student) {
+    return `
+    <li class="ba-student-searchresult-item">
+        <div onclick="loadStudent('${student["name_dev"]}')" class="ba-student-icon-large">
+            <img class="ba-student-icon-portrait" src="images/student/collection/Student_Portrait_${student["name_dev"]}_Collection.png">
+            <div class="d-flex align-items-center px-1 ba-student-icon-label-large${student["name_en"].length > 10 ? " smalltext" : ""}">
+                <span class="align-middle" style="width: 100%">${student["name_en"]}</span>
+            </div>
+        </div>
+    </li>
+    `
+}
 
 function getMaterialIconHTML(rarity, icon, name, amount) {
     var html
     html = `<div class="me-2" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${name}">
             <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${rarity}.png');"
             src="images/items/${icon}.png"><span class="ba-material-label">&times;${amount}</span></div>
+            `
+    return html
+}
+
+function getFavourIconHTML(icon, name, grade) {
+    var html
+    html = `<div class="" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${name}">
+            <img id="ba-student-favoured-item-icon" src="images/items/Item_Icon_Favor_${icon}.png">
+            <img id="ba-student-favoured-item-rank" src="images/ui/Cafe_Interaction_Gift_0${grade}.png"></div>
             `
     return html
 }

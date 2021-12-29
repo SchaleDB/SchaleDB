@@ -557,9 +557,21 @@
                                                 <div class="ba-student-lobby ms-4">
                                                     <img id="ba-student-lobby-img" src="">
                                                     <span id="ba-student-lobby-unlock"></span>
-                                                 </div>
+                                                </div>
                                             </div>
                                         </div>
+
+                                        <div class="row">
+                                            <h5 style="font-weight: bold;">Favourite Gifts</h5>
+                                        </div>
+
+                                        <div id="ba-student-favoured-items" class="my-1 d-flex flex-row flex-wrap justify-content-center">
+                                            <div style="position: relative;">
+                                                <img id="ba-student-favoured-item-img" src="images/items/Item_Icon_Favor_1.png">
+                                                <img id="ba-student-favoured-item-rank" src="images/ui/Cafe_Interaction_Gift_03.png">
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -575,39 +587,31 @@
         <div class="modal-dialog modal-xl" style="transition: transform .15s ease-out;">
             <div class="modal-content" style="background-color: transparent;">
                 <div class="modal-header" style="border-bottom: none;">
-                    <button type="button" class="btn btn-dark me-3" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters">Filters</button>
                     <div class="me-3">
                         <input type="search" class="form-control" id="ba-student-search-text" placeholder="Search Students..." onkeyup="populateStudentList('none')">
+                    </div>
+                    <div class="dropdown me-3">
+                        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">Sort</button>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('none')" class="btn btn-dark">Alphabetical</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('rarity')" class="btn btn-dark">Rarity</a></li>
+                            <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('school')" class="btn btn-dark">School</a></li>
+                            <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('class')" class="btn btn-dark">Class</a></li>
+                            <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('role')" class="btn btn-dark">Role</a></li>
+                            <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('weapon')" class="btn btn-dark">Weapon</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('attacktype')" class="btn btn-dark">Attack Type</a></li>
+                            <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('defensetype')" class="btn btn-dark">Defense Type</a></li>
+                            <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('excost')" class="btn btn-dark">EX Cost</a></li>
+                        </ul>
                     </div>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div id="ba-student-modal-page">
-
-                        <div id="ba-student-search-filters" class="collapse" style="min-width: 100%;">
-                            <div class="container px-4 py-2" style="overflow-x: auto;">
-                                <div class="d-flex flex-row">
-                                    <div class="">
-                                        <span class="me-2">Group By</span>
-                                        <span class="btn-group me-4" role="group">
-                                            <button type="button" onclick="populateStudentList('none')" class="btn btn-dark">None</button>
-                                            <button type="button" onclick="populateStudentList('rarity')" class="btn btn-dark">Rarity</button>
-                                            <button type="button" onclick="populateStudentList('school')" class="btn btn-dark">School</button>
-                                            <button type="button" onclick="populateStudentList('class')" class="btn btn-dark">Class</button>
-                                            <button type="button" onclick="populateStudentList('role')" class="btn btn-dark">Role</button>
-                                            <button type="button" onclick="populateStudentList('weapon')" class="btn btn-dark">Weapon</button>
-                                            <button type="button" onclick="populateStudentList('attacktype')" class="btn btn-dark">Attack Type</button>
-                                            <button type="button" onclick="populateStudentList('defensetype')" class="btn btn-dark">Defense Type</button>
-                                            <button type="button" onclick="populateStudentList('excost')" class="btn btn-dark">EX Cost</button>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div id="ba-student-search-results" class="px-2 pt-2">
-                            
                         </div>
-
                     </div>
                 </div>
             </div>
