@@ -168,17 +168,17 @@ function populateStudentList(grouping = "none") {
             switch (grouping) {
                 case "school":
                     groupIcon = `images/schoolicon/School_Icon_${key.toUpperCase()}.png`
-                    groupIconStyle= 'height:42px; width: auto; margin-bottom: -2px;'
+                    groupIconStyle= 'height:40px; width: auto; margin-bottom: -2px;'
                     groupName = school_longname[key]
                     break
                 case "weapon":
                     groupIcon = `images/weapontype/Weapon_Icon_${key.toUpperCase()}.png`
-                    groupIconStyle= 'height:42px; width: auto;'
+                    groupIconStyle= 'height:38px; width: auto; margin-bottom: 4px;'
                     groupName = key
                     break
                 case "rarity":
                     groupIcon = `images/ui/Star${key}.png`
-                    groupIconStyle= 'height:26px; width: auto; margin-bottom: 2px;'
+                    groupIconStyle= 'height:26px; width: auto; margin-bottom: 1px;'
                     groupName = ""
                     break
                 case "role":
@@ -192,18 +192,18 @@ function populateStudentList(grouping = "none") {
                     groupName = ""
                     break
                 case "attacktype":
-                    groupIcon = ''
-                    groupIconStyle = ''
+                    groupIcon = 'images/tactical/StrategyObjectBuff_Attack.png'
+                    groupIconStyle = 'height:26px; width: auto; margin-bottom: 1px; filter: brightness(0%);'
                     groupName = key
                     break
                 case "defensetype":
-                    groupIcon = ''
-                    groupIconStyle = ''
+                    groupIcon = 'images/tactical/StrategyObjectBuff_Defense.png'
+                    groupIconStyle = 'height:26px; width: auto; margin-bottom: 1px; filter: brightness(0%);'
                     groupName = key
                     break
                 case "excost":
-                    groupIcon = ''
-                    groupIconStyle = ''
+                    groupIcon = 'images/ui/Image_Cost_Font.png'
+                    groupIconStyle = 'height: 16px; width: 56px; margin-bottom: 5px; margin-top: 7px;'
                     groupName = key.substr(1)
                     break
             }
@@ -211,15 +211,15 @@ function populateStudentList(grouping = "none") {
             resultsHTML += `
             <div class="d-flex flex-row align-items-center justify-content-center ba-student-search-group ${grouping == "attacktype" || grouping == "defensetype" || grouping == "class" ? 'ba-student-search-group-'+key.toLowerCase() : ''}">
             <img class="d-inline-block align-self-center me-2" src="${groupIcon}" style="${groupIconStyle}">
-            <p style="font-size: larger; font-weight: 500; margin-bottom: 0px;">${groupName}</p>
+            <p style="font-size: larger; font-weight: bold; margin-bottom: 0px;">${groupName}</p>
             </div>
-            <div class="d-flex flex-row justify-content-center py-2">
+            <div class="d-flex flex-row justify-content-center pb-2">
 
             <ul class="ba-student-searchresult-grid align-top">
             `
             groupedResults[key].sort((a,b) => a.name_en.localeCompare(b.name_en))
             $.each(groupedResults[key], function(i2, el2){
-                resultsHTML += getStudentListIconHTML(el2)
+                resultsHTML += getStudentListIconHTMLLarge(el2)
             })
 
             resultsHTML +=
@@ -308,7 +308,9 @@ function loadStudent(studentName) {
         //$('#ba-student-school-img').tooltip('dispose').tooltip({title: school_longname[student.school], placement: 'bottom'})
         $("#ba-student-position").text(student.position.toUpperCase())
         $("#ba-student-attacktype-label").text(student.attack_type)
+        $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getTypeText(student.attack_type), placement: 'top', html: true})
         $("#ba-student-defensetype-label").text(student.defense_type)
+        $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getTypeText(student.defense_type), placement: 'top', html: true})
 
         $("#ba-student-terrain-urban-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.urban_adaption + ".png")
         $("#ba-student-terrain-field-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.field_adaption + ".png")
@@ -457,6 +459,31 @@ function getAdaptionText(terrain, rank) {
             break
         case "SS":
             text += `<b>30% more</b> damage in ${terrain} terrain.<br>Cover is <b>75%</b> more effective.` 
+            break
+    }
+    return text
+}
+
+function getTypeText(type) {
+    var text = ''
+    switch (type) {
+        case "Explosive":
+            text += 'Deals <b>2&times;</b> damage to <b class="ba-col-explosive">Light</b> armour targets.<br>Deals <b>0.5&times;</b> damage to <b class="ba-col-mystic">Special</b> armour targets.<br>Deals <b>0.5&times;</b> damage to <b class="ba-col-siege">Structures</b>.'
+            break
+        case "Piercing":
+            text += 'Deals <b>2&times;</b> damage to <b class="ba-col-piercing">Heavy</b> armour targets.<br>Deals <b>0.5&times;</b> damage to <b class="ba-col-explosive">Light</b> armour targets.<br>Deals <b>0.5&times;</b> damage to <b class="ba-col-siege">Structures</b>.'
+            break
+        case "Mystic":
+            text += 'Deals <b>2&times;</b> damage to <b class="ba-col-mystic">Special</b> armour targets.<br>Deals <b>0.5&times;</b> damage to <b class="ba-col-piercing">Heavy</b> armour targets.<br>Deals <b>0.5&times;</b> damage to <b class="ba-col-siege">Structures</b>.'
+            break
+        case "Light":
+            text += 'Receives <b>2&times;</b> damage from <b class="ba-col-explosive">Explosive</b> tpye attacks.<br>Receives <b>0.5&times;</b> damage from <b class="ba-col-mystic">Mystic</b> type attacks.<br>Receives <b>0.5&times;</b> damage from <b class="ba-col-siege">Siege</b> type attacks.'
+            break
+        case "Heavy":
+            text += 'Receives <b>2&times;</b> damage from <b class="ba-col-piercing">Piercing</b> tpye attacks.<br>Receives <b>0.5&times;</b> damage from <b class="ba-col-explosive">Explosive</b> type attacks.<br>Receives <b>0.5&times;</b> damage from <b class="ba-col-siege">Siege</b> type attacks.'
+            break
+        case "Special":
+            text += 'Receives <b>2&times;</b> damage from <b class="ba-col-mystic">Mystic</b> tpye attacks.<br>Receives <b>0.5&times;</b> damage from <b class="ba-col-piercing">Piercing</b> type attacks.<br>Receives <b>0.5&times;</b> damage from <b class="ba-col-siege">Siege</b> type attacks.'
             break
     }
     return text
@@ -675,7 +702,7 @@ function getStudentListIconHTMLLarge(student) {
     return `
     <li class="ba-student-searchresult-item">
         <div onclick="loadStudent('${student["name_dev"]}')" class="ba-student-icon-large">
-            <img class="ba-student-icon-portrait" src="images/student/collection/Student_Portrait_${student["name_dev"]}_Collection.png">
+            <img class="ba-student-icon-portrait ba-student-icon-portrait-large" src="images/student/collection/Student_Portrait_${student["name_dev"]}_Collection.png">
             <div class="d-flex align-items-center px-1 ba-student-icon-label-large${student["name_en"].length > 10 ? " smalltext" : ""}">
                 <span class="align-middle" style="width: 100%">${student["name_en"]}</span>
             </div>
@@ -753,9 +780,14 @@ function recalculateBondPreview() {
     var level = $("#ba-bond-levelrange").val()
     var stat1 = 0, stat2 = 0
 
-    for (let i = 1; i < Math.min(level,20); i++) {
-        stat1 += student.bond_stat_value[i-1][0]
-        stat2 += student.bond_stat_value[i-1][1]
+    for (let i = 1; i < Math.min(level,50); i++) {
+        if (i < 20) {
+            stat1 += student.bond_stat_value[Math.floor(i/5)][0]
+            stat2 += student.bond_stat_value[Math.floor(i/5)][1]
+        } else if (i < 50) {
+            stat1 += student.bond_stat_value[2+Math.floor(i/10)][0]
+            stat2 += student.bond_stat_value[2+Math.floor(i/10)][1]
+        }
     }
 
     $("#ba-student-bond-1-amount").text(stat1)
