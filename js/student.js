@@ -34,13 +34,14 @@ $.getJSON("./data/student_data.json", function(result) {
     $.holdReady(false)
 })
 
-var student
-var studentSelectorModal
+var student, regionID
+var studentSelectorModal, statPreviewModal
 
 var stat_preview_stars = 3
 
 $(document).ready(function() {
     studentSelectorModal = new bootstrap.Modal(document.getElementById("modStudents"), {})
+    statPreviewModal = new bootstrap.Modal(document.getElementById("modStatPreviewSettings"), {})
 
     document.getElementById("modStudents").addEventListener('shown.bs.modal', function (event) {
         if (window.matchMedia('(min-width: 768px)').matches) {
@@ -61,6 +62,12 @@ $(document).ready(function() {
         loadStudent(localStorage.getItem("chara"))
     } else {
         loadStudent("Haruna")
+    }
+
+    if (localStorage.getItem("region")) {
+        loadRegion(localStorage.getItem("region"))
+    } else {
+        loadRegion(0)
     }
 
     populateStudentList("none")
@@ -94,7 +101,7 @@ function populateStudentList(grouping = "none") {
         `
     
         $.each(groupedResults, function(i, el){
-            if (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase()))
+            if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
             resultsHTML += getStudentListIconHTMLLarge(el)
         })
     
@@ -110,48 +117,56 @@ function populateStudentList(grouping = "none") {
             case "school":
                 groupedResults = {"Abydos": [], "Gehenna": [], "Hyakkiyako": [], "Millennium": [], "RedWinter": [], "Shanhaijing": [], "Trinity": [], "Valkyrie": [], "ETC": []}
                 $.each(student_db.students, function(i, el){
+                    if (el["released"][regionID])
                     groupedResults[el.school].push(el)
                 })
                 break
             case "weapon":
                 groupedResults = {"SG": [], "SMG": [], "AR": [], "GL": [], "HG": [], "SR": [], "RG": [], "MG": [], "MT": []}
                 $.each(student_db.students, function(i, el){
+                    if (el["released"][regionID])
                     groupedResults[el.weapon_type].push(el)
                 })
                 break
             case "rarity":
                 groupedResults = {"_3": [], "_2": [], "_1": []}
                 $.each(student_db.students, function(i, el){
+                    if (el["released"][regionID])
                     groupedResults['_'+el.stars.toString()].push(el)
                 })
                 break
             case "role":
                 groupedResults = {"Tank": [], "Attacker": [], "Healer": [], "Support": [], "T.S.": []}
                 $.each(student_db.students, function(i, el){
+                    if (el["released"][regionID])
                     groupedResults[el.role].push(el)
                 })
                 break
             case "class":
                 groupedResults = {"Striker": [], "Special": []}
                 $.each(student_db.students, function(i, el){
+                    if (el["released"][regionID])
                     groupedResults[el.type].push(el)
                 })
                 break
             case "attacktype":
                 groupedResults = {"Explosive": [], "Piercing": [], "Mystic": []}
                 $.each(student_db.students, function(i, el){
+                    if (el["released"][regionID])
                     groupedResults[el.attack_type].push(el)
                 })
                 break
             case "defensetype":
                 groupedResults = {"Light": [], "Heavy": [], "Special": []}
                 $.each(student_db.students, function(i, el){
+                    if (el["released"][regionID])
                     groupedResults[el.defense_type].push(el)
                 })
                 break
             case "excost":
                 groupedResults = {"_2": [], "_3": [], "_4": [], "_5": [], "_6": [], "_7": [], "_10": []}
                 $.each(student_db.students, function(i, el){
+                    if (el["released"][regionID])
                     groupedResults['_'+el.skill_ex_cost[4]].push(el)
                 })
                 break
@@ -208,24 +223,26 @@ function populateStudentList(grouping = "none") {
                     break
             }
 
-            resultsHTML += `
-            <div class="d-flex flex-row align-items-center justify-content-center ba-student-search-group ${grouping == "attacktype" || grouping == "defensetype" || grouping == "class" ? 'ba-student-search-group-'+key.toLowerCase() : ''}">
-            <img class="d-inline-block align-self-center me-2" src="${groupIcon}" style="${groupIconStyle}">
-            <p style="font-size: larger; font-weight: bold; margin-bottom: 0px;">${groupName}</p>
-            </div>
-            <div class="d-flex flex-row justify-content-center pb-2">
-
-            <ul class="ba-student-searchresult-grid align-top">
-            `
-            groupedResults[key].sort((a,b) => a.name_en.localeCompare(b.name_en))
-            $.each(groupedResults[key], function(i2, el2){
-                resultsHTML += getStudentListIconHTMLLarge(el2)
-            })
-
-            resultsHTML +=
-            `
-            </ul></div></div>
-            `
+            if (groupedResults[key].length != 0) {
+                resultsHTML += `
+                <div class="d-flex flex-row align-items-center justify-content-center ba-student-search-group ${grouping == "attacktype" || grouping == "defensetype" || grouping == "class" ? 'ba-student-search-group-'+key.toLowerCase() : ''}">
+                <img class="d-inline-block align-self-center me-2" src="${groupIcon}" style="${groupIconStyle}">
+                <p style="font-size: larger; font-weight: bold; margin-bottom: 0px;">${groupName}</p>
+                </div>
+                <div class="d-flex flex-row justify-content-center pb-2">
+    
+                <ul class="ba-student-searchresult-grid align-top">
+                `
+                groupedResults[key].sort((a,b) => a.name_en.localeCompare(b.name_en))
+                $.each(groupedResults[key], function(i2, el2){
+                    resultsHTML += getStudentListIconHTMLLarge(el2)
+                })
+    
+                resultsHTML +=
+                `
+                </ul></div></div>
+                `
+            }
         }) 
 
         resultsHTML +=
@@ -424,19 +441,44 @@ function loadStudent(studentName) {
 
         document.title = `Schale DB | ${student.name_en}`
 
+        changeStatPreviewStars(student.stars)
         recalculateWeaponPreview()
         recalculateStatPreview()
         recalculateSkillPreview()
         recalculateEXSkillPreview()
         recalculateBondPreview()
 
-        changeGearLevel(1, document.getElementById('ba-info-gear1-range'))
-        changeGearLevel(2, document.getElementById('ba-info-gear2-range'))
-        changeGearLevel(3, document.getElementById('ba-info-gear3-range'))
+        changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'))
+        changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'))
+        changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'))
         
         localStorage.setItem("chara", student.name_dev)
         studentSelectorModal.hide()
     }
+}
+
+function changeRegion(regID) {
+    regionID = regID
+    localStorage.setItem("region", regionID)
+    location.reload()
+}
+
+function loadRegion(regID) {
+    regionID = regID
+    region = student_db.regions[regionID]
+    $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
+    $("#navbarRegionSelector").text(`Server: ${region.abbreviation}`)
+    $("#ba-statpreview-levelrange").attr("max",region.studentlevel_max)
+    $("#ba-weaponpreview-levelrange").attr("max",region.weaponlevel_max)
+    if (region.weaponlevel_max == 0) {
+        $("#ba-student-nav-weapon").hide()
+        $("#ba-statpreview-includeweapon-container").hide()
+        $("#ba-statpreview-includeweapon").prop("checked",false)
+    }
+    $("#ba-bond-levelrange").attr("max",region.bondlevel_max)
+    $("#ba-statpreview-gear1-range").attr("max",region.gear1_max)
+    $("#ba-statpreview-gear2-range").attr("max",region.gear2_max)
+    $("#ba-statpreview-gear3-range").attr("max",region.gear3_max)
 }
 
 function getAdaptionText(terrain, rank) {
@@ -500,14 +542,14 @@ function getFormattedStatAmount(val) {
 function changeGearLevel(slot, el) {
     var geartype = eval('student.gear_'+slot)
     var gearobj = find(student_db.gear, "type", geartype)[0]
-    $(`#ba-info-gear${slot}-icon`).attr("src", `images/equipment/Equipment_Icon_${geartype}_Tier${el.value}.png`)
-    $(`#ba-info-gear${slot}-icon-label`).text(`T${el.value}`)
-    $(`#ba-info-gear${slot}-name`).text(`${gearobj.items[el.value-1].name_en}`)
+    $(`#ba-statpreview-gear${slot}-icon`).attr("src", `images/equipment/Equipment_Icon_${geartype}_Tier${el.value}.png`)
+    $(`#ba-statpreview-gear${slot}-level`).text(`T${el.value}`)
+    $(`#ba-statpreview-gear${slot}-name`).text(`${gearobj.items[el.value-1].name_en}`)
     var desc = ""
     $(gearobj.items[el.value-1].bonus_stats).each(function(i){
         desc += `${getStatName(gearobj.items[el.value-1].bonus_stats[i])} <b>+${getFormattedStatAmount(gearobj.items[el.value-1].bonus_stats_parameters[i][1])}</b>, `
     })
-    $(`#ba-info-gear${slot}-description`).html(desc.substring(0, desc.length-2))
+    $(`#ba-statpreview-gear${slot}-description`).html(desc.substring(0, desc.length-2))
     if ($('#ba-statpreview-includegear').prop('checked')) {
         recalculateStatPreview()
     }    
@@ -520,11 +562,9 @@ function changeStatPreviewLevel(el) {
 
 function changeSkillPreviewLevel(el) {
     if (el.value == el.max) {
-        $('#ba-skill-level').text("")
-        $('#ba-skill-level-max').show()
+        $('#ba-skill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -3px;">`)
     } else {
-        $('#ba-skill-level').text("Lv." + el.value)
-        $('#ba-skill-level-max').hide()
+        $('#ba-skill-level').html("Lv." + el.value)
     }
     recalculateSkillPreview()
 }
@@ -543,11 +583,9 @@ function changeWeaponSkillPreviewLevel(el) {
 
 function changeEXSkillPreviewLevel(el) {
     if (el.value == el.max) {
-        $('#ba-skill-ex-level').text("")
-        $('#ba-skill-ex-level-max').show()
+        $('#ba-skill-ex-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -3px;">`)
     } else {
-        $('#ba-skill-ex-level').text("Lv." + el.value)
-        $('#ba-skill-ex-level-max').hide()
+        $('#ba-skill-ex-level').html("Lv." + el.value)
     }
     recalculateEXSkillPreview()
 }
@@ -575,6 +613,9 @@ function recalculateWeaponPreview() {
 }
 
 function recalculateStatPreview() {
+
+    var minlevelreq = [0, 15, 35]
+    var maxbond = [10, 10, 20, 20, 50]
 
     var bonus = {
         "maxhp_percent": 1,
@@ -611,22 +652,22 @@ function recalculateStatPreview() {
         gear[2] = find(student_db.gear,"type",student.gear_3)[0]
 
         $.each(gear, function(i, el) {
-            tier = $(`#ba-info-gear${i+1}-range`).val()
-            for (let j = 0; j < el.items[tier-1].bonus_stats.length; j++) {
-                bonus[el.items[tier-1].bonus_stats[j]] += el.items[tier-1].bonus_stats_parameters[j][1]    
+            tier = $(`#ba-statpreview-gear${i+1}-range`).val()
+            if (level >= minlevelreq[i]) {
+                for (let j = 0; j < el.items[tier-1].bonus_stats.length; j++) {
+                    bonus[el.items[tier-1].bonus_stats[j]] += el.items[tier-1].bonus_stats_parameters[j][1]    
+                }
             }
         })
     }
 
     if ($('#ba-statpreview-includebond').prop('checked')) {
         var bondlevel = $("#ba-bond-levelrange").val()
-        for (let i = 1; i < Math.min(bondlevel,20); i++) {
-            bonus[student.bond_stat[0]] += student.bond_stat_value[i-1][0]
-            bonus[student.bond_stat[1]] += student.bond_stat_value[i-1][1]
-        }
+        var bondbonus = getBondStats(student, bondlevel)
+        $.each(bondbonus, function(i, el) {bonus[i] += el})
     }
 
-    if ($('#ba-statpreview-includeweapon').prop('checked')) {
+    if ((stat_preview_stars == 5) && $('#ba-statpreview-includeweapon').prop('checked')) {
         var weaponlevel = $("#ba-weaponpreview-levelrange").val()
         var weaponlevelscale = ((weaponlevel-1)/99).toFixed(4)
         $.each(student.weapon_bonus_stats, function(i, el) {
@@ -778,20 +819,24 @@ function recalculateWeaponSkillPreview() {
 
 function recalculateBondPreview() {
     var level = $("#ba-bond-levelrange").val()
-    var stat1 = 0, stat2 = 0
+    var bondbonus = getBondStats(student, level)
+    console.log(bondbonus)
+    $("#ba-student-bond-1-amount").text(bondbonus[student.bond_stat[0]])
+    $("#ba-student-bond-2-amount").text(bondbonus[student.bond_stat[1]])    
+}
 
-    for (let i = 1; i < Math.min(level,50); i++) {
+function getBondStats(student, level) {
+    var stat1 = 0, stat2 = 0
+    for (let i = 1; i < Math.min(level, 50); i++) {
         if (i < 20) {
-            stat1 += student.bond_stat_value[Math.floor(i/5)][0]
-            stat2 += student.bond_stat_value[Math.floor(i/5)][1]
+            stat1 += student.bond_stat_value[Math.floor(i / 5)][0]
+            stat2 += student.bond_stat_value[Math.floor(i / 5)][1]
         } else if (i < 50) {
-            stat1 += student.bond_stat_value[2+Math.floor(i/10)][0]
-            stat2 += student.bond_stat_value[2+Math.floor(i/10)][1]
+            stat1 += student.bond_stat_value[2 + Math.floor(i / 10)][0]
+            stat2 += student.bond_stat_value[2 + Math.floor(i / 10)][1]
         }
     }
-
-    $("#ba-student-bond-1-amount").text(stat1)
-    $("#ba-student-bond-2-amount").text(stat2)    
+    return {[student.bond_stat[0]]: stat1, [student.bond_stat[1]]: stat2}
 }
 
 function getSkillText(text, params, level) {
@@ -833,7 +878,8 @@ function changeStatPreviewStars(stars) {
     for (let i = 1; i <= 5; i++) {
         i <= stars ? $("#ba-statpreview-star-" + i).attr("src", "images/ui/Common_Icon_Formation_Star.png") : $("#ba-statpreview-star-" + i).attr("src", "images/ui/Common_Icon_Formation_Star_Disable.png")
     }
-    
+
+    stars == 5 ? $("#ba-statpreview-includeweapon").prop("disabled",false) : $("#ba-statpreview-includeweapon").prop("disabled", true).prop("checked",false)
     recalculateStatPreview()
 }
 

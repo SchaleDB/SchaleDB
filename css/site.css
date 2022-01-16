@@ -227,12 +227,6 @@ p {
     margin: 6px 2px 2px 2px;
 }
 
-.ba-student-page {
-    overflow-y: scroll;
-    scrollbar-width: none;
-    max-height: calc(100vh - 190px);
-}
-
 .ba-student-icon::before {
     content: "";
     width: 100%;
@@ -341,6 +335,14 @@ p {
 .smalltext {
     font-size: x-small;
     line-height: 10px;
+}
+
+.ba-slider-label {
+    font-weight: bold;
+    background-color: #fff;
+    border-radius: 1rem;
+    padding: 0.1rem 0.5rem;
+    border: 1px solid lightgrey;
 }
 
 .ba-gear-icon {
@@ -474,16 +476,59 @@ p {
     max-width: 86px;
 }
 
+.ba-student-page {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    max-height: calc(100vh - 190px);
+}
+
 @media(min-width: 576px) {
     .ba-student-searchresult-item {
         max-width: 92px;
-    } 
+    }
 }
+
+@media(max-width: 768px) {
+    .ba-student-page {
+        overflow-y: none;
+        scrollbar-width: none;
+        max-height: inherit;
+    }
+
+    .card {
+        border: 0px;
+        border-radius: 0px;
+    }
+
+    .card-header .nav-tabs .nav-link.active {
+        background-color: #ffffff;
+        border-color: #ffffff;
+    }
+
+    .card-body {
+        background-color: rgb(214, 234, 242);
+        border-radius: 0px;
+        padding: 0px;
+    }
+
+    .card-header {
+        position: sticky;
+        top: 56px;
+        background-color: #212529;
+        border-bottom: 0.125rem white solid;
+        z-index: 1000;
+    }
+
+    .card-header:first-child {
+        border-radius: 0px;
+    }
+}
+
 
 @media(min-width: 1200px) {
     .ba-student-searchresult-item {
         max-width: 100px;
-    } 
+    }
 }
 
 .ba-student-searchresult-grid {
@@ -553,7 +598,7 @@ p {
     width: 100vw;
     height: 100vh;
     padding-top: 50vh;
-    position: absolute;
+    position: fixed;
     top: 0px;
     z-index: 9999;
     background-color: rgb(33, 37, 41);
