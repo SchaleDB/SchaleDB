@@ -4,9 +4,11 @@
     <title>Schale DB | Students</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#212529" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,10 +23,12 @@
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
-
+    </div>
+    
+    <div id="ba-student-background" style="position: fixed;">
     </div>
 
-    <div id="ba-student-container" class="container-fluid p-0 h-100" style="min-height: 100vh; overflow-x: none; position: relative; padding-top: 58px !important;">
+    <div class="container-fluid p-0 h-100" style="min-height: 100vh; overflow-x: none; position: relative; padding-top: 58px !important;">
         <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark" style="min-height: 56px;">
             <div class="container-xl">
                 <a class="navbar-brand" href="#">
@@ -44,6 +48,14 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <!-- <li class="nav-item">
+                            <span class="nav-link form-check form-check-inline form-switch me-2">
+                                <input class="form-check-input" type="checkbox" value="" onchange="toggleDarkTheme()" id="ba-navbar-themeswitcher">
+                                <label class="form-check-label" for="ba-navbar-themeswitcher">
+                                    Dark Theme
+                                </label>
+                            </span>
+                        </li> -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarRegionSelector" role="button" data-bs-toggle="dropdown">
                                 Server: JP
@@ -71,14 +83,14 @@
                     <div class="container px-0" style="position: fixed;">
                         <div class="row">
                             <div class="col">
-                                <button type="button" class="btn btn-light btn-sm" onclick="studentSelectorModal.show()"><img src="images/ui/Common_Icon_Change_Blue.png" style="height: auto; height: 28px; object-fit: contain;"> <span class="d-none d-md-inline">Change Student</span></button>
+                                <button type="button" class="btn btn-light btn-sm" onclick="studentSelectorModal.show()"><img src="images/ui/Common_Icon_CharInfo.png" style="height: auto; height: 28px; object-fit: contain;"><span class="d-none d-md-inline ps-2">Student List</span><span class="d-inline d-md-none px-2">List</span></button>
                             </div>
                         </div>
                     </div>
                     <div class="d-block d-md-none" style="height: 450px;"></div>
                 </div>
                 <div class="col-12 col-md-6 px-0 px-md-2">
-                    <div class="container-fluid px-0 px-xl-4" id=student_info>
+                    <div class="container-fluid px-0 px-xl-4" id="student_info">
                         <div class="card">
                             <div class="card-header">
                                 <ul class="nav nav-tabs card-header-tabs">
@@ -99,7 +111,7 @@
                             <div class="card-body">
                                 <div class="tab-content">
 
-                                    <div id="ba-student-page-stats" class="tab-pane fade show active container-fluid p-3 ba-student-page" style="background-color: #fff; border-radius: .25em;">
+                                    <div id="ba-student-page-stats" class="tab-pane fade show active container-fluid p-3 ba-student-page" style="border-radius: .25em;">
 
                                         <h1 id="ba-student-name-en" class="" style="display: inline; font-weight: bold;"></h1>
                                         <div class="d-flex flex-row align-items-center mt-1">
@@ -114,7 +126,7 @@
                                         </div>
                                         <div class="d-flex flex-row flex-wrap align-items-stretch mt-3">
                                             <div class="me-1 mb-2">
-                                                <img id="ba-student-school-img" class="" src="">
+                                                <img id="ba-student-school-img" class="drop-shadow" src="">
                                             </div>
                                             <div class="flex-grow-1 mb-2 flex-basis-50">
                                                 <span>
@@ -137,9 +149,9 @@
                                             </div>
 
                                             <div class="ps-3" style="min-width: fit-content;">
-                                                <div class="d-inline-block position-relative"><img id="ba-student-gear-1" class="ba-gear-icon" src=""></div>
-                                                <div class="d-inline-block position-relative"><img id="ba-student-gear-2" class="ba-gear-icon" src=""></div>
-                                                <div class="d-inline-block position-relative"><img id="ba-student-gear-3" class="ba-gear-icon" src=""></div>
+                                                <div class="d-inline-block position-relative"><img id="ba-student-gear-1" class="ba-gear-icon drop-shadow" src=""></div>
+                                                <div class="d-inline-block position-relative"><img id="ba-student-gear-2" class="ba-gear-icon drop-shadow" src=""></div>
+                                                <div class="d-inline-block position-relative"><img id="ba-student-gear-3" class="ba-gear-icon drop-shadow" src=""></div>
                                             </div>
 
     
@@ -237,7 +249,7 @@
                                                     </span>
                                                 </div>
                                                 <span class="align-self-end">
-                                                    <button class="btn btn-sm btn-light" type="button" onclick="statPreviewModal.show()">Preview Settings</button>
+                                                    <button class="btn btn-sm btn-light position-relative" type="button" onclick="statPreviewModal.show()"><img src="images/ui/Common_Icon_Setting_Game.png" style="height: 24px; object-fit: contain;position: absolute;left: 0.5rem;top:3px;"><span class="ps-2 d-none d-md-inline" style="margin-left: 30px;">Preview Settings</span><span class="ps-2 d-md-none d-inline" style="margin-left: 30px;"></span></button>
                                                 </span>
                                             </div>
                                         </div>
@@ -248,13 +260,15 @@
 
                                         <div class="mb-3 p-2 pb-0 d-flex flex-column ba-skill-panel align-items-start">
                                             <div class="d-flex flex-row align-items-center">
-                                                <img id="ba-skill-ex-icon" class="ba-skill d-inline-block me-3" src="">
+                                                <img id="ba-skill-ex-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
                                                 <div class="d-inline-block">
                                                     <div>
                                                         <h4 id="ba-skill-ex-name" class="me-2 d-inline"></h4>
                                                     </div>
-                                                    <div class="mt-1">
-                                                        <p class="d-inline" style="font-style: italic;">EX Skill</p><img src="images/ui/Image_Cost_Font.png" style="height: 13px; width: 44px; margin-top: -2px; margin-left: 10px; margin-right: 6px;"><span id="ba-skill-ex-cost" class="ba-skill-emphasis" style="font-weight: bold;"></span>
+                                                    <div class="pt-1 position-relative">
+                                                        <p class="d-inline me-2" style="font-style: italic;">EX Skill</p><span class="mx-1" style="font-style: italic;font-weight:700;">COST:</span><span id="ba-skill-ex-cost" class="ba-skill-emphasis" style="font-weight: bold;"></span>
+                                                        <!-- <span id="ba-skill-ex-cost" class="ba-skill-cost-label"></span> -->
+                                                        <!-- <img src="images/ui/Image_Cost_Font.png" style="height: 13px; width: 44px; margin-top: -2px; margin-left: 10px; margin-right: 6px;"> -->
                                                     </div>
                                                 </div>
                                             </div>
@@ -269,7 +283,7 @@
 
                                         <div class="row g-1">
                                             <div class="d-flex flex-row align-items-center">
-                                                <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-ex-materials-page">Materials</button>
+                                                <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-ex-materials-page" style="flex-shrink: 0; position: relative;"><img src="images/ui/Common_Icon_Skill.png" style="height: 24px; object-fit: contain;position: absolute;left: 0.5rem;top:3px;"><span class="ps-2" style="margin-left: 20px;">Materials</span></button>
                                                 <input id="ba-skillpreview-exrange" oninput="changeEXSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="5">
                                                 <span id="ba-skill-ex-level" class="ba-slider-label">Lv.1</span>
                                             </div>
@@ -277,7 +291,7 @@
 
                                         <div class="my-3 p-2 pb-0 d-flex flex-column ba-skill-panel align-items-start">
                                             <div class="d-flex flex-row align-items-center">
-                                                <img id="ba-skill-normal-icon" class="ba-skill d-inline-block me-3" src="">
+                                                <img id="ba-skill-normal-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
                                                 <div class="d-inline-block">
                                                     <div>
                                                         <h4 id="ba-skill-normal-name" class="me-2 d-inline"></h4>
@@ -290,7 +304,7 @@
                                             <p id="ba-skill-normal-description" class="mt-1 mb-2 p-1"></p>
                                             <div style="border-top: lightgrey 1px solid; min-width: 100%"></div>
                                             <div class="mt-2 d-flex flex-row align-items-center">
-                                                <img id="ba-skill-passive-icon" class="ba-skill d-inline-block me-3" src="">
+                                                <img id="ba-skill-passive-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
                                                 <div class="d-inline-block">
                                                     <div>
                                                         <h4 id="ba-skill-passive-name" class="me-2 d-inline"></h4>
@@ -303,7 +317,7 @@
                                             <p id="ba-skill-passive-description" class="mt-1 mb-2 p-1"></p>
                                             <div style="border-top: lightgrey 1px solid; min-width: 100%"></div>
                                             <div class="mt-2 d-flex flex-row align-items-center">
-                                                <img id="ba-skill-sub-icon" class="ba-skill d-inline-block me-3" src="">
+                                                <img id="ba-skill-sub-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
                                                 <div class="d-inline-block">
                                                     <div>
                                                         <h4 id="ba-skill-sub-name" class="me-2 d-inline"></h4>
@@ -324,7 +338,7 @@
 
                                         <div class="row g-1">
                                             <div class="d-flex flex-row align-items-center">
-                                                <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-materials-page">Materials</button>
+                                                <button class="btn btn-sm btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-materials-page"style="flex-shrink: 0;position: relative;"><img src="images/ui/Common_Icon_Skill.png" style="height: 24px; object-fit: contain;position: absolute;left: 0.5rem;top:3px;"><span class="ps-2" style="margin-left: 20px;">Materials</span></button>
                                                 <input id="ba-skillpreview-range" oninput="changeSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="10">
                                                 <span id="ba-skill-level" class="ba-slider-label">Lv.1</span>
                                             </div>
@@ -366,15 +380,18 @@
                                                             <td id="ba-weapon-stat-4" width="30%"></td>
                                                             <td id="ba-weapon-stat-4-amount" width="20%"></td>
                                                         </tr>
+                                                        <tr>
+                                                            <td colspan="4" id="ba-weapon-description" style="white-space: pre-line;"></td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
 
                                         <div class="row g-1 mb-3">
-                                            <div class="d-flex flex-row">
-                                                <span class="mx-2 flex-fill"><input id="ba-weaponpreview-levelrange" oninput="changeWeaponPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="50"></span>
-                                                <span id="ba-weaponpreview-level" style="font-weight: bold;">Lv.1</span>
+                                            <div class="d-flex flex-row align-items-center">
+                                                <input id="ba-weaponpreview-levelrange" oninput="changeWeaponPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="50">
+                                                <span id="ba-weaponpreview-level" class="ba-slider-label">Lv.1</span>
                                             </div>
                                         </div>
                                         <h5 class="d-block d-md-none" style="margin-top: 0.5rem; font-weight: bold;">Weapon Rank Bonus</h5>
@@ -422,10 +439,9 @@
                                                 </div>
         
                                                 <div class="row g-1 my-1">
-                                                    <div class="d-flex flex-row">
-                                                        <span class="mx-2 flex-fill"><input id="ba-weapon-skillpreview-range" oninput="changeWeaponSkillPreviewLevel(this)" type="range" class="form-range" value="1" min="1" max="10"></span>
-                                                        <img id="ba-weapon-skill-level-max" src="images/ui/ImageFont_Max.png" style="height: 20px;width: auto;margin-top: 3px;">
-                                                        <span id="ba-weapon-skill-level" style="font-weight: bold;">Lv.1</span>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <input id="ba-weapon-skillpreview-range" oninput="changeWeaponSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="10">
+                                                        <span id="ba-weapon-skill-level" class="ba-slider-label">Lv.1</span>
                                                     </div>
                                                 </div>
     
@@ -505,12 +521,12 @@
                                                             </tr>
                                                         </tbody>
                                                     </table>
-                                                    <div class="d-flex flex-row">
-                                                        <span class="mx-2 flex-fill"><input id="ba-bond-levelrange" oninput="changeBondLevel(this)" type="range" class="form-range" value="20" min="1" max="50"></span>
-                                                        <img src="images/ui/School_Icon_Schedule_Favor.png" style="height:24px; width:auto;"></span><span id="ba-bond-level" style="font-weight: bold;"></span>
+                                                    <div class="d-flex flex-row align-items-center">
+                                                        <input id="ba-bond-levelrange" oninput="changeBondLevel(this)" type="range" class="form-range mx-2 flex-fill" style="width: auto;" value="20" min="1" max="50">
+                                                        <span id="ba-bond-level" class="ba-slider-label"></span>
                                                     </div>
                                                 </div>
-                                                <div class="ba-student-lobby ms-4">
+                                                <div class="ba-student-lobby ms-4 drop-shadow">
                                                     <img id="ba-student-lobby-img" src="">
                                                     <span id="ba-student-lobby-unlock"></span>
                                                 </div>
@@ -560,6 +576,11 @@
                             <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('attacktype')" class="btn btn-dark">Attack Type</a></li>
                             <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('defensetype')" class="btn btn-dark">Defense Type</a></li>
                             <li><a class="dropdown-item" href="javascript:;" onclick="populateStudentList('excost')" class="btn btn-dark">EX Cost</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><span class="form-check form-check-inline form-switch mx-2">
+                                <input class="form-check-input" type="checkbox" value="checked" onchange="searchToggleInfo(this)" id="ba-student-search-showinfo" checked>
+                                <label class="form-check-label" for="ba-student-search-showinfo">Show Details</label>
+                            </span></li>
                         </ul>
                     </div>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -589,7 +610,7 @@
                             <div class="px-2 pt-2 d-flex flex-column ba-skill-panel">
                                 <div class="d-flex flex-row align-items-center">
                                     <div class="me-2" style="position: relative;">
-                                        <img id="ba-statpreview-gear1-icon" class="ba-gear-icon ms-0" style="height:64px; margin-bottom: 0px;">
+                                        <img id="ba-statpreview-gear1-icon" class="ba-gear-icon drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
                                     </div>
                                     <div class="flex-fill">
                                         <h5 id="ba-statpreview-gear1-name" class="d-inline"></h5>
@@ -605,7 +626,7 @@
 
                                 <div class="mt-2 d-flex flex-row align-items-center">
                                     <div class="me-2" style="position: relative;">
-                                        <img id="ba-statpreview-gear2-icon" class="ba-gear-icon ms-0" style="height:64px; margin-bottom: 0px;">
+                                        <img id="ba-statpreview-gear2-icon" class="ba-gear-icon drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
                                     </div>
                                     <div class="flex-fill">
                                         <h5 id="ba-statpreview-gear2-name" class="d-inline"></h5>
@@ -621,7 +642,7 @@
 
                                 <div class="mt-2 d-flex flex-row align-items-center">
                                     <div class="me-2" style="position: relative;">
-                                        <img id="ba-statpreview-gear3-icon" class="ba-gear-icon ms-0" style="height:64px; margin-bottom: 0px;">
+                                        <img id="ba-statpreview-gear3-icon" class="ba-gear-icon drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
                                     </div>
                                     <div class="flex-fill">
                                         <h5 id="ba-statpreview-gear3-name" class="d-inline"></h5>
@@ -634,24 +655,12 @@
                                 </div>                                    
                             </div>
                         </div>
-                        <!-- <h5>Weapon</h5>
+                        <h5>Affection</h5>
                         <div class="py-2">
-                            <div class="p-2 d-flex flex-column ba-skill-panel">
-                                <div class="d-flex flex-row align-items-center">
-                                    <div class="me-2" style="position: relative;">
-                                        <img id="ba-statpreview-weapon-img" class="ms-0" src="images/weapon/Weapon_Icon_10000.png" style="height:48px; margin: 8px 0px;">
-                                    </div>
-                                    <div class="flex-fill">
-                                        <h5 id="ba-statpreview-weapon-name" class="d-inline">WeaponName</h5>
-                                        <p id="ba-statpreview-weapon-description" class="mb-0" style="font-size: 0.875rem;">WeaponStats</p>
-                                    </div>  
-                                </div>
-                                <div class="d-flex flex-row align-items-center">
-                                    <input id="ba-statpreview-weapon-range" oninput="changeStatPreviewWeaponLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="50">
-                                    <span id="ba-statpreview-weapon-level" class="ba-slider-label">Lv.50</span>
-                                </div>
-                            </div>  
-                        </div> -->
+                            <div class="px-2 d-flex flex-column ba-skill-panel" id="ba-statpreview-bond-targets">
+                    
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

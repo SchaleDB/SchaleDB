@@ -34,22 +34,29 @@ $.getJSON("./data/student_data.json", function(result) {
     $.holdReady(false)
 })
 
-var student, regionID
+var student, region, regionID, student_bondalts
 var studentSelectorModal, statPreviewModal
-
+var header
 var stat_preview_stars = 3
 
 $(document).ready(function() {
     studentSelectorModal = new bootstrap.Modal(document.getElementById("modStudents"), {})
     statPreviewModal = new bootstrap.Modal(document.getElementById("modStatPreviewSettings"), {})
+    header = $(".card-header")
 
-    document.getElementById("modStudents").addEventListener('shown.bs.modal', function (event) {
-        if (window.matchMedia('(min-width: 768px)').matches) {
-            $('#ba-student-search-text').focus()
-        }
-    })
+    // document.getElementById("modStudents").addEventListener('shown.bs.modal', function (event) {
+    //     if (window.matchMedia('(min-width: 768px)').matches) {
+    //         $('#ba-student-search-text').focus()
+    //     }
+    // })
 
     var urlVars = new URL(window.location.href).searchParams
+
+    if (localStorage.getItem("region")) {
+        loadRegion(localStorage.getItem("region"))
+    } else {
+        loadRegion(0)
+    }
 
     $(window).on('popstate', function() {
         var urlVars = new URL(window.location.href).searchParams
@@ -64,18 +71,23 @@ $(document).ready(function() {
         loadStudent("Haruna")
     }
 
-    if (localStorage.getItem("region")) {
-        loadRegion(localStorage.getItem("region"))
-    } else {
-        loadRegion(0)
-    }
-
     populateStudentList("none")
 
     window.setTimeout(function(){$("#loading-cover").fadeOut()},500)
 
     $('input[type=range]').trigger('oninput')
+
+    window.addEventListener('scroll', _.throttle(function () {
+        if (((header.offset().top - $(this).scrollTop()) <= 56) != header.hasClass("stuck"))
+        header.toggleClass("stuck", (header.offset().top - $(this).scrollTop()) <= 56);
+    }, 100));
+
+
 })
+
+function toggleDarkTheme() {
+    $('body').toggleClass("theme-dark")
+}
 
 function hookTooltips() {
     //hook bs tooltips
@@ -102,7 +114,7 @@ function populateStudentList(grouping = "none") {
     
         $.each(groupedResults, function(i, el){
             if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
-            resultsHTML += getStudentListIconHTMLLarge(el)
+            resultsHTML += getStudentListCardHTML(el)
         })
     
         resultsHTML +=
@@ -136,7 +148,7 @@ function populateStudentList(grouping = "none") {
                 })
                 break
             case "role":
-                groupedResults = {"Tank": [], "Attacker": [], "Healer": [], "Support": [], "T.S.": []}
+                groupedResults = {"Tank": [], "Attacker": [], "Healer": [], "Support": [], "TacticalSupport": []}
                 $.each(student_db.students, function(i, el){
                     if (el["released"][regionID])
                     groupedResults[el.role].push(el)
@@ -197,9 +209,9 @@ function populateStudentList(grouping = "none") {
                     groupName = ""
                     break
                 case "role":
-                    groupIcon = `images/tactical/Role_${key.replace("T.S.","TacticalSupport")}.png`
+                    groupIcon = `images/tactical/Role_${key}.png`
                     groupIconStyle= 'height:34px; width: auto;'
-                    groupName = key
+                    groupName = key.replace("TacticalSupport", "Tactical Support")
                     break
                 case "class":
                     groupIcon = `images/ui/Class_${key}.png`
@@ -235,7 +247,7 @@ function populateStudentList(grouping = "none") {
                 `
                 groupedResults[key].sort((a,b) => a.name_en.localeCompare(b.name_en))
                 $.each(groupedResults[key], function(i2, el2){
-                    resultsHTML += getStudentListIconHTMLLarge(el2)
+                    resultsHTML += getStudentListCardHTML(el2)
                 })
     
                 resultsHTML +=
@@ -270,7 +282,7 @@ function loadStudent(studentName) {
         
         var bgimg = new Image()
         bgimg.onload = function(){
-            $("#ba-student-container").css('background-image', `url('${bgimg.src}')`)
+            $("#ba-student-background").css('background-image', `url('${bgimg.src}')`)
         }
         bgimg.src = `images/background/${student.background_img}.jpg`
 
@@ -298,8 +310,8 @@ function loadStudent(studentName) {
         }
         
 
-        $("#ba-student-role-label").text(student.role)
-        $("#ba-student-role-icon").attr("src", `images/tactical/Role_${student.role.replace("T.S.", "TacticalSupport")}.png`)
+        $("#ba-student-role-label").text(student.role.replace("TacticalSupport", "T.S."))
+        $("#ba-student-role-icon").attr("src", `images/tactical/Role_${student.role}.png`)
 
         if (student.attack_type == "Explosive") {
             $("#ba-student-attacktype").removeClass("ba-type-mystic ba-type-pierce").addClass("ba-type-explosive")
@@ -400,6 +412,14 @@ function loadStudent(studentName) {
             $('#ba-weapon-stat-row2').hide()
         }
 
+        if (student.weapon_description_en) {
+            $('#ba-weapon-description').text(student.weapon_description_en)
+        } else if (student.weapon_description_jp) {
+            $('#ba-weapon-description').text(student.weapon_description_jp)
+        } else {
+            $('#ba-weapon-description').text("")
+        }       
+
         //Profile
         $('#ba-student-fullname-en').text(student.fullname_en)
         $('#ba-student-fullname-jp').text(student.fullname_jp)
@@ -408,9 +428,11 @@ function loadStudent(studentName) {
 
         if (student.profile_en) {
             $('#ba-student-profile-text').text(student.profile_en)
+        } else if (student.profile_jp) {
+            $('#ba-student-profile-text').text(student.profile_jp)
         } else {
             $('#ba-student-profile-text').text("")
-        }     
+        }  
 
         if (student.recollection_lobby) {
             $(".ba-student-lobby").show()
@@ -439,6 +461,17 @@ function loadStudent(studentName) {
         $('#ba-student-bond-1').text(getStatName(student.bond_stat[0]))
         $('#ba-student-bond-2').text(getStatName(student.bond_stat[1]))
 
+
+        $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(1, student))
+        student_bondalts = []
+        for (let i = 0; i < student.bond_extratarget.length; i++) {
+            var extraTarget = find(student_db.students,"id",student.bond_extratarget[i])[0]
+            if (extraTarget.released[regionID]) {
+                student_bondalts.push(extraTarget)
+                $('#ba-statpreview-bond-targets').append('<div style="border-top: lightgrey 1px solid; min-width: 100%"></div>'+getBondTargetsHTML(1 + student_bondalts.length, extraTarget))
+            }
+        }
+
         document.title = `Schale DB | ${student.name_en}`
 
         changeStatPreviewStars(student.stars)
@@ -451,6 +484,10 @@ function loadStudent(studentName) {
         changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'))
         changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'))
         changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'))
+
+        for (let i = 1; i <= student_bondalts.length+1; i++) {
+            changeStatPreviewBondLevel(i, document.getElementById(`ba-statpreview-bond-${i}-range`))
+        }
         
         localStorage.setItem("chara", student.name_dev)
         studentSelectorModal.hide()
@@ -485,22 +522,22 @@ function getAdaptionText(terrain, rank) {
     var text = 'Deals '
     switch (rank) {
         case "D":
-            text += `<b>20% less</b> damage in ${terrain} terrain.`
+            text += `<b>0.8&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>0%</b>.`
             break
         case "C":
-            text += `<b>10% less</b> damage in ${terrain} terrain.<br>Cover is <b>15%</b> more effective.`
+            text += `<b>0.9&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>15%</b>.`
             break
         case "B":
-            text += `normal damage in ${terrain} terrain.<br>Cover is <b>30%</b> more effective.` 
+            text += `<b>1&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>30%</b>.` 
             break
         case "A":
-            text += `<b>10% more</b> damage in ${terrain} terrain.<br>Cover is <b>45%</b> more effective.`
+            text += `<b>1.1&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>45%</b>.`
             break
         case "S":
-            text += `<b>20% more</b> damage in ${terrain} terrain.<br>Cover is <b>60%</b> more effective.` 
+            text += `<b>1.2&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>60%</b>.` 
             break
         case "SS":
-            text += `<b>30% more</b> damage in ${terrain} terrain.<br>Cover is <b>75%</b> more effective.` 
+            text += `<b>1.3&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>75%</b>.` 
             break
     }
     return text
@@ -570,13 +607,10 @@ function changeSkillPreviewLevel(el) {
 }
 
 function changeWeaponSkillPreviewLevel(el) {
-    $('#ba-weapon-skill-level').text("Lv." + el.value)
     if (el.value == el.max) {
-        $('#ba-weapon-skill-level').text("")
-        $('#ba-weapon-skill-level-max').show()
+        $('#ba-weapon-skill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -3px;">`)
     } else {
-        $('#ba-weapon-skill-level').text("Lv." + el.value)
-        $('#ba-weapon-skill-level-max').hide()
+        $('#ba-weapon-skill-level').html("Lv." + el.value)
     }
     recalculateWeaponSkillPreview()
 }
@@ -591,12 +625,52 @@ function changeEXSkillPreviewLevel(el) {
 }
 
 function changeWeaponPreviewLevel(el) {
+    var imgHTML = '<img src="images/ui/Common_Icon_Formation_Star_2.png" style="height: 16px;width: auto;margin-top: -4px;"></img>'
     $('#ba-weaponpreview-level').text("Lv." + el.value)
+    // if (el.value <= 30) {
+    //     $('#ba-weaponpreview-level').append(imgHTML.repeat(1))
+    // } else if (el.value <= 40) {
+    //     $('#ba-weaponpreview-level').append(imgHTML.repeat(2))
+    // } else if (el.value <= 50) {
+    //     $('#ba-weaponpreview-level').append(imgHTML.repeat(3))
+    // }
     recalculateWeaponPreview()
 }
 
+function changeStatPreviewBondLevel(i, el) {
+    var imgHTML = '<img src="images/ui/School_Icon_Schedule_Favor.png" style="height:24px; width:auto; margin-top: -3px; margin-left: -2px;">'
+    $(`#ba-statpreview-bond-${i}-level`).html(imgHTML + el.value)
+    var bondStats
+    if (i == 1) {
+        bondStats = Object.entries(getBondStats(student, el.value))
+    } else {
+        bondStats = Object.entries(getBondStats(student_bondalts[i-2], el.value))
+    }
+    $(`#ba-statpreview-bond-${i}-description`).html(`${getStatName(bondStats[0][0])} <b>+${getFormattedStatAmount(bondStats[0][1])}</b>, ${getStatName(bondStats[1][0])} <b>+${getFormattedStatAmount(bondStats[1][1])}</b>`)
+    if ($('#ba-statpreview-includebond').prop('checked')) {
+        recalculateStatPreview()
+    }
+}
+
+function getBondTargetsHTML(num, student) {
+    return `<div class="mt-2 d-flex flex-row align-items-center">
+        <div class="me-2" style="position: relative;">
+            <img class="ba-bond-icon ms-0" src="images/student/collection/Student_Portrait_${student.name_dev}_Collection.png">
+        </div>
+        <div class="flex-fill">
+            <h5 class="d-inline">${student.name_en}</h5>
+            <p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
+        </div>
+    </div>
+    <div class="d-flex flex-row align-items-center mb-2">
+        <input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num}, this)" type="range" class="form-range mx-2 flex-fill" value="${num == 1 ? 20 : 1}" min="1" max="${region.bondlevel_max}">
+        <span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span>
+    </div>`
+}
+
 function changeBondLevel(el) {
-    $('#ba-bond-level').text(el.value)
+    var imgHTML = '<img src="images/ui/School_Icon_Schedule_Favor.png" style="height:24px; width:auto; margin-top: -3px; margin-left: -2px;">'
+    $('#ba-bond-level').html(imgHTML + el.value)
     recalculateBondPreview()
 }
 
@@ -662,9 +736,11 @@ function recalculateStatPreview() {
     }
 
     if ($('#ba-statpreview-includebond').prop('checked')) {
-        var bondlevel = $("#ba-bond-levelrange").val()
-        var bondbonus = getBondStats(student, bondlevel)
-        $.each(bondbonus, function(i, el) {bonus[i] += el})
+        for (let i = 1; i <= student_bondalts.length+1; i++) {
+            var bondlevel = $(`#ba-statpreview-bond-${i}-range`).val()
+            var bondbonus = getBondStats(i == 1 ? student : student_bondalts[i-2], i == 1 ? Math.min(maxbond[stat_preview_stars-1], bondlevel) : bondlevel)
+            $.each(bondbonus, function(j, el) {bonus[j] += el})
+        }
     }
 
     if ((stat_preview_stars == 5) && $('#ba-statpreview-includeweapon').prop('checked')) {
@@ -722,39 +798,38 @@ function recalculateEXSkillPreview() {
 
 }
 
-function getStudentListIconHTML(student) {
+function getStudentListCardHTML(student) {
+    var showInfo = $('#ba-student-search-showinfo').prop('checked')
     return `
     <li class="ba-student-searchresult-item">
-        <div onclick="loadStudent('${student["name_dev"]}')" class="ba-student-icon" style="margin-bottom: 36px;">
-            <img class="ba-student-icon-portrait" src="images/student/icon/Student_Portrait_${student["name_dev"]}.png">
-            <img class="ba-student-icon-role-bg" src="images/ui/Card_Role_Bg.png">
-            <img class="ba-student-icon-role" src="images/tactical/Role_${student["role"].replace("T.S.", "TacticalSupport")}.png">
-            <div class="d-flex align-items-center px-1 ba-student-icon-label${student["name_en"].length > 10 ? " smalltext" : ""}">
+        <div onclick="loadStudent('${student["name_dev"]}')" class="ba-student-card ${showInfo ? "ba-student-search-details" : ""}">
+            <img class="ba-student-card-portrait" src="images/student/collection/Student_Portrait_${student["name_dev"]}_Collection.png">
+            <span class="ba-student-card-role bg-${student["type"].toLowerCase()}" style="left: 0; top: 0;"><img src="images/tactical/Role_${student["role"]}.png" style="width:100%"></span>
+            <span class="ba-student-card-star" style="right: 2px; top: 2px;">${student["stars"]}</span>
+            <div class="d-flex align-items-center px-1 bd-${student["attack_type"].toLowerCase()} ba-student-card-label ${student["name_en"].length > 10 ? "smalltext" : ""}">
                 <span class="align-middle" style="width: 100%">${student["name_en"]}</span>
             </div>
         </div>
     </li>
     `
-    //<img class="ba-student-icon-role" src="images/schoolicon/School_Icon_${student["school"].toUpperCase().replace(" ","").replace("OTHERS", "ETC")}.png">
-    //<img class="ba-student-icon-role" src="images/tactical/Role_${student["role"].replace("T.S.", "TacticalSupport")}.png">
+    //            <span style="z-index: 10; padding: 2px 3px; position: absolute; left: 3px; bottom: 26px; width:36px; height:12px; background-color: #ffffff; border-radius: 10px;" ><img style="width:100%; height:100%" src="images/ui/Class_${student["type"]}.png"></span>
+
+}
+function getStudentLimitedBadgeHTML(lim) {
+    switch (lim) {
+        case 0:
+            return ''
+        case 1:
+            return `<span class="ba-student-card-badge" style="left: 3px; top: 26px; background-color: #f64b23; font-size: 13px;">L</span>`
+        case 2:
+            return `<span class="ba-student-card-badge" style="left: 3px; top: 26px; background-color: #007dff; font-size: 13px;">E</span>`
+    }
 }
 
-function getStudentListIconHTMLLarge(student) {
-    return `
-    <li class="ba-student-searchresult-item">
-        <div onclick="loadStudent('${student["name_dev"]}')" class="ba-student-icon-large">
-            <img class="ba-student-icon-portrait ba-student-icon-portrait-large" src="images/student/collection/Student_Portrait_${student["name_dev"]}_Collection.png">
-            <div class="d-flex align-items-center px-1 ba-student-icon-label-large${student["name_en"].length > 10 ? " smalltext" : ""}">
-                <span class="align-middle" style="width: 100%">${student["name_en"]}</span>
-            </div>
-        </div>
-    </li>
-    `
-}
 
 function getMaterialIconHTML(rarity, icon, name, amount) {
     var html
-    html = `<div class="me-2" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${name}">
+    html = `<div class="me-2 drop-shadow" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${name}">
             <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${rarity}.png');"
             src="images/items/${icon}.png"><span class="ba-material-label">&times;${amount}</span></div>
             `
@@ -768,6 +843,16 @@ function getFavourIconHTML(icon, name, grade) {
             <img id="ba-student-favoured-item-rank" src="images/ui/Cafe_Interaction_Gift_0${grade}.png"></div>
             `
     return html
+}
+
+function searchToggleInfo(obj) {
+    if ($('#ba-student-search-showinfo').prop('checked')) {
+        $(".ba-student-card").toggleClass('ba-student-search-details', true)
+    } else {
+        $(".ba-student-card").toggleClass('ba-student-search-details', false)
+    }
+
+    
 }
 
 function recalculateSkillPreview() {
@@ -820,7 +905,6 @@ function recalculateWeaponSkillPreview() {
 function recalculateBondPreview() {
     var level = $("#ba-bond-levelrange").val()
     var bondbonus = getBondStats(student, level)
-    console.log(bondbonus)
     $("#ba-student-bond-1-amount").text(bondbonus[student.bond_stat[0]])
     $("#ba-student-bond-2-amount").text(bondbonus[student.bond_stat[1]])    
 }

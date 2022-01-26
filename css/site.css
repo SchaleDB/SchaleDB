@@ -72,13 +72,35 @@ p {
     background-color: #fff;
 }
 
-#ba-student-container {
-    background: #000 no-repeat center center fixed;
+.tab-pane {
+    background-color: #fff;
+}
+
+.theme-dark {
+    background-color: #212529;
+    color: #ffffff;
+}
+
+.theme-dark .tab-pane{
+    background-color: #212529 !important;
+    color: #ffffff;
+}
+
+.drop-shadow {
+    filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
+}
+
+#ba-student-background {
+    position: fixed;
+    top: 56px;
+    background: #000 no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-attachment: fixed;
+    width: 100vw;
+    height: calc(100vh - 56px);
+    z-index: -1000;
 }
 
 .ba-type-school {
@@ -238,17 +260,12 @@ p {
     transition-duration: 300ms;
 }
 
-.ba-student-icon:hover::before, .ba-student-icon:hover .ba-student-icon-role-bg, .ba-student-icon-large:hover .ba-student-icon-portrait {
+.ba-student-card:hover .ba-student-card-role, .ba-student-card:hover .ba-student-card-star, .ba-student-card:hover .ba-student-card-portrait {
     filter: brightness(70%);
     transition-duration: 300ms;
 }
 
-.ba-student-icon:hover .ba-student-icon-label {
-    background-color: #233955;
-    transition-duration: 300ms;
-}
-
-.ba-student-icon-large:hover .ba-student-icon-label-large {
+.ba-student-card:hover .ba-student-card-label {
     background-color: #233955cb;
     transition-duration: 300ms;
 }
@@ -265,7 +282,7 @@ p {
     cursor: pointer;
 }
 
-.ba-student-icon-large {
+.ba-student-card {
     position: relative;
     width: 100%;
     height: auto;
@@ -273,51 +290,19 @@ p {
     cursor: pointer;
 }
 
-.ba-student-icon-portrait {
+.ba-student-card-portrait {
     position: relative;
     height: 100%;
     width: 100%;
-}
-
-.ba-student-icon-portrait-large {
+    box-shadow: 0rem 0.2rem 0.75rem rgba(0,0,0,.15);
     border-radius: 10px;
 }
 
-.ba-student-icon-role-bg {
-    width: 26px;
-    height: auto;
-    position: absolute;
-    bottom: 2px;
-    right: 10px;
-    transition-duration: 300ms;
-}
-
-.ba-student-icon-role {
-    width: 20px;
-    height: auto;
-    position: absolute;
-    bottom: 2px;
-    right: 13px;
-}
-
-.ba-student-icon-label {
-    background-color: #32527a;
-    color: #fff;
-    border-radius: 0.5rem;
-    font-size: small;
-    position: absolute;
-    width: 78px;
-    height: 26px;
-    top: 77px;
-    left: 2px;
-    transition-duration: 300ms;
-}
-
-.ba-student-icon-label-large {
+.ba-student-card-label {
     background-color: #32527acb;
     color: #fff;
     border-radius: 0px 0px 10px 10px;
-    font-size: medium;
+    font-size: 1rem;
     font-weight: 500;
     position: absolute;
     width: 100%;
@@ -327,23 +312,105 @@ p {
     transition-duration: 300ms;
 }
 
-.ba-student-icon-label-large.smalltext {
-    font-size: small !important;
-    line-height: 12px;
+.ba-student-card-label.smalltext {
+    font-size: 0.75rem !important;
+    line-height: 0.7rem;
 }
 
-.smalltext {
-    font-size: x-small;
-    line-height: 10px;
+.ba-student-card-badge {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    color: #ffffff;
+    font-weight: bold;
+    height: 24px;
+    width: 22px;
+    border-radius: 8px 0px 10px 0px;
+    align-items: baseline;
+    justify-content: center;
 }
+
+.ba-student-card-role {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    color: #ffffff;
+    height: 24px;
+    width: 22px;
+    border-radius: 8px 0px 10px 0px;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.ba-student-card-star {
+    display: none;
+    position: absolute;
+    background-color: transparent;
+    background: url('../images/ui/Common_Icon_Formation_Star.png') no-repeat center center/contain;
+    font-weight: bold;
+    color: #000000;
+    height: 20px;
+    width: 22px;
+    font-size: 14px;
+    text-align: center;
+    align-items: baseline;
+    justify-content: center;
+}
+
+.ba-student-search-details .ba-student-card-role, .ba-student-search-details .ba-student-card-star {
+    display: flex !important;
+}
+
+.ba-student-search-details > .bg-striker {
+    border-bottom: #f64b23 3px solid !important;
+}
+
+.ba-student-search-details > .bg-special {
+    border-bottom: #007dff 3px solid !important;
+}
+
+.ba-student-search-details > .bd-explosive {
+    border-bottom: #920008 5px solid;
+}
+
+.ba-student-search-details > .bd-piercing {
+    border-bottom: #be8901 5px solid;
+}
+
+.ba-student-search-details > .bd-mystic {
+    border-bottom: #289cdf 5px solid;
+}
+
+/* .ba-student-search-details > .ba-student-card-label {
+    font-size: 0.9rem;
+}
+
+.ba-student-search-details > .ba-student-card-label.smalltext {
+    font-size: 0.7rem !important;
+    line-height: 0.7rem;
+} */
 
 .ba-slider-label {
     font-weight: bold;
+    min-width: 60px;
+    text-align: center;
     background-color: #fff;
     border-radius: 1rem;
     padding: 0.1rem 0.5rem;
     border: 1px solid lightgrey;
 }
+
+/* .ba-skill-cost-label {
+    position: absolute;
+    top: 0px;
+    width: 30px;
+    height: 30px;
+    padding-top: 5px;
+    background: url("../images/ui/Combat_CostBg.png") no-repeat center center/contain;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+} */
 
 .ba-gear-icon {
     height: 78px;
@@ -451,6 +518,15 @@ p {
     cursor: pointer;
 }
 
+.ba-bond-icon {
+    width: 64px;
+    border-radius: 32px;
+    height: 64px;
+    object-fit: cover;
+    object-position: top;
+    box-shadow: 0rem 0.2rem 0.75rem rgba(0,0,0,.15);
+}
+
 #ba-student-img {
     position: fixed;
     margin-top: auto;
@@ -461,6 +537,7 @@ p {
 #ba-student-img-sm {
     position: fixed;
     height: 450px;
+    top: 64px;
 }
 
 #ba-student-weapon-img {
@@ -493,6 +570,7 @@ p {
         overflow-y: none;
         scrollbar-width: none;
         max-height: inherit;
+        min-height: calc(100vh - 105px)
     }
 
     .card {
@@ -512,15 +590,24 @@ p {
     }
 
     .card-header {
+        transition-duration: 200ms;
         position: sticky;
         top: 55px;
-        background-color: #212529;
-        border-bottom: 0.125rem white solid;
+        background-color: #0f083699;
         z-index: 1000;
+    }
+
+    .card-header.stuck {
+        background-color: #212529;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
     }
 
     .card-header:first-child {
         border-radius: 0px;
+    }
+
+    #ba-student-background {
+        height: 600px;
     }
 }
 
@@ -549,10 +636,12 @@ p {
 }
 
 #ba-student-lobby-img {
-    height: 72px;
+    height: 78px;
     width: auto;
     margin-right: 10px;
     margin-bottom: 10px;
+    background: url('../images/ui/Card_Bg.png') no-repeat center center/contain;
+    padding: 3px
 }
 
 #ba-student-lobby-unlock {
@@ -565,8 +654,8 @@ p {
     color: #fff;
     line-height: 40px;
     position: absolute;
-    left: 62px;
-    top: 42px;
+    left: 65px;
+    top: 45px;
 }
 
 #ba-student-favoured-item-icon {
