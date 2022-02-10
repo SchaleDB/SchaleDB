@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Schale DB | Raids</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#212529" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.css" integrity="sha256-NuCn4IvuZXdBaFKJOAcsU2Q3ZpwbdFisd5dux4jkQ5w=" crossorigin="anonymous">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Open+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet"> 
+    <link href="css/site.css" rel="stylesheet">
+</head>
+<body>
+    <div id="loading-cover">
+
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-light" style="width: 4rem; height: 4rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    
+    <div id="ba-raid-background" style="position: fixed; background-image: url('images/raid/Raid_Bg.jpg');">
+    </div>
+
+    <div class="container-fluid p-0 h-100" style="min-height: 100vh; overflow-x: none; position: relative; padding-top: 58px !important;">
+        <div id="ba-navbar-placeholder"></div>
+        <div class="container-xl my-md-4">
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <div id="ba-raid-list" class="container-fluid g-0">
+
+                    </div>
+                    <!-- <div class="container px-0" style="position: fixed;">
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" class="btn btn-light btn-sm" onclick="studentSelectorModal.show()"><img src="images/ui/Common_Icon_CharInfo.png" style="height: auto; height: 28px; object-fit: contain;"><span class="d-none d-md-inline ps-2">Student List</span><span class="d-inline d-md-none px-2">List</span></button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="d-none d-xxl-block col-xxl-2"></div>
+                <div class="col-12 col-md-8 col-xxl-6 px-0 px-md-2">
+                    <div class="container-fluid px-0 px-xl-4" id="ba-raid-info">
+                        <div class="shadow">
+                            <!-- <div class="card-header">
+                                <ul class="nav nav-tabs card-header-tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#ba-raid-page-stats">Info</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#ba-raid-page-skills">Skills</a>
+                                    </li>
+                                  </ul>
+                            </div> -->
+                            <div id="ba-raid-header" class="container-fluid pt-2">
+                                <img id="ba-raid-header-img" class="ba-raid-portrait" src="">
+                                <span class="position-absolute py-2 px-3" style="left:0px; top:0px; z-index: 500;">
+                                    <h5 id="ba-raid-affiliation" class="mb-0 text-shadow"></h5>
+                                    <h1 id="ba-raid-name-en" class="mb-0 text-shadow" style="font-weight: 700;"></h1>
+                                    <h4 id="ba-raid-name-jp" class="d-inline text-shadow"></h4>
+                                </span>
+
+                                <div style="height: 20px;background: linear-gradient(transparent, #ffffffff 80%);position: absolute;width: 100%;bottom: 0px;left: 0;"></div>
+                            </div>
+                            <div class="">                                 
+                                <div>
+                                    <div id="ba-raid-page-stats" class="tab-pane fade show active container-fluid p-3 ba-raid-page" style="border-radius: 0 0 .25em .25em;">
+                                        <div class="mt-2 d-flex flex-row align-items-end">
+                                            <span class="flex-grow-1">
+                                                <h5 style="display: inline; font-weight: bold;">Stats</h5>
+                                            </span>
+                                        </div>
+                                        <div class="d-flex flex-row mt-2">
+                                            <span id="ba-raid-attacktype" class="ba-type-info d-inline-block align-text-top text-center me-1" style="margin-top: -1px; max-width: 150px;"><img src="images/tactical/StrategyObjectBuff_Attack.png"><span id="ba-raid-attacktype-label" style="margin-left: 24px; font-weight: bold;"></span></span>
+                                            <span id="ba-raid-defensetype" class="ba-type-info d-inline-block align-text-top text-center" style="margin-top: -1px; max-width: 150px;"><img src="images/tactical/StrategyObjectBuff_Defense.png"><span id="ba-raid-defensetype-label" style="margin-left: 24px; font-weight: bold;"></span></span>
+                                            <span class="flex-grow-1"></span>
+                                        </div>
+                                        <div class="row g-1 mt-1">
+                                            <div class="col">
+                                                <table class="table ba-stats mb-4">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td width="30%">Level</td>
+                                                            <td id="ba-raid-stat-level" width="20%"></td>
+                                                            <td width="30%">HP</td>
+                                                            <td id="ba-raid-stat-hp" width="20%"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Attack</td>
+                                                            <td id="ba-raid-stat-attack"></td>
+                                                            <td>Defense</td>
+                                                            <td id="ba-raid-stat-defense"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Critical Res.</td>
+                                                            <td id="ba-raid-stat-critresist"></td>
+                                                            <td>Crit. DMG Res.</td>
+                                                            <td id="ba-raid-stat-critdmgresist"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Stagger Condition</td>
+                                                            <td id="ba-raid-stat-stagger-condition"></td>
+                                                            <td>Stagger Gauge</td>
+                                                            <td id="ba-raid-stat-stagger-gauge"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-2 d-flex flex-row align-items-end">
+                                            <span class="flex-grow-1">
+                                                <h5 style="display: inline; font-weight: bold;">Skills</h5>
+                                            </span>
+                                        </div>
+                                        <div id="ba-raid-skills" class="mt-3 px-2 d-flex flex-column ba-skill-panel align-items-start">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="js/common.js"></script>
+<script src="js/raids.js"></script>
+
+</html>

@@ -1,5 +1,6 @@
 body {
     font-family: 'Open Sans', 'Noto Sans JP', sans-serif;
+    overflow-y: hidden;
 }
 
 p {
@@ -63,6 +64,11 @@ p {
     filter: grayscale(100%); 
 }
 
+.navbar-dark .navbar-nav .nav-link.active {
+    background-color: #3f4448;;
+    border-radius: 0.25rem;
+}
+
 .flex-basis-50 {
     flex-basis: 50%;
 }
@@ -90,7 +96,7 @@ p {
     filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
 }
 
-#ba-student-background {
+#ba-student-background, #ba-raid-background {
     position: fixed;
     top: 56px;
     background: #000 no-repeat center center;
@@ -200,32 +206,38 @@ p {
 }
 
 .ba-type-striker {
-    border-color: rgb(246, 75, 35);
-    background-color: rgb(246, 75, 35);
+    border-color: #cc1a25;
+    background-color: #cc1a25;
     color: #fff;
 }
 
 .ba-type-special {
-    border-color: rgb(0, 125, 255);
-    background-color: rgb(0, 125, 255);
+    border-color: #006bff;
+    background-color: #006bff;
     color: #fff;
 }
 
 .ba-type-explosive {
-    border-color: rgb(146, 0, 8);
-    background-color: rgb(146, 0, 8);
+    border-color: #920008;
+    background-color: #920008;
     color: #fff;
 }
 
 .ba-type-mystic {
-    border-color: rgb(34, 111, 155);
-    background-color: rgb(34, 111, 155);
+    border-color: #226f9b;
+    background-color: #226f9b;
     color: #fff;
 }
 
 .ba-type-pierce {
-    border-color: rgb(190, 137, 1);
-    background-color: rgb(190, 137, 1);
+    border-color: #be8901;
+    background-color: #be8901;
+    color: #fff;
+}
+
+.ba-type-normal {
+    border-color: #747473;
+    background-color: #747473;
     color: #fff;
 }
 
@@ -298,6 +310,11 @@ p {
     border-radius: 10px;
 }
 
+.smalltext {
+    font-size: 0.75rem !important;
+    line-height: 0.7rem;
+}
+
 .ba-student-card-label {
     background-color: #32527acb;
     color: #fff;
@@ -312,9 +329,32 @@ p {
     transition-duration: 300ms;
 }
 
-.ba-student-card-label.smalltext {
-    font-size: 0.75rem !important;
-    line-height: 0.7rem;
+.ba-unhover-text {
+    position: absolute;
+    left: 0;
+    opacity: 100%;
+    transition: opacity 200ms ease-out;
+}
+
+.ba-student-card:hover .ba-unhover-text {
+    position: absolute;
+    left: 0;
+    opacity: 0%;
+    transition: opacity 200ms ease-out;
+}
+
+.ba-hover-text {
+    position: absolute;
+    left: 0;
+    opacity: 0%;
+    transition: opacity 200ms ease-out;
+}
+
+.ba-student-card:hover .ba-hover-text {
+    position: absolute;
+    left: 0;
+    opacity: 100%;
+    transition: opacity 200ms ease-out;
 }
 
 .ba-student-card-badge {
@@ -362,11 +402,11 @@ p {
 }
 
 .ba-student-search-details > .bg-striker {
-    border-bottom: #f64b23 3px solid !important;
+    border-bottom: #cc1a25 3px solid !important;
 }
 
 .ba-student-search-details > .bg-special {
-    border-bottom: #007dff 3px solid !important;
+    border-bottom: #006bff 3px solid !important;
 }
 
 .ba-student-search-details > .bd-explosive {
@@ -494,6 +534,10 @@ p {
     color: rgb(44, 69, 99);
     table-layout: fixed;
 }
+.ba-stats tr {
+    transition-duration: 200ms;
+}
+
 .ba-stats td:nth-child(even) {
     font-weight: bold;
 }
@@ -516,6 +560,16 @@ p {
     width:auto;
     margin-bottom: 0.25rem;
     cursor: pointer;
+}
+
+.ba-statpreview-star.disabled {
+    filter: grayscale(100%); 
+    cursor: default;
+}
+
+.ba-stat-tooltip {
+    text-decoration: underline dotted;
+    cursor: help;
 }
 
 .ba-bond-icon {
@@ -559,6 +613,20 @@ p {
     max-height: calc(100vh - 190px);
 }
 
+.ba-raid-page {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    max-height: calc(100vh - 13rem - 2.2vw);
+}
+
+#ba-raid-header {
+    color: #fff;
+    height: calc(6rem + 2.2vw);
+    border-radius: .5rem .5rem 0 0;
+    position: relative;
+    background: rgba(15, 8, 54, 0.6) url('images/raid/Boss_Portrait_Binah_LobbyBG.png') no-repeat left center/contain;
+}
+
 @media(min-width: 576px) {
     .ba-student-searchresult-item {
         max-width: 92px;
@@ -566,11 +634,23 @@ p {
 }
 
 @media(max-width: 768px) {
+    body {
+        font-family: 'Open Sans', 'Noto Sans JP', sans-serif;
+        overflow-y: auto;
+    }
+
     .ba-student-page {
         overflow-y: none;
         scrollbar-width: none;
         max-height: inherit;
         min-height: calc(100vh - 105px)
+    }
+
+    .ba-raid-page {
+        overflow-y: none;
+        scrollbar-width: none;
+        max-height: inherit;
+        min-height: calc(100vh - 11.5rem - 2.2vw)
     }
 
     .card {
@@ -595,6 +675,20 @@ p {
         top: 55px;
         background-color: #0f083699;
         z-index: 1000;
+    }
+
+    #ba-raid-header {
+        transition-duration: 200ms;
+        position: sticky;
+        top: 50px;
+        z-index: 1000;
+    }
+
+    #ba-raid-header.stuck {
+        /*background-color: #212529;*/
+        background-color: rgba(15, 8, 54, 1);
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+        border-radius: 0px !important;
     }
 
     .card-header.stuck {
@@ -633,6 +727,10 @@ p {
 
 .ba-student-lobby {
     position: relative;
+}
+
+#ba-student-role-icon, #ba-student-school-img, .ba-skill, .ba-student-card-role img {
+    image-rendering: -webkit-optimize-contrast;
 }
 
 #ba-student-lobby-img {
@@ -761,9 +859,46 @@ p {
 }
 
 .ba-student-search-group-striker {
-    color: #f64b23;
+    color: #cc1a25;
 }
 
 .ba-student-search-group-special {
-    color: #007dff;
+    color: #006bff;
+}
+
+.ba-raid-list-entry {
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 10px;
+    position: relative;
+    height: 90px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.ba-raid-portrait {
+    position: absolute;
+    height: 100%;
+    top: 0px;
+    right: 0px;
+    object-fit: contain;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.text-shadow {
+    text-shadow: 0.1rem 0.1rem 0.3rem rgb(0,0,0);
+}
+
+/* table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-child(2) {
+    background-color: rgb(218, 244, 225);
+    color: darkgreen;
+    transition-duration: 200ms;
+} */
+
+table.table-striker-bonus tr:nth-child(1) td:nth-child(even), table.table-striker-bonus tr:nth-child(2) td:nth-child(even) {
+    color: #006bff;
+}
+
+table.table-striker-bonus tr:nth-child(1){
+    border-radius: 0.25rem 0.25rem 0 0;
 }

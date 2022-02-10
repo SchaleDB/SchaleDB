@@ -1,0 +1,54 @@
+<nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark" style="min-height: 56px;">
+    <div class="container-xl">
+        <a class="navbar-brand" href="#">
+            <img src="images/schale.png" alt="" width="37" height="23" class="d-inline-block align-text-top">
+            SCHALE
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-2 me-auto mb-2 mb-lg-0">
+                <li class="nav-item me-1">
+                    <a id="ba-navbar-link-students" class="nav-link" href="students.html">
+                        <img src="images/ui/Common_Icon_Student.png" alt="" style="height:24px" class="d-inline-block align-text-top">
+                        Students
+                    </a>
+                </li>
+                <li class="nav-item me-1">
+                    <a id="ba-navbar-link-raids" class="nav-link disabled" href="raids.html">
+                        <img src="images/ui/Common_Attack_Icon.png" alt="" style="height:24px" class="d-inline-block align-text-top">
+                        Raids
+                    </a>
+                </li>
+                <li class="nav-item me-1">
+                    <a id="ba-navbar-link-crafting" class="nav-link disabled" href="crafting.html">
+                        <img src="images/ui/Common_Icon_Craft.png" alt="" style="height:24px" class="d-inline-block align-text-top">
+                        Crafting
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <!-- <li class="nav-item">
+                    <span class="nav-link form-check form-check-inline form-switch me-2">
+                        <input class="form-check-input" type="checkbox" value="" onchange="toggleDarkTheme()" id="ba-navbar-themeswitcher">
+                        <label class="form-check-label" for="ba-navbar-themeswitcher">
+                            Dark Theme
+                        </label>
+                    </span>
+                </li> -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="ba-navbar-regionselector" role="button" data-bs-toggle="dropdown">
+                        <i class="fa fa-server me-2"></i><span id="ba-navbar-regionselector-label"></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><h6 class="dropdown-header">Select Server</h6></li>
+                        <li><a id="ba-navbar-regionselector-0" class="dropdown-item" href="#" onclick="changeRegion(0)">Japan</a></li>
+                        <li><a id="ba-navbar-regionselector-1" class="dropdown-item" href="#" onclick="changeRegion(1)">Global</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
