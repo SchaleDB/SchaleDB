@@ -2,6 +2,7 @@
     {
         "id": 1,
         "released": [true, true],
+        "released_insane": [false, false],
         "name_dev": "Binah",
         "name_jp": "ビナー",
         "name_en": "Binah",
@@ -9,7 +10,7 @@
         "portrait_img": "Boss_Portrait_Binah_Lobby",
         "background_img": "Boss_Portrait_Binah_LobbyBG",
         "terrains": {
-            "field": {
+            "outdoor": {
                 "background_img": "Boss_Portrait_Binah_LobbyBG"
             },
             "urban": {
@@ -63,6 +64,7 @@
     {
         "id": 2,
         "released": [true, true],
+        "released_insane": [false, false],
         "name_dev": "Chesed",
         "name_jp": "ケセド",
         "name_en": "Chesed",
@@ -70,7 +72,7 @@
         "portrait_img": "Boss_Portrait_Chesed_Lobby",
         "background_img": "Boss_Portrait_Chesed_LobbyBG",
         "terrains": {
-            "field": {
+            "outdoor": {
                 "background_img": "Boss_Portrait_Binah_LobbyBG"
             },
             "urban": {
@@ -132,6 +134,7 @@
     {
         "id": 3,
         "released": [true, true],
+        "released_insane": [true, false],
         "name_dev": "Shirokuro",
         "name_jp": "シロ＆クロ",
         "name_en": "Shiro & Kuro",
@@ -147,6 +150,7 @@
             }
         },
         "attack_type": "Normal",
+        "attack_type_insane": "Piercing",
         "defense_type": "Special",
         "enemies": [
             {
@@ -154,11 +158,14 @@
                 "name_en": "Shiro",
                 "icon": "Portrait_Raidboss_Shiro",
                 "stats": {
-                    "level": [17],
-                    "maxhp": [280000],
-                    "attack_power": [600],
-                    "defense_power": [700],
-                    "stagger": [148000]
+                    "level": [17, 25, 35, 50, 70, 80],
+                    "maxhp": [280000, 550000, 675000, 1200000, 4500000, 10000000],
+                    "attack_power": [600, 950, 1400, 1600, 3700, 3700],
+                    "defense_power": [700, 700, 700, 700, 700, 700],
+                    "crit_res": [100, 100, 100, 100, 100],
+                    "crit_dmg_res": [5000, 5000, 5000, 5000, 5000],
+                    "stagger": [148000, 296000, 400000, 720000, 5000000, 10000000],
+                    "stagger_condition": "Deal Mystic Damage"
                 }
 
             },
@@ -167,11 +174,14 @@
                 "name_en": "Kuro",
                 "icon": "Portrait_Raidboss_Shiro",
                 "stats": {
-                    "level": [17],
-                    "maxhp": [320000],
-                    "attack_power": [600],
-                    "defense_power": [700],
-                    "stagger": [172000]
+                    "level": [17, 25, 35, 50, 70, 80],
+                    "maxhp": [320000, 600000, 735000, 1330000, 6000000, 10000000],
+                    "attack_power": [600, 950, 1400, 1600, 3700, 3700],
+                    "defense_power": [700, 700, 700, 700, 700, 700],
+                    "crit_res": [100, 100, 100, 100, 100, 100],
+                    "crit_dmg_res": [5000, 5000, 5000, 5000, 5000, 5000],
+                    "stagger": [172000, 320000, 440000, 800000, 6000000, 10000000],
+                    "stagger_condition": "Deal Mystic Damage"
                 }
             }
         ],
@@ -200,11 +210,55 @@
                 "atg": 0,
                 "icon": "SKILLICON_SHIROKURO_EXSKILL03"
             }
+        ],
+        "skills_insane": [
+            {
+                "name_jp": "ドッカァーン！！（シロ）",
+                "name_en": "Kaboom!! (Shiro) ",
+                "description_en": "Places bombs that explode after a short while and deal 900% damage to enemies in a circular area. Damage and number of bombs placed increases as Shiro's ATG gauge increases.\nAlso places ice bombs that additionally decrease <d:MoveSpeed> of enemies hit by 80% for 40s.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_SHIROKURO_EXSKILL01"
+            },
+            {
+                "name_jp": "転がれ転がれー！（シロ) ",
+                "name_en": "Roll & Roll (Shiro)",
+                "description_en": "Summons a rolling bomb that deals 1500% damage to enemies in a straight line.\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>999999</b> damage.\nThe bomb deals 300% damage to obstacles in its path. If an obstacle is hit but not destroyed, the bomb will bounce in the opposite direction towards Shiro, increasing her stagger gauge by a significant amount and <d:DamagedRatio> by 50% for 40s.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_SHIROKURO_EXSKILL02"
+            },
+            {
+                "name_jp": "突進だぁ！！！（クロ）",
+                "name_en": "Charge!!! (Kuro)",
+                "description_en": "Summons theme park rides that deals 500% damage to enemies in a straight line.\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>999999</b> damage. If Kuro is hit by this attack herself, increases Kuro's stagger gauge by a significant amount and <d:DamagedRatio> by 50% for 40s.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_SHIROKURO_EXSKILL03"
+            },
+            {
+                "name_jp": "アパシー・シンドローム（クロ）",
+                "name_en": "Apathy Syndrome (Kuro)",
+                "description_en": "Deals 100% damage to enemies and decreases their <d:MoveSpeed> by 80% for 40s.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_SHIROKURO_EXSKILL04"
+            },
+            {
+                "name_jp": "スランピアの恐怖",
+                "name_en": "Horror of Slumpia",
+                "description_en": "Decreases all enemies' <d:HealEffectiveness> by 80%. This debuff cannot be removed.", 
+                "type": "Passive",
+                "atg": 0,
+                "icon": "SKILLICON_SHIROKURO_PASSIVESKILL01"
+            }
         ]
+
     },
     {
         "id": 4,
         "released": [true, true],
+        "released_insane": [false, false],
         "name_dev": "Hieronymus",
         "name_jp": "ヒエロニムス",
         "name_en": "Hieronymus",
@@ -272,7 +326,7 @@
             {
                 "name_jp": "聖なる光（聖遺物）",
                 "name_en": "Holy Light (Relic)",
-                "description_en": "When a relic is healed to 100% HP, drains all HP and decreases <d:HealEffectiveness> by 50% for 20s and activates one of the following effects depending on the relic:\n<b>Green Relic</b>: Increases Hieronymus's <d:DamagedRatio> by 55% until the end of battle. Effect can stack up to 5 times.\n<b>Red Relic</b>: Interrupts Hieronymus's current active skill and increases his stagger gauge significantly. If a skill is successfully interrupted, increases the skill cost recovery speed of up to 4 students by <b>2500</b> for 1s.", 
+                "description_en": "When a relic is healed to 100% HP, drains all HP and decreases <d:HealEffectiveness> by 50% for 20s and activates one of the following effects depending on the relic:\n<b>Green Relic</b>: Increases Hieronymus's <d:DamagedRatio> by 55% until the end of battle. Effect can stack up to 5 times.\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, increases Hieronymus's stagger gauge significantly and increases the skill cost recovery speed of up to 4 students by <b>2500</b> for 1s.", 
                 "type": "EX",
                 "atg": 0,
                 "icon": "SKILLICON_HIERONYMUS_EXSKILL05"
@@ -282,6 +336,7 @@
     {
         "id": 5,
         "released": [true, false],
+        "released_insane": [false, false],
         "name_dev": "KaitenFxMk0",
         "name_jp": "KAITEN FX Mk.0",
         "name_en": "KAITEN FX Mk.0",
@@ -374,6 +429,7 @@
     {
         "id": 6,
         "released": [true, false],
+        "released_insane": [false, false],
         "name_dev": "Perorozilla",
         "name_jp": "ペロロジラ",
         "name_en": "Perorodzilla",
@@ -451,6 +507,7 @@
     {
         "id": 7,
         "released": [true, false],
+        "released_insane": [false, false],
         "name_dev": "HOD",
         "name_jp": "ホド",
         "name_en": "Hod",

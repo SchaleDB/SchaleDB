@@ -18,6 +18,7 @@ p {
 .card-body {
     background-color: rgb(214, 234, 242);
     border-radius: 0rem 0rem 0.25rem 0.25rem;
+    padding: 0.5rem;
 }
 
 .card-header .nav-tabs .nav-link.active {
@@ -125,8 +126,16 @@ p {
 
 #ba-student-class {
     height: 18px;
-    width: 80px;
-    margin: 4px 4px 0.25rem 4px;
+    width: 72px;
+    margin: 0 0.375rem 0 0;
+}
+
+h1 small {
+    font-size: 0.7em;
+}
+
+.text-bold {
+    font-weight: bold;
 }
 
 .ba-weapon-rank-tab a {
@@ -431,6 +440,7 @@ p {
 } */
 
 .ba-slider-label {
+    cursor: default;
     font-weight: bold;
     min-width: 60px;
     text-align: center;
@@ -837,7 +847,20 @@ p {
 }
 
 .ba-student-search-group {
-    height: 28px;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0 0.5rem 0;
+    background-color: rgb(242, 242, 242);
+    border-radius: 0.5rem;
+    /* border-bottom: lightgrey 2px solid; */
+}
+
+.ba-student-search-group:first-child {
+    margin-top: 0 !important;
+}
+
+.ba-student-search-group-header {
+    height: 30px;
+    margin-bottom: 0.3rem;
     /* border-bottom: lightgrey 2px solid; */
 }
 
@@ -901,4 +924,55 @@ table.table-striker-bonus tr:nth-child(1) td:nth-child(even), table.table-strike
 
 table.table-striker-bonus tr:nth-child(1){
     border-radius: 0.25rem 0.25rem 0 0;
+}
+
+
+.tooltip-inner {
+    padding: 0px !important;
+    max-width: 300px;
+}
+
+.tooltip.show {
+    opacity: 1;
+}
+
+.ba-tooltip{
+    max-width: 350px;
+    border-radius: 0.25rem;
+    font-family: 'Open Sans', 'Noto Sans JP', sans-serif;
+}
+
+.ba-tooltip-header{
+    position: relative;
+    border-radius: 0.25rem 0.25rem 0 0;
+    background-color: rgb(33, 37, 41);
+    padding: 0.3rem 0.4rem 0.1rem 0.4rem;
+}
+
+.ba-tooltip-img {
+    position: absolute;
+    left: 0.4rem;
+    height: 27px;
+    width: auto;
+}
+
+.ba-tooltip-title {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.ba-tooltip-subtitle {
+    position: absolute;
+    right: 0.4rem;
+    margin-top: 3px;
+    text-align: right;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.ba-tooltip-body{
+    padding: 0.2rem 0.4rem 0.3rem 0.4rem;
+    white-space: pre-line;
 }

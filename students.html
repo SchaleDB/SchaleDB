@@ -74,20 +74,18 @@
 
                                     <div id="ba-student-page-stats" class="tab-pane fade show active container-fluid p-3 ba-student-page" style="border-radius: .25em;">
 
-                                        <h1 id="ba-student-name-en" class="" style="display: inline; font-weight: bold;"></h1>
-                                        <div class="d-flex flex-row align-items-center mt-1">
-                                            <span class="flex-grow-1">
-                                                <h4 id="ba-student-name-jp" class="d-inline"></h4>
+                                        <!-- <h1 id="ba-student-name-en" class="" style="display: inline; font-weight: bold;"></h1> -->
+                                        <div class="d-flex flex-row flex-wrap align-items-end">
+                                            <span class="flex-grow-1 me-2">
+                                                <h1 id="ba-student-name" class="d-inline text-bold"></h4>
                                             </span>
-                                            <span id="ba-student-limited" class="badge rounded-pill m-1" style="font-size: 0.85rem; cursor: default;"></span>
-                                            <span class="">
-                                                <img id="ba-student-class" src="">
-                                                <img id="ba-student-stars" src="" style="height: 28px; width: auto; margin-bottom: 0.25rem;">
+                                            <span class="mt-2">
+                                                <img id="ba-student-class" src=""><span class="d-inline-block" style="width:1px; height:28px; margin-bottom: -8px; background-color:lightgrey"></span><img id="ba-student-stars" src="" style="height: 24px; width: auto; margin-left: 0.375rem; margin-bottom: 0.25rem;"><span id="ba-student-limited-sep" style="display:inline-block; margin-left: 0.375rem; width:1px; height:28px; margin-bottom: -8px; background-color:lightgrey"></span><span id="ba-student-limited" class="badge rounded-pill" style="margin-left: 0.375rem; font-size: 0.8rem; cursor: default; display: inline-block;"></span>
                                             </span>
                                         </div>
                                         <div class="d-flex flex-row flex-wrap align-items-stretch mt-3">
                                             <div class="me-1 mb-2">
-                                                <img id="ba-student-school-img" class="drop-shadow" src="">
+                                                <img id="ba-student-school-img" src="">
                                             </div>
                                             <div class="flex-grow-1 mb-2 flex-basis-50">
                                                 <span>
@@ -99,7 +97,7 @@
                                             </div>
                                             <div class="me-1 mb-2" style="min-width: fit-content;">
                                                 <div id="ba-student-terrain-urban" class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_urban.png"><br><img id="ba-student-terrain-urban-icon" class="ba-student-affinity-icon" src=""></div>
-                                                <div id="ba-student-terrain-field" class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_field.png"><br><img id="ba-student-terrain-field-icon" class="ba-student-affinity-icon" src=""></div>
+                                                <div id="ba-student-terrain-outdoor" class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_outdoor.png"><br><img id="ba-student-terrain-outdoor-icon" class="ba-student-affinity-icon" src=""></div>
                                                 <div id="ba-student-terrain-indoor" class="ba-type-terrain"><img class="ba-student-terrain-icon" src="images/tactical/Terrain_indoor.png"><br><img id="ba-student-terrain-indoor-icon" class="ba-student-affinity-icon" src=""></div>
                                             </div>
                                             <div class="flex-fill me-1 mb-2">
@@ -152,15 +150,15 @@
                                                         <tr>
                                                             <td>Critical Rate</td>
                                                             <td id="ba-student-stat-crit"></td>
+                                                            <td>Critical Resistance</td>
+                                                            <td id="ba-student-stat-critresist"></td>
+                                                        </tr>
+                                                        <tr>
                                                             <td>Critical Damage</td>
                                                             <td id="ba-student-stat-critdmg"></td>
-                                                        </tr>
-                                                        <!-- <tr>
-                                                            <td>Crit. Resistance</td>
-                                                            <td id="ba-student-stat-critresist"></td>
-                                                            <td>Crit. Dmg Resist.</td>
+                                                            <td>Critical Dmg. Res.</td>
                                                             <td id="ba-student-stat-critdmgresist"></td>
-                                                        </tr> -->
+                                                        </tr>
                                                         <tr>
                                                             <td>Stability</td>
                                                             <td id="ba-student-stat-stability"></td>
@@ -173,15 +171,9 @@
                                                             <td>CC Resistance</td>
                                                             <td id="ba-student-stat-ccresist"></td>
                                                         </tr>
-                                                        <!-- <tr>
-                                                            <td>Healing Rcvd.</td>
-                                                            <td id="ba-student-stat-healeffectiveness"></td>
-                                                            <td>Block Rate</td>
-                                                            <td id="ba-student-stat-blockrate"></td>
-                                                        </tr> -->
                                                         <tr>
-                                                            <td>Cost Recovery</td>
-                                                            <td id="ba-student-stat-costrecovery"></td>
+                                                            <td>Recovery Rate</td>
+                                                            <td id="ba-student-stat-recoveryrate"></td>
                                                             <td>Weapon Ammo</td>
                                                             <td id="ba-student-stat-ammo"></td>
                                                         </tr>
@@ -334,18 +326,19 @@
 
                                     <div id="ba-student-page-weapon" class="tab-pane fade container-fluid p-3 ba-student-page" style="background-color: #fff; border-radius: .25em;">
 
-                                        <div class="d-flex flex-row align-items-end">
+                                        <div class="d-flex flex-row align-items-center">
                                             <span class="flex-grow-1">
-                                                <h2 id="ba-student-weapon-name" style="display: inline; font-weight: bold;"></h2>
+                                                <h3 id="ba-student-weapon-name" style="display: inline; font-weight: bold;"></h3>
                                             </span>
-                                            <span class="">
-                                                <img src="images/ui/Common_Icon_CharacterWeapon_on.png" style="height: 28px; width:auto; margin-bottom: 0.25rem;">
+                                            <span class="me-1">
+                                                <img src="images/ui/Common_Icon_CharacterWeapon_off.png" style="height: 28px; width:auto;">
                                             </span>
+                                            <h4 class="d-inline-block mb-0"><i id="ba-student-weapon-type"></i></h4>
                                         </div>
 
-                                        <div class="row mt-1">
+                                        <!-- <div class="row mt-1">
                                             <h4 id="ba-weapon-name-jp" class="d-inline"></h4>
-                                        </div>
+                                        </div> -->
                                         
                                         <div class="mt-3">
                                             <img id="ba-student-weapon-img" src="">
@@ -438,7 +431,7 @@
     
                                                 <div class="d-flex flex-row align-items-end my-3">
                                                     <span class="flex-grow-1">
-                                                        <large style="display: inline;">Maximum Weapon Level Lv.40 → <b>Lv.50</b> / Improves terrain affinity:</large>
+                                                        <large style="display: inline;">Maximum Weapon Level Lv.40 → <b>Lv.50</b> / Improves Combat Power:</large>
                                                     </span>
                                                 </div>
 
@@ -519,18 +512,16 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="row">
                                             <h5 style="font-weight: bold;">Favourite Gifts</h5>
                                         </div>
-
-                                        <div id="ba-student-favoured-items" class="my-1 d-flex flex-row flex-wrap justify-content-center">
-                                            <div style="position: relative;">
-                                                <img id="ba-student-favoured-item-img" src="images/items/Item_Icon_Favor_1.png">
-                                                <img id="ba-student-favoured-item-rank" src="images/ui/Cafe_Interaction_Gift_03.png">
-                                            </div>
+                                        <div id="ba-student-favoured-items" class="my-1 px-2 pt-2 d-flex flex-row flex-wrap justify-content-center ba-skill-panel">
                                         </div>
-
+                                        <div class="row mt-3">
+                                            <h5 style="font-weight: bold;">Furniture Interaction</h5>
+                                        </div>
+                                        <div id="ba-student-favoured-furniture" class="my-1 px-2 pt-2 d-flex flex-row flex-wrap justify-content-center ba-skill-panel">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -547,7 +538,7 @@
             <div class="modal-content" style="background-color: transparent;">
                 <div class="modal-header" style="border-bottom: none;">
                     <div class="me-3">
-                        <input type="search" class="form-control" id="ba-student-search-text" placeholder="Search Students..." onkeyup="populateStudentList('none')">
+                        <input type="search" class="form-control" id="ba-student-search-text" placeholder="Search..." onkeyup="populateStudentList('none')">
                     </div>
                     <div class="dropdown me-3">
                         <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"><i class="fa fa-th me-1"></i> <span id="ba-student-search-groupby-label"></span></button>
@@ -557,7 +548,8 @@
                             <li><hr class="dropdown-divider"></li>
                             <li><a id="ba-student-search-groupby-rarity" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','rarity')" class="btn btn-dark">Rarity</a></li>
                             <li><a id="ba-student-search-groupby-school" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','school')" class="btn btn-dark">School</a></li>
-                            <li><a id="ba-student-search-groupby-class" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','class')" class="btn btn-dark">Class</a></li>
+                            <li><a id="ba-student-search-groupby-class" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','class')" class="btn btn-dark">Type</a></li>
+                            <li><a id="ba-student-search-groupby-position" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','position')" class="btn btn-dark">Position</a></li>
                             <li><a id="ba-student-search-groupby-role" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','role')" class="btn btn-dark">Role</a></li>
                             <li><a id="ba-student-search-groupby-weapon" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','weapon')" class="btn btn-dark">Weapon</a></li>
                             <li><a id="ba-student-search-groupby-limited" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','limited')" class="btn btn-dark">Limited</a></li>
@@ -565,6 +557,9 @@
                             <li><a id="ba-student-search-groupby-attacktype" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','attacktype')" class="btn btn-dark">Attack Type</a></li>
                             <li><a id="ba-student-search-groupby-defensetype" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','defensetype')" class="btn btn-dark">Defense Type</a></li>
                             <li><a id="ba-student-search-groupby-excost" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','excost')" class="btn btn-dark">EX Cost</a></li>
+                            <li><a id="ba-student-search-groupby-urbanpower" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','urbanpower')" class="btn btn-dark">Urban C. Power</a></li>
+                            <li><a id="ba-student-search-groupby-outdoorpower" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','outdoorpower')" class="btn btn-dark">Outdoor C. Power</a></li>
+                            <li><a id="ba-student-search-groupby-indoorpower" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('groupby','indoorpower')" class="btn btn-dark">Indoor C. Power</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><span class="form-check form-check-inline form-switch mx-2">
                                 <input class="form-check-input" type="checkbox" value="checked" onchange="searchToggleInfo(this)" id="ba-student-search-showinfo" checked>
@@ -577,6 +572,7 @@
                         <ul id="ba-student-search-sortby" class="dropdown-menu dropdown-menu-dark">
                             <li><h6 class="dropdown-header">Order By</h6></li>
                             <li><a id="ba-student-search-sortby-name" class="dropdown-item active" href="javascript:;" onclick="searchOptionSet('sortby','name')" class="btn btn-dark">Name</a></li>
+                            <li><a id="ba-student-search-sortby-default" class="dropdown-item active" href="javascript:;" onclick="searchOptionSet('sortby','default')" class="btn btn-dark">Released</a></li>
                             <li><a id="ba-student-search-sortby-rarity" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('sortby','rarity')" class="btn btn-dark">Rarity</a></li>
                             <li><a id="ba-student-search-sortby-school" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('sortby','school')" class="btn btn-dark">School</a></li>
                             <li><a id="ba-student-search-sortby-role" class="dropdown-item" href="javascript:;" onclick="searchOptionSet('sortby','role')" class="btn btn-dark">Role</a></li>
@@ -599,7 +595,7 @@
                 </div>
                 <div class="modal-body">
                     <div id="ba-student-modal-page">
-                        <div id="ba-student-search-results" class="pt-2">
+                        <div id="ba-student-search-results">
                         </div>
                     </div>
                 </div>

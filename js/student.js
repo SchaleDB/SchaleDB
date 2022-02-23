@@ -3,7 +3,11 @@ $.holdReady(true)
 const starscale_hp      = [1, 1.05,  1.12,  1.21,  1.35 ]
 const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445]
-const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Academy", "Hyakkiyako": "Allied Hyakkiyako Academy", "Millennium": "Millennium Science School", "RedWinter": "Red Winter Federal Academy", "Shanhaijing": "Shanhaijing Senior Secondary School", "Trinity": "Trinity General School", "Valkyrie": "Valkyrie Police School", "Arius": "Arius Satellite School", "ETC": "Others"}
+const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Academy", "Hyakkiyako": "Allied Hyakkiyako Academy", "Millennium": "Millennium Science School", "RedWinter": "Red Winter Federal Academy", "Shanhaijing": "Shanhaijing Senior Secondary School", "Trinity": "Trinity General School", "Valkyrie": "Valkyrie Police School", "Arius": "Arius Satellite School", "Others": "Others"}
+
+const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
+const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
+
 
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
 const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000, 2400000, 4000000]
@@ -17,13 +21,13 @@ const stat_friendlyname = {
     "attack_power_percent": "Attack",
     "heal_power_percent": "Healing",
     "accuracy": "Accuracy",
-    "critical": "Critical Chance",
+    "critical": "Critical Rate",
     "critical_damage": "Critical Damage",
-    "healing_received": "Healing Received",
+    "healing_received": "Recovery Rate",
     "cc_power_percent": "CC Power",
     "cc_resist_percent": "CC Resistance",
-    "critical_resist": "Critical Resistance",
-    "critical_damage_resist": "Critical Damage Resistance"
+    "critical_resist": "Critical Res.",
+    "critical_damage_resist": "Critical Dmg. Res."
 }
 
 var data = {}
@@ -85,7 +89,7 @@ $(document).ready(function() {
     } else if (localStorage.getItem("chara")) {
         loadStudent(localStorage.getItem("chara"))
     } else {
-        loadStudent("Haruna")
+        loadStudent("Aru")
     }
 
     if (localStorage.getItem("chara_groupby")) {
@@ -133,6 +137,9 @@ function populateStudentList() {
     var sortfunction
 
     switch (search_options["sortby"]) {
+        case "default":
+            sortfunction = ((a,b) => a.default_order - b.default_order)
+            break
         case "name":
             sortfunction = ((a,b) => a.name_en.localeCompare(b.name_en))
             break
@@ -180,160 +187,211 @@ function populateStudentList() {
             break
     }
 
-    if (grouping == "none") {
-        var groupedResults, searchTerm
-        searchTerm = $('#ba-student-search-text').val()
-        groupedResults = data.students
-        groupedResults.sort(sortfunction)
-    
-        $("#ba-student-search-results").empty()
-    
-        var resultsHTML = `<div class="d-flex flex-row justify-content-center">
-        <ul class="ba-student-searchresult-grid align-top">
-        `
-    
-        $.each(groupedResults, function(i, el){
-            if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
-            resultsHTML += getStudentListCardHTML(el)
-        })
-    
-        resultsHTML +=
-            `
-            </ul>
-            </div>
-            `
-        $("#ba-student-search-results").append(resultsHTML)
-    } else {
-        var groupedResults = {}
+    var groupedResults = {}, searchTerm = $('#ba-student-search-text').val()
+    switch (grouping) {
+        case "none":
+            groupedResults = {"All": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults["All"].push(el)
+            })
+            break
+        case "school":
+            groupedResults = {"Abydos": [], "Gehenna": [], "Hyakkiyako": [], "Millennium": [], "RedWinter": [], "Shanhaijing": [], "Trinity": [], "Valkyrie": [], "Others": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.school].push(el)
+            })
+            break
+        case "weapon":
+            groupedResults = {"SG": [], "SMG": [], "AR": [], "GL": [], "HG": [], "SR": [], "RG": [], "MG": [], "MT": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.weapon_type].push(el)
+            })
+            break
+        case "rarity":
+            groupedResults = {"_3": [], "_2": [], "_1": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults['_'+el.stars.toString()].push(el)
+            })
+            break
+        case "role":
+            groupedResults = {"Tank": [], "Attacker": [], "Healer": [], "Support": [], "TacticalSupport": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.role].push(el)
+            })
+            break
+        case "class":
+            groupedResults = {"Striker": [], "Special": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.type].push(el)
+            })
+            break
+        case "position":
+            groupedResults = {"Front": [], "Middle": [], "Back": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.position].push(el)
+            })
+            break
+        case "attacktype":
+            groupedResults = {"Explosive": [], "Piercing": [], "Mystic": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.attack_type].push(el)
+            })
+            break
+        case "defensetype":
+            groupedResults = {"Light": [], "Heavy": [], "Special": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.defense_type].push(el)
+            })
+            break
+        case "excost":
+            groupedResults = {"_2": [], "_3": [], "_4": [], "_5": [], "_6": [], "_7": [], "_10": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults['_'+el.skill_ex_cost[4]].push(el)
+            })
+            break
+        case "limited":
+            groupedResults = {"_0": [], "_1": [], "_2": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults['_'+el.is_limited].push(el)
+            })
+            break
+        case "urbanpower":
+            groupedResults = {"S": [], "A": [], "B": [], "C": [], "D": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.urban_adaption].push(el)
+            })
+            break
+        case "outdoorpower":
+            groupedResults = {"S": [], "A": [], "B": [], "C": [], "D": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.outdoor_adaption].push(el)
+            })
+            break
+        case "indoorpower":
+            groupedResults = {"S": [], "A": [], "B": [], "C": [], "D": []}
+            $.each(data.students, function(i, el){
+                if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
+                groupedResults[el.indoor_adaption].push(el)
+            })
+            break
+    }
+
+    $("#ba-student-search-results").empty()
+
+    var resultsHTML = ''
+
+    $.each(groupedResults, function(key, val){
+        
+        var groupIcon, groupName, groupIconStyle
+
         switch (grouping) {
+            case "none":
+                groupIcon = ''
+                groupIconStyle= ''
+                groupName = key
+                break
             case "school":
-                groupedResults = {"Abydos": [], "Gehenna": [], "Hyakkiyako": [], "Millennium": [], "RedWinter": [], "Shanhaijing": [], "Trinity": [], "Valkyrie": [], "ETC": []}
-                $.each(data.students, function(i, el){
-                    if (el["released"][regionID])
-                    groupedResults[el.school].push(el)
-                })
+                groupIcon = `images/schoolicon/School_Icon_${key.toUpperCase()}.png`
+                groupIconStyle= 'height:40px; width: auto; margin-bottom: -2px;'
+                groupName = school_longname[key]
                 break
             case "weapon":
-                groupedResults = {"SG": [], "SMG": [], "AR": [], "GL": [], "HG": [], "SR": [], "RG": [], "MG": [], "MT": []}
-                $.each(data.students, function(i, el){
-                    if (el["released"][regionID])
-                    groupedResults[el.weapon_type].push(el)
-                })
+                groupIcon = `images/weapontype/Weapon_Icon_${key.toUpperCase()}.png`
+                groupIconStyle= 'height:38px; width: auto; margin-bottom: 4px;'
+                groupName = key
                 break
             case "rarity":
-                groupedResults = {"_3": [], "_2": [], "_1": []}
-                $.each(data.students, function(i, el){
-                    if (el["released"][regionID])
-                    groupedResults['_'+el.stars.toString()].push(el)
-                })
+                groupIcon = `images/ui/Star${key}.png`
+                groupIconStyle= 'height:26px; width: auto; margin-bottom: 1px;'
+                groupName = ""
                 break
             case "role":
-                groupedResults = {"Tank": [], "Attacker": [], "Healer": [], "Support": [], "TacticalSupport": []}
-                $.each(data.students, function(i, el){
-                    if (el["released"][regionID])
-                    groupedResults[el.role].push(el)
-                })
+                groupIcon = `images/tactical/Role_${key}.png`
+                groupIconStyle= 'height:34px; width: auto;'
+                groupName = key.replace("TacticalSupport", "Tactical Support")
                 break
             case "class":
-                groupedResults = {"Striker": [], "Special": []}
-                $.each(data.students, function(i, el){
-                    if (el["released"][regionID])
-                    groupedResults[el.type].push(el)
-                })
+                groupIcon = `images/ui/Class_${key}.png`
+                groupIconStyle= 'height: 18px; width: 80px;'
+                groupName = ""
+                break
+            case "position":
+                groupIcon = ''
+                groupIconStyle= ''
+                groupName = key
                 break
             case "attacktype":
-                groupedResults = {"Explosive": [], "Piercing": [], "Mystic": []}
-                $.each(data.students, function(i, el){
-                    if (el["released"][regionID])
-                    groupedResults[el.attack_type].push(el)
-                })
+                groupIcon = 'images/tactical/StrategyObjectBuff_Attack.png'
+                groupIconStyle = 'height:26px; width: auto; margin-bottom: 1px; filter: brightness(0%);'
+                groupName = key
                 break
             case "defensetype":
-                groupedResults = {"Light": [], "Heavy": [], "Special": []}
-                $.each(data.students, function(i, el){
-                    if (el["released"][regionID])
-                    groupedResults[el.defense_type].push(el)
-                })
+                groupIcon = 'images/tactical/StrategyObjectBuff_Defense.png'
+                groupIconStyle = 'height:26px; width: auto; margin-bottom: 1px; filter: brightness(0%);'
+                groupName = key
                 break
             case "excost":
-                groupedResults = {"_2": [], "_3": [], "_4": [], "_5": [], "_6": [], "_7": [], "_10": []}
-                $.each(data.students, function(i, el){
-                    if (el["released"][regionID])
-                    groupedResults['_'+el.skill_ex_cost[4]].push(el)
-                })
+                groupIcon = 'images/ui/Image_Cost_Font.png'
+                groupIconStyle = 'height: 16px; width: 56px; margin-bottom: 5px; margin-top: 7px;'
+                groupName = key.substr(1)
                 break
             case "limited":
-                groupedResults = {"_0": [], "_1": [], "_2": []}
-                $.each(data.students, function(i, el){
-                    if (el["released"][regionID])
-                    groupedResults['_'+el.is_limited].push(el)
-                })
+                groupIcon = ''
+                groupIconStyle = ''
+                groupName = key.replace("_0", "Not Limited").replace("_1", "Limited Recruitment").replace("_2", "Event Reward")
+                break
+            case "urbanpower":
+                groupIcon = `images/tactical/Ingame_Emo_Adaptresult${key}.png`
+                groupIconStyle = 'height:28px; width: auto;'
+                groupName = `Urban Combat Power ${key}`
+                break
+            case "outdoorpower":
+                groupIcon = `images/tactical/Ingame_Emo_Adaptresult${key}.png`
+                groupIconStyle = 'height:28px; width: auto;'
+                groupName = `Outdoor Combat Power ${key}`
+                break
+            case "indoorpower":
+                groupIcon = `images/tactical/Ingame_Emo_Adaptresult${key}.png`
+                groupIconStyle = 'height:28px; width: auto;'
+                groupName = `Indoor Combat Power ${key}`
                 break
         }
 
-        $("#ba-student-search-results").empty()
-    
-        var resultsHTML = ''
-
-        $.each(groupedResults, function(key, val){
-            
-            var groupIcon, groupName, groupIconStyle
-
-            switch (grouping) {
-                case "school":
-                    groupIcon = `images/schoolicon/School_Icon_${key.toUpperCase()}.png`
-                    groupIconStyle= 'height:40px; width: auto; margin-bottom: -2px;'
-                    groupName = school_longname[key]
-                    break
-                case "weapon":
-                    groupIcon = `images/weapontype/Weapon_Icon_${key.toUpperCase()}.png`
-                    groupIconStyle= 'height:38px; width: auto; margin-bottom: 4px;'
-                    groupName = key
-                    break
-                case "rarity":
-                    groupIcon = `images/ui/Star${key}.png`
-                    groupIconStyle= 'height:26px; width: auto; margin-bottom: 1px;'
-                    groupName = ""
-                    break
-                case "role":
-                    groupIcon = `images/tactical/Role_${key}.png`
-                    groupIconStyle= 'height:34px; width: auto;'
-                    groupName = key.replace("TacticalSupport", "Tactical Support")
-                    break
-                case "class":
-                    groupIcon = `images/ui/Class_${key}.png`
-                    groupIconStyle= 'height: 18px; width: 80px; margin-bottom: 4px;'
-                    groupName = ""
-                    break
-                case "attacktype":
-                    groupIcon = 'images/tactical/StrategyObjectBuff_Attack.png'
-                    groupIconStyle = 'height:26px; width: auto; margin-bottom: 1px; filter: brightness(0%);'
-                    groupName = key
-                    break
-                case "defensetype":
-                    groupIcon = 'images/tactical/StrategyObjectBuff_Defense.png'
-                    groupIconStyle = 'height:26px; width: auto; margin-bottom: 1px; filter: brightness(0%);'
-                    groupName = key
-                    break
-                case "excost":
-                    groupIcon = 'images/ui/Image_Cost_Font.png'
-                    groupIconStyle = 'height: 16px; width: 56px; margin-bottom: 5px; margin-top: 7px;'
-                    groupName = key.substr(1)
-                    break
-                case "limited":
-                    groupIcon = ''
-                    groupIconStyle = ''
-                    groupName = key.replace("_0", "Not Limited").replace("_1", "Limited Recruitment").replace("_2", "Event Reward")
-                    break
-            }
-
-            if (groupedResults[key].length != 0) {
+        if (groupedResults[key].length != 0) {
+            if (grouping == 'none') {
+                resultsHTML = `<div class="d-flex flex-row justify-content-center">
+                <ul class="ba-student-searchresult-grid align-top">
+                `
+                groupedResults[key].sort(sortfunction)
+                $.each(groupedResults[key], function(i2, el2){
+                    resultsHTML += getStudentListCardHTML(el2)
+                })
+                resultsHTML +=
+                    `
+                    </ul>
+                    </div>
+                    `
+            } else {
                 resultsHTML += `
-                <div class="d-flex flex-row align-items-center justify-content-center ba-student-search-group ${grouping == "attacktype" || grouping == "defensetype" || grouping == "class" ? 'ba-student-search-group-'+key.toLowerCase() : ''}">
-                <img class="d-inline-block align-self-center me-2" src="${groupIcon}" style="${groupIconStyle}">
-                <p style="font-size: larger; font-weight: bold; margin-bottom: 0px;">${groupName}</p>
-                </div>
-                <div class="d-flex flex-row justify-content-center pb-2">
+                <div class="ba-student-search-group">
+                <div class="d-flex flex-row align-items-center justify-content-center ba-student-search-group-header ${grouping == "attacktype" || grouping == "defensetype" || grouping == "class" ? 'ba-student-search-group-'+key.toLowerCase() : ''}">`
+                if (groupIcon != '') {resultsHTML += `<img class="d-inline-block align-self-center me-2" src="${groupIcon}" style="${groupIconStyle}">`}
+                if (groupName != '') {resultsHTML += `<p style="font-size: larger; font-weight: bold; margin-bottom: 0px;">${groupName}</p>`}
+                resultsHTML += `</div>
+                <div class="d-flex flex-row justify-content-center">
     
                 <ul class="ba-student-searchresult-grid align-top">
                 `
@@ -347,14 +405,15 @@ function populateStudentList() {
                 </ul></div></div>
                 `
             }
-        }) 
+        }
+    }) 
 
-        resultsHTML +=
-            `
-            </div>
-            `
-        $("#ba-student-search-results").append(resultsHTML)
+    if (resultsHTML == '') {
+        resultsHTML += `<div class="d-flex flex-row align-items-center justify-content-center">No results.</div>`
     }
+
+    $("#ba-student-search-results").append(resultsHTML)
+    
 }
 
 function searchOptionSet(option, value, runSearch = true) {
@@ -385,26 +444,29 @@ function loadStudent(studentName) {
         }
         bgimg.src = `images/background/${student.background_img}.jpg`
 
-        $('#ba-student-name-en').text(student.name_en)
-        $('#ba-student-name-jp').text(student.name_jp)
+        $('#ba-student-name').html(student.name_en.replace('(', '<small>(').replace(')', ')</small>'))
+        //$('#ba-student-name-jp').text(student.name_jp)
         $("#ba-student-class").attr("src", `images/ui/Class_${student.type}.png`)
 
         $("#ba-student-limited").removeClass("ba-type-striker ba-type-special")
         switch (student.is_limited) {
             case 0:
                 $("#ba-student-limited").hide()
+                $('#ba-student-limited-sep').hide()
                 break;
             case 1:
                 $("#ba-student-limited").show()
+                $('#ba-student-limited-sep').show()
                 $("#ba-student-limited").addClass("ba-type-striker")
                 $("#ba-student-limited").text("LIM")
-                $("#ba-student-limited").tooltip('dispose').tooltip({title: 'Student only available for a limited time through a recruitment banner.', placement: 'top', html: true})
+                $("#ba-student-limited").tooltip('dispose').tooltip({title: getRichTooltip(null, 'Limited Recruitment', null, 'Student only available for a limited time through a recruitment banner.'), placement: 'top', html: true})
                 break;
             case 2:
                 $("#ba-student-limited").show()
+                $('#ba-student-limited-sep').show()
                 $("#ba-student-limited").addClass("ba-type-special")
                 $("#ba-student-limited").text("EVT")
-                $("#ba-student-limited").tooltip('dispose').tooltip({title: 'Student only available for a limited time as an event reward.', placement: 'top', html: true})
+                $("#ba-student-limited").tooltip('dispose').tooltip({title: getRichTooltip(null, 'Event Reward', null, 'Student only available for a limited time as an event reward.'), placement: 'top', html: true})
                 break;
         }
         
@@ -432,20 +494,15 @@ function loadStudent(studentName) {
         }
         
         $("#ba-student-school-label").text(student.school)
-        $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","").replace("OTHERS", "ETC") + ".png")
+        $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + ".png")
         //$('#ba-student-school-img').tooltip('dispose').tooltip({title: school_longname[student.school], placement: 'bottom'})
         $("#ba-student-position").text(student.position.toUpperCase())
         $("#ba-student-attacktype-label").text(student.attack_type)
-        $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getTypeText(student.attack_type), placement: 'top', html: true})
+        $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip("images/tactical/StrategyObjectBuff_Attack.png", `${student.attack_type}`, 'Attack Type', getTypeText(student.attack_type)), placement: 'top', html: true})
         $("#ba-student-defensetype-label").text(student.defense_type)
-        $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getTypeText(student.defense_type), placement: 'top', html: true})
+        $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip("images/tactical/StrategyObjectBuff_Defense.png", `${student.defense_type}`, 'Defense Type', getTypeText(student.defense_type)), placement: 'top', html: true})
 
-        $("#ba-student-terrain-urban-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.urban_adaption + ".png")
-        $("#ba-student-terrain-field-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.field_adaption + ".png")
-        $("#ba-student-terrain-indoor-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + student.indoor_adaption + ".png")
-        $('#ba-student-terrain-urban').tooltip('dispose').tooltip({title: getAdaptionText('urban', student.urban_adaption), placement: 'top', html: true})
-        $('#ba-student-terrain-field').tooltip('dispose').tooltip({title: getAdaptionText('field', student.field_adaption), placement: 'top', html: true})
-        $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getAdaptionText('indoor', student.indoor_adaption), placement: 'top', html: true})
+        recalculateTerrainAffinity()
 
         if (student.uses_cover) {
             $("#ba-student-usescover-icon").show()
@@ -461,15 +518,15 @@ function loadStudent(studentName) {
         $("#ba-student-gear-1").attr("src", "images/equipment/Equipment_Icon_" + student.gear_1 + "_Tier1.png")
         $("#ba-student-gear-2").attr("src", "images/equipment/Equipment_Icon_" + student.gear_2 + "_Tier1.png")
         $("#ba-student-gear-3").attr("src", "images/equipment/Equipment_Icon_" + student.gear_3 + "_Tier1.png")
-        $('#ba-student-gear-1').tooltip('dispose').tooltip({title: student.gear_1, placement: 'bottom'})
-        $('#ba-student-gear-2').tooltip('dispose').tooltip({title: student.gear_2, placement: 'bottom'})
-        $('#ba-student-gear-3').tooltip('dispose').tooltip({title: student.gear_3, placement: 'bottom'})
+        $('#ba-student-gear-1').tooltip('dispose').tooltip({title: getRichTooltip(null, student.gear_1, 'Gear', find(data.common.gear, "type", student.gear_1)[0].description), placement: 'top', html: true})
+        $('#ba-student-gear-2').tooltip('dispose').tooltip({title: getRichTooltip(null, student.gear_2, 'Gear', find(data.common.gear, "type", student.gear_2)[0].description), placement: 'top', html: true})
+        $('#ba-student-gear-3').tooltip('dispose').tooltip({title: getRichTooltip(null, student.gear_3, 'Gear', find(data.common.gear, "type", student.gear_3)[0].description), placement: 'top', html: true})
 
         //Skills
-        $("#ba-skill-ex-name").text(student.skill_ex_name_en != null ? student.skill_ex_name_en : student.skill_ex_name_jp)
-        $("#ba-skill-normal-name").text(student.skill_normal_name_en != null ? student.skill_normal_name_en : student.skill_normal_name_jp)
-        $("#ba-skill-passive-name").text(student.skill_passive_name_en != null ? student.skill_passive_name_en : student.skill_passive_name_jp)
-        $("#ba-skill-sub-name").text(student.skill_sub_name_en != null ? student.skill_sub_name_en : student.skill_sub_name_jp)     
+        $("#ba-skill-ex-name").text(student.skill_ex_name_en ? student.skill_ex_name_en : student.skill_ex_name_jp)
+        $("#ba-skill-normal-name").text(student.skill_normal_name_en ? student.skill_normal_name_en : student.skill_normal_name_jp)
+        $("#ba-skill-passive-name").text(student.skill_passive_name_en ? student.skill_passive_name_en : student.skill_passive_name_jp)
+        $("#ba-skill-sub-name").text(student.skill_sub_name_en ? student.skill_sub_name_en : student.skill_sub_name_jp)     
 
         $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon)
         $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon)
@@ -479,21 +536,22 @@ function loadStudent(studentName) {
         student.skill_ex_cost[0] == student.skill_ex_cost[4] ? $("#ba-skill-ex-cost").removeClass("ba-skill-emphasis") : $("#ba-skill-ex-cost").addClass("ba-skill-emphasis")
 
         //Weapon
-        $("#ba-student-weapon-name").text(student.weapon_name_en)
+        $("#ba-student-weapon-name").text(student.weapon_name_en ? student.weapon_name_jp: student.weapon_name_jp)
+        $("#ba-student-weapon-type").text(student.weapon_type)
         //$("#ba-statpreview-weapon-name").text(student.weapon_name_en)
-        $("#ba-weapon-name-jp").text(student.weapon_name_jp)
+        //$("#ba-weapon-name-jp").text(student.weapon_name_jp)
         $("#ba-student-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
         //$("#ba-statpreview-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
 
         if (student.weapon_skill_passive_description != null) {
-            $("#ba-weapon-skill-passive-name").text(student.skill_passive_name_en != null ? student.skill_passive_name_en + '＋' : student.skill_passive_name_jp + '＋')
+            $("#ba-weapon-skill-passive-name").text(student.skill_passive_name_en ? student.skill_passive_name_en + '＋' : student.skill_passive_name_jp + '＋')
             $('#ba-weapon-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
             recalculateWeaponSkillPreview()
         }
 
         $('#ba-weapon-bonus-terrain-type').attr("src", `images/tactical/Terrain_${student.weapon_bonus_terrain_type}.png`)
         $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/tactical/Ingame_Emo_Adaptresult${student.weapon_bonus_terrain_adaption}.png`)
-        $('#ba-weapon-bonus-terrain-adaption-description').html(`${student.weapon_bonus_terrain_type.charAt(0).toUpperCase()+student.weapon_bonus_terrain_type.substr(1)} terrain affinity ${eval('student.'+student.weapon_bonus_terrain_type+'_adaption')} → <b>${student.weapon_bonus_terrain_adaption}</b><br>(${getAdaptionText(student.weapon_bonus_terrain_type, student.weapon_bonus_terrain_adaption)})`)
+        $('#ba-weapon-bonus-terrain-adaption-description').html(`${student.weapon_bonus_terrain_type.charAt(0).toUpperCase()+student.weapon_bonus_terrain_type.substr(1)} Combat Power ${eval('student.'+student.weapon_bonus_terrain_type+'_adaption')} → <b>${student.weapon_bonus_terrain_adaption}</b><br>(${getAdaptionText(student.weapon_bonus_terrain_type, student.weapon_bonus_terrain_adaption)})`)
 
         var url = new URL(window.location.href)
 
@@ -524,7 +582,7 @@ function loadStudent(studentName) {
         //Profile
         $('#ba-student-fullname-en').text(student.fullname_en)
         $('#ba-student-fullname-jp').text(student.fullname_jp)
-        $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","").replace("OTHERS", "ETC") + ".png")
+        $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + ".png")
         $('#ba-student-schoolclub-label').text(`${school_longname[student.school]} / ${student.club_en}`)
 
         if (student.profile_en) {
@@ -539,6 +597,7 @@ function loadStudent(studentName) {
             $(".ba-student-lobby").show()
             $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.name_dev}_01_Small.png`)
             $("#ba-student-lobby-unlock").text(student.recollection_lobby)
+            $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, 'Recollection Lobby', null, `Unlocks after affection rank ♥${student.recollection_lobby}`), placement: 'top', html: true})
         } else {
             $(".ba-student-lobby").hide()
         }
@@ -552,12 +611,30 @@ function loadStudent(studentName) {
 
         var favItemsHtml = ""
         $(student.favoured_items[0]).each(function(i,el){
-            favItemsHtml += getFavourIconHTML(el, "Favour Item", 3)
+            favItemsHtml += getFavourIconHTML(el, 3)
         })
         $(student.favoured_items[1]).each(function(i,el){
-            favItemsHtml += getFavourIconHTML(el, "Favour Item", 2)
+            favItemsHtml += getFavourIconHTML(el, 2)
         })
         $('#ba-student-favoured-items').empty().html(favItemsHtml)
+        if (favItemsHtml == "") {
+            $('#ba-student-favoured-items').empty().html('<span class="pb-2">This student does not have any favourite gifts.</span>')
+        } else {
+            $('#ba-student-favoured-items').empty().html(favItemsHtml)
+        }
+
+        var favFurnitureHtml = ""
+        $(student.favoured_furniture).each(function(i,el){
+            favFurnitureHtml += getFurnitureIconHTML(el)
+        })
+
+        $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
+        if (favFurnitureHtml == "") {
+            $('#ba-student-favoured-furniture').empty().html('<span class="pb-2">This student does not interact with any café furniture.</span>')
+        } else {
+            $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
+        }
+        $('.ba-student-favoured-item').tooltip({html: true})
 
         $('#ba-student-bond-1').text(getStatName(student.bond_stat[0]))
         $('#ba-student-bond-2').text(getStatName(student.bond_stat[1]))
@@ -606,8 +683,8 @@ function changeRegion(regID) {
     regionID = regID
     localStorage.setItem("region", regionID)
     if (!student.released[regionID]) {
-        localStorage.setItem("chara", "Haruna")
-        location.href = "students.html?chara=Haruna"
+        localStorage.setItem("chara", "Aru")
+        location.href = "students.html?chara=Aru"
     } else {
         location.reload()
     }
@@ -630,28 +707,7 @@ function loadRegion(regID) {
 }
 
 function getAdaptionText(terrain, rank) {
-    var text = 'Deals '
-    switch (rank) {
-        case "D":
-            text += `<b>0.8&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>0%</b>.`
-            break
-        case "C":
-            text += `<b>0.9&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>15%</b>.`
-            break
-        case "B":
-            text += `<b>1&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>30%</b>.` 
-            break
-        case "A":
-            text += `<b>1.1&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>45%</b>.`
-            break
-        case "S":
-            text += `<b>1.2&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>60%</b>.` 
-            break
-        case "SS":
-            text += `<b>1.3&times;</b> damage in <b>${terrain}</b> terrain.<br>Block rate when taking cover is <b>75%</b>.` 
-            break
-    }
-    return text
+    return `Deals <b>${terrain_dmg_bonus[rank]}&times;</b> damage in <b>${terrain}</b> terrain.\nBlock rate when taking cover <b>+${terrain_block_bonus[rank]}%</b>.\nChance to ignore block <b>+${terrain_block_bonus[rank]}%</b>.`
 }
 
 function getStatName(stat) {
@@ -784,6 +840,24 @@ function changeBondLevel(el) {
     recalculateBondPreview()
 }
 
+function recalculateTerrainAffinity() {
+    var adaption = {}
+    adaption["urban"] = student.urban_adaption
+    adaption["outdoor"] = student.outdoor_adaption
+    adaption["indoor"] = student.indoor_adaption
+
+    if (stat_preview_stars == 5 && $('#ba-statpreview-includeweapon').prop('checked') && stat_preview_weapon_stars >= 3) {
+        adaption[student.weapon_bonus_terrain_type] = student.weapon_bonus_terrain_adaption
+    }
+
+    $("#ba-student-terrain-urban-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + adaption["urban"] + ".png")
+    $("#ba-student-terrain-outdoor-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + adaption["outdoor"] + ".png")
+    $("#ba-student-terrain-indoor-icon").attr("src", "images/tactical/Ingame_Emo_Adaptresult" + adaption["indoor"] + ".png")
+    $('#ba-student-terrain-urban').tooltip('dispose').tooltip({title: getRichTooltip(null, 'Urban Combat Power ' + adaption["urban"], null, getAdaptionText('urban', adaption["urban"])), placement: 'top', html: true})
+    $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getRichTooltip(null, 'Outdoor Combat Power ' + adaption["outdoor"], null, getAdaptionText('outdoor', adaption["outdoor"])), placement: 'top', html: true})
+    $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getRichTooltip(null, 'Indoor Combat Power ' + adaption["indoor"], null, getAdaptionText('indoor', adaption["indoor"])), placement: 'top', html: true})
+}
+
 function recalculateWeaponPreview() {
 
     var level = $("#ba-weaponpreview-levelrange").val()
@@ -791,7 +865,7 @@ function recalculateWeaponPreview() {
     var levelscale = ((level-1)/99).toFixed(4)
 
     $.each(student.weapon_bonus_stats, function(i, el) {
-        $(`#ba-weapon-stat-${i+1}-amount`).text(Math.round(student.weapon_bonus_stats_parameters[i][0] + (student.weapon_bonus_stats_parameters[i][1]-student.weapon_bonus_stats_parameters[i][0]) * levelscale))
+        $(`#ba-weapon-stat-${i+1}-amount`).text('+'+Math.round(student.weapon_bonus_stats_parameters[i][0] + (student.weapon_bonus_stats_parameters[i][1]-student.weapon_bonus_stats_parameters[i][0]) * levelscale))
     }) 
 
 }
@@ -883,8 +957,8 @@ function recalculateStatPreview() {
 
     $('#ba-student-stat-stability').text(student.stability)//.tooltip('dispose').tooltip({title: `Minimum weapon damage: <b>${parseFloat(((0.015*student.stability)+55).toFixed(2))}%</b>`, placement: 'top', html: true})
     $('#ba-student-stat-range').text(student.range)
-    $('#ba-student-stat-ccpower').text(`${parseFloat(((10000*bonus["cc_power_percent"])/100).toFixed(4))}%`)
-    $('#ba-student-stat-ccresist').text(`${parseFloat(((10000*bonus["cc_resist_percent"])/100).toFixed(4))}%`)
+    $('#ba-student-stat-ccpower').text(`${Math.round(((100*bonus["cc_power_percent"])).toFixed(4))}`)
+    $('#ba-student-stat-ccresist').text(`${Math.round(((100*bonus["cc_resist_percent"])).toFixed(4))}`)
 
     if (student.type == "Striker") {
         $('#ba-student-stat-ammo').text(student.ammo_count + " (" + student.ammo_cost + ")")
@@ -892,7 +966,10 @@ function recalculateStatPreview() {
         $('#ba-student-stat-ammo').text('N/A')
     }
     
-    $('#ba-student-stat-costrecovery').text(student.cost_recovery)
+    //$('#ba-student-stat-costrecovery').text(student.cost_recovery)
+    $('#ba-student-stat-critresist').text(100+bonus["critical_resist"])
+    $('#ba-student-stat-critdmgresist').text(`${parseFloat(((5000+bonus["critical_damage_resist"])/100).toFixed(4))}%`)
+    $('#ba-student-stat-recoveryrate').text(`${parseFloat(((10000+bonus["healing_received"])/100).toFixed(4))}%`)
 }
 
 function recalculateEXSkillPreview() {
@@ -900,7 +977,7 @@ function recalculateEXSkillPreview() {
 
     $('#ba-skill-ex-description').html(getSkillText(student.skill_ex_description, student.skill_ex_parameters, skillLevelEX))
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
-        $(el).tooltip()
+        $(el).tooltip({html: true})
     })
     $('#ba-skill-ex-materials').empty()
 
@@ -908,13 +985,13 @@ function recalculateEXSkillPreview() {
         var html = ''
         $.each(student.skill_ex_upgrade_material[skillLevelEX-2], function(i, el) {
             var item = find(data.common.items,"id",el)[0]
-            html += getMaterialIconHTML(item.rarity, item.icon, item.name_en, student.skill_ex_upgrade_amount[skillLevelEX - 2][i])
+            html += getMaterialIconHTML(item.rarity, item.icon, item.name_en, student.skill_ex_upgrade_amount[skillLevelEX - 2][i], item.type)
         })
-        html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_ex_upgrade_credits[skillLevelEX - 2]))
+        html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_ex_upgrade_credits[skillLevelEX - 2]), 'Item')
 
         $('#ba-skill-ex-materials').html(html)
         $('#ba-skill-ex-materials div').each(function(i,el) {
-            $(el).tooltip()
+            $(el).tooltip({html: true})
         })
     } else {
         $('#ba-skill-ex-materials').html('<span class="pb-2">No materials required.</span>')
@@ -926,17 +1003,14 @@ function recalculateEXSkillPreview() {
 function getStudentListCardHTML(student) {
     var label = ""
     switch (search_options["sortby"]) {
-        case "name":
+        case "default": case "name": case "rarity":
             label += student.name_en
             break
-        case "rarity":
-            label += student.name_en
-            break 
         case "school":
-            label += student.school.replace("RedWinter", "Red Winter").replace("ETC", "Others")
+            label += student.school.replace("RedWinter", "Red Winter")
             break
         case "role":
-            label += student.name_en
+            label += student.role.replace("TacticalSupport", "T.S.")
             break 
         case "weapon":
             label += student.weapon_type
@@ -992,6 +1066,7 @@ function getStudentListCardHTML(student) {
     //            <span style="z-index: 10; padding: 2px 3px; position: absolute; left: 3px; bottom: 26px; width:36px; height:12px; background-color: #ffffff; border-radius: 10px;" ><img style="width:100%; height:100%" src="images/ui/Class_${student["type"]}.png"></span>
 
 }
+
 function getStudentLimitedBadgeHTML(lim) {
     switch (lim) {
         case 0:
@@ -1003,23 +1078,30 @@ function getStudentLimitedBadgeHTML(lim) {
     }
 }
 
-
-function getMaterialIconHTML(rarity, icon, name, amount) {
+function getMaterialIconHTML(rarity, icon, name, amount, type) {
     var html
-    html = `<div class="me-2 drop-shadow" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${name}">
+    html = `<div class="me-2 drop-shadow" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(null, type, rarity, name)}">
             <img class="ba-material-icon" style="background-image: url('images/ui/Card_Item_Bg_${rarity}.png');"
             src="images/items/${icon}.png"><span class="ba-material-label">&times;${amount}</span></div>
             `
     return html
 }
 
-function getFavourIconHTML(icon, name, grade) {
-    var html
-    html = `<div class="" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${name}">
-            <img id="ba-student-favoured-item-icon" src="images/items/Item_Icon_Favor_${icon}.png">
+function getFavourIconHTML(id, grade) {
+    var gift = find(data.common.items, "id", 5000+id)[0]
+    var html = `<div class="ba-student-favoured-item drop-shadow" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(null, gift.type, gift.rarity, gift.name_en)}">
+            <img id="ba-student-favoured-item-icon" style="background-image: url('images/ui/Card_Item_Bg_${gift.rarity}.png')" src="images/items/${gift.icon}.png">
             <img id="ba-student-favoured-item-rank" src="images/ui/Cafe_Interaction_Gift_0${grade}.png"></div>
             `
     return html
+}
+
+function getFurnitureIconHTML(id) {
+    var item = find(data.common.furniture, "id", id)[0]
+    var html = `<div class="ba-student-favoured-item drop-shadow" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(null, 'Furniture', item.rarity, item.name_en)}">
+    <img id="ba-student-favoured-item-icon" style="background-image: url('images/ui/Card_Item_Bg_${item.rarity}.png')" src="images/furniture/${item.icon}.png"></div>
+    `
+return html
 }
 
 function searchToggleInfo(obj) {
@@ -1040,7 +1122,7 @@ function recalculateSkillPreview() {
     $('#ba-skill-sub-description').html(getSkillText(student.skill_sub_description, student.skill_sub_parameters, skillLevel))
 
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
-        $(el).tooltip()
+        $(el).tooltip({html: true})
     })
 
     $('#ba-skill-materials').empty()
@@ -1048,23 +1130,23 @@ function recalculateSkillPreview() {
         var html = ''
         $.each(student.skill_upgrade_material[skillLevel-2], function(i, el) {
             var item = find(data.common.items,"id",el)[0]
-            html += getMaterialIconHTML(item.rarity, item.icon, item.name_en, student.skill_upgrade_amount[skillLevel - 2][i])
+            html += getMaterialIconHTML(item.rarity, item.icon, item.name_en, student.skill_upgrade_amount[skillLevel - 2][i], item.type)
         })
-        html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_upgrade_credits[skillLevel - 2]))
+        html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_upgrade_credits[skillLevel - 2]), 'Item')
 
         $('#ba-skill-materials').html(html)
         $('#ba-skill-materials div').each(function(i,el) {
-            $(el).tooltip()
+            $(el).tooltip({html: true})
         })
     } else if (skillLevel == 10) {
         var html = ''
         var item = find(data.common.items,"id",9999)[0]
-        html += getMaterialIconHTML(item.rarity, item.icon, item.name_en, 1)
-        html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_upgrade_credits[skillLevel - 2]))
+        html += getMaterialIconHTML(item.rarity, item.icon, item.name_en, 1, item.type)
+        html += getMaterialIconHTML('N', 'Currency_Icon_Gold', 'Credits', abbreviateNumber(skill_upgrade_credits[skillLevel - 2]), 'Item')
 
         $('#ba-skill-materials').html(html)
         $('#ba-skill-materials div').each(function(i,el) {
-            $(el).tooltip()
+            $(el).tooltip({html: true})
         })
     } else {
         $('#ba-skill-materials').html('<span class="pb-2">No materials required.</span>')
@@ -1075,15 +1157,15 @@ function recalculateWeaponSkillPreview() {
     var skillLevel = $("#ba-weapon-skillpreview-range").val()
     $('#ba-weapon-skill-passive-description').html(getSkillText(student.weapon_skill_passive_description, student.weapon_skill_passive_parameters, skillLevel))
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
-        $(el).tooltip()
+        $(el).tooltip({html: true})
     })
 }
 
 function recalculateBondPreview() {
     var level = $("#ba-bond-levelrange").val()
     var bondbonus = getBondStats(student, level)
-    $("#ba-student-bond-1-amount").text(bondbonus[student.bond_stat[0]])
-    $("#ba-student-bond-2-amount").text(bondbonus[student.bond_stat[1]])    
+    $("#ba-student-bond-1-amount").text('+'+bondbonus[student.bond_stat[0]])
+    $("#ba-student-bond-2-amount").text('+'+bondbonus[student.bond_stat[1]])    
 }
 
 function getBondStats(student, level) {
@@ -1118,6 +1200,7 @@ function toggleStatPreviewWeapon(el) {
         $(".ba-weaponpreview-star").toggleClass("disabled",true)
     }
     recalculateStatPreview()
+    recalculateTerrainAffinity()
 }
 
 function changeWeaponPreviewStars(el, stars) {
@@ -1129,5 +1212,6 @@ function changeWeaponPreviewStars(el, stars) {
         }
         
         recalculateStatPreview()
+        recalculateTerrainAffinity()
     }
 }

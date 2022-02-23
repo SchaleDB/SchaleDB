@@ -69,9 +69,17 @@
 
                                 <div style="height: 20px;background: linear-gradient(transparent, #ffffffff 80%);position: absolute;width: 100%;bottom: 0px;left: 0;"></div>
                             </div>
-                            <div class="">                                 
+                            <div class="">                      
                                 <div>
                                     <div id="ba-raid-page-stats" class="tab-pane fade show active container-fluid p-3 ba-raid-page" style="border-radius: 0 0 .25em .25em;">
+                                        <nav class="nav nav-pills nav-fill">
+                                            <a id="ba-raid-difficulty-0" class="nav-link active" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(0)">Normal</a>
+                                            <a id="ba-raid-difficulty-1" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(1)">Hard</a>
+                                            <a id="ba-raid-difficulty-2" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(2)">VeryHard</a>
+                                            <a id="ba-raid-difficulty-3" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(3)">Hardcore</a>
+                                            <a id="ba-raid-difficulty-4" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(4)">Extreme</a>
+                                            <a id="ba-raid-difficulty-5" class="nav-link disabled" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(5)">Insane</a>
+                                        </nav>   
                                         <div class="mt-2 d-flex flex-row align-items-end">
                                             <span class="flex-grow-1">
                                                 <h5 style="display: inline; font-weight: bold;">Stats</h5>
@@ -84,34 +92,11 @@
                                         </div>
                                         <div class="row g-1 mt-1">
                                             <div class="col">
-                                                <table class="table ba-stats mb-4">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td width="30%">Level</td>
-                                                            <td id="ba-raid-stat-level" width="20%"></td>
-                                                            <td width="30%">HP</td>
-                                                            <td id="ba-raid-stat-hp" width="20%"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Attack</td>
-                                                            <td id="ba-raid-stat-attack"></td>
-                                                            <td>Defense</td>
-                                                            <td id="ba-raid-stat-defense"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Critical Res.</td>
-                                                            <td id="ba-raid-stat-critresist"></td>
-                                                            <td>Crit. DMG Res.</td>
-                                                            <td id="ba-raid-stat-critdmgresist"></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Stagger Condition</td>
-                                                            <td id="ba-raid-stat-stagger-condition"></td>
-                                                            <td>Stagger Gauge</td>
-                                                            <td id="ba-raid-stat-stagger-gauge"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                <nav id="ba-raid-enemy-tabs" class="nav nav-tabs">
+                                                </nav>
+                                                <div id="ba-raid-enemy-stats" class="tab-content">
+
+                                                </div>
                                             </div>
                                         </div>
 
