@@ -7,6 +7,21 @@ p {
     white-space: pre-line;
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5);
+    background-clip: padding-box;
+    border-radius: 99px;
+    border: solid 2px transparent;
+  }
+
 .card {
     background-color: rgba(0,0,0,0);
 }
@@ -74,6 +89,13 @@ p {
     flex-basis: 50%;
 }
 
+.unselectable {
+    -webkit-user-select: none;       
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
 .dropdown-menu-dark .dropdown-item.active, .dropdown-menu-dark .dropdown-item:active {
     color: #343a40;
     background-color: #fff;
@@ -125,7 +147,7 @@ p {
 }
 
 #ba-student-class {
-    height: 18px;
+    height: 16px;
     width: 72px;
     margin: 0 0.375rem 0 0;
 }
@@ -202,8 +224,8 @@ h1 small {
 }
 
 .ba-type-weapon {
-    height: 78px;
-    min-width: 162px;
+    height: 79px;
+    min-width: 167px;
     border-color: #2f6283;
     border-radius: 0.25em;
     padding: .1rem .25rem !important;
@@ -227,19 +249,16 @@ h1 small {
 }
 
 .ba-type-explosive {
-    border-color: #920008;
     background-color: #920008;
     color: #fff;
 }
 
 .ba-type-mystic {
-    border-color: #226f9b;
     background-color: #226f9b;
     color: #fff;
 }
 
 .ba-type-pierce {
-    border-color: #be8901;
     background-color: #be8901;
     color: #fff;
 }
@@ -394,16 +413,8 @@ h1 small {
 .ba-student-card-star {
     display: none;
     position: absolute;
-    background-color: transparent;
-    background: url('../images/ui/Common_Icon_Formation_Star.png') no-repeat center center/contain;
-    font-weight: bold;
-    color: #000000;
-    height: 20px;
-    width: 22px;
-    font-size: 14px;
-    text-align: center;
-    align-items: baseline;
-    justify-content: center;
+    height: 22px;
+    width: 23px;
 }
 
 .ba-student-search-details .ba-student-card-role, .ba-student-search-details .ba-student-card-star {
@@ -416,6 +427,18 @@ h1 small {
 
 .ba-student-search-details > .bg-special {
     border-bottom: #006bff 3px solid !important;
+}
+
+.bg-atk-explosive, .bg-def-light {
+    background-color: #920008;
+}
+
+.bg-atk-piercing, .bg-def-heavy {
+    background-color: #be8901;
+}
+
+.bg-atk-mystic, .bg-def-special {
+    background-color: #226f9b;
 }
 
 .ba-student-search-details > .bd-explosive {
@@ -452,14 +475,19 @@ h1 small {
 
 /* .ba-skill-cost-label {
     position: absolute;
-    top: 0px;
-    width: 30px;
-    height: 30px;
-    padding-top: 5px;
-    background: url("../images/ui/Combat_CostBg.png") no-repeat center center/contain;
-    color: #ffffff;
-    text-align: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    left: 48px;
+    border: 2px solid white;
+    top: 42px;
+    color: white;
+    line-height: 20px;
+    font-size: 16px;
+    cursor: default;
     font-weight: bold;
+    text-align: center;
+    background-color: rgb(44, 69, 99);
 } */
 
 .ba-gear-icon {
@@ -469,7 +497,6 @@ h1 small {
     margin-left: -10px;
     width: auto;
     object-fit: contain;
-    background-image: url("../images/ui/Card_Bg.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: center;
@@ -511,7 +538,7 @@ h1 small {
 }
 
 .ba-skill {
-    height: auto;
+    height: 64px;
     width: 60px;
     object-fit: contain;
     background-size: contain;
@@ -558,7 +585,7 @@ h1 small {
 }
 
 .ba-buff-icon {
-    image-rendering: -webkit-optimize-contrast;
+    /* image-rendering: -webkit-optimize-contrast; */
     position: absolute;
     top: 0px;
     height: 22px;
@@ -611,21 +638,39 @@ h1 small {
     border-radius: 0.25rem;
 }
 
+.ba-weapon-skill-plus {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    left: 50px;
+    border: 2px solid white;
+    top: 5px;
+    color: white;
+    line-height: 16px;
+    font-size: 15px;
+    cursor: default;
+    font-weight: bold;
+    text-align: center;
+}
+
 .ba-student-searchresult-item {
     display: inline-block;
     margin: 0px 4px 8px 4px;
-    max-width: 86px;
+    max-width: 100px;
 }
 
 .ba-student-page {
-    overflow-y: scroll;
-    scrollbar-width: none;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155, 155, 155, 0.5);
     max-height: calc(100vh - 190px);
 }
 
 .ba-raid-page {
-    overflow-y: scroll;
-    scrollbar-width: none;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(155, 155, 155, 0.5);
     max-height: calc(100vh - 13rem - 2.2vw);
 }
 
@@ -638,9 +683,9 @@ h1 small {
 }
 
 @media(min-width: 576px) {
-    .ba-student-searchresult-item {
+    /* .ba-student-searchresult-item {
         max-width: 92px;
-    }
+    } */
 }
 
 @media(max-width: 768px) {
@@ -716,11 +761,11 @@ h1 small {
 }
 
 
-@media(min-width: 1200px) {
+/* @media(min-width: 1200px) {
     .ba-student-searchresult-item {
         max-width: 100px;
     }
-}
+} */
 
 .ba-student-searchresult-grid {
     text-align: center;
@@ -739,9 +784,9 @@ h1 small {
     position: relative;
 }
 
-#ba-student-role-icon, #ba-student-school-img, .ba-skill, .ba-student-card-role img {
+/* #ba-student-role-icon, #ba-student-school-img, .ba-skill, .ba-student-card-role img {
     image-rendering: -webkit-optimize-contrast;
-}
+} */
 
 #ba-student-lobby-img {
     height: 78px;
@@ -807,7 +852,7 @@ h1 small {
 
 .ba-skill-buff, .ba-skill-debuff, .ba-skill-cc, .ba-skill-special {
     position: relative;
-    font-weight: 500;
+    font-weight: 600;
     border-radius: 0.25rem;
     padding: 0rem 0.25rem;
     white-space: nowrap;
@@ -954,6 +999,7 @@ table.table-striker-bonus tr:nth-child(1){
     left: 0.4rem;
     height: 27px;
     width: auto;
+    image-rendering: -webkit-optimize-contrast;
 }
 
 .ba-tooltip-title {

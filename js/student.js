@@ -314,7 +314,7 @@ function populateStudentList() {
                 groupName = key
                 break
             case "rarity":
-                groupIcon = `images/ui/Star${key}.png`
+                groupIcon = `images/ui/Common_Icon_Formation_Star_R${key.substr(1)}.png`
                 groupIconStyle= 'height:26px; width: auto; margin-bottom: 1px;'
                 groupName = ""
                 break
@@ -475,13 +475,13 @@ function loadStudent(studentName) {
         $("#ba-student-role-icon").attr("src", `images/tactical/Role_${student.role}.png`)
 
         if (student.attack_type == "Explosive") {
-            $("#ba-student-attacktype").removeClass("ba-type-mystic ba-type-pierce").addClass("ba-type-explosive")
+            $("#ba-student-attacktype, .ba-weapon-skill-plus").removeClass("ba-type-mystic ba-type-pierce").addClass("ba-type-explosive")
             $(".ba-skill").removeClass("ba-skill-yellow ba-skill-blue").addClass("ba-skill-red")
         } else if (student.attack_type == "Piercing") {
-            $("#ba-student-attacktype").removeClass("ba-type-mystic ba-type-explosive").addClass("ba-type-pierce")
+            $("#ba-student-attacktype, .ba-weapon-skill-plus").removeClass("ba-type-mystic ba-type-explosive").addClass("ba-type-pierce")
             $(".ba-skill").removeClass("ba-skill-red ba-skill-blue").addClass("ba-skill-yellow")
         } else if (student.attack_type == "Mystic") {
-            $("#ba-student-attacktype").removeClass("ba-type-pierce ba-type-explosive").addClass("ba-type-mystic")
+            $("#ba-student-attacktype, .ba-weapon-skill-plus").removeClass("ba-type-pierce ba-type-explosive").addClass("ba-type-mystic")
             $(".ba-skill").removeClass("ba-skill-yellow ba-skill-red").addClass("ba-skill-blue")
         }
 
@@ -513,7 +513,7 @@ function loadStudent(studentName) {
         $("#ba-student-weapontype-label").text(student.weapon_type)
         $(".ba-type-weapon").css("background-image", "url('images/weapontype/Weapon_Icon_" + student.weapon_type_img + ".png')")
 
-        $("#ba-student-stars").attr("src", "images/ui/Star_" + student.stars + ".png")
+        $("#ba-student-stars").attr("src", "images/ui/Common_Icon_Formation_Star_R" + student.stars + ".png")
 
         $("#ba-student-gear-1").attr("src", "images/equipment/Equipment_Icon_" + student.gear_1 + "_Tier1.png")
         $("#ba-student-gear-2").attr("src", "images/equipment/Equipment_Icon_" + student.gear_2 + "_Tier1.png")
@@ -544,7 +544,7 @@ function loadStudent(studentName) {
         //$("#ba-statpreview-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
 
         if (student.weapon_skill_passive_description != null) {
-            $("#ba-weapon-skill-passive-name").text(student.skill_passive_name_en ? student.skill_passive_name_en + '＋' : student.skill_passive_name_jp + '＋')
+            $("#ba-weapon-skill-passive-name").text(student.skill_passive_name_en ? student.skill_passive_name_en + '+' : student.skill_passive_name_jp + '＋')
             $('#ba-weapon-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
             recalculateWeaponSkillPreview()
         }
@@ -595,7 +595,7 @@ function loadStudent(studentName) {
 
         if (student.recollection_lobby) {
             $(".ba-student-lobby").show()
-            $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.name_dev}_01_Small.png`)
+            $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.name_dev}_01.png`)
             $("#ba-student-lobby-unlock").text(student.recollection_lobby)
             $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, 'Recollection Lobby', null, `Unlocks after affection rank ♥${student.recollection_lobby}`), placement: 'top', html: true})
         } else {
@@ -939,7 +939,7 @@ function recalculateStatPreview() {
     if (!strikerBonus) {
         $('#ba-student-stat-maxhp').text(Math.round(((maxHP+bonus["maxhp"])*bonus["maxhp_percent"]).toFixed(4)))
         $('#ba-student-stat-attack').text(Math.round(((attack+bonus["attack_power"])*bonus["attack_power_percent"]).toFixed(4)))
-        $('#ba-student-stat-defense').text(defense+bonus["defense_power"])//.tooltip('dispose').tooltip({title: `<b>${parseFloat(((1-(0.7*(Math.pow(0.99925,defense+bonus["defense_power"]))+0.3))*100).toFixed(2))}%</b> damage reduction.`, placement: 'top', html: true})
+        $('#ba-student-stat-defense').text(defense+bonus["defense_power"])
         $('#ba-student-stat-healing').text(Math.round(((healing+bonus["heal_power"])*bonus["heal_power_percent"]).toFixed(4)))
     } else {
         $('#ba-student-stat-maxhp').text('+'+Math.floor(((maxHP+bonus["maxhp"])*bonus["maxhp_percent"]).toFixed(4)*0.1))
@@ -948,14 +948,13 @@ function recalculateStatPreview() {
         $('#ba-student-stat-healing').text('+'+Math.floor(((healing+bonus["heal_power"])*bonus["heal_power_percent"]).toFixed(4)*0.05))
     }
 
-
     $('#ba-student-stat-accuracy').text(student.accuracy+bonus["accuracy"])
     $('#ba-student-stat-evasion').text(student.evasion)
     var totalcrit = student.critical+bonus["critical"]-100
     $('#ba-student-stat-crit').text(student.critical+bonus["critical"])//.tooltip('dispose').tooltip({title: `<b>${parseFloat(((totalcrit/(totalcrit+650))*100).toFixed(2))}%</b> critical chance against a target with 100 crit resistance.`, placement: 'top', html: true})
     $('#ba-student-stat-critdmg').text(`${parseFloat(((student.critical_dmg+bonus["critical_damage"])/100).toFixed(4))}%`)
 
-    $('#ba-student-stat-stability').text(student.stability)//.tooltip('dispose').tooltip({title: `Minimum weapon damage: <b>${parseFloat(((0.015*student.stability)+55).toFixed(2))}%</b>`, placement: 'top', html: true})
+    $('#ba-student-stat-stability').text(student.stability).tooltip('dispose')//.tooltip({title: getRichTooltip(null, 'Damage Variance', null, `<b>${parseFloat((((student.stability/(student.stability+997))+0.2)*100).toFixed(2))}%</b> ~ 100%`), placement: 'top', html: true})
     $('#ba-student-stat-range').text(student.range)
     $('#ba-student-stat-ccpower').text(`${Math.round(((100*bonus["cc_power_percent"])).toFixed(4))}`)
     $('#ba-student-stat-ccresist').text(`${Math.round(((100*bonus["cc_resist_percent"])).toFixed(4))}`)
@@ -1051,9 +1050,11 @@ function getStudentListCardHTML(student) {
     <li class="ba-student-searchresult-item">
         <div onclick="loadStudent('${student["name_dev"]}')" class="ba-student-card ${showInfo ? "ba-student-search-details" : ""}">
             <img class="ba-student-card-portrait" src="images/student/collection/Student_Portrait_${student["name_dev"]}_Collection.png">
-            <span class="ba-student-card-role bg-${student["type"].toLowerCase()}" style="left: 0; top: 0;"><img src="images/tactical/Role_${student["role"]}.png" style="width:100%"></span>
-            <span class="ba-student-card-star" style="right: 2px; top: 2px;">${student["stars"]}</span>
-            <div class="d-flex align-items-center bd-${student["attack_type"].toLowerCase()} ba-student-card-label">
+            <!--<span class="ba-student-card-role bg-def-${student["defense_type"].toLowerCase()}" style="width: 20px; height: 26px; left: 0; top: 34px; border-radius: 0px 0px 8px 0px;"><img src="images/tactical/StrategyObjectBuff_Defense.png" style="width:12px; margin-top: 10px;"></span>
+            <span class="ba-student-card-role bg-atk-${student["attack_type"].toLowerCase()}" style="width: 20px; height: 26px; left: 0; top: 16px; border-radius: 0px 0px 8px 0px;"><img src="images/tactical/StrategyObjectBuff_Attack.png" style="width:12px; margin-top: 10px;"></span>-->
+            <span class="ba-student-card-role bg-${student["type"].toLowerCase()}" style="left: 0; top: 0;"><img src="images/tactical/Role_${student["role"]}_s.png" style="width:100%"></span>
+            <img class="ba-student-card-star" style="right: 2px; top: 2px;" src="images/ui/Common_Icon_Formation_Star_R${student["stars"]}.png">
+            <div class="d-flex align-items-center ba-student-card-label bd-${student["attack_type"].toLowerCase()}">
             `
     if (student.name_en != label) {
         html += `<span class="ba-unhover-text px-1 align-middle ${label.length > 11 ? "smalltext" : ""}" style="width: 100%">${label}</span>
@@ -1063,7 +1064,7 @@ function getStudentListCardHTML(student) {
     }
     html += '</div></div></li>'
     return html
-    //            <span style="z-index: 10; padding: 2px 3px; position: absolute; left: 3px; bottom: 26px; width:36px; height:12px; background-color: #ffffff; border-radius: 10px;" ><img style="width:100%; height:100%" src="images/ui/Class_${student["type"]}.png"></span>
+    //   bd-${student["attack_type"].toLowerCase()}          <span style="z-index: 10; padding: 2px 3px; position: absolute; left: 3px; bottom: 26px; width:36px; height:12px; background-color: #ffffff; border-radius: 10px;" ><img style="width:100%; height:100%" src="images/ui/Class_${student["type"]}.png"></span>
 
 }
 
