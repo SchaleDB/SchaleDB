@@ -121,15 +121,24 @@ p {
 
 #ba-student-background, #ba-raid-background {
     position: fixed;
-    top: 56px;
+    top: 0px;
     background: #000 no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
     width: 100vw;
-    height: calc(100vh - 56px);
+    height: 100vh;
     z-index: -1000;
+}
+
+#ba-student-background::after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backdrop-filter: blur(6px);
+    pointer-events: none;
 }
 
 .ba-type-school {
@@ -138,12 +147,34 @@ p {
     color: #000;
 }
 
-#ba-student-school-img {
+#ba-student-school-img, #ba-profile-school-img {
     /*border: 1px solid rgb(17, 33, 52);*/
     border: 1px solid grey;
     border-radius: .25em;
     height: 78px;
     width: auto;
+}
+
+#ba-profile-school-label {
+    font-weight: 700;
+    /* color: rgb(44, 69, 99); */
+    margin-bottom: 0px;
+}
+
+#ba-profile-schoolyear-label {
+    margin-left: 0.25rem;
+    background-color: rgb(245, 233, 75);
+    border-radius: 0.25rem;
+    font-weight: 500;
+    padding: 0 0.25rem 0 0.25rem;
+    color: rgb(44, 69, 99);
+    margin-bottom: 0px;
+    white-space: nowrap;
+}
+
+#ba-profile-club-label {
+    font-weight: 500;
+    margin-bottom: 0px;
 }
 
 #ba-student-class {

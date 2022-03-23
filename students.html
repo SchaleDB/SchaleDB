@@ -28,7 +28,6 @@
     
     <div id="ba-student-background" style="position: fixed;">
     </div>
-
     <div class="container-fluid p-0 h-100" style="min-height: 100vh; overflow-x: none; position: relative; padding-top: 58px !important;">
 
         <div id="ba-navbar-placeholder"></div>
@@ -451,13 +450,17 @@
                                     </div>
 
                                     <div id="ba-student-page-profile" class="tab-pane fade container-fluid p-3 ba-student-page" style="background-color: #fff; border-radius: .25em;">
-                                        <div class="d-flex flex-row align-items-center">
+                                        <div class="d-flex flex-row align-items-center mb-2">
                                             <h2 id="ba-student-fullname-en" class="me-2" style="display: inline; font-weight: bold;"></h2>
                                             <h4 id="ba-student-fullname-jp" class="d-inline"></h4>
                                         </div>
                                         <div class="d-flex flex-row align-items-center">
-                                            <img id="ba-profile-school-img" class="me-1" src="" style="height:42px; width: auto;">
-                                            <p id="ba-student-schoolclub-label" style="font-style: italic; margin-bottom: 0px;"></p>
+                                            <img id="ba-profile-school-img" class="me-1" src="" style="height:50px; width: auto;">
+                                            <span class="ms-1">
+                                                <span id="ba-profile-school-label"></span><span id="ba-profile-schoolyear-label"></span><br>
+                                                <span id="ba-profile-club-label"></span>
+                                            </span>
+                                            
                                         </div>
 
                                         <table class="table ba-stats mt-2 mb-4">

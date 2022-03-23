@@ -3,7 +3,7 @@ $.holdReady(true)
 const starscale_hp      = [1, 1.05,  1.12,  1.21,  1.35 ]
 const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445]
-const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Academy", "Hyakkiyako": "Allied Hyakkiyako Academy", "Millennium": "Millennium Science School", "RedWinter": "Red Winter Federal Academy", "Shanhaijing": "Shanhaijing Senior Secondary School", "Trinity": "Trinity General School", "Valkyrie": "Valkyrie Police School", "Arius": "Arius Satellite School", "Others": "Others"}
+const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Academy", "Hyakkiyako": "Allied Hyakkiyako Academy", "Millennium": "Millennium Science School", "RedWinter": "Red Winter Federal Academy", "Shanhaijing": "Shanhaijing Senior Secondary School", "Trinity": "Trinity General School", "Valkyrie": "Valkyrie Police School", "Arius": "Arius Satellite School", "Others": "Others", "SRT": "SRT Special Academy"}
 
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
@@ -197,7 +197,7 @@ function populateStudentList() {
             })
             break
         case "school":
-            groupedResults = {"Abydos": [], "Gehenna": [], "Hyakkiyako": [], "Millennium": [], "RedWinter": [], "Shanhaijing": [], "Trinity": [], "Valkyrie": [], "Others": []}
+            groupedResults = {"Abydos": [], "Gehenna": [], "Hyakkiyako": [], "Millennium": [], "RedWinter": [], "Shanhaijing": [], "Trinity": [], "Valkyrie": [], "SRT": [], "Others": []}
             $.each(data.students, function(i, el){
                 if ((el["released"][regionID]) && (searchTerm == "" || el["name_en"].toLowerCase().includes(searchTerm.toLowerCase())))
                 groupedResults[el.school].push(el)
@@ -583,7 +583,10 @@ function loadStudent(studentName) {
         $('#ba-student-fullname-en').text(student.fullname_en)
         $('#ba-student-fullname-jp').text(student.fullname_jp)
         $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + ".png")
-        $('#ba-student-schoolclub-label').text(`${school_longname[student.school]} / ${student.club_en}`)
+        $('#ba-profile-school-label').text(school_longname[student.school])
+        $('#ba-profile-club-label').text(student.club_en)
+        student.year == "" ? $('#ba-profile-schoolyear-label').hide() : $('#ba-profile-schoolyear-label').show()
+        $('#ba-profile-schoolyear-label').text(student.year)
 
         if (student.profile_en) {
             $('#ba-student-profile-text').text(student.profile_en)

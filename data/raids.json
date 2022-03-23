@@ -2,7 +2,7 @@
     {
         "id": 1,
         "released": [true, true],
-        "released_insane": [false, false],
+        "released_insane": [true, false],
         "name_dev": "Binah",
         "name_jp": "ビナー",
         "name_en": "Binah",
@@ -18,6 +18,7 @@
             }
         },
         "attack_type": "Normal",
+        "attack_type_insane": "Piercing",
         "defense_type": "Heavy",
         "enemies": [
             {
@@ -25,11 +26,14 @@
                 "name_en": "Binah",
                 "icon": "Portrait_Raidboss_Binah",
                 "stats": {
-                    "level": [17, 25, 35, 50, 70],
-                    "maxhp": [300000, 800000, 1100000, 2000000, 6000000],
-                    "attack_power": [1500, 1800, 3000, 4000, 8000],
-                    "defense_power": [1700, 2000, 2500, 3100, 3900],
-                    "stagger": [150000, 300000, 450000, 800000, 2000000]
+                    "level": [17, 25, 35, 50, 70, 80],
+                    "maxhp": [300000, 800000, 1100000, 2000000, 6000000, 7000000],
+                    "attack_power": [1500, 1800, 3000, 4000, 8000, 20000],
+                    "defense_power": [1700, 2000, 2500, 3100, 3900, 5000],
+                    "crit_res": [20, 20, 20, 20, 20, 20],
+                    "crit_dmg_res": [5000, 5000, 5000, 5000, 5000, 10000],
+                    "stagger": [150000, 300000, 450000, 800000, 2000000, 2100000],
+                    "stagger_condition": "Deal Piercing Damage"
                 }
 
             }
@@ -58,6 +62,40 @@
                 "type": "EX",
                 "atg": 3,
                 "icon": "SKILLICON_BINAH_EXSKILL03"
+            }
+        ],
+        "skills_insane": [
+            {
+                "name_jp": "アツィルトの光",
+                "name_en": "Atziluth's Light",
+                "description_en": "Deals 120% damage to enemies in a straight line.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_BINAH_EXSKILL01"
+            },
+            {
+                "name_jp": "大道の劫火",
+                "name_en": "Ultimate Conflagration",
+                "description_en": "Deals 400% damage to 4 enemies.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_BINAH_EXSKILL02"
+            },
+            {
+                "name_jp": "浄化の嵐",
+                "name_en": "Purifying Storm",
+                "description_en": "Deals 300% damage to all enemies and decreases their <d:DEF> by 50% for 30s.", 
+                "type": "EX",
+                "atg": 3,
+                "icon": "SKILLICON_BINAH_EXSKILL03"
+            },
+            {
+                "name_jp": "吹き荒れる砂塵",
+                "name_en": "Raging Sandstorm",
+                "description_en": "Decreases all enemies' <d:HIT> by 20% and <d:Stability> by 50%. This debuff cannot be removed.", 
+                "type": "Passive",
+                "atg": 0,
+                "icon": "SKILLICON_BINAH_PASSIVESKILL01"
             }
         ]
     },
@@ -160,11 +198,11 @@
                 "stats": {
                     "level": [17, 25, 35, 50, 70, 80],
                     "maxhp": [280000, 550000, 675000, 1200000, 4500000, 10000000],
-                    "attack_power": [600, 950, 1400, 1600, 3700, 3700],
+                    "attack_power": [600, 950, 1400, 1600, 3700, 5500],
                     "defense_power": [700, 700, 700, 700, 700, 700],
-                    "crit_res": [100, 100, 100, 100, 100],
-                    "crit_dmg_res": [5000, 5000, 5000, 5000, 5000],
-                    "stagger": [148000, 296000, 400000, 720000, 5000000, 10000000],
+                    "crit_res": [100, 100, 100, 100, 100, 100],
+                    "crit_dmg_res": [5000, 5000, 5000, 5000, 5000, 10000],
+                    "stagger": [148000, 296000, 400000, 720000, 5000000, 18000000],
                     "stagger_condition": "Deal Mystic Damage"
                 }
 
@@ -176,11 +214,11 @@
                 "stats": {
                     "level": [17, 25, 35, 50, 70, 80],
                     "maxhp": [320000, 600000, 735000, 1330000, 6000000, 10000000],
-                    "attack_power": [600, 950, 1400, 1600, 3700, 3700],
+                    "attack_power": [600, 950, 1400, 1600, 3700, 13000],
                     "defense_power": [700, 700, 700, 700, 700, 700],
                     "crit_res": [100, 100, 100, 100, 100, 100],
-                    "crit_dmg_res": [5000, 5000, 5000, 5000, 5000, 5000],
-                    "stagger": [172000, 320000, 440000, 800000, 6000000, 10000000],
+                    "crit_dmg_res": [5000, 5000, 5000, 5000, 5000, 10000],
+                    "stagger": [172000, 320000, 440000, 800000, 6000000, 17000000],
                     "stagger_condition": "Deal Mystic Damage"
                 }
             }
@@ -336,7 +374,7 @@
     {
         "id": 5,
         "released": [true, false],
-        "released_insane": [false, false],
+        "released_insane": [true, false],
         "name_dev": "KaitenFxMk0",
         "name_jp": "KAITEN FX Mk.0",
         "name_en": "KAITEN FX Mk.0",
@@ -420,6 +458,56 @@
                 "name_jp": "心を燃やせ……まだまだ回れる！",
                 "name_en": "Set your heart alight... We can keep on going!",
                 "description_en": "Every 20s, each component of KAITEN FX Mk.0 will activate in the following order: Right Arm (pink), Chest (red), Left Arm (green). When a component is activated, KAITEN FX Mk.0 will gain one of the following effects:\n<b>Right Arm (pink)</b>: Increases <b:ATK> by 50%.\n<b>Chest (red)</b>: KAITEN FX Mk.0's EX skills will also inflict <c:Stunned> for 5s.\n<b>Left Arm (green)</b>: Increases <b:DEF> by <b>1,000</b>.\nIf a certain amount of damage is dealt while a component is active, that component will be destroyed, increasing KAITEN FX Mk.0's stagger gauge significantly and disabling both the component from activating and the corresponding EX skill until the end of battle.", 
+                "type": "Passive",
+                "atg": 0,
+                "icon": "SKILLICON_KAITENFXMK0_PASSIVE01"
+            }
+        ],
+        "skills_insane": [
+            {
+                "name_jp": "無限回転・SUPER海老マシンガン",
+                "name_en": "SUPER Shrimp Machine Gun ",
+                "description_en": "<b>Right Arm (pink)</b>: Deals 400% damage to enemies in a circular area.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_KAITENFXMK0_EXSKILL01"
+            },
+            {
+                "name_jp": "無限回転・HYPER鰯ミサイル",
+                "name_en": "HYPER Sardine Missiles",
+                "description_en": "<b>Chest (red)</b>: Deals 300% damage to all enemies.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_KAITENFXMK0_EXSKILL02"
+            },
+            {
+                "name_jp": "無限回転・ULTRAお皿シールド",
+                "name_en": "ULTRA Plate Shield",
+                "description_en": "<b>Left Arm (green)</b>: Decreases <b:DamagedRatio> by 50%. This buff is removed after taking 10 hits from any EX skill.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_KAITENFXMK0_EXSKILL03"
+            },
+            {
+                "name_jp": "無限回転・MEGA玉子オーバーチャージ",
+                "name_en": "MEGA Egg Overcharge",
+                "description_en": "<b>Feet (yellow)</b>: Increases <b:ATK> by <b>4,000</b> for 30s.", 
+                "type": "EX",
+                "atg": 0,
+                "icon": "SKILLICON_KAITENFXMK0_EXSKILL05"
+            },
+            {
+                "name_jp": "FINAL鯖スラッシュ",
+                "name_en": "FINAL Mackerel Slash",
+                "description_en": "Deals 400% damage to all enemies. This attack cannot be blocked or evaded.", 
+                "type": "EX",
+                "atg": 3,
+                "icon": "SKILLICON_KAITENFXMK0_EXSKILL04"
+            },
+            {
+                "name_jp": "心を燃やせ……まだまだ回れる！",
+                "name_en": "Set your heart alight... We can keep on going!",
+                "description_en": "Every 20s, each component of KAITEN FX Mk.0 will activate in the following order: Right Arm (pink), Chest (red), Left Arm (green). When a component is activated, KAITEN FX Mk.0 will gain one of the following effects:\n<b>Right Arm (pink)</b>: Increases <b:ATK> by 50%.\n<b>Chest (red)</b>: KAITEN FX Mk.0's EX skills will also inflict <c:Stunned> for 5s.\n<b>Left Arm (green)</b>: Increases <b:DEF> by <b>1,000</b> and KAITEN FX Mk.0's EX skills will also decrease enemies' <d:HealEffectiveness> by 80% for 30s.\nIf a certain amount of damage is dealt while a component is active, that component will be destroyed, increasing KAITEN FX Mk.0's stagger gauge significantly and disabling both the component from activating and the corresponding EX skill until the end of battle.", 
                 "type": "Passive",
                 "atg": 0,
                 "icon": "SKILLICON_KAITENFXMK0_PASSIVE01"
