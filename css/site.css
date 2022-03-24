@@ -8,7 +8,7 @@ p {
 }
 
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -66,6 +66,25 @@ p {
     background-color: #fff;
     border-radius: 0rem 0rem 0.3rem 0.3rem;
 }
+
+@media(min-width: 992px) {
+
+    .modal-content {
+        max-height: calc(100vh - 3.5rem);
+    }
+    .modal-body {
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(155, 155, 155, 0.5);
+    }
+}
+
+@media (min-width: 1400px) {
+    .modal-xl {
+        max-width: 1340px;
+    }
+}
+
 
 #ba-student-modal-page {
     background-color: #fff;
@@ -130,15 +149,8 @@ p {
     width: 100vw;
     height: 100vh;
     z-index: -1000;
-}
-
-#ba-student-background::after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    backdrop-filter: blur(6px);
-    pointer-events: none;
+    filter: blur(8px);
+    transform: scale(1.05);
 }
 
 .ba-type-school {
@@ -713,10 +725,26 @@ h1 small {
     background: rgba(15, 8, 54, 0.6) url('images/raid/Boss_Portrait_Binah_LobbyBG.png') no-repeat left center/contain;
 }
 
-@media(min-width: 576px) {
-    /* .ba-student-searchresult-item {
-        max-width: 92px;
+@media(max-width: 991px) {
+    .ba-student-searchresult-item {
+        max-width: 84px;
+    }
+
+    .ba-student-card-label {
+        font-size: 0.84rem;
+        height: 22px;
+        border-bottom-width: 4px !important;
+    }
+
+    .smalltext {
+        font-size: 0.64rem !important;
+        line-height: 0.64rem;
+    }
+
+    /* .modal-body {
+        padding: 0.5rem;
     } */
+    
 }
 
 @media(max-width: 768px) {
@@ -788,6 +816,7 @@ h1 small {
 
     #ba-student-background {
         height: 600px;
+        transform: scale(1.1);
     }
 }
 
@@ -924,7 +953,7 @@ h1 small {
 
 .ba-student-search-group {
     margin-top: 0.5rem;
-    padding: 0.5rem 0 0.5rem 0;
+    padding: 0.5rem;
     background-color: rgb(242, 242, 242);
     border-radius: 0.5rem;
     /* border-bottom: lightgrey 2px solid; */
