@@ -1,34 +1,86 @@
 <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark" style="min-height: 56px;">
     <div class="container-xl">
-        <a class="navbar-brand" href="#">
-            <img src="images/schale.png" alt="" width="37" height="23" class="d-inline-block align-text-top">
-            SCHALE
+        <img id="navbar-logo" src="images/schale.png" class="" style="height:38px; width:auto">
+        <a class="navbar-brand me-4" href="#">
+            SCHALE <span class="navbar-accent">DB</span>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-2 me-auto mb-2 mb-lg-0">
-                <li class="nav-item me-1">
-                    <a id="ba-navbar-link-students" class="nav-link" href="students.html">
+        <div class="dropdown ms-auto order-md-1">
+            <a class="btn btn-dark" href="#" id="ba-navbar-regionselector" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" >
+                <i class="fa-solid fa-gear"></i><span class="d-none d-md-inline ms-2">Settings</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark p-3">
+                <div class="d-flex align-items-center mb-2">
+                        <span class="flex-fill me-4" data-localize-id="navbar_settings_server"></span>
+                        <div class="btn-group">
+                            <button type="button" id="ba-navbar-regionselector-0" class="btn btn-sm btn-dark" onclick="changeRegion(0)">Japan</button>
+                            <button type="button" id="ba-navbar-regionselector-1" class="btn btn-sm btn-dark" onclick="changeRegion(1)">Global</button>
+                        </div>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="flex-fill me-4" style="white-space: nowrap;" data-localize-id="navbar_settings_language"></span>
+                    <span class="d-flex align-items-center">
+                        <div class="btn-group">
+                            <button type="button" id="ba-navbar-languageselector-en" class="btn btn-sm btn-dark" onclick="changeLanguage('en')">English</button>
+                            <button type="button" id="ba-navbar-languageselector-ja" class="btn btn-sm btn-dark" onclick="changeLanguage('ja')">日本語</button>
+                        </div>
+                        <!-- <i class="fa fa-sun-o"></i> -->
+                        <!-- <span class="form-check form-check-inline form-switch mx-2" style="margin-bottom: 0; padding-left: 0;">
+                            <input class="form-check-input" type="checkbox" value="" style="margin-left: 0;" onchange="toggleDarkTheme()" id="ba-navbar-themeswitcher">
+                        </span> -->
+                        <!-- <i class="fa fa-moon-o"></i> -->
+                    </span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <span class="flex-fill me-4" style="white-space: nowrap;" data-localize-id="navbar_settings_theme"></span>
+                    <span class="d-flex align-items-center">
+                        <div id="ba-navbar-themeswitcher" class="btn-group">
+                            <button type="button" id="ba-navbar-themeswitcher-auto" class="btn btn-sm btn-dark" onclick="toggleDarkTheme('auto')">Auto</button>
+                            <button type="button" id="ba-navbar-themeswitcher-light" class="btn btn-sm btn-dark" onclick="toggleDarkTheme('light')"><i class="fa-solid fa-sun px-2"></i></button>
+                            <button type="button" id="ba-navbar-themeswitcher-dark" class="btn btn-sm btn-dark" onclick="toggleDarkTheme('dark')"><i class="fa-solid fa-moon px-2"></i></button>
+                        </div>
+                        <!-- <i class="fa fa-sun-o"></i> -->
+                        <!-- <span class="form-check form-check-inline form-switch mx-2" style="margin-bottom: 0; padding-left: 0;">
+                            <input class="form-check-input" type="checkbox" value="" style="margin-left: 0;" onchange="toggleDarkTheme()" id="ba-navbar-themeswitcher">
+                        </span> -->
+                        <!-- <i class="fa fa-moon-o"></i> -->
+                    </span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <span class="flex-fill me-4" style="white-space: nowrap;" data-localize-id="navbar_settings_contrast"></span>
+                    <span class="d-flex align-items-center">
+                        <span class="form-check form-check-inline form-switch mx-2" style="margin-bottom: 0; padding-left: 0;">
+                            <input class="form-check-input" type="checkbox" value="" style="margin-left: 0;" onchange="toggleHighContrast()" id="ba-navbar-contrast-toggle">
+                        </span>
+                    </span>
+                </div>
+                <div class="text-muted" style="white-space: nowrap;">
+                    <small data-localize-id="navbar_settings_contrast_description"></small>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-dark d-md-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#ba-navbar-content"><i class="fa-solid fa-bars"></i></button>
+        <div class="collapse navbar-collapse" id="ba-navbar-content">
+            <ul class="navbar-nav my-2 my-md-0">
+                <li class="nav-item">
+                    <a id="ba-navbar-link-students" class="px-2 nav-link" href="students.html">
                         <img src="images/ui/Common_Icon_Student.png" alt="" style="height:24px" class="d-inline-block align-text-top">
-                        Students
+                        <span data-localize-id="navbar_students"></span>
                     </a>
                 </li>
-                <li class="nav-item me-1">
-                    <a id="ba-navbar-link-raids" class="nav-link disabled" href="raids.html">
+                <li class="nav-item">
+                    <a id="ba-navbar-link-raids" class="px-2 nav-link disabled" href="raids.html">
                         <img src="images/ui/Common_Attack_Icon.png" alt="" style="height:24px" class="d-inline-block align-text-top">
-                        Raids
+                        <span data-localize-id="navbar_raids"></span>
                     </a>
                 </li>
-                <li class="nav-item me-1">
-                    <a id="ba-navbar-link-crafting" class="nav-link disabled" href="crafting.html">
+                <li class="nav-item">
+                    <a id="ba-navbar-link-crafting" class="px-2 nav-link disabled" href="crafting.html">
                         <img src="images/ui/Common_Icon_Craft.png" alt="" style="height:24px" class="d-inline-block align-text-top">
-                        Crafting
+                        <span data-localize-id="navbar_crafting"></span>
                     </a>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
                 <!-- <li class="nav-item">
                     <span class="nav-link form-check form-check-inline form-switch me-2">
                         <input class="form-check-input" type="checkbox" value="" onchange="toggleDarkTheme()" id="ba-navbar-themeswitcher">
@@ -37,18 +89,18 @@
                         </label>
                     </span>
                 </li> -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="ba-navbar-regionselector" role="button" data-bs-toggle="dropdown">
-                        <i class="fa fa-server me-2"></i><span id="ba-navbar-regionselector-label"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><h6 class="dropdown-header">Select Server</h6></li>
-                        <li><a id="ba-navbar-regionselector-0" class="dropdown-item" href="#" onclick="changeRegion(0)">Japan</a></li>
-                        <li><a id="ba-navbar-regionselector-1" class="dropdown-item" href="#" onclick="changeRegion(1)">Global</a></li>
-                    </ul>
-                </li>
+                <!-- <span class="d-flex align-items-center me-2">
+                    <i class="fa fa-sun-o"></i>
+                    <span class="form-check form-check-inline form-switch mx-2" style="margin-bottom: 0; padding-left: 0;">
+                        <input class="form-check-input" type="checkbox" value="" style="margin-left: 0;" onchange="toggleDarkTheme()" id="ba-navbar-themeswitcher">
+                    </span>
+                    <i class="fa fa-moon-o"></i>
+                </span> -->
+
+
             </ul>
 
         </div>
+
     </div>
 </nav>
