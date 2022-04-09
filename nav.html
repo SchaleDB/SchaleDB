@@ -6,7 +6,7 @@
         </a>
         <div class="dropdown ms-auto order-md-1">
             <a class="btn btn-dark" href="#" id="ba-navbar-regionselector" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" >
-                <i class="fa-solid fa-gear"></i><span class="d-none d-md-inline ms-2">Settings</span>
+                <i class="fa-solid fa-gear"></i><span class="d-none ms-2">Settings</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark p-3">
                 <div class="d-flex align-items-center mb-2">
@@ -68,7 +68,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a id="ba-navbar-link-raids" class="px-2 nav-link disabled" href="raids.html">
+                    <a id="ba-navbar-link-raids" class="px-2 nav-link" href="raids.html">
                         <img src="images/ui/Common_Attack_Icon.png" alt="" style="height:24px" class="d-inline-block align-text-top">
                         <span data-localize-id="navbar_raids"></span>
                     </a>
@@ -79,25 +79,24 @@
                         <span data-localize-id="navbar_crafting"></span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a id="ba-navbar-link-items" class="px-2 nav-link" href="items.html">
+                        <img src="images/ui/Common_Icon_Inventory_NonEquip.png" alt="" style="height:20px" class="d-inline-block align-text-top">
+                        <span data-localize-id="navbar_items"></span>
+                    </a>
+                </li>
             </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-                <!-- <li class="nav-item">
-                    <span class="nav-link form-check form-check-inline form-switch me-2">
-                        <input class="form-check-input" type="checkbox" value="" onchange="toggleDarkTheme()" id="ba-navbar-themeswitcher">
-                        <label class="form-check-label" for="ba-navbar-themeswitcher">
-                            Dark Theme
-                        </label>
-                    </span>
-                </li> -->
-                <!-- <span class="d-flex align-items-center me-2">
-                    <i class="fa fa-sun-o"></i>
-                    <span class="form-check form-check-inline form-switch mx-2" style="margin-bottom: 0; padding-left: 0;">
-                        <input class="form-check-input" type="checkbox" value="" style="margin-left: 0;" onchange="toggleDarkTheme()" id="ba-navbar-themeswitcher">
-                    </span>
-                    <i class="fa fa-moon-o"></i>
-                </span> -->
-
-
+            <ul class="navbar-nav flex-fill me-2">
+                <div class="position-relative" style="width: 100%;display: flex;justify-content: end;">
+                    <div id="navbar-search" class="position-relative">
+                        <input type="search" class="form-control" style="height: 38px;" id="ba-navbar-search" placeholder="Search" autocomplete="off" oninput="allSearch()" onkeydown="searchNavigate(event)" onkeyup="searchNavigate(event)">
+                        <i id="navbar-search-icon" class="fa-solid fa-search"></i>
+                        <i id="navbar-search-clear" class="search-clear fa-solid fa-close" onclick="clearSearchBar(this);" data-target="ba-navbar-search" style="display:none;"></i>
+                    </div>
+                    <div id="navbar-search-results" style="width: 340px; display: none;">
+                        
+                    </div>
+                </div>
             </ul>
 
         </div>

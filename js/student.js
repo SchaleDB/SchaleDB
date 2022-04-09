@@ -32,15 +32,10 @@ const stat_friendlyname = {
 
 var data = {}
 const json_list = {
-    common: "./data/common.min.json",
-    students: "./data/students.min.json",
-    localization: "./data/localization.min.json"
+    common: "./data/common.json",
+    students: "./data/students.json",
+    localization: "./data/localization.json"
 }
-
-loadJSON(json_list, function(result) {
-    data = result
-    $.holdReady(false)
-})
 
 var student, region, regionID, userLang, student_bondalts, darkTheme, highContrast
 var studentSelectorModal, statPreviewModal
@@ -110,18 +105,21 @@ var search_options = {
     }
 }
 
+loadJSON(json_list, function(result) {
+    data = result
+    $.holdReady(false)
+})
+
+if (localStorage.getItem("theme")) {
+    $('body').toggleClass("theme-dark", (localStorage.getItem("theme") == 'dark'))
+}
+
 $(document).ready(function() {
     studentSelectorModal = new bootstrap.Modal(document.getElementById("modStudents"), {})
     statPreviewModal = new bootstrap.Modal(document.getElementById("modStatPreviewSettings"), {})
     header = $(".card-header")
 
     hookTooltips()
-
-    // document.getElementById("modStudents").addEventListener('shown.bs.modal', function (event) {
-    //     if (window.matchMedia('(min-width: 768px)').matches) {
-    //         $('#ba-student-search-text').focus()
-    //     }
-    // })
   
     var urlVars = new URL(window.location.href).searchParams
 
@@ -129,12 +127,6 @@ $(document).ready(function() {
         loadRegion(localStorage.getItem("region"))
     } else {
         loadRegion(0)
-    }
-
-    if (localStorage.getItem("theme")) {
-        darkTheme = localStorage.getItem("theme")    
-    } else {
-        darkTheme = 'auto'
     }
 
     if (localStorage.getItem("language")) {
@@ -146,6 +138,12 @@ $(document).ready(function() {
             userLang = 'en'
         }  
     }
+
+    if (localStorage.getItem("theme")) {
+        darkTheme = localStorage.getItem("theme")    
+    } else {
+        darkTheme = 'auto'
+    }
     
     toggleDarkTheme(darkTheme)
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
@@ -155,6 +153,7 @@ $(document).ready(function() {
         }
     })
 
+    $('body').toggleClass("reduced-motion", false)
     if (localStorage.getItem("high_contrast")) {
         highContrast = (localStorage.getItem("high_contrast") == "true")
     } else {
@@ -173,7 +172,6 @@ $(document).ready(function() {
         $('#ba-navbar-contrast-toggle').prop('checked', highContrast)
     })
     
-
     $(window).on('popstate', function() {
         var urlVars = new URL(window.location.href).searchParams
         loadStudent(urlVars.get("chara"))
@@ -203,7 +201,7 @@ $(document).ready(function() {
 
     updateStudentList()
 
-    window.setTimeout(function(){$("#loading-cover").fadeOut()},500)
+    window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
 
     $('input[type=range]').trigger('oninput')
 
@@ -215,6 +213,7 @@ $(document).ready(function() {
         
     // }, 100))
 
+    $('#ba-student, #ba-student-list-btn').show()
 
 })
 
@@ -494,6 +493,7 @@ function loadStudent(studentName) {
         $("#ba-student-defensetype-label").text(data.localization.strings[`def_${student.defense_type.toLowerCase()}`][userLang])
         $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.defense_type} Armor`, 'Defense Type', null, getTypeText(student.defense_type), 32), placement: 'top', html: true})
 
+        updateGearIcon()
         recalculateTerrainAffinity()
 
         if (student.uses_cover) {
@@ -504,16 +504,6 @@ function loadStudent(studentName) {
 
         $("#ba-student-weapontype-label").text(student.weapon_type)
         $(".ba-type-weapon").css("background-image", "url('images/weapontype/Weapon_Icon_" + student.weapon_type_img + ".png')")
-
-        $("#ba-student-gear-1").attr("src", "images/equipment/Equipment_Icon_" + student.gear_1 + "_Tier1.png")
-        $("#ba-student-gear-2").attr("src", "images/equipment/Equipment_Icon_" + student.gear_2 + "_Tier1.png")
-        $("#ba-student-gear-3").attr("src", "images/equipment/Equipment_Icon_" + student.gear_3 + "_Tier1.png")
-        var gear1 = find(data.common.gear, "type", student.gear_1)[0].items[0]
-        var gear2 = find(data.common.gear, "type", student.gear_2)[0].items[0]
-        var gear3 = find(data.common.gear, "type", student.gear_3)[0].items[0]
-        $('#ba-student-gear-1').tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${student.gear_1}_Tier${gear1.tier}.png`, gear1[`name_${userLang}`], student.gear_1, `T${gear1.tier}`, gear1[`description_${userLang}`] + getGearStatsText(gear1), 50, 'img-scale-larger'), placement: 'top', html: true})
-        $('#ba-student-gear-2').tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${student.gear_2}_Tier${gear2.tier}.png`, gear2[`name_${userLang}`], student.gear_2, `T${gear2.tier}`, gear2[`description_${userLang}`] + getGearStatsText(gear2), 50, 'img-scale-larger'), placement: 'top', html: true})
-        $('#ba-student-gear-3').tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${student.gear_3}_Tier${gear3.tier}.png`, gear3[`name_${userLang}`], student.gear_3, `T${gear3.tier}`, gear3[`description_${userLang}`] + getGearStatsText(gear3), 50, 'img-scale-larger'), placement: 'top', html: true})
 
         //Skills
         $("#ba-skill-ex-name").text(student[`skill_ex_name_${userLang}`] ? student[`skill_ex_name_${userLang}`] : student.skill_ex_name_ja)
@@ -583,7 +573,10 @@ function loadStudent(studentName) {
 
         var url = new URL(window.location.href)
 
-        if (url.searchParams.get("chara") !== student.name_dev) {
+        if (!url.searchParams.get("chara")) {
+            url.searchParams.set("chara", student.name_dev)
+            history.replaceState(null, '', url)  
+        } else if (url.searchParams.get("chara") !== student.name_dev) {
             url.searchParams.set("chara", student.name_dev)
             history.pushState(null, '', url)
         }
@@ -704,6 +697,10 @@ function loadStudent(studentName) {
     }
 }
 
+function loadItem(id) {
+    window.location.href = `items.html?item=${id}`
+}
+
 function changeRegion(regID) {
     regionID = regID
     localStorage.setItem("region", regionID)
@@ -740,7 +737,7 @@ function loadRegion(regID) {
 }
 
 function getAdaptionText(terrain, rank) {
-    return `Deals <b>${terrain_dmg_bonus[rank]}&times;</b> damage in <b>${terrain}</b> terrain.\nBlock rate when taking cover <b>+${terrain_block_bonus[rank]}%</b>.\nChance to ignore block <b>+${terrain_block_bonus[rank]}%</b>.`
+    return `Deals <b>${terrain_dmg_bonus[rank]}&times;</b> damage in <b>${terrain}</b> terrain.\nBlock rate when taking cover <b>+${terrain_block_bonus[rank]}%</b>.\nChance to ignore block when attacking <b>+${terrain_block_bonus[rank]}%</b>.`
 }
 
 function getStatName(stat) {
@@ -765,7 +762,8 @@ function changeGearLevel(slot, el) {
     $(`#ba-statpreview-gear${slot}-description`).html(desc.substring(0, desc.length-2))
     if ($('#ba-statpreview-includegear').prop('checked')) {
         recalculateStatPreview()
-    }    
+        updateGearIcon()
+    }
 }
 
 function getGearStatsText(item) {
@@ -880,6 +878,16 @@ function changeBondLevel(el) {
     recalculateBondPreview()
 }
 
+function updateGearIcon() {
+    var gear, tier, includeGear
+    includeGear = $('#ba-statpreview-includegear').prop('checked')
+    for (let i=1; i<=3; i++) {
+        tier = includeGear ? $(`#ba-statpreview-gear${i}-range`).val() : 1
+        gear = find(data.common.gear, "type", student[`gear_${i}`])[0]
+        $("#ba-student-gear-"+i).attr("src", `images/equipment/Equipment_Icon_${gear.type}_Tier${tier}.png`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${gear.type}_Tier${tier}.png`, gear.items[tier-1][`name_${userLang}`], gear[`name_${userLang}`], `T${tier}`, gear.items[tier-1][`description_${userLang}`] + getGearStatsText(gear.items[tier-1]), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !includeGear)
+    }
+}
+
 function recalculateTerrainAffinity() {
     var adaption = {}
     adaption["urban"] = student.urban_adaption
@@ -977,27 +985,27 @@ function recalculateStatPreview() {
     }
 
     if (!strikerBonus) {
-        $('#ba-student-stat-maxhp').text(Math.round(((maxHP+bonus["maxhp"])*bonus["maxhp_percent"]).toFixed(4)))
-        $('#ba-student-stat-attack').text(Math.round(((attack+bonus["attack_power"])*bonus["attack_power_percent"]).toFixed(4)))
-        $('#ba-student-stat-defense').text(defense+bonus["defense_power"])
-        $('#ba-student-stat-healing').text(Math.round(((healing+bonus["heal_power"])*bonus["heal_power_percent"]).toFixed(4)))
+        $('#ba-student-stat-maxhp').text(Math.round(((maxHP+bonus["maxhp"])*bonus["maxhp_percent"]).toFixed(4)).toLocaleString())
+        $('#ba-student-stat-attack').text(Math.round(((attack+bonus["attack_power"])*bonus["attack_power_percent"]).toFixed(4)).toLocaleString())
+        $('#ba-student-stat-defense').text((defense+bonus["defense_power"]).toLocaleString())
+        $('#ba-student-stat-healing').text(Math.round(((healing+bonus["heal_power"])*bonus["heal_power_percent"]).toFixed(4)).toLocaleString())
     } else {
-        $('#ba-student-stat-maxhp').text('+'+Math.floor(((maxHP+bonus["maxhp"])*bonus["maxhp_percent"]).toFixed(4)*0.1))
-        $('#ba-student-stat-attack').text('+'+Math.floor(((attack+bonus["attack_power"])*bonus["attack_power_percent"]).toFixed(4)*0.1))
-        $('#ba-student-stat-defense').text('+'+Math.floor((defense+bonus["defense_power"])*0.05))
-        $('#ba-student-stat-healing').text('+'+Math.floor(((healing+bonus["heal_power"])*bonus["heal_power_percent"]).toFixed(4)*0.05))
+        $('#ba-student-stat-maxhp').text('+'+Math.floor(((maxHP+bonus["maxhp"])*bonus["maxhp_percent"]).toFixed(4)*0.1).toLocaleString())
+        $('#ba-student-stat-attack').text('+'+Math.floor(((attack+bonus["attack_power"])*bonus["attack_power_percent"]).toFixed(4)*0.1).toLocaleString())
+        $('#ba-student-stat-defense').text('+'+Math.floor((defense+bonus["defense_power"])*0.05).toLocaleString())
+        $('#ba-student-stat-healing').text('+'+Math.floor(((healing+bonus["heal_power"])*bonus["heal_power_percent"]).toFixed(4)*0.05).toLocaleString())
     }
 
-    $('#ba-student-stat-accuracy').text(student.accuracy+bonus["accuracy"])
-    $('#ba-student-stat-evasion').text(student.evasion)
+    $('#ba-student-stat-accuracy').text((student.accuracy+bonus["accuracy"]).toLocaleString())
+    $('#ba-student-stat-evasion').text(student.evasion.toLocaleString())
     var totalcrit = student.critical+bonus["critical"]-100
-    $('#ba-student-stat-crit').text(student.critical+bonus["critical"])//.tooltip('dispose').tooltip({title: `<b>${parseFloat(((totalcrit/(totalcrit+650))*100).toFixed(2))}%</b> critical chance against a target with 100 crit resistance.`, placement: 'top', html: true})
-    $('#ba-student-stat-critdmg').text(`${parseFloat(((student.critical_dmg+bonus["critical_damage"])/100).toFixed(4))}%`)
+    $('#ba-student-stat-crit').text((student.critical+bonus["critical"]).toLocaleString())//.tooltip('dispose').tooltip({title: `<b>${parseFloat(((totalcrit/(totalcrit+650))*100).toFixed(2))}%</b> critical chance against a target with 100 crit resistance.`, placement: 'top', html: true})
+    $('#ba-student-stat-critdmg').text(`${parseFloat(((student.critical_dmg+bonus["critical_damage"])/100).toFixed(4)).toLocaleString()}%`)
 
-    $('#ba-student-stat-stability').text(student.stability).tooltip('dispose')//.tooltip({title: getRichTooltip(null, 'Damage Variance', null, `<b>${parseFloat((((student.stability/(student.stability+997))+0.2)*100).toFixed(2))}%</b> ~ 100%`), placement: 'top', html: true})
-    $('#ba-student-stat-range').text(student.range)
-    $('#ba-student-stat-ccpower').text(`${Math.round(((100*bonus["cc_power_percent"])).toFixed(4))}`)
-    $('#ba-student-stat-ccresist').text(`${Math.round(((100*bonus["cc_resist_percent"])).toFixed(4))}`)
+    $('#ba-student-stat-stability').text(student.stability.toLocaleString()).tooltip('dispose')//.tooltip({title: getRichTooltip(null, 'Damage Variance', null, `<b>${parseFloat((((student.stability/(student.stability+997))+0.2)*100).toFixed(2))}%</b> ~ 100%`), placement: 'top', html: true})
+    $('#ba-student-stat-range').text(student.range.toLocaleString())
+    $('#ba-student-stat-ccpower').text(`${Math.round(((100*bonus["cc_power_percent"])).toFixed(4)).toLocaleString()}`)
+    $('#ba-student-stat-ccresist').text(`${Math.round(((100*bonus["cc_resist_percent"])).toFixed(4)).toLocaleString()}`)
 
     if (student.type == "Striker") {
         $('#ba-student-stat-ammo').text(student.ammo_count + " (" + student.ammo_cost + ")")
@@ -1062,7 +1070,7 @@ function getMaterialIconHTML(id, amount) {
     //rarity, icon, name, amount, type, description=""
     var item = find(data.common.items, "id", id)[0]
     var html
-    html = `<div class="drop-shadow" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.icon}.png`, item[`name_${userLang}`], 'Material', id > 0 ? getRarityTier(item.rarity) : null, item[`description_${userLang}`], 50, 'img-scale-larger')}">
+    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.icon}.png`, item[`name_${userLang}`], item.type, getRarityTier(item.rarity), item[`description_${userLang}`], 50, 'img-scale-larger')}">
             <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/items/${item.icon}.png"><span class="ba-material-label">&times;${amount}</span></div>
             `
     return html
@@ -1070,7 +1078,7 @@ function getMaterialIconHTML(id, amount) {
 
 function getFavourIconHTML(id, grade) {
     var gift = find(data.common.items, "id", 5000+id)[0]
-    var html = `<div class="ba-favor-item drop-shadow" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.icon}.png`, gift[`name_${userLang}`], gift.type, getRarityStars(gift.rarity), gift[`description_${userLang}`], 50, 'img-scale-larger')}">
+    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.icon}.png`, gift[`name_${userLang}`], gift.type, getRarityStars(gift.rarity), gift[`description_${userLang}`], 50, 'img-scale-larger')}">
             <img class="ba-item-icon ba-item-${gift.rarity.toLowerCase()}" src="images/items/${gift.icon}.png">
             <img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade}.png"></div>
             `
@@ -1079,8 +1087,7 @@ function getFavourIconHTML(id, grade) {
 
 function getFurnitureIconHTML(id) {
     var item = find(data.common.furniture, "id", id)[0]
-    var set = find(data.common.furniture_set, "id", item.set)[0]
-    var html = `<div class="ba-favor-item drop-shadow" style="position: relative;" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/${item.icon}.png`, item[`name_${userLang}`], set[`name_${userLang}`], getRarityStars(item.rarity), item[`description_${userLang}`], 50, 'img-scale-larger')}">
+    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id+100000})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/${item.icon}.png`, item[`name_${userLang}`], data.localization.strings['furniture_type_'+item.type][userLang] + ' - ' + data.localization.strings['furniture_category_'+item.category][userLang], getRarityStars(item.rarity), item[`description_${userLang}`], 50, 'img-scale-larger')}">
     <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()} mb-2" src="images/furniture/${item.icon}.png"></div>
     `
 return html
@@ -1131,30 +1138,4 @@ function changeStatPreviewStars(stars, weaponstars) {
 
     recalculateStatPreview()
     recalculateTerrainAffinity()
-}
-
-function getRarityStars(rarity) {
-    switch (rarity) {
-        case 'N':
-            return ''
-        case 'R':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(1)
-        case 'SR':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(2)
-        case 'SSR':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(3)
-    }
-}
-
-function getRarityTier(rarity) {
-    switch (rarity) {
-        case 'N':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(1)
-        case 'R':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(2)
-        case 'SR':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(3)
-        case 'SSR':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(4)
-    }
 }

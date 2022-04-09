@@ -17,9 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Oswald&display=swap" rel="stylesheet"> 
     <link href="css/site.css" rel="stylesheet">
 </head>
-<body class="theme-lt">
+<body class="reduced-motion">
     <div id="loading-cover">
-
         <div class="d-flex justify-content-center">
             <div class="spinner-border text-light" style="width: 4rem; height: 4rem;" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -44,13 +43,13 @@
                     <div class="container px-0" style="position: fixed;">
                         <div class="row">
                             <div class="col">
-                                <button type="button" class="btn btn-dark btn-sm" onclick="studentSelectorModal.show()"><img src="images/ui/Common_Icon_CharInfo.png" style="height: auto; height: 28px; object-fit: contain;"><span class="d-inline ps-2" data-localize-id="student_search_list"></span></button>
+                                <button id="ba-student-list-btn" type="button" class="btn btn-dark btn-sm" onclick="studentSelectorModal.show()" style="display:none;"><img src="images/ui/Common_Icon_CharInfo.png" style="height: auto; height: 28px; object-fit: contain;"><span class="d-inline ps-2" data-localize-id="student_search_list"></span></button>
                             </div>
                         </div>
                     </div>
                     <div class="d-block d-md-none" style="height: 450px;"></div>
                 </div>
-                <div id="ba-student" class="col-12 col-md-6">
+                <div id="ba-student" class="col-12 col-md-6" style="display:none;">
                     <div class="px-0 px-xl-4">
                         <div class="card">
                             <div class="card-header">
@@ -97,9 +96,9 @@
                                             </div>
                                             <div id="ba-student-gear" class="flex-fill ba-panel mb-2">
                                                 <div class="d-flex align-items-center justify-content-evenly" style="height: 78px;">
-                                                    <div class="d-inline-block position-relative"><img id="ba-student-gear-1" class="ba-gear-icon ba-item-n drop-shadow" src=""></div>
-                                                    <div class="d-inline-block position-relative"><img id="ba-student-gear-2" class="ba-gear-icon ba-item-n drop-shadow" src=""></div>
-                                                    <div class="d-inline-block position-relative"><img id="ba-student-gear-3" class="ba-gear-icon ba-item-n drop-shadow" src=""></div>
+                                                    <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-1" class="ba-gear-icon" src=""></div>
+                                                    <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-2" class="ba-gear-icon" src=""></div>
+                                                    <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-3" class="ba-gear-icon" src=""></div>
                                                 </div>
                                             </div>
                                             <div id="ba-student-terrain" class="mb-2 ms-1" style="min-width: fit-content;">
@@ -276,7 +275,7 @@
                                                             </div>
                                                         </span>
                                                         <span class="form-check form-check-inline form-switch me-3">
-                                                            <input class="form-check-input" type="checkbox" value="" onchange="recalculateStatPreview()" id="ba-statpreview-includegear">
+                                                            <input class="form-check-input" type="checkbox" value="" onchange="updateGearIcon(); recalculateStatPreview()" id="ba-statpreview-includegear">
                                                             <label class="form-check-label" for="ba-statpreview-includegear">
                                                                 Equip.
                                                             </label>

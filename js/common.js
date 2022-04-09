@@ -1,3 +1,5 @@
+var searchResultsCount = 0, searchResultsSelection = 0
+
 function loadJSON(list, success) {
     results = {}
 
@@ -166,4 +168,140 @@ function loadLanguage(lang) {
     })
 
     $('#ba-student-search-text').attr("placeholder", data.localization.strings['student_search_textbox_placeholder'][lang])
+}
+
+function getRarityStars(rarity) {
+    switch (rarity) {
+        case 'N': case 'R': case 1:
+            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(1)
+        case 'SR': case 2:
+            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(2)
+        case 'SSR': case 3:
+            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(3)
+    }
+}
+
+function getRarityTier(rarity) {
+    switch (rarity) {
+        case 'N':
+            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(1)
+        case 'R':
+            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(2)
+        case 'SR':
+            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(3)
+        case 'SSR':
+            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(4)
+    }
+}
+
+function searchContains(substring, string) {
+    let a = string.toLowerCase().replace(/[^a-z0-9 ]/g,''), b = substring.toLowerCase().replace(/[^a-z0-9 ]/g,'')
+    //whole match
+    if (a.startsWith(b))
+    return true
+    //individual word match
+    while (a.includes(' ')) {
+        a = a.substring(a.indexOf(' ')+1)
+        if (a.startsWith(b))
+        return true
+    }
+    return false
+}
+
+function allSearch() {
+    let searchTerm = $('#ba-navbar-search').val().toLowerCase()
+    if (searchTerm == "") {
+        $('#navbar-search-results').html('').hide()
+        $('#ba-navbar-search').removeClass('has-text results-open')
+        $('#navbar-search-clear').hide()
+        searchResultsCount = 0
+        searchResultsSelection = 0
+        return true
+    }
+    $('#navbar-search-clear').show()
+    $('#ba-navbar-search').addClass('has-text')
+    $('#navbar-search-results').html('').show()
+    let results = [], maxResults = 6
+
+    $.each(data.students, function(i,el){
+        if (el['released'][regionID] && searchContains(searchTerm, el['name_'+userLang])) {
+            results.push({'name': el['name_'+userLang], 'icon': 'images/student/collection/Student_Portrait_'+el['name_dev']+'_Collection.png', 'type': 'Character', 'rarity': getRarityStars(el['stars']), 'onclick': `loadStudent('${el['name_dev']}')`})
+            if (results.length >= maxResults) return false
+        }
+    })
+
+    if (results.length < maxResults)
+    $.each(data.raids, function(i,el){
+        if (el['released'][regionID] && searchContains(searchTerm, el['name_'+userLang])) {
+            results.push({'name': el['name_'+userLang], 'icon': 'images/raid/'+el.enemies[0].icon+'.png', 'type': 'Total Assault Boss', 'rarity': '', 'onclick': 'items.html?item='+el['id']})
+            if (results.length >= maxResults) return false
+        }
+    })
+
+    if (results.length < maxResults)
+    $.each(data.common.items, function(i,el){
+        if (el['released'][regionID] && searchContains(searchTerm, el['name_'+userLang])) {
+            results.push({'name': el['name_'+userLang], 'icon': 'images/items/'+el['icon']+'.png', 'type': 'Item', 'rarity': getRarityTier(el['rarity']), 'onclick': `loadItem(${el['id']})`})
+            if (results.length >= maxResults) return false
+        }
+    })
+
+    if (results.length < maxResults)
+    $.each(data.common.furniture, function(i,el){
+        if (searchContains(searchTerm, el['name_'+userLang])) {
+            results.push({'name': el['name_'+userLang], 'icon': 'images/furniture/'+el['icon']+'.png', 'type': 'Furniture', 'rarity': getRarityStars(el['rarity']), 'onclick': `loadItem(${el['id']+100000})`})
+            if (results.length >= maxResults) return false
+        }
+    })
+
+    console.log(results)
+    if (results.length > 0) {
+        var html = ''
+        for (let i = 0; i < results.length; i++) {
+            html += `<div id="ba-search-result-item-${i+1}" class="ba-search-result-item" onclick="${results[i].onclick}; $('#navbar-search-clear').trigger('onclick');">
+            <div class='ba-search-img'><img src='${results[i].icon}' width=50 height=50></div>
+            <div class='flex-fill d-flex flex-column'><div class='flex-fill d-flex flex-column justify-content-end'><div class='ba-search-name'>${results[i].name}</div></div>
+            <div class='d-flex align-items-center mt-auto'>
+            <span class='ba-search-subtitle flex-fill'>${results[i].type}</span>
+            <span class='ba-search-rarity'>${results[i].rarity}</span></div></div></div>`
+        }
+        $('#navbar-search-results').html(html)
+        $('#ba-navbar-search').addClass('results-open')
+        searchResultsCount = results.length
+        searchResultsSelection = 0
+    } else {
+        $('#navbar-search-results').hide()
+        $('#ba-navbar-search').removeClass('results-open')
+        searchResultsCount = 0
+        searchResultsSelection = 0
+    }
+}
+
+function searchNavigate(ev) {
+    if (ev.keyCode == 13) {
+        ev.preventDefault()
+        if (ev.type == "keyup")
+        $('#ba-search-result-item-'+searchResultsSelection).trigger("onclick")
+    } if (ev.keyCode == 40) {
+        ev.preventDefault()
+        if (ev.type == "keydown" && searchResultsSelection < searchResultsCount) {
+            searchResultsSelection++
+            $('.ba-search-result-item').removeClass("selected")
+            $('#ba-search-result-item-'+searchResultsSelection).addClass("selected")
+        }
+    } else if (ev.keyCode == 38) {
+        ev.preventDefault()
+        if (ev.type == "keydown" && searchResultsSelection > 1)  {
+            searchResultsSelection--
+            $('.ba-search-result-item').removeClass("selected")
+            $('#ba-search-result-item-'+searchResultsSelection).addClass("selected")
+        }
+        
+    } 
+}
+
+function clearSearchBar(el) {
+    let searchbar = $('#'+el.dataset.target)
+    searchbar.val('').blur().trigger('oninput')
+    $(el).hide()
 }

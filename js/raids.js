@@ -1,11 +1,12 @@
 $.holdReady(true)
 
 var data = {}
-var raid, region, regionID
+var raid, region, regionID, userLang, selectedEnemy
 var difficulty = 0
 const json_list = {
     common: "./data/common.json",
-    raids: "./data/raids.json"
+    raids: "./data/raids.json",
+    localization: "./data/localization.json"
 }
 
 loadJSON(json_list, function(result) {
@@ -23,10 +24,37 @@ $(document).ready(function() {
         loadRegion(0)
     }
 
+    if (localStorage.getItem("theme")) {
+        darkTheme = localStorage.getItem("theme")    
+    } else {
+        darkTheme = 'auto'
+    }
+
+    if (localStorage.getItem("language")) {
+        userLang = localStorage.getItem("language")
+    } else {
+        if (window.navigator.language == 'ja') {
+            userLang = 'ja'
+        } else {
+            userLang = 'en'
+        }  
+    }
+    
+    toggleDarkTheme(darkTheme)
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        if (darkTheme == 'auto') {
+            $('body').toggleClass("theme-dark", event.matches)
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', $('body').hasClass('theme-dark') ? '#212529' : '#dee2e6')
+        }
+    })
+    
     $("#ba-navbar-placeholder").load('nav.html', function() {
+        loadLanguage(userLang)
         $("#ba-navbar-link-raids").addClass('active')
         $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
-        $("#ba-navbar-regionselector-label").text(region.name)
+        $(`#ba-navbar-languageselector-${userLang}`).addClass("active")
+        $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
+        $('#ba-navbar-contrast-toggle').prop('checked', highContrast)
     })
 
     $(window).on('popstate', function() {
@@ -44,7 +72,7 @@ $(document).ready(function() {
 
     populateRaidList("none")
 
-    window.setTimeout(function(){$("#loading-cover").fadeOut()},500)
+    window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
 
     $('input[type=range]').trigger('oninput')
 
@@ -75,7 +103,7 @@ function loadRegion(regID) {
 function loadRaid(raidName) {
 
     raid = find(data.raids,"name_dev",raidName)[0]
-
+    selectedEnemy = 0
     if (raid.released_insane[regionID]) {
         $('#ba-raid-difficulty-5').toggleClass('disabled', false)
     } else {
@@ -88,11 +116,10 @@ function loadRaid(raidName) {
     }
 
     $('#ba-raid-affiliation').text(raid.affiliation)
-    $('#ba-raid-name-en').text(raid.name_en)
-    $('#ba-raid-name-jp').text(raid.name_jp)
+    $('#ba-raid-name').text(raid['name_'+userLang])
 
-    $('#ba-raid-header').css('background-image', `url(images/raid/Boss_Portrait_${raid.name_dev}_LobbyBG.png`)
-    $('#ba-raid-header-img').attr('src', `images/raid/Boss_Portrait_${raid.name_dev}${difficulty == 5 ? "_Insane" : ""}_Lobby.png`)
+    $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.name_dev}${difficulty == 5 ? "_Insane" : ""}_Lobby.png')`)
+    //$('#ba-raid-header-img').attr('src', `images/raid/Boss_Portrait_${raid.name_dev}${difficulty == 5 ? "_Insane" : ""}_Lobby.png`)
 
     if (difficulty == 5) {
         if (raid.attack_type_insane == "Normal") {
@@ -112,63 +139,35 @@ function loadRaid(raidName) {
         $("#ba-raid-attacktype-label").text(raid.attack_type)
         $('#ba-raid-attacktype').tooltip('dispose').tooltip({title: getRichTooltip("images/tactical/StrategyObjectBuff_Attack.png", `${raid.attack_type}`, 'Attack Type', getTypeText(raid.attack_type)), placement: 'top', html: true})    
     }
+    var attacktype = (difficulty == 5) ? raid.attack_type_insane : raid.attack_type
+    $("#ba-raid-attacktype").removeClass("bg-atk-explosive bg-atk-piercing bg-atk-mystic bg-atk-normal").addClass(`bg-atk-${attacktype.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${attacktype}`, 'Attack Type', null, getTypeText(attacktype), 32), placement: 'top', html: true})
+    $("#ba-raid-attacktype-label").text(data.localization.strings[`atk_${attacktype.toLowerCase()}`][userLang])
+
+    $("#ba-raid-defensetype").removeClass("bg-def-light bg-def-heavy bg-def-special").addClass(`bg-def-${raid.defense_type.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${raid.defense_type} Armor`, 'Defense Type', null, getTypeText(raid.defense_type), 32), placement: 'top', html: true})
+    $("#ba-raid-defensetype-label").text(data.localization.strings[`def_${raid.defense_type.toLowerCase()}`][userLang])
+
+    $("#ba-raid-stat-level").text(raid.enemies[selectedEnemy].stats["level"][difficulty].toLocaleString())
+    $("#ba-raid-stat-maxhp").text(raid.enemies[selectedEnemy].stats["maxhp"][difficulty].toLocaleString())
+    $("#ba-raid-stat-attack").text(raid.enemies[selectedEnemy].stats["attack_power"][difficulty].toLocaleString())
+    $("#ba-raid-stat-defense").text(raid.enemies[selectedEnemy].stats["defense_power"][difficulty].toLocaleString())
+    $("#ba-raid-stat-critresist").text(raid.enemies[selectedEnemy].stats["crit_res"][difficulty].toLocaleString())
+    $("#ba-raid-stat-critdmgresist").text(raid.enemies[selectedEnemy].stats["crit_dmg_res"][difficulty].toLocaleString())
 
 
-    if (raid.defense_type == "Light") {
-        $("#ba-raid-defensetype").removeClass("ba-type-mystic ba-type-pierce").addClass("ba-type-explosive")
-    } else if (raid.defense_type == "Heavy") {
-        $("#ba-raid-defensetype").removeClass("ba-type-mystic ba-type-explosive").addClass("ba-type-pierce")
-    } else if (raid.defense_type == "Special") {
-        $("#ba-raid-defensetype").removeClass("ba-type-pierce ba-type-explosive").addClass("ba-type-mystic")
-    }
     var statsHtml = ''
     var tabsHtml = ''
     raid.enemies.forEach(function(el,i) {
         tabsHtml += `<button class="nav-link ${i==0 ? "active" : ""}" data-bs-toggle="tab" href="#ba-raid-enemy-${i}">${el.name_en}</button>`
-        statsHtml += `
-        <div id="ba-raid-enemy-${i}" class="tab-pane fade ${i==0 ? "show active" : ""}">
-        ${el.name_en}
-        <table class="table ba-stats mb-4">
-            <tbody>
-                <tr>
-                    <td width="30%">Level</td>
-                    <td width="20%">${el.stats["level"][difficulty]}</td>
-                    <td width="30%">HP</td>
-                    <td width="20%">${el.stats["maxhp"][difficulty]}</td>
-                </tr>
-                <tr>
-                    <td width="30%">Attack</td>
-                    <td width="20%">${el.stats["attack_power"][difficulty]}</td>
-                    <td width="30%">Defense</td>
-                    <td width="20%">${el.stats["defense_power"][difficulty]}</td>
-                </tr>
-                <tr>
-                    <td width="30%">Critical Resist</td>
-                    <td width="20%">${el.stats["crit_res"][difficulty]}</td>
-                    <td width="30%">Critical Dmg. Res.</td>
-                    <td width="20%">${el.stats["crit_dmg_res"][difficulty]}</td>
-                </tr>
-                <tr>
-                    <td width="30%">Stagger</td>
-                    <td width="70%" colspan="3">${el.stats["stagger"][difficulty]}</td>
-                </tr>
-            </tbody>
-        </table></div>`
     })
 
     $('#ba-raid-enemy-tabs').empty().html(tabsHtml)
-    $('#ba-raid-enemy-stats').empty().html(statsHtml)
-
-
-    $("#ba-raid-defensetype-label").text(raid.defense_type)
-    $('#ba-raid-defensetype').tooltip('dispose').tooltip({title: getRichTooltip("images/tactical/StrategyObjectBuff_Defense.png", `${raid.defense_type}`, 'Defense Type', getTypeText(raid.defense_type)), placement: 'top', html: true})
 
     var skillsHTML = ''
     var skillList = (difficulty == 5) ? raid.skills_insane : raid.skills
     skillList.forEach(function(el, i) {
         skillsHTML += `
         <div class="d-flex flex-row align-items-center mt-2">
-            <img class="ba-skill d-inline-block me-3" src="images/raid/skill/${el.icon}.png">
+            <img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.icon}.png">
             <div class="d-inline-block">
                 <div>
                     <h4 class="me-2 d-inline">${el.name_en}</h4>
@@ -178,10 +177,10 @@ function loadRaid(raidName) {
                 </div>
             </div>
         </div>
-        <p class="mt-1 mb-2 p-1">${getSkillText(el.description_en, el.parameters, difficulty+1)}</p>
+        <p class="mt-1 mb-2 p-1">${getSkillText(el.description_en, el.parameters, difficulty+1, raid.defense_type)}</p>
         `
         if (i != skillList.length-1) {
-            skillsHTML += '<div style="border-top: lightgrey 1px solid; min-width: 100%"></div>'
+            skillsHTML += '<div class="ba-panel-separator"></div>'
         }
     })
     $('#ba-raid-skills').empty().html(skillsHTML)
