@@ -121,7 +121,7 @@
 }
 
 body {
-    background-color: rgb(33, 37, 41);
+    background-color: var(--col-theme-background);
     font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
     overflow-y: hidden;
 }
@@ -178,16 +178,30 @@ p b, p strong {
     transition-duration: var(--var-animation-duration);
 }
 
+.screen-height {
+    max-height: calc(100vh - 3rem - 58px);
+    overflow: hidden;
+}
+
 .card-header {
     background-color: transparent;
     padding: 0.5rem;
     border-bottom: none;
 }
 
+.screen-height .card-body {
+    will-change: transform;
+    transform: translateZ(0);
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--col-panel-separator);
+}
+
 .card-body {
     background-color: transparent;
     border-radius: 0rem 0rem 0.25rem 0.25rem;
-    padding: 0 0.5rem 0.5rem 0.5rem;
+    padding: 0.5rem;
 }
 
 .form-control {
@@ -391,10 +405,12 @@ input[type="search" i]::-webkit-search-cancel-button {
 
 .navbar-dark .navbar-nav .nav-link.disabled {
     color: var(--col-panel-separator) !important;
+    cursor: default;
 }
 
 .navbar-dark .navbar-nav .nav-link {
     color: rgba(0,0,0,.55);
+    cursor: pointer;
 }
 
 .navbar-dark .navbar-nav .nav-link.active {
@@ -427,7 +443,7 @@ input[type="search" i]::-webkit-search-cancel-button {
     filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
 }
 
-#ba-student-name, #ba-raid-name, #ba-item-name {
+#ba-student-name, #ba-raid-name, #ba-item-name, #ba-stage-title, #ba-stage-enemy-name {
     font-family: 'Oswald', 'Noto Sans JP', sans-serif;
     text-transform: uppercase;
 }
@@ -450,7 +466,7 @@ input[type="search" i]::-webkit-search-cancel-button {
     
 }
 
-#ba-student-background, #ba-raid-background, #ba-craft-background, #ba-items-background {
+#ba-background, #ba-raid-background, #ba-craft-background, #ba-items-background {
     position: fixed;
     top: 0px;
     background: #000 no-repeat center center;
@@ -461,7 +477,7 @@ input[type="search" i]::-webkit-search-cancel-button {
     width: 100vw;
     height: 100vh;
     z-index: -1000;
-    filter: blur(8px) brightness(var(--var-background-brightness));
+    filter: blur(0.75rem) brightness(var(--var-background-brightness));
     transform: scale(1.05);
     transition: background-image var(--var-animation-duration) ease-in-out 0s;
 }
@@ -523,19 +539,24 @@ input[type="search" i]::-webkit-search-cancel-button {
     margin-bottom: 0px;
 }
 
-.ba-weaponpreview-star, .ba-statpreview-star {
-    /* color: var(--col-theme-accent); */
+.ba-statpreview-star, .ba-weaponpreview-star {
+    height: 22px;
+    width: auto;
+    margin-bottom: 0.25rem;
     color: var(--col-panel-separator);
     cursor: pointer;
     font-size: large;
 }
 
-.ba-statpreview-star i, .ba-weaponpreview-star i {
-    transition: color var(--var-animation-duration) ease, transform var(--var-animation-duration) ease;
+.ba-grid-header {
+    text-transform: uppercase;
+    font-size: initial;
+    font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+    text-align: left;
 }
 
-.ba-statpreview-star:hover i, .ba-weaponpreview-star:hover i {
-    transform: scale(1.2);
+.ba-statpreview-star i, .ba-weaponpreview-star i {
+    transition: color var(--var-animation-duration) ease, transform var(--var-animation-duration) ease;
 }
 
 .ba-statpreview-star.active {
@@ -624,7 +645,7 @@ h1 small {
     top: 5px !important;
 }
 
-#ba-student-attacktype img, #ba-student-defensetype img, #ba-raid-attacktype img, #ba-raid-defensetype img {
+#ba-student-attacktype img, #ba-student-defensetype img, #ba-raid-attacktype img, #ba-raid-defensetype img, #ba-stage-enemy-attacktype img, #ba-stage-enemy-defensetype img {
     position: absolute;
     width: auto;
     height: 18px;
@@ -646,7 +667,7 @@ h1 small {
     background-position: left;
 }
 
-#ba-student-class {
+#ba-student-class, #ba-stage-enemy-class {
     font-weight: 700;
     text-transform: uppercase;
     font-style: italic;
@@ -1001,7 +1022,7 @@ h1 small {
     padding: 3px;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
-    margin-bottom: calc(0.5rem + 8px);
+    margin-bottom: 0.5rem;
     object-fit: cover;
     border-radius: 999px;
     image-rendering: -webkit-optimize-contrast;
@@ -1023,19 +1044,45 @@ h1 small {
     background-color: var(--col-bg-item-ssr);
 }
 
-.ba-item {
-    transition: filter var(--var-animation-duration) ease;
+.ba-item-select-item {
+    max-width: 64px;
+    max-height: 64px;
+    margin: auto;
 }
 
-.ba-item img {
+.ba-item {
     height: 64px;
     width: 64px;
+    transition: filter var(--var-animation-duration) ease;
     padding: 3px;
     border-radius: 999px;
+    overflow: hidden;
+}
+
+.ba-item-student {
+    height: 58px;
+    width: 58px;
+    transition: filter var(--var-animation-duration) ease;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 0.25rem;
+}
+
+.ba-item-student img {
+    height: 100%;
+    width: 100%;
     object-fit: cover;
     object-position: center;
     image-rendering: -webkit-optimize-contrast;
+}
+
+.ba-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
     transition: transform var(--var-animation-duration) ease;
+    image-rendering: -webkit-optimize-contrast;
 }
 
 .ba-item:hover {
@@ -1055,7 +1102,7 @@ h1 small {
     border-radius: 1rem;
     right: 0px;
     padding: 0.1rem 0.25rem;
-    top: 44px;
+    bottom: 0px;
     cursor: default;
 }
 
@@ -1135,18 +1182,6 @@ h1 small {
     width: auto;
 }
 
-.ba-statpreview-star {
-    height: 22px;
-    width:auto;
-    margin-bottom: 0.25rem;
-    cursor: pointer;
-}
-
-.ba-statpreview-star.disabled {
-    filter: grayscale(100%); 
-    cursor: default;
-}
-
 .ba-stat-tooltip {
     text-decoration: underline dotted;
     cursor: default;
@@ -1220,8 +1255,8 @@ h1 small {
 }
 
 .ba-student-select-item {
-    will-change: transform;
-    transform: translateZ(0);
+    /* will-change: transform;
+    transform: translateZ(0); */
     display: inline-block;
     max-width: 100px;
     margin: auto;
@@ -1235,7 +1270,7 @@ h1 small {
     order: -1;
 }
 
-.ba-student-page {
+/* .ba-student-page {
     will-change: transform;
     transform: translateZ(0);
     padding: 1rem;
@@ -1252,20 +1287,15 @@ h1 small {
     scrollbar-width: thin;
     scrollbar-color: rgba(155, 155, 155, 0.5);
     max-height: calc(100vh - 13rem - 2.2vw);
-}
+} */
 
-#ba-item-list {
+#ba-item-list, #ba-stages-list, .ba-item-list {
     will-change: transform;
     transform: translateZ(0);
     font-size: 0;
-    max-height: calc(100vh - 58px - 6rem);
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(155, 155, 155, 0.5);
 }
 
 #ba-raid-header {
-    height: calc(6rem + 2.2vw);
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: right;
@@ -1303,6 +1333,8 @@ h1 small {
 }
 
 #ba-student-search-results {
+    will-change: transform;
+    transform: translateZ(0);
     overflow-y: scroll;
     scrollbar-width: thin;
     scrollbar-color: rgba(155, 155, 155, 0.5);
@@ -1310,6 +1342,7 @@ h1 small {
 }
 
 @media(max-width: 991px) {
+    
     .ba-student-select-item {
         max-width: 84px;
     }
@@ -1353,12 +1386,28 @@ h1 small {
 }
 
 @media(max-width: 768px) {
+
+    .screen-height {
+        max-height: none;
+        overflow: hidden;
+    }
+
+    #navbar-search, #ba-navbar-search, #navbar-search-results {
+        width: 100% !important;
+    }
+
+    #ba-navbar-content.collapse.show, #ba-navbar-content.collapsing {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
     body {
         font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
         overflow-y: auto;
     }
 
-    #ba-student {
+    .ba-page {
         padding: 0;
     }
 
@@ -1388,38 +1437,15 @@ h1 small {
 
     .card-body {
         border-radius: 0px;
-        padding: 0px;
+        padding: 0.5rem 0 0 0;
     }
 
     .card-header {
         /* position: sticky; */
-        padding: 0px;
+        padding: 0 0 0.5rem 0;
         top: 55px;
         z-index: 1000;
         transition: background-color ease var(--var-animation-duration);
-    }
-
-    #ba-raid-header {
-        position: sticky;
-        top: 50px;
-        z-index: 1000;
-    }
-
-    #ba-raid-header.stuck {
-        /*background-color: #212529;*/
-        background-color: rgba(15, 8, 54, 1);
-        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-        border-radius: 0px !important;
-    }
-
-    .card-header.stuck {
-        background-color: #212529;
-        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
-    }
-
-    .theme-lt .card-header.stuck {
-        background-color: #dee2e6;
-        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
     }
 
     .card-header:first-child {
@@ -1499,13 +1525,13 @@ h1 small {
 } */
 
 #loading-cover {
-    display: none;
+    /* display: none; */
     width: 100vw;
     height: 100vh;
     padding-top: 50vh;
     position: fixed;
     top: 0px;
-    z-index: 20;
+    z-index: 9999;
     background-color: rgb(33, 37, 41);
 }
 
@@ -1581,6 +1607,11 @@ h1 small {
 
 .ba-col-mystic {
     color: var(--col-text-mystic)  !important;
+    font-weight: 700;
+}
+
+.ba-col-raid {
+    color: var(--col-text-emphasis)  !important;
     font-weight: 700;
 }
 
@@ -1840,4 +1871,219 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     text-align: right;
     font-size: 0.75rem;
     font-weight: 400;
+}
+
+.ba-stage-select-grid {
+    text-align: center;
+    font-size: 0px;
+    display: grid;
+    gap: 0.6rem 0.6rem;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+}
+
+.ba-raid-select-grid {
+    text-align: center;
+    font-size: 0px;
+    display: grid;
+    gap: 0.6rem 0.6rem;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.ba-item-select-grid {
+    text-align: center;
+    font-size: 0px;
+    display: grid;
+    gap: 0.5rem 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+}
+
+.ba-stage-select-item {
+    max-width: 120px;
+    max-height: 80px;
+    margin: auto;
+}
+
+.ba-raid-select-item {
+    max-width: 180px;
+    max-height: 100px;
+    margin: auto;
+}
+
+.ba-item-select-item {
+    will-change: transform;
+    transform: translateZ(0);
+    max-width: 64px;
+    max-height: 64px;
+    margin: auto;
+}
+
+.ba-stage-card, .ba-raid-card, .ba-item-card {
+    position: relative;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.ba-stage-card-img {
+    position: relative;
+    height: 70px;
+    width: 120px;
+    box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.ba-item-card-img {
+    position: relative;
+    height: 64px;
+    width: 64px;
+    box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
+    overflow: hidden;
+    border-radius: 999px;
+}
+
+.ba-raid-card-bg-container {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.ba-raid-card-bg {
+    position: relative;
+    inset: 0;
+    height: 100px;
+    width: 180px;
+    filter: blur(8px);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: left center;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.ba-raid-card-img {
+    position: absolute;
+    inset: 0;
+    height: 100px;
+    width: 180px;
+    box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
+    border-radius: 10px;
+    overflow: hidden;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.ba-stage-card-img img {
+    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.ba-raid-card-img img {
+    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 33% center;
+}
+
+.ba-item-card-img img {
+    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
+    height: 100%;
+    width: 100%;
+    padding: 3px;
+    object-fit: cover;
+    object-position: center center;
+    backface-visibility: hidden;
+}
+
+.ba-stage-card-label, .ba-raid-card-label, .ba-item-card-label {
+    text-align: center;
+    background-color: var(--col-bg-imglabel);
+    color: var(--col-theme-text);
+    border-radius: 0px 0px 8px 8px;
+    border-bottom-width: 0 !important;
+    font-size: 1rem;
+    font-weight: 500;
+    position: absolute;
+    width: 100%;
+    height: 24px;
+    bottom: 0px;
+    left: 0px;
+    transition-duration: 300ms;
+}
+
+.ba-stage-card:hover .ba-stage-card-img img, .ba-raid-card:hover .ba-raid-card-img img, .ba-item-card:hover .ba-item-card-img img   {
+    filter: brightness(0.7);
+    transform: scale(1.15);
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.ba-icon-enemy {
+    display: inline-block;
+    margin: 0.5rem;
+    position: relative;
+    width: 120px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.ba-icon-enemy>img {
+    background-color: var(--col-theme-accent);
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    image-rendering: -webkit-optimize-contrast;
+    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;;
+}
+
+.ba-icon-enemy:hover>img {
+    transform: scale(1.15);
+    filter: brightness(0.75);
+}
+
+.ba-enemy-card-atk, .ba-enemy-card-def, .ba-enemy-card-lv {
+    font-size: 0;
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    border-radius: 999px;
+    align-items: baseline;
+    justify-content: center;
+    padding: 3px;
+    z-index: 30;
+}
+
+.ba-enemy-card-lv {
+    background-color: var(--col-bg-imglabel);
+    color: var(--col-theme-text);
+    width: auto;
+    font-weight: 700;
+    font-size: 0.75rem;
+    line-height: 0.75rem;
+    left: 4px;
+    top: 4px;
+}
+
+.ba-enemy-card-atk {
+    left: 4px;
+    top: 26px;
+}
+
+.ba-enemy-card-def {
+    left: 4px;
+    top: 48px;
+}
+
+.ba-enemy-card-rank {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    z-index: 30;
+}
+
+#ba-home-gacha-list>div {
+    margin: 0.5rem;
 }

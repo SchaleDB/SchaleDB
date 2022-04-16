@@ -1,0 +1,199 @@
+<div class="row">
+    <div class="col-12 col-md-6 ba-page">
+        <div class="px-0 px-xl-1">
+            <div id="ba-stages-list-container" class="card p-2 screen-height">
+                <div class="card-header">
+                    <nav id="ba-stages-list-tabs" class="nav nav-pills mb-2 px-2">
+                        <a id="ba-stages-list-tab-missions" class="nav-link active" data-bs-toggle="tab" href="#ba-stages-list-missions" data-localize-id="mission_type,missions"></a>
+                        <a id="ba-stages-list-tab-bounty" class="nav-link" data-bs-toggle="tab" href="#ba-stages-list-bounty" data-localize-id="mission_type,bounty"></a>
+                        <a id="ba-stages-list-tab-commissions" class="nav-link" data-bs-toggle="tab" href="#ba-stages-list-commissions" data-localize-id="mission_type,commissions"></a>
+                        <a id="ba-stages-list-tab-schooldungeon" class="nav-link" data-bs-toggle="tab" href="#ba-stages-list-schooldungeon" data-localize-id="mission_type,schooldungeon"></a>
+                        <a id="ba-stages-list-tab-events" class="nav-link" data-bs-toggle="tab" href="#ba-stages-list-events" data-localize-id="mission_type,events"></a>
+                    </nav>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div id="ba-stages-list-missions" class="ba-item-list tab-pane active show">
+                            <div id="ba-stages-list-missions-grid" class="ba-stage-select-grid align-top flex-fill p-2">
+                            </div>
+                        </div>
+                        <div id="ba-stages-list-bounty" class="ba-item-list tab-pane">
+                            <div id="ba-stages-list-bounty-grid" class="ba-stage-select-grid align-top flex-fill p-2">
+                            </div>
+                        </div>
+                        <div id="ba-stages-list-commissions" class="ba-item-list tab-pane">
+                            <div id="ba-stages-list-commissions-grid" class="ba-stage-select-grid align-top flex-fill p-2">
+                            </div>
+                        </div>
+                        <div id="ba-stages-list-schooldungeon" class="ba-item-list tab-pane">
+                            <div id="ba-stages-list-schooldungeon-grid" class="ba-stage-select-grid align-top flex-fill p-2">
+                            </div>
+                        </div>
+                        <div id="ba-stages-list-events" class="ba-item-list tab-pane">
+                            <div id="ba-stages-list-events-grid" class="ba-stage-select-grid align-top flex-fill p-2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 ba-page">
+        <div class="px-0 ps-xl-4" id="ba-stage-info">
+            <div id="ba-stages-details-container" class="card p-2 screen-height">
+                <div class="card-header">
+                    <div class="d-flex flex-row align-items-top py-2">
+                        <div class="flex-grow-1 me-2">
+                            <h4 id="ba-stage-name" class="px-1 mb-1"></h4>
+                            <h2 id="ba-stage-title" class="px-1 mb-2"></h2>
+                            <div class="d-flex align-items-center px-1">
+                                <span id="ba-stage-terrain" class="ba-panel"><img id="ba-stage-terrain-img" class="ba-student-terrain-icon invert-light" src=""></span>
+                                <span id="ba-stage-fog" class="ba-panel ms-2"><img id="ba-stage-terrain-img" class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_fog.png"></span>
+                                <span id="ba-stage-level" class="ba-student-info ba-panel text-bold mx-2 my-0"></span>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5 class="text-bold" data-localize-id="ui,stage_rewards"></h5>
+                    <div class="ba-panel p-2">
+                        <div id="ba-stage-drops" class="d-flex flex-wrap justify-content-center">
+
+                        </div>
+                    </div>
+                    <h5 class="text-bold mt-2" data-localize-id="ui,stage_enemies"></h5>
+                    <div class="ba-panel p-2 mb-2">
+                        <div id="ba-stage-enemies" class="d-flex flex-wrap justify-content-center">
+                        </div>
+                    </div>
+                    <div class="ba-panel p-2">
+                        <div id="ba-stage-enemy-info" class="">
+                            <div class="d-flex align-items-center px-2 mb-1">
+                                <div class="flex-fill me-2">
+                                    <h2 id="ba-stage-enemy-name" class="mb-2"></h2>
+                                    <div class="mb-3">
+                                        <!-- <h5 id="ba-stage-enemy-rank" class="d-inline-block me-2 mb-3"></h5> -->
+                                        <span id="ba-stage-enemy-rank" class="ba-student-info-s ba-panel text-bold" style="transition-duration: 0s;"></span>
+                                        <span id="ba-stage-enemy-class" class="ba-student-info-s" style="transition-duration: 0s;"></span>
+                                    </div>
+                                    <div class="d-flex flex-wrap align-items-center mb-2">
+                                        <span id="ba-stage-enemy-attacktype" class="ba-student-info"><img src="images/ui/Type_Attack.png"><span id="ba-stage-enemy-attacktype-label" style="margin-left: 18px; font-weight: 600;"></span></span>
+                                        <span id="ba-stage-enemy-defensetype" class="ba-student-info"><img src="images/ui/Type_Defense.png"><span id="ba-stage-enemy-defensetype-label" style="margin-left: 18px; font-weight: 600;"></span></span>
+                                    </div>
+                                    <div class="d-flex flex-row d-none">
+                                        <!-- <span id="ba-stage-enemy-rank" class="ba-student-info-s ba-panel"></span> -->
+                                        
+                                    </div>
+                                </div>
+                                <img id="ba-stage-enemy-img" src="" style="width: 150px; image-rendering: -webkit-optimize-contrast;">
+                            </div>
+
+                            <table id="ba-stage-enemy-stat-table" class="table ba-stats mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,maxhp"></span>
+                                                <span id="ba-stage-enemy-stat-maxhp" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,attack_power"></span>
+                                                <span id="ba-stage-enemy-stat-attack" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,defense_power"></span>
+                                                <span id="ba-stage-enemy-stat-defense" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,heal_power"></span>
+                                                <span id="ba-stage-enemy-stat-healing" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,accuracy"></span>
+                                                <span id="ba-stage-enemy-stat-accuracy" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,evasion"></span>
+                                                <span id="ba-stage-enemy-stat-evasion" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,critical"></span>
+                                                <span id="ba-stage-enemy-stat-crit" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,critical_resist"></span>
+                                                <span id="ba-stage-enemy-stat-critresist" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,critical_damage"></span>
+                                                <span id="ba-stage-enemy-stat-critdmg" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,critical_damage_resist"></span>
+                                                <span id="ba-stage-enemy-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,stability"></span>
+                                                <span id="ba-stage-enemy-stat-stability" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,range"></span>
+                                                <span id="ba-stage-enemy-stat-range" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,move_speed"></span>
+                                                <span id="ba-stage-enemy-stat-movespeed" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="stat,ammo"></span>
+                                                <span id="ba-stage-enemy-stat-ammo" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

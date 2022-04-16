@@ -20,73 +20,7 @@ if (localStorage.getItem("theme")) {
 
 $(document).ready(function() {
   
-    var urlVars = new URL(window.location.href).searchParams
-
-    if (localStorage.getItem("region")) {
-        loadRegion(localStorage.getItem("region"))
-    } else {
-        loadRegion(0)
-    }
-
-    if (localStorage.getItem("theme")) {
-        darkTheme = localStorage.getItem("theme")    
-    } else {
-        darkTheme = 'auto'
-    }
-
-    if (localStorage.getItem("language")) {
-        userLang = localStorage.getItem("language")
-    } else {
-        if (window.navigator.language == 'ja') {
-            userLang = 'ja'
-        } else {
-            userLang = 'en'
-        }  
-    }
-
-    toggleDarkTheme(darkTheme)
-    $('body').toggleClass("reduced-motion", false)
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-        if (darkTheme == 'auto') {
-            $('body').toggleClass("theme-dark", event.matches)
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', $('body').hasClass('theme-dark') ? '#212529' : '#dee2e6')
-        }
-    })
-
-    $("#ba-navbar-placeholder").load('nav.html', function() {
-
-        loadLanguage(userLang)
-        $("#ba-navbar-link-items").addClass('active')
-        $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
-        $(`#ba-navbar-languageselector-${userLang}`).addClass("active")
-        $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
-        $('#ba-navbar-contrast-toggle').prop('checked', highContrast)
-    })
-
-    $(window).on('popstate', function() {
-        var urlVars = new URL(window.location.href).searchParams
-        loadItem(urlVars.get("item"))
-    })
-
-    if (urlVars.has("item")) {
-        loadItem(urlVars.get("item"))
-    } else if (localStorage.getItem("item")) {
-        loadItem(localStorage.getItem("item"))
-    } else {
-        loadItem("")
-    }
-
-    populateItemList()
-
-    window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
-
-    $('input[type=range]').trigger('oninput')
-
-    var header = $('#ba-raid-header')
-    window.addEventListener('scroll', _.throttle(function () {
-        if (((header.offset().top - $(this).scrollTop()) <= 56) != header.hasClass("stuck"))
-        header.toggleClass("stuck", (header.offset().top - $(this).scrollTop()) <= 56);
-    }, 100));
+    
 
 })
 

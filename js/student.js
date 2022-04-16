@@ -5,6 +5,7 @@ const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445]
 const school_longname = {"Abydos": "Abydos High School", "Gehenna": "Gehenna Academy", "Hyakkiyako": "Allied Hyakkiyako Academy", "Millennium": "Millennium Science School", "RedWinter": "Red Winter Federal Academy", "Shanhaijing": "Shanhaijing Senior Secondary School", "Trinity": "Trinity General School", "Valkyrie": "Valkyrie Police School", "Arius": "Arius Satellite School", "Others": "Others", "SRT": "SRT Special Academy"}
 const label_smalltext_threshold = {'en':11, 'ja':5}
+const label_enemy_smalltext_threshold = {'en':12, 'ja':6}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 
@@ -33,19 +34,23 @@ const stat_friendlyname = {
 var data = {}
 const json_list = {
     common: "./data/common.json",
+    raids: "./data/raids.json",
     students: "./data/students.json",
-    localization: "./data/localization.json"
+    localization: "./data/localization.json",
+    stages: "./data/stages.json",
+    enemies: "./data/enemies.json",
 }
 
-var student, region, regionID, userLang, student_bondalts, darkTheme, highContrast
+var loadedModule, student, studentList, loadedItem, loadedStage, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy
 var studentSelectorModal, statPreviewModal
 var header
+var raid_difficulty = 0
 var stat_preview_stars = 3
 var stat_preview_weapon_stars = 1
 
 var search_options = {
     "groupby": "none",
-    "sortby": "",
+    "sortby": "default",
     "sortby_dir": 1,
     "filter": {
         "type": {
@@ -118,11 +123,7 @@ $(document).ready(function() {
     studentSelectorModal = new bootstrap.Modal(document.getElementById("modStudents"), {})
     statPreviewModal = new bootstrap.Modal(document.getElementById("modStatPreviewSettings"), {})
     header = $(".card-header")
-
-    hookTooltips()
   
-    var urlVars = new URL(window.location.href).searchParams
-
     if (localStorage.getItem("region")) {
         loadRegion(localStorage.getItem("region"))
     } else {
@@ -138,14 +139,15 @@ $(document).ready(function() {
             userLang = 'en'
         }  
     }
-
+    data.students.sort((a,b) => a["name_"+userLang].localeCompare(b["name_"+userLang]))
+    studentList = data.students.map(x => x)
     if (localStorage.getItem("theme")) {
         darkTheme = localStorage.getItem("theme")    
     } else {
         darkTheme = 'auto'
     }
-    
     toggleDarkTheme(darkTheme)
+
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
         if (darkTheme == 'auto') {
             $('body').toggleClass("theme-dark", event.matches)
@@ -158,64 +160,171 @@ $(document).ready(function() {
         highContrast = (localStorage.getItem("high_contrast") == "true")
     } else {
         highContrast = (!CSS.supports('backdrop-filter', 'blur(1px)')) || window.matchMedia('(prefers-contrast: more)').matches 
-    }    
-
+    }
     document.querySelector('meta[name="theme-color"]').setAttribute('content', darkTheme ? '#212529' : '#dee2e6')
     $('body').toggleClass("high-contrast", highContrast)
-
-    $("#ba-navbar-placeholder").load('nav.html', function() {
-        loadLanguage(userLang)
-        $("#ba-navbar-link-students").addClass('active')
-        $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
-        $(`#ba-navbar-languageselector-${userLang}`).addClass("active")
-        $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
-        $('#ba-navbar-contrast-toggle').prop('checked', highContrast)
-    })
     
+    $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
+    $(`#ba-navbar-languageselector-${userLang}`).addClass("active")
+    $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
+    $('#ba-navbar-contrast-toggle').prop('checked', highContrast)
+
     $(window).on('popstate', function() {
         var urlVars = new URL(window.location.href).searchParams
-        loadStudent(urlVars.get("chara"))
+        if (urlVars.get("chara")) {
+            loadStudent(urlVars.get("chara"))
+        } else if (urlVars.get("item")) {
+            loadItem(urlVars.get("item"))
+        } else if (urlVars.get("raid")) {
+            loadRaid(urlVars.get("item"))
+        } else if (urlVars.get("stage")) {
+            loadStage(urlVars.get("stage"))
+        }
     })
 
-    if (urlVars.has("chara")) {
+    var urlVars = new URL(window.location.href).searchParams
+    if (urlVars.get("chara")) {
         loadStudent(urlVars.get("chara"))
-    } else if (localStorage.getItem("chara")) {
-        loadStudent(localStorage.getItem("chara"))
-    } else {
-        loadStudent("Aru")
+    } else if (urlVars.get("item")) {
+        loadItem(urlVars.get("item"))
+    } else if (urlVars.get("raid")) {
+        loadRaid(urlVars.get("raid"))
+    } else if (urlVars.get("stage")) {
+        loadStage(urlVars.get("stage"))
+    }else {
+        loadModule('students')
     }
-
-    populateStudentList()
-
-    if (localStorage.getItem("chara_groupby")) {
-        searchOptionSet('groupby', localStorage.getItem("chara_groupby"), false)
-    } else {
-        searchOptionSet('groupby', 'none', false)
-    }
-
-    if (localStorage.getItem("chara_sortby")) {
-        searchSetOrder(localStorage.getItem("chara_sortby"), false)
-    } else {
-        searchSetOrder('default', false)
-    }
-
-    updateStudentList()
-
-    window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
-
-    $('input[type=range]').trigger('oninput')
-
-    // window.addEventListener('scroll', _.throttle(function () {
-    //     if (((header.offset().top - $(this).scrollTop()) <= 56) != header.hasClass("stuck")) {
-    //         header.toggleClass("stuck", (header.offset().top - $(this).scrollTop()) <= 56)
-    //         $('.navbar').toggleClass("stuck", (header.offset().top - $(this).scrollTop()) <= 56)
-    //     }
-        
-    // }, 100))
-
-    $('#ba-student, #ba-student-list-btn').show()
-
 })
+
+function loadModule(moduleName, entry=null) {
+    if (moduleName == 'students') {
+        loadedModule = 'students'
+        $(".navbar-nav .nav-link").removeClass('active')
+        $("#ba-navbar-link-students").addClass('active')
+        $("#loaded-module").load('students.html', function() {
+            loadRegion(regionID)
+            loadLanguage(userLang)
+            $(".tooltip").tooltip("hide")
+            var urlVars = new URL(window.location.href).searchParams
+        
+            if (entry != null) {
+                loadStudent(entry)
+            } else if (urlVars.has("chara")) {
+                loadStudent(urlVars.get("chara"))
+            } else if (localStorage.getItem("chara")) {
+                loadStudent(localStorage.getItem("chara"))
+            } else {
+                loadStudent("Aru")
+            }
+        
+            populateStudentList()
+        
+            if (localStorage.getItem("chara_groupby")) {
+                searchOptionSet('groupby', localStorage.getItem("chara_groupby"), false)
+            } else {
+                searchOptionSet('groupby', 'none', false)
+            }
+        
+            if (localStorage.getItem("chara_sortby_dir")) {
+                search_options["sortby_dir"] = parseInt(localStorage.getItem("chara_sortby_dir"))
+            }
+
+            if (localStorage.getItem("chara_sortby")) {
+                searchSetOrder(localStorage.getItem("chara_sortby"), false, false)
+            } else {
+                searchSetOrder('default', false, false)
+            }
+        
+            updateStudentList()
+        
+            window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
+        
+            $('input[type=range]').trigger('oninput')
+        
+            $('#ba-student, #ba-student-list-btn').show()
+        })
+    } else if (moduleName == 'items') {
+        loadedModule = 'items'
+        $(".navbar-nav .nav-link").removeClass('active')
+        $("#ba-navbar-link-items").addClass('active')
+        var bgimg = new Image()
+        bgimg.onload = function(){
+            $("#ba-background").css('background-image', `url('${bgimg.src}')`)
+        }
+        bgimg.src = `images/background/BG_CraftChamber_Night.jpg`
+        $("#loaded-module").load('items.html', function() {
+            loadLanguage(userLang)
+            $(".tooltip").tooltip("hide")
+            var urlVars = new URL(window.location.href).searchParams
+        
+            if (entry != null) {
+                loadItem(entry)
+            } else if (urlVars.has("item")) {
+                loadItem(urlVars.get("item"))
+            } else if (localStorage.getItem("item")) {
+                loadItem(localStorage.getItem("item"))
+            } else {
+                loadItem(0)
+            }
+            populateItemList()
+            window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
+            $('#ba-item-list-container, #ba-item-details-container').show()
+        })
+    } else if (moduleName == 'raids') {
+        loadedModule = 'raids'
+        $(".navbar-nav .nav-link").removeClass('active')
+        $("#ba-navbar-link-raids").addClass('active')
+        var bgimg = new Image()
+        bgimg.onload = function(){
+            $("#ba-background").css('background-image', `url('${bgimg.src}')`)
+        }
+        bgimg.src = `images/background/BG_Raid.jpg`
+        $("#loaded-module").load('raids.html', function() {
+            loadLanguage(userLang)
+            $(".tooltip").tooltip("hide")
+            var urlVars = new URL(window.location.href).searchParams
+        
+            if (entry != null) {
+                loadRaid(entry)
+            } else if (urlVars.has("raid")) {
+                loadRaid(urlVars.get("raid"))
+            } else if (localStorage.getItem("raid")) {
+                loadRaid(localStorage.getItem("raid"))
+            } else {
+                loadRaid("Binah")
+            }
+            populateRaidList("none")
+            window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
+        })
+    } else if (moduleName == 'stages') {
+        loadedModule = 'stages'
+        $(".navbar-nav .nav-link").removeClass('active')
+        $("#ba-navbar-link-stages").addClass('active')
+        var bgimg = new Image()
+        bgimg.onload = function(){
+            $("#ba-background").css('background-image', `url('${bgimg.src}')`)
+        }
+        bgimg.src = `images/background/BG_Raid.jpg`
+        $("#loaded-module").load('stages.html', function() {
+            loadLanguage(userLang)
+            $(".tooltip").tooltip("hide")
+            var urlVars = new URL(window.location.href).searchParams
+        
+            if (entry != null) {
+                loadStage(entry)
+            } else if (urlVars.has("stage")) {
+                loadStage(urlVars.get("stage"))
+            } else if (localStorage.getItem("stage")) {
+                loadStage(localStorage.getItem("stage"))
+            } else {
+                loadStage(1011101)
+            }
+            populateStageList()
+            window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
+        })
+    }
+
+}
 
 function hookTooltips() {
     //hook bs tooltips
@@ -295,10 +404,10 @@ function updateStudentList() {
         }
     })
 
-    data.students.sort(sortfunction)
+    studentList.sort(sortfunction)
     var count = 0
 
-    $.each(data.students, function(i, el){
+    $.each(studentList, function(i, el){
         if (el["released"][regionID]) {
             if (checkFilters(el, filterList, searchTerm)) {
                 count++
@@ -389,12 +498,14 @@ function searchOptionSet(option, value, runSearch = true) {
     }
 }
 
-function searchSetOrder(value, runSearch = true) {
+function searchSetOrder(value, runSearch = true, swapDir = true) {
 
-    if (value == search_options["sortby"]) {
-        search_options["sortby_dir"] = -search_options["sortby_dir"]
-    } else {
-        search_options["sortby_dir"] = 1
+    if (swapDir) {
+        if (value == search_options["sortby"]) {
+            search_options["sortby_dir"] = -search_options["sortby_dir"]
+        } else {
+            search_options["sortby_dir"] = 1
+        }
     }
 
     $(`#ba-student-search-sortby a`).removeClass("active")
@@ -411,7 +522,8 @@ function searchSetOrder(value, runSearch = true) {
     }
 
     search_options["sortby"] = value
-    localStorage.setItem(`chara_sortby`, value)
+    localStorage.setItem('chara_sortby', value)
+    localStorage.setItem('chara_sortby_dir', search_options["sortby_dir"])
     if (runSearch) {
         updateStudentList()  
     }
@@ -427,288 +539,501 @@ function searchSetFilter(prop, value, runSearch = true) {
 }
 
 function loadStudent(studentName) {
+    if (loadedModule == 'students') {
+        student = find(data.students,"name_dev",studentName)
 
-    student = find(data.students,"name_dev",studentName)
-
-    if (student.length == 1) {
-        console.log(student[0])
-        student = student[0]
-
-
-        var charimg = new Image()
-        charimg.onload = function() {
+        if (student.length == 1) {
+            console.log(student[0])
+            student = student[0]
+    
+    
+            var charimg = new Image()
+            charimg.onload = function() {
+                // $('#ba-student-img').attr('src', 'images/student/' + student.student_img)
+                // $('#ba-student-img-sm').attr('src', 'images/student/' + student.student_img)
+                $('#ba-student-img').css('background-image', `url('${charimg.src}')`)
+                $('#ba-student-img-sm').css('background-image', `url('${charimg.src}')`)
+            }
+            charimg.src = 'images/student/' + student.student_img
+    
             // $('#ba-student-img').attr('src', 'images/student/' + student.student_img)
             // $('#ba-student-img-sm').attr('src', 'images/student/' + student.student_img)
-            $('#ba-student-img').css('background-image', `url('${charimg.src}')`)
-            $('#ba-student-img-sm').css('background-image', `url('${charimg.src}')`)
-        }
-        charimg.src = 'images/student/' + student.student_img
-
-        // $('#ba-student-img').attr('src', 'images/student/' + student.student_img)
-        // $('#ba-student-img-sm').attr('src', 'images/student/' + student.student_img)
-        
-        var bgimg = new Image()
-        bgimg.onload = function(){
-            $("#ba-student-background").css('background-image', `url('${bgimg.src}')`)
-        }
-        bgimg.src = `images/background/${student.background_img}.jpg`
-
-        $('#ba-student-name').html(student[`name_${userLang}`].replace('(', '<small>(').replace(')', ')</small>'))
-        //$('#ba-student-name-ja').text(student.name_ja)
-        $("#ba-student-class").text(student.type).removeClass("bg-striker bg-special").addClass(`bg-${student.type.toLowerCase()}`)
-        $("#ba-student-stars").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars))
-
-        $("#ba-student-limited").removeClass("ba-type-limited ba-type-event")
-        switch (student.is_limited) {
-            case 0:
-                //$("#ba-student-limited").hide()
-                $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars))
-                break;
-            case 1:
-                //$("#ba-student-limited").show()
-                $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars) + ` (${data.localization.strings['rarity_limited'][userLang]})`)
-                //$("#ba-student-limited").tooltip('dispose').tooltip({title: getRichTooltip(null, 'Limited Recruitment', null, 'Student only available for a limited time through a recruitment banner.'), placement: 'top', html: true})
-                break;
-            case 2:
-                //$("#ba-student-limited").show()
-                $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars) + ` (${data.localization.strings['rarity_event'][userLang]})`)
-                //$("#ba-student-limited").tooltip('dispose').tooltip({title: getRichTooltip(null, 'Event Reward', null, 'Student only available for a limited time as an event reward.'), placement: 'top', html: true})
-                break;
-        }
-        
-
-        $("#ba-student-role-label").text(data.localization.strings[`role_${student.role.toLowerCase()}`][userLang])
-        $("#ba-student-role-icon").attr("src", `images/ui/Role_${student.role}.png`)
-
-        $(".ba-skill, .ba-weapon-skill-plus").removeClass("bg-skill-explosive bg-skill-piercing bg-skill-mystic").addClass(`bg-skill-${student.attack_type.toLowerCase()}`)
-        $("#ba-student-attacktype").removeClass("bg-atk-explosive bg-atk-piercing bg-atk-mystic").addClass(`bg-atk-${student.attack_type.toLowerCase()}`)
-        $("#ba-student-defensetype").removeClass("bg-def-light bg-def-heavy bg-def-special").addClass(`bg-def-${student.defense_type.toLowerCase()}`)
-        
-        $("#ba-student-school-label").text(student.school)
-        //$("#ba-student-school").tooltip('dispose').tooltip({title: getRichTooltip(null, null, null, student.school.replace("RedWinter", "Red Winter")), placement: 'bottom', html: true})
-        $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
-        $("#ba-student-position").text(student.position.toUpperCase())
-        $("#ba-student-attacktype-label").text(data.localization.strings[`atk_${student.attack_type.toLowerCase()}`][userLang])
-        $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.attack_type}`, 'Attack Type', null, getTypeText(student.attack_type), 32), placement: 'top', html: true})
-        $("#ba-student-defensetype-label").text(data.localization.strings[`def_${student.defense_type.toLowerCase()}`][userLang])
-        $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.defense_type} Armor`, 'Defense Type', null, getTypeText(student.defense_type), 32), placement: 'top', html: true})
-
-        updateGearIcon()
-        recalculateTerrainAffinity()
-
-        if (student.uses_cover) {
-            $("#ba-student-usescover-icon").show()
-        } else {
-            $("#ba-student-usescover-icon").hide()
-        }
-
-        $("#ba-student-weapontype-label").text(student.weapon_type)
-        $(".ba-type-weapon").css("background-image", "url('images/weapontype/Weapon_Icon_" + student.weapon_type_img + ".png')")
-
-        //Skills
-        $("#ba-skill-ex-name").text(student[`skill_ex_name_${userLang}`] ? student[`skill_ex_name_${userLang}`] : student.skill_ex_name_ja)
-        $("#ba-skill-normal-name").text(student[`skill_normal_name_${userLang}`] ? student[`skill_normal_name_${userLang}`] : student.skill_normal_name_ja)
-        $("#ba-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] : student.skill_passive_name_ja)
-        $("#ba-skill-sub-name").text(student[`skill_sub_name_${userLang}`] ? student[`skill_sub_name_${userLang}`] : student.skill_sub_name_ja)     
-
-        $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon)
-        $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon)
-        $('#ba-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
-        $('#ba-skill-sub-icon').attr("src", "images/skill/" + student.skill_sub_icon)
-
-        student.skill_ex_cost[0] == student.skill_ex_cost[4] ? $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic") : $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic").addClass(`ba-col-${student.attack_type.toLowerCase()}`)
-
-
-        //Skill materials
-        var html
-        for (let i = 2; i <= 5; i++) {
-            html = ''
-            $.each(student.skill_ex_upgrade_material[i-2], function(j, el) {
-                html += getMaterialIconHTML(el, student.skill_ex_upgrade_amount[i-2][j])
-            })
-            html += getMaterialIconHTML(0, abbreviateNumber(skill_ex_upgrade_credits[i-2]))
-    
-            $('#ba-skill-ex-materials-'+i).html(html)
-            $('#ba-skill-ex-materials-'+i+' div').each(function(j,el) {
-                $(el).tooltip({html: true})
-            })
-        }
-
-        for (let i = 2; i <= 9; i++) {
-            html = ''
-            $.each(student.skill_upgrade_material[i-2], function(j, el) {
-                html += getMaterialIconHTML(el, student.skill_upgrade_amount[i-2][j])
-            })
-            html += getMaterialIconHTML(0, abbreviateNumber(skill_upgrade_credits[i-2]))
-    
-            $('#ba-skill-materials-'+i).html(html)
-            $('#ba-skill-materials-'+i+' div').each(function(j,el) {
-                $(el).tooltip({html: true})
-            })
-        }
-
-        html = ''
-        html += getMaterialIconHTML(9999, 1)
-        html += getMaterialIconHTML(0, abbreviateNumber(skill_upgrade_credits[8]))
-
-        $('#ba-skill-materials-10').html(html)
-        $('#ba-skill-materials-10 div').each(function(i,el) {
-            $(el).tooltip({html: true})
-        })
-
-        //Weapon
-        $("#ba-student-weapon-name").text(student[`weapon_name_${userLang}`] ? student[`weapon_name_${userLang}`]: student.weapon_name_ja)
-        $("#ba-student-weapon-type").text(student.weapon_type)
-        $("#ba-student-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
-
-        if (student[`weapon_skill_passive_description_${userLang}`] != null) {
-            $("#ba-weapon-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] + data.localization.strings["skill_plus"][userLang] : student.skill_passive_name_ja + '＋')
-            $('#ba-weapon-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
-            recalculateWeaponSkillPreview()
-        }
-
-        $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.weapon_bonus_terrain_type}.png`)
-        $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${student.weapon_bonus_terrain_adaption}.png`)
-        $('#ba-weapon-bonus-terrain-adaption-description').html(`${student.weapon_bonus_terrain_type.charAt(0).toUpperCase()+student.weapon_bonus_terrain_type.substr(1)} Combat Power ${eval('student.'+student.weapon_bonus_terrain_type+'_adaption')} → <b>${student.weapon_bonus_terrain_adaption}</b><br>(${getAdaptionText(student.weapon_bonus_terrain_type, student.weapon_bonus_terrain_adaption)})`)
-
-        var url = new URL(window.location.href)
-
-        if (!url.searchParams.get("chara")) {
-            url.searchParams.set("chara", student.name_dev)
-            history.replaceState(null, '', url)  
-        } else if (url.searchParams.get("chara") !== student.name_dev) {
-            url.searchParams.set("chara", student.name_dev)
-            history.pushState(null, '', url)
-        }
-        
-        $.each(student.weapon_bonus_stats, function(i, el) {
-            $(`#ba-weapon-stat-${i+1}`).text(getStatName(student.weapon_bonus_stats[i]))
-            $(`#ba-weapon-stat-${i+1}-amount`).text(student.weapon_bonus_stats_parameters[i][0])
-        }) 
-
-        if (student.weapon_bonus_stats.length > 2) {
-            $('#ba-weapon-stat-row2').show()
-        } else {
-            $('#ba-weapon-stat-row2').hide()
-        }
-
-        if (student.weapon_description_en) {
-            $('#ba-weapon-description').text(student.weapon_description_en)
-        } else if (student.weapon_description_ja) {
-            $('#ba-weapon-description').text(student.weapon_description_ja)
-        } else {
-            $('#ba-weapon-description').text("")
-        }       
-
-        //Profile
-        $('#ba-student-fullname').text(student[`fullname_${userLang}`])
-        // $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + ".png")
-        // $("#ba-profile-school-img-w").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
-        $('#ba-profile-school-label').text(data.localization.strings[`school_${student.school.toLowerCase()}_long`][userLang])
-        $('#ba-profile-club-label').text(student[`club_${userLang}`])
-        student[`year_${userLang}`] == "" ? $('#ba-profile-schoolyear-label').hide() : $('#ba-profile-schoolyear-label').show()
-        $('#ba-profile-schoolyear-label').text(student[`year_${userLang}`])
-        $('#ba-profile-portrait-img').attr("src", `images/student/collection/Student_Portrait_${student.name_dev}_Collection.png`)
-        $('#ba-student-profile-text').text(student[`profile_${userLang}`] ? student[`profile_${userLang}`] : student[`profile_ja`])
-
-        if (student.recollection_lobby) {
-            $(".ba-student-lobby").show()
-            $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.name_dev}_01.png`)
-            $("#ba-student-lobby-unlock").text(student.recollection_lobby)
-            $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, `${student['name_'+userLang]}'s Recollection Lobby`, null, null, `Unlocks after reaching relationship rank ${student.recollection_lobby} with ${student['name_'+userLang]}.`), placement: 'top', html: true})
-        } else {
-            $(".ba-student-lobby").hide()
-        }
-        
-        $('#ba-student-profile-age').text(student.age)
-        $('#ba-student-profile-birthday').text(student.birthday)
-        $('#ba-student-profile-hobbies').text(student[`hobbies_${userLang}`])
-        $('#ba-student-profile-height').text(student.height)
-        $('#ba-student-profile-cv').text(student[`cv_${userLang}`])
-        $('#ba-student-profile-illustrator').text(student.illustrator)
-
-        var favItemsHtml = ""
-        $(student.favoured_items[0]).each(function(i,el){
-            favItemsHtml += getFavourIconHTML(el, 3)
-        })
-        $(student.favoured_items[1]).each(function(i,el){
-            favItemsHtml += getFavourIconHTML(el, 2)
-        })
-        $('#ba-student-favoured-items').empty().html(favItemsHtml)
-        if (favItemsHtml == "") {
-            $('#ba-student-favoured-items').empty().html('<span class="pb-2 text-center">This student does not have any favourite gifts.</span>')
-        } else {
-            $('#ba-student-favoured-items').empty().html(favItemsHtml)
-        }
-
-        var favFurnitureHtml = ""
-        $(student.favoured_furniture).each(function(i,el){
-            favFurnitureHtml += getFurnitureIconHTML(el)
-        })
-
-        $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
-        if (favFurnitureHtml == "") {
-            $('#ba-student-favoured-furniture').empty().html('<span class="pb-2 text-center">This student does not interact with any café furniture.</span>')
-        } else {
-            $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
-        }
-        $('.ba-favor-item').tooltip({html: true})
-
-        $('#ba-student-bond-1').text(getStatName(student.bond_stat[0]))
-        $('#ba-student-bond-2').text(getStatName(student.bond_stat[1]))
-
-        if (student.type == "Striker") {
-            $('#ba-student-stat-table').removeClass("table-striker-bonus")
-            $('#ba-student-stat-striker-bonus').hide()
-        } else {
-            $('#ba-student-stat-striker-bonus').show()
-        }
-        
-        $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(1, student))
-        student_bondalts = []
-        for (let i = 0; i < student.bond_extratarget.length; i++) {
-            var extraTarget = find(data.students,"id",student.bond_extratarget[i])[0]
-            if (extraTarget.released[regionID]) {
-                student_bondalts.push(extraTarget)
-                $('#ba-statpreview-bond-targets').append(getBondTargetsHTML(1 + student_bondalts.length, extraTarget))
+            
+            var bgimg = new Image()
+            bgimg.onload = function(){
+                $("#ba-background").css('background-image', `url('${bgimg.src}')`)
             }
-        }
-
-        document.title = `Schale DB | ${student['name_'+userLang]}`
-
-        changeStatPreviewStars(student.stars)
-        recalculateWeaponPreview()
-        recalculateStatPreview()
-        recalculateSkillPreview()
-        recalculateEXSkillPreview()
-        recalculateBondPreview()
-
-        changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'))
-        changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'))
-        changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'))
-
-        for (let i = 1; i <= student_bondalts.length+1; i++) {
-            changeStatPreviewBondLevel(i, document.getElementById(`ba-statpreview-bond-${i}-range`))
-        }
-        //changeStatPreviewWeaponLevel(document.getElementById(`ba-statpreview-weapon-range`))
+            bgimg.src = `images/background/${student.background_img}.jpg`
+    
+            $('#ba-student-name').html(student[`name_${userLang}`].replace('(', '<small>(').replace(')', ')</small>'))
+            //$('#ba-student-name-ja').text(student.name_ja)
+            $("#ba-student-class").text(student.type).removeClass("bg-striker bg-special").addClass(`bg-${student.type.toLowerCase()}`)
+            $("#ba-student-stars").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars))
+    
+            $("#ba-student-limited").removeClass("ba-type-limited ba-type-event")
+            switch (student.is_limited) {
+                case 0:
+                    //$("#ba-student-limited").hide()
+                    $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars))
+                    break;
+                case 1:
+                    //$("#ba-student-limited").show()
+                    $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars) + ` (${data.localization.strings['rarity_limited'][userLang]})`)
+                    //$("#ba-student-limited").tooltip('dispose').tooltip({title: getRichTooltip(null, 'Limited Recruitment', null, 'Student only available for a limited time through a recruitment banner.'), placement: 'top', html: true})
+                    break;
+                case 2:
+                    //$("#ba-student-limited").show()
+                    $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars) + ` (${data.localization.strings['rarity_event'][userLang]})`)
+                    //$("#ba-student-limited").tooltip('dispose').tooltip({title: getRichTooltip(null, 'Event Reward', null, 'Student only available for a limited time as an event reward.'), placement: 'top', html: true})
+                    break;
+            }
+            
+    
+            $("#ba-student-role-label").text(data.localization.strings[`role_${student.role.toLowerCase()}`][userLang])
+            $("#ba-student-role-icon").attr("src", `images/ui/Role_${student.role}.png`)
+    
+            $(".ba-skill, .ba-weapon-skill-plus").removeClass("bg-skill-explosive bg-skill-piercing bg-skill-mystic").addClass(`bg-skill-${student.attack_type.toLowerCase()}`)
+            $("#ba-student-attacktype").removeClass("bg-atk-explosive bg-atk-piercing bg-atk-mystic").addClass(`bg-atk-${student.attack_type.toLowerCase()}`)
+            $("#ba-student-defensetype").removeClass("bg-def-light bg-def-heavy bg-def-special").addClass(`bg-def-${student.defense_type.toLowerCase()}`)
+            
+            $("#ba-student-school-label").text(student.school)
+            //$("#ba-student-school").tooltip('dispose').tooltip({title: getRichTooltip(null, null, null, student.school.replace("RedWinter", "Red Winter")), placement: 'bottom', html: true})
+            $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
+            $("#ba-student-position").text(student.position.toUpperCase())
+            $("#ba-student-attacktype-label").text(data.localization.strings[`atk_${student.attack_type.toLowerCase()}`][userLang])
+            $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.attack_type}`, 'Attack Type', null, getTypeText(student.attack_type), 32), placement: 'top', html: true})
+            $("#ba-student-defensetype-label").text(data.localization.strings[`def_${student.defense_type.toLowerCase()}`][userLang])
+            $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.defense_type} Armor`, 'Defense Type', null, getTypeText(student.defense_type), 32), placement: 'top', html: true})
+    
+            updateGearIcon()
+            recalculateTerrainAffinity()
+    
+            if (student.uses_cover) {
+                $("#ba-student-usescover-icon").show()
+            } else {
+                $("#ba-student-usescover-icon").hide()
+            }
+    
+            $("#ba-student-weapontype-label").text(student.weapon_type)
+            $(".ba-type-weapon").css("background-image", "url('images/weapontype/Weapon_Icon_" + student.weapon_type_img + ".png')")
+    
+            //Skills
+            $("#ba-skill-ex-name").text(student[`skill_ex_name_${userLang}`] ? student[`skill_ex_name_${userLang}`] : student.skill_ex_name_ja)
+            $("#ba-skill-normal-name").text(student[`skill_normal_name_${userLang}`] ? student[`skill_normal_name_${userLang}`] : student.skill_normal_name_ja)
+            $("#ba-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] : student.skill_passive_name_ja)
+            $("#ba-skill-sub-name").text(student[`skill_sub_name_${userLang}`] ? student[`skill_sub_name_${userLang}`] : student.skill_sub_name_ja)     
+    
+            $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon)
+            $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon)
+            $('#ba-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
+            $('#ba-skill-sub-icon').attr("src", "images/skill/" + student.skill_sub_icon)
+    
+            student.skill_ex_cost[0] == student.skill_ex_cost[4] ? $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic") : $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic").addClass(`ba-col-${student.attack_type.toLowerCase()}`)
+    
+    
+            //Skill materials
+            var html
+            for (let i = 2; i <= 5; i++) {
+                html = ''
+                $.each(student.skill_ex_upgrade_material[i-2], function(j, el) {
+                    html += getMaterialIconHTML(el, student.skill_ex_upgrade_amount[i-2][j])
+                })
+                html += getMaterialIconHTML(0, abbreviateNumber(skill_ex_upgrade_credits[i-2]))
         
-        localStorage.setItem("chara", student.name_dev)
-        studentSelectorModal.hide()
+                $('#ba-skill-ex-materials-'+i).html(html)
+                $('#ba-skill-ex-materials-'+i+' div').each(function(j,el) {
+                    $(el).tooltip({html: true})
+                })
+            }
+    
+            for (let i = 2; i <= 9; i++) {
+                html = ''
+                $.each(student.skill_upgrade_material[i-2], function(j, el) {
+                    html += getMaterialIconHTML(el, student.skill_upgrade_amount[i-2][j])
+                })
+                html += getMaterialIconHTML(0, abbreviateNumber(skill_upgrade_credits[i-2]))
+        
+                $('#ba-skill-materials-'+i).html(html)
+                $('#ba-skill-materials-'+i+' div').each(function(j,el) {
+                    $(el).tooltip({html: true})
+                })
+            }
+    
+            html = ''
+            html += getMaterialIconHTML(9999, 1)
+            html += getMaterialIconHTML(0, abbreviateNumber(skill_upgrade_credits[8]))
+    
+            $('#ba-skill-materials-10').html(html)
+            $('#ba-skill-materials-10 div').each(function(i,el) {
+                $(el).tooltip({html: true})
+            })
+    
+            //Weapon
+            $("#ba-student-weapon-name").text(student[`weapon_name_${userLang}`] ? student[`weapon_name_${userLang}`]: student.weapon_name_ja)
+            $("#ba-student-weapon-type").text(student.weapon_type)
+            $("#ba-student-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
+    
+            if (student[`weapon_skill_passive_description_${userLang}`] != null) {
+                $("#ba-weapon-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] + data.localization.strings["skill_plus"][userLang] : student.skill_passive_name_ja + '＋')
+                $('#ba-weapon-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
+                recalculateWeaponSkillPreview()
+            }
+    
+            $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.weapon_bonus_terrain_type}.png`)
+            $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${student.weapon_bonus_terrain_adaption}.png`)
+            $('#ba-weapon-bonus-terrain-adaption-description').html(`${student.weapon_bonus_terrain_type.charAt(0).toUpperCase()+student.weapon_bonus_terrain_type.substr(1)} Combat Power ${eval('student.'+student.weapon_bonus_terrain_type+'_adaption')} → <b>${student.weapon_bonus_terrain_adaption}</b><br>(${getAdaptionText(student.weapon_bonus_terrain_type, student.weapon_bonus_terrain_adaption)})`)
+    
+            var url = new URL(window.location.href)
+    
+            if (url.searchParams.get("chara") !== student.name_dev) {
+                url.searchParams.forEach((v,k) => url.searchParams.delete(k))
+                url.searchParams.set("chara", student.name_dev)
+                history.pushState(null, '', url)
+            }
+            
+            $.each(student.weapon_bonus_stats, function(i, el) {
+                $(`#ba-weapon-stat-${i+1}`).text(getStatName(student.weapon_bonus_stats[i]))
+                $(`#ba-weapon-stat-${i+1}-amount`).text(student.weapon_bonus_stats_parameters[i][0])
+            }) 
+    
+            if (student.weapon_bonus_stats.length > 2) {
+                $('#ba-weapon-stat-row2').show()
+            } else {
+                $('#ba-weapon-stat-row2').hide()
+            }
+    
+            if (student.weapon_description_en) {
+                $('#ba-weapon-description').text(student.weapon_description_en)
+            } else if (student.weapon_description_ja) {
+                $('#ba-weapon-description').text(student.weapon_description_ja)
+            } else {
+                $('#ba-weapon-description').text("")
+            }       
+    
+            //Profile
+            $('#ba-student-fullname').text(student[`fullname_${userLang}`])
+            // $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + ".png")
+            // $("#ba-profile-school-img-w").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
+            $('#ba-profile-school-label').text(data.localization.strings[`school_${student.school.toLowerCase()}_long`][userLang])
+            $('#ba-profile-club-label').text(student[`club_${userLang}`])
+            student[`year_${userLang}`] == "" ? $('#ba-profile-schoolyear-label').hide() : $('#ba-profile-schoolyear-label').show()
+            $('#ba-profile-schoolyear-label').text(student[`year_${userLang}`])
+            $('#ba-profile-portrait-img').attr("src", `images/student/collection/Student_Portrait_${student.name_dev}_Collection.png`)
+            $('#ba-student-profile-text').text(student[`profile_${userLang}`] ? student[`profile_${userLang}`] : student[`profile_ja`])
+    
+            if (student.recollection_lobby) {
+                $(".ba-student-lobby").show()
+                $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.name_dev}_01.png`)
+                $("#ba-student-lobby-unlock").text(student.recollection_lobby)
+                $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, `${student['name_'+userLang]}'s Recollection Lobby`, null, null, `Unlocks after reaching relationship rank ${student.recollection_lobby} with ${student['name_'+userLang]}.`), placement: 'top', html: true})
+            } else {
+                $(".ba-student-lobby").hide()
+            }
+            
+            $('#ba-student-profile-age').text(student.age)
+            $('#ba-student-profile-birthday').text(student.birthday)
+            $('#ba-student-profile-hobbies').text(student[`hobbies_${userLang}`])
+            $('#ba-student-profile-height').text(student.height)
+            $('#ba-student-profile-cv').text(student[`cv_${userLang}`])
+            $('#ba-student-profile-illustrator').text(student.illustrator)
+    
+            var favItemsHtml = ""
+            $(student.favoured_items[0]).each(function(i,el){
+                favItemsHtml += getFavourIconHTML(el, 3)
+            })
+            $(student.favoured_items[1]).each(function(i,el){
+                favItemsHtml += getFavourIconHTML(el, 2)
+            })
+            $('#ba-student-favoured-items').empty().html(favItemsHtml)
+            if (favItemsHtml == "") {
+                $('#ba-student-favoured-items').empty().html('<span class="pb-2 text-center">This student does not have any favourite gifts.</span>')
+            } else {
+                $('#ba-student-favoured-items').empty().html(favItemsHtml)
+            }
+    
+            var favFurnitureHtml = ""
+            $(student.favoured_furniture).each(function(i,el){
+                favFurnitureHtml += getFurnitureIconHTML(el)
+            })
+    
+            $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
+            if (favFurnitureHtml == "") {
+                $('#ba-student-favoured-furniture').empty().html('<span class="pb-2 text-center">This student does not interact with any café furniture.</span>')
+            } else {
+                $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
+            }
+            $('.ba-favor-item').tooltip({html: true})
+    
+            $('#ba-student-bond-1').text(getStatName(student.bond_stat[0]))
+            $('#ba-student-bond-2').text(getStatName(student.bond_stat[1]))
+    
+            if (student.type == "Striker") {
+                $('#ba-student-stat-table').removeClass("table-striker-bonus")
+                $('#ba-student-stat-striker-bonus').hide()
+            } else {
+                $('#ba-student-stat-striker-bonus').show()
+            }
+            
+            $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(1, student))
+            student_bondalts = []
+            for (let i = 0; i < student.bond_extratarget.length; i++) {
+                var extraTarget = find(data.students,"id",student.bond_extratarget[i])[0]
+                if (extraTarget.released[regionID]) {
+                    student_bondalts.push(extraTarget)
+                    $('#ba-statpreview-bond-targets').append(getBondTargetsHTML(1 + student_bondalts.length, extraTarget))
+                }
+            }
+    
+            document.title = `Schale DB | ${student['name_'+userLang]}`
+    
+            changeStatPreviewStars(student.stars)
+            recalculateWeaponPreview()
+            recalculateStatPreview()
+            recalculateSkillPreview()
+            recalculateEXSkillPreview()
+            recalculateBondPreview()
+    
+            changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'))
+            changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'))
+            changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'))
+    
+            for (let i = 1; i <= student_bondalts.length+1; i++) {
+                changeStatPreviewBondLevel(i, document.getElementById(`ba-statpreview-bond-${i}-range`))
+            }
+            //changeStatPreviewWeaponLevel(document.getElementById(`ba-statpreview-weapon-range`))
+            
+            localStorage.setItem("chara", student.name_dev)
+            studentSelectorModal.hide()
+        }
+    } else {
+        loadModule('students', studentName)
     }
+    
 }
 
 function loadItem(id) {
-    window.location.href = `items.html?item=${id}`
+    if (loadedModule == 'items') {
+        var mode = '', item
+        if (id >= 1000000) {
+            mode = 'furniture'
+            item = find(data.common.furniture, "id", id-1000000)[0]
+        } else {
+            mode = 'items'
+            item = find(data.common.items, "id", id)[0]
+        } 
+        loadedItem = item
+        $('#ba-item-name').html(item[`name_${userLang}`])
+        $('#ba-item-type').html(mode == 'items' ? item[`type`] : item[`type`] + ' ' + item[`category`])
+        $('#ba-item-rarity').html(getRarityTier(item.rarity))
+        $('#ba-item-icon').removeClass('ba-item-n ba-item-r ba-item-sr ba-item-ssr').addClass('ba-item-'+item.rarity.toLowerCase())
+        $('#ba-item-icon-img').attr('src', `images/${mode}/${item.icon}.png`)
+        $('#ba-item-description').html(item[`description_${userLang}`])
+        $('#ba-item-usage').empty()
+        $('#ba-item-sources').empty().hide()
+        if (item.type == 'Material') {
+            $('#ba-item-usage').html(getUsedByStudents(item))
+            $('.ba-item-student').tooltip({html: true})
+            $('#ba-item-sources').html(getItemDropStages(item)).show()
+            $('#ba-item-list-tab-materials').tab('show')
+        } else if (item.type == 'Gift') {
+            $('#ba-item-usage').html(getLikedByStudents(item))
+            $('.ba-item-student').tooltip({html: true})
+            $('#ba-item-list-tab-gifts').tab('show')
+        } else if (item.type == 'Eleph') {
+            $('#ba-item-sources').html(getItemDropStages(item)).show()
+            let chara = find(data.students, 'id', item.id)[0]
+            $('#ba-item-usage').html(`<div class="mb-2"><i>Used by the following students:</i></div><div class="d-flex align-items-center justify-content-center flex-wrap"><div class="ba-item ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${chara['name_dev']}')" title="${getRichTooltip(`images/student/collection/Student_Portrait_${chara['name_dev']}_Collection.png`, chara[`name_${userLang}`], 'Character', getRarityStars(chara.stars), chara[`profile_${userLang}`] ? chara[`profile_${userLang}`].split('\n')[0] : chara['profile_ja'].split('\n')[0], 50, 'circle')}"><img class="ba-item-icon m-0 mx-1" src="images/student/collection/Student_Portrait_${chara['name_dev']}_Collection.png"></div></div>`)
+            $('.ba-item-student').tooltip({html: true})
+            $('#ba-item-list-tab-eleph').tab('show')
+        }
+        if (mode == 'furniture') {
+            $('#ba-item-usage').html(`<i>Comfort: ${item.comfort}</i>`)
+            $('#ba-item-list-tab-furniture').tab('show') 
+        }
+        var url = new URL(window.location.href)
+        if (url.searchParams.get("item") != id) {
+            url.searchParams.forEach((v,k) => url.searchParams.delete(k))
+            url.searchParams.set("item", id)
+            history.pushState(null, '', url)
+        }
+
+        document.title = `Schale DB | ${item['name_'+userLang]}`
+        localStorage.setItem("item", id)
+    } else {
+        loadModule('items', id)
+    }
 }
 
-function changeRegion(regID) {
-    regionID = regID
-    localStorage.setItem("region", regionID)
-    if (!student.released[regionID]) {
-        localStorage.setItem("chara", "Aru")
-        location.href = "students.html?chara=Aru"
+function loadRaid(raidName) {
+    if (loadedModule == 'raids') {
+        raid = find(data.raids,"name_dev",raidName)[0]
+        selectedEnemy = 0
+        if (raid.released_insane[regionID]) {
+            $('#ba-raid-difficulty-5').toggleClass('disabled', false)
+        } else {
+            $('#ba-raid-difficulty-5').toggleClass('disabled', true)
+            if (raid_difficulty == 5)  {
+                raid_difficulty = 0
+                $('#ba-raid-difficulty-5').toggleClass('active', false)
+                $('#ba-raid-difficulty-0').toggleClass('active', true)
+            }
+        }
+    
+        $('#ba-raid-affiliation').text(raid.affiliation)
+        $('#ba-raid-name').text(raid['name_'+userLang])
+    
+        $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.name_dev}${raid_difficulty == 5 ? "_Insane" : ""}_Lobby.png')`)
+        //$('#ba-raid-header-img').attr('src', `images/raid/Boss_Portrait_${raid.name_dev}${difficulty == 5 ? "_Insane" : ""}_Lobby.png`)
+    
+        if (raid_difficulty == 5) {
+            if (raid.attack_type_insane == "Normal") {
+                $("#ba-raid-attacktype").removeClass("ba-type-explosive ba-type-mystic ba-type-pierce").addClass("ba-type-normal")
+            } else if (raid.attack_type_insane == "Explosive") {
+                $("#ba-raid-attacktype").removeClass("ba-type-mystic ba-type-pierce ba-type-normal").addClass("ba-type-explosive")
+            } else if (raid.attack_type_insane == "Piercing") {
+                $("#ba-raid-attacktype").removeClass("ba-type-mystic ba-type-explosive ba-type-normal").addClass("ba-type-pierce")
+            } else if (raid.attack_type_insane == "Mystic") {
+                $("#ba-raid-attacktype").removeClass("ba-type-pierce ba-type-explosive ba-type-normal").addClass("ba-type-mystic")
+            }
+            $("#ba-raid-attacktype-label").text(raid.attack_type_insane)
+            $('#ba-raid-attacktype').tooltip('dispose').tooltip({title: getRichTooltip("images/tactical/StrategyObjectBuff_Attack.png", `${raid.attack_type_insane}`, 'Attack Type', getTypeText(raid.attack_type_insane)), placement: 'top', html: true})
+        
+        } else {
+            $("#ba-raid-attacktype").removeClass("ba-type-explosive ba-type-mystic ba-type-pierce").addClass("ba-type-normal")
+            $("#ba-raid-attacktype-label").text(raid.attack_type)
+            $('#ba-raid-attacktype').tooltip('dispose').tooltip({title: getRichTooltip("images/tactical/StrategyObjectBuff_Attack.png", `${raid.attack_type}`, 'Attack Type', getTypeText(raid.attack_type)), placement: 'top', html: true})    
+        }
+        var attacktype = (raid_difficulty == 5) ? raid.attack_type_insane : raid.attack_type
+        $("#ba-raid-attacktype").removeClass("bg-atk-explosive bg-atk-piercing bg-atk-mystic bg-atk-normal").addClass(`bg-atk-${attacktype.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${attacktype}`, 'Attack Type', null, getTypeText(attacktype), 32), placement: 'top', html: true})
+        $("#ba-raid-attacktype-label").text(data.localization.strings[`atk_${attacktype.toLowerCase()}`][userLang])
+    
+        $("#ba-raid-defensetype").removeClass("bg-def-light bg-def-heavy bg-def-special").addClass(`bg-def-${raid.defense_type.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${raid.defense_type} Armor`, 'Defense Type', null, getTypeText(raid.defense_type), 32), placement: 'top', html: true})
+        $("#ba-raid-defensetype-label").text(data.localization.strings[`def_${raid.defense_type.toLowerCase()}`][userLang])
+    
+        $("#ba-raid-stat-level").text(raid.enemies[selectedEnemy].stats["level"][raid_difficulty].toLocaleString())
+        $("#ba-raid-stat-maxhp").text(raid.enemies[selectedEnemy].stats["maxhp"][raid_difficulty].toLocaleString())
+        $("#ba-raid-stat-attack").text(raid.enemies[selectedEnemy].stats["attack_power"][raid_difficulty].toLocaleString())
+        $("#ba-raid-stat-defense").text(raid.enemies[selectedEnemy].stats["defense_power"][raid_difficulty].toLocaleString())
+        $("#ba-raid-stat-critresist").text(raid.enemies[selectedEnemy].stats["crit_res"][raid_difficulty].toLocaleString())
+        $("#ba-raid-stat-critdmgresist").text(raid.enemies[selectedEnemy].stats["crit_dmg_res"][raid_difficulty].toLocaleString())
+    
+    
+        var statsHtml = ''
+        var tabsHtml = ''
+        raid.enemies.forEach(function(el,i) {
+            tabsHtml += `<button class="nav-link ${i==0 ? "active" : ""}" data-bs-toggle="tab" href="#ba-raid-enemy-${i}">${el.name_en}</button>`
+        })
+    
+        $('#ba-raid-enemy-tabs').empty().html(tabsHtml)
+    
+        var skillsHTML = ''
+        var skillList = (raid_difficulty == 5) ? raid.skills_insane : raid.skills
+        skillList.forEach(function(el, i) {
+            skillsHTML += `
+            <div class="d-flex flex-row align-items-center mt-2">
+                <img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.icon}.png">
+                <div class="d-inline-block">
+                    <div>
+                        <h4 class="me-2 d-inline">${el.name_en}</h4>
+                    </div>
+                    <div class="mt-1">
+                        <p class="d-inline" style="font-style: italic;">${el.type} Skill</p>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-1 mb-2 p-1">${getSkillText(el.description_en, el.parameters, raid_difficulty+1, raid.defense_type)}</p>
+            `
+            if (i != skillList.length-1) {
+                skillsHTML += '<div class="ba-panel-separator"></div>'
+            }
+        })
+        $('#ba-raid-skills').empty().html(skillsHTML)
+        $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+            $(el).tooltip({html: true})
+        })
+    
+        var url = new URL(window.location.href)
+    
+        if (url.searchParams.get("raid") !== raid.name_dev) {
+            url.searchParams.forEach((v,k) => url.searchParams.delete(k))
+            url.searchParams.set("raid", raid.name_dev)
+            history.pushState(null, '', url)
+        }
+    
+        document.title = `Schale DB | ${raid.name_en}`
+        localStorage.setItem("raid", raid.name_dev)
     } else {
-        location.reload()
+        loadModule('raids', raidName)
+    }
+}
+
+function changeRaidDifficulty(difficultyId) {
+    raid_difficulty = difficultyId
+    loadRaid(raid.name_dev)
+}
+
+function loadStage(id) {
+    if (loadedModule == 'stages') {
+        var mode = '', item
+        if (id >= 3100000) {
+            mode = 'commission'
+            stage = find(data.stages.commissions, "id", id)[0]
+            $('#ba-stage-name').html('Commissions')
+        } else if (id >= 3000000) {
+            mode = 'bounty'
+            stage = find(data.stages.bounty, "id", id)[0]
+            $('#ba-stage-name').html('Bounty')
+        } else {
+            mode = 'mission'
+            stage = find(data.stages.missions, "id", id)[0]
+            $('#ba-stage-name').html(stage.area+'-'+stage.stage+ (stage.difficulty == 1 ? ' Hard' : ' Normal'))
+        } 
+        loadedStage = stage
+        $('#ba-stage-title').html(stage[`name_${userLang}`])
+        $('#ba-stage-level').text('Lv. '+ stage['level_stage'])
+        $('#ba-stage-terrain-img').attr('src', `images/ui/Terrain_${stage.terrain}.png`)
+        stage.difficulty == 1 ? $('#ba-stage-fog').show() : $('#ba-stage-fog').hide()
+        var url = new URL(window.location.href)
+        if (url.searchParams.get("stage") != id) {
+            url.searchParams.forEach((v,k) => url.searchParams.delete(k))
+            url.searchParams.set("stage", id)
+            history.pushState(null, '', url)
+        }
+        var html = ''
+        $.each(stage.rewards, function(i,el){
+            html += getDropIconHTML(el[0], el[1])
+        })
+        $.each(stage.drops, function(i,el){
+            html += getDropIconHTML(el[0], el[1])
+        })
+        $('#ba-stage-drops').html(html)
+        $('#ba-stage-drops div').each(function(i,el) {
+            $(el).tooltip({html: true})
+        })
+        html = ''
+        stage.enemies.sort((a,b) => parseInt(b.toString().slice(b.toString().length-1)) - parseInt(a.toString().slice(a.toString().length-1)))
+        $.each(stage.enemies, function(i,el){
+            let enemy = find(data.enemies, "id", el)[0]
+            if (stage.id >= 3000000) {
+                if (enemy.rank == 'Minion') {
+                    html += getEnemyCardHTML(enemy, stage.level_enemy[0])
+                } else if (enemy.rank == 'Elite') {
+                    html += getEnemyCardHTML(enemy, stage.level_enemy[1])
+                } else {
+                    html += getEnemyCardHTML(enemy, stage.level_enemy[2])
+                }
+            } else {
+                html += getEnemyCardHTML(enemy, stage.level_stage)
+            }
+
+            
+        })
+        $('#ba-stage-enemies').html(html)
+        showEnemyInfo(stage.enemies[0], stage.level_stage)
+        document.title = `Schale DB | ${stage['name_'+userLang]}`
+        localStorage.setItem("stage", id)
+    } else {
+        loadModule('stages', id)
     }
 }
 
@@ -1066,12 +1391,107 @@ function getStudentListCardHTML(student) {
     return html
 }
 
+function getStageCardHTML(stage) {
+    var html = `<div id="ba-stage-select-${stage["id"]}" class="ba-stage-select-item unselectable">
+    <div onclick="loadStage('${stage["id"]}')" class="ba-stage-card">
+    <div class="ba-stage-card-img"><img src="images/campaign/${stage["icon"]}.png"></div>
+    <div class="d-flex align-items-center ba-stage-card-label">`
+    if (stage.id >= 3000000) {
+        html += `<span class="ba-label-text px-1 align-middle ${stage['name_'+userLang].length > label_smalltext_threshold[userLang] ? "smalltext" : "" }" style="width: 100%">${stage['name_'+userLang]}</span>`
+    } else {
+        html += `<span class="ba-label-text px-1 align-middle" style="width: 100%">${stage.area+'-'+stage.stage+ (stage.difficulty == 1 ? ' Hard' : ' Normal')}</span>`
+    }
+    html += `</div></div></div>`
+    return html
+}
+
+function getEnemyCardHTML(enemy, level) {
+    var html = `<div class="ba-icon-enemy unselectable" onclick="showEnemyInfo(${enemy.id},${level})"><img src="images/enemy/${enemy.icon}.png">`
+    if (enemy.rank == 'Elite') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Elite.png" style="width:22px;"></span>`
+    else if (enemy.rank == 'Champion') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Champion.png" style="width:31px;"></span>`
+    html += `<span class="ba-enemy-card-atk bg-atk-${enemy["attack_type"].toLowerCase()}"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></span>
+    <span class="ba-enemy-card-def bg-def-${enemy["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></span><div class="d-flex align-items-center ba-stage-card-label"><span class="ba-label-text px-1 align-middle ${enemy['name_'+userLang].length > label_enemy_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${enemy['name_'+userLang]}</span></div></div>`
+    return html
+}
+
+function showEnemyInfo(id, level) {
+    var enemy = find(data.enemies, 'id', id)[0]
+    $('#ba-stage-enemy-name').text(enemy['name_'+userLang])
+    $('#ba-stage-enemy-img').attr('src', `images/enemy/${enemy.icon}.png`)
+    $('#ba-stage-enemy-rank').text('Lv.'+level + ' ' + enemy.rank)
+    $('#ba-stage-enemy-class').text(enemy.type).removeClass("bg-striker bg-special").addClass(`bg-${enemy.type.toLowerCase()}`)
+
+    $("#ba-stage-enemy-attacktype").removeClass("bg-atk-normal bg-atk-explosive bg-atk-piercing bg-atk-mystic").addClass(`bg-atk-${enemy.attack_type.toLowerCase()}`)
+    $("#ba-stage-enemy-defensetype").removeClass("bg-def-light bg-def-heavy bg-def-special").addClass(`bg-def-${enemy.defense_type.toLowerCase()}`)
+    
+    $("#ba-stage-enemy-attacktype-label").text(data.localization.strings[`atk_${enemy.attack_type.toLowerCase()}`][userLang])
+    $('#ba-stage-enemy-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${enemy.attack_type}`, 'Attack Type', null, getTypeText(enemy.attack_type), 32), placement: 'top', html: true})
+    $("#ba-stage-enemy-defensetype-label").text(data.localization.strings[`def_${enemy.defense_type.toLowerCase()}`][userLang])
+    $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${enemy.defense_type} Armor`, 'Defense Type', null, getTypeText(enemy.defense_type), 32), placement: 'top', html: true})
+
+    var levelscale = ((level-1)/99).toFixed(4)
+
+    var maxHP = Math.round((enemy.maxhp_1 + (enemy.maxhp_100-enemy.maxhp_1) * levelscale).toFixed(4))
+    var attack = Math.round((enemy.attack_power_1 + (enemy.attack_power_100-enemy.attack_power_1) * levelscale).toFixed(4))
+    var defense = Math.round((enemy.defense_power_1 + (enemy.defense_power_100-enemy.defense_power_1) * levelscale).toFixed(4))
+    var healing = Math.round((enemy.heal_power_1 + (enemy.heal_power_100-enemy.heal_power_1) * levelscale).toFixed(4))
+
+    
+    $('#ba-stage-enemy-stat-maxhp').text(maxHP.toLocaleString())
+    $('#ba-stage-enemy-stat-attack').text(attack.toLocaleString())
+    $('#ba-stage-enemy-stat-defense').text(defense.toLocaleString())
+    $('#ba-stage-enemy-stat-healing').text(healing.toLocaleString())
+
+
+    $('#ba-stage-enemy-stat-accuracy').text(enemy.accuracy.toLocaleString())
+    $('#ba-stage-enemy-stat-evasion').text(enemy.evasion.toLocaleString())
+    $('#ba-stage-enemy-stat-crit').text(enemy.critical.toLocaleString())
+    $('#ba-stage-enemy-stat-critdmg').text(`${parseFloat(((enemy.critical_dmg)/100).toFixed(4)).toLocaleString()}%`)
+
+    $('#ba-stage-enemy-stat-stability').text(enemy.stability.toLocaleString())
+    $('#ba-stage-enemy-stat-range').text(enemy.range.toLocaleString())
+
+    if (enemy.type == "Striker") {
+        $('#ba-stage-enemy-stat-ammo').text(enemy.ammo_count + " (" + enemy.ammo_cost + ")")
+    } else {
+        $('#ba-stage-enemy-stat-ammo').text('N/A')
+    }
+
+    $('#ba-stage-enemy-stat-critresist').text(enemy.critical_res.toLocaleString())
+    $('#ba-stage-enemy-stat-critdmgresist').text(`${parseFloat(((enemy.critical_dmg_res)/100).toFixed(4))}%`)
+    $('#ba-stage-enemy-stat-movespeed').text(enemy.move_speed.toLocaleString())
+
+}
+
 function getMaterialIconHTML(id, amount) {
     //rarity, icon, name, amount, type, description=""
     var item = find(data.common.items, "id", id)[0]
     var html
     html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.icon}.png`, item[`name_${userLang}`], item.type, getRarityTier(item.rarity), item[`description_${userLang}`], 50, 'img-scale-larger')}">
             <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/items/${item.icon}.png"><span class="ba-material-label">&times;${amount}</span></div>
+            `
+    return html
+}
+
+function getDropIconHTML(id, chance) {
+    //rarity, icon, name, amount, type, description=""
+    var item, type, haslink
+    if (id >= 2000000) {
+        item = find(data.common.equipment, "id", id-2000000)[0]
+        type = 'equipment'
+        haslink = false
+    } else if (id >= 30000) {
+        item = find(data.common.item_box, "id", id)[0]
+        type = 'items'
+        haslink = false
+    } else {
+        item = find(data.common.items, "id", id)[0]
+        type = 'items'
+        haslink = true
+    }
+    var html
+    html = `<div class="drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+item.id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${type}/${item.icon}.png`, item[`name_${userLang}`], item.type, getRarityTier(item.rarity), item[`description_${userLang}`], 50, 'img-scale-larger')}">
+            <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/${type}/${item.icon}.png"><span class="ba-material-label">${chance >= 1 ? '&times;'+chance: parseFloat((chance*100).toFixed(2)) + '&#37;'}</span></div>
             `
     return html
 }
@@ -1087,7 +1507,7 @@ function getFavourIconHTML(id, grade) {
 
 function getFurnitureIconHTML(id) {
     var item = find(data.common.furniture, "id", id)[0]
-    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id+100000})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/${item.icon}.png`, item[`name_${userLang}`], data.localization.strings['furniture_type_'+item.type][userLang] + ' - ' + data.localization.strings['furniture_category_'+item.category][userLang], getRarityStars(item.rarity), item[`description_${userLang}`], 50, 'img-scale-larger')}">
+    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id+1000000})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/${item.icon}.png`, item[`name_${userLang}`], 'Furniture', getRarityStars(item.rarity), item[`description_${userLang}`], 50, 'img-scale-larger')}">
     <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()} mb-2" src="images/furniture/${item.icon}.png"></div>
     `
 return html
@@ -1138,4 +1558,150 @@ function changeStatPreviewStars(stars, weaponstars) {
 
     recalculateStatPreview()
     recalculateTerrainAffinity()
+}
+
+
+function populateItemList() {
+    html = {"Material":"", "Gift":"", "Eleph":"", "Furniture":"",}
+    $.each(data.common.items, function(i,el) {
+        if (el.released[regionID])
+        html[el.type] += getItemIconHTML(el)
+    })
+    $.each(data.common.furniture, function(i,el) {
+        html['Furniture'] += getFurnitureItemIconHTML(el)
+    })
+    $('#ba-item-list-materials').html(html['Material'])
+    $('#ba-item-list-gifts').html(html['Gift'])
+    $('#ba-item-list-eleph').html(html['Eleph'])
+    $('#ba-item-list-furniture').html(html['Furniture'])
+}
+
+function populateStageList() {
+    var html
+    html = ''
+    $.each(data.stages.missions, function(i,el) {
+        if (el.released[regionID])
+        html += getStageCardHTML(el)
+    })
+    $('#ba-stages-list-missions-grid').html(html)
+    html = ''
+    $.each(data.stages.bounty, function(i,el) {
+        if (el.released[regionID])
+        html += getStageCardHTML(el)
+    })
+    $('#ba-stages-list-bounty-grid').html(html)
+    html = ''
+    $.each(data.stages.commissions, function(i,el) {
+        if (el.released[regionID])
+        html += getStageCardHTML(el)
+    })
+    $('#ba-stages-list-commissions-grid').html(html)
+}
+
+function populateRaidList(order) {
+    var html = ''
+
+    data.raids.forEach(function(el) {
+        if (el.released[regionID]) {
+            html += `<div class="ba-raid-list-entry my-2 text-shadow" style="background-image: url('images/raid/${el.background_img}.png')" onclick="loadRaid('${el.name_dev}')"><img class="ba-raid-portrait" src="images/raid/${el.portrait_img}.png"><span style="color:#fff;font-size:26px;font-weight:bold;position:absolute;left:10px;top:3px;">${el.name_en}</span></div>`
+        }
+    })
+
+    $("#ba-raid-list").html(html)
+}
+
+function getItemIconHTML(item) {
+    var html
+    html = `<div class="drop-shadow d-inline-block"><div class="ba-item m-2" style="position: relative; cursor:pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadItem(${item.id})"><img class="ba-item-${item.rarity.toLowerCase()}" src="images/items/${item.icon}.png"></div></div>`
+    return html
+}
+
+function getFurnitureItemIconHTML(item) {
+    var html
+    html = `<div class="drop-shadow d-inline-block"><div class="ba-item m-2" style="position: relative; cursor:pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadItem(${item.id+1000000})"><img class="ba-item-${item.rarity.toLowerCase()}" src="images/furniture/${item.icon}.png"></div></div>`
+    return html
+}
+
+function getUsedByStudents(item) {
+    var html = '<div class="mb-2"><i>Used by the following students:</i></div><div class="d-flex align-items-center justify-content-center flex-wrap">'
+    $.each(data.students, function(i,el){
+        if (!el.released[regionID])
+        return
+        let uses = false
+        for (let i = 0; i < el.skill_ex_upgrade_material.length; i++) {
+            for (let j = 0; j < el.skill_ex_upgrade_material[i].length; j++) {
+                if (item.id == el.skill_ex_upgrade_material[i][j]) {
+                    uses = true
+                    break
+                }
+            }
+            if (uses)
+            break
+        }
+        if (!uses)
+        for (let i = 0; i < el.skill_upgrade_material.length; i++) {
+            for (let j = 0; j < el.skill_upgrade_material[i].length; j++) {
+                if (item.id == el.skill_upgrade_material[i][j]) {
+                    uses = true
+                    break
+                }
+            }
+            if (uses)
+            break
+        }
+        if (uses)
+        html += `<div class="ba-item ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${el['name_dev']}')" title="${getRichTooltip(`images/student/collection/Student_Portrait_${el['name_dev']}_Collection.png`, el[`name_${userLang}`], 'Character', getRarityStars(el.stars), el[`profile_${userLang}`] ? el[`profile_${userLang}`].split('\n')[0] : el['profile_ja'].split('\n')[0], 50, 'circle')}"><img class="ba-item-icon m-0 mx-1" src="images/student/collection/Student_Portrait_${el['name_dev']}_Collection.png"></div>
+        `
+    })
+    html += "</div>"
+    return html
+}
+
+function getLikedByStudents(item) {
+    var htmlLoves = `<div class="mb-2"><i>Loved by the following students:</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">`
+    var htmlLikes = `<div class="mb-2"><i>Liked by the following students:</i></div><div class="d-flex align-items-center justify-content-center flex-wrap">`
+    $.each(data.students, function(i,el){
+        if (!el.released[regionID])
+        return
+        let likes = false, loves = false
+        for (let i = 0; i < el.favoured_items[0].length; i++) {
+            if (item.id-5000 == el.favoured_items[0][i]) {
+                loves = true
+                break
+            }
+        }
+        for (let i = 0; i < el.favoured_items[1].length; i++) {
+            if (item.id-5000 == el.favoured_items[1][i]) {
+                likes = true
+                break
+            }
+        }
+        
+        let html = `<div class="ba-item ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${el['name_dev']}')" title="${getRichTooltip(`images/student/collection/Student_Portrait_${el['name_dev']}_Collection.png`, el[`name_${userLang}`], 'Character', getRarityStars(el.stars), el[`profile_${userLang}`] ? el[`profile_${userLang}`].split('\n')[0] : el['profile_ja'].split('\n')[0], 50, 'circle')}"><img class="ba-item-icon m-0 mx-1" src="images/student/collection/Student_Portrait_${el['name_dev']}_Collection.png"></div>
+        `
+        if (likes) htmlLikes += html
+        if (loves) htmlLoves += html
+    })
+    htmlLikes += "</div>"
+    htmlLoves += "</div>"
+    return htmlLoves + htmlLikes
+}
+
+function getItemDropStages(item) {
+    let html = '<div class="d-flex justify-content-center flex-wrap">'
+    $.each(data.stages.missions, function(i,el){
+        if (!el.released[regionID])
+        return
+        let drop = false
+        for (let i = 0; i < el.drops.length; i++) {
+            if (item.id == el.drops[i][0]) {
+                drop = true
+                break
+            }
+        }
+        if (drop)
+        html += '<div class="m-1">' + getStageCardHTML(el) + '</div>'
+    })
+    html += '</div>'
+    return html
 }
