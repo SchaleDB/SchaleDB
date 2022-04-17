@@ -1710,7 +1710,7 @@ function getFavourIconHTML(id, grade) {
 }
 
 function getFurnitureIconHTML(item) {
-    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id+1000000})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/${item.icon}.png`, getLocalStringIfAvailable(item,'name'), 'Furniture', getRarityStars(item.rarity), getLocalStringIfAvailable(item, 'name'), 50, 'img-scale-larger')}">
+    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id+1000000})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/${item.icon}.png`, getLocalStringIfAvailable(item,'name'), 'Furniture', getRarityStars(item.rarity), getLocalStringIfAvailable(item, 'desc'), 50, 'img-scale-larger')}">
     <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()} mb-2" src="images/furniture/${item.icon}.png"></div>
     `
     return html
