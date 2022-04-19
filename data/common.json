@@ -2010,12 +2010,26 @@
             "gear1_max": 6,
             "gear2_max": 6,
             "gear3_max": 6,
-            "gacha_characters": [10039,10013],
-            "gacha_date_start": "4/6",
-            "gacha_date_end": "4/20",
-            "raid_id": 2,
-            "raid_date_start": "4/13",
-            "raid_date_end": "4/20"
+            "current_gacha": [
+                {
+                    "characters": [10039,10013],
+                    "start": 1649239200, 
+                    "end": 1650448799
+                },
+                {
+                    "characters": [10021,20004,20005],
+                    "start": 1650448800, 
+                    "end": 1651053599
+                }
+            ],
+            "current_raid": [
+                {
+                    "raid": 2,
+                    "terrain": "indoor",
+                    "start": 1649815200,
+                    "end": 1650394799
+                }
+            ]
         },
         {
             "abbreviation": "GLB",
@@ -2027,12 +2041,21 @@
             "gear1_max": 5,
             "gear2_max": 5,
             "gear3_max": 5,
-            "gacha_characters": [10024],
-            "gacha_date_start": "4/5",
-            "gacha_date_end": "4/19",
-            "raid_id": 3,
-            "raid_date_start": "4/5",
-            "raid_date_end": "4/12"
+            "current_gacha": [
+                {
+                    "characters": [10025, 13012, 20006],
+                    "start": 1650337200, 
+                    "end": 1651546800
+                }
+            ],
+            "current_raid": [
+                {
+                    "raid": 4,
+                    "terrain": "urban",
+                    "start": 1650337200,
+                    "end": 1650898799
+                }
+            ]
         }
     ]
 }

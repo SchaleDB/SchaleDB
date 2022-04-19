@@ -215,9 +215,9 @@
                             <div class="row g-1 mt-2">
                                 <div class="d-flex flex-row align-items-center">
                                     <div class="flex-fill">
-                                        <div class="d-flex flex-row flex-wrap align-items-stretch mb-1">
+                                        <div class="d-flex flex-row flex-wrap align-items-stretch">
                                             <div class="flex-fill d-flex flex-row align-items-stretch">
-                                                <div class="d-inline-block ba-panel px-2 me-2 d-flex align-items-center" style="font-size: 0px; min-width: 70px; border-radius: 0.2rem;">
+                                                <div class="d-inline-block ba-panel px-2 mb-2 me-2 d-flex align-items-center" style="font-size: 0px; min-width: 70px; min-height: 31px; border-radius: 0.2rem;">
                                                     <span id="ba-statpreview-star-1" class="ba-statpreview-star" onclick="changeStatPreviewStars(1,0)"><i class="fa-solid fa-star"></i></span>
                                                     <span id="ba-statpreview-star-2" class="ba-statpreview-star" onclick="changeStatPreviewStars(2,0)"><i class="fa-solid fa-star"></i></span>
                                                     <span id="ba-statpreview-star-3" class="ba-statpreview-star" onclick="changeStatPreviewStars(3,0)"><i class="fa-solid fa-star"></i></span>
@@ -229,33 +229,11 @@
                                                 </div>
                                             </div>
                                             <div class="">
-                                                <button id="ba-statpreview-strikerbonus" class="btn btn-sm btn-dark me-1" type="button" onclick="$(this).toggleClass('active');toggleStrikerBonus(this)" data-localize-id="ui,student_strikerbonus"></button>
-                                                <button id="ba-statpreview-includegear" class="btn btn-sm btn-dark me-1" type="button" onclick="$(this).toggleClass('active');updateGearIcon();recalculateStatPreview()" data-localize-id="ui,student_gear_short"></button>
-                                                <button id="ba-statpreview-includebond" class="btn btn-sm btn-dark me-1" type="button" onclick="$(this).toggleClass('active');recalculateStatPreview()" data-localize-id="ui,student_bond_short"></button>
-                                                <button class="btn btn-sm btn-dark" type="button" onclick="statPreviewModal.show()"><i class="fa-solid fa-sliders"></i></button>
+                                                <button id="ba-statpreview-strikerbonus" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');toggleStrikerBonus(this)" data-localize-id="ui,student_strikerbonus"></button>
+                                                <button id="ba-statpreview-includegear" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');updateGearIcon();recalculateStatPreview()" data-localize-id="ui,student_gear_short"></button>
+                                                <button id="ba-statpreview-includebond" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');recalculateStatPreview()" data-localize-id="ui,student_bond_short"></button>
+                                                <button class="btn btn-sm btn-dark mb-2" type="button" onclick="statPreviewModal.show()"><i class="fa-solid fa-sliders"></i></button>
                                             </div>
-                                            <!-- <span class="form-check form-check-inline form-switch me-3">
-                                                <input class="form-check-input" type="checkbox" value="" onchange="updateGearIcon(); recalculateStatPreview()" id="ba-statpreview-includegear">
-                                                <label class="form-check-label" for="ba-statpreview-includegear">
-                                                    Equip.
-                                                </label>
-                                            </span>
-
-                                <span id="ba-student-stat-striker-bonus">
-                                    <span class="form-check form-check-inline form-switch m-0">
-                                        <input class="form-check-input" type="checkbox" value="" onchange="toggleStrikerBonus(this)" id="ba-striker-bonus-toggle">
-                                        <label class="form-check-label" for="ba-striker-bonus-toggle">
-                                            <img src="images/ui/Common_Icon_Formation_DetailInfo.png" style="height: 24px; object-fit: contain;">
-                                        </label>
-                                    </span>
-                                </span>
-
-                                            <span class="form-check form-check-inline form-switch me-3">
-                                                <input class="form-check-input" type="checkbox" value="" onchange="recalculateStatPreview()" id="ba-statpreview-includebond">
-                                                <label class="form-check-label" for="ba-statpreview-includebond">
-                                                    Relationship
-                                                </label>
-                                            </span> -->
                                         </div>
                                     </div>
                                 </div>
@@ -464,9 +442,9 @@
 
                                     <div class="mb-3 p-2 d-flex flex-column ba-panel align-items-start">
                                         <div class="d-flex flex-row align-items-center">
-                                            <div class="position-relative drop-shadow me-1">
-                                                <img id="ba-weapon-skill-passive-icon" class="ba-skill d-inline-block me-3" src="">
-                                                <span class="ba-weapon-skill-plus unselectable">&plus;</span>
+                                            <div class="position-relative me-1">
+                                                <img id="ba-weapon-skill-passive-icon" class="ba-skill d-inline-block me-3 drop-shadow" src="">
+                                                <span class="ba-weapon-skill-plus drop-shadow unselectable"><i class="fa-solid fa-plus"></i></span>
                                             </div>
                                             <div class="d-inline-block">
                                                 <div>

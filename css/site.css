@@ -1244,13 +1244,11 @@ h1 small {
     height: 20px;
     border-radius: 10px;
     left: 52px;
-    border: 2px solid white;
     top: 4px;
     color: white;
+    padding: 2px;
     line-height: 16px;
-    font-size: 15px;
-    cursor: default;
-    font-weight: bold;
+    font-size: 16px;
     text-align: center;
 }
 
@@ -1353,6 +1351,11 @@ h1 small {
         /* border-bottom-width: 4px !important; */
     }
 
+    .ba-icon-enemy {
+        width: 105px !important;
+        height: 95px !important;
+    }
+
     .smalltext {
         font-size: 0.64rem !important;
         line-height: 0.64rem;
@@ -1362,6 +1365,22 @@ h1 small {
     #ba-student-select-grid {
         grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)) !important;
         gap: 0.4rem 0.4rem !important;
+    }
+
+    .ba-stage-select-grid {
+        --var-grid-card-width: 100px !important;
+        --var-grid-card-height: 65px !important;
+    }
+
+    .ba-raid-select-grid {
+        --var-grid-card-width: 150px !important;
+        --var-grid-card-height: 85px !important;
+    }
+
+    .ba-select-grid-card-label {
+        font-size: 0.85rem !important;
+        height: 22px !important;
+        /* border-bottom-width: 4px !important; */
     }
 
     #ba-student-modal-page {
@@ -1387,6 +1406,10 @@ h1 small {
 
 @media(max-width: 768px) {
 
+    .screen-height.mobile-scroll {
+        max-height: calc((100vh - 74px) * 0.75);
+    }
+
     .screen-height {
         max-height: none;
         overflow: hidden;
@@ -1408,7 +1431,7 @@ h1 small {
     }
 
     .ba-page {
-        padding: 0;
+        padding: 0.5rem;
     }
 
     .ba-student-page {
@@ -1427,7 +1450,6 @@ h1 small {
 
     .card {
         border: 0px;
-        border-radius: 0px;
     }
 
     .card-header .nav-tabs .nav-link.active {
@@ -1452,9 +1474,9 @@ h1 small {
         border-radius: 0px;
     }
 
-    #ba-student-background {
-        height: calc(100vh - 8rem);
-        transform: scale(1.1);
+    #ba-background {
+        /* height: calc(100vh - 8rem); */
+        transform: scale(1.2);
     }
 }
 
@@ -1874,32 +1896,40 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 }
 
 .ba-stage-select-grid {
+    --var-grid-card-width: 120px;
+    --var-grid-card-height: 70px;
+    --var-grid-gap: 0.6rem;
+}
+
+.ba-select-grid {
     text-align: center;
     font-size: 0px;
     display: grid;
-    gap: 0.6rem 0.6rem;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: var(--var-grid-gap);
+    grid-template-columns: repeat(auto-fill, minmax(var(--var-grid-card-width), 1fr));
+}
+
+.ba-select-grid-item {
+    max-width: var(--var-grid-card-width);
+    max-height: var(--var-grid-card-height);
+    margin: auto;
 }
 
 .ba-raid-select-grid {
-    text-align: center;
-    font-size: 0px;
-    display: grid;
-    gap: 0.6rem 0.6rem;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    --var-grid-card-width: 180px;
+    --var-grid-card-height: 100px;
+    --var-grid-gap: 0.6rem;
 }
 
 .ba-item-select-grid {
-    text-align: center;
-    font-size: 0px;
-    display: grid;
-    gap: 0.5rem 0.5rem;
-    grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+    --var-grid-card-width: 64px;
+    --var-grid-card-height: 64px;
+    --var-grid-gap: 0.5rem;
 }
 
-.ba-stage-select-item {
+/* .ba-stage-select-item {
     max-width: 120px;
-    max-height: 80px;
+    max-height: 70px;
     margin: auto;
 }
 
@@ -1907,15 +1937,7 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     max-width: 180px;
     max-height: 100px;
     margin: auto;
-}
-
-.ba-item-select-item {
-    will-change: transform;
-    transform: translateZ(0);
-    max-width: 64px;
-    max-height: 64px;
-    margin: auto;
-}
+} */
 
 .ba-stage-card, .ba-raid-card, .ba-item-card {
     position: relative;
@@ -1927,8 +1949,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 .ba-stage-card-img {
     position: relative;
-    height: 70px;
-    width: 120px;
+    height: var(--var-grid-card-height);
+    width: var(--var-grid-card-width);
     box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
     overflow: hidden;
     border-radius: 10px;
@@ -1936,8 +1958,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 .ba-item-card-img {
     position: relative;
-    height: 64px;
-    width: 64px;
+    height: var(--var-grid-card-height);
+    width: var(--var-grid-card-width);
     box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
     overflow: hidden;
     border-radius: 999px;
@@ -1951,8 +1973,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 .ba-raid-card-bg {
     position: relative;
     inset: 0;
-    height: 100px;
-    width: 180px;
+    height: var(--var-grid-card-height);
+    width: var(--var-grid-card-width);
     filter: blur(8px);
     background-size: cover;
     background-repeat: no-repeat;
@@ -1963,8 +1985,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 .ba-raid-card-img {
     position: absolute;
     inset: 0;
-    height: 100px;
-    width: 180px;
+    height: var(--var-grid-card-height);
+    width: var(--var-grid-card-width);
     box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
     border-radius: 10px;
     overflow: hidden;
@@ -1988,16 +2010,15 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 }
 
 .ba-item-card-img img {
-    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
+    transition: filter var(--var-animation-duration) ease;
     height: 100%;
     width: 100%;
     padding: 3px;
     object-fit: cover;
     object-position: center center;
-    backface-visibility: hidden;
 }
 
-.ba-stage-card-label, .ba-raid-card-label, .ba-item-card-label {
+.ba-select-grid-card-label {
     text-align: center;
     background-color: var(--col-bg-imglabel);
     color: var(--col-theme-text);
@@ -2013,7 +2034,11 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     transition-duration: 300ms;
 }
 
-.ba-stage-card:hover .ba-stage-card-img img, .ba-raid-card:hover .ba-raid-card-img img, .ba-item-card:hover .ba-item-card-img img   {
+.ba-item-card:hover .ba-item-card-img img {
+    filter: brightness(0.7);
+}
+
+.ba-stage-card:hover .ba-stage-card-img img, .ba-raid-card:hover .ba-raid-card-img img  {
     filter: brightness(0.7);
     transform: scale(1.15);
     image-rendering: -webkit-optimize-contrast;

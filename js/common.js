@@ -166,7 +166,6 @@ $(document).ready(function() {
     } else {
         highContrast = (!CSS.supports('backdrop-filter', 'blur(1px)')) || window.matchMedia('(prefers-contrast: more)').matches 
     }
-    document.querySelector('meta[name="theme-color"]').setAttribute('content', darkTheme ? '#212529' : '#dee2e6')
     $('body').toggleClass("high-contrast", highContrast)
     
     $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
@@ -339,24 +338,32 @@ function loadModule(moduleName, entry=null) {
             loadLanguage(userLang)
             loadRegion(regionID)
             var gachatext = "Character Banner\n", gachalistHtml = ""
-            $.each(data.common.regions[regionID].gacha_characters, function(i, el){
-                var char = find(data.students, "id", el)[0]
-                gachalistHtml += getStudentListCardHTML(char)
+            var currentTime = new Date().getTime()/1000, dateOptions = {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short"}
+            $.each(data.common.regions[regionID].current_gacha, function(i, el){
+                if (currentTime >= el.start && currentTime < el.end) {
+                    for (let j = 0; j < el.characters.length; j++) {
+                        var char = find(data.students, "id", el.characters[j])[0]
+                        gachalistHtml += getStudentListCardHTML(char)
+                    }
+                    gachatext += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
+                    gachatext += `<br>Ends in <b>${duration(el.end-currentTime)}</b>.`
+                }
             })
-            gachatext += data.common.regions[regionID].gacha_date_start+' - '+data.common.regions[regionID].gacha_date_end
-
-            $('#ba-home-gacha').text(gachatext)
+        
+            $('#ba-home-gacha').html(gachatext)
             $('#ba-home-gacha-list').html(gachalistHtml)
 
             var raidText = "Total Assault\n", raidHtml = ""
-            if (data.common.regions[regionID].raid_id != null) {
-                var raid = find(data.raids, "id", data.common.regions[regionID].raid_id)[0]
-                raidHtml += getRaidCardHTML(raid)
-            }
+            $.each(data.common.regions[regionID].current_raid, function(i, el){
+                if (currentTime >= el.start && currentTime < el.end) {
+                    var raid = find(data.raids, "id", el.raid)[0]
+                    raidHtml += getRaidCardHTML(raid, el.terrain)
+                    raidText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
+                    raidText += `<br>Ends in <b>${duration(el.end-currentTime)}</b>.`
+                }
+            })
 
-            raidText += data.common.regions[regionID].raid_date_start+' - '+data.common.regions[regionID].raid_date_end
-
-            $('#ba-home-raid').text(raidText)
+            $('#ba-home-raid').html(raidText)
             $('#ba-home-raid-list').html(raidHtml)
 
 
@@ -377,7 +384,7 @@ function loadModule(moduleName, entry=null) {
             })
             birthdayStudents.sort((a,b) => getNextBirthdayDate(a.birthday).getTime() - getNextBirthdayDate(b.birthday).getTime())
             for (let i = 0; i < birthdayStudents.length; i++) {
-                birthdaysHtml += '<div class="d-flex flex-column mx-1">'+getStudentIconSmall(birthdayStudents[i])+'<div class="ba-panel mt-1 mx-1 p-1 text-center">'+birthdayStudents[i].birthday+'</div></div>'
+                birthdaysHtml += '<div class="d-flex flex-column mx-1">'+getStudentIconSmall(birthdayStudents[i])+'<div class="ba-panel mt-1 mx-1 p-1 text-center">'+getNextBirthdayDate(birthdayStudents[i].birthday).toLocaleDateString([], {month: "numeric", day: "numeric"})+'</div></div>'
             }
             $('#ba-home-birthdays').html(birthdaysHtml)
             $('.ba-item-student').tooltip({html: true})
@@ -392,9 +399,9 @@ function loadModule(moduleName, entry=null) {
                 history.pushState(null, '', url)
             }
             document.title = `Schale DB | Home`
+            $('#ba-navbar-content').collapse('hide')
         })
     }
-
 }
 
 function getNextBirthdayDate(birthday) {
@@ -405,6 +412,16 @@ function getNextBirthdayDate(birthday) {
     birthdayDate.setMonth(parseInt(birthday.split('/')[0])-1,parseInt(birthday.split('/')[1]))
     birthdayDate.setFullYear(birthdayDate.getMonth() < todayDate.getMonth() ? todayDate.getFullYear()+1 : todayDate.getFullYear())
     return birthdayDate
+}
+
+function duration(seconds) {
+    let totalSeconds = seconds
+    let days = Math.floor(totalSeconds/86400)
+    totalSeconds -= days*86400
+    let hours = Math.floor(totalSeconds/3600)
+    totalSeconds -= hours*3600
+    let minutes = Math.floor(totalSeconds/60)
+    return `${days} days, ${hours} hours and ${minutes} minutes`
 }
 
 function hookTooltips() {
@@ -624,22 +641,15 @@ function loadStudent(studentName) {
         student = find(data.students,"name_dev",studentName)
 
         if (student.length == 1) {
-            console.log(student[0])
+            //console.log(student[0])
             student = student[0]
-    
     
             var charimg = new Image()
             charimg.onload = function() {
-                // $('#ba-student-img').attr('src', 'images/student/' + student.student_img)
-                // $('#ba-student-img-sm').attr('src', 'images/student/' + student.student_img)
                 $('#ba-student-img').css('background-image', `url('${charimg.src}')`)
                 $('#ba-student-img-sm').css('background-image', `url('${charimg.src}')`)
             }
-            charimg.src = 'images/student/' + student.student_img
-    
-            // $('#ba-student-img').attr('src', 'images/student/' + student.student_img)
-            // $('#ba-student-img-sm').attr('src', 'images/student/' + student.student_img)
-            
+            charimg.src = 'images/student/' + student.student_img           
             var bgimg = new Image()
             bgimg.onload = function(){
                 $("#ba-background").css('background-image', `url('${bgimg.src}')`)
@@ -647,7 +657,6 @@ function loadStudent(studentName) {
             bgimg.src = `images/background/${student.background_img}.jpg`
     
             $('#ba-student-name').html(student[`name_${userLang}`].replace('(', '<small>(').replace(')', ')</small>'))
-            //$('#ba-student-name-ja').text(student.name_ja)
             $("#ba-student-class").text(student.type).removeClass("bg-striker bg-special").addClass(`bg-${student.type.toLowerCase()}`)
             $("#ba-student-stars").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars))
     
@@ -682,7 +691,6 @@ function loadStudent(studentName) {
             $("#ba-student-defensetype").removeClass("bg-def-light bg-def-heavy bg-def-special").addClass(`bg-def-${student.defense_type.toLowerCase()}`)
             
             $("#ba-student-school-label").text(student.school)
-            //$("#ba-student-school").tooltip('dispose').tooltip({title: getRichTooltip(null, null, null, student.school.replace("RedWinter", "Red Winter")), placement: 'bottom', html: true})
             $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
             $("#ba-student-position").text(student.position.toUpperCase())
             $("#ba-student-attacktype-label").text(getLocalizedString('attack_type',student.attack_type.toLowerCase()))
@@ -873,6 +881,7 @@ function loadStudent(studentName) {
             }
     
             document.title = `Schale DB | ${getLocalStringIfAvailable(student,'name')}`
+            $('#ba-navbar-content').collapse('hide')
     
             changeStatPreviewStars(student.stars)
             recalculateWeaponPreview()
@@ -980,6 +989,7 @@ function loadItem(id) {
         }
 
         document.title = `Schale DB | ${getLocalStringIfAvailable(item,'name')}`
+        $('#ba-navbar-content').collapse('hide')
         localStorage.setItem("item", id)
     } else {
         loadModule('items', id)
@@ -1056,6 +1066,7 @@ function loadRaid(raidName) {
         }
     
         document.title = `Schale DB | ${getLocalStringIfAvailable(raid,'name')}`
+        $('#ba-navbar-content').collapse('hide')
         localStorage.setItem("raid", raid.name_dev)
     } else {
         loadModule('raids', raidName)
@@ -1078,7 +1089,8 @@ function changeRaidEnemy(num) {
     $('#ba-raid-stat-maxhp').text(maxHP.toLocaleString())
     $('#ba-raid-stat-attack').text(attack.toLocaleString())
     $('#ba-raid-stat-defense').text(defense.toLocaleString())
-    $('#ba-raid-stat-healing').text(healing.toLocaleString())
+    //$('#ba-raid-stat-healing').text(healing.toLocaleString())
+    $('#ba-raid-stat-dmgresist').text(`${parseFloat(((enemy.dmg_resist-10000)/100).toFixed(4)).toLocaleString()}%`)
     $('#ba-raid-stat-accuracy').text(enemy.accuracy.toLocaleString())
     $('#ba-raid-stat-evasion').text(enemy.evasion.toLocaleString())
     $('#ba-raid-stat-crit').text(enemy.critical.toLocaleString())
@@ -1099,9 +1111,9 @@ function changeRaidEnemy(num) {
 function loadStage(id) {
     if (loadedModule == 'stages') {
         var mode = '', item
-        if (id >= 8000000) {
+        if (id >= 7000000) {
             mode = 'events'
-            stage = findOrDefault(data.stages.events[id.toString().slice(0,3)], "id", id, 8012301)[0]
+            stage = getEventStage(id)
             $('#ba-stage-name').html(getLocalizedString('event_name',id.toString().slice(0,3)) + '<br>'+event_area[stage.area]+' '+stage.stage.toString().padStart(2,'0'))
             $('#ba-stages-list-tab-events').tab('show')
         } else if (id >= 1000000) {
@@ -1173,10 +1185,21 @@ function loadStage(id) {
         $('#ba-stage-enemies').html(html)
         
         document.title = `Schale DB | ${getLocalStringIfAvailable(stage,'name')}`
+        $('#ba-navbar-content').collapse('hide')
         localStorage.setItem("stage", id)
     } else {
         loadModule('stages', id)
     }
+}
+
+function getEventStage(id) {
+    let event_id = id.toString().slice(0,3)
+    let event = find(data.stages.events, "id", event_id)
+    if (event.length > 0) {
+        let event_stage = find(event[0].stages, "id", id)
+        if (event_stage.length > 0) return event_stage[0]
+    }
+    return data.stages.events[0].stages[0]
 }
 
 function loadRegion(regID) {
@@ -1559,18 +1582,18 @@ function getStudentListCardHTML(student) {
 
 function getItemCardHTML(item, linkid, icontype) {
 
-    var html = `<div id="ba-item-select-${item["id"]}" class="ba-item-select-item unselectable" title="${getBasicTooltip(getLocalStringIfAvailable(item,'name'))}">
+    var html = `<div id="ba-item-select-${item["id"]}" class="ba-select-grid-item unselectable" title="${getBasicTooltip(getLocalStringIfAvailable(item,'name'))}">
     <div onclick="loadItem('${linkid}')" class="ba-item-card">
     <div class="ba-item-card-img"><img class="ba-item-${item.rarity.toLowerCase()}" loading="lazy" src="images/${icontype}/${item["icon"]}.png"></div></div></div>`
     return html
 }
 
 function getStageCardHTML(stage) {
-    var html = `<div id="ba-stage-select-${stage["id"]}" class="ba-stage-select-item unselectable">
+    var html = `<div id="ba-stage-select-${stage["id"]}" class="ba-select-grid-item unselectable">
     <div onclick="loadStage('${stage["id"]}')" class="ba-stage-card">
     <div class="ba-stage-card-img"><img loading="lazy" src="images/campaign/${stage["icon"]}.png"></div>
-    <div class="d-flex align-items-center ba-stage-card-label">`
-    if (stage.id >= 8000000) {
+    <div class="d-flex align-items-center ba-select-grid-card-label">`
+    if (stage.id >= 7000000) {
         html += `<span class="ba-label-text px-1 align-middle" style="width: 100%">${event_area[stage.area] + ' ' + stage.stage.toString().padStart(2,'0')}</span>`
     } else if (stage.id < 1000000) {
         html += `<span class="ba-label-text px-1 align-middle ${stage['name_'+userLang].length > label_enemy_smalltext_threshold[userLang] ? "smalltext" : "" }" style="width: 100%">${stage['name_'+userLang]}</span>`
@@ -1581,12 +1604,12 @@ function getStageCardHTML(stage) {
     return html
 }
 
-function getRaidCardHTML(raid) {
-    var html = `<div id="ba-raid-select-${raid["id"]}" class="ba-raid-select-item unselectable">
+function getRaidCardHTML(raid, terrain='') {
+    var html = `<div id="ba-raid-select-${raid["id"]}" class="ba-select-grid-item unselectable">
     <div onclick="loadRaid('${raid["name_dev"]}')" class="ba-raid-card">
     <div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/raid/${raid['background_img']}.png');"></div></div>
     <div class="ba-raid-card-img"><img src="images/raid/${raid["portrait_img"]}.png"></div>
-    <div class="d-flex align-items-center ba-raid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${raid['name_'+userLang]}</span></div></div></div>`
+    <div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${raid['name_'+userLang] + ((terrain != '') ? ' ('+terrain+')' : '')}</span></div></div></div>`
     return html
 }
 
@@ -1595,7 +1618,7 @@ function getEnemyCardHTML(enemy, level, grade) {
     if (enemy.rank == 'Elite') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Elite.png" style="width:22px;"></span>`
     else if (enemy.rank == 'Champion') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Champion.png" style="width:31px;"></span>`
     html += `<span class="ba-enemy-card-lv">Lv.${level}</span><span class="ba-enemy-card-atk bg-atk-${enemy["attack_type"].toLowerCase()}"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></span>
-    <span class="ba-enemy-card-def bg-def-${enemy["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></span><div class="d-flex align-items-center ba-stage-card-label"><span class="ba-label-text px-1 align-middle ${enemy['name_'+userLang].length > label_enemy_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${enemy['name_'+userLang]}</span></div></div>`
+    <span class="ba-enemy-card-def bg-def-${enemy["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></span><div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${enemy['name_'+userLang].length > label_enemy_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${enemy['name_'+userLang]}</span></div></div>`
     return html
 }
 
@@ -1663,7 +1686,7 @@ function getMaterialIconHTML(id, amount) {
     }
     var html
     html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.icon}.png`, item[`name_${userLang}`], item.type, getRarityTier(item.rarity), item[`desc_${userLang}`], 50, 'img-scale-larger')}">
-            <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/items/${item.icon}.png"><span class="ba-material-label">&times;${amount}</span></div>
+            <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/items/${item.icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>
             `
     return html
 }
@@ -1690,7 +1713,7 @@ function getDropIconHTML(id, chance) {
     }
     var html
     html = `<div class="drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${type}/${item.icon}.png`, getLocalStringIfAvailable(item,'name'), getLocalizedString('item_type',item.type), getRarityTier(item.rarity), getLocalStringIfAvailable(item,'desc'), 50, 'img-scale-larger')}">
-            <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/${type}/${item.icon}.png"><span class="ba-material-label">${chance >= 1 ? '&times;'+abbreviateNumber(chance).toLocaleString(): parseFloat((chance*100).toFixed(2)) + '&#37;'}</span></div>
+            <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/${type}/${item.icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${chance >= 1 ? '&times;'+abbreviateNumber(chance).toLocaleString(): parseFloat((chance*100).toFixed(2)) + '&#37;'}</span></div>
             `
     return html
 }
@@ -1784,7 +1807,7 @@ function populateItemList() {
     $('#ba-item-list-currency-grid').html(html['Coin'])
     $('#ba-item-list-furniture-grid').html(html['Furniture'])
     $('#ba-item-list-equipment-grid').html(html['Equipment'])
-    $('.ba-item-select-item').tooltip({html: true, delay: { show: 200, hide: 0 }})
+    $('.ba-select-grid-item').tooltip({html: true, delay: { show: 200, hide: 0 }})
 }
 
 function populateStageList() {
@@ -1815,14 +1838,10 @@ function populateStageList() {
     $('#ba-stages-list-schooldungeon-grid').html(html)
     html = ''
     $.each(data.stages.events, function(i,el) {
-        header = false
-        for (let j = 0; j < el.length; j++) {
-            if (el[j].released[regionID]) {
-                if (!header && i != '811') {
-                    html += `<div id="stages-list-events-grid-header-${i}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('event_name',String(i))}</h3></div>`
-                    header = true
-                }
-                html += getStageCardHTML(el[j])
+        if (el.released[regionID]) {
+            html += `<div id="stages-list-events-grid-header-${el.id}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('event_name',String(el.id))}</h3></div>`
+            for (let j = 0; j < el.stages.length; j++) {
+                html += getStageCardHTML(el.stages[j])
             }
         }
     })
@@ -2029,7 +2048,7 @@ function findOrDefault(obj, key, value, default_value) {
         }
     })
 
-    if (result == []) {
+    if (result.length == 0) {
         return default_result
     } else {
         return result
@@ -2283,7 +2302,6 @@ function allSearch() {
         }
     })
 
-    //console.log(results)
     if (results.length > 0) {
         var html = ''
         for (let i = 0; i < results.length; i++) {
