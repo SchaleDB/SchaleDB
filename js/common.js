@@ -350,12 +350,14 @@ function loadModule(moduleName, entry=null) {
                 }
             })
         
-            $('#ba-home-gacha').html(gachatext)
+            $('#ba-home-gacha-text').html(gachatext)
             $('#ba-home-gacha-list').html(gachalistHtml)
 
             var raidText = "Total Assault\n", raidHtml = ""
+            $('#ba-home-raid').hide()
             $.each(data.common.regions[regionID].current_raid, function(i, el){
                 if (currentTime >= el.start && currentTime < el.end) {
+                    $('#ba-home-raid').show()
                     var raid = find(data.raids, "id", el.raid)[0]
                     raidHtml += getRaidCardHTML(raid, el.terrain)
                     raidText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
@@ -363,9 +365,8 @@ function loadModule(moduleName, entry=null) {
                 }
             })
 
-            $('#ba-home-raid').html(raidText)
+            $('#ba-home-raid-text').html(raidText)
             $('#ba-home-raid-list').html(raidHtml)
-
 
             //birthdays
             var birthdaysHtml = ''
@@ -382,11 +383,16 @@ function loadModule(moduleName, entry=null) {
                     birthdayStudents.push(el)
                 }
             })
-            birthdayStudents.sort((a,b) => getNextBirthdayDate(a.birthday).getTime() - getNextBirthdayDate(b.birthday).getTime())
-            for (let i = 0; i < birthdayStudents.length; i++) {
-                birthdaysHtml += '<div class="d-flex flex-column mx-1">'+getStudentIconSmall(birthdayStudents[i])+'<div class="ba-panel mt-1 mx-1 p-1 text-center">'+getNextBirthdayDate(birthdayStudents[i].birthday).toLocaleDateString([], {month: "numeric", day: "numeric"})+'</div></div>'
+            if (birthdayStudents.length > 0) {
+                birthdayStudents.sort((a,b) => getNextBirthdayDate(a.birthday).getTime() - getNextBirthdayDate(b.birthday).getTime())
+                for (let i = 0; i < birthdayStudents.length; i++) {
+                    birthdaysHtml += '<div class="d-flex flex-column mx-1">'+getStudentIconSmall(birthdayStudents[i])+'<div class="ba-panel mt-1 mx-1 p-1 text-center">'+getNextBirthdayDate(birthdayStudents[i].birthday).toLocaleDateString([], {month: "numeric", day: "numeric"})+'</div></div>'
+                }
+                $('#ba-home-birthdays-list').html(birthdaysHtml)
+            } else {
+                $('#ba-home-birthdays').hide()
             }
-            $('#ba-home-birthdays').html(birthdaysHtml)
+            
             $('.ba-item-student').tooltip({html: true})
             //
 
@@ -2071,13 +2077,13 @@ function getTypeText(type) {
             text += "Deals <b>2&times;</b> damage to <b class='ba-col-mystic'>Special</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-piercing'>Heavy</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-siege'>Structures</b>."
             break
         case 'Light':
-            text += "Receives <b>2&times;</b> damage from <b class='ba-col-explosive'>Explosive</b> attacks.<br>Receives <b>0.5&times;</b> damage from <b class='ba-col-mystic'>Mystic</b> attacks."
+            text += "Receives <b>2&times;</b> damage from <b class='ba-col-explosive'>Explosive</b> attacks.<br>Receives <b>0.5&times;</b> damage from <b class='ba-col-piercing'>Piercing</b> attacks."
             break
         case 'Heavy':
-            text += "Receives <b>2&times;</b> damage from <b class='ba-col-piercing'>Piercing</b> attacks.<br>Receives <b>0.5&times;</b> damage from <b class='ba-col-explosive'>Explosive</b> attacks."
+            text += "Receives <b>2&times;</b> damage from <b class='ba-col-piercing'>Piercing</b> attacks.<br>Receives <b>0.5&times;</b> damage from <b class='ba-col-mystic'>Mystic</b> attacks."
             break
         case 'Special':
-            text += "Receives <b>2&times;</b> damage from <b class='ba-col-mystic'>Mystic</b> attacks.<br>Receives <b>0.5&times;</b> damage from <b class='ba-col-piercing'>Piercing</b> attacks."
+            text += "Receives <b>2&times;</b> damage from <b class='ba-col-mystic'>Mystic</b> attacks.<br>Receives <b>0.5&times;</b> damage from <b class='ba-col-explosive'>Explosive</b> attacks."
             break
     }
     return text
