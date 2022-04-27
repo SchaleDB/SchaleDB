@@ -29,6 +29,8 @@
     --col-bg-item-r: rgba(122, 185, 255, 0.6);
     --col-bg-item-sr: rgba(236, 160, 74, 0.6);
     --col-bg-item-ssr: rgba(162, 105, 255, 0.6);
+    --col-bg-node-normal: rgba(44, 69, 99, 0.8);
+    --col-bg-node-rare: rgba(161, 111, 0, 0.8);
 
     --col-text-explosive: hsl(355, 87%, 35%);
     --col-text-piercing: hsl(32, 70%, 41%);
@@ -443,9 +445,13 @@ input[type="search" i]::-webkit-search-cancel-button {
     filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
 }
 
-#ba-student-name, #ba-raid-name, #ba-item-name, #ba-stage-title, #ba-stage-enemy-name {
+#ba-student-name, #ba-raid-name, #ba-item-name, #ba-stage-title, #ba-craft-name, #ba-stage-enemy-name {
     font-family: 'Oswald', 'Noto Sans JP', sans-serif;
     text-transform: uppercase;
+}
+
+#ba-item-rarity {
+    font-weight: 700;
 }
 
 #ba-item-icon {
@@ -457,7 +463,16 @@ input[type="search" i]::-webkit-search-cancel-button {
     border-radius: 999px;
 }
 
-#ba-item-icon-img {
+#ba-craft-icon {
+    height: 76px;
+    width: 76px;
+    min-height: 76px;
+    min-width: 76px;
+    padding: 14px;
+    border-radius: 999px;
+}
+
+#ba-item-icon-img, #ba-craft-icon-img {
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -793,16 +808,12 @@ h1 small {
 
 .ba-student-card {
     position: relative;
-    width: 100%;
-    height: auto;
-    object-fit: contain;
     cursor: pointer;
+    width: var(--var-grid-card-width);
+    height: var(--var-grid-card-height);
 }
 
 .ba-student-card-portrait {
-    position: relative;
-    height: 100%;
-    width: 100%;
     box-shadow: 0rem 0.2rem 0.75rem rgba(0,0,0,.15);
     border-radius: 10px;
     overflow: hidden;
@@ -834,6 +845,10 @@ h1 small {
     bottom: 0px;
     left: 0px;
     transition-duration: 300ms;
+}
+
+.ba-label-text {
+    word-wrap: normal;
 }
 
 .ba-unhover-text {
@@ -877,8 +892,6 @@ h1 small {
     height: 22px;
     width: 22px;
     border-radius: 999px;
-    align-items: baseline;
-    justify-content: center;
     left: 2px;
     top: 2px;
     z-index: 50;
@@ -890,8 +903,6 @@ h1 small {
     height: 18px;
     width: 18px;
     border-radius: 999px;
-    align-items: baseline;
-    justify-content: center;
     left: 4px;
     top: 4px;
     padding: 3px;
@@ -910,8 +921,6 @@ h1 small {
     height: 18px;
     width: 18px;
     border-radius: 999px;
-    align-items: baseline;
-    justify-content: center;
     left: 4px;
     top: 4px;
     padding: 3px;
@@ -1022,7 +1031,7 @@ h1 small {
     padding: 3px;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
     object-fit: cover;
     border-radius: 999px;
     image-rendering: -webkit-optimize-contrast;
@@ -1060,8 +1069,8 @@ h1 small {
 }
 
 .ba-item-student {
-    height: 58px;
-    width: 58px;
+    height: 60px;
+    width: 60px;
     transition: filter var(--var-animation-duration) ease;
     border-radius: 999px;
     overflow: hidden;
@@ -1073,7 +1082,7 @@ h1 small {
     width: 100%;
     object-fit: cover;
     object-position: center;
-    image-rendering: -webkit-optimize-contrast;
+    /* image-rendering: -webkit-optimize-contrast; */
 }
 
 .ba-item img {
@@ -1102,7 +1111,7 @@ h1 small {
     border-radius: 1rem;
     right: 0px;
     padding: 0.1rem 0.25rem;
-    bottom: 0px;
+    bottom: 0.5rem;
     cursor: default;
 }
 
@@ -1206,10 +1215,9 @@ h1 small {
 }
 
 .ba-bond-icon {
-    image-rendering: -webkit-optimize-contrast;
-    width: 64px;
+    width: 60px;
     border-radius: 32px;
-    height: 64px;
+    height: 60px;
     object-fit: cover;
     object-position: top;
     box-shadow: 0rem 0.2rem 0.75rem rgba(0,0,0,.15);
@@ -1250,14 +1258,6 @@ h1 small {
     line-height: 16px;
     font-size: 16px;
     text-align: center;
-}
-
-.ba-student-select-item {
-    /* will-change: transform;
-    transform: translateZ(0); */
-    display: inline-block;
-    max-width: 100px;
-    margin: auto;
 }
 
 .ba-student-group-header {
@@ -1341,8 +1341,8 @@ h1 small {
 
 @media(max-width: 991px) {
     
-    .ba-student-select-item {
-        max-width: 84px;
+    .modal-body {
+        overflow-y: overlay !important;
     }
 
     .ba-student-card-label {
@@ -1363,8 +1363,9 @@ h1 small {
     }
 
     #ba-student-select-grid {
-        grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)) !important;
-        gap: 0.4rem 0.4rem !important;
+        --var-grid-gap: 0.4rem !important;
+        --var-grid-card-width: 90px !important;
+        --var-grid-card-height: 102px !important;
     }
 
     .ba-stage-select-grid {
@@ -1480,19 +1481,10 @@ h1 small {
     }
 }
 
-
-/* @media(min-width: 1200px) {
-    .ba-student-select-item {
-        max-width: 100px;
-    }
-} */
-
 #ba-student-select-grid {
-    text-align: center;
-    font-size: 0px;
-    display: grid;
-    gap: 0.6rem 0.6rem;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    --var-grid-gap: 0.6rem;
+    --var-grid-card-width: 100px;
+    --var-grid-card-height: 113px;
 }
 
 .ba-student-select-groupseparator {
@@ -1941,8 +1933,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 .ba-stage-card, .ba-raid-card, .ba-item-card {
     position: relative;
-    width: 100%;
-    height: auto;
+    width: var(--var-grid-card-width);
+    height: var(--var-grid-card-height);
     object-fit: contain;
     cursor: pointer;
 }
@@ -2111,4 +2103,31 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 #ba-home-gacha-list>div {
     margin: 0.5rem;
+    max-width: 100px;
+}
+
+.ba-craft-node img {
+    position: absolute;
+    height: 24px;
+    width: auto;
+    left: 6px !important;
+    top: 4px !important;
+}
+
+.ba-craft-node {
+    cursor: pointer;
+    transition: filter ease var(--var-animation-duration);
+    color: #fff;
+}
+
+.ba-craft-node:hover {
+    filter: brightness(0.75);
+}
+
+.ba-node-grade-1 {
+    background-color: var(--col-bg-node-normal);
+}
+
+.ba-node-grade-2 {
+    background-color: var(--col-bg-node-rare);
 }

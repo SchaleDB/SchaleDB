@@ -101,6 +101,11 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a id="ba-navbar-link-craft" class="px-3 nav-link" onclick="loadModule('craft')">
+                                    <span data-localize-id="ui,navbar_craft"></span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a id="ba-navbar-link-stages" class="px-3 nav-link" onclick="loadModule('stages')">
                                     <span data-localize-id="ui,navbar_stages"></span>
                                 </a>
@@ -209,7 +214,7 @@
                                 <button id="ba-student-search-filter-school-srt" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','SRT')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_SRT_W.png"><span style="margin-left: 22px" data-localize-id="school,srt"></span></button>
                                 <button id="ba-student-search-filter-school-trinity" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Trinity')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_TRINITY_W.png"><span style="margin-left: 22px" data-localize-id="school,trinity"></span></button>
                                 <button id="ba-student-search-filter-school-valkyrie" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Valkyrie')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_VALKYRIE_W.png"><span style="margin-left: 22px" data-localize-id="school,valkyrie"></span></button>
-                                <button id="ba-student-search-filter-school-others" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Others')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_OTHERS_W.png"><span style="margin-left: 22px" data-localize-id="school,others"></span></button>
+                                <button id="ba-student-search-filter-school-etc" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','ETC')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_ETC_W.png"><span style="margin-left: 22px" data-localize-id="school,etc"></span></button>
                             </div>
                             <div class="mb-2">
                                 <h5 data-localize-id="ui,student_search_filter_weapon"></h5>
@@ -226,7 +231,7 @@
                         </div>
                         <div id="ba-student-search-results" class="flex-fill">
                             <div class="d-flex flex-row justify-content-center">
-                                <div id="ba-student-select-grid" class="align-top flex-fill">
+                                <div id="ba-student-select-grid" class="ba-select-grid align-top flex-fill">
                                 </div>
                             </div>
                         </div>
