@@ -3,7 +3,6 @@ $.holdReady(true)
 const starscale_hp      = [1, 1.05,  1.12,  1.21,  1.35 ]
 const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445]
-const terrain_adaption = ["D","C","B","A","S","SS"]
 const raid_level = [17, 25, 35, 50, 70, 80]
 const label_smalltext_threshold = {'en':11, 'ja':5}
 const label_enemy_smalltext_threshold = {'en':12, 'ja':6}
@@ -13,8 +12,6 @@ const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
 const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000, 2400000, 4000000]
 const event_area = {1: 'Quest', 2: 'Invasion'}
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
-const max_gifts = 35
-const module_list = ['home','students','raids','stages','items','craft']
 
 const stat_friendlyname = {
     "maxhp": "Max HP",
@@ -36,20 +33,19 @@ const stat_friendlyname = {
 
 var data = {}
 const json_list = {
-    common: "./data/common.json",
-    raids: "./data/raids.json",
-    students: "./data/students.json",
-    localization: "./data/localization.json",
-    stages: "./data/stages.json",
-    enemies: "./data/enemies.json",
-    items: "./data/items.json",
-    furniture: "./data/furniture.json",
-    formations: "./data/formations.json",
-    crafting: "./data/crafting.json",
-    tss_vehicles: "./data/tss_vehicles.json"
+    common: "./data/common.min.json",
+    raids: "./data/raids.min.json",
+    students: "./data/students.min.json",
+    localization: "./data/localization.min.json",
+    stages: "./data/stages.min.json",
+    enemies: "./data/enemies.min.json",
+    items: "./data/items.min.json",
+    furniture: "./data/furniture.min.json",
+    formations: "./data/formations.min.json",
+    tss_vehicles: "./data/tss_vehicles.min.json"
 }
 
-var loadedModule, student, studentList, loadedItem, loadedStage, loadedCraftNode, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy
+var loadedModule, student, studentList, loadedItem, loadedStage, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy
 var searchResultsCount = 0, searchResultsSelection = 0
 var studentSelectorModal, statPreviewModal, showVehicleStats = false
 var header
@@ -191,16 +187,6 @@ function loadModuleFromURL() {
         loadRaid(urlVars.get("raid"))
     } else if (urlVars.get("stage")) {
         loadStage(urlVars.get("stage"))
-    } else if (urlVars.get("craftnode")) {
-        loadCraft(urlVars.get("craftnode"))
-    } else {
-        loadLastModule()
-    }
-}
-
-function loadLastModule() {
-    if (localStorage.getItem("module") && module_list.includes(localStorage.getItem("module"))) {
-        loadModule(localStorage.getItem("module"))
     } else {
         loadModule('home')
     }
@@ -339,35 +325,6 @@ function loadModule(moduleName, entry=null) {
             $('.ba-item-list.active').addClass('show')
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         })
-    } else if (moduleName == 'craft') {
-        loadedModule = 'craft'
-        $(".navbar-nav .nav-link").removeClass('active')
-        $("#ba-navbar-link-craft").addClass('active')
-        var bgimg = new Image()
-        bgimg.onload = function(){
-            $("#ba-background").css('background-image', `url('${bgimg.src}')`)
-        }
-        bgimg.src = `images/background/BG_CraftChamber_Night.jpg`
-        $("#loaded-module").load('craft.html', function() {
-            loadLanguage(userLang)
-            $(".tooltip").tooltip("hide")
-            var urlVars = new URL(window.location.href).searchParams
-        
-            if (entry != null) {
-                loadCraft(entry)
-            } else if (urlVars.has("craftnode")) {
-                loadCraft(urlVars.get("craftnode"))
-            } else if (localStorage.getItem("craftnode")) {
-                loadCraft(localStorage.getItem("craftnode"))
-            } else {
-                loadCraft(1)
-            }
-            populateCraftList()
-            $('.ba-craft-list').addClass('fade')
-            $('.ba-craft-list.active').addClass('show')
-            window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
-            $('#ba-craft-list-container, #ba-craft-details-container').show()
-        })
     } else {
         loadedModule = 'home'
         $(".navbar-nav .nav-link").removeClass('active')
@@ -451,7 +408,6 @@ function loadModule(moduleName, entry=null) {
             $('#ba-navbar-content').collapse('hide')
         })
     }
-    localStorage.setItem("module", loadedModule)
 }
 
 function getNextBirthdayDate(birthday) {
@@ -562,7 +518,7 @@ function updateStudentList() {
                 $('#ba-student-select-'+el['id']).show().css("order", count)
                 switch (search_options["sortby"]) {
                     case "default": case "name":
-                        $('#ba-student-select-'+el['id']+' .ba-label-text').text(el["name_"+userLang]).toggleClass('smalltext', el["name_"+userLang].length > label_smalltext_threshold[userLang]).toggleClass('ba-unhover-text', false)
+                        $('#ba-student-select-'+el['id']+' .ba-label-text').text(el["name_"+userLang].replace(' (','\n(')).toggleClass('smalltext', el["name_"+userLang].length > label_smalltext_threshold[userLang]).toggleClass('ba-unhover-text', false)
                         $('#ba-student-select-'+el['id']+' .ba-hover-text').hide()
                         break
                     case "maxhp":
@@ -699,7 +655,7 @@ function loadStudent(studentName) {
                 $('#ba-student-img').css('background-image', `url('${charimg.src}')`)
                 $('#ba-student-img-sm').css('background-image', `url('${charimg.src}')`)
             }
-            charimg.src = `images/student/portrait/Portrait_${student.name_dev}.webp`         
+            charimg.src = 'images/student/' + student.student_img           
             var bgimg = new Image()
             bgimg.onload = function(){
                 $("#ba-background").css('background-image', `url('${bgimg.src}')`)
@@ -766,10 +722,10 @@ function loadStudent(studentName) {
             $("#ba-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] : student.skill_passive_name_ja)
             $("#ba-skill-sub-name").text(student[`skill_sub_name_${userLang}`] ? student[`skill_sub_name_${userLang}`] : student.skill_sub_name_ja)     
     
-            $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon+'.png')
-            $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon+'.png')
-            $('#ba-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon+'.png')
-            $('#ba-skill-sub-icon').attr("src", "images/skill/" + student.skill_sub_icon+'.png')
+            $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon)
+            $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon)
+            $('#ba-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
+            $('#ba-skill-sub-icon').attr("src", "images/skill/" + student.skill_sub_icon)
     
             student.skill_ex_cost[0] == student.skill_ex_cost[4] ? $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic") : $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic").addClass(`ba-col-${student.attack_type.toLowerCase()}`)
     
@@ -818,13 +774,13 @@ function loadStudent(studentName) {
     
             if (student[`weapon_skill_passive_description_${userLang}`] != null) {
                 $("#ba-weapon-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] + getLocalizedString('ui',"skill_plus") : student.skill_passive_name_ja + '＋')
-                $('#ba-weapon-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon+'.png')
+                $('#ba-weapon-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon)
                 recalculateWeaponSkillPreview()
             }
     
-            $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.weapon_bonus_terrain}.png`)
-            $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount]}.png`)
-            $('#ba-weapon-bonus-terrain-adaption-description').html(`${student.weapon_bonus_terrain.charAt(0).toUpperCase()+student.weapon_bonus_terrain.substr(1)} Combat Power ${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']]} → <b>${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount]}</b><br>(${getAdaptionText(student.weapon_bonus_terrain, terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount])})`)
+            $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.weapon_bonus_terrain_type}.png`)
+            $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${student.weapon_bonus_terrain_adaption}.png`)
+            $('#ba-weapon-bonus-terrain-adaption-description').html(`${student.weapon_bonus_terrain_type.charAt(0).toUpperCase()+student.weapon_bonus_terrain_type.substr(1)} Combat Power ${eval('student.'+student.weapon_bonus_terrain_type+'_adaption')} → <b>${student.weapon_bonus_terrain_adaption}</b><br>(${getAdaptionText(student.weapon_bonus_terrain_type, student.weapon_bonus_terrain_adaption)})`)
     
             var url = new URL(window.location.href)
     
@@ -834,12 +790,12 @@ function loadStudent(studentName) {
                 history.pushState(null, '', url)
             }
             
-            // $.each(student.weapon_bonus_stats, function(i, el) {
-            //     $(`#ba-weapon-stat-${i+1}`).text(getStatName(student.weapon_bonus_stats[i]))
-            //     $(`#ba-weapon-stat-${i+1}-amount`).text(student.weapon_bonus_stats_parameters[i][0])
-            // }) 
+            $.each(student.weapon_bonus_stats, function(i, el) {
+                $(`#ba-weapon-stat-${i+1}`).text(getStatName(student.weapon_bonus_stats[i]))
+                $(`#ba-weapon-stat-${i+1}-amount`).text(student.weapon_bonus_stats_parameters[i][0])
+            }) 
     
-            if (student.weapon_heal_power_100 > 0) {
+            if (student.weapon_bonus_stats.length > 2) {
                 $('#ba-weapon-stat-row2').show()
             } else {
                 $('#ba-weapon-stat-row2').hide()
@@ -848,18 +804,14 @@ function loadStudent(studentName) {
             $('#ba-weapon-description').text(getLocalStringIfAvailable(student,'weapon_description').replace("\n\n", "\n"))
     
             //Profile
-            if (userLang == 'en') {
-                $('#ba-student-fullname').text(getLocalStringIfAvailable(student,'given_name')+' '+getLocalStringIfAvailable(student,'family_name'))
-            } else {
-                $('#ba-student-fullname').text(getLocalStringIfAvailable(student,'family_name')+getLocalStringIfAvailable(student,'given_name'))
-            }
+            $('#ba-student-fullname').text(student[`fullname_${userLang}`])
             // $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + ".png")
             // $("#ba-profile-school-img-w").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
             $('#ba-profile-school-label').text(getLocalizedString('school_long',student.school.toLowerCase()))
-            $('#ba-profile-club-label').text(getLocalizedString('club',student.club))
+            $('#ba-profile-club-label').text(student[`club_${userLang}`])
             student[`year_${userLang}`] == null ? $('#ba-profile-schoolyear-label').hide() : $('#ba-profile-schoolyear-label').show()
             $('#ba-profile-schoolyear-label').text(student[`year_${userLang}`])
-            $('#ba-profile-portrait-img').attr("src", `images/student/collection/${student.portrait_img}.webp`)
+            $('#ba-profile-portrait-img').attr("src", `images/student/collection/Student_Portrait_${student.name_dev}_Collection.png`)
             var profileHtml = ''
             profileHtml += student[`profile_${userLang}`] ? student[`profile_${userLang}`] : student['profile_ja']
             if (student.stars == 3) {
@@ -877,21 +829,18 @@ function loadStudent(studentName) {
                 $(".ba-student-lobby").hide()
             }
             
-            $('#ba-student-profile-age').text(getLocalStringIfAvailable(student,'age'))
+            $('#ba-student-profile-age').text(userLang == 'ja' ? student.age+'歳' : student.age)
             $('#ba-student-profile-birthday').text(getLocalStringIfAvailable(student,'birthday'))
-            $('#ba-student-profile-hobbies').text(getLocalStringIfAvailable(student,'hobbies'))
+            $('#ba-student-profile-hobbies').text(student[`hobbies_${userLang}`] ? student[`hobbies_${userLang}`] : student['hobbies_ja'])
             $('#ba-student-profile-height').text(student.height_metric)
-            $('#ba-student-profile-cv').text(getLocalStringIfAvailable(student,'cv'))
+            $('#ba-student-profile-cv').text(student[`cv_${userLang}`])
             $('#ba-student-profile-illustrator').text(student.illustrator)
     
-            let allTags = student.favoured_item_tags
-            allTags.push(student.favoured_item_unique[0])
-            let favItems = getFavouriteItems(allTags)
             var favItemsHtml = ""
-            $(favItems[0]).each(function(i,el){
+            $(student.favoured_items[0]).each(function(i,el){
                 favItemsHtml += getFavourIconHTML(el, 3)
             })
-            $(favItems[1]).each(function(i,el){
+            $(student.favoured_items[1]).each(function(i,el){
                 favItemsHtml += getFavourIconHTML(el, 2)
             })
             $('#ba-student-favoured-items').empty().html(favItemsHtml)
@@ -1001,12 +950,7 @@ function loadItem(id) {
         } 
         loadedItem = item
         $('#ba-item-name').html(getLocalStringIfAvailable(item,'name'))
-        if (mode == 'equipment' && item.id >= 1000) {
-            $('#ba-item-rarity').html(`T${(id%10)+1}`)
-        } else {
-            $('#ba-item-rarity').html(getRarityStars(item.rarity))
-        }
-        
+        $('#ba-item-rarity').html(getRarityTier(item.rarity))
         $('#ba-item-icon').removeClass('ba-item-n ba-item-r ba-item-sr ba-item-ssr').addClass('ba-item-'+item.rarity.toLowerCase())
         $('#ba-item-icon-img').attr('src', `images/${mode}/${item.icon}.png`)
         $('#ba-item-description').html(getLocalStringIfAvailable(item,'desc'))
@@ -1055,54 +999,6 @@ function loadItem(id) {
         localStorage.setItem("item", id)
     } else {
         loadModule('items', id)
-    }
-}
-
-function loadCraft(id) {
-    if (loadedModule == 'craft') {
-        var mode = 'craftnode', craftNode = findOrDefault(data.crafting.nodes, "id", id, 1)[0]
-        loadedCraftNode = craftNode
-        $('#ba-craft-name').html(getLocalStringIfAvailable(craftNode,'name'))
-        $('#ba-craft-type').html(getLocalizedString("node_tier", craftNode.tier.toString()))
-        $('#ba-craft-rarity').html(getLocalizedString("node_grade", craftNode.grade.toString()))
-        $('#ba-craft-icon').removeClass('ba-node-grade-1 ba-node-grade-2').addClass('ba-node-grade-'+craftNode.grade.toString())
-        $('#ba-craft-icon-img').attr('src', `images/ui/${craftNode.icon}.png`)
-        $('#ba-craft-description').html(getLocalStringIfAvailable(craftNode,'desc'))
-        $('#ba-craft-rewards').empty()
-        let rewardsHtml = ''
-        $.each(craftNode.rewards, function(i,el){
-            let item_group = data.crafting.groups[el.group_id]
-            maxChance = 0
-            for (let j = 0; j < item_group.length; j++) {
-                maxChance += item_group[j].chance
-            }
-            for (let j = 0; j < item_group.length; j++) {
-                let itemProb = ((el.chance / craftNode.chance) * (item_group[j].chance / maxChance)).toFixed(4)
-                let itemId = item_group[j].item_id
-                if (item_group[j].type == "Furniture") {
-                    itemId += 1000000
-                } else if (item_group[j].type == "Equipment") {
-                    itemId += 2000000
-                }
-                rewardsHtml += getDropIconHTML(itemId,itemProb)
-            }
-        })
-        $('#ba-craft-rewards').html(rewardsHtml)
-        $('#ba-craft-rewards div').each(function(i,el) {
-            $(el).tooltip({html: true})
-        })
-        var url = new URL(window.location.href)
-        if (url.searchParams.get("craftnode") != id) {
-            url.searchParams.forEach((v,k) => url.searchParams.delete(k))
-            url.searchParams.set("craftnode", id)
-            history.pushState(null, '', url)
-        }
-
-        document.title = `Schale DB | ${getLocalStringIfAvailable(craftNode,'name')}`
-        $('#ba-navbar-content').collapse('hide')
-        localStorage.setItem("craftnode", id)
-    } else {
-        loadModule('craft', id)
     }
 }
 
@@ -1348,7 +1244,7 @@ function getFormattedStatAmount(val) {
 }
 
 function changeGearLevel(slot, el) {
-    var geartype = student.gear[slot-1]
+    var geartype = eval('student.gear_'+slot)
     var gearobj = find(data.common.gear, "type", geartype)[0]
     $(`#ba-statpreview-gear${slot}-icon`).attr("src", `images/equipment/Equipment_Icon_${geartype}_Tier${el.value}.png`)
     $(`#ba-statpreview-gear${slot}-level`).text(`T${el.value}`)
@@ -1436,10 +1332,27 @@ function changeStatPreviewBondLevel(i, el) {
     }
 }
 
+function changeStatPreviewWeaponLevel(el) {
+    var levelscale = ((((el.value*10) + 20)-1)/99).toFixed(4)
+    $(`#ba-statpreview-weapon-description`).empty()
+    $.each(student.weapon_bonus_stats, function(i, el) {
+        $(`#ba-statpreview-weapon-description`).append(stat_friendlyname[el] + ' <b>+' + Math.round(student.weapon_bonus_stats_parameters[i][0] + (student.weapon_bonus_stats_parameters[i][1]-student.weapon_bonus_stats_parameters[i][0]) * levelscale) + '</b>')
+        if (i+1 != student.weapon_bonus_stats.length) {
+            $(`#ba-statpreview-weapon-description`).append(', ')
+        }
+    }) 
+
+    $('#ba-statpreview-weapon-description').text()
+    $('#ba-statpreview-weapon-level').html(`<img src="images/ui/Common_Icon_Formation_Star_2.png" style="height: 20px;width: auto;margin-top: -3px;margin-right:2px;"></img>${el.value}`)
+    if (stat_preview_weapon_stars > 0) {
+        recalculateStatPreview()
+    }
+}
+
 function getBondTargetsHTML(num, student) {
     return `<div class="mt-2 mb-1 d-flex flex-row align-items-center">
         <div class="me-2" style="position: relative;">
-            <img class="ba-bond-icon ms-0" src="images/student/icon/${student.portrait_img}.png">
+            <img class="ba-bond-icon ms-0" src="images/student/collection/Student_Portrait_${student.name_dev}_Collection.png">
         </div>
         <div class="flex-fill">
             <h5 class="d-inline">${student['name_'+userLang]}</h5>
@@ -1462,36 +1375,39 @@ function updateGearIcon() {
     includeGear = $('#ba-statpreview-includegear').hasClass('active')
     for (let i=1; i<=3; i++) {
         tier = includeGear ? $(`#ba-statpreview-gear${i}-range`).val() : 1
-        gear = find(data.common.gear, "type", student.gear[i-1])[0]
+        gear = find(data.common.gear, "type", student[`gear_${i}`])[0]
         $("#ba-student-gear-"+i).attr("src", `images/equipment/Equipment_Icon_${gear.type}_Tier${tier}.png`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${gear.type}_Tier${tier}.png`, gear.items[tier-1][`name_${userLang}`], gear[`name_${userLang}`], `T${tier}`, gear.items[tier-1][`desc_${userLang}`] + getGearStatsText(gear.items[tier-1]), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !includeGear)
     }
 }
 
 function recalculateTerrainAffinity() {
-    
     var adaption = {}
     adaption["urban"] = student.urban_adaption
     adaption["outdoor"] = student.outdoor_adaption
     adaption["indoor"] = student.indoor_adaption
 
     if (stat_preview_stars == 5 && stat_preview_weapon_stars >= 3) {
-        adaption[student.weapon_bonus_terrain] += student.weapon_bonus_terrain_amount
+        adaption[student.weapon_bonus_terrain_type] = student.weapon_bonus_terrain_adaption
     }
 
-    $("#ba-student-terrain-urban-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["urban"]] + ".png")
-    $("#ba-student-terrain-outdoor-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["outdoor"]] + ".png")
-    $("#ba-student-terrain-indoor-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["indoor"]] + ".png")
-    $('#ba-student-terrain-urban').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["urban"]] + ".png", 'Combat Power ' + terrain_adaption[adaption["urban"]], null, null, getAdaptionText('urban', terrain_adaption[adaption["urban"]]), 30), placement: 'top', html: true})
-    $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["outdoor"]] + ".png", 'Combat Power ' + terrain_adaption[adaption["outdoor"]], null, null, getAdaptionText('outdoor', terrain_adaption[adaption["outdoor"]]), 30), placement: 'top', html: true})
-    $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["indoor"]] + ".png", 'Combat Power ' + terrain_adaption[adaption["indoor"]], null, null, getAdaptionText('indoor', terrain_adaption[adaption["indoor"]]), 30), placement: 'top', html: true})
+    $("#ba-student-terrain-urban-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + adaption["urban"] + ".png")
+    $("#ba-student-terrain-outdoor-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + adaption["outdoor"] + ".png")
+    $("#ba-student-terrain-indoor-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + adaption["indoor"] + ".png")
+    $('#ba-student-terrain-urban').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + adaption["urban"] + ".png", 'Combat Power ' + adaption["urban"], null, null, getAdaptionText('urban', adaption["urban"]), 30), placement: 'top', html: true})
+    $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + adaption["outdoor"] + ".png", 'Combat Power ' + adaption["outdoor"], null, null, getAdaptionText('outdoor', adaption["outdoor"]), 30), placement: 'top', html: true})
+    $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + adaption["indoor"] + ".png", 'Combat Power ' + adaption["indoor"], null, null, getAdaptionText('indoor', adaption["indoor"]), 30), placement: 'top', html: true})
 }
 
 function recalculateWeaponPreview() {
+
     var level = $("#ba-weaponpreview-levelrange").val()
+
     var levelscale = ((level-1)/99).toFixed(4)
-    $(`#ba-weapon-stat-attack-amount`).text('+'+Math.round(student.weapon_attack_power_1 + (student.weapon_attack_power_100-student.weapon_attack_power_1) * levelscale))
-    $(`#ba-weapon-stat-maxhp-amount`).text('+'+Math.round(student.weapon_maxhp_1 + (student.weapon_maxhp_100-student.weapon_maxhp_1) * levelscale))
-    $(`#ba-weapon-stat-healing-amount`).text('+'+Math.round(student.weapon_heal_power_1 + (student.weapon_heal_power_100-student.weapon_heal_power_1) * levelscale))
+
+    $.each(student.weapon_bonus_stats, function(i, el) {
+        $(`#ba-weapon-stat-${i+1}-amount`).text('+'+Math.round(student.weapon_bonus_stats_parameters[i][0] + (student.weapon_bonus_stats_parameters[i][1]-student.weapon_bonus_stats_parameters[i][0]) * levelscale))
+    }) 
+
 }
 
 function recalculateStatPreview() {
@@ -1556,9 +1472,9 @@ function recalculateStatPreview() {
         var gear = []
         var tier = 1
 
-        gear[0] = find(data.common.gear,"type",student.gear[0])[0]
-        gear[1] = find(data.common.gear,"type",student.gear[1])[0]
-        gear[2] = find(data.common.gear,"type",student.gear[2])[0]
+        gear[0] = find(data.common.gear,"type",student.gear_1)[0]
+        gear[1] = find(data.common.gear,"type",student.gear_2)[0]
+        gear[2] = find(data.common.gear,"type",student.gear_3)[0]
 
         $.each(gear, function(i, el) {
             tier = $(`#ba-statpreview-gear${i+1}-range`).val()
@@ -1581,10 +1497,6 @@ function recalculateStatPreview() {
     if ((stat_preview_stars == 5) && (stat_preview_weapon_stars > 0)) {
         var weaponlevel = (stat_preview_weapon_stars*10) + 20
         var weaponlevelscale = ((weaponlevel-1)/99).toFixed(4)
-        bonus["attack_power"] += Math.round((student.weapon_attack_power_1 + (student.weapon_attack_power_100-student.weapon_attack_power_1) * weaponlevelscale).toFixed(4))
-        bonus["maxhp"] += Math.round((student.weapon_maxhp_1 + (student.weapon_maxhp_100-student.weapon_maxhp_1) * weaponlevelscale).toFixed(4))
-        bonus["heal_power"] += Math.round((student.weapon_heal_power_1 + (student.weapon_heal_power_100-student.weapon_heal_power_1) * weaponlevelscale).toFixed(4))
-
         $.each(student.weapon_bonus_stats, function(i, el) {
             bonus[student.weapon_bonus_stats[i]] += Math.round((student.weapon_bonus_stats_parameters[i][0] + (student.weapon_bonus_stats_parameters[i][1]-student.weapon_bonus_stats_parameters[i][0]) * weaponlevelscale).toFixed(4))
         }) 
@@ -1657,16 +1569,16 @@ function recalculateSkillPreview() {
 
 function getStudentListCardHTML(student) {
     var html = `
-    <div id="ba-student-select-${student["id"]}" class="ba-select-grid-item unselectable">
+    <div id="ba-student-select-${student["id"]}" class="ba-student-select-item unselectable">
         <div onclick="loadStudent('${student["name_dev"]}')" class="ba-student-card">
-            <div class="ba-student-card-portrait"><img class="ba-student-card-portrait-img" src="images/student/collection/${student.portrait_img}.webp"></div>
+            <div class="ba-student-card-portrait"><img class="ba-student-card-portrait-img" src="images/student/collection/Student_Portrait_${student["name_dev"]}_Collection.png"></div>
             <span class="ba-student-card-role bg-${student["type"].toLowerCase()}-t"><img src="images/ui/Role_${student["role"]}.png" style="width:100%"></span>
             <span class="ba-student-card-atk bg-atk-${student["attack_type"].toLowerCase()}-t"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></span>
             <span class="ba-student-card-def bg-def-${student["defense_type"].toLowerCase()}-t"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></span>
             <img class="ba-student-card-star" style="right: 2px; top: 2px;" src="images/ui/Common_Icon_Formation_Star_R${student["stars"]}.png">
             <div class="d-flex align-items-center ba-student-card-label">
-                <span class="ba-label-text px-1 align-middle ${student['name_'+userLang].length > label_smalltext_threshold[userLang] ? "smalltext" : ""}" style="width: 100%">${student['name_'+userLang]}</span>
-                <span class="ba-hover-text px-1 align-middle ${student['name_'+userLang].length > label_smalltext_threshold[userLang] ? "smalltext" : ""}" style="display: none; width: 100%">${student['name_'+userLang]}</span>
+                <span class="ba-label-text px-1 align-middle ${student['name_'+userLang].length > label_smalltext_threshold[userLang] ? "smalltext" : ""}" style="width: 100%">${student['name_'+userLang].replace(' (','\n(')}</span>
+                <span class="ba-hover-text px-1 align-middle ${student['name_'+userLang].length > label_smalltext_threshold[userLang] ? "smalltext" : ""}" style="display: none; width: 100%">${student['name_'+userLang].replace(' (','\n(')}</span>
             </div>
         </div>
     </div>`
@@ -1779,7 +1691,7 @@ function getMaterialIconHTML(id, amount) {
         item = find(data.items, "id", id)[0]
     }
     var html
-    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.icon}.png`, item[`name_${userLang}`], item.type, getRarityStars(item.rarity), item[`desc_${userLang}`], 50, 'img-scale-larger')}">
+    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.icon}.png`, item[`name_${userLang}`], item.type, getRarityTier(item.rarity), item[`desc_${userLang}`], 50, 'img-scale-larger')}">
             <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/items/${item.icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>
             `
     return html
@@ -1796,10 +1708,6 @@ function getDropIconHTML(id, chance) {
         item = find(data.common.equipment, "id", id-2000000)[0]
         type = 'equipment'
         haslink = true
-    } else if (id >= 1000000) {
-        item = find(data.furniture, "id", id-1000000)[0]
-        type = 'furniture'
-        haslink = true
     } else if (id >= 30000 && id < 80000) {
         item = find(data.common.item_box, "id", id)[0]
         type = 'items'
@@ -1809,27 +1717,21 @@ function getDropIconHTML(id, chance) {
         type = 'items'
         haslink = true
     }
-    let rarityText = ''
-    if (type == 'equipment' && item.id >= 1000) {
-        rarityText = `T${(item.id%10)+1}`
-    } else {
-        rarityText = getRarityStars(item.rarity)
-    }
     var html
-    html = `<div class="drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${type}/${item.icon}.png`, getLocalStringIfAvailable(item,'name'), getLocalizedString('item_type',item.type), rarityText, getLocalStringIfAvailable(item,'desc'), 50, 'img-scale-larger')}">
-            <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/${type}/${item.icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${chance >= 1 ? '&times;'+abbreviateNumber(parseInt(chance).toFixed(0)).toLocaleString(): parseFloat((chance*100).toFixed(2)) + '&#37;'}</span></div>
+    html = `<div class="drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${type}/${item.icon}.png`, getLocalStringIfAvailable(item,'name'), getLocalizedString('item_type',item.type), getRarityTier(item.rarity), getLocalStringIfAvailable(item,'desc'), 50, 'img-scale-larger')}">
+            <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/${type}/${item.icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${chance >= 1 ? '&times;'+abbreviateNumber(chance).toLocaleString(): parseFloat((chance*100).toFixed(2)) + '&#37;'}</span></div>
             `
     return html
 }
 
 function getStudentIconSmall(student) {
-    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student['name_dev']}')" title="${getRichTooltip(`images/student/icon/${student.portrait_img}.png`, student[`name_${userLang}`], 'Character', getRarityStars(student.stars), student[`profile_${userLang}`] ? student[`profile_${userLang}`].split('\n')[0] : student['profile_ja'].split('\n')[0], 50, 'circle')}"><img src="images/student/icon/${student.portrait_img}.png"></div>`
+    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student['name_dev']}')" title="${getRichTooltip(`images/student/collection/Student_Portrait_${student['name_dev']}_Collection.png`, student[`name_${userLang}`], 'Character', getRarityStars(student.stars), student[`profile_${userLang}`] ? student[`profile_${userLang}`].split('\n')[0] : student['profile_ja'].split('\n')[0], 50, 'circle')}"><img src="images/student/collection/Student_Portrait_${student['name_dev']}_Collection.png"></div>`
     return html
 }
 
 function getFavourIconHTML(id, grade) {
     var gift = find(data.items, "id", 5000+id)[0]
-    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.icon}.png`, gift[`name_${userLang}`], getLocalizedString('item_type',gift.type), getRarityStars(gift.rarity), gift[`desc_${userLang}`], 50, 'img-scale-larger')}">
+    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.icon}.png`, gift[`name_${userLang}`], gift.type, getRarityStars(gift.rarity), gift[`desc_${userLang}`], 50, 'img-scale-larger')}">
             <img class="ba-item-icon ba-item-${gift.rarity.toLowerCase()}" src="images/items/${gift.icon}.png">
             <img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade}.png"></div>
             `
@@ -1837,7 +1739,7 @@ function getFavourIconHTML(id, grade) {
 }
 
 function getFurnitureIconHTML(item) {
-    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id+1000000})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/${item.icon}.png`, getLocalStringIfAvailable(item,'name'), getLocalizedString('item_type',item.type), getRarityStars(item.rarity), getLocalStringIfAvailable(item, 'desc'), 50, 'img-scale-larger')}">
+    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.id+1000000})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/${item.icon}.png`, getLocalStringIfAvailable(item,'name'), 'Furniture', getRarityStars(item.rarity), getLocalStringIfAvailable(item, 'desc'), 50, 'img-scale-larger')}">
     <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()} mb-2" src="images/furniture/${item.icon}.png"></div>
     `
     return html
@@ -1914,27 +1816,6 @@ function populateItemList() {
     $('.ba-select-grid-item').tooltip({html: true, delay: { show: 200, hide: 0 }})
 }
 
-function populateCraftList() {
-    html = []
-    html[0] = ""
-    html[1] = ""
-    html_h1= `<div id="stages-list-events-grid-header-1" class="w-100 ba-grid-header mb-2 p-2"><h3 class="mb-0">${getLocalizedString('node_tier',"1")}</h3></div>`
-    html_h2 = `<div id="stages-list-events-grid-header-2" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('node_tier',"2")}</h3></div>`
-    data.crafting.nodes.sort((a,b) => a.grade - b.grade)
-    data.crafting.nodes.sort((a,b) => b.icon.localeCompare(a.icon))
-    $.each(data.crafting.nodes, function(i,el) {
-        if (el.released[regionID] && el.chance > 0)
-        html[el.tier-1] += getCraftingCardHTML(el)
-    })
-
-    $('#ba-craft-list-nodes-grid').html(html_h1 + html[0] + html_h2 + html[1])
-}
-
-function getCraftingCardHTML(node) {
-    let html = `<div class="ba-craft-node ba-student-info ba-panel ba-node-grade-${node.grade}" onclick="loadCraft(${node.id})"><img class="ba-craft-node-img" src="images/ui/${node.icon}.png"><span style="margin-left:20px">${getLocalStringIfAvailable(node, "name")}</span></div>`
-    return html
-}
-
 function populateStageList() {
     var html
     html = ''
@@ -2000,7 +1881,7 @@ function getUsedByStudents(item) {
         let equiptype = item.icon.split('_')[2]
         $.each(data.students, function(i,el){
             if (!el.released[regionID]) return
-            if (el.gear[0] == equiptype || el.gear[1] == equiptype || el.gear[2] == equiptype)
+            if (el.gear_1 == equiptype || el.gear_2 == equiptype || el.gear_3 == equiptype)
             html += getStudentIconSmall(el)
         })
     } else if (item.type == 'Furnitures' || item.type == 'Decorations') {
@@ -2067,18 +1948,15 @@ function getLikedByStudents(item) {
     $.each(data.students, function(i,el){
         if (!el.released[regionID])
         return
-        let allTags = el.favoured_item_tags
-        allTags.push(el.favoured_item_unique[0])
-        let favItems = getFavouriteItems(allTags)
         let likes = false, loves = false
-        for (let i = 0; i < favItems[0].length; i++) {
-            if (item.id-5000 == favItems[0][i]) {
+        for (let i = 0; i < el.favoured_items[0].length; i++) {
+            if (item.id-5000 == el.favoured_items[0][i]) {
                 loves = true
                 break
             }
         }
-        for (let i = 0; i < favItems[1].length; i++) {
-            if (item.id-5000 == favItems[1][i]) {
+        for (let i = 0; i < el.favoured_items[1].length; i++) {
+            if (item.id-5000 == el.favoured_items[1][i]) {
                 likes = true
                 break
             }
@@ -2251,11 +2129,11 @@ function getRichTooltip(icon, title, subtitle, rarity, body, imgsize = 50, imgcl
     if (icon != null) {
         html += `<div class='ba-tooltip-img'><img class='${imgclass}' src='${icon}' width='${imgsize}' height='${imgsize}'></div>`
     }
-    html += `<div class='flex-fill d-flex flex-column'><div class='flex-fill d-flex flex-column justify-content-center'><div class='ba-tooltip-title'>${title.replace('-','&#8209;')}</div></div>`
+    html += `<div class='flex-fill d-flex flex-column'><div class='flex-fill d-flex flex-column justify-content-center'><div class='ba-tooltip-title'>${title}</div></div>`
     if (subtitle != null || rarity != null) {
         html += `<div class='d-flex align-items-center mt-auto'>`
         html += subtitle != null ? `<span class='ba-tooltip-subtitle flex-fill'>${subtitle}</span>` : ''
-        html += rarity != null ? `<span class='ba-tooltip-rarity text-bold'>${rarity}</span>` : ''
+        html += rarity != null ? `<span class='ba-tooltip-rarity'>${rarity}</span>` : ''
         html += '</div>'
     }
 
@@ -2392,7 +2270,7 @@ function allSearch() {
 
     $.each(data.students, function(i,el){
         if (el['released'][regionID] && searchContains(searchTerm, el['name_'+userLang])) {
-            results.push({'name': el['name_'+userLang], 'icon': 'images/student/collection/'+el.portrait_img+'.webp', 'type': 'Character', 'rarity': '', 'rarity_text': getRarityStars(el['stars']), 'onclick': `loadStudent('${el['name_dev']}')`})
+            results.push({'name': el['name_'+userLang], 'icon': 'images/student/collection/Student_Portrait_'+el['name_dev']+'_Collection.png', 'type': 'Character', 'rarity': getRarityStars(el['stars']), 'onclick': `loadStudent('${el['name_dev']}')`})
             if (results.length >= maxResults) return false
         }
     })
@@ -2400,7 +2278,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.raids, function(i,el){
         if (el['released'][regionID] && searchContains(searchTerm, el['name_'+userLang])) {
-            results.push({'name': el['name_'+userLang], 'icon': 'images/raid/'+el.portrait_img+'.png', 'type': 'Total Assault Boss', 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid('${el['name_dev']}')`})
+            results.push({'name': el['name_'+userLang], 'icon': 'images/raid/'+el.portrait_img+'.png', 'type': 'Total Assault Boss', 'rarity': '', 'onclick': `loadRaid('${el['name_dev']}')`})
             if (results.length >= maxResults) return false
         }
     })
@@ -2408,7 +2286,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.items, function(i,el){
         if (el['released'][regionID] && searchContains(searchTerm, el['name_'+userLang])) {
-            results.push({'name': el['name_'+userLang], 'icon': 'images/items/'+el['icon']+'.png', 'type': getLocalizedString('item_type', el.type), 'rarity': el['rarity'], 'rarity_text': getRarityStars(el['rarity']), 'onclick': `loadItem(${el['id']})`})
+            results.push({'name': el['name_'+userLang], 'icon': 'images/items/'+el['icon']+'.png', 'type': 'Item', 'rarity': getRarityTier(el['rarity']), 'onclick': `loadItem(${el['id']})`})
             if (results.length >= maxResults) return false
         }
     })
@@ -2416,15 +2294,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.furniture, function(i,el){
         if (searchContains(searchTerm, el['name_'+userLang])) {
-            results.push({'name': el['name_'+userLang], 'icon': 'images/furniture/'+el['icon']+'.png', 'type': getLocalizedString('item_type', el.type), 'rarity': el['rarity'], 'rarity_text': getRarityStars(el['rarity']), 'onclick': `loadItem(${el['id']+1000000})`})
-            if (results.length >= maxResults) return false
-        }
-    })
-
-    if (results.length < maxResults)
-    $.each(data.common.equipment, function(i,el){
-        if (searchContains(searchTerm, el['name_'+userLang])) {
-            results.push({'name': el['name_'+userLang], 'icon': 'images/equipment/'+el['icon']+'.png', 'type': getLocalizedString('item_type', el.type), 'rarity': el['rarity'], 'rarity_text': getRarityStars(el['rarity']), 'onclick': `loadItem(${el['id']+2000000})`})
+            results.push({'name': el['name_'+userLang], 'icon': 'images/furniture/'+el['icon']+'.png', 'type': 'Furniture', 'rarity': getRarityStars(el['rarity']), 'onclick': `loadItem(${el['id']+1000000})`})
             if (results.length >= maxResults) return false
         }
     })
@@ -2433,7 +2303,7 @@ function allSearch() {
     $.each(data.stages.missions, function(i,el){
         let stagecode = el['area']+'-'+el['stage']+' '+(el['difficulty'] == 1 ? 'Hard' : 'Normal')
         if (el['released'][regionID] && searchContains(searchTerm,stagecode)) {
-            results.push({'name': stagecode, 'icon': 'images/campaign/'+el.icon+'.png', 'type': 'Mission', 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.id}')`})
+            results.push({'name': stagecode, 'icon': 'images/campaign/'+el.icon+'.png', 'type': 'Mission', 'rarity': '', 'onclick': `loadStage('${el.id}')`})
             if (results.length >= maxResults) return false
         }
     })
@@ -2442,11 +2312,11 @@ function allSearch() {
         var html = ''
         for (let i = 0; i < results.length; i++) {
             html += `<div id="ba-search-result-item-${i+1}" class="ba-search-result-item" onclick="${results[i].onclick}; $('#navbar-search-clear').trigger('onclick');">
-            <div class='ba-search-img'><img src='${results[i].icon}' class='ba-item-${results[i].rarity.toLowerCase()}' width=50 height=50></div>
+            <div class='ba-search-img'><img src='${results[i].icon}' width=50 height=50></div>
             <div class='flex-fill d-flex flex-column'><div class='flex-fill d-flex flex-column justify-content-end'><div class='ba-search-name'>${results[i].name}</div></div>
             <div class='d-flex align-items-center mt-auto'>
             <span class='ba-search-subtitle flex-fill'>${results[i].type}</span>
-            <span class='ba-search-rarity'>${results[i].rarity_text}</span></div></div></div>`
+            <span class='ba-search-rarity'>${results[i].rarity}</span></div></div></div>`
         }
         $('#navbar-search-results').html(html)
         $('#ba-navbar-search').addClass('results-open')
@@ -2508,17 +2378,4 @@ function getLocalStringIfAvailable(obj, key) {
     else if (obj[key+'_ja']) return (obj[key+'_ja'])
     else if (obj[key+'_en']) return (obj[key+'_en'])
     else return ''
-}
-
-function getFavouriteItems(tags) {
-    let good = [], great = []
-    for (let i = 0; i < max_gifts; i++) {
-        let commonTags = find(data.items, "id", 5000+i)[0].tags.filter(val => tags.includes(val))
-        if (commonTags.length == 1) {
-            good.push(i)
-        } else if (commonTags.length > 1) {
-            great.push(i)
-        }  
-    }
-    return [great, good]
 }
