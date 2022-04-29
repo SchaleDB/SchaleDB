@@ -857,7 +857,7 @@ function loadStudent(studentName) {
             // $("#ba-profile-school-img-w").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
             $('#ba-profile-school-label').text(getLocalizedString('school_long',student.school.toLowerCase()))
             $('#ba-profile-club-label').text(getLocalizedString('club',student.club))
-            student[`year_${userLang}`] == null ? $('#ba-profile-schoolyear-label').hide() : $('#ba-profile-schoolyear-label').show()
+            student[`year_${userLang}`] == "" ? $('#ba-profile-schoolyear-label').hide() : $('#ba-profile-schoolyear-label').show()
             $('#ba-profile-schoolyear-label').text(student[`year_${userLang}`])
             $('#ba-profile-portrait-img').attr("src", `images/student/collection/${student.portrait_img}.webp`)
             var profileHtml = ''
