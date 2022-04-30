@@ -646,6 +646,16 @@ function searchOptionSet(option, value, runSearch = true) {
     }
 }
 
+function getNumActiveFilters() {
+    let num = 0
+    $.each(search_options.filter, function(i, v) {
+        $.each(v, function(j, w) {
+            if (w == true) num += 1
+        })
+    })
+    return num
+}
+
 function searchSetOrder(value, runSearch = true, swapDir = true) {
 
     if (swapDir) {
@@ -680,6 +690,8 @@ function searchSetOrder(value, runSearch = true, swapDir = true) {
 function searchSetFilter(prop, value, runSearch = true) {
     search_options["filter"][prop][value] = !search_options["filter"][prop][value]
     $(`#ba-student-search-filter-${prop}-${String(value).toLowerCase()}`).toggleClass("active", search_options["filter"][prop][value])
+    activeFilters = getNumActiveFilters()
+    $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
     if (runSearch) {
         updateStudentList()  
     }

@@ -140,93 +140,102 @@
     <div class="modal fade" id="modStudents" tabindex="-1">
         <div class="modal-dialog modal-xl modal-fullscreen-lg-down" style="transition: transform .15s ease-out;">
             <div class="modal-content">
-                <div class="modal-header d-lg-none" style="border-bottom: none;">
-                    <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters">Filters</button>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
                 <div class="modal-body">
                     <div id="ba-student-modal-page" class="d-lg-flex">
-                        <div id="ba-student-search-filters" class="collapse d-lg-block">
-                            <div class="mb-4">
-                                <input type="search" class="form-control" id="ba-student-search-text" placeholder="" autocomplete="off" oninput="updateStudentList()">
-                            </div>
-                            <div id="ba-student-search-sortby" class="mb-2">
-                                <h5 data-localize-id="ui,student_search_filter_sortby"></h5>
-                                <button id="ba-student-search-sortby-default" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrder('default')"><span data-localize-id="ui,student_search_filter_default"></span><span class="sort-direction-label"></span></button>
-                                <button id="ba-student-search-sortby-name" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrder('name')"><span data-localize-id="ui,student_search_filter_name"></span><span class="sort-direction-label"></span></button>
-                                <div class="dropdown d-inline">
-                                    <button id="ba-student-search-sortby-stat" class="btn btn-sm btn-dark dropdown-toggle btn-search-filter" type="button" data-bs-toggle="dropdown"><span data-localize-id="ui,student_search_filter_stat"></span></button>
-                                    <ul class="dropdown-menu dropdown-menu-dark">
-                                        <li><a id="ba-student-search-sortby-maxhp" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('maxhp')" class="btn btn-dark"><span data-localize-id="stat,maxhp"></span><span class="sort-direction-label"></span></a></li>
-                                        <li><a id="ba-student-search-sortby-attack" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('attack')" class="btn btn-dark"><span data-localize-id="stat,attack_power"></span><span class="sort-direction-label"></span></a></li>
-                                        <li><a id="ba-student-search-sortby-defense" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('defense')" class="btn btn-dark"><span data-localize-id="stat,defense_power"></span><span class="sort-direction-label"></span></a></li>
-                                        <li><a id="ba-student-search-sortby-healing" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('healing')" class="btn btn-dark"><span data-localize-id="stat,heal_power"></span><span class="sort-direction-label"></span></a></li>
-                                        <li><a id="ba-student-search-sortby-accuracy" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('accuracy')" class="btn btn-dark"><span data-localize-id="stat,accuracy"></span><span class="sort-direction-label"></span></a></li>
-                                        <li><a id="ba-student-search-sortby-evasion" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('evasion')" class="btn btn-dark"><span data-localize-id="stat,evasion"></span><span class="sort-direction-label"></span></a></li>
-                                        <li><a id="ba-student-search-sortby-crit" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('crit')" class="btn btn-dark"><span data-localize-id="stat,critical"></span><span class="sort-direction-label"></span></a></li>
-                                        <li><a id="ba-student-search-sortby-stability" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('stability')" class="btn btn-dark"><span data-localize-id="stat,stability"></span><span class="sort-direction-label"></span></a></li>
-                                        <li><a id="ba-student-search-sortby-range" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('range')" class="btn btn-dark"><span data-localize-id="stat,range"></span><span class="sort-direction-label"></span></a></li>
-                                    </ul>
+                        <div id="ba-student-search-filters" class="">
+                            <div class="mb-3 d-flex align-items-stretch">
+                                <div class="d-lg-none pe-2 flex-shrink-0">
+                                    <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters-panel"><i class="fa-solid fa-filter me-2"></i>Filters<span id="ba-student-search-filter-amount"></span></button>
                                 </div>
-                                
+                                <div class="flex-fill">
+                                    <input type="search" class="form-control h-100" id="ba-student-search-text" placeholder="" autocomplete="off" oninput="updateStudentList()">
+                                </div>
+                                <div class="d-lg-none ms-2 p-1" style="min-width:32px;">
+                                    <button type="button" class="btn-close btn-close-white btn" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 0.15rem;"></button>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <h5 data-localize-id="ui,student_search_filter_type"></h5>
-                                <button id="ba-student-search-filter-type-striker" class="btn btn-sm btn-dark btn-search-filter ba-col-striker text-bold text-italic" onclick="searchSetFilter('type','Striker')">STRIKER</button>
-                                <button id="ba-student-search-filter-type-special" class="btn btn-sm btn-dark btn-search-filter ba-col-special text-bold text-italic" onclick="searchSetFilter('type','Special')">SPECIAL</button>
-                            </div>
-                            <div class="mb-2">
-                                <h5 data-localize-id="ui,student_search_filter_role"></h5>
-                                <button id="ba-student-search-filter-role-tank" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','Tank')"><img class="ba-btn-img" src="images/ui/Role_Tank.png"><span class="ba-btn-label" data-localize-id="role,tank"></span></button>
-                                <button id="ba-student-search-filter-role-attacker" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','Attacker')"><img class="ba-btn-img" src="images/ui/Role_Attacker.png"><span class="ba-btn-label" data-localize-id="role,attacker"></span></button>
-                                <button id="ba-student-search-filter-role-healer" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','Healer')"><img class="ba-btn-img" src="images/ui/Role_Healer.png"><span class="ba-btn-label" data-localize-id="role,healer"></span></button>
-                                <button id="ba-student-search-filter-role-support" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','Support')"><img class="ba-btn-img" src="images/ui/Role_Support.png"><span class="ba-btn-label" data-localize-id="role,support"></span></button>
-                                <button id="ba-student-search-filter-role-tacticalsupport" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','TacticalSupport')"><img class="ba-btn-img" src="images/ui/Role_TacticalSupport.png"><span class="ba-btn-label" data-localize-id="role,tacticalsupport"></span></button>
-                            </div>
-                            <div class="mb-2">
-                                <h5 data-localize-id="ui,student_search_filter_rarity"></h5>
-                                <button id="ba-student-search-filter-stars-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('stars',3)"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></button>
-                                <button id="ba-student-search-filter-stars-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('stars',2)"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></button>
-                                <button id="ba-student-search-filter-stars-1" class="btn btn-sm btn-dark btn-search-filter me-2" onclick="searchSetFilter('stars',1)"><i class="fa-solid fa-star"></i></button>
-                                <button id="ba-student-search-filter-is_limited-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('is_limited',1)" data-localize-id="rarity,limited"></button>
-                                <button id="ba-student-search-filter-is_limited-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('is_limited',2)" data-localize-id="rarity,event"></button>
-                            </div>
-                            <div class="mb-2">
-                                <h5 data-localize-id="ui,student_search_filter_attacktype"></h5>
-                                <button id="ba-student-search-filter-attack_type-explosive" class="btn btn-sm btn-dark btn-search-filter ba-col-explosive text-bold" onclick="searchSetFilter('attack_type','Explosive')" data-localize-id="attack_type,explosive"></button>
-                                <button id="ba-student-search-filter-attack_type-piercing" class="btn btn-sm btn-dark btn-search-filter ba-col-piercing text-bold" onclick="searchSetFilter('attack_type','Piercing')" data-localize-id="attack_type,piercing"></button>
-                                <button id="ba-student-search-filter-attack_type-mystic" class="btn btn-sm btn-dark btn-search-filter ba-col-mystic text-bold" onclick="searchSetFilter('attack_type','Mystic')" data-localize-id="attack_type,mystic"></button>
-                            </div>
-                            <div class="mb-2">
-                                <h5 data-localize-id="ui,student_search_filter_defensetype"></h5>
-                                <button id="ba-student-search-filter-defense_type-light" class="btn btn-sm btn-dark btn-search-filter ba-col-explosive text-bold" onclick="searchSetFilter('defense_type','Light')" data-localize-id="defense_type,light"></button>
-                                <button id="ba-student-search-filter-defense_type-heavy" class="btn btn-sm btn-dark btn-search-filter ba-col-piercing text-bold" onclick="searchSetFilter('defense_type','Heavy')" data-localize-id="defense_type,heavy"></button>
-                                <button id="ba-student-search-filter-defense_type-special" class="btn btn-sm btn-dark btn-search-filter ba-col-mystic text-bold" onclick="searchSetFilter('defense_type','Special')" data-localize-id="defense_type,special"></button>
-                            </div>
-                            <div class="mb-2">
-                                <h5 data-localize-id="ui,student_search_filter_school"></h5>
-                                <button id="ba-student-search-filter-school-abydos" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Abydos')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_ABYDOS_W.png"><span style="margin-left: 22px" data-localize-id="school,abydos"></span></button>
-                                <button id="ba-student-search-filter-school-gehenna" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Gehenna')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_GEHENNA_W.png"><span style="margin-left: 22px" data-localize-id="school,gehenna"></span></button>
-                                <button id="ba-student-search-filter-school-hyakkiyako" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Hyakkiyako')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_HYAKKIYAKO_W.png"><span style="margin-left: 22px" data-localize-id="school,hyakkiyako"></span></button>
-                                <button id="ba-student-search-filter-school-millennium" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Millennium')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_MILLENNIUM_W.png"><span style="margin-left: 22px" data-localize-id="school,millennium"></span></button>
-                                <button id="ba-student-search-filter-school-redwinter" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','RedWinter')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_REDWINTER_W.png"><span style="margin-left: 22px" data-localize-id="school,redwinter"></span></button>
-                                <button id="ba-student-search-filter-school-shanhaijing" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Shanhaijing')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_SHANHAIJING_W.png"><span style="margin-left: 22px" data-localize-id="school,shanhaijing"></span></button>
-                                <button id="ba-student-search-filter-school-srt" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','SRT')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_SRT_W.png"><span style="margin-left: 22px" data-localize-id="school,srt"></span></button>
-                                <button id="ba-student-search-filter-school-trinity" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Trinity')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_TRINITY_W.png"><span style="margin-left: 22px" data-localize-id="school,trinity"></span></button>
-                                <button id="ba-student-search-filter-school-valkyrie" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Valkyrie')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_VALKYRIE_W.png"><span style="margin-left: 22px" data-localize-id="school,valkyrie"></span></button>
-                                <button id="ba-student-search-filter-school-etc" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','ETC')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_ETC_W.png"><span style="margin-left: 22px" data-localize-id="school,etc"></span></button>
-                            </div>
-                            <div class="mb-2">
-                                <h5 data-localize-id="ui,student_search_filter_weapon"></h5>
-                                <button id="ba-student-search-filter-weapon_type-sg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','SG')">SG</button>
-                                <button id="ba-student-search-filter-weapon_type-smg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','SMG')">SMG</button>
-                                <button id="ba-student-search-filter-weapon_type-ar" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','AR')">AR</button>
-                                <button id="ba-student-search-filter-weapon_type-gl" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','GL')">GL</button>
-                                <button id="ba-student-search-filter-weapon_type-hg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','HG')">HG</button>
-                                <button id="ba-student-search-filter-weapon_type-sr" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','SR')">SR</button>
-                                <button id="ba-student-search-filter-weapon_type-rg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','RG')">RG</button>
-                                <button id="ba-student-search-filter-weapon_type-mg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','MG')">MG</button>
-                                <button id="ba-student-search-filter-weapon_type-mt" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','MT')">MT</button>
+                            <!-- <div class="mb-2">
+                                <button id="ba-student-search-toggleinfo" class="btn btn-sm btn-dark btn-search-filter" onclick="searchToggleInfo()"><i class="fa-solid fa-eye me-2"></i>Type Info</button>
+                                <button id="ba-student-search-clearfilters" class="btn btn-sm btn-danger btn-search-filter" onclick="searchClearFilters()"><i class="fa-solid fa-trash me-2"></i>Reset Filters</button>
+                            </div> -->
+                            <div id="ba-student-search-filters-panel" class="collapse d-lg-block">
+                                <div id="ba-student-search-sortby" class="mb-2">
+                                    <h5 data-localize-id="ui,student_search_filter_sortby"></h5>
+                                    <button id="ba-student-search-sortby-default" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrder('default')"><span data-localize-id="ui,student_search_filter_default"></span><span class="sort-direction-label"></span></button>
+                                    <button id="ba-student-search-sortby-name" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrder('name')"><span data-localize-id="ui,student_search_filter_name"></span><span class="sort-direction-label"></span></button>
+                                    <div class="dropdown d-inline">
+                                        <button id="ba-student-search-sortby-stat" class="btn btn-sm btn-dark dropdown-toggle btn-search-filter" type="button" data-bs-toggle="dropdown"><span data-localize-id="ui,student_search_filter_stat"></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            <li><a id="ba-student-search-sortby-maxhp" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('maxhp')" class="btn btn-dark"><span data-localize-id="stat,maxhp"></span><span class="sort-direction-label"></span></a></li>
+                                            <li><a id="ba-student-search-sortby-attack" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('attack')" class="btn btn-dark"><span data-localize-id="stat,attack_power"></span><span class="sort-direction-label"></span></a></li>
+                                            <li><a id="ba-student-search-sortby-defense" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('defense')" class="btn btn-dark"><span data-localize-id="stat,defense_power"></span><span class="sort-direction-label"></span></a></li>
+                                            <li><a id="ba-student-search-sortby-healing" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('healing')" class="btn btn-dark"><span data-localize-id="stat,heal_power"></span><span class="sort-direction-label"></span></a></li>
+                                            <li><a id="ba-student-search-sortby-accuracy" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('accuracy')" class="btn btn-dark"><span data-localize-id="stat,accuracy"></span><span class="sort-direction-label"></span></a></li>
+                                            <li><a id="ba-student-search-sortby-evasion" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('evasion')" class="btn btn-dark"><span data-localize-id="stat,evasion"></span><span class="sort-direction-label"></span></a></li>
+                                            <li><a id="ba-student-search-sortby-crit" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('crit')" class="btn btn-dark"><span data-localize-id="stat,critical"></span><span class="sort-direction-label"></span></a></li>
+                                            <li><a id="ba-student-search-sortby-stability" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('stability')" class="btn btn-dark"><span data-localize-id="stat,stability"></span><span class="sort-direction-label"></span></a></li>
+                                            <li><a id="ba-student-search-sortby-range" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('range')" class="btn btn-dark"><span data-localize-id="stat,range"></span><span class="sort-direction-label"></span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="mb-2">
+                                    <h5 data-localize-id="ui,student_search_filter_type"></h5>
+                                    <button id="ba-student-search-filter-type-striker" class="btn btn-sm btn-dark btn-search-filter ba-col-striker text-bold text-italic" onclick="searchSetFilter('type','Striker')">STRIKER</button>
+                                    <button id="ba-student-search-filter-type-special" class="btn btn-sm btn-dark btn-search-filter ba-col-special text-bold text-italic" onclick="searchSetFilter('type','Special')">SPECIAL</button>
+                                </div>
+                                <div class="mb-2">
+                                    <h5 data-localize-id="ui,student_search_filter_role"></h5>
+                                    <button id="ba-student-search-filter-role-tank" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','Tank')"><img class="ba-btn-img" src="images/ui/Role_Tank.png"><span class="ba-btn-label" data-localize-id="role,tank"></span></button>
+                                    <button id="ba-student-search-filter-role-attacker" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','Attacker')"><img class="ba-btn-img" src="images/ui/Role_Attacker.png"><span class="ba-btn-label" data-localize-id="role,attacker"></span></button>
+                                    <button id="ba-student-search-filter-role-healer" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','Healer')"><img class="ba-btn-img" src="images/ui/Role_Healer.png"><span class="ba-btn-label" data-localize-id="role,healer"></span></button>
+                                    <button id="ba-student-search-filter-role-support" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','Support')"><img class="ba-btn-img" src="images/ui/Role_Support.png"><span class="ba-btn-label" data-localize-id="role,support"></span></button>
+                                    <button id="ba-student-search-filter-role-tacticalsupport" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('role','TacticalSupport')"><img class="ba-btn-img" src="images/ui/Role_TacticalSupport.png"><span class="ba-btn-label" data-localize-id="role,tacticalsupport"></span></button>
+                                </div>
+                                <div class="mb-2">
+                                    <h5 data-localize-id="ui,student_search_filter_rarity"></h5>
+                                    <button id="ba-student-search-filter-stars-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('stars',3)"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></button>
+                                    <button id="ba-student-search-filter-stars-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('stars',2)"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></button>
+                                    <button id="ba-student-search-filter-stars-1" class="btn btn-sm btn-dark btn-search-filter me-2" onclick="searchSetFilter('stars',1)"><i class="fa-solid fa-star"></i></button>
+                                    <button id="ba-student-search-filter-is_limited-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('is_limited',1)" data-localize-id="rarity,limited"></button>
+                                    <button id="ba-student-search-filter-is_limited-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('is_limited',2)" data-localize-id="rarity,event"></button>
+                                </div>
+                                <div class="mb-2">
+                                    <h5 data-localize-id="ui,student_search_filter_attacktype"></h5>
+                                    <button id="ba-student-search-filter-attack_type-explosive" class="btn btn-sm btn-dark btn-search-filter ba-col-explosive text-bold" onclick="searchSetFilter('attack_type','Explosive')" data-localize-id="attack_type,explosive"></button>
+                                    <button id="ba-student-search-filter-attack_type-piercing" class="btn btn-sm btn-dark btn-search-filter ba-col-piercing text-bold" onclick="searchSetFilter('attack_type','Piercing')" data-localize-id="attack_type,piercing"></button>
+                                    <button id="ba-student-search-filter-attack_type-mystic" class="btn btn-sm btn-dark btn-search-filter ba-col-mystic text-bold" onclick="searchSetFilter('attack_type','Mystic')" data-localize-id="attack_type,mystic"></button>
+                                </div>
+                                <div class="mb-2">
+                                    <h5 data-localize-id="ui,student_search_filter_defensetype"></h5>
+                                    <button id="ba-student-search-filter-defense_type-light" class="btn btn-sm btn-dark btn-search-filter ba-col-explosive text-bold" onclick="searchSetFilter('defense_type','Light')" data-localize-id="defense_type,light"></button>
+                                    <button id="ba-student-search-filter-defense_type-heavy" class="btn btn-sm btn-dark btn-search-filter ba-col-piercing text-bold" onclick="searchSetFilter('defense_type','Heavy')" data-localize-id="defense_type,heavy"></button>
+                                    <button id="ba-student-search-filter-defense_type-special" class="btn btn-sm btn-dark btn-search-filter ba-col-mystic text-bold" onclick="searchSetFilter('defense_type','Special')" data-localize-id="defense_type,special"></button>
+                                </div>
+                                <div class="mb-2">
+                                    <h5 data-localize-id="ui,student_search_filter_school"></h5>
+                                    <button id="ba-student-search-filter-school-abydos" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Abydos')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_ABYDOS_W.png"><span style="margin-left: 22px" data-localize-id="school,abydos"></span></button>
+                                    <button id="ba-student-search-filter-school-gehenna" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Gehenna')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_GEHENNA_W.png"><span style="margin-left: 22px" data-localize-id="school,gehenna"></span></button>
+                                    <button id="ba-student-search-filter-school-hyakkiyako" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Hyakkiyako')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_HYAKKIYAKO_W.png"><span style="margin-left: 22px" data-localize-id="school,hyakkiyako"></span></button>
+                                    <button id="ba-student-search-filter-school-millennium" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Millennium')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_MILLENNIUM_W.png"><span style="margin-left: 22px" data-localize-id="school,millennium"></span></button>
+                                    <button id="ba-student-search-filter-school-redwinter" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','RedWinter')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_REDWINTER_W.png"><span style="margin-left: 22px" data-localize-id="school,redwinter"></span></button>
+                                    <button id="ba-student-search-filter-school-shanhaijing" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Shanhaijing')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_SHANHAIJING_W.png"><span style="margin-left: 22px" data-localize-id="school,shanhaijing"></span></button>
+                                    <button id="ba-student-search-filter-school-srt" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','SRT')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_SRT_W.png"><span style="margin-left: 22px" data-localize-id="school,srt"></span></button>
+                                    <button id="ba-student-search-filter-school-trinity" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Trinity')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_TRINITY_W.png"><span style="margin-left: 22px" data-localize-id="school,trinity"></span></button>
+                                    <button id="ba-student-search-filter-school-valkyrie" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','Valkyrie')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_VALKYRIE_W.png"><span style="margin-left: 22px" data-localize-id="school,valkyrie"></span></button>
+                                    <button id="ba-student-search-filter-school-etc" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('school','ETC')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_ETC_W.png"><span style="margin-left: 22px" data-localize-id="school,etc"></span></button>
+                                </div>
+                                <div class="mb-2">
+                                    <h5 data-localize-id="ui,student_search_filter_weapon"></h5>
+                                    <button id="ba-student-search-filter-weapon_type-sg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','SG')">SG</button>
+                                    <button id="ba-student-search-filter-weapon_type-smg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','SMG')">SMG</button>
+                                    <button id="ba-student-search-filter-weapon_type-ar" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','AR')">AR</button>
+                                    <button id="ba-student-search-filter-weapon_type-gl" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','GL')">GL</button>
+                                    <button id="ba-student-search-filter-weapon_type-hg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','HG')">HG</button>
+                                    <button id="ba-student-search-filter-weapon_type-sr" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','SR')">SR</button>
+                                    <button id="ba-student-search-filter-weapon_type-rg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','RG')">RG</button>
+                                    <button id="ba-student-search-filter-weapon_type-mg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','MG')">MG</button>
+                                    <button id="ba-student-search-filter-weapon_type-mt" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','MT')">MT</button>
+                                </div>
                             </div>
                         </div>
                         <div id="ba-student-search-results" class="flex-fill">

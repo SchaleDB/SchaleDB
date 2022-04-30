@@ -817,6 +817,8 @@ h1 small {
     box-shadow: 0rem 0.2rem 0.75rem rgba(0,0,0,.15);
     border-radius: 10px;
     overflow: hidden;
+    width: var(--var-grid-card-width);
+    height: var(--var-grid-card-height);
 }
 
 .ba-student-card-portrait-img {
@@ -1342,6 +1344,7 @@ h1 small {
 @media(max-width: 991px) {
     
     .modal-body {
+        padding: 0;
         overflow-y: overlay !important;
     }
 
@@ -1363,9 +1366,9 @@ h1 small {
     }
 
     #ba-student-select-grid {
-        --var-grid-gap: 0.4rem !important;
-        --var-grid-card-width: 90px !important;
-        --var-grid-card-height: 102px !important;
+        --var-grid-gap: 0.5rem !important;
+        --var-grid-card-width: 80px !important;
+        --var-grid-card-height: 90px !important;
     }
 
     .ba-stage-select-grid {
@@ -1385,8 +1388,10 @@ h1 small {
     }
 
     #ba-student-modal-page {
-        height: auto;
-        flex-wrap: wrap;
+        height: 100%;
+        flex-wrap: nowrap;
+        display: flex;
+        flex-direction: column;
     }
 
     #ba-student-search-filters {
@@ -1395,13 +1400,18 @@ h1 small {
         scrollbar-color: rgba(155, 155, 155, 0.5);
         min-width: 336px;
         max-width: none;
-        padding: 0;
+        padding: 1rem 1rem 0 1rem;
         margin-right: 0;
+        flex: none;
     }
 
     #ba-student-search-results {
-        overflow-y: hidden;
-        padding: 0;
+        overflow-y: auto;
+        padding: 1rem;
+    }
+
+    #ba-info-statpreview-panel {
+        padding: 1rem;
     }
 }
 
