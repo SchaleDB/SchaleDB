@@ -49,7 +49,7 @@ const json_list = {
     tss_vehicles: "./data/tss_vehicles.json"
 }
 
-var loadedModule, student, studentList, loadedItem, loadedStage, loadedCraftNode, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy
+var loadedModule, student, studentList, loadedItem, loadedStage, loadedCraftNode, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
 var searchResultsCount = 0, searchResultsSelection = 0
 var studentSelectorModal, statPreviewModal, showVehicleStats = false
 var header
@@ -1120,8 +1120,8 @@ function loadCraft(id) {
 
 function loadRaid(raidName) {
     if (loadedModule == 'raids') {
-        raid = findOrDefault(data.raids,"name_dev",raidName,'Binah')[0]
         selectedEnemy = 0
+        raid = findOrDefault(data.raids,"name_dev",raidName,'Binah')[0]
         if (raid.released_insane[regionID]) {
             $('#ba-raid-difficulty-5').toggleClass('disabled', false)
         } else {
@@ -1135,8 +1135,6 @@ function loadRaid(raidName) {
     
         $('#ba-raid-affiliation').text(raid.affiliation)
         $('#ba-raid-name').text(raid['name_'+userLang])
-    
-        $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.name_dev}${raid_difficulty == 5 ? "_Insane" : ""}_Lobby.png')`)
         //$('#ba-raid-header-img').attr('src', `images/raid/Boss_Portrait_${raid.name_dev}${difficulty == 5 ? "_Insane" : ""}_Lobby.png`)
     
         $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.terrains[0]}.png`)
@@ -1146,41 +1144,10 @@ function loadRaid(raidName) {
             $('#ba-raid-terrain-alt-img').hide()
         }
 
-        var statsHtml = ''
-        var tabsHtml = ''
-        raid.enemies[raid_difficulty].forEach(function(el,i) {
-            let enemy = find(data.enemies,'id',el)[0]
-            tabsHtml += `<button class="nav-link ${i==0 ? "active" : ""}" data-bs-toggle="tab" href="#" onclick="changeRaidEnemy(${i})">${enemy['name_'+userLang]}</button>`
-        })
-        changeRaidEnemy(0)
-        $('#ba-raid-enemy-tabs').empty().html(tabsHtml)
-    
-        var skillsHTML = ''
-        raid.skills.forEach(function(el, i) {
-            if (raid_difficulty < el.min_difficulty) return
-            if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
-            skillsHTML += `
-            <div class="d-flex flex-row align-items-center mt-2">
-                <img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.icon}.png">
-                <div class="d-inline-block">
-                    <div>
-                        <h4 class="me-2 d-inline">${el.name_en}</h4>
-                    </div>
-                    <div class="mt-1">
-                        <p class="d-inline" style="font-style: italic;">${el.type} Skill</p>
-                    </div>
-                </div>
-            </div>
-            <p class="mt-1 mb-2 p-1">${getSkillText(el.description_en, el.parameters, raid_difficulty+1, 'raid')}</p>
-            `
-        })
-        $('#ba-raid-skills').empty().html(skillsHTML)
-        $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
-            $(el).tooltip({html: true})
-        })
-    
+        if (!raid.released_insane[regionID] && raid_difficulty == 5) {raid_difficulty = 0}
+        changeRaidDifficulty(raid_difficulty)
+
         var url = new URL(window.location.href)
-    
         if (url.searchParams.get("raid") !== raid.name_dev) {
             url.searchParams.forEach((v,k) => url.searchParams.delete(k))
             url.searchParams.set("raid", raid.name_dev)
@@ -1197,17 +1164,49 @@ function loadRaid(raidName) {
 
 function changeRaidDifficulty(difficultyId) {
     raid_difficulty = difficultyId
-    loadRaid(raid.name_dev)
+    let skillsHTML = '', tabsHtml = ''
+    $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.name_dev}${raid_difficulty == 5 ? "_Insane" : ""}_Lobby.png')`)
+    $('#ba-raid-level').text(`Lv.${raid_level[raid_difficulty]}`)
+    if (selectedEnemy >= raid.enemies[raid_difficulty].length) {selectedEnemy = 0}
+    raid.enemies[raid_difficulty].forEach(function(el,i) {
+        let enemy = find(data.enemies,'id',el)[0]
+        tabsHtml += `<button class="nav-link ${i==selectedEnemy ? "active" : ""}" data-bs-toggle="tab" href="#" onclick="changeRaidEnemy(${i})">${enemy['name_'+userLang]}</button>`
+    })
+    $('#ba-raid-enemy-tabs').empty().html(tabsHtml)
+    raid.skills.forEach(function(el, i) {
+        if (raid_difficulty < el.min_difficulty) return
+        if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
+        skillsHTML += `
+        <div class="d-flex flex-row align-items-center mt-2">
+            <img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.icon}.png">
+            <div class="d-inline-block">
+                <div>
+                    <h4 class="me-2 d-inline">${el.name_en}</h4>
+                </div>
+                <div class="mt-1">
+                    <p class="d-inline" style="font-style: italic;">${el.type} Skill</p>
+                </div>
+            </div>
+        </div>
+        <p class="mt-1 mb-2 p-1">${getSkillText(el.description_en, el.parameters, raid_difficulty+1, 'raid')}</p>
+        `
+    })
+    $('#ba-raid-skills').empty().html(skillsHTML)
+    $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+        $(el).tooltip({html: true})
+    })
+    
+    changeRaidEnemy(selectedEnemy)
 }
 
 function changeRaidEnemy(num) {
+    selectedEnemy = num
     let enemy = find(data.enemies,'id',raid.enemies[raid_difficulty][num])[0], grade = 1, level = raid_level[raid_difficulty]
     let levelscale = ((level-1)/99).toFixed(4)
-
     let maxHP = Math.ceil((Math.round((enemy.maxhp_1 + (enemy.maxhp_100-enemy.maxhp_1) * levelscale).toFixed(4)) * starscale_hp[grade-1]).toFixed(4))
     let attack = Math.ceil((Math.round((enemy.attack_power_1 + (enemy.attack_power_100-enemy.attack_power_1) * levelscale).toFixed(4)) * starscale_attack[grade-1]).toFixed(4))
     let defense = Math.round((enemy.defense_power_1 + (enemy.defense_power_100-enemy.defense_power_1) * levelscale).toFixed(4))
-    let healing = Math.ceil((Math.round((enemy.heal_power_1 + (enemy.heal_power_100-enemy.heal_power_1) * levelscale).toFixed(4)) * starscale_healing[grade-1]).toFixed(4))   
+    //let healing = Math.ceil((Math.round((enemy.heal_power_1 + (enemy.heal_power_100-enemy.heal_power_1) * levelscale).toFixed(4)) * starscale_healing[grade-1]).toFixed(4))   
     $('#ba-raid-stat-maxhp').text(maxHP.toLocaleString())
     $('#ba-raid-stat-attack').text(attack.toLocaleString())
     $('#ba-raid-stat-defense').text(defense.toLocaleString())
@@ -1712,7 +1711,7 @@ function getStageCardHTML(stage) {
 
 function getRaidCardHTML(raid, terrain='') {
     var html = `<div id="ba-raid-select-${raid["id"]}" class="ba-select-grid-item unselectable">
-    <div onclick="loadRaid('${raid["name_dev"]}')" class="ba-raid-card">
+    <div onclick="loadRaid('${raid["name_dev"]}');" class="ba-raid-card">
     <div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/raid/${raid['background_img']}.png');"></div></div>
     <div class="ba-raid-card-img"><img src="images/raid/${raid["portrait_img"]}.png"></div>
     <div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${raid['name_'+userLang] + ((terrain != '') ? ' ('+terrain+')' : '')}</span></div></div></div>`
