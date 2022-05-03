@@ -382,14 +382,24 @@ function loadModule(moduleName, entry=null) {
             loadRegion(regionID)
             var gachatext = "Character Banner\n", gachalistHtml = ""
             var currentTime = new Date().getTime()/1000, dateOptions = {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short"}
+            let found = false
             $.each(data.common.regions[regionID].current_gacha, function(i, el){
-                if (currentTime >= el.start && currentTime < el.end) {
+                if (currentTime >= el.start && currentTime < el.end && !found) {
                     for (let j = 0; j < el.characters.length; j++) {
                         var char = find(data.students, "id", el.characters[j])[0]
                         gachalistHtml += getStudentListCardHTML(char)
                     }
                     gachatext += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
                     gachatext += `<br>Ends in <b>${duration(el.end-currentTime)}</b>.`
+                    found = true
+                } else if (currentTime <= el.start && !found) {
+                    for (let j = 0; j < el.characters.length; j++) {
+                        var char = find(data.students, "id", el.characters[j])[0]
+                        gachalistHtml += getStudentListCardHTML(char)
+                    }
+                    gachatext += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
+                    gachatext += `<br>Starts in <b>${duration(el.end-currentTime)}</b>.`
+                    found = true
                 }
             })
         
@@ -398,13 +408,22 @@ function loadModule(moduleName, entry=null) {
 
             var raidText = "Total Assault\n", raidHtml = ""
             $('#ba-home-raid').hide()
+            found = false
             $.each(data.common.regions[regionID].current_raid, function(i, el){
-                if (currentTime >= el.start && currentTime < el.end) {
+                if (currentTime >= el.start && currentTime < el.end && !found) {
                     $('#ba-home-raid').show()
                     var raid = find(data.raids, "id", el.raid)[0]
                     raidHtml += getRaidCardHTML(raid, el.terrain)
                     raidText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
                     raidText += `<br>Ends in <b>${duration(el.end-currentTime)}</b>.`
+                    found = true
+                } else if (currentTime <= el.start && !found) {
+                    $('#ba-home-raid').show()
+                    var raid = find(data.raids, "id", el.raid)[0]
+                    raidHtml += getRaidCardHTML(raid, el.terrain)
+                    raidText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
+                    raidText += `<br>Starts in <b>${duration(el.start-currentTime)}</b>.`
+                    found = true
                 }
             })
 
@@ -1139,9 +1158,10 @@ function loadRaid(raidName) {
     
         $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.terrains[0]}.png`)
         if (raid.terrains.length > 1) {
-            $('#ba-raid-terrain-alt-img').attr('src', `images/ui/Terrain_${raid.terrains[1]}.png`).show()
+            $('#ba-raid-terrain-alt-img').attr('src', `images/ui/Terrain_${raid.terrains[1]}.png`)
+            $('#ba-raid-terrain-alt').show()
         } else {
-            $('#ba-raid-terrain-alt-img').hide()
+            $('#ba-raid-terrain-alt').hide()
         }
 
         if (!raid.released_insane[regionID] && raid_difficulty == 5) {raid_difficulty = 0}
@@ -1714,7 +1734,11 @@ function getRaidCardHTML(raid, terrain='') {
     <div onclick="loadRaid('${raid["name_dev"]}');" class="ba-raid-card">
     <div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/raid/${raid['background_img']}.png');"></div></div>
     <div class="ba-raid-card-img"><img src="images/raid/${raid["portrait_img"]}.png"></div>
-    <div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${raid['name_'+userLang] + ((terrain != '') ? ' ('+terrain+')' : '')}</span></div></div></div>`
+    <div class="ba-raid-card-def bg-def-${raid["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></div>`
+    if (terrain != '') {
+        html += `<div class="ba-raid-card-terrain"><img src="images/ui/Terrain_${terrain}.png"></div>`
+    }
+    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${raid['name_'+userLang]}</span></div></div></div>`
     return html
 }
 

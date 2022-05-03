@@ -132,6 +132,12 @@ body {
     filter: invert(var(--var-invert-dark)) grayscale(100%) brightness(200%);
 }
 
+a.text-emphasis {
+    color: var(--col-text-emphasis) !important;
+    font-weight: 700;
+    text-decoration: none;
+}
+
 p {
     white-space: pre-line;
 }
@@ -1993,6 +1999,39 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
     border-radius: 10px;
     overflow: hidden;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.ba-raid-card-terrain {
+    position: absolute;
+    color: #ffffff;
+    height: 28px;
+    width: 28px;
+    border-radius: 0.5rem;
+    right: 2px;
+    top: 2px;
+    z-index: 50;
+    background-color: var(--col-bg-imglabel);
+}
+
+.ba-raid-card-terrain img {
+    height: 100%;
+    width: 100%;
+    image-rendering: -webkit-optimize-contrast;
+}
+
+.ba-raid-card-def {
+    position: absolute;
+    height: 24px;
+    width: 24px;
+    border-radius: 999px;
+    left: 4px;
+    top: 4px;
+    padding: 4px;
+    z-index: 20;
+}
+
+.ba-raid-card-def img{
     image-rendering: -webkit-optimize-contrast;
 }
 
