@@ -132,7 +132,7 @@ body {
     filter: invert(var(--var-invert-dark)) grayscale(100%) brightness(200%);
 }
 
-a.text-emphasis {
+.text-emphasis {
     color: var(--col-text-emphasis) !important;
     font-weight: 700;
     text-decoration: none;
@@ -780,6 +780,14 @@ h1 small {
     cursor: pointer;
 }
 
+.ba-btn-img-noinvert {
+    height: 22px;
+    position: absolute;
+    left: 4px;
+    top: 3px;
+    image-rendering: -webkit-optimize-contrast;
+}
+
 .ba-btn-img {
     will-change: filter;
     height: 22px;
@@ -1325,14 +1333,17 @@ h1 small {
 }
 
 #ba-student-search-filters {
-    overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(155, 155, 155, 0.5);
-    min-width: 336px;
-    max-width: 336px;
+    min-width: 338px;
+    max-width: 338px;
     padding: 0.5rem;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
     font-size: 0;
+}
+
+#ba-student-search-filters-panel {
+    overflow-y: auto;
 }
 
 .btn-search-filter {
@@ -1410,6 +1421,10 @@ h1 small {
         padding: 1rem 1rem 0 1rem;
         margin-right: 0;
         flex: none;
+    }
+
+    #ba-student-search-filters-panel {
+        overflow-y: hidden;
     }
 
     #ba-student-search-results {
@@ -1877,7 +1892,7 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 .ba-search-img img {
     object-fit: cover;
     object-position: center;
-    image-rendering: -webkit-optimize-contrast;
+    /* image-rendering: -webkit-optimize-contrast; */
     border-radius: 999px;
 }
 
@@ -2111,7 +2126,7 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     filter: brightness(0.75);
 }
 
-.ba-enemy-card-atk, .ba-enemy-card-def, .ba-enemy-card-lv {
+.ba-enemy-card-atk, .ba-enemy-card-def, .ba-enemy-card-lv, .ba-stage-card-droprate {
     font-size: 0;
     position: absolute;
     height: 18px;
@@ -2123,7 +2138,7 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     z-index: 30;
 }
 
-.ba-enemy-card-lv {
+.ba-enemy-card-lv, .ba-stage-card-droprate {
     background-color: var(--col-bg-imglabel);
     color: var(--col-theme-text);
     width: auto;

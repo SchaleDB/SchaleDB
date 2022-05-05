@@ -142,7 +142,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <div id="ba-student-modal-page" class="d-lg-flex">
-                        <div id="ba-student-search-filters" class="">
+                        <div id="ba-student-search-filters" class="d-flex flex-column">
                             <div class="mb-3 d-flex align-items-stretch">
                                 <div class="d-lg-none pe-2 flex-shrink-0">
                                     <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters-panel"><i class="fa-solid fa-filter me-2"></i>Filters<span id="ba-student-search-filter-amount"></span></button>
@@ -235,6 +235,33 @@
                                     <button id="ba-student-search-filter-weapon_type-rg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','RG')">RG</button>
                                     <button id="ba-student-search-filter-weapon_type-mg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','MG')">MG</button>
                                     <button id="ba-student-search-filter-weapon_type-mt" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('weapon_type','MT')">MT</button>
+                                </div>
+                                <div class="mb-2">
+                                    <h5 data-localize-id="ui,student_search_filter_combat_power"></h5>
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <span class="me-2 mb-1"><img class="invert-light" src="images/ui/Terrain_urban.png" style="width: 31px; height: 31px;"></span>
+                                        <button id="ba-student-search-filter-urban_adaption-0" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('urban_adaption',0)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultD.png"><span style="margin-left: 22px">D</span></button>
+                                        <button id="ba-student-search-filter-urban_adaption-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('urban_adaption',1)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultC.png"><span style="margin-left: 22px">C</span></button>
+                                        <button id="ba-student-search-filter-urban_adaption-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('urban_adaption',2)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultB.png"><span style="margin-left: 22px">B</span></button>
+                                        <button id="ba-student-search-filter-urban_adaption-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('urban_adaption',3)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultA.png"><span style="margin-left: 22px">A</span></button>
+                                        <button id="ba-student-search-filter-urban_adaption-4" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('urban_adaption',4)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultS.png"><span style="margin-left: 22px">S</span></button>    
+                                    </div>
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <span class="me-2 mb-1"><img class="invert-light" src="images/ui/Terrain_outdoor.png" style="width: 31px; height: 31px;"></span>
+                                        <button id="ba-student-search-filter-outdoor_adaption-0" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('outdoor_adaption',0)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultD.png"><span style="margin-left: 22px">D</span></button>
+                                        <button id="ba-student-search-filter-outdoor_adaption-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('outdoor_adaption',1)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultC.png"><span style="margin-left: 22px">C</span></button>
+                                        <button id="ba-student-search-filter-outdoor_adaption-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('outdoor_adaption',2)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultB.png"><span style="margin-left: 22px">B</span></button>
+                                        <button id="ba-student-search-filter-outdoor_adaption-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('outdoor_adaption',3)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultA.png"><span style="margin-left: 22px">A</span></button>
+                                        <button id="ba-student-search-filter-outdoor_adaption-4" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('outdoor_adaption',4)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultS.png"><span style="margin-left: 22px">S</span></button>    
+                                    </div>
+                                    <div class="d-flex align-items-center flex-wrap">
+                                        <span class="me-2 mb-1"><img class="invert-light" src="images/ui/Terrain_indoor.png" style="width: 31px; height: 31px;"></span>
+                                        <button id="ba-student-search-filter-indoor_adaption-0" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('indoor_adaption',0)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultD.png"><span style="margin-left: 22px">D</span></button>
+                                        <button id="ba-student-search-filter-indoor_adaption-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('indoor_adaption',1)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultC.png"><span style="margin-left: 22px">C</span></button>
+                                        <button id="ba-student-search-filter-indoor_adaption-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('indoor_adaption',2)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultB.png"><span style="margin-left: 22px">B</span></button>
+                                        <button id="ba-student-search-filter-indoor_adaption-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('indoor_adaption',3)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultA.png"><span style="margin-left: 22px">A</span></button>
+                                        <button id="ba-student-search-filter-indoor_adaption-4" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('indoor_adaption',4)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultS.png"><span style="margin-left: 22px">S</span></button>    
+                                    </div>
                                 </div>
                             </div>
                         </div>

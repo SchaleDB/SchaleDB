@@ -116,6 +116,27 @@ var search_options = {
             1: false,
             2: false,
         },
+        "urban_adaption": {
+            0: false,
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+        },
+        "outdoor_adaption": {
+            0: false,
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+        },
+        "indoor_adaption": {
+            0: false,
+            1: false,
+            2: false,
+            3: false,
+            4: false,
+        }
     }
 }
 
@@ -380,6 +401,16 @@ function loadModule(moduleName, entry=null) {
         $("#loaded-module").load('home.html', function() {
             loadLanguage(userLang)
             loadRegion(regionID)
+
+            let changelogHtml = ""
+            $.each(data.common.changelog, function(i, el) {
+                changelogHtml += `<h5 class="text-emphasis">${el.date}</h5><ul>`
+                for (let j = 0; j < el.contents.length; j++) {
+                    changelogHtml += `<li>${el.contents[j]}</li>`
+                }
+                changelogHtml += '</ul>'
+            })
+            $("#ba-home-modal-changelog-content").html(changelogHtml)
             var gachatext = "Character Banner\n", gachalistHtml = ""
             var currentTime = new Date().getTime()/1000, dateOptions = {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short"}
             let found = false
@@ -426,7 +457,6 @@ function loadModule(moduleName, entry=null) {
                     found = true
                 }
             })
-
             $('#ba-home-raid-text').html(raidText)
             $('#ba-home-raid-list').html(raidHtml)
 
@@ -456,7 +486,6 @@ function loadModule(moduleName, entry=null) {
             }
             
             $('.ba-item-student').tooltip({html: true})
-            //
 
             $('#ba-home-server-info').text(`Current Events (${getLocalStringIfAvailable(data.common.regions[regionID], 'name')} Server)`)
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
@@ -855,7 +884,7 @@ function loadStudent(studentName) {
     
             $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.weapon_bonus_terrain}.png`)
             $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount]}.png`)
-            $('#ba-weapon-bonus-terrain-adaption-description').html(`${student.weapon_bonus_terrain.charAt(0).toUpperCase()+student.weapon_bonus_terrain.substr(1)} Combat Power ${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']]} → <b>${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount]}</b><br>(${getAdaptionText(student.weapon_bonus_terrain, terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount])})`)
+            $('#ba-weapon-bonus-terrain-adaption-description').html(`${getLocalizedString('terrain',student.weapon_bonus_terrain)} Combat Power ${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']]} → <b>${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount]}</b><br>(${getAdaptionText(student.weapon_bonus_terrain, terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount])})`)
     
             var url = new URL(window.location.href)
     
@@ -1147,10 +1176,9 @@ function loadRaid(raidName) {
             $('#ba-raid-difficulty-5').toggleClass('disabled', true)
             if (raid_difficulty == 5)  {
                 raid_difficulty = 0
-                $('#ba-raid-difficulty-5').toggleClass('active', false)
-                $('#ba-raid-difficulty-0').toggleClass('active', true)
             }
         }
+        $(`#ba-raid-difficulty-${raid_difficulty}`).tab('show')
     
         $('#ba-raid-affiliation').text(raid.affiliation)
         $('#ba-raid-name').text(raid['name_'+userLang])
@@ -1186,7 +1214,7 @@ function changeRaidDifficulty(difficultyId) {
     raid_difficulty = difficultyId
     let skillsHTML = '', tabsHtml = ''
     $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.name_dev}${raid_difficulty == 5 ? "_Insane" : ""}_Lobby.png')`)
-    $('#ba-raid-level').text(`Lv.${raid_level[raid_difficulty]}`)
+    $('#ba-raid-level').text(`Lv. ${raid_level[raid_difficulty]}`)
     if (selectedEnemy >= raid.enemies[raid_difficulty].length) {selectedEnemy = 0}
     raid.enemies[raid_difficulty].forEach(function(el,i) {
         let enemy = find(data.enemies,'id',el)[0]
@@ -1362,12 +1390,12 @@ function loadRegion(regID) {
 
     if (regionID == 1) {
         $('#ba-student-search-filter-school-srt').hide()
-        $('#ba-student-search-filter-school-others').hide()
+        $('#ba-student-search-filter-school-etc').hide()
     }
 }
 
 function getAdaptionText(terrain, rank) {
-    return `Deals <b>${terrain_dmg_bonus[rank]}&times;</b> damage in <b>${terrain}</b> terrain.\nBlock rate when taking cover <b>+${terrain_block_bonus[rank]}%</b>.\nChance to ignore block when attacking <b>+${terrain_block_bonus[rank]}%</b>.`
+    return `Deals <b>${terrain_dmg_bonus[rank]}&times;</b> damage in <b>${getLocalizedString('terrain',terrain).toLowerCase()}</b> terrain.\nBlock rate when taking cover <b>+${terrain_block_bonus[rank]}%</b>.\nChance to ignore block when attacking <b>+${terrain_block_bonus[rank]}%</b>.`
 }
 
 function getStatName(stat) {
@@ -1512,9 +1540,9 @@ function recalculateTerrainAffinity() {
     $("#ba-student-terrain-urban-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["urban"]] + ".png")
     $("#ba-student-terrain-outdoor-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["outdoor"]] + ".png")
     $("#ba-student-terrain-indoor-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["indoor"]] + ".png")
-    $('#ba-student-terrain-urban').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["urban"]] + ".png", 'Combat Power ' + terrain_adaption[adaption["urban"]], null, null, getAdaptionText('urban', terrain_adaption[adaption["urban"]]), 30), placement: 'top', html: true})
-    $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["outdoor"]] + ".png", 'Combat Power ' + terrain_adaption[adaption["outdoor"]], null, null, getAdaptionText('outdoor', terrain_adaption[adaption["outdoor"]]), 30), placement: 'top', html: true})
-    $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["indoor"]] + ".png", 'Combat Power ' + terrain_adaption[adaption["indoor"]], null, null, getAdaptionText('indoor', terrain_adaption[adaption["indoor"]]), 30), placement: 'top', html: true})
+    $('#ba-student-terrain-urban').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["urban"]] + ".png", getLocalizedString('ui', 'student_urban_adaption')+' '+terrain_adaption[adaption["urban"]], null, null, getAdaptionText('urban', terrain_adaption[adaption["urban"]]), 30), placement: 'top', html: true})
+    $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["outdoor"]] + ".png", getLocalizedString('ui', 'student_outdoor_adaption')+' '+terrain_adaption[adaption["outdoor"]], null, null, getAdaptionText('outdoor', terrain_adaption[adaption["outdoor"]]), 30), placement: 'top', html: true})
+    $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + terrain_adaption[adaption["indoor"]] + ".png", getLocalizedString('ui', 'student_indoor_adaption')+' '+terrain_adaption[adaption["indoor"]], null, null, getAdaptionText('indoor', terrain_adaption[adaption["indoor"]]), 30), placement: 'top', html: true})
 }
 
 function recalculateWeaponPreview() {
@@ -1713,11 +1741,14 @@ function getItemCardHTML(item, linkid, icontype) {
     return html
 }
 
-function getStageCardHTML(stage) {
+function getStageCardHTML(stage, dropChance = 0) {
     var html = `<div id="ba-stage-select-${stage["id"]}" class="ba-select-grid-item unselectable">
     <div onclick="loadStage('${stage["id"]}')" class="ba-stage-card">
-    <div class="ba-stage-card-img"><img loading="lazy" src="images/campaign/${stage["icon"]}.png"></div>
-    <div class="d-flex align-items-center ba-select-grid-card-label">`
+    <div class="ba-stage-card-img"><img loading="lazy" src="images/campaign/${stage["icon"]}.png"></div>`
+    if (dropChance > 0) {
+        html += `<span class="ba-stage-card-droprate">${getProbabilityText(dropChance)}</span>`
+    }
+    html += `<div class="d-flex align-items-center ba-select-grid-card-label">`
     if (stage.id >= 7000000) {
         html += `<span class="ba-label-text px-1 align-middle" style="width: 100%">${event_area[stage.area] + ' ' + stage.stage.toString().padStart(2,'0')}</span>`
     } else if (stage.id < 1000000) {
@@ -1736,7 +1767,7 @@ function getRaidCardHTML(raid, terrain='') {
     <div class="ba-raid-card-img"><img src="images/raid/${raid["portrait_img"]}.png"></div>
     <div class="ba-raid-card-def bg-def-${raid["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></div>`
     if (terrain != '') {
-        html += `<div class="ba-raid-card-terrain"><img src="images/ui/Terrain_${terrain}.png"></div>`
+        html += `<div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${terrain}.png"></div>`
     }
     html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${raid['name_'+userLang]}</span></div></div></div>`
     return html
@@ -1852,9 +1883,13 @@ function getDropIconHTML(id, chance) {
     }
     var html
     html = `<div class="drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${type}/${item.icon}.png`, getLocalStringIfAvailable(item,'name'), getLocalizedString('item_type',item.type), rarityText, getLocalStringIfAvailable(item,'desc'), 50, 'img-scale-larger')}">
-            <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/${type}/${item.icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${chance >= 1 ? '&times;'+abbreviateNumber(parseInt(chance).toFixed(0)).toLocaleString(): parseFloat((chance*100).toFixed(2)) + '&#37;'}</span></div>
+            <img class="ba-item-icon ba-item-${item.rarity.toLowerCase()}" src="images/${type}/${item.icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${getProbabilityText(chance)}</span></div>
             `
     return html
+}
+
+function getProbabilityText(chance) {
+    return chance >= 1 ? '&times;'+abbreviateNumber(parseInt(chance).toFixed(0)).toLocaleString(): parseFloat((chance*100).toFixed(2)) + '&#37;'
 }
 
 function getStudentIconSmall(student) {
@@ -2130,38 +2165,27 @@ function getLikedByStudents(item) {
 }
 
 function getItemDropStages(itemID) {
-    let html = ''
-    $.each(data.stages.missions, function(i,el){
-        if (!el.released[regionID])
-        return
-        let drop = false
-        for (let i = 0; i < el.drops.length; i++) {
-            if (itemID == el.drops[i][0]) {
-                drop = true
-                break
+    let html = '', stages = []
+    $.each([data.stages.missions, data.stages.schooldungeon], function(i, el1) {
+        $.each(el1, function(j, el2){
+            if (!el2.released[regionID])
+            return
+            let drop = false, dropChance = 0
+            for (let i = 0; i < el2.drops.length; i++) {
+                if (itemID == el2.drops[i][0]) {
+                    drop = true
+                    dropChance = el2.drops[i][1]
+                    break
+                }
             }
-        }
-        if (drop)
-        html += '<div class="m-1">' + getStageCardHTML(el) + '</div>'
+            if (drop) {
+                stages.push({'chance': dropChance, 'stage':el2})
+            }
+        })
     })
-    $.each(data.stages.schooldungeon, function(i,el){
-        if (!el.released[regionID])
-        return
-        let drop = false
-        for (let i = 0; i < el.rewards.length; i++) {
-            if (itemID == el.rewards[i][0]) {
-                drop = true
-                break
-            }
-        }
-        for (let i = 0; i < el.drops.length; i++) {
-            if (itemID == el.drops[i][0]) {
-                drop = true
-                break
-            }
-        }
-        if (drop)
-        html += '<div class="m-1">' + getStageCardHTML(el) + '</div>'
+    stages = stages.sort((a,b) => b.chance - a.chance)
+    $.each(stages, function(i,el){
+        html += '<div class="m-1">' + getStageCardHTML(el.stage, el.chance) + '</div>'
     })
     if (html != '') {
         $('#ba-item-sources').show()
