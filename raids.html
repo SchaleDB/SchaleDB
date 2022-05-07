@@ -1,21 +1,25 @@
-<div class="row">
-    <div class="col-12 col-md-6 ba-page">
-        <div class="px-0 px-xl-1">
-            <div id="ba-raid-list-container" class="card p-2 screen-height mobile-scroll">
-                <div class="card-header">
-                    <nav id="ba-raid-list-tabs" class="nav nav-pills mb-1 px-2">
-                        <a id="ba-raid-list-tab-raid" class="nav-link active" data-bs-toggle="tab" href="#ba-raid-list-raid" data-localize-id="mission_type,raid"></a>
-                        <a id="ba-raid-list-tab-timeattack" class="nav-link d-none" data-bs-toggle="tab" href="#ba-raid-list-timeattack" data-localize-id="mission_type,timeattack"></a>
-                    </nav>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content">
-                        <div id="ba-raid-list-raid" class="ba-item-list tab-pane active show">
-                            <div id="ba-raid-list-raid-grid" class="ba-raid-select-grid ba-select-grid align-top flex-fill p-2">
-                            </div>
+<div class="ba-selection-pane">
+    <div class="container-xl py-md-3">
+        <div class="row">
+            <div class="col-12 col-md-6 ba-page">
+                <div class="px-0 px-xl-1">
+                    <div id="ba-raid-list-container" class="card p-2 screen-height mobile-scroll">
+                        <div class="card-header">
+                            <nav id="ba-raid-list-tabs" class="nav nav-pills mb-1 px-2">
+                                <a id="ba-raid-list-tab-raid" class="nav-link active" data-bs-toggle="tab" href="#ba-raid-list-raid" data-localize-id="mission_type,raid"></a>
+                                <a id="ba-raid-list-tab-timeattack" class="nav-link d-none" data-bs-toggle="tab" href="#ba-raid-list-timeattack" data-localize-id="mission_type,timeattack"></a>
+                            </nav>
                         </div>
-                        <div id="ba-raid-list-timeattack" class="ba-item-list tab-pane">
-                            <div id="ba-raid-list-timeattack-grid" class="ba-raid-select-grid ba-select-grid align-top flex-fill p-2">
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div id="ba-raid-list-raid" class="ba-item-list tab-pane active show">
+                                    <div id="ba-raid-list-raid-grid" class="ba-raid-select-grid ba-select-grid align-top flex-fill p-2">
+                                    </div>
+                                </div>
+                                <div id="ba-raid-list-timeattack" class="ba-item-list tab-pane">
+                                    <div id="ba-raid-list-timeattack-grid" class="ba-raid-select-grid ba-select-grid align-top flex-fill p-2">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -23,127 +27,131 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-6 ba-page">
-        <div class="px-0 ps-xl-3" id="ba-raid-info">
-            <div class="card p-2 screen-height">
-                <div class="card-header">
-                    <div id="ba-raid-header" class="">
-                        <div class="pt-2">
-                            <h5 id="ba-raid-affiliation" class="px-1 mb-0"></h5>
-                            <h1 id="ba-raid-name" class="px-1 mb-2"></h1>
-                            <div class="d-flex align-items-center px-1">
-                                <span id="ba-raid-terrain" class="ba-panel me-2"><img id="ba-raid-terrain-img" class="ba-student-terrain-icon invert-light" src=""></span>
-                                <span id="ba-raid-terrain-alt" class="ba-panel me-2"><img id="ba-raid-terrain-alt-img" class="ba-student-terrain-icon invert-light" src=""></span>
-                                <span id="ba-raid-level" class="ba-student-info ba-panel text-bold my-0"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <nav id="ba-raid-difficulty" class="nav nav-pills nav-fill mt-3">
-                        <a id="ba-raid-difficulty-0" class="nav-link active" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(0)">Normal</a>
-                        <a id="ba-raid-difficulty-1" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(1)">Hard</a>
-                        <a id="ba-raid-difficulty-2" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(2)">VeryHard</a>
-                        <a id="ba-raid-difficulty-3" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(3)">Hardcore</a>
-                        <a id="ba-raid-difficulty-4" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(4)">Extreme</a>
-                        <a id="ba-raid-difficulty-5" class="nav-link disabled" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(5)">Insane</a>
-                    </nav>
-                </div>
-
-                <div class="card-body">                      
-                    <div id="ba-raid-page-stats" class="tab-pane fade show active" style="border-radius: 0 0 .25em .25em;">
-
-                        <div class="row g-1 mt-1">
-                            <div class="col">
-                                <nav id="ba-raid-enemy-tabs" class="nav nav-pills mb-2">
-                                </nav>
-                                <div class="d-flex py-2">
-                                    <span id="ba-raid-attacktype" class="ba-student-info"><img src="images/ui/Type_Attack.png"><span id="ba-raid-attacktype-label" style="margin-left: 18px; font-weight: 600;"></span></span>
-                                    <span id="ba-raid-defensetype" class="ba-student-info"><img src="images/ui/Type_Defense.png"><span id="ba-raid-defensetype-label" style="margin-left: 18px; font-weight: 600;"></span></span>            
-                                </div>
-                                <div id="ba-raid-enemy-stats" class="">
-                                    <table class="table ba-stats mb-2">
-                                        <tbody>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,maxhp"></span>
-                                                        <span id="ba-raid-stat-maxhp" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,attack_power"></span>
-                                                        <span id="ba-raid-stat-attack" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,defense_power"></span>
-                                                        <span id="ba-raid-stat-defense" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,dmg_resist"></span>
-                                                        <span id="ba-raid-stat-dmgresist" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,accuracy"></span>
-                                                        <span id="ba-raid-stat-accuracy" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,evasion"></span>
-                                                        <span id="ba-raid-stat-evasion" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,critical"></span>
-                                                        <span id="ba-raid-stat-crit" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,critical_resist"></span>
-                                                        <span id="ba-raid-stat-critresist" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,critical_damage"></span>
-                                                        <span id="ba-raid-stat-critdmg" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,critical_damage_resist"></span>
-                                                        <span id="ba-raid-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+</div>
+<div class="container-xl py-md-3">
+    <div class="row">
+        <div class="offset-md-6 col-12 col-md-6 ba-page">
+            <div class="px-0 ps-xl-3" id="ba-raid-info">
+                <div class="card p-2">
+                    <div class="card-header">
+                        <div id="ba-raid-header" class="">
+                            <div class="pt-2">
+                                <h5 id="ba-raid-affiliation" class="px-1 mb-0"></h5>
+                                <h1 id="ba-raid-name" class="px-1 mb-2"></h1>
+                                <div class="d-flex align-items-center px-1">
+                                    <span id="ba-raid-terrain" class="ba-panel me-2"><img id="ba-raid-terrain-img" class="ba-student-terrain-icon invert-light" src=""></span>
+                                    <span id="ba-raid-terrain-alt" class="ba-panel me-2"><img id="ba-raid-terrain-alt-img" class="ba-student-terrain-icon invert-light" src=""></span>
+                                    <span id="ba-raid-level" class="ba-student-info ba-panel text-bold my-0"></span>
                                 </div>
                             </div>
                         </div>
-
-                        <div id="ba-raid-skills" class="mt-1 px-2 d-flex flex-column ba-panel align-items-start">
-                        </div>
-
+                        <nav id="ba-raid-difficulty" class="nav nav-pills nav-fill mt-3">
+                            <a id="ba-raid-difficulty-0" class="nav-link active" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(0)">Normal</a>
+                            <a id="ba-raid-difficulty-1" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(1)">Hard</a>
+                            <a id="ba-raid-difficulty-2" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(2)">VeryHard</a>
+                            <a id="ba-raid-difficulty-3" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(3)">Hardcore</a>
+                            <a id="ba-raid-difficulty-4" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(4)">Extreme</a>
+                            <a id="ba-raid-difficulty-5" class="nav-link disabled" data-bs-toggle="tab" href="#" onclick="changeRaidDifficulty(5)">Insane</a>
+                        </nav>
                     </div>
+    
+                    <div class="card-body">                      
+                        <div id="ba-raid-page-stats" class="tab-pane fade show active" style="border-radius: 0 0 .25em .25em;">
+    
+                            <div class="row g-1 mt-1">
+                                <div class="col">
+                                    <nav id="ba-raid-enemy-tabs" class="nav nav-pills mb-2">
+                                    </nav>
+                                    <div class="d-flex py-2">
+                                        <span id="ba-raid-attacktype" class="ba-student-info"><img src="images/ui/Type_Attack.png"><span id="ba-raid-attacktype-label" style="margin-left: 18px; font-weight: 600;"></span></span>
+                                        <span id="ba-raid-defensetype" class="ba-student-info"><img src="images/ui/Type_Defense.png"><span id="ba-raid-defensetype-label" style="margin-left: 18px; font-weight: 600;"></span></span>            
+                                    </div>
+                                    <div id="ba-raid-enemy-stats" class="">
+                                        <table class="table ba-stats mb-2">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,maxhp"></span>
+                                                            <span id="ba-raid-stat-maxhp" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,attack_power"></span>
+                                                            <span id="ba-raid-stat-attack" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,defense_power"></span>
+                                                            <span id="ba-raid-stat-defense" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,dmg_resist"></span>
+                                                            <span id="ba-raid-stat-dmgresist" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,accuracy"></span>
+                                                            <span id="ba-raid-stat-accuracy" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,evasion"></span>
+                                                            <span id="ba-raid-stat-evasion" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,critical"></span>
+                                                            <span id="ba-raid-stat-crit" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,critical_resist"></span>
+                                                            <span id="ba-raid-stat-critresist" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,critical_damage"></span>
+                                                            <span id="ba-raid-stat-critdmg" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,critical_damage_resist"></span>
+                                                            <span id="ba-raid-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div id="ba-raid-skills" class="mt-1 px-2 d-flex flex-column ba-panel align-items-start">
+                            </div>
+    
+                        </div>
+                    </div>
+    
                 </div>
-
             </div>
         </div>
     </div>

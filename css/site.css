@@ -1,6 +1,7 @@
 :root {
     /* Colors */
     --col-theme-glass: rgba(222, 226, 230, 0.6);
+    --col-theme-glass-navbar: rgba(222, 226, 230, 0.7);
     --col-theme-glass-modal: rgba(255, 255, 255, 0.7);
     --col-theme-accent: rgba(255, 255, 255, 0.3);
     --col-theme-text: rgb(0, 0, 0);
@@ -53,7 +54,8 @@
     --col-bg-imglabel: rgba(255, 255, 255, 0.855);
     
     --var-background-brightness: 1;
-    --var-glass-filter: blur(4em);
+    --var-glass-filter: blur(4rem);
+    --var-glass-filter-navbar: blur(1rem);
     --var-opacity-lightonly: 100%;
     --var-opacity-darkonly: 0%;
     --var-invert-light: 1;
@@ -64,7 +66,8 @@
 }
 
 .theme-dark {
-    --col-theme-glass: rgba(33, 37, 41, 0.478);
+    --col-theme-glass: rgba(33, 37, 41, 0.578);
+    --col-theme-glass-navbar: rgba(33, 37, 41, 0.578);
     --col-theme-glass-modal: rgba(33, 37, 41, 0.478);
     --col-theme-accent: rgba(0, 0, 0, 0.25);
     --col-theme-text: rgb(255, 255, 255);
@@ -109,12 +112,14 @@
 
 .high-contrast {
     --col-theme-glass: rgb(222, 226, 230);
+    --col-theme-glass-navbar: rgb(222, 226, 230);
     --col-theme-glass-modal: rgb(222, 226, 230);
     /*--var-glass-filter: none;*/
 }
 
 .high-contrast.theme-dark {
     --col-theme-glass: rgb(33, 37, 41);
+    --col-theme-glass-navbar: rgb(33, 37, 41);
     --col-theme-glass-modal: rgb(33, 37, 41);
 }
 
@@ -125,7 +130,7 @@
 body {
     background-color: var(--col-theme-background);
     font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
-    overflow-y: hidden;
+    overflow: hidden scroll;
 }
 
 .btn-close {
@@ -146,21 +151,6 @@ p b, p strong {
     font-weight: 700;
 }
 
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: var(--col-panel-separator);
-    background-clip: padding-box;
-    border-radius: 99px;
-    border: solid 2px transparent;
-}
-
 ::-webkit-slider-thumb {
     background-color: var(--col-theme-text) !important;
 }
@@ -177,6 +167,12 @@ p b, p strong {
     background-color: var(--col-theme-accent) !important;
 }
 
+.ba-selection-pane {
+    width: calc(100vw - 10px);
+    position: fixed;
+    pointer-events: none;
+}
+
 .card {
     backdrop-filter: var(--var-glass-filter);
     background-color: var(--col-theme-glass);
@@ -184,6 +180,7 @@ p b, p strong {
     color: var(--col-theme-text);
     border: none;
     transition-duration: var(--var-animation-duration);
+    pointer-events: auto;
 }
 
 .screen-height {
@@ -339,6 +336,21 @@ input[type="search" i]::-webkit-search-cancel-button {
     box-shadow: none;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--col-panel-separator);
+    background-clip: padding-box;
+    border-radius: 99px;
+    border: solid 2px transparent;
+}
+
 @media(min-width: 992px) {
     .modal-dialog {
         margin: 1.5rem auto;
@@ -396,10 +408,10 @@ input[type="search" i]::-webkit-search-cancel-button {
 .navbar-dark {
     will-change: transform;
     transform: translateZ(0);
-    backdrop-filter: var(--var-glass-filter);
-    background-color: var(--col-theme-glass) !important;
+    backdrop-filter: var(--var-glass-filter-navbar);
+    background-color: var(--col-theme-glass-navbar) !important;
     color: var(--col-theme-text);
-    transition-duration: var(--var-animation-duration);
+    transition: background-color var(--var-animation-duration) ease, backdrop-filter var(--var-animation-duration) ease;
 }
 
 .navbar-dark .navbar-brand, .navbar-dark .navbar-nav .nav-link {
@@ -451,6 +463,12 @@ input[type="search" i]::-webkit-search-cancel-button {
     filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
 }
 
+#ba-content {
+    width: 100%;
+    position: relative;
+    top: 56px !important;
+}
+
 #ba-student-name, #ba-raid-name, #ba-item-name, #ba-stage-title, #ba-craft-name, #ba-stage-enemy-name {
     font-family: 'Oswald', 'Noto Sans JP', sans-serif;
     text-transform: uppercase;
@@ -498,6 +516,21 @@ input[type="search" i]::-webkit-search-cancel-button {
     width: 100vw;
     height: 100vh;
     z-index: -1000;
+    filter: blur(0.75rem) brightness(var(--var-background-brightness));
+    transform: scale(1.05);
+    transition: background-image var(--var-animation-duration) ease-in-out 0s;
+}
+
+#ba-navbar-background {
+    position: absolute;
+    top: 0;
+    background: #000 no-repeat center center;
+    width: 100vw;
+    height: 100vh;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     filter: blur(0.75rem) brightness(var(--var-background-brightness));
     transform: scale(1.05);
     transition: background-image var(--var-animation-duration) ease-in-out 0s;
@@ -1220,7 +1253,7 @@ h1 small {
     order: 4;
 }
 
-@media(min-width: 1400px) {
+@media(min-width: 1100px) {
     #ba-student-gear {
         order: 2;
     }
@@ -1241,20 +1274,13 @@ h1 small {
 
 #ba-student-img {
     image-rendering: -webkit-optimize-contrast;
+    will-change: transform;
+    transform: translate(0);
     position: fixed;
-    margin-top: auto;
-    height: calc(100vh - 59px - 3rem);
-    width: 100vw;
+    margin-top: 0.5rem;
+    height: calc(100vh - 56px - 3rem);
     background: transparent no-repeat center top/contain;
-}
-
-#ba-student-img-sm {
-    image-rendering: -webkit-optimize-contrast;
-    position: fixed;
-    height: 450px;
-    width: 1000px;
-    top: 64px;
-    background: transparent no-repeat center top/contain;
+    pointer-events: none;
 }
 
 #ba-student-weapon-img {
@@ -1361,6 +1387,16 @@ h1 small {
 
 @media(max-width: 991px) {
     
+    #ba-navbar-content.collapse.show, #ba-navbar-content.collapsing {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #navbar-search, #ba-navbar-search, #navbar-search-results {
+        width: 100% !important;
+    }
+
     .modal-body {
         padding: 0;
         overflow-y: overlay !important;
@@ -1428,7 +1464,7 @@ h1 small {
     }
 
     #ba-student-search-results {
-        overflow-y: auto;
+        overflow-y: overlay;
         padding: 1rem;
     }
 
@@ -1437,7 +1473,17 @@ h1 small {
     }
 }
 
-@media(max-width: 768px) {
+@media(max-width: 767px) {
+
+    /* body {
+        overflow-y: overlay;
+    } */
+
+    .ba-selection-pane {
+        width: auto;
+        position: relative;
+        pointer-events: auto;
+    }
 
     .screen-height.mobile-scroll {
         max-height: calc((100vh - 74px) * 0.75);
@@ -1448,19 +1494,10 @@ h1 small {
         overflow: hidden;
     }
 
-    #navbar-search, #ba-navbar-search, #navbar-search-results {
-        width: 100% !important;
-    }
-
-    #ba-navbar-content.collapse.show, #ba-navbar-content.collapsing {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    body {
-        font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
-        overflow-y: auto;
+    #ba-student-img {
+        height: 450px;
+        top: 64px;
+        margin-top: 0;
     }
 
     .ba-page {

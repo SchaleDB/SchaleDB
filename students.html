@@ -1,604 +1,602 @@
-<div class="row">
-    <div class="col-12 col-md-6">
-        <div class="d-none d-md-flex" style="justify-content: center;">
-            <div id="ba-student-img"></div>
-        </div>
-        <div class="d-flex d-md-none mb-2" style="justify-content: center;">
-            <div id="ba-student-img-sm"></div>
-        </div>
-        <div class="container px-0" style="position: fixed;">
-            <div class="row">
-                <div class="col">
-                    <button id="ba-student-list-btn" type="button" class="btn btn-dark" onclick="studentSelectorModal.show()" style="display:none;"><i class="fa-solid fa-bars"></i><span class="d-inline ms-2" data-localize-id="ui,student_search_list"></span></button>
-                </div>
+<div class="container-xl py-md-3">
+    <div class="row">
+        <div class="col-12 col-md-6 ba-page">
+            <div class="d-flex" style="justify-content: center;">
+                <img id="ba-student-img">
             </div>
+            <!-- <div class="d-flex d-md-none mb-2" style="justify-content: center;">
+                <div id="ba-student-img-sm"></div>
+            </div> -->
+            <div class="px-0" style="position: fixed;">
+                <button id="ba-student-list-btn" type="button" class="btn btn-dark" onclick="studentSelectorModal.show()" style="display:none;"><i class="fa-solid fa-bars"></i><span class="d-inline ms-2" data-localize-id="ui,student_search_list"></span></button>
+            </div>
+            <div class="d-block d-md-none" style="height: 450px;"></div>
         </div>
-        <div class="d-block d-md-none" style="height: 450px;"></div>
-    </div>
-    <div id="ba-student" class="col-12 col-md-6 ba-page" style="display:none;">
-        <div class="px-0 ps-xl-4">
-            <div class="card p-2 screen-height">
-                <div class="card-header">
-                    <div class="d-flex flex-row align-items-top pt-2 pb-3">
-                        <div class="flex-grow-1 me-2">
-                            <h1 id="ba-student-name" class="px-1 mb-3"></h1>
-                            <div class="d-flex flex-row flex-wrap">
-                                <span id="ba-student-limited" class="ba-student-info-s ba-panel"></span>
-                                <span id="ba-student-class" class="ba-student-info-s"></span>
+        <div id="ba-student" class="col-12 col-md-6 ba-page" style="display:none;">
+            <div class="px-0 ps-xl-3">
+                <div class="card p-2">
+                    <div class="card-header">
+                        <div class="d-flex flex-row align-items-top pt-2 pb-3">
+                            <div class="flex-grow-1 me-2">
+                                <h1 id="ba-student-name" class="px-1 mb-3"></h1>
+                                <div class="d-flex flex-row flex-wrap">
+                                    <span id="ba-student-limited" class="ba-student-info-s ba-panel"></span>
+                                    <span id="ba-student-class" class="ba-student-info-s"></span>
+                                </div>
+                            </div>
+                            <div id="ba-student-school">
+                                <img id="ba-student-school-img" class="invert-light" src="">
                             </div>
                         </div>
-                        <div id="ba-student-school">
-                            <img id="ba-student-school-img" class="invert-light" src="">
-                        </div>
+                        <ul class="nav nav-pills justify-content-left">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-bs-toggle="tab" href="#ba-student-page-stats" data-localize-id="ui,student_page_stats"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-skills" data-localize-id="ui,student_page_skills"></a>
+                            </li>
+                            <li class="nav-item" id="ba-student-nav-weapon">
+                                <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-weapon" data-localize-id="ui,student_page_weapon"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-profile" data-localize-id="ui,student_page_profile"></a>
+                            </li>
+                        </ul>
                     </div>
-                    <ul class="nav nav-pills justify-content-left">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-bs-toggle="tab" href="#ba-student-page-stats" data-localize-id="ui,student_page_stats"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-skills" data-localize-id="ui,student_page_skills"></a>
-                        </li>
-                        <li class="nav-item" id="ba-student-nav-weapon">
-                            <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-weapon" data-localize-id="ui,student_page_weapon"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-bs-toggle="tab" href="#ba-student-page-profile" data-localize-id="ui,student_page_profile"></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content">
-                        <div id="ba-student-page-stats" class="tab-pane fade show active" style="border-radius: .25em;">
-                            <div class="d-flex flex-row flex-wrap align-items-center mb-1">
-                                <span id="ba-student-role" class="ba-student-info ba-panel" style="position: relative;"><img id="ba-student-role-icon" class="invert-light" src="" style="height:22px;"><span id="ba-student-role-label" style="margin-left: 18px;"></span></span>
-                                <span id="ba-student-attacktype" class="ba-student-info"><img src="images/ui/Type_Attack.png"><span id="ba-student-attacktype-label" style="margin-left: 18px; font-weight: 600;"></span></span>
-                                <span id="ba-student-defensetype" class="ba-student-info"><img src="images/ui/Type_Defense.png"><span id="ba-student-defensetype-label" style="margin-left: 18px; font-weight: 600;"></span></span>                                    
-                                <span id="ba-student-position" class="ba-student-info"></span>
-                            </div>
-                            <div class="d-flex flex-row align-items-stretch flex-wrap justify-content-between">
-                                <div id="ba-student-weapon" class="ba-type-weapon ba-panel d-inline-block align-text-top me-1 mb-2">
-                                    <img id="ba-student-usescover-icon" src="images/ui/Combat_Icon_Cover_Ally.png" style="height: 24px; width:auto; margin-top: -4px;">
-                                    <p id="ba-student-weapontype-label" class="d-inline-block" style="font-weight: 600; font-style: italic; font-size: large;"></p>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div id="ba-student-page-stats" class="tab-pane fade show active" style="border-radius: .25em;">
+                                <div class="d-flex flex-row flex-wrap align-items-center mb-1">
+                                    <span id="ba-student-role" class="ba-student-info ba-panel" style="position: relative;"><img id="ba-student-role-icon" class="invert-light" src="" style="height:22px;"><span id="ba-student-role-label" style="margin-left: 18px;"></span></span>
+                                    <span id="ba-student-attacktype" class="ba-student-info"><img src="images/ui/Type_Attack.png"><span id="ba-student-attacktype-label" style="margin-left: 18px; font-weight: 600;"></span></span>
+                                    <span id="ba-student-defensetype" class="ba-student-info"><img src="images/ui/Type_Defense.png"><span id="ba-student-defensetype-label" style="margin-left: 18px; font-weight: 600;"></span></span>                                    
+                                    <span id="ba-student-position" class="ba-student-info"></span>
                                 </div>
-                                <div id="ba-student-gear" class="flex-fill ba-panel mb-2">
-                                    <div class="d-flex align-items-center justify-content-evenly" style="height: 78px;">
-                                        <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-1" class="ba-gear-icon" src=""></div>
-                                        <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-2" class="ba-gear-icon" src=""></div>
-                                        <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-3" class="ba-gear-icon" src=""></div>
+                                <div class="d-flex flex-row align-items-stretch flex-wrap justify-content-between">
+                                    <div id="ba-student-weapon" class="ba-type-weapon ba-panel d-inline-block align-text-top me-1 mb-2">
+                                        <img id="ba-student-usescover-icon" src="images/ui/Combat_Icon_Cover_Ally.png" style="height: 24px; width:auto; margin-top: -4px;">
+                                        <p id="ba-student-weapontype-label" class="d-inline-block" style="font-weight: 600; font-style: italic; font-size: large;"></p>
                                     </div>
-                                </div>
-                                <div id="ba-student-terrain" class="mb-2 ms-1" style="min-width: fit-content;">
-                                    <div id="ba-student-terrain-urban" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_urban.png"></span><br><img id="ba-student-terrain-urban-icon" class="ba-student-affinity-icon" src=""></div>
-                                    <div id="ba-student-terrain-outdoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_outdoor.png"></span><br><img id="ba-student-terrain-outdoor-icon" class="ba-student-affinity-icon" src=""></div>
-                                    <div id="ba-student-terrain-indoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_indoor.png"></span><br><img id="ba-student-terrain-indoor-icon" class="ba-student-affinity-icon" src=""></div>
-                                </div>
-                            </div>
-
-                            <div class="d-flex flex-row align-items-end">
-                                <span class="flex-grow-1">
-                                    <!-- <h5 class="d-inline text-bold">Student Stats</h5> -->
-                                    <nav id="ba-student-vehicle" class="nav nav-pills mt-1">
-                                        <button id="ba-student-vehicle-0" class="nav-link active" onclick="changeStudentVehicle(0)"></a>
-                                        <button id="ba-student-vehicle-1" class="nav-link" onclick="changeStudentVehicle(1)"></a>
-                                    </nav>   
-                                </span>
-                            </div>
-
-                            <div class="row g-1 mt-1">
-                                <div class="col">
-                                    <table id="ba-student-stat-table" class="table ba-stats mb-0">
-                                        <tbody>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,maxhp"></span>
-                                                        <span id="ba-student-stat-maxhp" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,attack_power"></span>
-                                                        <span id="ba-student-stat-attack" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,defense_power"></span>
-                                                        <span id="ba-student-stat-defense" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,heal_power"></span>
-                                                        <span id="ba-student-stat-healing" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,accuracy"></span>
-                                                        <span id="ba-student-stat-accuracy" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,evasion"></span>
-                                                        <span id="ba-student-stat-evasion" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,critical"></span>
-                                                        <span id="ba-student-stat-crit" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,critical_resist"></span>
-                                                        <span id="ba-student-stat-critresist" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,critical_damage"></span>
-                                                        <span id="ba-student-stat-critdmg" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,critical_damage_resist"></span>
-                                                        <span id="ba-student-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,stability"></span>
-                                                        <span id="ba-student-stat-stability" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,range"></span>
-                                                        <span id="ba-student-stat-range" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,cc_power"></span>
-                                                        <span id="ba-student-stat-ccpower" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,cc_resist"></span>
-                                                        <span id="ba-student-stat-ccresist" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,healing_received"></span>
-                                                        <span id="ba-student-stat-recoveryrate" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span data-localize-id="stat,ammo"></span>
-                                                        <span id="ba-student-stat-ammo" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <div class="row g-1 mt-3">
-                                <div class="d-flex flex-row align-items-center">
-                                    <input id="ba-statpreview-levelrange" oninput="changeStatPreviewLevel(this)" type="range" class="form-range me-2 flex-fill" value="1" min="1" max="100">
-                                    <span id="ba-statpreview-level" class="ba-slider-label"></span>
-                                </div>
-                            </div>
-
-                            <div class="row g-1 mt-2">
-                                <div class="d-flex flex-row align-items-center">
-                                    <div class="flex-fill">
-                                        <div class="d-flex flex-row flex-wrap align-items-stretch">
-                                            <div class="flex-fill d-flex flex-row align-items-stretch">
-                                                <div class="d-inline-block ba-panel px-2 mb-2 me-2 d-flex align-items-center" style="font-size: 0px; min-width: 70px; min-height: 31px; border-radius: 0.2rem;">
-                                                    <span id="ba-statpreview-star-1" class="ba-statpreview-star" onclick="changeStatPreviewStars(1,0)"><i class="fa-solid fa-star"></i></span>
-                                                    <span id="ba-statpreview-star-2" class="ba-statpreview-star" onclick="changeStatPreviewStars(2,0)"><i class="fa-solid fa-star"></i></span>
-                                                    <span id="ba-statpreview-star-3" class="ba-statpreview-star" onclick="changeStatPreviewStars(3,0)"><i class="fa-solid fa-star"></i></span>
-                                                    <span id="ba-statpreview-star-4" class="ba-statpreview-star" onclick="changeStatPreviewStars(4,0)"><i class="fa-solid fa-star"></i></span>
-                                                    <span id="ba-statpreview-star-5" class="ba-statpreview-star" onclick="changeStatPreviewStars(5,0)"><i class="fa-solid fa-star"></i></span>
-                                                    <span id="ba-weaponpreview-star-1" class="ba-weaponpreview-star ms-2" onclick="changeStatPreviewStars(5,1)"><i class="fa-solid fa-star"></i></span>
-                                                    <span id="ba-weaponpreview-star-2" class="ba-weaponpreview-star" onclick="changeStatPreviewStars(5,2)"><i class="fa-solid fa-star"></i></span>
-                                                    <span id="ba-weaponpreview-star-3" class="ba-weaponpreview-star" onclick="changeStatPreviewStars(5,3)"><i class="fa-solid fa-star"></i></span>
-                                                </div>
-                                            </div>
-                                            <div class="">
-                                                <button id="ba-statpreview-strikerbonus" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');toggleStrikerBonus(this)" data-localize-id="ui,student_strikerbonus"></button>
-                                                <button id="ba-statpreview-includegear" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');updateGearIcon();recalculateStatPreview()" data-localize-id="ui,student_gear_short"></button>
-                                                <button id="ba-statpreview-includebond" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');recalculateStatPreview()" data-localize-id="ui,student_bond_short"></button>
-                                                <button class="btn btn-sm btn-dark mb-2" type="button" onclick="statPreviewModal.show()"><i class="fa-solid fa-sliders"></i></button>
-                                            </div>
+                                    <div id="ba-student-gear" class="flex-fill ba-panel mb-2">
+                                        <div class="d-flex align-items-center justify-content-evenly" style="height: 78px;">
+                                            <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-1" class="ba-gear-icon" src=""></div>
+                                            <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-2" class="ba-gear-icon" src=""></div>
+                                            <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-3" class="ba-gear-icon" src=""></div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div id="ba-student-page-skills" class="tab-pane fade" style="border-radius: .25em;">
-
-                            <div class="mb-3 p-2 pb-0 d-flex flex-column ba-panel align-items-start">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img id="ba-skill-ex-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
-                                    <div class="d-inline-block">
-                                        <div>
-                                            <h4 id="ba-skill-ex-name" class="me-2 d-inline"></h4>
-                                        </div>
-                                        <div class="pt-1 position-relative">
-                                            <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_ex"></p>
-                                            <p class="d-inline text-bold">・</p>
-                                            <p class="d-inline text-bold text-italic">COST:</p>
-                                            <span id="ba-skill-ex-cost" style="font-weight: bold;"></span>
-                                        </div>
+                                    <div id="ba-student-terrain" class="mb-2 ms-1" style="min-width: fit-content;">
+                                        <div id="ba-student-terrain-urban" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_urban.png"></span><br><img id="ba-student-terrain-urban-icon" class="ba-student-affinity-icon" src=""></div>
+                                        <div id="ba-student-terrain-outdoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_outdoor.png"></span><br><img id="ba-student-terrain-outdoor-icon" class="ba-student-affinity-icon" src=""></div>
+                                        <div id="ba-student-terrain-indoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_indoor.png"></span><br><img id="ba-student-terrain-indoor-icon" class="ba-student-affinity-icon" src=""></div>
                                     </div>
                                 </div>
-                                <p id="ba-skill-ex-description" class="mb-2 mt-2 p-1"></p>
-                                <div class="collapse" id="ba-skill-ex-materials-page" style="min-width: 100%;">
-                                    <div class="ba-panel-separator"></div>
-                                    <div class="my-1 p-2 pb-0">
-                                        <div id="ba-skill-ex-materials-1" class="ba-skill-ex-materials"><span class="pb-2">No materials required.</span></div>
-                                        <div id="ba-skill-ex-materials-2" class="ba-skill-ex-materials"></div>
-                                        <div id="ba-skill-ex-materials-3" class="ba-skill-ex-materials"></div>
-                                        <div id="ba-skill-ex-materials-4" class="ba-skill-ex-materials"></div>
-                                        <div id="ba-skill-ex-materials-5" class="ba-skill-ex-materials"></div>
-                                    </div>
+    
+                                <div class="d-flex flex-row align-items-end">
+                                    <span class="flex-grow-1">
+                                        <!-- <h5 class="d-inline text-bold">Student Stats</h5> -->
+                                        <nav id="ba-student-vehicle" class="nav nav-pills mt-1">
+                                            <button id="ba-student-vehicle-0" class="nav-link active" onclick="changeStudentVehicle(0)"></a>
+                                            <button id="ba-student-vehicle-1" class="nav-link" onclick="changeStudentVehicle(1)"></a>
+                                        </nav>   
+                                    </span>
                                 </div>
-                            </div>
-
-                            <div class="row g-1">
-                                <div class="d-flex flex-row align-items-center">
-                                    <button class="btn btn-sm btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-ex-materials-page" style="flex-shrink: 0; position: relative;"><span data-localize-id="ui,student_skills_materials"></span></button>
-                                    <input id="ba-skillpreview-exrange" oninput="changeEXSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="5">
-                                    <span id="ba-skill-ex-level" class="ba-slider-label">Lv.1</span>
-                                </div>
-                            </div>
-
-                            <div class="my-3 p-2 pb-0 d-flex flex-column ba-panel align-items-start">
-                                <div class="d-flex flex-row align-items-center">
-                                    <img id="ba-skill-normal-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
-                                    <div class="d-inline-block">
-                                        <div>
-                                            <h4 id="ba-skill-normal-name" class="me-2 d-inline"></h4>
-                                        </div>
-                                        <div class="mt-1">
-                                            <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_normal"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p id="ba-skill-normal-description" class="mt-2 mb-2 p-1"></p>
-                                <div class="ba-panel-separator"></div>
-                                <div class="mt-2 d-flex flex-row align-items-center">
-                                    <img id="ba-skill-passive-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
-                                    <div class="d-inline-block">
-                                        <div>
-                                            <h4 id="ba-skill-passive-name" class="me-2 d-inline"></h4>
-                                        </div>
-                                        <div class="mt-1">
-                                            <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_passive"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p id="ba-skill-passive-description" class="mt-2 mb-2 p-1"></p>
-                                <div class="ba-panel-separator"></div>
-                                <div class="mt-2 d-flex flex-row align-items-center">
-                                    <img id="ba-skill-sub-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
-                                    <div class="d-inline-block">
-                                        <div>
-                                            <h4 id="ba-skill-sub-name" class="me-2 d-inline"></h4>
-                                        </div>
-                                        <div class="mt-1">
-                                            <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_sub"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p id="ba-skill-sub-description" class="mt-2 mb-2 p-1"></p>
-                                <div class="collapse" id="ba-skill-materials-page" style="min-width: 100%;">
-                                    <div class="ba-panel-separator"></div>
-                                    <div class="my-1 p-2 pb-0">
-                                        <div id="ba-skill-materials-1" class="ba-skill-materials"><span class="pb-2">No materials required.</span></div>
-                                        <div id="ba-skill-materials-2" class="ba-skill-materials"></div>
-                                        <div id="ba-skill-materials-3" class="ba-skill-materials"></div>
-                                        <div id="ba-skill-materials-4" class="ba-skill-materials"></div>
-                                        <div id="ba-skill-materials-5" class="ba-skill-materials"></div>
-                                        <div id="ba-skill-materials-6" class="ba-skill-materials"></div>
-                                        <div id="ba-skill-materials-7" class="ba-skill-materials"></div>
-                                        <div id="ba-skill-materials-8" class="ba-skill-materials"></div>
-                                        <div id="ba-skill-materials-9" class="ba-skill-materials"></div>
-                                        <div id="ba-skill-materials-10" class="ba-skill-materials"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row g-1">
-                                <div class="d-flex flex-row align-items-center">
-                                    <button class="btn btn-sm btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-materials-page"style="flex-shrink: 0;position: relative;"><span data-localize-id="ui,student_skills_materials"></span></button>
-                                    <input id="ba-skillpreview-range" oninput="changeSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="10">
-                                    <span id="ba-skill-level" class="ba-slider-label">Lv.1</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="ba-student-page-weapon" class="tab-pane fade" style="border-radius: .25em;">
-
-                            <div class="d-flex flex-row align-items-center px-1">
-                                <span class="flex-grow-1">
-                                    <h3 id="ba-student-weapon-name" style="display: inline;"></h3>
-                                </span>
-                                <span class="me-1">
-                                    <img src="images/ui/Common_Icon_CharacterWeapon_off.png" style="height: 28px; width:auto;">
-                                </span>
-                                <h4 class="d-inline-block mb-0"><i id="ba-student-weapon-type"></i></h4>
-                            </div>
-
-                            <!-- <div class="row mt-1">
-                                <h4 id="ba-weapon-name-ja" class="d-inline"></h4>
-                            </div> -->
-                            
-                            <div class="row g-1 mt-3">
-                                <div class="col">
-                                    <table class="table ba-stats">
-                                        <tbody>
-                                            <tr>
-                                                <td colspan="2">
-                                                    <img id="ba-student-weapon-img" src="">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span id="ba-weapon-stat-attack" data-localize-id="stat,attack_power"></span>
-                                                        <span id="ba-weapon-stat-attack-amount" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span id="ba-weapon-stat-maxhp" data-localize-id="stat,maxhp"></span>
-                                                        <span id="ba-weapon-stat-maxhp-amount" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr id="ba-weapon-stat-row2">
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span id="ba-weapon-stat-healing" data-localize-id="stat,heal_power"></span>
-                                                        <span id="ba-weapon-stat-healing-amount" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                                <td width="50%">
-                                                    <div class="d-flex align-items-top justify-content-between">
-                                                        <span id="ba-weapon-stat-4"></span>
-                                                        <span id="ba-weapon-stat-4-amount" class="ms-2 text-bold text-end"></span>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan="2" id="ba-weapon-description" style="white-space: pre-line;"></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-
-                            <div class="row g-1 mb-3">
-                                <div class="d-flex flex-row align-items-center">
-                                    <input id="ba-weaponpreview-levelrange" oninput="changeWeaponPreviewLevel(this)" type="range" class="form-range me-2 flex-fill" value="1" min="1" max="50">
-                                    <span id="ba-weaponpreview-level" class="ba-slider-label">Lv.1</span>
-                                </div>
-                            </div>
-                            <h5 class="d-block d-md-none" style="margin-top: 0.5rem; font-weight: bold;">Exclusive Weapon Bonuses</h5>
-                            <ul class="nav nav-pills justify-content-left">
-                                <li class="nav-item flex-grow-1 d-none d-md-flex">
-                                    <h5 style="margin-bottom: 0px; margin-top: 0.5rem; font-weight: bold;">Exclusive Weapon Bonuses</h5>
-                                </li>
-                                <li class="nav-item ba-weapon-rank-tab">
-                                    <a class="nav-link active" data-bs-toggle="tab" href="#ba-weapon-page-2star"><i class="fa-solid fa-star"></i> 2</a>
-                                </li>
-                                <li class="nav-item ba-weapon-rank-tab">
-                                    <a class="nav-link" data-bs-toggle="tab" href="#ba-weapon-page-3star"><i class="fa-solid fa-star"></i> 3</a>
-                                </li>
-                                <li class="nav-item ba-weapon-rank-tab">
-                                    <a class="nav-link disabled" data-bs-toggle="tab" href="#ba-weapon-page-4star"><i class="fa-solid fa-star"></i> 4</a>
-                                </li>
-                                <li class="nav-item ba-weapon-rank-tab">
-                                    <a class="nav-link disabled" data-bs-toggle="tab" href="#ba-weapon-page-5star"><i class="fa-solid fa-star"></i> 5</a>
-                                </li>
-                            </ul><!--<img src="images/ui/Common_Icon_Formation_Star_2.png" style="height: 22px; width:auto; margin-top: -6px; margin-right: 0.35rem;">2-->
-
-                            <div class="tab-content">
-
-                                <div id="ba-weapon-page-2star" class="tab-pane fade show active">
-
-                                    <div class="d-flex flex-row align-items-end my-3">
-                                        <span class="flex-grow-1">
-                                            <large style="display: inline;" data-localize-id="ui,student_weapon_rank_2star_desc"></large>
-                                        </span>
-                                    </div>
-
-                                    <div class="mb-3 p-2 d-flex flex-column ba-panel align-items-start">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <div class="position-relative me-1">
-                                                <img id="ba-weapon-skill-passive-icon" class="ba-skill d-inline-block me-3 drop-shadow" src="">
-                                                <span class="ba-weapon-skill-plus drop-shadow unselectable"><i class="fa-solid fa-plus"></i></span>
-                                            </div>
-                                            <div class="d-inline-block">
-                                                <div>
-                                                    <h4 id="ba-weapon-skill-passive-name" class="me-2 d-inline"></h4>
-                                                </div>
-                                                <div class="mt-1">
-                                                    <p class="d-inline" style="font-style: italic; font-weight: 500;"><span data-localize-id="ui,student_skill_passive"></span><span data-localize-id="ui,skill_plus"></span></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p id="ba-weapon-skill-passive-description" class="mb-0 mt-1 p-1"></p>
-                                    </div>
-
-                                    <div class="row g-1 my-1">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <input id="ba-weapon-skillpreview-range" oninput="changeWeaponSkillPreviewLevel(this)" type="range" class="form-range me-2 flex-fill" value="1" min="1" max="10">
-                                            <span id="ba-weapon-skill-level" class="ba-slider-label">Lv.1</span>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div id="ba-weapon-page-3star" class="tab-pane fade">
-
-                                    <div class="d-flex flex-row align-items-end my-3">
-                                        <span class="flex-grow-1">
-                                            <large style="display: inline;" data-localize-id="ui,student_weapon_rank_3star_desc"></large>
-                                        </span>
-                                    </div>
-
-                                    <div class="mb-3 p-2 d-flex flex-row align-items-center ba-panel">
-                                        <div class="position-relative">
-                                            <div class="d-inline-block" style="margin-bottom: 24px; margin-right: calc(28px + 1rem);background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img id="ba-weapon-bonus-terrain-type" class="invert-light" style="height:48px; width: 48px;" src=""></div>
-                                            <img id="ba-weapon-bonus-terrain-adaption" class="d-inline-block position-absolute" style="height:48px; width: auto; top: 22px; left: 28px;" src="">    
-                                        </div>
-                                        <span id="ba-weapon-bonus-terrain-adaption-description"></span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div id="ba-student-page-profile" class="tab-pane fade" style="border-radius: .25em;">
-                            <div class="d-flex flex-row align-items-top">
-                                <img id="ba-profile-portrait-img" class="drop-shadow me-3">
-                                <div>
-                                    <div class="my-1">
-                                        <h3 id="ba-student-fullname" class="d-inline"></h3>
-                                    </div>
-
-                                    <div class="">
-                                        <span id="ba-profile-school-label"></span>
-                                        <span id="ba-profile-schoolyear-label"></span><br>
-                                        <span id="ba-profile-club-label"></span>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <table class="table ba-stats mt-3 mb-4">
-                                <tbody>
-                                    <tr>
-                                        <td width="50%">
-                                            <div class="d-flex align-items-top justify-content-between">
-                                                <span data-localize-id="ui,student_profile_age"></span>
-                                                <span id="ba-student-profile-age" class="ms-2 text-bold text-end"></span>
-                                            </div>
-                                        </td>
-                                        <td width="50%">
-                                            <div class="d-flex align-items-top justify-content-between">
-                                                <span data-localize-id="ui,student_profile_birthday"></span>
-                                                <span id="ba-student-profile-birthday" class="ms-2 text-bold text-end"></span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="50%">
-                                            <div class="d-flex align-items-top justify-content-between">
-                                                <span data-localize-id="ui,student_profile_hobbies"></span>
-                                                <span id="ba-student-profile-hobbies" class="ms-2 text-bold text-end"></span>
-                                            </div>
-                                        </td>
-                                        <td width="50%">
-                                            <div class="d-flex align-items-top justify-content-between">
-                                                <span data-localize-id="ui,student_profile_height"></span>
-                                                <span id="ba-student-profile-height" class="ms-2 text-bold text-end"></span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td width="50%">
-                                            <div class="d-flex align-items-top justify-content-between">
-                                                <span data-localize-id="ui,student_profile_cv"></span>
-                                                <span id="ba-student-profile-cv" class="ms-2 text-bold text-end"></span>
-                                            </div>
-                                        </td>
-                                        <td width="50%">
-                                            <div class="d-flex align-items-top justify-content-between">
-                                                <span data-localize-id="ui,student_profile_illustrator"></span>
-                                                <span id="ba-student-profile-illustrator" class="ms-2 text-bold text-end"></span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" id="ba-student-profile-text" style="white-space: pre-line;"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <div class="mt-3">
-                                <h5 style="font-weight: bold;">Relationship Bonus</h5>
-                            </div>
-
-                            <div class="row g-1 my-1">
-                                <div class="d-flex flex-row">
-                                    <div class="flex-grow-1">
-                                        <table class="table ba-stats mb-2">
+    
+                                <div class="row g-1 mt-1">
+                                    <div class="col">
+                                        <table id="ba-student-stat-table" class="table ba-stats mb-0">
                                             <tbody>
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span id="ba-student-bond-1"></span>
-                                                            <span id="ba-student-bond-1-amount" class="ms-2 text-bold text-end"></span>
+                                                            <span data-localize-id="stat,maxhp"></span>
+                                                            <span id="ba-student-stat-maxhp" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span id="ba-student-bond-2"></span>
-                                                            <span id="ba-student-bond-2-amount" class="ms-2 text-bold text-end"></span>
+                                                            <span data-localize-id="stat,attack_power"></span>
+                                                            <span id="ba-student-stat-attack" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,defense_power"></span>
+                                                            <span id="ba-student-stat-defense" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,heal_power"></span>
+                                                            <span id="ba-student-stat-healing" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,accuracy"></span>
+                                                            <span id="ba-student-stat-accuracy" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,evasion"></span>
+                                                            <span id="ba-student-stat-evasion" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,critical"></span>
+                                                            <span id="ba-student-stat-crit" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,critical_resist"></span>
+                                                            <span id="ba-student-stat-critresist" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,critical_damage"></span>
+                                                            <span id="ba-student-stat-critdmg" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,critical_damage_resist"></span>
+                                                            <span id="ba-student-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,stability"></span>
+                                                            <span id="ba-student-stat-stability" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,range"></span>
+                                                            <span id="ba-student-stat-range" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,cc_power"></span>
+                                                            <span id="ba-student-stat-ccpower" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,cc_resist"></span>
+                                                            <span id="ba-student-stat-ccresist" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,healing_received"></span>
+                                                            <span id="ba-student-stat-recoveryrate" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="stat,ammo"></span>
+                                                            <span id="ba-student-stat-ammo" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </table>
-                                        <div class="d-flex flex-row align-items-center">
-                                            <input id="ba-bond-levelrange" oninput="changeBondLevel(this)" type="range" class="form-range me-2 flex-fill" style="width: auto;" value="20" min="1" max="50">
-                                            <span id="ba-bond-level" class="ba-slider-label"></span>
+                                    </div>
+                                </div>
+    
+                                <div class="row g-1 mt-3">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <input id="ba-statpreview-levelrange" oninput="changeStatPreviewLevel(this)" type="range" class="form-range me-2 flex-fill" value="1" min="1" max="100">
+                                        <span id="ba-statpreview-level" class="ba-slider-label"></span>
+                                    </div>
+                                </div>
+    
+                                <div class="row g-1 mt-2">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <div class="flex-fill">
+                                            <div class="d-flex flex-row flex-wrap align-items-stretch">
+                                                <div class="flex-fill d-flex flex-row align-items-stretch">
+                                                    <div class="d-inline-block ba-panel px-2 mb-2 me-2 d-flex align-items-center" style="font-size: 0px; min-width: 70px; min-height: 31px; border-radius: 0.2rem;">
+                                                        <span id="ba-statpreview-star-1" class="ba-statpreview-star" onclick="changeStatPreviewStars(1,0)"><i class="fa-solid fa-star"></i></span>
+                                                        <span id="ba-statpreview-star-2" class="ba-statpreview-star" onclick="changeStatPreviewStars(2,0)"><i class="fa-solid fa-star"></i></span>
+                                                        <span id="ba-statpreview-star-3" class="ba-statpreview-star" onclick="changeStatPreviewStars(3,0)"><i class="fa-solid fa-star"></i></span>
+                                                        <span id="ba-statpreview-star-4" class="ba-statpreview-star" onclick="changeStatPreviewStars(4,0)"><i class="fa-solid fa-star"></i></span>
+                                                        <span id="ba-statpreview-star-5" class="ba-statpreview-star" onclick="changeStatPreviewStars(5,0)"><i class="fa-solid fa-star"></i></span>
+                                                        <span id="ba-weaponpreview-star-1" class="ba-weaponpreview-star ms-2" onclick="changeStatPreviewStars(5,1)"><i class="fa-solid fa-star"></i></span>
+                                                        <span id="ba-weaponpreview-star-2" class="ba-weaponpreview-star" onclick="changeStatPreviewStars(5,2)"><i class="fa-solid fa-star"></i></span>
+                                                        <span id="ba-weaponpreview-star-3" class="ba-weaponpreview-star" onclick="changeStatPreviewStars(5,3)"><i class="fa-solid fa-star"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <button id="ba-statpreview-strikerbonus" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');toggleStrikerBonus(this)" data-localize-id="ui,student_strikerbonus"></button>
+                                                    <button id="ba-statpreview-includegear" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');updateGearIcon();recalculateStatPreview()" data-localize-id="ui,student_gear_short"></button>
+                                                    <button id="ba-statpreview-includebond" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');recalculateStatPreview()" data-localize-id="ui,student_bond_short"></button>
+                                                    <button class="btn btn-sm btn-dark mb-2" type="button" onclick="statPreviewModal.show()"><i class="fa-solid fa-sliders"></i></button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="ba-student-lobby ms-3 drop-shadow">
-                                        <img id="ba-student-lobby-img" src="">
-                                        <span id="ba-student-lobby-unlock" class="unselectable"></span>
+                                </div>
+    
+                            </div>
+    
+                            <div id="ba-student-page-skills" class="tab-pane fade" style="border-radius: .25em;">
+    
+                                <div class="mb-3 p-2 pb-0 d-flex flex-column ba-panel align-items-start">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <img id="ba-skill-ex-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
+                                        <div class="d-inline-block">
+                                            <div>
+                                                <h4 id="ba-skill-ex-name" class="me-2 d-inline"></h4>
+                                            </div>
+                                            <div class="pt-1 position-relative">
+                                                <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_ex"></p>
+                                                <p class="d-inline text-bold">・</p>
+                                                <p class="d-inline text-bold text-italic">COST:</p>
+                                                <span id="ba-skill-ex-cost" style="font-weight: bold;"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p id="ba-skill-ex-description" class="mb-2 mt-2 p-1"></p>
+                                    <div class="collapse" id="ba-skill-ex-materials-page" style="min-width: 100%;">
+                                        <div class="ba-panel-separator"></div>
+                                        <div class="my-1 p-2 pb-0">
+                                            <div id="ba-skill-ex-materials-1" class="ba-skill-ex-materials"><span class="pb-2">No materials required.</span></div>
+                                            <div id="ba-skill-ex-materials-2" class="ba-skill-ex-materials"></div>
+                                            <div id="ba-skill-ex-materials-3" class="ba-skill-ex-materials"></div>
+                                            <div id="ba-skill-ex-materials-4" class="ba-skill-ex-materials"></div>
+                                            <div id="ba-skill-ex-materials-5" class="ba-skill-ex-materials"></div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="row g-1">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <button class="btn btn-sm btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-ex-materials-page" style="flex-shrink: 0; position: relative;"><span data-localize-id="ui,student_skills_materials"></span></button>
+                                        <input id="ba-skillpreview-exrange" oninput="changeEXSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="5">
+                                        <span id="ba-skill-ex-level" class="ba-slider-label">Lv.1</span>
+                                    </div>
+                                </div>
+    
+                                <div class="my-3 p-2 pb-0 d-flex flex-column ba-panel align-items-start">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <img id="ba-skill-normal-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
+                                        <div class="d-inline-block">
+                                            <div>
+                                                <h4 id="ba-skill-normal-name" class="me-2 d-inline"></h4>
+                                            </div>
+                                            <div class="mt-1">
+                                                <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_normal"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p id="ba-skill-normal-description" class="mt-2 mb-2 p-1"></p>
+                                    <div class="ba-panel-separator"></div>
+                                    <div class="mt-2 d-flex flex-row align-items-center">
+                                        <img id="ba-skill-passive-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
+                                        <div class="d-inline-block">
+                                            <div>
+                                                <h4 id="ba-skill-passive-name" class="me-2 d-inline"></h4>
+                                            </div>
+                                            <div class="mt-1">
+                                                <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_passive"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p id="ba-skill-passive-description" class="mt-2 mb-2 p-1"></p>
+                                    <div class="ba-panel-separator"></div>
+                                    <div class="mt-2 d-flex flex-row align-items-center">
+                                        <img id="ba-skill-sub-icon" class="ba-skill drop-shadow d-inline-block me-3" src="">
+                                        <div class="d-inline-block">
+                                            <div>
+                                                <h4 id="ba-skill-sub-name" class="me-2 d-inline"></h4>
+                                            </div>
+                                            <div class="mt-1">
+                                                <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_sub"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p id="ba-skill-sub-description" class="mt-2 mb-2 p-1"></p>
+                                    <div class="collapse" id="ba-skill-materials-page" style="min-width: 100%;">
+                                        <div class="ba-panel-separator"></div>
+                                        <div class="my-1 p-2 pb-0">
+                                            <div id="ba-skill-materials-1" class="ba-skill-materials"><span class="pb-2">No materials required.</span></div>
+                                            <div id="ba-skill-materials-2" class="ba-skill-materials"></div>
+                                            <div id="ba-skill-materials-3" class="ba-skill-materials"></div>
+                                            <div id="ba-skill-materials-4" class="ba-skill-materials"></div>
+                                            <div id="ba-skill-materials-5" class="ba-skill-materials"></div>
+                                            <div id="ba-skill-materials-6" class="ba-skill-materials"></div>
+                                            <div id="ba-skill-materials-7" class="ba-skill-materials"></div>
+                                            <div id="ba-skill-materials-8" class="ba-skill-materials"></div>
+                                            <div id="ba-skill-materials-9" class="ba-skill-materials"></div>
+                                            <div id="ba-skill-materials-10" class="ba-skill-materials"></div>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="row g-1">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <button class="btn btn-sm btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-materials-page"style="flex-shrink: 0;position: relative;"><span data-localize-id="ui,student_skills_materials"></span></button>
+                                        <input id="ba-skillpreview-range" oninput="changeSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="10">
+                                        <span id="ba-skill-level" class="ba-slider-label">Lv.1</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-3">
-                                <h5 style="font-weight: bold;">Favourite Gifts</h5>
+    
+                            <div id="ba-student-page-weapon" class="tab-pane fade" style="border-radius: .25em;">
+    
+                                <div class="d-flex flex-row align-items-center px-1">
+                                    <span class="flex-grow-1">
+                                        <h3 id="ba-student-weapon-name" style="display: inline;"></h3>
+                                    </span>
+                                    <span class="me-1">
+                                        <img src="images/ui/Common_Icon_CharacterWeapon_off.png" style="height: 28px; width:auto;">
+                                    </span>
+                                    <h4 class="d-inline-block mb-0"><i id="ba-student-weapon-type"></i></h4>
+                                </div>
+    
+                                <!-- <div class="row mt-1">
+                                    <h4 id="ba-weapon-name-ja" class="d-inline"></h4>
+                                </div> -->
+                                
+                                <div class="row g-1 mt-3">
+                                    <div class="col">
+                                        <table class="table ba-stats">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <img id="ba-student-weapon-img" src="">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span id="ba-weapon-stat-attack" data-localize-id="stat,attack_power"></span>
+                                                            <span id="ba-weapon-stat-attack-amount" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span id="ba-weapon-stat-maxhp" data-localize-id="stat,maxhp"></span>
+                                                            <span id="ba-weapon-stat-maxhp-amount" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr id="ba-weapon-stat-row2">
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span id="ba-weapon-stat-healing" data-localize-id="stat,heal_power"></span>
+                                                            <span id="ba-weapon-stat-healing-amount" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span id="ba-weapon-stat-4"></span>
+                                                            <span id="ba-weapon-stat-4-amount" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" id="ba-weapon-description" style="white-space: pre-line;"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+    
+                                <div class="row g-1 mb-3">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <input id="ba-weaponpreview-levelrange" oninput="changeWeaponPreviewLevel(this)" type="range" class="form-range me-2 flex-fill" value="1" min="1" max="50">
+                                        <span id="ba-weaponpreview-level" class="ba-slider-label">Lv.1</span>
+                                    </div>
+                                </div>
+                                <h5 class="d-block d-md-none" style="margin-top: 0.5rem; font-weight: bold;">Exclusive Weapon Bonuses</h5>
+                                <ul class="nav nav-pills justify-content-left">
+                                    <li class="nav-item flex-grow-1 d-none d-md-flex">
+                                        <h5 style="margin-bottom: 0px; margin-top: 0.5rem; font-weight: bold;">Exclusive Weapon Bonuses</h5>
+                                    </li>
+                                    <li class="nav-item ba-weapon-rank-tab">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#ba-weapon-page-2star"><i class="fa-solid fa-star"></i> 2</a>
+                                    </li>
+                                    <li class="nav-item ba-weapon-rank-tab">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#ba-weapon-page-3star"><i class="fa-solid fa-star"></i> 3</a>
+                                    </li>
+                                    <li class="nav-item ba-weapon-rank-tab">
+                                        <a class="nav-link disabled" data-bs-toggle="tab" href="#ba-weapon-page-4star"><i class="fa-solid fa-star"></i> 4</a>
+                                    </li>
+                                    <li class="nav-item ba-weapon-rank-tab">
+                                        <a class="nav-link disabled" data-bs-toggle="tab" href="#ba-weapon-page-5star"><i class="fa-solid fa-star"></i> 5</a>
+                                    </li>
+                                </ul><!--<img src="images/ui/Common_Icon_Formation_Star_2.png" style="height: 22px; width:auto; margin-top: -6px; margin-right: 0.35rem;">2-->
+    
+                                <div class="tab-content">
+    
+                                    <div id="ba-weapon-page-2star" class="tab-pane fade show active">
+    
+                                        <div class="d-flex flex-row align-items-end my-3">
+                                            <span class="flex-grow-1">
+                                                <large style="display: inline;" data-localize-id="ui,student_weapon_rank_2star_desc"></large>
+                                            </span>
+                                        </div>
+    
+                                        <div class="mb-3 p-2 d-flex flex-column ba-panel align-items-start">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <div class="position-relative me-1">
+                                                    <img id="ba-weapon-skill-passive-icon" class="ba-skill d-inline-block me-3 drop-shadow" src="">
+                                                    <span class="ba-weapon-skill-plus drop-shadow unselectable"><i class="fa-solid fa-plus"></i></span>
+                                                </div>
+                                                <div class="d-inline-block">
+                                                    <div>
+                                                        <h4 id="ba-weapon-skill-passive-name" class="me-2 d-inline"></h4>
+                                                    </div>
+                                                    <div class="mt-1">
+                                                        <p class="d-inline" style="font-style: italic; font-weight: 500;"><span data-localize-id="ui,student_skill_passive"></span><span data-localize-id="ui,skill_plus"></span></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p id="ba-weapon-skill-passive-description" class="mb-0 mt-1 p-1"></p>
+                                        </div>
+    
+                                        <div class="row g-1 my-1">
+                                            <div class="d-flex flex-row align-items-center">
+                                                <input id="ba-weapon-skillpreview-range" oninput="changeWeaponSkillPreviewLevel(this)" type="range" class="form-range me-2 flex-fill" value="1" min="1" max="10">
+                                                <span id="ba-weapon-skill-level" class="ba-slider-label">Lv.1</span>
+                                            </div>
+                                        </div>
+    
+                                    </div>
+    
+                                    <div id="ba-weapon-page-3star" class="tab-pane fade">
+    
+                                        <div class="d-flex flex-row align-items-end my-3">
+                                            <span class="flex-grow-1">
+                                                <large style="display: inline;" data-localize-id="ui,student_weapon_rank_3star_desc"></large>
+                                            </span>
+                                        </div>
+    
+                                        <div class="mb-3 p-2 d-flex flex-row align-items-center ba-panel">
+                                            <div class="position-relative">
+                                                <div class="d-inline-block" style="margin-bottom: 24px; margin-right: calc(28px + 1rem);background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img id="ba-weapon-bonus-terrain-type" class="invert-light" style="height:48px; width: 48px;" src=""></div>
+                                                <img id="ba-weapon-bonus-terrain-adaption" class="d-inline-block position-absolute" style="height:48px; width: auto; top: 22px; left: 28px;" src="">    
+                                            </div>
+                                            <span id="ba-weapon-bonus-terrain-adaption-description"></span>
+                                        </div>
+    
+                                    </div>
+    
+                                </div>
                             </div>
-                            <div id="ba-student-favoured-items" class="my-1 p-2 pb-0 d-flex flex-row flex-wrap justify-content-center ba-panel">
-                            </div>
-                            <div class="mt-3">
-                                <h5 style="font-weight: bold;">Furniture Interaction</h5>
-                            </div>
-                            <div id="ba-student-favoured-furniture" class="my-1 p-2 pb-0 d-flex flex-row flex-wrap justify-content-center ba-panel">
+    
+                            <div id="ba-student-page-profile" class="tab-pane fade" style="border-radius: .25em;">
+                                <div class="d-flex flex-row align-items-top">
+                                    <img id="ba-profile-portrait-img" class="drop-shadow me-3">
+                                    <div>
+                                        <div class="my-1">
+                                            <h3 id="ba-student-fullname" class="d-inline"></h3>
+                                        </div>
+    
+                                        <div class="">
+                                            <span id="ba-profile-school-label"></span>
+                                            <span id="ba-profile-schoolyear-label"></span><br>
+                                            <span id="ba-profile-club-label"></span>
+                                        </div>
+                                    </div>
+    
+                                </div>
+                                <table class="table ba-stats mt-3 mb-4">
+                                    <tbody>
+                                        <tr>
+                                            <td width="50%">
+                                                <div class="d-flex align-items-top justify-content-between">
+                                                    <span data-localize-id="ui,student_profile_age"></span>
+                                                    <span id="ba-student-profile-age" class="ms-2 text-bold text-end"></span>
+                                                </div>
+                                            </td>
+                                            <td width="50%">
+                                                <div class="d-flex align-items-top justify-content-between">
+                                                    <span data-localize-id="ui,student_profile_birthday"></span>
+                                                    <span id="ba-student-profile-birthday" class="ms-2 text-bold text-end"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50%">
+                                                <div class="d-flex align-items-top justify-content-between">
+                                                    <span data-localize-id="ui,student_profile_hobbies"></span>
+                                                    <span id="ba-student-profile-hobbies" class="ms-2 text-bold text-end"></span>
+                                                </div>
+                                            </td>
+                                            <td width="50%">
+                                                <div class="d-flex align-items-top justify-content-between">
+                                                    <span data-localize-id="ui,student_profile_height"></span>
+                                                    <span id="ba-student-profile-height" class="ms-2 text-bold text-end"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td width="50%">
+                                                <div class="d-flex align-items-top justify-content-between">
+                                                    <span data-localize-id="ui,student_profile_cv"></span>
+                                                    <span id="ba-student-profile-cv" class="ms-2 text-bold text-end"></span>
+                                                </div>
+                                            </td>
+                                            <td width="50%">
+                                                <div class="d-flex align-items-top justify-content-between">
+                                                    <span data-localize-id="ui,student_profile_illustrator"></span>
+                                                    <span id="ba-student-profile-illustrator" class="ms-2 text-bold text-end"></span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" id="ba-student-profile-text" style="white-space: pre-line;"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+    
+                                <div class="mt-3">
+                                    <h5 style="font-weight: bold;">Relationship Bonus</h5>
+                                </div>
+    
+                                <div class="row g-1 my-1">
+                                    <div class="d-flex flex-row">
+                                        <div class="flex-grow-1">
+                                            <table class="table ba-stats mb-2">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span id="ba-student-bond-1"></span>
+                                                                <span id="ba-student-bond-1-amount" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span id="ba-student-bond-2"></span>
+                                                                <span id="ba-student-bond-2-amount" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="d-flex flex-row align-items-center">
+                                                <input id="ba-bond-levelrange" oninput="changeBondLevel(this)" type="range" class="form-range me-2 flex-fill" style="width: auto;" value="20" min="1" max="50">
+                                                <span id="ba-bond-level" class="ba-slider-label"></span>
+                                            </div>
+                                        </div>
+                                        <div class="ba-student-lobby ms-3 drop-shadow">
+                                            <img id="ba-student-lobby-img" src="">
+                                            <span id="ba-student-lobby-unlock" class="unselectable"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h5 style="font-weight: bold;">Favourite Gifts</h5>
+                                </div>
+                                <div id="ba-student-favoured-items" class="my-1 p-2 pb-0 d-flex flex-row flex-wrap justify-content-center ba-panel">
+                                </div>
+                                <div class="mt-3">
+                                    <h5 style="font-weight: bold;">Furniture Interaction</h5>
+                                </div>
+                                <div id="ba-student-favoured-furniture" class="my-1 p-2 pb-0 d-flex flex-row flex-wrap justify-content-center ba-panel">
+                                </div>
                             </div>
                         </div>
                     </div>

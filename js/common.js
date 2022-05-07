@@ -469,7 +469,7 @@ function loadModule(moduleName, entry=null) {
             nextWeek.setDate(currentDate.getDate()+7)
             birthdayStudents = []
             $.each(data.students, function(i, el){
-                if (el["released"][regionID]) {
+                if (el["released"][regionID] && !el["name_en"].includes("(")) {
                     var nextBirthday = getNextBirthdayDate(el.birthday)
                     if (nextBirthday.getTime() < nextWeek.getTime() && nextBirthday.getTime() >= currentDate.getTime())
                     birthdayStudents.push(el)
@@ -497,6 +497,7 @@ function loadModule(moduleName, entry=null) {
             }
             document.title = `Schale DB | Home`
             $('#ba-navbar-content').collapse('hide')
+            window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
     }
     localStorage.setItem("module", loadedModule)
@@ -753,13 +754,7 @@ function loadStudent(studentName) {
         if (student.length == 1) {
             //console.log(student[0])
             student = student[0]
-    
-            var charimg = new Image()
-            charimg.onload = function() {
-                $('#ba-student-img').css('background-image', `url('${charimg.src}')`)
-                $('#ba-student-img-sm').css('background-image', `url('${charimg.src}')`)
-            }
-            charimg.src = `images/student/portrait/Portrait_${student.name_dev}.webp`         
+            $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.name_dev}.webp`)
             var bgimg = new Image()
             bgimg.onload = function(){
                 $("#ba-background").css('background-image', `url('${bgimg.src}')`)
@@ -909,7 +904,7 @@ function loadStudent(studentName) {
     
             //Profile
             if (userLang == 'en') {
-                $('#ba-student-fullname').text(getLocalStringIfAvailable(student,'given_name')+' '+getLocalStringIfAvailable(student,'family_name'))
+                $('#ba-student-fullname').text(getLocalStringIfAvailable(student,'family_name')+' '+getLocalStringIfAvailable(student,'given_name'))
             } else {
                 $('#ba-student-fullname').text(getLocalStringIfAvailable(student,'family_name')+getLocalStringIfAvailable(student,'given_name'))
             }
@@ -999,6 +994,7 @@ function loadStudent(studentName) {
     
             document.title = `Schale DB | ${getLocalStringIfAvailable(student,'name')}`
             $('#ba-navbar-content').collapse('hide')
+            window.scrollTo({top: 0, left: 0, behavior: 'instant'})
     
             changeStatPreviewStars(student.stars)
             recalculateWeaponPreview()
@@ -1112,6 +1108,7 @@ function loadItem(id) {
 
         document.title = `Schale DB | ${getLocalStringIfAvailable(item,'name')}`
         $('#ba-navbar-content').collapse('hide')
+        window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("item", id)
     } else {
         loadModule('items', id)
@@ -1160,6 +1157,7 @@ function loadCraft(id) {
 
         document.title = `Schale DB | ${getLocalStringIfAvailable(craftNode,'name')}`
         $('#ba-navbar-content').collapse('hide')
+        window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("craftnode", id)
     } else {
         loadModule('craft', id)
@@ -1204,6 +1202,7 @@ function loadRaid(raidName) {
     
         document.title = `Schale DB | ${getLocalStringIfAvailable(raid,'name')}`
         $('#ba-navbar-content').collapse('hide')
+        window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("raid", raid.name_dev)
     } else {
         loadModule('raids', raidName)
@@ -1355,6 +1354,7 @@ function loadStage(id) {
         
         document.title = `Schale DB | ${getLocalStringIfAvailable(stage,'name')}`
         $('#ba-navbar-content').collapse('hide')
+        window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("stage", id)
     } else {
         loadModule('stages', id)

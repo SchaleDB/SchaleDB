@@ -27,15 +27,15 @@
     <div id="ba-background" style="position: fixed;">
     </div>
 
-    <div class="container-fluid p-0 h-100" style="min-height: 100vh; overflow-x: none; position: relative; padding-top: 58px !important;">
+    <div id="ba-content" class="container-fluid p-0">
         <div id="ba-navbar-placeholder">
-            <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark" style="min-height: 56px;">
+            <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark drop-shadow" style="min-height: 56px;">
                 <div class="container-xl">
                     <img id="navbar-logo" src="images/schale.png" class="" style="height:38px; width:auto">
-                    <a class="navbar-brand me-4 unselectable">
+                    <a class="navbar-brand me-4 unselectable" onclick="window.scrollTo(0,0);">
                         SCHALE <span class="navbar-accent">DB</span>
                     </a>
-                    <div class="dropdown ms-auto order-md-1">
+                    <div class="dropdown ms-auto order-lg-1">
                         <a class="btn btn-dark" href="#" id="ba-navbar-regionselector" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" >
                             <i class="fa-solid fa-gear"></i><span class="d-none ms-2">Settings</span>
                         </a>
@@ -82,9 +82,9 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-dark d-md-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#ba-navbar-content"><i class="fa-solid fa-bars"></i></button>
+                    <button class="btn btn-dark d-lg-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#ba-navbar-content"><i class="fa-solid fa-bars"></i></button>
                     <div class="collapse navbar-collapse" id="ba-navbar-content">
-                        <ul class="navbar-nav my-2 my-md-0 order-2 order-md-1">
+                        <ul class="navbar-nav my-2 my-lg-0 order-2 order-lg-1">
                             <li class="nav-item">
                                 <a id="ba-navbar-link-home" class="px-3 nav-link" onclick="loadModule('home')">
                                     <span data-localize-id="ui,navbar_home"></span>
@@ -116,9 +116,9 @@
                                 </a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav flex-fill me-md-2 order-1 order-md-2 mt-3 mt-md-0">
-                            <div class="position-relative" style="width: 100%;display: flex;justify-content: end;">
-                                <div id="navbar-search" class="position-relative">
+                        <ul class="navbar-nav flex-fill me-lg-2 order-1 order-lg-2 mt-3 mt-lg-0">
+                            <div class="position-relative" style="width: 100%;height:38px;display: flex;justify-content: end;">
+                                <div id="navbar-search" class="position-absolute">
                                     <input type="search" class="form-control" style="height: 38px;" id="ba-navbar-search" placeholder="Search" autocomplete="off" oninput="allSearch()" onkeydown="searchNavigate(event)" onkeyup="searchNavigate(event)">
                                     <i id="navbar-search-icon" class="fa-solid fa-search"></i>
                                     <i id="navbar-search-clear" class="search-clear fa-solid fa-close" onclick="clearSearchBar(this);" data-target="ba-navbar-search" style="display:none;"></i>
@@ -131,7 +131,7 @@
                 </div>
             </nav>
         </div>
-        <div id="loaded-module" class="container-xl my-md-4">
+        <div id="loaded-module">
         </div>
     
     </div>
