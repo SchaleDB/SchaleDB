@@ -50,6 +50,7 @@
     --col-btn-secondary: rgb(222, 226, 230);
     --col-btn-active-primary: rgb(255, 255, 255);
     --col-btn-active-secondary: rgb(0, 0, 0);
+    --col-btn-primary-glow: rgba(0, 0, 0, 0.25);
     --col-panel-separator: rgba(0, 0, 0, 0.25);
     --col-bg-imglabel: rgba(255, 255, 255, 0.855);
     
@@ -98,6 +99,7 @@
     --col-btn-secondary: rgb(33, 37, 41);
     --col-btn-active-primary: rgb(0, 0, 0);
     --col-btn-active-secondary: rgb(255, 255, 255);
+    --col-btn-primary-glow: rgba(255, 255, 255, 0.25);
     --col-panel-separator: rgba(255, 255, 255, 0.25);
     --col-bg-imglabel: rgba(40, 40, 40, 0.835);
 
@@ -153,6 +155,10 @@ p b, p strong {
 
 ::-webkit-slider-thumb {
     background-color: var(--col-theme-text) !important;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 1px var(--col-theme-text), 0 0 0 0.25rem var(--col-btn-primary-glow);
 }
 
 ::-webkit-slider-runnable-track {
@@ -247,6 +253,10 @@ input[type="search" i]::-webkit-search-cancel-button {
 /* .nav-pills .nav-link {
     border-radius: 999px;
 } */
+
+.nav {
+    font-weight: 400;
+}
 
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     color: var(--col-btn-active-primary);
@@ -359,7 +369,7 @@ input[type="search" i]::-webkit-search-cancel-button {
     #modStudents .modal-body {
         height: calc(100vh - 3rem);
         scrollbar-width: thin;
-        scrollbar-color: rgba(155, 155, 155, 0.5);
+        scrollbar-color: var(--col-panel-separator);
     }
 
     #modStudents .modal-content {
@@ -662,6 +672,11 @@ h1 small {
     color: #6c757d !important;
 }
 
+.ba-bg-theme {
+    background-color: var(--col-theme-accent);
+    transition: background-color ease var(--var-animation-duration);
+}
+
 .ba-student-info {
     position: relative;
     white-space: nowrap;
@@ -680,6 +695,21 @@ h1 small {
     margin: 0 0.25rem 0.25rem 0;
 }
 
+.ba-info-pill {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    padding: 0 0.5rem 0 0.5rem !important;
+    white-space: nowrap;
+    cursor: default;
+    border-radius: 999px !important;
+    margin: 0 0.4rem 0.25rem 0;
+}
+
+.ba-info-pill span {
+    padding: 0.25rem 0.5rem;
+}
+
 #ba-student-role {
     font-weight: 600;
 }
@@ -691,21 +721,16 @@ h1 small {
     color: #fff;
 }
 
-#ba-student-role img {
+/* #ba-student-role img {
     position: absolute;
     height: 32px;
     width: auto;
     left: 6px !important;
     top: 5px !important;
-}
+} */
 
 #ba-student-attacktype img, #ba-student-defensetype img, #ba-raid-attacktype img, #ba-raid-defensetype img, #ba-stage-enemy-attacktype img, #ba-stage-enemy-defensetype img {
-    position: absolute;
-    width: auto;
     height: 18px;
-    left: 8px !important;
-    top: 7px !important;
-    image-rendering: -webkit-optimize-contrast;
 }
 
 #ba-student-attacktype, #ba-student-defensetype {
@@ -1359,8 +1384,6 @@ h1 small {
 }
 
 #ba-student-search-filters {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(155, 155, 155, 0.5);
     min-width: 338px;
     max-width: 338px;
     padding: 0.5rem;
@@ -1369,6 +1392,8 @@ h1 small {
 }
 
 #ba-student-search-filters-panel {
+    scrollbar-width: thin;
+    scrollbar-color: var(--col-panel-separator);
     overflow-y: auto;
 }
 
@@ -1381,7 +1406,7 @@ h1 small {
     transform: translateZ(0);
     overflow-y: scroll;
     scrollbar-width: thin;
-    scrollbar-color: rgba(155, 155, 155, 0.5);
+    scrollbar-color: var(--col-panel-separator);
     padding: 0.5rem;
 }
 
@@ -1451,7 +1476,7 @@ h1 small {
     #ba-student-search-filters {
         overflow-y: hidden;
         scrollbar-width: thin;
-        scrollbar-color: rgba(155, 155, 155, 0.5);
+        scrollbar-color: var(--col-panel-separator);
         min-width: 336px;
         max-width: none;
         padding: 1rem 1rem 0 1rem;
@@ -2060,8 +2085,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     height: 28px;
     width: 28px;
     border-radius: 0.5rem;
-    right: 2px;
-    top: 2px;
+    right: 3px;
+    top: 3px;
     z-index: 50;
     background-color: var(--col-bg-imglabel);
 }
@@ -2074,8 +2099,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 .ba-raid-card-def {
     position: absolute;
-    height: 24px;
-    width: 24px;
+    height: 26px;
+    width: 26px;
     border-radius: 999px;
     left: 4px;
     top: 4px;

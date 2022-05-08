@@ -49,6 +49,15 @@ const json_list = {
     tss_vehicles: "./data/tss_vehicles.json"
 }
 
+const html_list = {
+    craft: "./html/craft.html",
+    home: "./html/home.html",
+    items: "./html/items.html",
+    raids: "./html/raids.html",
+    stages: "./html/stages.html",
+    students: "./html/students.html",
+}
+
 var loadedModule, student, studentList, loadedItem, loadedStage, loadedCraftNode, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
 var searchResultsCount = 0, searchResultsSelection = 0
 var studentSelectorModal, statPreviewModal, showVehicleStats = false
@@ -232,7 +241,7 @@ function loadModule(moduleName, entry=null) {
         loadedModule = 'students'
         $(".navbar-nav .nav-link").removeClass('active')
         $("#ba-navbar-link-students").addClass('active')
-        $("#loaded-module").load('students.html', function() {
+        $("#loaded-module").load(html_list['students'], function() {
             loadRegion(regionID)
             loadLanguage(userLang)
             $(".tooltip").tooltip("hide")
@@ -283,7 +292,7 @@ function loadModule(moduleName, entry=null) {
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
         bgimg.src = `images/background/BG_CraftChamber_Night.jpg`
-        $("#loaded-module").load('items.html', function() {
+        $("#loaded-module").load(html_list['items'], function() {
             loadLanguage(userLang)
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
@@ -312,7 +321,7 @@ function loadModule(moduleName, entry=null) {
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
         bgimg.src = `images/background/BG_Raid.jpg`
-        $("#loaded-module").load('raids.html', function() {
+        $("#loaded-module").load(html_list['raids'], function() {
             loadLanguage(userLang)
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
@@ -338,7 +347,7 @@ function loadModule(moduleName, entry=null) {
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
         bgimg.src = `images/background/BG_Raid.jpg`
-        $("#loaded-module").load('stages.html', function() {
+        $("#loaded-module").load(html_list['stages'], function() {
             loadLanguage(userLang)
             if (region.weaponlevel_max == 0) {
                 $('#ba-stages-list-tab-schooldungeon').hide()
@@ -369,7 +378,7 @@ function loadModule(moduleName, entry=null) {
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
         bgimg.src = `images/background/BG_CraftChamber_Night.jpg`
-        $("#loaded-module").load('craft.html', function() {
+        $("#loaded-module").load(html_list['craft'], function() {
             loadLanguage(userLang)
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
@@ -398,7 +407,7 @@ function loadModule(moduleName, entry=null) {
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
         bgimg.src = `images/background/BG_View_Kivotos.jpg`
-        $("#loaded-module").load('home.html', function() {
+        $("#loaded-module").load(html_list['home'], function() {
             loadLanguage(userLang)
             loadRegion(regionID)
 
@@ -797,7 +806,7 @@ function loadStudent(studentName) {
             
             $("#ba-student-school-label").text(student.school)
             $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
-            $("#ba-student-position").text(student.position.toUpperCase())
+            $("#ba-student-position-label").text(student.position.toUpperCase())
             $("#ba-student-attacktype-label").text(getLocalizedString('attack_type',student.attack_type.toLowerCase()))
             $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.attack_type}`, 'Attack Type', null, getTypeText(student.attack_type), 32), placement: 'top', html: true})
             $("#ba-student-defensetype-label").text(getLocalizedString('defense_type',student.defense_type.toLowerCase()))
@@ -1579,13 +1588,13 @@ function recalculateStatPreview() {
 
     var level = $("#ba-statpreview-levelrange").val()
     var levelscale = ((level-1)/99).toFixed(4)
-    var maxHP,attack,defense,healing,accuracy,evasion,crit,crit_dmg,stability,range,ammo_cost,ammo_count
+    var maxHP,attack,defense,healing,accuracy,evasion,critical,critical_dmg,stability,range,ammo_cost,ammo_count
     if (showVehicleStats) {
         let vehicle = find(data.tss_vehicles, 'id', student.tss_id)[0]
-        maxHP = Math.ceil((Math.round((vehicle.maxhp_1 + (vehicle.maxhp_100-vehicle.maxhp_1) * levelscale).toFixed(4)) * starscale_hp[stat_preview_stars-1]).toFixed(4))
-        attack = Math.ceil((Math.round((vehicle.attack_power_1 + (vehicle.attack_power_100-vehicle.attack_power_1) * levelscale).toFixed(4)) * starscale_attack[stat_preview_stars-1]).toFixed(4))
+        maxHP = Math.round((vehicle.maxhp_1 + (vehicle.maxhp_100-vehicle.maxhp_1) * levelscale).toFixed(4))
+        attack = Math.round((vehicle.attack_power_1 + (vehicle.attack_power_100-vehicle.attack_power_1) * levelscale).toFixed(4))
         defense = Math.round((vehicle.defense_power_1 + (vehicle.defense_power_100-vehicle.defense_power_1) * levelscale).toFixed(4))
-        healing = Math.ceil((Math.round((vehicle.heal_power_1 + (vehicle.heal_power_100-vehicle.heal_power_1) * levelscale).toFixed(4)) * starscale_healing[stat_preview_stars-1]).toFixed(4))
+        healing = Math.round((vehicle.heal_power_1 + (vehicle.heal_power_100-vehicle.heal_power_1) * levelscale).toFixed(4))
         accuracy = vehicle.accuracy
         evasion = vehicle.evasion
         stability = vehicle.stability
@@ -1609,8 +1618,6 @@ function recalculateStatPreview() {
         ammo_cost = student.ammo_cost
     }
 
-
-
     if ($('#ba-statpreview-includegear').hasClass('active')) {
         var gear = []
         var tier = 1
@@ -1629,7 +1636,7 @@ function recalculateStatPreview() {
         })
     }
 
-    if ($('#ba-statpreview-includebond').hasClass('active')) {
+    if ($('#ba-statpreview-includebond').hasClass('active') && !showVehicleStats) {
         for (let i = 1; i <= student_bondalts.length+1; i++) {
             var bondlevel = $(`#ba-statpreview-bond-${i}-range`).val()
             var bondbonus = getBondStats(i == 1 ? student : student_bondalts[i-2], i == 1 ? Math.min(maxbond[stat_preview_stars-1], bondlevel) : bondlevel)
@@ -1637,7 +1644,7 @@ function recalculateStatPreview() {
         }
     }
 
-    if ((stat_preview_stars == 5) && (stat_preview_weapon_stars > 0)) {
+    if ((stat_preview_stars == 5) && (stat_preview_weapon_stars > 0) && (!showVehicleStats)) {
         var weaponlevel = (stat_preview_weapon_stars*10) + 20
         var weaponlevelscale = ((weaponlevel-1)/99).toFixed(4)
         bonus["attack_power"] += Math.round((student.weapon_attack_power_1 + (student.weapon_attack_power_100-student.weapon_attack_power_1) * weaponlevelscale).toFixed(4))
@@ -1648,8 +1655,6 @@ function recalculateStatPreview() {
             bonus[student.weapon_bonus_stats[i]] += Math.round((student.weapon_bonus_stats_parameters[i][0] + (student.weapon_bonus_stats_parameters[i][1]-student.weapon_bonus_stats_parameters[i][0]) * weaponlevelscale).toFixed(4))
         }) 
     }
-    
-    
 
     if (!strikerBonus || showVehicleStats) {
         $('#ba-student-stat-maxhp').text(Math.round(((maxHP+bonus["maxhp"])*bonus["maxhp_percent"]).toFixed(4)).toLocaleString())
@@ -1765,7 +1770,7 @@ function getRaidCardHTML(raid, terrain='') {
     <div onclick="loadRaid('${raid["name_dev"]}');" class="ba-raid-card">
     <div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/raid/${raid['background_img']}.png');"></div></div>
     <div class="ba-raid-card-img"><img src="images/raid/${raid["portrait_img"]}.png"></div>
-    <div class="ba-raid-card-def bg-def-${raid["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></div>`
+    <div class="ba-raid-card-def bg-def-${raid["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
     if (terrain != '') {
         html += `<div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${terrain}.png"></div>`
     }
