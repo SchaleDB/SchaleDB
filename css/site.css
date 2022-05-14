@@ -479,7 +479,7 @@ input[type="search" i]::-webkit-search-cancel-button {
     top: 56px !important;
 }
 
-#ba-student-name, #ba-raid-name, #ba-item-name, #ba-stage-title, #ba-craft-name, #ba-stage-enemy-name {
+#ba-student-name, #ba-raid-name, #ba-item-name, #ba-stage-title, #ba-craft-name, #ba-stage-enemy-name, #ba-timeattack-name {
     font-family: 'Oswald', 'Noto Sans JP', sans-serif;
     text-transform: uppercase;
 }
@@ -923,6 +923,12 @@ h1 small {
 
 .ba-label-text {
     word-wrap: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .ba-unhover-text {
@@ -1367,7 +1373,7 @@ h1 small {
     image-rendering: -webkit-optimize-contrast;
 }
 
-#ba-raid-difficulty a {
+#ba-raid-difficulty a, #ba-timeattack-difficulty a {
     text-transform: uppercase;
     font-style: italic;
     font-weight: 600;
@@ -2061,14 +2067,15 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     inset: 0;
     height: var(--var-grid-card-height);
     width: var(--var-grid-card-width);
-    filter: blur(8px);
+    filter: blur(4px);
+    transform: scale(1.1);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: left center;
     image-rendering: -webkit-optimize-contrast;
 }
 
-.ba-raid-card-img {
+.ba-raid-card-img, .ba-ta-card-img {
     position: absolute;
     inset: 0;
     height: var(--var-grid-card-height);
@@ -2076,19 +2083,20 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
     border-radius: 10px;
     overflow: hidden;
+    text-align: center;
     image-rendering: -webkit-optimize-contrast;
 }
 
 .ba-raid-card-terrain {
-    position: absolute;
-    color: #ffffff;
-    height: 28px;
-    width: 28px;
-    border-radius: 0.5rem;
-    right: 3px;
-    top: 3px;
-    z-index: 50;
     background-color: var(--col-bg-imglabel);
+    position: absolute;
+    height: 26px;
+    width: 26px;
+    border-radius: 999px;
+    left: 4px;
+    top: 34px;
+    padding: 0px;
+    z-index: 20;
 }
 
 .ba-raid-card-terrain img {
@@ -2125,7 +2133,15 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     height: 100%;
     width: 100%;
     object-fit: cover;
-    object-position: 33% center;
+    object-position: -45px center;
+}
+
+.ba-ta-card-img img {
+    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
+    height: 100%;
+    width: 75%;
+    object-fit: cover;
+    object-position: center 70%;
 }
 
 .ba-item-card-img img {
@@ -2157,7 +2173,7 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     filter: brightness(0.7);
 }
 
-.ba-stage-card:hover .ba-stage-card-img img, .ba-raid-card:hover .ba-raid-card-img img  {
+.ba-stage-card:hover .ba-stage-card-img img, .ba-raid-card:hover .ba-raid-card-img img, .ba-raid-card:hover .ba-ta-card-img img  {
     filter: brightness(0.7);
     transform: scale(1.15);
     image-rendering: -webkit-optimize-contrast;

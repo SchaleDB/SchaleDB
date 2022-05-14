@@ -15,6 +15,7 @@ const event_area = {1: 'Quest', 2: 'Invasion'}
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
+const cache_ver = 1
 
 const stat_friendlyname = {
     "maxhp": "Max HP",
@@ -36,33 +37,33 @@ const stat_friendlyname = {
 
 var data = {}
 const json_list = {
-    common: "./data/common.json",
-    raids: "./data/raids.json",
-    students: "./data/students.json",
-    localization: "./data/localization.json",
-    stages: "./data/stages.json",
-    enemies: "./data/enemies.json",
-    items: "./data/items.json",
-    furniture: "./data/furniture.json",
-    formations: "./data/formations.json",
-    crafting: "./data/crafting.json",
-    tss_vehicles: "./data/tss_vehicles.json"
+    common: getCacheVerResourceName("./data/common.json"),
+    raids: getCacheVerResourceName("./data/raids.json"),
+    students: getCacheVerResourceName("./data/students.json"),
+    localization: getCacheVerResourceName("./data/localization.json"),
+    stages: getCacheVerResourceName("./data/stages.json"),
+    enemies: getCacheVerResourceName("./data/enemies.json"),
+    items: getCacheVerResourceName("./data/items.json"),
+    furniture: getCacheVerResourceName("./data/furniture.json"),
+    formations: getCacheVerResourceName("./data/formations.json"),
+    crafting: getCacheVerResourceName("./data/crafting.json"),
+    tss_vehicles: getCacheVerResourceName("./data/tss_vehicles.json")
 }
 
 const html_list = {
-    craft: "./html/craft.html",
-    home: "./html/home.html",
-    items: "./html/items.html",
-    raids: "./html/raids.html",
-    stages: "./html/stages.html",
-    students: "./html/students.html",
+    craft: getCacheVerResourceName("./html/craft.html"),
+    home: getCacheVerResourceName("./html/home.html"),
+    items: getCacheVerResourceName("./html/items.html"),
+    raids: getCacheVerResourceName("./html/raids.html"),
+    stages: getCacheVerResourceName("./html/stages.html"),
+    students: getCacheVerResourceName("./html/students.html"),
 }
 
 var loadedModule, student, studentList, loadedItem, loadedStage, loadedCraftNode, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
 var searchResultsCount = 0, searchResultsSelection = 0
 var studentSelectorModal, statPreviewModal, showVehicleStats = false
 var header
-var raid_difficulty = 0
+var raid_difficulty = 0, ta_difficulty = 0;
 var stat_preview_stars = 3
 var stat_preview_weapon_stars = 1
 
@@ -336,6 +337,7 @@ function loadModule(moduleName, entry=null) {
                 loadRaid("Binah")
             }
             populateRaidList()
+            if (regionID == 1) {$('#ba-raid-list-tab-timeattack').hide()}
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         })
     } else if (moduleName == 'stages') {
@@ -424,21 +426,13 @@ function loadModule(moduleName, entry=null) {
             var currentTime = new Date().getTime()/1000, dateOptions = {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short"}
             let found = false
             $.each(data.common.regions[regionID].current_gacha, function(i, el){
-                if (currentTime >= el.start && currentTime < el.end && !found) {
+                if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
                     for (let j = 0; j < el.characters.length; j++) {
                         var char = find(data.students, "id", el.characters[j])[0]
                         gachalistHtml += getStudentListCardHTML(char)
                     }
                     gachatext += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
-                    gachatext += `<br>Ends in <b>${duration(el.end-currentTime)}</b>.`
-                    found = true
-                } else if (currentTime <= el.start && !found) {
-                    for (let j = 0; j < el.characters.length; j++) {
-                        var char = find(data.students, "id", el.characters[j])[0]
-                        gachalistHtml += getStudentListCardHTML(char)
-                    }
-                    gachatext += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
-                    gachatext += `<br>Starts in <b>${duration(el.end-currentTime)}</b>.`
+                    gachatext += `\n${(currentTime >= el.start) ? "Ends" : "Starts"} in <b>${(currentTime >= el.start) ? duration(el.end-currentTime) : duration(el.start-currentTime)}</b>.`
                     found = true
                 }
             })
@@ -446,23 +440,24 @@ function loadModule(moduleName, entry=null) {
             $('#ba-home-gacha-text').html(gachatext)
             $('#ba-home-gacha-list').html(gachalistHtml)
 
-            var raidText = "Total Assault\n", raidHtml = ""
+            let raidText = "", raidHtml = ""
             $('#ba-home-raid').hide()
             found = false
             $.each(data.common.regions[regionID].current_raid, function(i, el){
-                if (currentTime >= el.start && currentTime < el.end && !found) {
+                if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
+                    if (el.raid >= 1000) {
+                        raidText = "Firepower Drill\n"
+                        let raid = find(data.raids.time_attack, "id", el.raid)[0]
+                        raidHtml += getTimeAttackCardHTML(raid, el.terrain)
+                    } else {
+                        raidText = "Total Assault\n"
+                        let raid = find(data.raids.total_assault, "id", el.raid)[0]
+                        raidHtml += getRaidCardHTML(raid, el.terrain)
+                    }
                     $('#ba-home-raid').show()
-                    var raid = find(data.raids, "id", el.raid)[0]
-                    raidHtml += getRaidCardHTML(raid, el.terrain)
                     raidText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
-                    raidText += `<br>Ends in <b>${duration(el.end-currentTime)}</b>.`
-                    found = true
-                } else if (currentTime <= el.start && !found) {
-                    $('#ba-home-raid').show()
-                    var raid = find(data.raids, "id", el.raid)[0]
-                    raidHtml += getRaidCardHTML(raid, el.terrain)
-                    raidText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
-                    raidText += `<br>Starts in <b>${duration(el.start-currentTime)}</b>.`
+                    if (currentTime >= el.start)
+                    raidText += `\n${(currentTime >= el.start) ? "Ends" : "Starts"} in <b>${(currentTime >= el.start) ? duration(el.end-currentTime) : duration(el.start-currentTime)}</b>.`
                     found = true
                 }
             })
@@ -487,7 +482,7 @@ function loadModule(moduleName, entry=null) {
             if (birthdayStudents.length > 0) {
                 birthdayStudents.sort((a,b) => getNextBirthdayDate(a.birthday).getTime() - getNextBirthdayDate(b.birthday).getTime())
                 for (let i = 0; i < birthdayStudents.length; i++) {
-                    birthdaysHtml += '<div class="d-flex flex-column mx-1">'+getStudentIconSmall(birthdayStudents[i])+'<div class="ba-panel mt-1 mx-1 p-1 text-center">'+getNextBirthdayDate(birthdayStudents[i].birthday).toLocaleDateString([], {month: "numeric", day: "numeric"})+'</div></div>'
+                    birthdaysHtml += '<div class="d-flex flex-column mx-1 mb-1">'+getStudentIconSmall(birthdayStudents[i])+'<div class="ba-panel mt-1 mx-1 p-1 text-center">'+getNextBirthdayDate(birthdayStudents[i].birthday).toLocaleDateString([], {month: "numeric", day: "numeric"})+'</div></div>'
                 }
                 $('#ba-home-birthdays-list').html(birthdaysHtml)
             } else {
@@ -1173,48 +1168,65 @@ function loadCraft(id) {
     }
 }
 
-function loadRaid(raidName) {
+function loadRaid(raidId) {
+    selectedEnemy = 0
     if (loadedModule == 'raids') {
-        selectedEnemy = 0
-        raid = findOrDefault(data.raids,"name_dev",raidName,'Binah')[0]
-        if (raid.released_insane[regionID]) {
-            $('#ba-raid-difficulty-5').toggleClass('disabled', false)
-        } else {
-            $('#ba-raid-difficulty-5').toggleClass('disabled', true)
-            if (raid_difficulty == 5)  {
-                raid_difficulty = 0
+        if (parseInt(raidId) == NaN) {raidId = 1}
+        if (regionID == 1 && raidId >= 1000) {raidId = 1}
+        if (raidId < 1000) {
+            $('#ba-raid-list-tab-raid').tab('show')
+            $('#ba-raid-info').show()
+            $('#ba-timeattack-info').hide()
+            raid = findOrDefault(data.raids.total_assault,"id",raidId,1)[0]
+            if (raid.released_insane[regionID]) {
+                $('#ba-raid-difficulty-5').toggleClass('disabled', false)
+            } else {
+                $('#ba-raid-difficulty-5').toggleClass('disabled', true)
+                if (raid_difficulty == 5)  {
+                    raid_difficulty = 0
+                }
             }
-        }
-        $(`#ba-raid-difficulty-${raid_difficulty}`).tab('show')
+            $(`#ba-raid-difficulty-${raid_difficulty}`).tab('show')
+        
+            $('#ba-raid-affiliation').text(raid.affiliation)
+            $('#ba-raid-name').text(raid['name_'+userLang])
+            //$('#ba-raid-header-img').attr('src', `images/raid/Boss_Portrait_${raid.name_dev}${difficulty == 5 ? "_Insane" : ""}_Lobby.png`)
+        
+            $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.terrains[0]}.png`)
+            if (raid.terrains.length > 1) {
+                $('#ba-raid-terrain-alt-img').attr('src', `images/ui/Terrain_${raid.terrains[1]}.png`)
+                $('#ba-raid-terrain-alt').show()
+            } else {
+                $('#ba-raid-terrain-alt').hide()
+            }
     
-        $('#ba-raid-affiliation').text(raid.affiliation)
-        $('#ba-raid-name').text(raid['name_'+userLang])
-        //$('#ba-raid-header-img').attr('src', `images/raid/Boss_Portrait_${raid.name_dev}${difficulty == 5 ? "_Insane" : ""}_Lobby.png`)
-    
-        $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.terrains[0]}.png`)
-        if (raid.terrains.length > 1) {
-            $('#ba-raid-terrain-alt-img').attr('src', `images/ui/Terrain_${raid.terrains[1]}.png`)
-            $('#ba-raid-terrain-alt').show()
+            if (!raid.released_insane[regionID] && raid_difficulty == 5) {raid_difficulty = 0}
+            changeRaidDifficulty(raid_difficulty)
         } else {
-            $('#ba-raid-terrain-alt').hide()
-        }
+            $('#ba-raid-list-tab-timeattack').tab('show')
+            $('#ba-raid-info').hide()
+            $('#ba-timeattack-info').show()
+            raid = findOrDefault(data.raids.time_attack,"id",raidId,1000)[0]
+            $(`#ba-timeattack-difficulty-${ta_difficulty}`).tab('show')
+            $('#ba-timeattack-name').text(getLocalStringIfAvailable(raid, 'name'))
+            $('#ba-timeattack-terrain-img').attr('src', `images/ui/Terrain_${raid.terrain}.png`)
 
-        if (!raid.released_insane[regionID] && raid_difficulty == 5) {raid_difficulty = 0}
-        changeRaidDifficulty(raid_difficulty)
+            changeTimeAttackDifficulty(ta_difficulty)
+        }
 
         var url = new URL(window.location.href)
-        if (url.searchParams.get("raid") !== raid.name_dev) {
+        if (url.searchParams.get("raid") != raid.id) {
             url.searchParams.forEach((v,k) => url.searchParams.delete(k))
-            url.searchParams.set("raid", raid.name_dev)
+            url.searchParams.set("raid", raid.id)
             history.pushState(null, '', url)
         }
     
         document.title = `Schale DB | ${getLocalStringIfAvailable(raid,'name')}`
         $('#ba-navbar-content').collapse('hide')
         window.scrollTo({top: 0, left: 0, behavior: 'instant'})
-        localStorage.setItem("raid", raid.name_dev)
+        localStorage.setItem("raid", raid.id)
     } else {
-        loadModule('raids', raidName)
+        loadModule('raids', raidId)
     }
 }
 
@@ -1253,6 +1265,48 @@ function changeRaidDifficulty(difficultyId) {
     })
     
     changeRaidEnemy(selectedEnemy)
+}
+
+function changeTimeAttackDifficulty(difficultyId) {
+    ta_difficulty = difficultyId
+    let rulesHTML = '', enemyHTML = '';
+    $('#ba-timeattack-level').text(`Lv. ${raid.level[ta_difficulty]}`)
+    
+    // let all_enemies = {}
+    // for (let i = 0; i < raid.enemies[ta_difficulty].length; i++) {
+    //     let enemy = find(data.enemies, "id", raid.enemies[ta_difficulty][i])[0]
+    //     all_enemies[enemy_rank[enemy.rank]+'_'+enemy.id+'_'+raid.level[ta_difficulty]+'_1'] = enemy
+    // }
+    let isfirst = true
+    raid.enemies[ta_difficulty].forEach(function(el, i) {
+        let enemy = find(data.enemies, "id", raid.enemies[ta_difficulty][i])[0]
+        enemyHTML += getEnemyCardHTML(enemy, raid.level[ta_difficulty], 1, 1)
+        if (isfirst) {
+            showEnemyInfo(enemy.id, raid.level[ta_difficulty], 1, 1)
+            isfirst = false
+        }
+    })
+    $('#ba-stage-enemies').html(enemyHTML)
+
+    raid.rules.forEach(function(el, i) {
+        if (ta_difficulty < el.min_difficulty) return
+        if (rulesHTML != '') rulesHTML += '<div class="ba-panel-separator"></div>'
+        rulesHTML += `
+        <div class="d-flex flex-row align-items-start mt-2">
+            <img class="ba-raid-skill d-inline-block me-3" src="images/timeattack/${el.icon}.png">
+            <div class="d-inline-block">
+                <div>
+                    <h4 class="me-2 d-inline">${getLocalStringIfAvailable(el, 'name')}</h4>
+                    <p class="mt-1 mb-2 p-1">${getSkillText(getLocalStringIfAvailable(el, 'description'), [], 0, 'raid')}</p>
+                </div>
+            </div>
+        </div>
+        `
+    })
+    $('#ba-timeattack-rules').empty().html(rulesHTML)
+    $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+        $(el).tooltip({html: true})
+    })
 }
 
 function changeRaidEnemy(num) {
@@ -1739,7 +1793,6 @@ function getStudentListCardHTML(student) {
 }
 
 function getItemCardHTML(item, linkid, icontype) {
-
     var html = `<div id="ba-item-select-${item["id"]}" class="ba-select-grid-item unselectable" title="${getBasicTooltip(getLocalStringIfAvailable(item,'name'))}">
     <div onclick="loadItem('${linkid}')" class="ba-item-card">
     <div class="ba-item-card-img"><img class="ba-item-${item.rarity.toLowerCase()}" loading="lazy" src="images/${icontype}/${item["icon"]}.png"></div></div></div>`
@@ -1767,7 +1820,7 @@ function getStageCardHTML(stage, dropChance = 0) {
 
 function getRaidCardHTML(raid, terrain='') {
     var html = `<div id="ba-raid-select-${raid["id"]}" class="ba-select-grid-item unselectable">
-    <div onclick="loadRaid('${raid["name_dev"]}');" class="ba-raid-card">
+    <div onclick="loadRaid(${raid["id"]});" class="ba-raid-card">
     <div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/raid/${raid['background_img']}.png');"></div></div>
     <div class="ba-raid-card-img"><img src="images/raid/${raid["portrait_img"]}.png"></div>
     <div class="ba-raid-card-def bg-def-${raid["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
@@ -1778,8 +1831,19 @@ function getRaidCardHTML(raid, terrain='') {
     return html
 }
 
-function getEnemyCardHTML(enemy, level, grade) {
-    var html = `<div class="ba-icon-enemy unselectable" onclick="showEnemyInfo(${enemy.id},${level},${grade})"><img src="images/enemy/${enemy.icon}.png">`
+function getTimeAttackCardHTML(raid) {
+    var html = `<div id="ba-raid-select-${raid["id"]}" class="ba-select-grid-item unselectable">
+    <div onclick="loadRaid(${raid["id"]});" class="ba-raid-card">
+    <div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/timeattack/${raid['background_img']}.png');"></div></div>
+    <div class="ba-ta-card-img"><img src="images/enemy/${raid["enemy_img"]}.png"></div>
+    <div class="ba-raid-card-def bg-def-${raid["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>
+    <div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/terrain_${raid.terrain}.png"></div>`
+    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${raid['name_'+userLang]}</span></div></div></div>`
+    return html
+}
+
+function getEnemyCardHTML(enemy, level, grade, scaletype=0) {
+    var html = `<div class="ba-icon-enemy unselectable" onclick="showEnemyInfo(${enemy.id},${level},${grade},${scaletype})"><img src="images/enemy/${enemy.icon}.png">`
     if (enemy.rank == 'Elite') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Elite.png" style="width:22px;"></span>`
     else if (enemy.rank == 'Champion') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Champion.png" style="width:31px;"></span>`
     html += `<span class="ba-enemy-card-lv">Lv.${level}</span><span class="ba-enemy-card-atk bg-atk-${enemy["attack_type"].toLowerCase()}"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></span>
@@ -1787,39 +1851,36 @@ function getEnemyCardHTML(enemy, level, grade) {
     return html
 }
 
-function showEnemyInfo(id, level, grade=1) {
-    var enemy = find(data.enemies, 'id', id)[0]
+function showEnemyInfo(id, level, grade=1, scaletype=0) {
+    let enemy = find(data.enemies, 'id', id)[0]
     $('#ba-stage-enemy-name').text(enemy['name_'+userLang])
     $('#ba-stage-enemy-img').attr('src', `images/enemy/${enemy.icon}.png`)
     $('#ba-stage-enemy-rank').text('Lv.'+level + ' ' + getLocalizedString('enemy_rank', enemy.rank.toLowerCase()))
     $('#ba-stage-enemy-class').text(enemy.type).removeClass("bg-striker bg-special").addClass(`bg-${enemy.type.toLowerCase()}`)
-
     $("#ba-stage-enemy-attacktype").removeClass("bg-atk-normal bg-atk-explosive bg-atk-piercing bg-atk-mystic").addClass(`bg-atk-${enemy.attack_type.toLowerCase()}`)
     $("#ba-stage-enemy-defensetype").removeClass("bg-def-light bg-def-heavy bg-def-special").addClass(`bg-def-${enemy.defense_type.toLowerCase()}`)
-    
     $("#ba-stage-enemy-attacktype-label").text(getLocalizedString('attack_type',enemy.attack_type.toLowerCase()))
     $('#ba-stage-enemy-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${enemy.attack_type}`, 'Attack Type', null, getTypeText(enemy.attack_type), 32), placement: 'top', html: true})
     $("#ba-stage-enemy-defensetype-label").text(getLocalizedString('defense_type',enemy.defense_type.toLowerCase()))
     $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${enemy.defense_type} Armor`, 'Defense Type', null, getTypeText(enemy.defense_type), 32), placement: 'top', html: true})
 
-    var levelscale = ((level-1)/99).toFixed(4)
+    let levelscale
+    if (scaletype == 0) {
+        levelscale = ((level-1)/99).toFixed(4)
+    } else if (scaletype == 1) {
+        levelscale = getTimeAttackLevelScale(level)
+    }
+        
 
-    // var maxHP = Math.round((enemy.maxhp_1 + (enemy.maxhp_100-enemy.maxhp_1) * levelscale).toFixed(4))
-    // var attack = Math.round((enemy.attack_power_1 + (enemy.attack_power_100-enemy.attack_power_1) * levelscale).toFixed(4))
-    // var defense = Math.round((enemy.defense_power_1 + (enemy.defense_power_100-enemy.defense_power_1) * levelscale).toFixed(4))
-    // var healing = Math.round((enemy.heal_power_1 + (enemy.heal_power_100-enemy.heal_power_1) * levelscale).toFixed(4))
-
-    var maxHP = Math.ceil((Math.round((enemy.maxhp_1 + (enemy.maxhp_100-enemy.maxhp_1) * levelscale).toFixed(4)) * starscale_hp[grade-1]).toFixed(4))
-    var attack = Math.ceil((Math.round((enemy.attack_power_1 + (enemy.attack_power_100-enemy.attack_power_1) * levelscale).toFixed(4)) * starscale_attack[grade-1]).toFixed(4))
-    var defense = Math.round((enemy.defense_power_1 + (enemy.defense_power_100-enemy.defense_power_1) * levelscale).toFixed(4))
-    var healing = Math.ceil((Math.round((enemy.heal_power_1 + (enemy.heal_power_100-enemy.heal_power_1) * levelscale).toFixed(4)) * starscale_healing[grade-1]).toFixed(4))
-
+    let maxHP = Math.ceil((Math.round((enemy.maxhp_1 + (enemy.maxhp_100-enemy.maxhp_1) * levelscale).toFixed(4)) * starscale_hp[grade-1]).toFixed(4))
+    let attack = Math.ceil((Math.round((enemy.attack_power_1 + (enemy.attack_power_100-enemy.attack_power_1) * levelscale).toFixed(4)) * starscale_attack[grade-1]).toFixed(4))
+    let defense = Math.round((enemy.defense_power_1 + (enemy.defense_power_100-enemy.defense_power_1) * levelscale).toFixed(4))
+    let healing = Math.ceil((Math.round((enemy.heal_power_1 + (enemy.heal_power_100-enemy.heal_power_1) * levelscale).toFixed(4)) * starscale_healing[grade-1]).toFixed(4))
     
     $('#ba-stage-enemy-stat-maxhp').text(maxHP.toLocaleString())
     $('#ba-stage-enemy-stat-attack').text(attack.toLocaleString())
     $('#ba-stage-enemy-stat-defense').text(defense.toLocaleString())
     $('#ba-stage-enemy-stat-healing').text(healing.toLocaleString())
-
 
     $('#ba-stage-enemy-stat-accuracy').text(enemy.accuracy.toLocaleString())
     $('#ba-stage-enemy-stat-evasion').text(enemy.evasion.toLocaleString())
@@ -2053,19 +2114,19 @@ function populateRaidList() {
 
     var html
     html = ''
-    $.each(data.raids, function(i,el) {
+    $.each(data.raids.total_assault, function(i,el) {
         if (el.released[regionID])
         html += getRaidCardHTML(el)
     })
     $('#ba-raid-list-raid-grid').html(html)
 
-    // data.raids.forEach(function(el) {
-    //     if (el.released[regionID]) {
-    //         html += `<div class="ba-raid-list-entry my-2 text-shadow" style="background-image: url('images/raid/${el.background_img}.png')" onclick="loadRaid('${el.name_dev}')"><img class="ba-raid-portrait" src="images/raid/${el.portrait_img}.png"><span style="color:#fff;font-size:26px;font-weight:bold;position:absolute;left:10px;top:3px;">${el.name_en}</span></div>`
-    //     }
-    // })
+    html = ''
+    $.each(data.raids.time_attack, function(i,el) {
+        if (el.released[regionID])
+        html += getTimeAttackCardHTML(el)
+    })
+    $('#ba-raid-list-timeattack-grid').html(html)
 
-    // $("#ba-raid-list").html(html)
 }
 
 function getUsedByStudents(item) {
@@ -2462,9 +2523,9 @@ function allSearch() {
     })
 
     if (results.length < maxResults)
-    $.each(data.raids, function(i,el){
+    $.each(data.raids.total_assault, function(i,el){
         if (el['released'][regionID] && searchContains(searchTerm, el['name_'+userLang])) {
-            results.push({'name': el['name_'+userLang], 'icon': 'images/raid/'+el.portrait_img+'.png', 'type': 'Total Assault Boss', 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid('${el['name_dev']}')`})
+            results.push({'name': el['name_'+userLang], 'icon': 'images/raid/'+el.portrait_img+'.png', 'type': 'Total Assault Boss', 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el['id']})`})
             if (results.length >= maxResults) return false
         }
     })
@@ -2585,4 +2646,34 @@ function getFavouriteItems(tags) {
         }  
     }
     return [great, good]
+}
+
+function getCacheVerResourceName(res) {
+    return res + '?v=' + cache_ver
+}
+
+function getTimeAttackLevelScale(level) {
+    if (level <= 1) {
+        return 0
+    } else if (level == 2) {
+        return 0.0101
+    } else if (level <= 24) {
+        return 0.0707
+    } else if (level == 25) {
+        return 0.0808
+    } else if (level <= 39) {
+        return 0.1919
+    } else if (level == 40) {
+        return 0.2020
+    } else if (level <= 64) {
+        return 0.4444
+    } else if (level == 65) {
+        return 0.4545
+    } else if (level <= 77) {
+        return 0.7172
+    } else if (level == 78) {
+        return 0.7273
+    } else if (level >= 79) {
+        return ((level-1)/99).toFixed(4)
+    }
 }
