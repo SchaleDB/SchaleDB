@@ -1837,7 +1837,7 @@ function getTimeAttackCardHTML(raid) {
     <div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/timeattack/${raid['background_img']}.png');"></div></div>
     <div class="ba-ta-card-img"><img src="images/enemy/${raid["enemy_img"]}.png"></div>
     <div class="ba-raid-card-def bg-def-${raid["defense_type"].toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>
-    <div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/terrain_${raid.terrain}.png"></div>`
+    <div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${raid.terrain}.png"></div>`
     html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${raid['name_'+userLang]}</span></div></div></div>`
     return html
 }
