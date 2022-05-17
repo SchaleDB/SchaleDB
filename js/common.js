@@ -216,6 +216,8 @@ function loadModuleFromURL() {
     var urlVars = new URL(window.location.href).searchParams
     if (urlVars.get("chara")) {
         loadStudent(urlVars.get("chara"))
+    } else if (urlVars.get("charaid")) {
+        loadStudentById(urlVars.get("charaid"))
     } else if (urlVars.get("item")) {
         loadItem(urlVars.get("item"))
     } else if (urlVars.get("raid")) {
@@ -252,6 +254,8 @@ function loadModule(moduleName, entry=null) {
                 loadStudent(entry)
             } else if (urlVars.has("chara")) {
                 loadStudent(urlVars.get("chara"))
+            } else if (urlVars.has("charaid")) {
+                loadStudentById(urlVars.get("charaid"))
             } else if (localStorage.getItem("chara")) {
                 loadStudent(localStorage.getItem("chara"))
             } else {
@@ -751,278 +755,294 @@ function searchSetFilter(prop, value, runSearch = true) {
 
 }
 
+function processStudent() {
+    $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.name_dev}.webp`)
+    var bgimg = new Image()
+    bgimg.onload = function(){
+        $("#ba-background").css('background-image', `url('${bgimg.src}')`)
+    }
+    bgimg.src = `images/background/${student.background_img}.jpg`
+
+    $('#ba-student-name').html(student[`name_${userLang}`].replace('(', '<small>(').replace(')', ')</small>'))
+    $("#ba-student-class").text(student.type).removeClass("bg-striker bg-special").addClass(`bg-${student.type.toLowerCase()}`)
+    $("#ba-student-stars").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars))
+
+    $("#ba-student-limited").removeClass("ba-type-limited ba-type-event")
+    switch (student.is_limited) {
+        case 0:
+            $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars))
+            break;
+        case 1:
+            $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars) + ` (${getLocalizedString('rarity','limited')})`)
+            break;
+        case 2:
+            $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars) + ` (${getLocalizedString('rarity','event')})`)
+            break;
+    }
+    
+    showVehicleStats = false
+    if (student.tss_id > 0) {
+        let vehicle = find(data.tss_vehicles, 'id', student.tss_id)[0]
+        $('#ba-student-vehicle-0').addClass('active').text(student['name_'+userLang])
+        $('#ba-student-vehicle-1').removeClass('active').text(vehicle['name_'+userLang])
+        $('#ba-student-vehicle').show()
+    } else {
+        $('#ba-student-vehicle').hide()
+    }
+
+    $("#ba-student-role-label").text(getLocalizedString('role',student.role.toLowerCase()))
+    $("#ba-student-role-icon").attr("src", `images/ui/Role_${student.role}.png`)
+
+    $(".ba-skill, .ba-weapon-skill-plus").removeClass("bg-skill-explosive bg-skill-piercing bg-skill-mystic").addClass(`bg-skill-${student.attack_type.toLowerCase()}`)
+    $("#ba-student-attacktype").removeClass("bg-atk-explosive bg-atk-piercing bg-atk-mystic").addClass(`bg-atk-${student.attack_type.toLowerCase()}`)
+    $("#ba-student-defensetype").removeClass("bg-def-light bg-def-heavy bg-def-special").addClass(`bg-def-${student.defense_type.toLowerCase()}`)
+    
+    $("#ba-student-school-label").text(student.school)
+    $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
+    $("#ba-student-position-label").text(student.position.toUpperCase())
+    $("#ba-student-attacktype-label").text(getLocalizedString('attack_type',student.attack_type.toLowerCase()))
+    $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.attack_type}`, 'Attack Type', null, getTypeText(student.attack_type), 32), placement: 'top', html: true})
+    $("#ba-student-defensetype-label").text(getLocalizedString('defense_type',student.defense_type.toLowerCase()))
+    $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.defense_type} Armor`, 'Defense Type', null, getTypeText(student.defense_type), 32), placement: 'top', html: true})
+
+    updateGearIcon()
+    recalculateTerrainAffinity()
+
+    if (student.uses_cover) {
+        $("#ba-student-usescover-icon").show()
+    } else {
+        $("#ba-student-usescover-icon").hide()
+    }
+
+    $("#ba-student-weapontype-label").text(student.weapon_type)
+    $(".ba-type-weapon").css("background-image", "url('images/weapontype/Weapon_Icon_" + student.weapon_type_img + ".png')")
+
+    //Skills
+    $("#ba-skill-ex-name").text(student[`skill_ex_name_${userLang}`] ? student[`skill_ex_name_${userLang}`] : student.skill_ex_name_ja)
+    $("#ba-skill-normal-name").text(student[`skill_normal_name_${userLang}`] ? student[`skill_normal_name_${userLang}`] : student.skill_normal_name_ja)
+    $("#ba-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] : student.skill_passive_name_ja)
+    $("#ba-skill-sub-name").text(student[`skill_sub_name_${userLang}`] ? student[`skill_sub_name_${userLang}`] : student.skill_sub_name_ja)     
+
+    $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon+'.png')
+    $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon+'.png')
+    $('#ba-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon+'.png')
+    $('#ba-skill-sub-icon').attr("src", "images/skill/" + student.skill_sub_icon+'.png')
+
+    student.skill_ex_cost[0] == student.skill_ex_cost[4] ? $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic") : $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic").addClass(`ba-col-${student.attack_type.toLowerCase()}`)
+
+
+    //Skill materials
+    var html
+    for (let i = 2; i <= 5; i++) {
+        html = ''
+        $.each(student.skill_ex_upgrade_material[i-2], function(j, el) {
+            html += getMaterialIconHTML(el, student.skill_ex_upgrade_amount[i-2][j])
+        })
+        html += getMaterialIconHTML(3000001, abbreviateNumber(skill_ex_upgrade_credits[i-2]))
+
+        $('#ba-skill-ex-materials-'+i).html(html)
+        $('#ba-skill-ex-materials-'+i+' div').each(function(j,el) {
+            $(el).tooltip({html: true})
+        })
+    }
+
+    for (let i = 2; i <= 9; i++) {
+        html = ''
+        $.each(student.skill_upgrade_material[i-2], function(j, el) {
+            html += getMaterialIconHTML(el, student.skill_upgrade_amount[i-2][j])
+        })
+        html += getMaterialIconHTML(3000001, abbreviateNumber(skill_upgrade_credits[i-2]))
+
+        $('#ba-skill-materials-'+i).html(html)
+        $('#ba-skill-materials-'+i+' div').each(function(j,el) {
+            $(el).tooltip({html: true})
+        })
+    }
+
+    html = ''
+    html += getMaterialIconHTML(9999, 1)
+    html += getMaterialIconHTML(3000001, abbreviateNumber(skill_upgrade_credits[8]))
+
+    $('#ba-skill-materials-10').html(html)
+    $('#ba-skill-materials-10 div').each(function(i,el) {
+        $(el).tooltip({html: true})
+    })
+
+    //Weapon
+    $("#ba-student-weapon-name").text(student[`weapon_name_${userLang}`] ? student[`weapon_name_${userLang}`]: student.weapon_name_ja)
+    $("#ba-student-weapon-type").text(student.weapon_type)
+    $("#ba-student-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
+
+    if (student[`weapon_skill_passive_description_${userLang}`] != null) {
+        $("#ba-weapon-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] + getLocalizedString('ui',"skill_plus") : student.skill_passive_name_ja + '＋')
+        $('#ba-weapon-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon+'.png')
+        recalculateWeaponSkillPreview()
+    }
+
+    $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.weapon_bonus_terrain}.png`)
+    $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount]}.png`)
+    $('#ba-weapon-bonus-terrain-adaption-description').html(`${getLocalizedString('terrain',student.weapon_bonus_terrain)} Combat Power ${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']]} → <b>${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount]}</b><br>(${getAdaptionText(student.weapon_bonus_terrain, terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount])})`)
+
+    var url = new URL(window.location.href)
+
+    if (url.searchParams.get("chara") !== student.name_dev) {
+        url.searchParams.forEach((v,k) => url.searchParams.delete(k))
+        url.searchParams.set("chara", student.name_dev)
+        history.pushState(null, '', url)
+    }
+    
+    // $.each(student.weapon_bonus_stats, function(i, el) {
+    //     $(`#ba-weapon-stat-${i+1}`).text(getStatName(student.weapon_bonus_stats[i]))
+    //     $(`#ba-weapon-stat-${i+1}-amount`).text(student.weapon_bonus_stats_parameters[i][0])
+    // }) 
+
+    if (student.weapon_heal_power_100 > 0) {
+        $('#ba-weapon-stat-row2').show()
+    } else {
+        $('#ba-weapon-stat-row2').hide()
+    }
+
+    $('#ba-weapon-description').text(getLocalStringIfAvailable(student,'weapon_description').replace("\n\n", "\n"))
+
+    //Profile
+    if (userLang == 'en') {
+        $('#ba-student-fullname').text(getLocalStringIfAvailable(student,'family_name')+' '+getLocalStringIfAvailable(student,'given_name'))
+    } else {
+        $('#ba-student-fullname').text(getLocalStringIfAvailable(student,'family_name')+getLocalStringIfAvailable(student,'given_name'))
+    }
+    // $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + ".png")
+    // $("#ba-profile-school-img-w").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
+    $('#ba-profile-school-label').text(getLocalizedString('school_long',student.school.toLowerCase()))
+    $('#ba-profile-club-label').text(getLocalizedString('club',student.club))
+    student[`year_${userLang}`] == "" ? $('#ba-profile-schoolyear-label').hide() : $('#ba-profile-schoolyear-label').show()
+    $('#ba-profile-schoolyear-label').text(student[`year_${userLang}`])
+    $('#ba-profile-portrait-img').attr("src", `images/student/collection/${student.portrait_img}.webp`)
+    var profileHtml = ''
+    profileHtml += student[`profile_${userLang}`] ? student[`profile_${userLang}`] : student['profile_ja']
+    if (student.stars == 3) {
+        if (student[`gacha_quote_${userLang}`]) profileHtml += `\n\n<i class="text-bold">"${student[`gacha_quote_${userLang}`]}"</i>`
+        else profileHtml += `\n\n<i class="text-bold">"${student['gacha_quote_ja']}"</i>`
+    }
+    $('#ba-student-profile-text').html(profileHtml)
+
+    if (student.recollection_lobby) {
+        $(".ba-student-lobby").show()
+        $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.name_dev}_01.png`)
+        $("#ba-student-lobby-unlock").text(student.recollection_lobby)
+        $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, `${student['name_'+userLang]}'s Recollection Lobby`, null, null, `Unlocks after reaching relationship rank ${student.recollection_lobby} with ${student['name_'+userLang]}.`), placement: 'top', html: true})
+    } else {
+        $(".ba-student-lobby").hide()
+    }
+    
+    $('#ba-student-profile-age').text(getLocalStringIfAvailable(student,'age'))
+    $('#ba-student-profile-birthday').text(getLocalStringIfAvailable(student,'birthday'))
+    $('#ba-student-profile-hobbies').text(getLocalStringIfAvailable(student,'hobbies'))
+    $('#ba-student-profile-height').text(student.height_metric)
+    $('#ba-student-profile-cv').text(getLocalStringIfAvailable(student,'cv'))
+    $('#ba-student-profile-illustrator').text(student.illustrator)
+
+    let allTags = student.favoured_item_tags
+    allTags.push(student.favoured_item_unique[0])
+    let favItems = getFavouriteItems(allTags)
+    var favItemsHtml = ""
+    $(favItems[0]).each(function(i,el){
+        favItemsHtml += getFavourIconHTML(el, 3)
+    })
+    $(favItems[1]).each(function(i,el){
+        favItemsHtml += getFavourIconHTML(el, 2)
+    })
+    $('#ba-student-favoured-items').empty().html(favItemsHtml)
+    if (favItemsHtml == "") {
+        $('#ba-student-favoured-items').empty().html('<span class="pb-2 text-center">This student does not have any favourite gifts.</span>')
+    } else {
+        $('#ba-student-favoured-items').empty().html(favItemsHtml)
+    }
+
+    var favFurnitureHtml = ""
+    $(student.favoured_furniture).each(function(i,el){
+        var item = find(data.furniture, "id", el)[0]
+        if (item.released[regionID]) {
+            favFurnitureHtml += getFurnitureIconHTML(item)
+        }
+    })
+
+    $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
+    if (favFurnitureHtml == "") {
+        $('#ba-student-favoured-furniture').empty().html('<span class="pb-2 text-center">This student does not interact with any café furniture.</span>')
+    } else {
+        $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
+    }
+    $('.ba-favor-item').tooltip({html: true})
+
+    $('#ba-student-bond-1').text(getStatName(student.bond_stat[0]))
+    $('#ba-student-bond-2').text(getStatName(student.bond_stat[1]))
+
+    if (student.type == "Striker") {
+        $('#ba-student-stat-table').removeClass("table-striker-bonus")
+        $('#ba-statpreview-strikerbonus').removeClass('active').hide()
+    } else {
+        $('#ba-statpreview-strikerbonus').show()
+    }
+    
+    $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(1, student))
+    student_bondalts = []
+    for (let i = 0; i < student.bond_extratarget.length; i++) {
+        var extraTarget = find(data.students,"id",student.bond_extratarget[i])[0]
+        if (extraTarget.released[regionID]) {
+            student_bondalts.push(extraTarget)
+            $('#ba-statpreview-bond-targets').append(getBondTargetsHTML(1 + student_bondalts.length, extraTarget))
+        }
+    }
+
+    document.title = `Schale DB | ${getLocalStringIfAvailable(student,'name')}`
+    $('#ba-navbar-content').collapse('hide')
+    window.scrollTo({top: 0, left: 0, behavior: 'instant'})
+
+    changeStatPreviewStars(student.stars)
+    recalculateWeaponPreview()
+    recalculateStatPreview()
+    recalculateSkillPreview()
+    recalculateEXSkillPreview()
+    recalculateBondPreview()
+
+    changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'))
+    changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'))
+    changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'))
+
+    for (let i = 1; i <= student_bondalts.length+1; i++) {
+        changeStatPreviewBondLevel(i, document.getElementById(`ba-statpreview-bond-${i}-range`))
+    }
+    //changeStatPreviewWeaponLevel(document.getElementById(`ba-statpreview-weapon-range`))
+    
+    localStorage.setItem("chara", student.name_dev)
+    studentSelectorModal.hide()
+}
+
 function loadStudent(studentName) {
     if (loadedModule == 'students') {
         student = find(data.students,"name_dev",studentName)
 
         if (student.length == 1) {
-            //console.log(student[0])
-            student = student[0]
-            $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.name_dev}.webp`)
-            var bgimg = new Image()
-            bgimg.onload = function(){
-                $("#ba-background").css('background-image', `url('${bgimg.src}')`)
-            }
-            bgimg.src = `images/background/${student.background_img}.jpg`
-    
-            $('#ba-student-name').html(student[`name_${userLang}`].replace('(', '<small>(').replace(')', ')</small>'))
-            $("#ba-student-class").text(student.type).removeClass("bg-striker bg-special").addClass(`bg-${student.type.toLowerCase()}`)
-            $("#ba-student-stars").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars))
-    
-            $("#ba-student-limited").removeClass("ba-type-limited ba-type-event")
-            switch (student.is_limited) {
-                case 0:
-                    $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars))
-                    break;
-                case 1:
-                    $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars) + ` (${getLocalizedString('rarity','limited')})`)
-                    break;
-                case 2:
-                    $("#ba-student-limited").html('<i class="fa-solid fa-star"></i>'.repeat(student.stars) + ` (${getLocalizedString('rarity','event')})`)
-                    break;
-            }
-            
-            showVehicleStats = false
-            if (student.tss_id > 0) {
-                let vehicle = find(data.tss_vehicles, 'id', student.tss_id)[0]
-                $('#ba-student-vehicle-0').addClass('active').text(student['name_'+userLang])
-                $('#ba-student-vehicle-1').removeClass('active').text(vehicle['name_'+userLang])
-                $('#ba-student-vehicle').show()
-            } else {
-                $('#ba-student-vehicle').hide()
-            }
-
-            $("#ba-student-role-label").text(getLocalizedString('role',student.role.toLowerCase()))
-            $("#ba-student-role-icon").attr("src", `images/ui/Role_${student.role}.png`)
-    
-            $(".ba-skill, .ba-weapon-skill-plus").removeClass("bg-skill-explosive bg-skill-piercing bg-skill-mystic").addClass(`bg-skill-${student.attack_type.toLowerCase()}`)
-            $("#ba-student-attacktype").removeClass("bg-atk-explosive bg-atk-piercing bg-atk-mystic").addClass(`bg-atk-${student.attack_type.toLowerCase()}`)
-            $("#ba-student-defensetype").removeClass("bg-def-light bg-def-heavy bg-def-special").addClass(`bg-def-${student.defense_type.toLowerCase()}`)
-            
-            $("#ba-student-school-label").text(student.school)
-            $("#ba-student-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
-            $("#ba-student-position-label").text(student.position.toUpperCase())
-            $("#ba-student-attacktype-label").text(getLocalizedString('attack_type',student.attack_type.toLowerCase()))
-            $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.attack_type}`, 'Attack Type', null, getTypeText(student.attack_type), 32), placement: 'top', html: true})
-            $("#ba-student-defensetype-label").text(getLocalizedString('defense_type',student.defense_type.toLowerCase()))
-            $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${student.defense_type} Armor`, 'Defense Type', null, getTypeText(student.defense_type), 32), placement: 'top', html: true})
-    
-            updateGearIcon()
-            recalculateTerrainAffinity()
-    
-            if (student.uses_cover) {
-                $("#ba-student-usescover-icon").show()
-            } else {
-                $("#ba-student-usescover-icon").hide()
-            }
-    
-            $("#ba-student-weapontype-label").text(student.weapon_type)
-            $(".ba-type-weapon").css("background-image", "url('images/weapontype/Weapon_Icon_" + student.weapon_type_img + ".png')")
-    
-            //Skills
-            $("#ba-skill-ex-name").text(student[`skill_ex_name_${userLang}`] ? student[`skill_ex_name_${userLang}`] : student.skill_ex_name_ja)
-            $("#ba-skill-normal-name").text(student[`skill_normal_name_${userLang}`] ? student[`skill_normal_name_${userLang}`] : student.skill_normal_name_ja)
-            $("#ba-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] : student.skill_passive_name_ja)
-            $("#ba-skill-sub-name").text(student[`skill_sub_name_${userLang}`] ? student[`skill_sub_name_${userLang}`] : student.skill_sub_name_ja)     
-    
-            $('#ba-skill-ex-icon').attr("src", "images/skill/" + student.skill_ex_icon+'.png')
-            $('#ba-skill-normal-icon').attr("src", "images/skill/" + student.skill_normal_icon+'.png')
-            $('#ba-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon+'.png')
-            $('#ba-skill-sub-icon').attr("src", "images/skill/" + student.skill_sub_icon+'.png')
-    
-            student.skill_ex_cost[0] == student.skill_ex_cost[4] ? $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic") : $("#ba-skill-ex-cost").removeClass("ba-col-explosive ba-col-piercing ba-col-mystic").addClass(`ba-col-${student.attack_type.toLowerCase()}`)
-    
-    
-            //Skill materials
-            var html
-            for (let i = 2; i <= 5; i++) {
-                html = ''
-                $.each(student.skill_ex_upgrade_material[i-2], function(j, el) {
-                    html += getMaterialIconHTML(el, student.skill_ex_upgrade_amount[i-2][j])
-                })
-                html += getMaterialIconHTML(3000001, abbreviateNumber(skill_ex_upgrade_credits[i-2]))
-        
-                $('#ba-skill-ex-materials-'+i).html(html)
-                $('#ba-skill-ex-materials-'+i+' div').each(function(j,el) {
-                    $(el).tooltip({html: true})
-                })
-            }
-    
-            for (let i = 2; i <= 9; i++) {
-                html = ''
-                $.each(student.skill_upgrade_material[i-2], function(j, el) {
-                    html += getMaterialIconHTML(el, student.skill_upgrade_amount[i-2][j])
-                })
-                html += getMaterialIconHTML(3000001, abbreviateNumber(skill_upgrade_credits[i-2]))
-        
-                $('#ba-skill-materials-'+i).html(html)
-                $('#ba-skill-materials-'+i+' div').each(function(j,el) {
-                    $(el).tooltip({html: true})
-                })
-            }
-    
-            html = ''
-            html += getMaterialIconHTML(9999, 1)
-            html += getMaterialIconHTML(3000001, abbreviateNumber(skill_upgrade_credits[8]))
-    
-            $('#ba-skill-materials-10').html(html)
-            $('#ba-skill-materials-10 div').each(function(i,el) {
-                $(el).tooltip({html: true})
-            })
-    
-            //Weapon
-            $("#ba-student-weapon-name").text(student[`weapon_name_${userLang}`] ? student[`weapon_name_${userLang}`]: student.weapon_name_ja)
-            $("#ba-student-weapon-type").text(student.weapon_type)
-            $("#ba-student-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.id}.png`)
-    
-            if (student[`weapon_skill_passive_description_${userLang}`] != null) {
-                $("#ba-weapon-skill-passive-name").text(student[`skill_passive_name_${userLang}`] ? student[`skill_passive_name_${userLang}`] + getLocalizedString('ui',"skill_plus") : student.skill_passive_name_ja + '＋')
-                $('#ba-weapon-skill-passive-icon').attr("src", "images/skill/" + student.skill_passive_icon+'.png')
-                recalculateWeaponSkillPreview()
-            }
-    
-            $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.weapon_bonus_terrain}.png`)
-            $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount]}.png`)
-            $('#ba-weapon-bonus-terrain-adaption-description').html(`${getLocalizedString('terrain',student.weapon_bonus_terrain)} Combat Power ${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']]} → <b>${terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount]}</b><br>(${getAdaptionText(student.weapon_bonus_terrain, terrain_adaption[student[student.weapon_bonus_terrain+'_adaption']+student.weapon_bonus_terrain_amount])})`)
-    
-            var url = new URL(window.location.href)
-    
-            if (url.searchParams.get("chara") !== student.name_dev) {
-                url.searchParams.forEach((v,k) => url.searchParams.delete(k))
-                url.searchParams.set("chara", student.name_dev)
-                history.pushState(null, '', url)
-            }
-            
-            // $.each(student.weapon_bonus_stats, function(i, el) {
-            //     $(`#ba-weapon-stat-${i+1}`).text(getStatName(student.weapon_bonus_stats[i]))
-            //     $(`#ba-weapon-stat-${i+1}-amount`).text(student.weapon_bonus_stats_parameters[i][0])
-            // }) 
-    
-            if (student.weapon_heal_power_100 > 0) {
-                $('#ba-weapon-stat-row2').show()
-            } else {
-                $('#ba-weapon-stat-row2').hide()
-            }
-    
-            $('#ba-weapon-description').text(getLocalStringIfAvailable(student,'weapon_description').replace("\n\n", "\n"))
-    
-            //Profile
-            if (userLang == 'en') {
-                $('#ba-student-fullname').text(getLocalStringIfAvailable(student,'family_name')+' '+getLocalStringIfAvailable(student,'given_name'))
-            } else {
-                $('#ba-student-fullname').text(getLocalStringIfAvailable(student,'family_name')+getLocalStringIfAvailable(student,'given_name'))
-            }
-            // $("#ba-profile-school-img").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + ".png")
-            // $("#ba-profile-school-img-w").attr("src", "images/schoolicon/School_Icon_" + student.school.toUpperCase().replace(" ","") + "_W.png")
-            $('#ba-profile-school-label').text(getLocalizedString('school_long',student.school.toLowerCase()))
-            $('#ba-profile-club-label').text(getLocalizedString('club',student.club))
-            student[`year_${userLang}`] == "" ? $('#ba-profile-schoolyear-label').hide() : $('#ba-profile-schoolyear-label').show()
-            $('#ba-profile-schoolyear-label').text(student[`year_${userLang}`])
-            $('#ba-profile-portrait-img').attr("src", `images/student/collection/${student.portrait_img}.webp`)
-            var profileHtml = ''
-            profileHtml += student[`profile_${userLang}`] ? student[`profile_${userLang}`] : student['profile_ja']
-            if (student.stars == 3) {
-                if (student[`gacha_quote_${userLang}`]) profileHtml += `\n\n<i class="text-bold">"${student[`gacha_quote_${userLang}`]}"</i>`
-                else profileHtml += `\n\n<i class="text-bold">"${student['gacha_quote_ja']}"</i>`
-            }
-            $('#ba-student-profile-text').html(profileHtml)
-    
-            if (student.recollection_lobby) {
-                $(".ba-student-lobby").show()
-                $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.name_dev}_01.png`)
-                $("#ba-student-lobby-unlock").text(student.recollection_lobby)
-                $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, `${student['name_'+userLang]}'s Recollection Lobby`, null, null, `Unlocks after reaching relationship rank ${student.recollection_lobby} with ${student['name_'+userLang]}.`), placement: 'top', html: true})
-            } else {
-                $(".ba-student-lobby").hide()
-            }
-            
-            $('#ba-student-profile-age').text(getLocalStringIfAvailable(student,'age'))
-            $('#ba-student-profile-birthday').text(getLocalStringIfAvailable(student,'birthday'))
-            $('#ba-student-profile-hobbies').text(getLocalStringIfAvailable(student,'hobbies'))
-            $('#ba-student-profile-height').text(student.height_metric)
-            $('#ba-student-profile-cv').text(getLocalStringIfAvailable(student,'cv'))
-            $('#ba-student-profile-illustrator').text(student.illustrator)
-    
-            let allTags = student.favoured_item_tags
-            allTags.push(student.favoured_item_unique[0])
-            let favItems = getFavouriteItems(allTags)
-            var favItemsHtml = ""
-            $(favItems[0]).each(function(i,el){
-                favItemsHtml += getFavourIconHTML(el, 3)
-            })
-            $(favItems[1]).each(function(i,el){
-                favItemsHtml += getFavourIconHTML(el, 2)
-            })
-            $('#ba-student-favoured-items').empty().html(favItemsHtml)
-            if (favItemsHtml == "") {
-                $('#ba-student-favoured-items').empty().html('<span class="pb-2 text-center">This student does not have any favourite gifts.</span>')
-            } else {
-                $('#ba-student-favoured-items').empty().html(favItemsHtml)
-            }
-    
-            var favFurnitureHtml = ""
-            $(student.favoured_furniture).each(function(i,el){
-                var item = find(data.furniture, "id", el)[0]
-                if (item.released[regionID]) {
-                    favFurnitureHtml += getFurnitureIconHTML(item)
-                }
-            })
-    
-            $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
-            if (favFurnitureHtml == "") {
-                $('#ba-student-favoured-furniture').empty().html('<span class="pb-2 text-center">This student does not interact with any café furniture.</span>')
-            } else {
-                $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
-            }
-            $('.ba-favor-item').tooltip({html: true})
-    
-            $('#ba-student-bond-1').text(getStatName(student.bond_stat[0]))
-            $('#ba-student-bond-2').text(getStatName(student.bond_stat[1]))
-    
-            if (student.type == "Striker") {
-                $('#ba-student-stat-table').removeClass("table-striker-bonus")
-                $('#ba-statpreview-strikerbonus').removeClass('active').hide()
-            } else {
-                $('#ba-statpreview-strikerbonus').show()
-            }
-            
-            $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(1, student))
-            student_bondalts = []
-            for (let i = 0; i < student.bond_extratarget.length; i++) {
-                var extraTarget = find(data.students,"id",student.bond_extratarget[i])[0]
-                if (extraTarget.released[regionID]) {
-                    student_bondalts.push(extraTarget)
-                    $('#ba-statpreview-bond-targets').append(getBondTargetsHTML(1 + student_bondalts.length, extraTarget))
-                }
-            }
-    
-            document.title = `Schale DB | ${getLocalStringIfAvailable(student,'name')}`
-            $('#ba-navbar-content').collapse('hide')
-            window.scrollTo({top: 0, left: 0, behavior: 'instant'})
-    
-            changeStatPreviewStars(student.stars)
-            recalculateWeaponPreview()
-            recalculateStatPreview()
-            recalculateSkillPreview()
-            recalculateEXSkillPreview()
-            recalculateBondPreview()
-    
-            changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'))
-            changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'))
-            changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'))
-    
-            for (let i = 1; i <= student_bondalts.length+1; i++) {
-                changeStatPreviewBondLevel(i, document.getElementById(`ba-statpreview-bond-${i}-range`))
-            }
-            //changeStatPreviewWeaponLevel(document.getElementById(`ba-statpreview-weapon-range`))
-            
-            localStorage.setItem("chara", student.name_dev)
-            studentSelectorModal.hide()
+            student = student[0];
+            processStudent()
         }
     } else {
         loadModule('students', studentName)
     }
-    
+}
+
+function loadStudentById(studentId) {
+    if (loadedModule == 'students') {
+        student = find(data.students,"id",studentId)
+        console.log(student);
+
+        if (student.length == 1) {
+            student = student[0];
+            processStudent()
+        }
+    } else {
+        loadModule('students')
+    }
 }
 
 function changeStudentVehicle(vehicleID) {
