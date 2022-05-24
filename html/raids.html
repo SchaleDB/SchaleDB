@@ -6,8 +6,8 @@
                     <div id="ba-raid-list-container" class="card p-2 screen-height mobile-scroll">
                         <div class="card-header">
                             <nav id="ba-raid-list-tabs" class="nav nav-pills mb-1 px-2">
-                                <a id="ba-raid-list-tab-raid" class="nav-link active" data-bs-toggle="tab" href="#ba-raid-list-raid" data-localize-id="mission_type,raid"></a>
-                                <a id="ba-raid-list-tab-timeattack" class="nav-link" data-bs-toggle="tab" href="#ba-raid-list-timeattack" data-localize-id="mission_type,timeattack"></a>
+                                <a id="ba-raid-list-tab-raid" class="nav-link active" data-bs-toggle="tab" href="#ba-raid-list-raid" data-localize-id="StageType,raid"></a>
+                                <a id="ba-raid-list-tab-timeattack" class="nav-link" data-bs-toggle="tab" href="#ba-raid-list-timeattack" data-localize-id="StageType,timeattack"></a>
                             </nav>
                         </div>
                         <div class="card-body">
@@ -37,7 +37,7 @@
                         <div id="ba-raid-header" class="">
                             <div class="pt-2">
                                 <h5 id="ba-raid-affiliation" class="px-1 mb-0"></h5>
-                                <h1 id="ba-raid-name" class="px-1 mb-2"></h1>
+                                <h1 id="ba-raid-name" class="title-text px-1 mb-2"></h1>
                                 <div class="d-flex align-items-center px-1">
                                     <span id="ba-raid-terrain" class="ba-panel me-2"><img id="ba-raid-terrain-img" class="ba-student-terrain-icon invert-light" src=""></span>
                                     <span id="ba-raid-terrain-alt" class="ba-panel me-2"><img id="ba-raid-terrain-alt-img" class="ba-student-terrain-icon invert-light" src=""></span>
@@ -72,13 +72,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,maxhp"></span>
+                                                            <span data-localize-id="Stat,MaxHP"></span>
                                                             <span id="ba-raid-stat-maxhp" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,attack_power"></span>
+                                                            <span data-localize-id="Stat,AttackPower"></span>
                                                             <span id="ba-raid-stat-attack" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -86,13 +86,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,defense_power"></span>
+                                                            <span data-localize-id="Stat,DefensePower"></span>
                                                             <span id="ba-raid-stat-defense" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,dmg_resist"></span>
+                                                            <span data-localize-id="Stat,DamagedRatio"></span>
                                                             <span id="ba-raid-stat-dmgresist" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -100,13 +100,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,accuracy"></span>
+                                                            <span data-localize-id="Stat,AccuracyPoint"></span>
                                                             <span id="ba-raid-stat-accuracy" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,evasion"></span>
+                                                            <span data-localize-id="Stat,DodgePoint"></span>
                                                             <span id="ba-raid-stat-evasion" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -114,13 +114,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,critical"></span>
+                                                            <span data-localize-id="Stat,CriticalPoint"></span>
                                                             <span id="ba-raid-stat-crit" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,critical_resist"></span>
+                                                            <span data-localize-id="Stat,CriticalChanceResistPoint"></span>
                                                             <span id="ba-raid-stat-critresist" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -128,13 +128,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,critical_damage"></span>
+                                                            <span data-localize-id="Stat,CriticalDamageRate"></span>
                                                             <span id="ba-raid-stat-critdmg" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,critical_damage_resist"></span>
+                                                            <span data-localize-id="Stat,CriticalDamageResistRate"></span>
                                                             <span id="ba-raid-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -158,8 +158,8 @@
                     <div class="card-header">
                         <div id="ba-timeattack-header" class="">
                             <div class="pt-2">
-                                <h5 id="ba-timeattack-type" class="px-1 mb-0" data-localize-id="mission_type,timeattack"></h5>
-                                <h1 id="ba-timeattack-name" class="px-1 mb-2"></h1>
+                                <h5 id="ba-timeattack-type" class="px-1 mb-0" data-localize-id="StageType,timeattack"></h5>
+                                <h1 id="ba-timeattack-name" class="title-text px-1 mb-2"></h1>
                                 <div class="d-flex align-items-center px-1">
                                     <span id="ba-timeattack-terrain" class="ba-panel me-2"><img id="ba-timeattack-terrain-img" class="ba-student-terrain-icon invert-light" src=""></span>
                                     <span id="ba-timeattack-level" class="ba-student-info ba-panel text-bold my-0"></span>
@@ -187,10 +187,10 @@
                             <div id="ba-stage-enemy-info" class="">
                                 <div class="d-flex align-items-center px-2 mb-1">
                                     <div class="flex-fill me-2">
-                                        <h2 id="ba-stage-enemy-name" class="mb-2"></h2>
+                                        <h2 id="ba-stage-enemy-name" class="title-text mb-2"></h2>
                                         <div class="mb-3">
-                                            <span id="ba-stage-enemy-rank" class="ba-student-info-s ba-panel text-bold" style="transition-duration: 0s;"></span>
-                                            <span id="ba-stage-enemy-class" class="ba-student-info-s" style="transition-duration: 0s;"></span>
+                                            <span id="ba-stage-enemy-rank" class="ba-info-pill-s bg-theme text-bold" style="transition-duration: 0s;"></span>
+                                            <span id="ba-stage-enemy-class" class="ba-info-pill-s" style="transition-duration: 0s;"></span>
                                         </div>
                                         <div class="d-flex flex-wrap align-items-center mb-2">
                                             <span id="ba-stage-enemy-attacktype" class="ba-info-pill"><img src="images/ui/Type_Attack.png"><span id="ba-stage-enemy-attacktype-label"></span></span>
@@ -206,13 +206,13 @@
                                         <tr>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,maxhp"></span>
+                                                    <span data-localize-id="Stat,MaxHP"></span>
                                                     <span id="ba-stage-enemy-stat-maxhp" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,attack_power"></span>
+                                                    <span data-localize-id="Stat,AttackPower"></span>
                                                     <span id="ba-stage-enemy-stat-attack" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
@@ -220,13 +220,13 @@
                                         <tr>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,defense_power"></span>
+                                                    <span data-localize-id="Stat,DefensePower"></span>
                                                     <span id="ba-stage-enemy-stat-defense" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,heal_power"></span>
+                                                    <span data-localize-id="Stat,HealPower"></span>
                                                     <span id="ba-stage-enemy-stat-healing" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
@@ -234,13 +234,13 @@
                                         <tr>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,accuracy"></span>
+                                                    <span data-localize-id="Stat,AccuracyPoint"></span>
                                                     <span id="ba-stage-enemy-stat-accuracy" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,evasion"></span>
+                                                    <span data-localize-id="Stat,DodgePoint"></span>
                                                     <span id="ba-stage-enemy-stat-evasion" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
@@ -248,13 +248,13 @@
                                         <tr>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,critical"></span>
+                                                    <span data-localize-id="Stat,CriticalPoint"></span>
                                                     <span id="ba-stage-enemy-stat-crit" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,critical_resist"></span>
+                                                    <span data-localize-id="Stat,CriticalChanceResistPoint"></span>
                                                     <span id="ba-stage-enemy-stat-critresist" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
@@ -262,13 +262,13 @@
                                         <tr>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,critical_damage"></span>
+                                                    <span data-localize-id="Stat,CriticalDamageRate"></span>
                                                     <span id="ba-stage-enemy-stat-critdmg" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,critical_damage_resist"></span>
+                                                    <span data-localize-id="Stat,CriticalDamageResistRate"></span>
                                                     <span id="ba-stage-enemy-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
@@ -276,13 +276,13 @@
                                         <tr>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,stability"></span>
+                                                    <span data-localize-id="Stat,StabilityPoint"></span>
                                                     <span id="ba-stage-enemy-stat-stability" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,range"></span>
+                                                    <span data-localize-id="Stat,Range"></span>
                                                     <span id="ba-stage-enemy-stat-range" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
@@ -290,13 +290,13 @@
                                         <tr>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,move_speed"></span>
+                                                    <span data-localize-id="Stat,MoveSpeed"></span>
                                                     <span id="ba-stage-enemy-stat-movespeed" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
                                             <td width="50%">
                                                 <div class="d-flex align-items-top justify-content-between">
-                                                    <span data-localize-id="stat,ammo"></span>
+                                                    <span data-localize-id="Stat,AmmoCount"></span>
                                                     <span id="ba-stage-enemy-stat-ammo" class="ms-2 text-bold text-end"></span>
                                                 </div>
                                             </td>
@@ -306,7 +306,6 @@
                             </div>
                         </div>
                     </div>
-    
                 </div>
             </div>
         </div>

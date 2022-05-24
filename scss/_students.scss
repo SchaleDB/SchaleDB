@@ -1,0 +1,23 @@
+#ba-student-modal-students {
+    @include lg-up {
+        .modal-body {
+            height: calc(100vh - 3rem);
+        }
+    }
+}
+
+#ba-student-modal-page {
+    height: 100%;
+    flex-wrap: nowrap;
+
+    @include md-down {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+#ba-student-usescover-icon {
+    height: 24px;
+    width: auto;
+    margin: -4px 0 0 -4px;
+}

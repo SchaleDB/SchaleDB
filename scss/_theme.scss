@@ -1,0 +1,133 @@
+// Put all CSS variables for theming here
+
+:root {
+    /* Colors */
+    --col-theme-glass: rgba(222, 226, 230, 0.6);
+    --col-theme-glass-navbar: rgba(222, 226, 230, 0.7);
+    --col-theme-glass-modal: rgba(255, 255, 255, 0.7);
+    --col-theme-accent: rgba(255, 255, 255, 0.3);
+    --col-theme-text: rgb(0, 0, 0);
+    --col-theme-logo: rgba(0, 107, 255, 1);
+    --col-theme-background: rgb(222, 226, 230);
+
+    --col-bg-explosive: rgba(167, 12, 25, 1);
+    --col-bg-piercing: rgba(178, 109, 31, 1);
+    --col-bg-mystic-t: rgba(33, 111, 156, 1);
+    --col-bg-explosive-t: rgba(167, 12, 25, 0.835);
+    --col-bg-piercing-t: rgba(178, 109, 31, 0.835);
+    --col-bg-mystic: rgba(33, 111, 156, 0.835);
+    --col-bg-buff: rgba(255, 79, 50, 0.122);
+    --col-bg-debuff: rgba(63, 158, 238, 0.122);
+    --col-bg-cc: rgba(175, 105, 246, 0.122);
+    --col-bg-status: rgba(255, 200, 50, 0.122);
+    --col-bg-normal: hsl(60, 0%, 45%);
+    --col-bg-striker: rgba(255, 255, 255, 0.3);
+    --col-bg-special: rgba(255, 255, 255, 0.3);
+    --col-bg-striker-t: rgba(204, 26, 37, 0.835);
+    --col-bg-special-t: rgba(0, 107, 255, 0.835);
+    --col-bg-position: rgb(44, 69, 99);
+    --col-bg-tooltip: rgb(23, 26, 28);
+    --col-bg-tooltip-body: rgba(0, 0, 0, 0.3);
+    --col-bg-item-n: rgba(190, 196, 201, 0.6);
+    --col-bg-item-r: rgba(122, 185, 255, 0.6);
+    --col-bg-item-sr: rgba(236, 160, 74, 0.6);
+    --col-bg-item-ssr: rgba(162, 105, 255, 0.6);
+    --col-bg-node-normal: rgba(44, 69, 99, 0.8);
+    --col-bg-node-rare: rgba(161, 111, 0, 0.8);
+
+    --col-text-explosive: hsl(355, 87%, 35%);
+    --col-text-piercing: hsl(32, 70%, 41%);
+    --col-text-mystic: hsl(202, 65%, 37%);
+    --col-text-buff: rgb(75, 16, 13);
+    --col-text-debuff: rgb(12, 39, 76);
+    --col-text-cc: rgb(47, 12, 76);
+    --col-text-status: rgb(76, 38, 12);
+    --col-text-striker: rgba(204, 26, 37, 1);
+    --col-text-special: rgba(0, 107, 255, 1);
+    --col-text-emphasis: rgb(0, 107, 255);
+    --col-text-stars: hsl(44, 100%, 48%);
+    --col-text-weaponstars: hsl(192, 100%, 48%);
+
+    --col-btn-primary: rgb(33, 37, 41);
+    --col-btn-secondary: rgb(222, 226, 230);
+    --col-btn-active-primary: rgb(255, 255, 255);
+    --col-btn-active-secondary: rgb(0, 0, 0);
+    --col-btn-primary-glow: rgba(0, 0, 0, 0.25);
+    --col-panel-separator: rgba(0, 0, 0, 0.25);
+    --col-bg-imglabel: rgba(255, 255, 255, 0.855);
+    
+    --var-background-brightness: 1;
+    --var-glass-filter: blur(4rem);
+    --var-glass-filter-navbar: blur(1rem);
+    --var-opacity-lightonly: 100%;
+    --var-opacity-darkonly: 0%;
+    --var-invert-light: invert(1);
+    --var-invert-light-hue: 180deg;
+    --var-invert-dark: invert(0);
+    --var-invert-dark-hue: 0deg;
+    --var-animation-duration: 200ms;
+}
+
+.theme-dark {
+    --col-theme-glass: rgba(33, 37, 41, 0.578);
+    --col-theme-glass-navbar: rgba(33, 37, 41, 0.578);
+    --col-theme-glass-modal: rgba(33, 37, 41, 0.478);
+    --col-theme-accent: rgba(0, 0, 0, 0.25);
+    --col-theme-text: rgb(255, 255, 255);
+    --col-theme-logo: hsl(188, 100%, 49%);
+    --col-theme-background: rgb(33, 37, 41);
+
+    --col-bg-buff: rgba(76, 15, 12, 0.431);
+    --col-bg-debuff: rgba(12, 39, 76, 0.439);
+    --col-bg-cc: rgba(50, 12, 78, 0.361);
+    --col-bg-status: rgba(111, 53, 29, 0.478);
+    --col-bg-striker: rgba(204, 26, 37, 1);
+    --col-bg-special: rgba(0, 107, 255, 1);
+
+    --col-text-explosive: hsl(355, 87%, 48%);
+    --col-text-piercing: hsl(32, 69%, 53%);
+    --col-text-mystic: hsl(202, 65%, 50%);
+    --col-text-buff: rgb(255, 79, 50);
+    --col-text-debuff: rgb(63, 158, 238);
+    --col-text-cc: rgb(174, 106, 247);
+    --col-text-status: rgb(255, 203, 51);
+    --col-text-striker: rgb(255, 255, 255);
+    --col-text-special: rgb(255, 255, 255);
+    --col-text-emphasis: rgb(84, 168, 255);
+    --col-text-stars: hsl(44, 100%, 60%);
+    --col-text-weaponstars: hsl(192, 100%, 60%);
+
+    --col-btn-primary: rgb(222, 226, 230);
+    --col-btn-secondary: rgb(33, 37, 41);
+    --col-btn-active-primary: rgb(0, 0, 0);
+    --col-btn-active-secondary: rgb(255, 255, 255);
+    --col-btn-primary-glow: rgba(255, 255, 255, 0.25);
+    --col-panel-separator: rgba(255, 255, 255, 0.25);
+    --col-bg-imglabel: rgba(40, 40, 40, 0.835);
+
+    --var-background-brightness: 0.85;
+    --var-opacity-lightonly: 0%;
+    --var-opacity-darkonly: 100%;
+    --var-invert-light: invert(0);
+    --var-invert-dark: invert(1);
+    --var-invert-light-hue: 0deg;
+    --var-invert-dark-hue: 180deg;
+}
+
+.high-contrast {
+    --col-theme-glass: rgb(222, 226, 230);
+    --col-theme-glass-navbar: rgb(222, 226, 230);
+    --col-theme-glass-modal: rgb(222, 226, 230);
+    --var-glass-filter: none;
+    --var-glass-filter-navbar: none;
+}
+
+.high-contrast.theme-dark {
+    --col-theme-glass: rgb(33, 37, 41);
+    --col-theme-glass-navbar: rgb(33, 37, 41);
+    --col-theme-glass-modal: rgb(33, 37, 41);
+}
+
+.reduced-motion {
+    --var-animation-duration: 0ms;
+}

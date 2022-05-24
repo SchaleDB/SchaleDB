@@ -4,28 +4,25 @@
             <div class="d-flex" style="justify-content: center;">
                 <img id="ba-student-img">
             </div>
-            <!-- <div class="d-flex d-md-none mb-2" style="justify-content: center;">
-                <div id="ba-student-img-sm"></div>
-            </div> -->
             <div class="px-0" style="position: fixed;">
-                <button id="ba-student-list-btn" type="button" class="btn btn-dark" onclick="studentSelectorModal.show()" style="display:none;"><i class="fa-solid fa-bars"></i><span class="d-inline ms-2" data-localize-id="ui,student_search_list"></span></button>
+                <button id="ba-student-list-btn" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ba-student-modal-students" style="display:none;"><i class="fa-solid fa-bars"></i><span class="d-inline ms-2" data-localize-id="ui,student_search_list"></span></button>
             </div>
             <div class="d-block d-md-none" style="height: 450px;"></div>
         </div>
         <div id="ba-student" class="col-12 col-md-6 ba-page" style="display:none;">
-            <div class="px-0 ps-xl-3">
+            <div class="px-0 ps-xl-4">
                 <div class="card p-2">
                     <div class="card-header">
                         <div class="d-flex flex-row align-items-top pt-2 pb-3">
                             <div class="flex-grow-1 me-2">
-                                <h1 id="ba-student-name" class="px-1 mb-3"></h1>
+                                <h1 id="ba-student-name" class="title-text px-1 mb-3"></h1>
                                 <div class="d-flex flex-row flex-wrap">
-                                    <span id="ba-student-limited" class="ba-student-info-s ba-panel"></span>
-                                    <span id="ba-student-class" class="ba-student-info-s"></span>
+                                    <span id="ba-student-stargrade" class="ba-info-pill-s bg-theme"></span>
+                                    <span id="ba-student-class" class="ba-info-pill-s"></span>
                                 </div>
                             </div>
                             <div id="ba-student-school">
-                                <img id="ba-student-school-img" class="invert-light" src="">
+                                <img id="ba-student-school-img" class="invert-light" width="84" height="76" src="">
                             </div>
                         </div>
                         <ul class="nav nav-pills justify-content-left">
@@ -47,15 +44,16 @@
                         <div class="tab-content">
                             <div id="ba-student-page-stats" class="tab-pane fade show active" style="border-radius: .25em;">
                                 <div class="d-flex flex-row flex-wrap align-items-center mb-1">
-                                    <span id="ba-student-role" class="ba-info-pill ba-panel" style="position: relative;"><img id="ba-student-role-icon" class="invert-light" src="" style="height:22px;"><span id="ba-student-role-label" class="ba-pill-label"></span></span>
+                                    <span id="ba-student-role" class="ba-info-pill bg-theme" style="position: relative;"><img id="ba-student-role-icon" class="invert-light" src="" style="height:22px;"><span id="ba-student-role-label" class="ba-pill-label"></span></span>
                                     <span id="ba-student-attacktype" class="ba-info-pill"><img src="images/ui/Type_Attack.png"><span id="ba-student-attacktype-label" class="ba-pill-label"></span></span>
                                     <span id="ba-student-defensetype" class="ba-info-pill"><img src="images/ui/Type_Defense.png"><span id="ba-student-defensetype-label" class="ba-pill-label"></span></span>                                    
                                     <span id="ba-student-position" class="ba-info-pill"><span id="ba-student-position-label"></span></span>
                                 </div>
                                 <div class="d-flex flex-row align-items-stretch flex-wrap justify-content-between">
                                     <div id="ba-student-weapon" class="ba-type-weapon ba-panel d-inline-block align-text-top me-1 mb-2">
-                                        <img id="ba-student-usescover-icon" src="images/ui/Combat_Icon_Cover_Ally.png" style="height: 24px; width:auto; margin-top: -4px;">
+                                        <img id="ba-student-usescover-icon" src="images/ui/Combat_Icon_Cover_Ally.png">
                                         <p id="ba-student-weapontype-label" class="d-inline-block" style="font-weight: 600; font-style: italic; font-size: large;"></p>
+                                        <p id="ba-student-weapon-level" class="d-none" style="font-weight: 600; font-style: italic; font-size: large; float:right;"></p>
                                     </div>
                                     <div id="ba-student-gear" class="flex-fill ba-panel mb-2">
                                         <div class="d-flex align-items-center justify-content-evenly" style="height: 78px;">
@@ -65,18 +63,15 @@
                                         </div>
                                     </div>
                                     <div id="ba-student-terrain" class="mb-2 ms-1" style="min-width: fit-content;">
-                                        <div id="ba-student-terrain-urban" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_urban.png"></span><br><img id="ba-student-terrain-urban-icon" class="ba-student-affinity-icon" src=""></div>
-                                        <div id="ba-student-terrain-outdoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_outdoor.png"></span><br><img id="ba-student-terrain-outdoor-icon" class="ba-student-affinity-icon" src=""></div>
-                                        <div id="ba-student-terrain-indoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_indoor.png"></span><br><img id="ba-student-terrain-indoor-icon" class="ba-student-affinity-icon" src=""></div>
+                                        <div id="ba-student-terrain-street" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_Street.png"></span><br><img id="ba-student-terrain-street-icon" class="ba-student-affinity-icon" src=""></div>
+                                        <div id="ba-student-terrain-outdoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_Outdoor.png"></span><br><img id="ba-student-terrain-outdoor-icon" class="ba-student-affinity-icon" src=""></div>
+                                        <div id="ba-student-terrain-indoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_Indoor.png"></span><br><img id="ba-student-terrain-indoor-icon" class="ba-student-affinity-icon" src=""></div>
                                     </div>
                                 </div>
     
                                 <div class="d-flex flex-row align-items-end">
                                     <span class="flex-grow-1">
-                                        <!-- <h5 class="d-inline text-bold">Student Stats</h5> -->
-                                        <nav id="ba-student-vehicle" class="nav nav-pills mt-1">
-                                            <button id="ba-student-vehicle-0" class="nav-link active" onclick="changeStudentVehicle(0)"></a>
-                                            <button id="ba-student-vehicle-1" class="nav-link" onclick="changeStudentVehicle(1)"></a>
+                                        <nav id="ba-student-summons" class="nav nav-pills mt-1">
                                         </nav>   
                                     </span>
                                 </div>
@@ -88,13 +83,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,maxhp"></span>
+                                                            <span data-localize-id="Stat,MaxHP"></span>
                                                             <span id="ba-student-stat-maxhp" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,attack_power"></span>
+                                                            <span data-localize-id="Stat,AttackPower"></span>
                                                             <span id="ba-student-stat-attack" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -102,13 +97,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,defense_power"></span>
+                                                            <span data-localize-id="Stat,DefensePower"></span>
                                                             <span id="ba-student-stat-defense" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,heal_power"></span>
+                                                            <span data-localize-id="Stat,HealPower"></span>
                                                             <span id="ba-student-stat-healing" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -116,13 +111,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,accuracy"></span>
+                                                            <span data-localize-id="Stat,AccuracyPoint"></span>
                                                             <span id="ba-student-stat-accuracy" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,evasion"></span>
+                                                            <span data-localize-id="Stat,DodgePoint"></span>
                                                             <span id="ba-student-stat-evasion" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -130,13 +125,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,critical"></span>
+                                                            <span data-localize-id="Stat,CriticalPoint"></span>
                                                             <span id="ba-student-stat-crit" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,critical_resist"></span>
+                                                            <span data-localize-id="Stat,CriticalChanceResistPoint"></span>
                                                             <span id="ba-student-stat-critresist" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -144,13 +139,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,critical_damage"></span>
+                                                            <span data-localize-id="Stat,CriticalDamageRate"></span>
                                                             <span id="ba-student-stat-critdmg" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,critical_damage_resist"></span>
+                                                            <span data-localize-id="Stat,CriticalDamageResistRate"></span>
                                                             <span id="ba-student-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -158,13 +153,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,stability"></span>
+                                                            <span data-localize-id="Stat,StabilityPoint"></span>
                                                             <span id="ba-student-stat-stability" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,range"></span>
+                                                            <span data-localize-id="Stat,Range"></span>
                                                             <span id="ba-student-stat-range" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -172,13 +167,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,cc_power"></span>
+                                                            <span data-localize-id="Stat,OppressionPower"></span>
                                                             <span id="ba-student-stat-ccpower" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,cc_resist"></span>
+                                                            <span data-localize-id="Stat,OppressionResist"></span>
                                                             <span id="ba-student-stat-ccresist" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -186,13 +181,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,healing_received"></span>
+                                                            <span data-localize-id="Stat,HealEffectivenessRate"></span>
                                                             <span id="ba-student-stat-recoveryrate" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="stat,ammo"></span>
+                                                            <span data-localize-id="Stat,AmmoCount"></span>
                                                             <span id="ba-student-stat-ammo" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -227,15 +222,15 @@
                                                 </div>
                                                 <div class="">
                                                     <button id="ba-statpreview-strikerbonus" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');toggleStrikerBonus(this)" data-localize-id="ui,student_strikerbonus"></button>
+                                                    <!-- <button id="ba-statpreview-includepassive" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');recalculateStatPreview()" data-localize-id="ui,student_passive_short"></button> -->
                                                     <button id="ba-statpreview-includegear" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');updateGearIcon();recalculateStatPreview()" data-localize-id="ui,student_gear_short"></button>
                                                     <button id="ba-statpreview-includebond" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');recalculateStatPreview()" data-localize-id="ui,student_bond_short"></button>
-                                                    <button class="btn btn-sm btn-dark mb-2" type="button" onclick="statPreviewModal.show()"><i class="fa-solid fa-sliders"></i></button>
+                                                    <button class="btn btn-sm btn-dark mb-2" type="button" data-bs-toggle="modal" data-bs-target="#ba-student-modal-statpreview"><i class="fa-solid fa-sliders me-2"></i><span data-localize-id="ui,options"></span></button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-    
+                                </div>    
                             </div>
     
                             <div id="ba-student-page-skills" class="tab-pane fade" style="border-radius: .25em;">
@@ -334,7 +329,7 @@
     
                                 <div class="row g-1">
                                     <div class="d-flex flex-row align-items-center">
-                                        <button class="btn btn-sm btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-materials-page"style="flex-shrink: 0;position: relative;"><span data-localize-id="ui,student_skills_materials"></span></button>
+                                        <button class="btn btn-sm btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-skill-materials-page" style="flex-shrink: 0;position: relative;"><span data-localize-id="ui,student_skills_materials"></span></button>
                                         <input id="ba-skillpreview-range" oninput="changeSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="10">
                                         <span id="ba-skill-level" class="ba-slider-label">Lv.1</span>
                                     </div>
@@ -342,7 +337,6 @@
                             </div>
     
                             <div id="ba-student-page-weapon" class="tab-pane fade" style="border-radius: .25em;">
-    
                                 <div class="d-flex flex-row align-items-center px-1">
                                     <span class="flex-grow-1">
                                         <h3 id="ba-student-weapon-name" style="display: inline;"></h3>
@@ -351,12 +345,7 @@
                                         <img src="images/ui/Common_Icon_CharacterWeapon_off.png" style="height: 28px; width:auto;">
                                     </span>
                                     <h4 class="d-inline-block mb-0"><i id="ba-student-weapon-type"></i></h4>
-                                </div>
-    
-                                <!-- <div class="row mt-1">
-                                    <h4 id="ba-weapon-name-ja" class="d-inline"></h4>
-                                </div> -->
-                                
+                                </div>                                
                                 <div class="row g-1 mt-3">
                                     <div class="col">
                                         <table class="table ba-stats">
@@ -369,13 +358,13 @@
                                                 <tr>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span id="ba-weapon-stat-attack" data-localize-id="stat,attack_power"></span>
+                                                            <span id="ba-weapon-stat-attack" data-localize-id="Stat,AttackPower"></span>
                                                             <span id="ba-weapon-stat-attack-amount" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span id="ba-weapon-stat-maxhp" data-localize-id="stat,maxhp"></span>
+                                                            <span id="ba-weapon-stat-maxhp" data-localize-id="Stat,MaxHP"></span>
                                                             <span id="ba-weapon-stat-maxhp-amount" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -383,7 +372,7 @@
                                                 <tr id="ba-weapon-stat-row2">
                                                     <td width="50%">
                                                         <div class="d-flex align-items-top justify-content-between">
-                                                            <span id="ba-weapon-stat-healing" data-localize-id="stat,heal_power"></span>
+                                                            <span id="ba-weapon-stat-healing" data-localize-id="Stat,HealPower"></span>
                                                             <span id="ba-weapon-stat-healing-amount" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
@@ -425,7 +414,7 @@
                                     <li class="nav-item ba-weapon-rank-tab">
                                         <a class="nav-link disabled" data-bs-toggle="tab" href="#ba-weapon-page-5star"><i class="fa-solid fa-star"></i> 5</a>
                                     </li>
-                                </ul><!--<img src="images/ui/Common_Icon_Formation_Star_2.png" style="height: 22px; width:auto; margin-top: -6px; margin-right: 0.35rem;">2-->
+                                </ul>
     
                                 <div class="tab-content">
     
@@ -440,19 +429,19 @@
                                         <div class="mb-3 p-2 d-flex flex-column ba-panel align-items-start">
                                             <div class="d-flex flex-row align-items-center">
                                                 <div class="position-relative me-1">
-                                                    <img id="ba-weapon-skill-passive-icon" class="ba-skill d-inline-block me-3 drop-shadow" src="">
+                                                    <img id="ba-skill-weaponpassive-icon" class="ba-skill d-inline-block me-3 drop-shadow" src="">
                                                     <span class="ba-weapon-skill-plus drop-shadow unselectable"><i class="fa-solid fa-plus"></i></span>
                                                 </div>
                                                 <div class="d-inline-block">
                                                     <div>
-                                                        <h4 id="ba-weapon-skill-passive-name" class="me-2 d-inline"></h4>
+                                                        <h4 id="ba-skill-weaponpassive-name" class="me-2 d-inline"></h4>
                                                     </div>
                                                     <div class="mt-1">
                                                         <p class="d-inline" style="font-style: italic; font-weight: 500;"><span data-localize-id="ui,student_skill_passive"></span><span data-localize-id="ui,skill_plus"></span></p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p id="ba-weapon-skill-passive-description" class="mb-0 mt-1 p-1"></p>
+                                            <p id="ba-skill-weaponpassive-description" class="mb-0 mt-1 p-1"></p>
                                         </div>
     
                                         <div class="row g-1 my-1">
@@ -597,6 +586,251 @@
                                 </div>
                                 <div id="ba-student-favoured-furniture" class="my-1 p-2 pb-0 d-flex flex-row flex-wrap justify-content-center ba-panel">
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ba-student-modal-statpreview" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen-sm-down" style="transition: transform .15s ease-out;">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none;">
+                <h5 class="modal-title" data-localize-id="ui,statpreview_title"></h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="ba-info-statpreview-panel">
+                    <h5 data-localize-id="ui,student_gear"></h5>
+                    <div class="py-2">
+                        <div class="pt-2 d-flex flex-column">
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="me-3" style="position: relative;">
+                                    <img id="ba-statpreview-gear1-icon" class="ba-gear-icon drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
+                                </div>
+                                <div class="flex-fill">
+                                    <h5 id="ba-statpreview-gear1-name" class="d-inline"></h5>
+                                    <p id="ba-statpreview-gear1-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <input id="ba-statpreview-gear1-range" oninput="changeGearLevel(1, this)" type="range" class="form-range me-2 flex-fill" value="99" min="1" max="99">
+                                <span id="ba-statpreview-gear1-level" class="ba-slider-label"></span>
+                            </div>
+                            <div class="mt-2 d-flex flex-row align-items-center">
+                                <div class="me-3" style="position: relative;">
+                                    <img id="ba-statpreview-gear2-icon" class="ba-gear-icon drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
+                                </div>
+                                <div class="flex-fill">
+                                    <h5 id="ba-statpreview-gear2-name" class="d-inline"></h5>
+                                    <p id="ba-statpreview-gear2-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <input id="ba-statpreview-gear2-range" oninput="changeGearLevel(2, this)" type="range" class="form-range me-2 flex-fill" value="99" min="1" max="99">
+                                <span id="ba-statpreview-gear2-level" class="ba-slider-label"></span>
+                            </div>
+                            <div class="mt-2 d-flex flex-row align-items-center">
+                                <div class="me-3" style="position: relative;">
+                                    <img id="ba-statpreview-gear3-icon" class="ba-gear-icon drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
+                                </div>
+                                <div class="flex-fill">
+                                    <h5 id="ba-statpreview-gear3-name" class="d-inline"></h5>
+                                    <p id="ba-statpreview-gear3-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
+                                </div>  
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <input id="ba-statpreview-gear3-range" oninput="changeGearLevel(3, this)" type="range" class="form-range me-2 flex-fill" value="99" min="1" max="99">
+                                <span id="ba-statpreview-gear3-level" class="ba-slider-label"></span>
+                            </div>                                    
+                        </div>
+                    </div>
+                    <div id="ba-statpreview-weapon">
+                        <h5 class="mt-2" data-localize-id="ui,student_weapon"></h5>
+                        <div class="py-2">
+                            <div class="d-flex flex-column">
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="me-2" style="position: relative;">
+                                        <img id="ba-statpreview-weapon-img" class="ba-weapon-icon ms-0" style="height:48px; margin-bottom: 0px;">
+                                    </div>
+                                    <div class="flex-fill">
+                                        <h5 id="ba-statpreview-weapon-name" class="d-inline"></h5>
+                                        <p id="ba-statpreview-weapon-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center mb-2">
+                                    <input id="ba-statpreview-weapon-range" oninput="changeStatPreviewWeaponLevel(this)" type="range" class="form-range me-2 flex-fill" value="1" min="1" max="50">
+                                    <span id="ba-statpreview-weapon-level" class="ba-slider-label"></span>
+                                </div>                                  
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <h5 class="mt-2" data-localize-id="ui,student_skill_passive"></h5>
+                    <div class="py-2">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex flex-row align-items-center mb-1">
+                                <div class="position-relative me-2">
+                                    <img id="ba-statpreview-passiveskill-icon" class="ba-skill d-inline-block me-3 drop-shadow" src="">
+                                    <span id="ba-statpreview-passiveskill-icon-plus" class="ba-weapon-skill-plus drop-shadow unselectable"><i class="fa-solid fa-plus"></i></span>
+                                </div>
+                                <div class="flex-fill">
+                                    <h5 id="ba-statpreview-passiveskill-name" class="d-inline"></h5>
+                                    <p id="ba-statpreview-passiveskill-desc" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-2">
+                                <input id="ba-statpreview-passiveskill-range" oninput="changeStatPreviewPassiveSkillLevel(this)" type="range" class="form-range me-2 flex-fill" value="10" min="1" max="10">
+                                <span id="ba-statpreview-passiveskill-level" class="ba-slider-label"></span>
+                            </div>                                  
+                        </div>
+                    </div> -->
+                    <h5 class="mt-2" data-localize-id="ui,student_bond"></h5>
+                    <div class="py-2">
+                        <div class="d-flex flex-column" id="ba-statpreview-bond-targets">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="ba-student-modal-students" tabindex="-1">
+    <div class="modal-dialog modal-xl modal-fullscreen-lg-down" style="transition: transform .15s ease-out;">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div id="ba-student-modal-page" class="d-lg-flex">
+                    <div id="ba-student-search-filters" class="d-flex flex-column">
+                        <div class="mb-3 d-flex align-items-stretch">
+                            <div class="d-lg-none pe-2 flex-shrink-0">
+                                <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters-panel"><i class="fa-solid fa-filter me-2"></i>Filters<span id="ba-student-search-filter-amount"></span></button>
+                            </div>
+                            <div class="flex-fill">
+                                <input type="search" class="form-control h-100" id="ba-student-search-text" placeholder="" autocomplete="off" oninput="updateStudentList()">
+                            </div>
+                            <div class="d-lg-none ms-2 p-1" style="min-width:32px;">
+                                <button type="button" class="btn-close btn-close-white btn" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 0.15rem;"></button>
+                            </div>
+                        </div>
+                        <div id="ba-student-search-filters-panel" class="collapse d-lg-block">
+                            <div id="ba-student-search-sortby" class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_sortby"></h5>
+                                <button id="ba-student-search-sortby-default" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrder('Default')"><span data-localize-id="ui,student_search_filter_default"></span><span class="sort-direction-label"></span></button>
+                                <button id="ba-student-search-sortby-name" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrder('Name')"><span data-localize-id="ui,student_search_filter_name"></span><span class="sort-direction-label"></span></button>
+                                <div class="dropdown d-inline">
+                                    <button id="ba-student-search-sortby-stat" class="btn btn-sm btn-dark dropdown-toggle btn-search-filter" type="button" data-bs-toggle="dropdown"><span data-localize-id="ui,student_search_filter_stat"></span></button>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li><a id="ba-student-search-sortby-maxhp100" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('MaxHP100')" class="btn btn-dark"><span data-localize-id="Stat,MaxHP"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-attackpower100" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('AttackPower100')" class="btn btn-dark"><span data-localize-id="Stat,AttackPower"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-defensepower100" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('DefensePower100')" class="btn btn-dark"><span data-localize-id="Stat,DefensePower"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-healpower100" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('HealPower100')" class="btn btn-dark"><span data-localize-id="Stat,HealPower"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-accuracypoint" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('AccuracyPoint')" class="btn btn-dark"><span data-localize-id="Stat,AccuracyPoint"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-dodgepoint" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('DodgePoint')" class="btn btn-dark"><span data-localize-id="Stat,DodgePoint"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-criticalpoint" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('CriticalPoint')" class="btn btn-dark"><span data-localize-id="Stat,CriticalPoint"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-stabilitypoint" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('StabilityPoint')" class="btn btn-dark"><span data-localize-id="Stat,StabilityPoint"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-range" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('Range')" class="btn btn-dark"><span data-localize-id="Stat,Range"></span><span class="sort-direction-label"></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_type"></h5>
+                                <button id="ba-student-search-filter-squadtype-main" class="btn btn-sm btn-dark btn-search-filter ba-col-striker text-bold text-italic" onclick="searchSetFilter('SquadType','Main')">STRIKER</button>
+                                <button id="ba-student-search-filter-squadtype-support" class="btn btn-sm btn-dark btn-search-filter ba-col-special text-bold text-italic" onclick="searchSetFilter('SquadType','Support')">SPECIAL</button>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_role"></h5>
+                                <button id="ba-student-search-filter-tacticrole-tanker" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('TacticRole','Tanker')"><img class="ba-btn-img" src="images/ui/Role_Tanker.png"><span class="ba-btn-label" data-localize-id="TacticRole,Tanker"></span></button>
+                                <button id="ba-student-search-filter-tacticrole-damagedealer" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('TacticRole','DamageDealer')"><img class="ba-btn-img" src="images/ui/Role_DamageDealer.png"><span class="ba-btn-label" data-localize-id="TacticRole,DamageDealer"></span></button>
+                                <button id="ba-student-search-filter-tacticrole-healer" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('TacticRole','Healer')"><img class="ba-btn-img" src="images/ui/Role_Healer.png"><span class="ba-btn-label" data-localize-id="TacticRole,Healer"></span></button>
+                                <button id="ba-student-search-filter-tacticrole-supporter" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('TacticRole','Supporter')"><img class="ba-btn-img" src="images/ui/Role_Supporter.png"><span class="ba-btn-label" data-localize-id="TacticRole,Supporter"></span></button>
+                                <button id="ba-student-search-filter-tacticrole-vehicle" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('TacticRole','Vehicle')"><img class="ba-btn-img" src="images/ui/Role_Vehicle.png"><span class="ba-btn-label" data-localize-id="TacticRole,Vehicle"></span></button>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_rarity"></h5>
+                                <button id="ba-student-search-filter-stargrade-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('StarGrade',3)"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></button>
+                                <button id="ba-student-search-filter-stargrade-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('StarGrade',2)"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></button>
+                                <button id="ba-student-search-filter-stargrade-1" class="btn btn-sm btn-dark btn-search-filter me-2" onclick="searchSetFilter('StarGrade',1)"><i class="fa-solid fa-star"></i></button>
+                                <button id="ba-student-search-filter-islimited-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('IsLimited',1)" data-localize-id="IsLimited,1"></button>
+                                <button id="ba-student-search-filter-islimited-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('IsLimited',2)" data-localize-id="IsLimited,2"></button>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_attacktype"></h5>
+                                <button id="ba-student-search-filter-bullettype-explosion" class="btn btn-sm btn-dark btn-search-filter ba-col-explosion text-bold" onclick="searchSetFilter('BulletType','Explosion')" data-localize-id="BulletType,Explosion"></button>
+                                <button id="ba-student-search-filter-bullettype-pierce" class="btn btn-sm btn-dark btn-search-filter ba-col-pierce text-bold" onclick="searchSetFilter('BulletType','Pierce')" data-localize-id="BulletType,Pierce"></button>
+                                <button id="ba-student-search-filter-bullettype-mystic" class="btn btn-sm btn-dark btn-search-filter ba-col-mystic text-bold" onclick="searchSetFilter('BulletType','Mystic')" data-localize-id="BulletType,Mystic"></button>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_defensetype"></h5>
+                                <button id="ba-student-search-filter-armortype-lightarmor" class="btn btn-sm btn-dark btn-search-filter ba-col-explosion text-bold" onclick="searchSetFilter('ArmorType','LightArmor')" data-localize-id="ArmorType,LightArmor"></button>
+                                <button id="ba-student-search-filter-armortype-heavyarmor" class="btn btn-sm btn-dark btn-search-filter ba-col-pierce text-bold" onclick="searchSetFilter('ArmorType','HeavyArmor')" data-localize-id="ArmorType,HeavyArmor"></button>
+                                <button id="ba-student-search-filter-armortype-unarmed" class="btn btn-sm btn-dark btn-search-filter ba-col-mystic text-bold" onclick="searchSetFilter('ArmorType','Unarmed')" data-localize-id="ArmorType,Unarmed"></button>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_position"></h5>
+                                <button id="ba-student-search-filter-position-front" class="btn btn-sm btn-dark btn-search-filter text-bold text-italic" onclick="searchSetFilter('Position','Front')">FRONT</button>
+                                <button id="ba-student-search-filter-position-middle" class="btn btn-sm btn-dark btn-search-filter text-bold text-italic" onclick="searchSetFilter('Position','Middle')">MIDDLE</button>
+                                <button id="ba-student-search-filter-position-back" class="btn btn-sm btn-dark btn-search-filter text-bold text-italic" onclick="searchSetFilter('Position','Back')">BACK</button>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_school"></h5>
+                                <button id="ba-student-search-filter-school-abydos" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','Abydos')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_ABYDOS_W.png"><span style="margin-left: 22px" data-localize-id="School,Abydos"></span></button>
+                                <button id="ba-student-search-filter-school-arius" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','Arius')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_ARIUS_W.png"><span style="margin-left: 22px" data-localize-id="School,Arius"></span></button>
+                                <button id="ba-student-search-filter-school-gehenna" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','Gehenna')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_GEHENNA_W.png"><span style="margin-left: 22px" data-localize-id="School,Gehenna"></span></button>
+                                <button id="ba-student-search-filter-school-hyakkiyako" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','Hyakkiyako')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_HYAKKIYAKO_W.png"><span style="margin-left: 22px" data-localize-id="School,Hyakkiyako"></span></button>
+                                <button id="ba-student-search-filter-school-millennium" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','Millennium')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_MILLENNIUM_W.png"><span style="margin-left: 22px" data-localize-id="School,Millennium"></span></button>
+                                <button id="ba-student-search-filter-school-redwinter" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','RedWinter')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_REDWINTER_W.png"><span style="margin-left: 22px" data-localize-id="School,RedWinter"></span></button>
+                                <button id="ba-student-search-filter-school-shanhaijing" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','Shanhaijing')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_SHANHAIJING_W.png"><span style="margin-left: 22px" data-localize-id="School,Shanhaijing"></span></button>
+                                <button id="ba-student-search-filter-school-srt" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','SRT')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_SRT_W.png"><span style="margin-left: 22px" data-localize-id="School,SRT"></span></button>
+                                <button id="ba-student-search-filter-school-trinity" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','Trinity')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_TRINITY_W.png"><span style="margin-left: 22px" data-localize-id="School,Trinity"></span></button>
+                                <button id="ba-student-search-filter-school-valkyrie" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','Valkyrie')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_VALKYRIE_W.png"><span style="margin-left: 22px" data-localize-id="School,Valkyrie"></span></button>
+                                <button id="ba-student-search-filter-school-etc" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('School','ETC')"><img class="ba-btn-img" src="images/schoolicon/School_Icon_ETC_W.png"><span style="margin-left: 22px" data-localize-id="School,ETC"></span></button>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_weapon"></h5>
+                                <button id="ba-student-search-filter-weapontype-sg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','SG')">SG</button>
+                                <button id="ba-student-search-filter-weapontype-smg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','SMG')">SMG</button>
+                                <button id="ba-student-search-filter-weapontype-ar" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','AR')">AR</button>
+                                <button id="ba-student-search-filter-weapontype-gl" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','GL')">GL</button>
+                                <button id="ba-student-search-filter-weapontype-hg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','HG')">HG</button>
+                                <button id="ba-student-search-filter-weapontype-rl" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','RL')">RL</button>
+                                <button id="ba-student-search-filter-weapontype-sr" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','SR')">SR</button>
+                                <button id="ba-student-search-filter-weapontype-rg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','RG')">RG</button>
+                                <button id="ba-student-search-filter-weapontype-mg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','MG')">MG</button>
+                                <button id="ba-student-search-filter-weapontype-mt" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','MT')">MT</button>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_search_filter_combat_power"></h5>
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <span class="me-2 mb-1"><img class="invert-light" src="images/ui/Terrain_Street.png" style="width: 31px; height: 31px;"></span>
+                                    <button id="ba-student-search-filter-streetbattleadaptation-0" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('StreetBattleAdaptation',0)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultD.png"><span style="margin-left: 22px">D</span></button>
+                                    <button id="ba-student-search-filter-streetbattleadaptation-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('StreetBattleAdaptation',1)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultC.png"><span style="margin-left: 22px">C</span></button>
+                                    <button id="ba-student-search-filter-streetbattleadaptation-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('StreetBattleAdaptation',2)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultB.png"><span style="margin-left: 22px">B</span></button>
+                                    <button id="ba-student-search-filter-streetbattleadaptation-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('StreetBattleAdaptation',3)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultA.png"><span style="margin-left: 22px">A</span></button>
+                                    <button id="ba-student-search-filter-streetbattleadaptation-4" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('StreetBattleAdaptation',4)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultS.png"><span style="margin-left: 22px">S</span></button>    
+                                </div>
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <span class="me-2 mb-1"><img class="invert-light" src="images/ui/Terrain_Outdoor.png" style="width: 31px; height: 31px;"></span>
+                                    <button id="ba-student-search-filter-outdoorbattleadaptation-0" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('OutdoorBattleAdaptation',0)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultD.png"><span style="margin-left: 22px">D</span></button>
+                                    <button id="ba-student-search-filter-outdoorbattleadaptation-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('OutdoorBattleAdaptation',1)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultC.png"><span style="margin-left: 22px">C</span></button>
+                                    <button id="ba-student-search-filter-outdoorbattleadaptation-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('OutdoorBattleAdaptation',2)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultB.png"><span style="margin-left: 22px">B</span></button>
+                                    <button id="ba-student-search-filter-outdoorbattleadaptation-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('OutdoorBattleAdaptation',3)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultA.png"><span style="margin-left: 22px">A</span></button>
+                                    <button id="ba-student-search-filter-outdoorbattleadaptation-4" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('OutdoorBattleAdaptation',4)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultS.png"><span style="margin-left: 22px">S</span></button>    
+                                </div>
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <span class="me-2 mb-1"><img class="invert-light" src="images/ui/Terrain_Indoor.png" style="width: 31px; height: 31px;"></span>
+                                    <button id="ba-student-search-filter-indoorbattleadaptation-0" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('IndoorBattleAdaptation',0)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultD.png"><span style="margin-left: 22px">D</span></button>
+                                    <button id="ba-student-search-filter-indoorbattleadaptation-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('IndoorBattleAdaptation',1)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultC.png"><span style="margin-left: 22px">C</span></button>
+                                    <button id="ba-student-search-filter-indoorbattleadaptation-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('IndoorBattleAdaptation',2)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultB.png"><span style="margin-left: 22px">B</span></button>
+                                    <button id="ba-student-search-filter-indoorbattleadaptation-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('IndoorBattleAdaptation',3)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultA.png"><span style="margin-left: 22px">A</span></button>
+                                    <button id="ba-student-search-filter-indoorbattleadaptation-4" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('IndoorBattleAdaptation',4)"><img class="ba-btn-img-noinvert" src="images/ui/Ingame_Emo_AdaptresultS.png"><span style="margin-left: 22px">S</span></button>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="ba-student-search-results" class="flex-fill">
+                        <div class="d-flex flex-row justify-content-center">
+                            <div id="ba-student-select-grid" class="ba-select-grid align-top flex-fill">
                             </div>
                         </div>
                     </div>

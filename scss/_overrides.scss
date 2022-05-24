@@ -1,0 +1,207 @@
+// Put all Bootstrap CSS overrides here
+
+
+// Buttons
+
+.btn-dark {
+    background-color: var(--col-theme-accent);
+    color: var(--col-btn-primary);
+    border-color: transparent !important;
+    box-shadow: none !important;
+    position: relative;
+    font-weight: 600;
+
+    &:focus {
+        background-color: var(--col-theme-accent);
+        color: var(--col-btn-primary);
+    }
+
+    &:hover {
+        background-color: var(--col-btn-secondary);
+        color: var(--col-btn-primary);
+    }
+
+    &.active {
+        background-color: var(--col-btn-active-secondary);
+        color: var(--col-btn-active-primary);
+    }
+
+}
+
+// Dropdowns
+
+.dropdown-menu-dark {
+    color: var(--col-btn-primary);
+    background-color: var(--col-btn-secondary);
+    border-color: var(--col-theme-accent);
+    @include transition(background-color);
+
+    .dropdown-item {
+        color: var(--col-btn-primary);
+        background-color: var(--col-btn-secondary);
+
+        &:hover {
+            color: var(--col-btn-primary);
+            background-color: var(--col-theme-accent);
+        }
+
+        &:active, &.active {
+            color: var(--col-btn-active-primary);
+            background-color: var(--col-btn-active-secondary);
+        }
+    }
+}
+
+// Navs
+
+.nav {
+    font-weight: 400;
+}
+
+.nav-pills {
+    .nav-link {
+        color: var(--col-theme-text);
+
+        &.active {
+            color: var(--col-btn-active-primary);
+            background-color: var(--col-btn-active-secondary);
+        }
+
+        &:hover {
+            background-color: var(--col-theme-accent);
+
+            &.active {
+                background-color: var(--col-btn-primary);
+            }
+        }
+    }
+}
+
+.navbar-dark {
+    @include promote-layer;
+    @include transition(background-color backdrop-filter);
+    backdrop-filter: var(--var-glass-filter-navbar);
+    background-color: var(--col-theme-glass-navbar) !important;
+    color: var(--col-theme-text);
+
+    .navbar-brand {
+        color: var(--col-theme-text);
+    }
+
+    .navbar-nav .nav-link {
+        color: var(--col-theme-text) !important;
+        cursor: pointer;
+
+        &.active {
+            background-color: var(--col-theme-accent);
+            border-radius: 0.25rem;
+        }
+    }
+}
+
+// Forms
+
+.form-control {
+    color: var(--col-theme-text);
+    background-color: var(--col-theme-accent);
+    border: none;
+    outline: 0;
+    box-shadow: none;
+
+    &:focus {
+        color: var(--col-theme-text);
+        background-color: var(--col-theme-accent);
+        border: none;
+        outline: 0;
+        box-shadow: none;
+    }
+
+    &::placeholder {
+        font-style: italic;
+        color: var(--col-panel-separator);
+    }
+}
+
+// Cards
+
+.card {
+    backdrop-filter: var(--var-glass-filter);
+    background-color: var(--col-theme-glass);
+    font-weight: 300;
+    color: var(--col-theme-text);
+    border: none;
+    transition-duration: var(--var-animation-duration);
+    pointer-events: auto;
+}
+
+.card-header {
+    background-color: transparent;
+    padding: 0.5rem;
+    border-bottom: none;
+}
+
+.card-body {
+    background-color: transparent;
+    border-radius: 0rem 0rem 0.25rem 0.25rem;
+    padding: 0.5rem;
+}
+
+// Range Input
+
+::-webkit-slider-thumb {
+    background-color: var(--col-theme-text) !important;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 1px var(--col-theme-text), 0 0 0 0.25rem var(--col-btn-primary-glow);
+}
+
+::-webkit-slider-runnable-track {
+    background-color: var(--col-theme-accent) !important;
+}
+
+::-moz-range-thumb {
+    background-color: var(--col-theme-text) !important;
+}
+
+::-moz-range-track {
+    background-color: var(--col-theme-accent) !important;
+}
+
+// Toggle Input
+
+.form-check-input:checked {
+    background-color: rgb(33, 37, 41);
+    border-color: rgb(33, 37, 41);
+}
+
+.form-check-input:focus {
+    border: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+// Modals
+
+.modal-dialog {
+    @include lg-up {
+        margin: 1.5rem auto;
+    }
+}
+
+.modal-content {
+    background-color: var(--col-theme-glass-modal);
+    backdrop-filter: var(--var-glass-filter);
+    color: var(--col-theme-text);
+    border: none;
+}
+
+.modal-xl {
+    @include xxl-up {
+        max-width: 1340px;
+    }
+}
+
+.btn-close {
+    filter: var(--var-invert-dark) grayscale(100%) brightness(200%);
+}

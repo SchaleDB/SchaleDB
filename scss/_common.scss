@@ -1,0 +1,133 @@
+// Put styles here that are common to all pages
+
+body {
+    background-color: var(--col-theme-background);
+    font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
+    overflow: hidden scroll;
+}
+
+p {
+    white-space: pre-line;
+
+    b, strong {
+        font-weight: 700;
+    }
+}
+
+#ba-background {
+    position: fixed;
+    top: 0px;
+    background: var(--col-theme-background) no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1000;
+    filter: blur(0.75rem) brightness(var(--var-background-brightness));
+    transform: scale(1.05);
+    @include transition(background-image);
+}
+
+.title-text {
+    font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+    text-transform: uppercase;
+}
+
+.ba-selection-pane {
+    width: 100%;
+    position: fixed;
+    pointer-events: none;
+}
+
+.gear-disabled {
+    opacity: 0.6;
+    filter: grayscale(0.2);
+}
+
+//utilities
+
+.screen-height {
+    max-height: calc(100vh - 2rem - 58px);
+    overflow: hidden;
+
+    .card-body {
+        @include promote-layer;
+        @include scrollable(auto);
+        overflow-x: hidden;
+    }
+}
+
+.circle {
+    @include circular;
+}
+
+.unselectable {
+    user-select: none; 
+    -webkit-user-select: none;       
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    img {
+        -webkit-user-drag: none;
+        -moz-user-drag: none;
+        -ms-user-drag: none;
+    }
+}
+
+.drop-shadow {
+    @include drop-shadow;
+}
+
+.text-emphasis {
+    color: var(--col-text-emphasis) !important;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.only-lt {
+    opacity: var(--var-opacity-lightonly);
+    transition: opacity ease var(--var-animation-duration);
+}
+
+.only-dk {
+    opacity: var(--var-opacity-darkonly);
+    transition: opacity ease var(--var-animation-duration);
+}
+
+.invert-light {
+    @include transition(filter);
+    filter: var(--var-invert-light) hue-rotate(var(--var-invert-light-hue));
+}
+
+// hide default clear button
+input[type="search" i]::-webkit-search-cancel-button {
+    appearance: none;
+}
+
+.search-clear {
+    text-align: center;
+    position: absolute;
+    top: 11px;
+    right: 11px;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+// chrome scrollbar
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--col-panel-separator);
+    background-clip: padding-box;
+    border-radius: 99px;
+    border: solid 2px transparent;
+}

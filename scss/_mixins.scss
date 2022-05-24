@@ -1,0 +1,101 @@
+@mixin grayscale {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    filter: grayscale(100%); 
+}
+
+@mixin circular {
+    border-radius: 999px;
+}
+
+@mixin drop-shadow {
+    filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
+}
+
+@mixin sharp-img {
+    // prevent aggressive image filtering when downscaling on chrome
+    image-rendering: -webkit-optimize-contrast;
+}
+
+@mixin promote-layer {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+@mixin transition($props...) {
+    $transitions: ();
+    @each $prop in $props {
+        $transitions: append($transitions, $prop ease var(--var-animation-duration) 0s, $separator: comma)
+    }
+    transition: $transitions;
+}
+
+@mixin scrollable($scroll) {
+    overflow-y: $scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--col-panel-separator);
+}
+
+//breakpoints
+
+$break-sm: 576px;
+$break-md: 768px;
+$break-lg: 992px;
+$break-xl: 1200px;
+$break-xxl: 1400px;
+
+@mixin xs-down() {
+    @media only screen and (max-width: ($break-sm - 1px)) {
+        @content;
+    }
+}
+
+@mixin sm-down() {
+    @media only screen and (max-width: ($break-md - 1px)) {
+        @content;
+    }
+}
+
+@mixin md-down() {
+    @media only screen and (max-width: ($break-lg - 1px)) {
+        @content;
+    }
+}
+
+@mixin lg-down() {
+    @media only screen and (max-width: ($break-xl - 1px)) {
+        @content;
+    }
+}
+
+@mixin sm-up() {
+    @media only screen and (min-width: $break-sm) {
+        @content;
+    }
+}
+
+@mixin md-up() {
+    @media only screen and (min-width: $break-md) {
+        @content;
+    }
+}
+
+@mixin lg-up() {
+    @media only screen and (min-width: $break-lg) {
+        @content;
+    }
+}
+
+@mixin xl-up() {
+    @media only screen and (min-width: $break-xl) {
+        @content;
+    }
+}
+
+@mixin xxl-up() {
+    @media only screen and (min-width: $break-xxl) {
+        @content;
+    }
+}
