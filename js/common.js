@@ -792,7 +792,7 @@ function processStudent() {
     } 
 
     statPreviewSummonStats = false
-
+    $('#ba-statpreview-status-summon').toggleClass('deactivated',true)
     $('#ba-statpreview-status-summon').toggle((student.SummonIds.length > 0))
 
     $("#ba-student-role-label").text(getLocalizedString('TacticRole', student.TacticRole))
@@ -954,9 +954,11 @@ function processStudent() {
     if (student.SquadType == "Main") {
         $('#ba-student-stat-table').removeClass("table-striker-bonus")
         $('#ba-statpreview-status-strikerbonus').hide()
+        statPreviewSupportStats = false
     } else {
         $('#ba-statpreview-status-strikerbonus').show()
     }
+    $('#ba-statpreview-status-strikerbonus').toggleClass("deactivated", !statPreviewSupportStats)
     
     $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(1, student))
     $('#ba-statpreview-status-bond-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`)
