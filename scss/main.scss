@@ -87,20 +87,6 @@
     text-align: left;
 }
 
-.ba-statpreview-star i, .ba-weaponpreview-star i {
-    transition: color var(--var-animation-duration) ease, transform var(--var-animation-duration) ease;
-}
-
-.ba-statpreview-star.active {
-    color: var(--col-text-stars);
-    filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
-}
-
-.ba-weaponpreview-star.active {
-    color: var(--col-text-weaponstars);
-    filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
-}
-
 h1 small {
     font-size: 0.7em;
 }
@@ -507,6 +493,7 @@ h1 small {
 }
 
 .ba-gear-icon {
+    cursor: pointer;
     height: 64px;
     width: 64px;
     margin-left: 0;
@@ -1168,6 +1155,7 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 }
 
 .tooltip-inner {
+    cursor: default;
     max-width: 340px;
     min-width: 160px;
     background-color: var(--col-bg-tooltip);
@@ -1655,4 +1643,12 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 .ba-node-quality-2 {
     background-color: var(--col-bg-node-rare);
+}
+
+#ba-stage-drops-tabs {
+    a {
+        font-weight: 500;
+        font-size: normal;
+        padding: 0.2rem 0.6rem;
+    }
 }

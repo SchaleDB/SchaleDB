@@ -5,7 +5,7 @@
                 <div class="px-0 px-xl-1">
                     <div id="ba-stages-list-container" class="card p-2 screen-height mobile-scroll">
                         <div class="card-header">
-                            <nav id="ba-stages-list-tabs" class="nav nav-pills mb-1 px-2">
+                            <nav id="ba-stages-list-tabs" class="nav nav-pills nav-justified mb-1 px-2">
                                 <a id="ba-stages-list-tab-missions" class="nav-link active" data-bs-toggle="tab" href="#ba-stages-list-missions" data-localize-id="StageType,missions"></a>
                                 <a id="ba-stages-list-tab-bounty" class="nav-link" data-bs-toggle="tab" href="#ba-stages-list-bounty" data-localize-id="StageType,bounty"></a>
                                 <a id="ba-stages-list-tab-commissions" class="nav-link" data-bs-toggle="tab" href="#ba-stages-list-commissions" data-localize-id="StageType,commissions"></a>
@@ -61,11 +61,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="text-bold" data-localize-id="ui,stage_rewards"></h5>
-                        <div class="ba-panel p-2 pb-0">
-                            <div id="ba-stage-drops" class="d-flex flex-wrap justify-content-center">
+                    <div class="card-body pt-0">
+                        <div class="d-flex align-items-end mb-2" style="min-height:32px;">
+                            <h5 class="text-bold mb-0" data-localize-id="ui,stage_rewards"></h5>
+                            <div class="flex-fill"></div>
+                            <nav id="ba-stage-drops-tabs" class="nav nav-pills">
+                                <a id="ba-stage-drops-default-tab" class="nav-link active" data-bs-toggle="tab" href="#ba-stage-drops-default" data-localize-id="ui,stage_reward_default"></a>
+                                <a id="ba-stage-drops-firstclear-tab" class="nav-link" data-bs-toggle="tab" href="#ba-stage-drops-firstclear" data-localize-id="ui,stage_reward_firstclear"></a>
+                                <a id="ba-stage-drops-threestar-tab" class="nav-link" data-bs-toggle="tab" href="#ba-stage-drops-threestar" data-localize-id="ui,stage_reward_threestar"></a>
+                            </nav>
+                        </div>
 
+                        <div class="ba-panel p-2 pb-0">
+                            <div class="tab-content">
+                                <div id="ba-stage-drops-default" class="tab-pane active show">
+                                </div>
+                                <div id="ba-stage-drops-firstclear" class="tab-pane">
+                                </div>
+                                <div id="ba-stage-drops-threestar" class="tab-pane">
+                                </div>
                             </div>
                         </div>
                         <h5 class="text-bold mt-2" data-localize-id="ui,stage_enemies"></h5>
@@ -82,10 +96,12 @@
                                             <!-- <h5 id="ba-stage-enemy-rank" class="d-inline-block me-2 mb-3"></h5> -->
                                             <span id="ba-stage-enemy-rank" class="ba-student-info-s ba-panel text-bold" style="transition-duration: 0s;"></span>
                                             <span id="ba-stage-enemy-class" class="ba-student-info-s" style="transition-duration: 0s;"></span>
+                                            
                                         </div>
                                         <div class="d-flex flex-wrap align-items-center mb-2">
                                             <span id="ba-stage-enemy-attacktype" class="ba-info-pill"><img src="images/ui/Type_Attack.png"><span id="ba-stage-enemy-attacktype-label"></span></span>
                                             <span id="ba-stage-enemy-defensetype" class="ba-info-pill"><img src="images/ui/Type_Defense.png"><span id="ba-stage-enemy-defensetype-label"></span></span>
+                                            <span id="ba-stage-enemy-size" class="ba-student-info ba-panel ba-panel text-bold" style="transition-duration: 0s;"></span>
                                         </div>
                                         <div class="d-flex flex-row d-none">
                                             <!-- <span id="ba-stage-enemy-rank" class="ba-student-info-s ba-panel"></span> -->

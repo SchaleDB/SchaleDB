@@ -21,3 +21,124 @@
     width: auto;
     margin: -4px 0 0 -4px;
 }
+
+a.ba-statpreview-status {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer !important;
+    padding-right: 0.25rem !important;
+    padding-left: 2px !important;
+    color: var(--col-theme-text);
+    text-decoration: none;
+
+    span {
+        display: flex;
+        align-items: center;
+    }
+
+    img {
+        height: 28px;
+        min-width: 28px;
+        @include circular;
+
+        &.icon-heart {
+            position: absolute;
+            bottom: 0px;
+            left: 20px;
+            height: 16px;
+            width: 16px;
+            min-width: 16px;
+        }
+    }
+
+    &:hover {
+        background-color: var(--col-btn-secondary);
+    }
+
+    &.deactivated {
+        color: var(--col-panel-separator);
+
+        img {
+            filter: grayscale(1) opacity(0.5);
+        }
+    }
+}
+
+a.ba-statpreview-icon {
+    display: flex;
+    cursor: pointer !important;
+    height: 32px;
+    width: 32px;
+    @include circular;
+    color: var(--col-theme-text);
+    text-decoration: none;
+    font-size: 16px;
+
+    &:hover {
+        background-color: var(--col-btn-secondary);
+    }
+
+    &.deactivated {
+        color: var(--col-panel-separator);
+
+        img {
+            opacity: 0.5;
+        }
+    }
+}
+
+.ba-weapon-label {
+    display: inline-block;
+    font-weight: 600;
+    font-style: italic;
+    font-size: large;
+}
+
+#ba-statpreview-stars {
+    font-size: 0px;
+    height: 32px;
+    @include circular;
+}
+
+.ba-statpreview-star {
+
+    transition: color var(--var-animation-duration) ease, opacity var(--var-animation-duration) ease;
+
+    &.active {
+        color: var(--col-text-stars);
+        filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
+    }
+
+    &:hover {
+        color: var(--col-text-stars);
+        opacity: 0.5
+    }
+}
+.ba-weaponpreview-star {
+
+    transition: color var(--var-animation-duration) ease, opacity var(--var-animation-duration) ease;
+
+    &.active {
+        color: var(--col-text-weaponstars);
+        filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
+    }
+
+    &:hover {
+        color: var(--col-text-weaponstars);
+        opacity: 0.5
+    }
+}
+
+#ba-statpreview-status-title {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#ba-statpreview-status-title-icon {
+    width: 36px;
+    height: 36px;
+    @include circular;
+}

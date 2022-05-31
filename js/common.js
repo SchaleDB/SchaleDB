@@ -11,11 +11,10 @@ const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
 const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000, 2400000, 4000000]
-const event_area = {1: 'Quest', 2: 'Invasion'}
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 2
+const cache_ver = 3
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const json_list = {
@@ -28,7 +27,6 @@ const json_list = {
     items: getCacheVerResourceName("./data/items.json"),
     furniture: getCacheVerResourceName("./data/furniture.json"),
     equipment: getCacheVerResourceName("./data/equipment.json"),
-    formations: getCacheVerResourceName("./data/formations.json"),
     crafting: getCacheVerResourceName("./data/crafting.json"),
     summons: getCacheVerResourceName("./data/summons.json")
 }
@@ -56,12 +54,18 @@ const sort_functions = {
 
 let data = {}, loadedModule, student, studentList, loadedItem, loadedStage, loadedCraftNode, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
     , searchResultsCount = 0, searchResultsSelection = 0
-    , studentSelectorModal, statPreviewModal, showVehicleStats = false
+    , studentSelectorModal, statPreviewModal
     , summonId = 0
     , header
     , raid_difficulty = 0, ta_difficulty = 0
     , stat_preview_stars = 3
     , stat_preview_weapon_stars = 0
+    ,statPreviewIncludePassive = false
+    ,statPreviewIncludeBond = false
+    ,statPreviewIncludeBondAlts = false
+    ,statPreviewIncludeEquipment = false
+    ,statPreviewSupportStats = false
+    ,statPreviewSummonStats = false
     , search_options = {
     "groupby": "none",
     "sortby": "Default",
@@ -183,6 +187,10 @@ let data = {}, loadedModule, student, studentList, loadedItem, loadedStage, load
         this.stats['HealEffectivenessRate'] = [10000,0,1]
         this.stats['OppressionPower'] = [100,0,1]
         this.stats['OppressionResist'] = [100,0,1]
+        this.stats['AttackSpeed'] = [10000,0,1]
+        this.stats['BlockRate'] = [10000,0,1]
+        this.stats['DefensePenetration'] = [10000,0,1]
+        this.stats['MoveSpeed'] = [10000,0,1]
     }
 
     addBuff(stat, amount) {
@@ -370,6 +378,12 @@ function loadModule(moduleName, entry=null) {
         
             $('input[type=range]').trigger('oninput')
             $('#ba-student, #ba-student-list-btn').show()
+            $('#ba-statpreview-status-bond-level').tooltip({title: getBasicTooltip('Toggle Relationship Bonus'), placement: 'top', html: true})
+            $('#ba-statpreview-status-equipment').tooltip({title: getBasicTooltip('Toggle Equipment Bonus'), placement: 'top', html: true})
+            $('#ba-statpreview-status-bond-alt-level').tooltip({title: getBasicTooltip('Toggle Alt Relationship Bonus'), placement: 'top', html: true})
+            $('#ba-statpreview-status-passive-level').tooltip({title: getBasicTooltip('Toggle Passive Skill Bonus'), placement: 'top', html: true})
+            $('#ba-statpreview-status-strikerbonus').tooltip({title: getBasicTooltip('Toggle Support Stats'), placement: 'top', html: true})
+            $('#ba-statpreview-status-summon').tooltip({title: getBasicTooltip('Toggle Vehicle/Summon Stats'), placement: 'top', html: true})
         })
     } else if (moduleName == 'items') {
         loadedModule = 'items'
@@ -568,9 +582,9 @@ function loadModule(moduleName, entry=null) {
             })
 
             if (birthdayStudents.length > 0) {
-                birthdayStudents.sort((a,b) => getNextBirthdayDate(a.birthday).getTime() - getNextBirthdayDate(b.birthday).getTime())
+                birthdayStudents.sort((a,b) => getNextBirthdayDate(a.BirthDay).getTime() - getNextBirthdayDate(b.BirthDay).getTime())
                 for (let i = 0; i < birthdayStudents.length; i++) {
-                    birthdaysHtml += '<div class="d-flex flex-column mx-1 mb-1">'+getStudentIconSmall(birthdayStudents[i])+'<div class="ba-panel mt-1 mx-1 p-1 text-center">'+getNextBirthdayDate(birthdayStudents[i].birthday).toLocaleDateString([], {month: "numeric", day: "numeric"})+'</div></div>'
+                    birthdaysHtml += '<div class="d-flex flex-column mx-1 mb-1">'+getStudentIconSmall(birthdayStudents[i])+'<div class="ba-panel mt-1 mx-1 p-1 text-center">'+getNextBirthdayDate(birthdayStudents[i].BirthDay).toLocaleDateString([], {month: "numeric", day: "numeric"})+'</div></div>'
                 }
                 $('#ba-home-birthdays-list').html(birthdaysHtml)
             } else {
@@ -777,17 +791,9 @@ function processStudent() {
         $("#ba-student-stargrade").append(`<span class="ms-1">(${getLocalizedString('IsLimited',''+student.IsLimited)})</span>`)
     } 
 
-    summonId = 0
+    statPreviewSummonStats = false
 
-    if (student.SummonIds.length > 0) {
-        $('#ba-student-summons').empty().html(`<button id="ba-student-summon-0" class="nav-link active" onclick="changeStudentSummon(0)">${getTranslatedString(student, 'Name')}</button>`).show()
-        student.SummonIds.forEach((el, i) => {
-            let summon = find(data.summons, 'Id', el)[0]
-            $('#ba-student-summons').append(`<button id="ba-student-summon-${i+1}" class="nav-link" onclick="changeStudentSummon(${i+1})">${getTranslatedString(summon, 'Name')}</button>`)
-        })
-    } else {
-        $('#ba-student-summons').empty().hide()
-    }
+    $('#ba-statpreview-status-summon').toggle((student.SummonIds.length > 0))
 
     $("#ba-student-role-label").text(getLocalizedString('TacticRole', student.TacticRole))
     $("#ba-student-role-icon").attr("src", `images/ui/Role_${student.TacticRole}.png`)
@@ -816,7 +822,7 @@ function processStudent() {
         $(`#ba-skill-${el.SkillType}-name`).text(getTranslatedString(el, 'Name'))
         $(`#ba-skill-${el.SkillType}-icon`).attr("src", `images/skill/${el.Icon}.png`)
         if (el.SkillType == 'passive') {
-            $('#ba-statpreview-passiveskill-icon').attr("src", `images/skill/${el.Icon}.png`)
+            $('#ba-statpreview-passiveskill-icon, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${el.Icon}.png`)
         }
         if (el.SkillType == "ex") {
             $("#ba-skill-ex-cost").removeClass("ba-col-explosion ba-col-pierce ba-col-mystic")
@@ -912,7 +918,7 @@ function processStudent() {
     let allTags = student.FavorItemTags
     allTags.push(student.FavorItemUniqueTags[0])
     let favItems = getFavouriteItems(allTags)
-    var favItemsHtml = ""
+    let favItemsHtml = ""
     $(favItems[0]).each(function(i,el){
         favItemsHtml += getFavourIconHTML(el, 3)
     })
@@ -926,9 +932,9 @@ function processStudent() {
         $('#ba-student-favoured-items').empty().html(favItemsHtml)
     }
 
-    var favFurnitureHtml = ""
+    let favFurnitureHtml = ""
     $(student.FurnitureInteraction).each(function(i,el){
-        var item = find(data.furniture, "Id", el)[0]
+        let item = find(data.furniture, "Id", el)[0]
         if (item.IsReleased[regionID]) {
             favFurnitureHtml += getFurnitureIconHTML(item)
         }
@@ -947,20 +953,24 @@ function processStudent() {
 
     if (student.SquadType == "Main") {
         $('#ba-student-stat-table').removeClass("table-striker-bonus")
-        $('#ba-statpreview-strikerbonus').removeClass('active').hide()
+        $('#ba-statpreview-status-strikerbonus').hide()
     } else {
-        $('#ba-statpreview-strikerbonus').show()
+        $('#ba-statpreview-status-strikerbonus').show()
     }
     
     $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(1, student))
+    $('#ba-statpreview-status-bond-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`)
     student_bondalts = []
     for (let i = 0; i < student.FavorAlts.length; i++) {
         var extraTarget = find(data.students,"Id",student.FavorAlts[i])[0]
         if (extraTarget.IsReleased[regionID]) {
             student_bondalts.push(extraTarget)
+            $('#ba-statpreview-status-bond-alt-icon').attr('src', `images/student/icon/${extraTarget.CollectionTexture}.png`)
             $('#ba-statpreview-bond-targets').append(getBondTargetsHTML(1 + student_bondalts.length, extraTarget))
         }
     }
+    $('#ba-statpreview-status-bond-alt-level').toggle(student_bondalts.length > 0)
+    updateStatPreviewTitle()
 
     document.title = `Schale DB | ${getTranslatedString(student, 'Name')}`
     $('#ba-navbar-content').collapse('hide')
@@ -968,7 +978,9 @@ function processStudent() {
 
     changeStatPreviewStars(student.StarGrade, 0)
     recalculateTerrainAffinity()
+    updatePassiveSkillStatPreview()
     recalculateWeaponPreview()
+    updateWeaponLevelStatPreview($('#ba-statpreview-weapon-range').val())
     recalculateStatPreview()
     recalculateSkillPreview()
     recalculateWeaponSkillPreview()
@@ -1022,22 +1034,18 @@ function loadStudentById(studentId) {
     }
 }
 
-function changeStudentSummon(summon) {
-    summonId = summon
-    $('#ba-student-summon-'+summonId).tab('show')
-    if (summonId == 0) {
-        $('#ba-statpreview-strikerbonus').removeClass('disabled')
-        recalculateStatPreview()
-    } else if (summonId >= 1) {
-        $('#ba-statpreview-strikerbonus').addClass('disabled').removeClass('active')
-        $('#ba-student-stat-table').removeClass("table-striker-bonus")
-        recalculateStatPreview()
-    }
+function toggleStudentSummon() {
+    statPreviewSummonStats = !statPreviewSummonStats
+    if (statPreviewSupportStats && statPreviewSummonStats) toggleStrikerBonus()
+    recalculateStatPreview()
+    $('#ba-statpreview-status-summon').toggleClass('deactivated', (!statPreviewSummonStats))
+    updateStatPreviewTitle()
 }
 
 function loadItem(id) {
     if (loadedModule == 'items') {
         var mode = '', item
+        $(".tooltip").tooltip("hide")
         $('#ba-item-furniture-row').hide()
         if (id >= 2000000) {
             mode = 'equipment'
@@ -1069,9 +1077,13 @@ function loadItem(id) {
         if (mode == 'equipment' && item.Id >= 1000 && item.Id <= 10000) {
             $('#ba-item-description').append("\n\n<b>Bonus Stats:</b>\n" + getGearStatsText(item, '\n'))
         }
+        if (item.Category.includes("WeaponExpGrowth")) {
+            $('#ba-item-description').append(`\n\n<i>${getLocalizedString('WeaponPartExpBonus', item.Category)}</i>`)
+        }
+        $('#ba-equipment-recipe').empty().hide()
         $('#ba-item-usage').empty().hide()
         $('#ba-item-sources').empty().hide()
-        if (item.Category == 'Material') {
+        if (item.Category == 'Material' || item.Category == 'CharacterExpGrowth') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
             $('#ba-item-sources').html(getItemDropStages(item.Id))
@@ -1092,9 +1104,14 @@ function loadItem(id) {
         } else if (mode == 'equipment') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('#ba-item-sources').html(getItemDropStages(item.Id+2000000))
+            $('#ba-equipment-recipe').html(getEquipmentRecipe(item))
+            $('#ba-equipment-recipe div').each(function(i,el) {
+                $(el).tooltip({html: true})
+            })
             $('.ba-item-student').tooltip({html: true})
             $('#ba-item-list-tab-equipment').tab('show')
         } else if (item.Category == 'Coin') {
+            $('#ba-item-sources').html(getItemDropStages(item.Id))
             $('#ba-item-list-tab-currency').tab('show')
         }
         if (mode == 'furniture') {
@@ -1300,91 +1317,141 @@ function changeRaidEnemy(num) {
 
     $("#ba-raid-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType', enemy.ArmorType)} Armor`, 'Defense Type', null, getTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
     $("#ba-raid-defensetype-label").text(getLocalizedString('ArmorType',enemy.ArmorType))
+    let enemysize = getEnemySize(enemy)
+    $('#ba-raid-enemy-size').text(getLocalizedString('EnemyTags', enemysize)).toggle(enemysize != null)
+
+}
+
+function getEnemySize(enemy) {
+    let size = enemy.Tags.filter(x => x.includes("Enemy"))
+    return (size.length == 0) ? null : size[0]
 }
 
 function loadStage(id) {
     if (loadedModule == 'stages') {
         let mode = ''
         if (id >= 7000000) {
-            mode = 'events'
-            stage = getEventStage(id)
-            $('#ba-stage-name').html(getLocalizedString('EventName',id.toString().slice(0,3)) + '<br>'+event_area[stage.Area]+' '+stage.Stage.toString().padStart(2,'0'))
+            mode = 'Event'
+            stage = findOrDefault(data.stages.Event, "Id", id, 8012301)[0]
             $('#ba-stages-list-tab-events').tab('show')
         } else if (id >= 1000000) {
-            mode = 'missions'
-            stage = findOrDefault(data.stages.missions, "Id", id, 1011101)[0]
-            $('#ba-stage-name').html(stage.Area+'-'+stage.Stage+ (stage.Difficulty == 1 ? ' Hard' : ' Normal'))
+            mode = 'Campaign'
+            stage = findOrDefault(data.stages.Campaign, "Id", id, 1011101)[0]
             $('#ba-stages-list-tab-missions').tab('show')
         } else if (id >= 60000) {
-            mode = 'schooldungeon'
-            stage = findOrDefault(data.stages.schooldungeon, "Id", id, 60101)[0]
-            $('#ba-stage-name').html(getLocalizedString('StageType',mode))
+            mode = 'SchoolDungeon'
+            stage = findOrDefault(data.stages.SchoolDungeon, "Id", id, 60101)[0]
             $('#ba-stages-list-tab-schooldungeon').tab('show')
         } else if (id >= 31000) {
-            mode = 'commissions'
-            stage = findOrDefault(data.stages.commissions, "Id", id, 32101)[0]
-            $('#ba-stage-name').html(getLocalizedString('StageType',mode))
+            mode = 'WeekDungeon'
+            stage = findOrDefault(data.stages.WeekDungeon, "Id", id, 31101)[0]
             $('#ba-stages-list-tab-commissions').tab('show')
         } else if (id >= 30000) {
-            mode = 'bounty'
-            stage = findOrDefault(data.stages.bounty, "Id", id, 30101)[0]
-            $('#ba-stage-name').html(getLocalizedString('StageType',mode))
+            mode = 'WeekDungeon'
+            stage = findOrDefault(data.stages.WeekDungeon, "Id", id, 30101)[0]
             $('#ba-stages-list-tab-bounty').tab('show')
         } else {
-            mode = 'missions'
-            stage = find(data.stages.missions, "Id", 1011101)[0]
-            $('#ba-stage-name').html(stage.Area+'-'+stage.Stage+ (stage.Difficulty == 1 ? ' Hard' : ' Normal'))
+            // fallback to default 1-1 Normal
+            mode = 'Campaign'
+            stage = find(data.stages.Campaign, "Id", 1011101)[0]
             $('#ba-stages-list-tab-missions').tab('show')
         }
+        $('#ba-stage-drops-tabs').toggle(mode != 'WeekDungeon')
+        if (mode == 'WeekDungeon') $('#ba-stage-drops-default-tab').tab('show')
+
         loadedStage = stage
-        $('#ba-stage-title').html(getTranslatedString(stage,'Name'))
-        $('#ba-stage-level').text('Lv.'+ stage.RecommendedLevel)
+        $('#ba-stage-name').html(getStageName(stage, mode))
+        $('#ba-stage-title').html(getStageTitle(stage, mode))
+        $('#ba-stage-level').text('Rec. Lv. '+ stage.Level)
         $('#ba-stage-terrain-img').attr('src', `images/ui/Terrain_${stage.Terrain}.png`)
-        stage.Difficulty == 1 ? $('#ba-stage-fog').show() : $('#ba-stage-fog').hide()
+        $('#ba-stage-fog').toggle(mode == "Campaign" && stage.Difficulty == 1)
+
         let url = new URL(window.location.href)
         if (url.searchParams.get("stage") != id) {
             url.searchParams.forEach((v,k) => url.searchParams.delete(k))
             url.searchParams.set("stage", id)
             history.pushState(null, '', url)
         }
+
+        const stageTypes = ["Default","FirstClear","ThreeStar"]
+        stageTypes.forEach(el => {
+            if (el in stage.Rewards && stage.Rewards[el].length > 0) {
+                let html = ''
+                $.each(stage.Rewards[el], function(i,el2){
+                    html += getDropIconHTML(el2[0], el2[1])
+                })
+                $(`#ba-stage-drops-${el.toLowerCase()}`).html(`<div class="d-flex flex-wrap justify-content-center">${html}</div>`)
+                if (stage.Type == "FindGift") {
+                    $(`#ba-stage-drops-${el.toLowerCase()}`).prepend('<i class="d-block mb-2">Each enemy defeated will drop one of the following items</i><div class="d-flex flex-wrap justify-content-center"></div>')
+                }
+                $(`#ba-stage-drops-${el.toLowerCase()}>div div`).each(function(i,el2) {
+                    $(el2).tooltip({html: true})
+                })
+            } else {
+                $(`#ba-stage-drops-${el.toLowerCase()}>div`).html('<span class="pb-2 text-center">No rewards.</span>')
+            }
+
+        })
+
         let html = ''
-        $.each(stage.Rewards, function(i,el){
-            html += getDropIconHTML(el[0], el[1])
-        })
-        $.each(stage.Drops, function(i,el){
-            html += getDropIconHTML(el[0], el[1])
-        })
-        $('#ba-stage-drops').html(html)
-        $('#ba-stage-drops div').each(function(i,el) {
-            $(el).tooltip({html: true})
-        })
-        html = ''
-        let all_enemies = {}
-        $.each(data.formations[stage.Id], function(i,el){
+        let enemyList = {}
+        const enemyRanks = ['Minion','Elite','Champion','Boss']
+        stage.Formations.forEach(el => {
             for (let i = 0; i < el.EnemyList.length; i++) {
                 let enemy = find(data.enemies, "Id", el.EnemyList[i])[0]
-                all_enemies[enemy_rank[enemy.Rank]+'_'+enemy.Id+'_'+el['Level'+enemy.Rank]+'_'+el['Grade'+enemy.Rank]] = enemy
+                let rankId = enemyRanks.indexOf(enemy.Rank)
+                enemyList[`${4-rankId}_${enemy.Id}_${el.Level[rankId]}_${el.Grade[rankId]}`] = enemy
+                //all_enemies[enemy_rank[enemy.Rank]+'_'+enemy.Id+'_'+el['Level'+enemy.Rank]+'_'+el['Grade'+enemy.Rank]] = enemy
             }
         })
+
+
         let isfirst = true
-        Object.keys(all_enemies).sort().forEach(el => {
+        Object.keys(enemyList).sort().forEach(el => {
             e_level = el.split('_')[2]
             e_grade = el.split('_')[3]
-            html += getEnemyCardHTML(all_enemies[el], e_level, e_grade)
+            html += getEnemyCardHTML(enemyList[el], e_level, e_grade)
             if (isfirst) {
-                showEnemyInfo(all_enemies[el].Id, e_level, e_grade)
+                showEnemyInfo(enemyList[el].Id, e_level, e_grade)
                 isfirst = false
             }
         })
         $('#ba-stage-enemies').html(html)
         
-        document.title = `Schale DB | ${getTranslatedString(stage, 'Name')}`
+        document.title = `Schale DB | ${$('#ba-stage-title').text()}`
         $('#ba-navbar-content').collapse('hide')
         window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("stage", id)
     } else {
         loadModule('stages', id)
     }
+}
+
+function getStageName(stage, type) {
+    switch (type) {
+        case "Event":
+            return `${getLocalizedString('EventName', ''+stage.EventId)}\nQuest ${stage.Stage.toString().padStart(2,'0')}`
+        case "Campaign":
+            return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
+        case "WeekDungeon":
+        case "SchoolDungeon":
+            return `${getLocalizedString('StageType', stage.Type)}`
+    }
+    console.log(`No name definition for stage type ${type}`)
+    return "undefined!!!"
+}
+
+function getStageTitle(stage, type) {
+    switch (type) {
+        case "Event":
+        case "Campaign":
+            return getTranslatedString(stage, 'Name')
+        case "WeekDungeon":
+        case "SchoolDungeon":
+            return `${formatString(getLocalizedString('StageTitle', stage.Type), String.fromCharCode(64+stage.Stage))}`
+    }
+    console.log(`No title definition for stage type ${type}`)
+    return "undefined!!!"
 }
 
 function getEventStage(id) {
@@ -1420,7 +1487,7 @@ function loadRegion(regID) {
         $('#ba-student-search-filter-school-srt').hide()
         $('#ba-student-search-filter-school-arius').hide()
         $('#ba-student-search-filter-school-etc').hide()
-        $('#ba-student-search-filter-weapon_type-rl').hide()
+        $('#ba-student-search-filter-weapontype-rl').hide()
     }
 }
 
@@ -1446,7 +1513,7 @@ function changeGearLevel(slot, el) {
     $(`#ba-statpreview-gear${slot}-level`).text(`T${tier}`)
     $(`#ba-statpreview-gear${slot}-name`).text(getTranslatedString(equipment, 'Name'))
     $(`#ba-statpreview-gear${slot}-description`).html(getGearStatsText(equipment))
-    if ($('#ba-statpreview-includegear').hasClass('active')) {
+    if (statPreviewIncludeEquipment) {
         recalculateStatPreview()
         updateGearIcon()
     }
@@ -1469,8 +1536,11 @@ function getGearStatsText(equipment, delimiter=', ') {
     return text.join(delimiter)
 }
 
-function toggleStrikerBonus(el) {
-    $('#ba-student-stat-table').toggleClass("table-striker-bonus", $(el).hasClass('active'))
+function toggleStrikerBonus() {
+    statPreviewSupportStats = !statPreviewSupportStats
+    if (statPreviewSupportStats && statPreviewSummonStats) toggleStudentSummon()
+    $('#ba-student-stat-table').toggleClass("table-striker-bonus", statPreviewSupportStats)
+    $('#ba-statpreview-status-strikerbonus').toggleClass("deactivated", !statPreviewSupportStats)
     recalculateStatPreview()
 }
 
@@ -1512,7 +1582,7 @@ function changeWeaponPreviewLevel(el) {
 }
 
 function changeStatPreviewBondLevel(i, el) {
-    $(`#ba-statpreview-bond-${i}-level`).html('<i class="fa-solid fa-heart"></i> ' + el.value)
+    $(`#ba-statpreview-bond-${i}-level`).html(`<i class="fa-solid fa-heart"></i> ${el.value}`)
     var bondStats
     if (i == 1) {
         bondStats = Object.entries(getBondStats(student, el.value))
@@ -1520,9 +1590,7 @@ function changeStatPreviewBondLevel(i, el) {
         bondStats = Object.entries(getBondStats(student_bondalts[i-2], el.value))
     }
     $(`#ba-statpreview-bond-${i}-description`).html(`${getStatName(bondStats[0][0])} <b>+${getFormattedStatAmount(bondStats[0][1])}</b>, ${getStatName(bondStats[1][0])} <b>+${getFormattedStatAmount(bondStats[1][1])}</b>`)
-    if ($('#ba-statpreview-includebond').hasClass('active')) {
-        recalculateStatPreview()
-    }
+    recalculateStatPreview()
 }
 
 function changeStatPreviewWeaponLevel(el) {
@@ -1551,7 +1619,7 @@ function changeStatPreviewPassiveSkillLevel(el) {
 }
 
 function getBondTargetsHTML(num, student) {
-    return `<div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num}, this)" type="range" class="form-range me-2 flex-fill" value="${num == 1 ? 20 : 1}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div>`
+    return `<div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num}, this)" type="range" class="form-range me-2 flex-fill" value="20" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div>`
 }
 
 function changeBondLevel(el) {
@@ -1560,13 +1628,16 @@ function changeBondLevel(el) {
 }
 
 function updateGearIcon() {
-    let gear, tier, includeGear
-    includeGear = $('#ba-statpreview-includegear').hasClass('active')
+    let gear, tier, tierText = ""
     for (let i=1; i<=3; i++) {
-        tier = includeGear ? $(`#ba-statpreview-gear${i}-range`).val() : 1
+        tier = statPreviewIncludeEquipment ? $(`#ba-statpreview-gear${i}-range`).val() : 1
+        tierText += ((tierText == "") ? "" : " / ") + "T"+$(`#ba-statpreview-gear${i}-range`).val()
         gear = find(data.equipment, "Id", gearId[student.Equipment[i-1]]+(tier-1))[0]
-        $("#ba-student-gear-"+i).attr("src", `images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`, getTranslatedString(gear, 'Name'), getLocalizedString('ItemCategory', gear.Category), `T${tier}`, getTranslatedString(gear, 'Desc') + "\n\n<b>Bonus Stats:</b>\n" + getGearStatsText(gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !includeGear)
+        $("#ba-student-gear-"+i).attr("src", `images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`, getTranslatedString(gear, 'Name'), getLocalizedString('ItemCategory', gear.Category), `T${tier}`, getTranslatedString(gear, 'Desc') + "\n\n<b>Bonus Stats:</b>\n" + getGearStatsText(gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !statPreviewIncludeEquipment)
+        $("#ba-student-gear-"+i).attr('onclick', `loadItem(${gear.Id+2000000})`)
+
     }
+    //$('#ba-statpreview-status-equipment .statpreview-label').text(tierText)
 }
 
 function recalculateTerrainAffinity() {
@@ -1596,16 +1667,16 @@ function recalculateStatPreview() {
     const maxbond = [10, 10, 20, 20, 50]
     let strikerBonus = $('#ba-student-stat-table').hasClass("table-striker-bonus")
     let level = $("#ba-statpreview-levelrange").val()
-    let stats
-    if (summonId > 0) {
-        let summon = find(data.summons, 'Id', student.SummonIds[summonId-1])[0]
-        stats = new CharacterStats(summon, level, 1)
+    let stats, summon
+    if (statPreviewSummonStats) {
+        summon = find(data.summons, 'Id', student.SummonIds[0])[0]
+        stats = new CharacterStats(summon, level, (summon.StarBonus ? stat_preview_stars : 1))
     } else {
         stats = new CharacterStats(student, level, stat_preview_stars)
     }
 
     //Include Equipment
-    if ($('#ba-statpreview-includegear').hasClass('active')) {
+    if (statPreviewIncludeEquipment) {
         let gear, tier
         for (let i = 0; i < 3; i++) {
             tier = parseInt($(`#ba-statpreview-gear${i+1}-range`).val())
@@ -1620,29 +1691,37 @@ function recalculateStatPreview() {
         }
     }
 
-    if (summonId == 0)  {
+    if (!statPreviewSummonStats)  {
         //Include Relationship
-        if ($('#ba-statpreview-includebond').hasClass('active')) {
-            for (let i = 1; i <= student_bondalts.length+1; i++) {
-                var bondlevel = $(`#ba-statpreview-bond-${i}-range`).val()
-                var bondbonus = getBondStats(i == 1 ? student : student_bondalts[i-2], i == 1 ? Math.min(maxbond[stat_preview_stars-1], bondlevel) : bondlevel)
+        if (statPreviewIncludeBond) {
+            let bondlevel = $(`#ba-statpreview-bond-1-range`).val()
+            let bondbonus = getBondStats(student, Math.min(maxbond[stat_preview_stars-1], bondlevel))
+            Object.entries(bondbonus).forEach(el => {
+                stats.addBuff(el[0], el[1])
+            })
+        }
+
+        if (statPreviewIncludeBondAlts) {
+            for (let i = 2; i <= student_bondalts.length+1; i++) {
+                let bondlevel = $(`#ba-statpreview-bond-${i}-range`).val()
+                let bondbonus = getBondStats(student_bondalts[i-2], bondlevel)
                 Object.entries(bondbonus).forEach(el => {
                     stats.addBuff(el[0], el[1])
                 })
-                //$.each(bondbonus, function(j, el) {bonus[j] += el})
             }
         }
 
         //Include Passive Skill
-        // if ($('#ba-statpreview-includepassive').hasClass('active')) {
-        //     let passiveBonus = getPassiveSkillBonus(student, $('#ba-statpreview-passiveskill-range').val(), (stat_preview_weapon_stars >= 2))
-        //     Object.entries(passiveBonus).forEach(el => {
-        //         stats.addBuff(el[0], el[1])
-        //     })
-        // }
+        if (statPreviewIncludePassive && !statPreviewSupportStats) {
+            let passiveSkill = find(student.Skills, 'SkillType', ((stat_preview_weapon_stars >= 2) ? 'weapon' : '') + 'passive')[0]
+            let passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
+            Object.entries(passiveBonus).forEach(el => {
+                stats.addBuff(el[0], el[1])
+            })
+        }
 
         //Include Ex. Weapon
-        if ((stat_preview_stars == 5) && (stat_preview_weapon_stars > 0) && (!showVehicleStats)) {
+        if ((stat_preview_stars == 5) && (stat_preview_weapon_stars > 0)) {
             let weaponStats = getWeaponStats(student, $('#ba-statpreview-weapon-range').val())
             Object.entries(weaponStats).forEach(el => {
                 stats.addBuff(el[0], el[1])
@@ -1651,7 +1730,7 @@ function recalculateStatPreview() {
     }
 
     //populate table
-    if (!strikerBonus || summonId > 0) {
+    if (!strikerBonus || statPreviewSummonStats) {
         $('#ba-student-stat-maxhp').text(stats.getTotal('MaxHP'))
         $('#ba-student-stat-attack').text(stats.getTotal('AttackPower'))
         $('#ba-student-stat-defense').text(stats.getTotal('DefensePower'))
@@ -1672,7 +1751,7 @@ function recalculateStatPreview() {
     $('#ba-student-stat-ccpower').text(stats.getTotal('OppressionPower'))
     $('#ba-student-stat-ccresist').text(stats.getTotal('OppressionResist'))
 
-    if (student.SquadType == "Main" || summonId > 0) {
+    if (student.SquadType == "Main" || statPreviewSummonStats) {
         $('#ba-student-stat-ammo').text(stats.getTotal('AmmoCount') + " (" + stats.getTotal('AmmoCost') + ")")
     } else {
         $('#ba-student-stat-ammo').text('N/A')
@@ -1681,6 +1760,15 @@ function recalculateStatPreview() {
     $('#ba-student-stat-critresist').text(stats.getTotal('CriticalChanceResistPoint'))
     $('#ba-student-stat-critdmgresist').text(stats.getTotal('CriticalDamageResistRate'))
     $('#ba-student-stat-recoveryrate').text(stats.getTotal('HealEffectivenessRate'))
+
+    $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
+    $('#ba-statpreview-status-bond-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-1-range').val()}`)
+    if (student_bondalts.length > 0) {
+        $('#ba-statpreview-status-bond-alt-level').toggleClass('deactivated', !statPreviewIncludeBondAlts)
+        $('#ba-statpreview-status-bond-alt-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-2-range').val()}`)
+    }
+    $('#ba-statpreview-status-passive-level').toggleClass('deactivated', !statPreviewIncludePassive)
+    $('#ba-statpreview-status-equipment').toggleClass('deactivated', !statPreviewIncludeEquipment)
 }
 
 function recalculateEXSkillPreview() {
@@ -1747,22 +1835,52 @@ function getItemCardHTML(item, linkid, icontype) {
 }
 
 function getStageCardHTML(stage, dropChance = 0) {
+    let type = ''
+    if (stage.Id >= 7000000) {
+        type = 'Event'
+    } else if (stage.Id >= 1000000) {
+        type = 'Campaign'
+    } else if (stage.Id >= 60000) {
+        type =  'SchoolDungeon'
+    } else if (stage.Id >= 30000) {
+        type = 'WeekDungeon'
+    } else {type = 'Unknown'}
+    let name = getStageCardName(stage)
     var html = `<div id="ba-stage-select-${stage.Id}" class="ba-select-grid-item unselectable">
     <div onclick="loadStage('${stage.Id}')" class="ba-stage-card">
-    <div class="ba-stage-card-img"><img loading="lazy" src="images/campaign/${stage.Icon}.png"></div>`
+    <div class="ba-stage-card-img"><img loading="lazy" src="images/campaign/${getStageIcon(stage, type)}.png"></div>`
     if (dropChance > 0) {
         html += `<span class="ba-stage-card-droprate">${getProbabilityText(dropChance)}</span>`
     }
     html += `<div class="d-flex align-items-center ba-select-grid-card-label">`
-    if (stage.Id >= 7000000) {
-        html += `<span class="ba-label-text px-1 align-middle" style="width: 100%">${event_area[stage.Area] + ' ' + stage.Stage.toString().padStart(2,'0')}</span>`
-    } else if (stage.Id < 1000000) {
-        html += `<span class="ba-label-text px-1 align-middle ${getTranslatedString(stage, 'Name').length > label_enemy_smalltext_threshold[userLang] ? "smalltext" : "" }" style="width: 100%">${getTranslatedString(stage, 'Name')}</span>`
-    } else {
-        html += `<span class="ba-label-text px-1 align-middle" style="width: 100%">${stage.Area+'-'+stage.Stage+ (stage.Difficulty == 1 ? ' Hard' : ' Normal')}</span>`
-    }
+    html += `<span class="ba-label-text px-1 align-middle  ${name.length > label_enemy_smalltext_threshold[userLang] ? "smalltext" : "" }"" style="width: 100%">${name}</span>`
     html += `</div></div></div>`
     return html
+
+    function getStageCardName() {
+        switch (type) {
+            case "Event":
+                return `Quest ${stage.Stage.toString().padStart(2,'0')}`
+            case "Campaign":
+                return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
+            case "WeekDungeon":
+            case "SchoolDungeon":
+                return `${formatString(getLocalizedString('StageTitle', stage.Type), String.fromCharCode(64+stage.Stage))}`
+        }
+    }
+}
+
+function getStageIcon(stage, type) {
+    switch (type) {
+        case "Event":
+            return `Campaign_Event_${stage.EventId}_Normal`
+        case "Campaign":
+            return `Campaign_Image_${stage.Area.toString().padStart(2,'0')}_${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
+        case "WeekDungeon":
+            return `WeekDungeon_Image_${stage.Type}`
+        case "SchoolDungeon":
+            return `SchoolDungeon_Image_${stage.Type}`
+    }
 }
 
 function getRaidCardHTML(raid, terrain='') {
@@ -1795,6 +1913,8 @@ function showEnemyInfo(id, level, grade=1, scaletype=0) {
     $('#ba-stage-enemy-img').attr('src', `images/enemy/${enemy.Icon}.png`)
     $('#ba-stage-enemy-rank').text(`Lv.${level} ${getLocalizedString('EnemyRank', enemy.Rank)}`)
     $('#ba-stage-enemy-class').text(getLocalizedString('SquadType', enemy.SquadType)).removeClass("ba-class-main ba-class-support").addClass(`ba-class-${enemy.SquadType.toLowerCase()}`)
+    let enemysize = getEnemySize(enemy)
+    $('#ba-stage-enemy-size').text(getLocalizedString('EnemyTags', enemysize)).toggle(enemysize != null)
     $("#ba-stage-enemy-attacktype").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
     $("#ba-stage-enemy-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
     $("#ba-stage-enemy-attacktype-label").text(getLocalizedString('BulletType',enemy.BulletType))
@@ -1849,49 +1969,107 @@ function getMaterialIconHTML(id, amount) {
         item = find(data.items, "Id", id)[0]
     }
     var html
-    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), item.Category, getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}">
-            <img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/${item.Icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>
-            `
+    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), item.Category, getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/${item.Icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>`
     return html
 }
 
 function getDropIconHTML(id, chance) {
-    //rarity, icon, name, amount, type, description=""
-    var item, type, haslink
-    if (id >= 3000000) {
+    let item, type, group, haslink
+    if (id >= 4000000) {
+        groups = find(data.common.GachaGroup, "Id", id-4000000)
+        if (groups.length > 0) {
+            group = groups[0]
+            type = 'GachaGroup'
+            iconPath = 'items'
+            haslink = false
+        } else return ''
+    } else if (id >= 3000000) {
         item = find(data.common.currency, "Id", id-3000000)[0]
-        type = 'items'
-        haslink = true
+        type = 'Currency'
+        iconPath = 'items'
+        haslink = false
     } else if (id >= 2000000) {
         item = find(data.equipment, "Id", id-2000000)[0]
-        type = 'equipment'
+        type = 'Equipment'
+        iconPath = 'equipment'
         haslink = true
     } else if (id >= 1000000) {
         item = find(data.furniture, "Id", id-1000000)[0]
-        type = 'furniture'
+        type = 'Furniture'
+        iconPath = 'furniture'
         haslink = true
-    } else if (id >= 30000 && id < 80000) {
-        item = find(data.common.item_box, "Id", id)[0]
-        type = 'items'
-        haslink = false
     } else {
         item = find(data.items, "Id", id)[0]
-        type = 'items'
+        type = 'Item'
+        iconPath = 'items'
         haslink = true
     }
     let rarityText = ''
-    if (type == 'equipment' && item.Id >= 1000) {
-        rarityText = `T${(item.Id%10)+1}`
-    } else {
-        rarityText = getRarityStars(item.Rarity)
+    if (item) {
+        if (type == 'Equipment' && item.Id >= 1000) {
+            rarityText = `T${(item.Id%10)+1}`
+        } else {
+            rarityText = getRarityStars(item.Rarity)
+        }
     }
-    var html
-    html = `<div class="drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${type}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',item.Category), rarityText, getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}">
-            <img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${type}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${getProbabilityText(chance)}</span></div>
-            `
+
+    let html = ''
+    if (type == "GachaGroup") {
+        //check for single item GachaGroup, just display the item as normal with max qty
+        //todo: make this show the full qty range
+        let rarity = 'N'
+        if (group.ItemList.length == 1) {
+            return getDropIconHTML(group.ItemList[0][0], chance < 1 ? chance : group.ItemList[0][3])
+        } else {
+            // build group icon
+            let icon, name, desc
+            if (group.Id >= 600000 && group.Id < 700000) {
+                name = "Random "
+                desc = "Contains one of the following equipment pieces:\n"
+                iconPath = 'equipment'
+                let gearType = ''
+                for (let i = 0; i < group.ItemList.length; i++) {
+                    let gear = find(data.equipment, 'Id', group.ItemList[i][0]-2000000)[0]
+                    desc += getTranslatedString(gear, 'Name') + "\n"
+                    icon = gear.Icon
+                    gearType = getLocalizedString('ItemCategory', gear.Category)
+                    name += `${(i > 0) ? '/' : ''}T${(gear.Id%10)+1}`
+                }
+                name += ' '+gearType
+
+            } else if (group.Id >= 10100 && group.Id <= 10103) {
+                icon = group.Icon
+                name = getTranslatedString(group, 'Name')
+                desc = "Contains one of the following artifacts:\n"
+                rarity = group.Rarity
+                for (let i = 0; i < group.ItemList.length; i++) {
+                    let item = find(data.items, 'Id', group.ItemList[i][0])[0]
+                    desc += getTranslatedString(item, 'Name') + "\n"
+                }
+            }
+            html = `<div class="drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${icon}.png`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/${icon}.png"><span class="ba-material-label">${getProbabilityText(chance)}</span></div>`
+        }
+    } else {
+        html = `<div class="drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',item.Category), rarityText, getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${getProbabilityText(chance)}</span></div>`
+    }
     return html
 }
 
+/**
+ * Formats a string with placeholders {n} using replacements. If n is out of bounds it will be replaced with an empty string
+ * @param {string} string
+ * @param  {...string} replacements 
+ * @returns
+ */
+function formatString(string, ...replacements) {
+    return string.replaceAll(/\{([0-9]+)\}/g, (match, p1) => (p1 < replacements.length) ? replacements[p1] : '')
+}
+
+/**
+ * Converts a probability to a string representing its percentage chance when < 1.00, or the quantity when >= 1.00
+ * @param {*} chance 
+ * @returns 
+ */
 function getProbabilityText(chance) {
     return chance >= 1 ? '&times;'+abbreviateNumber(parseInt(chance).toFixed(0)).toLocaleString(): parseFloat((chance*100).toFixed(2)) + '&#37;'
 }
@@ -1976,48 +2154,67 @@ function changeStatPreviewStars(stars, weaponstars) {
         $('#ba-statpreview-weapon-range').val(level)
         updateWeaponLevelStatPreview(level)
     }
+    $('#ba-student-weapon-level').toggle((stat_preview_weapon_stars > 0))
 
     if ((weaponstars == 3 && weaponstars_prev < 3) || (weaponstars_prev == 3 && weaponstars < 3)) {
         recalculateTerrainAffinity()
     }
-    
+
+    if ((weaponstars >= 2 && weaponstars_prev < 2) || (weaponstars_prev >= 2 && weaponstars < 2)) {
+        updatePassiveSkillStatPreview()
+    }
+
     recalculateStatPreview()
-    //updatePassiveSkillStatPreview()
 }
 
 function updatePassiveSkillStatPreview() {
     //update passive skill info in preview
     let passivePlus = (stat_preview_weapon_stars >= 2)
-    let passiveBonus = getPassiveSkillBonus(student, $('#ba-statpreview-passiveskill-range').val(), passivePlus)
-    $('#ba-statpreview-passiveskill-name').text(getTranslatedString(student, 'skill_passive_name') + (passivePlus ? getLocalizedString('ui',"skill_plus") : ""))
+    let passiveSkill = find(student.Skills, 'SkillType', (passivePlus ? 'weapon' : '') + 'passive')[0]
+    let passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
+    $('#ba-statpreview-passiveskill-name').text(getTranslatedString(passiveSkill, 'Name'))
     let desc = ""
     $(Object.entries(passiveBonus)).each(function(i, el){
-        if (el[1] > 0) desc += `${getStatName(el[0])} <b>+${getFormattedStatAmount(el[1])}</b>, `
+        let value = el[1]
+        if (el[0].includes('_Coefficient')) value /= 10000
+        if (value > 0) desc += `${getStatName(el[0])} <b>+${getFormattedStatAmount(value)}</b>, `
     })
     $('#ba-statpreview-passiveskill-desc').html(desc.substring(0, desc.length-2))
     passivePlus ? $('#ba-statpreview-passiveskill-icon-plus').show() : $('#ba-statpreview-passiveskill-icon-plus').hide()
+    $('#ba-statpreview-status-passive-level .statpreview-label').text(`Lv.${$('#ba-statpreview-passiveskill-range').val()}`)
 }
 
 function populateItemList() {
-    html = {"Material":"", "Favor":"", "SecretStone":"", "Furniture":"", "Equipment":"", "Coin":""}
+    itemsHtml = {"materials":"", "gifts":"", "eleph":"", "furniture":"", "equipment":"", "currency":""}
     $.each(data.items, function(i,el) {
-        if (el.IsReleased[regionID])
-        html[el.Category] += getItemCardHTML(el,el.Id,'items')
+        if (el.IsReleased[regionID]) {
+            let itemHtml = getItemCardHTML(el,el.Id,'items')
+            switch (el.Category) {
+                case "CharacterExpGrowth":
+                case "Material":
+                    itemsHtml["materials"] += itemHtml
+                    break
+                case "Favor":
+                    itemsHtml["gifts"] += itemHtml
+                    break
+                case "SecretStone":
+                    itemsHtml["eleph"] += itemHtml
+                    break
+                case "Coin":
+                    itemsHtml["currency"] += itemHtml
+                    break
+            }
+        }
     })
     $.each(data.furniture, function(i,el) {
         if (el.IsReleased[regionID])
-        html['Furniture'] += getItemCardHTML(el,el.Id+1000000,'furniture')
+        itemsHtml['furniture'] += getItemCardHTML(el,el.Id+1000000,'furniture')
     })
     $.each(data.equipment, function(i,el) {
         if (el.IsReleased[regionID])
-        html['Equipment'] += getItemCardHTML(el,el.Id+2000000,'equipment')
+        itemsHtml['equipment'] += getItemCardHTML(el,el.Id+2000000,'equipment')
     })
-    $('#ba-item-list-materials-grid').html(html['Material'])
-    $('#ba-item-list-gifts-grid').html(html['Favor'])
-    $('#ba-item-list-eleph-grid').html(html['SecretStone'])
-    $('#ba-item-list-currency-grid').html(html['Coin'])
-    $('#ba-item-list-furniture-grid').html(html['Furniture'])
-    $('#ba-item-list-equipment-grid').html(html['Equipment'])
+    Object.entries(itemsHtml).forEach(el => $(`#ba-item-list-${el[0]}-grid`).html(el[1]))
     $('.ba-select-grid-item').tooltip({html: true, delay: { show: 200, hide: 0 }})
 }
 
@@ -2043,39 +2240,42 @@ function getCraftingCardHTML(node) {
 }
 
 function populateStageList() {
-    var html
+    let html, html2
     html = ''
-    $.each(data.stages.missions, function(i,el) {
-        if (el.IsReleased[regionID])
+    $.each(data.stages.Campaign, function(i,el) {
+        if (el.Area <= data.common.regions[regionID].campaign_max)
         html += getStageCardHTML(el)
     })
     $('#ba-stages-list-missions-grid').html(html)
     html = ''
-    $.each(data.stages.bounty, function(i,el) {
-        if (el.IsReleased[regionID])
+    html2 = ''
+    $.each(data.stages.WeekDungeon, function(i,el) {
+        if (el.Id < 31000) {
+            if (el.Stage <= data.common.regions[regionID].bounty_max) html += getStageCardHTML(el)
+        } else {
+            if (el.Stage <= data.common.regions[regionID].commission_max) html2 += getStageCardHTML(el)
+        }
+        if (el.Area <= data.common.regions[regionID].commission_max)
         html += getStageCardHTML(el)
     })
     $('#ba-stages-list-bounty-grid').html(html)
+    $('#ba-stages-list-commissions-grid').html(html2)
     html = ''
-    $.each(data.stages.commissions, function(i,el) {
-        if (el.IsReleased[regionID])
-        html += getStageCardHTML(el)
-    })
-    $('#ba-stages-list-commissions-grid').html(html)
-    html = ''
-    $.each(data.stages.schooldungeon, function(i,el) {
-        if (el.IsReleased[regionID])
+    $.each(data.stages.SchoolDungeon, function(i,el) {
+        if (el.Stage <= data.common.regions[regionID].schooldungeon_max)
         html += getStageCardHTML(el)
     })
     $('#ba-stages-list-schooldungeon-grid').html(html)
     html = ''
-    $.each(data.stages.events, function(i,el) {
-        if (el.IsReleased[regionID]) {
-            html += `<div id="stages-list-events-grid-header-${el.Id}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('EventName',''+el.Id)}</h3></div>`
-            for (let j = 0; j < el.Stages.length; j++) {
-                html += getStageCardHTML(el.Stages[j])
+    eventPrev = 0
+    $.each(data.stages.Event, function(i,el) {
+        if (el.EventId <= data.common.regions[regionID].event_max && !(regionID == 1 && el.EventId == 701)) {
+            if (el.EventId != eventPrev) {
+                html += `<div id="stages-list-events-grid-header-${el.EventId}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('EventName',''+el.EventId)}</h3></div>`
             }
-        }
+            html += getStageCardHTML(el)
+            eventPrev = el.EventId
+        }  
     })
     $('#ba-stages-list-events-grid').html(html)
 }
@@ -2168,6 +2368,24 @@ function getUsedByStudents(item, mode) {
     
 }
 
+function getEquipmentRecipe(item) {
+    let html = '', headerText = 'Crafted using the following items'
+    if ("Recipe" in item) {
+        for (let i = 0; i < item.Recipe.length; i++) {
+            html += getDropIconHTML(item.Recipe[i][0]+2000000, item.Recipe[i][1])
+        }
+        html += getDropIconHTML(3000001, item.RecipeCost)
+    }
+
+    if (html != '') {
+        $('#ba-equipment-recipe').show()
+        return `<div class="mb-2"><i>${headerText}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap">` + html + '</div>'
+    } else {
+        return ''
+    }
+    
+}
+
 function getLikedByStudents(item) {
     var htmlLoves = `<div class="mb-2"><i>Loved by the following students</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">`
     var htmlLikes = `<div class="mb-2"><i>Liked by the following students</i></div><div class="d-flex align-items-center justify-content-center flex-wrap">`
@@ -2203,15 +2421,15 @@ function getLikedByStudents(item) {
 
 function getItemDropStages(itemID) {
     let html = '', stages = []
-    $.each([data.stages.missions, data.stages.schooldungeon], function(i, el1) {
+    $.each([data.stages.Campaign, data.stages.SchoolDungeon, data.stages.WeekDungeon], function(i, el1) {
         $.each(el1, function(j, el2){
-            if (!el2.IsReleased[regionID])
-            return
+            if (!stageIsReleased(el2)) return
             let drop = false, dropChance = 0
-            for (let i = 0; i < el2.Drops.length; i++) {
-                if (itemID == el2.Drops[i][0]) {
+            if ("Default" in el2.Rewards)
+            for (let i = 0; i < el2.Rewards.Default.length; i++) {
+                if (itemID == el2.Rewards.Default[i][0]) {
                     drop = true
-                    dropChance = el2.Drops[i][1]
+                    dropChance = el2.Rewards.Default[i][1]
                     break
                 }
             }
@@ -2517,10 +2735,28 @@ function allSearch() {
     })
 
     if (results.length < maxResults)
-    $.each(data.stages.missions, function(i,el){
+    $.each(data.stages.Campaign, function(i,el){
         let stagecode = el.Area+'-'+el.Stage+' '+(el.Difficulty == 1 ? 'Hard' : 'Normal')
-        if (el.IsReleased[regionID] && searchContains(searchTerm, stagecode)) {
-            results.push({'name': stagecode, 'icon': 'images/campaign/'+el.Icon+'.png', 'type': 'Mission', 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
+        if ((el.Area <= data.common.regions[regionID].campaign_max) && searchContains(searchTerm, stagecode)) {
+            results.push({'name': stagecode, 'icon': 'images/campaign/'+getStageIcon(el,'Campaign')+'.png', 'type': 'Stage', 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
+            if (results.length >= maxResults) return false
+        }
+    })
+
+    if (results.length < maxResults)
+    $.each(data.stages.WeekDungeon, function(i,el){
+        let stagecode = getStageTitle(el, 'WeekDungeon')
+        if ((stageIsReleased(el)) && searchContains(searchTerm, stagecode)) {
+            results.push({'name': stagecode, 'icon': 'images/campaign/'+getStageIcon(el,'WeekDungeon')+'.png', 'type': 'Stage', 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
+            if (results.length >= maxResults) return false
+        }
+    })
+
+    if (results.length < maxResults)
+    $.each(data.stages.SchoolDungeon, function(i,el){
+        let stagecode = getStageTitle(el, 'SchoolDungeon')
+        if ((stageIsReleased(el)) && searchContains(searchTerm, stagecode)) {
+            results.push({'name': stagecode, 'icon': 'images/campaign/'+getStageIcon(el,'SchoolDungeon')+'.png', 'type': 'Stage', 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
             if (results.length >= maxResults) return false
         }
     })
@@ -2658,26 +2894,50 @@ function getTimeAttackLevelScale(level) {
 
 /**
  * Returns an object of stat bonuses granted by a student's passive or weaponpassive skill
- * @param {*} student 
+ * @param {*} skill the object containing skill data 
  * @param {*} skillLevel 
  * @param {*} hasWeapon
  * @returns 
  */
-function getPassiveSkillBonus(student, skillLevel, hasWeapon) {
-    let bonuses = {}, skill
-    if (hasWeapon) {
-        skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
-    } else {
-        skill = find(student.Skills, 'SkillType', 'passive')[0]
-    }
-    
+function getPassiveSkillBonus(skill, level) {
+    let bonuses = {}   
     skill.Parameters.forEach((el, i) => {
-        if (el[skillLevel-1].includes("%")) {
-            bonuses[skill.Stat[i] + '_Coefficient'] = parseInt(parseFloat(el[skillLevel-1].replace("%",""))*100)
+        if (el[level-1].includes("%")) {
+            bonuses[skill.Stat[i] + '_Coefficient'] = Math.round(parseFloat(el[level-1].replace("%",""))*100)
         } else {
-            bonuses[skill.Stat[i] + '_Base'] = parseInt(el[skillLevel-1])
+            bonuses[skill.Stat[i] + '_Base'] = Math.round(el[level-1])
         }
         
     })
     return bonuses
+}
+
+/**
+ * Returns true if the stage has been released in the current region
+ */
+function stageIsReleased(stage) {
+    if (stage.Id > 8000000) {
+        return (stage.EventId <= data.common.regions[regionID].event_max)
+    } else if (stage.Id > 1000000) {
+        return (stage.Area <= data.common.regions[regionID].campaign_max)
+    } else if (stage.Id > 60000) {
+        return (stage.Stage <= data.common.regions[regionID].schooldungeon_max)
+    } else if (stage.Id > 31000) {
+        return (stage.Stage <= data.common.regions[regionID].commission_max)
+    } else if (stage.Id > 30000) {
+        return (stage.Stage <= data.common.regions[regionID].bounty_max)
+    } else return false
+}
+
+function updateStatPreviewTitle() {
+    if (statPreviewSummonStats) {
+        let summon  = find(data.summons, 'Id', student.SummonIds[0])[0]
+        //$('#ba-statpreview-status-title').text(formatString(getLocalizedString("ui", "statpreview_header"), getTranslatedString(summon, "Name")))
+        $('#ba-statpreview-status-title').text(getTranslatedString(summon, "Name"))
+        $('#ba-statpreview-status-title-icon').attr('src', `images/skill/${student.Skills[0].Icon}.png`).addClass(`bg-skill-${student.BulletType.toLowerCase()}`)
+    } else {
+        //$('#ba-statpreview-status-title').text(formatString(getLocalizedString("ui", "statpreview_header"), getTranslatedString(student, "PersonalName")))
+        $('#ba-statpreview-status-title').text(getTranslatedString(student, "PersonalName"))
+        $('#ba-statpreview-status-title-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
+    }
 }

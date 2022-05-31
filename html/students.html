@@ -44,16 +44,16 @@
                         <div class="tab-content">
                             <div id="ba-student-page-stats" class="tab-pane fade show active" style="border-radius: .25em;">
                                 <div class="d-flex flex-row flex-wrap align-items-center mb-1">
-                                    <span id="ba-student-role" class="ba-info-pill bg-theme" style="position: relative;"><img id="ba-student-role-icon" class="invert-light" src="" style="height:22px;"><span id="ba-student-role-label" class="ba-pill-label"></span></span>
+                                    <span id="ba-student-role" class="ba-info-pill bg-theme" style="position: relative;"><img id="ba-student-role-icon" class="invert-light" src="" style="height:26px;"><span id="ba-student-role-label" class="ba-pill-label"></span></span>
                                     <span id="ba-student-attacktype" class="ba-info-pill"><img src="images/ui/Type_Attack.png"><span id="ba-student-attacktype-label" class="ba-pill-label"></span></span>
                                     <span id="ba-student-defensetype" class="ba-info-pill"><img src="images/ui/Type_Defense.png"><span id="ba-student-defensetype-label" class="ba-pill-label"></span></span>                                    
                                     <span id="ba-student-position" class="ba-info-pill"><span id="ba-student-position-label"></span></span>
                                 </div>
                                 <div class="d-flex flex-row align-items-stretch flex-wrap justify-content-between">
-                                    <div id="ba-student-weapon" class="ba-type-weapon ba-panel d-inline-block align-text-top me-1 mb-2">
+                                    <div id="ba-student-weapon" class="ba-type-weapon ba-panel d-inline-block align-text-top me-1 mb-2 position-relative">
                                         <img id="ba-student-usescover-icon" src="images/ui/Combat_Icon_Cover_Ally.png">
-                                        <p id="ba-student-weapontype-label" class="d-inline-block" style="font-weight: 600; font-style: italic; font-size: large;"></p>
-                                        <p id="ba-student-weapon-level" class="d-none" style="font-weight: 600; font-style: italic; font-size: large; float:right;"></p>
+                                        <p id="ba-student-weapontype-label" class="ba-weapon-label"></p>
+                                        <p id="ba-student-weapon-level" class="text-bold float-end"></p>
                                     </div>
                                     <div id="ba-student-gear" class="flex-fill ba-panel mb-2">
                                         <div class="d-flex align-items-center justify-content-evenly" style="height: 78px;">
@@ -68,14 +68,24 @@
                                         <div id="ba-student-terrain-indoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_Indoor.png"></span><br><img id="ba-student-terrain-indoor-icon" class="ba-student-affinity-icon" src=""></div>
                                     </div>
                                 </div>
-    
-                                <div class="d-flex flex-row align-items-end">
-                                    <span class="flex-grow-1">
-                                        <nav id="ba-student-summons" class="nav nav-pills mt-1">
-                                        </nav>   
-                                    </span>
+
+                                <div class="row g-1 mt-1">
+                                    <div class="d-flex flex-row align-items-end">
+                                        <img id="ba-statpreview-status-title-icon">
+                                        <h5 id="ba-statpreview-status-title" class="mb-1 mx-2"></h5>
+                                        <div class="flex-fill"></div>
+                                        <a id="ba-statpreview-status-strikerbonus" onclick="toggleStrikerBonus()" class="ba-statpreview-icon bg-theme me-2 deactivated" style="padding:5px;">
+                                            <img id="" src="images/ui/Special_StatBonus.png" class="sharp-img invert-light" width="22" height="22">
+                                        </a>
+                                        <a id="ba-statpreview-status-summon" onclick="toggleStudentSummon()" class="ba-statpreview-icon bg-theme me-2 deactivated" style="padding:2px;">
+                                            <img id="" src="images/ui/Role_Vehicle.png" class="sharp-img invert-light" width="28" height="28">
+                                        </a>
+                                        <a id="ba-statpreview-status-options" data-bs-toggle="modal" data-bs-target="#ba-student-modal-statpreview" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center px-2 me-0 mb-0">
+                                            <span><i class="fa-solid fa-sliders"></i><span class="ms-2 px-0 d-none d-md-block" data-localize-id="ui,options"></span></span>
+                                        </a>
+                                    </div>
                                 </div>
-    
+
                                 <div class="row g-1 mt-1">
                                     <div class="col">
                                         <table id="ba-student-stat-table" class="table ba-stats mb-0">
@@ -205,32 +215,40 @@
                                 </div>
     
                                 <div class="row g-1 mt-2">
-                                    <div class="d-flex flex-row align-items-center">
-                                        <div class="flex-fill">
-                                            <div class="d-flex flex-row flex-wrap align-items-stretch">
-                                                <div class="flex-fill d-flex flex-row align-items-stretch">
-                                                    <div class="d-inline-block ba-panel px-2 mb-2 me-2 d-flex align-items-center" style="font-size: 0px; min-width: 70px; min-height: 31px; border-radius: 0.2rem;">
-                                                        <span id="ba-statpreview-star-1" class="ba-statpreview-star" onclick="changeStatPreviewStars(1,0)"><i class="fa-solid fa-star"></i></span>
-                                                        <span id="ba-statpreview-star-2" class="ba-statpreview-star" onclick="changeStatPreviewStars(2,0)"><i class="fa-solid fa-star"></i></span>
-                                                        <span id="ba-statpreview-star-3" class="ba-statpreview-star" onclick="changeStatPreviewStars(3,0)"><i class="fa-solid fa-star"></i></span>
-                                                        <span id="ba-statpreview-star-4" class="ba-statpreview-star" onclick="changeStatPreviewStars(4,0)"><i class="fa-solid fa-star"></i></span>
-                                                        <span id="ba-statpreview-star-5" class="ba-statpreview-star" onclick="changeStatPreviewStars(5,0)"><i class="fa-solid fa-star"></i></span>
-                                                        <span id="ba-weaponpreview-star-1" class="ba-weaponpreview-star ms-2" onclick="changeStatPreviewStars(5,1)"><i class="fa-solid fa-star"></i></span>
-                                                        <span id="ba-weaponpreview-star-2" class="ba-weaponpreview-star" onclick="changeStatPreviewStars(5,2)"><i class="fa-solid fa-star"></i></span>
-                                                        <span id="ba-weaponpreview-star-3" class="ba-weaponpreview-star" onclick="changeStatPreviewStars(5,3)"><i class="fa-solid fa-star"></i></span>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <button id="ba-statpreview-strikerbonus" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');toggleStrikerBonus(this)" data-localize-id="ui,student_strikerbonus"></button>
-                                                    <!-- <button id="ba-statpreview-includepassive" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');recalculateStatPreview()" data-localize-id="ui,student_passive_short"></button> -->
-                                                    <button id="ba-statpreview-includegear" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');updateGearIcon();recalculateStatPreview()" data-localize-id="ui,student_gear_short"></button>
-                                                    <button id="ba-statpreview-includebond" class="btn btn-sm btn-dark mb-2 me-1" type="button" onclick="$(this).toggleClass('active');recalculateStatPreview()" data-localize-id="ui,student_bond_short"></button>
-                                                    <button class="btn btn-sm btn-dark mb-2" type="button" data-bs-toggle="modal" data-bs-target="#ba-student-modal-statpreview"><i class="fa-solid fa-sliders me-2"></i><span data-localize-id="ui,options"></span></button>
-                                                </div>
+                                    <div class="d-flex flex-row flex-wrap align-items-stretch">
+                                        <div class="d-flex flex-row align-items-stretch me-2">
+                                            <div id="ba-statpreview-stars" class="d-inline-block ba-panel px-2 mb-2 d-flex align-items-center">
+                                                <span id="ba-statpreview-star-1" class="ba-statpreview-star" onclick="changeStatPreviewStars(1,0)"><i class="fa-solid fa-star"></i></span>
+                                                <span id="ba-statpreview-star-2" class="ba-statpreview-star" onclick="changeStatPreviewStars(2,0)"><i class="fa-solid fa-star"></i></span>
+                                                <span id="ba-statpreview-star-3" class="ba-statpreview-star" onclick="changeStatPreviewStars(3,0)"><i class="fa-solid fa-star"></i></span>
+                                                <span id="ba-statpreview-star-4" class="ba-statpreview-star" onclick="changeStatPreviewStars(4,0)"><i class="fa-solid fa-star"></i></span>
+                                                <span id="ba-statpreview-star-5" class="ba-statpreview-star" onclick="changeStatPreviewStars(5,0)"><i class="fa-solid fa-star"></i></span>
+                                                <span id="ba-weaponpreview-star-1" class="ba-weaponpreview-star ms-2" onclick="changeStatPreviewStars(5,1)"><i class="fa-solid fa-star"></i></span>
+                                                <span id="ba-weaponpreview-star-2" class="ba-weaponpreview-star" onclick="changeStatPreviewStars(5,2)"><i class="fa-solid fa-star"></i></span>
+                                                <span id="ba-weaponpreview-star-3" class="ba-weaponpreview-star" onclick="changeStatPreviewStars(5,3)"><i class="fa-solid fa-star"></i></span>
                                             </div>
                                         </div>
+                                        <div class="flex-fill"></div>
+                                        <a id="ba-statpreview-status-equipment" onclick="statPreviewIncludeEquipment=!statPreviewIncludeEquipment;updateGearIcon();recalculateStatPreview()" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
+                                            <!-- <img id="" src="images/ui/Icon_Inven_Bag.png" class="sharp-img invert-light"> -->
+                                            <span class="statpreview-label" data-localize-id="ui,student_gear_short"></span>
+                                        </a>
+                                        <a id="ba-statpreview-status-bond-level" onclick="statPreviewIncludeBond=!statPreviewIncludeBond;recalculateStatPreview()" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
+                                            <img id="ba-statpreview-status-bond-icon" src="" class="sharp-img">
+                                            <!-- <img src="images/ui/School_Icon_Schedule_Favor.png" class="sharp-img icon-heart"> -->
+                                            <span class="statpreview-label"></span>
+                                        </a>
+                                        <a id="ba-statpreview-status-bond-alt-level" onclick="statPreviewIncludeBondAlts=!statPreviewIncludeBondAlts;recalculateStatPreview()" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
+                                            <img id="ba-statpreview-status-bond-alt-icon" src="" class="sharp-img">
+                                            <!-- <img src="images/ui/School_Icon_Schedule_Favor.png" class="sharp-img icon-heart"> -->
+                                            <span class="statpreview-label"></span>
+                                        </a>
+                                        <a id="ba-statpreview-status-passive-level" onclick="statPreviewIncludePassive=!statPreviewIncludePassive;recalculateStatPreview()" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center me-0 px-2">
+                                            <img id="ba-statpreview-status-passive-icon" src="" class="sharp-img ba-skill">
+                                            <span class="statpreview-label"></span>
+                                        </a>
                                     </div>
-                                </div>    
+                                </div>
                             </div>
     
                             <div id="ba-student-page-skills" class="tab-pane fade" style="border-radius: .25em;">
@@ -608,7 +626,7 @@
                         <div class="pt-2 d-flex flex-column">
                             <div class="d-flex flex-row align-items-center">
                                 <div class="me-3" style="position: relative;">
-                                    <img id="ba-statpreview-gear1-icon" class="ba-gear-icon drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
+                                    <img id="ba-statpreview-gear1-icon" class="ba-gear-icon ba-item-n drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
                                 </div>
                                 <div class="flex-fill">
                                     <h5 id="ba-statpreview-gear1-name" class="d-inline"></h5>
@@ -621,7 +639,7 @@
                             </div>
                             <div class="mt-2 d-flex flex-row align-items-center">
                                 <div class="me-3" style="position: relative;">
-                                    <img id="ba-statpreview-gear2-icon" class="ba-gear-icon drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
+                                    <img id="ba-statpreview-gear2-icon" class="ba-gear-icon ba-item-n drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
                                 </div>
                                 <div class="flex-fill">
                                     <h5 id="ba-statpreview-gear2-name" class="d-inline"></h5>
@@ -634,7 +652,7 @@
                             </div>
                             <div class="mt-2 d-flex flex-row align-items-center">
                                 <div class="me-3" style="position: relative;">
-                                    <img id="ba-statpreview-gear3-icon" class="ba-gear-icon drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
+                                    <img id="ba-statpreview-gear3-icon" class="ba-gear-icon ba-item-n drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
                                 </div>
                                 <div class="flex-fill">
                                     <h5 id="ba-statpreview-gear3-name" class="d-inline"></h5>
@@ -667,7 +685,12 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <h5 class="mt-2" data-localize-id="ui,student_skill_passive"></h5>
+                    <h5 class="mt-2" data-localize-id="ui,student_bond"></h5>
+                    <div class="py-2">
+                        <div class="d-flex flex-column" id="ba-statpreview-bond-targets">
+                        </div>
+                    </div>
+                    <h5 class="mt-2" data-localize-id="ui,student_skill_passive"></h5>
                     <div class="py-2">
                         <div class="d-flex flex-column">
                             <div class="d-flex flex-row align-items-center mb-1">
@@ -684,11 +707,6 @@
                                 <input id="ba-statpreview-passiveskill-range" oninput="changeStatPreviewPassiveSkillLevel(this)" type="range" class="form-range me-2 flex-fill" value="10" min="1" max="10">
                                 <span id="ba-statpreview-passiveskill-level" class="ba-slider-label"></span>
                             </div>                                  
-                        </div>
-                    </div> -->
-                    <h5 class="mt-2" data-localize-id="ui,student_bond"></h5>
-                    <div class="py-2">
-                        <div class="d-flex flex-column" id="ba-statpreview-bond-targets">
                         </div>
                     </div>
                 </div>

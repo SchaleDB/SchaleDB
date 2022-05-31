@@ -64,11 +64,7 @@ p {
 }
 
 .unselectable {
-    user-select: none; 
-    -webkit-user-select: none;       
-    -moz-user-select: none;
-    -ms-user-select: none;
-
+    @include unselectable;
     img {
         -webkit-user-drag: none;
         -moz-user-drag: none;
@@ -99,6 +95,10 @@ p {
 .invert-light {
     @include transition(filter);
     filter: var(--var-invert-light) hue-rotate(var(--var-invert-light-hue));
+}
+
+.sharp-img {
+    @include sharp-img;
 }
 
 // hide default clear button

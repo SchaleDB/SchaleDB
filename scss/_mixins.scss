@@ -38,6 +38,13 @@
     scrollbar-color: var(--col-panel-separator);
 }
 
+@mixin unselectable {
+    user-select: none; 
+    -webkit-user-select: none;       
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
 //breakpoints
 
 $break-sm: 576px;
