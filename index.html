@@ -13,17 +13,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Oswald&display=swap" rel="stylesheet"> 
-    <link href="css/main.css?v=3" rel="stylesheet">
+    <link href="css/main.css?v=4" rel="stylesheet">
 </head>
 <body class="reduced-motion">
     <div id="loading-cover">
-        <div class="d-flex justify-content-center">
+        <noscript class="d-flex justify-content-center text-center mb-1 text-light">Schale DB requires JavaScript in order to function correctly.<br>Please enable JavaScript for this site and reload the page.</noscript>
+        <div id="loading-spinner" class="d-flex justify-content-center" style="display:none!important;">
             <div class="spinner-border text-light" style="width: 4rem; height: 4rem;" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
+        <div id="loading-skipmsg" class="d-flex justify-content-center mt-2 text-center text-light" style="display:none!important;">
+            <p>Stuck loading? Click <a href="javascript:$('#loading-cover').fadeOut();" class="text-emphasis">here</a> to try and continue anyway.<br>If there is an error in your browser console (Press F12), please report it to lonqie#2708 on Discord.</p>
+        </div>
     </div>
-    
     <div id="ba-background" style="position: fixed;">
     </div>
 
@@ -135,6 +138,13 @@
         </div>
     </div>
 </body>
-<script src="js/common.min.js?v=3"></script>
+<script>
+    document.getElementById('loading-spinner').style.display = null;
+    window.setTimeout(x => {
+        document.getElementById('loading-skipmsg').style.display = null;
+    }, 10000)
+    
+</script>
+<script src="js/common.min.js?v=4"></script>
 
 </html>

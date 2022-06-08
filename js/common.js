@@ -7,6 +7,7 @@ const raid_level = [17, 25, 35, 50, 70, 80]
 const translation_code = {'en': 'En', 'ja': 'Jp'}
 const label_smalltext_threshold = {'en':11, 'ja':5}
 const label_enemy_smalltext_threshold = {'en':12, 'ja':6}
+const label_raid_smalltext_threshold = {'en':20, 'ja':12}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
@@ -14,7 +15,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 3
+const cache_ver = 4
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const json_list = {
@@ -162,8 +163,9 @@ let data = {}, loadedModule, student, studentList, loadedItem, loadedStage, load
  * Represents a set of character stats
  */
  class CharacterStats {
-    stats = {}
+    
     constructor(character, level, stargrade) {
+        this.stats = {}
         let levelscale = ((level-1)/99).toFixed(4)
         let MaxHP = Math.ceil((Math.round((character.MaxHP1 + (character.MaxHP100-character.MaxHP1)*levelscale).toFixed(4))*starscale_hp[stargrade-1]).toFixed(4))
         let AttackPower = Math.ceil((Math.round((character.AttackPower1 + (character.AttackPower100-character.AttackPower1)*levelscale).toFixed(4))*starscale_attack[stargrade-1]).toFixed(4))
@@ -206,8 +208,22 @@ let data = {}, loadedModule, student, studentList, loadedItem, loadedStage, load
         }
     }
 
+    /**
+     * Adds the specified stat from another instance of CharacterStats as a flat buff
+     * @param {CharacterStats} chStats the instance of CharacterStats to add from
+     * @param {*} stat the name of the stat to add
+     * @param {*} coefficient the amount of the stat to add
+     */
+    addCharacterStatsAsBuff(chStats, stat, coefficient) {
+        this.stats[stat][1] += Math.round(chStats.getTotal(stat) * (coefficient/10000))
+    }
+
     getTotal(stat) {
-        let total = Math.round(((this.stats[stat][0] + this.stats[stat][1]) * this.stats[stat][2]).toFixed(4))
+        return Math.round(((this.stats[stat][0] + this.stats[stat][1]) * this.stats[stat][2]).toFixed(4))
+    }
+
+    getTotalString(stat) {
+        let total = this.getTotal(stat)
         if (stat.slice(-4) == "Rate") {
             return parseInt((total/100).toFixed(0)).toLocaleString() + "%"
         } else {
@@ -372,7 +388,7 @@ function loadModule(moduleName, entry=null) {
             activeFilters = getNumActiveFilters()
             $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
 
-            updateStudentList()
+            updateStudentList(updateSortMethod = true)
         
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         
@@ -381,9 +397,10 @@ function loadModule(moduleName, entry=null) {
             $('#ba-statpreview-status-bond-level').tooltip({title: getBasicTooltip('Toggle Relationship Bonus'), placement: 'top', html: true})
             $('#ba-statpreview-status-equipment').tooltip({title: getBasicTooltip('Toggle Equipment Bonus'), placement: 'top', html: true})
             $('#ba-statpreview-status-bond-alt-level').tooltip({title: getBasicTooltip('Toggle Alt Relationship Bonus'), placement: 'top', html: true})
-            $('#ba-statpreview-status-passive-level').tooltip({title: getBasicTooltip('Toggle Passive Skill Bonus'), placement: 'top', html: true})
+            $('#ba-statpreview-status-passive-level').tooltip({title: getBasicTooltip('Toggle Enhanced Skill Buff'), placement: 'top', html: true})
             $('#ba-statpreview-status-strikerbonus').tooltip({title: getBasicTooltip('Toggle Support Stats'), placement: 'top', html: true})
             $('#ba-statpreview-status-summon').tooltip({title: getBasicTooltip('Toggle Vehicle/Summon Stats'), placement: 'top', html: true})
+            //bindTooltip('#ba-statpreview-status-summon', getBasicTooltip('Toggle Vehicle/Summon Stats'), 'top', true)
         })
     } else if (moduleName == 'items') {
         loadedModule = 'items'
@@ -438,7 +455,10 @@ function loadModule(moduleName, entry=null) {
                 loadRaid("Binah")
             }
             populateRaidList()
-            if (regionID == 1) {$('#ba-raid-list-tab-timeattack').hide()}
+            if (regionID == 1) {
+                $('#ba-raid-list-tab-timeattack').hide()
+                $('#ba-raid-difficulty-5').hide()
+            }
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         })
     } else if (moduleName == 'stages') {
@@ -646,10 +666,9 @@ function populateStudentList() {
 /**
  * Applies the selected filters and sort method to the student selection grid
  */
-function updateStudentList() {
+function updateStudentList(updateSortMethod = false) {
     let searchTerm = $('#ba-student-search-text').val()
     let sortfunction = sort_functions[search_options["sortby"]]
-
     let filterList = []
     $.each(search_options["filter"], function(i, el) {
         var allfalse = true, alltrue = true
@@ -662,15 +681,15 @@ function updateStudentList() {
         }
     })
 
-    studentList.sort(sortfunction)
-    var count = 0
+    if (updateSortMethod) {
+        studentList.sort(sortfunction)
+    }
 
+    let count = 0
     $.each(studentList, function(i, el){
         if (el.IsReleased[regionID]) {
-            if (checkFilters(el, filterList, searchTerm)) {
-                count++
-                $('#ba-student-select-'+el.Id).show().css("order", count)
-
+            if (updateSortMethod) {
+                $('#ba-student-select-'+el.Id).css("order", i)
                 if (search_options["sortby"] == "Default" || search_options["sortby"] == "Name") {
                     $('#ba-student-select-'+el.Id+' .ba-label-text').text(getTranslatedString(el, 'Name')).toggleClass('smalltext', getTranslatedString(el, 'Name').length > label_smalltext_threshold[userLang]).toggleClass('ba-unhover-text', false)
                     $('#ba-student-select-'+el.Id+' .ba-hover-text').hide()
@@ -678,6 +697,10 @@ function updateStudentList() {
                     $('#ba-student-select-'+el.Id+' .ba-label-text').text(el[search_options["sortby"]]).toggleClass('smalltext', false).toggleClass('ba-unhover-text', true)
                     $('#ba-student-select-'+el.Id+' .ba-hover-text').show()
                 }
+            }
+            if (checkFilters(el, filterList, searchTerm)) {
+                count++
+                $('#ba-student-select-'+el.Id).show()
             } else {
                 $('#ba-student-select-'+el.Id).hide()
             }
@@ -708,7 +731,7 @@ function searchOptionSet(option, value, runSearch = true) {
     $(`#ba-student-search-${option} a`).removeClass("active")
     $(`#ba-student-search-${option} button`).removeClass("active")
     $(`#ba-student-search-${option}-${value}`).addClass("active")
-    $(`#ba-student-search-sortby-stat`).text(getLocalizedString('ui','student_search_filter_stat')+" ")
+    $(`#ba-student-search-sortby-stat`).text(getLocalizedString('ui','stat')+" ")
 
     if (option == "sortby" && value != "default" && value != "name") {
         $(`#ba-student-search-sortby-stat`).addClass("active")
@@ -748,7 +771,7 @@ function searchSetOrder(value, runSearch = true, swapDir = true) {
     $(`#ba-student-search-sortby a`).removeClass("active")
     $(`#ba-student-search-sortby button`).removeClass("active")
     $(`#ba-student-search-sortby-${value.toLowerCase()}`).addClass("active")
-    $('#ba-student-search-sortby-stat').text(getLocalizedString('ui','student_search_filter_stat'))
+    $('#ba-student-search-sortby-stat').text(getLocalizedString('ui','stat'))
     $('.sort-direction-label').text("")
 
     $(`#ba-student-search-sortby-${value.toLowerCase()} > .sort-direction-label`).html((search_options["sortby_dir"] == 1) != (value == "Name" || value == "Default") ? '<i class="fa-solid fa-arrow-down-long ms-2"></i>' : '<i class="fa-solid fa-arrow-up-long ms-2"></i>')
@@ -762,7 +785,7 @@ function searchSetOrder(value, runSearch = true, swapDir = true) {
     localStorage.setItem('chara_sortby', value)
     localStorage.setItem('chara_sortby_dir', search_options["sortby_dir"])
     if (runSearch) {
-        updateStudentList()  
+        updateStudentList(updateSortMethod = true)  
     }
 }
 
@@ -806,9 +829,9 @@ function processStudent() {
     $("#ba-student-school-img").attr("src", `images/schoolicon/School_Icon_${student.School.toUpperCase()}_W.png`)
     $("#ba-student-position-label").text(student.Position.toUpperCase())
     $("#ba-student-attacktype-label").text(getLocalizedString('BulletType',student.BulletType))
-    $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',student.BulletType)}`, 'Attack Type', null, getTypeText(student.BulletType), 32), placement: 'top', html: true})
+    $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',student.BulletType)}`, getLocalizedString('ui','attacktype'), null, getTypeText(student.BulletType), 32), placement: 'top',  html: true})
     $("#ba-student-defensetype-label").text(getLocalizedString('ArmorType',student.ArmorType))
-    $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',student.ArmorType)} Armor`, 'Defense Type', null, getTypeText(student.ArmorType), 32), placement: 'top', html: true})
+    $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',student.ArmorType)}`, getLocalizedString('ui','defensetype'), null, getTypeText(student.ArmorType), 32), placement: 'top', html: true})
 
     updateGearIcon()
     
@@ -825,6 +848,7 @@ function processStudent() {
             $('#ba-statpreview-passiveskill-icon, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${el.Icon}.png`)
         }
         if (el.SkillType == "ex") {
+            $('#ba-statpreview-exskill-icon').attr("src", `images/skill/${el.Icon}.png`)
             $("#ba-skill-ex-cost").removeClass("ba-col-explosion ba-col-pierce ba-col-mystic")
             if (el.Cost[0] != el.Cost[4]) {
                 $("#ba-skill-ex-cost").addClass(`ba-col-${student.BulletType.toLowerCase()}`)
@@ -879,7 +903,7 @@ function processStudent() {
     let initialTerrainAmount = getLocalizedString('AdaptationAmount', String(student[student.Weapon.AdaptationType+'BattleAdaptation'])) 
     let bonusTerrainAmount = getLocalizedString('AdaptationAmount', String(student[student.Weapon.AdaptationType+'BattleAdaptation'] + student.Weapon.AdaptationValue)) 
     $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${bonusTerrainAmount}.png`)
-    $('#ba-weapon-bonus-terrain-adaption-description').html(`${getLocalizedString('AdaptationType',student.Weapon.AdaptationType)} Combat Power ${initialTerrainAmount} → <b>${bonusTerrainAmount}</b><br>(${getAdaptationText(student.Weapon.AdaptationType, bonusTerrainAmount)})`)
+    $('#ba-weapon-bonus-terrain-adaption-description').html(`${formatString(getLocalizedString("ui","terrain_adaption"), getLocalizedString('AdaptationType',student.Weapon.AdaptationType))} ${initialTerrainAmount} → <b>${bonusTerrainAmount}</b><br>(${getAdaptationText(student.Weapon.AdaptationType, bonusTerrainAmount)})`)
     $('#ba-weapon-stat-row2').toggle(student.Weapon.HealPower1 > 0)
 
     //Profile
@@ -903,7 +927,7 @@ function processStudent() {
         $(".ba-student-lobby").show()
         $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.DevName}_01.png`)
         $("#ba-student-lobby-unlock").text(student.MemoryLobby)
-        $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, `${getTranslatedString(student,'Name')}'s Recollection Lobby`, null, null, `Unlocks after reaching relationship rank ${student.MemoryLobby} with ${getTranslatedString(student,'Name')}.`), placement: 'top', html: true})
+        $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, formatString(getLocalizedString('ui', 'memory_lobby_student'), getTranslatedString(student,'Name')), null, null, formatString(getLocalizedString('ui', 'memory_lobby_unlock'), student.MemoryLobby, getTranslatedString(student,'Name'))), placement: 'top', html: true})
     } else {
         $(".ba-student-lobby").hide()
     }
@@ -927,7 +951,7 @@ function processStudent() {
     })
     $('#ba-student-favoured-items').empty().html(favItemsHtml)
     if (favItemsHtml == "") {
-        $('#ba-student-favoured-items').empty().html('<span class="pb-2 text-center">This student does not have any favourite gifts.</span>')
+        $('#ba-student-favoured-items').empty().html(`<span class="pb-2 text-center">${getLocalizedString('ui','favoritem_none')}</span>`)
     } else {
         $('#ba-student-favoured-items').empty().html(favItemsHtml)
     }
@@ -942,7 +966,7 @@ function processStudent() {
 
     $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
     if (favFurnitureHtml == "") {
-        $('#ba-student-favoured-furniture').empty().html('<span class="pb-2 text-center">This student does not interact with any cafe furniture.</span>')
+        $('#ba-student-favoured-furniture').empty().html(`<span class="pb-2 text-center">${getLocalizedString('ui','furniture_none')}</span>`)
     } else {
         $('#ba-student-favoured-furniture').empty().html(favFurnitureHtml)
     }
@@ -981,6 +1005,7 @@ function processStudent() {
     changeStatPreviewStars(student.StarGrade, 0)
     recalculateTerrainAffinity()
     updatePassiveSkillStatPreview()
+    updateSummonExSkillStatPreview()
     recalculateWeaponPreview()
     updateWeaponLevelStatPreview($('#ba-statpreview-weapon-range').val())
     recalculateStatPreview()
@@ -1059,7 +1084,7 @@ function loadItem(id) {
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.SubCategory))
             $('#ba-item-furniture-row').show()
             $('#ba-item-furniture-set').html(getLocalizedString('furniture_set', String(item.SetGroupId)))
-            $('#ba-item-furniture-comfort').html('+'+item.ComfortBonus)
+            $('#ba-item-furniture-comfort').html(item.ComfortBonus)
         } else {
             mode = 'items'
             item = findOrDefault(data.items, "Id", id, 1)[0]
@@ -1077,7 +1102,7 @@ function loadItem(id) {
         $('#ba-item-icon-img').attr('src', `images/${mode}/${item.Icon}.png`)
         $('#ba-item-description').html(getTranslatedString(item, 'Desc'))
         if (mode == 'equipment' && item.Id >= 1000 && item.Id <= 10000) {
-            $('#ba-item-description').append("\n\n<b>Bonus Stats:</b>\n" + getGearStatsText(item, '\n'))
+            $('#ba-item-description').append(`\n\n<b>${getLocalizedString('ui', "stat_info")}:</b>\n` + getGearStatsText(item, '\n'))
         }
         if (item.Category.includes("WeaponExpGrowth")) {
             $('#ba-item-description').append(`\n\n<i>${getLocalizedString('WeaponPartExpBonus', item.Category)}</i>`)
@@ -1259,7 +1284,7 @@ function changeRaidDifficulty(difficultyId) {
     raid.RaidSkill.forEach(function(el, i) {
         if (raid_difficulty < el.MinDifficulty) return
         if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
-        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${el.SkillType} Skill</p></div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), el.Parameters, raid_difficulty+1, 'raid')}</p>`
+        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${el.SkillType} Skill</p>${el.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG Cost:</i> '+el.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), el.Parameters, raid_difficulty+1, 'raid')}</p>`
     })
     $('#ba-raid-skills').empty().html(skillsHTML)
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -1314,10 +1339,12 @@ function changeRaidEnemy(num) {
     $('#ba-raid-stat-critresist').text(enemy.CriticalResistPoint.toLocaleString())
     $('#ba-raid-stat-critdmgresist').text(`${parseFloat(((enemy.CriticalDamageResistRate)/100).toFixed(4))}%`)
 
-    $("#ba-raid-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-normal").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType', enemy.BulletType)}`, 'Attack Type', null, getTypeText(enemy.BulletType), 32), placement: 'top', html: true})
-    $("#ba-raid-attacktype-label").text(getLocalizedString('BulletType',enemy.BulletType))
 
-    $("#ba-raid-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType', enemy.ArmorType)} Armor`, 'Defense Type', null, getTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
+    let bulletType = (raid_difficulty < 5) ? raid.BulletType : raid.BulletTypeInsane
+    $("#ba-raid-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-normal").addClass(`bg-atk-${bulletType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType', bulletType)}`, getLocalizedString('ui','attacktype'), null, getTypeText(bulletType), 32), placement: 'top', html: true})
+    $("#ba-raid-attacktype-label").text(getLocalizedString('BulletType',bulletType))
+
+    $("#ba-raid-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType', enemy.ArmorType)} Armor`, getLocalizedString('ui','defensetype'), null, getTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
     $("#ba-raid-defensetype-label").text(getLocalizedString('ArmorType',enemy.ArmorType))
     let enemysize = getEnemySize(enemy)
     $('#ba-raid-enemy-size').text(getLocalizedString('EnemyTags', enemysize)).toggle(enemysize != null)
@@ -1364,7 +1391,7 @@ function loadStage(id) {
         loadedStage = stage
         $('#ba-stage-name').html(getStageName(stage, mode))
         $('#ba-stage-title').html(getStageTitle(stage, mode))
-        $('#ba-stage-level').text('Rec. Lv. '+ stage.Level)
+        $('#ba-stage-level').text(getLocalizedString('ui','rec_level') + ' Lv.'+ stage.Level)
         $('#ba-stage-terrain-img').attr('src', `images/ui/Terrain_${stage.Terrain}.png`)
         $('#ba-stage-fog').toggle(mode == "Campaign" && stage.Difficulty == 1)
 
@@ -1376,7 +1403,16 @@ function loadStage(id) {
         }
 
         const stageTypes = ["Default","FirstClear","ThreeStar"]
-        stageTypes.forEach(el => {
+        if (stage.Type == "Blood" && regionID == 1) {
+            let html = ''
+            $.each(stage.RewardsGlobal["Default"], function(i,el2){
+                html += getDropIconHTML(el2[0], el2[1])
+            })
+            $(`#ba-stage-drops-default`).html(`<div class="d-flex flex-wrap justify-content-center">${html}</div>`)
+            $(`#ba-stage-drops-default>div div`).each(function(i,el2) {
+                $(el2).tooltip({html: true})
+            })
+        } else { stageTypes.forEach(el => {
             if (el in stage.Rewards && stage.Rewards[el].length > 0) {
                 let html = ''
                 $.each(stage.Rewards[el], function(i,el2){
@@ -1393,7 +1429,7 @@ function loadStage(id) {
                 $(`#ba-stage-drops-${el.toLowerCase()}>div`).html('<span class="pb-2 text-center">No rewards.</span>')
             }
 
-        })
+        })}
 
         let html = ''
         let enemyList = {}
@@ -1494,7 +1530,7 @@ function loadRegion(regID) {
 }
 
 function getAdaptationText(terrain, rank) {
-    return `Deals <b>${terrain_dmg_bonus[rank]}&times;</b> damage in <b>${getLocalizedString('AdaptationType',terrain).toLowerCase()}</b> terrain.\nBlock rate when taking cover <b>+${terrain_block_bonus[rank]}%</b>.\nChance to ignore block when attacking <b>+${terrain_block_bonus[rank]}%</b>.`
+    return formatString(getLocalizedString('ui','terrain_adaption_details'), terrain_dmg_bonus[rank], getLocalizedString('AdaptationType',terrain).toLowerCase(), terrain_block_bonus[rank])
 }
 
 function getStatName(stat) {
@@ -1620,6 +1656,16 @@ function changeStatPreviewPassiveSkillLevel(el) {
     recalculateStatPreview()
 }
 
+function changeStatPreviewSummonExSkillLevel(el) {
+    if (el.value == el.max) {
+        $('#ba-statpreview-exskill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
+    } else {
+        $('#ba-statpreview-exskill-level').html("Lv." + el.value)
+    }
+    updateSummonExSkillStatPreview()
+    recalculateStatPreview()
+}
+
 function getBondTargetsHTML(num, student) {
     return `<div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num}, this)" type="range" class="form-range me-2 flex-fill" value="20" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div>`
 }
@@ -1635,7 +1681,7 @@ function updateGearIcon() {
         tier = statPreviewIncludeEquipment ? $(`#ba-statpreview-gear${i}-range`).val() : 1
         tierText += ((tierText == "") ? "" : " / ") + "T"+$(`#ba-statpreview-gear${i}-range`).val()
         gear = find(data.equipment, "Id", gearId[student.Equipment[i-1]]+(tier-1))[0]
-        $("#ba-student-gear-"+i).attr("src", `images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`, getTranslatedString(gear, 'Name'), getLocalizedString('ItemCategory', gear.Category), `T${tier}`, getTranslatedString(gear, 'Desc') + "\n\n<b>Bonus Stats:</b>\n" + getGearStatsText(gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !statPreviewIncludeEquipment)
+        $("#ba-student-gear-"+i).attr("src", `images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`, getTranslatedString(gear, 'Name'), getLocalizedString('ItemCategory', gear.Category), `T${tier}`, getTranslatedString(gear, 'Desc') + `\n\n<b>${getLocalizedString('ui', "stat_info")}:</b>\n` + getGearStatsText(gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !statPreviewIncludeEquipment)
         $("#ba-student-gear-"+i).attr('onclick', `loadItem(${gear.Id+2000000})`)
 
     }
@@ -1643,17 +1689,13 @@ function updateGearIcon() {
 }
 
 function recalculateTerrainAffinity() {
-    let adaptation = {}
-    adaptation["street"] = getLocalizedString('AdaptationAmount', String(student.StreetBattleAdaptation + ((stat_preview_stars == 5 && stat_preview_weapon_stars >= 3 && student.Weapon.AdaptationType == 'Street') ? student.Weapon.AdaptationValue : 0)))
-    adaptation["outdoor"] = getLocalizedString('AdaptationAmount', String(student.OutdoorBattleAdaptation + ((stat_preview_stars == 5 && stat_preview_weapon_stars >= 3 && student.Weapon.AdaptationType == 'Outdoor') ? student.Weapon.AdaptationValue : 0)))
-    adaptation["indoor"] = getLocalizedString('AdaptationAmount', String(student.IndoorBattleAdaptation + ((stat_preview_stars == 5 && stat_preview_weapon_stars >= 3 && student.Weapon.AdaptationType == 'Indoor') ? student.Weapon.AdaptationValue : 0)))
+    let types = ["Street","Outdoor","Indoor"]
+    types.forEach( type => {
+        let adaptation = getLocalizedString('AdaptationAmount', String(student[`${type}BattleAdaptation`] + ((stat_preview_stars == 5 && stat_preview_weapon_stars >= 3 && student.Weapon.AdaptationType == type) ? student.Weapon.AdaptationValue : 0)))
+        $(`#ba-student-terrain-${type.toLowerCase()}-icon`).attr("src", `images/ui/Ingame_Emo_Adaptresult${adaptation}.png`)
+        $(`#ba-student-terrain-${type.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(`images/ui/Ingame_Emo_Adaptresult${adaptation}.png`,formatString(getLocalizedString('ui', 'terrain_adaption'), getLocalizedString('AdaptationType', type))+' '+adaptation, null, null, getAdaptationText(type, adaptation), 30), placement: 'top', html: true})
 
-    $("#ba-student-terrain-street-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + adaptation["street"] + ".png")
-    $("#ba-student-terrain-outdoor-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + adaptation["outdoor"] + ".png")
-    $("#ba-student-terrain-indoor-icon").attr("src", "images/ui/Ingame_Emo_Adaptresult" + adaptation["indoor"] + ".png")
-    $('#ba-student-terrain-street').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + adaptation["street"] + ".png", getLocalizedString('ui', 'student_street_adaption')+' '+adaptation["street"], null, null, getAdaptationText('Street', adaptation["street"]), 30), placement: 'top', html: true})
-    $('#ba-student-terrain-outdoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + adaptation["outdoor"] + ".png", getLocalizedString('ui', 'student_outdoor_adaption')+' '+adaptation["outdoor"], null, null, getAdaptationText('Outdoor', adaptation["outdoor"]), 30), placement: 'top', html: true})
-    $('#ba-student-terrain-indoor').tooltip('dispose').tooltip({title: getRichTooltip("images/ui/Ingame_Emo_Adaptresult" + adaptation["indoor"] + ".png", getLocalizedString('ui', 'student_indoor_adaption')+' '+adaptation["indoor"], null, null, getAdaptationText('Indoor', adaptation["indoor"]), 30), placement: 'top', html: true})
+    })
 }
 
 function recalculateWeaponPreview() {
@@ -1669,12 +1711,13 @@ function recalculateStatPreview() {
     const maxbond = [10, 10, 20, 20, 50]
     let strikerBonus = $('#ba-student-stat-table').hasClass("table-striker-bonus")
     let level = $("#ba-statpreview-levelrange").val()
-    let stats, summon
+    let studentStats, summonStats, summon
     if (statPreviewSummonStats) {
         summon = find(data.summons, 'Id', student.SummonIds[0])[0]
-        stats = new CharacterStats(summon, level, (summon.StarBonus ? stat_preview_stars : 1))
+        summonStats = new CharacterStats(summon, level, (summon.StarBonus ? stat_preview_stars : 1))
+        studentStats = new CharacterStats(student, level, stat_preview_stars)
     } else {
-        stats = new CharacterStats(student, level, stat_preview_stars)
+        studentStats = new CharacterStats(student, level, stat_preview_stars)
     }
 
     //Include Equipment
@@ -1687,56 +1730,68 @@ function recalculateStatPreview() {
             //check that equipment slot is unlocked at current level
             if (level >= minlevelreq[i]) {
                 for (let j = 0; j < gear.StatType.length; j++) {
-                    stats.addBuff(gear.StatType[j], gear.StatValue[j][1])
+                    studentStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
+                    if (statPreviewSummonStats && summon.Id != 99999) {
+                        summonStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
+                    }
                 }
             }
         }
     }
 
-    if (!statPreviewSummonStats)  {
-        //Include Relationship
-        if (statPreviewIncludeBond) {
-            let bondlevel = $(`#ba-statpreview-bond-1-range`).val()
-            let bondbonus = getBondStats(student, Math.min(maxbond[stat_preview_stars-1], bondlevel))
+
+    //Include Relationship
+    if (statPreviewIncludeBond) {
+        let bondlevel = $(`#ba-statpreview-bond-1-range`).val()
+        let bondbonus = getBondStats(student, Math.min(maxbond[stat_preview_stars-1], bondlevel))
+        Object.entries(bondbonus).forEach(el => {
+            studentStats.addBuff(el[0], el[1])
+        })
+    }
+
+    if (statPreviewIncludeBondAlts) {
+        for (let i = 2; i <= student_bondalts.length+1; i++) {
+            let bondlevel = $(`#ba-statpreview-bond-${i}-range`).val()
+            let bondbonus = getBondStats(student_bondalts[i-2], bondlevel)
             Object.entries(bondbonus).forEach(el => {
-                stats.addBuff(el[0], el[1])
-            })
-        }
-
-        if (statPreviewIncludeBondAlts) {
-            for (let i = 2; i <= student_bondalts.length+1; i++) {
-                let bondlevel = $(`#ba-statpreview-bond-${i}-range`).val()
-                let bondbonus = getBondStats(student_bondalts[i-2], bondlevel)
-                Object.entries(bondbonus).forEach(el => {
-                    stats.addBuff(el[0], el[1])
-                })
-            }
-        }
-
-        //Include Passive Skill
-        if (statPreviewIncludePassive && !statPreviewSupportStats) {
-            let passiveSkill = find(student.Skills, 'SkillType', ((stat_preview_weapon_stars >= 2) ? 'weapon' : '') + 'passive')[0]
-            let passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
-            Object.entries(passiveBonus).forEach(el => {
-                stats.addBuff(el[0], el[1])
-            })
-        }
-
-        //Include Ex. Weapon
-        if ((stat_preview_stars == 5) && (stat_preview_weapon_stars > 0)) {
-            let weaponStats = getWeaponStats(student, $('#ba-statpreview-weapon-range').val())
-            Object.entries(weaponStats).forEach(el => {
-                stats.addBuff(el[0], el[1])
+                studentStats.addBuff(el[0], el[1])
             })
         }
     }
 
+    //Include Passive Skill
+    if (statPreviewIncludePassive && !statPreviewSupportStats) {
+        let passiveSkill = find(student.Skills, 'SkillType', ((stat_preview_weapon_stars >= 2) ? 'weapon' : '') + 'passive')[0]
+        let passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
+        Object.entries(passiveBonus).forEach(el => {
+            studentStats.addBuff(el[0], el[1])
+        })
+    }
+
+    //Include Ex. Weapon
+    if ((stat_preview_stars == 5) && (stat_preview_weapon_stars > 0)) {
+        let weaponStats = getWeaponStats(student, $('#ba-statpreview-weapon-range').val())
+        Object.entries(weaponStats).forEach(el => {
+            studentStats.addBuff(el[0], el[1])
+            if (statPreviewSummonStats && summon.Id != 99999) {
+                summonStats.addBuff(el[0], el[1])
+            }
+        })
+    }
+
+    //add student stat to summon/vehicle
+    if (statPreviewSummonStats) {
+        let exLevel = $('#ba-statpreview-exskill-range').val()
+        summonStats.addCharacterStatsAsBuff(studentStats, student.Skills[0].SummonStat, student.Skills[0].SummonStatCoefficient[exLevel-1])
+    }
+
+    let stats = (statPreviewSummonStats ? summonStats : studentStats)
     //populate table
     if (!strikerBonus || statPreviewSummonStats) {
-        $('#ba-student-stat-maxhp').text(stats.getTotal('MaxHP'))
-        $('#ba-student-stat-attack').text(stats.getTotal('AttackPower'))
-        $('#ba-student-stat-defense').text(stats.getTotal('DefensePower'))
-        $('#ba-student-stat-healing').text(stats.getTotal('HealPower'))
+        $('#ba-student-stat-maxhp').text(stats.getTotalString('MaxHP'))
+        $('#ba-student-stat-attack').text(stats.getTotalString('AttackPower'))
+        $('#ba-student-stat-defense').text(stats.getTotalString('DefensePower'))
+        $('#ba-student-stat-healing').text(stats.getTotalString('HealPower'))
     } else {
         $('#ba-student-stat-maxhp').text(stats.getStrikerBonus('MaxHP'))
         $('#ba-student-stat-attack').text(stats.getStrikerBonus('AttackPower'))
@@ -1744,24 +1799,24 @@ function recalculateStatPreview() {
         $('#ba-student-stat-healing').text(stats.getStrikerBonus('HealPower'))
     }
 
-    $('#ba-student-stat-accuracy').text(stats.getTotal('AccuracyPoint'))
-    $('#ba-student-stat-evasion').text(stats.getTotal('DodgePoint'))
-    $('#ba-student-stat-crit').text(stats.getTotal('CriticalPoint'))
-    $('#ba-student-stat-critdmg').text(stats.getTotal('CriticalDamageRate'))
-    $('#ba-student-stat-stability').text(stats.getTotal('StabilityPoint'))
-    $('#ba-student-stat-range').text(stats.getTotal('Range'))
-    $('#ba-student-stat-ccpower').text(stats.getTotal('OppressionPower'))
-    $('#ba-student-stat-ccresist').text(stats.getTotal('OppressionResist'))
+    $('#ba-student-stat-accuracy').text(stats.getTotalString('AccuracyPoint'))
+    $('#ba-student-stat-evasion').text(stats.getTotalString('DodgePoint'))
+    $('#ba-student-stat-crit').text(stats.getTotalString('CriticalPoint'))
+    $('#ba-student-stat-critdmg').text(stats.getTotalString('CriticalDamageRate'))
+    $('#ba-student-stat-stability').text(stats.getTotalString('StabilityPoint'))
+    $('#ba-student-stat-range').text(stats.getTotalString('Range'))
+    $('#ba-student-stat-ccpower').text(stats.getTotalString('OppressionPower'))
+    $('#ba-student-stat-ccresist').text(stats.getTotalString('OppressionResist'))
 
     if (student.SquadType == "Main" || statPreviewSummonStats) {
-        $('#ba-student-stat-ammo').text(stats.getTotal('AmmoCount') + " (" + stats.getTotal('AmmoCost') + ")")
+        $('#ba-student-stat-ammo').text(stats.getTotalString('AmmoCount') + " (" + stats.getTotalString('AmmoCost') + ")")
     } else {
         $('#ba-student-stat-ammo').text('N/A')
     }
     
-    $('#ba-student-stat-critresist').text(stats.getTotal('CriticalChanceResistPoint'))
-    $('#ba-student-stat-critdmgresist').text(stats.getTotal('CriticalDamageResistRate'))
-    $('#ba-student-stat-recoveryrate').text(stats.getTotal('HealEffectivenessRate'))
+    $('#ba-student-stat-critresist').text(stats.getTotalString('CriticalChanceResistPoint'))
+    $('#ba-student-stat-critdmgresist').text(stats.getTotalString('CriticalDamageResistRate'))
+    $('#ba-student-stat-recoveryrate').text(stats.getTotalString('HealEffectivenessRate'))
 
     $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
     $('#ba-statpreview-status-bond-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-1-range').val()}`)
@@ -1895,8 +1950,9 @@ function getRaidCardHTML(raid, terrain='') {
 }
 
 function getTimeAttackCardHTML(raid) {
+    let name = getTranslatedString(raid, 'Name')
     let html = `<div id="ba-raid-select-${raid.Id}" class="ba-select-grid-item unselectable"><div onclick="loadRaid(${raid.Id});" class="ba-raid-card"><div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/timeattack/${raid.IconBG}.png');"></div></div><div class="ba-ta-card-img"><img src="images/enemy/${raid.Icon}.png"></div><div class="ba-raid-card-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div><div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${raid.Terrain}.png"></div>`
-    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${getTranslatedString(raid, 'Name')}</span></div></div></div>`
+    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${name}</span></div></div></div>`
     return html
 }
 
@@ -1920,9 +1976,9 @@ function showEnemyInfo(id, level, grade=1, scaletype=0) {
     $("#ba-stage-enemy-attacktype").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
     $("#ba-stage-enemy-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
     $("#ba-stage-enemy-attacktype-label").text(getLocalizedString('BulletType',enemy.BulletType))
-    $('#ba-stage-enemy-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',enemy.BulletType)}`, 'Attack Type', null, getTypeText(enemy.BulletType), 32), placement: 'top', html: true})
+    $('#ba-stage-enemy-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',enemy.BulletType)}`, getLocalizedString('ui','attacktype'), null, getTypeText(enemy.BulletType), 32), placement: 'top', html: true})
     $("#ba-stage-enemy-defensetype-label").text(getLocalizedString('ArmorType',enemy.ArmorType))
-    $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',enemy.ArmorType)} Armor`, 'Defense Type', null, getTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
+    $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',enemy.ArmorType)} Armor`, getLocalizedString('ui','defensetype'), null, getTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
 
     let levelscale
     if (scaletype == 0) {
@@ -1971,7 +2027,7 @@ function getMaterialIconHTML(id, amount) {
         item = find(data.items, "Id", id)[0]
     }
     var html
-    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), item.Category, getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/${item.Icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>`
+    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory', item.Category), getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/${item.Icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>`
     return html
 }
 
@@ -2064,7 +2120,7 @@ function getDropIconHTML(id, chance) {
  * @returns
  */
 function formatString(string, ...replacements) {
-    return string.replaceAll(/\{([0-9]+)\}/g, (match, p1) => (p1 < replacements.length) ? replacements[p1] : '')
+    return string.replace(/\{([0-9]+)\}/g, (match, p1) => (p1 < replacements.length) ? replacements[p1] : '')
 }
 
 /**
@@ -2077,7 +2133,7 @@ function getProbabilityText(chance) {
 }
 
 function getStudentIconSmall(student) {
-    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student.DevName}')" title="${getRichTooltip(`images/student/icon/${student.CollectionTexture}.png`, getTranslatedString(student, 'Name'), 'Character', getRarityStars(student.StarGrade), getTranslatedString(student, 'ProfileIntroduction').split('\n')[0], 50, 'circle')}"><img src="images/student/icon/${student.CollectionTexture}.png"></div>`
+    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student.DevName}')" title="${getRichTooltip(`images/student/icon/${student.CollectionTexture}.png`, getTranslatedString(student, 'Name'), getLocalizedString('ui','student'), getRarityStars(student.StarGrade), getTranslatedString(student, 'ProfileIntroduction').split('\n')[0], 50, 'circle')}"><img src="images/student/icon/${student.CollectionTexture}.png"></div>`
     return html
 }
 
@@ -2186,6 +2242,25 @@ function updatePassiveSkillStatPreview() {
     $('#ba-statpreview-status-passive-level .statpreview-label').text(`Lv.${$('#ba-statpreview-passiveskill-range').val()}`)
 }
 
+function updateSummonExSkillStatPreview() {
+    if (student.SummonIds.length > 0) {
+        $('#ba-statpreview-summon-level').show()
+        //update ex skill info in preview
+        let exSkill = find(student.Skills, 'SkillType', 'ex')[0]
+        let summon = find(data.summons, "Id", student.SummonIds[0])[0]
+        
+        let level = $('#ba-statpreview-exskill-range').val()
+
+        $('#ba-statpreview-exskill-name').text(getTranslatedString(exSkill, 'Name'))
+        $('#ba-statpreview-exskill-desc').html(formatString(getLocalizedString('ui','summon_ex_bonus'), getTranslatedString(summon, "Name"), getStatName(exSkill.SummonStat), parseFloat((exSkill.SummonStatCoefficient[level-1]/100).toPrecision(3)), getTranslatedString(student, "Name"), getLocalizedString('Stat', exSkill.SummonStat)))
+        
+        //$('#ba-statpreview-status-passive-level .statpreview-label').text(`Lv.${$('#ba-statpreview-passiveskill-range').val()}`)
+    } else {
+        $('#ba-statpreview-summon-level').hide()
+    }
+
+}
+
 function populateItemList() {
     itemsHtml = {"materials":"", "gifts":"", "eleph":"", "furniture":"", "equipment":"", "currency":""}
     $.each(data.items, function(i,el) {
@@ -2217,7 +2292,7 @@ function populateItemList() {
         itemsHtml['equipment'] += getItemCardHTML(el,el.Id+2000000,'equipment')
     })
     Object.entries(itemsHtml).forEach(el => $(`#ba-item-list-${el[0]}-grid`).html(el[1]))
-    $('.ba-select-grid-item').tooltip({html: true, delay: { show: 200, hide: 0 }})
+    $('.ba-select-grid-item').tooltip({html: true, delay: { show: 200, hide: 0 }, container: $('.tab-content') })
 }
 
 function populateCraftList() {
@@ -2251,7 +2326,12 @@ function populateStageList() {
     $('#ba-stages-list-missions-grid').html(html)
     html = ''
     html2 = ''
+    let typePrev = ''
     $.each(data.stages.WeekDungeon, function(i,el) {
+        if (el.Type != typePrev) {
+            let header = `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
+            if (el.Id < 31000) {html += header} else {html2 += header}
+        }
         if (el.Id < 31000) {
             if (el.Stage <= data.common.regions[regionID].bounty_max) html += getStageCardHTML(el)
         } else {
@@ -2259,17 +2339,22 @@ function populateStageList() {
         }
         if (el.Area <= data.common.regions[regionID].commission_max)
         html += getStageCardHTML(el)
+        typePrev = el.Type
     })
     $('#ba-stages-list-bounty-grid').html(html)
     $('#ba-stages-list-commissions-grid').html(html2)
     html = ''
     $.each(data.stages.SchoolDungeon, function(i,el) {
+        if (el.Type != typePrev) {
+            html += `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
+        }
         if (el.Stage <= data.common.regions[regionID].schooldungeon_max)
         html += getStageCardHTML(el)
+        typePrev = el.Type
     })
     $('#ba-stages-list-schooldungeon-grid').html(html)
     html = ''
-    eventPrev = 0
+    let eventPrev = 0
     $.each(data.stages.Event, function(i,el) {
         if (el.EventId <= data.common.regions[regionID].event_max && !(regionID == 1 && el.EventId == 701)) {
             if (el.EventId != eventPrev) {
@@ -2311,7 +2396,7 @@ function getUsedByStudents(item, mode) {
             html += getStudentIconSmall(el)
         })
     } else if (mode == 'furniture') {
-        headerText = 'The following students interact with this furniture'
+        headerText = getLocalizedString('ui','furniture_interaction_list')
         $.each(data.students, function(i,el){
             if (!el.IsReleased[regionID])
             return
@@ -2500,29 +2585,21 @@ function findOrDefault(obj, key, value, default_value) {
 }
 
 function getTypeText(type) {
-    var text = ''
     switch (type) {
         case 'Normal':
-            text += "Deals <b>1&times;</b> damage to <b class='ba-col-explosion'>Light</b>, <b class='ba-col-pierce'>Heavy</b> and <b class='ba-col-mystic'>Special</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-siege'>Structures</b>."
-            break
+            return getLocalizedString("ui","attack_type_normal_desc")
         case 'Explosion':
-            text += "Deals <b>2&times;</b> damage to <b class='ba-col-explosion'>Light</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-mystic'>Special</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-siege'>Structures</b>."
-            break
+            return formatString(getLocalizedString("ui","attack_type_desc"), `<b class='ba-col-explosion'>${getLocalizedString("ArmorType","LightArmor")}</b>`, `<b class='ba-col-mystic'>${getLocalizedString("ArmorType","Unarmed")}</b>`)
         case 'Pierce':
-            text += "Deals <b>2&times;</b> damage to <b class='ba-col-pierce'>Heavy</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-explosion'>Light</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-siege'>Structures</b>."
-            break
+            return formatString(getLocalizedString("ui","attack_type_desc"), `<b class='ba-col-pierce'>${getLocalizedString("ArmorType","HeavyArmor")}</b>`, `<b class='ba-col-explosion'>${getLocalizedString("ArmorType","LightArmor")}</b>`)
         case 'Mystic':
-            text += "Deals <b>2&times;</b> damage to <b class='ba-col-mystic'>Special</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-pierce'>Heavy</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-siege'>Structures</b>."
-            break
+            return formatString(getLocalizedString("ui","attack_type_desc"), `<b class='ba-col-mystic'>${getLocalizedString("ArmorType","Unarmed")}</b>`, `<b class='ba-col-pierce'>${getLocalizedString("ArmorType","HeavyArmor")}</b>`)
         case 'LightArmor':
-            text += "Receives <b>2&times;</b> damage from <b class='ba-col-explosion'>Explosive</b> attacks.<br>Receives <b>0.5&times;</b> damage from <b class='ba-col-pierce'>Piercing</b> attacks."
-            break
+            return formatString(getLocalizedString("ui","defense_type_desc"), `<b class='ba-col-explosion'>${getLocalizedString("BulletType","Explosion")}</b>`, `<b class='ba-col-pierce'>${getLocalizedString("BulletType","Pierce")}</b>`)
         case 'HeavyArmor':
-            text += "Receives <b>2&times;</b> damage from <b class='ba-col-pierce'>Piercing</b> attacks.<br>Receives <b>0.5&times;</b> damage from <b class='ba-col-mystic'>Mystic</b> attacks."
-            break
+            return formatString(getLocalizedString("ui","defense_type_desc"), `<b class='ba-col-pierce'>${getLocalizedString("BulletType","Pierce")}</b>`, `<b class='ba-col-mystic'>${getLocalizedString("BulletType","Mystic")}</b>`)
         case 'Unarmed':
-            text += "Receives <b>2&times;</b> damage from <b class='ba-col-mystic'>Mystic</b> attacks.<br>Receives <b>0.5&times;</b> damage from <b class='ba-col-explosion'>Explosive</b> attacks."
-            break
+            return formatString(getLocalizedString("ui","defense_type_desc"), `<b class='ba-col-mystic'>${getLocalizedString("BulletType","Mystic")}</b>`, `<b class='ba-col-explosion'>${getLocalizedString("BulletType","Explosion")}</b>`)
     }
     return text
 }
@@ -2534,7 +2611,7 @@ function getSkillText(text, params, level, type) {
     var regex
 
     regex = /[0-9.]+[%s秒]/g
-    result = result.replaceAll(regex, function(match) {return `<strong>${match}</strong>`})
+    result = result.replace(regex, function(match) {return `<strong>${match}</strong>`})
 
     while (result.includes("<?"+paramCount+">")) {
         result = result.replace("<?"+paramCount+">", "<span class=\"ba-col-"+type.toLowerCase()+"\">" + params[paramCount-1][level-1] + "</span>")
@@ -2542,16 +2619,16 @@ function getSkillText(text, params, level, type) {
     }
 
     regex = /<d:(\w+)>/g
-    result = result.replaceAll(regex, function(match, capture) {return `<span class="ba-skill-debuff" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_Debuff_${capture}.png`, data.common.buffs['Debuff_'+capture].tooltip_title, 'Debuff', null, data.common.buffs['Debuff_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Debuff_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['Debuff_'+capture], 'Name')}</span>`})
+    result = result.replace(regex, function(match, capture) {return `<span class="ba-skill-debuff" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_Debuff_${capture}.png`, data.common.buffs['Debuff_'+capture].tooltip_title, 'Debuff', null, data.common.buffs['Debuff_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Debuff_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['Debuff_'+capture], 'Name')}</span>`})
 
     regex = /<b:(\w+)>/g
-    result = result.replaceAll(regex, function(match, capture) {return `<span class="ba-skill-buff" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_Buff_${capture}.png`, data.common.buffs['Buff_'+capture].tooltip_title, 'Buff', null, data.common.buffs['Buff_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Buff_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['Buff_'+capture], 'Name')}</span>`})
+    result = result.replace(regex, function(match, capture) {return `<span class="ba-skill-buff" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_Buff_${capture}.png`, data.common.buffs['Buff_'+capture].tooltip_title, 'Buff', null, data.common.buffs['Buff_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Buff_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['Buff_'+capture], 'Name')}</span>`})
 
     regex = /<c:(\w+)>/g
-    result = result.replaceAll(regex, function(match, capture) {return `<span class="ba-skill-cc" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_CC_${capture}.png`, data.common.buffs['CC_'+capture].tooltip_title, 'CC Effect', null, data.common.buffs['CC_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_CC_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['CC_'+capture], 'Name')}</span>`})
+    result = result.replace(regex, function(match, capture) {return `<span class="ba-skill-cc" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_CC_${capture}.png`, data.common.buffs['CC_'+capture].tooltip_title, 'CC Effect', null, data.common.buffs['CC_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_CC_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['CC_'+capture], 'Name')}</span>`})
 
     regex = /<s:(\w+)>/g
-    result = result.replaceAll(regex, function(match, capture) {return `<span class="ba-skill-special" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_Special_${capture}.png`, data.common.buffs['Special_'+capture].tooltip_title, 'Status', null, data.common.buffs['Special_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Special_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['Special_'+capture], 'Name')}</span>`})
+    result = result.replace(regex, function(match, capture) {return `<span class="ba-skill-special" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_Special_${capture}.png`, data.common.buffs['Special_'+capture].tooltip_title, 'Status', null, data.common.buffs['Special_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Special_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['Special_'+capture], 'Name')}</span>`})
 
     return result
 }
@@ -2574,7 +2651,7 @@ function getRichTooltip(icon, title, subtitle, rarity, body, imgsize = 50, imgcl
     html += '</div></div>'
     
     if (body != null && body != "") {
-        html += `<div class='ba-tooltip-body'>${body.replaceAll("\"", "&quot;")}</div>`
+        html += `<div class='ba-tooltip-body'>${body.replace( /\"/g, "&quot;")}</div>`
     }
     html += '</span>'
     return html
@@ -2898,7 +2975,6 @@ function getTimeAttackLevelScale(level) {
  * Returns an object of stat bonuses granted by a student's passive or weaponpassive skill
  * @param {*} skill the object containing skill data 
  * @param {*} skillLevel 
- * @param {*} hasWeapon
  * @returns 
  */
 function getPassiveSkillBonus(skill, level) {
@@ -2934,11 +3010,9 @@ function stageIsReleased(stage) {
 function updateStatPreviewTitle() {
     if (statPreviewSummonStats) {
         let summon  = find(data.summons, 'Id', student.SummonIds[0])[0]
-        //$('#ba-statpreview-status-title').text(formatString(getLocalizedString("ui", "statpreview_header"), getTranslatedString(summon, "Name")))
         $('#ba-statpreview-status-title').text(getTranslatedString(summon, "Name"))
         $('#ba-statpreview-status-title-icon').attr('src', `images/skill/${student.Skills[0].Icon}.png`).addClass(`bg-skill-${student.BulletType.toLowerCase()}`)
     } else {
-        //$('#ba-statpreview-status-title').text(formatString(getLocalizedString("ui", "statpreview_header"), getTranslatedString(student, "PersonalName")))
         $('#ba-statpreview-status-title').text(getTranslatedString(student, "PersonalName"))
         $('#ba-statpreview-status-title-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
     }

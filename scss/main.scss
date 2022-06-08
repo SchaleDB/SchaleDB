@@ -1297,7 +1297,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     height: 16px;
     width: 16px;
     position: absolute;
-    inset: 11px 0 0 11px;
+    top: 11px;
+    left: 11px;
     color: var(--col-panel-separator);
 }
 
@@ -1434,7 +1435,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 .ba-raid-card-bg {
     position: relative;
-    inset: 0;
+    top: 0;
+    left: 0;
     height: var(--var-grid-card-height);
     width: var(--var-grid-card-width);
     filter: blur(4px);
@@ -1447,7 +1449,8 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 .ba-raid-card-img, .ba-ta-card-img {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
     height: var(--var-grid-card-height);
     width: var(--var-grid-card-width);
     box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
