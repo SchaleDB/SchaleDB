@@ -15,7 +15,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 4
+const cache_ver = 5
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const json_list = {
@@ -54,6 +54,7 @@ const sort_functions = {
 }
 
 let data = {}, loadedModule, student, studentList, loadedItem, loadedStage, loadedCraftNode, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
+    , studentCompare   
     , searchResultsCount = 0, searchResultsSelection = 0
     , studentSelectorModal, statPreviewModal
     , summonId = 0
@@ -67,6 +68,8 @@ let data = {}, loadedModule, student, studentList, loadedItem, loadedStage, load
     ,statPreviewIncludeEquipment = false
     ,statPreviewSupportStats = false
     ,statPreviewSummonStats = false
+    ,compareMode = false
+    ,selectCompareMode = false
     , search_options = {
     "groupby": "none",
     "sortby": "Default",
@@ -218,21 +221,49 @@ let data = {}, loadedModule, student, studentList, loadedItem, loadedStage, load
         this.stats[stat][1] += Math.round(chStats.getTotal(stat) * (coefficient/10000))
     }
 
+    /**
+     * Calculates the final total of a stat with all flat and percentage buffs
+     * @param {string} stat The name of the stat
+     * @returns 
+     */
     getTotal(stat) {
         return Math.round(((this.stats[stat][0] + this.stats[stat][1]) * this.stats[stat][2]).toFixed(4))
     }
 
+    /**
+     * Calculates and returns the final total of a stat as a locale-formatted string
+     * @param {*} stat 
+     * @returns 
+     */
     getTotalString(stat) {
         let total = this.getTotal(stat)
         if (stat.slice(-4) == "Rate") {
-            return parseInt((total/100).toFixed(0)).toLocaleString() + "%"
+            return (total/100).toFixed(0).toLocaleString() + "%"
         } else {
             return total.toLocaleString()
         }
     }
 
     getStrikerBonus(stat) {
-        return '+'+Math.floor(((this.stats[stat][0]+this.stats[stat][1])*this.stats[stat][2]).toFixed(4)*striker_bonus_coefficient[stat]).toLocaleString()
+        return Math.floor(((this.stats[stat][0]+this.stats[stat][1])*this.stats[stat][2]).toFixed(4)*striker_bonus_coefficient[stat])
+    }
+
+    getStabilityMinDamage() {
+        let stability =  this.getTotal('StabilityPoint')
+        return parseFloat((((stability / (stability + 997)) + 0.2)*100).toFixed(2)) + "%"
+    }
+
+    getDescriptionText(stat) {
+        let desc = ""
+        desc += "If this character's HP reaches 0, they will be unable to continue fighting.\n\n"
+        desc += `Base Value: <b>${this.stats[stat][0].toLocaleString()}</b>`
+        if (this.stats[stat][1] > 0) {
+            desc += `\nFlat Buffs: <b>+${this.stats[stat][1].toLocaleString()}</b>`
+        }
+        if (this.stats[stat][2] > 1) {
+            desc += `\n% Buffs: <b>+${parseFloat(((this.stats[stat][2]-1)*100).toFixed(2))}%</b>`
+        }
+        return desc        
     }
 }
 
@@ -345,6 +376,11 @@ function loadModule(moduleName, entry=null) {
             loadRegion(regionID)
             loadLanguage(userLang)
             studentSelectorModal = new bootstrap.Modal(document.getElementById("ba-student-modal-students"), {})
+            document.getElementById("ba-student-modal-students").addEventListener('hidden.bs.modal', function (e) {
+                selectCompareMode = false
+            })
+            compareMode = false
+            selectCompareMode = false
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
         
@@ -387,20 +423,29 @@ function loadModule(moduleName, entry=null) {
             })
             activeFilters = getNumActiveFilters()
             $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
+            $('#ba-student-search-reset').toggle(activeFilters > 0)
 
             updateStudentList(updateSortMethod = true)
-        
+    
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         
-            $('input[type=range]').trigger('oninput')
             $('#ba-student, #ba-student-list-btn').show()
             $('#ba-statpreview-status-bond-level').tooltip({title: getBasicTooltip('Toggle Relationship Bonus'), placement: 'top', html: true})
             $('#ba-statpreview-status-equipment').tooltip({title: getBasicTooltip('Toggle Equipment Bonus'), placement: 'top', html: true})
             $('#ba-statpreview-status-bond-alt-level').tooltip({title: getBasicTooltip('Toggle Alt Relationship Bonus'), placement: 'top', html: true})
             $('#ba-statpreview-status-passive-level').tooltip({title: getBasicTooltip('Toggle Enhanced Skill Buff'), placement: 'top', html: true})
-            $('#ba-statpreview-status-strikerbonus').tooltip({title: getBasicTooltip('Toggle Support Stats'), placement: 'top', html: true})
-            $('#ba-statpreview-status-summon').tooltip({title: getBasicTooltip('Toggle Vehicle/Summon Stats'), placement: 'top', html: true})
-            //bindTooltip('#ba-statpreview-status-summon', getBasicTooltip('Toggle Vehicle/Summon Stats'), 'top', true)
+            $('#ba-statpreview-status-strikerbonus').tooltip({title: getBasicTooltip('Support Stats'), placement: 'top', html: true})
+            $('#ba-statpreview-status-summon').tooltip({title: getBasicTooltip('Vehicle/Summon Stats'), placement: 'top', html: true})
+            $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip('Compare with Student'), placement: 'top', html: true})
+            $('#ba-student-search-reset').tooltip({title: getBasicTooltip('Clear All Filters'), placement: 'top', html: true})
+
+            $('.tooltip-button').on('click', e => {
+                if (e.originalEvent.pointerType == "touch") {
+                    $(e.currentTarget)
+                    $(".tooltip").tooltip("hide")
+                }
+            })
+
         })
     } else if (moduleName == 'items') {
         loadedModule = 'items'
@@ -794,9 +839,24 @@ function searchSetFilter(prop, value, runSearch = true) {
     $(`#ba-student-search-filter-${prop.toLowerCase()}-${String(value).toLowerCase()}`).toggleClass("active", search_options["filter"][prop][value])
     activeFilters = getNumActiveFilters()
     $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
+    $('#ba-student-search-reset').toggle(activeFilters > 0)
     if (runSearch) {
-        updateStudentList()  
+        updateStudentList()
     }
+}
+
+function searchResetFilter() {
+    $('#ba-student-search-text').val('')
+    Object.entries(search_options["filter"]).forEach(prop => {
+        Object.entries(prop[1]).forEach (val => {
+            search_options["filter"][prop[0]][val[0]] = false
+            $(`#ba-student-search-filter-${prop[0].toLowerCase()}-${String(val[0]).toLowerCase()}`).toggleClass("active", false)
+        })
+    })
+    $('#ba-student-search-reset').hide()
+    $('#ba-student-search-filter-amount').text('')
+    document.getElementById('ba-student-search-reset').blur()
+    updateStudentList()
 }
 
 function processStudent() {
@@ -1002,26 +1062,28 @@ function processStudent() {
     $('#ba-navbar-content').collapse('hide')
     window.scrollTo({top: 0, left: 0, behavior: 'instant'})
 
-    changeStatPreviewStars(student.StarGrade, 0)
+    changeStatPreviewStars(stat_preview_stars, stat_preview_weapon_stars, false)
     recalculateTerrainAffinity()
     updatePassiveSkillStatPreview()
     updateSummonExSkillStatPreview()
     recalculateWeaponPreview()
     updateWeaponLevelStatPreview($('#ba-statpreview-weapon-range').val())
-    recalculateStatPreview()
+
     recalculateSkillPreview()
     recalculateWeaponSkillPreview()
     recalculateEXSkillPreview()
     recalculateBondPreview()
 
-    changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'))
-    changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'))
-    changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'))
+    changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'), false)
+    changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'), false)
+    changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'), false)
 
     for (let i = 1; i <= student_bondalts.length+1; i++) {
-        changeStatPreviewBondLevel(i, document.getElementById(`ba-statpreview-bond-${i}-range`))
+        changeStatPreviewBondLevel(i, document.getElementById(`ba-statpreview-bond-${i}-range`), false)
     }
     
+    recalculateStatPreview()
+
     var url = new URL(window.location.href)
 
     if (url.searchParams.get("chara") !== student.DevName) {
@@ -1036,12 +1098,30 @@ function processStudent() {
 
 function loadStudent(studentName) {
     if (loadedModule == 'students') {
-        student = find(data.students, "DevName", studentName)
-
-        if (student.length == 1) {
-            student = student[0];
-            processStudent()
+        if (selectCompareMode) {
+            studentCompare = find(data.students, "DevName", studentName)[0]
+            selectCompareMode = false
+            compareMode = true
+            if (statPreviewSummonStats) {
+                statPreviewSummonStats = false
+                $('#ba-statpreview-status-summon').toggleClass('deactivated',true)
+            }
+            recalculateStatPreview()
+            studentSelectorModal.hide()
+            updateStatPreviewTitle()
+        } else {
+            student = find(data.students, "DevName", studentName)
+            if (student.length == 1) {
+                student = student[0]
+                if (compareMode) {
+                    if (student.Id == studentCompare.Id) {
+                        compareMode = false
+                    }
+                }
+                processStudent()
+            }
         }
+
     } else {
         loadModule('students', studentName)
     }
@@ -1064,6 +1144,10 @@ function loadStudentById(studentId) {
 function toggleStudentSummon() {
     statPreviewSummonStats = !statPreviewSummonStats
     if (statPreviewSupportStats && statPreviewSummonStats) toggleStrikerBonus()
+    if (compareMode) {
+        compareMode = false
+        $('#ba-statpreview-status-compare').toggleClass('deactivated', true)
+    }
     recalculateStatPreview()
     $('#ba-statpreview-status-summon').toggleClass('deactivated', (!statPreviewSummonStats))
     updateStatPreviewTitle()
@@ -1541,7 +1625,7 @@ function getFormattedStatAmount(val) {
     return Number.isInteger(val) ? val : `${parseFloat((val*100).toFixed(2))}%`
 }
 
-function changeGearLevel(slot, el) {
+function changeGearLevel(slot, el, recalculate = true) {
     let geartype = student.Equipment[slot-1]
     let tier = parseInt(el.value)
     let equipment = find(data.equipment, "Id", gearId[geartype]+tier-1)[0]
@@ -1552,7 +1636,7 @@ function changeGearLevel(slot, el) {
     $(`#ba-statpreview-gear${slot}-name`).text(getTranslatedString(equipment, 'Name'))
     $(`#ba-statpreview-gear${slot}-description`).html(getGearStatsText(equipment))
     if (statPreviewIncludeEquipment) {
-        recalculateStatPreview()
+        if (recalculate) recalculateStatPreview()
         updateGearIcon()
     }
 }
@@ -1619,7 +1703,7 @@ function changeWeaponPreviewLevel(el) {
     recalculateWeaponPreview()
 }
 
-function changeStatPreviewBondLevel(i, el) {
+function changeStatPreviewBondLevel(i, el, recalculate = true) {
     $(`#ba-statpreview-bond-${i}-level`).html(`<i class="fa-solid fa-heart"></i> ${el.value}`)
     var bondStats
     if (i == 1) {
@@ -1628,7 +1712,7 @@ function changeStatPreviewBondLevel(i, el) {
         bondStats = Object.entries(getBondStats(student_bondalts[i-2], el.value))
     }
     $(`#ba-statpreview-bond-${i}-description`).html(`${getStatName(bondStats[0][0])} <b>+${getFormattedStatAmount(bondStats[0][1])}</b>, ${getStatName(bondStats[1][0])} <b>+${getFormattedStatAmount(bondStats[1][1])}</b>`)
-    recalculateStatPreview()
+    if (recalculate) recalculateStatPreview()
 }
 
 function changeStatPreviewWeaponLevel(el) {
@@ -1715,9 +1799,10 @@ function recalculateStatPreview() {
     if (statPreviewSummonStats) {
         summon = find(data.summons, 'Id', student.SummonIds[0])[0]
         summonStats = new CharacterStats(summon, level, (summon.StarBonus ? stat_preview_stars : 1))
-        studentStats = new CharacterStats(student, level, stat_preview_stars)
-    } else {
-        studentStats = new CharacterStats(student, level, stat_preview_stars)
+    }
+    studentStats = new CharacterStats(student, level, stat_preview_stars)
+    if (compareMode) {
+        studentCompareStats = new CharacterStats(studentCompare, level, stat_preview_stars)
     }
 
     //Include Equipment
@@ -1736,9 +1821,18 @@ function recalculateStatPreview() {
                     }
                 }
             }
+
+            if (compareMode) {
+                gear = find(data.equipment, "Id", gearId[studentCompare.Equipment[i]]+tier-1)[0]
+                //check that equipment slot is unlocked at current level
+                if (level >= minlevelreq[i]) {
+                    for (let j = 0; j < gear.StatType.length; j++) {
+                        studentCompareStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
+                    }
+                }
+            }
         }
     }
-
 
     //Include Relationship
     if (statPreviewIncludeBond) {
@@ -1747,6 +1841,12 @@ function recalculateStatPreview() {
         Object.entries(bondbonus).forEach(el => {
             studentStats.addBuff(el[0], el[1])
         })
+        if (compareMode) {
+            bondbonus = getBondStats(studentCompare, Math.min(maxbond[stat_preview_stars-1], bondlevel))
+            Object.entries(bondbonus).forEach(el => {
+                studentCompareStats.addBuff(el[0], el[1])
+            })
+        }
     }
 
     if (statPreviewIncludeBondAlts) {
@@ -1766,6 +1866,14 @@ function recalculateStatPreview() {
         Object.entries(passiveBonus).forEach(el => {
             studentStats.addBuff(el[0], el[1])
         })
+
+        if (compareMode) {
+            passiveSkill = find(studentCompare.Skills, 'SkillType', ((stat_preview_weapon_stars >= 2) ? 'weapon' : '') + 'passive')[0]
+            passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
+            Object.entries(passiveBonus).forEach(el => {
+                studentCompareStats.addBuff(el[0], el[1])            
+            })
+        }
     }
 
     //Include Ex. Weapon
@@ -1777,46 +1885,76 @@ function recalculateStatPreview() {
                 summonStats.addBuff(el[0], el[1])
             }
         })
+        if (compareMode) {
+            weaponStats = getWeaponStats(studentCompare, $('#ba-statpreview-weapon-range').val())
+            Object.entries(weaponStats).forEach(el => {
+                studentCompareStats.addBuff(el[0], el[1])
+            })
+        }
     }
 
     //add student stat to summon/vehicle
-    if (statPreviewSummonStats) {
+    if (statPreviewSummonStats && !compareMode) {
         let exLevel = $('#ba-statpreview-exskill-range').val()
         summonStats.addCharacterStatsAsBuff(studentStats, student.Skills[0].SummonStat, student.Skills[0].SummonStatCoefficient[exLevel-1])
     }
 
+    if (student.SquadType == "Support") {
+        studentStats.stats["AmmoCount"][0] = 0
+    }
+    if (compareMode && studentCompare.SquadType == "Support") {
+        studentCompareStats.stats["AmmoCount"][0] = 0
+    }
+
+    const statList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalDamageRate','StabilityPoint','Range','OppressionPower','OppressionResist','AmmoCount','CriticalChanceResistPoint','CriticalDamageResistRate','HealEffectivenessRate']
     let stats = (statPreviewSummonStats ? summonStats : studentStats)
-    //populate table
-    if (!strikerBonus || statPreviewSummonStats) {
-        $('#ba-student-stat-maxhp').text(stats.getTotalString('MaxHP'))
-        $('#ba-student-stat-attack').text(stats.getTotalString('AttackPower'))
-        $('#ba-student-stat-defense').text(stats.getTotalString('DefensePower'))
-        $('#ba-student-stat-healing').text(stats.getTotalString('HealPower'))
-    } else {
-        $('#ba-student-stat-maxhp').text(stats.getStrikerBonus('MaxHP'))
-        $('#ba-student-stat-attack').text(stats.getStrikerBonus('AttackPower'))
-        $('#ba-student-stat-defense').text(stats.getStrikerBonus('DefensePower'))
-        $('#ba-student-stat-healing').text(stats.getStrikerBonus('HealPower'))
-    }
 
-    $('#ba-student-stat-accuracy').text(stats.getTotalString('AccuracyPoint'))
-    $('#ba-student-stat-evasion').text(stats.getTotalString('DodgePoint'))
-    $('#ba-student-stat-crit').text(stats.getTotalString('CriticalPoint'))
-    $('#ba-student-stat-critdmg').text(stats.getTotalString('CriticalDamageRate'))
-    $('#ba-student-stat-stability').text(stats.getTotalString('StabilityPoint'))
-    $('#ba-student-stat-range').text(stats.getTotalString('Range'))
-    $('#ba-student-stat-ccpower').text(stats.getTotalString('OppressionPower'))
-    $('#ba-student-stat-ccresist').text(stats.getTotalString('OppressionResist'))
+    statList.forEach((stat, index) => {
+        let text
+        if ((strikerBonus) && (!statPreviewSummonStats) && (index < 4)) {
+            text = '+' + stats.getStrikerBonus(stat).toLocaleString()
+        } else {
+            if (stat == 'AmmoCount') {
+                let ammo = stats.getTotalString('AmmoCount')
+                let cost = stats.getTotalString('AmmoCost')
+                if (ammo == 0) {
+                    text = "N/A"
+                } else {
+                    text = `${ammo}&nbsp;(${cost})`
+                }
+            } else {
+                text = stats.getTotalString(stat)
+            }
+        }
+        if (compareMode) {
+            let diff, amount
 
-    if (student.SquadType == "Main" || statPreviewSummonStats) {
-        $('#ba-student-stat-ammo').text(stats.getTotalString('AmmoCount') + " (" + stats.getTotalString('AmmoCost') + ")")
-    } else {
-        $('#ba-student-stat-ammo').text('N/A')
-    }
-    
-    $('#ba-student-stat-critresist').text(stats.getTotalString('CriticalChanceResistPoint'))
-    $('#ba-student-stat-critdmgresist').text(stats.getTotalString('CriticalDamageResistRate'))
-    $('#ba-student-stat-recoveryrate').text(stats.getTotalString('HealEffectivenessRate'))
+            if (strikerBonus) {
+                if (studentCompare.SquadType != "Support") {
+                    diff = stats.getStrikerBonus(stat)
+                } else {
+                    diff = stats.getStrikerBonus(stat) - studentCompareStats.getStrikerBonus(stat)
+                }
+            } else {
+                diff = stats.getTotal(stat) - studentCompareStats.getTotal(stat)
+            }
+
+            if (stat.slice(-4) == 'Rate') {
+                amount = `${parseFloat(Math.abs(diff/100).toFixed(1)).toLocaleString()}%`
+            } else {
+                amount = `${Math.abs(diff).toLocaleString()}`
+            }
+
+            if (diff < 0) {
+                text += `<small class="comparison less">&#9660;&nbsp;${amount}</small>`
+            } else if (diff > 0) {
+                text += `<small class="comparison greater">&#9650;&nbsp;${amount}</small>`
+            } else {
+                text += `<small class="comparison">&#9654;&nbsp;0</small>`
+            }
+        }
+        $(`#ba-student-stat-${stat} .stat-value`).html(text)
+    })
 
     $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
     $('#ba-statpreview-status-bond-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-1-range').val()}`)
@@ -1826,6 +1964,7 @@ function recalculateStatPreview() {
     }
     $('#ba-statpreview-status-passive-level').toggleClass('deactivated', !statPreviewIncludePassive)
     $('#ba-statpreview-status-equipment').toggleClass('deactivated', !statPreviewIncludeEquipment)
+    $('#ba-statpreview-status-compare').toggleClass('deactivated', !compareMode)
 }
 
 function recalculateEXSkillPreview() {
@@ -2192,7 +2331,7 @@ function getWeaponStats(student, level) {
     return weaponStats
 }
 
-function changeStatPreviewStars(stars, weaponstars) {
+function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
 
     let weaponstars_prev = stat_preview_weapon_stars
 
@@ -2222,7 +2361,7 @@ function changeStatPreviewStars(stars, weaponstars) {
         updatePassiveSkillStatPreview()
     }
 
-    recalculateStatPreview()
+    if (recalculate) recalculateStatPreview()
 }
 
 function updatePassiveSkillStatPreview() {
@@ -3008,12 +3147,38 @@ function stageIsReleased(stage) {
 }
 
 function updateStatPreviewTitle() {
+    //$('#ba-statpreview-status-title-compare').removeClass('d-none d-md-block')
     if (statPreviewSummonStats) {
         let summon  = find(data.summons, 'Id', student.SummonIds[0])[0]
         $('#ba-statpreview-status-title').text(getTranslatedString(summon, "Name"))
         $('#ba-statpreview-status-title-icon').attr('src', `images/skill/${student.Skills[0].Icon}.png`).addClass(`bg-skill-${student.BulletType.toLowerCase()}`)
     } else {
-        $('#ba-statpreview-status-title').text(getTranslatedString(student, "PersonalName"))
+        $('#ba-statpreview-status-title').html(getTranslatedString(student, "PersonalName"))//.removeClass('d-none d-md-block')
         $('#ba-statpreview-status-title-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
     }
+    if (compareMode) {
+        $('#ba-statpreview-status-title-compare').html(getTranslatedString(studentCompare, "PersonalName"))
+        $('#ba-statpreview-status-title, #ba-statpreview-status-title-compare')//.addClass('d-none d-md-block')
+        $('#ba-statpreview-status-title-compare-icon').attr('src', `images/student/icon/${studentCompare.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
+    }
+    $('.statpreview-compare').toggle(compareMode)
+    if (compareMode) {
+        $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip('Remove Comparison'), placement: 'top', html: true})
+    } else {
+        $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip('Compare with Student'), placement: 'top', html: true})
+
+    }
+}
+
+function openStudentComparison() {
+    if (compareMode) {
+        compareMode = false
+        recalculateStatPreview()
+        updateStatPreviewTitle()
+    } else {
+        $(`#ba-student-select-${student.Id}>div`).addClass('disabled')
+        selectCompareMode = true
+        studentSelectorModal.show()
+    }
+
 }

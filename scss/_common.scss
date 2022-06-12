@@ -4,6 +4,7 @@ body {
     background-color: var(--col-theme-background);
     font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
     overflow: hidden scroll;
+    @include webkit-scrollbar;
 }
 
 p {
@@ -116,18 +117,54 @@ input[type="search" i]::-webkit-search-cancel-button {
     cursor: pointer;
 }
 
-// chrome scrollbar
-::-webkit-scrollbar {
-    width: 10px;
+.has-tooltip {
+    //text-decoration: dotted;
+    background-color: var(--col-theme-accent);
+    @include circular;
+    padding: 0 0.5rem;
+    cursor: default;
 }
 
-::-webkit-scrollbar-track {
-    background: transparent;
-}
+.ba-stats {
 
-::-webkit-scrollbar-thumb {
-    background-color: var(--col-panel-separator);
-    background-clip: padding-box;
-    border-radius: 99px;
-    border: solid 2px transparent;
+    .stat-icon {
+        display: none;
+        @include sharp-img;
+        margin-right: 0.5rem;
+        height: 22px;
+        width: auto;
+        filter: grayscale(1) brightness(1.4);
+    
+        &.active {
+            filter: none;
+        }
+    }
+
+    .stat-name {
+        @include truncate-text;
+    }
+
+    .stat-value {
+        margin-left: 0.5rem;
+        text-align: right;
+        font-weight: 700;
+        min-width: fit-content;
+
+        .comparison {
+            font-size: 0.75rem;
+            min-width: 3.5rem;
+            display: inline-block;
+            text-align: left;
+            margin-left: 0.5rem;
+
+            &.greater {
+                color: var(--col-text-compare-greater);
+            }
+    
+            &.less {
+                color: var(--col-text-compare-less);
+            }
+        }
+
+    }
 }

@@ -183,6 +183,10 @@
 
 // Modals
 
+.modal {
+    @include scrollable(auto);
+}
+
 .modal-dialog {
     @include lg-up {
         margin: 1.5rem auto;

@@ -5,7 +5,7 @@
                 <img id="ba-student-img">
             </div>
             <div class="px-0" style="position: fixed;">
-                <button id="ba-student-list-btn" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ba-student-modal-students" style="display:none;"><i class="fa-solid fa-bars"></i><span class="d-inline ms-2" data-localize-id="ui,student_list"></span></button>
+                <button id="ba-student-list-btn" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ba-student-modal-students" onclick="$('.ba-student-card.disabled').removeClass('disabled')" style="display:none;"><i class="fa-solid fa-bars"></i><span class="d-inline ms-2" data-localize-id="ui,student_list"></span></button>
             </div>
             <div class="d-block d-md-none" style="height: 450px;"></div>
         </div>
@@ -71,17 +71,23 @@
 
                                 <div class="row g-1 mt-1">
                                     <div class="d-flex flex-row align-items-end">
-                                        <img id="ba-statpreview-status-title-icon">
-                                        <h5 id="ba-statpreview-status-title" class="mb-1 mx-2"></h5>
+                                        <img id="ba-statpreview-status-title-icon" class="me-1">
+                                        <h5 id="ba-statpreview-status-title" class="mb-1 mx-1"></h5>
                                         <div class="flex-fill"></div>
-                                        <a id="ba-statpreview-status-strikerbonus" onclick="toggleStrikerBonus()" class="ba-statpreview-icon bg-theme me-2 deactivated" style="padding:5px;">
+                                        <a id="ba-statpreview-status-compare" onclick="openStudentComparison()" class="ba-statpreview-status tooltip-button bg-theme me-2 deactivated" style="padding:2px!important;">
+                                            <img src="images/ui/Image_Compare.png" class="compare-icon sharp-img invert-light" width="28" height="28">
+                                            <img id="ba-statpreview-status-title-compare-icon" src="" class="statpreview-compare sharp-img me-2" width="28" height="28">
+                                            <span id="ba-statpreview-status-title-compare" class="statpreview-compare me-2"></span>
+                                            <i class="fa-solid fa-xmark me-2 statpreview-compare"></i>
+                                        </a>
+                                        <a id="ba-statpreview-status-strikerbonus" onclick="toggleStrikerBonus()" class="ba-statpreview-icon tooltip-button bg-theme me-2 deactivated" style="padding:5px;">
                                             <img id="" src="images/ui/Special_StatBonus.png" class="sharp-img invert-light" width="22" height="22">
                                         </a>
-                                        <a id="ba-statpreview-status-summon" onclick="toggleStudentSummon()" class="ba-statpreview-icon bg-theme me-2 deactivated" style="padding:2px;">
+                                        <a id="ba-statpreview-status-summon" onclick="toggleStudentSummon()" class="ba-statpreview-icon tooltip-button bg-theme me-2 deactivated" style="padding:2px;">
                                             <img id="" src="images/ui/Role_Vehicle.png" class="sharp-img invert-light" width="28" height="28">
                                         </a>
                                         <a id="ba-statpreview-status-options" data-bs-toggle="modal" data-bs-target="#ba-student-modal-statpreview" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center px-2 me-0 mb-0">
-                                            <span><i class="fa-solid fa-sliders"></i><span class="ms-2 px-0 d-none d-md-block" data-localize-id="ui,options"></span></span>
+                                            <span><i class="fa-solid fa-sliders"></i><span class="ms-2 px-0 d-none d-md-block" data-localize-id="ui,options"></span><span class="ms-2 px-0 d-block d-md-none" data-localize-id="ui,options_short"></span></span>
                                         </a>
                                     </div>
                                 </div>
@@ -92,113 +98,129 @@
                                             <tbody>
                                                 <tr>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,MaxHP"></span>
-                                                            <span id="ba-student-stat-maxhp" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-MaxHP" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,MaxHP"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,AttackPower"></span>
-                                                            <span id="ba-student-stat-attack" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,DefensePower"></span>
-                                                            <span id="ba-student-stat-defense" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,HealPower"></span>
-                                                            <span id="ba-student-stat-healing" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-AttackPower" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,AttackPower"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,AccuracyPoint"></span>
-                                                            <span id="ba-student-stat-accuracy" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-DefensePower" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,DefensePower"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,DodgePoint"></span>
-                                                            <span id="ba-student-stat-evasion" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,CriticalPoint"></span>
-                                                            <span id="ba-student-stat-crit" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,CriticalChanceResistPoint"></span>
-                                                            <span id="ba-student-stat-critresist" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-HealPower" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,HealPower"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,CriticalDamageRate"></span>
-                                                            <span id="ba-student-stat-critdmg" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-AccuracyPoint" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,AccuracyPoint"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,CriticalDamageResistRate"></span>
-                                                            <span id="ba-student-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,StabilityPoint"></span>
-                                                            <span id="ba-student-stat-stability" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,Range"></span>
-                                                            <span id="ba-student-stat-range" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-DodgePoint" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,DodgePoint"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,OppressionPower"></span>
-                                                            <span id="ba-student-stat-ccpower" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-CriticalPoint" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,CriticalPoint"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,OppressionResist"></span>
-                                                            <span id="ba-student-stat-ccresist" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-CriticalChanceResistPoint" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,CriticalChanceResistPoint"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,HealEffectivenessRate"></span>
-                                                            <span id="ba-student-stat-recoveryrate" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-CriticalDamageRate" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,CriticalDamageRate"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                     <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,AmmoCount"></span>
-                                                            <span id="ba-student-stat-ammo" class="ms-2 text-bold text-end"></span>
+                                                        <div id="ba-student-stat-CriticalDamageResistRate" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,CriticalDamageResistRate"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div id="ba-student-stat-StabilityPoint" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,StabilityPoint"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div id="ba-student-stat-Range" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,Range"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div id="ba-student-stat-OppressionPower" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,OppressionPower"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div id="ba-student-stat-OppressionResist" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,OppressionResist"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div id="ba-student-stat-HealEffectivenessRate" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,HealEffectivenessRate"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div id="ba-student-stat-AmmoCount" class="d-flex align-items-center">
+                                                            <span class="stat-name" data-localize-id="Stat,AmmoCount"></span>
+                                                            <span class="flex-fill"></span>
+                                                            <span class="stat-value" class="ms-2 text-bold text-end"></span>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -210,7 +232,7 @@
                                 <div class="row g-1 mt-3">
                                     <div class="d-flex flex-row align-items-center">
                                         <input id="ba-statpreview-levelrange" oninput="changeStatPreviewLevel(this)" type="range" class="form-range me-2 flex-fill" value="1" min="1" max="100">
-                                        <span id="ba-statpreview-level" class="ba-slider-label"></span>
+                                        <span id="ba-statpreview-level" class="ba-slider-label">Lv.1</span>
                                     </div>
                                 </div>
     
@@ -230,21 +252,18 @@
                                         </div>
                                         <div class="flex-fill"></div>
                                         <div class="d-flex align-items-stretch">
-                                            <a id="ba-statpreview-status-equipment" onclick="statPreviewIncludeEquipment=!statPreviewIncludeEquipment;updateGearIcon();recalculateStatPreview()" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
-                                                <!-- <img id="" src="images/ui/Icon_Inven_Bag.png" class="sharp-img invert-light"> -->
+                                            <a id="ba-statpreview-status-equipment" onclick="statPreviewIncludeEquipment=!statPreviewIncludeEquipment;updateGearIcon();recalculateStatPreview()" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
                                                 <span class="statpreview-label" data-localize-id="ui,student_gear_short"></span>
                                             </a>
-                                            <a id="ba-statpreview-status-bond-level" onclick="statPreviewIncludeBond=!statPreviewIncludeBond;recalculateStatPreview()" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
+                                            <a id="ba-statpreview-status-bond-level" onclick="statPreviewIncludeBond=!statPreviewIncludeBond;recalculateStatPreview()" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
                                                 <img id="ba-statpreview-status-bond-icon" src="" class="sharp-img">
-                                                <!-- <img src="images/ui/School_Icon_Schedule_Favor.png" class="sharp-img icon-heart"> -->
                                                 <span class="statpreview-label"></span>
                                             </a>
-                                            <a id="ba-statpreview-status-bond-alt-level" onclick="statPreviewIncludeBondAlts=!statPreviewIncludeBondAlts;recalculateStatPreview()" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
+                                            <a id="ba-statpreview-status-bond-alt-level" onclick="statPreviewIncludeBondAlts=!statPreviewIncludeBondAlts;recalculateStatPreview()" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
                                                 <img id="ba-statpreview-status-bond-alt-icon" src="" class="sharp-img">
-                                                <!-- <img src="images/ui/School_Icon_Schedule_Favor.png" class="sharp-img icon-heart"> -->
                                                 <span class="statpreview-label"></span>
                                             </a>
-                                            <a id="ba-statpreview-status-passive-level" onclick="statPreviewIncludePassive=!statPreviewIncludePassive;recalculateStatPreview()" class="ba-statpreview-status unselectable ba-info-pill bg-theme align-items-center me-0 px-2">
+                                            <a id="ba-statpreview-status-passive-level" onclick="statPreviewIncludePassive=!statPreviewIncludePassive;recalculateStatPreview()" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center me-0 px-2">
                                                 <img id="ba-statpreview-status-passive-icon" src="" class="sharp-img ba-skill">
                                                 <span class="statpreview-label"></span>
                                             </a>
@@ -588,7 +607,7 @@
                                             </table>
                                             <div class="d-flex flex-row align-items-center">
                                                 <input id="ba-bond-levelrange" oninput="changeBondLevel(this)" type="range" class="form-range me-2 flex-fill" style="width: auto;" value="20" min="1" max="50">
-                                                <span id="ba-bond-level" class="ba-slider-label"></span>
+                                                <span id="ba-bond-level" class="ba-slider-label"><i class="fa-solid fa-heart"></i> 20</span>
                                             </div>
                                         </div>
                                         <div class="ba-student-lobby ms-3 drop-shadow">
@@ -708,7 +727,7 @@
                                 </div>
                                 <div class="d-flex flex-row align-items-center mb-2">
                                     <input id="ba-statpreview-exskill-range" oninput="changeStatPreviewSummonExSkillLevel(this)" type="range" class="form-range me-2 flex-fill" value="5" min="1" max="5">
-                                    <span id="ba-statpreview-exskill-level" class="ba-slider-label"></span>
+                                    <span id="ba-statpreview-exskill-level" class="ba-slider-label"><img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;"></span>
                                 </div>                                  
                             </div>
                         </div>
@@ -728,7 +747,7 @@
                             </div>
                             <div class="d-flex flex-row align-items-center mb-2">
                                 <input id="ba-statpreview-passiveskill-range" oninput="changeStatPreviewPassiveSkillLevel(this)" type="range" class="form-range me-2 flex-fill" value="10" min="1" max="10">
-                                <span id="ba-statpreview-passiveskill-level" class="ba-slider-label"></span>
+                                <span id="ba-statpreview-passiveskill-level" class="ba-slider-label"><img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;"></span>
                             </div>                                  
                         </div>
                     </div>
@@ -743,13 +762,16 @@
             <div class="modal-body">
                 <div id="ba-student-modal-page" class="d-lg-flex">
                     <div id="ba-student-search-filters" class="d-flex flex-column">
-                        <div class="mb-3 d-flex align-items-stretch">
+                        <div class="mb-3 d-flex align-items-stretch" style="min-height:38px;">
                             <div class="d-lg-none pe-2 flex-shrink-0">
                                 <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters-panel"><i class="fa-solid fa-filter me-2"></i>Filters<span id="ba-student-search-filter-amount"></span></button>
                             </div>
                             <div class="flex-fill">
                                 <input type="search" class="form-control h-100" id="ba-student-search-text" placeholder="" autocomplete="off" oninput="updateStudentList()">
                             </div>
+
+                            <button id="ba-student-search-reset" class="btn btn-dark tooltip-button ms-2" type="button" onclick="searchResetFilter()"><i class="fa-solid fa-filter-circle-xmark"></i></button>
+
                             <div class="d-lg-none ms-2 p-1" style="min-width:32px;">
                                 <button type="button" class="btn-close btn-close-white btn" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 0.15rem;"></button>
                             </div>
@@ -870,9 +892,7 @@
                         </div>
                     </div>
                     <div id="ba-student-search-results" class="flex-fill">
-                        <div class="d-flex flex-row justify-content-center">
-                            <div id="ba-student-select-grid" class="ba-select-grid align-top flex-fill">
-                            </div>
+                        <div id="ba-student-select-grid" class="ba-select-grid align-top flex-fill">
                         </div>
                     </div>
                 </div>

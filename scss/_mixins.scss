@@ -32,10 +32,36 @@
     transition: $transitions;
 }
 
+@mixin scrollable-nostyle($scroll) {
+    overflow-y: $scroll;
+}
+
 @mixin scrollable($scroll) {
     overflow-y: $scroll;
+
+    //firefox
     scrollbar-width: thin;
-    scrollbar-color: var(--col-panel-separator);
+    scrollbar-color: var(--col-panel-separator) transparent;
+
+    @include webkit-scrollbar;
+}
+
+@mixin webkit-scrollbar {
+    //chrome
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--col-panel-separator);
+        background-clip: padding-box;
+        border-radius: 99px;
+        border: solid 2px transparent;
+    }
 }
 
 @mixin unselectable {
@@ -43,6 +69,16 @@
     -webkit-user-select: none;       
     -moz-user-select: none;
     -ms-user-select: none;
+
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -ms-user-drag: none;
+}
+
+@mixin truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 //breakpoints
