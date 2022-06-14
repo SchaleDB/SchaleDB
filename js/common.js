@@ -2752,7 +2752,16 @@ function getSkillText(text, params, level, type) {
     result = result.replace(regex, function(match) {return `<strong>${match}</strong>`})
 
     while (result.includes("<?"+paramCount+">")) {
-        result = result.replace("<?"+paramCount+">", "<span class=\"ba-col-"+type.toLowerCase()+"\">" + params[paramCount-1][level-1] + "</span>")
+        if (type == "raid") {
+            if ((level == 1 && params[paramCount-1][level-1] != params[paramCount-1][level]) || (level > 1 && params[paramCount-1][level-1] != params[paramCount-1][level-2])) {
+                result = result.replace("<?"+paramCount+">", `<span class="ba-col-emphasis">${params[paramCount-1][level-1]}</span>`)
+            } else {
+                result = result.replace("<?"+paramCount+">", params[paramCount-1][level-1].replace(regex, function(match) {return `<strong>${match}</strong>`}))   
+            }
+        } else {
+            result = result.replace("<?"+paramCount+">", "<span class=\"ba-col-"+type.toLowerCase()+"\">" + params[paramCount-1][level-1] + "</span>")
+        }
+        
         paramCount += 1
     }
 
