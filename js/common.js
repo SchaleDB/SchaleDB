@@ -1608,7 +1608,6 @@ function loadRegion(regID) {
         //hide filters not relevant to global
         $('#ba-student-search-filter-school-srt').hide()
         $('#ba-student-search-filter-school-arius').hide()
-        $('#ba-student-search-filter-school-etc').hide()
         $('#ba-student-search-filter-weapontype-rl').hide()
     }
 }
