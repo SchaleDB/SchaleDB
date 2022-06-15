@@ -49,7 +49,6 @@
 }
 
 #ba-profile-portrait-img {
-    @include sharp-img;
     height: 96px;
     width: auto;
     border-radius: 8px;
@@ -286,7 +285,8 @@ h1 small {
 
     &.disabled {
         pointer-events: none;
-        filter: grayscale(1) brightness(0.75);
+        filter: grayscale(1);
+        opacity: 0.5;
     }
 }
 
