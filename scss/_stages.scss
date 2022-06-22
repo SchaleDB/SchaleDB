@@ -1,0 +1,235 @@
+#ba-stage-map {
+    @include scrollable-xy(scroll);
+    max-height: 560px;
+    cursor: grab;
+
+    &.scrolling {
+        cursor: grabbing;
+    }
+}
+
+#ba-stage-map-canvas {
+    position: relative;
+    margin: auto;
+
+    .ba-stage-map-tile {
+        width: 90px;
+        height: 90px;
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        --col-tile: var(--col-map-tile);
+
+        &.group-1 {
+            --col-tile: var(--col-map-pair-1);
+        }
+        &.group-2 {
+            --col-tile: var(--col-map-pair-2);
+        }
+        &.group-3 {
+            --col-tile: var(--col-map-pair-3);
+        }
+        &.group-4 {
+            --col-tile: var(--col-map-pair-4);
+        }
+        &.group-5 {
+            --col-tile: var(--col-map-pair-5);
+        }
+        &.group-6 {
+            --col-tile: var(--col-map-pair-6);
+        }
+        &.group-7 {
+            --col-tile: var(--col-map-pair-7);
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: var(--col-tile);
+            -webkit-mask-image: url("../images/stage-tile.svg");
+            mask-image: url("../images/stage-tile.svg");
+            opacity: 0.7;
+        }
+
+        &.hidden-tile {
+            &::before {
+                opacity: 0.2 !important;
+            }
+        }
+
+        &.cracked-tile {
+            &::before {
+                -webkit-mask-image: url("../images/stage-tile-cracked.svg") !important;
+                mask-image: url("../images/stage-tile-cracked.svg") !important;
+            }
+        }
+
+        .start-tile {
+            background-color: var(--col-bg-imglabel);
+        }
+
+        .tile-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--col-btn-active-primary);
+            width: 70px;
+            height: 70px;
+
+            &.group-1 {
+                --col-tile: var(--col-map-pair-1);
+            }
+            &.group-2 {
+                --col-tile: var(--col-map-pair-2);
+            }
+            &.group-3 {
+                --col-tile: var(--col-map-pair-3);
+            }
+            &.group-4 {
+                --col-tile: var(--col-map-pair-4);
+            }
+            &.group-5 {
+                --col-tile: var(--col-map-pair-5);
+            }
+            &.group-6 {
+                --col-tile: var(--col-map-pair-6);
+            }
+            &.group-7 {
+                --col-tile: var(--col-map-pair-7);
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                width: 70px;
+                height: 70px;
+                background-color: var(--col-tile);
+                -webkit-mask-image: url("../images/stage-tile.svg");
+                mask-image: url("../images/stage-tile.svg");
+                opacity: 0.3;
+            }
+            
+        }
+
+        .switch-tile {
+            &::before {
+                content: "";
+                position: absolute;
+                width: 84px;
+                height: 84px;
+                background-color: var(--col-tile);
+                -webkit-mask-image: url("../images/stage-tile.svg");
+                mask-image: url("../images/stage-tile.svg");
+                opacity: 0.3;
+            }
+        }
+
+    }
+
+    .ba-stage-map-enemy {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        left: -10px;
+        top: -45px;
+        opacity: 1;
+        @include unselectable;
+    }
+
+    .tile-item {
+        width: 62px;
+        height: 62px;
+        position: absolute;
+        left: 14px;
+        top: 14px;
+        opacity: 1;
+        @include unselectable;
+    }
+
+    .map-info {
+        position: absolute;
+        bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 500;
+        gap: 4px;
+
+        .move-type {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            padding: 2px;
+            @include circular;
+            width: 22px;
+            height: 22px;
+            background-color: var(--col-btn-secondary);
+    
+            &.pursuit {
+                color: var(--col-map-pair-4);
+            }
+    
+            &.guard {
+                color: var(--col-map-pair-3);
+            }
+        }
+
+        .def-type {
+    
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            width: 22px;
+            height: 22px;
+    
+            padding: 3px;
+            @include circular;
+        }
+    }
+
+    .unit-grade {
+        position: absolute;
+        bottom: 34px;
+        z-index: 500;
+        width: 100%;
+        height: 22px;
+        color: var(--col-theme-text);
+        text-align: center;
+
+
+        .grade {
+            font-size: 12px;
+            font-style: italic;
+            padding: 0.125rem 0.25rem;
+            background-color: var(--col-bg-imglabel);
+            @include circular;
+
+            img {
+                height:18px;
+            }
+        }
+
+        &.boss {
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            background-image: url('../images/ui/Image_Campaign_Boss.png')
+        }
+    }
+}
+
+// .theme-dark .ba-stage-map-tile::before {
+//     filter: invert(1);
+// }
+
+
+
+.stage-star {
+    color: var(--col-text-stars);
+}

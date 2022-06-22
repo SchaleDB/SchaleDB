@@ -15,7 +15,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 5
+const cache_ver = 6
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const json_list = {
@@ -70,6 +70,8 @@ let data = {}, loadedModule, student, studentList, loadedItem, loadedStage, load
     ,statPreviewSummonStats = false
     ,compareMode = false
     ,selectCompareMode = false
+    ,scrolling = false
+    ,scrollPosition = {top: 0, left: 0, x: 0, y: 0}
     , search_options = {
     "groupby": "none",
     "sortby": "Default",
@@ -379,6 +381,7 @@ function loadModule(moduleName, entry=null) {
             document.getElementById("ba-student-modal-students").addEventListener('hidden.bs.modal', function (e) {
                 selectCompareMode = false
             })
+            statPreviewSupportStats = false
             compareMode = false
             selectCompareMode = false
             $(".tooltip").tooltip("hide")
@@ -535,6 +538,7 @@ function loadModule(moduleName, entry=null) {
             populateStageList()
             $('.ba-item-list').addClass('fade')
             $('.ba-item-list.active').addClass('show')
+            //makeDraggable($('#ba-stage-map'))
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         })
     } else if (moduleName == 'craft') {
@@ -612,11 +616,11 @@ function loadModule(moduleName, entry=null) {
             $.each(data.common.regions[regionID].current_raid, function(i, el){
                 if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
                     if (el.raid >= 1000) {
-                        raidText = "Firepower Drill\n"
+                        raidText = getLocalizedString("StageType", "timeattack") + "\n"
                         let raid = find(data.raids.TimeAttack, "Id", el.raid)[0]
                         raidHtml += getTimeAttackCardHTML(raid, el.terrain)
                     } else {
-                        raidText = "Total Assault\n"
+                        raidText = getLocalizedString("StageType", "raid") + "\n"
                         let raid = find(data.raids.Raid, "Id", el.raid)[0]
                         raidHtml += getRaidCardHTML(raid, el.terrain)
                     }
@@ -898,7 +902,7 @@ function processStudent() {
     $("#ba-student-usescover-icon").toggle(student.Cover)
 
     $("#ba-student-weapontype-label").text(student.WeaponType)
-    $(".ba-type-weapon").css("background-image", `url('images/weapon/Weapon_Icon_${student.Id}.png')`)
+    $(".ba-type-weapon").css("background-image", `url('images/weapon/${student.WeaponImg}.png')`)
 
     //Skills
     student.Skills.forEach(el => {
@@ -957,13 +961,13 @@ function processStudent() {
     $("#ba-student-weapon-name, #ba-statpreview-weapon-name").text(getTranslatedString(student.Weapon, 'Name'))
     $('#ba-weapon-description').text(getTranslatedString(student.Weapon,'Desc').replace("\n\n", "\n"))
     $("#ba-student-weapon-type").text(student.WeaponType)
-    $("#ba-student-weapon-img, #ba-statpreview-weapon-img").attr("src", `images/weapon/Weapon_Icon_${student.Id}.png`)
+    $("#ba-student-weapon-img, #ba-statpreview-weapon-img").attr("src", `images/weapon/${student.WeaponImg}.png`)
 
     $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.Weapon.AdaptationType}.png`)
     let initialTerrainAmount = getLocalizedString('AdaptationAmount', String(student[student.Weapon.AdaptationType+'BattleAdaptation'])) 
     let bonusTerrainAmount = getLocalizedString('AdaptationAmount', String(student[student.Weapon.AdaptationType+'BattleAdaptation'] + student.Weapon.AdaptationValue)) 
     $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${bonusTerrainAmount}.png`)
-    $('#ba-weapon-bonus-terrain-adaption-description').html(`${formatString(getLocalizedString("ui","terrain_adaption"), getLocalizedString('AdaptationType',student.Weapon.AdaptationType))} ${initialTerrainAmount} → <b>${bonusTerrainAmount}</b><br>(${getAdaptationText(student.Weapon.AdaptationType, bonusTerrainAmount)})`)
+    $('#ba-weapon-bonus-terrain-adaption-description').html(`${getLocalizedString("ui","terrain_adaption", [getLocalizedString('AdaptationType',student.Weapon.AdaptationType)])} ${initialTerrainAmount} → <b>${bonusTerrainAmount}</b><br>(${getAdaptationText(student.Weapon.AdaptationType, bonusTerrainAmount)})`)
     $('#ba-weapon-stat-row2').toggle(student.Weapon.HealPower1 > 0)
 
     //Profile
@@ -987,7 +991,7 @@ function processStudent() {
         $(".ba-student-lobby").show()
         $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.DevName}_01.png`)
         $("#ba-student-lobby-unlock").text(student.MemoryLobby)
-        $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, formatString(getLocalizedString('ui', 'memory_lobby_student'), getTranslatedString(student,'Name')), null, null, formatString(getLocalizedString('ui', 'memory_lobby_unlock'), student.MemoryLobby, getTranslatedString(student,'Name'))), placement: 'top', html: true})
+        $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, getLocalizedString('ui', 'memory_lobby_student', [getTranslatedString(student,'Name')]), null, null, getLocalizedString('ui', 'memory_lobby_unlock', [student.MemoryLobby, getTranslatedString(student,'Name')])), placement: 'top', html: true})
     } else {
         $(".ba-student-lobby").hide()
     }
@@ -1527,7 +1531,6 @@ function loadStage(id) {
             }
         })
 
-
         let isfirst = true
         Object.keys(enemyList).sort().forEach(el => {
             e_level = el.split('_')[2]
@@ -1539,6 +1542,52 @@ function loadStage(id) {
             }
         })
         $('#ba-stage-enemies').html(html)
+
+        if ("HexaMap" in stage) {
+            //$('#ba-stage-tab-map').toggleClass('disabled', false)
+            //drawHexamap(stage)
+            $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_complete'))
+            $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_sranks', [stage.StarCondition[0]]))
+            $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_clearturns', [stage.StarCondition[1]]))
+        } else {
+            if ($('#ba-stage-tab-map').hasClass('active')) {
+                $('#ba-stage-tab-info').tab('show')
+            }
+            $('#ba-stage-tab-map').toggleClass('disabled', true)
+            if (mode == "Campaign" || mode == "Event") {
+                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_defeatall'))
+                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_defeatalltime', ['120']))
+                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_allsurvive'))  
+            } else if (stage.Type.slice(0,6) == "Chaser") {
+                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
+                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
+                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_cleartime', ['150']))
+            } else if (stage.Type == "Blood") {
+                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
+                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
+                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_cleartime', ['120']))
+            } else if (stage.Type == "FindGift") {
+                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_earnrewards', ['1']))
+                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_earnrewards', ['4']))
+                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_earnrewards', ['5']))
+            } else if (stage.Type.slice(0,6) == "School"){
+                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
+                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
+                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_cleartime', ['120']))
+            }
+        }
+
+        if ("EntryCost" in stage && stage.EntryCost.length > 0) {
+            let currency
+            if (stage.EntryCost[0][0] < 20) {
+                currency = find(data.common.currency, 'Id', stage.EntryCost[0][0])[0]
+            } else {
+                currency = find(data.items, 'Id', stage.EntryCost[0][0])[0]
+            }
+            $('#ba-stage-entrycost').tooltip('dispose').tooltip({title: getRichTooltip(`images/items/${currency.Icon}.png`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), getRarityStars(currency.Rarity), getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger'), placement: 'top', html: true})
+            $('#ba-stage-entrycost img').attr('src', `images/items/${currency.Icon}.png`)
+            $('#ba-stage-entrycost .label').html(`&times;${stage.EntryCost[0][1]}`)
+        }
         
         document.title = `Schale DB | ${$('#ba-stage-title').text()}`
         $('#ba-navbar-content').collapse('hide')
@@ -1570,7 +1619,7 @@ function getStageTitle(stage, type) {
             return getTranslatedString(stage, 'Name')
         case "WeekDungeon":
         case "SchoolDungeon":
-            return `${formatString(getLocalizedString('StageTitle', stage.Type), String.fromCharCode(64+stage.Stage))}`
+            return `${getLocalizedString('StageTitle', stage.Type, String.fromCharCode(64+stage.Stage))}`
     }
     console.log(`No title definition for stage type ${type}`)
     return "undefined!!!"
@@ -1613,7 +1662,7 @@ function loadRegion(regID) {
 }
 
 function getAdaptationText(terrain, rank) {
-    return formatString(getLocalizedString('ui','terrain_adaption_details'), terrain_dmg_bonus[rank], getLocalizedString('AdaptationType',terrain).toLowerCase(), terrain_block_bonus[rank])
+    return getLocalizedString('ui','terrain_adaption_details', [terrain_dmg_bonus[rank], getLocalizedString('AdaptationType',terrain).toLowerCase(), terrain_block_bonus[rank]])
 }
 
 function getStatName(stat) {
@@ -1776,7 +1825,7 @@ function recalculateTerrainAffinity() {
     types.forEach( type => {
         let adaptation = getLocalizedString('AdaptationAmount', String(student[`${type}BattleAdaptation`] + ((stat_preview_stars == 5 && stat_preview_weapon_stars >= 3 && student.Weapon.AdaptationType == type) ? student.Weapon.AdaptationValue : 0)))
         $(`#ba-student-terrain-${type.toLowerCase()}-icon`).attr("src", `images/ui/Ingame_Emo_Adaptresult${adaptation}.png`)
-        $(`#ba-student-terrain-${type.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(`images/ui/Ingame_Emo_Adaptresult${adaptation}.png`,formatString(getLocalizedString('ui', 'terrain_adaption'), getLocalizedString('AdaptationType', type))+' '+adaptation, null, null, getAdaptationText(type, adaptation), 30), placement: 'top', html: true})
+        $(`#ba-student-terrain-${type.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(`images/ui/Ingame_Emo_Adaptresult${adaptation}.png`,getLocalizedString('ui', 'terrain_adaption', [getLocalizedString('AdaptationType', type)])+' '+adaptation, null, null, getAdaptationText(type, adaptation), 30), placement: 'top', html: true})
 
     })
 }
@@ -1895,7 +1944,10 @@ function recalculateStatPreview() {
     //add student stat to summon/vehicle
     if (statPreviewSummonStats && !compareMode) {
         let exLevel = $('#ba-statpreview-exskill-range').val()
-        summonStats.addCharacterStatsAsBuff(studentStats, student.Skills[0].SummonStat, student.Skills[0].SummonStatCoefficient[exLevel-1])
+        for (let i = 0; i < student.Skills[0].SummonStat.length; i++) {
+            summonStats.addCharacterStatsAsBuff(studentStats, student.Skills[0].SummonStat[i], student.Skills[0].SummonStatCoefficient[i][exLevel-1]) 
+        }
+        
     }
 
     if (student.SquadType == "Support") {
@@ -2060,7 +2112,7 @@ function getStageCardHTML(stage, dropChance = 0) {
                 return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
             case "WeekDungeon":
             case "SchoolDungeon":
-                return `${formatString(getLocalizedString('StageTitle', stage.Type), String.fromCharCode(64+stage.Stage))}`
+                return `${getLocalizedString('StageTitle', stage.Type, [String.fromCharCode(64+stage.Stage)])}`
         }
     }
 }
@@ -2254,10 +2306,10 @@ function getDropIconHTML(id, chance) {
 /**
  * Formats a string with placeholders {n} using replacements. If n is out of bounds it will be replaced with an empty string
  * @param {string} string
- * @param  {...string} replacements 
+ * @param  {string[]} replacements 
  * @returns
  */
-function formatString(string, ...replacements) {
+function formatString(string, replacements=[]) {
     return string.replace(/\{([0-9]+)\}/g, (match, p1) => (p1 < replacements.length) ? replacements[p1] : '')
 }
 
@@ -2390,7 +2442,11 @@ function updateSummonExSkillStatPreview() {
         let level = $('#ba-statpreview-exskill-range').val()
 
         $('#ba-statpreview-exskill-name').text(getTranslatedString(exSkill, 'Name'))
-        $('#ba-statpreview-exskill-desc').html(formatString(getLocalizedString('ui','summon_ex_bonus'), getTranslatedString(summon, "Name"), getStatName(exSkill.SummonStat), parseFloat((exSkill.SummonStatCoefficient[level-1]/100).toPrecision(3)), getTranslatedString(student, "Name"), getLocalizedString('Stat', exSkill.SummonStat)))
+        $('#ba-statpreview-exskill-desc').empty()
+        for (let i = 0; i < exSkill.SummonStat.length; i++) {
+            
+            $('#ba-statpreview-exskill-desc').append((i == 0 ? "": "\n") + getLocalizedString('ui','summon_ex_bonus',[getTranslatedString(summon, "Name"), getStatName(exSkill.SummonStat[i]), parseFloat((exSkill.SummonStatCoefficient[i][level-1]/100).toPrecision(3)), getTranslatedString(student, "Name")]))
+        }
         
         //$('#ba-statpreview-status-passive-level .statpreview-label').text(`Lv.${$('#ba-statpreview-passiveskill-range').val()}`)
     } else {
@@ -2727,17 +2783,17 @@ function getTypeText(type) {
         case 'Normal':
             return getLocalizedString("ui","attack_type_normal_desc")
         case 'Explosion':
-            return formatString(getLocalizedString("ui","attack_type_desc"), `<b class='ba-col-explosion'>${getLocalizedString("ArmorType","LightArmor")}</b>`, `<b class='ba-col-mystic'>${getLocalizedString("ArmorType","Unarmed")}</b>`)
+            return getLocalizedString("ui","attack_type_desc", [`<b class='ba-col-explosion'>${getLocalizedString("ArmorType","LightArmor")}</b>`, `<b class='ba-col-mystic'>${getLocalizedString("ArmorType","Unarmed")}</b>`])
         case 'Pierce':
-            return formatString(getLocalizedString("ui","attack_type_desc"), `<b class='ba-col-pierce'>${getLocalizedString("ArmorType","HeavyArmor")}</b>`, `<b class='ba-col-explosion'>${getLocalizedString("ArmorType","LightArmor")}</b>`)
+            return getLocalizedString("ui","attack_type_desc", [`<b class='ba-col-pierce'>${getLocalizedString("ArmorType","HeavyArmor")}</b>`, `<b class='ba-col-explosion'>${getLocalizedString("ArmorType","LightArmor")}</b>`]) 
         case 'Mystic':
-            return formatString(getLocalizedString("ui","attack_type_desc"), `<b class='ba-col-mystic'>${getLocalizedString("ArmorType","Unarmed")}</b>`, `<b class='ba-col-pierce'>${getLocalizedString("ArmorType","HeavyArmor")}</b>`)
+            return getLocalizedString("ui","attack_type_desc", [`<b class='ba-col-mystic'>${getLocalizedString("ArmorType","Unarmed")}</b>`, `<b class='ba-col-pierce'>${getLocalizedString("ArmorType","HeavyArmor")}</b>`])
         case 'LightArmor':
-            return formatString(getLocalizedString("ui","defense_type_desc"), `<b class='ba-col-explosion'>${getLocalizedString("BulletType","Explosion")}</b>`, `<b class='ba-col-pierce'>${getLocalizedString("BulletType","Pierce")}</b>`)
+            return getLocalizedString("ui","defense_type_desc", [`<b class='ba-col-explosion'>${getLocalizedString("BulletType","Explosion")}</b>`, `<b class='ba-col-pierce'>${getLocalizedString("BulletType","Pierce")}</b>`])
         case 'HeavyArmor':
-            return formatString(getLocalizedString("ui","defense_type_desc"), `<b class='ba-col-pierce'>${getLocalizedString("BulletType","Pierce")}</b>`, `<b class='ba-col-mystic'>${getLocalizedString("BulletType","Mystic")}</b>`)
+            return getLocalizedString("ui","defense_type_desc", [`<b class='ba-col-pierce'>${getLocalizedString("BulletType","Pierce")}</b>`, `<b class='ba-col-mystic'>${getLocalizedString("BulletType","Mystic")}</b>`])
         case 'Unarmed':
-            return formatString(getLocalizedString("ui","defense_type_desc"), `<b class='ba-col-mystic'>${getLocalizedString("BulletType","Mystic")}</b>`, `<b class='ba-col-explosion'>${getLocalizedString("BulletType","Explosion")}</b>`)
+            return getLocalizedString("ui","defense_type_desc", [`<b class='ba-col-mystic'>${getLocalizedString("BulletType","Mystic")}</b>`, `<b class='ba-col-explosion'>${getLocalizedString("BulletType","Explosion")}</b>`]) 
     }
     return text
 }
@@ -3044,13 +3100,13 @@ function clearSearchBar(el) {
  * @param {*} key The localization value to load
  * @returns 
  */
-function getLocalizedString(group, key) {
+function getLocalizedString(group, key, replacements=[]) {
     if (data.localization.strings.hasOwnProperty(group) && data.localization.strings[group].hasOwnProperty(key)) {
         if (data.localization.strings[group][key].hasOwnProperty(userLang)) {
-            return data.localization.strings[group][key][userLang]
+            return formatString(data.localization.strings[group][key][userLang], replacements)
         } else {
             console.log(`Localization not defined for "${group}, ${key}" for locale "${userLang}"`)
-            return data.localization.strings[group][key]['en']
+            return formatString(data.localization.strings[group][key]['en'], replacements)
         }
     } else {
         console.log(`Localization not defined for "${group}, ${key}"`)
@@ -3189,4 +3245,153 @@ function openStudentComparison() {
         studentSelectorModal.show()
     }
 
+}
+
+/**
+ * Draws the hexamap for a given stage
+ * @param {} stage 
+ */
+function drawHexamap(stage) {
+    // const canvas = document.getElementById('ba-stage-map-canvas')
+    // const ctx = canvas.getContext('2d')
+    $('#ba-stage-map-canvas').empty()
+    const scale = 90
+
+    let x_min = 99
+    let y_min = 99
+    let y_max = -99
+    let x_max = -99
+    let leftOffset = 999999
+    let rightOffset = 0
+    let topOffset = 50
+
+    stage.HexaMap.forEach(tile => {
+        x_min = Math.min(x_min, tile.Pos[0])
+        y_min = Math.min(y_min, tile.Pos[1])
+        x_max = Math.max(x_max, tile.Pos[0])
+        y_max = Math.max(y_max, tile.Pos[1])
+    })
+
+    stage.HexaMap.forEach(tile => {
+        let xx = tile.Pos[0] - x_min
+        let yy = tile.Pos[1] - y_min
+        leftOffset = Math.min(leftOffset, xx*scale + (yy*scale*0.5))
+        rightOffset = Math.max(rightOffset, scale + xx*scale + (yy*scale*0.5))
+    })
+
+    console.log(`x_min ${x_min}, y_min ${y_min}`)
+    let tilePairs = new Array(stage.HexaMap.length).fill(0)
+    let pairCount = 0
+    stage.HexaMap.forEach((tile, ind) => {
+        let xx = tile.Pos[0] - x_min
+        let yy = tile.Pos[1] - y_min
+
+        console.log(`Drawing tile at ${xx},${yy}`)
+
+        const x = xx*scale + (yy*scale*0.5) - leftOffset
+        const y = yy* Math.sqrt(Math.pow(scale/2, 2)*3) + topOffset
+        let html = `<div class="ba-stage-map-tile map-tile-${ind} ${(tile.Type == "TileRemoveObject_TargetTile_01" && stage.HexaMap[tile.Trigger].Entity == 102101) ? "hidden-tile" : ""} ${(tile.Type == "DisposableTileObject_01") ? "cracked-tile" : ""}" style="left:${x}px;top:${y}px;">`
+        if (tile.Type == "TileRemoveObject_TargetTile_01") {
+            if (tilePairs[ind] == 0 && tilePairs[tile.Trigger] == 0) {
+                pairCount++
+                tilePairs[ind] = pairCount
+                tilePairs[tile.Trigger] = pairCount
+            }
+        }
+
+        if ("Entity" in tile) {
+            if (tile.Entity > 100000000) {
+                //Enemy Unit Tile
+                let unit = find(stage.Formations, "Id", tile.Entity)[0]
+                html += `<img class="ba-stage-map-enemy" src="images/enemy/${unit.MapIcon}.png" style="z-index:${yy}">`
+                html += `<div class="map-info">`
+
+
+                if (unit.MoveType == "Guard") {
+                    html += `<span class="move-type guard"><i class="fa-solid fa-triangle-exclamation"></i></span>`
+                } else if (unit.MoveType == "Pursuit") {
+                    html += `<span class="move-type pursuit"><i class="fa-solid fa-angles-left"></i></span>`
+                }
+
+                let armorType = find(data.enemies, "Id", unit.EnemyList[0])[0].ArmorType
+                html += `<span class="def-type bg-def-${armorType.toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="height:100%;"></span>`
+
+                html += `</div>`
+
+                if (unit.UnitGrade.slice(0,5) == "Grade") {
+                    let unitGrade = parseInt(unit.UnitGrade.slice(-1))
+                    html += `<span class="unit-grade"><span class="grade">RANK<img src="images/ui/Strategy_Icon_EnemyRank_${unitGrade}.png"></span></span>`
+                } else if (unit.UnitGrade == "Boss") {
+                    html += `<span class="unit-grade boss"></span>`
+                }
+
+            } else if (tile.Entity == 101101) {
+                //Start Tile
+                html += `<span class="start-tile ba-info-pill-s bg-theme text-italic m-0" style="z-index:${yy}">START</span>`
+            } else if (tile.Entity == 102101 || tile.Entity == 902101 || tile.Entity == 903108) {
+                //Spawn Tile
+                html += `<span class="tile-icon" style="z-index:${yy}"><i class="fa-solid fa-shoe-prints" style="transform:rotate(315deg);"></i></span>`
+            } else if (tile.Entity == 102201 || tile.Entity == 903101) {
+                //Remove Tile
+                html += `<span class="tile-icon" style="z-index:${yy}"><i class="fa-solid fa-shoe-prints" style="transform:rotate(315deg);font-size: 20px;"></i><i class="fa-solid fa-ban" style="position: absolute;font-size: 38px;"></i></span>`
+            } else if (tile.Entity == 104101 || tile.Entity == 104102) {
+                //2-Way Teleporter Tile
+                html += `<span class="tile-icon group-${tile.Entity-104100}" style="z-index:${yy}"><i class="fa-solid fa-up-long"></i><i class="fa-solid fa-down-long"></i></span>`
+            } else if (tile.Entity == 105101 || tile.Entity == 105201) {
+                //1-Way Teleporter Out
+                html += `<span class="tile-icon group-${((tile.Entity-105001)/100) +2}" style="z-index:${yy}"><i class="fa-solid fa-up-long"></i></span>`
+            } else if (tile.Entity == 105102 || tile.Entity == 105202) {
+                //1-Way Teleporter In
+                html += `<span class="tile-icon group-${((tile.Entity-105002)/100) +2}" style="z-index:${yy}"><i class="fa-solid fa-down-long"></i></span>`
+            } else if (tile.Entity == 109201 || tile.Entity == 109202 || tile.Entity == 109203) {
+                //Switch D -> U
+                html += `<span class="tile-icon group-${tile.Entity-109200}" style="z-index:${yy}"><i class="fa-solid fa-circle-chevron-up"></i></span>`
+            } else if (tile.Entity == 109204 || tile.Entity == 109205 || tile.Entity == 109206) {
+                //Switch U -> D
+                html += `<span class="tile-icon group-${tile.Entity-109200-3}" style="z-index:${yy}"><i class="fa-solid fa-circle-chevron-down"></i></span>`
+            } else if (tile.Entity == 109301 || tile.Entity == 109302 || tile.Entity == 109303) {
+                //Switch Tile D
+                html += `<span class="tile-icon switch-tile group-${tile.Entity-109300}" style="z-index:${yy}"></span>`
+            } else if (tile.Entity == 109304 || tile.Entity == 109305 || tile.Entity == 109306) {
+                //Switch Tile U
+                html += `<span class="tile-icon switch-tile group-${tile.Entity-109300-3}" style="z-index:${yy}"></span>`
+            }
+        }
+        html += `</div>`
+        $('#ba-stage-map-canvas').css('width', `${rightOffset-leftOffset}px`)
+        $('#ba-stage-map-canvas').css('height', `${topOffset + 40 + scale + (y_max-y_min)*Math.sqrt(Math.pow(scale/2, 2)*3)}px`)
+        $('#ba-stage-map-canvas').append(html)
+    })
+
+    tilePairs.forEach((val, ind) => {
+        $(`.map-tile-${ind}`).addClass(`group-${val}`)
+    })
+}
+
+function makeDraggable(el) {
+    $(el).on('mousedown', e => {
+        $(el).toggleClass('scrolling', true)
+        scrolling = true
+        scrollPosition = {
+            left: el.scrollLeft(),
+            top: el.scrollTop(),
+            x: e.clientX,
+            y: e.clientY,
+        }
+    })
+    $(el).on('mouseleave', e => {
+        scrolling = false
+        $(el).toggleClass('scrolling', false)
+    })
+    $(el).on('mouseup', e => {
+        scrolling = false
+        $(el).toggleClass('scrolling', false)
+    })
+    $(el).on('mousemove', e => {
+        e.preventDefault()
+        if (scrolling) {
+            $(el).scrollLeft(scrollPosition.left - (e.clientX - scrollPosition.x))
+            $(el).scrollTop(scrollPosition.top - (e.clientY - scrollPosition.y))
+        }
+    })
 }

@@ -5,6 +5,7 @@
 @import 'overrides';
 @import 'common';
 @import 'students';
+@import 'stages';
 
 #ba-content {
     width: 100%;
@@ -108,10 +109,6 @@ h1 small {
     font-weight: 500;
     font-size: large;
     padding: 0.2rem 0.5rem;
-}
-
-.ba-weapon-rank-tab a.disabled {
-    color: #6c757d !important;
 }
 
 .ba-bg-theme {
@@ -772,7 +769,7 @@ h1 small {
     padding: 0.5rem 0.25rem;
 }
 
-#ba-raid-difficulty a.disabled {
+a.nav-link.disabled {
     color: var(--col-panel-separator)
 }
 
@@ -1575,7 +1572,6 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     height: 100%;
     width: 100%;
     object-fit: cover;
-    @include sharp-img;
     transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;;
 }
 

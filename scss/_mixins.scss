@@ -46,9 +46,21 @@
     @include webkit-scrollbar;
 }
 
+@mixin scrollable-xy($scroll) {
+    overflow-x: $scroll;
+    overflow-y: $scroll;
+
+    //firefox
+    scrollbar-width: thin;
+    scrollbar-color: var(--col-panel-separator) transparent;
+
+    @include webkit-scrollbar;
+}
+
 @mixin webkit-scrollbar {
     //chrome
     &::-webkit-scrollbar {
+        height: 10px;
         width: 10px;
     }
 
@@ -61,6 +73,10 @@
         background-clip: padding-box;
         border-radius: 99px;
         border: solid 2px transparent;
+    }
+
+    &::-webkit-scrollbar-corner {
+        display: none;
     }
 }
 
