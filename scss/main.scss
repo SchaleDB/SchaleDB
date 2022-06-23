@@ -455,7 +455,7 @@ h1 small {
     color: #fff;
 }
 
-.bg-atk-normal {
+.bg-atk-normal, .bg-def-normal {
     background-color: var(--col-bg-normal);
     color: #fff;
 }
@@ -762,7 +762,7 @@ h1 small {
     @include sharp-img;
 }
 
-#ba-raid-difficulty a, #ba-timeattack-difficulty a {
+#ba-raid-difficulty a, #ba-timeattack-difficulty a, #ba-worldraid-difficulty a {
     text-transform: uppercase;
     font-style: italic;
     font-weight: 600;

@@ -4,10 +4,11 @@ const starscale_hp      = [1, 1.05,  1.12,  1.21,  1.35 ]
 const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445] 
 const raid_level = [17, 25, 35, 50, 70, 80]
+const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40]]
 const translation_code = {'en': 'En', 'ja': 'Jp'}
 const label_smalltext_threshold = {'en':11, 'ja':5}
 const label_enemy_smalltext_threshold = {'en':12, 'ja':6}
-const label_raid_smalltext_threshold = {'en':20, 'ja':12}
+const label_raid_smalltext_threshold = {'en':20, 'ja':11}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
@@ -15,7 +16,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 6
+const cache_ver = 7
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const json_list = {
@@ -505,6 +506,7 @@ function loadModule(moduleName, entry=null) {
             populateRaidList()
             if (regionID == 1) {
                 $('#ba-raid-list-tab-timeattack').hide()
+                $('#ba-raid-list-tab-worldraid').hide()
                 $('#ba-raid-difficulty-5').hide()
             }
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
@@ -893,9 +895,9 @@ function processStudent() {
     $("#ba-student-school-img").attr("src", `images/schoolicon/School_Icon_${student.School.toUpperCase()}_W.png`)
     $("#ba-student-position-label").text(student.Position.toUpperCase())
     $("#ba-student-attacktype-label").text(getLocalizedString('BulletType',student.BulletType))
-    $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',student.BulletType)}`, getLocalizedString('ui','attacktype'), null, getTypeText(student.BulletType), 32), placement: 'top',  html: true})
+    $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',student.BulletType)}`, getLocalizedString('ui','attacktype'), null, getAttackTypeText(student.BulletType), 32), placement: 'top',  html: true})
     $("#ba-student-defensetype-label").text(getLocalizedString('ArmorType',student.ArmorType))
-    $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',student.ArmorType)}`, getLocalizedString('ui','defensetype'), null, getTypeText(student.ArmorType), 32), placement: 'top', html: true})
+    $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',student.ArmorType)}`, getLocalizedString('ui','defensetype'), null, getDefenseTypeText(student.ArmorType), 32), placement: 'top', html: true})
 
     updateGearIcon()
     
@@ -1308,6 +1310,8 @@ function loadRaid(raidId) {
             $('#ba-raid-list-tab-raid').tab('show')
             $('#ba-raid-info').show()
             $('#ba-timeattack-info').hide()
+            $('#ba-worldraid-difficulty').hide()
+            $('#ba-raid-difficulty').show()
             raid = findOrDefault(data.raids.Raid,"Id",raidId,1)[0]
             if (raid.IsReleasedInsane[regionID]) {
                 $('#ba-raid-difficulty-5').toggleClass('disabled', false)
@@ -1331,7 +1335,8 @@ function loadRaid(raidId) {
     
             if (!raid.IsReleasedInsane[regionID] && raid_difficulty == 5) {raid_difficulty = 0}
             changeRaidDifficulty(raid_difficulty)
-        } else {
+        } else if (raidId < 800000) {
+            //Time Attack
             $('#ba-raid-list-tab-timeattack').tab('show')
             $('#ba-raid-info').hide()
             $('#ba-timeattack-info').show()
@@ -1340,6 +1345,32 @@ function loadRaid(raidId) {
             $('#ba-timeattack-name').text(getTranslatedString(raid, 'Name'))
             $('#ba-timeattack-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain}.png`)
             changeTimeAttackDifficulty(ta_difficulty)
+        } else {
+            //World Raid
+            $('#ba-raid-list-tab-worldraid').tab('show')
+            $('#ba-raid-info').show()
+            $('#ba-timeattack-info').hide()
+            $('#ba-worldraid-difficulty').show()
+            $('#ba-raid-difficulty').hide()
+            raid = findOrDefault(data.raids.WorldRaid,"Id",raidId,1)[0]
+
+            if (raid_difficulty > 2)  {
+                raid_difficulty = 0
+            }
+            
+            $(`#ba-worldraid-difficulty-${raid_difficulty}`).tab('show')
+        
+            $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'worldraid'))
+            $('#ba-raid-name').text(getTranslatedString(raid, 'Name'))      
+            $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain[0]}.png`)
+            if (raid.Terrain.length > 1) {
+                $('#ba-raid-terrain-alt-img').attr('src', `images/ui/Terrain_${raid.Terrain[1]}.png`)
+                $('#ba-raid-terrain-alt').show()
+            } else {
+                $('#ba-raid-terrain-alt').hide()
+            }
+
+            changeWorldRaidDifficulty(raid_difficulty)
         }
 
         let url = new URL(window.location.href)
@@ -1378,6 +1409,18 @@ function changeRaidDifficulty(difficultyId) {
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })
+
+    let html = ''
+
+    html += getDropIconHTML(7, raid_reward_coin[raid_difficulty][0])
+    if (regionID != 1 && raid_reward_coin[raid_difficulty][1] != 0) {
+        html += getDropIconHTML(9, raid_reward_coin[raid_difficulty][1])
+    }
+    
+    $(`#ba-raid-rewards`).html(`<div class="d-flex flex-wrap justify-content-center">${html}</div>`)
+    $(`#ba-raid-rewards>div div`).each((i, el) => {
+        $(el).tooltip({html: true})
+    })
     
     changeRaidEnemy(selectedEnemy)
 }
@@ -1409,9 +1452,45 @@ function changeTimeAttackDifficulty(difficultyId) {
     })
 }
 
+function changeWorldRaidDifficulty(difficultyId) {
+    raid_difficulty = difficultyId
+    let skillsHTML = '', tabsHtml = ''
+    $('#ba-raid-header').css('background-image', `url('images/raid/${raid.Icon}.png')`)
+    $('#ba-raid-level').text(`Lv. ${raid.Level[raid_difficulty]}`)
+    if (selectedEnemy >= raid.EnemyList[raid_difficulty].length) {selectedEnemy = 0}
+    raid.EnemyList[raid_difficulty].forEach(function(el,i) {
+        let enemy = find(data.enemies,'Id',el)[0]
+        tabsHtml += `<button class="nav-link ${i==selectedEnemy ? "active" : ""}" data-bs-toggle="tab" href="#" onclick="changeRaidEnemy(${i})">${getTranslatedString(enemy, 'Name')}</button>`
+    })
+    $('#ba-raid-enemy-tabs').empty().html(tabsHtml)
+    raid.RaidSkill.forEach(function(el, i) {
+        if (raid_difficulty < el.MinDifficulty) return
+        if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
+        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${el.SkillType} Skill</p>${el.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG Cost:</i> '+el.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), el.Parameters, raid_difficulty+1, 'raid')}</p>`
+    })
+    $('#ba-raid-skills').empty().html(skillsHTML)
+    $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+        $(el).tooltip({html: true})
+    })
+
+    let html = ''
+    raid.Rewards[raid_difficulty].forEach(val => {
+        html += getDropIconHTML(val[0], val[1])
+    })
+        
+    $(`#ba-raid-rewards`).html(`<div class="d-flex flex-wrap justify-content-center">${html}</div>`)
+    $(`#ba-raid-rewards>div div`).each((i, el) => {
+        $(el).tooltip({html: true})
+    })
+    
+    changeRaidEnemy(selectedEnemy)
+}
+
 function changeRaidEnemy(num) {
     selectedEnemy = num
-    let enemy = find(data.enemies,'Id',raid.EnemyList[raid_difficulty][num])[0], grade = 1, level = raid_level[raid_difficulty]
+    let enemy = find(data.enemies,'Id',raid.EnemyList[raid_difficulty][num])[0], grade = 1
+    let level
+    (raid.Id < 1000) ? level = raid_level[raid_difficulty] : level = raid.Level[raid_difficulty]
     let levelscale = ((level-1)/99).toFixed(4)
     let maxHP = Math.ceil((Math.round((enemy.MaxHP1 + (enemy.MaxHP100-enemy.MaxHP1) * levelscale).toFixed(4)) * starscale_hp[grade-1]).toFixed(4))
     let attack = Math.ceil((Math.round((enemy.AttackPower1 + (enemy.AttackPower100-enemy.AttackPower1) * levelscale).toFixed(4)) * starscale_attack[grade-1]).toFixed(4))
@@ -1429,10 +1508,10 @@ function changeRaidEnemy(num) {
 
 
     let bulletType = (raid_difficulty < 5) ? raid.BulletType : raid.BulletTypeInsane
-    $("#ba-raid-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-normal").addClass(`bg-atk-${bulletType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType', bulletType)}`, getLocalizedString('ui','attacktype'), null, getTypeText(bulletType), 32), placement: 'top', html: true})
+    $("#ba-raid-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-normal").addClass(`bg-atk-${bulletType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType', bulletType)}`, getLocalizedString('ui','attacktype'), null, getAttackTypeText(bulletType), 32), placement: 'top', html: true})
     $("#ba-raid-attacktype-label").text(getLocalizedString('BulletType',bulletType))
 
-    $("#ba-raid-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType', enemy.ArmorType)} Armor`, getLocalizedString('ui','defensetype'), null, getTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
+    $("#ba-raid-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType', enemy.ArmorType)} Armor`, getLocalizedString('ui','defensetype'), null, getDefenseTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
     $("#ba-raid-defensetype-label").text(getLocalizedString('ArmorType',enemy.ArmorType))
     let enemysize = getEnemySize(enemy)
     $('#ba-raid-enemy-size').text(getLocalizedString('EnemyTags', enemysize)).toggle(enemysize != null)
@@ -1491,21 +1570,19 @@ function loadStage(id) {
         }
 
         const stageTypes = ["Default","FirstClear","ThreeStar"]
-        if (stage.Type == "Blood" && regionID == 1) {
-            let html = ''
-            $.each(stage.RewardsGlobal["Default"], function(i,el2){
-                html += getDropIconHTML(el2[0], el2[1])
-            })
-            $(`#ba-stage-drops-default`).html(`<div class="d-flex flex-wrap justify-content-center">${html}</div>`)
-            $(`#ba-stage-drops-default>div div`).each(function(i,el2) {
-                $(el2).tooltip({html: true})
-            })
-        } else { stageTypes.forEach(el => {
+        stageTypes.forEach(el => {
             if (el in stage.Rewards && stage.Rewards[el].length > 0) {
                 let html = ''
-                $.each(stage.Rewards[el], function(i,el2){
-                    html += getDropIconHTML(el2[0], el2[1])
-                })
+                if (regionID == 1 && "RewardsGlobal" in stage) {
+                    $.each(stage.RewardsGlobal[el], function(i,el2){
+                        html += getDropIconHTML(el2[0], el2[1])
+                    })
+                } else {
+                    $.each(stage.Rewards[el], function(i,el2){
+                        html += getDropIconHTML(el2[0], el2[1])
+                    })
+                }
+
                 $(`#ba-stage-drops-${el.toLowerCase()}`).html(`<div class="d-flex flex-wrap justify-content-center">${html}</div>`)
                 if (stage.Type == "FindGift") {
                     $(`#ba-stage-drops-${el.toLowerCase()}`).prepend('<i class="d-block mb-2">Each enemy defeated will drop one of the following items</i><div class="d-flex flex-wrap justify-content-center"></div>')
@@ -1516,8 +1593,7 @@ function loadStage(id) {
             } else {
                 $(`#ba-stage-drops-${el.toLowerCase()}>div`).html('<span class="pb-2 text-center">No rewards.</span>')
             }
-
-        })}
+        })
 
         let html = ''
         let enemyList = {}
@@ -2131,11 +2207,12 @@ function getStageIcon(stage, type) {
 }
 
 function getRaidCardHTML(raid, terrain='') {
+    let name = getTranslatedString(raid, 'Name')
     let html = `<div id="ba-raid-select-${raid.Id}" class="ba-select-grid-item unselectable"><div onclick="loadRaid(${raid.Id});" class="ba-raid-card"><div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/raid/${raid.IconBG}.png');"></div></div><div class="ba-raid-card-img"><img src="images/raid/${raid.Icon}.png"></div><div class="ba-raid-card-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
     if (terrain != '') {
         html += `<div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${terrain}.png"></div>`
     }
-    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle" style="width: 100%">${getTranslatedString(raid, 'Name')}</span></div></div></div>`
+    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${getTranslatedString(raid, 'Name')}</span></div></div></div>`
     return html
 }
 
@@ -2164,11 +2241,11 @@ function showEnemyInfo(id, level, grade=1, scaletype=0) {
     let enemysize = getEnemySize(enemy)
     $('#ba-stage-enemy-size').text(getLocalizedString('EnemyTags', enemysize)).toggle(enemysize != null)
     $("#ba-stage-enemy-attacktype").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
-    $("#ba-stage-enemy-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
+    $("#ba-stage-enemy-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
     $("#ba-stage-enemy-attacktype-label").text(getLocalizedString('BulletType',enemy.BulletType))
-    $('#ba-stage-enemy-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',enemy.BulletType)}`, getLocalizedString('ui','attacktype'), null, getTypeText(enemy.BulletType), 32), placement: 'top', html: true})
+    $('#ba-stage-enemy-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',enemy.BulletType)}`, getLocalizedString('ui','attacktype'), null, getAttackTypeText(enemy.BulletType), 32), placement: 'top', html: true})
     $("#ba-stage-enemy-defensetype-label").text(getLocalizedString('ArmorType',enemy.ArmorType))
-    $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',enemy.ArmorType)} Armor`, getLocalizedString('ui','defensetype'), null, getTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
+    $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',enemy.ArmorType)} Armor`, getLocalizedString('ui','defensetype'), null, getDefenseTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
 
     let levelscale
     if (scaletype == 0) {
@@ -2550,7 +2627,7 @@ function populateStageList() {
     html = ''
     let eventPrev = 0
     $.each(data.stages.Event, function(i,el) {
-        if (el.EventId <= data.common.regions[regionID].event_max && !(regionID == 1 && el.EventId == 701)) {
+        if (el.EventId <= data.common.regions[regionID].event_max && !(el.EventId == 701 && el.Stage > data.common.regions[regionID].event_701_max)) {
             if (el.EventId != eventPrev) {
                 html += `<div id="stages-list-events-grid-header-${el.EventId}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('EventName',''+el.EventId)}</h3></div>`
             }
@@ -2578,6 +2655,13 @@ function populateRaidList() {
         html += getTimeAttackCardHTML(el)
     })
     $('#ba-raid-list-timeattack-grid').html(html)
+
+    html = ''
+    $.each(data.raids.WorldRaid, function(i,el) {
+        if (el.IsReleased[regionID])
+        html += getRaidCardHTML(el)
+    })
+    $('#ba-raid-list-worldraid-grid').html(html)
 
 }
 
@@ -2778,7 +2862,7 @@ function findOrDefault(obj, key, value, default_value) {
     }
 }
 
-function getTypeText(type) {
+function getAttackTypeText(type) {
     switch (type) {
         case 'Normal':
             return getLocalizedString("ui","attack_type_normal_desc")
@@ -2788,6 +2872,13 @@ function getTypeText(type) {
             return getLocalizedString("ui","attack_type_desc", [`<b class='ba-col-pierce'>${getLocalizedString("ArmorType","HeavyArmor")}</b>`, `<b class='ba-col-explosion'>${getLocalizedString("ArmorType","LightArmor")}</b>`]) 
         case 'Mystic':
             return getLocalizedString("ui","attack_type_desc", [`<b class='ba-col-mystic'>${getLocalizedString("ArmorType","Unarmed")}</b>`, `<b class='ba-col-pierce'>${getLocalizedString("ArmorType","HeavyArmor")}</b>`])
+    }
+    return text
+}
+function getDefenseTypeText(type) {
+    switch (type) {
+        case 'Normal':
+            return getLocalizedString("ui","defense_type_normal_desc")
         case 'LightArmor':
             return getLocalizedString("ui","defense_type_desc", [`<b class='ba-col-explosion'>${getLocalizedString("BulletType","Explosion")}</b>`, `<b class='ba-col-pierce'>${getLocalizedString("BulletType","Pierce")}</b>`])
         case 'HeavyArmor':
