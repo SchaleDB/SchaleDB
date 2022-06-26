@@ -303,7 +303,7 @@ h1 small {
 
 .smalltext {
     font-size: 0.75rem !important;
-    line-height: 0.7rem;
+    line-height: 0.75rem;
     white-space: pre-line;
 }
 
@@ -1380,6 +1380,17 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     max-width: var(--var-grid-card-width);
     max-height: var(--var-grid-card-height);
     margin: auto;
+
+    &.selected {
+        outline: 5px solid var(--col-theme-text);
+        outline-offset: -2px;
+        border-radius: 10px;
+
+        .ba-select-grid-card-label {
+            background-color: var(--col-bg-imglabel-invert) !important;
+            color: var(--col-btn-active-primary) !important;
+        }
+    }
 }
 
 .ba-raid-select-grid {
@@ -1543,7 +1554,6 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     height: 24px;
     bottom: 0px;
     left: 0px;
-    transition-duration: 300ms;
 }
 
 .ba-item-card:hover .ba-item-card-img img {
@@ -1558,26 +1568,42 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 .ba-icon-enemy {
     display: inline-block;
-    margin: 0.5rem;
     position: relative;
     width: 120px;
     height: 100px;
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
-}
 
-.ba-icon-enemy>img {
-    background-color: var(--col-theme-accent);
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;;
-}
+    &.selected {
+        outline: 4px solid var(--col-theme-text);
+        outline-offset: -1px;
 
-.ba-icon-enemy:hover>img {
-    transform: scale(1.15);
-    filter: brightness(0.75);
+        >img {
+            background-color: var(--col-bg-imglabel-invert) !important;
+            //filter: brightness(0.75);
+        }
+
+        .ba-select-grid-card-label {
+            background-color: var(--col-bg-imglabel-invert) !important;
+            color: var(--col-btn-active-primary) !important;
+        }
+    }
+
+    >img {
+        background-color: var(--col-theme-accent);
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;;
+    }
+
+    &:hover {
+        >img {
+            transform: scale(1.15);
+            filter: brightness(0.75);
+        }
+    }
 }
 
 .ba-enemy-card-atk, .ba-enemy-card-def, .ba-enemy-card-lv, .ba-stage-card-droprate {
@@ -1651,10 +1677,10 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     background-color: var(--col-bg-node-rare);
 }
 
-#ba-stage-drops-tabs {
-    a {
-        font-weight: 500;
-        font-size: normal;
-        padding: 0.2rem 0.6rem;
-    }
-}
+// #ba-stage-drops-tabs {
+//     a {
+//         font-weight: 500;
+//         font-size: normal;
+//         padding: 0.2rem 0.6rem;
+//     }
+// }

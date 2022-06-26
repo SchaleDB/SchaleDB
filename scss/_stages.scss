@@ -1,6 +1,6 @@
 #ba-stage-map {
     @include scrollable-xy(scroll);
-    max-height: 560px;
+    max-height: calc(100vh - 12rem);
     cursor: grab;
 
     &.scrolling {
@@ -20,6 +20,25 @@
         align-items: center;
         justify-content: center;
         --col-tile: var(--col-map-tile);
+
+        &:hover {
+            .ba-stage-map-enemy {
+                filter: brightness(0.7);
+                transform: scale(1.1);
+            }
+        }
+
+        .ba-stage-map-enemy {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            left: -10px;
+            top: -45px;
+            opacity: 1;
+            pointer-events: none;
+            @include unselectable;
+            @include transition(transform, filter);
+        }
 
         &.group-1 {
             --col-tile: var(--col-map-pair-1);
@@ -68,10 +87,19 @@
         }
 
         .start-tile {
-            background-color: var(--col-bg-imglabel);
+            position: absolute;
+            bottom: 32px;
+            z-index: 500;
+            width: 100%;
+            height: 28px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            background-image: url('../images/ui/Image_Campaign_Start.png')
         }
 
         .tile-icon {
+            cursor: default;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -92,14 +120,15 @@
             &.group-4 {
                 --col-tile: var(--col-map-pair-4);
             }
-            &.group-5 {
-                --col-tile: var(--col-map-pair-5);
+
+            &.lowered::before {
+                -webkit-mask-image: url("../images/stage-tile-lowered.svg") !important;
+                mask-image: url("../images/stage-tile-lowered.svg") !important;
+                opacity: 0.6;
             }
-            &.group-6 {
-                --col-tile: var(--col-map-pair-6);
-            }
-            &.group-7 {
-                --col-tile: var(--col-map-pair-7);
+
+            &.raised::before {
+                opacity: 0.6;
             }
 
             &::before {
@@ -115,40 +144,54 @@
             
         }
 
+        .tile-item {
+            cursor: default;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--col-theme-text-t);
+            color: var(--col-btn-active-primary);
+            @include circular;
+            font-size: 24px;
+            overflow: hidden;
+
+            img {
+                height: 100%;
+                object-fit: cover;
+            }
+
+            width: 58px;
+            height: 58px;
+        }
+
         .switch-tile {
+            &.lowered::before {
+                -webkit-mask-image: url("../images/stage-tile-lowered.svg") !important;
+                mask-image: url("../images/stage-tile-lowered.svg") !important;
+            }
+
             &::before {
                 content: "";
                 position: absolute;
-                width: 84px;
-                height: 84px;
+                width: 90px;
+                height: 90px;
                 background-color: var(--col-tile);
                 -webkit-mask-image: url("../images/stage-tile.svg");
                 mask-image: url("../images/stage-tile.svg");
-                opacity: 0.3;
+                opacity: 0.6;
             }
         }
 
     }
-
-    .ba-stage-map-enemy {
-        width: 120px;
-        height: 120px;
-        position: absolute;
-        left: -10px;
-        top: -45px;
-        opacity: 1;
-        @include unselectable;
-    }
-
-    .tile-item {
-        width: 62px;
-        height: 62px;
-        position: absolute;
-        left: 14px;
-        top: 14px;
-        opacity: 1;
-        @include unselectable;
-    }
+    // .tile-item {
+    //     width: 62px;
+    //     height: 62px;
+    //     position: absolute;
+    //     left: 14px;
+    //     top: 14px;
+    //     opacity: 1;
+    //     @include unselectable;
+    // }
 
     .map-info {
         position: absolute;
@@ -228,8 +271,17 @@
 //     filter: invert(1);
 // }
 
-
+#ba-stage-name {
+    white-space: pre-line;
+}
 
 .stage-star {
     color: var(--col-text-stars);
+}
+
+.enemy-list {
+    gap: 1rem;
+    padding: 0.5rem 0;
+    max-height: 348px;
+    @include scrollable(auto);
 }

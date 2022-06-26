@@ -64,32 +64,20 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <nav id="ba-stage-page" class="nav nav-pills mt-3">
-                            <a id="ba-stage-tab-info" class="nav-link active" data-bs-toggle="tab" href="#ba-stage-page-info" data-localize-id="ui,stage_info"></a>
-                            <a id="ba-stage-tab-map" class="nav-link" data-bs-toggle="tab" href="#ba-stage-page-map" data-localize-id="ui,stage_map"></a>
-                            <a id="ba-stage-tab-enemies" class="nav-link" data-bs-toggle="tab" href="#ba-stage-page-enemies" data-localize-id="ui,stage_enemies"></a>
-                        </nav> -->
                     </div>
                     <div class="card-body">
                         <div class="tab-content">
                             <div id="ba-stage-page-info" class="tab-pane fade show active">
-
                                 <div class="ba-panel p-2 mb-2">
                                     <p class="m-0"><i class="fa-solid fa-star me-2 stage-star"></i><span id="ba-stage-star-1"></span>
                                         <i class="fa-solid fa-star me-2 stage-star"></i><span id="ba-stage-star-2"></span>
                                         <i class="fa-solid fa-star me-2 stage-star"></i><span id="ba-stage-star-3"></span></p>
                                 </div>
-
-                                <div class="d-flex align-items-end mb-2" style="min-height:32px;">
-                                    <h5 class="text-bold mb-0" data-localize-id="ui,stage_rewards"></h5>
-                                    <div class="flex-fill"></div>
-                                    <nav id="ba-stage-drops-tabs" class="nav nav-pills">
-                                        <a id="ba-stage-drops-default-tab" class="nav-link active" data-bs-toggle="tab" href="#ba-stage-drops-default" data-localize-id="ui,stage_reward_default"></a>
-                                        <a id="ba-stage-drops-firstclear-tab" class="nav-link" data-bs-toggle="tab" href="#ba-stage-drops-firstclear" data-localize-id="ui,stage_reward_firstclear"></a>
-                                        <a id="ba-stage-drops-threestar-tab" class="nav-link" data-bs-toggle="tab" href="#ba-stage-drops-threestar" data-localize-id="ui,stage_reward_threestar"></a>
-                                    </nav>
-                                </div>
-        
+                                <nav id="ba-stage-drops-tabs" class="nav nav-pills mb-2">
+                                    <a id="ba-stage-drops-default-tab" class="nav-link active" data-bs-toggle="tab" href="#ba-stage-drops-default" data-localize-id="ui,stage_reward_default"></a>
+                                    <a id="ba-stage-drops-firstclear-tab" class="nav-link" data-bs-toggle="tab" href="#ba-stage-drops-firstclear" data-localize-id="ui,stage_reward_firstclear"></a>
+                                    <a id="ba-stage-drops-threestar-tab" class="nav-link" data-bs-toggle="tab" href="#ba-stage-drops-threestar" data-localize-id="ui,stage_reward_threestar"></a>
+                                </nav>
                                 <div class="ba-panel p-2 pb-0">
                                     <div class="tab-content">
                                         <div id="ba-stage-drops-default" class="tab-pane active show">
@@ -100,156 +88,158 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h5 class="text-bold mt-2" data-localize-id="ui,stage_enemies"></h5>
-                                <div id="ba-stage-enemy-list" class="ba-panel p-2 mb-2">
-                                    <div id="ba-stage-enemies" class="d-flex flex-wrap justify-content-center">
+                            </div>
+                            <nav id="ba-stage-page" class="nav nav-pills my-3">
+                                <a id="ba-stage-tab-enemies" class="nav-link active" data-bs-toggle="tab" href="#ba-stage-page-enemies" data-localize-id="ui,stage_enemies"></a>
+                                <a id="ba-stage-tab-map" class="nav-link" data-bs-toggle="tab" href="#ba-stage-page-map" data-localize-id="ui,stage_map"></a>
+                            </nav>
+                            <div class="tab-content">
+                                <div id="ba-stage-page-enemies" class="tab-pane show active">
+                                    <div id="ba-stage-enemy-list" class="ba-panel p-2 mb-2">
+                                        <div id="ba-stage-enemies" class="enemy-list d-flex flex-wrap justify-content-center">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="ba-panel p-2">
-                                    <div id="ba-stage-enemy-info" class="">
-                                        <div class="d-flex align-items-center px-2 mb-1">
-                                            <div class="flex-fill me-2">
-                                                <h2 id="ba-stage-enemy-name" class="title-text mb-2"></h2>
-                                                <div class="mb-3">
-                                                    <!-- <h5 id="ba-stage-enemy-rank" class="d-inline-block me-2 mb-3"></h5> -->
-                                                    <span id="ba-stage-enemy-rank" class="ba-student-info-s ba-panel text-bold" style="transition-duration: 0s;"></span>
-                                                    <span id="ba-stage-enemy-class" class="ba-student-info-s" style="transition-duration: 0s;"></span>
-                                                    
+                                    <div class="ba-panel p-2">
+                                        <div id="ba-stage-enemy-info" class="">
+                                            <div class="d-flex align-items-center px-2 mb-1">
+                                                <div class="flex-fill me-2">
+                                                    <h2 id="ba-stage-enemy-name" class="title-text mb-2"></h2>
+                                                    <div class="mb-3">
+                                                        <span id="ba-stage-enemy-rank" class="ba-student-info-s ba-panel text-bold" style="transition-duration: 0s;"></span>
+                                                        <span id="ba-stage-enemy-class" class="ba-student-info-s" style="transition-duration: 0s;"></span>
+                                                    </div>
+                                                    <div class="d-flex flex-wrap align-items-center mb-2">
+                                                        <span id="ba-stage-enemy-attacktype" class="ba-info-pill"><img src="images/ui/Type_Attack.png"><span id="ba-stage-enemy-attacktype-label"></span></span>
+                                                        <span id="ba-stage-enemy-defensetype" class="ba-info-pill"><img src="images/ui/Type_Defense.png"><span id="ba-stage-enemy-defensetype-label"></span></span>
+                                                        <span id="ba-stage-enemy-size" class="ba-student-info ba-panel ba-panel text-bold" style="transition-duration: 0s;"></span>
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex flex-wrap align-items-center mb-2">
-                                                    <span id="ba-stage-enemy-attacktype" class="ba-info-pill"><img src="images/ui/Type_Attack.png"><span id="ba-stage-enemy-attacktype-label"></span></span>
-                                                    <span id="ba-stage-enemy-defensetype" class="ba-info-pill"><img src="images/ui/Type_Defense.png"><span id="ba-stage-enemy-defensetype-label"></span></span>
-                                                    <span id="ba-stage-enemy-size" class="ba-student-info ba-panel ba-panel text-bold" style="transition-duration: 0s;"></span>
-                                                </div>
-                                                <div class="d-flex flex-row d-none">
-                                                    <!-- <span id="ba-stage-enemy-rank" class="ba-student-info-s ba-panel"></span> -->
-                                                    
-                                                </div>
+                                                <img id="ba-stage-enemy-img" src="" style="width: 150px; image-rendering: -webkit-optimize-contrast;">
                                             </div>
-                                            <img id="ba-stage-enemy-img" src="" style="width: 150px; image-rendering: -webkit-optimize-contrast;">
-                                        </div>
-        
-                                        <table id="ba-stage-enemy-stat-table" class="table ba-stats mb-0">
-                                            <tbody>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,MaxHP"></span>
-                                                            <span id="ba-stage-enemy-stat-maxhp" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,AttackPower"></span>
-                                                            <span id="ba-stage-enemy-stat-attack" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,DefensePower"></span>
-                                                            <span id="ba-stage-enemy-stat-defense" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,HealPower"></span>
-                                                            <span id="ba-stage-enemy-stat-healing" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,AccuracyPoint"></span>
-                                                            <span id="ba-stage-enemy-stat-accuracy" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,DodgePoint"></span>
-                                                            <span id="ba-stage-enemy-stat-evasion" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,CriticalPoint"></span>
-                                                            <span id="ba-stage-enemy-stat-crit" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,CriticalChanceResistPoint"></span>
-                                                            <span id="ba-stage-enemy-stat-critresist" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,CriticalDamageRate"></span>
-                                                            <span id="ba-stage-enemy-stat-critdmg" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,CriticalDamageResistRate"></span>
-                                                            <span id="ba-stage-enemy-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,StabilityPoint"></span>
-                                                            <span id="ba-stage-enemy-stat-stability" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,Range"></span>
-                                                            <span id="ba-stage-enemy-stat-range" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,MoveSpeed"></span>
-                                                            <span id="ba-stage-enemy-stat-movespeed" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                    <td width="50%">
-                                                        <div class="d-flex align-items-top justify-content-between">
-                                                            <span data-localize-id="Stat,AmmoCount"></span>
-                                                            <span id="ba-stage-enemy-stat-ammo" class="ms-2 text-bold text-end"></span>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- <div id="ba-stage-page-map" class="tab-pane fade">
-                                <div class="ba-panel p-2 mb-2">
-                                    <div id="ba-stage-map">
-                                        <div id="ba-stage-map-canvas">
+    
+                                            <table id="ba-stage-enemy-stat-table" class="table ba-stats mb-0">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,MaxHP"></span>
+                                                                <span id="ba-stage-enemy-stat-maxhp" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,AttackPower"></span>
+                                                                <span id="ba-stage-enemy-stat-attack" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,DefensePower"></span>
+                                                                <span id="ba-stage-enemy-stat-defense" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,HealPower"></span>
+                                                                <span id="ba-stage-enemy-stat-healing" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,AccuracyPoint"></span>
+                                                                <span id="ba-stage-enemy-stat-accuracy" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,DodgePoint"></span>
+                                                                <span id="ba-stage-enemy-stat-evasion" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,CriticalPoint"></span>
+                                                                <span id="ba-stage-enemy-stat-crit" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,CriticalChanceResistPoint"></span>
+                                                                <span id="ba-stage-enemy-stat-critresist" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,CriticalDamageRate"></span>
+                                                                <span id="ba-stage-enemy-stat-critdmg" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,CriticalDamageResistRate"></span>
+                                                                <span id="ba-stage-enemy-stat-critdmgresist" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,StabilityPoint"></span>
+                                                                <span id="ba-stage-enemy-stat-stability" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,Range"></span>
+                                                                <span id="ba-stage-enemy-stat-range" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,MoveSpeed"></span>
+                                                                <span id="ba-stage-enemy-stat-movespeed" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                        <td width="50%">
+                                                            <div class="d-flex align-items-top justify-content-between">
+                                                                <span data-localize-id="Stat,AmmoCount"></span>
+                                                                <span id="ba-stage-enemy-stat-ammo" class="ms-2 text-bold text-end"></span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div id="ba-stage-page-enemies" class="tab-pane fade">
-                               
-                            </div> -->
+                                <div id="ba-stage-page-map" class="tab-pane">
+                                    <div class="ba-panel p-2 mb-2">
+                                        <div id="ba-stage-map">
+                                            <div id="ba-stage-map-canvas">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div id="ba-stage-map-enemy-list" class="ba-panel p-2 my-2">
+                                        <div id="ba-stage-map-enemies" class="enemy-list d-flex flex-wrap justify-content-center">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

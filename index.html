@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Oswald&display=swap" rel="stylesheet"> 
-    <link href="css/main.css?v=7" rel="stylesheet">
+    <link href="css/main.css?v=8" rel="stylesheet">
 </head>
 <body class="reduced-motion">
     <div id="loading-cover">
@@ -53,9 +53,13 @@
                             <div class="d-flex align-items-center mb-3">
                                 <span class="flex-fill me-4" style="white-space: nowrap;" data-localize-id="ui,navbar_settings_language"></span>
                                 <span class="d-flex align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" id="ba-navbar-languageselector-en" class="btn btn-sm btn-dark" onclick="changeLanguage('en')">English</button>
-                                        <button type="button" id="ba-navbar-languageselector-ja" class="btn btn-sm btn-dark" onclick="changeLanguage('ja')">日本語</button>
+                                    <div class="dropdown d-inline">
+                                        <button id="ba-navbar-languageselector" class="btn btn-sm btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"><span></span></button>
+                                        <ul class="dropdown-menu dropdown-menu-dark">
+                                            <li><a id="ba-navbar-languageselector-en" class="dropdown-item" href="javascript:;" onclick="changeLanguage('En')" class="btn btn-dark">English</a></li>
+                                            <li><a id="ba-navbar-languageselector-jp" class="dropdown-item" href="javascript:;" onclick="changeLanguage('Jp')" class="btn btn-dark">日本語</a></li>
+                                            <!-- <li><a id="ba-navbar-languageselector-kr" class="dropdown-item" href="javascript:;" onclick="changeLanguage('Kr')" class="btn btn-dark">한국어</a></li> -->
+                                        </ul>
                                     </div>
                                 </span>
                             </div>
@@ -75,9 +79,10 @@
                             <div class="d-flex align-items-center">
                                 <span class="flex-fill me-4" style="white-space: nowrap;" data-localize-id="ui,navbar_settings_contrast"></span>
                                 <span class="d-flex align-items-center">
-                                    <span class="form-check form-check-inline form-switch mx-2" style="margin-bottom: 0; padding-left: 0;">
-                                        <input class="form-check-input" type="checkbox" value="" style="margin-left: 0;" onchange="toggleHighContrast()" id="ba-navbar-contrast-toggle">
-                                    </span>
+                                    <div id="ba-navbar-contrast-toggle" class="btn-group">
+                                        <button type="button" id="ba-navbar-contrast-toggle-false" class="btn btn-sm btn-dark" onclick="toggleHighContrast(false)">OFF</button>
+                                        <button type="button" id="ba-navbar-contrast-toggle-true" class="btn btn-sm btn-dark" onclick="toggleHighContrast(true)">ON</button>
+                                    </div>
                                 </span>
                             </div>
                             <div class="text-muted" style="white-space: nowrap;">
@@ -145,6 +150,6 @@
     }, 10000)
     
 </script>
-<script src="js/common.min.js?v=7"></script>
+<script src="js/common.min.js?v=8"></script>
 
 </html>

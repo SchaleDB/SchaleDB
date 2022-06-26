@@ -5,10 +5,10 @@ const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445] 
 const raid_level = [17, 25, 35, 50, 70, 80]
 const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40]]
-const translation_code = {'en': 'En', 'ja': 'Jp'}
-const label_smalltext_threshold = {'en':11, 'ja':5}
-const label_enemy_smalltext_threshold = {'en':12, 'ja':6}
-const label_raid_smalltext_threshold = {'en':20, 'ja':11}
+const languages = ['En', 'Jp', 'Kr']
+const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5}
+const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6}
+const label_raid_smalltext_threshold = {'En':20, 'Jp':11, 'Kr':11}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
@@ -16,17 +16,36 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 7
+const cache_ver = 8
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
+
+let userLang
+if (localStorage.getItem("language") && languages.includes(localStorage.getItem("language")))  {
+    userLang = localStorage.getItem("language")
+} else {
+    let browserLang = window.navigator.language
+    switch (browserLang.split('-')[0]) {
+        case 'ja':
+            userLang = 'Jp'
+            break;
+        case 'ko':
+            userLang = 'Kr'
+            break;
+        default:
+            userLang = 'En'
+            break;
+    }
+}
+
 const json_list = {
     common: getCacheVerResourceName("./data/common.json"),
     raids: getCacheVerResourceName("./data/raids.json"),
-    students: getCacheVerResourceName("./data/students.json"),
+    students: getCacheVerResourceName(`./data/students_${userLang.toLowerCase()}.json`),
     localization: getCacheVerResourceName("./data/localization.json"),
     stages: getCacheVerResourceName("./data/stages.json"),
     enemies: getCacheVerResourceName("./data/enemies.json"),
-    items: getCacheVerResourceName("./data/items.json"),
+    items: getCacheVerResourceName(`./data/items_${userLang.toLowerCase()}.json`),
     furniture: getCacheVerResourceName("./data/furniture.json"),
     equipment: getCacheVerResourceName("./data/equipment.json"),
     crafting: getCacheVerResourceName("./data/crafting.json"),
@@ -54,7 +73,7 @@ const sort_functions = {
     DodgePoint: (a,b) => (b.DodgePoint - a.DodgePoint)*search_options["sortby_dir"]
 }
 
-let data = {}, loadedModule, student, studentList, loadedItem, loadedStage, loadedCraftNode, region, regionID, userLang, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
+let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loadedStage, loadedCraftNode, region, regionID, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
     , studentCompare   
     , searchResultsCount = 0, searchResultsSelection = 0
     , studentSelectorModal, statPreviewModal
@@ -289,16 +308,6 @@ $(document).ready(function() {
         loadRegion(0)
     }
 
-    if (localStorage.getItem("language")) {
-        userLang = localStorage.getItem("language")
-    } else {
-        if (window.navigator.language == 'ja') {
-            userLang = 'ja'
-        } else {
-            userLang = 'en'
-        }  
-    }
-
     data.students.sort(sort_functions.Name)
     studentList = data.students.map(x => x)
     if (localStorage.getItem("theme")) {
@@ -324,9 +333,10 @@ $(document).ready(function() {
     $('body').toggleClass("high-contrast", highContrast)
     
     $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
-    $(`#ba-navbar-languageselector-${userLang}`).addClass("active")
+    $(`#ba-navbar-languageselector span`).text($(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).text())
+    $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).addClass("active")
     $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
-    $('#ba-navbar-contrast-toggle').prop('checked', highContrast)
+    $(`#ba-navbar-contrast-toggle-${highContrast}`).addClass("active")
 
     $(window).on('popstate', loadModuleFromURL)
     loadModuleFromURL()
@@ -494,6 +504,8 @@ function loadModule(moduleName, entry=null) {
             $(".tooltip").tooltip("hide")
             let urlVars = new URL(window.location.href).searchParams
         
+            populateRaidList()
+
             if (entry != null) {
                 loadRaid(entry)
             } else if (urlVars.has("raid")) {
@@ -503,7 +515,7 @@ function loadModule(moduleName, entry=null) {
             } else {
                 loadRaid("Binah")
             }
-            populateRaidList()
+            
             if (regionID == 1) {
                 $('#ba-raid-list-tab-timeattack').hide()
                 $('#ba-raid-list-tab-worldraid').hide()
@@ -528,6 +540,8 @@ function loadModule(moduleName, entry=null) {
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
         
+            populateStageList()
+
             if (entry != null) {
                 loadStage(entry)
             } else if (urlVars.has("stage")) {
@@ -537,10 +551,14 @@ function loadModule(moduleName, entry=null) {
             } else {
                 loadStage(1011101)
             }
-            populateStageList()
+
+            //scroll the loaded stage into view in the stage list
+            let offset = $(`#ba-stage-select-${loadedStage.Id}`).prop('offsetTop')
+            $('#ba-stages-list-container .card-body').scrollTop(offset)
+
             $('.ba-item-list').addClass('fade')
             $('.ba-item-list.active').addClass('show')
-            //makeDraggable($('#ba-stage-map'))
+            makeDraggable($('#ba-stage-map'))
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         })
     } else if (moduleName == 'craft') {
@@ -645,7 +663,7 @@ function loadModule(moduleName, entry=null) {
             birthdayStudents = []
 
             data.students.forEach(el => {
-                if (el.IsReleased[regionID] && !el.NameEn.includes("(")) {
+                if (el.IsReleased[regionID]) {
                     var nextBirthday = getNextBirthdayDate(el.BirthDay)
                     if (nextBirthday.getTime() < nextWeek.getTime() && nextBirthday.getTime() >= currentDate.getTime())
                     birthdayStudents.push(el)
@@ -973,7 +991,7 @@ function processStudent() {
     $('#ba-weapon-stat-row2').toggle(student.Weapon.HealPower1 > 0)
 
     //Profile
-    if (userLang == 'en') {
+    if (userLang != 'Jp') {
         $('#ba-student-fullname').text(getTranslatedString(student,'FamilyName')+' '+getTranslatedString(student,'PersonalName'))
     } else {
         $('#ba-student-fullname').text(getTranslatedString(student,'FamilyName')+getTranslatedString(student,'PersonalName'))
@@ -1173,8 +1191,8 @@ function loadItem(id) {
             item = findOrDefault(data.furniture, "Id", id-1000000, 1)[0]
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.SubCategory))
             $('#ba-item-furniture-row').show()
-            $('#ba-item-furniture-set').html(getLocalizedString('furniture_set', String(item.SetGroupId)))
-            $('#ba-item-furniture-comfort').html(item.ComfortBonus)
+            $('#ba-item-furniture-set').html(item.SetGroupId == 0 ? '' : `・ <i>${getLocalizedString('furniture_set', String(item.SetGroupId))}</i>`)
+            $('#ba-item-furniture-comfort').html('+'+item.ComfortBonus)
         } else {
             mode = 'items'
             item = findOrDefault(data.items, "Id", id, 1)[0]
@@ -1306,6 +1324,7 @@ function loadRaid(raidId) {
     if (loadedModule == 'raids') {
         if (parseInt(raidId) == NaN) {raidId = 1}
         if (regionID == 1 && raidId >= 1000) {raidId = 1}
+        if (loadedRaid) $('#ba-raid-select-'+loadedRaid.Id).removeClass('selected')
         if (raidId < 1000) {
             $('#ba-raid-list-tab-raid').tab('show')
             $('#ba-raid-info').show()
@@ -1372,6 +1391,8 @@ function loadRaid(raidId) {
 
             changeWorldRaidDifficulty(raid_difficulty)
         }
+        loadedRaid = raid
+        $('#ba-raid-select-'+raid.Id).addClass('selected')
 
         let url = new URL(window.location.href)
         if (url.searchParams.get("raid") != raid.Id) {
@@ -1430,16 +1451,12 @@ function changeTimeAttackDifficulty(difficultyId) {
     let rulesHTML = '', enemyHTML = '';
     $('#ba-timeattack-level').text(`Lv.${raid.EnemyLevel[ta_difficulty]}`)
 
-    let isfirst = true
     raid.EnemyList[ta_difficulty].forEach(function(el, i) {
         let enemy = find(data.enemies, "Id", raid.EnemyList[ta_difficulty][i])[0]
         enemyHTML += getEnemyCardHTML(enemy, raid.EnemyLevel[ta_difficulty], 1, 1)
-        if (isfirst) {
-            showEnemyInfo(enemy.Id, raid.EnemyLevel[ta_difficulty], 1, 1)
-            isfirst = false
-        }
     })
     $('#ba-stage-enemies').html(enemyHTML)
+    $('#ba-stage-enemies > :first').trigger("click")
 
     raid.Rules.forEach(function(el, i) {
         if (ta_difficulty < el.MinDifficulty) return
@@ -1526,6 +1543,7 @@ function getEnemySize(enemy) {
 function loadStage(id) {
     if (loadedModule == 'stages') {
         let mode = ''
+        if (loadedStage) $('#ba-stage-select-'+loadedStage.Id).removeClass('selected')
         if (id >= 7000000) {
             mode = 'Event'
             stage = findOrDefault(data.stages.Event, "Id", id, 8012301)[0]
@@ -1591,7 +1609,7 @@ function loadStage(id) {
                     $(el2).tooltip({html: true})
                 })
             } else {
-                $(`#ba-stage-drops-${el.toLowerCase()}>div`).html('<span class="pb-2 text-center">No rewards.</span>')
+                $(`#ba-stage-drops-${el.toLowerCase()}`).html(`<div class="d-flex flex-wrap justify-content-center"><span class="pb-2 text-center">No rewards.</span></div>`)
             }
         })
 
@@ -1607,27 +1625,23 @@ function loadStage(id) {
             }
         })
 
-        let isfirst = true
         Object.keys(enemyList).sort().forEach(el => {
             e_level = el.split('_')[2]
             e_grade = el.split('_')[3]
             html += getEnemyCardHTML(enemyList[el], e_level, e_grade)
-            if (isfirst) {
-                showEnemyInfo(enemyList[el].Id, e_level, e_grade)
-                isfirst = false
-            }
         })
         $('#ba-stage-enemies').html(html)
+        $('#ba-stage-enemies > :first').trigger("click")
 
         if ("HexaMap" in stage) {
-            //$('#ba-stage-tab-map').toggleClass('disabled', false)
-            //drawHexamap(stage)
+            $('#ba-stage-tab-map').toggleClass('disabled', false)
+            drawHexamap(stage)
             $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_complete'))
             $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_sranks', [stage.StarCondition[0]]))
             $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_clearturns', [stage.StarCondition[1]]))
         } else {
             if ($('#ba-stage-tab-map').hasClass('active')) {
-                $('#ba-stage-tab-info').tab('show')
+                $('#ba-stage-tab-enemies').tab('show')
             }
             $('#ba-stage-tab-map').toggleClass('disabled', true)
             if (mode == "Campaign" || mode == "Event") {
@@ -1665,9 +1679,12 @@ function loadStage(id) {
             $('#ba-stage-entrycost .label').html(`&times;${stage.EntryCost[0][1]}`)
         }
         
+        $('#ba-stage-map-enemies').html('<p class="mb-0">Click on an enemy unit on the map to view a list of enemies.</p>')
+        $('#ba-stage-select-'+stage.Id).addClass('selected')
+
         document.title = `Schale DB | ${$('#ba-stage-title').text()}`
         $('#ba-navbar-content').collapse('hide')
-        window.scrollTo({top: 0, left: 0, behavior: 'instant'})
+        //window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("stage", id)
     } else {
         loadModule('stages', id)
@@ -1677,7 +1694,7 @@ function loadStage(id) {
 function getStageName(stage, type) {
     switch (type) {
         case "Event":
-            return `${getLocalizedString('EventName', ''+stage.EventId)}\nQuest ${stage.Stage.toString().padStart(2,'0')}`
+            return `${getLocalizedString('EventName', ''+stage.EventId)}\n${stage.Difficulty == 1 ? "Quest" : "Challenge"} ${stage.Stage.toString().padStart(2,'0')}`
         case "Campaign":
             return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
         case "WeekDungeon":
@@ -2097,11 +2114,8 @@ function recalculateStatPreview() {
 function recalculateEXSkillPreview() {
     let skillLevelEX = $("#ba-skillpreview-exrange").val()
     let skillEX = find(student.Skills, 'SkillType', 'ex')[0]
-    if (userLang == 'ja' && skillEX.ParametersJp != null) {
-        $('#ba-skill-ex-description').html(getSkillText(getTranslatedString(skillEX, 'Desc'), skillEX.ParametersJp, skillLevelEX, student.BulletType))
-    } else {
-        $('#ba-skill-ex-description').html(getSkillText(getTranslatedString(skillEX, 'Desc'), skillEX.Parameters, skillLevelEX, student.BulletType))
-    }
+
+    $('#ba-skill-ex-description').html(getSkillText(getTranslatedString(skillEX, 'Desc'), skillEX.Parameters, skillLevelEX, student.BulletType))
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })
@@ -2117,11 +2131,7 @@ function recalculateSkillPreview() {
     let skillList = ['normal','passive','sub']
     skillList.forEach(el => {
         let skill = find(student.Skills, 'SkillType', el)[0]
-        if (userLang == 'ja' && skill.ParametersJp != null) {
-            $(`#ba-skill-${el}-description`).html(getSkillText(getTranslatedString(skill, 'Desc'), skill.ParametersJp, skillLevel, student.BulletType))
-        } else {
-            $(`#ba-skill-${el}-description`).html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType))
-        }
+        $(`#ba-skill-${el}-description`).html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType))
     })
 
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -2176,14 +2186,14 @@ function getStageCardHTML(stage, dropChance = 0) {
         html += `<span class="ba-stage-card-droprate">${getProbabilityText(dropChance)}</span>`
     }
     html += `<div class="d-flex align-items-center ba-select-grid-card-label">`
-    html += `<span class="ba-label-text px-1 align-middle  ${name.length > label_enemy_smalltext_threshold[userLang] ? "smalltext" : "" }"" style="width: 100%">${name}</span>`
+    html += `<span class="ba-label-text px-1 align-middle ${name.length > label_enemy_smalltext_threshold[userLang] ? "smalltext" : "" }" style="width: 100%">${name}</span>`
     html += `</div></div></div>`
     return html
 
     function getStageCardName() {
         switch (type) {
             case "Event":
-                return `Quest ${stage.Stage.toString().padStart(2,'0')}`
+                return `${stage.Difficulty == 1 ? 'Quest' : 'Challenge'} ${stage.Stage.toString().padStart(2,'0')}`
             case "Campaign":
                 return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
             case "WeekDungeon":
@@ -2196,7 +2206,7 @@ function getStageCardHTML(stage, dropChance = 0) {
 function getStageIcon(stage, type) {
     switch (type) {
         case "Event":
-            return `Campaign_Event_${stage.EventId}_Normal`
+            return `Campaign_Event_${stage.EventId > 10000 ? stage.EventId - 10000 : stage.EventId}_${stage.Difficulty == 1 ? 'Normal' : 'Hard'}`
         case "Campaign":
             return `Campaign_Image_${stage.Area.toString().padStart(2,'0')}_${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
         case "WeekDungeon":
@@ -2223,8 +2233,8 @@ function getTimeAttackCardHTML(raid) {
     return html
 }
 
-function getEnemyCardHTML(enemy, level, grade, scaletype=0) {
-    var html = `<div class="ba-icon-enemy unselectable" onclick="showEnemyInfo(${enemy.Id},${level},${grade},${scaletype})"><img src="images/enemy/${enemy.Icon}.png">`
+function getEnemyCardHTML(enemy, level, grade, scaletype=0, data=true) {
+    var html = `<div class="ba-icon-enemy unselectable" ${data ? `data-enemy='${enemy.Id}_${level}_${grade}_${scaletype}'` : ''} onclick="showEnemyInfo(${enemy.Id},${level},${grade},${scaletype},${!data})"><img src="images/enemy/${enemy.Icon}.png">`
     if (enemy.Rank == 'Elite') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Elite.png" style="width:22px;"></span>`
     else if (enemy.Rank == 'Champion') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Champion.png" style="width:31px;"></span>`
     html += `<span class="ba-enemy-card-lv">Lv.${level}</span><span class="ba-enemy-card-atk bg-atk-${enemy.BulletType.toLowerCase()}"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></span>
@@ -2232,7 +2242,11 @@ function getEnemyCardHTML(enemy, level, grade, scaletype=0) {
     return html
 }
 
-function showEnemyInfo(id, level, grade=1, scaletype=0) {
+function showEnemyInfo(id, level, grade=1, scaletype=0, switchTab=false) {
+    $(".ba-icon-enemy").removeClass("selected")
+    if (loadedModule == 'stages' && switchTab) $('#ba-stage-tab-enemies').tab('show')
+    $(`.ba-icon-enemy[data-enemy='${id}_${level}_${grade}_${scaletype}']`).addClass("selected")
+    //if (selector != null) $(selector).addClass("selected")
     let enemy = find(data.enemies, 'Id', id)[0]
     $('#ba-stage-enemy-name').text(getTranslatedString(enemy, 'Name'))
     $('#ba-stage-enemy-img').attr('src', `images/enemy/${enemy.Icon}.png`)
@@ -2283,6 +2297,26 @@ function showEnemyInfo(id, level, grade=1, scaletype=0) {
     $('#ba-stage-enemy-stat-critdmgresist').text(`${parseFloat(((enemy.CriticalDamageResistRate)/100).toFixed(4))}%`)
     $('#ba-stage-enemy-stat-movespeed').text(enemy.MoveSpeed.toLocaleString())
 
+}
+
+function populateMapEnemyList(formationId) {
+    let enemyList = {}
+    const enemyRanks = ['Minion','Elite','Champion','Boss']
+    let formation = find(loadedStage.Formations, 'Id', formationId)[0]
+    let html = ''
+    for (let i = 0; i < formation.EnemyList.length; i++) {
+        let enemy = find(data.enemies, "Id", formation.EnemyList[i])[0]
+        let rankId = enemyRanks.indexOf(enemy.Rank)
+        enemyList[`${4-rankId}_${enemy.Id}_${formation.Level[rankId]}_${formation.Grade[rankId]}`] = enemy
+    }
+
+    Object.keys(enemyList).sort().forEach(el => {
+        e_level = el.split('_')[2]
+        e_grade = el.split('_')[3]
+        html += getEnemyCardHTML(enemyList[el], e_level, e_grade, 0, false)
+    })
+    $('#ba-stage-map-enemies').html(html)
+    window.scrollTo({top: $(`#ba-stage-map-enemies`).prop('offsetTop'), left: 0})
 }
 
 function getMaterialIconHTML(id, amount) {
@@ -2418,11 +2452,8 @@ function getFurnitureIconHTML(item) {
 function recalculateWeaponSkillPreview() {
     let skillLevel = $("#ba-weapon-skillpreview-range").val()
     let skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
-    if (userLang == 'ja' && skill.ParametersJp != null) {
-        $('#ba-skill-weaponpassive-description').html(getSkillText(getTranslatedString(skill, 'Desc'), skill.ParametersJp, skillLevel, student.BulletType))
-    } else {
-        $('#ba-skill-weaponpassive-description').html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType))
-    }
+
+    $('#ba-skill-weaponpassive-description').html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType))
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })
@@ -2626,15 +2657,16 @@ function populateStageList() {
     $('#ba-stages-list-schooldungeon-grid').html(html)
     html = ''
     let eventPrev = 0
-    $.each(data.stages.Event, function(i,el) {
-        if (el.EventId <= data.common.regions[regionID].event_max && !(el.EventId == 701 && el.Stage > data.common.regions[regionID].event_701_max)) {
-            if (el.EventId != eventPrev) {
-                html += `<div id="stages-list-events-grid-header-${el.EventId}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('EventName',''+el.EventId)}</h3></div>`
-            }
-            html += getStageCardHTML(el)
-            eventPrev = el.EventId
-        }  
+    data.common.regions[regionID].events.forEach(val => {
+        html += `<div id="stages-list-events-grid-header-${val}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('EventName',''+val)}</h3></div>`
+        $.each(find(data.stages.Event, "EventId", val), function(i,el) {
+            if (!(el.EventId == 701 && el.Stage > data.common.regions[regionID].event_701_max)) {
+                html += getStageCardHTML(el)
+                eventPrev = el.EventId
+            }  
+        })
     })
+    
     $('#ba-stages-list-events-grid').html(html)
 }
 
@@ -2982,8 +3014,10 @@ function toggleDarkTheme(theme) {
     document.querySelector('meta[name="theme-color"]').setAttribute('content', $('body').hasClass('theme-dark') ? '#212529' : '#dee2e6')
 }
 
-function toggleHighContrast() {
-    var highContrast = $('#ba-navbar-contrast-toggle').prop('checked')
+function toggleHighContrast(state) {
+    highContrast = state
+    $(`#ba-navbar-contrast-toggle button`).removeClass("active")
+    $(`#ba-navbar-contrast-toggle-${highContrast}`).addClass("active")
     localStorage.setItem("high_contrast", highContrast)
     $('body').toggleClass("high-contrast", highContrast)
 }
@@ -3034,7 +3068,7 @@ function getRarityTier(rarity) {
 }
 
 function searchContains(substring, string) {
-    if (userLang == 'ja') {
+    if (userLang != 'En') {
         if (string.includes(substring))
         return true
     } else {
@@ -3197,7 +3231,7 @@ function getLocalizedString(group, key, replacements=[]) {
             return formatString(data.localization.strings[group][key][userLang], replacements)
         } else {
             console.log(`Localization not defined for "${group}, ${key}" for locale "${userLang}"`)
-            return formatString(data.localization.strings[group][key]['en'], replacements)
+            return formatString(data.localization.strings[group][key]['En'], replacements)
         }
     } else {
         console.log(`Localization not defined for "${group}, ${key}"`)
@@ -3212,8 +3246,8 @@ function getLocalizedString(group, key, replacements=[]) {
  * @returns 
  */
 function getTranslatedString(obj, key) {
-    translateCode = translation_code[userLang]
-    if (obj[key+translateCode]) return (obj[key+translateCode])
+    if (obj[key]) return (obj[key])
+    else if (obj[key+userLang]) return (obj[key+userLang])
     else if (obj[key+'Jp']) return (obj[key+'Jp'])
     else if (obj[key+'En']) return (obj[key+'En'])
     else {
@@ -3289,7 +3323,7 @@ function getPassiveSkillBonus(skill, level) {
  */
 function stageIsReleased(stage) {
     if (stage.Id > 8000000) {
-        return (stage.EventId <= data.common.regions[regionID].event_max)
+        return (stage.EventId in data.common.regions[regionID].events)
     } else if (stage.Id > 1000000) {
         return (stage.Area <= data.common.regions[regionID].campaign_max)
     } else if (stage.Id > 60000) {
@@ -3343,8 +3377,6 @@ function openStudentComparison() {
  * @param {} stage 
  */
 function drawHexamap(stage) {
-    // const canvas = document.getElementById('ba-stage-map-canvas')
-    // const ctx = canvas.getContext('2d')
     $('#ba-stage-map-canvas').empty()
     const scale = 90
 
@@ -3377,12 +3409,14 @@ function drawHexamap(stage) {
         let xx = tile.Pos[0] - x_min
         let yy = tile.Pos[1] - y_min
 
-        console.log(`Drawing tile at ${xx},${yy}`)
+        //console.log(`Drawing tile at ${xx},${yy}`)
 
         const x = xx*scale + (yy*scale*0.5) - leftOffset
         const y = yy* Math.sqrt(Math.pow(scale/2, 2)*3) + topOffset
-        let html = `<div class="ba-stage-map-tile map-tile-${ind} ${(tile.Type == "TileRemoveObject_TargetTile_01" && stage.HexaMap[tile.Trigger].Entity == 102101) ? "hidden-tile" : ""} ${(tile.Type == "DisposableTileObject_01") ? "cracked-tile" : ""}" style="left:${x}px;top:${y}px;">`
-        if (tile.Type == "TileRemoveObject_TargetTile_01") {
+        const spawnTiles = [102101, 902101, 903108]
+        let html = ""
+        let onclick = ""
+        if (tile.Type.startsWith("TileRemoveObject_TargetTile")) {
             if (tilePairs[ind] == 0 && tilePairs[tile.Trigger] == 0) {
                 pairCount++
                 tilePairs[ind] = pairCount
@@ -3396,7 +3430,7 @@ function drawHexamap(stage) {
                 let unit = find(stage.Formations, "Id", tile.Entity)[0]
                 html += `<img class="ba-stage-map-enemy" src="images/enemy/${unit.MapIcon}.png" style="z-index:${yy}">`
                 html += `<div class="map-info">`
-
+                onclick = ` onclick="populateMapEnemyList(${tile.Entity});" `
 
                 if (unit.MoveType == "Guard") {
                     html += `<span class="move-type guard"><i class="fa-solid fa-triangle-exclamation"></i></span>`
@@ -3416,42 +3450,88 @@ function drawHexamap(stage) {
                     html += `<span class="unit-grade boss"></span>`
                 }
 
-            } else if (tile.Entity == 101101) {
-                //Start Tile
-                html += `<span class="start-tile ba-info-pill-s bg-theme text-italic m-0" style="z-index:${yy}">START</span>`
-            } else if (tile.Entity == 102101 || tile.Entity == 902101 || tile.Entity == 903108) {
-                //Spawn Tile
-                html += `<span class="tile-icon" style="z-index:${yy}"><i class="fa-solid fa-shoe-prints" style="transform:rotate(315deg);"></i></span>`
-            } else if (tile.Entity == 102201 || tile.Entity == 903101) {
-                //Remove Tile
-                html += `<span class="tile-icon" style="z-index:${yy}"><i class="fa-solid fa-shoe-prints" style="transform:rotate(315deg);font-size: 20px;"></i><i class="fa-solid fa-ban" style="position: absolute;font-size: 38px;"></i></span>`
-            } else if (tile.Entity == 104101 || tile.Entity == 104102) {
-                //2-Way Teleporter Tile
-                html += `<span class="tile-icon group-${tile.Entity-104100}" style="z-index:${yy}"><i class="fa-solid fa-up-long"></i><i class="fa-solid fa-down-long"></i></span>`
-            } else if (tile.Entity == 105101 || tile.Entity == 105201) {
-                //1-Way Teleporter Out
-                html += `<span class="tile-icon group-${((tile.Entity-105001)/100) +2}" style="z-index:${yy}"><i class="fa-solid fa-up-long"></i></span>`
-            } else if (tile.Entity == 105102 || tile.Entity == 105202) {
-                //1-Way Teleporter In
-                html += `<span class="tile-icon group-${((tile.Entity-105002)/100) +2}" style="z-index:${yy}"><i class="fa-solid fa-down-long"></i></span>`
-            } else if (tile.Entity == 109201 || tile.Entity == 109202 || tile.Entity == 109203) {
-                //Switch D -> U
-                html += `<span class="tile-icon group-${tile.Entity-109200}" style="z-index:${yy}"><i class="fa-solid fa-circle-chevron-up"></i></span>`
-            } else if (tile.Entity == 109204 || tile.Entity == 109205 || tile.Entity == 109206) {
-                //Switch U -> D
-                html += `<span class="tile-icon group-${tile.Entity-109200-3}" style="z-index:${yy}"><i class="fa-solid fa-circle-chevron-down"></i></span>`
-            } else if (tile.Entity == 109301 || tile.Entity == 109302 || tile.Entity == 109303) {
-                //Switch Tile D
-                html += `<span class="tile-icon switch-tile group-${tile.Entity-109300}" style="z-index:${yy}"></span>`
-            } else if (tile.Entity == 109304 || tile.Entity == 109305 || tile.Entity == 109306) {
-                //Switch Tile U
-                html += `<span class="tile-icon switch-tile group-${tile.Entity-109300-3}" style="z-index:${yy}"></span>`
+            }  else if (tile.Entity > 1000000) {
+                //Pyroxene Tile
+                let item = find(data.items, "Id", 90000)[0]
+                html += `<span class="tile-item" style="z-index:${yy}" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory', item.Category), getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><i class="fa-solid fa-gift"></i></span>`
+
+            } else switch (tile.Entity) {
+                case 101101:
+                    //Start Tile
+                    html += `<span class="start-tile"></span>`
+                    break
+            
+                case 102101: case 902101: case 903108:
+                    //Spawn Tile
+                    html += `<span class="tile-icon" style="z-index:${yy}" title="${getBasicTooltip('Spawn Tile')}"><i class="fa-solid fa-shoe-prints" style="transform:rotate(315deg);"></i></span>`
+                    break
+
+                case 103101: case 103102:
+                    //Drone Tile
+                    html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip('Drone (Reveals surrounding tiles)')}"><i class="fa-solid fa-eye"></i></span>`
+                    break
+
+                case 102201: case 903101:
+                    //Remove Tile
+                    html += `<span class="tile-icon" style="z-index:${yy}" title="${getBasicTooltip('Remove Tile')}"><i class="fa-solid fa-shoe-prints" style="transform:rotate(315deg);font-size: 20px;"></i><i class="fa-solid fa-ban" style="position: absolute;font-size: 38px;"></i></span>`
+                    break
+
+                case 104101: case 104102:
+                    //2-Way Teleporter Tile
+                    html += `<span class="tile-icon group-${tile.Entity-104100}" style="z-index:${yy}" title="${getBasicTooltip('Two-way Teleporter')}"><i class="fa-solid fa-up-long"></i><i class="fa-solid fa-down-long"></i></span>`
+                    break
+      
+                case 105101: case 105201:
+                    //1-Way Teleporter Out
+                    html += `<span class="tile-icon group-${((tile.Entity-105001)/100) +2}" style="z-index:${yy}" title="${getBasicTooltip('One-way Teleporter Entrance')}"><i class="fa-solid fa-up-long"></i></span>`
+                    break
+
+                case 105102: case 105202:
+                    //1-Way Teleporter In
+                    html += `<span class="tile-icon group-${((tile.Entity-105002)/100) +2}" style="z-index:${yy}" title="${getBasicTooltip('One-way Teleporter Exit')}"><i class="fa-solid fa-down-long"></i></span>`
+                    break
+
+                case 106101:
+                    //Heal Tile
+                    html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip('Food Pickup\n(Heals unit for 50% of their Max HP)')}"><i class="fa-solid fa-bowl-rice"></i></span>`
+                    break
+
+                case 107101:
+                    //Gun Tile
+                    html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip('Gun Pickup\n(Increases unit\'s attack by 10% for the next two turns)')}"><i class="fa-solid fa-gun"></i></span>`
+                    break
+
+                case 107201:
+                    //Armor Tile
+                    html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip('Armor Pickup\n(Increases unit\'s defense by 10% for the next two turns)')}"><i class="fa-solid fa-shield"></i></span>`
+                    break
+                
+                case 109201: case 109202: case 109203:
+                    //Switch D -> U
+                    html += `<span class="tile-icon lowered group-${tile.Entity-109200}" style="z-index:${yy}" title="${getBasicTooltip('Lowered Switch Tile')}"><i class="fa-solid fa-chevron-up" style="margin-top: 12px;"></i></span>`
+                    break
+
+                case 109204: case 109205: case 109206:
+                    //Switch U -> D
+                    html += `<span class="tile-icon raised group-${tile.Entity-109200-3}" style="z-index:${yy}" title="${getBasicTooltip('Raised Switch Tile')}"><i class="fa-solid fa-chevron-down"></i></span>`
+                    break
+
+                case 109301: case 109302: case 109303:
+                    //Switch Tile D
+                    html += `<span class="tile-icon switch-tile lowered group-${tile.Entity-109300}" style="z-index:${yy}" title="${getBasicTooltip('Lowered Tile')}"></span>`
+                    break
+
+                case 109304: case 109305: case 109306:
+                    //Switch Tile U
+                    html += `<span class="tile-icon switch-tile group-${tile.Entity-109300-3}" style="z-index:${yy}" title="${getBasicTooltip('Raised Tile')}"></span>`
+                    break
             }
         }
-        html += `</div>`
+        html = `<div class="ba-stage-map-tile map-tile-${ind} ${(tile.Type.startsWith("TileRemoveObject_TargetTile") && spawnTiles.includes(stage.HexaMap[tile.Trigger].Entity)) ? "hidden-tile" : ""} ${(tile.Type.startsWith("DisposableTileObject")) ? "cracked-tile" : ""}" ${onclick} style="left:${x}px;top:${y.toFixed(0)}px;${onclick != '' ? 'cursor:pointer;' : ''}">${html}</div>`
         $('#ba-stage-map-canvas').css('width', `${rightOffset-leftOffset}px`)
-        $('#ba-stage-map-canvas').css('height', `${topOffset + 40 + scale + (y_max-y_min)*Math.sqrt(Math.pow(scale/2, 2)*3)}px`)
+        $('#ba-stage-map-canvas').css('height', `${topOffset + 10 + scale + (y_max-y_min)*Math.sqrt(Math.pow(scale/2, 2)*3)}px`)
         $('#ba-stage-map-canvas').append(html)
+        $('.tile-icon, .tile-item').tooltip({html: true})
     })
 
     tilePairs.forEach((val, ind) => {
