@@ -3240,7 +3240,7 @@ function getLocalizedString(group, key, replacements=[]) {
 }
 
 /**
- * Returns the translated string for the current language. If it is null or empty for the current language, returns the first nonempty translation in the order Jp, En
+ * Returns the translated string for the current language. If it is null or empty for the current language, returns the first nonempty translation in the order En, Jp
  * @param {*} obj The object containing the translated strings
  * @param {*} key The key excluding the language suffix e.g. 'Name' to get either 'NameEn' or 'NameJp' based on the current language
  * @returns 
@@ -3248,8 +3248,8 @@ function getLocalizedString(group, key, replacements=[]) {
 function getTranslatedString(obj, key) {
     if (obj[key]) return (obj[key])
     else if (obj[key+userLang]) return (obj[key+userLang])
-    else if (obj[key+'Jp']) return (obj[key+'Jp'])
     else if (obj[key+'En']) return (obj[key+'En'])
+    else if (obj[key+'Jp']) return (obj[key+'Jp'])
     else {
         console.log(`No translations defined for "${obj}.${key}"`)
         return ''
