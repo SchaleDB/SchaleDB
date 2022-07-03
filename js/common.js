@@ -18,7 +18,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 9
+const cache_ver = 10
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -1158,7 +1158,7 @@ function processStudent() {
     changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'), false)
 
     for (let i = 1; i <= student_bondalts.length+1; i++) {
-        changeStatPreviewBondLevel(i, document.getElementById(`ba-statpreview-bond-${i}-range`), false)
+        changeStatPreviewBondLevel(i, false)
     }
     
     recalculateStatPreview()
@@ -1956,13 +1956,14 @@ function changeWeaponPreviewLevel(el) {
     recalculateWeaponPreview()
 }
 
-function changeStatPreviewBondLevel(i, el, recalculate = true) {
-    $(`#ba-statpreview-bond-${i}-level`).html(`<i class="fa-solid fa-heart"></i> ${el.value}`)
+function changeStatPreviewBondLevel(i, recalculate = true) {
+    const level = parseInt($(`#ba-statpreview-bond-${i}-range`).val())
+    $(`#ba-statpreview-bond-${i}-level`).html(`<i class="fa-solid fa-heart"></i> ${level}`)
     var bondStats
     if (i == 1) {
-        bondStats = Object.entries(getBondStats(student, el.value))
+        bondStats = Object.entries(getBondStats(student, level))
     } else {
-        bondStats = Object.entries(getBondStats(student_bondalts[i-2], el.value))
+        bondStats = Object.entries(getBondStats(student_bondalts[i-2], level))
     }
     $(`#ba-statpreview-bond-${i}-description`).html(`${getStatName(bondStats[0][0])} <b>+${getFormattedStatAmount(bondStats[0][1])}</b>, ${getStatName(bondStats[1][0])} <b>+${getFormattedStatAmount(bondStats[1][1])}</b>`)
     if (recalculate) recalculateStatPreview()
@@ -2004,7 +2005,7 @@ function changeStatPreviewSummonExSkillLevel(el) {
 }
 
 function getBondTargetsHTML(num, student) {
-    return `<div class="d-flex ${num != 1 ? "mt-3": ""}"><label for="ba-statpreview-bond-${num}-toggle"><h5>${(num == 1) ? getLocalizedString('ui', 'student_bond') : getLocalizedString('ui', 'student_bond_alt')}</h5></label><div class="flex-fill"></div><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="ba-statpreview-bond-${num}-toggle" onchange="toggleBond(${num})"></div></div><div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num}, this)" type="range" class="form-range statpreview-bond me-2 flex-fill" value="20" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div>`
+    return `<div class="d-flex ${num != 1 ? "mt-3": ""}"><label for="ba-statpreview-bond-${num}-toggle"><h5>${(num == 1) ? getLocalizedString('ui', 'student_bond') : getLocalizedString('ui', 'student_bond_alt')}</h5></label><div class="flex-fill"></div><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="ba-statpreview-bond-${num}-toggle" onchange="toggleBond(${num})"></div></div><div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="20" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div>`
 }
 
 function changeBondLevel(el) {
@@ -2242,9 +2243,11 @@ function recalculateStatPreview() {
     $('#ba-statpreview-gear-toggle').prop("checked", statPreviewIncludeEquipment)
     $('#ba-statpreview-gear input').prop("disabled", !statPreviewIncludeEquipment)
 
-    for (let i = 0; i < 3; i++) {
-        $(`#ba-statpreview-gear${i+1}`).toggleClass('disabled', (level < gear_minlevelreq[i]))
-        $(`#ba-statpreview-gear${i+1}-range`).prop('disabled', (level < gear_minlevelreq[i]))
+    if (statPreviewIncludeEquipment) {
+        for (let i = 0; i < 3; i++) {
+            $(`#ba-statpreview-gear${i+1}`).toggleClass('disabled', (level < gear_minlevelreq[i]))
+            $(`#ba-statpreview-gear${i+1}-range`).prop('disabled', (level < gear_minlevelreq[i]))
+        }
     }
 
     $('#ba-statpreview-status-compare').toggleClass('deactivated', !compareMode)
@@ -2649,14 +2652,13 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
     }
 
 
-    
-    $('.statpreview-bond').each((ind, el) => {
-        if (parseInt($(el).val()) > maxbond[stars-1]) {
-            $(el).val(maxbond[stars-1])
-            $(el).trigger('input')
-        }
-    })
-    $('.statpreview-bond').attr("max", maxbond[stars-1])
+    const bondLevel = parseInt($('#ba-statpreview-bond-1-range').val())
+    if (bondLevel > maxbond[stars-1]) {
+        $('#ba-statpreview-bond-1-range').val(maxbond[stars-1])
+        changeStatPreviewBondLevel(1, false)
+    }
+    $('#ba-statpreview-bond-1-range').attr("max", maxbond[stars-1])
+
     if (weaponstars > 0) {
         $('#ba-statpreview-weapon').toggleClass('disabled', false)
         $('.statpreview-weapon-range').prop('disabled', false)

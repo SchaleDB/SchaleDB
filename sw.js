@@ -5,8 +5,8 @@
  */
 
 // data cache version should match common.js
-const dataCacheVer = 9;
-const imgCacheVer = 1;
+const dataCacheVer = 10;
+const imgCacheVer = 2;
 
 const dataCacheName = `schale-data-v${dataCacheVer}`;
 
@@ -22,14 +22,14 @@ const dataPreCacheFiles = [
 const coreCacheName = `schale-core-v${dataCacheVer}`;
 const corePreCacheFiles = [
     './',
-    './html/craft.html',
-    './html/home.html',
-    './html/items.html',
-    './html/raids.html',
-    './html/stages.html',
-    './html/students.html',
-    './css/main.css',
-    './js/common.min.js',
+    './html/craft.html?v=' + dataCacheVer,
+    './html/home.html?v=' + dataCacheVer,
+    './html/items.html?v=' + dataCacheVer,
+    './html/raids.html?v=' + dataCacheVer,
+    './html/stages.html?v=' + dataCacheVer,
+    './html/students.html?v=' + dataCacheVer,
+    './css/main.css?v=' + dataCacheVer,
+    './js/common.min.js?v=' + dataCacheVer,
 ];
 
 const imageCacheName = `schale-images-v${imgCacheVer}`;
@@ -39,6 +39,7 @@ const currentCacheList = []
 self.addEventListener('install', (e) => {
     console.log('[SW] Installed');
     e.waitUntil((async () => {
+        self.skipWaiting();
         const dataCache = await caches.open(dataCacheName);
         currentCacheList.push(dataCacheName)
         console.log('[SW] Caching Data Files');
@@ -58,7 +59,6 @@ self.addEventListener('install', (e) => {
                 }
             }));
         });
-        self.skipWaiting();
     })());
 });
 
@@ -67,7 +67,7 @@ self.addEventListener('fetch', (e) => {
     e.respondWith((async () => {
         //console.log(e.request)
         if (e.request.method != 'GET') {return await fetch(e.request);}
-        const hasQuery = e.request.url.includes('?');
+        const hasQuery = e.request.url.includes('/?');
         const r = await caches.match(e.request, {ignoreSearch: hasQuery});
         
         if (r) { 
@@ -79,11 +79,11 @@ self.addEventListener('fetch', (e) => {
         if (response.type == 'basic') {
             //cache same origin files
             const requestURL = new URL(e.request.url);
-            if (requestURL.pathname.startsWith('/images/')) {
+            if (requestURL.pathname.includes('/images/')) {
                 const imageCache = await caches.open(imageCacheName);
                 //console.log(`[SW] Caching new image resource: ${e.request.url}`);
                 imageCache.put(e.request, response.clone());
-            } else if (requestURL.pathname.startsWith('/data/')) {
+            } else if (requestURL.pathname.includes('/data/')) {
                 const dataCache = await caches.open(dataCacheName);
                 //console.log(`[SW] Caching new data resource: ${e.request.url}`);
                 try {
