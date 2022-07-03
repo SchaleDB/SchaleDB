@@ -4,11 +4,13 @@ const starscale_hp      = [1, 1.05,  1.12,  1.21,  1.35 ]
 const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445] 
 const raid_level = [17, 25, 35, 50, 70, 80]
+const maxbond = [10, 10, 20, 20, 50]
+const gear_minlevelreq = [0, 15, 35]
 const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40]]
-const languages = ['En', 'Jp', 'Kr']
-const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5}
-const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6}
-const label_raid_smalltext_threshold = {'En':20, 'Jp':11, 'Kr':11}
+const languages = ['En', 'Jp', 'Kr', 'Tw']
+const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5}
+const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':5}
+const label_raid_smalltext_threshold = {'En':20, 'Jp':11, 'Kr':11, 'Tw':5}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
@@ -16,7 +18,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 8
+const cache_ver = 9
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -44,10 +46,10 @@ const json_list = {
     students: getCacheVerResourceName(`./data/students_${userLang.toLowerCase()}.json`),
     localization: getCacheVerResourceName("./data/localization.json"),
     stages: getCacheVerResourceName("./data/stages.json"),
-    enemies: getCacheVerResourceName("./data/enemies.json"),
+    enemies: getCacheVerResourceName(`./data/enemies_${userLang.toLowerCase()}.json`),
     items: getCacheVerResourceName(`./data/items_${userLang.toLowerCase()}.json`),
-    furniture: getCacheVerResourceName("./data/furniture.json"),
-    equipment: getCacheVerResourceName("./data/equipment.json"),
+    furniture: getCacheVerResourceName(`./data/furniture_${userLang.toLowerCase()}.json`),
+    equipment: getCacheVerResourceName(`./data/equipment_${userLang.toLowerCase()}.json`),
     crafting: getCacheVerResourceName("./data/crafting.json"),
     summons: getCacheVerResourceName("./data/summons.json")
 }
@@ -76,7 +78,7 @@ const sort_functions = {
 let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loadedStage, loadedCraftNode, region, regionID, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
     , studentCompare   
     , searchResultsCount = 0, searchResultsSelection = 0
-    , studentSelectorModal, statPreviewModal
+    , studentSelectorModal, statPreviewModal, stageMapModal
     , summonId = 0
     , header
     , raid_difficulty = 0, ta_difficulty = 0
@@ -215,8 +217,8 @@ let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loade
         this.stats['OppressionPower'] = [100,0,1]
         this.stats['OppressionResist'] = [100,0,1]
         this.stats['AttackSpeed'] = [10000,0,1]
-        this.stats['BlockRate'] = [10000,0,1]
-        this.stats['DefensePenetration'] = [10000,0,1]
+        this.stats['BlockRate'] = [0,0,1]
+        this.stats['DefensePenetration'] = [0,0,1]
         this.stats['MoveSpeed'] = [10000,0,1]
     }
 
@@ -259,11 +261,43 @@ let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loade
      */
     getTotalString(stat) {
         let total = this.getTotal(stat)
-        if (stat.slice(-4) == "Rate") {
+        if (CharacterStats.isRateStat(stat)) {
             return (total/100).toFixed(0).toLocaleString() + "%"
         } else {
             return total.toLocaleString()
         }
+    }
+
+    /**
+     * Returns the base stat as a locale-formatted string
+     * @param {*} stat 
+     * @returns 
+     */
+    getBaseString(stat) {
+        let total = this.stats[stat][0]
+        if (CharacterStats.isRateStat(stat)) {
+            return (total/100).toFixed(0).toLocaleString() + "%"
+        } else {
+            return total.toLocaleString()
+        }
+    }
+
+    /**
+     * Returns the flat buff as a locale-formatted string
+     * @param {*} stat 
+     * @returns 
+     */
+    getFlatString(stat) {
+        return "+" + this.stats[stat][1].toLocaleString()
+    }
+
+    /**
+     * Returns the coefficient percent buff as a locale-formatted string
+     * @param {*} stat 
+     * @returns 
+     */
+    getCoefficientString(stat) {
+        return "+" + parseFloat(((this.stats[stat][2]-1)*100).toFixed(1)).toLocaleString() + "%"
     }
 
     getStrikerBonus(stat) {
@@ -287,6 +321,10 @@ let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loade
         }
         return desc        
     }
+
+    static isRateStat(stat) {
+        return stat.slice(-4) == "Rate" || stat.startsWith("AttackSpeed")
+    }
 }
 
 /** Functions */
@@ -301,6 +339,19 @@ if (localStorage.getItem("theme")) {
 }
 
 $(document).ready(function() {
+
+    //service worker
+    if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+    }
+
+    //gtag settings
+    gtag('config', 'G-XQEWDXR13H', {
+        'custom_map': {
+            'dimension1': 'user_language' 
+        },
+    })
+
     //header = $(".card-header")
     if (localStorage.getItem("region")) {
         loadRegion(localStorage.getItem("region"))
@@ -449,7 +500,7 @@ function loadModule(moduleName, entry=null) {
             $('#ba-statpreview-status-bond-alt-level').tooltip({title: getBasicTooltip('Toggle Alt Relationship Bonus'), placement: 'top', html: true})
             $('#ba-statpreview-status-passive-level').tooltip({title: getBasicTooltip('Toggle Enhanced Skill Buff'), placement: 'top', html: true})
             $('#ba-statpreview-status-strikerbonus').tooltip({title: getBasicTooltip('Support Stats'), placement: 'top', html: true})
-            $('#ba-statpreview-status-summon').tooltip({title: getBasicTooltip('Vehicle/Summon Stats'), placement: 'top', html: true})
+            $('.ba-summon-toggle').tooltip({title: getBasicTooltip('Vehicle/Summon Stats'), placement: 'top', html: true})
             $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip('Compare with Student'), placement: 'top', html: true})
             $('#ba-student-search-reset').tooltip({title: getBasicTooltip('Clear All Filters'), placement: 'top', html: true})
 
@@ -459,6 +510,8 @@ function loadModule(moduleName, entry=null) {
                     $(".tooltip").tooltip("hide")
                 }
             })
+
+            $('#ba-student-modal-statpreview').on('shown.bs.modal', recalculateStatPreview)
 
         })
     } else if (moduleName == 'items') {
@@ -534,6 +587,7 @@ function loadModule(moduleName, entry=null) {
         bgimg.src = `images/background/BG_Raid.jpg`
         $("#loaded-module").load(html_list['stages'], function() {
             loadLanguage(userLang)
+            stageMapModal = new bootstrap.Modal(document.getElementById("ba-stage-modal-map"), {})
             if (region.weaponlevel_max == 0) {
                 $('#ba-stages-list-tab-schooldungeon').hide()
             }
@@ -559,6 +613,7 @@ function loadModule(moduleName, entry=null) {
             $('.ba-item-list').addClass('fade')
             $('.ba-item-list.active').addClass('show')
             makeDraggable($('#ba-stage-map'))
+            makeDraggable($('#ba-stage-modal-map-container'))
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         })
     } else if (moduleName == 'craft') {
@@ -899,8 +954,8 @@ function processStudent() {
     } 
 
     statPreviewSummonStats = false
-    $('#ba-statpreview-status-summon').toggleClass('deactivated',true)
-    $('#ba-statpreview-status-summon').toggle((student.SummonIds.length > 0))
+    $('.ba-summon-toggle').toggleClass('deactivated',true)
+    $('.ba-summon-toggle').toggle((student.SummonIds.length > 0))
 
     $("#ba-student-role-label").text(getLocalizedString('TacticRole', student.TacticRole))
     $("#ba-student-role-icon").attr("src", `images/ui/Role_${student.TacticRole}.png`)
@@ -1108,6 +1163,7 @@ function processStudent() {
     
     recalculateStatPreview()
 
+
     var url = new URL(window.location.href)
 
     if (url.searchParams.get("chara") !== student.DevName) {
@@ -1118,6 +1174,12 @@ function processStudent() {
 
     localStorage.setItem("chara", student.DevName)
     studentSelectorModal.hide()
+
+    gtag('event', 'View Student', {
+        'event_category': 'student',
+        'event_label': student.Id,
+        'user_language': userLang
+    })
 }
 
 function loadStudent(studentName) {
@@ -1128,7 +1190,7 @@ function loadStudent(studentName) {
             compareMode = true
             if (statPreviewSummonStats) {
                 statPreviewSummonStats = false
-                $('#ba-statpreview-status-summon').toggleClass('deactivated',true)
+                $('.ba-summon-toggle').toggleClass('deactivated',true)
             }
             recalculateStatPreview()
             studentSelectorModal.hide()
@@ -1173,7 +1235,8 @@ function toggleStudentSummon() {
         $('#ba-statpreview-status-compare').toggleClass('deactivated', true)
     }
     recalculateStatPreview()
-    $('#ba-statpreview-status-summon').toggleClass('deactivated', (!statPreviewSummonStats))
+    $('.ba-summon-toggle').toggleClass('deactivated', (!statPreviewSummonStats))
+    $('#ba-statpreview-summon-level').toggle(statPreviewSummonStats)
     updateStatPreviewTitle()
 }
 
@@ -1265,6 +1328,12 @@ function loadItem(id) {
         $('#ba-navbar-content').collapse('hide')
         window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("item", id)
+
+        gtag('event', 'View Item', {
+            'event_category': 'item',
+            'event_label': id,
+            'user_language': userLang
+        })
     } else {
         loadModule('items', id)
     }
@@ -1314,6 +1383,12 @@ function loadCraft(id) {
         $('#ba-navbar-content').collapse('hide')
         window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("craftnode", id)
+
+        gtag('event', 'View Crafting', {
+            'event_category': 'crafting',
+            'event_label': id,
+            'user_language': userLang
+        })
     } else {
         loadModule('craft', id)
     }
@@ -1405,6 +1480,12 @@ function loadRaid(raidId) {
         $('#ba-navbar-content').collapse('hide')
         window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("raid", raid.Id)
+
+        gtag('event', 'View Raid', {
+            'event_category': 'raid',
+            'event_label': raid.Id,
+            'user_language': userLang
+        })
     } else {
         loadModule('raids', raidId)
     }
@@ -1515,7 +1596,7 @@ function changeRaidEnemy(num) {
     $('#ba-raid-stat-maxhp').text(maxHP.toLocaleString())
     $('#ba-raid-stat-attack').text(attack.toLocaleString())
     $('#ba-raid-stat-defense').text(defense.toLocaleString())
-    $('#ba-raid-stat-dmgresist').text(`${parseFloat(((enemy.DamagedRatio-10000)/100).toFixed(4)).toLocaleString()}%`)
+    $('#ba-raid-stat-dmgresist').text(`${parseFloat(((10000-enemy.DamagedRatio)/100).toFixed(4)).toLocaleString()}%`)
     $('#ba-raid-stat-accuracy').text(enemy.AccuracyPoint.toLocaleString())
     $('#ba-raid-stat-evasion').text(enemy.DodgePoint.toLocaleString())
     $('#ba-raid-stat-crit').text(enemy.CriticalPoint.toLocaleString())
@@ -1635,35 +1716,35 @@ function loadStage(id) {
 
         if ("HexaMap" in stage) {
             $('#ba-stage-tab-map').toggleClass('disabled', false)
-            drawHexamap(stage)
-            $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_complete'))
-            $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_sranks', [stage.StarCondition[0]]))
-            $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_clearturns', [stage.StarCondition[1]]))
+            drawHexamap(stage, '#ba-stage-map-canvas')
+            $('.ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_complete'))
+            $('.ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_sranks', [stage.StarCondition[0]]))
+            $('.ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_clearturns', [stage.StarCondition[1]]))
         } else {
             if ($('#ba-stage-tab-map').hasClass('active')) {
                 $('#ba-stage-tab-enemies').tab('show')
             }
             $('#ba-stage-tab-map').toggleClass('disabled', true)
             if (mode == "Campaign" || mode == "Event") {
-                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_defeatall'))
-                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_defeatalltime', ['120']))
-                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_allsurvive'))  
+                $('.ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_defeatall'))
+                $('.ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_defeatalltime', ['120']))
+                $('.ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_allsurvive'))
             } else if (stage.Type.slice(0,6) == "Chaser") {
-                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
-                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
-                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_cleartime', ['150']))
+                $('.ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
+                $('.ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
+                $('.ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_cleartime', ['150']))
             } else if (stage.Type == "Blood") {
-                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
-                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
-                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_cleartime', ['120']))
+                $('.ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
+                $('.ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
+                $('.ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_cleartime', ['120']))
             } else if (stage.Type == "FindGift") {
-                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_earnrewards', ['1']))
-                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_earnrewards', ['4']))
-                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_earnrewards', ['5']))
+                $('.ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_earnrewards', ['1']))
+                $('.ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_earnrewards', ['4']))
+                $('.ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_earnrewards', ['5']))
             } else if (stage.Type.slice(0,6) == "School"){
-                $('#ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
-                $('#ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
-                $('#ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_cleartime', ['120']))
+                $('.ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
+                $('.ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
+                $('.ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_cleartime', ['120']))
             }
         }
 
@@ -1686,6 +1767,13 @@ function loadStage(id) {
         $('#ba-navbar-content').collapse('hide')
         //window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("stage", id)
+
+        gtag('event', 'View Stage', {
+            'event_category': 'stage',
+            'event_label': id,
+            'user_language': userLang
+        })
+
     } else {
         loadModule('stages', id)
     }
@@ -1731,7 +1819,8 @@ function getEventStage(id) {
 function loadRegion(regID) {
     regionID = regID
     region = data.common.regions[regionID]
-    $("#ba-statpreview-levelrange").attr("max",region.studentlevel_max)
+    $(".statpreview-level").attr("max",region.studentlevel_max)
+    $('#ba-statpreview-level-modal').text(`Lv.1 / ${region.studentlevel_max}`)
     $("#ba-weaponpreview-levelrange, #ba-statpreview-weapon-range").attr("max",region.weaponlevel_max)
     if (region.weaponlevel_max == 0) {
         $("#ba-student-nav-weapon").hide()
@@ -1807,8 +1896,31 @@ function toggleStrikerBonus() {
     recalculateStatPreview()
 }
 
+function toggleGear() {
+    statPreviewIncludeEquipment = !statPreviewIncludeEquipment
+    updateGearIcon()
+    recalculateStatPreview()
+}
+
+function toggleBond(num) {
+    if (num == 1) {
+        statPreviewIncludeBond = !statPreviewIncludeBond
+    } else {
+        statPreviewIncludeBondAlts = !statPreviewIncludeBondAlts
+    }
+    recalculateStatPreview()
+}
+
+function togglePassiveSkill() {
+    statPreviewIncludePassive = !statPreviewIncludePassive
+    recalculateStatPreview()
+}
+
 function changeStatPreviewLevel(el) {
-    $('#ba-statpreview-level').text("Lv." + el.value)
+    const level = parseInt(el.value)
+    $('.statpreview-level').val(level)
+    $('#ba-statpreview-level').text("Lv." + level)
+    $('#ba-statpreview-level-modal').text(`Lv.${level} / ${el.max}`)
     recalculateStatPreview()
 }
 
@@ -1892,7 +2004,7 @@ function changeStatPreviewSummonExSkillLevel(el) {
 }
 
 function getBondTargetsHTML(num, student) {
-    return `<div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num}, this)" type="range" class="form-range me-2 flex-fill" value="20" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div>`
+    return `<div class="d-flex ${num != 1 ? "mt-3": ""}"><label for="ba-statpreview-bond-${num}-toggle"><h5>${(num == 1) ? getLocalizedString('ui', 'student_bond') : getLocalizedString('ui', 'student_bond_alt')}</h5></label><div class="flex-fill"></div><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="ba-statpreview-bond-${num}-toggle" onchange="toggleBond(${num})"></div></div><div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num}, this)" type="range" class="form-range statpreview-bond me-2 flex-fill" value="20" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div>`
 }
 
 function changeBondLevel(el) {
@@ -1910,7 +2022,6 @@ function updateGearIcon() {
         $("#ba-student-gear-"+i).attr('onclick', `loadItem(${gear.Id+2000000})`)
 
     }
-    //$('#ba-statpreview-status-equipment .statpreview-label').text(tierText)
 }
 
 function recalculateTerrainAffinity() {
@@ -1932,8 +2043,6 @@ function recalculateWeaponPreview() {
 }
 
 function recalculateStatPreview() {
-    const minlevelreq = [0, 15, 35]
-    const maxbond = [10, 10, 20, 20, 50]
     let strikerBonus = $('#ba-student-stat-table').hasClass("table-striker-bonus")
     let level = $("#ba-statpreview-levelrange").val()
     let studentStats, summonStats, summon
@@ -1954,7 +2063,7 @@ function recalculateStatPreview() {
             gear = find(data.equipment, "Id", gearId[student.Equipment[i]]+tier-1)[0]
 
             //check that equipment slot is unlocked at current level
-            if (level >= minlevelreq[i]) {
+            if (level >= gear_minlevelreq[i]) {
                 for (let j = 0; j < gear.StatType.length; j++) {
                     studentStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
                     if (statPreviewSummonStats && summon.Id != 99999) {
@@ -1966,7 +2075,7 @@ function recalculateStatPreview() {
             if (compareMode) {
                 gear = find(data.equipment, "Id", gearId[studentCompare.Equipment[i]]+tier-1)[0]
                 //check that equipment slot is unlocked at current level
-                if (level >= minlevelreq[i]) {
+                if (level >= gear_minlevelreq[i]) {
                     for (let j = 0; j < gear.StatType.length; j++) {
                         studentCompareStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
                     }
@@ -2050,11 +2159,11 @@ function recalculateStatPreview() {
         studentCompareStats.stats["AmmoCount"][0] = 0
     }
 
-    const statList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalDamageRate','StabilityPoint','Range','OppressionPower','OppressionResist','AmmoCount','CriticalChanceResistPoint','CriticalDamageResistRate','HealEffectivenessRate']
+    const statList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalDamageRate','StabilityPoint','Range','OppressionPower','OppressionResist','AmmoCount','CriticalChanceResistPoint','CriticalDamageResistRate','HealEffectivenessRate','AttackSpeed','DefensePenetration','BlockRate']
     let stats = (statPreviewSummonStats ? summonStats : studentStats)
 
     statList.forEach((stat, index) => {
-        let text
+        let text, modText, compareText = ""
         if ((strikerBonus) && (!statPreviewSummonStats) && (index < 4)) {
             text = '+' + stats.getStrikerBonus(stat).toLocaleString()
         } else {
@@ -2090,24 +2199,54 @@ function recalculateStatPreview() {
             }
 
             if (diff < 0) {
-                text += `<small class="comparison less">&#9660;&nbsp;${amount}</small>`
+                compareText = `<small class="comparison less">&#9660;&nbsp;${amount}</small>`
             } else if (diff > 0) {
-                text += `<small class="comparison greater">&#9650;&nbsp;${amount}</small>`
+                compareText = `<small class="comparison greater">&#9650;&nbsp;${amount}</small>`
             } else {
-                text += `<small class="comparison">&#9654;&nbsp;0</small>`
+                compareText = `<small class="comparison">&#9654;&nbsp;0</small>`
             }
         }
-        $(`#ba-student-stat-${stat} .stat-value`).html(text)
+        $(`#ba-student-stat-${stat} .stat-value`).html(text + compareText)
+
+        //Modal
+        if ($('#ba-student-modal-statpreview').hasClass('show')) {
+            modText = `<span class="stat-base">${stats.getBaseString(stat)}</span>`
+            let flatBonus = stats.getFlatString(stat)
+            modText += `<span class="stat-flat${(flatBonus == "+0") ? " zero" : ""}">${flatBonus}</span>`
+            let coefBonus = stats.getCoefficientString(stat)
+            modText += `<span class="stat-coefficient${(coefBonus == "+0%") ? " zero" : ""}">${coefBonus}</span>`
+            modText += `<span class="stat-final">${text}</span>`
+            $(`#ba-student-stat-modal-${stat} .stat-value`).html(modText)
+        }
     })
 
     $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
     $('#ba-statpreview-status-bond-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-1-range').val()}`)
+    $('#ba-statpreview-bond-1-toggle').prop("checked", statPreviewIncludeBond)
+    $('#ba-statpreview-bond-1').toggleClass("disabled", !statPreviewIncludeBond)
+    $('#ba-statpreview-bond-1 input').prop("disabled", !statPreviewIncludeBond)
     if (student_bondalts.length > 0) {
         $('#ba-statpreview-status-bond-alt-level').toggleClass('deactivated', !statPreviewIncludeBondAlts)
         $('#ba-statpreview-status-bond-alt-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-2-range').val()}`)
+        $('#ba-statpreview-bond-2-toggle').prop("checked", statPreviewIncludeBondAlts)
+        $('#ba-statpreview-bond-2').toggleClass("disabled", !statPreviewIncludeBondAlts)
+        $('#ba-statpreview-bond-2 input').prop("disabled", !statPreviewIncludeBondAlts)
     }
     $('#ba-statpreview-status-passive-level').toggleClass('deactivated', !statPreviewIncludePassive)
+    $('#ba-statpreview-passiveskill-toggle').prop("checked", statPreviewIncludePassive)
+    $('#ba-statpreview-passiveskill').toggleClass("disabled", !statPreviewIncludePassive)
+    $('#ba-statpreview-passiveskill input').prop("disabled", !statPreviewIncludePassive)
+
     $('#ba-statpreview-status-equipment').toggleClass('deactivated', !statPreviewIncludeEquipment)
+    $('#ba-statpreview-gear').toggleClass("disabled", !statPreviewIncludeEquipment)
+    $('#ba-statpreview-gear-toggle').prop("checked", statPreviewIncludeEquipment)
+    $('#ba-statpreview-gear input').prop("disabled", !statPreviewIncludeEquipment)
+
+    for (let i = 0; i < 3; i++) {
+        $(`#ba-statpreview-gear${i+1}`).toggleClass('disabled', (level < gear_minlevelreq[i]))
+        $(`#ba-statpreview-gear${i+1}-range`).prop('disabled', (level < gear_minlevelreq[i]))
+    }
+
     $('#ba-statpreview-status-compare').toggleClass('deactivated', !compareMode)
 }
 
@@ -2169,14 +2308,17 @@ function getItemCardHTML(item, linkid, icontype) {
 
 function getStageCardHTML(stage, dropChance = 0) {
     let type = ''
+    let smallTextThreshold = label_enemy_smalltext_threshold["En"]
     if (stage.Id >= 7000000) {
         type = 'Event'
     } else if (stage.Id >= 1000000) {
         type = 'Campaign'
     } else if (stage.Id >= 60000) {
         type =  'SchoolDungeon'
+        smallTextThreshold = label_enemy_smalltext_threshold[userLang]
     } else if (stage.Id >= 30000) {
         type = 'WeekDungeon'
+        smallTextThreshold = label_enemy_smalltext_threshold[userLang]
     } else {type = 'Unknown'}
     let name = getStageCardName(stage)
     var html = `<div id="ba-stage-select-${stage.Id}" class="ba-select-grid-item unselectable">
@@ -2186,7 +2328,7 @@ function getStageCardHTML(stage, dropChance = 0) {
         html += `<span class="ba-stage-card-droprate">${getProbabilityText(dropChance)}</span>`
     }
     html += `<div class="d-flex align-items-center ba-select-grid-card-label">`
-    html += `<span class="ba-label-text px-1 align-middle ${name.length > label_enemy_smalltext_threshold[userLang] ? "smalltext" : "" }" style="width: 100%">${name}</span>`
+    html += `<span class="ba-label-text px-1 align-middle ${name.length > smallTextThreshold ? "smalltext" : "" }" style="width: 100%">${name}</span>`
     html += `</div></div></div>`
     return html
 
@@ -2300,6 +2442,7 @@ function showEnemyInfo(id, level, grade=1, scaletype=0, switchTab=false) {
 }
 
 function populateMapEnemyList(formationId) {
+    stageMapModal.hide()
     let enemyList = {}
     const enemyRanks = ['Minion','Elite','Champion','Boss']
     let formation = find(loadedStage.Formations, 'Id', formationId)[0]
@@ -2498,17 +2641,32 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
     stat_preview_weapon_stars = weaponstars
 
     for (let i = 1; i <= 5; i++) {
-        $("#ba-statpreview-star-" + i).toggleClass("active", i <= stars)
+        $(`.statpreview-star-${i}`).toggleClass("active", i <= stars)
     }
 
     for (let i = 1; i <= 3; i++) {
-        $("#ba-weaponpreview-star-" + i).toggleClass("active", i <= weaponstars)
+        $(`.weaponpreview-star-${i}`).toggleClass("active", i <= weaponstars)
     }
 
+
+    
+    $('.statpreview-bond').each((ind, el) => {
+        if (parseInt($(el).val()) > maxbond[stars-1]) {
+            $(el).val(maxbond[stars-1])
+            $(el).trigger('input')
+        }
+    })
+    $('.statpreview-bond').attr("max", maxbond[stars-1])
     if (weaponstars > 0) {
+        $('#ba-statpreview-weapon').toggleClass('disabled', false)
+        $('.statpreview-weapon-range').prop('disabled', false)
         let level = 20 + (weaponstars*10)
-        $('#ba-statpreview-weapon-range').val(level)
+        $('.statpreview-weapon-range').attr("max", level)
+        $('.statpreview-weapon-range').val(level)
         updateWeaponLevelStatPreview(level)
+    } else {
+        $('#ba-statpreview-weapon').toggleClass('disabled', true)
+        $('.statpreview-weapon-range').prop('disabled', true)
     }
     $('#ba-student-weapon-level').toggle((stat_preview_weapon_stars > 0))
 
@@ -2542,7 +2700,7 @@ function updatePassiveSkillStatPreview() {
 
 function updateSummonExSkillStatPreview() {
     if (student.SummonIds.length > 0) {
-        $('#ba-statpreview-summon-level').show()
+        $('#ba-statpreview-summon-level').toggle(statPreviewSummonStats)
         //update ex skill info in preview
         let exSkill = find(student.Skills, 'SkillType', 'ex')[0]
         let summon = find(data.summons, "Id", student.SummonIds[0])[0]
@@ -3069,7 +3227,7 @@ function getRarityTier(rarity) {
 
 function searchContains(substring, string) {
     if (userLang != 'En') {
-        if (string.includes(substring))
+        if (string.toLowerCase().includes(substring))
         return true
     } else {
         let a = string.toLowerCase().replace(/[^a-z0-9\- ]/g,''), b = substring.toLowerCase().replace(/[^a-z0-9\- ]/g,'')
@@ -3227,7 +3385,7 @@ function clearSearchBar(el) {
  */
 function getLocalizedString(group, key, replacements=[]) {
     if (data.localization.strings.hasOwnProperty(group) && data.localization.strings[group].hasOwnProperty(key)) {
-        if (data.localization.strings[group][key].hasOwnProperty(userLang)) {
+        if (data.localization.strings[group][key].hasOwnProperty(userLang) && data.localization.strings[group][key][userLang] != null) {
             return formatString(data.localization.strings[group][key][userLang], replacements)
         } else {
             console.log(`Localization not defined for "${group}, ${key}" for locale "${userLang}"`)
@@ -3339,11 +3497,11 @@ function updateStatPreviewTitle() {
     //$('#ba-statpreview-status-title-compare').removeClass('d-none d-md-block')
     if (statPreviewSummonStats) {
         let summon  = find(data.summons, 'Id', student.SummonIds[0])[0]
-        $('#ba-statpreview-status-title').text(getTranslatedString(summon, "Name"))
-        $('#ba-statpreview-status-title-icon').attr('src', `images/skill/${student.Skills[0].Icon}.png`).addClass(`bg-skill-${student.BulletType.toLowerCase()}`)
+        $('#ba-statpreview-status-title, #ba-student-stat-modal-title').text(getTranslatedString(summon, "Name"))
+        $('#ba-statpreview-status-title-icon, #ba-student-stat-modal-title-icon').attr('src', `images/skill/${student.Skills[0].Icon}.png`).addClass(`bg-skill-${student.BulletType.toLowerCase()}`)
     } else {
-        $('#ba-statpreview-status-title').html(getTranslatedString(student, "PersonalName"))//.removeClass('d-none d-md-block')
-        $('#ba-statpreview-status-title-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
+        $('#ba-statpreview-status-title, #ba-student-stat-modal-title').html(getTranslatedString(student, "PersonalName"))//.removeClass('d-none d-md-block')
+        $('#ba-statpreview-status-title-icon, #ba-student-stat-modal-title-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
     }
     if (compareMode) {
         $('#ba-statpreview-status-title-compare').html(getTranslatedString(studentCompare, "PersonalName"))
@@ -3376,8 +3534,8 @@ function openStudentComparison() {
  * Draws the hexamap for a given stage
  * @param {} stage 
  */
-function drawHexamap(stage) {
-    $('#ba-stage-map-canvas').empty()
+function drawHexamap(stage, container) {
+    $(container).empty()
     const scale = 90
 
     let x_min = 99
@@ -3528,9 +3686,9 @@ function drawHexamap(stage) {
             }
         }
         html = `<div class="ba-stage-map-tile map-tile-${ind} ${(tile.Type.startsWith("TileRemoveObject_TargetTile") && spawnTiles.includes(stage.HexaMap[tile.Trigger].Entity)) ? "hidden-tile" : ""} ${(tile.Type.startsWith("DisposableTileObject")) ? "cracked-tile" : ""}" ${onclick} style="left:${x}px;top:${y.toFixed(0)}px;${onclick != '' ? 'cursor:pointer;' : ''}">${html}</div>`
-        $('#ba-stage-map-canvas').css('width', `${rightOffset-leftOffset}px`)
-        $('#ba-stage-map-canvas').css('height', `${topOffset + 10 + scale + (y_max-y_min)*Math.sqrt(Math.pow(scale/2, 2)*3)}px`)
-        $('#ba-stage-map-canvas').append(html)
+        $(container).css('width', `${rightOffset-leftOffset}px`)
+        $(container).css('height', `${topOffset + 10 + scale + (y_max-y_min)*Math.sqrt(Math.pow(scale/2, 2)*3)}px`)
+        $(container).append(html)
         $('.tile-icon, .tile-item').tooltip({html: true})
     })
 
@@ -3565,4 +3723,10 @@ function makeDraggable(el) {
             $(el).scrollTop(scrollPosition.top - (e.clientY - scrollPosition.y))
         }
     })
+}
+
+function openStageMapModal() {
+    drawHexamap(loadedStage, '#ba-stage-modal-map-canvas')
+    $('#ba-stage-modal-map .modal-title').text($('#ba-stage-name').text())
+    stageMapModal.show()
 }

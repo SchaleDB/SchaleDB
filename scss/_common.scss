@@ -1,9 +1,14 @@
 // Put styles here that are common to all pages
 
+html {
+    //fixes address bar pull-down on mobile
+    height: 100vh;
+}
+
 body {
     background-color: var(--col-theme-background);
     font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
-    overflow: hidden scroll;
+    overflow: auto scroll;
     @include webkit-scrollbar;
 }
 
@@ -57,6 +62,14 @@ p {
         @include promote-layer;
         @include scrollable(auto);
         overflow-x: hidden;
+    }
+}
+
+.sidebar {
+    top: calc(56px + 1rem);
+    @include md-up{
+        position: sticky;
+        position: -webkit-sticky;
     }
 }
 
@@ -166,5 +179,31 @@ input[type="search" i]::-webkit-search-cancel-button {
             }
         }
 
+        .stat-base {
+            display: inline-block;
+            min-width: 4rem;
+            font-weight: 400;
+        }
+        .stat-flat {
+            display: inline-block;
+            min-width: 4.5rem;
+            font-weight: 400;
+            color: var(--col-text-emphasis)
+        }
+
+        .stat-coefficient {
+            display: inline-block;
+            min-width: 4rem;
+            font-weight: 400;
+            color: var(--col-text-emphasis)
+        }
+        .stat-final {
+            display: inline-block;
+            min-width: 4.5rem;
+        }
+
+        .zero {
+            color: var(--col-theme-text-t) !important;
+        }
     }
 }

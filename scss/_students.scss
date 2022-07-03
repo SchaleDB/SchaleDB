@@ -1,7 +1,7 @@
 #ba-student-modal-students {
     @include lg-up {
         .modal-body {
-            height: calc(100vh - 3rem);
+            height: 100%;
         }
     }
 }
@@ -102,12 +102,6 @@ a.ba-statpreview-icon {
     font-size: large;
 }
 
-#ba-statpreview-stars {
-    font-size: 0px;
-    height: 32px;
-    @include circular;
-}
-
 .ba-statpreview-star {
 
     transition: color var(--var-animation-duration) ease, opacity var(--var-animation-duration) ease;
@@ -138,12 +132,12 @@ a.ba-statpreview-icon {
     }
 }
 
-#ba-statpreview-status-title {
+.statpreview-student-title {
     font-weight: 500;
     @include truncate-text;
 }
 
-#ba-statpreview-status-title-icon {
+.statpreview-student-icon {
     width: 36px;
     height: 36px;
     @include circular;
@@ -176,5 +170,33 @@ a.ba-statpreview-icon {
     i {
         font-size: 1.2rem;
         margin-top: 6px;
+    }
+}
+
+#ba-info-statpreview-panel{
+    @include md-up {
+        height: 100%;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+    }
+
+    @include md-down {
+        padding: 0.5rem;
+    }
+
+    .panel-sliders {
+        @include scrollable(auto);
+        padding: 0 0.5rem;
+    }
+
+    .panel-stats {
+        @include scrollable(auto);
+        @include lg-up {
+            max-width: 400px;
+        }
+        @include xl-up {
+            max-width: 450px;
+        }
+        padding: 0 0.5rem;
     }
 }

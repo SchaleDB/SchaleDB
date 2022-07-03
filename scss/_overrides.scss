@@ -171,14 +171,19 @@
 // Toggle Input
 
 .form-check-input:checked {
-    background-color: rgb(33, 37, 41);
-    border-color: rgb(33, 37, 41);
+    background-color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
 }
 
 .form-check-input:focus {
-    border: none;
-    outline: 0;
-    box-shadow: none;
+    border-color: transparent;
+    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e") !important;
+}
+
+.form-check-input:checked {
+    background-position: right center;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e") !important;
 }
 
 // Modals
@@ -189,7 +194,17 @@
 
 .modal-dialog {
     @include lg-up {
-        margin: 1.5rem auto;
+        padding: 1.5rem 0;
+        margin: 0 auto;
+        height: 100%;
+    }
+
+    transition: transform .15s ease-out !important;
+}
+
+.modal-body {
+    @include lg-up {
+        @include scrollable(auto);
     }
 }
 
@@ -197,12 +212,19 @@
     background-color: var(--col-theme-glass-modal);
     backdrop-filter: var(--var-glass-filter);
     color: var(--col-theme-text);
+    height: 100%;
     border: none;
 }
 
 .modal-xl {
     @include xxl-up {
         max-width: 1340px;
+    }
+}
+
+.modal-xxl {
+    @include xxl-up {
+        max-width: 1680px;
     }
 }
 

@@ -32,6 +32,12 @@
     transition: $transitions;
 }
 
+@mixin flex($align, $justify) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+}
+
 @mixin scrollable-nostyle($scroll) {
     overflow-y: $scroll;
 }

@@ -1,6 +1,6 @@
-#ba-stage-map {
-    @include scrollable-xy(scroll);
-    max-height: calc(100vh - 12rem);
+.stage-map-container {
+    @include scrollable-xy(auto);
+    
     cursor: grab;
 
     &.scrolling {
@@ -8,7 +8,16 @@
     }
 }
 
-#ba-stage-map-canvas {
+#ba-stage-map {
+    max-height: calc(100vh - 12rem);
+}
+
+#ba-stage-modal-map-container {
+    @include flex(center, center);
+    height: 100%;
+}
+
+.stage-map-canvas {
     position: relative;
     margin: auto;
 
@@ -60,6 +69,10 @@
         }
         &.group-7 {
             --col-tile: var(--col-map-pair-7);
+        }
+
+        &.group-0::before {
+            opacity: var(--var-tile-default-opacity) !important;
         }
 
         &::before {
