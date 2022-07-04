@@ -18,7 +18,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 10
+const cache_ver = 11
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -3087,7 +3087,7 @@ function getSkillText(text, params, level, type) {
     var paramCount = 1
     var regex
 
-    regex = /[0-9.]+[%s秒]/g
+    regex = /[0-9.]+[%s秒초]/g
     result = result.replace(regex, function(match) {return `<strong>${match}</strong>`})
 
     while (result.includes("<?"+paramCount+">")) {
