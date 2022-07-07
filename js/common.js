@@ -10,7 +10,7 @@ const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40]]
 const languages = ['En', 'Jp', 'Kr', 'Tw']
 const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5}
 const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':5}
-const label_raid_smalltext_threshold = {'En':20, 'Jp':11, 'Kr':11, 'Tw':5}
+const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':5}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
@@ -18,7 +18,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 11
+const cache_ver = 12
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -76,7 +76,7 @@ const sort_functions = {
 }
 
 let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loadedStage, loadedCraftNode, region, regionID, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
-    , studentCompare   
+    , studentCompare 
     , searchResultsCount = 0, searchResultsSelection = 0
     , studentSelectorModal, statPreviewModal, stageMapModal
     , summonId = 0
@@ -92,6 +92,7 @@ let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loade
     ,statPreviewSummonStats = false
     ,compareMode = false
     ,selectCompareMode = false
+    , loadedStageList = null
     ,scrolling = false
     ,scrollPosition = {top: 0, left: 0, x: 0, y: 0}
     , search_options = {
@@ -587,6 +588,7 @@ function loadModule(moduleName, entry=null) {
         bgimg.src = `images/background/BG_Raid.jpg`
         $("#loaded-module").load(html_list['stages'], function() {
             loadLanguage(userLang)
+            loadedStageList = null
             stageMapModal = new bootstrap.Modal(document.getElementById("ba-stage-modal-map"), {})
             if (region.weaponlevel_max == 0) {
                 $('#ba-stages-list-tab-schooldungeon').hide()
@@ -594,8 +596,6 @@ function loadModule(moduleName, entry=null) {
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
         
-            populateStageList()
-
             if (entry != null) {
                 loadStage(entry)
             } else if (urlVars.has("stage")) {
@@ -605,13 +605,21 @@ function loadModule(moduleName, entry=null) {
             } else {
                 loadStage(1011101)
             }
+            
+            // if (loadedStage.Id >= 7000000) {
+            //     populateEventStageList(loadedStage.EventId)
+            // } else if (loadedStage.Id >= 1000000) {
+            //     populateStageList('missions')
+            // } else if (loadedStage.Id >= 60000) {
+            //     populateStageList('schooldungeon')
+            // } else if (loadedStage.Id >= 31000) {
+            //     populateStageList('commissions')
+            // } else if (loadedStage.Id >= 30000) {
+            //     populateStageList('bounty')
+            // } else {
+            //     populateStageList('missions')
+            // }
 
-            //scroll the loaded stage into view in the stage list
-            let offset = $(`#ba-stage-select-${loadedStage.Id}`).prop('offsetTop')
-            $('#ba-stages-list-container .card-body').scrollTop(offset)
-
-            $('.ba-item-list').addClass('fade')
-            $('.ba-item-list.active').addClass('show')
             makeDraggable($('#ba-stage-map'))
             makeDraggable($('#ba-stage-modal-map-container'))
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
@@ -667,7 +675,7 @@ function loadModule(moduleName, entry=null) {
                 changelogHtml += '</ul>'
             })
             $("#ba-home-modal-changelog-content").html(changelogHtml)
-            let gachatext = "Character Banner\n", gachalistHtml = ""
+            let gachatext = getLocalizedString('ui', 'gacha_pickup') + "\n", gachalistHtml = ""
             let currentTime = new Date().getTime()/1000, dateOptions = {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short"}
             let found = false
             $.each(data.common.regions[regionID].current_gacha, function(i, el){
@@ -693,7 +701,7 @@ function loadModule(moduleName, entry=null) {
                     if (el.raid >= 1000) {
                         raidText = getLocalizedString("StageType", "timeattack") + "\n"
                         let raid = find(data.raids.TimeAttack, "Id", el.raid)[0]
-                        raidHtml += getTimeAttackCardHTML(raid, el.terrain)
+                        raidHtml += getTimeAttackCardHTML(raid, raid.Terrain)
                     } else {
                         raidText = getLocalizedString("StageType", "raid") + "\n"
                         let raid = find(data.raids.Raid, "Id", el.raid)[0]
@@ -707,6 +715,23 @@ function loadModule(moduleName, entry=null) {
             })
             $('#ba-home-raid-text').html(raidText)
             $('#ba-home-raid-list').html(raidHtml)
+
+            let eventText = "", eventHtml = ""
+            $('#ba-home-event').hide()
+            found = false
+            $.each(data.common.regions[regionID].current_events, function(i, el){
+                if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
+                    eventText = getLocalizedString("StageType", "event") + "\n"
+                    eventHtml += getEventCardHTML(el.event)
+                    
+                    $('#ba-home-event').show()
+                    eventText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
+                    eventText += `\n${(currentTime >= el.start) ? "Ends" : "Starts"} in <b>${(currentTime >= el.start) ? duration(el.end-currentTime) : duration(el.start-currentTime)}</b>.`
+                    found = true
+                }
+            })
+            $('#ba-home-event-text').html(eventText)
+            $('#ba-home-event-list').html(eventHtml)
 
             //birthdays
             var birthdaysHtml = ''
@@ -1628,33 +1653,38 @@ function loadStage(id) {
         if (id >= 7000000) {
             mode = 'Event'
             stage = findOrDefault(data.stages.Event, "Id", id, 8012301)[0]
-            $('#ba-stages-list-tab-events').tab('show')
+            loadedStage = stage
+            if (loadedStageList != '' + stage.EventId) populateEventStageList(stage.EventId)
         } else if (id >= 1000000) {
             mode = 'Campaign'
             stage = findOrDefault(data.stages.Campaign, "Id", id, 1011101)[0]
-            $('#ba-stages-list-tab-missions').tab('show')
+            loadedStage = stage
+            if (loadedStageList != 'missions') populateStageList('missions')
         } else if (id >= 60000) {
             mode = 'SchoolDungeon'
             stage = findOrDefault(data.stages.SchoolDungeon, "Id", id, 60101)[0]
-            $('#ba-stages-list-tab-schooldungeon').tab('show')
+            loadedStage = stage
+            if (loadedStageList != 'schooldungeon') populateStageList('schooldungeon')
         } else if (id >= 31000) {
             mode = 'WeekDungeon'
             stage = findOrDefault(data.stages.WeekDungeon, "Id", id, 31101)[0]
-            $('#ba-stages-list-tab-commissions').tab('show')
+            loadedStage = stage
+            if (loadedStageList != 'commissions') populateStageList('commissions')
         } else if (id >= 30000) {
             mode = 'WeekDungeon'
             stage = findOrDefault(data.stages.WeekDungeon, "Id", id, 30101)[0]
-            $('#ba-stages-list-tab-bounty').tab('show')
+            loadedStage = stage
+            if (loadedStageList != 'bounty') populateStageList('bounty')
         } else {
             // fallback to default 1-1 Normal
             mode = 'Campaign'
             stage = find(data.stages.Campaign, "Id", 1011101)[0]
-            $('#ba-stages-list-tab-missions').tab('show')
+            loadedStage = stage
+            if (loadedStageList != 'missions') populateStageList('missions')
         }
         $('#ba-stage-drops-tabs').toggle(mode != 'WeekDungeon')
         if (mode == 'WeekDungeon') $('#ba-stage-drops-default-tab').tab('show')
 
-        loadedStage = stage
         $('#ba-stage-name').html(getStageName(stage, mode))
         $('#ba-stage-title').html(getStageTitle(stage, mode))
         $('#ba-stage-level').text(getLocalizedString('ui','rec_level') + ' Lv.'+ stage.Level)
@@ -2348,6 +2378,14 @@ function getStageCardHTML(stage, dropChance = 0) {
     }
 }
 
+function getEventCardHTML(eventId) {
+    let eventIdImg = eventId % 10000
+    let name = getLocalizedString("EventName", eventId)
+    let html = `<div id="ba-event-select-${eventId}" class="ba-select-grid-item unselectable"><div onclick="populateEventStageList(${eventId});" class="ba-event-card"><div class="bg-container"><div style="background-image:url('images/campaign/Campaign_Event_${eventIdImg}_Normal.png');"></div></div><div class="ba-event-card-img"><img src="images/eventlogo/Event_${eventIdImg}_${regionID == 0 ? "Jp" : userLang}.png"></div>`
+    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${name}</span></div></div></div>`
+    return html
+}
+
 function getStageIcon(stage, type) {
     switch (type) {
         case "Event":
@@ -2778,57 +2816,124 @@ function getCraftingCardHTML(node) {
     return html
 }
 
-function populateStageList() {
-    let html, html2
-    html = ''
-    $.each(data.stages.Campaign, function(i,el) {
-        if (el.Area <= data.common.regions[regionID].campaign_max)
-        html += getStageCardHTML(el)
-    })
-    $('#ba-stages-list-missions-grid').html(html)
-    html = ''
-    html2 = ''
-    let typePrev = ''
-    $.each(data.stages.WeekDungeon, function(i,el) {
-        if (el.Type != typePrev) {
-            let header = `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
-            if (el.Id < 31000) {html += header} else {html2 += header}
-        }
-        if (el.Id < 31000) {
-            if (el.Stage <= data.common.regions[regionID].bounty_max) html += getStageCardHTML(el)
-        } else {
-            if (el.Stage <= data.common.regions[regionID].commission_max) html2 += getStageCardHTML(el)
-        }
-        if (el.Area <= data.common.regions[regionID].commission_max)
-        html += getStageCardHTML(el)
-        typePrev = el.Type
-    })
-    $('#ba-stages-list-bounty-grid').html(html)
-    $('#ba-stages-list-commissions-grid').html(html2)
-    html = ''
-    $.each(data.stages.SchoolDungeon, function(i,el) {
-        if (el.Type != typePrev) {
-            html += `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
-        }
-        if (el.Stage <= data.common.regions[regionID].schooldungeon_max)
-        html += getStageCardHTML(el)
-        typePrev = el.Type
-    })
-    $('#ba-stages-list-schooldungeon-grid').html(html)
-    html = ''
-    let eventPrev = 0
-    data.common.regions[regionID].events.forEach(val => {
-        html += `<div id="stages-list-events-grid-header-${val}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('EventName',''+val)}</h3></div>`
-        $.each(find(data.stages.Event, "EventId", val), function(i,el) {
-            if (!(el.EventId == 701 && el.Stage > data.common.regions[regionID].event_701_max)) {
-                html += getStageCardHTML(el)
-                eventPrev = el.EventId
-            }  
-        })
-    })
+function populateStageList(mode) {
     
-    $('#ba-stages-list-events-grid').html(html)
+    let html = '', typePrev = ''
+    switch (mode) {
+        case 'missions':
+            $.each(data.stages.Campaign, function(i,el) {
+                if (el.Area <= data.common.regions[regionID].campaign_max)
+                html += getStageCardHTML(el)
+            })
+            $('#ba-stages-list-grid').show()
+            $('#ba-event-list-grid').hide()
+            $('#ba-stages-list-tab-missions').tab('show')
+            $('#ba-stages-list-grid').html(html)
+            break
+        case 'bounty':
+            $.each(data.stages.WeekDungeon, function(i,el) {
+                if (el.Id < 31000) {
+                    if (el.Type != typePrev) {
+                        let header = `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
+                        html += header
+                    }
+                    if (el.Stage <= data.common.regions[regionID].bounty_max) html += getStageCardHTML(el)
+                    typePrev = el.Type
+                }
+            })
+            $('#ba-stages-list-grid').show()
+            $('#ba-event-list-grid').hide()
+            $('#ba-stages-list-tab-bounty').tab('show')
+            $('#ba-stages-list-grid').html(html)
+            break
+        case 'commissions':
+            typePrev = ''
+            $.each(data.stages.WeekDungeon, function(i,el) {
+                if (el.Id >= 31000) {
+                    if (el.Type != typePrev) {
+                        let header = `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
+                        html += header
+                    }
+                    if (el.Stage <= data.common.regions[regionID].commission_max) html += getStageCardHTML(el)
+                    typePrev = el.Type
+                }
+            })
+            $('#ba-stages-list-grid').show()
+            $('#ba-event-list-grid').hide()
+            $('#ba-stages-list-tab-commissions').tab('show')
+            $('#ba-stages-list-grid').html(html)
+            break
+        case 'schooldungeon':
+            typePrev = ''
+            $.each(data.stages.SchoolDungeon, function(i,el) {
+                if (el.Type != typePrev) {
+                    html += `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
+                }
+                if (el.Stage <= data.common.regions[regionID].schooldungeon_max) html += getStageCardHTML(el)
+                typePrev = el.Type
+            })
+            $('#ba-stages-list-grid').show()
+            $('#ba-event-list-grid').hide()
+            $('#ba-stages-list-tab-schooldungeon').tab('show')
+            $('#ba-stages-list-grid').html(html)
+            break
+        case 'events':
+            data.common.regions[regionID].events.forEach(val => {
+                if (val < 10000) html += getEventCardHTML(val)
+            })
+            $('#ba-stages-list-grid').hide()
+            $('#ba-event-list-grid').show()
+            $('#ba-stages-list-tab-events').tab('show')
+            $('#ba-event-list-grid').html(html)
+    }
+    loadedStageList = mode
+    $('#ba-stage-select-'+loadedStage.Id).addClass('selected')
+    //scroll the loaded stage into view in the stage list (excl. events)
+    if (loadedStage.Id < 7000000) {
+        let offset = $(`#ba-stage-select-${loadedStage.Id}`).prop('offsetTop')
+        $('#ba-stages-list-container .card-body').scrollTop((offset === undefined) ? 0 : offset)
+    }
 }
+
+function populateEventStageList(eventId) {
+
+    if (loadedModule == 'stages') {
+        eventId = eventId % 10000
+        let diffPrev = 0
+        let eventPrev = 0
+        let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'events')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/Event_${eventId}_${regionID == 0 ? "Jp" : userLang}.png"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>
+        `
+    
+        let eventStages = find(data.stages.Event, 'EventId', eventId)
+        //Add rerun stages
+        if (data.common.regions[regionID].events.includes(eventId + 10000)) {
+            eventStages = eventStages.concat(find(data.stages.Event, 'EventId', eventId + 10000))
+        }
+        eventStages.forEach(stage => {
+            if (!(eventId == 701 && ((stage.Difficulty == 1 && stage.Stage > data.common.regions[regionID].event_701_max) || (stage.Difficulty == 2 && stage.Stage > data.common.regions[regionID].event_701_challenge_max)))) {
+                if (stage.Difficulty != diffPrev || stage.EventId != eventPrev) {
+                    let name = stage.Difficulty == 1 ? "Quest" : "Challenge"
+                    name += stage.EventId > 10000 ? " (Rerun)" : ""
+                    let header = `<div class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${name}</h3></div>`
+                    html += header
+                }
+                html += getStageCardHTML(stage)
+                diffPrev = stage.Difficulty
+                eventPrev = stage.EventId
+            }
+        })
+        loadedStageList = '' + eventId
+        $('#ba-stages-list-tab-events').tab('show')
+        $('#ba-stages-list-grid').show()
+        $('#ba-event-list-grid').hide()
+        $('#ba-stages-list-grid').html(html)
+        $('#ba-stage-select-'+loadedStage.Id).addClass('selected')
+        $('#ba-stages-list-container .card-body').scrollTop(0)
+    } else {
+        loadModule('stages', find(data.stages.Event, 'EventId', eventId % 10000)[0].Id)
+    }
+}
+
 
 function populateRaidList() {
     var html = ''

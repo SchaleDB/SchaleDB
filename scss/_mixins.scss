@@ -24,6 +24,16 @@
     transform: translateZ(0);
 }
 
+@mixin text-clamp($lines) {
+    word-wrap: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 @mixin transition($props...) {
     $transitions: ();
     @each $prop in $props {

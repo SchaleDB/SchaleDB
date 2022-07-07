@@ -28,17 +28,29 @@
 
 }
 
+.dropdown-menu {
+    .btn-dark {
+        &:hover {
+            background-color: var(--col-btn-secondary-dropdown);
+        }
+
+        &.active {
+            background-color: var(--col-btn-active-secondary);
+        }
+    }
+}
+
 // Dropdowns
 
 .dropdown-menu-dark {
     color: var(--col-btn-primary);
-    background-color: var(--col-btn-secondary);
+    background-color: var(--col-theme-background);
     border-color: var(--col-theme-accent);
     @include transition(background-color);
 
     .dropdown-item {
         color: var(--col-btn-primary);
-        background-color: var(--col-btn-secondary);
+        background-color: var(--col-theme-background);
 
         &:hover {
             color: var(--col-btn-primary);
@@ -61,6 +73,7 @@
 .nav-pills {
     .nav-link {
         color: var(--col-theme-text);
+        word-break: keep-all;
 
         &.active {
             color: var(--col-btn-active-primary);

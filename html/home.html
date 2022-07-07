@@ -3,8 +3,8 @@
         <div id="ba-home" class="col-12 ba-page">
             <div id="ba-home-info" class="card p-2">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 col-md-6 px-4 mb-4">
+                    <div class="row g-1">
+                        <div class="col-12 col-md-6 mb-4 px-2">
                             <div class="p-2 ba-panel">
                                 <div class="d-flex align-items-end p-2">
                                     <img src="images/ui/Image_Char_Arona2.png" height="120">
@@ -24,25 +24,43 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6 px-4 mb-4">
+                        <div class="col-12 col-md-6 mb-4 px-2">
                             <h4 id="ba-home-server-info" class="mx-1 mb-1"></h4>
                             <h6 class="mx-1 mb-3"><small>All dates are converted to your local timezone</small></h6>
-                            <div class="d-flex justify-content-center align-items-start flex-wrap">
-                                <div id="ba-home-gacha" class="ba-panel mb-2 p-2 w-100">
-                                    <h6 id="ba-home-gacha-text" class="text-center" style="white-space: pre-wrap;"></h6>
-                                    <div id="ba-home-gacha-list" class="d-flex justify-content-center" style="font-size: 0;"></div>
-                                </div>
-                                <div id="ba-home-raid" class="ba-panel mb-2 p-2 w-100">
-                                    <h6 id="ba-home-raid-text" class="text-center" style="white-space: pre-wrap;"></h6>
-                                    <div id="ba-home-raid-list" class="d-flex justify-content-center mt-3 mb-2 ba-raid-select-grid" style="font-size: 0;"></div>
-                                </div>
-                            </div>
-                            <div id="ba-home-birthdays">
-                                <div class="ba-panel p-2">
-                                    <div class="d-inline-block w-100 text-center">
-                                        <i><i class="fa-solid fa-cake-candles"></i> The following characters are celebrating their birthday this week!</i>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div id="ba-home-gacha" class="col">
+                                        <div class="ba-panel mb-2 p-2 w-100">
+                                            <h6 id="ba-home-gacha-text" class="text-center" style="white-space: pre-wrap;"></h6>
+                                            <div id="ba-home-gacha-list" class="d-flex justify-content-center" style="font-size: 0;"></div>
+                                        </div>
                                     </div>
-                                    <div id="ba-home-birthdays-list" class="d-flex justify-content-center flex-wrap">
+                                </div>
+                                <div class="row g-0 g-md-2">
+                                    <div id="ba-home-event" class="col-md-6 col-12">
+                                        <div class="ba-panel mb-2 p-2 w-100">
+                                            <h6 id="ba-home-event-text" class="text-center" style="white-space: pre-wrap;"></h6>
+                                            <div id="ba-home-event-list" class="d-flex justify-content-center mt-3 mb-2 ba-raid-select-grid" style="font-size: 0;"></div>
+                                        </div>
+                                    </div>
+                                    <div id="ba-home-raid" class="col">
+                                        <div class="ba-panel mb-2 p-2 w-100">
+                                            <h6 id="ba-home-raid-text" class="text-center" style="white-space: pre-wrap;"></h6>
+                                            <div id="ba-home-raid-list" class="d-flex justify-content-center mt-3 mb-2 ba-raid-select-grid" style="font-size: 0;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div id="ba-home-birthdays">
+                                            <div class="ba-panel p-2">
+                                                <div class="d-inline-block w-100 text-center">
+                                                    <i><i class="fa-solid fa-cake-candles"></i> The following characters are celebrating their birthday this week!</i>
+                                                </div>
+                                                <div id="ba-home-birthdays-list" class="d-flex justify-content-center flex-wrap">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

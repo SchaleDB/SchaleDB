@@ -81,10 +81,26 @@
 }
 
 .ba-grid-header {
-    text-transform: uppercase;
-    font-size: initial;
-    font-family: 'Oswald', 'Noto Sans JP', sans-serif;
     text-align: left;
+    @include flex(start, left);
+    align-items: center;
+
+    h3 {
+        display: inline;
+        text-transform: uppercase;
+        font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+    }
+
+    h4 {
+        @include text-clamp(2);
+        @include md-down {
+            display: none;
+        }
+    }
+
+    img {
+        height: 60px;
+    }
 }
 
 h1 small {
@@ -324,13 +340,7 @@ h1 small {
 }
 
 .ba-label-text {
-    word-wrap: normal;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    @include text-clamp(2);
 }
 
 .ba-unhover-text {
@@ -1554,6 +1564,60 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     padding: 3px;
     object-fit: cover;
     object-position: center center;
+}
+
+.ba-event-card {
+
+    position: relative;
+    width: var(--var-grid-card-width);
+    height: var(--var-grid-card-height);
+    object-fit: contain;
+    cursor: pointer;
+
+    .bg-container {
+        overflow: hidden;
+        border-radius: 10px;
+
+        >div {
+            position: relative;
+            top: 0;
+            left: 0;
+            height: var(--var-grid-card-height);
+            width: var(--var-grid-card-width);
+            filter: blur(4px);
+            transform: scale(1.1);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: left center;
+            @include sharp-img;
+        }
+    }
+
+    .ba-event-card-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: var(--var-grid-card-height);
+        width: var(--var-grid-card-width);
+        box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
+        border-radius: 10px;
+        overflow: hidden;
+        text-align: center;
+    
+        img {
+            transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
+            width: 100%;
+            margin-top: 8px;
+        }
+    
+    }
+
+    &:hover img {
+        filter: brightness(0.7);
+        transform: scale(1.15);
+        @include sharp-img;
+    }
+
 }
 
 .ba-select-grid-card-label {
