@@ -4,8 +4,9 @@
  * Also enables installable PWA support
  */
 
-// data cache version should match common.js
-const dataCacheVer = 12;
+// cache versions should match common.js
+const dataCacheVer = 13;
+const coreCacheVer = 13;
 const imgCacheVer = 2;
 
 const dataCacheName = `schale-data-v${dataCacheVer}`;
@@ -19,17 +20,19 @@ const dataPreCacheFiles = [
     './data/summons.json',
 ];
 
-const coreCacheName = `schale-core-v${dataCacheVer}`;
+const coreCacheName = `schale-core-v${coreCacheVer}`;
 const corePreCacheFiles = [
-    './',
-    './html/craft.html?v=' + dataCacheVer,
-    './html/home.html?v=' + dataCacheVer,
-    './html/items.html?v=' + dataCacheVer,
-    './html/raids.html?v=' + dataCacheVer,
-    './html/stages.html?v=' + dataCacheVer,
-    './html/students.html?v=' + dataCacheVer,
-    './css/main.css?v=' + dataCacheVer,
-    './js/common.min.js?v=' + dataCacheVer,
+    './?v=' + coreCacheVer,
+    './html/craft.html?v=' + coreCacheVer,
+    './html/home.html?v=' + coreCacheVer,
+    './html/items.html?v=' + coreCacheVer,
+    './html/raids.html?v=' + coreCacheVer,
+    './html/stages.html?v=' + coreCacheVer,
+    './html/students.html?v=' + coreCacheVer,
+    './css/main.css?v=' + coreCacheVer,
+    './js/common.min.js?v=' + coreCacheVer,
+    './manifest.json',
+    './favicon.png',
 ];
 
 const imageCacheName = `schale-images-v${imgCacheVer}`;
@@ -50,6 +53,12 @@ self.addEventListener('install', (e) => {
         await coreCache.addAll(corePreCacheFiles);
         const imageCache = await caches.open(imageCacheName);
         currentCacheList.push(imageCacheName);
+    })());
+});
+
+self.addEventListener('activate', (e) => {
+    console.log('[SW] Activated');
+    e.waitUntil(
         //remove old caches
         caches.keys().then((keys) => {
             return Promise.all(keys.map((key) => {
@@ -58,9 +67,9 @@ self.addEventListener('install', (e) => {
                     return caches.delete(key);
                 }
             }));
-        });
-    })());
-});
+        })
+    )
+})
 
 self.addEventListener('fetch', (e) => {
     //console.log(`[SW] Fetching Resource ${e.request.url}`);
@@ -82,21 +91,17 @@ self.addEventListener('fetch', (e) => {
             if (requestURL.pathname.includes('/images/')) {
                 const imageCache = await caches.open(imageCacheName);
                 //console.log(`[SW] Caching new image resource: ${e.request.url}`);
-                imageCache.put(e.request, response.clone());
+                try {
+                    imageCache.put(e.request, response.clone());
+                }
+                catch (error) {
+                    console.log(error)
+                }
             } else if (requestURL.pathname.includes('/data/')) {
                 const dataCache = await caches.open(dataCacheName);
                 //console.log(`[SW] Caching new data resource: ${e.request.url}`);
                 try {
                     dataCache.put(e.request, response.clone());
-                }
-                catch (error) {
-                    console.log(error)
-                }
-            } else {
-                const coreCache = await caches.open(coreCacheName);
-                //console.log(`[SW] Caching new app shell/other resource: ${e.request.url}`);
-                try {
-                    coreCache.put(e.request, response.clone());
                 }
                 catch (error) {
                     console.log(error)

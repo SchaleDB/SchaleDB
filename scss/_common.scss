@@ -207,3 +207,34 @@ input[type="search" i]::-webkit-search-cancel-button {
         }
     }
 }
+
+#update-message-container {
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 9998;
+    pointer-events: none;
+}
+
+#update-message {
+    color: rgb(255, 255, 255);
+    backdrop-filter: var(--var-glass-filter);
+    background-color: var(--col-bg-msg-success);
+    @include transition(transform, opacity);
+    transform: translateY(-30px);
+    opacity: 0;
+
+    &.show {
+        transform: translateY(48px);
+        opacity: 1;
+    }
+
+    // @include md-down {
+    //     flex-grow: 1;
+    //     &.show {
+    //         transform: translateY(48px);
+    //     }
+    // }
+}

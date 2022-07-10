@@ -18,7 +18,8 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 12
+const data_cache_ver = 13
+const cache_ver = 13
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -43,15 +44,15 @@ if (localStorage.getItem("language") && languages.includes(localStorage.getItem(
 const json_list = {
     common: getCacheVerResourceName("./data/common.json"),
     raids: getCacheVerResourceName("./data/raids.json"),
-    students: getCacheVerResourceName(`./data/students_${userLang.toLowerCase()}.json`),
     localization: getCacheVerResourceName("./data/localization.json"),
     stages: getCacheVerResourceName("./data/stages.json"),
-    enemies: getCacheVerResourceName(`./data/enemies_${userLang.toLowerCase()}.json`),
-    items: getCacheVerResourceName(`./data/items_${userLang.toLowerCase()}.json`),
-    furniture: getCacheVerResourceName(`./data/furniture_${userLang.toLowerCase()}.json`),
-    equipment: getCacheVerResourceName(`./data/equipment_${userLang.toLowerCase()}.json`),
     crafting: getCacheVerResourceName("./data/crafting.json"),
-    summons: getCacheVerResourceName("./data/summons.json")
+    summons: getCacheVerResourceName("./data/summons.json"),
+    students: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/students.json`),
+    enemies: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/enemies.json`),
+    items: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/items.json`),
+    furniture: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/furniture.json`),
+    equipment: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/equipment.json`),
 }
 const html_list = {
     craft: getCacheVerResourceName("./html/craft.html"),
@@ -344,6 +345,22 @@ $(document).ready(function() {
     //service worker
     if('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js')
+        //force reload the page if a new update is available
+        navigator.serviceWorker.addEventListener('controllerchange', function () {
+            window.location.reload()
+        })
+    }
+
+    //check if we updated
+    if (localStorage.getItem("cache_version")) {
+        if (localStorage.getItem("cache_version") != `${cache_ver}_${data_cache_ver}`) {
+            localStorage.setItem("cache_version", `${cache_ver}_${data_cache_ver}`)
+            $('body').append(`<div id="update-message-container"><div class="container-xl d-flex h-100 align-items-start justify-content-center"><div id="update-message" class="ba-panel p-2"><p class="m-0"><i class="fa-solid fa-circle-check me-2"></i>Schale DB updated to the latest version</p></div></div></div>`)
+            $('#update-message').addClass('show')
+            window.setTimeout(function(){$("#update-message").removeClass('show')},4000)
+        }
+    } else {
+        localStorage.setItem("cache_version", `${cache_ver}_${data_cache_ver}`)
     }
 
     //gtag settings
@@ -770,7 +787,7 @@ function loadModule(moduleName, entry=null) {
                 url.searchParams.forEach((v,k) => url.searchParams.delete(k))
                 history.pushState(null, '', url)
             }
-            document.title = `Schale DB | Home`
+            $('title').html(`Schale DB | Home`)
             $('#ba-navbar-content').collapse('hide')
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
@@ -1162,7 +1179,7 @@ function processStudent() {
     $('#ba-statpreview-status-bond-alt-level').toggle(student_bondalts.length > 0)
     updateStatPreviewTitle()
 
-    document.title = `Schale DB | ${getTranslatedString(student, 'Name')}`
+    $('title').html(`Schale DB | ${getTranslatedString(student, 'Name')}`)
     $('#ba-navbar-content').collapse('hide')
     window.scrollTo({top: 0, left: 0, behavior: 'instant'})
 
@@ -1349,7 +1366,7 @@ function loadItem(id) {
             history.pushState(null, '', url)
         }
 
-        document.title = `Schale DB | ${getTranslatedString(item, 'Name')}`
+        $('title').html(`Schale DB | ${getTranslatedString(item, 'Name')}`)
         $('#ba-navbar-content').collapse('hide')
         window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("item", id)
@@ -1404,7 +1421,7 @@ function loadCraft(id) {
             history.pushState(null, '', url)
         }
 
-        document.title = `Schale DB | ${getTranslatedString(craftNode, 'Name')}`
+        $('title').html(`Schale DB | ${getTranslatedString(craftNode, 'Name')}`)
         $('#ba-navbar-content').collapse('hide')
         window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("craftnode", id)
@@ -1501,7 +1518,7 @@ function loadRaid(raidId) {
             history.pushState(null, '', url)
         }
     
-        document.title = `Schale DB | ${getTranslatedString(raid, 'Name')}`
+        $('title').html(`Schale DB | ${getTranslatedString(raid, 'Name')}`)
         $('#ba-navbar-content').collapse('hide')
         window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("raid", raid.Id)
@@ -1654,7 +1671,7 @@ function loadStage(id) {
             mode = 'Event'
             stage = findOrDefault(data.stages.Event, "Id", id, 8012301)[0]
             loadedStage = stage
-            if (loadedStageList != '' + stage.EventId) populateEventStageList(stage.EventId)
+            if (loadedStageList != '' + stage.EventId % 10000) populateEventStageList(stage.EventId)
         } else if (id >= 1000000) {
             mode = 'Campaign'
             stage = findOrDefault(data.stages.Campaign, "Id", id, 1011101)[0]
@@ -1793,7 +1810,7 @@ function loadStage(id) {
         $('#ba-stage-map-enemies').html('<p class="mb-0">Click on an enemy unit on the map to view a list of enemies.</p>')
         $('#ba-stage-select-'+stage.Id).addClass('selected')
 
-        document.title = `Schale DB | ${$('#ba-stage-title').text()}`
+        $('title').html(`Schale DB | ${$('#ba-stage-title').text()}`)
         $('#ba-navbar-content').collapse('hide')
         //window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         localStorage.setItem("stage", id)
@@ -3290,13 +3307,13 @@ function toggleHighContrast(state) {
 function changeRegion(regID) {
     regionID = regID
     localStorage.setItem("region", regionID)
-    location.reload()
+    window.location.reload()
 }
 
 function changeLanguage(lang) {
     userLang = lang
     localStorage.setItem("language", lang)
-    location.reload()
+    window.location.reload()
 }
 
 function loadLanguage(lang) {
@@ -3535,7 +3552,7 @@ function getFavouriteItems(tags) {
 }
 
 function getCacheVerResourceName(res) {
-    return res + '?v=' + cache_ver
+    return res + '?v=' + (res.endsWith('.json') ? data_cache_ver : cache_ver)
 }
 
 function getTimeAttackLevelScale(level) {
