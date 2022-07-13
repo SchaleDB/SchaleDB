@@ -908,16 +908,6 @@ a.nav-link.disabled {
 
 @media(max-width: 767px) {
 
-    /* body {
-        overflow-y: overlay;
-    } */
-
-    .ba-selection-pane {
-        width: auto;
-        position: relative;
-        pointer-events: auto;
-    }
-
     .screen-height.mobile-scroll {
         max-height: calc((100vh - 74px) * 0.75);
     }
@@ -1442,12 +1432,37 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     margin: auto;
 } */
 
-.ba-stage-card, .ba-raid-card, .ba-item-card {
+.ba-stage-card, .ba-raid-card {
     position: relative;
     width: var(--var-grid-card-width);
     height: var(--var-grid-card-height);
     object-fit: contain;
     cursor: pointer;
+}
+
+.ba-item-card {
+
+    position: relative;
+    height: var(--var-grid-card-height);
+    width: var(--var-grid-card-width);
+    padding: 3px;
+    box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
+    overflow: hidden;
+    @include circular;
+    cursor: pointer;
+    @include transition(filter);
+
+    &:hover {
+        filter: brightness(0.7);
+    }
+
+    img {
+        
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center center;
+    }
 }
 
 .ba-stage-card-img {
@@ -1457,15 +1472,6 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
     overflow: hidden;
     border-radius: 10px;
-}
-
-.ba-item-card-img {
-    position: relative;
-    height: var(--var-grid-card-height);
-    width: var(--var-grid-card-width);
-    box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
-    overflow: hidden;
-    @include circular;
 }
 
 .ba-raid-card-bg-container {
@@ -1557,15 +1563,6 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     object-position: center 70%;
 }
 
-.ba-item-card-img img {
-    transition: filter var(--var-animation-duration) ease;
-    height: 100%;
-    width: 100%;
-    padding: 3px;
-    object-fit: cover;
-    object-position: center center;
-}
-
 .ba-event-card {
 
     position: relative;
@@ -1633,10 +1630,6 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     height: 24px;
     bottom: 0px;
     left: 0px;
-}
-
-.ba-item-card:hover .ba-item-card-img img {
-    filter: brightness(0.7);
 }
 
 .ba-stage-card:hover .ba-stage-card-img img, .ba-raid-card:hover .ba-raid-card-img img, .ba-raid-card:hover .ba-ta-card-img img  {

@@ -5,8 +5,7 @@
  */
 
 // cache versions should match common.js
-const dataCacheVer = 13;
-const coreCacheVer = 13;
+const dataCacheVer = 14;
 const imgCacheVer = 2;
 
 const dataCacheName = `schale-data-v${dataCacheVer}`;
@@ -20,17 +19,17 @@ const dataPreCacheFiles = [
     './data/summons.json',
 ];
 
-const coreCacheName = `schale-core-v${coreCacheVer}`;
+const coreCacheName = `schale-core-v${dataCacheVer}`;
 const corePreCacheFiles = [
-    './?v=' + coreCacheVer,
-    './html/craft.html?v=' + coreCacheVer,
-    './html/home.html?v=' + coreCacheVer,
-    './html/items.html?v=' + coreCacheVer,
-    './html/raids.html?v=' + coreCacheVer,
-    './html/stages.html?v=' + coreCacheVer,
-    './html/students.html?v=' + coreCacheVer,
-    './css/main.css?v=' + coreCacheVer,
-    './js/common.min.js?v=' + coreCacheVer,
+    './',
+    './html/craft.html?v=' + dataCacheVer,
+    './html/home.html?v=' + dataCacheVer,
+    './html/items.html?v=' + dataCacheVer,
+    './html/raids.html?v=' + dataCacheVer,
+    './html/stages.html?v=' + dataCacheVer,
+    './html/students.html?v=' + dataCacheVer,
+    './css/main.css?v=' + dataCacheVer,
+    './js/common.min.js?v=' + dataCacheVer,
     './manifest.json',
     './favicon.png',
 ];

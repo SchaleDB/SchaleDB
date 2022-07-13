@@ -18,8 +18,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const data_cache_ver = 13
-const cache_ver = 13
+const cache_ver = 14
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -94,6 +93,7 @@ let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loade
     ,compareMode = false
     ,selectCompareMode = false
     , loadedStageList = null
+    , loadedItemList = null
     ,scrolling = false
     ,scrollPosition = {top: 0, left: 0, x: 0, y: 0}
     , search_options = {
@@ -347,20 +347,21 @@ $(document).ready(function() {
         navigator.serviceWorker.register('./sw.js')
         //force reload the page if a new update is available
         navigator.serviceWorker.addEventListener('controllerchange', function () {
+            //window.alert("The Service Worker changed to a new version")
             window.location.reload()
         })
     }
 
     //check if we updated
     if (localStorage.getItem("cache_version")) {
-        if (localStorage.getItem("cache_version") != `${cache_ver}_${data_cache_ver}`) {
-            localStorage.setItem("cache_version", `${cache_ver}_${data_cache_ver}`)
+        if (localStorage.getItem("cache_version") != `${cache_ver}`) {
+            localStorage.setItem("cache_version", `${cache_ver}`)
             $('body').append(`<div id="update-message-container"><div class="container-xl d-flex h-100 align-items-start justify-content-center"><div id="update-message" class="ba-panel p-2"><p class="m-0"><i class="fa-solid fa-circle-check me-2"></i>Schale DB updated to the latest version</p></div></div></div>`)
             $('#update-message').addClass('show')
             window.setTimeout(function(){$("#update-message").removeClass('show')},4000)
         }
     } else {
-        localStorage.setItem("cache_version", `${cache_ver}_${data_cache_ver}`)
+        localStorage.setItem("cache_version", `${cache_ver}`)
     }
 
     //gtag settings
@@ -543,6 +544,7 @@ function loadModule(moduleName, entry=null) {
         bgimg.src = `images/background/BG_CraftChamber_Night.jpg`
         $("#loaded-module").load(html_list['items'], function() {
             loadLanguage(userLang)
+            loadedItemList = null
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
         
@@ -555,9 +557,7 @@ function loadModule(moduleName, entry=null) {
             } else {
                 loadItem(1)
             }
-            populateItemList()
-            $('.ba-item-list').addClass('fade')
-            $('.ba-item-list.active').addClass('show')
+
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
             $('#ba-item-list-container, #ba-item-details-container').show()
         })
@@ -584,7 +584,7 @@ function loadModule(moduleName, entry=null) {
             } else if (localStorage.getItem("raid")) {
                 loadRaid(localStorage.getItem("raid"))
             } else {
-                loadRaid("Binah")
+                loadRaid(1)
             }
             
             if (regionID == 1) {
@@ -1285,7 +1285,7 @@ function toggleStudentSummon() {
 function loadItem(id) {
     if (loadedModule == 'items') {
         var mode = '', item
-        $(".tooltip").tooltip("hide")
+        //$(".tooltip").tooltip("hide")
         $('#ba-item-furniture-row').hide()
         if (id >= 2000000) {
             mode = 'equipment'
@@ -1328,6 +1328,7 @@ function loadItem(id) {
             $('.ba-item-student').tooltip({html: true})
             $('#ba-item-sources').html(getItemDropStages(item.Id))
             $('#ba-item-list-tab-materials').tab('show')
+            if (loadedItemList != 'materials') populateItemList('materials')
         } else if (item.Category == 'Favor') {
             if (item.Rarity != 'SSR') {
                 $('#ba-item-usage').html(getLikedByStudents(item))
@@ -1336,11 +1337,13 @@ function loadItem(id) {
                 $('#ba-item-usage').html("<i>This gift will be treated as a favorite item when given to any student.</i>").show()
             }
             $('#ba-item-list-tab-gifts').tab('show')
+            if (loadedItemList != 'gifts') populateItemList('gifts')
         } else if (item.Category == 'SecretStone') {
             $('#ba-item-sources').html(getItemDropStages(item.Id))
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
             $('#ba-item-list-tab-eleph').tab('show')
+            if (loadedItemList != 'eleph') populateItemList('eleph')
         } else if (mode == 'equipment') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('#ba-item-sources').html(getItemDropStages(item.Id+2000000))
@@ -1350,13 +1353,16 @@ function loadItem(id) {
             })
             $('.ba-item-student').tooltip({html: true})
             $('#ba-item-list-tab-equipment').tab('show')
+            if (loadedItemList != 'equipment') populateItemList('equipment')
         } else if (item.Category == 'Coin') {
             $('#ba-item-sources').html(getItemDropStages(item.Id))
             $('#ba-item-list-tab-currency').tab('show')
+            if (loadedItemList != 'equipment') populateItemList('equipment')
         }
         if (mode == 'furniture') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
+            if (loadedItemList != 'furniture') populateItemList('furniture')
             $('#ba-item-list-tab-furniture').tab('show') 
         }
         var url = new URL(window.location.href)
@@ -1439,7 +1445,7 @@ function loadCraft(id) {
 function loadRaid(raidId) {
     selectedEnemy = 0
     if (loadedModule == 'raids') {
-        if (parseInt(raidId) == NaN) {raidId = 1}
+        if (isNaN(parseInt(raidId))) {raidId = 1}
         if (regionID == 1 && raidId >= 1000) {raidId = 1}
         if (loadedRaid) $('#ba-raid-select-'+loadedRaid.Id).removeClass('selected')
         if (raidId < 1000) {
@@ -2352,7 +2358,7 @@ function getStudentListCardHTML(student) {
 }
 
 function getItemCardHTML(item, linkid, icontype) {
-    var html = `<div id="ba-item-select-${item.Id}" class="ba-select-grid-item unselectable" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><div onclick="loadItem('${linkid}')" class="ba-item-card"><div class="ba-item-card-img"><img class="ba-item-${item.Rarity.toLowerCase()}" loading="lazy" src="images/${icontype}/${item.Icon}.png"></div></div></div>`
+    var html = `<div id="ba-item-select-${item.Id}" class="ba-select-grid-item unselectable" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><div onclick="loadItem('${linkid}')" class="ba-item-card ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${icontype}/${item.Icon}.png"></div></div>`
     return html
 }
 
@@ -2778,38 +2784,50 @@ function updateSummonExSkillStatPreview() {
 
 }
 
-function populateItemList() {
-    itemsHtml = {"materials":"", "gifts":"", "eleph":"", "furniture":"", "equipment":"", "currency":""}
-    $.each(data.items, function(i,el) {
-        if (el.IsReleased[regionID]) {
-            let itemHtml = getItemCardHTML(el,el.Id,'items')
-            switch (el.Category) {
-                case "CharacterExpGrowth":
-                case "Material":
-                    itemsHtml["materials"] += itemHtml
-                    break
-                case "Favor":
-                    itemsHtml["gifts"] += itemHtml
-                    break
-                case "SecretStone":
-                    itemsHtml["eleph"] += itemHtml
-                    break
-                case "Coin":
-                    itemsHtml["currency"] += itemHtml
-                    break
-            }
+function populateItemList(tab) {
+    itemsHtml = ""
+
+    if (tab == 'equipment') {
+        $.each(data.equipment, function(i,el) {
+            if (el.IsReleased[regionID])
+            itemsHtml += getItemCardHTML(el,el.Id+2000000,'equipment')
+        })
+    } else if (tab == 'furniture') {
+        $.each(data.furniture, function(i,el) {
+            if (el.IsReleased[regionID])
+            itemsHtml += getItemCardHTML(el,el.Id+1000000,'furniture')
+        })
+    } else {
+        itemTypes = []
+        switch (tab) {
+            case "materials":
+                itemTypes = ["CharacterExpGrowth","Material"]
+                break
+            case "gifts":
+                itemTypes = ["Favor"]
+                break
+            case "eleph":
+                itemTypes = ["SecretStone"]
+                break
+            case "currency":
+                itemTypes = ["Coin"]
+                break
+            case "consumables":
+                itemTypes = ["Consumable"]
+                break
+            case "collectibles":
+                itemTypes = ["Collectible"]
+                break
         }
-    })
-    $.each(data.furniture, function(i,el) {
-        if (el.IsReleased[regionID])
-        itemsHtml['furniture'] += getItemCardHTML(el,el.Id+1000000,'furniture')
-    })
-    $.each(data.equipment, function(i,el) {
-        if (el.IsReleased[regionID])
-        itemsHtml['equipment'] += getItemCardHTML(el,el.Id+2000000,'equipment')
-    })
-    Object.entries(itemsHtml).forEach(el => $(`#ba-item-list-${el[0]}-grid`).html(el[1]))
-    $('.ba-select-grid-item').tooltip({html: true, delay: { show: 200, hide: 0 }, container: $('.tab-content') })
+        $.each(data.items, function(i,el) {
+            if (el.IsReleased[regionID] && itemTypes.includes(el.Category)) {
+                itemsHtml += getItemCardHTML(el,el.Id,'items')
+            }
+        })
+    }
+    loadedItemList = tab
+    $(`#ba-item-list-grid`).html(itemsHtml)
+    $('.ba-select-grid-item').tooltip({html: true, delay: { show: 200, hide: 0 }, container: $('.card-body') })
 }
 
 function populateCraftList() {
@@ -3552,7 +3570,7 @@ function getFavouriteItems(tags) {
 }
 
 function getCacheVerResourceName(res) {
-    return res + '?v=' + (res.endsWith('.json') ? data_cache_ver : cache_ver)
+    return res + '?v=' + cache_ver
 }
 
 function getTimeAttackLevelScale(level) {
