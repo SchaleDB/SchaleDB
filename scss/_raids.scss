@@ -1,0 +1,15 @@
+#ba-raid-season-rewards {
+    .reward-point {
+        @include flex(center, left);
+        min-width: 120px;
+        margin-left: 0.5rem;
+        font-weight: 700;
+        font-style: italic;
+    }
+
+    .season-rewards {
+        flex-grow: 1;
+        @include flex(center, center);
+        flex-wrap: wrap;
+    }
+}

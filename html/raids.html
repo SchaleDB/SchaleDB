@@ -152,6 +152,7 @@
                             <nav id="ba-raid-info-tabs" class="nav nav-pills mt-2 mb-3">
                                 <a id="ba-raid-info-tab-skills" class="nav-link active" data-bs-toggle="tab" href="#ba-raid-page-skills" data-localize-id="ui,student_page_skills"></a>
                                 <a id="ba-raid-info-tab-rewards" class="nav-link" data-bs-toggle="tab" href="#ba-raid-page-rewards" data-localize-id="ui,stage_rewards"></a>
+                                <a id="ba-raid-info-tab-profile" class="nav-link" data-bs-toggle="tab" href="#ba-raid-page-profile" data-localize-id="ui,profile"></a>
                             </nav>
                             <div class="tab-content">
                                 <div id="ba-raid-page-skills" class="tab-pane fade show active">
@@ -160,6 +161,21 @@
                                 </div>
                                 <div id="ba-raid-page-rewards" class="tab-pane fade">
                                     <div id="ba-raid-rewards" class="ba-panel p-2 pb-0">
+                                    </div>
+                                    <div id="ba-raid-season">
+                                        <h5 class="text-bold mt-3" data-localize-id="ui,rewards_season"></h5>
+                                        <select id="ba-raid-season-select" class="form-select mb-2" onchange="loadRaidSeasonRewards(this)">
+                                        </select>
+                                        <div id="ba-raid-season-rewards" class="ba-panel p-2 pb-0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="ba-raid-page-profile" class="tab-pane fade">
+                                    <div class="px-2 mb-2">
+                                        <h3 id="ba-raid-profile-name" class="my-1"></h3>
+                                        <span id="ba-raid-profile-affiliation" class="text-bold mb-1"></span>
+                                    </div>
+                                    <div id="ba-raid-profile" class="ba-panel p-2">
                                     </div>
                                 </div>
                             </div>    

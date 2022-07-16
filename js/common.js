@@ -18,7 +18,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 14
+const cache_ver = 15
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -408,14 +408,14 @@ $(document).ready(function() {
     $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
     $(`#ba-navbar-contrast-toggle-${highContrast}`).addClass("active")
 
-    $(window).on('popstate', loadModuleFromURL)
-    loadModuleFromURL()
+    $(window).on('popstate', () => loadModuleFromURL(false))
+    loadModuleFromURL(true)
 })
 
 /**
  * Loads the module based on the present query string parameter. If no query string is present then loads the last module the user visited
  */
-function loadModuleFromURL() {
+function loadModuleFromURL(loadlast) {
     var urlVars = new URL(window.location.href).searchParams
     if (urlVars.get("chara")) {
         loadStudent(urlVars.get("chara"))
@@ -430,7 +430,8 @@ function loadModuleFromURL() {
     } else if (urlVars.get("craftnode")) {
         loadCraft(urlVars.get("craftnode"))
     } else {
-        loadLastModule()
+        if (loadlast) loadLastModule()
+        else loadModule('home')
     }
 }
 
@@ -507,7 +508,7 @@ function loadModule(moduleName, entry=null) {
             })
             activeFilters = getNumActiveFilters()
             $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
-            $('#ba-student-search-reset').toggle(activeFilters > 0)
+            $('#ba-student-search-reset').toggle(activeFilters > 0 || $('#ba-student-search-text').val() != "")
 
             updateStudentList(updateSortMethod = true)
     
@@ -787,12 +788,28 @@ function loadModule(moduleName, entry=null) {
                 url.searchParams.forEach((v,k) => url.searchParams.delete(k))
                 history.pushState(null, '', url)
             }
-            $('title').html(`Schale DB | Home`)
+            $('title').html(`Schale DB`)
             $('#ba-navbar-content').collapse('hide')
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
     }
     localStorage.setItem("module", loadedModule)
+}
+
+function finalizeLoad(pageTitle, searchParamKey, searchParamValue, noscroll = false) {
+    
+    var url = new URL(window.location.href)
+
+    if (url.searchParams.get(searchParamKey) !== searchParamValue) {
+        url.searchParams.forEach((v,k) => url.searchParams.delete(k))
+        url.searchParams.set(searchParamKey, searchParamValue)
+        history.pushState(null, '', url)
+    }
+
+    $('title').html(`${pageTitle} | Schale DB`)
+    $('#ba-navbar-content').collapse('hide')
+    if (!noscroll) window.scrollTo({top: 0, left: 0, behavior: 'instant'})
+    localStorage.setItem(searchParamKey, searchParamValue)
 }
 
 function getNextBirthdayDate(birthday) {
@@ -873,6 +890,9 @@ function updateStudentList(updateSortMethod = false) {
         }
     })
     $('#ba-student-select-noresult').toggle(count == 0)
+    const activeFilters = getNumActiveFilters()
+    $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
+    $('#ba-student-search-reset').toggle(activeFilters > 0 || $('#ba-student-search-text').val() != "")
 }
 
 /**
@@ -958,9 +978,6 @@ function searchSetOrder(value, runSearch = true, swapDir = true) {
 function searchSetFilter(prop, value, runSearch = true) {
     search_options["filter"][prop][value] = !search_options["filter"][prop][value]
     $(`#ba-student-search-filter-${prop.toLowerCase()}-${String(value).toLowerCase()}`).toggleClass("active", search_options["filter"][prop][value])
-    activeFilters = getNumActiveFilters()
-    $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
-    $('#ba-student-search-reset').toggle(activeFilters > 0)
     if (runSearch) {
         updateStudentList()
     }
@@ -1179,10 +1196,6 @@ function processStudent() {
     $('#ba-statpreview-status-bond-alt-level').toggle(student_bondalts.length > 0)
     updateStatPreviewTitle()
 
-    $('title').html(`Schale DB | ${getTranslatedString(student, 'Name')}`)
-    $('#ba-navbar-content').collapse('hide')
-    window.scrollTo({top: 0, left: 0, behavior: 'instant'})
-
     changeStatPreviewStars(stat_preview_stars, stat_preview_weapon_stars, false)
     recalculateTerrainAffinity()
     updatePassiveSkillStatPreview()
@@ -1205,16 +1218,8 @@ function processStudent() {
     
     recalculateStatPreview()
 
+    finalizeLoad(getTranslatedString(student, 'Name'), "chara", student.DevName)
 
-    var url = new URL(window.location.href)
-
-    if (url.searchParams.get("chara") !== student.DevName) {
-        url.searchParams.forEach((v,k) => url.searchParams.delete(k))
-        url.searchParams.set("chara", student.DevName)
-        history.pushState(null, '', url)
-    }
-
-    localStorage.setItem("chara", student.DevName)
     studentSelectorModal.hide()
 
     gtag('event', 'View Student', {
@@ -1357,7 +1362,7 @@ function loadItem(id) {
         } else if (item.Category == 'Coin') {
             $('#ba-item-sources').html(getItemDropStages(item.Id))
             $('#ba-item-list-tab-currency').tab('show')
-            if (loadedItemList != 'equipment') populateItemList('equipment')
+            if (loadedItemList != 'currency') populateItemList('currency')
         }
         if (mode == 'furniture') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
@@ -1365,17 +1370,8 @@ function loadItem(id) {
             if (loadedItemList != 'furniture') populateItemList('furniture')
             $('#ba-item-list-tab-furniture').tab('show') 
         }
-        var url = new URL(window.location.href)
-        if (url.searchParams.get("item") != id) {
-            url.searchParams.forEach((v,k) => url.searchParams.delete(k))
-            url.searchParams.set("item", id)
-            history.pushState(null, '', url)
-        }
 
-        $('title').html(`Schale DB | ${getTranslatedString(item, 'Name')}`)
-        $('#ba-navbar-content').collapse('hide')
-        window.scrollTo({top: 0, left: 0, behavior: 'instant'})
-        localStorage.setItem("item", id)
+        finalizeLoad(getTranslatedString(item, 'Name'), "item", loadedItem.Id)
 
         gtag('event', 'View Item', {
             'event_category': 'item',
@@ -1420,17 +1416,7 @@ function loadCraft(id) {
             $(el).tooltip({html: true})
         })
 
-        var url = new URL(window.location.href)
-        if (url.searchParams.get("craftnode") != id) {
-            url.searchParams.forEach((v,k) => url.searchParams.delete(k))
-            url.searchParams.set("craftnode", id)
-            history.pushState(null, '', url)
-        }
-
-        $('title').html(`Schale DB | ${getTranslatedString(craftNode, 'Name')}`)
-        $('#ba-navbar-content').collapse('hide')
-        window.scrollTo({top: 0, left: 0, behavior: 'instant'})
-        localStorage.setItem("craftnode", id)
+        finalizeLoad(getTranslatedString(craftNode, 'Name'), "craftnode", craftNode.Id)
 
         gtag('event', 'View Crafting', {
             'event_category': 'crafting',
@@ -1454,6 +1440,8 @@ function loadRaid(raidId) {
             $('#ba-timeattack-info').hide()
             $('#ba-worldraid-difficulty').hide()
             $('#ba-raid-difficulty').show()
+            $('#ba-raid-season').show()
+            $('#ba-raid-info-tab-profile').show()
             raid = findOrDefault(data.raids.Raid,"Id",raidId,1)[0]
             if (raid.IsReleasedInsane[regionID]) {
                 $('#ba-raid-difficulty-5').toggleClass('disabled', false)
@@ -1465,7 +1453,7 @@ function loadRaid(raidId) {
             }
             $(`#ba-raid-difficulty-${raid_difficulty}`).tab('show')
         
-            $('#ba-raid-affiliation').text(raid.Faction)
+            $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'raid'))
             $('#ba-raid-name').text(getTranslatedString(raid, 'Name'))      
             $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain[0]}.png`)
             if (raid.Terrain.length > 1) {
@@ -1474,9 +1462,24 @@ function loadRaid(raidId) {
             } else {
                 $('#ba-raid-terrain-alt').hide()
             }
+            $('#ba-raid-profile-page').show()
+            $('#ba-raid-profile-name').text(getTranslatedString(raid, "Name"))
+            $('#ba-raid-profile-affiliation').text(getLocalizedString("BossFaction", raid.Faction))
+            $('#ba-raid-profile').html(getTranslatedString(raid, "Profile"))
     
             if (!raid.IsReleasedInsane[regionID] && raid_difficulty == 5) {raid_difficulty = 0}
             changeRaidDifficulty(raid_difficulty)
+            //populate raid seasons
+            raidSeasons = find(data.raids["SeasonReward"+(regionID == 0 ? "Jp" : "Global")], "RaidId", raid.Id)
+            let optionsHtml = '<option value="0" disabled selected>Select Season</option>'
+            const dateOptions = {year: "numeric", month: "numeric", day: "numeric"}
+            raidSeasons.forEach((season, index) => {
+                const start = new Date(season.Start*1000).toLocaleString([], dateOptions)
+                const end = new Date(season.End*1000).toLocaleString([], dateOptions)
+                optionsHtml += `<option value="${season.Season}">${getLocalizedString("ui","raid_season",[season.Season, getLocalizedString("AdaptationType", season.Terrain)]) + " [" + start + "~"+end+"]"}</option>`
+            })
+            $('#ba-raid-season-select').html(optionsHtml)
+            $('#ba-raid-season-rewards').html("")
         } else if (raidId < 800000) {
             //Time Attack
             $('#ba-raid-list-tab-timeattack').tab('show')
@@ -1494,6 +1497,11 @@ function loadRaid(raidId) {
             $('#ba-timeattack-info').hide()
             $('#ba-worldraid-difficulty').show()
             $('#ba-raid-difficulty').hide()
+            $('#ba-raid-season').hide()
+            if ($('#ba-raid-info-tab-profile').hasClass('active')) {
+                $('#ba-raid-info-tab-skills').tab('show')
+            }
+            $('#ba-raid-info-tab-profile').hide()
             raid = findOrDefault(data.raids.WorldRaid,"Id",raidId,1)[0]
 
             if (raid_difficulty > 2)  {
@@ -1514,20 +1522,11 @@ function loadRaid(raidId) {
 
             changeWorldRaidDifficulty(raid_difficulty)
         }
+        $('#ba-raid-season-rewards').hide()
         loadedRaid = raid
         $('#ba-raid-select-'+raid.Id).addClass('selected')
 
-        let url = new URL(window.location.href)
-        if (url.searchParams.get("raid") != raid.Id) {
-            url.searchParams.forEach((v,k) => url.searchParams.delete(k))
-            url.searchParams.set("raid", raid.Id)
-            history.pushState(null, '', url)
-        }
-    
-        $('title').html(`Schale DB | ${getTranslatedString(raid, 'Name')}`)
-        $('#ba-navbar-content').collapse('hide')
-        window.scrollTo({top: 0, left: 0, behavior: 'instant'})
-        localStorage.setItem("raid", raid.Id)
+        finalizeLoad(getTranslatedString(raid, 'Name'), "raid", raid.Id)
 
         gtag('event', 'View Raid', {
             'event_category': 'raid',
@@ -1536,6 +1535,24 @@ function loadRaid(raidId) {
         })
     } else {
         loadModule('raids', raidId)
+    }
+}
+
+function loadRaidSeasonRewards(el) {
+    const season = find(data.raids["SeasonReward"+(regionID == 0 ? "Jp" : "Global")], "Season", $(el).val())[0]
+    if (season) {
+        let html = ""
+        season.Rewards.forEach(([points, rewards]) => {
+            if (html != "") html += '<div class="ba-panel-separator"></div>'
+            html += `<div class="d-flex"><span class="reward-point">${points.toLocaleString() + " Pt"}</span><div class="season-rewards mt-2">`
+            rewards.forEach(([itemId, amount]) => {
+                html += getDropIconHTML(itemId, amount)
+            })
+            html += `</div></div>`
+        })
+        $('#ba-raid-season-rewards').html(html)
+        $('#ba-raid-season-rewards .season-rewards>div').tooltip({html: true})
+        $('#ba-raid-season-rewards').show()
     }
 }
 
@@ -1714,13 +1731,6 @@ function loadStage(id) {
         $('#ba-stage-terrain-img').attr('src', `images/ui/Terrain_${stage.Terrain}.png`)
         $('#ba-stage-fog').toggle(mode == "Campaign" && stage.Difficulty == 1)
 
-        let url = new URL(window.location.href)
-        if (url.searchParams.get("stage") != id) {
-            url.searchParams.forEach((v,k) => url.searchParams.delete(k))
-            url.searchParams.set("stage", id)
-            history.pushState(null, '', url)
-        }
-
         const stageTypes = ["Default","FirstClear","ThreeStar"]
         stageTypes.forEach(el => {
             if (el in stage.Rewards && stage.Rewards[el].length > 0) {
@@ -1816,10 +1826,7 @@ function loadStage(id) {
         $('#ba-stage-map-enemies').html('<p class="mb-0">Click on an enemy unit on the map to view a list of enemies.</p>')
         $('#ba-stage-select-'+stage.Id).addClass('selected')
 
-        $('title').html(`Schale DB | ${$('#ba-stage-title').text()}`)
-        $('#ba-navbar-content').collapse('hide')
-        //window.scrollTo({top: 0, left: 0, behavior: 'instant'})
-        localStorage.setItem("stage", id)
+        finalizeLoad($('#ba-stage-title').text(), 'stage', loadedStage.Id, noscroll=true)
 
         gtag('event', 'View Stage', {
             'event_category': 'stage',
@@ -2454,7 +2461,7 @@ function showEnemyInfo(id, level, grade=1, scaletype=0, switchTab=false) {
     $(`.ba-icon-enemy[data-enemy='${id}_${level}_${grade}_${scaletype}']`).addClass("selected")
     //if (selector != null) $(selector).addClass("selected")
     let enemy = find(data.enemies, 'Id', id)[0]
-    $('#ba-stage-enemy-name').text(getTranslatedString(enemy, 'Name'))
+    $('#ba-stage-enemy-name').html(getTranslatedString(enemy, 'Name'))
     $('#ba-stage-enemy-img').attr('src', `images/enemy/${enemy.Icon}.png`)
     $('#ba-stage-enemy-rank').text(`Lv.${level} ${getLocalizedString('EnemyRank', enemy.Rank)}`)
     $('#ba-stage-enemy-class').text(getLocalizedString('SquadType', enemy.SquadType)).removeClass("ba-class-main ba-class-support").addClass(`ba-class-${enemy.SquadType.toLowerCase()}`)
@@ -3404,7 +3411,7 @@ function allSearch() {
 
     $.each(data.students, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/student/collection/'+el.CollectionTexture+'.webp', 'type': 'Student', 'rarity': '', 'rarity_text': getRarityStars(el.StarGrade), 'onclick': `loadStudent('${el.DevName}')`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/student/collection/'+el.CollectionTexture+'.webp', 'type': getLocalizedString('ui', 'student'), 'rarity': '', 'rarity_text': getRarityStars(el.StarGrade), 'onclick': `loadStudent('${el.DevName}')`})
             if (results.length >= maxResults) return false
         }
     })
@@ -3412,7 +3419,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.raids.Raid, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/raid/'+el.Icon+'.png', 'type': 'Total Assault Boss', 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/raid/'+el.Icon+'.png', 'type': getLocalizedString('StageType', 'raid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
             if (results.length >= maxResults) return false
         }
     })
