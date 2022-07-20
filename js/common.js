@@ -18,7 +18,7 @@ const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 15
+const cache_ver = 16
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -1371,7 +1371,7 @@ function loadItem(id) {
             $('#ba-item-list-tab-furniture').tab('show') 
         }
 
-        finalizeLoad(getTranslatedString(item, 'Name'), "item", loadedItem.Id)
+        finalizeLoad(getTranslatedString(item, 'Name'), "item", id)
 
         gtag('event', 'View Item', {
             'event_category': 'item',
@@ -2220,7 +2220,7 @@ function recalculateStatPreview() {
         studentCompareStats.stats["AmmoCount"][0] = 0
     }
 
-    const statList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalDamageRate','StabilityPoint','Range','OppressionPower','OppressionResist','AmmoCount','CriticalChanceResistPoint','CriticalDamageResistRate','HealEffectivenessRate','AttackSpeed','DefensePenetration','BlockRate']
+    const statList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalDamageRate','StabilityPoint','Range','OppressionPower','OppressionResist','AmmoCount','CriticalChanceResistPoint','CriticalDamageResistRate','HealEffectivenessRate','AttackSpeed','DefensePenetration','BlockRate', 'RegenCost']
     let stats = (statPreviewSummonStats ? summonStats : studentStats)
 
     statList.forEach((stat, index) => {
@@ -2841,8 +2841,10 @@ function populateCraftList() {
     html = []
     html[0] = ""
     html[1] = ""
+    //html[2] = ""
     html_h1= `<div id="stages-list-events-grid-header-1" class="w-100 ba-grid-header mb-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"1")}</h3></div>`
     html_h2 = `<div id="stages-list-events-grid-header-2" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"2")}</h3></div>`
+    //html_h3 = `<div id="stages-list-events-grid-header-3" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"3")}</h3></div>`
     data.crafting.Nodes.sort((a,b) => a.Quality - b.Quality)
     data.crafting.Nodes.sort((a,b) => b.Icon.localeCompare(a.Icon))
     $.each(data.crafting.Nodes, function(i,el) {
