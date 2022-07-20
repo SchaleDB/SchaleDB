@@ -15,10 +15,12 @@ const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
 const skill_upgrade_credits = [5000, 7500, 60000, 90000, 300000, 450000, 1500000, 2400000, 4000000]
+const gear_upgrade_credits = [500000]
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
+const max_gifts_ssr = 13
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 16
+const cache_ver = 17
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -84,14 +86,15 @@ let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loade
     , raid_difficulty = 0, ta_difficulty = 0
     , stat_preview_stars = 3
     , stat_preview_weapon_stars = 0
-    ,statPreviewIncludePassive = false
-    ,statPreviewIncludeBond = false
-    ,statPreviewIncludeBondAlts = false
-    ,statPreviewIncludeEquipment = false
-    ,statPreviewSupportStats = false
-    ,statPreviewSummonStats = false
-    ,compareMode = false
-    ,selectCompareMode = false
+    , statPreviewIncludePassive = false
+    , statPreviewIncludeExGear = false
+    , statPreviewIncludeBond = false
+    , statPreviewIncludeBondAlts = false
+    , statPreviewIncludeEquipment = false
+    , statPreviewSupportStats = false
+    , statPreviewSummonStats = false
+    , compareMode = false
+    , selectCompareMode = false
     , loadedStageList = null
     , loadedItemList = null
     ,scrolling = false
@@ -1104,6 +1107,28 @@ function processStudent() {
     $('#ba-weapon-bonus-terrain-adaption-description').html(`${getLocalizedString("ui","terrain_adaption", [getLocalizedString('AdaptationType',student.Weapon.AdaptationType)])} ${initialTerrainAmount} → <b>${bonusTerrainAmount}</b><br>(${getAdaptationText(student.Weapon.AdaptationType, bonusTerrainAmount)})`)
     $('#ba-weapon-stat-row2').toggle(student.Weapon.HealPower1 > 0)
 
+    //Gear
+    if ("Released" in student.Gear && student.Gear.Released[regionID]) {
+        $('#ba-student-tab-gear, #ba-statpreview-ex-gear-container').show()
+        $("#ba-student-gear-name, #ba-statpreview-ex-gear-name").html(student.Gear.Name)
+        $("#ba-student-gear-description").html(`${student.Gear.Desc}\n\n<i>${getLocalizedString('ui','bond_req_equip',['20', student.Name])}\n\n</i><b>${getLocalizedString('ui','stat_info')}</b>\n${getGearStatsText(student.Gear, "\n")}`)
+        $("#ba-student-gear-icon, #ba-statpreview-ex-gear-icon").attr("src", `images/gear/${student.Gear.Icon}.png`)
+        let gearMaterialsHtml = ""
+        for (let i = 0; i < student.Gear.TierUpMaterial[0].length; i++) {
+            gearMaterialsHtml += getMaterialIconHTML(student.Gear.TierUpMaterial[0][i], student.Gear.TierUpMaterialAmount[0][i])
+        }
+        gearMaterialsHtml += getMaterialIconHTML(3000001, abbreviateNumber(gear_upgrade_credits[0]))
+        $("#ba-statpreview-ex-gear-description").html(getGearStatsText(student.Gear, ", "))
+        $("#ba-student-gear-materials-t2").html(gearMaterialsHtml)
+        $("#ba-student-gear-materials-t2>div").tooltip({html: true})
+        $("#ba-student-bondreq-t2").html(getLocalizedString('ui','bond_req_upgrade',['25', student.Name]))
+    } else {
+        $('#ba-student-tab-gear, #ba-statpreview-ex-gear-container').hide()
+        if ($('#ba-student-tab-gear').hasClass('active')) {
+            $('#ba-student-tab-stats').tab('show')
+        }
+    }
+
     //Profile
     if (userLang != 'Jp') {
         $('#ba-student-fullname').text(getTranslatedString(student,'FamilyName')+' '+getTranslatedString(student,'PersonalName'))
@@ -1139,14 +1164,28 @@ function processStudent() {
 
     let allTags = student.FavorItemTags
     allTags.push(student.FavorItemUniqueTags[0])
-    let favItems = getFavouriteItems(allTags)
+    allTags.push(student.FavorItemUniqueTags[0] + "2")
+
     let favItemsHtml = ""
+    
+    if (regionID == 0) {
+        const favSSRItems = getFavouriteSSRItems(allTags)
+        $(favSSRItems[0]).each(function(i,el){
+            favItemsHtml += getFavourIconHTML(el, 4)
+        })
+        $(favSSRItems[1]).each(function(i,el){
+            favItemsHtml += getFavourIconHTML(el, 3)
+        })
+    }
+
+    const favItems = getFavouriteItems(allTags)
     $(favItems[0]).each(function(i,el){
         favItemsHtml += getFavourIconHTML(el, 3)
     })
     $(favItems[1]).each(function(i,el){
         favItemsHtml += getFavourIconHTML(el, 2)
     })
+
     $('#ba-student-favoured-items').empty().html(favItemsHtml)
     if (favItemsHtml == "") {
         $('#ba-student-favoured-items').empty().html(`<span class="pb-2 text-center">${getLocalizedString('ui','favoritem_none')}</span>`)
@@ -1205,6 +1244,7 @@ function processStudent() {
 
     recalculateSkillPreview()
     recalculateWeaponSkillPreview()
+    recalculateGearSkillPreview()
     recalculateEXSkillPreview()
     recalculateBondPreview()
 
@@ -1290,7 +1330,7 @@ function toggleStudentSummon() {
 function loadItem(id) {
     if (loadedModule == 'items') {
         var mode = '', item
-        //$(".tooltip").tooltip("hide")
+        $(".tooltip").tooltip("hide")
         $('#ba-item-furniture-row').hide()
         if (id >= 2000000) {
             mode = 'equipment'
@@ -1335,11 +1375,11 @@ function loadItem(id) {
             $('#ba-item-list-tab-materials').tab('show')
             if (loadedItemList != 'materials') populateItemList('materials')
         } else if (item.Category == 'Favor') {
-            if (item.Rarity != 'SSR') {
+            if (item.Id < 5998) {
                 $('#ba-item-usage').html(getLikedByStudents(item))
                 $('.ba-item-student').tooltip({html: true})
             } else {
-                $('#ba-item-usage').html("<i>This gift will be treated as a favorite item when given to any student.</i>").show()
+                $('#ba-item-usage').html(`<i>This gift will be treated as a liked item <img class="gift-like-icon" src="images/ui/Cafe_Interaction_Gift_03.png"> when given to any student.</i>`).show()
             }
             $('#ba-item-list-tab-gifts').tab('show')
             if (loadedItemList != 'gifts') populateItemList('gifts')
@@ -1407,6 +1447,8 @@ function loadCraft(id) {
                     itemId += 1000000
                 } else if (itemGroup[j].Type == "Equipment") {
                     itemId += 2000000
+                }  else if (itemGroup[j].Type == "Currency") {
+                    itemId += 3000000
                 }
                 rewardsHtml += getDropIconHTML(itemId,itemWeight)
             }
@@ -1976,6 +2018,11 @@ function togglePassiveSkill() {
     recalculateStatPreview()
 }
 
+function toggleExGear() {
+    statPreviewIncludeExGear = !statPreviewIncludeExGear
+    recalculateStatPreview()
+}
+
 function changeStatPreviewLevel(el) {
     const level = parseInt(el.value)
     $('.statpreview-level').val(level)
@@ -2000,6 +2047,15 @@ function changeWeaponSkillPreviewLevel(el) {
         $('#ba-weapon-skill-level').html("Lv." + el.value)
     }
     recalculateWeaponSkillPreview()
+}
+
+function changeGearSkillPreviewLevel(el) {
+    if (el.value == el.max) {
+        $('#ba-gear-skill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
+    } else {
+        $('#ba-gear-skill-level').html("Lv." + el.value)
+    }
+    recalculateGearSkillPreview()
 }
 
 function changeEXSkillPreviewLevel(el) {
@@ -2204,6 +2260,15 @@ function recalculateStatPreview() {
         }
     }
 
+    //Include Fav Item
+    if (statPreviewIncludeExGear && "Released" in student.Gear && student.Gear.Released[regionID]) {
+        studentStats.addBuff(student.Gear.StatType[0], student.Gear.StatValue[0][1])
+
+        if (compareMode && "Released" in studentCompare.Gear && studentCompare.Gear.Released[regionID]) {
+            studentCompareStats.addBuff(studentCompare.Gear.StatType[0], studentCompare.Gear.StatValue[0][1])
+        }
+    }
+
     //add student stat to summon/vehicle
     if (statPreviewSummonStats && !compareMode) {
         let exLevel = $('#ba-statpreview-exskill-range').val()
@@ -2302,6 +2367,9 @@ function recalculateStatPreview() {
     $('#ba-statpreview-gear').toggleClass("disabled", !statPreviewIncludeEquipment)
     $('#ba-statpreview-gear-toggle').prop("checked", statPreviewIncludeEquipment)
     $('#ba-statpreview-gear input').prop("disabled", !statPreviewIncludeEquipment)
+
+    $('#ba-statpreview-ex-gear-toggle').prop("checked", statPreviewIncludeExGear)
+    $('#ba-statpreview-ex-gear').toggleClass("disabled", !statPreviewIncludeExGear)
 
     if (statPreviewIncludeEquipment) {
         for (let i = 0; i < 3; i++) {
@@ -2653,7 +2721,7 @@ function getStudentIconSmall(student) {
 }
 
 function getFavourIconHTML(id, grade) {
-    var gift = find(data.items, "Id", 5000+id)[0]
+    var gift = find(data.items, "Id", id)[0]
     var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.Icon}.png`, getTranslatedString(gift, 'Name'), getLocalizedString('ItemCategory', gift.Category), getRarityStars(gift.Rarity), getTranslatedString(gift, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${gift.Rarity.toLowerCase()}" src="images/items/${gift.Icon}.png"><img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade}.png"></div>`
     return html
 }
@@ -2668,6 +2736,17 @@ function recalculateWeaponSkillPreview() {
     let skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
 
     $('#ba-skill-weaponpassive-description').html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType))
+    $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+        $(el).tooltip({html: true})
+    })
+}
+
+function recalculateGearSkillPreview() {
+    if (!("Released" in student.Gear)) return
+    let skillLevel = $("#ba-gear-skillpreview-range").val()
+    let skill = find(student.Skills, 'SkillType', 'gearnormal')[0]
+
+    $('#ba-skill-gearnormal-description').html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType))
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })
@@ -2841,10 +2920,10 @@ function populateCraftList() {
     html = []
     html[0] = ""
     html[1] = ""
-    //html[2] = ""
+    html[2] = ""
     html_h1= `<div id="stages-list-events-grid-header-1" class="w-100 ba-grid-header mb-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"1")}</h3></div>`
     html_h2 = `<div id="stages-list-events-grid-header-2" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"2")}</h3></div>`
-    //html_h3 = `<div id="stages-list-events-grid-header-3" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"3")}</h3></div>`
+    html_h3 = `<div id="stages-list-events-grid-header-3" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"3")}</h3></div>`
     data.crafting.Nodes.sort((a,b) => a.Quality - b.Quality)
     data.crafting.Nodes.sort((a,b) => b.Icon.localeCompare(a.Icon))
     $.each(data.crafting.Nodes, function(i,el) {
@@ -2852,7 +2931,7 @@ function populateCraftList() {
         html[el.Tier-1] += getCraftingCardHTML(el)
     })
 
-    $('#ba-craft-list-nodes-grid').html(html_h1 + html[0] + html_h2 + html[1])
+    $('#ba-craft-list-nodes-grid').html(html_h1 + html[0] + html_h2 + html[1] + (regionID == 0 ? html_h3 + html[2] : ""))
 }
 
 function getCraftingCardHTML(node) {
@@ -3075,7 +3154,7 @@ function getUsedByStudents(item, mode) {
 }
 
 function getEquipmentRecipe(item) {
-    let html = '', headerText = 'Crafted using the following items'
+    let html = '', headerText = getLocalizedString('ui','craft_using')
     if ("Recipe" in item) {
         for (let i = 0; i < item.Recipe.length; i++) {
             html += getDropIconHTML(item.Recipe[i][0]+2000000, item.Recipe[i][1])
@@ -3093,36 +3172,47 @@ function getEquipmentRecipe(item) {
 }
 
 function getLikedByStudents(item) {
-    var htmlLoves = `<div class="mb-2"><i>Loved by the following students</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">`
-    var htmlLikes = `<div class="mb-2"><i>Liked by the following students</i></div><div class="d-flex align-items-center justify-content-center flex-wrap">`
+    let studentsHtml = ["", ""]
+    let likedStudentsHtml =  ""
+
     $.each(data.students, function(i,el){
         if (!el.IsReleased[regionID])
         return
         let allTags = el.FavorItemTags
         allTags.push(el.FavorItemUniqueTags[0])
-        let favItems = getFavouriteItems(allTags)
-        let likes = false, loves = false
-        for (let i = 0; i < favItems[0].length; i++) {
-            if (item.Id-5000 == favItems[0][i]) {
-                loves = true
-                break
-            }
-        }
-        for (let i = 0; i < favItems[1].length; i++) {
-            if (item.Id-5000 == favItems[1][i]) {
-                likes = true
-                break
-            }
+        allTags.push(el.FavorItemUniqueTags[0] + "2")
+
+        if (item.Rarity == "SSR") {
+            const favItems = getFavouriteSSRItems(allTags)
+            favItems.forEach((items, grade) => {
+                items.forEach((itemId) => {
+                    if (item.Id == itemId) {
+                        studentsHtml[grade] += getStudentIconSmall(el)
+                    } 
+                })
+                
+            })
+        } else {
+            const favItems = getFavouriteItems(allTags)
+            favItems.forEach((items, grade) => {
+                items.forEach((itemId) => {
+                    if (item.Id == itemId) {
+                        studentsHtml[grade] += getStudentIconSmall(el)
+                    } 
+                })
+                
+            })
         }
         
-        let html = getStudentIconSmall(el)
-        if (likes) htmlLikes += html
-        if (loves) htmlLoves += html
     })
-    htmlLikes += "</div>"
-    htmlLoves += "</div>"
+    studentsHtml.forEach((html, ind) => {
+        if (html != "") {
+            likedStudentsHtml += `<div class="mb-2"><i>${getLocalizedString('ui','item_likedbystudent_list_'+ind, [`<img class="gift-like-icon" src="images/ui/Cafe_Interaction_Gift_0${(item.Rarity == "SSR" ? 4 : 3) - ind}.png">`])}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${studentsHtml[ind]}</div>`
+        }
+    })
+
     $('#ba-item-usage').show()
-    return htmlLoves + htmlLikes
+    return likedStudentsHtml
 }
 
 function getItemDropStages(itemID) {
@@ -3566,16 +3656,29 @@ function getTranslatedString(obj, key) {
 }
 
 function getFavouriteItems(tags) {
-    let good = [], great = []
-    for (let i = 0; i < max_gifts; i++) {
-        let commonTags = find(data.items, "Id", 5000+i)[0].Tags.filter(x => tags.includes(x))
+    let gifts = [[],[]]
+    for (let i = 5000; i < 5000+max_gifts; i++) {
+        let commonTags = find(data.items, "Id", i)[0].Tags.filter(x => tags.includes(x))
         if (commonTags.length == 1) {
-            good.push(i)
+            gifts[1].push(i)
         } else if (commonTags.length > 1) {
-            great.push(i)
+            gifts[0].push(i)
         }  
     }
-    return [great, good]
+    return gifts
+}
+
+function getFavouriteSSRItems(tags) {
+    let gifts = [[],[]]
+    for (let i = 5100; i < 5100+max_gifts_ssr; i++) {
+        let commonTags = find(data.items, "Id", i)[0].Tags.filter(x => tags.includes(x))
+        if (commonTags.length == 1) {
+            gifts[1].push(i)
+        } else if (commonTags.length > 1) {
+            gifts[0].push(i)
+        }  
+    }
+    return gifts
 }
 
 function getCacheVerResourceName(res) {
@@ -3674,6 +3777,7 @@ function openStudentComparison() {
         recalculateStatPreview()
         updateStatPreviewTitle()
     } else {
+        $('.ba-student-card.disabled').removeClass('disabled')
         $(`#ba-student-select-${student.Id}>div`).addClass('disabled')
         selectCompareMode = true
         studentSelectorModal.show()

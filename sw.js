@@ -5,7 +5,7 @@
  */
 
 // cache versions should match common.js
-const dataCacheVer = 16;
+const dataCacheVer = 17;
 const imgCacheVer = 2;
 
 const dataCacheName = `schale-data-v${dataCacheVer}`;
