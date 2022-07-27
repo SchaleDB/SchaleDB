@@ -121,17 +121,10 @@
             width: 70px;
             height: 70px;
 
-            &.group-1 {
-                --col-tile: var(--col-map-pair-1);
-            }
-            &.group-2 {
-                --col-tile: var(--col-map-pair-2);
-            }
-            &.group-3 {
-                --col-tile: var(--col-map-pair-3);
-            }
-            &.group-4 {
-                --col-tile: var(--col-map-pair-4);
+            @for $i from 1 through 4 {
+                &.group-#{$i} {
+                    --col-tile: var(--col-map-pair-#{$i});
+                }
             }
 
             &.lowered::before {
@@ -233,6 +226,16 @@
             &.guard {
                 color: var(--col-map-pair-3);
             }
+
+            @for $i from 1 through 3 {
+                &.team-#{$i} {
+                    font-weight: bold;
+                    font-style: italic;
+                    color: #fff;
+                    background-color: var(--col-conquest-team-#{$i});
+                }
+            }
+            
         }
 
         .def-type {
@@ -277,12 +280,16 @@
             background-position: center center;
             background-image: url('../images/ui/Image_Campaign_Boss.png')
         }
+
+        &.leader {
+            height: 18px;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+            background-image: url('../images/ui/Image_Conquest_Leader.png')
+        }
     }
 }
-
-// .theme-dark .ba-stage-map-tile::before {
-//     filter: invert(1);
-// }
 
 #ba-stage-name {
     white-space: pre-line;

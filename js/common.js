@@ -9,8 +9,8 @@ const gear_minlevelreq = [0, 15, 35]
 const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40]]
 const languages = ['En', 'Jp', 'Kr', 'Tw']
 const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5}
-const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':5}
-const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':5}
+const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6}
+const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':10}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
@@ -19,6 +19,7 @@ const gear_upgrade_credits = [500000]
 const enemy_rank = {'Champion': 1, 'Elite': 2, 'Minion': 3}
 const max_gifts = 35
 const max_gifts_ssr = 13
+const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
 const cache_ver = 17
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
@@ -42,6 +43,7 @@ if (localStorage.getItem("language") && languages.includes(localStorage.getItem(
     }
 }
 
+let data = {}
 const json_list = {
     common: getCacheVerResourceName("./data/common.json"),
     raids: getCacheVerResourceName("./data/raids.json"),
@@ -61,7 +63,7 @@ const html_list = {
     items: getCacheVerResourceName("./html/items.html"),
     raids: getCacheVerResourceName("./html/raids.html"),
     stages: getCacheVerResourceName("./html/stages.html"),
-    students: getCacheVerResourceName("./html/students.html"),
+    students: getCacheVerResourceName("./html/students.html")
 }
 const sort_functions = {
     Default: (a,b) => (a.DefaultOrder - b.DefaultOrder)*search_options["sortby_dir"],
@@ -77,29 +79,59 @@ const sort_functions = {
     DodgePoint: (a,b) => (b.DodgePoint - a.DodgePoint)*search_options["sortby_dir"]
 }
 
-let data = {}, loadedModule, student, studentList, loadedRaid, loadedItem, loadedStage, loadedCraftNode, region, regionID, student_bondalts, darkTheme, highContrast, raid, selectedEnemy = 0
-    , studentCompare 
-    , searchResultsCount = 0, searchResultsSelection = 0
-    , studentSelectorModal, statPreviewModal, stageMapModal
-    , summonId = 0
-    , header
-    , raid_difficulty = 0, ta_difficulty = 0
-    , stat_preview_stars = 3
-    , stat_preview_weapon_stars = 0
-    , statPreviewIncludePassive = false
-    , statPreviewIncludeExGear = false
-    , statPreviewIncludeBond = false
-    , statPreviewIncludeBondAlts = false
-    , statPreviewIncludeEquipment = false
-    , statPreviewSupportStats = false
-    , statPreviewSummonStats = false
-    , compareMode = false
-    , selectCompareMode = false
-    , loadedStageList = null
-    , loadedItemList = null
-    ,scrolling = false
-    ,scrollPosition = {top: 0, left: 0, x: 0, y: 0}
-    , search_options = {
+let loadedModule
+
+let student
+let studentList
+let studentCompare 
+
+// Todo: These should also be stored in localstorage
+let stat_preview_stars = 3
+let stat_preview_weapon_stars = 0
+let statPreviewIncludePassive = false
+let statPreviewIncludeExGear = false
+let statPreviewIncludeBond = false
+let statPreviewIncludeBondAlts = false
+let statPreviewIncludeEquipment = false
+let statPreviewSupportStats = false
+let statPreviewSummonStats = false
+
+let compareMode = false
+let selectCompareMode = false
+
+let loadedRaid
+let loadedItem
+let loadedStage
+let loadedConquest
+let loadedCraftNode
+
+let loadedStageList = null
+let loadedItemList = null
+
+let region
+let regionID
+let student_bondalts
+let darkTheme
+let highContrast
+let raid
+let selectedEnemy = 0
+let raid_difficulty = 0
+let ta_difficulty = 0
+
+// searchbar properties
+let searchResultsCount = 0
+let searchResultsSelection = 0
+
+//bs modal references
+let studentSelectorModal
+let statPreviewModal
+let stageMapModal
+
+let scrolling = false
+let scrollPosition = {top: 0, left: 0, x: 0, y: 0}
+
+//Todo: save this in a localStorage object so it is remembered across visits
+let search_options = {
     "groupby": "none",
     "sortby": "Default",
     "sortby_dir": 1,
@@ -627,21 +659,8 @@ function loadModule(moduleName, entry=null) {
                 loadStage(1011101)
             }
             
-            // if (loadedStage.Id >= 7000000) {
-            //     populateEventStageList(loadedStage.EventId)
-            // } else if (loadedStage.Id >= 1000000) {
-            //     populateStageList('missions')
-            // } else if (loadedStage.Id >= 60000) {
-            //     populateStageList('schooldungeon')
-            // } else if (loadedStage.Id >= 31000) {
-            //     populateStageList('commissions')
-            // } else if (loadedStage.Id >= 30000) {
-            //     populateStageList('bounty')
-            // } else {
-            //     populateStageList('missions')
-            // }
-
             makeDraggable($('#ba-stage-map'))
+            makeDraggable($('#ba-conquest-map'))
             makeDraggable($('#ba-stage-modal-map-container'))
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         })
@@ -1733,10 +1752,18 @@ function loadStage(id) {
         let mode = ''
         if (loadedStage) $('#ba-stage-select-'+loadedStage.Id).removeClass('selected')
         if (id >= 7000000) {
-            mode = 'Event'
-            stage = findOrDefault(data.stages.Event, "Id", id, 8012301)[0]
-            loadedStage = stage
-            if (loadedStageList != '' + stage.EventId % 10000) populateEventStageList(stage.EventId)
+            const eventId = parseInt(String(id).slice(0,3))
+            if (conquest_events.includes(eventId)) {
+                mode = 'Conquest'
+                stage = findOrDefault(data.stages.Conquest, "Id", id, 8153902)[0]
+                loadedStage = stage
+                if (loadedStageList != '' + stage.EventId % 10000) populateEventStageList(stage.EventId)
+            } else {
+                mode = 'Event'
+                stage = findOrDefault(data.stages.Event, "Id", id, 8012301)[0]
+                loadedStage = stage
+                if (loadedStageList != '' + stage.EventId % 10000) populateEventStageList(stage.EventId)
+            }
         } else if (id >= 1000000) {
             mode = 'Campaign'
             stage = findOrDefault(data.stages.Campaign, "Id", id, 1011101)[0]
@@ -1834,6 +1861,10 @@ function loadStage(id) {
                 $('.ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_defeatall'))
                 $('.ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_defeatalltime', ['120']))
                 $('.ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_allsurvive'))
+            } else if (mode == "Conquest") {
+                $('.ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_defeatall'))
+                $('.ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_defeatalltime', [stage.StarCondition[1]]))
+                $('.ba-stage-star-3').html(getLocalizedString('ui', 'starcondition_allsurvive'))
             } else if (stage.Type.slice(0,6) == "Chaser") {
                 $('.ba-stage-star-1').html(getLocalizedString('ui', 'starcondition_clear'))
                 $('.ba-stage-star-2').html(getLocalizedString('ui', 'starcondition_allsurvive'))
@@ -1868,7 +1899,7 @@ function loadStage(id) {
         $('#ba-stage-map-enemies').html('<p class="mb-0">Click on an enemy unit on the map to view a list of enemies.</p>')
         $('#ba-stage-select-'+stage.Id).addClass('selected')
 
-        finalizeLoad($('#ba-stage-title').text(), 'stage', loadedStage.Id, noscroll=true)
+        finalizeLoad($('#ba-stage-title').text(), 'stage', id, noscroll=true)
 
         gtag('event', 'View Stage', {
             'event_category': 'stage',
@@ -1881,6 +1912,27 @@ function loadStage(id) {
     }
 }
 
+function populateEnemyList(containerId, formations) {
+    let html = ''
+    let enemyList = {}
+    const enemyRanks = ['Minion','Elite','Champion','Boss']
+    formations.forEach(el => {
+        for (let i = 0; i < el.EnemyList.length; i++) {
+            let enemy = find(data.enemies, "Id", el.EnemyList[i])[0]
+            let rankId = enemyRanks.indexOf(enemy.Rank)
+            enemyList[`${4-rankId}_${enemy.Id}_${el.Level[rankId]}_${el.Grade[rankId]}`] = enemy
+        }
+    })
+
+    Object.keys(enemyList).sort().forEach(el => {
+        e_level = el.split('_')[2]
+        e_grade = el.split('_')[3]
+        html += getEnemyCardHTML(enemyList[el], e_level, e_grade)
+    })
+    $(containerId).html(html)
+    $(containerId).children().first().trigger("click")
+}
+
 function getStageName(stage, type) {
     switch (type) {
         case "Event":
@@ -1890,6 +1942,8 @@ function getStageName(stage, type) {
         case "WeekDungeon":
         case "SchoolDungeon":
             return `${getLocalizedString('StageType', stage.Type)}`
+        case "Conquest":
+            return `${getLocalizedString('ConquestMap', stage.EventId)}`
     }
     console.log(`No name definition for stage type ${type}`)
     return "undefined!!!"
@@ -1899,6 +1953,7 @@ function getStageTitle(stage, type) {
     switch (type) {
         case "Event":
         case "Campaign":
+        case "Conquest":
             return getTranslatedString(stage, 'Name')
         case "WeekDungeon":
         case "SchoolDungeon":
@@ -2665,6 +2720,7 @@ function getDropIconHTML(id, chance) {
             // build group icon
             let icon, name, desc
             if (group.Id >= 600000 && group.Id < 700000) {
+                // Equipment boxes that contain lower tier variants of the same equipment piece
                 name = "Random "
                 desc = "Contains one of the following equipment pieces:\n"
                 iconPath = 'equipment'
@@ -2677,7 +2733,22 @@ function getDropIconHTML(id, chance) {
                     name += `${(i > 0) ? '/' : ''}T${(gear.Id%10)+1}`
                 }
                 name += ' '+gearType
-
+            } else if (group.Id >= 300000 && group.Id < 600000) {
+                // Equipment boxes that contain a random piece for an equipment slot (same tier)
+                name = "Random "
+                desc = "Contains one of the following equipment pieces:\n"
+                iconPath = 'equipment'
+                let gearType = ''
+                for (let i = 0; i < group.ItemList.length; i++) {
+                    let gear = find(data.equipment, 'Id', group.ItemList[i][0]-2000000)[0]
+                    desc += getTranslatedString(gear, 'Name') + "\n"
+                    if (i == 0) {
+                        name += `T${(gear.Id%10)+1} `
+                        icon = gear.Icon
+                    }
+                    gearType = getLocalizedString('ItemCategory', gear.Category)
+                    name += `${(i > 0) ? '/' : ''}${gearType}`                    
+                }
             } else if (group.Id >= 10100 && group.Id <= 10103) {
                 icon = group.Icon
                 name = getTranslatedString(group, 'Name')
@@ -2688,10 +2759,10 @@ function getDropIconHTML(id, chance) {
                     desc += getTranslatedString(item, 'Name') + "\n"
                 }
             }
-            html = `<div class="drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${icon}.png`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/${icon}.png"><span class="ba-material-label">${getProbabilityText(chance)}</span></div>`
+            html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${icon}.png`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/${icon}.png"><span class="ba-material-label">${getProbabilityText(chance)}</span></div>`
         }
     } else {
-        html = `<div class="drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',item.Category), rarityText, getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${getProbabilityText(chance)}</span></div>`
+        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',item.Category), rarityText, getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${getProbabilityText(chance)}</span></div>`
     }
     return html
 }
@@ -2948,8 +3019,8 @@ function populateStageList(mode) {
                 if (el.Area <= data.common.regions[regionID].campaign_max)
                 html += getStageCardHTML(el)
             })
-            $('#ba-stages-list-grid').show()
-            $('#ba-event-list-grid').hide()
+            $('.stage-list').hide()
+            $('#ba-stages-list').show()
             $('#ba-stages-list-tab-missions').tab('show')
             $('#ba-stages-list-grid').html(html)
             break
@@ -2964,8 +3035,8 @@ function populateStageList(mode) {
                     typePrev = el.Type
                 }
             })
-            $('#ba-stages-list-grid').show()
-            $('#ba-event-list-grid').hide()
+            $('.stage-list').hide()
+            $('#ba-stages-list').show()
             $('#ba-stages-list-tab-bounty').tab('show')
             $('#ba-stages-list-grid').html(html)
             break
@@ -2981,8 +3052,8 @@ function populateStageList(mode) {
                     typePrev = el.Type
                 }
             })
-            $('#ba-stages-list-grid').show()
-            $('#ba-event-list-grid').hide()
+            $('.stage-list').hide()
+            $('#ba-stages-list').show()
             $('#ba-stages-list-tab-commissions').tab('show')
             $('#ba-stages-list-grid').html(html)
             break
@@ -2995,8 +3066,8 @@ function populateStageList(mode) {
                 if (el.Stage <= data.common.regions[regionID].schooldungeon_max) html += getStageCardHTML(el)
                 typePrev = el.Type
             })
-            $('#ba-stages-list-grid').show()
-            $('#ba-event-list-grid').hide()
+            $('.stage-list').hide()
+            $('#ba-stages-list').show()
             $('#ba-stages-list-tab-schooldungeon').tab('show')
             $('#ba-stages-list-grid').html(html)
             break
@@ -3004,8 +3075,8 @@ function populateStageList(mode) {
             data.common.regions[regionID].events.forEach(val => {
                 if (val < 10000) html += getEventCardHTML(val)
             })
-            $('#ba-stages-list-grid').hide()
-            $('#ba-event-list-grid').show()
+            $('.stage-list').hide()
+            $('#ba-event-list').show()
             $('#ba-stages-list-tab-events').tab('show')
             $('#ba-event-list-grid').html(html)
     }
@@ -3024,39 +3095,57 @@ function populateEventStageList(eventId) {
         eventId = eventId % 10000
         let diffPrev = 0
         let eventPrev = 0
-        let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'events')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/Event_${eventId}_${regionID == 0 ? "Jp" : userLang}.png"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>
-        `
+        let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'events')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/Event_${eventId}_${regionID == 0 ? "Jp" : userLang}.png"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>`
     
-        let eventStages = find(data.stages.Event, 'EventId', eventId)
-        //Add rerun stages
-        if (data.common.regions[regionID].events.includes(eventId + 10000)) {
-            eventStages = eventStages.concat(find(data.stages.Event, 'EventId', eventId + 10000))
-        }
-        eventStages.forEach(stage => {
-            if (!(eventId == 701 && ((stage.Difficulty == 1 && stage.Stage > data.common.regions[regionID].event_701_max) || (stage.Difficulty == 2 && stage.Stage > data.common.regions[regionID].event_701_challenge_max)))) {
-                if (stage.Difficulty != diffPrev || stage.EventId != eventPrev) {
-                    let name = stage.Difficulty == 1 ? "Quest" : "Challenge"
-                    name += stage.EventId > 10000 ? " (Rerun)" : ""
-                    let header = `<div class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${name}</h3></div>`
-                    html += header
-                }
-                html += getStageCardHTML(stage)
-                diffPrev = stage.Difficulty
-                eventPrev = stage.EventId
+        if (conquest_events.includes(eventId)) {
+            $('.stage-list').hide()
+            $('#ba-conquest-list').show()
+    
+            let conquestMap = find(data.stages.ConquestMap, "EventId", eventId)[0]
+            loadedConquest = conquestMap
+            $('#ba-conquest-header').html(html)
+            $('#ba-conquest-step-n0').tab('show')
+            changeConquestMap(0, 0)
+            
+        } else {
+
+            let eventStages = find(data.stages.Event, 'EventId', eventId)
+            //Add rerun stages
+            if (data.common.regions[regionID].events.includes(eventId + 10000)) {
+                eventStages = eventStages.concat(find(data.stages.Event, 'EventId', eventId + 10000))
             }
-        })
+            eventStages.forEach(stage => {
+                if (!(eventId == 701 && ((stage.Difficulty == 1 && stage.Stage > data.common.regions[regionID].event_701_max) || (stage.Difficulty == 2 && stage.Stage > data.common.regions[regionID].event_701_challenge_max)))) {
+                    if (stage.Difficulty != diffPrev || stage.EventId != eventPrev) {
+                        let name = stage.Difficulty == 1 ? "Quest" : "Challenge"
+                        name += stage.EventId > 10000 ? " (Rerun)" : ""
+                        let header = `<div class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${name}</h3></div>`
+                        html += header
+                    }
+                    html += getStageCardHTML(stage)
+                    diffPrev = stage.Difficulty
+                    eventPrev = stage.EventId
+                }
+            })
+            
+            $('.stage-list').hide()
+            $('#ba-stages-list').show()
+            $('#ba-stages-list-grid').html(html)
+            $('#ba-stage-select-'+loadedStage.Id).addClass('selected')
+        }
+
         loadedStageList = '' + eventId
         $('#ba-stages-list-tab-events').tab('show')
-        $('#ba-stages-list-grid').show()
-        $('#ba-event-list-grid').hide()
-        $('#ba-stages-list-grid').html(html)
-        $('#ba-stage-select-'+loadedStage.Id).addClass('selected')
         $('#ba-stages-list-container .card-body').scrollTop(0)
     } else {
-        loadModule('stages', find(data.stages.Event, 'EventId', eventId % 10000)[0].Id)
+        if (conquest_events.includes(eventId)) {
+            //need a better way of defining a default here for conquest tiles
+            loadModule('stages', find(data.stages.Conquest, 'EventId', eventId % 10000)[0].Id)
+        } else {
+            loadModule('stages', find(data.stages.Event, 'EventId', eventId % 10000)[0].Id)
+        }
     }
 }
-
 
 function populateRaidList() {
     var html = ''
@@ -3911,12 +4000,12 @@ function drawHexamap(stage, container) {
 
                 case 107101:
                     //Gun Tile
-                    html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip('Gun Pickup\n(Increases unit\'s attack by 10% for the next two turns)')}"><i class="fa-solid fa-gun"></i></span>`
+                    html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip('Gun Pickup\n(Increases unit\'s ATK by 10% for the next two turns)')}"><i class="fa-solid fa-gun"></i></span>`
                     break
 
                 case 107201:
                     //Armor Tile
-                    html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip('Armor Pickup\n(Increases unit\'s defense by 10% for the next two turns)')}"><i class="fa-solid fa-shield"></i></span>`
+                    html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip('Armor Pickup\n(Increases unit\'s DEF by 10% for the next two turns)')}"><i class="fa-solid fa-shield"></i></span>`
                     break
                 
                 case 109201: case 109202: case 109203:
@@ -3984,4 +4073,95 @@ function openStageMapModal() {
     drawHexamap(loadedStage, '#ba-stage-modal-map-canvas')
     $('#ba-stage-modal-map .modal-title').text($('#ba-stage-name').text())
     stageMapModal.show()
+}
+
+function changeConquestMap(map, step) {
+    drawConquestHexamap(loadedConquest, map, step, '#ba-conquest-map-canvas')
+}
+
+/**
+ * Draws the hexamap for a given conquest map and step
+ * @param {} stage 
+ */
+function drawConquestHexamap(conquest, mapId, step, container) {
+    $(container).empty()
+
+    filteredTiles = conquest.Maps[mapId].Tiles.filter(tile => tile.Step == step)
+
+    const scale = 90
+
+    let x_min = 99
+    let y_min = 99
+    let y_max = -99
+    let x_max = -99
+    let leftOffset = 999999
+    let rightOffset = 0
+    let topOffset = 50
+
+    filteredTiles.forEach(tile => {
+        x_min = Math.min(x_min, tile.Pos[0])
+        y_min = Math.min(y_min, tile.Pos[1])
+        x_max = Math.max(x_max, tile.Pos[0])
+        y_max = Math.max(y_max, tile.Pos[1])
+    })
+
+    filteredTiles.forEach(tile => {
+        let xx = tile.Pos[0] - x_min
+        let yy = tile.Pos[1] - y_min
+        leftOffset = Math.min(leftOffset, xx*scale + (yy*scale*0.5))
+        rightOffset = Math.max(rightOffset, scale + xx*scale + (yy*scale*0.5))
+    })
+
+    console.log(`x_min ${x_min}, y_min ${y_min}`)
+
+    filteredTiles.forEach((tile, ind) => {
+        let xx = tile.Pos[0] - x_min
+        let yy = tile.Pos[1] - y_min
+
+        console.log(`Drawing tile at ${xx},${yy}`)
+
+        const x = xx*scale + (yy*scale*0.5) - leftOffset
+        const y = yy* Math.sqrt(Math.pow(scale/2, 2)*3) + topOffset
+
+        let html = ""
+        let onclick = ""
+        if (tile.Type == "Start") {
+            html += `<span class="start-tile"></span>`
+        }
+
+        const stages = find(data.stages.Conquest, "Id", tile.Id)
+        if (stages.length > 0) {
+            //Enemy Unit Tile
+            const stage = stages[0]
+            const unit = stage.Formations[0]
+            html += `<img class="ba-stage-map-enemy" src="images/enemy/${unit.MapIcon}.png" style="z-index:${yy}">`
+            html += `<div class="map-info">`
+            onclick = ` onclick="loadStage(${stage.Id});" `
+
+            if (stage.Team != 'None') {
+                const team = stage.Team.replace('Team','')
+                html += `<span class="move-type team-${team}">${team}</span>`
+            }
+
+            let armorType = find(data.enemies, "Id", unit.EnemyList[0])[0].ArmorType
+            html += `<span class="def-type bg-def-${armorType.toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="height:100%;"></span>`
+
+            html += `</div>`
+
+            if (stage.EnemyType == "Normal" || stage.EnemyType == "Challenge") {
+                html += `<span class="unit-grade"><span class="grade">Lv. ${stage.Level}</span></span>`
+            } else if (stage.EnemyType == "Boss") {
+                html += `<span class="unit-grade boss"></span>`
+            }  else if (stage.EnemyType == "MiddleBoss") {
+                html += `<span class="unit-grade leader"></span>`
+            }
+
+            
+        }
+        html = `<div class="ba-stage-map-tile map-tile-${ind} ${(tile.Type.startsWith("TileRemoveObject_TargetTile") && spawnTiles.includes(stage.HexaMap[tile.Trigger].Entity)) ? "hidden-tile" : ""} ${(tile.Type.startsWith("DisposableTileObject")) ? "cracked-tile" : ""}" ${onclick} style="left:${x}px;top:${y.toFixed(0)}px;${onclick != '' ? 'cursor:pointer;' : ''}">${html}</div>`
+        $(container).css('width', `${rightOffset-leftOffset}px`)
+        $(container).css('height', `${topOffset + 10 + scale + (y_max-y_min)*Math.sqrt(Math.pow(scale/2, 2)*3)}px`)
+        $(container).append(html)
+        $('.tile-icon, .tile-item').tooltip({html: true})
+    })
 }

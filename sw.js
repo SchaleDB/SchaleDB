@@ -6,7 +6,7 @@
 
 // cache versions should match common.js
 const dataCacheVer = 17;
-const imgCacheVer = 2;
+const staticCacheVer = 1;
 
 const dataCacheName = `schale-data-v${dataCacheVer}`;
 
@@ -34,7 +34,7 @@ const corePreCacheFiles = [
     './favicon.png',
 ];
 
-const imageCacheName = `schale-images-v${imgCacheVer}`;
+const staticCacheName = `schale-static-v${staticCacheVer}`;
 const currentCacheList = []
 
 
@@ -50,8 +50,8 @@ self.addEventListener('install', (e) => {
         currentCacheList.push(coreCacheName)
         console.log('[SW] Caching App Shell Files');
         await coreCache.addAll(corePreCacheFiles);
-        const imageCache = await caches.open(imageCacheName);
-        currentCacheList.push(imageCacheName);
+        const staticCache = await caches.open(staticCacheName);
+        currentCacheList.push(staticCacheName);
     })());
 });
 
@@ -84,14 +84,14 @@ self.addEventListener('fetch', (e) => {
         }
         const response = await fetch(e.request);
 
-        if (response.type == 'basic') {
+        if (response.ok && response.type == 'basic') {
             //cache same origin files
             const requestURL = new URL(e.request.url);
-            if (requestURL.pathname.includes('/images/')) {
-                const imageCache = await caches.open(imageCacheName);
-                //console.log(`[SW] Caching new image resource: ${e.request.url}`);
+            if (requestURL.pathname.includes('/images/') || requestURL.pathname.includes('/lib/') || requestURL.pathname.includes('/fonts/')) {
+                const staticCache = await caches.open(staticCacheName);
+                //console.log(`[SW] Caching new static resource: ${e.request.url}`);
                 try {
-                    imageCache.put(e.request, response.clone());
+                    staticCache.put(e.request, response.clone());
                 }
                 catch (error) {
                     console.log(error)
