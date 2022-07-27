@@ -21,7 +21,7 @@ const max_gifts = 35
 const max_gifts_ssr = 13
 const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 17
+const cache_ver = 18
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
