@@ -7,10 +7,63 @@ html {
 
 body {
     background-color: var(--col-theme-background);
-    font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
     overflow: auto scroll;
     @include webkit-scrollbar;
+
+    .ba-tooltip{
+        border-radius: 0.25rem;
+    }
 }
+
+//fonts - only add chinese fonts when language is selected to avoid confliction
+
+body {
+
+    font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
+
+    .title-text {
+        font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+        text-transform: uppercase;
+    }
+
+    .ba-tooltip{
+        font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
+    }
+
+    &.font-kr {
+        &, .ba-tooltip {
+            font-family: 'Nunito Sans', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
+        }
+
+        .title-text {
+            font-family: 'Oswald', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
+            text-transform: uppercase;
+        }
+    }
+    &.font-cn {
+        &, .ba-tooltip {
+            font-family: 'Nunito Sans', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
+        }
+
+        .title-text {
+            font-family: 'Oswald', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
+            text-transform: uppercase;
+        }
+    }
+    &.font-tw {
+        &, .ba-tooltip {
+            font-family: 'Nunito Sans', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
+        }
+
+        .title-text {
+            font-family: 'Oswald', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
+            text-transform: uppercase;
+        }
+    }
+
+
+}
+
 
 p {
     white-space: pre-line;
@@ -34,11 +87,6 @@ p {
     filter: blur(0.75rem) brightness(var(--var-background-brightness));
     transform: scale(1.05);
     @include transition(background-image);
-}
-
-.title-text {
-    font-family: 'Oswald', 'Noto Sans JP', sans-serif;
-    text-transform: uppercase;
 }
 
 .gear-disabled {

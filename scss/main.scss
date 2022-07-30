@@ -87,9 +87,8 @@
     align-items: center;
 
     h3 {
+        @extend .title-text;
         display: inline;
-        text-transform: uppercase;
-        font-family: 'Oswald', 'Noto Sans JP', sans-serif;
         font-weight: 400;
     }
 
@@ -764,8 +763,7 @@ h1 small {
 
 .ba-student-group-header {
     text-align: left;
-    text-transform: uppercase;
-    font-family: 'Oswald', 'Noto Sans JP', sans-serif;
+    @extend .title-text;
     font-weight: 400;
     grid-column: 1/-1;
     order: -1;
@@ -1215,11 +1213,6 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
 
 .bs-tooltip-bottom .tooltip-arrow::before {
     border-bottom-color: var(--col-bg-tooltip) !important;
-}
-
-.ba-tooltip{
-    border-radius: 0.25rem;
-    font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
 }
 
 .ba-tooltip-header{

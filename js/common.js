@@ -7,10 +7,10 @@ const raid_level = [17, 25, 35, 50, 70, 80]
 const maxbond = [10, 10, 20, 20, 50]
 const gear_minlevelreq = [0, 15, 35]
 const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40]]
-const languages = ['En', 'Jp', 'Kr', 'Tw']
-const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5}
-const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6}
-const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':10}
+const languages = ['En', 'Jp', 'Kr', 'Tw', 'Cn']
+const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5, 'Cn': 5}
+const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6, 'Cn':6}
+const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':10, 'Cn':10}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
@@ -30,12 +30,20 @@ if (localStorage.getItem("language") && languages.includes(localStorage.getItem(
     userLang = localStorage.getItem("language")
 } else {
     let browserLang = window.navigator.language
+    // guess user's language from their browser language
     switch (browserLang.split('-')[0]) {
         case 'ja':
             userLang = 'Jp'
             break;
         case 'ko':
             userLang = 'Kr'
+            break;
+        case 'zh':
+            if (browserLang.toLowerCase().startsWith('zh-tw')) {
+                userLang = 'Tw'
+            } else {
+                userLang = 'Cn'
+            }
             break;
         default:
             userLang = 'En'
@@ -3523,6 +3531,10 @@ function changeLanguage(lang) {
 }
 
 function loadLanguage(lang) {
+
+    // add correct font class
+    $('body').addClass(`font-${lang.toLowerCase()}`)
+
     $('*[data-localize-id]').each(function (i,el) {
         let key = $(el).data('localize-id').split(',')[0], value = $(el).data('localize-id').split(',')[1]
         $(el).html(getLocalizedString(key,value))
