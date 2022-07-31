@@ -60,8 +60,6 @@ body {
             text-transform: uppercase;
         }
     }
-
-
 }
 
 
@@ -272,13 +270,18 @@ input[type="search" i]::-webkit-search-cancel-button {
         transform: translateY(48px);
         opacity: 1;
     }
+}
 
-    // @include md-down {
-    //     flex-grow: 1;
-    //     &.show {
-    //         transform: translateY(48px);
-    //     }
-    // }
+#settings-dropdown-menu {
+    width: 360px;
+
+    @include sm-down {
+        width: auto;
+        max-width: 100vw;
+        position: fixed;
+        left: 0;
+        top: 46px;
+    }
 }
 
 .gift-like-icon {

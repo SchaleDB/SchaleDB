@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,700&family=Oswald&display=swap" rel="stylesheet">    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="manifest" href="./manifest.json" crossorigin="use-credentials">
-    <link href="css/main.css?v=18" rel="stylesheet">
+    <link href="css/main.css?v=19" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQEWDXR13H"></script>
     <script>
@@ -51,16 +51,16 @@
                         <a class="btn btn-dark" href="#" id="ba-navbar-regionselector" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" >
                             <i class="fa-solid fa-gear"></i><span class="d-none ms-2">Settings</span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-dark p-3">
+                        <div id="settings-dropdown-menu" class="dropdown-menu dropdown-menu-end dropdown-menu-dark p-3">
                             <div class="d-flex align-items-center mb-3">
                                     <span class="flex-fill me-4" data-localize-id="ui,navbar_settings_server"></span>
                                     <div class="btn-group">
-                                        <button type="button" id="ba-navbar-regionselector-0" class="btn btn-sm btn-dark" onclick="changeRegion(0)">Japan</button>
-                                        <button type="button" id="ba-navbar-regionselector-1" class="btn btn-sm btn-dark" onclick="changeRegion(1)">Global</button>
+                                        <button type="button" id="ba-navbar-regionselector-0" class="btn btn-sm btn-dark" onclick="changeRegion(0)"></button>
+                                        <button type="button" id="ba-navbar-regionselector-1" class="btn btn-sm btn-dark" onclick="changeRegion(1)"></button>
                                     </div>
                             </div>
-                            <div class="d-flex align-items-center mb-3">
-                                <span class="flex-fill me-4" style="white-space: nowrap;" data-localize-id="ui,navbar_settings_language"></span>
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="flex-fill me-4" data-localize-id="ui,navbar_settings_language"></span>
                                 <span class="d-flex align-items-center">
                                     <div class="dropdown d-inline">
                                         <button id="ba-navbar-languageselector" class="btn btn-sm btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"><span></span></button>
@@ -74,8 +74,11 @@
                                     </div>
                                 </span>
                             </div>
+                            <div class="text-muted mb-3">
+                                <small data-localize-id="ui,navbar_settings_language_description"></small>
+                            </div>
                             <div class="d-flex align-items-center mb-1">
-                                <span class="flex-fill me-4" style="white-space: nowrap;" data-localize-id="ui,navbar_settings_theme"></span>
+                                <span class="flex-fill me-4" data-localize-id="ui,navbar_settings_theme"></span>
                                 <span class="d-flex align-items-center">
                                     <div id="ba-navbar-themeswitcher" class="btn-group">
                                         <button type="button" id="ba-navbar-themeswitcher-auto" class="btn btn-sm btn-dark" onclick="toggleDarkTheme('auto')">Auto</button>
@@ -84,19 +87,19 @@
                                     </div>
                                 </span>
                             </div>
-                            <div class="text-muted mb-3" style="white-space: nowrap;">
+                            <div class="text-muted mb-3">
                                 <small data-localize-id="ui,navbar_settings_theme_description"></small>
                             </div>
                             <div class="d-flex align-items-center">
-                                <span class="flex-fill me-4" style="white-space: nowrap;" data-localize-id="ui,navbar_settings_contrast"></span>
+                                <span class="flex-fill me-4" data-localize-id="ui,navbar_settings_contrast"></span>
                                 <span class="d-flex align-items-center">
                                     <div id="ba-navbar-contrast-toggle" class="btn-group">
-                                        <button type="button" id="ba-navbar-contrast-toggle-false" class="btn btn-sm btn-dark" onclick="toggleHighContrast(false)">OFF</button>
-                                        <button type="button" id="ba-navbar-contrast-toggle-true" class="btn btn-sm btn-dark" onclick="toggleHighContrast(true)">ON</button>
+                                        <button type="button" id="ba-navbar-contrast-toggle-false" class="btn btn-sm btn-dark" onclick="toggleHighContrast(false)" data-localize-id="ui,setting_off"></button>
+                                        <button type="button" id="ba-navbar-contrast-toggle-true" class="btn btn-sm btn-dark" onclick="toggleHighContrast(true)" data-localize-id="ui,setting_on"></button>
                                     </div>
                                 </span>
                             </div>
-                            <div class="text-muted" style="white-space: nowrap;">
+                            <div class="text-muted">
                                 <small data-localize-id="ui,navbar_settings_contrast_description"></small>
                             </div>
                         </div>
@@ -161,6 +164,6 @@
     }, 10000)
     
 </script>
-<script src="js/common.min.js?v=18"></script>
+<script src="js/common.min.js?v=19"></script>
 
 </html>

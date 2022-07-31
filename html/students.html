@@ -244,7 +244,7 @@
                                             </div>
                                         </div>
                                         <div class="flex-fill"></div>
-                                        <div class="d-flex align-items-stretch">
+                                        <div class="d-flex align-items-stretch flex-wrap">
                                             <a id="ba-statpreview-status-equipment" onclick="toggleGear()" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
                                                 <span class="statpreview-label" data-localize-id="ui,student_gear_short"></span>
                                             </a>
@@ -1086,7 +1086,7 @@
                     <div id="ba-student-search-filters" class="d-flex flex-column">
                         <div class="mb-3 d-flex align-items-stretch" style="min-height:38px;">
                             <div class="d-lg-none pe-2 flex-shrink-0">
-                                <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters-panel"><i class="fa-solid fa-filter me-2"></i>Filters<span id="ba-student-search-filter-amount"></span></button>
+                                <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters-panel"><i class="fa-solid fa-filter me-2"></i><span data-localize-id="ui,student_search_filters"></span><span id="ba-student-search-filter-amount"></span></button>
                             </div>
                             <div class="flex-fill">
                                 <input type="search" class="form-control h-100" id="ba-student-search-text" placeholder="" autocomplete="off" oninput="updateStudentList()">
