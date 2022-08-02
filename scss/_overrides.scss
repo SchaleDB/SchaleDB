@@ -97,6 +97,13 @@
     background-color: var(--col-theme-glass-navbar) !important;
     color: var(--col-theme-text);
 
+    @include sm-down {
+        >.container-xl {
+            padding-right: 0.5rem;
+            padding-left: 0.5rem;
+        }
+    }
+
     .navbar-brand {
         &, &:hover {
             color: var(--col-theme-text);

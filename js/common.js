@@ -21,7 +21,7 @@ const max_gifts = 35
 const max_gifts_ssr = 13
 const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 20
+const cache_ver = 21
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -53,17 +53,17 @@ if (localStorage.getItem("language") && languages.includes(localStorage.getItem(
 
 let data = {}
 const json_list = {
-    common: getCacheVerResourceName("./data/common.json"),
-    raids: getCacheVerResourceName("./data/raids.json"),
-    localization: getCacheVerResourceName("./data/localization.json"),
-    stages: getCacheVerResourceName("./data/stages.json"),
-    crafting: getCacheVerResourceName("./data/crafting.json"),
-    summons: getCacheVerResourceName("./data/summons.json"),
-    students: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/students.json`),
-    enemies: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/enemies.json`),
-    items: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/items.json`),
-    furniture: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/furniture.json`),
-    equipment: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/equipment.json`),
+    common: getCacheVerResourceName("./data/common.min.json"),
+    raids: getCacheVerResourceName("./data/raids.min.json"),
+    localization: getCacheVerResourceName("./data/localization.min.json"),
+    stages: getCacheVerResourceName("./data/stages.min.json"),
+    crafting: getCacheVerResourceName("./data/crafting.min.json"),
+    summons: getCacheVerResourceName("./data/summons.min.json"),
+    students: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/students.min.json`),
+    enemies: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/enemies.min.json`),
+    items: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/items.min.json`),
+    furniture: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/furniture.min.json`),
+    equipment: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/equipment.min.json`),
 }
 const html_list = {
     craft: getCacheVerResourceName("./html/craft.html"),
@@ -103,6 +103,9 @@ let statPreviewIncludeBondAlts = false
 let statPreviewIncludeEquipment = false
 let statPreviewSupportStats = false
 let statPreviewSummonStats = false
+let studentCollection = {}
+let collectionUpdateTimeout
+let toastMessageTimeout
 
 let compareMode = false
 let selectCompareMode = false
@@ -147,6 +150,10 @@ let search_options = {
         "SquadType": {
             "Main": false,
             "Support": false
+        },
+        "Collection": {
+            "Owned": false,
+            "NotOwned": false,
         },
         "TacticRole": {
             "Tanker": false,
@@ -399,9 +406,7 @@ $(document).ready(function() {
     if (localStorage.getItem("cache_version")) {
         if (localStorage.getItem("cache_version") != `${cache_ver}`) {
             localStorage.setItem("cache_version", `${cache_ver}`)
-            $('body').append(`<div id="update-message-container"><div class="container-xl d-flex h-100 align-items-start justify-content-center"><div id="update-message" class="ba-panel p-2"><p class="m-0"><i class="fa-solid fa-circle-check me-2"></i>Schale DB updated to the latest version</p></div></div></div>`)
-            $('#update-message').addClass('show')
-            window.setTimeout(function(){$("#update-message").removeClass('show')},4000)
+            toastMessage('<i class="fa-solid fa-circle-check me-2"></i>Schale DB updated to the latest version', 4000, 'success')
         }
     } else {
         localStorage.setItem("cache_version", `${cache_ver}`)
@@ -413,6 +418,11 @@ $(document).ready(function() {
             'dimension1': 'user_language' 
         },
     })
+
+    //load saved student collection
+    if (localStorage.getItem("student_collection")) {
+        studentCollection = JSON.parse(localStorage.getItem("student_collection"))
+    }
 
     //header = $(".card-header")
     if (localStorage.getItem("region")) {
@@ -445,6 +455,8 @@ $(document).ready(function() {
     }
     $('body').toggleClass("high-contrast", highContrast)
     
+    $('#collection-data-import-planner-btn').tooltip({title: getBasicTooltip(translateUI('tooltip_import_planner')), placement: 'top', html: true})
+
     $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
     $(`#ba-navbar-regionselector-0`).text(getTranslatedString(data.common.regions[0], 'Name'))
     $(`#ba-navbar-regionselector-1`).text(getTranslatedString(data.common.regions[1], 'Name'))
@@ -511,9 +523,10 @@ function loadModule(moduleName, entry=null) {
             statPreviewSupportStats = false
             compareMode = false
             selectCompareMode = false
+            $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
-        
+
             if (entry != null) {
                 loadStudent(entry)
             } else if (urlVars.has("chara")) {
@@ -831,7 +844,7 @@ function finalizeLoad(pageTitle, searchParamKey, searchParamValue, noscroll = fa
     
     var url = new URL(window.location.href)
 
-    if (url.searchParams.get(searchParamKey) !== searchParamValue) {
+    if (url.searchParams.get(searchParamKey) != searchParamValue) {
         url.searchParams.forEach((v,k) => url.searchParams.delete(k))
         url.searchParams.set(searchParamKey, searchParamValue)
         history.pushState(null, '', url)
@@ -938,7 +951,12 @@ function checkFilters(student, filterList, searchTerm) {
     if (filterList.length == 0) {
     } else {
         for (let i = 0; i < filterList.length; i++) {
-            if (!search_options['filter'][filterList[i]][student[filterList[i]]]) return false
+            if (filterList[i] != 'Collection') {
+                if (!search_options['filter'][filterList[i]][student[filterList[i]]]) return false
+            } else {
+                if (!search_options.filter.Collection[student.Id in studentCollection ? 'Owned': 'NotOwned']) return false
+            }
+            
         }
     }
     return (searchTerm == "" || getTranslatedString(student, 'Name').toLowerCase().includes(searchTerm.toLowerCase()))
@@ -1029,6 +1047,7 @@ function searchResetFilter() {
 }
 
 function processStudent() {
+
     $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.DevName}.webp`)
     let bgimg = new Image()
     bgimg.onload = function(){
@@ -1061,8 +1080,6 @@ function processStudent() {
     $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',student.BulletType)}`, translateUI('attacktype'), null, getAttackTypeText(student.BulletType), 32), placement: 'top',  html: true})
     $("#ba-student-defensetype-label").text(getLocalizedString('ArmorType',student.ArmorType))
     $('#ba-student-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',student.ArmorType)}`, translateUI('defensetype'), null, getDefenseTypeText(student.ArmorType), 32), placement: 'top', html: true})
-
-    updateGearIcon()
     
     $("#ba-student-usescover-icon").toggle(student.Cover)
 
@@ -1261,6 +1278,30 @@ function processStudent() {
         }
     }
     $('#ba-statpreview-status-bond-alt-level').toggle(student_bondalts.length > 0)
+
+    if (student.Id in studentCollection) {
+        stat_preview_stars = studentCollection[student.Id].s
+        $('#ba-statpreview-levelrange').val(studentCollection[student.Id].l)
+        changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
+        $('#ba-statpreview-gear1-range').val(studentCollection[student.Id].e1)
+        $('#ba-statpreview-gear2-range').val(studentCollection[student.Id].e2)
+        $('#ba-statpreview-gear3-range').val(studentCollection[student.Id].e3)
+        stat_preview_weapon_stars = studentCollection[student.Id].ws
+        $('#ba-statpreview-weapon-range').val(studentCollection[student.Id].wl)
+        $('#ba-statpreview-bond-1-range').val(studentCollection[student.Id].b)
+        $('#ba-statpreview-passiveskill-range').val(studentCollection[student.Id].s3)
+        changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
+        statPreviewIncludeBond = true
+        statPreviewIncludeEquipment = true
+
+        $('#ba-student-collection-btn').toggleClass('active', true).html('<i class="fa-solid fa-circle-check"></i>')
+        $('#ba-student-collection-btn').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_collection_remove')), placement: 'top', html: true})
+    } else {
+        $('#ba-student-collection-btn').toggleClass('active', false).html('<i class="fa-solid fa-circle-plus"></i>')
+        $('#ba-student-collection-btn').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_collection_add')), placement: 'top', html: true})
+    }
+
+    updateGearIcon()
     updateStatPreviewTitle()
 
     changeStatPreviewStars(stat_preview_stars, stat_preview_weapon_stars, false)
@@ -1280,7 +1321,12 @@ function processStudent() {
     changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'), false)
     changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'), false)
 
+    statPreviewIncludeBondAlts = false
     for (let i = 1; i <= student_bondalts.length+1; i++) {
+        if (i > 1 && student_bondalts[i-2].Id in studentCollection) {
+            $(`#ba-statpreview-bond-${i}-range`).val(studentCollection[student_bondalts[i-2].Id].b)
+            statPreviewIncludeBondAlts = true
+        }
         changeStatPreviewBondLevel(i, false)
     }
     
@@ -2087,12 +2133,12 @@ function toggleExGear() {
     recalculateStatPreview()
 }
 
-function changeStatPreviewLevel(el) {
+function changeStatPreviewLevel(el, recalculate = true) {
     const level = parseInt(el.value)
     $('.statpreview-level').val(level)
     $('#ba-statpreview-level').text("Lv." + level)
     $('#ba-statpreview-level-modal').text(`Lv.${level} / ${el.max}`)
-    recalculateStatPreview()
+    if (recalculate) recalculateStatPreview()
 }
 
 function changeSkillPreviewLevel(el) {
@@ -2164,14 +2210,14 @@ function updateWeaponLevelStatPreview(level) {
     $('#ba-statpreview-weapon-description').html(desc.substring(0, desc.length-2))
 }
 
-function changeStatPreviewPassiveSkillLevel(el) {
+function changeStatPreviewPassiveSkillLevel(el, recalculate = true) {
     if (el.value == el.max) {
         $('#ba-statpreview-passiveskill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
     } else {
         $('#ba-statpreview-passiveskill-level').html("Lv." + el.value)
     }
     updatePassiveSkillStatPreview()
-    recalculateStatPreview()
+    if (recalculate) recalculateStatPreview()
 }
 
 function changeStatPreviewSummonExSkillLevel(el) {
@@ -2443,6 +2489,14 @@ function recalculateStatPreview() {
     }
 
     $('#ba-statpreview-status-compare').toggleClass('deactivated', !compareMode)
+
+    //save settings - use timeout to limit the rate function
+    if (student.Id in studentCollection) {
+        if (collectionUpdateTimeout) clearTimeout(collectionUpdateTimeout)
+        collectionUpdateTimeout = window.setTimeout(() => {
+            studentCollectionSave()
+        }, 50)
+    }
 }
 
 function recalculateEXSkillPreview() {
@@ -2878,7 +2932,6 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
         $(`.weaponpreview-star-${i}`).toggleClass("active", i <= weaponstars)
     }
 
-
     const bondLevel = parseInt($('#ba-statpreview-bond-1-range').val())
     if (bondLevel > maxbond[stars-1]) {
         $('#ba-statpreview-bond-1-range').val(maxbond[stars-1])
@@ -2891,7 +2944,7 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
         $('.statpreview-weapon-range').prop('disabled', false)
         let level = 20 + (weaponstars*10)
         $('.statpreview-weapon-range').attr("max", level)
-        $('.statpreview-weapon-range').val(level)
+        if (recalculate) $('.statpreview-weapon-range').val(level)
         updateWeaponLevelStatPreview(level)
     } else {
         $('#ba-statpreview-weapon').toggleClass('disabled', true)
@@ -3544,7 +3597,10 @@ function loadLanguage(lang) {
         $(el).html(getLocalizedString(key,value))
     })
 
-    $('#ba-student-search-text').attr("placeholder", translateUI('student_search_textbox_placeholder'))
+    $('*[data-ph-localize-id]').each(function (i,el) {
+        let key = $(el).data('ph-localize-id').split(',')[0], value = $(el).data('ph-localize-id').split(',')[1]
+        $(el).attr('placeholder', getLocalizedString(key,value))
+    })
 }
 
 function getRarityStars(rarity) {
@@ -4187,4 +4243,121 @@ function drawConquestHexamap(conquest, mapId, step, container) {
         $(container).append(html)
         $('.tile-icon, .tile-item').tooltip({html: true})
     })
+}
+
+function toggleOwned() {
+    //Add/Remove the current student from the collection list
+    if (student.Id in studentCollection) {
+        delete studentCollection[student.Id]
+        $('#ba-student-collection-btn').toggleClass('active', false).html('<i class="fa-solid fa-circle-plus"></i>')
+        $('#ba-student-collection-btn').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_collection_add')), placement: 'top', html: true})
+    } else {
+        studentCollectionSave()
+        $('#ba-student-collection-btn').toggleClass('active', true).html('<i class="fa-solid fa-circle-check"></i>')
+        $('#ba-student-collection-btn').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_collection_remove')), placement: 'top', html: true})
+    }
+    if (search_options.filter.Collection.Owned || search_options.filter.Collection.NotOwned) updateStudentList()
+    localStorage.setItem('student_collection', JSON.stringify(studentCollection))
+    $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
+}
+
+function studentCollectionSave() {
+    studentCollection[student.Id] = {
+        s: stat_preview_stars,
+        l: parseInt($('#ba-statpreview-levelrange').val()),
+        e1: parseInt($('#ba-statpreview-gear1-range').val()),
+        e2: parseInt($('#ba-statpreview-gear2-range').val()),
+        e3: parseInt($('#ba-statpreview-gear3-range').val()),
+        ws: stat_preview_weapon_stars,
+        wl: parseInt($('#ba-statpreview-weapon-range').val()),
+        b: parseInt($('#ba-statpreview-bond-1-range').val()),
+        s3: parseInt($('#ba-statpreview-passiveskill-range').val())
+    }
+
+    //update alt bond
+    for (let i = 2; i <= student_bondalts.length+1; i++) {
+        if (student_bondalts[i-2].Id in studentCollection) {
+            studentCollection[student_bondalts[i-2].Id].b = parseInt($(`#ba-statpreview-bond-${i}-range`).val())
+        }
+    }
+    
+    localStorage.setItem('student_collection', JSON.stringify(studentCollection))
+}
+
+function exportDataString() {
+    $('#collection-export-string').val(btoa(JSON.stringify(studentCollection)))
+    navigator.clipboard.writeText($('#collection-export-string').val())
+    toastMessage(`<i class="fa-solid fa-circle-exclamation me-2"></i>${translateUI('toast_import_copy')}`, 2500, 'alert')
+}
+
+function importDataString() {
+    try {
+        let importData = JSON.parse(atob($('#collection-import-string').val()))
+        let collectionNew = {}
+        Object.entries(importData).forEach((char) => {
+            collectionNew[char[0]] = {
+                s: char[1].s,
+                l: char[1].l,
+                e1: char[1].e1,
+                e2: char[1].e2,
+                e3: char[1].e3,
+                ws: char[1].ws,
+                wl: char[1].wl,
+                b: char[1].b,
+                s3: char[1].s3
+            }
+        })
+        localStorage.setItem('student_collection', JSON.stringify(collectionNew))
+        studentCollection = JSON.parse(localStorage.getItem('student_collection'))
+        toastMessage(`<i class="fa-solid fa-circle-check me-2"></i>${translateUI('toast_import_success')}`, 2500, 'success')
+        if (loadedModule == 'students') {
+            loadStudent(student.DevName)
+            $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
+            if (search_options.filter.Collection.Owned || search_options.filter.Collection.NotOwned) updateStudentList()
+        }
+    } catch (error) {
+        console.log(error)
+        toastMessage(`<i class="fa-solid fa-circle-xmark me-2"></i>${translateUI('toast_import_failure')}`, 2500, 'failure')
+    }
+}
+
+function importResourcePlannerData() {
+    try {
+        $('.tooltip').tooltip('hide')
+        let importData = JSON.parse($('#collection-import-string').val())
+        let collectionNew = {}
+        importData.characters.forEach((char) => {
+            collectionNew[char.id] = {
+                s: char.current.star,
+                l: char.current.level,
+                e1: Math.max(char.current.gear1,1),
+                e2: Math.max(char.current.gear2,1),
+                e3: Math.max(char.current.gear3,1),
+                ws: char.current.ue,
+                wl: char.current.ue_level,
+                b: char.current.bond,
+                s3: Math.max(char.current.passive,1)
+            }
+        })
+        localStorage.setItem('student_collection', JSON.stringify(collectionNew))
+        studentCollection = JSON.parse(localStorage.getItem('student_collection'))
+        toastMessage(`<i class="fa-solid fa-circle-check me-2"></i>${translateUI('toast_import_success')}`, 2500, 'success')
+        if (loadedModule == 'students') {
+            loadStudent(student.DevName)
+            $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
+            if (search_options.filter.Collection.Owned || search_options.filter.Collection.NotOwned) updateStudentList()
+        }
+    } catch (error) {
+        console.log(error)
+        toastMessage(`<i class="fa-solid fa-circle-xmark me-2"></i>${translateUI('toast_import_failure')}`, 2500, 'failure')
+    }
+    
+}
+
+function toastMessage(msg, duration, cssClass) {
+    if (toastMessageTimeout) {
+        clearTimeout(toastMessageTimeout)
+    }
+    $('#toast-message').removeClass().addClass('p-2 ba-panel show').addClass(cssClass).html(`<p class="m-0">${msg}</p>`)
+    toastMessageTimeout = window.setTimeout(function(){$("#toast-message").removeClass('show')},duration)
 }

@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400;1,700&family=Oswald&display=swap" rel="stylesheet">    <link rel="icon" type="image/png" href="favicon.png">
     <link rel="manifest" href="./manifest.json" crossorigin="use-credentials">
-    <link href="css/main.css?v=20" rel="stylesheet">
+    <link href="css/main.css?v=21" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQEWDXR13H"></script>
     <script>
@@ -64,7 +64,7 @@
                                 <span class="d-flex align-items-center">
                                     <div class="dropdown d-inline">
                                         <button id="ba-navbar-languageselector" class="btn btn-sm btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown"><span></span></button>
-                                        <ul class="dropdown-menu dropdown-menu-dark drop-shadow">
+                                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark drop-shadow">
                                             <li><a id="ba-navbar-languageselector-en" class="dropdown-item" href="javascript:;" onclick="changeLanguage('En')" class="btn btn-dark">English</a></li>
                                             <li><a id="ba-navbar-languageselector-jp" class="dropdown-item" href="javascript:;" onclick="changeLanguage('Jp')" class="btn btn-dark">日本語</a></li>
                                             <li><a id="ba-navbar-languageselector-kr" class="dropdown-item" href="javascript:;" onclick="changeLanguage('Kr')" class="btn btn-dark">한국어</a></li>
@@ -99,8 +99,19 @@
                                     </div>
                                 </span>
                             </div>
-                            <div class="text-muted">
+                            <div class="text-muted mb-3">
                                 <small data-localize-id="ui,navbar_settings_contrast_description"></small>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="flex-fill me-4" data-localize-id="ui,navbar_settings_collection"></span>
+                                <span class="d-flex align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" id="ba-navbar-collection" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#collection-data-modal" onclick="$('#collection-export-string').val('');$('#collection-import-string').val('');" data-localize-id="ui,setting_open"></button>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="text-muted">
+                                <small data-localize-id="ui,navbar_settings_collection_description"></small>
                             </div>
                         </div>
                     </div>
@@ -155,6 +166,39 @@
         </div>
         <div id="loaded-module">
         </div>
+        <div class="modal fade" id="collection-data-modal" tabindex="-1">
+            <div class="modal-dialog modal-xl modal-fullscreen-lg-down" style="transition: transform .15s ease-out;">
+                <div class="modal-content">
+                    <div class="modal-header" style="border-bottom: none;">
+                        <h4 class="modal-title" data-localize-id="ui,navbar_settings_collection"></h4>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body pt-0">
+                        <div class="p-2 h-100 d-flex flex-column">
+                            <h5 data-localize-id="ui,collection_export_collection"></h5>
+                            <div class="d-flex flex-wrap mb-2" style="gap:0.5rem;">
+                                <button id="collection-data-export-btn" type="button" class="btn btn-dark" onclick="exportDataString()"><i class="fa-solid fa-right-from-bracket me-2"></i><span data-localize-id="ui,collection_export"></span></button>
+                            </div>
+                            <textarea id="collection-export-string" readonly onclick="this.select()" data-ph-localize-id="ui,collection_export_placeholder"></textarea>
+                            <h5 class="mt-3" data-localize-id="ui,collection_import_collection"></h5>
+                            <p class="text-italic mb-2"><i class="fa-solid fa-triangle-exclamation me-2"></i><span data-localize-id="ui,collection_import_warning"></span></p>
+                            <textarea id="collection-import-string" data-ph-localize-id="ui,collection_import_placeholder"></textarea>
+                            <div class="d-flex flex-wrap mt-2" style="gap:0.5rem;">
+                                <button id="collection-data-import-btn" type="button" class="btn btn-dark" onclick="importDataString()"><i class="fa-solid fa-right-to-bracket me-2"></i><span data-localize-id="ui,collection_import"></span></button>
+                                <button id="collection-data-import-planner-btn" type="button" class="btn btn-dark" onclick="importResourcePlannerData()"><i class="fa-solid fa-right-to-bracket me-2"></i><span data-localize-id="ui,collection_import_planner"></span></button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="toast-message-container">
+        <div class="container-xl d-flex h-100 align-items-start justify-content-center">
+            <div id="toast-message" class="ba-panel p-2">
+            </div>
+        </div>
     </div>
 </body>
 <script>
@@ -164,6 +208,6 @@
     }, 10000)
     
 </script>
-<script src="js/common.min.js?v=20"></script>
+<script src="js/common.min.js?v=21"></script>
 
 </html>

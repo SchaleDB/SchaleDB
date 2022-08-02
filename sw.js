@@ -5,18 +5,18 @@
  */
 
 // cache versions should match common.js
-const dataCacheVer = 20;
+const dataCacheVer = 21;
 const staticCacheVer = 1;
 
 const dataCacheName = `schale-data-v${dataCacheVer}`;
 
 // don't precache language-specific files
 const dataPreCacheFiles = [
-    './data/common.json',
-    './data/crafting.json',
-    './data/localization.json',
-    './data/raids.json',
-    './data/summons.json',
+    './data/common.min.json',
+    './data/crafting.min.json',
+    './data/localization.min.json',
+    './data/raids.min.json',
+    './data/summons.min.json',
 ];
 
 const coreCacheName = `schale-core-v${dataCacheVer}`;
