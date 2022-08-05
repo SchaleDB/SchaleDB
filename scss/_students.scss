@@ -203,11 +203,12 @@ a.ba-statpreview-icon {
 
 .student-portrait-buttons {
     position: sticky;
-    top: calc(56px + 0.5rem);
+    top: calc(56px + 1rem);
     display: flex;
     gap: 0.5rem;
 
     @include sm-down {
         justify-content: space-between;
+        top: calc(56px + 0.5rem);
     }
 }

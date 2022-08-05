@@ -1,5 +1,3 @@
-$.holdReady(true)
-
 const starscale_hp      = [1, 1.05,  1.12,  1.21,  1.35 ]
 const starscale_attack  = [1, 1.1,   1.22,  1.36,  1.53 ]
 const starscale_healing = [1, 1.075, 1.175, 1.295, 1.445] 
@@ -7,10 +5,11 @@ const raid_level = [17, 25, 35, 50, 70, 80]
 const maxbond = [10, 10, 20, 20, 50]
 const gear_minlevelreq = [0, 15, 35]
 const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40]]
-const languages = ['En', 'Jp', 'Kr', 'Tw', 'Cn']
-const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5, 'Cn': 5}
-const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6, 'Cn':6}
-const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':10, 'Cn':10}
+const languages = ['En', 'Jp', 'Kr', 'Tw', 'Cn', 'Th']
+const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5, 'Cn': 5, 'Th': 11}
+const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6, 'Cn':6, 'Th': 12}
+const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':10, 'Cn':10, 'Th': 20}
+const adaptaionAmount = {0: "D", 1: "C", 2: "B", 3: "A", 4: "S", 5: "SS"}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
 const skill_ex_upgrade_credits = [80000, 500000, 3000000, 10000000]
@@ -21,7 +20,7 @@ const max_gifts = 35
 const max_gifts_ssr = 13
 const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 21
+const cache_ver = 22
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -37,6 +36,9 @@ if (localStorage.getItem("language") && languages.includes(localStorage.getItem(
             break;
         case 'ko':
             userLang = 'Kr'
+            break;
+        case 'th':
+            userLang = 'Th'
             break;
         case 'zh':
             if (browserLang.toLowerCase().startsWith('zh-cn')) {
@@ -55,10 +57,10 @@ let data = {}
 const json_list = {
     common: getCacheVerResourceName("./data/common.min.json"),
     raids: getCacheVerResourceName("./data/raids.min.json"),
-    localization: getCacheVerResourceName("./data/localization.min.json"),
     stages: getCacheVerResourceName("./data/stages.min.json"),
     crafting: getCacheVerResourceName("./data/crafting.min.json"),
     summons: getCacheVerResourceName("./data/summons.min.json"),
+    localization: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/localization.min.json`),
     students: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/students.min.json`),
     enemies: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/enemies.min.json`),
     items: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/items.min.json`),
@@ -381,16 +383,15 @@ let search_options = {
 
 /** Functions */
 
-loadJSON(json_list, function(result) {
+loadPromise = loadJSON(json_list, result => {
     data = result
-    $.holdReady(false)
 })
 
 if (localStorage.getItem("theme")) {
     $('body').toggleClass("theme-dark", (localStorage.getItem("theme") == 'dark'))
 }
 
-$(document).ready(function() {
+$.when($.ready, loadPromise).then(function() {
 
     //service worker
     if('serviceWorker' in navigator) {
@@ -761,11 +762,11 @@ function loadModule(moduleName, entry=null) {
             $.each(data.common.regions[regionID].current_raid, function(i, el){
                 if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
                     if (el.raid >= 1000) {
-                        raidText = getLocalizedString("StageType", "timeattack") + "\n"
+                        raidText = getLocalizedString("StageType", "TimeAttack") + "\n"
                         let raid = find(data.raids.TimeAttack, "Id", el.raid)[0]
                         raidHtml += getTimeAttackCardHTML(raid, raid.Terrain)
                     } else {
-                        raidText = getLocalizedString("StageType", "raid") + "\n"
+                        raidText = getLocalizedString("StageType", "Raid") + "\n"
                         let raid = find(data.raids.Raid, "Id", el.raid)[0]
                         raidHtml += getRaidCardHTML(raid, el.terrain)
                     }
@@ -783,7 +784,7 @@ function loadModule(moduleName, entry=null) {
             found = false
             $.each(data.common.regions[regionID].current_events, function(i, el){
                 if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
-                    eventText = getLocalizedString("StageType", "event") + "\n"
+                    eventText = getLocalizedString("StageType", "Event") + "\n"
                     eventHtml += getEventCardHTML(el.event)
                     
                     $('#ba-home-event').show()
@@ -1146,8 +1147,8 @@ function processStudent() {
     $("#ba-student-weapon-img, #ba-statpreview-weapon-img").attr("src", `images/weapon/${student.WeaponImg}.png`)
 
     $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.Weapon.AdaptationType}.png`)
-    let initialTerrainAmount = getLocalizedString('AdaptationAmount', String(student[student.Weapon.AdaptationType+'BattleAdaptation'])) 
-    let bonusTerrainAmount = getLocalizedString('AdaptationAmount', String(student[student.Weapon.AdaptationType+'BattleAdaptation'] + student.Weapon.AdaptationValue)) 
+    let initialTerrainAmount = adaptaionAmount[student[student.Weapon.AdaptationType+'BattleAdaptation']]
+    let bonusTerrainAmount = adaptaionAmount[student[student.Weapon.AdaptationType+'BattleAdaptation'] + student.Weapon.AdaptationValue]
     $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${bonusTerrainAmount}.png`)
     $('#ba-weapon-bonus-terrain-adaption-description').html(`${translateUI("terrain_adaption", [getLocalizedString('AdaptationType',student.Weapon.AdaptationType)])} ${initialTerrainAmount} → <b>${bonusTerrainAmount}</b><br>(${getAdaptationText(student.Weapon.AdaptationType, bonusTerrainAmount)})`)
     $('#ba-weapon-stat-row2').toggle(student.Weapon.HealPower1 > 0)
@@ -1509,13 +1510,15 @@ function loadCraft(id) {
         $('#ba-craft-description').html(getTranslatedString(craftNode, 'Desc'))
         $('#ba-craft-rewards').empty()
         let rewardsHtml = ''
+        let nodeWeightTotal = 0
+        craftNode.Groups.forEach(grp => {nodeWeightTotal += grp.Weight})
         $.each(craftNode.Groups, function(i,el){
             let itemGroup = data.crafting.Groups[el.GroupId], maxWeight = 0
             for (let j = 0; j < itemGroup.length; j++) {
                 maxWeight += itemGroup[j].Weight
             }
             for (let j = 0; j < itemGroup.length; j++) {
-                let itemWeight = ((el.Weight / craftNode.Weight) * (itemGroup[j].Weight / maxWeight)).toFixed(4)
+                let itemWeight = ((el.Weight / nodeWeightTotal) * (itemGroup[j].Weight / maxWeight)).toFixed(4)
                 let itemId = itemGroup[j].ItemId
                 if (itemGroup[j].Type == "Furniture") {
                     itemId += 1000000
@@ -1524,7 +1527,7 @@ function loadCraft(id) {
                 }  else if (itemGroup[j].Type == "Currency") {
                     itemId += 3000000
                 }
-                rewardsHtml += getDropIconHTML(itemId,itemWeight)
+                rewardsHtml += getDropIconHTML(itemId,itemWeight,itemGroup[j].AmountMin,itemGroup[j].AmountMax)
             }
         })
         $('#ba-craft-rewards').html(rewardsHtml)
@@ -1569,7 +1572,7 @@ function loadRaid(raidId) {
             }
             $(`#ba-raid-difficulty-${raid_difficulty}`).tab('show')
         
-            $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'raid'))
+            $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'Raid'))
             $('#ba-raid-name').text(getTranslatedString(raid, 'Name'))      
             $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain[0]}.png`)
             if (raid.Terrain.length > 1) {
@@ -1626,7 +1629,7 @@ function loadRaid(raidId) {
             
             $(`#ba-worldraid-difficulty-${raid_difficulty}`).tab('show')
         
-            $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'worldraid'))
+            $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'WorldRaid'))
             $('#ba-raid-name').text(getTranslatedString(raid, 'Name'))      
             $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain[0]}.png`)
             if (raid.Terrain.length > 1) {
@@ -1859,7 +1862,12 @@ function loadStage(id) {
         stageTypes.forEach(el => {
             if (el in stage.Rewards && stage.Rewards[el].length > 0) {
                 let html = ''
-                if (regionID == 1 && "RewardsGlobal" in stage) {
+                if (stage.Type == "FindGift") {
+                    html += getDropIconHTML(stage.Rewards[el][0][0], 0.1, stage.Rewards[el][0][1], stage.Rewards[el][0][1])
+                    html += getDropIconHTML(stage.Rewards[el][1][0], 0.5, stage.Rewards[el][1][1], stage.Rewards[el][1][1])
+                    html += getDropIconHTML(stage.Rewards[el][2][0], 0.4, stage.Rewards[el][2][1], stage.Rewards[el][2][1])
+                    stage.Rewards[el]
+                } else if (regionID == 1 && "RewardsGlobal" in stage) {
                     $.each(stage.RewardsGlobal[el], function(i,el2){
                         html += getDropIconHTML(el2[0], el2[1])
                     })
@@ -2254,7 +2262,7 @@ function updateGearIcon() {
 function recalculateTerrainAffinity() {
     let types = ["Street","Outdoor","Indoor"]
     types.forEach( type => {
-        let adaptation = getLocalizedString('AdaptationAmount', String(student[`${type}BattleAdaptation`] + ((stat_preview_stars == 5 && stat_preview_weapon_stars >= 3 && student.Weapon.AdaptationType == type) ? student.Weapon.AdaptationValue : 0)))
+        let adaptation = adaptaionAmount[student[`${type}BattleAdaptation`] + ((stat_preview_stars == 5 && stat_preview_weapon_stars >= 3 && student.Weapon.AdaptationType == type) ? student.Weapon.AdaptationValue : 0)]
         $(`#ba-student-terrain-${type.toLowerCase()}-icon`).attr("src", `images/ui/Ingame_Emo_Adaptresult${adaptation}.png`)
         $(`#ba-student-terrain-${type.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(`images/ui/Ingame_Emo_Adaptresult${adaptation}.png`,translateUI('terrain_adaption', [getLocalizedString('AdaptationType', type)])+' '+adaptation, null, null, getAdaptationText(type, adaptation), 30), placement: 'top', html: true})
 
@@ -2732,7 +2740,7 @@ function getMaterialIconHTML(id, amount) {
     return html
 }
 
-function getDropIconHTML(id, chance) {
+function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1) {
     let item, type, group, haslink
     if (id >= 4000000) {
         groups = find(data.common.GachaGroup, "Id", id-4000000)
@@ -2825,7 +2833,7 @@ function getDropIconHTML(id, chance) {
             html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${icon}.png`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/${icon}.png"><span class="ba-material-label">${getProbabilityText(chance)}</span></div>`
         }
     } else {
-        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',item.Category), rarityText, getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${getProbabilityText(chance)}</span></div>`
+        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',item.Category), rarityText, getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}</div>`
     }
     return html
 }
@@ -3157,7 +3165,7 @@ function populateEventStageList(eventId) {
         eventId = eventId % 10000
         let diffPrev = 0
         let eventPrev = 0
-        let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'events')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/Event_${eventId}_${regionID == 0 ? "Jp" : userLang}.png"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>`
+        let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'Event')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/Event_${eventId}_${regionID == 0 ? "Jp" : userLang}.png"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>`
     
         if (conquest_events.includes(eventId)) {
             $('.stage-list').hide()
@@ -3401,15 +3409,15 @@ function getItemDropStages(itemID) {
 }
 
 function loadJSON(list, success) {
-    results = {}
+    let results = {}
 
-    var loadPromise = Object.entries(list).map(function(el){
+    let loadPromise = Object.entries(list).map(function(el){
         return $.getJSON(el[1], function(result) {
             results[el[0]] = result
         })
     })
 
-    Promise.all(loadPromise).then(function() {
+    return Promise.all(loadPromise).then(function() {
         success(results)
     })
 }
@@ -3476,11 +3484,11 @@ function getDefenseTypeText(type) {
 
 function getSkillText(text, params, level, type) {
     
-    var result = text
-    var paramCount = 1
-    var regex
+    let result = text
+    let paramCount = 1
+    let regex
 
-    regex = /[0-9.]+[%s秒초]/g
+    regex = /[0-9.]+(?:%|s|秒|초| วินาที)/g
     result = result.replace(regex, function(match) {return `<strong>${match}</strong>`})
 
     while (result.includes("<?"+paramCount+">")) {
@@ -3497,17 +3505,14 @@ function getSkillText(text, params, level, type) {
         paramCount += 1
     }
 
-    regex = /<d:(\w+)>/g
-    result = result.replace(regex, function(match, capture) {return `<span class="ba-skill-debuff" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_Debuff_${capture}.png`, data.common.buffs['Debuff_'+capture].tooltip_title, 'Debuff', null, data.common.buffs['Debuff_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Debuff_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['Debuff_'+capture], 'Name')}</span>`})
-
-    regex = /<b:(\w+)>/g
-    result = result.replace(regex, function(match, capture) {return `<span class="ba-skill-buff" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_Buff_${capture}.png`, data.common.buffs['Buff_'+capture].tooltip_title, 'Buff', null, data.common.buffs['Buff_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Buff_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['Buff_'+capture], 'Name')}</span>`})
-
-    regex = /<c:(\w+)>/g
-    result = result.replace(regex, function(match, capture) {return `<span class="ba-skill-cc" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_CC_${capture}.png`, data.common.buffs['CC_'+capture].tooltip_title, 'CC Effect', null, data.common.buffs['CC_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_CC_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['CC_'+capture], 'Name')}</span>`})
-
-    regex = /<s:(\w+)>/g
-    result = result.replace(regex, function(match, capture) {return `<span class="ba-skill-special" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_Special_${capture}.png`, data.common.buffs['Special_'+capture].tooltip_title, 'Status', null, data.common.buffs['Special_'+capture].tooltip_body, 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_Special_${capture}.png\"><span class="ba-buff-icon-spacer"></span>${getTranslatedString(data.common.buffs['Special_'+capture], 'Name')}</span>`})
+    const buffTypes = ['Buff', 'Debuff', 'CC', 'Special']
+    buffTypes.forEach(type => {
+        regex = new RegExp(`<${type.slice(0,1).toLowerCase()}:(\\w+)>`, 'g')
+        result = result.replace(regex, function(match, capture) {
+            const buffName = type + '_' + capture
+            return `<span class="ba-skill-${type.toLowerCase()}" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_${buffName}.png`, getLocalizedString('BuffNameLong', buffName), getLocalizedString('BuffType', type), null, getLocalizedString('BuffTooltip', buffName), 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_${buffName}.png\"><span class="ba-buff-icon-spacer"></span>${getLocalizedString('BuffName', buffName)}</span>`
+        })
+    })
 
     return result
 }
@@ -3672,7 +3677,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.raids.Raid, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/raid/'+el.Icon+'.png', 'type': getLocalizedString('StageType', 'raid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/raid/'+el.Icon+'.png', 'type': getLocalizedString('StageType', 'Raid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
             if (results.length >= maxResults) return false
         }
     })
@@ -3786,17 +3791,7 @@ function clearSearchBar(el) {
  * @returns 
  */
 function getLocalizedString(group, key, replacements=[]) {
-    if (data.localization.strings.hasOwnProperty(group) && data.localization.strings[group].hasOwnProperty(key)) {
-        if (data.localization.strings[group][key].hasOwnProperty(userLang) && data.localization.strings[group][key][userLang] != null) {
-            return formatString(data.localization.strings[group][key][userLang], replacements)
-        } else {
-            console.log(`Localization not defined for "${group}, ${key}" for locale "${userLang}"`)
-            return formatString(data.localization.strings[group][key]['En'], replacements)
-        }
-    } else {
-        console.log(`Localization not defined for "${group}, ${key}"`)
-        return "undefined!!!"
-    }
+    return formatString(data.localization[group][key], replacements)
 }
 
 /**

@@ -5,7 +5,7 @@
  */
 
 // cache versions should match common.js
-const dataCacheVer = 21;
+const dataCacheVer = 22;
 const staticCacheVer = 1;
 
 const dataCacheName = `schale-data-v${dataCacheVer}`;
@@ -14,7 +14,6 @@ const dataCacheName = `schale-data-v${dataCacheVer}`;
 const dataPreCacheFiles = [
     './data/common.min.json',
     './data/crafting.min.json',
-    './data/localization.min.json',
     './data/raids.min.json',
     './data/summons.min.json',
 ];
