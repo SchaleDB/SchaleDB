@@ -20,7 +20,7 @@ const max_gifts = 35
 const max_gifts_ssr = 13
 const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 22
+const cache_ver = 23
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 
@@ -1796,7 +1796,7 @@ function changeRaidEnemy(num) {
     $("#ba-raid-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType', enemy.ArmorType)} Armor`, translateUI('defensetype'), null, getDefenseTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
     $("#ba-raid-defensetype-label").text(getLocalizedString('ArmorType',enemy.ArmorType))
     let enemysize = getEnemySize(enemy)
-    $('#ba-raid-enemy-size').text(getLocalizedString('EnemyTags', enemysize)).toggle(enemysize != null)
+    $('#ba-raid-enemy-size').text(enemysize != null ? getLocalizedString('EnemyTags', enemysize) : '').toggle(enemysize != null)
 
 }
 
@@ -2660,7 +2660,7 @@ function showEnemyInfo(id, level, grade=1, scaletype=0, switchTab=false) {
     $('#ba-stage-enemy-rank').text(`Lv.${level} ${getLocalizedString('EnemyRank', enemy.Rank)}`)
     $('#ba-stage-enemy-class').text(getLocalizedString('SquadType', enemy.SquadType)).removeClass("ba-class-main ba-class-support").addClass(`ba-class-${enemy.SquadType.toLowerCase()}`)
     let enemysize = getEnemySize(enemy)
-    $('#ba-stage-enemy-size').text(getLocalizedString('EnemyTags', enemysize)).toggle(enemysize != null)
+    $('#ba-stage-enemy-size').text(enemysize != null ? getLocalizedString('EnemyTags', enemysize) : '').toggle(enemysize != null)
     $("#ba-stage-enemy-attacktype").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
     $("#ba-stage-enemy-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
     $("#ba-stage-enemy-attacktype-label").text(getLocalizedString('BulletType',enemy.BulletType))
@@ -3791,7 +3791,12 @@ function clearSearchBar(el) {
  * @returns 
  */
 function getLocalizedString(group, key, replacements=[]) {
-    return formatString(data.localization[group][key], replacements)
+    if (data.localization.hasOwnProperty(group) && data.localization[group].hasOwnProperty(key)) {
+        return formatString(data.localization[group][key], replacements)
+    } else {
+        console.log(`Localization not defined for "${group}, ${key}"`)
+        return "undefined!!!"
+    }
 }
 
 /**
