@@ -20,9 +20,10 @@ const max_gifts = 35
 const max_gifts_ssr = 13
 const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 24
+const cache_ver = 25
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
+const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_01", "Defense": "TimeAttack_SlotBG_02", "Destruction": "TimeAttack_SlotBG_03"}
 
 let userLang
 if (localStorage.getItem("language") && languages.includes(localStorage.getItem("language")))  {
@@ -590,6 +591,7 @@ function loadModule(moduleName, entry=null) {
             })
 
             $('#ba-student-modal-statpreview').on('shown.bs.modal', recalculateStatPreview)
+            window.scrollTo({top: 0, left: 0, behavior: 'instant'})
 
         })
     } else if (moduleName == 'items') {
@@ -619,6 +621,7 @@ function loadModule(moduleName, entry=null) {
 
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
             $('#ba-item-list-container, #ba-item-details-container').show()
+            window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
     } else if (moduleName == 'raids') {
         loadedModule = 'raids'
@@ -652,6 +655,7 @@ function loadModule(moduleName, entry=null) {
                 $('#ba-raid-difficulty-5').hide()
             }
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
+            window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
     } else if (moduleName == 'stages') {
         loadedModule = 'stages'
@@ -686,6 +690,7 @@ function loadModule(moduleName, entry=null) {
             makeDraggable($('#ba-conquest-map'))
             makeDraggable($('#ba-stage-modal-map-container'))
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
+            window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
     } else if (moduleName == 'craft') {
         loadedModule = 'craft'
@@ -715,6 +720,7 @@ function loadModule(moduleName, entry=null) {
             $('.ba-craft-list.active').addClass('show')
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
             $('#ba-craft-list-container, #ba-craft-details-container').show()
+            window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
     } else {
         loadedModule = 'home'
@@ -841,7 +847,7 @@ function loadModule(moduleName, entry=null) {
     localStorage.setItem("module", loadedModule)
 }
 
-function finalizeLoad(pageTitle, searchParamKey, searchParamValue, noscroll = false) {
+function finalizeLoad(pageTitle, searchParamKey, searchParamValue, gtagEvent = null, gtagEventLabel = null) {
     
     var url = new URL(window.location.href)
 
@@ -853,8 +859,17 @@ function finalizeLoad(pageTitle, searchParamKey, searchParamValue, noscroll = fa
 
     $('title').html(`${pageTitle} | Schale DB`)
     $('#ba-navbar-content').collapse('hide')
-    if (!noscroll) window.scrollTo({top: 0, left: 0, behavior: 'instant'})
     localStorage.setItem(searchParamKey, searchParamValue)
+
+    if (gtagEvent) {
+        // Add a 0.5s delay before sending hit - possibly fix incorrect page title being sent to GA by some users(?)
+        window.setTimeout(function() {
+            gtag('event', gtagEvent, {
+                'event_label': gtagEventLabel,
+                'user_language': userLang
+            })
+        }, 500)
+    }
 }
 
 function getNextBirthdayDate(birthday) {
@@ -1333,21 +1348,15 @@ function processStudent() {
     
     recalculateStatPreview()
 
-    finalizeLoad(getTranslatedString(student, 'Name'), "chara", student.DevName)
+    finalizeLoad(getTranslatedString(student, 'Name'), "chara", student.PathName, 'View Student', student.Id)
 
     studentSelectorModal.hide()
-
-    gtag('event', 'View Student', {
-        'event_category': 'student',
-        'event_label': student.Id,
-        'user_language': userLang
-    })
 }
 
 function loadStudent(studentName) {
     if (loadedModule == 'students') {
         if (selectCompareMode) {
-            studentCompare = find(data.students, "DevName", studentName)[0]
+            studentCompare = find(data.students, "PathName", studentName)[0]
             selectCompareMode = false
             compareMode = true
             if (statPreviewSummonStats) {
@@ -1358,16 +1367,22 @@ function loadStudent(studentName) {
             studentSelectorModal.hide()
             updateStatPreviewTitle()
         } else {
-            student = find(data.students, "DevName", studentName)
-            if (student.length == 1) {
-                student = student[0]
-                if (compareMode) {
-                    if (student.Id == studentCompare.Id) {
-                        compareMode = false
-                    }
-                }
-                processStudent()
+            student = find(data.students, "PathName", studentName)
+            if (student.length == 0) {
+                // Legacy support for when DevName was used in the url
+                student = findOrDefault(data.students, "DevName", studentName, "Aru")
             }
+            student = student[0]
+
+            // Clear the comparison view if we select the student we are comparing against
+            if (compareMode) {
+                if (student.Id == studentCompare.Id) {
+                    compareMode = false
+                }
+            }
+
+            processStudent()
+            
         }
 
     } else {
@@ -1377,13 +1392,8 @@ function loadStudent(studentName) {
 
 function loadStudentById(studentId) {
     if (loadedModule == 'students') {
-        student = find(data.students,"Id",studentId)
-        console.log(student);
-
-        if (student.length == 1) {
-            student = student[0];
-            processStudent()
-        }
+        student = findOrDefault(data.students, "Id", studentId, 10000)[0]
+        processStudent()
     } else {
         loadModule('students')
     }
@@ -1486,13 +1496,8 @@ function loadItem(id) {
             $('#ba-item-list-tab-furniture').tab('show') 
         }
 
-        finalizeLoad(getTranslatedString(item, 'Name'), "item", id)
+        finalizeLoad(getTranslatedString(item, 'Name'), "item", loadedItem.Id, 'View Item', loadedItem.Id)
 
-        gtag('event', 'View Item', {
-            'event_category': 'item',
-            'event_label': id,
-            'user_language': userLang
-        })
     } else {
         loadModule('items', id)
     }
@@ -1535,13 +1540,8 @@ function loadCraft(id) {
             $(el).tooltip({html: true})
         })
 
-        finalizeLoad(getTranslatedString(craftNode, 'Name'), "craftnode", craftNode.Id)
+        finalizeLoad(getTranslatedString(craftNode, 'Name'), "craftnode", craftNode.Id, 'View Crafting', craftNode.Id)
 
-        gtag('event', 'View Crafting', {
-            'event_category': 'crafting',
-            'event_label': id,
-            'user_language': userLang
-        })
     } else {
         loadModule('craft', id)
     }
@@ -1553,6 +1553,8 @@ function loadRaid(raidId) {
         if (isNaN(parseInt(raidId))) {raidId = 1}
         if (regionID == 1 && raidId >= 1000) {raidId = 1}
         if (loadedRaid) $('#ba-raid-select-'+loadedRaid.Id).removeClass('selected')
+        let raidName
+
         if (raidId < 1000) {
             $('#ba-raid-list-tab-raid').tab('show')
             $('#ba-raid-info').show()
@@ -1573,7 +1575,8 @@ function loadRaid(raidId) {
             $(`#ba-raid-difficulty-${raid_difficulty}`).tab('show')
         
             $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'Raid'))
-            $('#ba-raid-name').text(getTranslatedString(raid, 'Name'))      
+            raidName = getTranslatedString(raid, 'Name')
+            $('#ba-raid-name').text(raidName)       
             $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain[0]}.png`)
             if (raid.Terrain.length > 1) {
                 $('#ba-raid-terrain-alt-img').attr('src', `images/ui/Terrain_${raid.Terrain[1]}.png`)
@@ -1606,7 +1609,8 @@ function loadRaid(raidId) {
             $('#ba-timeattack-info').show()
             raid = findOrDefault(data.raids.TimeAttack,"Id",raidId,1000)[0]
             $(`#ba-timeattack-difficulty-${ta_difficulty}`).tab('show')
-            $('#ba-timeattack-name').text(getTranslatedString(raid, 'Name'))
+            raidName = getLocalizedString("TimeAttackStage", raid.DungeonType)
+            $('#ba-timeattack-name').text(raidName)
             $('#ba-timeattack-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain}.png`)
             changeTimeAttackDifficulty(ta_difficulty)
         } else {
@@ -1630,7 +1634,8 @@ function loadRaid(raidId) {
             $(`#ba-worldraid-difficulty-${raid_difficulty}`).tab('show')
         
             $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'WorldRaid'))
-            $('#ba-raid-name').text(getTranslatedString(raid, 'Name'))      
+            raidName = getTranslatedString(raid, 'Name')
+            $('#ba-raid-name').text(raidName)      
             $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain[0]}.png`)
             if (raid.Terrain.length > 1) {
                 $('#ba-raid-terrain-alt-img').attr('src', `images/ui/Terrain_${raid.Terrain[1]}.png`)
@@ -1645,13 +1650,8 @@ function loadRaid(raidId) {
         loadedRaid = raid
         $('#ba-raid-select-'+raid.Id).addClass('selected')
 
-        finalizeLoad(getTranslatedString(raid, 'Name'), "raid", raid.Id)
+        finalizeLoad(raidName, "raid", raid.Id, 'View Raid', raid.Id)
 
-        gtag('event', 'View Raid', {
-            'event_category': 'raid',
-            'event_label': raid.Id,
-            'user_language': userLang
-        })
     } else {
         loadModule('raids', raidId)
     }
@@ -1678,7 +1678,7 @@ function loadRaidSeasonRewards(el) {
 function changeRaidDifficulty(difficultyId) {
     raid_difficulty = difficultyId
     let skillsHTML = '', tabsHtml = ''
-    $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.DevName}${raid_difficulty == 5 ? "_Insane" : ""}_Lobby.png')`)
+    $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.PathName}${raid_difficulty == 5 ? "_Insane" : ""}_Lobby.png')`)
     $('#ba-raid-level').text(`Lv. ${raid_level[raid_difficulty]}`)
     if (selectedEnemy >= raid.EnemyList[raid_difficulty].length) {selectedEnemy = 0}
     raid.EnemyList[raid_difficulty].forEach(function(el,i) {
@@ -1688,8 +1688,22 @@ function changeRaidDifficulty(difficultyId) {
     $('#ba-raid-enemy-tabs').empty().html(tabsHtml)
     raid.RaidSkill.forEach(function(el, i) {
         if (raid_difficulty < el.MinDifficulty) return
+        
+        let skillType
+        switch (el.SkillType) {
+            case 'EX':
+                skillType = translateUI('student_skill_ex')
+                break;
+            case 'Passive':
+                skillType = translateUI('student_skill_passive')
+                break;
+            default:
+                skillType = 'unknown'
+                break;
+        }
+
         if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
-        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${el.SkillType} Skill</p>${el.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG Cost:</i> '+el.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), el.Parameters, raid_difficulty+1, 'raid')}</p>`
+        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${skillType}</p>${el.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG:</i> '+el.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), el["Parameters"+userLang], raid_difficulty+1, 'raid')}</p>`
     })
     $('#ba-raid-skills').empty().html(skillsHTML)
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -1716,17 +1730,20 @@ function changeTimeAttackDifficulty(difficultyId) {
     let rulesHTML = '', enemyHTML = '';
     $('#ba-timeattack-level').text(`Lv.${raid.EnemyLevel[ta_difficulty]}`)
 
-    raid.EnemyList[ta_difficulty].forEach(function(el, i) {
-        let enemy = find(data.enemies, "Id", raid.EnemyList[ta_difficulty][i])[0]
-        enemyHTML += getEnemyCardHTML(enemy, raid.EnemyLevel[ta_difficulty], 1, 1)
+    const enemyRanks = ['Minion','Elite','Champion','Boss']
+    raid.Formations[ta_difficulty].EnemyList.forEach(function(el, i) {
+        let enemy = find(data.enemies, "Id", raid.Formations[ta_difficulty].EnemyList[i])[0]
+        let rankId = enemy.Rank == 'Summoned' ? 0 : enemyRanks.indexOf(enemy.Rank)
+        enemyHTML += getEnemyCardHTML(enemy, raid.Formations[ta_difficulty].Level[rankId], raid.Formations[ta_difficulty].Grade[rankId], 1)
     })
+    
     $('#ba-stage-enemies').html(enemyHTML)
     $('#ba-stage-enemies > :first').trigger("click")
 
-    raid.Rules.forEach(function(el, i) {
-        if (ta_difficulty < el.MinDifficulty) return
+    raid.Rules[difficultyId].forEach(id => {
+        rule = find(data.raids.TimeAttackRules, 'Id', id)[0]
         if (rulesHTML != '') rulesHTML += '<div class="ba-panel-separator"></div>'
-        rulesHTML += `<div class="d-flex flex-row align-items-start mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/timeattack/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), [], 0, 'raid')}</p></div></div></div>`
+        rulesHTML += `<div class="d-flex flex-row align-items-start mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/timeattack/${rule.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(rule, 'Name')}</h4><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(rule, 'Desc'), [], 0, 'raid')}</p></div></div></div>`
     })
     $('#ba-timeattack-rules').empty().html(rulesHTML)
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -1737,7 +1754,7 @@ function changeTimeAttackDifficulty(difficultyId) {
 function changeWorldRaidDifficulty(difficultyId) {
     raid_difficulty = difficultyId
     let skillsHTML = '', tabsHtml = ''
-    $('#ba-raid-header').css('background-image', `url('images/raid/${raid.Icon}.png')`)
+    $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.PathName}_Lobby.png')`)
     $('#ba-raid-level').text(`Lv. ${raid.Level[raid_difficulty]}`)
     if (selectedEnemy >= raid.EnemyList[raid_difficulty].length) {selectedEnemy = 0}
     raid.EnemyList[raid_difficulty].forEach(function(el,i) {
@@ -1747,8 +1764,22 @@ function changeWorldRaidDifficulty(difficultyId) {
     $('#ba-raid-enemy-tabs').empty().html(tabsHtml)
     raid.RaidSkill.forEach(function(el, i) {
         if (raid_difficulty < el.MinDifficulty) return
+
+        let skillType
+        switch (el.SkillType) {
+            case 'EX':
+                skillType = translateUI('student_skill_ex')
+                break;
+            case 'Passive':
+                skillType = translateUI('student_skill_passive')
+                break;
+            default:
+                skillType = 'unknown'
+                break;
+        }
+
         if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
-        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${el.SkillType} Skill</p>${el.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG Cost:</i> '+el.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), el.Parameters, raid_difficulty+1, 'raid')}</p>`
+        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${skillType}</p>${el.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG:</i> '+el.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), el.Parameters, raid_difficulty+1, 'raid')}</p>`
     })
     $('#ba-raid-skills').empty().html(skillsHTML)
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -1962,13 +1993,7 @@ function loadStage(id) {
         $('#ba-stage-map-enemies').html(`<p class="mb-0">${translateUI('maptile_enemy_default_msg')}</p>`)
         $('#ba-stage-select-'+stage.Id).addClass('selected')
 
-        finalizeLoad($('#ba-stage-title').text(), 'stage', id, noscroll=true)
-
-        gtag('event', 'View Stage', {
-            'event_category': 'stage',
-            'event_label': id,
-            'user_language': userLang
-        })
+        finalizeLoad($('#ba-stage-title').text(), 'stage', id, 'View Stage', id)
 
     } else {
         loadModule('stages', id)
@@ -2605,7 +2630,20 @@ function getStageCardHTML(stage, dropChance = 0) {
 function getEventCardHTML(eventId) {
     let eventIdImg = eventId % 10000
     let name = getLocalizedString("EventName", eventId)
-    let html = `<div id="ba-event-select-${eventId}" class="ba-select-grid-item unselectable"><div onclick="populateEventStageList(${eventId});" class="ba-event-card"><div class="bg-container"><div style="background-image:url('images/campaign/Campaign_Event_${eventIdImg}_Normal.png');"></div></div><div class="ba-event-card-img"><img src="images/eventlogo/Event_${eventIdImg}_${regionID == 0 ? "Jp" : userLang}.png"></div>`
+
+    let logoLang
+    if (regionID == 0 || !data.common.regions[regionID].events.includes(eventIdImg)) {
+        //always use JP logo for Japan server
+        logoLang = 'Jp'
+    } else {
+        if (userLang == 'Cn') {
+            logoLang = 'Tw'
+        } else {
+            logoLang = userLang
+        }
+    }
+
+    let html = `<div id="ba-event-select-${eventId}" class="ba-select-grid-item unselectable"><div onclick="populateEventStageList(${eventId});" class="ba-event-card"><div class="bg-container"><div style="background-image:url('images/campaign/Campaign_Event_${eventIdImg}_Normal.png');"></div></div><div class="ba-event-card-img"><img src="images/eventlogo/Event_${eventIdImg}_${logoLang}.png"></div>`
     html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${name}</span></div></div></div>`
     return html
 }
@@ -2623,9 +2661,17 @@ function getStageIcon(stage, type) {
     }
 }
 
-function getRaidCardHTML(raid, terrain='') {
+function getRaidCardHTML(raid, terrain='', backgroundPath=null) {
     let name = getTranslatedString(raid, 'Name')
-    let html = `<div id="ba-raid-select-${raid.Id}" class="ba-select-grid-item unselectable"><div onclick="loadRaid(${raid.Id});" class="ba-raid-card"><div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/raid/${raid.IconBG}.png');"></div></div><div class="ba-raid-card-img"><img src="images/raid/${raid.Icon}.png"></div><div class="ba-raid-card-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
+    if (!backgroundPath) {
+        // Check if it's the alternative terrain background
+        if (raid.Terrain.length > 1 && terrain == raid.Terrain[1]) {
+            backgroundPath = `Boss_Portrait_${raid.PathName}_LobbyBG_${terrain}`
+        } else {
+            backgroundPath = `Boss_Portrait_${raid.PathName}_LobbyBG`
+        }
+    }
+    let html = `<div id="ba-raid-select-${raid.Id}" class="ba-select-grid-item unselectable"><div onclick="loadRaid(${raid.Id});" class="ba-raid-card"><div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/raid/${backgroundPath}.png');"></div></div><div class="ba-raid-card-img"><img src="images/raid/Boss_Portrait_${raid.PathName}_Lobby.png"></div><div class="ba-raid-card-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
     if (terrain != '') {
         html += `<div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${terrain}.png"></div>`
     }
@@ -2634,8 +2680,8 @@ function getRaidCardHTML(raid, terrain='') {
 }
 
 function getTimeAttackCardHTML(raid) {
-    let name = getTranslatedString(raid, 'Name')
-    let html = `<div id="ba-raid-select-${raid.Id}" class="ba-select-grid-item unselectable"><div onclick="loadRaid(${raid.Id});" class="ba-raid-card"><div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/timeattack/${raid.IconBG}.png');"></div></div><div class="ba-ta-card-img"><img src="images/enemy/${raid.Icon}.png"></div><div class="ba-raid-card-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div><div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${raid.Terrain}.png"></div>`
+    let name = getLocalizedString("TimeAttackStage", raid.DungeonType)
+    let html = `<div id="ba-raid-select-${raid.Id}" class="ba-select-grid-item unselectable"><div onclick="loadRaid(${raid.Id});" class="ba-raid-card"><div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/timeattack/${timeAttackBG[raid.DungeonType]}.png');"></div></div><div class="ba-ta-card-img"><img src="images/enemy/${raid.Icon}.png"></div><div class="ba-raid-card-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div><div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${raid.Terrain}.png"></div>`
     html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${name}</span></div></div></div>`
     return html
 }
@@ -3165,7 +3211,18 @@ function populateEventStageList(eventId) {
         eventId = eventId % 10000
         let diffPrev = 0
         let eventPrev = 0
-        let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'Event')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/Event_${eventId}_${regionID == 0 ? "Jp" : userLang}.png"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>`
+        let logoLang
+        if (regionID == 0  || !data.common.regions[regionID].events.includes(eventId)) {
+            //always use JP logo for Japan server
+            logoLang = 'Jp'
+        } else {
+            if (userLang == 'Cn') {
+                logoLang = 'Tw'
+            } else {
+                logoLang = userLang
+            }
+        }
+        let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'Event')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/Event_${eventId}_${logoLang}.png"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>`
     
         if (conquest_events.includes(eventId)) {
             $('.stage-list').hide()
@@ -3241,7 +3298,7 @@ function populateRaidList() {
     html = ''
     $.each(data.raids.WorldRaid, function(i,el) {
         if (el.IsReleased[regionID])
-        html += getRaidCardHTML(el)
+        html += getRaidCardHTML(el, '', el.IconBG)
     })
     $('#ba-raid-list-worldraid-grid').html(html)
 
@@ -3402,7 +3459,7 @@ function getItemDropStages(itemID) {
     })
     if (html != '') {
         $('#ba-item-sources').show()
-        return '<div class="mb-2"><i>Obtained from the following missions</i></div><div class="d-flex justify-content-center flex-wrap">' + html + '</div>'
+        return `<div class="mb-2"><i>${translateUI('item_obtainedfrom_stage')}</i></div><div class="d-flex justify-content-center flex-wrap">` + html + '</div>'
     } else {
         return ''
     }
@@ -3491,19 +3548,23 @@ function getSkillText(text, params, level, type) {
     regex = /[0-9.]+(?:%|s|秒|초| วินาที)/g
     result = result.replace(regex, function(match) {return `<strong>${match}</strong>`})
 
-    while (result.includes("<?"+paramCount+">")) {
-        if (type == "raid") {
-            if ((level == 1 && params[paramCount-1][level-1] != params[paramCount-1][level]) || (level > 1 && params[paramCount-1][level-1] != params[paramCount-1][level-2])) {
-                result = result.replace("<?"+paramCount+">", `<span class="ba-col-emphasis">${params[paramCount-1][level-1]}</span>`)
-            } else {
-                result = result.replace("<?"+paramCount+">", params[paramCount-1][level-1].replace(regex, function(match) {return `<strong>${match}</strong>`}))   
+    if (params) {
+        for (let i = 1; i <= params.length; i++) {
+            while (result.includes(`<?${i}>`)) {
+                if (type == "raid") {
+                    if ((level == 1 && params[i-1][level-1] != params[i-1][level]) || (level > 1 && params[i-1][level-1] != params[i-1][level-2])) {
+                        result = result.replace(`<?${i}>`, `<span class="ba-col-emphasis">${params[i-1][level-1]}</span>`)
+                    } else {
+                        result = result.replace(`<?${i}>`, params[i-1][level-1].replace(regex, function(match) {return `<strong>${match}</strong>`}))   
+                    }
+                } else {
+                    result = result.replace(`<?${i}>`, "<span class=\"ba-col-"+type.toLowerCase()+"\">" + params[i-1][level-1] + "</span>")
+                }
             }
-        } else {
-            result = result.replace("<?"+paramCount+">", "<span class=\"ba-col-"+type.toLowerCase()+"\">" + params[paramCount-1][level-1] + "</span>")
         }
-        
-        paramCount += 1
     }
+
+
 
     const buffTypes = ['Buff', 'Debuff', 'CC', 'Special']
     buffTypes.forEach(type => {
