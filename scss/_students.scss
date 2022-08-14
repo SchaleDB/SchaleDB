@@ -33,10 +33,20 @@ a.ba-statpreview-status {
     color: var(--col-theme-text);
     text-decoration: none;
 
+    .ba-weapon-skill-plus {
+        position: absolute;
+        top: 2px;
+        left: 22px;
+        height: 12px;
+        width: 12px;
+        min-width: auto;
+        font-size: 8px;
+        padding: 2px;
+    }
+
     span {
         font-weight: 600;
-        display: flex;
-        align-items: center;
+        @include flex(center, center);
     }
 
     img {
@@ -60,6 +70,11 @@ a.ba-statpreview-status {
 
     &.deactivated {
         color: var(--col-panel-separator);
+
+        .ba-weapon-skill-plus {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
 
         img {
             opacity: 0.5;

@@ -20,7 +20,7 @@ const max_gifts = 35
 const max_gifts_ssr = 13
 const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 25
+const cache_ver = 26
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_01", "Defense": "TimeAttack_SlotBG_02", "Destruction": "TimeAttack_SlotBG_03"}
@@ -67,6 +67,7 @@ const json_list = {
     items: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/items.min.json`),
     furniture: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/furniture.min.json`),
     equipment: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/equipment.min.json`),
+    currency: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/currency.min.json`),
 }
 const html_list = {
     craft: getCacheVerResourceName("./html/craft.html"),
@@ -1496,7 +1497,7 @@ function loadItem(id) {
             $('#ba-item-list-tab-furniture').tab('show') 
         }
 
-        finalizeLoad(getTranslatedString(item, 'Name'), "item", loadedItem.Id, 'View Item', loadedItem.Id)
+        finalizeLoad(getTranslatedString(item, 'Name'), "item", id, 'View Item', id)
 
     } else {
         loadModule('items', id)
@@ -1978,18 +1979,21 @@ function loadStage(id) {
             }
         }
 
+        html = ''
         if ("EntryCost" in stage && stage.EntryCost.length > 0) {
-            let currency
-            if (stage.EntryCost[0][0] < 20) {
-                currency = find(data.common.currency, 'Id', stage.EntryCost[0][0])[0]
-            } else {
-                currency = find(data.items, 'Id', stage.EntryCost[0][0])[0]
-            }
-            $('#ba-stage-entrycost').tooltip('dispose').tooltip({title: getRichTooltip(`images/items/${currency.Icon}.png`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), getRarityStars(currency.Rarity), getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger'), placement: 'top', html: true})
-            $('#ba-stage-entrycost img').attr('src', `images/items/${currency.Icon}.png`)
-            $('#ba-stage-entrycost .label').html(`&times;${stage.EntryCost[0][1]}`)
+            stage.EntryCost.forEach(ec => {
+                let currency
+                if (ec[0] < 20) {
+                    currency = find(data.currency, 'Id', ec[0])[0]
+                } else {
+                    currency = find(data.items, 'Id', ec[0])[0]
+                }
+                html += `<span class="ba-info-pill bg-theme my-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${currency.Icon}.png`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), getRarityStars(currency.Rarity), getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger')}"><img src="images/items/${currency.Icon}.png" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${ec[1]}</span></span>`
+            })
+            
         }
-        
+        $('#ba-stage-entrycost').html(html)
+        $('#ba-stage-entrycost >span').tooltip({html: true})
         $('#ba-stage-map-enemies').html(`<p class="mb-0">${translateUI('maptile_enemy_default_msg')}</p>`)
         $('#ba-stage-select-'+stage.Id).addClass('selected')
 
@@ -2775,47 +2779,53 @@ function populateMapEnemyList(formationId) {
 
 function getMaterialIconHTML(id, amount) {
     //rarity, icon, name, amount, type, description=""
-    var item
+    let item, itemType, html
     if (id >= 3000000) {
-        item = find(data.common.currency, "Id", id-3000000)[0]
+        item = find(data.currency, "Id", id-3000000)[0]
+        itemType = 'Currency'
     } else {
         item = find(data.items, "Id", id)[0]
+        itemType = item.Category
     }
-    var html
-    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory', item.Category), getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/${item.Icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>`
+    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory', itemType), getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/${item.Icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>`
     return html
 }
 
 function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1) {
-    let item, type, group, haslink
+    let item, type, group, haslink, itemType
     if (id >= 4000000) {
         groups = find(data.common.GachaGroup, "Id", id-4000000)
         if (groups.length > 0) {
             group = groups[0]
             type = 'GachaGroup'
+            itemType = 'Box'
             iconPath = 'items'
             haslink = false
         } else return ''
     } else if (id >= 3000000) {
-        item = find(data.common.currency, "Id", id-3000000)[0]
+        item = find(data.currency, "Id", id-3000000)[0]
         type = 'Currency'
+        itemType = 'Currency'
         iconPath = 'items'
         haslink = false
     } else if (id >= 2000000) {
         item = find(data.equipment, "Id", id-2000000)[0]
         type = 'Equipment'
+        itemType = item.Category
         iconPath = 'equipment'
         haslink = true
     } else if (id >= 1000000) {
         item = find(data.furniture, "Id", id-1000000)[0]
         type = 'Furniture'
+        itemType = item.Category
         iconPath = 'furniture'
         haslink = true
     } else {
         item = find(data.items, "Id", id)[0]
         type = 'Item'
+        itemType = item.Category
         iconPath = 'items'
-        haslink = true
+        haslink = !(item.Category == 'Consumable' || item.Category == 'Collectible')
     }
     let rarityText = ''
     if (item) {
@@ -2838,48 +2848,68 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1) {
             let icon, name, desc
             if (group.Id >= 600000 && group.Id < 700000) {
                 // Equipment boxes that contain lower tier variants of the same equipment piece
-                name = "Random "
                 desc = translateUI('item_equipment_box') + "\n"
                 iconPath = 'equipment'
-                let gearType = ''
+                let tier = '', gearType = ''
+
+                // Count the total probability
+                const totalProb = group.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
+
                 for (let i = 0; i < group.ItemList.length; i++) {
                     let gear = find(data.equipment, 'Id', group.ItemList[i][0]-2000000)[0]
-                    desc += getTranslatedString(gear, 'Name') + "\n"
+                    
+                    desc += `${getTranslatedString(gear, 'Name')} (${getProbabilityText(group.ItemList[i][1]/totalProb)})\n`
                     icon = gear.Icon
                     gearType = getLocalizedString('ItemCategory', gear.Category)
-                    name += `${(i > 0) ? '/' : ''}T${(gear.Id%10)+1}`
+
+                    // Add Tiers String
+                    if (tier != '') tier += '/'
+                    tier += `T${(gear.Id%10)+1}`
                 }
-                name += ' '+gearType
+                name = translateUI('item_randombox_tier', [tier, gearType])
             } else if (group.Id >= 300000 && group.Id < 600000) {
                 // Equipment boxes that contain a random piece for an equipment slot (same tier)
-                name = "Random "
                 desc = translateUI('item_equipment_box') + "\n"
                 iconPath = 'equipment'
-                let gearType = ''
+                let tier = '', gearType = ''
+
+                // Count the total probability
+                const totalProb = group.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
+
                 for (let i = 0; i < group.ItemList.length; i++) {
+
                     let gear = find(data.equipment, 'Id', group.ItemList[i][0]-2000000)[0]
-                    desc += getTranslatedString(gear, 'Name') + "\n"
+                    desc += `${getTranslatedString(gear, 'Name')} (${getProbabilityText(group.ItemList[i][1]/totalProb)})\n`
                     if (i == 0) {
-                        name += `T${(gear.Id%10)+1} `
+                        tier = `T${(gear.Id%10)+1} `
                         icon = gear.Icon
                     }
-                    gearType = getLocalizedString('ItemCategory', gear.Category)
-                    name += `${(i > 0) ? '/' : ''}${gearType}`                    
+
+                    // Add Gear Type String
+                    if (gearType != '') gearType += '/'
+                    gearType += getLocalizedString('ItemCategory', gear.Category)                
                 }
+                name = translateUI('item_randombox_tier', [tier, gearType])
             } else if (group.Id >= 10100 && group.Id <= 10103) {
+                // Artifact Box
+                tier = group.Id - 10099
                 icon = group.Icon
-                name = getTranslatedString(group, 'Name')
+                name = translateUI('item_randombox_tier', ['T'+tier, getLocalizedString('ItemCategory', 'Artifact')])
                 desc = translateUI('item_artifact_box') + "\n"
                 rarity = group.Rarity
+
+                // Count the total probability
+                const totalProb = group.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
+
                 for (let i = 0; i < group.ItemList.length; i++) {
                     let item = find(data.items, 'Id', group.ItemList[i][0])[0]
-                    desc += getTranslatedString(item, 'Name') + "\n"
+                    desc += `${getTranslatedString(item, 'Name')} (${getProbabilityText(group.ItemList[i][1]/totalProb)})\n`
                 }
             }
             html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${icon}.png`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/${icon}.png"><span class="ba-material-label">${getProbabilityText(chance)}</span></div>`
         }
     } else {
-        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',item.Category), rarityText, getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}</div>`
+        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}</div>`
     }
     return html
 }
@@ -3030,7 +3060,7 @@ function updatePassiveSkillStatPreview() {
         if (value > 0) desc += `${getStatName(el[0])} <b>+${getFormattedStatAmount(value)}</b>, `
     })
     $('#ba-statpreview-passiveskill-desc').html(desc.substring(0, desc.length-2))
-    passivePlus ? $('#ba-statpreview-passiveskill-icon-plus').show() : $('#ba-statpreview-passiveskill-icon-plus').hide()
+    passivePlus ? $('.passive-skill-plus').show() : $('.passive-skill-plus').hide()
     $('#ba-statpreview-status-passive-level .statpreview-label').text(`Lv.${$('#ba-statpreview-passiveskill-range').val()}`)
 }
 
@@ -3436,26 +3466,40 @@ function getLikedByStudents(item) {
 
 function getItemDropStages(itemID) {
     let html = '', stages = []
-    $.each([data.stages.Campaign, data.stages.SchoolDungeon, data.stages.WeekDungeon], function(i, el1) {
-        $.each(el1, function(j, el2){
-            if (!stageIsReleased(el2)) return
-            let drop = false, dropChance = 0
-            if ("Default" in el2.Rewards)
-            for (let i = 0; i < el2.Rewards.Default.length; i++) {
-                if (itemID == el2.Rewards.Default[i][0]) {
+    $.each([data.stages.Campaign, data.stages.SchoolDungeon, data.stages.WeekDungeon], function(i, stageType) {
+        stageType.forEach(dropStage => {
+            if (!stageIsReleased(dropStage)) return
+            let drop = false, dropChance = 0, isItemBox = false
+            if ("Default" in dropStage.Rewards)
+            for (let i = 0; i < dropStage.Rewards.Default.length; i++) {
+                if (dropStage.Rewards.Default[i][0] >= 4000000) {
+                    // Reward is an Item Box
+                    const box = find(data.common.GachaGroup, "Id", dropStage.Rewards.Default[i][0] - 4000000)[0]
+
+                    // Count the total probability
+                    const totalProb = box.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
+                    box.ItemList.forEach(boxItem => {
+                        if (itemID == boxItem[0]) {
+                            drop = true
+                            isItemBox = true
+                            dropChance = dropStage.Rewards.Default[i][1] * (boxItem[1]/totalProb)
+                        }
+                    })
+
+                } else if (itemID == dropStage.Rewards.Default[i][0]) {
                     drop = true
-                    dropChance = el2.Rewards.Default[i][1]
+                    dropChance = dropStage.Rewards.Default[i][1]
                     break
                 }
             }
             if (drop) {
-                stages.push({'chance': dropChance, 'stage':el2})
+                stages.push({'chance': dropChance, 'stage': dropStage, 'box': isItemBox})
             }
         })
     })
     stages = stages.sort((a,b) => b.chance - a.chance)
     $.each(stages, function(i,el){
-        html += '<div class="m-1">' + getStageCardHTML(el.stage, el.chance) + '</div>'
+        html += '<div class="m-1">' + getStageCardHTML(el.stage, el.chance, el.box) + '</div>'
     })
     if (html != '') {
         $('#ba-item-sources').show()
@@ -3738,14 +3782,14 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.raids.Raid, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/raid/'+el.Icon+'.png', 'type': getLocalizedString('StageType', 'Raid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': `images/raid/Boss_Portrait_${el.PathName}_Lobby.png`, 'type': getLocalizedString('StageType', 'Raid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
             if (results.length >= maxResults) return false
         }
     })
 
     if (results.length < maxResults)
     $.each(data.items, function(i,el){
-        if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
+        if (el.IsReleased[regionID] && el.Category != 'Collectible' && el.Category != 'Consumable' && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
             results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/items/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityStars(el.Rarity), 'onclick': `loadItem(${el.Id})`})
             if (results.length >= maxResults) return false
         }
@@ -3819,8 +3863,13 @@ function allSearch() {
 function searchNavigate(ev) {
     if (ev.keyCode == 13) {
         ev.preventDefault()
-        if (ev.type == "keyup")
-        $('#ba-search-result-item-'+searchResultsSelection).trigger("onclick")
+        if (ev.type == "keyup") {
+            if (searchResultsSelection == 0 && searchResultsCount > 0) {
+                $('#ba-search-result-item-1').trigger("onclick")
+            } else {
+                $('#ba-search-result-item-'+searchResultsSelection).trigger("onclick")
+            }
+        }
     } if (ev.keyCode == 40) {
         ev.preventDefault()
         if (ev.type == "keydown" && searchResultsSelection < searchResultsCount) {
