@@ -5,7 +5,7 @@
  */
 
 // cache versions should match common.js
-const dataCacheVer = 26;
+const dataCacheVer = 27;
 const staticCacheVer = 1;
 
 const dataCacheName = `schale-data-v${dataCacheVer}`;

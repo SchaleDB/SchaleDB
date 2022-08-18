@@ -279,7 +279,7 @@
                         ]
                     ],
                     "NameJp": "玉座への喚び声は此処にありて",
-                    "DescJp": "機械兵を召喚\n機械兵が存在する間、ATGの値が徐々に貯まっていく",
+                    "DescJp": "機械兵を召喚\n機械兵が存在する間、ATGの値が徐々に貯まっていく\n機械兵を倒す毎に、グロッキーゲージが上昇<?1>\n20秒後に、スキル「自爆モード作動」を発動し、<s:FormChange>を攻撃力の3000%分のダメージを与える自己破壊攻撃に変更",
                     "ParametersJp": [
                         [
                             "",
@@ -287,7 +287,7 @@
                             "",
                             "",
                             "",
-                            "and spawn a Sweeper "
+                            "、スイーパーを召喚"
                         ]
                     ],
                     "NameKr": "왕좌로 부르는 소리 있도다",
@@ -1485,7 +1485,7 @@
                         ]
                     ],
                     "NameJp": "心を燃やせ……まだまだ回れる！",
-                    "DescJp": "20秒毎に右腕（ピンク）、胸部（レッド）、左腕（グリーン）の順にパーツが活性化。\nパーツが活性化すると、右腕（ピンク）：攻撃力を50%増加\n胸部（レッド）：Exスキルの攻撃時、相手に気絶状態を付与（5秒間）\n左腕（グリーン）：防御力を1000増加<?1>\nパーツが活性化している状態で<?2>のダメージが蓄積されると、そのパーツは破壊されもう活性化できなくなります。\nまた、破壊されたパーツのスキルは、その後発動することができなくなります。",
+                    "DescJp": "20秒毎に右腕（ピンク）、胸部（レッド）、左腕（グリーン）の順にパーツが活性化。\nパーツが活性化すると、右腕（ピンク）：<b:ATK>を50%増加\n胸部（レッド）：Exスキルの攻撃時、相手に<c:Stunned>を付与（5秒間）\n左腕（グリーン）：<b:DEF>を1000増加<?1>\nパーツが活性化している状態で<?2>のダメージが蓄積されると、そのパーツは破壊されもう活性化できなくなります。\nまた、破壊されたパーツのスキルは、その後発動することができなくなります。",
                     "ParametersJp": [
                         [
                             "",
@@ -1505,7 +1505,7 @@
                         ]
                     ],
                     "NameKr": "무한히 타오르는 뜨거운 마음",
-                    "DescKr": "20초마다 오른팔(핑크), 가슴(레드), 왼팔(그린) 순서로 부위가 활성화된다.\n오른팔(핑크): 공격력 50% 증가\n가슴(레드): Ex 스킬 공격 시 대상 기절 (5초간)\n왼팔(그린): 방어력 1000 증가<?1>\n부위 활성화 시 일정 대미지 이상을 입힐 경우 해당 부위는 파괴되고 더 이상 활성화되지 않는다.\n파괴된 부위의 스킬은 사용하지 않는다.",
+                    "DescKr": "20초마다 오른팔(핑크), 가슴(레드), 왼팔(그린) 순서로 부위가 활성화된다.\n오른팔(핑크): <b:ATK> 50% 증가\n가슴(레드): Ex 스킬 공격 시 대상 <c:Stunned> (5초간)\n왼팔(그린): <b:DEF> 1000 증가<?1>\n부위 활성화 시 일정 대미지 이상을 입힐 경우 해당 부위는 파괴되고 더 이상 활성화되지 않는다.\n파괴된 부위의 스킬은 사용하지 않는다.",
                     "ParametersKr": [
                         [
                             "",
@@ -1592,9 +1592,9 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
                     "NameEn": "Kaiten Pose!",
-                    "DescEn": "Each Kaitenger will periodically activate their personal EX Skill:\n<b>Red of Zealousness!</b>: Inflicts <c:Provoke> on all nearby enemies and prevents them from activating EX skills for 10s.\n<b>Black of Shrewdness!</b>: Deals <b>300%</b> damage to one enemy and increases their <d:DamagedRatio> by <b>50%</b>.\n<b>Green of Weekend OT</b>: Deals <b>350%</b> damage to enemies in a fan-shaped area.\n<b>Yellow of Passion!</b>: Deals <b>500%</b> damage to one enemy.\n<b>Pink of Pure Heart!</b>: Increases all nearby allies' <b:ATK> by <b>6%</b> for 15s.",
+                    "DescEn": "Each Kaitenger will periodically activate their personal EX Skill:\n<b>Red of Zealousness!</b>: Inflicts <c:Provoke> on all nearby enemies for 10s.\n<b>Black of Shrewdness!</b>: Deals <b>300%</b> damage to one enemy and increases their <d:DamagedRatio> by <b>50%</b> for 5s.\n<b>Green of Weekend OT</b>: Deals <b>350%</b> damage to enemies in a fan-shaped area.\n<b>Yellow of Passion!</b>: Deals <b>500%</b> damage to one enemy.\n<b>Pink of Pure Heart!</b>: Increases all nearby allies' <b:ATK> by <b>6%</b> for 15s.",
                     "NameJp": "カイテンポーズ！",
-                    "DescJp": "Each Kaitenger will periodically activate their personal EX Skill:\n<b>Red of Zealousness!</b>: Inflicts <c:Provoke> on all nearby enemies and prevents them from activating EX skills for 10s.\n<b>Black of Shrewdness!</b>: Deals <b>300%</b> damage to one enemy and increases their <d:DamagedRatio> by <b>50%</b>.\n<b>Green of Weekend OT</b>: Deals <b>350%</b> damage to enemies in a fan-shaped area.\n<b>Yellow of Passion!</b>: Deals <b>500%</b> damage to one enemy.\n<b>Pink of Pure Heart!</b>: Increases all nearby allies' <b:ATK> by <b>6%</b> for 15s.",
+                    "DescJp": "カイテンジャーは定期的にEXスキルを発動する\n<b>熱血のレッド！</b>：円形範囲内の敵に<c:Provoke>を付与（10秒間）\n<b>冷徹なブラック！</b>：敵1人に対して攻撃力の300%分のダメージ/\n<d:DamagedRatio>を50%増加（5秒間）\n<b>休出のグリーン……</b>：扇形範囲内の敵に対して、攻撃力の350%分のダメージ\n<b>気合のイエロー！</b>：敵1人に対して、攻撃力の500%分のダメージ\n<b>純情のピンク！</b>：円形範囲内の味方の<b:ATK>を6%増加（15秒間）",
                     "NameKr": "카이텐 포즈!",
                     "DescKr": null,
                     "NameTw": "迴轉之力！",
@@ -1775,15 +1775,15 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL03",
                     "NameEn": "Summon Minion",
-                    "DescEn": "Summons Perorominions<?1>. Perorominions are <s:Immortal> and 100% of the damage taken by them will also be taken by Perorodzilla. If a Perorominion's HP drops below 50%, they will be knocked down, permanently inflicted with <c:Stunned> and allies will no longer prioritise attacking them.<?2>",
+                    "DescEn": "Summons Perorominions<?1>. Perorominions are <s:Immortal> and 100% of the damage taken by them will also be taken by Perorodzilla. If a Perorominion's HP drops below 50%, they will be knocked down, permanently inflicted with <c:Stunned> and allies will no longer prioritise attacking them. Perorominions are otherwise immune to Crowd Control effects.<?2>",
                     "ParametersEn": [
                         [
                             "",
                             "",
                             "",
                             "",
-                            " with 110% increased <b:MAXHP>",
-                            " with up to 3 stacks of 100% increased <b:MAXHP>"
+                            " with 110% increased <b:MAXHP> (Indoor only)",
+                            " with up to 200% increased <b:MAXHP>"
                         ],
                         [
                             "",
@@ -1791,7 +1791,7 @@
                             "",
                             "",
                             "",
-                            "\nAlso summons glowing Perorominions which when knocked down, deal 200,000 damage to other Perorominions in a circular area around it."
+                            "\nAlso summons glowing Perorominions which, when knocked down, deal 200,000 damage to other Perorominions in a circular area around it."
                         ]
                     ],
                     "NameJp": "ペロロミニオン召喚",
@@ -1842,8 +1842,8 @@
                             "",
                             "",
                             "",
-                            " with 110% increased <b:MAXHP>",
-                            " with up to 3 stacks of 100% increased <b:MAXHP>"
+                            " with 110% increased <b:MAXHP> (Indoor only)",
+                            " with up to 200% increased <b:MAXHP>"
                         ],
                         [
                             "",
@@ -1851,7 +1851,7 @@
                             "",
                             "",
                             "",
-                            "\nAlso summons glowing Perorominions which when knocked down, deal 200,000 damage to other Perorominions in a circular area around it."
+                            "\nAlso summons glowing Perorominions which, when knocked down, deal 200,000 damage to other Perorominions in a circular area around it."
                         ]
                     ],
                     "NameCn": "召唤士兵",
@@ -1862,8 +1862,8 @@
                             "",
                             "",
                             "",
-                            " with 110% increased <b:MAXHP>",
-                            " with up to 3 stacks of 100% increased <b:MAXHP>"
+                            " with 110% increased <b:MAXHP> (Indoor only)",
+                            " with up to 200% increased <b:MAXHP>"
                         ],
                         [
                             "",
@@ -1871,19 +1871,19 @@
                             "",
                             "",
                             "",
-                            "\nAlso summons glowing Perorominions which when knocked down, deal 200,000 damage to other Perorominions in a circular area around it."
+                            "\nAlso summons glowing Perorominions which, when knocked down, deal 200,000 damage to other Perorominions in a circular area around it."
                         ]
                     ],
                     "NameTh": "เรียกลูกสมุน",
-                    "DescTh": "เรียกลูกสมุนบิ๊กเพโรโร่<?1>มาสร้างความเสียหาย 100% ของความเสียหายที่ได้รับ /\nลูกสมุนบิ๊กเพโรโร่จะล้มลงถ้ามี HP ต่ำกว่า 50%<?2>",
+                    "DescTh": "เรียกลูกสมุนบิ๊กเพโรโร่<?1>ออกมา เมื่อลูกสมุนบิ๊กเพโรโร่ได้รับความเสียหาย สร้างความเสียหาย 100% ของความเสียหายที่ได้รับให้กับเพโรโร่ซิลล่าด้วย/\nลูกสมุนบิ๊กเพโรโร่จะล้มลงถ้ามี HP ต่ำกว่า 50%<?2>",
                     "ParametersTh": [
                         [
                             "",
                             "",
                             "",
                             "",
-                            "ที่มี<b:MAXHP> เพิ่ม 110%",
-                            "และลูกสมุนบิ๊กเพโรโร่เรืองแสงที่มี<b:MAXHP> เพิ่ม 100% (เพิ่มได้สูงสุด 3 ชั้น) "
+                            "ที่มี<b:MAXHP> เพิ่ม 110% (ในอาคารเท่านั้น)",
+                            "และลูกสมุนบิ๊กเพโรโร่เรืองแสงที่มี<b:MAXHP> เพิ่ม 100% (เพิ่มได้สูงสุด 2 ชั้น) "
                         ],
                         [
                             "",
@@ -1902,7 +1902,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL04",
                     "NameEn": "Absorb Minion",
-                    "DescEn": "Absorbs all Perorominions. For every Perorominion that was knocked down, increases Perorodzilla's groggy gauge by a significant amount. When Perorodzilla's groggy gauge is full, summons 5 broken Perorominions with reduced defense, these Perorominions are <s:Immortal> and 100% of the damage taken by them will also be taken by Perorodzilla.",
+                    "DescEn": "Absorbs all Perorominions. For every Perorominion that was knocked down, increases Perorodzilla's groggy gauge by a fixed amount. When Perorodzilla's groggy gauge is full, summons 5 Small Perorominions with reduced defense. Small Perorominions are <s:Immortal> and 100% of the damage taken by them will also be taken by Perorodzilla.",
                     "NameJp": "ペロロミニオン吸収",
                     "DescJp": "転倒している大きなペロロミニオンの数に比例して、グロッキーゲージが上昇",
                     "NameKr": "미니언 흡수",
@@ -1912,7 +1912,7 @@
                     "NameCn": "吸收士兵",
                     "DescCn": "格罗基量表的进度与倒地的巨大佩洛洛士兵数量成正比",
                     "NameTh": "ดูดซับลูกสมุน",
-                    "DescTh": "เกจมึนงงจะเพิ่มขึ้นตามจำนวนลูกสมุนบิ๊กเพโรโร่ที่ล้มลง"
+                    "DescTh": "เกจมึนงงจะเพิ่มขึ้นตามจำนวนลูกสมุนบิ๊กเพโรโร่ที่ล้มลง/\nหากเกจมึนงงเต็ม เพโรโร่ซิลล่าจะอยู่ในสถานะมึนงงพร้อมกับเรียกลูกสมุนเพโรโร่ออกมา 5 ตัว เมื่อลูกสมุนเพโรโร่ได้รับความเสียหาย สร้างความเสียหาย 100% ของความเสียหายที่ได้รับให้กับเพโรโร่ซิลล่าด้วย"
                 },
                 {
                     "Id": "Perorozilla01Ex10",

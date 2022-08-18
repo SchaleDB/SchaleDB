@@ -20,7 +20,7 @@ const max_gifts = 35
 const max_gifts_ssr = 13
 const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 26
+const cache_ver = 27
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_01", "Defense": "TimeAttack_SlotBG_02", "Destruction": "TimeAttack_SlotBG_03"}
@@ -1357,7 +1357,12 @@ function processStudent() {
 function loadStudent(studentName) {
     if (loadedModule == 'students') {
         if (selectCompareMode) {
-            studentCompare = find(data.students, "PathName", studentName)[0]
+            studentCompare = find(data.students, "PathName", studentName)
+            if (studentCompare.length == 0) {
+                // Legacy support for when DevName was used in the url
+                studentCompare = findOrDefault(data.students, "DevName", studentName, "Aru")
+            }
+            studentCompare = studentCompare[0]
             selectCompareMode = false
             compareMode = true
             if (statPreviewSummonStats) {
@@ -2571,7 +2576,7 @@ function getStudentListCardHTML(student) {
     let name = getTranslatedString(student, 'Name')
     let html = `
     <div id="ba-student-select-${student.Id}" class="ba-select-grid-item unselectable">
-        <div onclick="loadStudent('${student.DevName}')" class="ba-student-card">
+        <div onclick="loadStudent('${student.PathName}')" class="ba-student-card">
             <div class="ba-student-card-portrait"><img class="ba-student-card-portrait-img" src="images/student/collection/${student.CollectionTexture}.webp"></div>
             <span class="ba-student-card-role bg-${student.SquadType.toLowerCase()}-t"><img src="images/ui/Role_${student.TacticRole}.png" style="width:100%"></span>
             <span class="ba-student-card-atk bg-atk-${student.BulletType.toLowerCase()}-t"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></span>
@@ -2934,7 +2939,7 @@ function getProbabilityText(chance) {
 }
 
 function getStudentIconSmall(student) {
-    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student.DevName}')" title="${getRichTooltip(`images/student/icon/${student.CollectionTexture}.png`, getTranslatedString(student, 'Name'), translateUI('student'), getRarityStars(student.StarGrade), getTranslatedString(student, 'ProfileIntroduction').split('\n')[0], 50, 'circle')}"><img src="images/student/icon/${student.CollectionTexture}.png"></div>`
+    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student.PathName}')" title="${getRichTooltip(`images/student/icon/${student.CollectionTexture}.png`, getTranslatedString(student, 'Name'), translateUI('student'), getRarityStars(student.StarGrade), getTranslatedString(student, 'ProfileIntroduction').split('\n')[0], 50, 'circle')}"><img src="images/student/icon/${student.CollectionTexture}.png"></div>`
     return html
 }
 
@@ -3774,7 +3779,7 @@ function allSearch() {
 
     $.each(data.students, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/student/collection/'+el.CollectionTexture+'.webp', 'type': translateUI('student'), 'rarity': '', 'rarity_text': getRarityStars(el.StarGrade), 'onclick': `loadStudent('${el.DevName}')`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/student/collection/'+el.CollectionTexture+'.webp', 'type': translateUI('student'), 'rarity': '', 'rarity_text': getRarityStars(el.StarGrade), 'onclick': `loadStudent('${el.PathName}')`})
             if (results.length >= maxResults) return false
         }
     })
@@ -4421,7 +4426,7 @@ function importDataString() {
         studentCollection = JSON.parse(localStorage.getItem('student_collection'))
         toastMessage(`<i class="fa-solid fa-circle-check me-2"></i>${translateUI('toast_import_success')}`, 2500, 'success')
         if (loadedModule == 'students') {
-            loadStudent(student.DevName)
+            loadStudent(student.PathName)
             $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
             if (search_options.filter.Collection.Owned || search_options.filter.Collection.NotOwned) updateStudentList()
         }
@@ -4453,7 +4458,7 @@ function importResourcePlannerData() {
         studentCollection = JSON.parse(localStorage.getItem('student_collection'))
         toastMessage(`<i class="fa-solid fa-circle-check me-2"></i>${translateUI('toast_import_success')}`, 2500, 'success')
         if (loadedModule == 'students') {
-            loadStudent(student.DevName)
+            loadStudent(student.PathName)
             $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
             if (search_options.filter.Collection.Owned || search_options.filter.Collection.NotOwned) updateStudentList()
         }
