@@ -369,9 +369,8 @@
             "current_gacha": [
                 { "characters": [10048, 10000], "start": 1660010400, "end": 1661306400 }
             ],
-            "current_events": [ {"event": 815, "start": 1658282400, "end": 1659492000} ],
+            "current_events": [],
             "current_raid": [
-                { "raid":    6, "terrain": "Outdoor", "start": 1660010400, "end": 1660676400 },
                 { "raid":    4, "terrain": "Street" , "start": 1661911200, "end": 1662490800 },
                 { "raid": 7000,                       "start": 1663725600, "end": 1664305200 }
             ]
@@ -397,21 +396,26 @@
             "bounty_max": 9,
             "schooldungeon_max": 3,
             "current_gacha": [
-                { "characters": [10031, 10032], "start": 1660014000, "end": 1661223601 }
+                { "characters": [20011], "start": 1661223600, "end": 1662429601 }
             ],
-            "current_events": [ {"event": 809, "start": 1660015800, "end": 1661223601} ],
+            "current_events": [],
             "current_raid": [
-                { "raid": 2, "terrain": "Outdoor", "start": 1660015800, "end": 1660575600 },
                 { "raid": 6, "terrain": "Outdoor", "start": 1661225400, "end": 1661785200 }
             ]
         }
     ],
     "changelog": [
         {
-            "date": "2022/08/15",
+            "date": "2022/08/23",
             "contents": [
-                "Items: Show drop stages for which the item can drop through an item box."
+                "Students: Added tooltips to show calculated DMG reduction from DEF, Crit Chance and Stability Minimum DMG on student stat tables.", 
+                "Items: Corrected drop chances from bounty stages on Artifact pages. (Probability shown is the chance of obtaining at least one item)",
+                "Translation updates."
             ]
+        },
+        {
+            "date": "2022/08/15",
+            "contents": ["Items: Show drop stages for which the item can drop through an item box."]
         },
         {
             "date": "2022/08/14",
@@ -504,16 +508,6 @@
                 "Stages: Added ability to preview stage maps in a larger window.", 
                 "Added a Service Worker to allow for more efficient caching of resources. (Should greatly reduce the amount of data usage if you are a frequent user)", 
                 "Schale DB can now be installed as a PWA."
-            ]
-        },
-        {
-            "date": "2022/06/26",
-            "contents": [
-                "Stages: Added stage maps for all Campaign and Event stages.", 
-                "Stages: Clicking on an enemy unit on the map will list enemies appearing in that unit.", 
-                "Stages: Added information for Event Challenge stages and event reruns.", 
-                "UI: Several UI improvements to Stages and Raid lists.", 
-                "UI: Current event stages will now be shown at the top of the list."
             ]
         }
     ]

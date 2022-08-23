@@ -256,6 +256,16 @@ input[type="search" i]::-webkit-search-cancel-button {
             color: var(--col-theme-text-t) !important;
         }
     }
+
+    .stat-help {
+        font-size: 14px;
+        opacity: 0.5;
+        @include transition(opacity);
+
+        &:hover {
+            opacity: 1;
+        }
+    }
 }
 
 #toast-message-container {

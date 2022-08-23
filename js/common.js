@@ -20,7 +20,6 @@ const max_gifts = 35
 const max_gifts_ssr = 13
 const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
-const cache_ver = 27
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_01", "Defense": "TimeAttack_SlotBG_02", "Destruction": "TimeAttack_SlotBG_03"}
@@ -362,20 +361,17 @@ let search_options = {
 
     getStabilityMinDamage() {
         let stability =  this.getTotal('StabilityPoint')
-        return parseFloat((((stability / (stability + 997)) + 0.2)*100).toFixed(2)) + "%"
+        return parseFloat((((stability / (stability + 1000)) + 0.2)*100).toFixed(2)) + "%"
     }
 
-    getDescriptionText(stat) {
-        let desc = ""
-        desc += "If this character's HP reaches 0, they will be unable to continue fighting.\n\n"
-        desc += `Base Value: <b>${this.stats[stat][0].toLocaleString()}</b>`
-        if (this.stats[stat][1] > 0) {
-            desc += `\nFlat Buffs: <b>+${this.stats[stat][1].toLocaleString()}</b>`
-        }
-        if (this.stats[stat][2] > 1) {
-            desc += `\n% Buffs: <b>+${parseFloat(((this.stats[stat][2]-1)*100).toFixed(2))}%</b>`
-        }
-        return desc        
+    getDefenseDamageReduction() {
+        let defense =  this.getTotal('DefensePower')
+        return parseFloat(((1 - (10000000 / (defense * 6000 + 10000000)))*100).toFixed(2)) + "%"
+    }
+
+    getCriticalHitChance(critRes) {
+        let crit =  this.getTotal('CriticalPoint')
+        return Math.max(Math.min(parseFloat(((1 - (4000000 / ((crit - critRes) * 6000 + 4000000)))*100).toFixed(2)), 80), 0) + "%"
     }
 
     static isRateStat(stat) {
@@ -398,21 +394,6 @@ $.when($.ready, loadPromise).then(function() {
     //service worker
     if('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js')
-        //force reload the page if a new update is available
-        navigator.serviceWorker.addEventListener('controllerchange', function () {
-            //window.alert("The Service Worker changed to a new version")
-            window.location.reload()
-        })
-    }
-
-    //check if we updated
-    if (localStorage.getItem("cache_version")) {
-        if (localStorage.getItem("cache_version") != `${cache_ver}`) {
-            localStorage.setItem("cache_version", `${cache_ver}`)
-            toastMessage('<i class="fa-solid fa-circle-check me-2"></i>Schale DB updated to the latest version', 4000, 'success')
-        }
-    } else {
-        localStorage.setItem("cache_version", `${cache_ver}`)
     }
 
     //gtag settings
@@ -2498,6 +2479,11 @@ function recalculateStatPreview() {
         }
     })
 
+    //Derived stat tooltips
+    $('#ba-student-stat-DefensePower .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('stat_defense_tooltip', [`<b>${stats.getDefenseDamageReduction()}</b>`])), html: true, placement: 'top'})
+    $('#ba-student-stat-CriticalPoint .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('stat_crit_tooltip', [`<b>${stats.getCriticalHitChance(100)}</b>`])), html: true, placement: 'top'})
+    $('#ba-student-stat-StabilityPoint .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('stat_stability_tooltip', [`<b>${stats.getStabilityMinDamage()}</b>`])), html: true, placement: 'top'})
+
     $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
     $('#ba-statpreview-status-bond-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-1-range').val()}`)
     $('#ba-statpreview-bond-1-toggle').prop("checked", statPreviewIncludeBond)
@@ -3474,9 +3460,10 @@ function getItemDropStages(itemID) {
     $.each([data.stages.Campaign, data.stages.SchoolDungeon, data.stages.WeekDungeon], function(i, stageType) {
         stageType.forEach(dropStage => {
             if (!stageIsReleased(dropStage)) return
-            let drop = false, dropChance = 0, isItemBox = false
+            let drop = false, dropChance = 0, isItemBox = false, dropCertainCount = 0
             if ("Default" in dropStage.Rewards)
             for (let i = 0; i < dropStage.Rewards.Default.length; i++) {
+
                 if (dropStage.Rewards.Default[i][0] >= 4000000) {
                     // Reward is an Item Box
                     const box = find(data.common.GachaGroup, "Id", dropStage.Rewards.Default[i][0] - 4000000)[0]
@@ -3487,7 +3474,12 @@ function getItemDropStages(itemID) {
                         if (itemID == boxItem[0]) {
                             drop = true
                             isItemBox = true
-                            dropChance = dropStage.Rewards.Default[i][1] * (boxItem[1]/totalProb)
+                            if (dropStage.Rewards.Default[i][1] >= 1) {
+                                dropCertainCount = dropStage.Rewards.Default[i][1]
+                                dropCertainChance = (boxItem[1]/totalProb)
+                            } else {
+                                dropChance = dropStage.Rewards.Default[i][1] * (boxItem[1]/totalProb)
+                            }
                         }
                     })
 
@@ -3498,6 +3490,15 @@ function getItemDropStages(itemID) {
                 }
             }
             if (drop) {
+                // Calculate the probability of receiving at least one drop
+                if (isItemBox && dropCertainCount > 0) {
+                    // Chance of drop from certain boxes
+                    let dropChanceA = 1-Math.pow(1-dropCertainChance, dropCertainCount)
+                    // Chance of drop from uncertain box
+                    let dropChanceB = dropChance
+                    // Chance to get at least one drop
+                    dropChance = (dropChanceA + dropChanceB - (dropChanceA*dropChanceB))
+                }
                 stages.push({'chance': dropChance, 'stage': dropStage, 'box': isItemBox})
             }
         })
