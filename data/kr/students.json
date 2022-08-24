@@ -42860,396 +42860,12 @@
         ]
     },
     {
-        "Id": 10049,
-        "IsReleased": [
-            true,
-            false
-        ],
-        "DefaultOrder": 108,
-        "PathName": "Kazusa",
-        "DevName": "Kazusa",
-        "Name": "카즈사",
-        "School": "Trinity",
-        "Club": "HoukagoDessert",
-        "StarGrade": 3,
-        "SquadType": "Main",
-        "TacticRole": "DamageDealer",
-        "SummonIds": [],
-        "Position": "Back",
-        "BulletType": "Pierce",
-        "ArmorType": "HeavyArmor",
-        "StreetBattleAdaptation": 4,
-        "OutdoorBattleAdaptation": 0,
-        "IndoorBattleAdaptation": 2,
-        "WeaponType": "MG",
-        "WeaponImg": "Weapon_Icon_CH0075",
-        "Cover": false,
-        "Equipment": [
-            "Gloves",
-            "Hairpin",
-            "Watch"
-        ],
-        "CollectionBG": "BG_Trinity_Collection",
-        "CollectionTexture": "Student_Portrait_Kazusa_Collection",
-        "FamilyName": "쿄야마",
-        "FamilyNameRuby": "",
-        "PersonalName": "카즈사",
-        "SchoolYear": "1학년",
-        "CharacterAge": "15세",
-        "Birthday": "8월 5일",
-        "CharacterSSRNew": "아, 선생님.\n이런 곳에서 다 보네.",
-        "ProfileIntroduction": "느긋하고 조용한 성격의 &lt;방과후 디저트부&gt; 부원.\n\n자신을 잘 드러내지 않는 편이며, 보통 다른 부원들의 행동에 묵묵히 따른다.\n늘 주변의 기행에 휘말려 고생하지만 한편으론 그런 것들까지도 소중하게 생각한다.",
-        "Hobby": "평범하게&#x27; 디저트 먹기",
-        "CharacterVoice": "夏吉ゆうこ",
-        "BirthDay": "8/5",
-        "ArtistName": "mimo",
-        "CharHeightMetric": "155cm",
-        "CharHeightImperial": null,
-        "StabilityPoint": 1388,
-        "AttackPower1": 241,
-        "AttackPower100": 2415,
-        "MaxHP1": 2231,
-        "MaxHP100": 19340,
-        "DefensePower1": 79,
-        "DefensePower100": 475,
-        "HealPower1": 1411,
-        "HealPower100": 4235,
-        "DodgePoint": 198,
-        "AccuracyPoint": 100,
-        "CriticalPoint": 201,
-        "CriticalDamageRate": 20000,
-        "AmmoCount": 40,
-        "AmmoCost": 4,
-        "Range": 750,
-        "RegenCost": 700,
-        "Skills": [
-            {
-                "SkillType": "ex",
-                "Name": "달콤한 포화",
-                "Desc": "즉시 재장전/\n적 1인에게 공격력 <?1> 대미지",
-                "Parameters": [
-                    [
-                        "933%",
-                        "1073%",
-                        "1353%",
-                        "1493%",
-                        "1773%",
-                        "1913%",
-                        "2193%",
-                        "2333%",
-                        "2613%",
-                        "2753%"
-                    ]
-                ],
-                "Cost": [
-                    4,
-                    4,
-                    4,
-                    4,
-                    4
-                ],
-                "SummonStat": [],
-                "SummonStatCoefficient": [],
-                "Icon": "COMMON_SKILLICON_TARGET"
-            },
-            {
-                "SkillType": "normal",
-                "Name": "예전 습관",
-                "Desc": "30초마다 <b:ATK> <?1> 증가(25초간)",
-                "Parameters": [
-                    [
-                        "23%",
-                        "24.2%",
-                        "25.3%",
-                        "29.9%",
-                        "31.1%",
-                        "32.2%",
-                        "36.8%",
-                        "38%",
-                        "39.2%",
-                        "43.8%"
-                    ]
-                ],
-                "Icon": "COMMON_SKILLICON_WEAPONBUFF"
-            },
-            {
-                "SkillType": "passive",
-                "Name": "슈가 하이",
-                "Desc": "<b:ATK> <?1> 증가",
-                "Parameters": [
-                    [
-                        "14%",
-                        "14.7%",
-                        "15.4%",
-                        "18.2%",
-                        "18.9%",
-                        "19.6%",
-                        "22.4%",
-                        "23.1%",
-                        "23.8%",
-                        "26.6%"
-                    ]
-                ],
-                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
-                "Stat": [
-                    "AttackPower"
-                ]
-            },
-            {
-                "SkillType": "sub",
-                "Name": "퍼스트 테이스트",
-                "Desc": "재장전 시 공격속도가 16.3% 감소하는 대신 <b:ATK> <?1> 증가(15초간) (최대 2회까지 중첩)",
-                "Parameters": [
-                    [
-                        "26.1%",
-                        "27.4%",
-                        "28.7%",
-                        "33.9%",
-                        "35.2%",
-                        "36.5%",
-                        "41.8%",
-                        "43.1%",
-                        "44.4%",
-                        "49.6%"
-                    ]
-                ],
-                "Icon": "COMMON_SKILLICON_WEAPONDUALEFFECT"
-            },
-            {
-                "SkillType": "weaponpassive",
-                "Name": "슈가 하이+",
-                "Desc": "<b:ATK> <?1> 증가/\n추가로 <b:ATK> <?2> 증가",
-                "Parameters": [
-                    [
-                        "290",
-                        "304",
-                        "319",
-                        "376",
-                        "391",
-                        "405",
-                        "463",
-                        "478",
-                        "492",
-                        "550"
-                    ],
-                    [
-                        "14%",
-                        "14.7%",
-                        "15.4%",
-                        "18.2%",
-                        "18.9%",
-                        "19.6%",
-                        "22.4%",
-                        "23.1%",
-                        "23.8%",
-                        "26.6%"
-                    ]
-                ],
-                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
-                "Stat": [
-                    "AttackPower",
-                    "AttackPower"
-                ]
-            }
-        ],
-        "FavorStatType": [
-            "AttackPower",
-            "MaxHP"
-        ],
-        "FavorStatValue": [
-            [
-                2,
-                0
-            ],
-            [
-                4,
-                0
-            ],
-            [
-                5,
-                48
-            ],
-            [
-                6,
-                58
-            ],
-            [
-                2,
-                10
-            ],
-            [
-                2,
-                15
-            ],
-            [
-                4,
-                25
-            ]
-        ],
-        "FavorAlts": [],
-        "MemoryLobby": 5,
-        "FurnitureInteraction": [
-            3103
-        ],
-        "FavorItemTags": [
-            "Dessert",
-            "Delicious",
-            "Girlish"
-        ],
-        "FavorItemUniqueTags": [
-            "F_Kazusa"
-        ],
-        "IsLimited": 0,
-        "Weapon": {
-            "Name": "마비노기온",
-            "Desc": "카즈사와 오래 전부터 함께해 온 기관총.\n\n이름의 유래에 대해 물어보면, 당황하며 회피하는 카즈사의 모습을 볼 수 있다.",
-            "AdaptationType": "Street",
-            "AdaptationValue": 1,
-            "AttackPower1": 106,
-            "AttackPower100": 1061,
-            "MaxHP1": 559,
-            "MaxHP100": 5592,
-            "HealPower1": 0,
-            "HealPower100": 0,
-            "StatLevelUpType": "Standard"
-        },
-        "Gear": {},
-        "SkillExMaterial": [
-            [
-                3020,
-                240
-            ],
-            [
-                3021,
-                3020,
-                241,
-                140
-            ],
-            [
-                3022,
-                3021,
-                242,
-                141
-            ],
-            [
-                3023,
-                3022,
-                243,
-                142
-            ]
-        ],
-        "SkillExMaterialAmount": [
-            [
-                12,
-                12
-            ],
-            [
-                12,
-                18,
-                12,
-                33
-            ],
-            [
-                12,
-                18,
-                8,
-                27
-            ],
-            [
-                8,
-                18,
-                8,
-                21
-            ]
-        ],
-        "SkillMaterial": [
-            [
-                4020
-            ],
-            [
-                4020
-            ],
-            [
-                4021,
-                4020,
-                240
-            ],
-            [
-                4021,
-                241,
-                140
-            ],
-            [
-                4022,
-                4021,
-                241,
-                140
-            ],
-            [
-                4022,
-                242,
-                141
-            ],
-            [
-                4023,
-                4022,
-                243,
-                142
-            ],
-            [
-                4023,
-                243,
-                142
-            ]
-        ],
-        "SkillMaterialAmount": [
-            [
-                5
-            ],
-            [
-                8
-            ],
-            [
-                5,
-                12,
-                5
-            ],
-            [
-                8,
-                3,
-                12
-            ],
-            [
-                5,
-                12,
-                10,
-                18
-            ],
-            [
-                8,
-                3,
-                16
-            ],
-            [
-                8,
-                12,
-                4,
-                9
-            ],
-            [
-                12,
-                7,
-                14
-            ]
-        ]
-    },
-    {
         "Id": 20018,
         "IsReleased": [
             true,
             false
         ],
-        "DefaultOrder": 110,
+        "DefaultOrder": 108,
         "PathName": "Moe",
         "DevName": "Moe",
         "Name": "모에",
@@ -43646,6 +43262,390 @@
             [
                 12,
                 8,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 10049,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 109,
+        "PathName": "Kazusa",
+        "DevName": "Kazusa",
+        "Name": "카즈사",
+        "School": "Trinity",
+        "Club": "HoukagoDessert",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "SummonIds": [],
+        "Position": "Back",
+        "BulletType": "Pierce",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 0,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "MG",
+        "WeaponImg": "Weapon_Icon_CH0075",
+        "Cover": false,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Trinity_Collection",
+        "CollectionTexture": "Student_Portrait_Kazusa_Collection",
+        "FamilyName": "쿄야마",
+        "FamilyNameRuby": "",
+        "PersonalName": "카즈사",
+        "SchoolYear": "1학년",
+        "CharacterAge": "15세",
+        "Birthday": "8월 5일",
+        "CharacterSSRNew": "아, 선생님.\n이런 곳에서 다 보네.",
+        "ProfileIntroduction": "느긋하고 조용한 성격의 &lt;방과후 디저트부&gt; 부원.\n\n자신을 잘 드러내지 않는 편이며, 보통 다른 부원들의 행동에 묵묵히 따른다.\n늘 주변의 기행에 휘말려 고생하지만 한편으론 그런 것들까지도 소중하게 생각한다.",
+        "Hobby": "평범하게&#x27; 디저트 먹기",
+        "CharacterVoice": "夏吉ゆうこ",
+        "BirthDay": "8/5",
+        "ArtistName": "mimo",
+        "CharHeightMetric": "155cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1388,
+        "AttackPower1": 241,
+        "AttackPower100": 2415,
+        "MaxHP1": 2231,
+        "MaxHP100": 19340,
+        "DefensePower1": 79,
+        "DefensePower100": 475,
+        "HealPower1": 1411,
+        "HealPower100": 4235,
+        "DodgePoint": 198,
+        "AccuracyPoint": 100,
+        "CriticalPoint": 201,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 40,
+        "AmmoCost": 4,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "달콤한 포화",
+                "Desc": "즉시 재장전/\n적 1인에게 공격력 <?1> 대미지",
+                "Parameters": [
+                    [
+                        "933%",
+                        "1073%",
+                        "1353%",
+                        "1493%",
+                        "1773%",
+                        "1913%",
+                        "2193%",
+                        "2333%",
+                        "2613%",
+                        "2753%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "SummonStat": [],
+                "SummonStatCoefficient": [],
+                "Icon": "COMMON_SKILLICON_TARGET"
+            },
+            {
+                "SkillType": "normal",
+                "Name": "예전 습관",
+                "Desc": "30초마다 <b:ATK> <?1> 증가(25초간)",
+                "Parameters": [
+                    [
+                        "23%",
+                        "24.2%",
+                        "25.3%",
+                        "29.9%",
+                        "31.1%",
+                        "32.2%",
+                        "36.8%",
+                        "38%",
+                        "39.2%",
+                        "43.8%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF"
+            },
+            {
+                "SkillType": "passive",
+                "Name": "슈가 하이",
+                "Desc": "<b:ATK> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackPower"
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "퍼스트 테이스트",
+                "Desc": "재장전 시 공격속도가 16.3% 감소하는 대신 <b:ATK> <?1> 증가(15초간) (최대 2회까지 중첩)",
+                "Parameters": [
+                    [
+                        "26.1%",
+                        "27.4%",
+                        "28.7%",
+                        "33.9%",
+                        "35.2%",
+                        "36.5%",
+                        "41.8%",
+                        "43.1%",
+                        "44.4%",
+                        "49.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONDUALEFFECT"
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "슈가 하이+",
+                "Desc": "<b:ATK> <?1> 증가/\n추가로 <b:ATK> <?2> 증가",
+                "Parameters": [
+                    [
+                        "290",
+                        "304",
+                        "319",
+                        "376",
+                        "391",
+                        "405",
+                        "463",
+                        "478",
+                        "492",
+                        "550"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackPower",
+                    "AttackPower"
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                48
+            ],
+            [
+                6,
+                58
+            ],
+            [
+                2,
+                10
+            ],
+            [
+                2,
+                15
+            ],
+            [
+                4,
+                25
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": 5,
+        "FurnitureInteraction": [
+            3103
+        ],
+        "FavorItemTags": [
+            "Dessert",
+            "Delicious",
+            "Girlish"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Kazusa"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "마비노기온",
+            "Desc": "카즈사와 오래 전부터 함께해 온 기관총.\n\n이름의 유래에 대해 물어보면, 당황하며 회피하는 카즈사의 모습을 볼 수 있다.",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 106,
+            "AttackPower100": 1061,
+            "MaxHP1": 559,
+            "MaxHP100": 5592,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                240
+            ],
+            [
+                3021,
+                3020,
+                241,
+                140
+            ],
+            [
+                3022,
+                3021,
+                242,
+                141
+            ],
+            [
+                3023,
+                3022,
+                243,
+                142
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                12
+            ],
+            [
+                12,
+                18,
+                12,
+                33
+            ],
+            [
+                12,
+                18,
+                8,
+                27
+            ],
+            [
+                8,
+                18,
+                8,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                240
+            ],
+            [
+                4021,
+                241,
+                140
+            ],
+            [
+                4022,
+                4021,
+                241,
+                140
+            ],
+            [
+                4022,
+                242,
+                141
+            ],
+            [
+                4023,
+                4022,
+                243,
+                142
+            ],
+            [
+                4023,
+                243,
+                142
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                3,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                18
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                9
+            ],
+            [
+                12,
+                7,
                 14
             ]
         ]

@@ -42862,15 +42862,422 @@
         ]
     },
     {
-        "Id": 10049,
+        "Id": 20018,
         "IsReleased": [
             true,
             false
         ],
         "DefaultOrder": 108,
+        "PathName": "Moe",
+        "DevName": "Moe",
+        "Name": "โมเอะ",
+        "School": "SRT",
+        "Club": "RabbitPlatoon",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "DamageDealer",
+        "SummonIds": [],
+        "Position": "Back",
+        "BulletType": "Pierce",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "HG",
+        "WeaponImg": "Weapon_Icon_CH0143",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Bag",
+            "Watch"
+        ],
+        "CollectionBG": "BG_SRT_Collection",
+        "CollectionTexture": "Student_Portrait_Moe_Collection",
+        "FamilyName": "風倉",
+        "FamilyNameRuby": null,
+        "PersonalName": "モエ",
+        "SchoolYear": "1年生",
+        "CharacterAge": "15歳",
+        "Birthday": "9月13日",
+        "CharacterSSRNew": "こちらRABBIT3。次の爆撃場所はどこ？",
+        "ProfileIntroduction": "SRT特殊学園所属、RABBIT小隊のオペレーター。コールサインは「RABBIT3」。\n\n強大な火力を保有したSRT特殊学園の武器に憧れて入学したが、突然学園が閉鎖され、現在は公園で他の小隊員と共に野宿をしている。何かを爆破したり台無しにしたりすることに喜びを感じる奇妙な趣向の持ち主だが、オペレーターの腕だけは確かである。重症の甘いもの好きで、いつも棒キャンディを口にくわえている。",
+        "Hobby": "打ち上げ花火",
+        "CharacterVoice": "井澤詩織",
+        "BirthDay": "9/13",
+        "ArtistName": "Mx2j",
+        "CharHeightMetric": "163cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1136,
+        "AttackPower1": 199,
+        "AttackPower100": 1998,
+        "MaxHP1": 2224,
+        "MaxHP100": 16629,
+        "DefensePower1": 19,
+        "DefensePower100": 118,
+        "HealPower1": 1627,
+        "HealPower100": 4883,
+        "DodgePoint": 791,
+        "AccuracyPoint": 404,
+        "CriticalPoint": 202,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "พิรุณเหล็กกล้า",
+                "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีกับศัตรูในแนวเส้นตรง/\nสร้างความเสียหายเผา<d:Burn>ต่อเนื่อง <?2> ของค่าโจมตี (เป็นเวลา 20 วินาที)",
+                "Parameters": [
+                    [
+                        "306%",
+                        "352%",
+                        "398%",
+                        "443%",
+                        "489%",
+                        "535%",
+                        "581%",
+                        "627%",
+                        "673%",
+                        "719%"
+                    ],
+                    [
+                        "50.9%",
+                        "50.9%",
+                        "58.5%",
+                        "58.5%",
+                        "66.2%",
+                        "66.2%",
+                        "73.8%",
+                        "73.8%",
+                        "81.5%",
+                        "81.5%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "SummonStat": [],
+                "SummonStatCoefficient": [],
+                "Icon": "COMMON_SKILLICON_RECZONE"
+            },
+            {
+                "SkillType": "normal",
+                "Name": "ระดมยิง",
+                "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรู 5 เป้าหมายทุก 40 วินาที/\nทำให้<c:Stunned> (เป็นเวลา <?2>)",
+                "Parameters": [
+                    [
+                        "100%",
+                        "105%",
+                        "110%",
+                        "120%",
+                        "125%",
+                        "130%",
+                        "140%",
+                        "145%",
+                        "150%",
+                        "160%"
+                    ],
+                    [
+                        "1.2 วินาที",
+                        "1.2 วินาที",
+                        "1.2 วินาที",
+                        "1.4 วินาที",
+                        "1.4 วินาที",
+                        "1.4 วินาที",
+                        "1.5 วินาที",
+                        "1.5 วินาที",
+                        "1.5 วินาที",
+                        "1.6 วินาที"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STUNNED"
+            },
+            {
+                "SkillType": "passive",
+                "Name": "ความสุขของการทำลายล้าง",
+                "Desc": "เพิ่ม<b:ATK> <?1>",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackPower"
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "ยุทธการสนับสนุน",
+                "Desc": "เพิ่ม<b:ATK>ของฝ่ายเรา <?1>",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF"
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "ความสุขของการทำลายล้าง+",
+                "Desc": "เพิ่ม<b:ATK> <?1>/\nเพิ่ม<b:ATK>เพิ่มเติม <?2>",
+                "Parameters": [
+                    [
+                        "239",
+                        "251",
+                        "263",
+                        "311",
+                        "323",
+                        "335",
+                        "383",
+                        "395",
+                        "406",
+                        "454"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackPower",
+                    "AttackPower"
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                42
+            ],
+            [
+                5,
+                50
+            ],
+            [
+                1,
+                9
+            ],
+            [
+                2,
+                13
+            ],
+            [
+                3,
+                22
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": 6,
+        "FurnitureInteraction": [
+            8106
+        ],
+        "FavorItemTags": [
+            "Electronic",
+            "Army"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Moe"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "ラビット224式拳銃",
+            "Desc": "モエがSRT特殊学園から支給された制式拳銃。\n\n拳銃にもかかわらず高い連射力を保有しているため、弾倉を瞬時に空にすることができる。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 88,
+            "AttackPower100": 877,
+            "MaxHP1": 484,
+            "MaxHP100": 4840,
+            "HealPower1": 191,
+            "HealPower100": 1913,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3080,
+                160
+            ],
+            [
+                3081,
+                3080,
+                161,
+                130
+            ],
+            [
+                3082,
+                3081,
+                162,
+                131
+            ],
+            [
+                3083,
+                3082,
+                163,
+                132
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                14,
+                31
+            ],
+            [
+                12,
+                18,
+                9,
+                24
+            ],
+            [
+                8,
+                18,
+                7,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4080
+            ],
+            [
+                4080
+            ],
+            [
+                4081,
+                4080,
+                160
+            ],
+            [
+                4081,
+                161,
+                130
+            ],
+            [
+                4082,
+                4081,
+                161,
+                130
+            ],
+            [
+                4082,
+                162,
+                131
+            ],
+            [
+                4083,
+                4082,
+                163,
+                132
+            ],
+            [
+                4083,
+                163,
+                132
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                9,
+                18
+            ],
+            [
+                8,
+                2,
+                15
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                8,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 10049,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 109,
         "PathName": "Kazusa",
         "DevName": "Kazusa",
-        "Name": "カズサ",
+        "Name": "คาซึสะ",
         "School": "Trinity",
         "Club": "HoukagoDessert",
         "StarGrade": 3,
@@ -42894,10 +43301,10 @@
         "CollectionBG": "BG_Trinity_Collection",
         "CollectionTexture": "Student_Portrait_Kazusa_Collection",
         "FamilyName": "杏山",
+        "FamilyNameRuby": null,
         "PersonalName": "カズサ",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
-        "FamilyNameRuby": "きょうやま",
         "Birthday": "8月5日",
         "CharacterSSRNew": "あ、先生。\nこんな所で会えるなんて奇遇だね",
         "ProfileIntroduction": "トリニティ総合学園所属、ゆったりとした静かな性格の「放課後スイーツ部」の部員。\n\n自分をあまり表に出さないため、普段は他の部員たちに黙々とついていく事が多い。\nいつも周囲の奇行に巻き込まれて苦労しているが、一方でそういう所も大切に思っている。",
@@ -42927,8 +43334,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "スイート・ファイア",
-                "Desc": "スキル発動後すぐにリロード/\n敵1人に対して攻撃力の<?1>分のダメージ",
+                "Name": "สวีท ไฟร์",
+                "Desc": "รีโหลดกระสุนทันที/\nสร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรู 1 เป้าหมาย",
                 "Parameters": [
                     [
                         "933%",
@@ -42956,8 +43363,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "しみついたクセ",
-                "Desc": "30秒毎に、<b:ATK>を<?1>増加（25秒間）",
+                "Name": "นิสัยติดตัว",
+                "Desc": "เพิ่ม<b:ATK> <?1> ทุก 30 วินาที (เป็นเวลา 25 วินาที)",
                 "Parameters": [
                     [
                         "23%",
@@ -42976,8 +43383,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "シュガー・ハイ",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Name": "ชูการ์ ไฮท์",
+                "Desc": "เพิ่ม<b:ATK> <?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -42999,8 +43406,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "つまみ食い",
-                "Desc": "リロード時、攻撃速度が16.3%減少する代わりに<b:ATK>を<?1>増加（15秒間）（最大で2回分まで効果が重複）",
+                "Name": "กินจุบจิบ",
+                "Desc": "เมื่อรีโหลดกระสุน จะเพิ่ม<b:ATK> <?1> (เป็นเวลา 15 วินาที) (ทับซ้อนได้สูงสุด 2 ขั้น)\nลด<d:AttackSpeed> 16.3% (เป็นเวลา 15 วินาที)",
                 "Parameters": [
                     [
                         "26.1%",
@@ -43019,8 +43426,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "シュガー・ハイ+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Name": "ชูการ์ ไฮท์+",
+                "Desc": "เพิ่ม<b:ATK> <?1>/\nเพิ่ม<b:ATK>เพิ่มเติม <?2>",
                 "Parameters": [
                     [
                         "290",
@@ -43241,413 +43648,6 @@
             [
                 12,
                 7,
-                14
-            ]
-        ]
-    },
-    {
-        "Id": 20018,
-        "IsReleased": [
-            true,
-            false
-        ],
-        "DefaultOrder": 110,
-        "PathName": "Moe",
-        "DevName": "Moe",
-        "Name": "モエ",
-        "School": "SRT",
-        "Club": "RabbitPlatoon",
-        "StarGrade": 3,
-        "SquadType": "Support",
-        "TacticRole": "DamageDealer",
-        "SummonIds": [],
-        "Position": "Back",
-        "BulletType": "Pierce",
-        "ArmorType": "LightArmor",
-        "StreetBattleAdaptation": 0,
-        "OutdoorBattleAdaptation": 2,
-        "IndoorBattleAdaptation": 4,
-        "WeaponType": "HG",
-        "WeaponImg": "Weapon_Icon_CH0143",
-        "Cover": false,
-        "Equipment": [
-            "Hat",
-            "Bag",
-            "Watch"
-        ],
-        "CollectionBG": "BG_SRT_Collection",
-        "CollectionTexture": "Student_Portrait_Moe_Collection",
-        "FamilyName": "風倉",
-        "PersonalName": "モエ",
-        "SchoolYear": "1年生",
-        "CharacterAge": "15歳",
-        "FamilyNameRuby": "かぜくら",
-        "Birthday": "9月13日",
-        "CharacterSSRNew": "こちらRABBIT3。次の爆撃場所はどこ？",
-        "ProfileIntroduction": "SRT特殊学園所属、RABBIT小隊のオペレーター。コールサインは「RABBIT3」。\n\n強大な火力を保有したSRT特殊学園の武器に憧れて入学したが、突然学園が閉鎖され、現在は公園で他の小隊員と共に野宿をしている。何かを爆破したり台無しにしたりすることに喜びを感じる奇妙な趣向の持ち主だが、オペレーターの腕だけは確かである。重症の甘いもの好きで、いつも棒キャンディを口にくわえている。",
-        "Hobby": "打ち上げ花火",
-        "CharacterVoice": "井澤詩織",
-        "BirthDay": "9/13",
-        "ArtistName": "Mx2j",
-        "CharHeightMetric": "163cm",
-        "CharHeightImperial": null,
-        "StabilityPoint": 1136,
-        "AttackPower1": 199,
-        "AttackPower100": 1998,
-        "MaxHP1": 2224,
-        "MaxHP100": 16629,
-        "DefensePower1": 19,
-        "DefensePower100": 118,
-        "HealPower1": 1627,
-        "HealPower100": 4883,
-        "DodgePoint": 791,
-        "AccuracyPoint": 404,
-        "CriticalPoint": 202,
-        "CriticalDamageRate": 20000,
-        "AmmoCount": 5,
-        "AmmoCost": 1,
-        "Range": 1000,
-        "RegenCost": 700,
-        "Skills": [
-            {
-                "SkillType": "ex",
-                "Name": "鋼鉄の雨",
-                "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n攻撃力の<?2>分の<d:Burn>持続ダメージを付与（20秒間）",
-                "Parameters": [
-                    [
-                        "306%",
-                        "352%",
-                        "398%",
-                        "443%",
-                        "489%",
-                        "535%",
-                        "581%",
-                        "627%",
-                        "673%",
-                        "719%"
-                    ],
-                    [
-                        "50.9%",
-                        "50.9%",
-                        "58.5%",
-                        "58.5%",
-                        "66.2%",
-                        "66.2%",
-                        "73.8%",
-                        "73.8%",
-                        "81.5%",
-                        "81.5%"
-                    ]
-                ],
-                "Cost": [
-                    4,
-                    4,
-                    4,
-                    4,
-                    4
-                ],
-                "SummonStat": [],
-                "SummonStatCoefficient": [],
-                "Icon": "COMMON_SKILLICON_RECZONE"
-            },
-            {
-                "SkillType": "normal",
-                "Name": "集中砲火",
-                "Desc": "40秒毎に、敵5人に対し攻撃力の<?1>分のダメージ/\nさらに<c:Stunned>を付与（<?2>間）",
-                "Parameters": [
-                    [
-                        "100%",
-                        "105%",
-                        "110%",
-                        "120%",
-                        "125%",
-                        "130%",
-                        "140%",
-                        "145%",
-                        "150%",
-                        "160%"
-                    ],
-                    [
-                        "1.2秒",
-                        "1.2秒",
-                        "1.2秒",
-                        "1.4秒",
-                        "1.4秒",
-                        "1.4秒",
-                        "1.5秒",
-                        "1.5秒",
-                        "1.5秒",
-                        "1.6秒"
-                    ]
-                ],
-                "Icon": "COMMON_SKILLICON_STUNNED"
-            },
-            {
-                "SkillType": "passive",
-                "Name": "破滅の快感",
-                "Desc": "<b:ATK>を<?1>増加",
-                "Parameters": [
-                    [
-                        "14%",
-                        "14.7%",
-                        "15.4%",
-                        "18.2%",
-                        "18.9%",
-                        "19.6%",
-                        "22.4%",
-                        "23.1%",
-                        "23.8%",
-                        "26.6%"
-                    ]
-                ],
-                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
-                "Stat": [
-                    "AttackPower"
-                ]
-            },
-            {
-                "SkillType": "sub",
-                "Name": "作戦支援",
-                "Desc": "味方の<b:ATK>を<?1>増加",
-                "Parameters": [
-                    [
-                        "9.1%",
-                        "9.5%",
-                        "10%",
-                        "11.8%",
-                        "12.3%",
-                        "12.7%",
-                        "14.5%",
-                        "15%",
-                        "15.5%",
-                        "17.3%"
-                    ]
-                ],
-                "Icon": "COMMON_SKILLICON_WEAPONBUFF"
-            },
-            {
-                "SkillType": "weaponpassive",
-                "Name": "破滅の快感+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
-                "Parameters": [
-                    [
-                        "239",
-                        "251",
-                        "263",
-                        "311",
-                        "323",
-                        "335",
-                        "383",
-                        "395",
-                        "406",
-                        "454"
-                    ],
-                    [
-                        "14%",
-                        "14.7%",
-                        "15.4%",
-                        "18.2%",
-                        "18.9%",
-                        "19.6%",
-                        "22.4%",
-                        "23.1%",
-                        "23.8%",
-                        "26.6%"
-                    ]
-                ],
-                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
-                "Stat": [
-                    "AttackPower",
-                    "AttackPower"
-                ]
-            }
-        ],
-        "FavorStatType": [
-            "AttackPower",
-            "MaxHP"
-        ],
-        "FavorStatValue": [
-            [
-                2,
-                0
-            ],
-            [
-                3,
-                0
-            ],
-            [
-                4,
-                42
-            ],
-            [
-                5,
-                50
-            ],
-            [
-                1,
-                9
-            ],
-            [
-                2,
-                13
-            ],
-            [
-                3,
-                22
-            ]
-        ],
-        "FavorAlts": [],
-        "MemoryLobby": 6,
-        "FurnitureInteraction": [
-            8106
-        ],
-        "FavorItemTags": [
-            "Electronic",
-            "Army"
-        ],
-        "FavorItemUniqueTags": [
-            "F_Moe"
-        ],
-        "IsLimited": 0,
-        "Weapon": {
-            "Name": "ラビット224式拳銃",
-            "Desc": "モエがSRT特殊学園から支給された制式拳銃。\n\n拳銃にもかかわらず高い連射力を保有しているため、弾倉を瞬時に空にすることができる。",
-            "AdaptationType": "Indoor",
-            "AdaptationValue": 1,
-            "AttackPower1": 88,
-            "AttackPower100": 877,
-            "MaxHP1": 484,
-            "MaxHP100": 4840,
-            "HealPower1": 191,
-            "HealPower100": 1913,
-            "StatLevelUpType": "Standard"
-        },
-        "Gear": {},
-        "SkillExMaterial": [
-            [
-                3080,
-                160
-            ],
-            [
-                3081,
-                3080,
-                161,
-                130
-            ],
-            [
-                3082,
-                3081,
-                162,
-                131
-            ],
-            [
-                3083,
-                3082,
-                163,
-                132
-            ]
-        ],
-        "SkillExMaterialAmount": [
-            [
-                12,
-                15
-            ],
-            [
-                12,
-                18,
-                14,
-                31
-            ],
-            [
-                12,
-                18,
-                9,
-                24
-            ],
-            [
-                8,
-                18,
-                7,
-                21
-            ]
-        ],
-        "SkillMaterial": [
-            [
-                4080
-            ],
-            [
-                4080
-            ],
-            [
-                4081,
-                4080,
-                160
-            ],
-            [
-                4081,
-                161,
-                130
-            ],
-            [
-                4082,
-                4081,
-                161,
-                130
-            ],
-            [
-                4082,
-                162,
-                131
-            ],
-            [
-                4083,
-                4082,
-                163,
-                132
-            ],
-            [
-                4083,
-                163,
-                132
-            ]
-        ],
-        "SkillMaterialAmount": [
-            [
-                5
-            ],
-            [
-                8
-            ],
-            [
-                5,
-                12,
-                5
-            ],
-            [
-                8,
-                4,
-                12
-            ],
-            [
-                5,
-                12,
-                9,
-                18
-            ],
-            [
-                8,
-                2,
-                15
-            ],
-            [
-                8,
-                12,
-                4,
-                8
-            ],
-            [
-                12,
-                8,
                 14
             ]
         ]
