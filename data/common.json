@@ -358,7 +358,7 @@
             "campaign_max": 19,
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810,   811,   812, 
-                  813,   814,   815,   701, 10801, 10802, 10803
+                  813,   814,   815,   816,   701, 10801, 10802, 10803
             ],
             "event_max": 815,
             "event_701_max": 10,
@@ -367,12 +367,13 @@
             "bounty_max": 9,
             "schooldungeon_max": 4,
             "current_gacha": [
-                { "characters": [10048, 10000], "start": 1660010400, "end": 1661306400 }
+                { "characters": [20018, 10049], "start": 1661306400, "end": 1662516000 }
             ],
-            "current_events": [],
+            "current_events": [ {"event": 816, "start": 1661306400, "end": 1662516000} ],
             "current_raid": [
-                { "raid":    4, "terrain": "Street" , "start": 1661911200, "end": 1662490800 },
-                { "raid": 7000,                       "start": 1663725600, "end": 1664305200 }
+                { "raid":    4, "terrain": "Street", "start": 1661911200, "end": 1662490800 },
+                { "raid":    7, "terrain": "Street", "start": 1663120800, "end": 1663700400 },
+                { "raid": 7000,                      "start": 1663725600, "end": 1664305200 }
             ]
         },
         {
@@ -399,17 +400,22 @@
                 { "characters": [20011], "start": 1661223600, "end": 1662429601 }
             ],
             "current_events": [],
-            "current_raid": [
-                { "raid": 6, "terrain": "Outdoor", "start": 1661225400, "end": 1661785200 }
-            ]
+            "current_raid": [ {"raid": 6, "terrain": "Outdoor", "start": 1661225400, "end": 1661785200} ]
         }
     ],
     "changelog": [
         {
+            "date": "2022/08/24",
+            "contents": [
+                "Students: Added information for Kazusa and Moe.", 
+                "Stages: Added information for \"Sweet Secrets and Gun Fights\" Event Stages."
+            ]
+        },
+        {
             "date": "2022/08/23",
             "contents": [
                 "Students: Added tooltips to show calculated DMG reduction from DEF, Crit Chance and Stability Minimum DMG on student stat tables.", 
-                "Items: Corrected drop chances from bounty stages on Artifact pages. (Probability shown is the chance of obtaining at least one item)",
+                "Items: Corrected drop chances from bounty stages on Artifact pages. (Probability shown is the chance of obtaining at least one item)", 
                 "Translation updates."
             ]
         },
