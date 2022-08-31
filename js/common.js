@@ -510,12 +510,7 @@ $.when($.ready, loadPromise).then(function() {
 
     loadRegion(regionID)
 
-    data.students.sort(sort_functions.Name)
-    studentList = data.students.map(x => x)
-
-    itemList = data.items.map(x => x)
-    furnitureList = data.furniture.map(x => x)
-    equipmentList = data.equipment.map(x => x)
+    setSortedDataLists()
 
     if (localStorage.getItem("theme")) {
         darkTheme = localStorage.getItem("theme")
@@ -1045,6 +1040,16 @@ function duration(seconds) {
     totalSeconds -= hours*3600
     let minutes = Math.floor(totalSeconds/60)
     return [days, hours, minutes]
+}
+
+function setSortedDataLists() {
+    // Make a copy of the data objects for sorting/filtering so we retain the original order in the loaded data
+    data.students.sort(sort_functions.Name)
+    studentList = data.students.map(x => x)
+
+    itemList = data.items.map(x => x)
+    furnitureList = data.furniture.map(x => x)
+    equipmentList = data.equipment.map(x => x)
 }
 
 /**
@@ -4136,6 +4141,7 @@ function changeLanguage(lang) {
         loadJSON(json_lang_list, result => {
             data = Object.assign(data, result)
         }).then(function(val){
+            setSortedDataLists()
             $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).removeClass("active")
             $('body').removeClass(`font-${userLang.toLowerCase()}`)
     
