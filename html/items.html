@@ -2,20 +2,120 @@
     <div class="row">
         <div class="col-12 col-md-6 ba-page">
             <div class="px-0 px-xl-1 sidebar">
-                <div id="ba-item-list-container" class="card p-2 screen-height mobile-scroll" style="display:none;">
+                <div id="ba-item-list-container" class="card p-2 screen-height mobile-scroll">
                     <div class="card-header">
-                        <nav id="ba-item-list-tabs" class="nav nav-pills nav-justified mb-1 px-2">
-                            <a id="ba-item-list-tab-materials" class="nav-link" data-bs-toggle="tab" href="#" onclick="populateItemList('materials')" data-localize-id="ui,item_tab_materials"></a>
-                            <a id="ba-item-list-tab-gifts" class="nav-link" data-bs-toggle="tab" href="#" onclick="populateItemList('gifts')" data-localize-id="ui,item_tab_gifts"></a>
-                            <a id="ba-item-list-tab-eleph" class="nav-link" data-bs-toggle="tab" href="#" onclick="populateItemList('eleph')" data-localize-id="ui,item_tab_eleph"></a>
-                            <a id="ba-item-list-tab-currency" class="nav-link" data-bs-toggle="tab" href="#" onclick="populateItemList('currency')" data-localize-id="ui,item_tab_currency"></a>
-                            <a id="ba-item-list-tab-furniture" class="nav-link" data-bs-toggle="tab" href="#" onclick="populateItemList('furniture')" data-localize-id="ui,item_tab_furniture"></a>
-                            <a id="ba-item-list-tab-equipment" class="nav-link" data-bs-toggle="tab" href="#" onclick="populateItemList('equipment')" data-localize-id="ui,item_tab_equipment"></a>
-                        </nav>
+                        <div class="d-flex mb-2 flex-wrap gap-2">
+
+                            <nav id="ba-item-list-tabs" class="nav nav-pills nav-justified flex-fill">
+                                <a id="ba-item-list-tab-items" class="nav-link" data-bs-toggle="tab" href="#" onclick="populateItemList('items')" data-localize-id="ui,navbar_items"></a>
+                                <a id="ba-item-list-tab-furniture" class="nav-link" data-bs-toggle="tab" href="#" onclick="populateItemList('furniture')" data-localize-id="ui,item_tab_furniture"></a>
+                                <a id="ba-item-list-tab-equipment" class="nav-link" data-bs-toggle="tab" href="#" onclick="populateItemList('equipment')" data-localize-id="ui,item_tab_equipment"></a>
+                            </nav>
+
+                            <div class="flex-fill d-flex gap-2">
+                                <input type="search" class="form-control h-100" id="item-search-text" data-ph-localize-id="ui,filter_by_name" autocomplete="off">
+                                <button id="item-search-filters-btn" class="btn btn-dark tooltip-button" type="button" data-bs-toggle="collapse" data-bs-target="#item-search-filters-panel"><i class="fa-solid fa-filter"></i></button>
+                            </div>
+                        </div>
+                        <div id="item-search-filters-panel" class="collapse">
+                            <div class="p-2 ba-panel bg-theme" style="font-size: 0;">
+                                <div class="d-flex show-items show-furniture show-equipment">
+                                    <div id="item-search-sortby" class="">
+                                        <h5 data-localize-id="ui,sortby"></h5>
+                                        <button id="item-search-sortby-default" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrderItems('Default')"><span data-localize-id="ui,default"></span><span class="sort-direction-label"></span></button>
+                                        <button id="item-search-sortby-name" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrderItems('Name')"><span data-localize-id="ui,name"></span><span class="sort-direction-label"></span></button>
+                                    </div>
+                                    <div class="flex-fill"></div>
+                                    <div id="item-search-displaytype" class="ms-4">
+                                        <button id="item-search-displaytype-detailed" class="btn btn-sm btn-dark me-1" onclick="setGridItemDisplayStyle('detailed')" style="font-size: 0;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-grid-fill" viewBox="0 0 16 16" style="padding: 2px;">
+                                                <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/>
+                                            </svg>
+                                        </button>
+                                        <button id="item-search-displaytype-compact" class="btn btn-sm btn-dark" onclick="setGridItemDisplayStyle('compact')" style="font-size: 0;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-grid-3x3-gap-fill" viewBox="0 0 16 16" style="padding: 2px;">
+                                                <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div id="item-search-filter-itemcategory" class="mt-2 show-items">
+                                    <h5 data-localize-id="ui,category"></h5>
+                                    <button id="item-search-filter-itemcategory-material" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Material')"><span data-localize-id="ItemCategory,Material"></span></button>
+                                    <button id="item-search-filter-itemcategory-coin" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Coin')"><span data-localize-id="ItemCategory,Coin"></span></button>
+                                    <button id="item-search-filter-itemcategory-favor" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Favor')"><span data-localize-id="ItemCategory,Favor"></span></button>
+                                    <button id="item-search-filter-itemcategory-secretstone" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','SecretStone')"><span data-localize-id="ItemCategory,SecretStone"></span></button>
+                                    <button id="item-search-filter-itemcategory-consumable" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Consumable')"><span data-localize-id="ItemCategory,Consumable"></span></button>
+                                    <button id="item-search-filter-itemcategory-collectible" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Collectible')"><span data-localize-id="ItemCategory,Collectible"></span></button>
+                                </div>
+                                <div id="item-search-filter-furnituresubcategory" class="mt-2 show-furniture">
+                                    <h5 data-localize-id="ui,category"></h5>
+                                    <button id="item-search-filter-furnituresubcategory-wallpaper" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Wallpaper')"><span data-localize-id="ItemCategory,Wallpaper"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-floor" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Floor')"><span data-localize-id="ItemCategory,Floor"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-background" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Background')"><span data-localize-id="ItemCategory,Background"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-table" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Table')"><span data-localize-id="ItemCategory,Table"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-chair" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Chair')"><span data-localize-id="ItemCategory,Chair"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-closet" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Closet')"><span data-localize-id="ItemCategory,Closet"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-floordecoration" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','FloorDecoration')"><span data-localize-id="ItemCategory,FloorDecoration"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-walldecoration" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','WallDecoration')"><span data-localize-id="ItemCategory,WallDecoration"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-prop" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Prop')"><span data-localize-id="ItemCategory,Prop"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-homeappliance" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','HomeAppliance')"><span data-localize-id="ItemCategory,HomeAppliance"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-bed" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Bed')"><span data-localize-id="ItemCategory,Bed"></span></button>
+                                    <button id="item-search-filter-furnituresubcategory-furnitureetc" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','FurnitureEtc')"><span data-localize-id="ItemCategory,FurnitureEtc"></span></button>
+                                </div>
+                                <div id="item-search-filter-equipmentcategory" class="mt-2 show-equipment">
+                                    <h5 data-localize-id="ui,category"></h5>
+                                    <button id="item-search-filter-equipmentcategory-exp" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Exp')"><span data-localize-id="ItemCategory,Exp"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-weaponexpgrowth" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','WeaponExpGrowth')"><span data-localize-id="ItemCategory,WeaponExpGrowth"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-hat" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Hat')"><span data-localize-id="ItemCategory,Hat"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-gloves" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Gloves')"><span data-localize-id="ItemCategory,Gloves"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-shoes" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Shoes')"><span data-localize-id="ItemCategory,Shoes"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-bag" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Bag')"><span data-localize-id="ItemCategory,Bag"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-badge" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Badge')"><span data-localize-id="ItemCategory,Badge"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-hairpin" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Hairpin')"><span data-localize-id="ItemCategory,Hairpin"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-charm" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Charm')"><span data-localize-id="ItemCategory,Charm"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-necklace" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Necklace')"><span data-localize-id="ItemCategory,Necklace"></span></button>
+                                    <button id="item-search-filter-equipmentcategory-watch" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Watch')"><span data-localize-id="ItemCategory,Watch"></span></button>
+                                </div>
+                                <div id="item-search-filter-furnitureset" class="mt-2 show-furniture">
+                                    <h5 data-localize-id="ui,furniture_set"></h5>
+                                    <button id="item-search-filter-furnitureset-100" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','100')"><span data-localize-id="FurnitureSet,100"></span></button>
+                                    <button id="item-search-filter-furnitureset-101" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','101')"><span data-localize-id="FurnitureSet,101"></span></button>
+                                    <button id="item-search-filter-furnitureset-102" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','102')"><span data-localize-id="FurnitureSet,102"></span></button>
+                                    <button id="item-search-filter-furnitureset-103" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','103')"><span data-localize-id="FurnitureSet,103"></span></button>
+                                    <button id="item-search-filter-furnitureset-104" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','104')"><span data-localize-id="FurnitureSet,104"></span></button>
+                                    <button id="item-search-filter-furnitureset-105" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','105')"><span data-localize-id="FurnitureSet,105"></span></button>
+                                    <button id="item-search-filter-furnitureset-106" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','106')"><span data-localize-id="FurnitureSet,106"></span></button>
+                                    <button id="item-search-filter-furnitureset-107" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','107')"><span data-localize-id="FurnitureSet,107"></span></button>
+                                    <button id="item-search-filter-furnitureset-108" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','108')"><span data-localize-id="FurnitureSet,108"></span></button>
+                                </div>
+                                <div id="item-search-filter-equipmenttier" class="mt-2 show-equipment">
+                                    <h5 data-localize-id="ui,equipment_tier"></h5>
+                                    <button id="item-search-filter-equipmenttier-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','1')">T1</button>
+                                    <button id="item-search-filter-equipmenttier-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','2')">T2</button>
+                                    <button id="item-search-filter-equipmenttier-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','3')">T3</button>
+                                    <button id="item-search-filter-equipmenttier-4" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','4')">T4</button>
+                                    <button id="item-search-filter-equipmenttier-5" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','5')">T5</button>
+                                    <button id="item-search-filter-equipmenttier-6" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','6')">T6</button>
+                                    <button id="item-search-filter-equipmenttier-7" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','7')">T7</button>
+                                </div>
+                                <div id="item-search-filter-rarity" class="mt-2 show-items show-furniture">
+                                    <h5 data-localize-id="ui,rarity"></h5>
+                                    <button id="item-search-filter-rarity-n" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('Rarity','N')"><i class="fa-solid fa-circle me-2 col-item-n"></i><span>N</span></button>
+                                    <button id="item-search-filter-rarity-r" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('Rarity','R')"><i class="fa-solid fa-circle me-2 col-item-r"></i><span>R</span></button>
+                                    <button id="item-search-filter-rarity-sr" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('Rarity','SR')"><i class="fa-solid fa-circle me-2 col-item-sr"></i><span>SR</span></button>
+                                    <button id="item-search-filter-rarity-ssr" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('Rarity','SSR')"><i class="fa-solid fa-circle me-2 col-item-ssr"></i><span>SSR</span></button>
+                                </div>
+                                <div id="item-search-filter-misc" class="mt-2 show-furniture">
+                                    <button id="item-search-filter-furnitureinteraction" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureInteraction',null)"><span data-localize-id="ui,furniture_title"></span></button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div id="ba-item-list" class="ba-item-list">
-                            <div id="ba-item-list-grid" class="ba-item-select-grid ba-select-grid align-top flex-fill p-2">
+                            <div id="item-select-grid" class="selection-grid align-top flex-fill">
                             </div>
                         </div>
                     </div>
@@ -23,8 +123,8 @@
             </div>
         </div>
         <div class="col-12 col-md-6 ba-page">
-            <div class="px-0 ps-xl-3" id="ba-raid-info">
-                <div id="ba-item-details-container" class="card p-2" style="display:none;">
+            <div class="px-0 ps-xl-3" id="ba-item-info">
+                <div id="ba-item-details-container" class="card p-2">
                     <div class="card-header">
                         <div class="d-flex flex-row align-items-top px-1 py-2">
                             <div class="flex-grow-1 me-2">
@@ -34,7 +134,7 @@
                                     <span id="ba-item-rarity" class="ba-info-pill-s bg-theme"></span>
                                 </div>
                                 <div id="ba-item-furniture-row">
-                                    <i class="fa-solid fa-clover me-2"></i><span data-localize-id="ui,comfort"></span> <span id="ba-item-furniture-comfort"></span> <span class="me-1 d-inline-block" id="ba-item-furniture-set"></span>
+                                    <span id="ba-item-furniture-comfort" class="text-bold"></span> <span class="me-1 d-inline-block" id="ba-item-furniture-set"></span>
                                 </div>
                             </div>
                             <div id="ba-item-icon">
@@ -49,7 +149,7 @@
                         </div>
                         <div id="ba-equipment-recipe" class="ba-panel p-2 mt-2"></div>
                         <div id="ba-item-usage" class="ba-panel p-2 mt-2"></div>
-                        <div id="ba-item-sources" class="ba-panel p-2 mt-2 ba-stage-select-grid"></div>
+                        <div id="ba-item-sources" class="ba-panel p-2 mt-2"></div>
                     </div>
                 </div>
             </div>

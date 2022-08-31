@@ -1094,7 +1094,7 @@
                                 <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters-panel"><i class="fa-solid fa-filter me-2"></i><span data-localize-id="ui,student_search_filters"></span><span id="ba-student-search-filter-amount"></span></button>
                             </div>
                             <div class="flex-fill">
-                                <input type="search" class="form-control h-100" id="ba-student-search-text" data-ph-localize-id="ui,search" autocomplete="off" oninput="updateStudentList()">
+                                <input type="search" class="form-control h-100" id="ba-student-search-text" data-ph-localize-id="ui,filter_by_name" autocomplete="off">
                             </div>
 
                             <button id="ba-student-search-reset" class="btn btn-dark tooltip-button ms-2" type="button" onclick="searchResetFilter()"><i class="fa-solid fa-filter-circle-xmark"></i></button>
@@ -1224,7 +1224,7 @@
                         </div>
                     </div>
                     <div id="ba-student-search-results" class="flex-fill">
-                        <div id="ba-student-select-grid" class="ba-select-grid align-top flex-fill">
+                        <div id="student-select-grid" class="selection-grid student align-top flex-fill">
                         </div>
                     </div>
                 </div>

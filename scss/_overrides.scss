@@ -171,7 +171,7 @@
     font-weight: 300;
     color: var(--col-theme-text);
     border: none;
-    transition-duration: var(--var-animation-duration);
+    @include transition(background-color, color);
     pointer-events: auto;
 }
 
@@ -271,4 +271,18 @@
 
 .btn-close {
     filter: var(--var-invert-dark) grayscale(100%) brightness(200%);
+}
+
+// flex custom
+
+.gap-1 {
+    gap:0.25rem;
+}
+
+.gap-2 {
+    gap:0.5rem;
+}
+
+.gap-3 {
+    gap:1rem;
 }

@@ -14,6 +14,10 @@
     filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
 }
 
+@mixin card-shadow {
+    box-shadow: 0 0 0.5rem rgba(0,0,0,.125);
+}
+
 @mixin sharp-img {
     // prevent aggressive image filtering when downscaling on chrome
     image-rendering: -webkit-optimize-contrast;

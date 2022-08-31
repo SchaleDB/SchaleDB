@@ -4,7 +4,9 @@
 
 @import 'overrides';
 @import 'common';
+@import 'grid';
 @import 'students';
+@import 'items';
 @import 'stages';
 @import 'raids';
 
@@ -81,28 +83,7 @@
     font-size: large;
 }
 
-.ba-grid-header {
-    text-align: left;
-    @include flex(start, left);
-    align-items: center;
 
-    h3 {
-        @extend .title-text;
-        display: inline;
-        font-weight: 400;
-    }
-
-    h4 {
-        @include text-clamp(2);
-        @include md-down {
-            display: none;
-        }
-    }
-
-    img {
-        height: 60px;
-    }
-}
 
 h1 small {
     font-size: 0.7em;
@@ -236,12 +217,6 @@ h1 small {
     transition-duration: 300ms;
 }
 
-.ba-student-card:hover .ba-student-card-portrait-img {
-    filter: brightness(0.75);
-    transform: scale(1.15);
-    @include sharp-img;
-}
-
 .ba-student-icon {
     position: relative;
     height: 74px;
@@ -290,147 +265,6 @@ h1 small {
     margin-left: 20px
 }
 
-.ba-student-card {
-    position: relative;
-    cursor: pointer;
-    width: var(--var-grid-card-width);
-    height: var(--var-grid-card-height);
-
-    &.disabled {
-        pointer-events: none;
-        filter: grayscale(1);
-        opacity: 0.5;
-    }
-}
-
-.ba-student-card-portrait {
-    box-shadow: 0rem 0.2rem 0.75rem rgba(0,0,0,.15);
-    border-radius: 10px;
-    overflow: hidden;
-    width: var(--var-grid-card-width);
-    height: var(--var-grid-card-height);
-}
-
-.ba-student-card-portrait-img {
-    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
-    height: 100%;
-    width: 100%;
-}
-
-.smalltext {
-    font-size: 0.75rem !important;
-    line-height: 0.75rem;
-    white-space: pre-line;
-}
-
-.ba-student-card-label {
-    text-align: center;
-    background-color: var(--col-bg-imglabel);
-    color: var(--col-theme-text);
-    border-radius: 0px 0px 8px 8px;
-    border-bottom-width: 0 !important;
-    font-size: 1rem;
-    font-weight: 400;
-    position: absolute;
-    width: 100%;
-    height: 24px;
-    bottom: 0px;
-    left: 0px;
-    transition-duration: 300ms;
-}
-
-.ba-label-text {
-    @include text-clamp(2);
-}
-
-.ba-unhover-text {
-    position: absolute;
-    left: 0;
-    opacity: 100%;
-    transition: opacity var(--var-animation-duration) ease-in-out;
-}
-
-.ba-student-card:hover .ba-unhover-text {
-    opacity: 0%;
-}
-
-.ba-hover-text {
-    position: absolute;
-    left: 0;
-    opacity: 0%;
-    transition: opacity var(--var-animation-duration) ease-in-out;
-}
-
-.ba-student-card:hover .ba-hover-text {
-    opacity: 100%;
-}
-
-.ba-student-card-badge {
-    display: none;
-    position: absolute;
-    background-color: #ffffff;
-    color: #ffffff;
-    font-weight: bold;
-    height: 24px;
-    width: 22px;
-    border-radius: 8px 0px 10px 0px;
-    align-items: baseline;
-    justify-content: center;
-}
-
-.ba-student-card-role {
-    position: absolute;
-    color: #ffffff;
-    height: 22px;
-    width: 22px;
-    @include circular;
-    left: 2px;
-    top: 2px;
-    z-index: 50;
-}
-
-.ba-student-card-atk {
-    opacity: 0;
-    position: absolute;
-    height: 18px;
-    width: 18px;
-    @include circular;
-    left: 4px;
-    top: 4px;
-    padding: 3px;
-    z-index: 30;
-    transition: transform ease-out var(--var-animation-duration), opacity ease-out var(--var-animation-duration);
-}
-
-.ba-student-card:hover .ba-student-card-atk, .ba-student-card-atk.show {
-    opacity: 100;
-    transform: translateY(22px);
-}
-
-.ba-student-card-def {
-    opacity: 0;
-    position: absolute;
-    height: 18px;
-    width: 18px;
-    @include circular;
-    left: 4px;
-    top: 4px;
-    padding: 3px;
-    z-index: 20;
-    transition: transform ease-out var(--var-animation-duration), opacity ease-out var(--var-animation-duration);
-}
-
-.ba-student-card:hover .ba-student-card-def,.ba-student-card-def.show {
-    opacity: 100;
-    transform: translateY(42px);
-}
-
-.ba-student-card-star {
-    /* display: none !important; */
-    position: absolute;
-    height: 22px;
-    width: 23px;
-}
 
 .ba-class-striker, .ba-class-main {
     font-weight: 700;
@@ -552,6 +386,22 @@ h1 small {
 
 .ba-item-ssr {
     background-color: var(--col-bg-item-ssr);
+}
+
+.col-item-n {
+    color: var(--col-bg-item-n);
+}
+
+.col-item-r {
+    color: var(--col-bg-item-r);
+}
+
+.col-item-sr {
+    color: var(--col-bg-item-sr);
+}
+
+.col-item-ssr {
+    color: var(--col-bg-item-ssr);
 }
 
 .ba-item-select-item {
@@ -723,7 +573,7 @@ h1 small {
     height: 60px;
     object-fit: cover;
     object-position: top;
-    box-shadow: 0rem 0.2rem 0.75rem rgba(0,0,0,.15);
+    @include card-shadow;
 }
 
 #ba-student-img {
@@ -767,14 +617,6 @@ h1 small {
     left: 4px;
     padding: 0.15rem 0.25rem;
     top: 0.2rem;
-}
-
-.ba-student-group-header {
-    text-align: left;
-    @extend .title-text;
-    font-weight: 400;
-    grid-column: 1/-1;
-    order: -1;
 }
 
 #ba-item-list, #ba-stages-list, .ba-item-list {
@@ -845,44 +687,9 @@ a.nav-link.disabled {
         overflow-y: overlay !important;
     }
 
-    .ba-student-card-label {
-        font-size: 0.84rem;
-        height: 22px;
-        /* border-bottom-width: 4px !important; */
-    }
-
     .ba-icon-enemy {
         width: 105px !important;
         height: 95px !important;
-    }
-
-    .smalltext {
-        font-size: 0.64rem !important;
-        line-height: 0.64rem;
-        white-space: pre-line;
-    }
-
-    #ba-student-select-grid {
-        --var-grid-gap: 0.5rem !important;
-        --var-grid-card-width: 80px !important;
-        --var-grid-card-height: 90px !important;
-        margin: 1rem;
-    }
-
-    .ba-stage-select-grid {
-        --var-grid-card-width: 100px !important;
-        --var-grid-card-height: 65px !important;
-    }
-
-    .ba-raid-select-grid {
-        --var-grid-card-width: 150px !important;
-        --var-grid-card-height: 85px !important;
-    }
-
-    .ba-select-grid-card-label {
-        font-size: 0.85rem !important;
-        height: 22px !important;
-        /* border-bottom-width: 4px !important; */
     }
 
     #ba-student-modal-page {
@@ -914,6 +721,10 @@ a.nav-link.disabled {
     .screen-height {
         max-height: none;
         overflow: hidden;
+
+        .card-body {
+            padding: 0.5rem 0;
+        }
     }
 
     #ba-student-img {
@@ -972,18 +783,6 @@ a.nav-link.disabled {
     }
 }
 
-#ba-student-select-grid {
-    --var-grid-gap: 0.6rem;
-    --var-grid-card-width: 100px;
-    --var-grid-card-height: 113px;
-}
-
-.ba-student-select-groupseparator {
-    height: 1px;
-    background-color: #dee2e6;
-}
-
-
 .ba-student-lobby {
     position: relative;
 }
@@ -1020,10 +819,6 @@ a.nav-link.disabled {
     flex-wrap: wrap;
     justify-content: center;
 }
-
-/* #ba-skill-materials, #ba-skill-ex-materials {
-    min-height: 68px;
-} */
 
 #loading-cover {
     /* display: none; */
@@ -1123,50 +918,6 @@ a.nav-link.disabled {
 .ba-col-special {
     color: #006bff !important;
 }
-
-.ba-raid-list-entry {
-    backdrop-filter: var(--var-glass-filter);
-    background-color: var(--col-theme-glass);
-    border-radius: 10px;
-    position: relative;
-    height: 90px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    cursor: pointer;
-    transition-duration: var(--var-animation-duration);
-    overflow: hidden;
-}
-
-.ba-raid-list-entry:hover {
-    filter: brightness(0.8);
-}
-
-.ba-raid-list-entry img {
-    transition-duration: var(--var-animation-duration);
-}
-
-.ba-raid-list-entry:hover img {
-    transform: scale(1.25);
-}
-
-.ba-raid-portrait {
-    position: absolute;
-    height: 100%;
-    top: 0px;
-    right: 0px;
-    object-fit: contain;
-    border-radius: 0px 10px 10px 0px;
-}
-
-.text-shadow {
-    text-shadow: 0.1rem 0.1rem 0.3rem rgb(0,0,0);
-}
-
-/* table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-child(2) {
-    background-color: rgb(218, 244, 225);
-    color: darkgreen;
-    transition-duration: var(--var-animation-duration);
-} */
 
 table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-child(2) {
     color: var(--col-text-emphasis);
@@ -1288,8 +1039,15 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     color: var(--col-btn-primary);
     background-color: var(--col-btn-secondary);
     border-radius: 0 0 0.25rem 0.25rem;
-    width: 300px;
-    padding: 0 0.5rem 0.5rem 0.5rem;
+    width: 340px;
+    padding: 0 0.25rem 0.5rem 0.5rem;
+
+    >div {
+        padding-right: 0.25rem;
+        max-height: 500px;
+        @include scrollable(auto);
+    }
+
 }
 
 #ba-navbar-search {
@@ -1369,348 +1127,7 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     margin-left: 1rem;
     text-align: right;
     font-size: 0.75rem;
-    font-weight: 400;
-}
-
-.ba-stage-select-grid {
-    --var-grid-card-width: 120px;
-    --var-grid-card-height: 70px;
-    --var-grid-gap: 0.6rem;
-}
-
-.ba-select-grid {
-    text-align: center;
-    font-size: 0px;
-    display: grid;
-    gap: var(--var-grid-gap);
-    grid-template-columns: repeat(auto-fill, minmax(var(--var-grid-card-width), 1fr));
-}
-
-.ba-select-grid-item {
-    max-width: var(--var-grid-card-width);
-    max-height: var(--var-grid-card-height);
-    margin: auto;
-
-    &.selected {
-        outline: 5px solid var(--col-theme-text);
-        outline-offset: -2px;
-        border-radius: 10px;
-
-        .ba-select-grid-card-label {
-            background-color: var(--col-bg-imglabel-invert) !important;
-            color: var(--col-btn-active-primary) !important;
-        }
-    }
-}
-
-.ba-raid-select-grid {
-    --var-grid-card-width: 180px;
-    --var-grid-card-height: 100px;
-    --var-grid-gap: 0.6rem;
-}
-
-.ba-item-select-grid {
-    --var-grid-card-width: 64px;
-    --var-grid-card-height: 64px;
-    --var-grid-gap: 0.5rem;
-}
-
-/* .ba-stage-select-item {
-    max-width: 120px;
-    max-height: 70px;
-    margin: auto;
-}
-
-.ba-raid-select-item {
-    max-width: 180px;
-    max-height: 100px;
-    margin: auto;
-} */
-
-.ba-stage-card, .ba-raid-card {
-    position: relative;
-    width: var(--var-grid-card-width);
-    height: var(--var-grid-card-height);
-    object-fit: contain;
-    cursor: pointer;
-}
-
-.ba-item-card {
-
-    position: relative;
-    height: var(--var-grid-card-height);
-    width: var(--var-grid-card-width);
-    padding: 3px;
-    box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
-    overflow: hidden;
-    @include circular;
-    cursor: pointer;
-    @include transition(filter);
-
-    &:hover {
-        filter: brightness(0.7);
-    }
-
-    img {
-        
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        object-position: center center;
-    }
-}
-
-.ba-stage-card-img {
-    position: relative;
-    height: var(--var-grid-card-height);
-    width: var(--var-grid-card-width);
-    box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.ba-raid-card-bg-container {
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.ba-raid-card-bg {
-    position: relative;
-    top: 0;
-    left: 0;
-    height: var(--var-grid-card-height);
-    width: var(--var-grid-card-width);
-    filter: blur(4px);
-    transform: scale(1.1);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: left center;
-    @include sharp-img;
-}
-
-.ba-raid-card-img, .ba-ta-card-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: var(--var-grid-card-height);
-    width: var(--var-grid-card-width);
-    box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
-    border-radius: 10px;
-    overflow: hidden;
-    text-align: center;
-    @include sharp-img;
-}
-
-.ba-raid-card-terrain {
-    background-color: var(--col-bg-imglabel);
-    position: absolute;
-    height: 26px;
-    width: 26px;
-    @include circular;
-    left: 4px;
-    top: 34px;
-    padding: 0px;
-    z-index: 20;
-}
-
-.ba-raid-card-terrain img {
-    height: 100%;
-    width: 100%;
-    @include sharp-img;
-}
-
-.ba-raid-card-def {
-    position: absolute;
-    height: 26px;
-    width: 26px;
-    @include circular;
-    left: 4px;
-    top: 4px;
-    padding: 4px;
-    z-index: 20;
-}
-
-.ba-raid-card-def img{
-    @include sharp-img;
-}
-
-.ba-stage-card-img img {
-    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center center;
-}
-
-.ba-raid-card-img img {
-    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: -45px center;
-}
-
-.ba-ta-card-img img {
-    transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
-    height: 100%;
-    width: 75%;
-    object-fit: cover;
-    object-position: center 70%;
-}
-
-.ba-event-card {
-
-    position: relative;
-    width: var(--var-grid-card-width);
-    height: var(--var-grid-card-height);
-    object-fit: contain;
-    cursor: pointer;
-
-    .bg-container {
-        overflow: hidden;
-        border-radius: 10px;
-
-        >div {
-            position: relative;
-            top: 0;
-            left: 0;
-            height: var(--var-grid-card-height);
-            width: var(--var-grid-card-width);
-            filter: blur(4px);
-            transform: scale(1.1);
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: left center;
-            @include sharp-img;
-        }
-    }
-
-    .ba-event-card-img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: var(--var-grid-card-height);
-        width: var(--var-grid-card-width);
-        box-shadow: 0rem 0.2rem 0.75rem rgb(0 0 0 / 15%);
-        border-radius: 10px;
-        overflow: hidden;
-        text-align: center;
-    
-        img {
-            transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;
-            width: 100%;
-            margin-top: 8px;
-        }
-    
-    }
-
-    &:hover img {
-        filter: brightness(0.7);
-        transform: scale(1.15);
-        @include sharp-img;
-    }
-
-}
-
-.ba-select-grid-card-label {
-    text-align: center;
-    background-color: var(--col-bg-imglabel);
-    color: var(--col-theme-text);
-    border-radius: 0px 0px 8px 8px;
-    border-bottom-width: 0 !important;
-    font-size: 1rem;
-    font-weight: 400;
-    position: absolute;
-    width: 100%;
-    height: 24px;
-    bottom: 0px;
-    left: 0px;
-}
-
-.ba-stage-card:hover .ba-stage-card-img img, .ba-raid-card:hover .ba-raid-card-img img, .ba-raid-card:hover .ba-ta-card-img img  {
-    filter: brightness(0.7);
-    transform: scale(1.15);
-    @include sharp-img;
-}
-
-.ba-icon-enemy {
-    display: inline-block;
-    position: relative;
-    width: 120px;
-    height: 100px;
-    overflow: hidden;
-    border-radius: 10px;
-    cursor: pointer;
-
-    &.selected {
-        outline: 4px solid var(--col-theme-text);
-        outline-offset: -1px;
-
-        >img {
-            background-color: var(--col-bg-imglabel-invert) !important;
-            //filter: brightness(0.75);
-        }
-
-        .ba-select-grid-card-label {
-            background-color: var(--col-bg-imglabel-invert) !important;
-            color: var(--col-btn-active-primary) !important;
-        }
-    }
-
-    >img {
-        background-color: var(--col-theme-accent);
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        transition: transform var(--var-animation-duration) ease, filter var(--var-animation-duration) ease;;
-    }
-
-    &:hover {
-        >img {
-            transform: scale(1.15);
-            filter: brightness(0.75);
-        }
-    }
-}
-
-.ba-enemy-card-atk, .ba-enemy-card-def, .ba-enemy-card-lv, .ba-stage-card-droprate {
-    font-size: 0;
-    position: absolute;
-    height: 18px;
-    width: 18px;
-    @include circular;
-    align-items: baseline;
-    justify-content: center;
-    padding: 3px;
-    z-index: 30;
-}
-
-.ba-enemy-card-lv, .ba-stage-card-droprate {
-    background-color: var(--col-bg-imglabel);
-    color: var(--col-theme-text);
-    width: auto;
     font-weight: 700;
-    font-size: 0.75rem;
-    line-height: 0.75rem;
-    left: 4px;
-    top: 4px;
-}
-
-.ba-enemy-card-atk {
-    left: 4px;
-    top: 26px;
-}
-
-.ba-enemy-card-def {
-    left: 4px;
-    top: 48px;
-}
-
-.ba-enemy-card-rank {
-    position: absolute;
-    right: 4px;
-    top: 4px;
-    z-index: 30;
 }
 
 #ba-home-gacha-list>div {
@@ -1718,28 +1135,10 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     max-width: 100px;
 }
 
-.ba-craft-node img {
-    position: absolute;
-    height: 24px;
-    width: auto;
-    left: 6px !important;
-    top: 4px !important;
-}
-
-.ba-craft-node {
-    cursor: pointer;
-    transition: filter ease var(--var-animation-duration);
-    color: #fff;
-}
-
-.ba-craft-node:hover {
-    filter: brightness(0.75);
-}
-
-.ba-node-quality-1 {
+.ba-node-quality-1, .ba-item-node-1 {
     background-color: var(--col-bg-node-normal);
 }
 
-.ba-node-quality-2 {
+.ba-node-quality-2, .ba-item-node-2 {
     background-color: var(--col-bg-node-rare);
 }

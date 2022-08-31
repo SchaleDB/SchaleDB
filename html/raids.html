@@ -13,15 +13,15 @@
                     <div class="card-body">
                         <div class="tab-content">
                             <div id="ba-raid-list-raid" class="ba-item-list tab-pane active show">
-                                <div id="ba-raid-list-raid-grid" class="ba-raid-select-grid ba-select-grid align-top flex-fill p-2">
+                                <div id="raid-select-grid" class="selection-grid raid align-top flex-fill p-2">
                                 </div>
                             </div>
                             <div id="ba-raid-list-timeattack" class="ba-item-list tab-pane">
-                                <div id="ba-raid-list-timeattack-grid" class="ba-raid-select-grid ba-select-grid align-top flex-fill p-2">
+                                <div id="timeattack-select-grid" class="selection-grid raid align-top flex-fill p-2">
                                 </div>
                             </div>
                             <div id="ba-raid-list-worldraid" class="ba-item-list tab-pane">
-                                <div id="ba-raid-list-worldraid-grid" class="ba-raid-select-grid ba-select-grid align-top flex-fill p-2">
+                                <div id="worldraid-select-grid" class="selection-grid raid align-top flex-fill p-2">
                                 </div>
                             </div>
                         </div>
@@ -144,6 +144,20 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="Stat,StabilityPoint"></span>
+                                                            <span id="ba-raid-stat-stability" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                    <td width="50%">
+                                                        <div class="d-flex align-items-top justify-content-between">
+                                                            <span data-localize-id="Stat,Range"></span>
+                                                            <span id="ba-raid-stat-range" class="ms-2 text-bold text-end"></span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -211,7 +225,7 @@
                         </div>
                         <h5 class="text-bold mt-2" data-localize-id="ui,stage_enemies"></h5>
                         <div class="ba-panel p-2 mb-2">
-                            <div id="ba-stage-enemies" class="d-flex flex-wrap justify-content-center enemy-list">
+                            <div id="ba-stage-enemies" class="selection-grid enemy selection-grid-flex enemy-list">
                             </div>
                         </div>
                         <div class="ba-panel p-2">

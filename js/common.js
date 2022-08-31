@@ -7,6 +7,7 @@ const gear_minlevelreq = [0, 15, 35]
 const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40]]
 const languages = ['En', 'Jp', 'Kr', 'Tw', 'Cn', 'Th']
 const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5, 'Cn': 5, 'Th': 11}
+const label_craft_smalltext_threshold = {'En':8, 'Jp':4, 'Kr':4, 'Tw':4, 'Cn': 4, 'Th': 8}
 const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6, 'Cn':6, 'Th': 12}
 const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':10, 'Cn':10, 'Th': 20}
 const adaptaionAmount = {0: "D", 1: "C", 2: "B", 3: "A", 4: "S", 5: "SS"}
@@ -23,8 +24,11 @@ const module_list = ['home','students','raids','stages','items','craft']
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_01", "Defense": "TimeAttack_SlotBG_02", "Destruction": "TimeAttack_SlotBG_03"}
+const searchDelay = 100
 
 let userLang
+let regionID
+
 if (localStorage.getItem("language") && languages.includes(localStorage.getItem("language")))  {
     userLang = localStorage.getItem("language")
 } else {
@@ -53,21 +57,35 @@ if (localStorage.getItem("language") && languages.includes(localStorage.getItem(
     }
 }
 
+if (localStorage.getItem("region")) {
+    regionID = localStorage.getItem("region")
+} else {
+    regionID = 0
+}
+
 let data = {}
-const json_list = {
+
+let json_list = {
     common: getCacheVerResourceName("./data/common.min.json"),
     raids: getCacheVerResourceName("./data/raids.min.json"),
     stages: getCacheVerResourceName("./data/stages.min.json"),
-    crafting: getCacheVerResourceName("./data/crafting.min.json"),
+    crafting: getCacheVerResourceName(`./data/crafting.min.json`),
     summons: getCacheVerResourceName("./data/summons.min.json"),
-    localization: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/localization.min.json`),
-    students: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/students.min.json`),
-    enemies: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/enemies.min.json`),
-    items: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/items.min.json`),
-    furniture: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/furniture.min.json`),
-    equipment: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/equipment.min.json`),
-    currency: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/currency.min.json`),
 }
+let json_lang_list = getLanguageJSONList(userLang.toLowerCase())
+
+function getLanguageJSONList(lang) {
+    return {
+        localization: getCacheVerResourceName(`./data/${lang}/localization.min.json`),
+        students: getCacheVerResourceName(`./data/${lang}/students.min.json`),
+        enemies: getCacheVerResourceName(`./data/${lang}/enemies.min.json`),
+        items: getCacheVerResourceName(`./data/${lang}/items.min.json`),
+        furniture: getCacheVerResourceName(`./data/${lang}/furniture.min.json`),
+        equipment: getCacheVerResourceName(`./data/${lang}/equipment.min.json`),
+        currency: getCacheVerResourceName(`./data/${lang}/currency.min.json`),
+    }
+}
+
 const html_list = {
     craft: getCacheVerResourceName("./html/craft.html"),
     home: getCacheVerResourceName("./html/home.html"),
@@ -90,6 +108,11 @@ const sort_functions = {
     DodgePoint: (a,b) => (b.DodgePoint - a.DodgePoint)*search_options["sortby_dir"]
 }
 
+const itemSortFunctions = {
+    Default: (a,b) => (a.Id - b.Id)*itemSearchOptions["sortby_dir"],
+    Name: (a,b) => getTranslatedString(a, 'Name').localeCompare(getTranslatedString(b, 'Name'))*itemSearchOptions["sortby_dir"],
+}
+
 let loadedModule
 
 let student
@@ -107,23 +130,30 @@ let statPreviewIncludeEquipment = false
 let statPreviewSupportStats = false
 let statPreviewSummonStats = false
 let studentCollection = {}
+
+// Shared Timeouts
 let collectionUpdateTimeout
 let toastMessageTimeout
+let searchDelayTimeout
 
 let compareMode = false
 let selectCompareMode = false
 
 let loadedRaid
 let loadedItem
+let loadedItemType
 let loadedStage
 let loadedConquest
 let loadedCraftNode
+
+let itemList
+let furnitureList
+let equipmentList
 
 let loadedStageList = null
 let loadedItemList = null
 
 let region
-let regionID
 let student_bondalts
 let darkTheme
 let highContrast
@@ -131,6 +161,7 @@ let raid
 let selectedEnemy = 0
 let raid_difficulty = 0
 let ta_difficulty = 0
+let gridItemDisplayStyle = 'detailed'
 
 // searchbar properties
 let searchResultsCount = 0
@@ -236,6 +267,75 @@ let search_options = {
             3: false,
             4: false,
         }
+    }
+}
+
+let itemSearchOptions = {
+    "sortby": "Default",
+    "sortby_dir": 1,
+    "filter": {
+        "ItemCategory": {
+            "Material": false,
+            "Coin": false,
+            "Favor": false,
+            "SecretStone": false,
+            "Consumable": false,
+            "Collectible": false,
+        },
+        "FurnitureSubCategory": {
+            "Wallpaper": false,
+            "Floor": false,
+            "Background": false,
+            "Table": false,
+            "Chair": false,
+            "Closet": false,
+            "FloorDecoration": false,
+            "WallDecoration": false,
+            "Prop": false,
+            "HomeAppliance": false,
+            "Bed": false,
+            "FurnitureEtc": false,
+        },
+        "EquipmentCategory": {
+            "Exp": false,
+            "WeaponExpGrowth": false,
+            "Hat": false,
+            "Gloves": false,
+            "Shoes": false,
+            "Bag": false,
+            "Badge": false,
+            "Hairpin": false,
+            "Charm": false,
+            "Necklace": false,
+            "Watch": false,
+        },
+        "Rarity": {
+            "N": false,
+            "R": false,
+            "SR": false,
+            "SSR": false,
+        },
+        "FurnitureSet": {
+            "100": false,
+            "101": false,
+            "102": false,
+            "103": false,
+            "104": false,
+            "105": false,
+            "106": false,
+            "107": false,
+            "108": false,
+        },
+        "EquipmentTier": {
+            "1": false,
+            "2": false,
+            "3": false,
+            "4": false,
+            "5": false,
+            "6": false,
+            "7": false,
+        },
+        "FurnitureInteraction": false
     }
 }
 
@@ -381,7 +481,7 @@ let search_options = {
 
 /** Functions */
 
-loadPromise = loadJSON(json_list, result => {
+let loadPromise = loadJSON(Object.assign(json_list, json_lang_list), result => {
     data = result
 })
 
@@ -408,15 +508,15 @@ $.when($.ready, loadPromise).then(function() {
         studentCollection = JSON.parse(localStorage.getItem("student_collection"))
     }
 
-    //header = $(".card-header")
-    if (localStorage.getItem("region")) {
-        loadRegion(localStorage.getItem("region"))
-    } else {
-        loadRegion(0)
-    }
+    loadRegion(regionID)
 
     data.students.sort(sort_functions.Name)
     studentList = data.students.map(x => x)
+
+    itemList = data.items.map(x => x)
+    furnitureList = data.furniture.map(x => x)
+    equipmentList = data.equipment.map(x => x)
+
     if (localStorage.getItem("theme")) {
         darkTheme = localStorage.getItem("theme")
     } else {
@@ -442,12 +542,31 @@ $.when($.ready, loadPromise).then(function() {
     $('#collection-data-import-planner-btn').tooltip({title: getBasicTooltip(translateUI('tooltip_import_planner')), placement: 'top', html: true})
 
     $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
-    $(`#ba-navbar-regionselector-0`).text(getTranslatedString(data.common.regions[0], 'Name'))
-    $(`#ba-navbar-regionselector-1`).text(getTranslatedString(data.common.regions[1], 'Name'))
     $(`#ba-navbar-languageselector span`).text($(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).text())
     $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).addClass("active")
     $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
     $(`#ba-navbar-contrast-toggle-${highContrast}`).addClass("active")
+
+    $('#ba-navbar-search').on('input', function() {
+        if (searchDelayTimeout) {
+            clearTimeout(searchDelayTimeout)
+        }
+        searchDelayTimeout = setTimeout(allSearch, searchDelay)
+    }).on('keydown', searchNavigate).on('keyup', searchNavigate)
+
+    $('#navbar-search-clear').on('click', function() {
+        $('#'+this.dataset.target).val('').trigger('blur')
+        allSearch()
+        $(this).hide()
+    })
+
+    //Keyboard Shortcut for search
+    $(document).on('keydown', function(e) {
+        if (e.ctrlKey && e.code === 'KeyK') {
+            $('#ba-navbar-search').trigger('focus')
+            e.preventDefault()
+        }
+    })
 
     $(window).on('popstate', () => loadModuleFromURL(false))
     loadModuleFromURL(true)
@@ -565,6 +684,13 @@ function loadModule(moduleName, entry=null) {
             $('.ba-summon-toggle').tooltip({title: getBasicTooltip(translateUI('tooltip_vehiclestats')), placement: 'top', html: true})
             $('#ba-student-search-reset').tooltip({title: getBasicTooltip(translateUI('student_search_filters_clear')), placement: 'top', html: true})
 
+            $('#ba-student-search-text').on('input', function() {
+                if (searchDelayTimeout) {
+                    clearTimeout(searchDelayTimeout)
+                }
+                searchDelayTimeout = setTimeout(updateStudentList, searchDelay)
+            })
+
             $('.tooltip-button').on('click', e => {
                 if (e.originalEvent.pointerType == "touch") {
                     $(e.currentTarget)
@@ -584,13 +710,50 @@ function loadModule(moduleName, entry=null) {
         bgimg.onload = function(){
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
-        bgimg.src = `images/background/BG_CraftChamber_Night.jpg`
+        bgimg.src = `images/background/BG_MainOffice_Night.jpg`
         $("#loaded-module").load(html_list['items'], function() {
+            loadRegion(regionID)
             loadLanguage(userLang)
             loadedItemList = null
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
         
+            if (localStorage.getItem("item_sortby_dir")) {
+                itemSearchOptions["sortby_dir"] = parseInt(localStorage.getItem("item_sortby_dir"))
+            }
+
+            if (localStorage.getItem("item_sortby")) {
+                searchSetOrderItems(localStorage.getItem("item_sortby"), false, false)
+            } else {
+                searchSetOrderItems('Default', false, false)
+            }
+
+            if (localStorage.getItem("grid_item_display_style")) {
+                gridItemDisplayStyle = localStorage.getItem("grid_item_display_style")
+            }
+
+            $('#item-search-displaytype-'+gridItemDisplayStyle).addClass('active')
+            switch (gridItemDisplayStyle) {
+                case 'detailed':
+                    $('#item-select-grid').addClass('items')
+                    break;
+            
+                case 'compact':
+                    $('#item-select-grid').addClass('items-compact')
+                    break;
+            }
+
+            $('#item-search-displaytype-detailed').tooltip({title: getBasicTooltip(translateUI('list_style_detailed')), html: true, placement: 'top'})
+            $('#item-search-displaytype-compact').tooltip({title: getBasicTooltip(translateUI('list_style_compact')), html: true, placement: 'top'})
+        
+            Object.entries(itemSearchOptions.filter).forEach(i => {
+                Object.entries(i[1]).forEach(j => {
+                    if (j[1] === true) {
+                        $(`#item-search-filter-${i[0].toLowerCase()}-${String(j[0]).toLowerCase()}`).toggleClass("active", true)
+                    }
+                })
+            })
+
             if (entry != null) {
                 loadItem(entry)
             } else if (urlVars.has("item")) {
@@ -601,8 +764,19 @@ function loadModule(moduleName, entry=null) {
                 loadItem(1)
             }
 
+            $('#item-search-text').on('input', function() {
+                if (searchDelayTimeout) {
+                    clearTimeout(searchDelayTimeout)
+                }
+                searchDelayTimeout = setTimeout(updateItemList, searchDelay)
+            })
+
+            $('#item-search-filters-panel').on('show.bs.collapse', function() {
+                $('#item-search-filters-btn').toggleClass('active', true)
+            }).on('hide.bs.collapse', function() {
+                $('#item-search-filters-btn').toggleClass('active', false)
+            })
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
-            $('#ba-item-list-container, #ba-item-details-container').show()
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
     } else if (moduleName == 'raids') {
@@ -647,7 +821,7 @@ function loadModule(moduleName, entry=null) {
         bgimg.onload = function(){
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
-        bgimg.src = `images/background/BG_Raid.jpg`
+        bgimg.src = `images/background/BG_HQ.jpg`
         $("#loaded-module").load(html_list['stages'], function() {
             loadLanguage(userLang)
             loadedStageList = null
@@ -701,7 +875,6 @@ function loadModule(moduleName, entry=null) {
             $('.ba-craft-list').addClass('fade')
             $('.ba-craft-list.active').addClass('show')
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
-            $('#ba-craft-list-container, #ba-craft-details-container').show()
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
     } else {
@@ -712,7 +885,7 @@ function loadModule(moduleName, entry=null) {
         bgimg.onload = function(){
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
-        bgimg.src = `images/background/BG_View_Kivotos.jpg`
+        bgimg.src = `images/background/BG_ReceptionRoom.jpg`
         $("#loaded-module").load(html_list['home'], function() {
             loadLanguage(userLang)
             loadRegion(regionID)
@@ -745,7 +918,7 @@ function loadModule(moduleName, entry=null) {
             $('#ba-home-gacha-list').html(gachalistHtml)
 
             let raidText = "", raidHtml = ""
-            $('#ba-home-raid').hide()
+            $('#events-row-2').hide()
             found = false
             $.each(data.common.regions[regionID].current_raid, function(i, el){
                 if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
@@ -758,7 +931,7 @@ function loadModule(moduleName, entry=null) {
                         let raid = find(data.raids.Raid, "Id", el.raid)[0]
                         raidHtml += getRaidCardHTML(raid, el.terrain)
                     }
-                    $('#ba-home-raid').show()
+                    $('#events-row-2').show()
                     raidText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
                     raidText += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end-currentTime)) : translateUI('event_starts', duration(el.start-currentTime)))
                     found = true
@@ -813,7 +986,7 @@ function loadModule(moduleName, entry=null) {
             
             $('.ba-item-student').tooltip({html: true})
 
-            $('#ba-home-server-info').text(translateUI('current_events', [getTranslatedString(data.common.regions[regionID], 'Name')]))
+            $('#ba-home-server-info').text(translateUI('current_events', [getLocalizedString('ServerName', regionID)]))
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
             let url = new URL(window.location.href)
     
@@ -884,8 +1057,8 @@ function populateStudentList() {
             resultsHTML += getStudentListCardHTML(el)
         }
     })
-    resultsHTML += `<div id="ba-student-select-noresult" class="p-2" style="font-size: medium;display:none;grid-column: 1/-1;">No results.</div>`
-    $("#ba-student-select-grid").html(resultsHTML)
+    resultsHTML += `<div id="student-select-noresult" class="p-2 grid-text">${translateUI('no_results')}</div>`
+    $("#student-select-grid").html(resultsHTML)
 }
 
 /**
@@ -914,27 +1087,86 @@ function updateStudentList(updateSortMethod = false) {
     $.each(studentList, function(i, el){
         if (el.IsReleased[regionID]) {
             if (updateSortMethod) {
-                $('#ba-student-select-'+el.Id).css("order", i)
+                $('#student-select-'+el.Id).css("order", i)
                 if (search_options["sortby"] == "Default" || search_options["sortby"] == "Name") {
-                    $('#ba-student-select-'+el.Id+' .ba-label-text').text(getTranslatedString(el, 'Name')).toggleClass('smalltext', getTranslatedString(el, 'Name').length > label_smalltext_threshold[userLang]).toggleClass('ba-unhover-text', false)
-                    $('#ba-student-select-'+el.Id+' .ba-hover-text').hide()
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(getTranslatedString(el, 'Name')).toggleClass('smalltext', getTranslatedString(el, 'Name').length > label_smalltext_threshold[userLang]).toggleClass('unhover', false)
+                    $('#student-select-'+el.Id+' .label-text.hover').hide()
                 } else {
-                    $('#ba-student-select-'+el.Id+' .ba-label-text').text(el[search_options["sortby"]]).toggleClass('smalltext', false).toggleClass('ba-unhover-text', true)
-                    $('#ba-student-select-'+el.Id+' .ba-hover-text').show()
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(el[search_options["sortby"]]).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
                 }
             }
             if (checkFilters(el, filterList, searchTerm)) {
                 count++
-                $('#ba-student-select-'+el.Id).show()
+                $('#student-select-'+el.Id).show()
             } else {
-                $('#ba-student-select-'+el.Id).hide()
+                $('#student-select-'+el.Id).hide()
             }
         }
     })
-    $('#ba-student-select-noresult').toggle(count == 0)
+    $('#student-select-noresult').toggle(count == 0)
     const activeFilters = getNumActiveFilters()
     $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
     $('#ba-student-search-reset').toggle(activeFilters > 0 || $('#ba-student-search-text').val() != "")
+}
+
+/**
+ * Applies the selected filters and sort method to the student selection grid
+ */
+ function updateItemList(updateSortMethod = false) {
+    let searchTerm = $('#item-search-text').val()
+    let sortfunction = itemSortFunctions[itemSearchOptions["sortby"]]
+    let filterList = []
+    $.each(itemSearchOptions["filter"], function(i, el) {
+        if (typeof el == 'boolean') {
+            if (el) filterList.push(i)
+        } else {
+            let allfalse = true, alltrue = true
+            $.each(el, function(i2, el2) {
+                allfalse = (allfalse && !el2)
+                alltrue = alltrue && el2
+            })
+            if (!(allfalse || alltrue)) {
+                filterList.push(i)
+            }
+        }
+
+    })
+
+    let list, offset
+    
+    switch (loadedItemList) {
+        case 'items':
+            list = itemList
+            offset = 0
+            break;
+        case 'furniture':
+            list = furnitureList
+            offset = 1000000
+            break;
+        case 'equipment':
+            list = equipmentList
+            offset = 2000000
+            break;
+    }
+    
+    if (updateSortMethod) list.sort(sortfunction)
+
+    let count = 0
+    $.each(list, function(i, el){
+        if (el.IsReleased[regionID]) {
+            if (updateSortMethod) {
+                $(`#item-select-${el.Id+offset}`).css("order", i)                
+            }
+            if (itemCheckFilters(el, filterList, searchTerm)) {
+                count++
+                $(`#item-select-${el.Id+offset}`).show()
+            } else {
+                $(`#item-select-${el.Id+offset}`).hide()
+            }
+        }
+    })
+    $('#item-select-noresult').toggle(count == 0)
 }
 
 /**
@@ -958,6 +1190,56 @@ function checkFilters(student, filterList, searchTerm) {
         }
     }
     return (searchTerm == "" || getTranslatedString(student, 'Name').toLowerCase().includes(searchTerm.toLowerCase()))
+}
+
+/**
+ * Checks whether an item passes a given list of filters
+ * @param {*} item The student object
+ * @param {*} filterList List of filters checked
+ * @param {*} searchTerm Text search filter
+ * @returns 
+ */
+ function itemCheckFilters(item, filterList, searchTerm) {
+    if (!item.IsReleased[regionID]) return false
+    if (filterList.length == 0) {
+    } else {
+        for (let i = 0; i < filterList.length; i++) {
+            switch (filterList[i]) {
+                case 'ItemCategory':
+                    if (loadedItemList == 'items' && !itemSearchOptions['filter'][filterList[i]][item['Category']]) return false
+                    break
+                case 'EquipmentCategory':
+                    if (loadedItemList == 'equipment') {
+                        if (item['Category'].startsWith('WeaponExpGrowth')) {
+                            // Combine all weapon part types to same filter
+                            if (!itemSearchOptions['filter'][filterList[i]]['WeaponExpGrowth']) return false     
+                        } else {
+                            if (!itemSearchOptions['filter'][filterList[i]][item['Category']]) return false     
+                        }
+                    }
+                    break
+                case 'FurnitureSubCategory':
+                    if (loadedItemList == 'furniture' && !itemSearchOptions['filter'][filterList[i]][item['SubCategory']]) return false
+                    break
+                case 'FurnitureSet':
+                    if (loadedItemList == 'furniture' && !itemSearchOptions['filter'][filterList[i]][String(item['SetGroupId'])]) return false
+                    break
+                case 'Rarity':
+                    if (loadedItemList != 'equipment' && !itemSearchOptions['filter'][filterList[i]][item[filterList[i]]]) return false
+                    break
+                case 'FurnitureInteraction':
+                    if (loadedItemList == 'furniture' && !item['Interaction'][regionID]) return false
+                    break
+                case 'EquipmentTier':
+                    if (loadedItemList == 'equipment' && !itemSearchOptions['filter'][filterList[i]][item['Tier']]) return false
+                    break
+                default:
+                    if (!itemSearchOptions['filter'][filterList[i]][item[filterList[i]]]) return false
+                    break
+            }           
+        }
+    }
+    return (searchTerm == "" || getTranslatedString(item, 'Name').toLowerCase().includes(searchTerm.toLowerCase()))
 }
 
 function searchOptionSet(option, value, runSearch = true) {
@@ -1022,11 +1304,49 @@ function searchSetOrder(value, runSearch = true, swapDir = true) {
     }
 }
 
+function searchSetOrderItems(value, runSearch = true, swapDir = true) {
+
+    if (swapDir) {
+        if (value == itemSearchOptions["sortby"]) {
+            itemSearchOptions["sortby_dir"] = -itemSearchOptions["sortby_dir"]
+        } else {
+            itemSearchOptions["sortby_dir"] = 1
+        }
+    }
+
+    $(`#item-search-sortby a`).removeClass("active")
+    $(`#item-search-sortby button`).removeClass("active")
+    $(`#item-search-sortby-${value.toLowerCase()}`).addClass("active")
+    $('.sort-direction-label').text("")
+
+    $(`#item-search-sortby-${value.toLowerCase()} > .sort-direction-label`).html((itemSearchOptions["sortby_dir"] == 1) ? '<i class="fa-solid fa-arrow-up-long ms-2"></i>' : '<i class="fa-solid fa-arrow-down-long ms-2"></i>')
+
+    itemSearchOptions["sortby"] = value
+    localStorage.setItem('item_sortby', value)
+    localStorage.setItem('item_sortby_dir', itemSearchOptions["sortby_dir"])
+    if (runSearch) {
+        updateItemList(updateSortMethod = true)  
+    }
+}
+
 function searchSetFilter(prop, value, runSearch = true) {
     search_options["filter"][prop][value] = !search_options["filter"][prop][value]
     $(`#ba-student-search-filter-${prop.toLowerCase()}-${String(value).toLowerCase()}`).toggleClass("active", search_options["filter"][prop][value])
     if (runSearch) {
         updateStudentList()
+    }
+}
+
+function searchSetFilterItems(prop, value, runSearch = true) {
+    if (value != null) {
+        itemSearchOptions["filter"][prop][value] = !itemSearchOptions["filter"][prop][value]
+        $(`#item-search-filter-${prop.toLowerCase()}-${String(value).toLowerCase()}`).toggleClass("active", itemSearchOptions["filter"][prop][value])    
+    } else {
+        itemSearchOptions["filter"][prop] = !itemSearchOptions["filter"][prop]
+        $(`#item-search-filter-${prop.toLowerCase()}`).toggleClass("active", itemSearchOptions["filter"][prop])
+    }
+    if (runSearch) {
+        updateItemList()
     }
 }
 
@@ -1042,6 +1362,29 @@ function searchResetFilter() {
     $('#ba-student-search-filter-amount').text('')
     document.getElementById('ba-student-search-reset').blur()
     updateStudentList()
+}
+
+function setGridItemDisplayStyle(style) {
+    $(".tooltip").tooltip("hide")
+    if (gridItemDisplayStyle != style) {
+        gridItemDisplayStyle = style
+        localStorage.setItem("grid_item_display_style", gridItemDisplayStyle)
+
+        $('#item-search-displaytype button').removeClass('active')
+        $('#item-search-displaytype-'+style).addClass('active')
+
+        switch (style) {
+            case 'detailed':
+                $('#item-select-grid').removeClass('items-compact').addClass('items')
+                break;
+        
+            case 'compact':
+                $('#item-select-grid').removeClass('items').addClass('items-compact')
+                break;
+        }
+
+        populateItemList(loadedItemList)
+    }
 }
 
 function processStudent() {
@@ -1189,11 +1532,11 @@ function processStudent() {
     }
     $('#ba-student-profile-text').html(profileHtml)
 
-    if (student.MemoryLobby > 0) {
+    if (student.MemoryLobby[regionID] > 0) {
         $(".ba-student-lobby").show()
         $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.DevName}_01.png`)
-        $("#ba-student-lobby-unlock").text(student.MemoryLobby)
-        $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, translateUI('memory_lobby_student', [getTranslatedString(student,'Name')]), null, null, translateUI('memory_lobby_unlock', [student.MemoryLobby, getTranslatedString(student,'Name')])), placement: 'top', html: true})
+        $("#ba-student-lobby-unlock").text(student.MemoryLobby[regionID])
+        $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, translateUI('memory_lobby_student', [getTranslatedString(student,'Name')]), null, null, translateUI('memory_lobby_unlock', [student.MemoryLobby[regionID], getTranslatedString(student,'Name')])), placement: 'top', html: true})
     } else {
         $(".ba-student-lobby").hide()
     }
@@ -1237,7 +1580,7 @@ function processStudent() {
     }
 
     let favFurnitureHtml = ""
-    $(student.FurnitureInteraction).each(function(i,el){
+    $(student.FurnitureInteraction[regionID]).each(function(i,el){
         let item = find(data.furniture, "Id", el)[0]
         if (item.IsReleased[regionID]) {
             favFurnitureHtml += getFurnitureIconHTML(item)
@@ -1403,7 +1746,9 @@ function loadItem(id) {
     if (loadedModule == 'items') {
         var mode = '', item
         $(".tooltip").tooltip("hide")
+        $('#item-select-grid .card-items.selected').removeClass('selected')
         $('#ba-item-furniture-row').hide()
+
         if (id >= 2000000) {
             mode = 'equipment'
             item = findOrDefault(data.equipment, "Id", id-2000000, 1)[0]
@@ -1413,19 +1758,26 @@ function loadItem(id) {
             item = findOrDefault(data.furniture, "Id", id-1000000, 1)[0]
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.SubCategory))
             $('#ba-item-furniture-row').show()
-            $('#ba-item-furniture-set').html(item.SetGroupId == 0 ? '' : `・ <i>${getLocalizedString('furniture_set', String(item.SetGroupId))}</i>`)
-            $('#ba-item-furniture-comfort').html('+'+item.ComfortBonus)
+            $('#ba-item-furniture-set').html(item.SetGroupId == 0 ? '' : `・ <i>${getLocalizedString('FurnitureSet', String(item.SetGroupId))}</i>`)
+            $('#ba-item-furniture-comfort').html(`<img class="inline-img" src="images/ui/Cafe_Icon_Comfort.png"> ${item.ComfortBonus}`)
         } else {
             mode = 'items'
             item = findOrDefault(data.items, "Id", id, 1)[0]
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.Category))
-        } 
+        }
+
         loadedItem = item
+        loadedItemType = mode
+
         $('#ba-item-name').html(getTranslatedString(item, 'Name'))
         if (mode == 'equipment' && item.Id >= 1000) {
-            $('#ba-item-rarity').html(`T${(item.Id%10)+1}`)
+            $('#ba-item-rarity').html(`T${item.Tier}`)
         } else {
-            $('#ba-item-rarity').html(getRarityStars(item.Rarity))
+            if (mode == 'furniture') {
+                $('#ba-item-rarity').html(getRarityStars(item.Rarity))
+            } else {
+                $('#ba-item-rarity').html(getRarityTier(item.Rarity))
+            }
         }
         
         $('#ba-item-icon').removeClass('ba-item-n ba-item-r ba-item-sr ba-item-ssr').addClass('ba-item-'+item.Rarity.toLowerCase())
@@ -1444,23 +1796,20 @@ function loadItem(id) {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
             $('#ba-item-sources').html(getItemDropStages(item.Id))
-            $('#ba-item-list-tab-materials').tab('show')
-            if (loadedItemList != 'materials') populateItemList('materials')
-        } else if (item.Category == 'Favor') {
+        } else if (item.Category == 'Consumable') {
+            $('#ba-item-sources').html(getItemDropStages(item.Id))
+        }
+        else if (item.Category == 'Favor') {
             if (item.Id < 5998) {
                 $('#ba-item-usage').html(getLikedByStudents(item))
                 $('.ba-item-student').tooltip({html: true})
             } else {
-                $('#ba-item-usage').html(`<i>${translateUI('item_specialgift', ['<img class="gift-like-icon" src="images/ui/Cafe_Interaction_Gift_03.png">'])}</i>`).show()
+                $('#ba-item-usage').html(`<i>${translateUI('item_specialgift', ['<img class="inline-img" src="images/ui/Cafe_Interaction_Gift_03.png">'])}</i>`).show()
             }
-            $('#ba-item-list-tab-gifts').tab('show')
-            if (loadedItemList != 'gifts') populateItemList('gifts')
         } else if (item.Category == 'SecretStone') {
             $('#ba-item-sources').html(getItemDropStages(item.Id))
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
-            $('#ba-item-list-tab-eleph').tab('show')
-            if (loadedItemList != 'eleph') populateItemList('eleph')
         } else if (mode == 'equipment') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('#ba-item-sources').html(getItemDropStages(item.Id+2000000))
@@ -1469,19 +1818,17 @@ function loadItem(id) {
                 $(el).tooltip({html: true})
             })
             $('.ba-item-student').tooltip({html: true})
-            $('#ba-item-list-tab-equipment').tab('show')
-            if (loadedItemList != 'equipment') populateItemList('equipment')
         } else if (item.Category == 'Coin') {
             $('#ba-item-sources').html(getItemDropStages(item.Id))
-            $('#ba-item-list-tab-currency').tab('show')
-            if (loadedItemList != 'currency') populateItemList('currency')
         }
         if (mode == 'furniture') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
-            if (loadedItemList != 'furniture') populateItemList('furniture')
-            $('#ba-item-list-tab-furniture').tab('show') 
         }
+
+        $(`#ba-item-list-tab-${mode}`).tab('show')
+        $('#item-select-'+id).addClass('selected')
+        if (loadedItemList != mode) populateItemList(mode)
 
         finalizeLoad(getTranslatedString(item, 'Name'), "item", id, 'View Item', id)
 
@@ -1492,7 +1839,8 @@ function loadItem(id) {
 
 function loadCraft(id) {
     if (loadedModule == 'craft') {
-        let mode = 'craftnode', craftNode = findOrDefault(data.crafting.Nodes, "Id", id, 1)[0]
+        let craftNode = findOrDefault(data.crafting.Nodes[regionID], "Id", id, 1)[0]
+        if (loadedCraftNode) $('#craft-select-'+loadedCraftNode.Id).removeClass('selected')
         loadedCraftNode = craftNode
         $('#ba-craft-name').html(getTranslatedString(craftNode,'Name'))
         $('#ba-craft-type').html(getLocalizedString("NodeTier", ''+craftNode.Tier))
@@ -1505,7 +1853,7 @@ function loadCraft(id) {
         let nodeWeightTotal = 0
         craftNode.Groups.forEach(grp => {nodeWeightTotal += grp.Weight})
         $.each(craftNode.Groups, function(i,el){
-            let itemGroup = data.crafting.Groups[el.GroupId], maxWeight = 0
+            let itemGroup = data.crafting.Groups[regionID][el.GroupId], maxWeight = 0
             for (let j = 0; j < itemGroup.length; j++) {
                 maxWeight += itemGroup[j].Weight
             }
@@ -1527,6 +1875,7 @@ function loadCraft(id) {
             $(el).tooltip({html: true})
         })
 
+        $('#craft-select-'+loadedCraftNode.Id).addClass('selected')
         finalizeLoad(getTranslatedString(craftNode, 'Name'), "craftnode", craftNode.Id, 'View Crafting', craftNode.Id)
 
     } else {
@@ -1539,7 +1888,7 @@ function loadRaid(raidId) {
     if (loadedModule == 'raids') {
         if (isNaN(parseInt(raidId))) {raidId = 1}
         if (regionID == 1 && raidId >= 1000) {raidId = 1}
-        if (loadedRaid) $('#ba-raid-select-'+loadedRaid.Id).removeClass('selected')
+        if (loadedRaid) $('#raid-select-'+loadedRaid.Id).removeClass('selected')
         let raidName
 
         if (raidId < 1000) {
@@ -1635,7 +1984,7 @@ function loadRaid(raidId) {
         }
         $('#ba-raid-season-rewards').hide()
         loadedRaid = raid
-        $('#ba-raid-select-'+raid.Id).addClass('selected')
+        $('#raid-select-'+raid.Id).addClass('selected')
 
         finalizeLoad(raidName, "raid", raid.Id, 'View Raid', raid.Id)
 
@@ -1805,6 +2154,8 @@ function changeRaidEnemy(num) {
     $('#ba-raid-stat-critdmg').text(`${parseFloat(((enemy.CriticalDamageRate)/100).toFixed(4)).toLocaleString()}%`)
     $('#ba-raid-stat-critresist').text(enemy.CriticalResistPoint.toLocaleString())
     $('#ba-raid-stat-critdmgresist').text(`${parseFloat(((enemy.CriticalDamageResistRate)/100).toFixed(4))}%`)
+    $('#ba-raid-stat-stability').text(enemy.StabilityPoint.toLocaleString())
+    $('#ba-raid-stat-range').text(enemy.Range.toLocaleString())
 
 
     let bulletType = (raid_difficulty < 5) ? raid.BulletType : raid.BulletTypeInsane
@@ -1826,7 +2177,7 @@ function getEnemySize(enemy) {
 function loadStage(id) {
     if (loadedModule == 'stages') {
         let mode = ''
-        if (loadedStage) $('#ba-stage-select-'+loadedStage.Id).removeClass('selected')
+        if (loadedStage) $('#stage-select-'+loadedStage.Id).removeClass('selected')
         if (id >= 7000000) {
             const eventId = parseInt(String(id).slice(0,3))
             if (conquest_events.includes(eventId)) {
@@ -1974,14 +2325,14 @@ function loadStage(id) {
                 } else {
                     currency = find(data.items, 'Id', ec[0])[0]
                 }
-                html += `<span class="ba-info-pill bg-theme my-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${currency.Icon}.png`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), getRarityStars(currency.Rarity), getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger')}"><img src="images/items/${currency.Icon}.png" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${ec[1]}</span></span>`
+                html += `<span class="ba-info-pill bg-theme my-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${currency.Icon}.png`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger')}"><img src="images/items/${currency.Icon}.png" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${ec[1]}</span></span>`
             })
             
         }
         $('#ba-stage-entrycost').html(html)
         $('#ba-stage-entrycost >span').tooltip({html: true})
-        $('#ba-stage-map-enemies').html(`<p class="mb-0">${translateUI('maptile_enemy_default_msg')}</p>`)
-        $('#ba-stage-select-'+stage.Id).addClass('selected')
+        $('#ba-stage-map-enemies').html(`<p class="grid-text">${translateUI('maptile_enemy_default_msg')}</p>`)
+        $('#stage-select-'+stage.Id).addClass('selected')
 
         finalizeLoad($('#ba-stage-title').text(), 'stage', id, 'View Stage', id)
 
@@ -2075,6 +2426,10 @@ function loadRegion(regID) {
         $('#ba-student-search-filter-school-srt').hide()
         $('#ba-student-search-filter-school-arius').hide()
         $('#ba-student-search-filter-weapontype-rl').hide()
+        
+        $('#item-search-filter-furnitureset-107').hide()
+        $('#item-search-filter-furnitureset-108').hide()
+        $('#item-search-filter-equipmenttier-7').hide()
     }
 }
 
@@ -2561,25 +2916,22 @@ function recalculateSkillPreview() {
 function getStudentListCardHTML(student) {
     let name = getTranslatedString(student, 'Name')
     let html = `
-    <div id="ba-student-select-${student.Id}" class="ba-select-grid-item unselectable">
-        <div onclick="loadStudent('${student.PathName}')" class="ba-student-card">
-            <div class="ba-student-card-portrait"><img class="ba-student-card-portrait-img" src="images/student/collection/${student.CollectionTexture}.webp"></div>
-            <span class="ba-student-card-role bg-${student.SquadType.toLowerCase()}-t"><img src="images/ui/Role_${student.TacticRole}.png" style="width:100%"></span>
-            <span class="ba-student-card-atk bg-atk-${student.BulletType.toLowerCase()}-t"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></span>
-            <span class="ba-student-card-def bg-def-${student.ArmorType.toLowerCase()}-t"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></span>
-            <img class="ba-student-card-star" style="right: 2px; top: 2px;" src="images/ui/Common_Icon_Formation_Star_R${student.StarGrade}.png">
-            <div class="d-flex align-items-center ba-student-card-label">
-                <span class="ba-label-text px-1 align-middle ${name.length > label_smalltext_threshold[userLang] ? "smalltext" : ""}" style="width: 100%">${name}</span>
-                <span class="ba-hover-text px-1 align-middle ${name.length > label_smalltext_threshold[userLang] ? "smalltext" : ""}" style="display: none; width: 100%">${name}</span>
-            </div>
+    <div id="student-select-${student.Id}" class="selection-grid-card card-student" onclick="loadStudent('${student.PathName}')">
+        <div class="card-img">
+            <img src="images/student/collection/${student.CollectionTexture}.webp">
+        </div>
+        <span class="card-badge student-role top-left bg-${student.SquadType.toLowerCase()}-t"><img src="images/ui/Role_${student.TacticRole}.png"></span>
+        <span class="card-badge student-type atk bg-atk-${student.BulletType.toLowerCase()}-t"><img src="images/ui/Type_Attack_s.png"></span>
+        <span class="card-badge student-type def bg-def-${student.ArmorType.toLowerCase()}-t"><img src="images/ui/Type_Defense_s.png"></span>
+        <span class="card-badge student-rarity">${'<i class="fa-solid fa-star"></i>'.repeat(student.StarGrade)}</span>
+        
+        <div class="card-label">
+            <span class="label-text ${name.length > label_smalltext_threshold[userLang] ? "smalltext" : ""}">${name}</span>
+            <span class="label-text hover ${name.length > label_smalltext_threshold[userLang] ? "smalltext" : ""}" style="display: none;">${name}</span>
         </div>
     </div>`
+    //<img class="card-badge top-right" height="22" width="23" src="images/ui/Common_Icon_Formation_Star_R${student.StarGrade}.png">
     //html += `<span class="px-1 align-middle ${label.length > 11 ? "smalltext" : ""}" style="width: 100%">${label.replace(' (','\n(')}</span>`
-    return html
-}
-
-function getItemCardHTML(item, linkid, icontype) {
-    var html = `<div id="ba-item-select-${item.Id}" class="ba-select-grid-item unselectable" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><div onclick="loadItem('${linkid}')" class="ba-item-card ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${icontype}/${item.Icon}.png"></div></div>`
     return html
 }
 
@@ -2598,15 +2950,14 @@ function getStageCardHTML(stage, dropChance = 0) {
         smallTextThreshold = label_enemy_smalltext_threshold[userLang]
     } else {type = 'Unknown'}
     let name = getStageCardName(stage)
-    var html = `<div id="ba-stage-select-${stage.Id}" class="ba-select-grid-item unselectable">
-    <div onclick="loadStage('${stage.Id}')" class="ba-stage-card">
-    <div class="ba-stage-card-img"><img loading="lazy" src="images/campaign/${getStageIcon(stage, type)}.png"></div>`
+    let html = `<div id="stage-select-${stage.Id}" class="selection-grid-card card-stage" onclick="loadStage('${stage.Id}')">
+    <div class="card-img"><img loading="lazy" src="images/campaign/${getStageIcon(stage, type)}.png"></div>`
     if (dropChance > 0) {
-        html += `<span class="ba-stage-card-droprate">${getProbabilityText(dropChance)}</span>`
+        html += `<span class="card-badge stage-droprate">${getProbabilityText(dropChance)}</span>`
     }
-    html += `<div class="d-flex align-items-center ba-select-grid-card-label">`
-    html += `<span class="ba-label-text px-1 align-middle ${name.length > smallTextThreshold ? "smalltext" : "" }" style="width: 100%">${name}</span>`
-    html += `</div></div></div>`
+    html += `<div class="card-label">`
+    html += `<span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
+    html += `</div></div>`
     return html
 
     function getStageCardName() {
@@ -2638,8 +2989,12 @@ function getEventCardHTML(eventId) {
         }
     }
 
-    let html = `<div id="ba-event-select-${eventId}" class="ba-select-grid-item unselectable"><div onclick="populateEventStageList(${eventId});" class="ba-event-card"><div class="bg-container"><div style="background-image:url('images/campaign/Campaign_Event_${eventIdImg}_Normal.png');"></div></div><div class="ba-event-card-img"><img src="images/eventlogo/Event_${eventIdImg}_${logoLang}.png"></div>`
-    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${name}</span></div></div></div>`
+    let html = `
+    <div id="event-select-${eventId}" class="selection-grid-card card-event" onclick="populateEventStageList(${eventId});">
+        <div class="card-bg"><div style="background-image:url('images/campaign/Campaign_Event_${eventIdImg}_Normal.png');"></div>
+        </div>
+        <div class="card-img"><img src="images/eventlogo/Event_${eventIdImg}_${logoLang}.png"></div>`
+    html += `<div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${name}</span></div></div>`
     return html
 }
 
@@ -2666,34 +3021,38 @@ function getRaidCardHTML(raid, terrain='', backgroundPath=null) {
             backgroundPath = `Boss_Portrait_${raid.PathName}_LobbyBG`
         }
     }
-    let html = `<div id="ba-raid-select-${raid.Id}" class="ba-select-grid-item unselectable"><div onclick="loadRaid(${raid.Id});" class="ba-raid-card"><div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/raid/${backgroundPath}.png');"></div></div><div class="ba-raid-card-img"><img src="images/raid/Boss_Portrait_${raid.PathName}_Lobby.png"></div><div class="ba-raid-card-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
+    let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/raid/${backgroundPath}.png');"></div></div><div class="card-img"><img src="images/raid/Boss_Portrait_${raid.PathName}_Lobby.png"></div><div class="card-badge raid-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
     if (terrain != '') {
-        html += `<div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${terrain}.png"></div>`
+        html += `<div class="card-badge raid-terrain"><img class="invert-light" src="images/ui/Terrain_${terrain}.png"></div>`
     }
-    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${getTranslatedString(raid, 'Name')}</span></div></div></div>`
+    html += `<div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${getTranslatedString(raid, 'Name')}</span></div></div>`
     return html
 }
 
 function getTimeAttackCardHTML(raid) {
     let name = getLocalizedString("TimeAttackStage", raid.DungeonType)
-    let html = `<div id="ba-raid-select-${raid.Id}" class="ba-select-grid-item unselectable"><div onclick="loadRaid(${raid.Id});" class="ba-raid-card"><div class="ba-raid-card-bg-container"><div class="ba-raid-card-bg" style="background-image:url('images/timeattack/${timeAttackBG[raid.DungeonType]}.png');"></div></div><div class="ba-ta-card-img"><img src="images/enemy/${raid.Icon}.png"></div><div class="ba-raid-card-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div><div class="ba-raid-card-terrain"><img class="invert-light" src="images/ui/Terrain_${raid.Terrain}.png"></div>`
-    html += `<div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${name}</span></div></div></div>`
+    let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/timeattack/${timeAttackBG[raid.DungeonType]}.png');"></div></div><div class="card-img ta-img"><img src="images/enemy/${raid.Icon}.png"></div><div class="card-badge raid-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png"></div><div class="card-badge raid-terrain"><img class="invert-light" src="images/ui/Terrain_${raid.Terrain}.png"></div>`
+    html += `<div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${name}</span></div></div>`
     return html
 }
 
 function getEnemyCardHTML(enemy, level, grade, scaletype=0, data=true) {
-    var html = `<div class="ba-icon-enemy unselectable" ${data ? `data-enemy='${enemy.Id}_${level}_${grade}_${scaletype}'` : ''} onclick="showEnemyInfo(${enemy.Id},${level},${grade},${scaletype},${!data})"><img src="images/enemy/${enemy.Icon}.png">`
-    if (enemy.Rank == 'Elite') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Elite.png" style="width:22px;"></span>`
-    else if (enemy.Rank == 'Champion') html += `<span class="ba-enemy-card-rank"><img src="images/ui/Common_Icon_Enemy_Champion.png" style="width:31px;"></span>`
-    html += `<span class="ba-enemy-card-lv">Lv.${level}</span><span class="ba-enemy-card-atk bg-atk-${enemy.BulletType.toLowerCase()}"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></span>
-    <span class="ba-enemy-card-def bg-def-${enemy.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></span><div class="d-flex align-items-center ba-select-grid-card-label"><span class="ba-label-text px-1 align-middle ${getTranslatedString(enemy, 'Name').length > label_enemy_smalltext_threshold[userLang] ? 'smalltext' : ''}" style="width: 100%">${getTranslatedString(enemy, 'Name')}</span></div></div>`
+    let name = getTranslatedString(enemy, 'Name')
+    let smallTextThreshold = getSmallTextThreshold(name, label_enemy_smalltext_threshold)
+    let html = `<div class="selection-grid-card card-enemy" ${data ? `data-enemy='${enemy.Id}_${level}_${grade}_${scaletype}'` : ''} onclick="showEnemyInfo(${enemy.Id},${level},${grade},${scaletype},${!data})"><div class="card-img"><img src="images/enemy/${enemy.Icon}.png"></div>`
+
+    if (enemy.Rank == 'Elite') html += `<div class="card-badge enemy-rank"><img src="images/ui/Common_Icon_Enemy_Elite.png" style="width:22px;"></div>`
+    else if (enemy.Rank == 'Champion') html += `<div class="card-badge enemy-rank"><img src="images/ui/Common_Icon_Enemy_Champion.png" style="width:31px;"></div>`
+
+    html += `<div class="card-badge enemy-level">Lv.${level}</div><div class="card-badge enemy-atk bg-atk-${enemy.BulletType.toLowerCase()}"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></div>
+    <div class="card-badge enemy-def bg-def-${enemy.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></div><div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? 'smalltext' : ''}">${name}</span></div></div>`
     return html
 }
 
 function showEnemyInfo(id, level, grade=1, scaletype=0, switchTab=false) {
-    $(".ba-icon-enemy").removeClass("selected")
+    $(".card-enemy").removeClass("selected")
     if (loadedModule == 'stages' && switchTab) $('#ba-stage-tab-enemies').tab('show')
-    $(`.ba-icon-enemy[data-enemy='${id}_${level}_${grade}_${scaletype}']`).addClass("selected")
+    $(`.card-enemy[data-enemy='${id}_${level}_${grade}_${scaletype}']`).addClass("selected")
     //if (selector != null) $(selector).addClass("selected")
     let enemy = find(data.enemies, 'Id', id)[0]
     $('#ba-stage-enemy-name').html(getTranslatedString(enemy, 'Name'))
@@ -2778,7 +3137,7 @@ function getMaterialIconHTML(id, amount) {
         item = find(data.items, "Id", id)[0]
         itemType = item.Category
     }
-    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory', itemType), getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/${item.Icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>`
+    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory', itemType), getRarityTier(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/${item.Icon}.png"><span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span></div>`
     return html
 }
 
@@ -2816,14 +3175,14 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1) {
         type = 'Item'
         itemType = item.Category
         iconPath = 'items'
-        haslink = !(item.Category == 'Consumable' || item.Category == 'Collectible')
+        haslink = true
     }
     let rarityText = ''
     if (item) {
         if (type == 'Equipment' && item.Id >= 1000) {
             rarityText = `T${(item.Id%10)+1}`
         } else {
-            rarityText = getRarityStars(item.Rarity)
+            rarityText = getRarityTier(item.Rarity)
         }
     }
 
@@ -2931,7 +3290,7 @@ function getStudentIconSmall(student) {
 
 function getFavourIconHTML(id, grade) {
     var gift = find(data.items, "Id", id)[0]
-    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.Icon}.png`, getTranslatedString(gift, 'Name'), getLocalizedString('ItemCategory', gift.Category), getRarityStars(gift.Rarity), getTranslatedString(gift, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${gift.Rarity.toLowerCase()}" src="images/items/${gift.Icon}.png"><img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade}.png"></div>`
+    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.Icon}.png`, getTranslatedString(gift, 'Name'), getLocalizedString('ItemCategory', gift.Category), getRarityTier(gift.Rarity), getTranslatedString(gift, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${gift.Rarity.toLowerCase()}" src="images/items/${gift.Icon}.png"><img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade}.png"></div>`
     return html
 }
 
@@ -3079,49 +3438,69 @@ function updateSummonExSkillStatPreview() {
 }
 
 function populateItemList(tab) {
-    itemsHtml = ""
+    let itemsHtml = ""
+
+    let itemCardGenerator
+    switch (gridItemDisplayStyle) {
+        case 'detailed':
+            itemCardGenerator = getItemGridCardHTML
+            break;
+        case 'compact':
+            itemCardGenerator = getItemCardHTML
+            break;
+        default:
+            itemCardGenerator = getItemGridCardHTML
+            break;
+    }
 
     if (tab == 'equipment') {
         $.each(data.equipment, function(i,el) {
-            if (el.IsReleased[regionID])
-            itemsHtml += getItemCardHTML(el,el.Id+2000000,'equipment')
+            if (el.IsReleased[regionID]) {
+                itemsHtml += itemCardGenerator(el,el.Id+2000000,'equipment')
+            }
         })
     } else if (tab == 'furniture') {
         $.each(data.furniture, function(i,el) {
-            if (el.IsReleased[regionID])
-            itemsHtml += getItemCardHTML(el,el.Id+1000000,'furniture')
+            if (el.IsReleased[regionID]) {
+                itemsHtml += itemCardGenerator(el,el.Id+1000000,'furniture')
+            }
         })
     } else {
-        itemTypes = []
-        switch (tab) {
-            case "materials":
-                itemTypes = ["CharacterExpGrowth","Material"]
-                break
-            case "gifts":
-                itemTypes = ["Favor"]
-                break
-            case "eleph":
-                itemTypes = ["SecretStone"]
-                break
-            case "currency":
-                itemTypes = ["Coin"]
-                break
-            case "consumables":
-                itemTypes = ["Consumable"]
-                break
-            case "collectibles":
-                itemTypes = ["Collectible"]
-                break
-        }
         $.each(data.items, function(i,el) {
-            if (el.IsReleased[regionID] && itemTypes.includes(el.Category)) {
-                itemsHtml += getItemCardHTML(el,el.Id,'items')
+            if (el.IsReleased[regionID]) {
+                itemsHtml += itemCardGenerator(el,el.Id,'items')
             }
         })
     }
+    itemsHtml += `<div id="item-select-noresult" class="p-2 grid-text">${translateUI('no_results')}</div>`
+    $('#item-search-filters-panel >div >div').hide()
+    $(`#item-search-filters-panel >div >div.show-${tab}`).show()
+
     loadedItemList = tab
-    $(`#ba-item-list-grid`).html(itemsHtml)
-    $('.ba-select-grid-item').tooltip({html: true, delay: { show: 200, hide: 0 }, container: $('.card-body') })
+
+    $(`#item-select-grid`).html(itemsHtml)
+    if (loadedItemType == tab) {
+        $(`#item-select-${loadedItem.Id+getItemIdOffset(tab)}`).addClass('selected')
+        let offset = $(`#item-select-${loadedItem.Id+getItemIdOffset(tab)}`).prop('offsetTop') - 100
+        $('#ba-item-list-container .card-body').scrollTop((offset === undefined) ? 0 : offset)
+    }
+
+    $('#item-select-grid .item-grid-card-compact').tooltip({html: true, placement: 'top', delay: { show: 200, hide: 0 }, container: $('.card-body')})
+
+    updateItemList(true)
+}
+
+function getItemIdOffset(type) {
+    switch (type.toLowerCase()) {
+        case 'furniture':
+            return 1000000
+        case 'equipment':
+            return 2000000
+        case 'currency':
+            return 3000000
+        default:
+            return 0
+    }
 }
 
 function populateCraftList() {
@@ -3129,22 +3508,63 @@ function populateCraftList() {
     html[0] = ""
     html[1] = ""
     html[2] = ""
-    html_h1= `<div id="stages-list-events-grid-header-1" class="w-100 ba-grid-header mb-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"1")}</h3></div>`
-    html_h2 = `<div id="stages-list-events-grid-header-2" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"2")}</h3></div>`
-    html_h3 = `<div id="stages-list-events-grid-header-3" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"3")}</h3></div>`
-    data.crafting.Nodes.sort((a,b) => a.Quality - b.Quality)
-    data.crafting.Nodes.sort((a,b) => b.Icon.localeCompare(a.Icon))
-    $.each(data.crafting.Nodes, function(i,el) {
-        if (el.IsReleased[regionID] && el.Weight > 0)
+    html_h1= `<div id="craft-list-grid-header-1" class="w-100 ba-grid-header mb-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"1")}</h3></div>`
+    html_h2 = `<div id="craft-list-grid-header-2" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"2")}</h3></div>`
+    html_h3 = `<div id="craft-list-grid-header-3" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"3")}</h3></div>`
+    data.crafting.Nodes[regionID].sort((a,b) => a.Quality - b.Quality)
+    data.crafting.Nodes[regionID].sort((a,b) => b.Icon.localeCompare(a.Icon))
+    $.each(data.crafting.Nodes[regionID], function(i,el) {
+        if (el.Weight > 0)
         html[el.Tier-1] += getCraftingCardHTML(el)
     })
 
-    $('#ba-craft-list-nodes-grid').html(html_h1 + html[0] + html_h2 + html[1] + (regionID == 0 ? html_h3 + html[2] : ""))
+    $('#craft-select-grid').html(html_h1 + html[0] + html_h2 + html[1] + (regionID == 0 ? html_h3 + html[2] : ""))
+
+    $('#craft-select-'+loadedCraftNode.Id).addClass('selected')
+    if (loadedCraftNode) {
+        let offset = $(`#craft-select-${loadedCraftNode.Id}`).prop('offsetTop') - 100
+        $('#ba-craft-list-container .card-body').scrollTop((offset === undefined) ? 0 : offset)
+    }
 }
 
 function getCraftingCardHTML(node) {
-    let html = `<div class="ba-craft-node ba-student-info ba-panel ba-node-quality-${node.Quality}" onclick="loadCraft(${node.Id})"><img class="ba-craft-node-img" src="images/ui/${node.Icon}.png"><span style="margin-left:20px">${getTranslatedString(node, "Name")}</span></div>`
+    let name = getTranslatedString(node, "Name")
+    let smallTextThreshold = label_craft_smalltext_threshold[userLang]
+    let html = `<div id="craft-select-${node.Id}" class="selection-grid-card card-craft" onclick="loadCraft(${node.Id})"><div class="card-img ba-node-quality-${node.Quality}"><img loading="lazy" src="images/ui/${node.Icon}.png"></div>`
+    html += `<div class="card-label">`
+    html += `<span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
+    html += `</div></div>`
     return html
+}
+
+function getItemGridCardHTML(item, linkid, icontype) {
+    let name = getTranslatedString(item, "Name")
+    let smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
+    
+    let html = `<div id="item-select-${linkid}" class="selection-grid-card card-items" onclick="loadItem(${linkid})"><div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${icontype}/${item.Icon}.png"></div>`
+    if (icontype == 'furniture' && item.Interaction[regionID]) {
+        html += '<div class="card-badge furniture-interaction"><img src="images/ui/Cafe_Icon_Interaction.png"></div>'
+    }
+    if (icontype == 'equipment' && item.Id >= 1000 ) {
+        html += `<div class="card-badge equipment-tier">T${item.Tier}</div>`
+    }
+    html += `<div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span></div>`
+    html += `</div>`
+    return html
+}
+
+function getItemCardHTML(item, linkid, icontype) {
+    var html = `<div id="item-select-${linkid}" class="item-grid-card-compact card-items ba-item-${item.Rarity.toLowerCase()}" onclick="loadItem('${linkid}')" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><img loading="lazy" src="images/${icontype}/${item.Icon}.png"></div>`
+    return html
+}
+
+function getSmallTextThreshold(text, thresholdArray) {
+    // Check if the name is untranslated and we need to use the full-width threshold
+    if ((userLang == 'En' || userLang == 'Th') && (text.codePointAt(0) >= 0x3000 && text.codePointAt(0) <= 0x9FFF)) {
+        return thresholdArray['Jp']
+    } else {
+        return thresholdArray[userLang]
+    }
 }
 
 function populateStageList(mode) {
@@ -3157,9 +3577,9 @@ function populateStageList(mode) {
                 html += getStageCardHTML(el)
             })
             $('.stage-list').hide()
-            $('#ba-stages-list').show()
+            $('#stage-list').show()
             $('#ba-stages-list-tab-missions').tab('show')
-            $('#ba-stages-list-grid').html(html)
+            $('#stage-select-grid').html(html)
             break
         case 'bounty':
             $.each(data.stages.WeekDungeon, function(i,el) {
@@ -3173,9 +3593,9 @@ function populateStageList(mode) {
                 }
             })
             $('.stage-list').hide()
-            $('#ba-stages-list').show()
+            $('#stage-list').show()
             $('#ba-stages-list-tab-bounty').tab('show')
-            $('#ba-stages-list-grid').html(html)
+            $('#stage-select-grid').html(html)
             break
         case 'commissions':
             typePrev = ''
@@ -3190,9 +3610,9 @@ function populateStageList(mode) {
                 }
             })
             $('.stage-list').hide()
-            $('#ba-stages-list').show()
+            $('#stage-list').show()
             $('#ba-stages-list-tab-commissions').tab('show')
-            $('#ba-stages-list-grid').html(html)
+            $('#stage-select-grid').html(html)
             break
         case 'schooldungeon':
             typePrev = ''
@@ -3204,24 +3624,24 @@ function populateStageList(mode) {
                 typePrev = el.Type
             })
             $('.stage-list').hide()
-            $('#ba-stages-list').show()
+            $('#stage-list').show()
             $('#ba-stages-list-tab-schooldungeon').tab('show')
-            $('#ba-stages-list-grid').html(html)
+            $('#stage-select-grid').html(html)
             break
         case 'events':
             data.common.regions[regionID].events.forEach(val => {
                 if (val < 10000) html += getEventCardHTML(val)
             })
             $('.stage-list').hide()
-            $('#ba-event-list').show()
+            $('#event-list').show()
             $('#ba-stages-list-tab-events').tab('show')
-            $('#ba-event-list-grid').html(html)
+            $('#event-select-grid').html(html)
     }
     loadedStageList = mode
-    $('#ba-stage-select-'+loadedStage.Id).addClass('selected')
+    $('#stage-select-'+loadedStage.Id).addClass('selected')
     //scroll the loaded stage into view in the stage list (excl. events)
     if (loadedStage.Id < 7000000) {
-        let offset = $(`#ba-stage-select-${loadedStage.Id}`).prop('offsetTop')
+        let offset = $(`#stage-select-${loadedStage.Id}`).prop('offsetTop') - 100
         $('#ba-stages-list-container .card-body').scrollTop((offset === undefined) ? 0 : offset)
     }
 }
@@ -3247,7 +3667,7 @@ function populateEventStageList(eventId) {
     
         if (conquest_events.includes(eventId)) {
             $('.stage-list').hide()
-            $('#ba-conquest-list').show()
+            $('#conquest-list').show()
     
             let conquestMap = find(data.stages.ConquestMap, "EventId", eventId)[0]
             loadedConquest = conquestMap
@@ -3280,9 +3700,9 @@ function populateEventStageList(eventId) {
             })
             
             $('.stage-list').hide()
-            $('#ba-stages-list').show()
-            $('#ba-stages-list-grid').html(html)
-            $('#ba-stage-select-'+loadedStage.Id).addClass('selected')
+            $('#stage-list').show()
+            $('#stage-select-grid').html(html)
+            $('#stage-select-'+loadedStage.Id).addClass('selected')
         }
 
         loadedStageList = '' + eventId
@@ -3307,21 +3727,21 @@ function populateRaidList() {
         if (el.IsReleased[regionID])
         html += getRaidCardHTML(el)
     })
-    $('#ba-raid-list-raid-grid').html(html)
+    $('#raid-select-grid').html(html)
 
     html = ''
     $.each(data.raids.TimeAttack, function(i,el) {
         if (el.IsReleased[regionID])
         html += getTimeAttackCardHTML(el)
     })
-    $('#ba-raid-list-timeattack-grid').html(html)
+    $('#timeattack-select-grid').html(html)
 
     html = ''
     $.each(data.raids.WorldRaid, function(i,el) {
         if (el.IsReleased[regionID])
         html += getRaidCardHTML(el, '', el.IconBG)
     })
-    $('#ba-raid-list-worldraid-grid').html(html)
+    $('#worldraid-select-grid').html(html)
 
 }
 
@@ -3334,13 +3754,14 @@ function getUsedByStudents(item, mode) {
             html += getStudentIconSmall(el)
         })
     } else if (mode == 'furniture') {
-        headerText = translateUI('furniture_interaction_list')
+        
+        headerText = `<img class="inline-img" src="images/ui/Cafe_Icon_Interaction.png"> ${translateUI('furniture_interaction_list')}`
         $.each(data.students, function(i,el){
             if (!el.IsReleased[regionID])
             return
             let uses = false
-            for (let i = 0; i < el.FurnitureInteraction.length; i++) {
-                if (item.Id == el.FurnitureInteraction[i]) {
+            for (let i = 0; i < el.FurnitureInteraction[regionID].length; i++) {
+                if (item.Id == el.FurnitureInteraction[regionID][i]) {
                     uses = true
                 }
             }
@@ -3447,7 +3868,7 @@ function getLikedByStudents(item) {
     })
     studentsHtml.forEach((html, ind) => {
         if (html != "") {
-            likedStudentsHtml += `<div class="mb-2"><i>${translateUI('item_likedbystudent_list_'+ind, [`<img class="gift-like-icon" src="images/ui/Cafe_Interaction_Gift_0${(item.Rarity == "SSR" ? 4 : 3) - ind}.png">`])}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${studentsHtml[ind]}</div>`
+            likedStudentsHtml += `<div class="mb-2"><i>${translateUI('item_likedbystudent_list_'+ind, [`<img class="inline-img" src="images/ui/Cafe_Interaction_Gift_0${(item.Rarity == "SSR" ? 4 : 3) - ind}.png">`])}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${studentsHtml[ind]}</div>`
         }
     })
 
@@ -3461,12 +3882,20 @@ function getItemDropStages(itemID) {
         stageType.forEach(dropStage => {
             if (!stageIsReleased(dropStage)) return
             let drop = false, dropChance = 0, isItemBox = false, dropCertainCount = 0
-            if ("Default" in dropStage.Rewards)
-            for (let i = 0; i < dropStage.Rewards.Default.length; i++) {
 
-                if (dropStage.Rewards.Default[i][0] >= 4000000) {
+            let rewardList
+            if (regionID == 1 && "RewardsGlobal" in dropStage) {
+                rewardList = dropStage.RewardsGlobal
+            } else {
+                rewardList = dropStage.Rewards
+            }
+
+            if ("Default" in rewardList)
+            for (let i = 0; i < rewardList.Default.length; i++) {
+
+                if (rewardList.Default[i][0] >= 4000000) {
                     // Reward is an Item Box
-                    const box = find(data.common.GachaGroup, "Id", dropStage.Rewards.Default[i][0] - 4000000)[0]
+                    const box = find(data.common.GachaGroup, "Id", rewardList.Default[i][0] - 4000000)[0]
 
                     // Count the total probability
                     const totalProb = box.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
@@ -3474,18 +3903,18 @@ function getItemDropStages(itemID) {
                         if (itemID == boxItem[0]) {
                             drop = true
                             isItemBox = true
-                            if (dropStage.Rewards.Default[i][1] >= 1) {
-                                dropCertainCount = dropStage.Rewards.Default[i][1]
+                            if (rewardList.Default[i][1] >= 1) {
+                                dropCertainCount = rewardList.Default[i][1]
                                 dropCertainChance = (boxItem[1]/totalProb)
                             } else {
-                                dropChance = dropStage.Rewards.Default[i][1] * (boxItem[1]/totalProb)
+                                dropChance = rewardList.Default[i][1] * (boxItem[1]/totalProb)
                             }
                         }
                     })
 
-                } else if (itemID == dropStage.Rewards.Default[i][0]) {
+                } else if (itemID == rewardList.Default[i][0]) {
                     drop = true
-                    dropChance = dropStage.Rewards.Default[i][1]
+                    dropChance = rewardList.Default[i][1]
                     break
                 }
             }
@@ -3505,11 +3934,11 @@ function getItemDropStages(itemID) {
     })
     stages = stages.sort((a,b) => b.chance - a.chance)
     $.each(stages, function(i,el){
-        html += '<div class="m-1">' + getStageCardHTML(el.stage, el.chance, el.box) + '</div>'
+        html += getStageCardHTML(el.stage, el.chance, el.box)
     })
     if (html != '') {
         $('#ba-item-sources').show()
-        return `<div class="mb-2"><i>${translateUI('item_obtainedfrom_stage')}</i></div><div class="d-flex justify-content-center flex-wrap">` + html + '</div>'
+        return `<div class="mb-2"><i>${translateUI('item_obtainedfrom_stage')}</i></div><div class="selection-grid stage selection-grid-flex">` + html + '</div>'
     } else {
         return ''
     }
@@ -3692,15 +4121,35 @@ function toggleHighContrast(state) {
 }
 
 function changeRegion(regID) {
-    regionID = regID
-    localStorage.setItem("region", regionID)
-    window.location.reload()
+    if (regID != regionID) {
+        $(`#ba-navbar-regionselector-${regionID}`).removeClass("active")
+        regionID = regID
+        localStorage.setItem("region", regionID)
+        $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
+        loadModule(loadedModule)        
+    }
 }
 
 function changeLanguage(lang) {
-    userLang = lang
-    localStorage.setItem("language", lang)
-    window.location.reload()
+    if (lang != userLang) {
+        json_lang_list = getLanguageJSONList(lang.toLowerCase())
+        loadJSON(json_lang_list, result => {
+            data = Object.assign(data, result)
+        }).then(function(val){
+            $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).removeClass("active")
+            $('body').removeClass(`font-${userLang.toLowerCase()}`)
+    
+            userLang = lang
+            localStorage.setItem("language", lang)
+    
+            $(`#ba-navbar-languageselector span`).text($(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).text())
+            $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).addClass("active")
+            
+            loadModule(loadedModule)
+        }, function(reason) {
+            console.error(reason)
+        })
+    }
 }
 
 function loadLanguage(lang) {
@@ -3731,16 +4180,7 @@ function getRarityStars(rarity) {
 }
 
 function getRarityTier(rarity) {
-    switch (rarity) {
-        case 'N':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(1)
-        case 'R':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(2)
-        case 'SR':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(3)
-        case 'SSR':
-            return '\<i class=\'fa-solid fa-star\'\>\</i\>'.repeat(4)
-    }
+    return `\<i class=\'fa-solid fa-circle me-2 col-item-${rarity.toLowerCase()}\'\>\</i\>${rarity}`
 }
 
 function searchContains(substring, string) {
@@ -3748,10 +4188,15 @@ function searchContains(substring, string) {
         if (string.toLowerCase().includes(substring))
         return true
     } else {
-        let a = string.toLowerCase().replace(/[^a-z0-9\- ]/g,''), b = substring.toLowerCase().replace(/[^a-z0-9\- ]/g,'')
+        //decode certain html entities out of the string
+        string = string.replace('&#x27;', '').replace('&quot;', '').replace('&amp;', '&')
+
+        let a = string.toLowerCase().replace(/['"!\?<>\(\)\.\-]/g,''), b = substring.toLowerCase().replace(/['"!\?<>\(\)\.\-]/g,'')
+
         //whole match
         if (a.startsWith(b))
         return true
+
         //individual word match
         while (a.includes(' ')) {
             a = a.substring(a.indexOf(' ')+1)
@@ -3759,12 +4204,12 @@ function searchContains(substring, string) {
             return true
         }
     }
-
     return false
 }
 
 function allSearch() {
     let searchTerm = $('#ba-navbar-search').val().toLowerCase()
+    $('#navbar-search-results').scrollTop(0)
     if (searchTerm == "") {
         $('#navbar-search-results').html('').hide()
         $('#ba-navbar-search').removeClass('has-text results-open')
@@ -3776,7 +4221,7 @@ function allSearch() {
     $('#navbar-search-clear').show()
     $('#ba-navbar-search').addClass('has-text')
     $('#navbar-search-results').html('').show()
-    let results = [], maxResults = 6
+    let results = [], maxResults = 25
 
     $.each(data.students, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
@@ -3794,9 +4239,17 @@ function allSearch() {
     })
 
     if (results.length < maxResults)
+    $.each(data.raids.WorldRaid, function(i,el){
+        if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': `images/raid/Boss_Portrait_${el.PathName}_Lobby.png`, 'type': getLocalizedString('StageType', 'WorldRaid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
+            if (results.length >= maxResults) return false
+        }
+    })
+
+    if (results.length < maxResults)
     $.each(data.items, function(i,el){
-        if (el.IsReleased[regionID] && el.Category != 'Collectible' && el.Category != 'Consumable' && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/items/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityStars(el.Rarity), 'onclick': `loadItem(${el.Id})`})
+        if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/items/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id})`})
             if (results.length >= maxResults) return false
         }
     })
@@ -3812,48 +4265,80 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.equipment, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/equipment/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityStars(el.Rarity), 'onclick': `loadItem(${el.Id+2000000})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/equipment/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id+2000000})`})
+            if (results.length >= maxResults) return false
+        }
+    })
+
+    if (results.length < maxResults)
+    $.each(data.crafting.Nodes[regionID], function(i,el){
+        if (el.Weight > 0 && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/ui/'+el.Icon+'.png', 'type': getLocalizedString('NodeTier', el.Tier), 'rarity': `node-${el.Quality}`, 'rarity_text': getLocalizedString('NodeQuality', el.Quality), 'onclick': `loadCraft(${el.Id})`})
             if (results.length >= maxResults) return false
         }
     })
 
     if (results.length < maxResults)
     $.each(data.stages.Campaign, function(i,el){
-        let stagecode = el.Area+'-'+el.Stage+' '+(el.Difficulty == 1 ? 'Hard' : 'Normal')
-        if ((el.Area <= data.common.regions[regionID].campaign_max) && searchContains(searchTerm, stagecode)) {
-            results.push({'name': stagecode, 'icon': 'images/campaign/'+getStageIcon(el,'Campaign')+'.png', 'type': 'Stage', 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
+        let stagecode = getStageName(el, 'Campaign')
+        let stageName = getStageTitle(el, 'Campaign')
+        if ((el.Area <= data.common.regions[regionID].campaign_max) && (searchContains(searchTerm, stagecode) || searchContains(searchTerm, stageName))) {
+            results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,'Campaign')+'.png', 'type': stagecode, 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
             if (results.length >= maxResults) return false
         }
     })
 
     if (results.length < maxResults)
     $.each(data.stages.WeekDungeon, function(i,el){
-        let stagecode = getStageTitle(el, 'WeekDungeon')
-        if ((stageIsReleased(el)) && searchContains(searchTerm, stagecode)) {
-            results.push({'name': stagecode, 'icon': 'images/campaign/'+getStageIcon(el,'WeekDungeon')+'.png', 'type': 'Stage', 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
+        let stagecode = getStageName(el, 'WeekDungeon')
+        let stageName = getStageTitle(el, 'WeekDungeon')
+        if ((stageIsReleased(el)) && (searchContains(searchTerm, stagecode) || searchContains(searchTerm, stageName))) {
+            results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,'WeekDungeon')+'.png', 'type': stagecode, 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
             if (results.length >= maxResults) return false
         }
     })
 
     if (results.length < maxResults)
     $.each(data.stages.SchoolDungeon, function(i,el){
-        let stagecode = getStageTitle(el, 'SchoolDungeon')
-        if ((stageIsReleased(el)) && searchContains(searchTerm, stagecode)) {
-            results.push({'name': stagecode, 'icon': 'images/campaign/'+getStageIcon(el,'SchoolDungeon')+'.png', 'type': 'Stage', 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
+        let stagecode = getStageName(el, 'SchoolDungeon')
+        let stageName = getStageTitle(el, 'SchoolDungeon')
+        if ((stageIsReleased(el)) && (searchContains(searchTerm, stagecode) || searchContains(searchTerm, stageName))) {
+            results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,'SchoolDungeon')+'.png', 'type': getLocalizedString('StageType', el.Type), 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
             if (results.length >= maxResults) return false
         }
     })
 
+    if (results.length < maxResults)
+    $.each(data.stages.Event, function(i,el){
+        let stagecode = getStageName(el, 'Event')
+        let searchStageCode = stagecode.replace('\n', ' ')
+        let stageName = getStageTitle(el, 'Event')
+        if ((data.common.regions[regionID].events.includes(el.EventId)) && (searchContains(searchTerm, searchStageCode) || searchContains(searchTerm, stageName))) {
+            results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,'Event')+'.png', 'type': stagecode, 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
+            if (results.length >= maxResults) return false
+        }
+    })
+
+    // if (results.length < maxResults)
+    // $.each(data.raids.TimeAttack, function(i,el){
+    //     let name = getLocalizedString('TimeAttackStage', el.DungeonType)
+    //     if (el.IsReleased[regionID] && (searchContains(searchTerm, name) || searchContains(searchTerm, getLocalizedString('StageType', 'TimeAttack')))) {
+    //         results.push({'name': name, 'icon': `images/enemy/${el.Icon}.png`, 'type': getLocalizedString('StageType', 'TimeAttack'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
+    //         if (results.length >= maxResults) return false
+    //     }
+    // })
+
     if (results.length > 0) {
-        var html = ''
+        let html = '<div>'
         for (let i = 0; i < results.length; i++) {
-            html += `<div id="ba-search-result-item-${i+1}" class="ba-search-result-item" onclick="${results[i].onclick}; $('#navbar-search-clear').trigger('onclick');">
+            html += `<div id="ba-search-result-item-${i+1}" class="ba-search-result-item" onclick="${results[i].onclick}; $('#navbar-search-clear').trigger('click');">
             <div class='ba-search-img'><img src='${results[i].icon}' class='ba-item-${results[i].rarity.toLowerCase()}' width=50 height=50></div>
             <div class='flex-fill d-flex flex-column'><div class='flex-fill d-flex flex-column justify-content-end'><div class='ba-search-name'>${results[i].name}</div></div>
             <div class='d-flex align-items-center mt-auto'>
             <span class='ba-search-subtitle flex-fill'>${results[i].type}</span>
             <span class='ba-search-rarity'>${results[i].rarity_text}</span></div></div></div>`
         }
+        html += '</div>'
         $('#navbar-search-results').html(html)
         $('#ba-navbar-search').addClass('results-open')
         searchResultsCount = results.length
@@ -3882,6 +4367,7 @@ function searchNavigate(ev) {
             searchResultsSelection++
             $('.ba-search-result-item').removeClass("selected")
             $('#ba-search-result-item-'+searchResultsSelection).addClass("selected")
+            $(`#ba-search-result-item-${searchResultsSelection}`)[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
         }
     } else if (ev.keyCode == 38) {
         ev.preventDefault()
@@ -3889,15 +4375,10 @@ function searchNavigate(ev) {
             searchResultsSelection--
             $('.ba-search-result-item').removeClass("selected")
             $('#ba-search-result-item-'+searchResultsSelection).addClass("selected")
+            $(`#ba-search-result-item-${searchResultsSelection}`)[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
         }
         
     } 
-}
-
-function clearSearchBar(el) {
-    let searchbar = $('#'+el.dataset.target)
-    searchbar.val('').blur().trigger('oninput')
-    $(el).hide()
 }
 
 /**
@@ -4061,8 +4542,8 @@ function openStudentComparison() {
         recalculateStatPreview()
         updateStatPreviewTitle()
     } else {
-        $('.ba-student-card.disabled').removeClass('disabled')
-        $(`#ba-student-select-${student.Id}>div`).addClass('disabled')
+        $('#student-select-grid .selection-grid-card.disabled').removeClass('disabled')
+        $(`#student-select-${student.Id}>div`).addClass('disabled')
         selectCompareMode = true
         studentSelectorModal.show()
     }
@@ -4099,14 +4580,11 @@ function drawHexamap(stage, container) {
         rightOffset = Math.max(rightOffset, scale + xx*scale + (yy*scale*0.5))
     })
 
-    console.log(`x_min ${x_min}, y_min ${y_min}`)
     let tilePairs = new Array(stage.HexaMap.length).fill(0)
     let pairCount = 0
     stage.HexaMap.forEach((tile, ind) => {
         let xx = tile.Pos[0] - x_min
         let yy = tile.Pos[1] - y_min
-
-        //console.log(`Drawing tile at ${xx},${yy}`)
 
         const x = xx*scale + (yy*scale*0.5) - leftOffset
         const y = yy* Math.sqrt(Math.pow(scale/2, 2)*3) + topOffset
@@ -4149,8 +4627,8 @@ function drawHexamap(stage, container) {
 
             }  else if (tile.Entity > 1000000) {
                 //Pyroxene Tile
-                let item = find(data.items, "Id", 90000)[0]
-                html += `<span class="tile-item" style="z-index:${yy}" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory', item.Category), getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><i class="fa-solid fa-gift"></i></span>`
+                let item = find(data.currency, "Id", 4)[0]
+                html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip(getTranslatedString(item, 'Name')+' &times;50')}"><i class="fa-solid fa-gift"></i></span>`
 
             } else switch (tile.Entity) {
                 case 101101:
@@ -4307,13 +4785,9 @@ function drawConquestHexamap(conquest, mapId, step, container) {
         rightOffset = Math.max(rightOffset, scale + xx*scale + (yy*scale*0.5))
     })
 
-    console.log(`x_min ${x_min}, y_min ${y_min}`)
-
     filteredTiles.forEach((tile, ind) => {
         let xx = tile.Pos[0] - x_min
         let yy = tile.Pos[1] - y_min
-
-        console.log(`Drawing tile at ${xx},${yy}`)
 
         const x = xx*scale + (yy*scale*0.5) - leftOffset
         const y = yy* Math.sqrt(Math.pow(scale/2, 2)*3) + topOffset

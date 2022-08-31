@@ -1,0 +1,7 @@
+#item-search-filters-panel >div{
+    max-height: calc(100vh - 2rem - 192px);
+    @include sm-down {
+        max-height: calc(((100vh - 74px) * 0.7 ) - 110px);
+    }
+    @include scrollable(auto)
+}

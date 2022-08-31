@@ -343,12 +343,6 @@
     ],
     "regions": [
         {
-            "abbreviation": "JPN",
-            "NameEn": "Japan",
-            "NameJp": "日本",
-            "NameKr": null,
-            "NameTw": "日服",
-            "NameCn": "日服",
             "studentlevel_max": 80,
             "weaponlevel_max": 50,
             "bondlevel_max": 50,
@@ -377,12 +371,6 @@
             ]
         },
         {
-            "abbreviation": "GLB",
-            "NameEn": "Global",
-            "NameJp": "グローバル",
-            "NameKr": null,
-            "NameTw": "國際服",
-            "NameCn": "国际服",
             "studentlevel_max": 75,
             "weaponlevel_max": 50,
             "bondlevel_max": 50,
@@ -400,10 +388,23 @@
                 { "characters": [20011], "start": 1661223600, "end": 1662429601 }
             ],
             "current_events": [],
-            "current_raid": [ {"raid": 6, "terrain": "Outdoor", "start": 1661225400, "end": 1661785200} ]
+            "current_raid": []
         }
     ],
     "changelog": [
+        {
+            "date": "2022/08/31",
+            "contents": [
+                "Items: Visual overhaul for item lists (can be toggled between the old, more compact layout and the new, more detailed layout) and added filters and sort options.",
+                "Items: Rearranged items into three tabs (Items, Furniture and Equipment) and added information for Consumable and Collectible type items.", 
+                "Crafting: Visual overhaul to match the other pages.", 
+                "Crafting: Corrected crafting nodes for Global server. (Note: the probability for 2nd Node items shown assume that the 2nd Node is chosen, this is not guaranteed for common grade nodes. i.e. you may get an item from either the 1st or 2nd Node)", 
+                "Improved the Search Bar to show more results and now searches Craft Nodes and Event Stages. Stages can now be searched for by name, area, stage type or event name.", 
+                "Recollection Lobbies and Furniture Interactions will no longer display if it has not been implemented yet on the selected Game Server.", 
+                "Changing Game Server or Language is now instant without a page reload.", 
+                "Various Translation updates and fixes."
+            ]
+        },
         {
             "date": "2022/08/24",
             "contents": [
@@ -503,17 +504,6 @@
             "contents": [
                 "Students: Added and updated skill descriptions for Korean and Japanese.", 
                 "Stages: Improved display of the Events tab."
-            ]
-        },
-        {
-            "date": "2022/07/03",
-            "contents": [
-                "Added partial Korean and Traditional Chinese translations.", 
-                "UI: Standardised stat and buff names in English to closer match the in-game terminology.", 
-                "Students: Improved interface for changing stat preview options.", 
-                "Stages: Added ability to preview stage maps in a larger window.", 
-                "Added a Service Worker to allow for more efficient caching of resources. (Should greatly reduce the amount of data usage if you are a frequent user)", 
-                "Schale DB can now be installed as a PWA."
             ]
         }
     ]
