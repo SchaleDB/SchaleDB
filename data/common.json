@@ -361,9 +361,13 @@
             "bounty_max": 9,
             "schooldungeon_max": 4,
             "current_gacha": [
-                { "characters": [20018, 10049], "start": 1661306400, "end": 1662516000 }
+                { "characters": [20018, 10049], "start": 1661306400, "end": 1662516000 },
+                { "characters": [10022, 10023], "start": 1662516000, "end": 1663120800 }
             ],
-            "current_events": [ {"event": 816, "start": 1661306400, "end": 1662516000} ],
+            "current_events": [
+                { "event":   816, "start": 1661306400, "end": 1662516000 },
+                { "event": 10804, "start": 1662516000, "end": 1663120800 }
+            ],
             "current_raid": [
                 { "raid":    4, "terrain": "Street", "start": 1661911200, "end": 1662490800 },
                 { "raid":    7, "terrain": "Street", "start": 1663120800, "end": 1663700400 },
@@ -393,9 +397,16 @@
     ],
     "changelog": [
         {
+            "date": "2022/09/03",
+            "contents": [
+                "Items: Improved load performance of item lists.",
+                "Items: Shops from which an item can be purchased are now displayed."
+            ]
+        },
+        {
             "date": "2022/08/31",
             "contents": [
-                "Items: Visual overhaul for item lists (can be toggled between the old, more compact layout and the new, more detailed layout) and added filters and sort options.",
+                "Items: Visual overhaul for item lists (can be toggled between the old, more compact layout and the new, more detailed layout) and added filters and sort options.", 
                 "Items: Rearranged items into three tabs (Items, Furniture and Equipment) and added information for Consumable and Collectible type items.", 
                 "Crafting: Visual overhaul to match the other pages.", 
                 "Crafting: Corrected crafting nodes for Global server. (Note: the probability for 2nd Node items shown assume that the 2nd Node is chosen, this is not guaranteed for common grade nodes. i.e. you may get an item from either the 1st or 2nd Node)", 
@@ -497,13 +508,6 @@
                 "Added student skill descriptions for Chinese.", 
                 "Fixed an issue where some item descriptions would not display correctly in Chinese.", 
                 "Improved handling of updates - Schale DB will now refresh automatically when there is an updated version available."
-            ]
-        },
-        {
-            "date": "2022/07/07",
-            "contents": [
-                "Students: Added and updated skill descriptions for Korean and Japanese.", 
-                "Stages: Improved display of the Events tab."
             ]
         }
     ]

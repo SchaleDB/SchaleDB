@@ -153,6 +153,8 @@ let equipmentList
 let loadedStageList = null
 let loadedItemList = null
 
+let loadObserver
+
 let region
 let student_bondalts
 let darkTheme
@@ -607,6 +609,7 @@ function loadLastModule() {
  * @param {*} entry (Optional) The id of the entry to navigate to
  */
 function loadModule(moduleName, entry=null) {
+    if (loadObserver) loadObserver.disconnect()
     if (moduleName == 'students') {
         loadedModule = 'students'
         $(".navbar-nav .nav-link").removeClass('active')
@@ -737,6 +740,8 @@ function loadModule(moduleName, entry=null) {
                     $('#item-select-grid').addClass('items-compact')
                     break;
             }
+
+            $('#item-select-grid').on('click', 'div[data-itemid]', function(e){loadItem($(this).data('itemid'))})
 
             $('#item-search-displaytype-detailed').tooltip({title: getBasicTooltip(translateUI('list_style_detailed')), html: true, placement: 'top'})
             $('#item-search-displaytype-compact').tooltip({title: getBasicTooltip(translateUI('list_style_compact')), html: true, placement: 'top'})
@@ -962,7 +967,7 @@ function loadModule(moduleName, entry=null) {
             birthdayStudents = []
 
             data.students.forEach(el => {
-                if (el.IsReleased[regionID]) {
+                if (el.IsReleased[regionID] && !el.PathName.includes('_')) {
                     var nextBirthday = getNextBirthdayDate(el.BirthDay)
                     if (nextBirthday.getTime() < nextWeek.getTime() && nextBirthday.getTime() >= currentDate.getTime())
                     birthdayStudents.push(el)
@@ -1797,6 +1802,7 @@ function loadItem(id) {
         $('#ba-equipment-recipe').empty().hide()
         $('#ba-item-usage').empty().hide()
         $('#ba-item-sources').empty().hide()
+        $('#ba-item-shops').empty().hide()
         if (item.Category == 'Material' || item.Category == 'CharacterExpGrowth') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
@@ -1829,6 +1835,17 @@ function loadItem(id) {
         if (mode == 'furniture') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
+        }
+
+        if (item.Shops) {
+            let html = ''
+            item.Shops.forEach((shop) => {
+                if (shop.Released[regionID]) html += getShopCardHTML(shop)
+            })
+            if (html != '') {
+                $('#ba-item-shops').html(`<div class="mb-2"><i>${translateUI('item_purchasedfrom')}</i></div><div class="selection-grid stage selection-grid-flex">${html}</div>`).show()
+                $('#ba-item-shops .shop-cost').tooltip({html: true, placement: 'top'})
+            }
         }
 
         $(`#ba-item-list-tab-${mode}`).tab('show')
@@ -2252,6 +2269,7 @@ function loadStage(id) {
                 }
 
                 $(`#ba-stage-drops-${el.toLowerCase()}`).html(`<div class="d-flex flex-wrap justify-content-center">${html}</div>`)
+
                 if (stage.Type == "FindGift") {
                     $(`#ba-stage-drops-${el.toLowerCase()}`).prepend(`<i class="d-block mb-2">${translateUI('rewards_findgift_msg')}</i><div class="d-flex flex-wrap justify-content-center"></div>`)
                 }
@@ -2370,7 +2388,7 @@ function populateEnemyList(containerId, formations) {
 function getStageName(stage, type) {
     switch (type) {
         case "Event":
-            return `${getLocalizedString('EventName', ''+stage.EventId)}\n${stage.Difficulty == 1 ? "Quest" : "Challenge"} ${stage.Stage.toString().padStart(2,'0')}`
+            return `${getLocalizedString('EventName', ''+stage.EventId % 10000)}\n${stage.Difficulty == 1 ? "Quest" : "Challenge"} ${stage.Stage.toString().padStart(2,'0')}`
         case "Campaign":
             return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
         case "WeekDungeon":
@@ -2978,9 +2996,35 @@ function getStageCardHTML(stage, dropChance = 0) {
     }
 }
 
+function getShopCardHTML(shop) {
+    let smallTextThreshold = label_enemy_smalltext_threshold[userLang]
+    let name = getLocalizedString('ShopCategory', shop.ShopCategory)
+    let costItem
+    let costType
+    switch (shop.CostType) {
+        case 'Item':
+            costItem = find(data.items, 'Id', shop.CostId)[0]
+            costType = costItem.Category
+            break
+        case 'Currency':
+            costItem = find(data.currency, 'Id', shop.CostId)[0]
+            costType = 'Currency'
+            break
+    }
+
+    let html = `<div class="selection-grid-card card-shop">
+    <div class="card-img"><img loading="lazy" src="images/ui/BG_Shop.png"></div>`
+
+    html += `<span class="card-badge shop-cost" title="${getRichTooltip(`images/items/${costItem.Icon}.png`, getTranslatedString(costItem, 'Name'), getLocalizedString('ItemCategory', costType), getRarityTier(costItem.Rarity), getTranslatedString(costItem, 'Desc').replace('&','&amp;'), 50, 'img-scale-larger')}"><img src="images/items/${costItem.Icon}.png"><span>&times;${abbreviateNumber(shop.CostAmount)}${shop.Amount > 1 ? ` (${shop.Amount})` : ''}</span></span>`
+    html += `<div class="card-label">`
+    html += `<span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
+    html += `</div></div>`
+    return html
+}
+
 function getEventCardHTML(eventId) {
     let eventIdImg = eventId % 10000
-    let name = getLocalizedString("EventName", eventId)
+    let name = getLocalizedString("EventName", eventIdImg) + (eventId > 10000 ? translateUI('event_rerun') : '')
 
     let logoLang
     if (regionID == 0 || !data.common.regions[regionID].events.includes(eventIdImg)) {
@@ -3264,7 +3308,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1) {
             html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${icon}.png`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/${icon}.png"><span class="ba-material-label">${getProbabilityText(chance)}</span></div>`
         }
     } else {
-        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}</div>`
+        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, getTranslatedString(item, 'Desc').replace('&','&amp;'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}</div>`
     }
     return html
 }
@@ -3444,39 +3488,26 @@ function updateSummonExSkillStatPreview() {
 
 function populateItemList(tab) {
     let itemsHtml = ""
-
     let itemCardGenerator
+    let placeholderGenerator = function(id) {
+        return `<div id="item-select-${id}" data-itemid="${id}" class="selection-grid-card ${gridItemDisplayStyle == 'compact' ? 'compact' : ''} card-items" style="display:none;"></div>`
+    }
     switch (gridItemDisplayStyle) {
         case 'detailed':
-            itemCardGenerator = getItemGridCardHTML
+            itemCardGenerator = getItemGridCardDetailedInnerHTML
             break;
         case 'compact':
-            itemCardGenerator = getItemCardHTML
-            break;
-        default:
-            itemCardGenerator = getItemGridCardHTML
+            itemCardGenerator = getItemGridCardCompactInnerHTML
             break;
     }
 
-    if (tab == 'equipment') {
-        $.each(data.equipment, function(i,el) {
-            if (el.IsReleased[regionID]) {
-                itemsHtml += itemCardGenerator(el,el.Id+2000000,'equipment')
-            }
-        })
-    } else if (tab == 'furniture') {
-        $.each(data.furniture, function(i,el) {
-            if (el.IsReleased[regionID]) {
-                itemsHtml += itemCardGenerator(el,el.Id+1000000,'furniture')
-            }
-        })
-    } else {
-        $.each(data.items, function(i,el) {
-            if (el.IsReleased[regionID]) {
-                itemsHtml += itemCardGenerator(el,el.Id,'items')
-            }
-        })
-    }
+    const itemOffset = getItemIdOffset(tab)
+    data[tab].forEach((item) => {
+        if (item.IsReleased[regionID]) {
+            itemsHtml += placeholderGenerator(item.Id+itemOffset)
+        }
+    })
+
     itemsHtml += `<div id="item-select-noresult" class="p-2 grid-text">${translateUI('no_results')}</div>`
     $('#item-search-filters-panel >div >div').hide()
     $(`#item-search-filters-panel >div >div.show-${tab}`).show()
@@ -3484,15 +3515,57 @@ function populateItemList(tab) {
     loadedItemList = tab
 
     $(`#item-select-grid`).html(itemsHtml)
+
+    updateItemList(true)
+
+    // Scroll the selected item into view automatically
     if (loadedItemType == tab) {
         $(`#item-select-${loadedItem.Id+getItemIdOffset(tab)}`).addClass('selected')
         let offset = $(`#item-select-${loadedItem.Id+getItemIdOffset(tab)}`).prop('offsetTop') - 100
         $('#ba-item-list-container .card-body').scrollTop((offset === undefined) ? 0 : offset)
     }
 
-    $('#item-select-grid .item-grid-card-compact').tooltip({html: true, placement: 'top', delay: { show: 200, hide: 0 }, container: $('.card-body')})
+    // Lazy load the content of each grid item for performance
+    if (loadObserver) loadObserver.disconnect()
+    loadObserver = new IntersectionObserver(function(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                //console.log(entry.target.id)
+                entry.target.innerHTML = itemCardGenerator(parseInt(entry.target.id.replace('item-select-','')))
+                if (gridItemDisplayStyle == 'compact') {
+                    $(entry.target).children('.card-compact').tooltip({html: true, placement: 'top', delay: { show: 200, hide: 0 }, container: $('.card-body')})
+                }
+                loadObserver.unobserve(entry.target)
+            }
+        })
+    }, {
+        root: $('#ba-item-list-container .card-body')[0]
+    })
+    $('#item-select-grid div[data-itemid]').each(function(i,el){
+        loadObserver.observe(el)
+    })
 
-    updateItemList(true)
+    function getItemGridCardDetailedInnerHTML(linkid) {
+        const item = find(data[loadedItemList], 'Id', linkid % 1000000)[0]
+        const name = getTranslatedString(item, "Name")
+        const smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
+        
+        let html = `<div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${loadedItemList}/${item.Icon}.png"></div>`
+        if (loadedItemList == 'furniture' && item.Interaction[regionID]) {
+            html += '<div class="card-badge furniture-interaction"><img src="images/ui/Cafe_Icon_Interaction.png"></div>'
+        }
+        if (loadedItemList == 'equipment' && item.Id >= 1000) {
+            html += `<div class="card-badge equipment-tier">T${item.Tier}</div>`
+        }
+        html += `<div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span></div>`
+        return html
+    }
+    
+    function getItemGridCardCompactInnerHTML(linkid) {
+        const item = find(data[loadedItemList], 'Id', linkid % 1000000)[0]
+        const name = getTranslatedString(item, "Name")
+        return `<div class="card-compact ba-item-${item.Rarity.toLowerCase()}" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><img loading="lazy" src="images/${loadedItemList}/${item.Icon}.png"></div>`
+    }
 }
 
 function getItemIdOffset(type) {
@@ -3539,27 +3612,6 @@ function getCraftingCardHTML(node) {
     html += `<div class="card-label">`
     html += `<span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
     html += `</div></div>`
-    return html
-}
-
-function getItemGridCardHTML(item, linkid, icontype) {
-    let name = getTranslatedString(item, "Name")
-    let smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
-    
-    let html = `<div id="item-select-${linkid}" class="selection-grid-card card-items" onclick="loadItem(${linkid})"><div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${icontype}/${item.Icon}.png"></div>`
-    if (icontype == 'furniture' && item.Interaction[regionID]) {
-        html += '<div class="card-badge furniture-interaction"><img src="images/ui/Cafe_Icon_Interaction.png"></div>'
-    }
-    if (icontype == 'equipment' && item.Id >= 1000 ) {
-        html += `<div class="card-badge equipment-tier">T${item.Tier}</div>`
-    }
-    html += `<div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span></div>`
-    html += `</div>`
-    return html
-}
-
-function getItemCardHTML(item, linkid, icontype) {
-    var html = `<div id="item-select-${linkid}" class="item-grid-card-compact card-items ba-item-${item.Rarity.toLowerCase()}" onclick="loadItem('${linkid}')" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><img loading="lazy" src="images/${icontype}/${item.Icon}.png"></div>`
     return html
 }
 
@@ -4271,7 +4323,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.equipment, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/equipment/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id+2000000})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/equipment/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': el.Id >= 1000 ? `T${el.Tier}` : getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id+2000000})`})
             if (results.length >= maxResults) return false
         }
     })

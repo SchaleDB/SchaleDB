@@ -241,6 +241,33 @@
             top: 4px;
         }
 
+        &.shop-cost {
+            
+            background-color: var(--col-bg-imglabel);
+            color: var(--col-theme-text);
+
+            padding: 4px 8px;
+            z-index: 30;
+
+            img {
+                position: absolute;
+                top: 0px;
+                left: 2px;
+                height: 20px;
+                width: auto;
+            }
+
+            span {
+                font-weight: 700;
+                margin-left: 18px;
+            }
+            
+            font-size: 12px;
+            line-height: 12px;
+            left: 4px;
+            top: 4px;
+        }
+
         &.enemy-rank {
             border-radius: none;
             top: 4px;
@@ -282,7 +309,7 @@
             padding: 3px;
 
             left: 4px;
-            top: 48px;
+            top: 46px;
         }
 
         &.furniture-interaction {
@@ -390,8 +417,52 @@
 
     }
 
+    // Compact Items
+
+    &.compact {
+
+        @include circular;
+        @include transition(filter);
+
+        overflow: hidden;
+
+        &.selected {
+            outline: 4px solid var(--col-theme-text);
+            outline-offset: -2px;
+            @include circular;
+
+            .card-compact {
+                background-color: var(--col-bg-imglabel-invert)
+            }
+
+        }
+
+        .card-compact {
+
+            padding: 3px;
+            height: 100%;
+            width: 100%;
+
+            img {
+
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
+        }
+    }
+
     &:hover, &:focus, &:active {
 
+        &.card-shop {
+            .card-img {
+                img {
+                    filter: none;
+                    transform: none;
+                }
+            }
+        }
         .card-img {
 
             img {
@@ -399,6 +470,10 @@
                 transform: scale(1.15);
                 @include sharp-img;
             }
+        }
+
+        &.compact {
+            filter: brightness(0.7);
         }
 
         .card-bg {
@@ -536,40 +611,11 @@
 
     }
 
-}
+    &.card-shop {
 
-.item-grid-card-compact {
-
-    position: relative;
-    margin: auto;
-    height: var(--var-grid-card-height);
-    width: var(--var-grid-card-width);
-    padding: 3px;
-    @include card-shadow;
-    overflow: hidden;
-    @include circular;
-    cursor: pointer;
-    @include unselectable;
-    @include transition(filter);
-
-    &.selected {
-        outline: 4px solid var(--col-theme-text);
-        outline-offset: -2px;
-
-        background-color: var(--col-bg-imglabel-invert)
+        cursor: default;
     }
 
-    &:hover {
-        filter: brightness(0.7);
-    }
-
-    img {
-        
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-        object-position: center center;
-    }
 }
 
 @include md-down{
