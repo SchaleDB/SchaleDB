@@ -29,7 +29,7 @@
 }
 
 @mixin text-clamp($lines) {
-    word-wrap: normal;
+    word-wrap: break-word;
     display: -webkit-box;
     -webkit-line-clamp: $lines;
     line-clamp: $lines;
