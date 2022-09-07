@@ -268,7 +268,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_CHESED_EXSKILL01",
                     "NameEn": "Call of the Throne",
-                    "DescEn": "Summons automaton soldiers. Chesed's ATG gauge gradually fills while soldiers are alive and resets after all soldiers have been defeated. Automaton soldiers also increase Chesed's groggy gauge <?1>when defeated.\nIf not killed within 20s, automaton soldiers will use the skill \"Self-Destruct Activated\", changing their <s:FormChange> to a self-destruct attack that deals 3000% damage to enemies in a circular area around them.",
+                    "DescEn": "Summons automaton soldiers. Chesed's ATG gauge gradually fills while soldiers are alive and resets after all soldiers have been defeated. Automaton soldiers also increase Chesed's groggy gauge <?1>when defeated.\nIf not killed within 20s, automaton soldiers will use the skill \"Self-Destruct Activated\", changing their <s:FormChange> to a self-destruct attack that deals 3000% damage to enemies in a circular area around them.\nWhenever a Goliath is defeated, releases an EMP blast that inflicts <c:Paralysis> on all other automaton soldiers in a circular area for 3s.",
                     "ParametersEn": [
                         [
                             "",
@@ -1577,7 +1577,7 @@
                             "",
                             "",
                             "",
-                            " และเมื่อใช้สกิลEX โจมตีจะลด<d:HealEffectiveness>ของเป้าหมายลง 80% (เป็นเวลา 30 วินาที)"
+                            " และเมื่อใช้สกิล EX โจมตีจะลด<d:HealEffectiveness>ของเป้าหมายลง 80% (เป็นเวลา 30 วินาที)"
                         ],
                         [
                             "70,000",
@@ -2103,7 +2103,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL03",
                     "NameEn": "Erosion Tower Construction",
-                    "DescEn": "Summons an Erosion Tower, decreasing the <d:CostRegen> of enemies and allies by <b>350</b> in a circular area around it and forcing nearby defense turrets to attack enemies instead of Hod. The tower's area of effect expands every 15s.",
+                    "DescEn": "Summons an Erosion Tower, decreasing the <d:CostRegen> of enemies by <b>350</b> in a circular area around it and forcing nearby defense turrets to attack enemies instead of Hod. The tower's area of effect expands every 15s.",
                     "NameJp": "インベイドピラー生成",
                     "DescJp": "インベイドピラーを召喚。インベイドピラーは15秒毎に、侵食範囲を拡大していきます。\n侵食範囲内に入った敵の<d:CostRegen>を350減少。侵食範囲内に入ったフィールドターレットは、ホドではなく敵を攻撃するようになります。",
                     "NameKr": "침식 타워 생성",
@@ -2113,7 +2113,7 @@
                     "NameCn": null,
                     "DescCn": null,
                     "NameTh": "สร้างเสากัดกร่อน",
-                    "DescTh": "เรียกเสาอินเวเดอร์ออกมา<?1> โดยรัศมีทำการของเสาจะเพิ่มขึ้นทุก 15 วินาที\nลด<d:CostRegen>ของทุกเป้าหมายที่อยู่ในรัศมี <b>350</b> หากมีป้อมปืนอยู่ในรัศมีจะเปลี่ยนเป้าหมายของป้อมปืนให้โจมตีศัตรูแทนตัวของฮ็อด",
+                    "DescTh": "สร้างเสากัดกร่อนออกมา<?1> โดยรัศมีทำการของเสาจะเพิ่มขึ้นทุก 15 วินาที\nลด<d:CostRegen>ของทุกเป้าหมายที่อยู่ในรัศมี <b>350</b> รอบเสา หากมีป้อมปืนอยู่ในรัศมีจะเปลี่ยนเป้าหมายของป้อมปืนให้โจมตีศัตรูแทนตัวของฮ็อด",
                     "ParametersTh": [
                         [
                             "",
@@ -2170,7 +2170,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_PASSIVESKILL02",
                     "NameEn": "Behind the Glory",
-                    "DescEn": "Hod and all summoned Erosion Towers are immune to the effects of crowd-control. However, crowd-control abilities will fill their circular <b>stun gauge</b> proportional to the duration of the effect that would be inflicted.<?2>\nOnce the stun gauge reaches a total equivalent to <?1> of crowd-control duration, inflicts the following effects:\n<b>Hod</b>: Increases <d:DamagedRatio> by 300% for 30s and decrease Hod's ATG gauge.\n<b>Erosion Tower</b>: Increases <d:DamagedRatio> by 300% for 30s and reduce the tower's area of effect by 1 stage.",
+                    "DescEn": "Hod and all summoned Erosion Towers are immune to the effects of Crowd Control. However, Crowd Control abilities will fill their circular <b>CC gauge</b> proportional to the duration of the effect that would be inflicted.<?2>\nOnce the CC gauge reaches a total equivalent to <?1> of Crowd Control duration, inflicts the following effects:\n<b>Hod</b>: Increases <d:DamagedRatio> by 300% for 30s and decrease Hod's ATG gauge.\n<b>Erosion Tower</b>: Increases <d:DamagedRatio> by 300% for 30s and reduce the tower's area of effect by 1 stage.",
                     "ParametersEn": [
                         [
                             "6s",
@@ -2186,7 +2186,7 @@
                             "",
                             "",
                             "",
-                            "\nThe amount added to the stun gauge is multiplied by the inflicter's CC power stat."
+                            "\nThe amount added to the CC gauge is multiplied by the inflicter's CC Power stat."
                         ]
                     ],
                     "NameJp": "栄光の裏側",
@@ -2246,7 +2246,7 @@
                             "",
                             "",
                             "",
-                            "\nThe amount added to the stun gauge is multiplied by the inflicter's CC power stat."
+                            "\nThe amount added to the CC gauge is multiplied by the inflicter's CC Power stat."
                         ]
                     ],
                     "NameCn": null,
@@ -2266,11 +2266,11 @@
                             "",
                             "",
                             "",
-                            "\nThe amount added to the stun gauge is multiplied by the inflicter's CC power stat."
+                            "\nThe amount added to the CC gauge is multiplied by the inflicter's CC Power stat."
                         ]
                     ],
                     "NameTh": "อีกด้านของเกียรติยศ",
-                    "DescTh": "ฮ็อดและเสาอินเวเดอร์จะไม่ได้รับผลของเอฟเฟคกดขี่ แต่ระยะเวลาของเอฟเฟคกดขี่ที่ได้รับจะถูกนำไปเพิ่มเกจพิเศษแทน<?2>\nเมื่อเกจพิเศษมีระยะเวลาของเอฟเฟคกดขี่ครบ <?1> จะส่งผลต่อไปนี้\nฮ็อด : เพิ่ม<d:DamagedRatio> 300%, เพิ่มเกจมึนงงและลด ATG ของฮ็อดลง\nเสาอินเวเดอร์ : เพิ่ม<d:DamagedRatio> 300% และลดรัศมีที่ส่งผลลง 1 ขั้น",
+                    "DescTh": "ฮ็อดและเสากัดกร่อนจะไม่ได้รับผลของเอฟเฟคกดขี่ แต่ระยะเวลาของเอฟเฟคกดขี่ที่ได้รับจะถูกนำไปเพิ่มเกจพิเศษแทน<?2>\nเมื่อเกจพิเศษมีระยะเวลาของเอฟเฟคกดขี่ครบ <?1> จะส่งผลต่อไปนี้\nฮ็อด : เพิ่ม<d:DamagedRatio> 300%, เพิ่มเกจมึนงงและลด ATG ของฮ็อดลง\nเสากัดกร่อน : เพิ่ม<d:DamagedRatio> 300% และลดรัศมีที่ส่งผลลง 1 ขั้น",
                     "ParametersTh": [
                         [
                             "6 วินาที",
@@ -2306,7 +2306,7 @@
                     "NameCn": null,
                     "DescCn": null,
                     "NameTh": "เงาแห่งเกียรติยศ",
-                    "DescTh": "ฮ็อดและเสาอินเวเดอร์จะมีค่าต้านทานคริเพิ่ม 400%\nเสาอินเวเดอร์จะไม่ได้รับผลจากการถูกเอฟเฟค<d:ConcentratedTarget>หมายหัว"
+                    "DescTh": "ฮ็อดและเสากัดกร่อนจะมีค่าต้านทานคริเพิ่ม 400%\nเสากัดกร่อนจะไม่ได้รับผลจากการถูกเอฟเฟค<d:ConcentratedTarget>หมายหัว"
                 }
             ],
             "NameEn": "Hod",

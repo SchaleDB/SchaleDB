@@ -352,30 +352,24 @@
             "campaign_max": 19,
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810,   811,   812, 
-                  813,   814,   815,   816,   701, 10801, 10802, 10803
+                  813,   814,   815,   816,   701, 10801, 10802, 10803, 10804
             ],
-            "event_max": 815,
             "event_701_max": 10,
             "event_701_challenge_max": 1,
             "commission_max": 11,
             "bounty_max": 9,
             "schooldungeon_max": 4,
             "current_gacha": [
-                { "characters": [20018, 10049], "start": 1661306400, "end": 1662516000 },
                 { "characters": [10022, 10023], "start": 1662516000, "end": 1663120800 }
             ],
-            "current_events": [
-                { "event":   816, "start": 1661306400, "end": 1662516000 },
-                { "event": 10804, "start": 1662516000, "end": 1663120800 }
-            ],
+            "current_events": [ {"event": 10804, "start": 1662516000, "end": 1663120800} ],
             "current_raid": [
-                { "raid":    4, "terrain": "Street", "start": 1661911200, "end": 1662490800 },
                 { "raid":    7, "terrain": "Street", "start": 1663120800, "end": 1663700400 },
                 { "raid": 7000,                      "start": 1663725600, "end": 1664305200 }
             ]
         },
         {
-            "studentlevel_max": 75,
+            "studentlevel_max": 78,
             "weaponlevel_max": 50,
             "bondlevel_max": 50,
             "gear1_max": 6,
@@ -392,19 +386,15 @@
                 { "characters": [10033]       , "start": 1662429600, "end": 1662775200 },
                 { "characters": [20012, 20013], "start": 1662775200, "end": 1663639200 }
             ],
-            "current_events": [
-                { "event":   810, "start": 1662429600, "end": 1663639201 }
-            ],
-            "current_raid": [
-                { "raid": 7, "terrain": "Street" , "start": 1663034400, "end": 1663614000 }
-            ]
+            "current_events": [ {"event": 810, "start": 1662429600, "end": 1663639201} ],
+            "current_raid": [ {"raid": 7, "terrain": "Street", "start": 1663034400, "end": 1663614000} ]
         }
     ],
     "changelog": [
         {
             "date": "2022/09/03",
             "contents": [
-                "Items: Improved load performance of item lists.",
+                "Items: Improved load performance of item lists.", 
                 "Items: Shops from which an item can be purchased are now displayed."
             ]
         },
