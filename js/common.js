@@ -559,8 +559,24 @@ $.when($.ready, loadPromise).then(function() {
 
     //Keyboard Shortcut for search
     $(document).on('keydown', function(e) {
-        if (e.ctrlKey && e.code === 'KeyK') {
-            $('#ba-navbar-search').trigger('focus')
+        // Ignore shortcuts if an input is focused
+        if ($('input:focus').length) return
+
+        // Ctrl + K or '/' for Search
+        if (e.ctrlKey && e.code === 'KeyK' || e.code === 'Slash') {
+            if ($('#ba-student-modal-students').hasClass('show')) {
+                $('#ba-student-search-text').trigger('focus')
+            } else {
+                $('#ba-navbar-search').trigger('focus')
+            }
+            e.preventDefault()
+        }
+
+        // Ctrl + L key for Student List
+        if (e.ctrlKey && e.code === "KeyL") {
+            if ($('#ba-student-modal-students') && !$('#ba-student-modal-students').hasClass('show')) {
+                $('#ba-student-modal-students').modal('show', 'shortcut')
+            }
             e.preventDefault()
         }
     })
@@ -682,8 +698,10 @@ function loadModule(moduleName, entry=null) {
             $('.ba-summon-toggle').tooltip({title: getBasicTooltip(translateUI('tooltip_vehiclestats')), placement: 'top', html: true})
             $('#ba-student-search-reset').tooltip({title: getBasicTooltip(translateUI('student_search_filters_clear')), placement: 'top', html: true})
 
-            $('#ba-student-modal-students').on('shown.bs.modal', function () {
-                $('#ba-student-search-text').focus()
+            $('#ba-student-modal-students').on('shown.bs.modal', function (ev) {
+                if (ev.relatedTarget === 'shortcut') {
+                    $('#ba-student-search-text').trigger('focus')
+                }
             })
 
             $('#ba-student-search-text').on('input', function() {
@@ -4274,14 +4292,15 @@ function allSearch() {
     $('#navbar-search-results').scrollTop(0)
     if (searchTerm == "") {
         $('#navbar-search-results').html('').hide()
-        $('#ba-navbar-search').removeClass('has-text results-open')
+        $('#navbar-search').removeClass('has-text')
+        $('#ba-navbar-search').removeClass('results-open')
         $('#navbar-search-clear').hide()
         searchResultsCount = 0
         searchResultsSelection = 0
         return true
     }
     $('#navbar-search-clear').show()
-    $('#ba-navbar-search').addClass('has-text')
+    $('#navbar-search').addClass('has-text')
     $('#navbar-search-results').html('').show()
     let results = [], maxResults = 25
 

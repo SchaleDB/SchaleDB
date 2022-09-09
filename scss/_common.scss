@@ -170,14 +170,41 @@ input[type="search" i]::-webkit-search-cancel-button {
     appearance: none;
 }
 
-.search-clear {
-    text-align: center;
-    position: absolute;
-    top: 11px;
-    right: 11px;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
+#navbar-search {
+
+    .search-clear {
+        text-align: center;
+        position: absolute;
+        top: 11px;
+        right: 11px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+    
+    .shortcut-hint {
+        @include unselectable;
+        pointer-events: none;
+        position: absolute;
+
+        right: 5px;
+        top: 5px;
+
+        height: 28px;
+
+        background-color: var(--col-theme-accent);
+        border: 1px solid var(--col-theme-text-t);
+        border-radius: 0.25rem;
+
+        opacity: 0.75;
+        padding: 0.125rem 0.5rem;
+
+    }
+
+    &.has-text .shortcut-hint {
+        display: none;
+    }
+
 }
 
 .has-tooltip {

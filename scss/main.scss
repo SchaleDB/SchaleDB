@@ -1057,7 +1057,7 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     transition: width var(--var-animation-duration) ease, background-color var(--var-animation-duration) ease;
 }
 
-#ba-navbar-search:focus, #ba-navbar-search.has-text {
+#ba-navbar-search:focus, #navbar-search.has-text #ba-navbar-search {
     width: 340px;
     background-color: var(--col-btn-secondary);
 }
@@ -1073,9 +1073,10 @@ table.table-striker-bonus tr:nth-child(1), table.table-striker-bonus tr:nth-chil
     top: 11px;
     left: 11px;
     color: var(--col-panel-separator);
+    pointer-events: none;
 }
 
-#ba-navbar-search:focus+i, #ba-navbar-search.has-text+i {
+#ba-navbar-search:focus+i, #navbar-search.has-text #navbar-search-icon {
     color: var(--col-theme-text);
 }
 
