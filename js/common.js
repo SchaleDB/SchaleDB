@@ -682,6 +682,10 @@ function loadModule(moduleName, entry=null) {
             $('.ba-summon-toggle').tooltip({title: getBasicTooltip(translateUI('tooltip_vehiclestats')), placement: 'top', html: true})
             $('#ba-student-search-reset').tooltip({title: getBasicTooltip(translateUI('student_search_filters_clear')), placement: 'top', html: true})
 
+            $('#ba-student-modal-students').on('shown.bs.modal', function () {
+                $('#ba-student-search-text').focus()
+            })
+
             $('#ba-student-search-text').on('input', function() {
                 if (searchDelayTimeout) {
                     clearTimeout(searchDelayTimeout)
