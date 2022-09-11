@@ -1046,7 +1046,7 @@ a.nav-link.disabled {
     transition: width var(--var-animation-duration) ease, background-color var(--var-animation-duration) ease;
 }
 
-#ba-navbar-search:focus, #ba-navbar-search.has-text {
+#ba-navbar-search:focus, #navbar-search.has-text #ba-navbar-search {
     width: 340px;
     background-color: var(--col-btn-secondary);
 }
@@ -1061,10 +1061,11 @@ a.nav-link.disabled {
     position: absolute;
     top: 11px;
     left: 11px;
-    color: var(--col-panel-separator);
+    color: var(--col-theme-text-t);
+    pointer-events: none;
 }
 
-#ba-navbar-search:focus+i, #ba-navbar-search.has-text+i {
+#ba-navbar-search:focus+i, #navbar-search.has-text #navbar-search-icon {
     color: var(--col-theme-text);
 }
 

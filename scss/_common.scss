@@ -146,6 +146,10 @@ p {
     text-decoration: none;
 }
 
+.changelog a {
+    @extend .text-emphasis;
+}
+
 .only-lt {
     opacity: var(--var-opacity-lightonly);
     transition: opacity ease var(--var-animation-duration);
@@ -170,14 +174,40 @@ input[type="search" i]::-webkit-search-cancel-button {
     appearance: none;
 }
 
-.search-clear {
-    text-align: center;
-    position: absolute;
-    top: 11px;
-    right: 11px;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
+#navbar-search {
+
+    .search-clear {
+        text-align: center;
+        position: absolute;
+        top: 11px;
+        right: 11px;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+    }
+    
+    .shortcut-hint {
+        @include unselectable;
+        pointer-events: none;
+        position: absolute;
+
+        right: 5px;
+        top: 5px;
+
+        height: 28px;
+
+        color: var(--col-theme-text-t);
+        background-color: var(--col-theme-accent);
+        border-radius: 0.25rem;
+
+        padding: 0.125rem 0.5rem;
+
+    }
+
+    &.has-text .shortcut-hint {
+        display: none;
+    }
+
 }
 
 .has-tooltip {

@@ -599,10 +599,48 @@ $.when($.ready, loadPromise).then(function() {
 
     //Keyboard Shortcut for search
     $(document).on('keydown', function(e) {
-        if (e.ctrlKey && e.code === 'KeyK') {
-            $('#ba-navbar-search').trigger('focus')
-            e.preventDefault()
+
+        // Esc: Defocus current input field
+        if (e.code === 'Escape') {
+            $('input:focus').trigger('blur')
         }
+
+        // Combination keyboard shortcuts
+        if (e.ctrlKey || e.metaKey) {
+
+            // Ctrl + K: Search
+            if (e.code === 'KeyK') {
+                focusSearch()
+                e.preventDefault()
+            }
+
+        }
+
+        // Ignore single key shortcuts if an input is focused
+        if ($('input:focus').length) return
+
+        switch (e.code) {
+            case 'Slash':
+                focusSearch()
+                e.preventDefault()
+                break
+            case 'KeyL':
+                if (loadedModule === 'students' && !$('#ba-student-modal-students').hasClass('show')) {
+                    $('#ba-student-modal-students').modal('show', 'shortcut')
+                }
+                e.preventDefault()
+                break
+        }
+
+        function focusSearch() {
+            if ($('#ba-student-modal-students').hasClass('show')) {
+                $('#ba-student-search-text').trigger('focus')
+            } else {
+                $('#ba-navbar-search').trigger('focus')
+            }
+        }
+
+        
     })
 
     $(window).on('popstate', () => loadModuleFromURL(false))
@@ -726,6 +764,12 @@ function loadModule(moduleName, entry=null) {
             $('#ba-statpreview-status-strikerbonus').tooltip({title: getBasicTooltip(translateUI('tooltip_supportstats')), placement: 'top', html: true})
             $('.ba-summon-toggle').tooltip({title: getBasicTooltip(translateUI('tooltip_vehiclestats')), placement: 'top', html: true})
             $('#ba-student-search-reset').tooltip({title: getBasicTooltip(translateUI('student_search_filters_clear')), placement: 'top', html: true})
+
+            $('#ba-student-modal-students').on('shown.bs.modal', function (ev) {
+                if (ev.relatedTarget === 'shortcut') {
+                    $('#ba-student-search-text').trigger('focus')
+                }
+            })
 
             $('#ba-student-search-text').on('input', function() {
                 if (searchDelayTimeout) {
@@ -4336,14 +4380,15 @@ function allSearch() {
     $('#navbar-search-results').scrollTop(0)
     if (searchTerm == "") {
         $('#navbar-search-results').html('').hide()
-        $('#ba-navbar-search').removeClass('has-text results-open')
+        $('#navbar-search').removeClass('has-text')
+        $('#ba-navbar-search').removeClass('results-open')
         $('#navbar-search-clear').hide()
         searchResultsCount = 0
         searchResultsSelection = 0
         return true
     }
     $('#navbar-search-clear').show()
-    $('#ba-navbar-search').addClass('has-text')
+    $('#navbar-search').addClass('has-text')
     $('#navbar-search-results').html('').show()
     let results = [], maxResults = 25
 
@@ -4476,33 +4521,41 @@ function allSearch() {
 }
 
 function searchNavigate(ev) {
-    if (ev.keyCode == 13) {
-        ev.preventDefault()
-        if (ev.type == "keyup") {
-            if (searchResultsSelection == 0 && searchResultsCount > 0) {
-                $('#ba-search-result-item-1').trigger("onclick")
-            } else {
-                $('#ba-search-result-item-'+searchResultsSelection).trigger("onclick")
+    switch (ev.code) {
+        case 'Enter':
+            ev.preventDefault()
+            if (ev.type == "keyup") {
+                if (searchResultsSelection == 0 && searchResultsCount > 0) {
+                    $('#ba-search-result-item-1').trigger("onclick")
+                } else {
+                    $('#ba-search-result-item-'+searchResultsSelection).trigger("onclick")
+                }
             }
-        }
-    } if (ev.keyCode == 40) {
-        ev.preventDefault()
-        if (ev.type == "keydown" && searchResultsSelection < searchResultsCount) {
-            searchResultsSelection++
-            $('.ba-search-result-item').removeClass("selected")
-            $('#ba-search-result-item-'+searchResultsSelection).addClass("selected")
-            $(`#ba-search-result-item-${searchResultsSelection}`)[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
-        }
-    } else if (ev.keyCode == 38) {
-        ev.preventDefault()
-        if (ev.type == "keydown" && searchResultsSelection > 1)  {
-            searchResultsSelection--
-            $('.ba-search-result-item').removeClass("selected")
-            $('#ba-search-result-item-'+searchResultsSelection).addClass("selected")
-            $(`#ba-search-result-item-${searchResultsSelection}`)[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
-        }
-        
-    } 
+            break
+        case 'ArrowDown':
+            ev.preventDefault()
+            if (ev.type == "keydown" && searchResultsSelection < searchResultsCount) {
+                searchResultsSelection++
+                $('.ba-search-result-item').removeClass("selected")
+                $('#ba-search-result-item-'+searchResultsSelection).addClass("selected")
+                $(`#ba-search-result-item-${searchResultsSelection}`)[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
+            }
+            break
+        case 'ArrowUp':
+            ev.preventDefault()
+            if (ev.type == "keydown" && searchResultsSelection > 1)  {
+                searchResultsSelection--
+                $('.ba-search-result-item').removeClass("selected")
+                $('#ba-search-result-item-'+searchResultsSelection).addClass("selected")
+                $(`#ba-search-result-item-${searchResultsSelection}`)[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
+            }
+            break
+        case 'Escape':
+            ev.preventDefault()
+            $('#navbar-search-clear').trigger('click')
+            break
+    }
+
 }
 
 /**
