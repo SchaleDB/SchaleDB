@@ -190,16 +190,37 @@ input[type="search" i]::-webkit-search-cancel-button {
 
 .ba-stats {
 
+    &.striker-bonus .row >div:nth-child(-n+4) {
+        color: var(--col-text-emphasis);
+
+        .stat-help {
+            display: none;
+        }
+    }
+
+    .row >div {
+        position: relative;
+        padding: 0.5rem;
+    }
+
     .stat-icon {
-        display: none;
-        @include sharp-img;
+
+        @include drop-shadow;
+        margin-top: -2px;
+        width: 26px;
+        min-width: 26px;
+        height: 26px;
         margin-right: 0.5rem;
-        height: 22px;
-        width: auto;
-        filter: grayscale(1) brightness(1.4);
-    
-        &.active {
-            filter: none;
+        
+
+        img {
+            @include unselectable;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            opacity: 0.85;
+            background-color: rgba(0, 0, 0, 0.4);
+            @include circular;
         }
     }
 
@@ -231,7 +252,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 
         .stat-base {
             display: inline-block;
-            min-width: 4rem;
+            //min-width: 4rem;
             font-weight: 400;
         }
         .stat-flat {

@@ -453,7 +453,7 @@
         "Buff_EnhancePierceRate": "Increases the bonus damage dealt by Piercing type attacks against Heavy Armor targets.",
         "Buff_EnhanceMysticRate": "Increases the bonus damage dealt by Mystic type attacks against Special Armor targets.",
         "Buff_HealByHit_Damaged": "Restores HP each time damage is taken from an attack.",
-        "Buff_HealEffectiveness": "Increases the amount of HP restored from healing abilities.",
+        "Buff_HealEffectiveness": "Increases the amount of HP restored from healing abilities that target this character.",
         "Buff_HealPower": "Increases the amount of HP restored by healing abilities, and damage absorbed by barrier abilities.",
         "Buff_HIT": "Decreases the chance of missing when attacking.",
         "Buff_MAXHP": "Increases maximum HP.",
@@ -485,7 +485,7 @@
         "Debuff_EnhancePierceRate": "Decreases the bonus damage dealt by Piercing type attacks against Heavy Armor targets.",
         "Debuff_EnhanceMysticRate": "Decreases the bonus damage dealt by Mystic type attacks against Special Armor targets.",
         "Debuff_HealedLimit": "Limits the amount of HP healing abilities will restore.",
-        "Debuff_HealEffectiveness": "Decreases the amount of HP restored from healing abilities.",
+        "Debuff_HealEffectiveness": "Decreases the amount of HP restored from healing abilities that target this character.",
         "Debuff_HealPower": "Decreases the amount of HP restored by healing abilities, and damage absorbed by barrier abilities.",
         "Debuff_Hieronymus": "Inflicts continuous damage over time. Inflicts a large amount of damage in a circular area around the target if this debuff is not removed before it expires. This debuff can only be removed by healing the afflicted to 100% HP.",
         "Debuff_HIT": "Increases the chance of missing when attacking.",
@@ -718,7 +718,8 @@
         "toast_import_failure": "導入學生集出錯",
         "toast_import_copy": "導入字符串已複製到剪貼板",
         "stat_defense_tooltip": "受到傷害降低：{0}",
-        "stat_crit_tooltip": "暴擊幾率：{0}\n<small><i>對於一個暴擊抵抗力100的敵人</i></small>",
+        "stat_crit_tooltip": "暴擊幾率：",
+        "stat_crit_amount_tooltip": "{0}&nbsp;<small><i>(對於一個暴擊抵抗力{1}的敵人)</i></small>",
         "stat_stability_tooltip": "最低傷害：{0}"
     }
 }

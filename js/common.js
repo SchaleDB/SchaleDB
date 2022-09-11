@@ -26,6 +26,11 @@ const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 50
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_01", "Defense": "TimeAttack_SlotBG_02", "Destruction": "TimeAttack_SlotBG_03"}
 const searchDelay = 100
 
+const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','AmmoCount']
+const studentStatListFull = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','AttackSpeed','BlockRate','DefensePenetration', 'AmmoCount']
+const enemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','MoveSpeed','AmmoCount']
+const raidEnemyStatList = ['MaxHP','AttackPower','DefensePower','DamagedRatio','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range',]
+
 let userLang
 let regionID
 
@@ -348,9 +353,15 @@ let itemSearchOptions = {
  */
  class CharacterStats {
     
-    constructor(character, level, stargrade) {
+    constructor(character, level, stargrade, scaletype=0) {
         this.stats = {}
-        let levelscale = ((level-1)/99).toFixed(4)
+        let levelscale
+        if (scaletype == 0) {
+            levelscale = ((level-1)/99).toFixed(4)
+        } else if (scaletype == 1) {
+            levelscale = CharacterStats.getTimeAttackLevelScale(level)
+        }
+
         let MaxHP = Math.ceil((Math.round((character.MaxHP1 + (character.MaxHP100-character.MaxHP1)*levelscale).toFixed(4))*starscale_hp[stargrade-1]).toFixed(4))
         let AttackPower = Math.ceil((Math.round((character.AttackPower1 + (character.AttackPower100-character.AttackPower1)*levelscale).toFixed(4))*starscale_attack[stargrade-1]).toFixed(4))
         let DefensePower = Math.round((character.DefensePower1 + (character.DefensePower100-character.DefensePower1)*levelscale).toFixed(4))
@@ -370,13 +381,14 @@ let itemSearchOptions = {
         this.stats['AmmoCost'] = [character.AmmoCost,0,1]
         this.stats['Range'] = [character.Range,0,1]
         this.stats['RegenCost'] = [character.RegenCost,0,1]
+        this.stats['DamagedRatio'] = [character.DamagedRatio,0,1]
         this.stats['HealEffectivenessRate'] = [10000,0,1]
         this.stats['OppressionPower'] = [100,0,1]
         this.stats['OppressionResist'] = [100,0,1]
         this.stats['AttackSpeed'] = [10000,0,1]
         this.stats['BlockRate'] = [0,0,1]
         this.stats['DefensePenetration'] = [0,0,1]
-        this.stats['MoveSpeed'] = [10000,0,1]
+        this.stats['MoveSpeed'] = [character.MoveSpeed ? character.MoveSpeed : 10000,0,1]
     }
 
     addBuff(stat, amount) {
@@ -432,7 +444,9 @@ let itemSearchOptions = {
      */
     getBaseString(stat) {
         let total = this.stats[stat][0]
-        if (CharacterStats.isRateStat(stat)) {
+        if (stat == 'DamagedRatio') {
+            return ((total-10000)/100).toFixed(0).toLocaleString() + "%"
+        } else if (CharacterStats.isRateStat(stat)) {
             return (total/100).toFixed(0).toLocaleString() + "%"
         } else {
             return total.toLocaleString()
@@ -477,7 +491,33 @@ let itemSearchOptions = {
     }
 
     static isRateStat(stat) {
-        return stat.slice(-4) == "Rate" || stat.startsWith("AttackSpeed")
+        return stat.slice(-4) == "Rate" || stat.startsWith("AttackSpeed") || stat.startsWith("DamagedRatio")
+    }
+
+    static getTimeAttackLevelScale(level) {
+        if (level <= 1) {
+            return 0
+        } else if (level == 2) {
+            return 0.0101
+        } else if (level <= 24) {
+            return 0.0707
+        } else if (level == 25) {
+            return 0.0808
+        } else if (level <= 39) {
+            return 0.1919
+        } else if (level == 40) {
+            return 0.2020
+        } else if (level <= 64) {
+            return 0.4444
+        } else if (level == 65) {
+            return 0.4545
+        } else if (level <= 77) {
+            return 0.7172
+        } else if (level == 78) {
+            return 0.7273
+        } else if (level >= 79) {
+            return ((level-1)/99).toFixed(4)
+        }
     }
 }
 
@@ -621,6 +661,11 @@ function loadModule(moduleName, entry=null) {
             document.getElementById("ba-student-modal-students").addEventListener('hidden.bs.modal', function (e) {
                 selectCompareMode = false
             })
+
+            generateStatTable('#ba-student-stat-table', studentStatList, 6, ['DefensePower', 'CriticalPoint', 'StabilityPoint'])
+            generateStatTable('#ba-student-stat-modal-table', studentStatListFull, 12, ['DefensePower', 'CriticalPoint', 'StabilityPoint'])
+            generateStatTable('#ba-weapon-stat-table', ['AttackPower', 'MaxHP', 'HealPower'], 6)
+
             statPreviewSupportStats = false
             compareMode = false
             selectCompareMode = false
@@ -793,6 +838,9 @@ function loadModule(moduleName, entry=null) {
             $(".tooltip").tooltip("hide")
             let urlVars = new URL(window.location.href).searchParams
         
+            generateStatTable('#ba-raid-enemy-stats', raidEnemyStatList, 6, ['DefensePower'])
+            generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6, ['DefensePower'])
+
             populateRaidList()
 
             if (entry != null) {
@@ -832,6 +880,8 @@ function loadModule(moduleName, entry=null) {
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
         
+            generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6, ['DefensePower'])
+
             if (entry != null) {
                 loadStage(entry)
             } else if (urlVars.has("stage")) {
@@ -1501,18 +1551,29 @@ function processStudent() {
     let bonusTerrainAmount = adaptaionAmount[student[student.Weapon.AdaptationType+'BattleAdaptation'] + student.Weapon.AdaptationValue]
     $('#ba-weapon-bonus-terrain-adaption').attr("src", `images/ui/Ingame_Emo_Adaptresult${bonusTerrainAmount}.png`)
     $('#ba-weapon-bonus-terrain-adaption-description').html(`${translateUI("terrain_adaption", [getLocalizedString('AdaptationType',student.Weapon.AdaptationType)])} ${initialTerrainAmount} → <b>${bonusTerrainAmount}</b><br>(${getAdaptationText(student.Weapon.AdaptationType, bonusTerrainAmount)})`)
-    $('#ba-weapon-stat-row2').toggle(student.Weapon.HealPower1 > 0)
+    $('#ba-weapon-stat-table .stat-HealPower').parent().toggle(student.Weapon.HealPower1 > 0)
 
     //Gear
     if ("Released" in student.Gear && student.Gear.Released[regionID]) {
         $('#ba-student-tab-gear, #ba-statpreview-ex-gear-container').show()
         $("#ba-student-gear-name, #ba-statpreview-ex-gear-name").html(student.Gear.Name)
-        $("#ba-student-gear-description").html(`${student.Gear.Desc}\n\n<i>${translateUI('bond_req_equip',['20', student.Name])}\n\n</i><b>${translateUI('stat_info')}</b>\n${getGearStatsText(student.Gear, "\n")}`)
+        $("#ba-student-gear-description").html(`${student.Gear.Desc}\n\n<i>${translateUI('bond_req_equip',['20', student.Name])}`)
         $("#ba-student-gear-icon, #ba-statpreview-ex-gear-icon").attr("src", `images/gear/${student.Gear.Icon}.png`)
         let gearMaterialsHtml = ""
         for (let i = 0; i < student.Gear.TierUpMaterial[0].length; i++) {
             gearMaterialsHtml += getMaterialIconHTML(student.Gear.TierUpMaterial[0][i], student.Gear.TierUpMaterialAmount[0][i])
         }
+        
+        let gearStats = student.Gear.StatType.map((x) => x.split('_')[0])
+        generateStatTable('#ba-gear-stat-table', gearStats, 6)
+        for (let i = 0; i < student.Gear.StatValue.length; i++) {
+            let value = student.Gear.StatValue[i][1]
+            if (student.Gear.StatType[i].split('_')[1] == "Coefficient") {
+                value = parseFloat((value/100).toFixed(2))+'%'
+            }
+            $(`#ba-gear-stat-table .stat-${gearStats[i]} .stat-value`).text('+'+value)
+        }
+
         gearMaterialsHtml += getMaterialIconHTML(3000001, abbreviateNumber(gear_upgrade_credits[0]))
         $("#ba-statpreview-ex-gear-description").html(getGearStatsText(student.Gear, ", "))
         $("#ba-student-gear-materials-t2").html(gearMaterialsHtml)
@@ -1605,11 +1666,13 @@ function processStudent() {
     }
     $('.ba-favor-item').tooltip({html: true})
 
-    $('#ba-student-bond-1').text(getStatName(student.FavorStatType[0]))
-    $('#ba-student-bond-2').text(getStatName(student.FavorStatType[1]))
+    generateStatTable('#ba-bond-stat-table', student.FavorStatType, 6)
+
+    // $('#ba-student-bond-1').text(getStatName(student.FavorStatType[0]))
+    // $('#ba-student-bond-2').text(getStatName(student.FavorStatType[1]))
 
     if (student.SquadType == "Main") {
-        $('#ba-student-stat-table').removeClass("table-striker-bonus")
+        $('#ba-student-stat-table').removeClass("striker-bonus")
         $('#ba-statpreview-status-strikerbonus').hide()
         statPreviewSupportStats = false
     } else {
@@ -2162,23 +2225,19 @@ function changeRaidEnemy(num) {
     let enemy = find(data.enemies,'Id',raid.EnemyList[raid_difficulty][num])[0], grade = 1
     let level
     (raid.Id < 1000) ? level = raid_level[raid_difficulty] : level = raid.Level[raid_difficulty]
-    let levelscale = ((level-1)/99).toFixed(4)
-    let maxHP = Math.ceil((Math.round((enemy.MaxHP1 + (enemy.MaxHP100-enemy.MaxHP1) * levelscale).toFixed(4)) * starscale_hp[grade-1]).toFixed(4))
-    let attack = Math.ceil((Math.round((enemy.AttackPower1 + (enemy.AttackPower100-enemy.AttackPower1) * levelscale).toFixed(4)) * starscale_attack[grade-1]).toFixed(4))
-    let defense = Math.round((enemy.DefensePower1 + (enemy.DefensePower100-enemy.DefensePower1) * levelscale).toFixed(4))
-    $('#ba-raid-stat-maxhp').text(maxHP.toLocaleString())
-    $('#ba-raid-stat-attack').text(attack.toLocaleString())
-    $('#ba-raid-stat-defense').text(defense.toLocaleString())
-    $('#ba-raid-stat-dmgresist').text(`${parseFloat(((10000-enemy.DamagedRatio)/100).toFixed(4)).toLocaleString()}%`)
-    $('#ba-raid-stat-accuracy').text(enemy.AccuracyPoint.toLocaleString())
-    $('#ba-raid-stat-evasion').text(enemy.DodgePoint.toLocaleString())
-    $('#ba-raid-stat-crit').text(enemy.CriticalPoint.toLocaleString())
-    $('#ba-raid-stat-critdmg').text(`${parseFloat(((enemy.CriticalDamageRate)/100).toFixed(4)).toLocaleString()}%`)
-    $('#ba-raid-stat-critresist').text(enemy.CriticalResistPoint.toLocaleString())
-    $('#ba-raid-stat-critdmgresist').text(`${parseFloat(((enemy.CriticalDamageResistRate)/100).toFixed(4))}%`)
-    $('#ba-raid-stat-stability').text(enemy.StabilityPoint.toLocaleString())
-    $('#ba-raid-stat-range').text(enemy.Range.toLocaleString())
 
+    let enemyStats = new CharacterStats(enemy, level, 1)
+
+    raidEnemyStatList.forEach((statName) => {
+        if (statName == 'AmmoCount') {
+            $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text(enemy.SquadType == 'Main' ? enemyStats.getBaseString('AmmoCount') + ' (' + enemyStats.getBaseString('AmmoCost') + ')' : '-')
+        } else {
+            $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text(enemyStats.getBaseString(statName))
+        }
+    })
+
+    let defText = translateUI('stat_defense_tooltip', [`<b>${enemyStats.getDefenseDamageReduction()}</b>`])
+    $('.stat-DefensePower .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
 
     let bulletType = (raid_difficulty < 5) ? raid.BulletType : raid.BulletTypeInsane
     $("#ba-raid-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-normal").addClass(`bg-atk-${bulletType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType', bulletType)}`, translateUI('attacktype'), null, getAttackTypeText(bulletType), 32), placement: 'top', html: true})
@@ -2504,7 +2563,7 @@ function getGearStatsText(equipment, delimiter=', ') {
 function toggleStrikerBonus() {
     statPreviewSupportStats = !statPreviewSupportStats
     if (statPreviewSupportStats && statPreviewSummonStats) toggleStudentSummon()
-    $('#ba-student-stat-table').toggleClass("table-striker-bonus", statPreviewSupportStats)
+    $('#ba-student-stat-table').toggleClass("striker-bonus", statPreviewSupportStats)
     $('#ba-statpreview-status-strikerbonus').toggleClass("deactivated", !statPreviewSupportStats)
     recalculateStatPreview()
 }
@@ -2665,13 +2724,34 @@ function recalculateTerrainAffinity() {
 function recalculateWeaponPreview() {
     let level = $("#ba-weaponpreview-levelrange").val()
     let weaponStats = getWeaponStats(student, level)
-    $(`#ba-weapon-stat-attack-amount`).text('+'+weaponStats.AttackPower)
-    $(`#ba-weapon-stat-maxhp-amount`).text('+'+weaponStats.MaxHP)
-    $(`#ba-weapon-stat-healing-amount`).text('+'+weaponStats.HealPower)
+    $(`#ba-weapon-stat-table .stat-AttackPower .stat-value`).text('+'+weaponStats.AttackPower.toLocaleString())
+    $(`#ba-weapon-stat-table .stat-MaxHP .stat-value`).text('+'+weaponStats.MaxHP.toLocaleString())
+    $(`#ba-weapon-stat-table .stat-HealPower .stat-value`).text('+'+weaponStats.HealPower.toLocaleString())
+}
+
+function generateStatTable(container, statList, columnWidth, helpTextStats=[]) {
+    let innerHtml = ''
+    statList.forEach(function(statName){
+        let hasHelpText = helpTextStats.includes(statName)
+        innerHtml += `
+            <div class="col-${columnWidth}">
+                <div class="stat-${statName} d-flex align-items-center">
+                    <span class="stat-icon"><img class="invert-light" src="images/staticon/Stat_${statName}.png"></span>
+                    <span class="stat-name">${getLocalizedString('Stat', statName)}</span>
+                    <span class="flex-fill"></span>
+                    ${hasHelpText ? '<span class="stat-help"><i class="fa-solid fa-circle-question"></i></span>' : ''}
+                    <span class="stat-value" class="ms-2 text-bold text-end"></span>
+                </div>
+            </div>
+        `
+
+    })
+    innerHtml = `<div class="row g-0">${innerHtml}</div>`
+    $(container).html(innerHtml)
 }
 
 function recalculateStatPreview() {
-    let strikerBonus = $('#ba-student-stat-table').hasClass("table-striker-bonus")
+    let strikerBonus = $('#ba-student-stat-table').hasClass("striker-bonus")
     let level = $("#ba-statpreview-levelrange").val()
     let studentStats, summonStats, summon
     if (statPreviewSummonStats) {
@@ -2796,10 +2876,9 @@ function recalculateStatPreview() {
         studentCompareStats.stats["AmmoCount"][0] = 0
     }
 
-    const statList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalDamageRate','StabilityPoint','Range','OppressionPower','OppressionResist','AmmoCount','CriticalChanceResistPoint','CriticalDamageResistRate','HealEffectivenessRate','AttackSpeed','DefensePenetration','BlockRate', 'RegenCost']
     let stats = (statPreviewSummonStats ? summonStats : studentStats)
 
-    statList.forEach((stat, index) => {
+    studentStatListFull.forEach((stat, index) => {
         let text, modText, compareText = ""
         if ((strikerBonus) && (!statPreviewSummonStats) && (index < 4)) {
             text = '+' + stats.getStrikerBonus(stat).toLocaleString()
@@ -2808,7 +2887,7 @@ function recalculateStatPreview() {
                 let ammo = stats.getTotalString('AmmoCount')
                 let cost = stats.getTotalString('AmmoCost')
                 if (ammo == 0) {
-                    text = "N/A"
+                    text = "-"
                 } else {
                     text = `${ammo}&nbsp;(${cost})`
                 }
@@ -2843,7 +2922,7 @@ function recalculateStatPreview() {
                 compareText = `<small class="comparison">&#9654;&nbsp;0</small>`
             }
         }
-        $(`#ba-student-stat-${stat} .stat-value`).html(text + compareText)
+        $(`#ba-student-stat-table .stat-${stat} .stat-value`).html(text + compareText)
 
         //Modal
         if ($('#ba-student-modal-statpreview').hasClass('show')) {
@@ -2853,14 +2932,22 @@ function recalculateStatPreview() {
             let coefBonus = stats.getCoefficientString(stat)
             modText += `<span class="stat-coefficient${(coefBonus == "+0%") ? " zero" : ""}">${coefBonus}</span>`
             modText += `<span class="stat-final">${text}</span>`
-            $(`#ba-student-stat-modal-${stat} .stat-value`).html(modText)
+            $(`#ba-student-stat-modal-table .stat-${stat} .stat-value`).html(modText)
         }
     })
 
     //Derived stat tooltips
-    $('#ba-student-stat-DefensePower .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('stat_defense_tooltip', [`<b>${stats.getDefenseDamageReduction()}</b>`])), html: true, placement: 'top'})
-    $('#ba-student-stat-CriticalPoint .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('stat_crit_tooltip', [`<b>${stats.getCriticalHitChance(100)}</b>`])), html: true, placement: 'top'})
-    $('#ba-student-stat-StabilityPoint .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('stat_stability_tooltip', [`<b>${stats.getStabilityMinDamage()}</b>`])), html: true, placement: 'top'})
+    let defText = translateUI('stat_defense_tooltip', [`<b>${stats.getDefenseDamageReduction()}</b>`])
+    let critChanceText = translateUI('stat_crit_tooltip')
+    const critResValues = [20, 100, 500]
+    critResValues.forEach((critRes) => {
+        critChanceText += '\n' + translateUI('stat_crit_amount_tooltip', [`<b>${stats.getCriticalHitChance(critRes)}</b>`, critRes])
+    })
+    let stabilityText = translateUI('stat_stability_tooltip', [`<b>${stats.getStabilityMinDamage()}</b>`])
+
+    $('.stat-DefensePower .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
+    $('.stat-CriticalPoint .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(critChanceText), html: true, placement: 'top'})
+    $('.stat-StabilityPoint .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
 
     $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
     $('#ba-statpreview-status-bond-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-1-range').val()}`)
@@ -3103,56 +3190,35 @@ function showEnemyInfo(id, level, grade=1, scaletype=0, switchTab=false) {
     if (loadedModule == 'stages' && switchTab) $('#ba-stage-tab-enemies').tab('show')
     $(`.card-enemy[data-enemy='${id}_${level}_${grade}_${scaletype}']`).addClass("selected")
     //if (selector != null) $(selector).addClass("selected")
+
     let enemy = find(data.enemies, 'Id', id)[0]
     $('#ba-stage-enemy-name').html(getTranslatedString(enemy, 'Name'))
     $('#ba-stage-enemy-img').attr('src', `images/enemy/${enemy.Icon}.png`)
     $('#ba-stage-enemy-rank').text(`Lv.${level} ${getLocalizedString('EnemyRank', enemy.Rank)}`)
     $('#ba-stage-enemy-class').text(getLocalizedString('SquadType', enemy.SquadType)).removeClass("ba-class-main ba-class-support").addClass(`ba-class-${enemy.SquadType.toLowerCase()}`)
+
     let enemysize = getEnemySize(enemy)
+
     $('#ba-stage-enemy-size').text(enemysize != null ? getLocalizedString('EnemyTags', enemysize) : '').toggle(enemysize != null)
     $("#ba-stage-enemy-attacktype").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
     $("#ba-stage-enemy-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
     $("#ba-stage-enemy-attacktype-label").text(getLocalizedString('BulletType',enemy.BulletType))
     $('#ba-stage-enemy-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',enemy.BulletType)}`, translateUI('attacktype'), null, getAttackTypeText(enemy.BulletType), 32), placement: 'top', html: true})
     $("#ba-stage-enemy-defensetype-label").text(getLocalizedString('ArmorType',enemy.ArmorType))
-    $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',enemy.ArmorType)} Armor`, translateUI('defensetype'), null, getDefenseTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
+    $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',enemy.ArmorType)} Armor`, translateUI('defensetype'), null, getDefenseTypeText(enemy.ArmorType), 32), placement: 'top', html: true})        
 
-    let levelscale
-    if (scaletype == 0) {
-        levelscale = ((level-1)/99).toFixed(4)
-    } else if (scaletype == 1) {
-        levelscale = getTimeAttackLevelScale(level)
-    }
-        
+    let enemyStats = new CharacterStats(enemy, level, grade, scaletype)
 
-    let MaxHP = Math.ceil((Math.round((enemy.MaxHP1 + (enemy.MaxHP100-enemy.MaxHP1) * levelscale).toFixed(4)) * starscale_hp[grade-1]).toFixed(4))
-    let AttackPower = Math.ceil((Math.round((enemy.AttackPower1 + (enemy.AttackPower100-enemy.AttackPower1) * levelscale).toFixed(4)) * starscale_attack[grade-1]).toFixed(4))
-    let Defense = Math.round((enemy.DefensePower1 + (enemy.DefensePower100-enemy.DefensePower1) * levelscale).toFixed(4))
-    let Healing = Math.ceil((Math.round((enemy.HealPower1 + (enemy.HealPower100-enemy.HealPower1) * levelscale).toFixed(4)) * starscale_healing[grade-1]).toFixed(4))
-    
-    $('#ba-stage-enemy-stat-maxhp').text(MaxHP.toLocaleString())
-    $('#ba-stage-enemy-stat-attack').text(AttackPower.toLocaleString())
-    $('#ba-stage-enemy-stat-defense').text(Defense.toLocaleString())
-    $('#ba-stage-enemy-stat-healing').text(Healing.toLocaleString())
+    enemyStatList.forEach((statName) => {
+        if (statName == 'AmmoCount') {
+            $(`#ba-stage-enemy-stat-table .stat-${statName} .stat-value`).text(enemy.SquadType == 'Main' ? enemyStats.getBaseString('AmmoCount') + ' (' + enemyStats.getBaseString('AmmoCost') + ')' : '-')
+        } else {
+            $(`#ba-stage-enemy-stat-table .stat-${statName} .stat-value`).text(enemyStats.getBaseString(statName))
+        }
+    })
 
-    $('#ba-stage-enemy-stat-accuracy').text(enemy.AccuracyPoint.toLocaleString())
-    $('#ba-stage-enemy-stat-evasion').text(enemy.DodgePoint.toLocaleString())
-    $('#ba-stage-enemy-stat-crit').text(enemy.CriticalPoint.toLocaleString())
-    $('#ba-stage-enemy-stat-critdmg').text(`${parseFloat(((enemy.CriticalDamageRate)/100).toFixed(4)).toLocaleString()}%`)
-
-    $('#ba-stage-enemy-stat-stability').text(enemy.StabilityPoint.toLocaleString())
-    $('#ba-stage-enemy-stat-range').text(enemy.Range.toLocaleString())
-
-    if (enemy.SquadType == "Main") {
-        $('#ba-stage-enemy-stat-ammo').text(enemy.AmmoCount + " (" + enemy.AmmoCost + ")")
-    } else {
-        $('#ba-stage-enemy-stat-ammo').text('N/A')
-    }
-
-    $('#ba-stage-enemy-stat-critresist').text(enemy.CriticalResistPoint.toLocaleString())
-    $('#ba-stage-enemy-stat-critdmgresist').text(`${parseFloat(((enemy.CriticalDamageResistRate)/100).toFixed(4))}%`)
-    $('#ba-stage-enemy-stat-movespeed').text(enemy.MoveSpeed.toLocaleString())
-
+    let defText = translateUI('stat_defense_tooltip', [`<b>${enemyStats.getDefenseDamageReduction()}</b>`])
+    $('.stat-DefensePower .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
 }
 
 function populateMapEnemyList(formationId) {
@@ -3372,8 +3438,8 @@ function recalculateGearSkillPreview() {
 function recalculateBondPreview() {
     var level = $("#ba-bond-levelrange").val()
     var bondbonus = getBondStats(student, level)
-    $("#ba-student-bond-1-amount").text('+'+bondbonus[student.FavorStatType[0]])
-    $("#ba-student-bond-2-amount").text('+'+bondbonus[student.FavorStatType[1]])    
+    $(`#ba-bond-stat-table .stat-${student.FavorStatType[0]} .stat-value`).text('+'+bondbonus[student.FavorStatType[0]].toLocaleString())
+    $(`#ba-bond-stat-table .stat-${student.FavorStatType[1]} .stat-value`).text('+'+bondbonus[student.FavorStatType[1]].toLocaleString())    
 }
 
 function getBondStats(student, level) {
@@ -4506,32 +4572,6 @@ function getFavouriteSSRItems(tags) {
 
 function getCacheVerResourceName(res) {
     return res + '?v=' + cache_ver
-}
-
-function getTimeAttackLevelScale(level) {
-    if (level <= 1) {
-        return 0
-    } else if (level == 2) {
-        return 0.0101
-    } else if (level <= 24) {
-        return 0.0707
-    } else if (level == 25) {
-        return 0.0808
-    } else if (level <= 39) {
-        return 0.1919
-    } else if (level == 40) {
-        return 0.2020
-    } else if (level <= 64) {
-        return 0.4444
-    } else if (level == 65) {
-        return 0.4545
-    } else if (level <= 77) {
-        return 0.7172
-    } else if (level == 78) {
-        return 0.7273
-    } else if (level >= 79) {
-        return ((level-1)/99).toFixed(4)
-    }
 }
 
 /**
