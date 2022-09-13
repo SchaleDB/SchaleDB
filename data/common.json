@@ -360,9 +360,12 @@
             "bounty_max": 9,
             "schooldungeon_max": 4,
             "current_gacha": [
-                { "characters": [10022, 10023], "start": 1662516000, "end": 1663120800 }
+                { "characters": [10022, 10023]       , "start": 1662516000, "end": 1663120800 },
+                { "characters": [10029, 23008, 10011], "start": 1663120800, "end": 1663725600 }
             ],
-            "current_events": [ {"event": 10804, "start": 1662516000, "end": 1663120800} ],
+            "current_events": [
+                { "event": 10804, "start": 1662516000, "end": 1663120800 }
+            ],
             "current_raid": [
                 { "raid":    7, "terrain": "Street", "start": 1663120800, "end": 1663700400 },
                 { "raid": 7000,                      "start": 1663725600, "end": 1664305200 }
@@ -392,12 +395,17 @@
     ],
     "changelog": [
         {
+            "date": "2022/09/14",
+            "contents": [
+                "Add alternate maskless sprites for Wakamo and Arius students."
+            ]
+        },
+        {
             "date": "2022/09/11",
             "contents": [
-                "Display damage reduction from DEF for enemies.",
-                "Improved Crit Chance tooltip to display more calculations for common enemy Crit RES values.",
-                "Added icons for stats.",
-                "Fixed some incorrect EN skill descriptions.",
+                "Display damage reduction from DEF for enemies.", 
+                "Improved Crit Chance tooltip to display more calculations for common enemy Crit RES values.", 
+                "Added icons for stats.", "Fixed some incorrect EN skill descriptions.", 
                 "Added new keybind for Search [/] and Student List [L]. <a href='https://github.com/lonqie/SchaleDB/pull/12'>(pr/12)</a>"
             ]
         },

@@ -1,12 +1,14 @@
 <div class="container-xl py-md-3">
     <div class="row">
         <div class="col-12 col-md-6 ba-page">
-            <div class="d-flex" style="justify-content: center;">
+            <div class="d-flex pe-xl-3" style="justify-content: center;">
                 <img id="ba-student-img">
             </div>
             <div class="student-portrait-buttons">
                 <button id="ba-student-list-btn" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ba-student-modal-students" onclick="$('.ba-student-card.disabled').removeClass('disabled')" style="display:none;"><i class="fa-solid fa-bars"></i><span class="d-inline ms-2" data-localize-id="ui,student_list"></span></button>
+                <div class="d-md-none flex-fill"></div>
                 <button id="ba-student-collection-btn" type="button" class="btn btn-dark" onclick="toggleOwned()"></button>
+                <a id="ba-student-toggle-sprite-btn" type="button" class="btn btn-dark tooltip-button"><i class="fa-solid fa-repeat"></i></a>
             </div>
             <div class="d-block d-md-none" style="height: 412px;"></div>
         </div>

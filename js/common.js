@@ -25,6 +25,7 @@ const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePow
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_01", "Defense": "TimeAttack_SlotBG_02", "Destruction": "TimeAttack_SlotBG_03"}
 const searchDelay = 100
+const altSprite = [10033, 10041, 10042, 10043, 10048]
 
 const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','AmmoCount']
 const studentStatListFull = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','AttackSpeed','BlockRate','DefensePenetration', 'AmmoCount']
@@ -143,6 +144,7 @@ let searchDelayTimeout
 
 let compareMode = false
 let selectCompareMode = false
+let showAltSprite = false
 
 let loadedRaid
 let loadedItem
@@ -374,8 +376,8 @@ let itemSearchOptions = {
         this.stats['DodgePoint'] = [character.DodgePoint,0,1]
         this.stats['CriticalPoint'] = [character.CriticalPoint,0,1]
         this.stats['CriticalDamageRate'] = [character.CriticalDamageRate,0,1]
-        this.stats['CriticalChanceResistPoint'] = [100,0,1]
-        this.stats['CriticalDamageResistRate'] = [5000,0,1]
+        this.stats['CriticalChanceResistPoint'] = [character.CriticalResistPoint ? character.CriticalResistPoint : 100,0,1]
+        this.stats['CriticalDamageResistRate'] = [character.CriticalDamageResistRate ? character.CriticalDamageResistRate : 5000,0,1]
         this.stats['StabilityPoint'] = [character.StabilityPoint,0,1]
         this.stats['AmmoCount'] = [character.AmmoCount,0,1]
         this.stats['AmmoCost'] = [character.AmmoCost,0,1]
@@ -700,8 +702,8 @@ function loadModule(moduleName, entry=null) {
                 selectCompareMode = false
             })
 
-            generateStatTable('#ba-student-stat-table', studentStatList, 6, ['DefensePower', 'CriticalPoint', 'StabilityPoint'])
-            generateStatTable('#ba-student-stat-modal-table', studentStatListFull, 12, ['DefensePower', 'CriticalPoint', 'StabilityPoint'])
+            generateStatTable('#ba-student-stat-table', studentStatList, 6)
+            generateStatTable('#ba-student-stat-modal-table', studentStatListFull, 12)
             generateStatTable('#ba-weapon-stat-table', ['AttackPower', 'MaxHP', 'HealPower'], 6)
 
             statPreviewSupportStats = false
@@ -764,6 +766,7 @@ function loadModule(moduleName, entry=null) {
             $('#ba-statpreview-status-strikerbonus').tooltip({title: getBasicTooltip(translateUI('tooltip_supportstats')), placement: 'top', html: true})
             $('.ba-summon-toggle').tooltip({title: getBasicTooltip(translateUI('tooltip_vehiclestats')), placement: 'top', html: true})
             $('#ba-student-search-reset').tooltip({title: getBasicTooltip(translateUI('student_search_filters_clear')), placement: 'top', html: true})
+            $('#ba-student-toggle-sprite-btn').tooltip({title: getBasicTooltip(translateUI('tooltip_sprite_toggle')), placement: 'top', html: true})
 
             $('#ba-student-modal-students').on('shown.bs.modal', function (ev) {
                 if (ev.relatedTarget === 'shortcut') {
@@ -776,6 +779,11 @@ function loadModule(moduleName, entry=null) {
                     clearTimeout(searchDelayTimeout)
                 }
                 searchDelayTimeout = setTimeout(updateStudentList, searchDelay)
+            })
+
+            $('#ba-student-toggle-sprite-btn').on('click', e => {
+                showAltSprite = !showAltSprite
+                $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.DevName}${showAltSprite ? '_2' : ''}.webp`)
             })
 
             $('.tooltip-button').on('click', e => {
@@ -882,8 +890,8 @@ function loadModule(moduleName, entry=null) {
             $(".tooltip").tooltip("hide")
             let urlVars = new URL(window.location.href).searchParams
         
-            generateStatTable('#ba-raid-enemy-stats', raidEnemyStatList, 6, ['DefensePower'])
-            generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6, ['DefensePower'])
+            generateStatTable('#ba-raid-enemy-stats', raidEnemyStatList, 6)
+            generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6)
 
             populateRaidList()
 
@@ -924,7 +932,7 @@ function loadModule(moduleName, entry=null) {
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
         
-            generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6, ['DefensePower'])
+            generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6)
 
             if (entry != null) {
                 loadStage(entry)
@@ -1493,6 +1501,7 @@ function setGridItemDisplayStyle(style) {
 
 function processStudent() {
 
+    showAltSprite = false
     $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.DevName}.webp`)
     let bgimg = new Image()
     bgimg.onload = function(){
@@ -1662,6 +1671,8 @@ function processStudent() {
     $('#ba-student-profile-height').text(student.CharHeightMetric)
     $('#ba-student-profile-cv').text(getTranslatedString(student,'CharacterVoice'))
     $('#ba-student-profile-illustrator').text(student.ArtistName)
+
+    $('#ba-student-toggle-sprite-btn').toggle(altSprite.includes(student.Id))
 
     let allTags = student.FavorItemTags
     allTags.push(student.FavorItemUniqueTags[0])
@@ -2275,13 +2286,15 @@ function changeRaidEnemy(num) {
     raidEnemyStatList.forEach((statName) => {
         if (statName == 'AmmoCount') {
             $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text(enemy.SquadType == 'Main' ? enemyStats.getBaseString('AmmoCount') + ' (' + enemyStats.getBaseString('AmmoCost') + ')' : '-')
+        } else if (statName == 'DefensePower') {
+            $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).html(`<span class="has-tooltip">${enemyStats.getBaseString(statName)}</span>`)
         } else {
             $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text(enemyStats.getBaseString(statName))
         }
     })
 
     let defText = translateUI('stat_defense_tooltip', [`<b>${enemyStats.getDefenseDamageReduction()}</b>`])
-    $('.stat-DefensePower .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
+    $('.stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
 
     let bulletType = (raid_difficulty < 5) ? raid.BulletType : raid.BulletTypeInsane
     $("#ba-raid-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-normal").addClass(`bg-atk-${bulletType.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType', bulletType)}`, translateUI('attacktype'), null, getAttackTypeText(bulletType), 32), placement: 'top', html: true})
@@ -2773,22 +2786,19 @@ function recalculateWeaponPreview() {
     $(`#ba-weapon-stat-table .stat-HealPower .stat-value`).text('+'+weaponStats.HealPower.toLocaleString())
 }
 
-function generateStatTable(container, statList, columnWidth, helpTextStats=[]) {
+function generateStatTable(container, statList, columnWidth) {
     let innerHtml = ''
     statList.forEach(function(statName){
-        let hasHelpText = helpTextStats.includes(statName)
         innerHtml += `
             <div class="col-${columnWidth}">
                 <div class="stat-${statName} d-flex align-items-center">
                     <span class="stat-icon"><img class="invert-light" src="images/staticon/Stat_${statName}.png"></span>
                     <span class="stat-name">${getLocalizedString('Stat', statName)}</span>
                     <span class="flex-fill"></span>
-                    ${hasHelpText ? '<span class="stat-help"><i class="fa-solid fa-circle-question"></i></span>' : ''}
-                    <span class="stat-value" class="ms-2 text-bold text-end"></span>
+                    <span class="stat-value"></span>
                 </div>
             </div>
         `
-
     })
     innerHtml = `<div class="row g-0">${innerHtml}</div>`
     $(container).html(innerHtml)
@@ -2921,6 +2931,7 @@ function recalculateStatPreview() {
     }
 
     let stats = (statPreviewSummonStats ? summonStats : studentStats)
+    const helpStats = ['DefensePower', 'CriticalPoint', 'StabilityPoint']
 
     studentStatListFull.forEach((stat, index) => {
         let text, modText, compareText = ""
@@ -2966,6 +2977,9 @@ function recalculateStatPreview() {
                 compareText = `<small class="comparison">&#9654;&nbsp;0</small>`
             }
         }
+        if (helpStats.includes(stat)) {
+            text = '<span class="has-tooltip">' + text + '</span>'
+        }
         $(`#ba-student-stat-table .stat-${stat} .stat-value`).html(text + compareText)
 
         //Modal
@@ -2989,9 +3003,9 @@ function recalculateStatPreview() {
     })
     let stabilityText = translateUI('stat_stability_tooltip', [`<b>${stats.getStabilityMinDamage()}</b>`])
 
-    $('.stat-DefensePower .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
-    $('.stat-CriticalPoint .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(critChanceText), html: true, placement: 'top'})
-    $('.stat-StabilityPoint .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
+    $('.stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
+    $('.stat-CriticalPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(critChanceText), html: true, placement: 'top'})
+    $('.stat-StabilityPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
 
     $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
     $('#ba-statpreview-status-bond-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-1-range').val()}`)
@@ -3256,13 +3270,15 @@ function showEnemyInfo(id, level, grade=1, scaletype=0, switchTab=false) {
     enemyStatList.forEach((statName) => {
         if (statName == 'AmmoCount') {
             $(`#ba-stage-enemy-stat-table .stat-${statName} .stat-value`).text(enemy.SquadType == 'Main' ? enemyStats.getBaseString('AmmoCount') + ' (' + enemyStats.getBaseString('AmmoCost') + ')' : '-')
+        } else if (statName == 'DefensePower') {
+            $(`#ba-stage-enemy-stat-table .stat-${statName} .stat-value`).html(`<span class="has-tooltip">${enemyStats.getBaseString(statName)}</span>`)
         } else {
             $(`#ba-stage-enemy-stat-table .stat-${statName} .stat-value`).text(enemyStats.getBaseString(statName))
         }
     })
 
     let defText = translateUI('stat_defense_tooltip', [`<b>${enemyStats.getDefenseDamageReduction()}</b>`])
-    $('.stat-DefensePower .stat-help').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
+    $('.stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
 }
 
 function populateMapEnemyList(formationId) {

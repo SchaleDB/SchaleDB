@@ -5,7 +5,7 @@
  * Update 22/08/2022: Changed to cache only images & static resources
  */
 
-const staticCacheVer = 1;
+const staticCacheVer = 2;
 const staticCacheName = `schale-static-v${staticCacheVer}`;
 const currentCacheList = [];
 

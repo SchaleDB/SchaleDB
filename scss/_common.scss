@@ -210,14 +210,6 @@ input[type="search" i]::-webkit-search-cancel-button {
 
 }
 
-.has-tooltip {
-    //text-decoration: dotted;
-    background-color: var(--col-theme-accent);
-    @include circular;
-    padding: 0 0.5rem;
-    cursor: default;
-}
-
 .ba-stats {
 
     &.striker-bonus .row >div:nth-child(-n+4) {
@@ -308,15 +300,27 @@ input[type="search" i]::-webkit-search-cancel-button {
         }
     }
 
-    .stat-help {
-        font-size: 14px;
-        opacity: 0.5;
-        @include transition(opacity);
+    .has-tooltip {
+        text-decoration: underline dotted 2px var(--col-theme-text-t);
+        text-underline-position: under;
+        cursor: help;
+        @include transition(text-decoration-color);
 
         &:hover {
-            opacity: 1;
+            text-decoration-color: var(--col-theme-text);
         }
     }
+
+    // .stat-help {
+    //     font-size: 14px;
+    //     opacity: 0.5;
+    //     @include transition(opacity);
+
+    //     &:hover {
+    //         opacity: 1;
+    //     }
+    // }
+
 }
 
 #toast-message-container {
