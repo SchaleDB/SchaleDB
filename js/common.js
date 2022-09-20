@@ -908,7 +908,6 @@ function loadModule(moduleName, entry=null) {
             if (regionID == 1) {
                 $('#ba-raid-list-tab-timeattack').hide()
                 $('#ba-raid-list-tab-worldraid').hide()
-                $('#ba-raid-difficulty-5').hide()
             }
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
@@ -2944,7 +2943,7 @@ function recalculateStatPreview() {
                 if (ammo == 0) {
                     text = "-"
                 } else {
-                    text = `${ammo}&nbsp;(${cost})`
+                    text = `<span class="has-tooltip">${ammo}&nbsp;(${cost})</span>`
                 }
             } else {
                 text = stats.getTotalString(stat)
@@ -2977,7 +2976,7 @@ function recalculateStatPreview() {
                 compareText = `<small class="comparison">&#9654;&nbsp;0</small>`
             }
         }
-        if (helpStats.includes(stat)) {
+        if (helpStats.includes(stat) && (!strikerBonus || index > 4)) {
             text = '<span class="has-tooltip">' + text + '</span>'
         }
         $(`#ba-student-stat-table .stat-${stat} .stat-value`).html(text + compareText)
@@ -3006,6 +3005,10 @@ function recalculateStatPreview() {
     $('.stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
     $('.stat-CriticalPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(critChanceText), html: true, placement: 'top'})
     $('.stat-StabilityPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
+
+    if (stats.getTotalString('AmmoCount') != 0) {
+        $('.stat-AmmoCount .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(getNormalAttackHitsText((statPreviewSummonStats ? summon.DamageDist : student.DamageDist), stats.getTotalString('AmmoCost'), (statPreviewSummonStats ? summon.WeaponType : student.WeaponType), student.BulletType.toLowerCase())), html: true, placement: 'top'})
+    }
 
     $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
     $('#ba-statpreview-status-bond-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-1-range').val()}`)
@@ -3051,10 +3054,13 @@ function recalculateStatPreview() {
 }
 
 function recalculateEXSkillPreview() {
+    $('.tooltip').tooltip('hide')
     let skillLevelEX = $("#ba-skillpreview-exrange").val()
     let skillEX = find(student.Skills, 'SkillType', 'ex')[0]
 
-    $('#ba-skill-ex-description').html(getSkillText(getTranslatedString(skillEX, 'Desc'), skillEX.Parameters, skillLevelEX, student.BulletType))
+    $('#ba-skill-ex-description').html(getSkillText(getTranslatedString(skillEX, 'Desc'), skillEX.Parameters, skillLevelEX, student.BulletType, skillEX.DamageDist ? skillEX.DamageDist : []))
+    $(`#ba-skill-ex-description .skill-hitinfo`).tooltip({html: true})
+
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })
@@ -3066,11 +3072,13 @@ function recalculateEXSkillPreview() {
 }
 
 function recalculateSkillPreview() {
+    $('.tooltip').tooltip('hide')
     let skillLevel = $("#ba-skillpreview-range").val()
     let skillList = ['normal','passive','sub']
     skillList.forEach(el => {
         let skill = find(student.Skills, 'SkillType', el)[0]
-        $(`#ba-skill-${el}-description`).html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType))
+        $(`#ba-skill-${el}-description`).html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType, skill.DamageDist ? skill.DamageDist : []))
+        $(`#ba-skill-${el}-description .skill-hitinfo`).tooltip({html: true})
     })
 
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -4201,10 +4209,9 @@ function getDefenseTypeText(type) {
     return text
 }
 
-function getSkillText(text, params, level, type) {
+function getSkillText(text, params, level, type, damageDist=[]) {
     
     let result = text
-    let paramCount = 1
     let regex
 
     regex = /[0-9.]+(?:%|s|秒|초| วินาที)/g
@@ -4220,13 +4227,16 @@ function getSkillText(text, params, level, type) {
                         result = result.replace(`<?${i}>`, params[i-1][level-1].replace(regex, function(match) {return `<strong>${match}</strong>`}))   
                     }
                 } else {
-                    result = result.replace(`<?${i}>`, "<span class=\"ba-col-"+type.toLowerCase()+"\">" + params[i-1][level-1] + "</span>")
+                    if (i == 1 && damageDist.length > 1) {
+                        result = result.replace(`<?${i}>`, `<span class="ba-col-${type.toLowerCase()} skill-hitinfo" data-bs-toggle="tooltip" data-bs-placement="top" title="${getBasicTooltip(getSkillHitsText(damageDist, params[i-1][level-1], type.toLowerCase()))}">${params[i-1][level-1]}</span>`)
+
+                    } else {
+                        result = result.replace(`<?${i}>`, `<span class="ba-col-${type.toLowerCase()}">${params[i-1][level-1]}</span>`)
+                    }
                 }
             }
         }
     }
-
-
 
     const buffTypes = ['Buff', 'Debuff', 'CC', 'Special']
     buffTypes.forEach(type => {
@@ -4238,6 +4248,48 @@ function getSkillText(text, params, level, type) {
     })
 
     return result
+}
+
+function getSkillHitsText(damageDist, totalDamage, type) {
+    let hits = {}
+    let hitsText = ''
+    totalDamage = parseFloat(totalDamage.replace('%', ''))
+    damageDist.forEach((hit) => {
+        hit = parseFloat(((hit / 10000) * totalDamage).toFixed(1)) + '%'
+        hits[hit] = hits[hit] ? hits[hit]+1 : 1
+    })
+    Object.keys(hits).forEach((hit) => {
+        hitsText += `${hitsText == '' ? '' : '\n'}<span class='ba-col-${type}'>${hit}</span> <b>&times;${hits[hit]}</b>`
+    })
+    return translateUI('skill_hits_tooltip', [`<b>${damageDist.length}</b>`]) + `\n<small>${hitsText}</small>`
+}
+
+function getNormalAttackHitsText(damageDist, ammoCost, weaponType, attackType) {
+    let hits = {}
+    let hitsText = ''
+    damageDist.forEach((hit) => {
+        hit = parseFloat(((hit / 10000) * 100).toFixed(1)) + '%'
+        hits[hit] = hits[hit] ? hits[hit]+1 : 1
+    })
+    Object.keys(hits).forEach((hit) => {
+        hitsText += `${hitsText == '' ? '' : '\n'}<span class='ba-col-${attackType}'>${hit}</span> <b>&times;${hits[hit]}</b>`
+    })
+    let text
+    switch (weaponType) {
+        case "GL":
+        case "RL":
+        case "Cannon":
+            text = translateUI('stat_ammocount_tooltip_area', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
+            break;
+        case "RG":
+            text = translateUI('stat_ammocount_tooltip_line', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
+            break;
+    
+        default:
+            text = translateUI('stat_ammocount_tooltip', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
+            break;
+    }
+    return text + `\n<small>${hitsText}</small>`
 }
 
 function getRichTooltip(icon, title, subtitle, rarity, body, imgsize = 50, imgclass = '') {

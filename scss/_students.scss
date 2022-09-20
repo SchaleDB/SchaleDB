@@ -227,3 +227,32 @@ a.ba-statpreview-icon {
         top: calc(56px + 0.5rem);
     }
 }
+
+.skill-hitinfo {
+    text-decoration: underline dotted 2px;
+    text-underline-position: under;
+    text-underline-offset: -2px;
+    cursor: help;
+    @include transition(text-decoration-color);
+
+    &.ba-col-explosion {
+        text-decoration-color: var(--col-text-explosive-t);
+        &:hover {
+            text-decoration-color: var(--col-text-explosive);
+        }
+    }
+    &.ba-col-pierce {
+        text-decoration-color: var(--col-text-piercing-t);
+        &:hover {
+            text-decoration-color: var(--col-text-piercing);
+        }
+    }
+    &.ba-col-mystic {
+        text-decoration-color: var(--col-text-mystic-t);
+        &:hover {
+            text-decoration-color: var(--col-text-mystic);
+        }
+    }
+
+
+}

@@ -363,9 +363,7 @@
                 { "characters": [10022, 10023]       , "start": 1662516000, "end": 1663120800 },
                 { "characters": [10029, 23008, 10011], "start": 1663120800, "end": 1663725600 }
             ],
-            "current_events": [
-                { "event": 10804, "start": 1662516000, "end": 1663120800 }
-            ],
+            "current_events": [ {"event": 10804, "start": 1662516000, "end": 1663120800} ],
             "current_raid": [
                 { "raid":    7, "terrain": "Street", "start": 1663120800, "end": 1663700400 },
                 { "raid": 7000,                      "start": 1663725600, "end": 1664305200 }
@@ -377,28 +375,34 @@
             "bondlevel_max": 50,
             "gear1_max": 6,
             "gear2_max": 6,
-            "gear3_max": 5,
-            "campaign_max": 16,
-            "events": [801, 802, 803, 804, 805, 806, 808, 809, 810, 811, 701],
+            "gear3_max": 6,
+            "campaign_max": 17,
+            "events": [801, 802, 803, 804, 805, 806, 808, 809, 810, 811, 701, 10801],
             "event_701_max": 8,
             "event_701_challenge_max": 0,
             "commission_max": 10,
             "bounty_max": 9,
             "schooldungeon_max": 3,
             "current_gacha": [
-                { "characters": [10033]       , "start": 1662429600, "end": 1662775200 },
-                { "characters": [20012, 20013], "start": 1662775200, "end": 1663639200 }
+                { "characters": [10034, 10014], "start": 1663639200, "end": 1664244000 },
+                { "characters": [10020, 10002], "start": 1664244000, "end": 1664848800 }
             ],
-            "current_events": [ {"event": 810, "start": 1662429600, "end": 1663639201} ],
-            "current_raid": [ {"raid": 7, "terrain": "Street", "start": 1663034400, "end": 1663614000} ]
+            "current_events": [ {"event": 10801, "start": 1663639200, "end": 1664244001} ],
+            "current_raid": [ {"raid": 3, "terrain": "Street", "start": 1664244000, "end": 1664823600} ]
         }
     ],
     "changelog": [
         {
-            "date": "2022/09/14",
+            "date": "2022/09/20",
             "contents": [
-                "Add alternate maskless sprites for Wakamo and Arius students."
+                "Display hit count information for EX and Basic skills that deal damage in multiple hits when hovering over the skill description.", 
+                "Display hit count information for Normal Attacks when hovering over Mag Count.", 
+                "Various Translation updates and fixes."
             ]
+        },
+        {
+            "date": "2022/09/14",
+            "contents": ["Add alternate maskless sprites for Wakamo and Arius students."]
         },
         {
             "date": "2022/09/11",
