@@ -414,8 +414,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_TimeAttackCoin",
-        "Name": "Joint Firing Drill Coin",
-        "Desc": "This coin can be spent at the Joint Firing Drill Shop."
+        "Name": "Complete Tactical Challenge Coin",
+        "Desc": "This coin can be spent at the Complete Tactical Challenge Shop."
     },
     {
         "Id": 61,
@@ -6487,7 +6487,9 @@
             "F_Kirino_default",
             "F_Kirino_default2",
             "F_Asuna",
-            "F_Asuna2"
+            "F_Asuna2",
+            "F_Kokona",
+            "F_Kokona2"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_4",
@@ -7115,7 +7117,19 @@
         "Tags": [
             "SecretStone"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "TimeAttack",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 5,
+                "CostType": "Item",
+                "CostId": 60,
+                "CostAmount": 50
+            }
+        ],
         "Icon": "Item_Icon_SecretStone_Tsurugi",
         "Name": "Tsurugi&#x27;s Eleph",
         "Desc": "The mystical Eleph of Tsurugi."
@@ -7863,6 +7877,23 @@
         "Icon": "Item_Icon_SecretStone_Kazusa",
         "Name": "Kazusa's Eleph",
         "Desc": "The mystical Eleph of Kazusa."
+    },
+    {
+        "Id": 10050,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0137",
+        "Name": "Kokona's Eleph",
+        "Desc": "The mystical Eleph of Kokona."
     },
     {
         "Id": 13000,
@@ -10353,6 +10384,66 @@
         "Icon": "Item_Icon_Event_Token_0_S7",
         "Name": "Splashy Helmet (Rerun)",
         "Desc": "Seized by the Prefect Team from a Splashy Helmet Gang hoodlum in the beachside slums.\nSigns of a futile struggle remain."
+    },
+    {
+        "Id": 85040,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Item_0",
+        "Name": "Event Points (Rerun)",
+        "Desc": "These points are earned each time you progress in an event. The more you earn, the greater the variety of rewards you can receive."
+    },
+    {
+        "Id": 85041,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S8",
+        "Name": "Turtle Mushroom (Rerun)",
+        "Desc": "An exotic mushroom that grows naturally throughout the Shanhaijing district. Contrary to how it looks, its firm texture and great taste make it a delicacy. "
+    },
+    {
+        "Id": 85042,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 3,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_1_S8",
+        "Name": "Black Bamboo Shoot (Rerun)",
+        "Desc": "Black bamboo shoots growing in the gardens of Genryumon. Difficult to obtain due to strict management of Genryumon officers."
+    },
+    {
+        "Id": 85043,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_2_S8",
+        "Name": "Ginseng Doll (Rerun)",
+        "Desc": "A human-shaped root herb found deep in the mountains of Shanhaijing. It&#x27;s said to have effects that prolong your life or make you younger."
     },
     {
         "Id": 100008,

@@ -6487,7 +6487,9 @@
             "F_Kirino_default",
             "F_Kirino_default2",
             "F_Asuna",
-            "F_Asuna2"
+            "F_Asuna2",
+            "F_Kokona",
+            "F_Kokona2"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_4",
@@ -7115,7 +7117,19 @@
         "Tags": [
             "SecretStone"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "TimeAttack",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 5,
+                "CostType": "Item",
+                "CostId": 60,
+                "CostAmount": 50
+            }
+        ],
         "Icon": "Item_Icon_SecretStone_Tsurugi",
         "Name": "鹤城的神名文字",
         "Desc": "充满着鹤城的神秘的神名文字。"
@@ -7863,6 +7877,23 @@
         "Icon": "Item_Icon_SecretStone_Kazusa",
         "Name": "和纱的神名文字",
         "Desc": "充满着和纱的神秘的神名文字。"
+    },
+    {
+        "Id": 10050,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0137",
+        "Name": "ココナの神名文字",
+        "Desc": "ココナの神秘が詰まった神名文字。"
     },
     {
         "Id": 13000,
@@ -10353,6 +10384,66 @@
         "Icon": "Item_Icon_Event_Token_0_S7",
         "Name": "哗啦哗啦头盔",
         "Desc": "纠察部从引发夏日贫民窟骚动的滋事份子—哗啦哗啦头盔团手中没收的头盔。\n上面有因无谓的抵抗而留下的痕迹。"
+    },
+    {
+        "Id": 85040,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Item_0",
+        "Name": "活动点数",
+        "Desc": "每当进行活动时可获得的点数。获得越多即可得到多样奖励。"
+    },
+    {
+        "Id": 85041,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S8",
+        "Name": "乌龟菇",
+        "Desc": "自然分布于山海经自治区全域，外观华丽的蘑菇。\n和华丽的外观不同，口感扎实，味道也不错，是受欢迎的食物。"
+    },
+    {
+        "Id": 85042,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 3,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_1_S8",
+        "Name": "乌竹笋",
+        "Desc": "生长于玄龙门庭园的黑色竹笋。\n受到玄龙门的干部严加管理，因此难以取得。"
+    },
+    {
+        "Id": 85043,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_2_S8",
+        "Name": "人形参",
+        "Desc": "被发现于山海经的深山中，根部貌似人类的药草。\n据说具有延长寿命或减龄的效果。"
     },
     {
         "Id": 100008,

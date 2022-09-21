@@ -45629,5 +45629,401 @@
                 14
             ]
         ]
+    },
+    {
+        "Id": 10050,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 110,
+        "PathName": "Kokona",
+        "DevName": "CH0137",
+        "Name": "ココナ",
+        "School": "Shanhaijing",
+        "Club": "Meihuayuan",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Healer",
+        "SummonIds": [],
+        "Position": "Middle",
+        "BulletType": "Pierce",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "Weapon_Icon_CH0137",
+        "Cover": true,
+        "Equipment": [
+            "Shoes",
+            "Hairpin",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_Sanhaijing_Collection",
+        "CollectionTexture": "Student_Portrait_CH0137_Collection",
+        "FamilyName": "春原",
+        "PersonalName": "ココナ",
+        "SchoolYear": "1年生",
+        "CharacterAge": "11歳",
+        "FamilyNameRuby": "すのはら",
+        "Birthday": "6月1日",
+        "CharacterSSRNew": "訓育支援部「梅花園」のココナです！\nち、違います！これでもれっきとした教官なんですよ！？",
+        "ProfileIntroduction": "山海経高級中学校所属、訓育支援部「梅花園」の教官を務める1年生の生徒。\n\n本来は小学校に通う年齢だが、優れた学習能力が認められ、教官の権限を持つまでになった。\n園生たちは親しみをこめて「ココナちゃん」と呼んでいるが、ココナはその呼称をあまり喜んでいない。",
+        "Hobby": "絵本を読むこと",
+        "CharacterVoice": "五十嵐裕美",
+        "BirthDay": "6/1",
+        "ArtistName": "seicoh",
+        "CharHeightMetric": "139cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1264,
+        "AttackPower1": 206,
+        "AttackPower100": 2061,
+        "MaxHP1": 2262,
+        "MaxHP100": 22620,
+        "DefensePower1": 22,
+        "DefensePower100": 135,
+        "HealPower1": 2299,
+        "HealPower100": 6899,
+        "DodgePoint": 723,
+        "AccuracyPoint": 766,
+        "CriticalPoint": 219,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "DamageDist": [
+            3334,
+            3333,
+            3333
+        ],
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "たいへんよくできました！",
+                "Desc": "自身を除き味方1人に対して治癒力の<?1>分の回復/\n自身に治癒力の101%分の回復/\n<s:Stamp>を1個獲得",
+                "Parameters": [
+                    [
+                        "152%",
+                        "175%",
+                        "221%",
+                        "244%",
+                        "290%",
+                        "312%",
+                        "358%",
+                        "381%",
+                        "427%",
+                        "450%"
+                    ]
+                ],
+                "Cost": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                ],
+                "SummonStat": [],
+                "SummonStatCoefficient": [],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "次も楽しみにしてますよ！",
+                "Desc": "味方が会心を100回成功した時、自身を除きHPが最も低い味方1人に対して治癒力の<?1>分の回復/\n<s:Stamp>を1個獲得",
+                "Parameters": [
+                    [
+                        "56.6%",
+                        "59.4%",
+                        "62.2%",
+                        "73.5%",
+                        "76.4%",
+                        "79.2%",
+                        "90.5%",
+                        "93.4%",
+                        "96.2%",
+                        "107%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "教官としての責任",
+                "Desc": "<b:HealPower>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Stat": []
+            },
+            {
+                "SkillType": "sub",
+                "Name": "梅花園の指導法",
+                "Desc": "<s:Stamp>を5個獲得時、自身を除く味方のスキルコストを1減少（Exスキルの使用1回分）（<s:Stamp>は初期化されます）/\n自身に治癒力の<?1>分の回復",
+                "Parameters": [
+                    [
+                        "57%",
+                        "59.8%",
+                        "62.7%",
+                        "74.1%",
+                        "76.9%",
+                        "79.8%",
+                        "91.2%",
+                        "94%",
+                        "96.9%",
+                        "108%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0137_EXTRAPASSIVESKILL"
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "教官としての責任+",
+                "Desc": "<b:Dodge>を<?1>増加/\nさらに<b:HealPower>を<?2>増加",
+                "Parameters": [
+                    [
+                        "160",
+                        "168",
+                        "176",
+                        "208",
+                        "216",
+                        "224",
+                        "256",
+                        "264",
+                        "272",
+                        "304"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Stat": []
+            }
+        ],
+        "FavorStatType": [
+            "HealPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                7,
+                0
+            ],
+            [
+                10,
+                0
+            ],
+            [
+                14,
+                57
+            ],
+            [
+                17,
+                68
+            ],
+            [
+                4,
+                12
+            ],
+            [
+                7,
+                18
+            ],
+            [
+                11,
+                30
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            6,
+            0
+        ],
+        "FurnitureInteraction": [
+            [
+                1100
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Dessert",
+            "Delicious"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Kokona",
+            "F_Kokona2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "レディーの気品",
+            "Desc": "レディーの品位を守る際にも、教官としての責務を果たす際にも効果的なアサルトライフル。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 91,
+            "AttackPower100": 905,
+            "MaxHP1": 650,
+            "MaxHP100": 6504,
+            "HealPower1": 270,
+            "HealPower100": 2703,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3070,
+                100
+            ],
+            [
+                3071,
+                3070,
+                101,
+                180
+            ],
+            [
+                3072,
+                3071,
+                102,
+                181
+            ],
+            [
+                3073,
+                3072,
+                103,
+                182
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                13
+            ],
+            [
+                12,
+                18,
+                13,
+                28
+            ],
+            [
+                12,
+                18,
+                8,
+                23
+            ],
+            [
+                8,
+                18,
+                10,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4070
+            ],
+            [
+                4070
+            ],
+            [
+                4071,
+                4070,
+                100
+            ],
+            [
+                4071,
+                101,
+                180
+            ],
+            [
+                4072,
+                4071,
+                101,
+                180
+            ],
+            [
+                4072,
+                102,
+                181
+            ],
+            [
+                4073,
+                4072,
+                103,
+                182
+            ],
+            [
+                4073,
+                103,
+                182
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                16
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                8,
+                14
+            ]
+        ]
     }
 ]

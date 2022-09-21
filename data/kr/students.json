@@ -45605,5 +45605,401 @@
                 14
             ]
         ]
+    },
+    {
+        "Id": 10050,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 110,
+        "PathName": "Kokona",
+        "DevName": "CH0137",
+        "Name": "코코나",
+        "School": "Shanhaijing",
+        "Club": "Meihuayuan",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Healer",
+        "SummonIds": [],
+        "Position": "Middle",
+        "BulletType": "Pierce",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "Weapon_Icon_CH0137",
+        "Cover": true,
+        "Equipment": [
+            "Shoes",
+            "Hairpin",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_Sanhaijing_Collection",
+        "CollectionTexture": "Student_Portrait_CH0137_Collection",
+        "FamilyName": "스노하라",
+        "FamilyNameRuby": "",
+        "PersonalName": "코코나",
+        "SchoolYear": "1학년",
+        "CharacterAge": "11세",
+        "Birthday": "6월 1일",
+        "CharacterSSRNew": "훈육지원부 &#x27;매화원&#x27;의 코코나입니다!\n아, 아닙니다! 이래도 어엿한 교관이라구요!?",
+        "ProfileIntroduction": "산해경 훈육지원부, 매화원의 교관을 맡고 있는 1학년 학생.\n\n본래는 소학교에 다닐 나이지만 뛰어난 학습능력을 인정받아 교관의 권한까지 받게 되었다.\n원생들은 코코나를  &#x27;코코나 짱&#x27;이라고 부르며 친근하게 따르곤 하지만, 코코나는 그 호칭을 그다지 달가워하지 않는다고 한다.",
+        "Hobby": "동화책 읽기",
+        "CharacterVoice": "五十嵐裕美",
+        "BirthDay": "6/1",
+        "ArtistName": "seicoh",
+        "CharHeightMetric": "139cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1264,
+        "AttackPower1": 206,
+        "AttackPower100": 2061,
+        "MaxHP1": 2262,
+        "MaxHP100": 22620,
+        "DefensePower1": 22,
+        "DefensePower100": 135,
+        "HealPower1": 2299,
+        "HealPower100": 6899,
+        "DodgePoint": 723,
+        "AccuracyPoint": 766,
+        "CriticalPoint": 219,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "DamageDist": [
+            3334,
+            3333,
+            3333
+        ],
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "참 잘했어요",
+                "Desc": "자신을 제외한 아군 1인에게 치유력 <?1> 회복/\n자신은 치유력 101% 회복/\n<s:Stamp> 1개 적립",
+                "Parameters": [
+                    [
+                        "152%",
+                        "175%",
+                        "221%",
+                        "244%",
+                        "290%",
+                        "312%",
+                        "358%",
+                        "381%",
+                        "427%",
+                        "450%"
+                    ]
+                ],
+                "Cost": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                ],
+                "SummonStat": [],
+                "SummonStatCoefficient": [],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "다음에도 기대할게요",
+                "Desc": "아군이 치명 공격 100회 성공 시 자신을 제외하고 가장 체력이 낮은 아군 1인에게 치유력 <?1> 회복/\n<s:Stamp> 1개 적립",
+                "Parameters": [
+                    [
+                        "56.6%",
+                        "59.4%",
+                        "62.2%",
+                        "73.5%",
+                        "76.4%",
+                        "79.2%",
+                        "90.5%",
+                        "93.4%",
+                        "96.2%",
+                        "107%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "교관의 책임감",
+                "Desc": "<b:HealPower> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Stat": []
+            },
+            {
+                "SkillType": "sub",
+                "Name": "매화원의 지도법",
+                "Desc": "<s:Stamp> 5개 적립 시 자신을 제외한 아군 <b:CostChange> 1 감소 (Ex 스킬 사용 1회까지) (<s:Stamp>은 초기화됩니다.)/\n자신에게 치유력 <?1> 회복",
+                "Parameters": [
+                    [
+                        "57%",
+                        "59.8%",
+                        "62.7%",
+                        "74.1%",
+                        "76.9%",
+                        "79.8%",
+                        "91.2%",
+                        "94%",
+                        "96.9%",
+                        "108%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0137_EXTRAPASSIVESKILL"
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "교관의 책임감+",
+                "Desc": "<b:Dodge> <?1> 증가/\n추가로 <b:HealPower> <?2> 증가",
+                "Parameters": [
+                    [
+                        "160",
+                        "168",
+                        "176",
+                        "208",
+                        "216",
+                        "224",
+                        "256",
+                        "264",
+                        "272",
+                        "304"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Stat": []
+            }
+        ],
+        "FavorStatType": [
+            "HealPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                7,
+                0
+            ],
+            [
+                10,
+                0
+            ],
+            [
+                14,
+                57
+            ],
+            [
+                17,
+                68
+            ],
+            [
+                4,
+                12
+            ],
+            [
+                7,
+                18
+            ],
+            [
+                11,
+                30
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            6,
+            0
+        ],
+        "FurnitureInteraction": [
+            [
+                1100
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Dessert",
+            "Delicious"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Kokona",
+            "F_Kokona2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "숙녀의 기품",
+            "Desc": "숙녀의 품위를 지킬 때에도, 교관으로서의 책무를 다할 때에도 효과적인 돌격소총.",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 91,
+            "AttackPower100": 905,
+            "MaxHP1": 650,
+            "MaxHP100": 6504,
+            "HealPower1": 270,
+            "HealPower100": 2703,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3070,
+                100
+            ],
+            [
+                3071,
+                3070,
+                101,
+                180
+            ],
+            [
+                3072,
+                3071,
+                102,
+                181
+            ],
+            [
+                3073,
+                3072,
+                103,
+                182
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                13
+            ],
+            [
+                12,
+                18,
+                13,
+                28
+            ],
+            [
+                12,
+                18,
+                8,
+                23
+            ],
+            [
+                8,
+                18,
+                10,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4070
+            ],
+            [
+                4070
+            ],
+            [
+                4071,
+                4070,
+                100
+            ],
+            [
+                4071,
+                101,
+                180
+            ],
+            [
+                4072,
+                4071,
+                101,
+                180
+            ],
+            [
+                4072,
+                102,
+                181
+            ],
+            [
+                4073,
+                4072,
+                103,
+                182
+            ],
+            [
+                4073,
+                103,
+                182
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                16
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                8,
+                14
+            ]
+        ]
     }
 ]
