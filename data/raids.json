@@ -32926,6 +32926,128 @@
                     3334829467
                 ]
             ]
+        },
+        {
+            "Id": 8000,
+            "IsReleased": [
+                false,
+                false
+            ],
+            "DungeonType": "Defense",
+            "Icon": "EnemyInfo_Sweeper_Decagram_Taser_White",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 901000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7801201,
+                        7801001,
+                        7801101
+                    ]
+                },
+                {
+                    "Id": 901000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7801202,
+                        7801002,
+                        7801102
+                    ]
+                },
+                {
+                    "Id": 901000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7801203,
+                        7801003,
+                        7801103
+                    ]
+                },
+                {
+                    "Id": 901000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7801104,
+                        7801204,
+                        7801004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    3938056289,
+                    2075498290
+                ],
+                [
+                    3938056289,
+                    2075498290
+                ],
+                [
+                    3938056289,
+                    2075498290,
+                    3839125090
+                ],
+                [
+                    3938056289,
+                    2075498290,
+                    3839125090,
+                    89307624
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -33181,13 +33303,37 @@
             "Id": 3334829467,
             "Icon": "TimeAttackGeas_Enemy_Heal_TriggerPeriod",
             "NameEn": "Enemy Continuous Healing",
-            "DescEn": "All enemies restore 50% of their Max HP every 30s",
+            "DescEn": "All enemies restore 1.5% of their Max HP every 1s.",
             "NameJp": "一定時間毎に回復",
             "DescJp": "敵が一定時間毎に体力を回復します。",
             "NameKr": "일정 시간마다 회복",
             "DescKr": "일정 시간마다 적이 체력을 회복합니다.",
             "NameTh": "ศัตรูฟื้นฟูต่อเนื่อง",
-            "DescTh": "ศัตรูจะทำการฟื้นฟู HP เท่ากับ 50% ของ HP สูงสุด ทุก 30 วินาที"
+            "DescTh": "ศัตรูจะทำการฟื้นฟู HP เท่ากับ 1.5% ของ HP สูงสุด ทุก 1 วินาที"
+        },
+        {
+            "Id": 3839125090,
+            "Icon": "TimeAttackGeas_Enemy_DamagedLimit_StatChange_MaxHP",
+            "NameEn": "Enemy Incoming DMG Limit",
+            "DescEn": "All enemies have an <b:DamagedLimit> reducing the damage received from ally attacks to 1.",
+            "NameJp": "最大ダメージ制限",
+            "DescJp": "敵の最大体力が減少する代わりに、一度に最大1のダメージだけを受けます。",
+            "NameKr": "최대 피해 제한",
+            "DescKr": "적 최대 체력이 감소하지만, 한 번에 최대 1의 피해만 받습니다.",
+            "NameTh": "จำกัดความเสียหายที่ศัตรูได้รับ",
+            "DescTh": "ศัตรูทั้งหมดจะ<b:DamagedLimit>จากการโจมตีทั้งหมดของฝ่ายเราเหลือ 1 ต่อการโจมตี"
+        },
+        {
+            "Id": 89307624,
+            "Icon": "TimeAttackGeas_Ally_Damage_ExtraDamage_TriggerDamageHit",
+            "NameEn": "AR/HG Additional Damage",
+            "DescEn": "Allies who use AR or HG type weapons will deal damage as an additional hit to enemies.",
+            "NameJp": "攻撃時には追加ダメージ(AR、HG)",
+            "DescJp": "AR、HG武器を使用する味方生徒が攻撃時、追加ダメージが適用されます。",
+            "NameKr": "공격 시 추가 피해(AR, HG)",
+            "DescKr": "AR, HG 무기를 사용하는 아군 학생이 공격 시 추가 피해가 적용됩니다.",
+            "NameTh": "AR/HG สร้างความเสียหายเพิ่มเติม",
+            "DescTh": "ฝ่ายเราที่ใช้อาวุธประเภท AR หรือ HG จะสร้างความเสียหายเพิ่มเติมจากปกติให้กับศัตรู"
         }
     ],
     "WorldRaid": [
@@ -33480,7 +33626,7 @@
                     "NameCn": null,
                     "DescCn": null,
                     "NameTh": "เพื่อนายท่านแต่เพียงผู้เดียว",
-                    "DescTh": "ทุก 60 วินาที, ได้รับเอฟเฟคดังต่อไปนี้ (ทับซ้อนได้สูงสุด 3 ขั้น)\nเพิ่ม<b:ATK>：30%/60%/90%\nเพิ่ม<b:CriticalChance>：35%/70%/105%\nเพิ่มอัตราการฟื้นฟู ATG15%/30%/80%\nเพิ่ม<d:DamagedRatio>：10%/20%/50%"
+                    "DescTh": "ทุก 60 วินาที, ได้รับเอฟเฟคดังต่อไปนี้ (ทับซ้อนได้สูงสุด 3 ขั้น)\nเพิ่ม<b:ATK>：30%/60%/90%\nเพิ่ม<b:CriticalChance>：35%/70%/105%\nเพิ่มอัตราการฟื้นฟู ATG:15%/30%/80%\nเพิ่ม<d:DamagedRatio>：10%/20%/50%"
                 },
                 {
                     "Id": "WakamoSwimsuit01Passive01",
@@ -33793,7 +33939,7 @@
                     "NameCn": null,
                     "DescCn": null,
                     "NameTh": "ถ้ามาถึงจุดนี้ล่ะก็...!",
-                    "DescTh": "เมื่อ ATG เต็ม, โฮเวอร์คราฟจะเข้าโหมดยิงมิสไซล์และเริ่มโจมตีรีสอร์ต\nระหว่างที่อยู่ในโหมดยิงมิสไซล์ โฮเวอร์คราฟจะ<s:Immortal>\nหลังจบโหมดยิงมิสไซล์, โฮเวอร์คราฟจะอยู่ในสถานะมึนงง\nเมื่อโฮเวอร์คราฟอยู่ในสถานะมึนงง เพิ่ม<d:DamagedRatio> 200%/ลด<d:CriticalChanceResistPoint> 100%"
+                    "DescTh": "เมื่อ ATG เต็ม, โฮเวอร์คราฟจะเข้าโหมดยิงมิสไซล์และเริ่มโจมตีรีสอร์ต\nระหว่างที่อยู่ในโหมดยิงมิสไซล์ โฮเวอร์คราฟจะ<s:Immortal>\nหลังจบโหมดยิงมิสไซล์, โฮเวอร์คราฟจะอยู่ในสถานะมึนงง\nเมื่อโฮเวอร์คราฟอยู่ในสถานะมึนงง เพิ่ม<d:DamagedRatio> 200% และลด<d:CriticalChanceResistPoint> 100%"
                 },
                 {
                     "Id": "WakamoHoverCraftPassive01",

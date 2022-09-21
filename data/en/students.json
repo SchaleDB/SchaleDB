@@ -26554,7 +26554,7 @@
         "CharacterVoice": "Shizuka Itou",
         "BirthDay": "2/5",
         "ArtistName": "9ml",
-        "CharHeightMetric": "未測定",
+        "CharHeightMetric": "Unmeasured",
         "CharHeightImperial": "Unmeasured",
         "StabilityPoint": 1992,
         "AttackPower1": 419,
@@ -35627,7 +35627,7 @@
             {
                 "SkillType": "ex",
                 "Name": "Ancient Texts Expert",
-                "Desc": "Reduces the <b:CostChange> of an ally's next <b>two</b> EX skill uses by 50% (The amount reduced is rounded down to the nearest whole number) and increases their <b:ATK> by <?1> for 46s. Cannot target self or T.S. vehicles.",
+                "Desc": "Reduces the <b:CostChange> of an ally's next <b>two</b> EX Skill uses by 50% (The amount reduced is rounded down to the nearest whole number) and increases their <b:ATK> by <?1> for 46s. Cannot target self or T.S. vehicles.",
                 "Parameters": [
                     [
                         "10%",
@@ -45282,12 +45282,14 @@
                     ]
                 ],
                 "Icon": "COMMON_SKILLICON_STATBUFF",
-                "Stat": []
+                "Stat": [
+                    "HealPower"
+                ]
             },
             {
                 "SkillType": "sub",
                 "Name": "Plum Blossom Teaching",
-                "Desc": "When Kokona reaches 5 <s:Stamp> stacks, reduces the <b:CostChange> of all allies' next EX skill use by <b>1</b> (except self) and restores own HP by <?1> of Healing. All <s:Stamp> stacks are consumed after activation.",
+                "Desc": "When Kokona reaches 5 <s:Stamp> stacks, reduces the <b:CostChange> of all allies' next EX Skill use by <b>1</b> (except self) and restores own HP by <?1> of Healing. All <s:Stamp> stacks are consumed after activation.",
                 "Parameters": [
                     [
                         "57%",
@@ -45335,7 +45337,10 @@
                     ]
                 ],
                 "Icon": "COMMON_SKILLICON_STATBUFF",
-                "Stat": []
+                "Stat": [
+                    "DodgePoint",
+                    "HealPower"
+                ]
             }
         ],
         "FavorStatType": [
