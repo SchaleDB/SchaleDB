@@ -20,7 +20,7 @@ const conquest_events = [815]
 const module_list = ['home','students','raids','stages','items','craft']
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
-const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_01", "Defense": "TimeAttack_SlotBG_02", "Destruction": "TimeAttack_SlotBG_03"}
+const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_02", "Defense": "TimeAttack_SlotBG_01", "Destruction": "TimeAttack_SlotBG_03"}
 const searchDelay = 100
 const altSprite = [10033, 10041, 10042, 10043, 10048]
 
@@ -122,14 +122,20 @@ let student
 let studentList
 let studentCompare 
 
-// Todo: These should also be stored in localstorage
-let stat_preview_stars = 3
-let stat_preview_weapon_stars = 0
-let statPreviewIncludePassive = false
-let statPreviewIncludeExGear = false
-let statPreviewIncludeBond = false
-let statPreviewIncludeBondAlts = false
-let statPreviewIncludeEquipment = false
+let statPreviewStarGrade
+let statPreviewWeaponGrade
+let statPreviewLevel
+let statPreviewWeaponLevel
+let statPreviewEquipment
+let statPreviewBondLevel
+let statPreviewBondAltLevel
+let statPreviewPassiveLevel
+let statPreviewExLevel
+let statPreviewIncludePassive
+let statPreviewIncludeExGear
+let statPreviewIncludeBond
+let statPreviewIncludeBondAlts
+let statPreviewIncludeEquipment
 let statPreviewSupportStats = false
 let statPreviewSummonStats = false
 let studentCollection = {}
@@ -558,6 +564,9 @@ $.when($.ready, loadPromise).then(function() {
         },
     })
 
+    //load student settings
+    statPreviewSettingsLoad()
+
     //load saved student collection
     if (localStorage.getItem("student_collection")) {
         studentCollection = JSON.parse(localStorage.getItem("student_collection"))
@@ -720,6 +729,16 @@ function loadModule(moduleName, entry=null) {
             statPreviewSupportStats = false
             compareMode = false
             selectCompareMode = false
+
+            $('#ba-statpreview-levelrange').val(statPreviewLevel)
+            changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
+            $('#ba-statpreview-weapon-range').val(statPreviewWeaponLevel)
+            $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
+            $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
+            $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
+            $('#ba-statpreview-passiveskill-range').val(statPreviewPassiveLevel)
+            $('#ba-statpreview-exskill-range').val(statPreviewExLevel)
+
             $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
@@ -1759,15 +1778,23 @@ function processStudent() {
     $('#ba-statpreview-status-bond-alt-level').toggle(student_bondalts.length > 0)
 
     if (student.Id in studentCollection) {
-        stat_preview_stars = studentCollection[student.Id].s
-        $('#ba-statpreview-levelrange').val(studentCollection[student.Id].l)
+        statPreviewStarGrade = studentCollection[student.Id].s
+
+        statPreviewLevel = studentCollection[student.Id].l
+        $('#ba-statpreview-levelrange').val(statPreviewLevel)
         changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
-        $('#ba-statpreview-gear1-range').val(studentCollection[student.Id].e1)
-        $('#ba-statpreview-gear2-range').val(studentCollection[student.Id].e2)
-        $('#ba-statpreview-gear3-range').val(studentCollection[student.Id].e3)
-        stat_preview_weapon_stars = studentCollection[student.Id].ws
-        $('#ba-statpreview-weapon-range').val(studentCollection[student.Id].wl)
-        $('#ba-statpreview-bond-1-range').val(studentCollection[student.Id].b)
+
+        statPreviewEquipment = [studentCollection[student.Id].e1, studentCollection[student.Id].e2, studentCollection[student.Id].e3]
+        $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
+        $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
+        $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
+
+        statPreviewWeaponGrade = studentCollection[student.Id].ws
+        statPreviewWeaponLevel = studentCollection[student.Id].wl
+        $('#ba-statpreview-weapon-range').val(statPreviewWeaponLevel)
+
+        statPreviewBondLevel = studentCollection[student.Id].b
+        $('#ba-statpreview-bond-1-range').val(statPreviewBondLevel)
         $('#ba-statpreview-passiveskill-range').val(studentCollection[student.Id].s3)
         changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
         statPreviewIncludeBond = true
@@ -1783,10 +1810,10 @@ function processStudent() {
     updateGearIcon()
     updateStatPreviewTitle()
 
-    changeStatPreviewStars(stat_preview_stars, stat_preview_weapon_stars, false)
+    changeStatPreviewStars(statPreviewStarGrade, statPreviewWeaponGrade, false)
     recalculateTerrainAffinity()
-    updatePassiveSkillStatPreview()
-    updateSummonExSkillStatPreview()
+    changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
+    changeStatPreviewSummonExSkillLevel(document.getElementById('ba-statpreview-exskill-range'), false)
     recalculateWeaponPreview()
     updateWeaponLevelStatPreview($('#ba-statpreview-weapon-range').val())
 
@@ -1800,9 +1827,9 @@ function processStudent() {
     changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'), false)
     changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'), false)
 
-    statPreviewIncludeBondAlts = false
     for (let i = 1; i <= student_bondalts.length+1; i++) {
         if (i > 1 && student_bondalts[i-2].Id in studentCollection) {
+            statPreviewBondAltLevel = studentCollection[student_bondalts[i-2].Id].b
             $(`#ba-statpreview-bond-${i}-range`).val(studentCollection[student_bondalts[i-2].Id].b)
             statPreviewIncludeBondAlts = true
         }
@@ -2563,7 +2590,7 @@ function loadRegion(regID) {
         $("#ba-weaponpreview-star-1").hide()
         $("#ba-weaponpreview-star-2").hide()
         $("#ba-weaponpreview-star-3").hide()
-        stat_preview_weapon_stars = 0
+        statPreviewWeaponGrade = 0
     }
     $("#ba-bond-levelrange").attr("max",region.bondlevel_max)
     $("#ba-statpreview-gear1-range").attr("max",region.gear1_max)
@@ -2578,6 +2605,7 @@ function loadRegion(regID) {
         
         $('#item-search-filter-furnitureset-107').hide()
         $('#item-search-filter-furnitureset-108').hide()
+        $('#item-search-filter-furnitureset-109').hide()
         $('#item-search-filter-equipmenttier-7').hide()
     }
 }
@@ -2595,10 +2623,10 @@ function getFormattedStatAmount(val) {
 }
 
 function changeGearLevel(slot, el, recalculate = true) {
-    let geartype = student.Equipment[slot-1]
-    let tier = parseInt(el.value)
-    let equipment = find(data.equipment, "Id", gearId[geartype]+tier-1)[0]
-
+    const geartype = student.Equipment[slot-1]
+    const tier = parseInt(el.value)
+    const equipment = find(data.equipment, "Id", gearId[geartype]+tier-1)[0]
+    statPreviewEquipment[slot-1] = tier
     //var gearobj = find(data.common.gear, "type", geartype)[0]
     $(`#ba-statpreview-gear${slot}-icon`).attr("src", `images/equipment/Equipment_Icon_${geartype}_Tier${tier}.png`)
     $(`#ba-statpreview-gear${slot}-level`).text(`T${tier}`)
@@ -2665,6 +2693,7 @@ function changeStatPreviewLevel(el, recalculate = true) {
     $('.statpreview-level').val(level)
     $('#ba-statpreview-level').text("Lv." + level)
     $('#ba-statpreview-level-modal').text(`Lv.${level} / ${el.max}`)
+    statPreviewLevel = level
     if (recalculate) recalculateStatPreview()
 }
 
@@ -2715,8 +2744,10 @@ function changeStatPreviewBondLevel(i, recalculate = true) {
     var bondStats
     if (i == 1) {
         bondStats = Object.entries(getBondStats(student, level))
+        statPreviewBondLevel = level
     } else {
         bondStats = Object.entries(getBondStats(student_bondalts[i-2], level))
+        statPreviewBondAltLevel = level
     }
     $(`#ba-statpreview-bond-${i}-description`).html(`${getStatName(bondStats[0][0])} <b>+${getFormattedStatAmount(bondStats[0][1])}</b>, ${getStatName(bondStats[1][0])} <b>+${getFormattedStatAmount(bondStats[1][1])}</b>`)
     if (recalculate) recalculateStatPreview()
@@ -2734,6 +2765,7 @@ function updateWeaponLevelStatPreview(level) {
     $(Object.entries(weaponStats)).each(function(i, el){
         if (el[1] > 0) desc += `${getStatName(el[0])} <b>+${getFormattedStatAmount(el[1])}</b>, `
     })
+    statPreviewWeaponLevel = parseInt(level)
     $('#ba-statpreview-weapon-description').html(desc.substring(0, desc.length-2))
 }
 
@@ -2743,22 +2775,24 @@ function changeStatPreviewPassiveSkillLevel(el, recalculate = true) {
     } else {
         $('#ba-statpreview-passiveskill-level').html("Lv." + el.value)
     }
+    statPreviewPassiveLevel = parseInt(el.value)
     updatePassiveSkillStatPreview()
     if (recalculate) recalculateStatPreview()
 }
 
-function changeStatPreviewSummonExSkillLevel(el) {
+function changeStatPreviewSummonExSkillLevel(el, recalculate = true) {
     if (el.value == el.max) {
         $('#ba-statpreview-exskill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
     } else {
         $('#ba-statpreview-exskill-level').html("Lv." + el.value)
     }
+    statPreviewExLevel = parseInt(el.value)
     updateSummonExSkillStatPreview()
-    recalculateStatPreview()
+    if (recalculate) recalculateStatPreview()
 }
 
 function getBondTargetsHTML(num, student) {
-    return `<div class="d-flex ${num != 1 ? "mt-3": ""}"><label for="ba-statpreview-bond-${num}-toggle"><h5>${(num == 1) ? translateUI('student_bond') : translateUI('student_bond_alt')}</h5></label><div class="flex-fill"></div><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="ba-statpreview-bond-${num}-toggle" onchange="toggleBond(${num})"></div></div><div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="20" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div>`
+    return `<div class="d-flex ${num != 1 ? "mt-3": ""}"><label for="ba-statpreview-bond-${num}-toggle"><h5>${(num == 1) ? translateUI('student_bond') : translateUI('student_bond_alt')}</h5></label><div class="flex-fill"></div><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="ba-statpreview-bond-${num}-toggle" onchange="toggleBond(${num})"></div></div><div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${num == 1 ? statPreviewBondLevel : statPreviewBondAltLevel}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div>`
 }
 
 function changeBondLevel(el) {
@@ -2781,7 +2815,7 @@ function updateGearIcon() {
 function recalculateTerrainAffinity() {
     let types = ["Street","Outdoor","Indoor"]
     types.forEach( type => {
-        let adaptation = adaptaionAmount[student[`${type}BattleAdaptation`] + ((stat_preview_stars == 5 && stat_preview_weapon_stars >= 3 && student.Weapon.AdaptationType == type) ? student.Weapon.AdaptationValue : 0)]
+        let adaptation = adaptaionAmount[student[`${type}BattleAdaptation`] + ((statPreviewStarGrade == 5 && statPreviewWeaponGrade >= 3 && student.Weapon.AdaptationType == type) ? student.Weapon.AdaptationValue : 0)]
         $(`#ba-student-terrain-${type.toLowerCase()}-icon`).attr("src", `images/ui/Ingame_Emo_Adaptresult${adaptation}.png`)
         $(`#ba-student-terrain-${type.toLowerCase()}`).tooltip('dispose').tooltip({title: getRichTooltip(`images/ui/Ingame_Emo_Adaptresult${adaptation}.png`,translateUI('terrain_adaption', [getLocalizedString('AdaptationType', type)])+' '+adaptation, null, null, getAdaptationText(type, adaptation), 30), placement: 'top', html: true})
 
@@ -2820,11 +2854,11 @@ function recalculateStatPreview() {
     let studentStats, summonStats, summon
     if (statPreviewSummonStats) {
         summon = find(data.summons, 'Id', student.SummonIds[0])[0]
-        summonStats = new CharacterStats(summon, level, (summon.StarBonus ? stat_preview_stars : 1))
+        summonStats = new CharacterStats(summon, level, (summon.StarBonus ? statPreviewStarGrade : 1))
     }
-    studentStats = new CharacterStats(student, level, stat_preview_stars)
+    studentStats = new CharacterStats(student, level, statPreviewStarGrade)
     if (compareMode) {
-        studentCompareStats = new CharacterStats(studentCompare, level, stat_preview_stars)
+        studentCompareStats = new CharacterStats(studentCompare, level, statPreviewStarGrade)
     }
 
     //Include Equipment
@@ -2859,12 +2893,12 @@ function recalculateStatPreview() {
     //Include Relationship
     if (statPreviewIncludeBond) {
         let bondlevel = $(`#ba-statpreview-bond-1-range`).val()
-        let bondbonus = getBondStats(student, Math.min(maxbond[stat_preview_stars-1], bondlevel))
+        let bondbonus = getBondStats(student, Math.min(maxbond[statPreviewStarGrade-1], bondlevel))
         Object.entries(bondbonus).forEach(el => {
             studentStats.addBuff(el[0], el[1])
         })
         if (compareMode) {
-            bondbonus = getBondStats(studentCompare, Math.min(maxbond[stat_preview_stars-1], bondlevel))
+            bondbonus = getBondStats(studentCompare, Math.min(maxbond[statPreviewStarGrade-1], bondlevel))
             Object.entries(bondbonus).forEach(el => {
                 studentCompareStats.addBuff(el[0], el[1])
             })
@@ -2883,14 +2917,14 @@ function recalculateStatPreview() {
 
     //Include Passive Skill
     if (statPreviewIncludePassive && !statPreviewSupportStats) {
-        let passiveSkill = find(student.Skills, 'SkillType', ((stat_preview_weapon_stars >= 2) ? 'weapon' : '') + 'passive')[0]
+        let passiveSkill = find(student.Skills, 'SkillType', ((statPreviewWeaponGrade >= 2) ? 'weapon' : '') + 'passive')[0]
         let passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
         Object.entries(passiveBonus).forEach(el => {
             studentStats.addBuff(el[0], el[1])
         })
 
         if (compareMode) {
-            passiveSkill = find(studentCompare.Skills, 'SkillType', ((stat_preview_weapon_stars >= 2) ? 'weapon' : '') + 'passive')[0]
+            passiveSkill = find(studentCompare.Skills, 'SkillType', ((statPreviewWeaponGrade >= 2) ? 'weapon' : '') + 'passive')[0]
             passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
             Object.entries(passiveBonus).forEach(el => {
                 studentCompareStats.addBuff(el[0], el[1])            
@@ -2899,7 +2933,7 @@ function recalculateStatPreview() {
     }
 
     //Include Ex. Weapon
-    if ((stat_preview_stars == 5) && (stat_preview_weapon_stars > 0)) {
+    if ((statPreviewStarGrade == 5) && (statPreviewWeaponGrade > 0)) {
         let weaponStats = getWeaponStats(student, $('#ba-statpreview-weapon-range').val())
         Object.entries(weaponStats).forEach(el => {
             studentStats.addBuff(el[0], el[1])
@@ -3055,11 +3089,17 @@ function recalculateStatPreview() {
 
     $('#ba-statpreview-status-compare').toggleClass('deactivated', !compareMode)
 
-    //save settings - use timeout to limit the rate function
+    //save settings
     if (student.Id in studentCollection) {
         if (collectionUpdateTimeout) clearTimeout(collectionUpdateTimeout)
         collectionUpdateTimeout = window.setTimeout(() => {
             studentCollectionSave()
+            statPreviewSettingsSave()
+        }, 50)
+    } else {
+        if (collectionUpdateTimeout) clearTimeout(collectionUpdateTimeout)
+        collectionUpdateTimeout = window.setTimeout(() => {
+            statPreviewSettingsSave()
         }, 50)
     }
 }
@@ -3069,7 +3109,7 @@ function recalculateEXSkillPreview() {
     let skillLevelEX = $("#ba-skillpreview-exrange").val()
     let skillEX = find(student.Skills, 'SkillType', 'ex')[0]
 
-    $('#ba-skill-ex-description').html(getSkillText(getTranslatedString(skillEX, 'Desc'), skillEX.Parameters, skillLevelEX, student.BulletType, skillEX.DamageDist ? skillEX.DamageDist : []))
+    $('#ba-skill-ex-description').html(getSkillText(getTranslatedString(skillEX, 'Desc'), skillEX.Parameters, skillLevelEX, student.BulletType, skillEX.DamageDist ? skillEX.DamageDist : [], skillEX.DamageDistParam ? skillEX.DamageDistParam : 1))
     $(`#ba-skill-ex-description .skill-hitinfo`).tooltip({html: true})
 
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -3088,7 +3128,7 @@ function recalculateSkillPreview() {
     let skillList = ['normal','passive','sub']
     skillList.forEach(el => {
         let skill = find(student.Skills, 'SkillType', el)[0]
-        $(`#ba-skill-${el}-description`).html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType, skill.DamageDist ? skill.DamageDist : []))
+        $(`#ba-skill-${el}-description`).html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType, skill.DamageDist ? skill.DamageDist : [], skill.DamageDistParam ? skill.DamageDistParam : 1))
         $(`#ba-skill-${el}-description .skill-hitinfo`).tooltip({html: true})
     })
 
@@ -3547,10 +3587,10 @@ function getWeaponStats(student, level) {
 
 function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
 
-    let weaponstars_prev = stat_preview_weapon_stars
+    let weaponstars_prev = statPreviewWeaponGrade
 
-    stat_preview_stars = stars
-    stat_preview_weapon_stars = weaponstars
+    statPreviewStarGrade = stars
+    statPreviewWeaponGrade = weaponstars
 
     for (let i = 1; i <= 5; i++) {
         $(`.statpreview-star-${i}`).toggleClass("active", i <= stars)
@@ -3578,7 +3618,7 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
         $('#ba-statpreview-weapon').toggleClass('disabled', true)
         $('.statpreview-weapon-range').prop('disabled', true)
     }
-    $('#ba-student-weapon-level').toggle((stat_preview_weapon_stars > 0))
+    $('#ba-student-weapon-level').toggle((statPreviewWeaponGrade > 0))
 
     if ((weaponstars == 3 && weaponstars_prev < 3) || (weaponstars_prev == 3 && weaponstars < 3)) {
         recalculateTerrainAffinity()
@@ -3593,12 +3633,12 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
 
 function updatePassiveSkillStatPreview() {
     //update passive skill info in preview
-    let passivePlus = (stat_preview_weapon_stars >= 2)
+    let passivePlus = (statPreviewWeaponGrade >= 2)
     let passiveSkill = find(student.Skills, 'SkillType', (passivePlus ? 'weapon' : '') + 'passive')[0]
     let passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
     $('#ba-statpreview-passiveskill-name').text(getTranslatedString(passiveSkill, 'Name'))
     let desc = ""
-    $(Object.entries(passiveBonus)).each(function(i, el){
+    $(Object.entries(passiveBonus)).each(function(i, el) {
         let value = el[1]
         if (el[0].includes('_Coefficient')) value /= 10000
         if (value > 0) desc += `${getStatName(el[0])} <b>+${getFormattedStatAmount(value)}</b>, `
@@ -4220,7 +4260,7 @@ function getDefenseTypeText(type) {
     return text
 }
 
-function getSkillText(text, params, level, type, damageDist=[]) {
+function getSkillText(text, params, level, type, damageDist=[], damageDistParameter=1) {
     
     let result = text
     let regex
@@ -4238,7 +4278,7 @@ function getSkillText(text, params, level, type, damageDist=[]) {
                         result = result.replace(`<?${i}>`, params[i-1][level-1].replace(regex, function(match) {return `<strong>${match}</strong>`}))   
                     }
                 } else {
-                    if (i == 1 && damageDist.length > 1) {
+                    if (i == damageDistParameter && damageDist.length > 1) {
                         result = result.replace(`<?${i}>`, `<span class="ba-col-${type.toLowerCase()} skill-hitinfo" data-bs-toggle="tooltip" data-bs-placement="top" title="${getBasicTooltip(getSkillHitsText(damageDist, params[i-1][level-1], type.toLowerCase()))}">${params[i-1][level-1]}</span>`)
 
                     } else {
@@ -4773,7 +4813,7 @@ function openStudentComparison() {
         updateStatPreviewTitle()
     } else {
         $('#student-select-grid .selection-grid-card.disabled').removeClass('disabled')
-        $(`#student-select-${student.Id}>div`).addClass('disabled')
+        $(`#student-select-${student.Id}`).addClass('disabled')
         selectCompareMode = true
         studentSelectorModal.show()
     }
@@ -5083,12 +5123,12 @@ function toggleOwned() {
 
 function studentCollectionSave() {
     studentCollection[student.Id] = {
-        s: stat_preview_stars,
+        s: statPreviewStarGrade,
         l: parseInt($('#ba-statpreview-levelrange').val()),
         e1: parseInt($('#ba-statpreview-gear1-range').val()),
         e2: parseInt($('#ba-statpreview-gear2-range').val()),
         e3: parseInt($('#ba-statpreview-gear3-range').val()),
-        ws: stat_preview_weapon_stars,
+        ws: statPreviewWeaponGrade,
         wl: parseInt($('#ba-statpreview-weapon-range').val()),
         b: parseInt($('#ba-statpreview-bond-1-range').val()),
         s3: parseInt($('#ba-statpreview-passiveskill-range').val())
@@ -5102,6 +5142,47 @@ function studentCollectionSave() {
     }
     
     localStorage.setItem('student_collection', JSON.stringify(studentCollection))
+}
+
+function statPreviewSettingsSave() {
+    let statPreviewSettings = {
+        StarGrade: statPreviewStarGrade,
+        WeaponGrade: statPreviewWeaponGrade,
+        Level: statPreviewLevel,
+        WeaponLevel: statPreviewWeaponLevel,
+        Equipment: statPreviewEquipment,
+        BondLevel: statPreviewBondLevel,
+        BondAltLevel: statPreviewBondAltLevel,
+        PassiveLevel: statPreviewPassiveLevel,
+        ExLevel: statPreviewExLevel,
+        IncludePassive: statPreviewIncludePassive,
+        IncludeExGear: statPreviewIncludeExGear,
+        IncludeBond: statPreviewIncludeBond,
+        IncludeBondAlts: statPreviewIncludeBondAlts,
+        IncludeEquipment: statPreviewIncludeEquipment
+    }
+    localStorage.setItem('student_settings', JSON.stringify(statPreviewSettings))
+}
+
+function statPreviewSettingsLoad() {
+    let statPreviewSettings = {}
+    if (localStorage.getItem("student_settings")) {
+        statPreviewSettings = JSON.parse(localStorage.getItem("student_settings"))
+    }
+    statPreviewStarGrade = statPreviewSettings.StarGrade ? statPreviewSettings.StarGrade : 3
+    statPreviewWeaponGrade = statPreviewSettings.WeaponGrade ? statPreviewSettings.WeaponGrade : 0
+    statPreviewLevel = statPreviewSettings.Level ? statPreviewSettings.Level : 1
+    statPreviewWeaponLevel = statPreviewSettings.WeaponLevel ? statPreviewSettings.WeaponLevel : 1
+    statPreviewEquipment = statPreviewSettings.Equipment ? statPreviewSettings.Equipment : [99, 99, 99]
+    statPreviewBondLevel = statPreviewSettings.BondLevel ? statPreviewSettings.BondLevel : 20
+    statPreviewBondAltLevel = statPreviewSettings.BondAltLevel ? statPreviewSettings.BondAltLevel : 20
+    statPreviewPassiveLevel = statPreviewSettings.PassiveLevel ? statPreviewSettings.PassiveLevel : 10
+    statPreviewExLevel = statPreviewSettings.ExLevel ? statPreviewSettings.ExLevel : 5
+    statPreviewIncludePassive = statPreviewSettings.IncludePassive ? statPreviewSettings.IncludePassive : false
+    statPreviewIncludeExGear = statPreviewSettings.IncludeExGear ? statPreviewSettings.IncludeExGear : false
+    statPreviewIncludeBond = statPreviewSettings.IncludeBond ? statPreviewSettings.IncludeBond : false
+    statPreviewIncludeBondAlts = statPreviewSettings.IncludeBondAlts ? statPreviewSettings.IncludeBondAlts : false
+    statPreviewIncludeEquipment = statPreviewSettings.IncludeEquipment ? statPreviewSettings.IncludeEquipment : false
 }
 
 function exportDataString() {

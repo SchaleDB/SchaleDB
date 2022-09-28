@@ -619,14 +619,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1
+                "CostAmount": 1,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_0",
@@ -661,14 +661,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4
+                "CostAmount": 4,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_1",
@@ -692,14 +692,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_2",
@@ -753,14 +753,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1
+                "CostAmount": 1,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_0",
@@ -795,14 +795,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4
+                "CostAmount": 4,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_1",
@@ -826,14 +826,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_2",
@@ -884,17 +884,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Wolfsegg_0",
@@ -926,17 +915,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Wolfsegg_1",
@@ -957,19 +935,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
-        "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Wolfsegg_2",
         "Name": "저순도 볼프세크 강철",
         "Desc": "여러 가지 불순물이 섞인 저순도의 볼프세크 강철. 각종 제조 및 강화에 사용된다."
@@ -1018,6 +984,17 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_0",
@@ -1049,6 +1026,17 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_1",
@@ -1069,7 +1057,19 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            }
+        ],
         "Icon": "Item_Icon_Material_Nimrud_2",
         "Name": "마모된 님루드 렌즈",
         "Desc": "조각을 맞추어 수리한 님루드 렌즈. 각종 제조 및 강화에 사용된다."
@@ -1118,6 +1118,28 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Mandragora_0",
@@ -1149,6 +1171,28 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Mandragora_1",
@@ -1169,7 +1213,30 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
+            }
+        ],
         "Icon": "Item_Icon_Material_Mandragora_2",
         "Name": "만드라고라 주스",
         "Desc": "잘 익은 만드라고라를 짜내 만든 만드라고라 주스. 각종 제조 및 강화에 사용된다."
@@ -1188,7 +1255,19 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Mandragora_3",
         "Name": "만드라고라 농축액",
         "Desc": "만드라고라 주스를 농축하여 만든 만드라고라 농축액. 각종 제조 및 강화에 사용된다."
@@ -1220,15 +1299,15 @@
                 "CostAmount": 8000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
+                "CostId": 23,
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Rohonc_0",
@@ -1262,15 +1341,15 @@
                 "CostAmount": 25000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
+                "CostId": 23,
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Rohonc_1",
@@ -1293,15 +1372,15 @@
         ],
         "Shops": [
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
+                "CostId": 23,
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Rohonc_2",
@@ -1322,19 +1401,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Rohonc_3",
         "Name": "온전한 로혼치 사본",
         "Desc": "온전한 상태의 로혼치 사본. 각종 제조 및 강화에 사용된다."
@@ -1464,6 +1531,17 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_0",
@@ -1495,6 +1573,17 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_1",
@@ -1515,7 +1604,19 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
+            }
+        ],
         "Icon": "Item_Icon_Material_Antikythera_2",
         "Name": "마모된 안티키테라 장치",
         "Desc": "고장 나 작동하지 않는 안티키테라 장치. 각종 제조 및 강화에 사용된다."
@@ -1534,7 +1635,19 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Antikythera_3",
         "Name": "온전한 안티키테라 장치",
         "Desc": "온전한 상태의 안티키테라 장치. 각종 제조 및 강화에 사용된다."
@@ -1698,17 +1811,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_0",
@@ -1740,17 +1842,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_1",
@@ -1771,19 +1862,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_CrystalHaniwa_2",
         "Name": "수리된 수정 하니와",
         "Desc": "조각을 맞추어 수리한 수정 하니와. 각종 제조 및 강화에 사용된다."
@@ -1802,19 +1881,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_CrystalHaniwa_3",
         "Name": "온전한 수정 하니와",
         "Desc": "온전한 상태의 수정 하니와. 각종 제조 및 강화에 사용된다."
@@ -2116,6 +2183,17 @@
         ],
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2147,6 +2225,17 @@
         ],
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2177,6 +2266,17 @@
             "MaterialItemSR"
         ],
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2240,17 +2340,6 @@
         ],
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
-            },
-            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2282,17 +2371,6 @@
         ],
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
-            },
-            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2323,17 +2401,6 @@
             "MaterialItemSR"
         ],
         "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
-            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2411,7 +2478,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2453,7 +2520,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2495,7 +2562,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2537,7 +2604,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2579,7 +2646,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2621,7 +2688,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2663,7 +2730,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2705,7 +2772,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2747,7 +2814,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2789,7 +2856,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2831,7 +2898,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2873,7 +2940,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2915,7 +2982,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2957,7 +3024,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -2999,7 +3066,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -3041,7 +3108,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -3083,12 +3150,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Abydos_0",
@@ -3125,12 +3203,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Abydos_1",
@@ -3167,12 +3256,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Abydos_2",
@@ -3209,12 +3309,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Abydos_3",
@@ -3251,23 +3362,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Millennium_0",
@@ -3304,23 +3404,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Millennium_1",
@@ -3357,23 +3446,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Millennium_2",
@@ -3410,23 +3488,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Millennium_3",
@@ -3631,12 +3698,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Shanhaijing_0",
@@ -3673,12 +3751,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Shanhaijing_1",
@@ -3715,12 +3804,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Shanhaijing_2",
@@ -3757,12 +3857,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Shanhaijing_3",
@@ -3799,23 +3910,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Valkyrie_0",
@@ -3852,23 +3952,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Valkyrie_1",
@@ -3905,23 +3994,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Valkyrie_2",
@@ -3958,23 +4036,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Valkyrie_3",
@@ -4011,7 +4078,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4053,7 +4120,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4095,7 +4162,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4137,7 +4204,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4179,7 +4246,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4221,7 +4288,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4263,7 +4330,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4305,7 +4372,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4347,7 +4414,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4389,7 +4456,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4431,7 +4498,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4473,7 +4540,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4515,7 +4582,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4557,7 +4624,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4599,7 +4666,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4641,7 +4708,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -4683,12 +4750,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Abydos_0",
@@ -4725,12 +4803,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Abydos_1",
@@ -4767,12 +4856,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Abydos_2",
@@ -4809,12 +4909,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Abydos_3",
@@ -4851,23 +4962,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Millennium_0",
@@ -4904,23 +5004,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Millennium_1",
@@ -4957,23 +5046,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Millennium_2",
@@ -5010,23 +5088,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Millennium_3",
@@ -5231,12 +5298,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Shanhaijing_0",
@@ -5273,12 +5351,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Shanhaijing_1",
@@ -5315,12 +5404,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Shanhaijing_2",
@@ -5357,12 +5457,23 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Shanhaijing_3",
@@ -5399,23 +5510,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Valkyrie_0",
@@ -5452,23 +5552,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Valkyrie_1",
@@ -5505,23 +5594,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Valkyrie_2",
@@ -5558,23 +5636,12 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Valkyrie_3",
@@ -5819,7 +5886,8 @@
             "Toy",
             "Observational",
             "F_Utaha",
-            "F_Nodoka"
+            "F_Nodoka",
+            "F_Utaha_Cheerleader"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_10",
@@ -6521,7 +6589,9 @@
             "F_Utaha",
             "F_Utaha2",
             "F_Ayane_Swimsuit",
-            "F_Ayane_Swimsuit2"
+            "F_Ayane_Swimsuit2",
+            "F_Utaha_Cheerleader",
+            "F_Utaha_Cheerleader2"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_5",
@@ -6637,7 +6707,9 @@
             "F_Pina",
             "F_Pina2",
             "F_Karin",
-            "F_Karin2"
+            "F_Karin2",
+            "F_Hibiki_Cheerleader",
+            "F_Hibiki_Cheerleader2"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_9",
@@ -6814,7 +6886,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -7248,7 +7320,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 5,
                 "CostType": "Item",
@@ -7896,6 +7968,40 @@
         "Desc": "코코나의 신비가 담겨 있는 신명문자(神名文字)."
     },
     {
+        "Id": 10051,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0182",
+        "Name": "우타하(응원단)의 엘레프",
+        "Desc": "우타하(응원단)의 신비가 담겨 있는 신명문자(神名文字)."
+    },
+    {
+        "Id": 10052,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0095",
+        "Name": "노아의 엘레프",
+        "Desc": "노아의 신비가 담겨 있는 신명문자(神名文字)."
+    },
+    {
         "Id": 13000,
         "IsReleased": [
             true,
@@ -8309,6 +8415,23 @@
         "Icon": "Item_Icon_SecretStone_CH0113",
         "Name": "미치루의 엘레프",
         "Desc": "미치루의 신비가 담겨 있는 신명문자(神名文字)."
+    },
+    {
+        "Id": 16010,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0181",
+        "Name": "히비키(응원단)의 엘레프",
+        "Desc": "히비키(응원단)의 신비가 담겨 있는 신명문자(神名文字)."
     },
     {
         "Id": 20000,
@@ -9830,8 +9953,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_Event_Token_0_S13",
-        "Name": "와카모 체포영장",
-        "Desc": "와카모를 체포하기 위해 발키리 경찰학교에서 발부된 체포영장. 와카모가 그간 저질러온 무시무시한 죄목들이 적혀 있다."
+        "Name": "와카모 체포 영장",
+        "Desc": "와카모를 체포하기 위해 발키리 경찰학교에서 발부된 체포 영장. 와카모가 그간 저질러온 무시무시한 죄목들이 적혀 있다."
     },
     {
         "Id": 80100,
@@ -10140,6 +10263,66 @@
         "Desc": "속이 빈 채로 기다랗게 말려 있는 초콜릿 맛 과자. 괜히 폼 잡고 싶은 아이들이 입에 문 채 흔들기도 한다."
     },
     {
+        "Id": 80150,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Item_0",
+        "Name": "이벤트 포인트",
+        "Desc": "이벤트를 진행할 때마다 획득할 수 있는 포인트. 많이 얻을수록 다양한 보상을 얻을 수 있다."
+    },
+    {
+        "Id": 80151,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S19",
+        "Name": "오자미",
+        "Desc": "부드러운 천에 콩과 모래 등을 채워 만든 주머니. 푹신하고 맞아도 다칠 염려가 없기에 공던지기 등의 대회에서 사용된다. 드물게 정말로 폭발하는 오자미가 발견되기도 한다."
+    },
+    {
+        "Id": 80152,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 3,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_1_S19",
+        "Name": "밀레니엄 깃발",
+        "Desc": "밀레니엄의 교표가 그려져 있는 작은 깃발. 반환점을 표시하거나 집합 장소를 알릴 때 사용된다."
+    },
+    {
+        "Id": 80153,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_2_S19",
+        "Name": "호루라기",
+        "Desc": "엔지니어부의 첨단 기술로 만들어진 특제 호루라기. 입김을 불면 진동판이 전자 신호를 발생시켜 새 소리를 내는 스피커를 작동시키는 복잡한 구조로 되어 있다."
+    },
+    {
         "Id": 85000,
         "IsReleased": [
             true,
@@ -10444,6 +10627,66 @@
         "Icon": "Item_Icon_Event_Token_2_S8",
         "Name": "인형삼（Rerun）",
         "Desc": "산해경의 깊은 산속에서 발견되는 사람을 닮은 모양의 뿌리 약초. \n수명을 늘려주거나 나이를 어려지게 만들어주는 효과가 있다고 한다."
+    },
+    {
+        "Id": 85050,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S9",
+        "Name": "초콜릿 코인（Rerun）",
+        "Desc": "골든 플리스 호의 대표적인 간식거리 중 하나. 진짜 코인은 아니지만, 달콤한 맛 때문에 학생들 사이에서 인기가 높다."
+    },
+    {
+        "Id": 85051,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_1_S9",
+        "Name": "토끼 스티커（Rerun）",
+        "Desc": "학생들이 붙이고 다니는 토끼 모양의 스티커. 딱히 큰 의미는 없다. 만들기도 쉽기 때문에 대부분 직접 만들어서 붙이고 다닌다."
+    },
+    {
+        "Id": 85052,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 3,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_2_S9",
+        "Name": "승선권（Rerun）",
+        "Desc": "골든 플리스 호의 승선권. 승선 이후에도 내부 행사나 이벤트 때 종종 확인하기 때문에 항시 지니고 있는 편이 좋다."
+    },
+    {
+        "Id": 85053,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_3_S9",
+        "Name": "주사위（Rerun）",
+        "Desc": "배 안에서 자주 발견되는 주사위. 단순한 장난감이지만, 가끔 학생들 간의 갈등을 해결하는 데에 사용되기도 한다."
     },
     {
         "Id": 100008,
@@ -11213,6 +11456,23 @@
         "Icon": "Item_Icon_Furniture_Selection_Group108",
         "Name": "비치사이드 테마 가구 선택권",
         "Desc": "비치사이드 테마 가구를 선택할 수 있는 선택권"
+    },
+    {
+        "Id": 151010,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Consumable",
+        "Rarity": "SSR",
+        "Quality": 4,
+        "Tags": [
+            "ShiftingCraftCategory_Furniture"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_Furniture_Selection_Group109",
+        "Name": "대운동회 테마 가구 선택권",
+        "Desc": "대운동회 테마 가구를 선택할 수 있는 선택권"
     },
     {
         "Id": 160002,
@@ -12429,8 +12689,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Material_Random_0",
-        "Name": "기초 오파츠 랜덤 선택권",
-        "Desc": "기초 오파츠 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
+        "Name": "오파츠 랜덤 선택권1",
+        "Desc": "오파츠 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
     },
     {
         "Id": 190021,
@@ -12446,8 +12706,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Material_Random_1",
-        "Name": "일반 오파츠 랜덤 선택권",
-        "Desc": "일반 오파츠 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
+        "Name": "오파츠 랜덤 선택권2",
+        "Desc": "오파츠 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
     },
     {
         "Id": 190022,
@@ -12463,8 +12723,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Material_Random_2",
-        "Name": "상급 오파츠 랜덤 선택권",
-        "Desc": "상급 오파츠 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
+        "Name": "오파츠 랜덤 선택권3",
+        "Desc": "오파츠 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
     },
     {
         "Id": 190023,
@@ -12480,8 +12740,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Material_Random_3",
-        "Name": "최상급 오파츠 랜덤 선택권",
-        "Desc": "최상급 오파츠 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
+        "Name": "오파츠 랜덤 선택권4",
+        "Desc": "오파츠 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
     },
     {
         "Id": 191000,
@@ -12652,5 +12912,22 @@
         "Icon": "Item_Icon_Furniture_Random_Group108",
         "Name": "비치사이드 테마 가구 랜덤 선택권",
         "Desc": "비치사이드 테마 가구 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
+    },
+    {
+        "Id": 191010,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Consumable",
+        "Rarity": "SSR",
+        "Quality": 4,
+        "Tags": [
+            "ShiftingCraftCategory_Furniture"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_Furniture_Random_Group109",
+        "Name": "대운동회 테마 가구 랜덤 선택권",
+        "Desc": "대운동회 테마 가구 중 하나를 무작위로 획득할 수 있는 랜덤 선택권"
     }
 ]

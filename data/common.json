@@ -343,16 +343,16 @@
     ],
     "regions": [
         {
-            "studentlevel_max": 80,
+            "studentlevel_max": 83,
             "weaponlevel_max": 50,
             "bondlevel_max": 50,
             "gear1_max": 7,
             "gear2_max": 7,
-            "gear3_max": 6,
-            "campaign_max": 19,
+            "gear3_max": 7,
+            "campaign_max": 20,
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810,   811,   812, 
-                  813,   814,   815,   816,   701, 10801, 10802, 10803, 10804, 10805
+                  813,   814,   815,   816,   817,   701, 10801, 10802, 10803, 10804, 10805
             ],
             "event_701_max": 10,
             "event_701_challenge_max": 1,
@@ -360,16 +360,12 @@
             "bounty_max": 9,
             "schooldungeon_max": 4,
             "current_gacha": [
-                {
-                    "characters": [10050, 10025, 13012, 20006],
-                    "start": 1663725600,
-                    "end": 1664330400
-                }
+                { "characters": [10051, 10052], "start": 1664330400, "end": 1665540000 }
             ],
-            "current_events": [ {"event": 10805, "start": 1663725600, "end": 1664330400} ],
+            "current_events": [ {"event": 817, "start": 1664330400, "end": 1665540000} ],
             "current_raid": [
-                { "raid": 7000,                      "start": 1663725600, "end": 1664305200 },
-                { "raid":    3, "terrain": "Street", "start": 1664935200, "end": 1665514800 }
+                { "raid":    3, "terrain": "Street", "start": 1664935200, "end": 1665514800 },
+                { "raid": 8000,                      "start": 1665540000, "end": 1666119600 }
             ]
         },
         {
@@ -396,9 +392,18 @@
     ],
     "changelog": [
         {
+            "date": "2022/09/28",
+            "contents": [
+                "Added information for Noa, Utaha (Cheerleader) and Hibiki (Cheerleader).", 
+                "Added information for Mission 20 and On Your Mark @ Millennium stages.", 
+                "Added information for new items, furniture and equipment.", 
+                "Settings for student stats will now be remembered between visits. (Students marked as collected will still remember individual settings)"
+            ]
+        },
+        {
             "date": "2022/09/21",
             "contents": [
-                "Add information for Kokona and Neverland Rerun stages.",
+                "Add information for Kokona and Neverland Rerun stages.", 
                 "Add information for Joint Firing Drill #7."
             ]
         },
@@ -520,21 +525,6 @@
                 "Students: Added information for Hoshino, Shizuko, Izuna and Chise (Swimsuit).", 
                 "Stages: Added information for Scrimmage D", 
                 "Items: Added new items and furniture from the latest JP event update."
-            ]
-        },
-        {
-            "date": "2022/07/16",
-            "contents": [
-                "Raids: Added season point rewards for Total Assault bosses.", 
-                "Several bug fixes."
-            ]
-        },
-        {
-            "date": "2022/07/10",
-            "contents": [
-                "Added student skill descriptions for Chinese.", 
-                "Fixed an issue where some item descriptions would not display correctly in Chinese.", 
-                "Improved handling of updates - Schale DB will now refresh automatically when there is an updated version available."
             ]
         }
     ]
