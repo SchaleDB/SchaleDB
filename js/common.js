@@ -2226,7 +2226,7 @@ function changeRaidDifficulty(difficultyId) {
     let html = ''
 
     html += getDropIconHTML(7, raid_reward_coin[raid_difficulty][0])
-    if (regionID != 1 && raid_reward_coin[raid_difficulty][1] != 0) {
+    if (raid_reward_coin[raid_difficulty][1] != 0) {
         html += getDropIconHTML(9, raid_reward_coin[raid_difficulty][1])
     }
     
