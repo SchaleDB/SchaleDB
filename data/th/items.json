@@ -436,7 +436,7 @@
         "Id": 80,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Material",
         "Rarity": "N",
@@ -463,7 +463,7 @@
         "Id": 81,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Material",
         "Rarity": "R",
@@ -490,7 +490,7 @@
         "Id": 82,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Material",
         "Rarity": "SR",
@@ -517,7 +517,7 @@
         "Id": 83,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Material",
         "Rarity": "SSR",
@@ -552,6 +552,7 @@
         "Tags": [
             "CraftItem"
         ],
+        "SynthQuality": 10,
         "Shops": [],
         "Icon": "Item_Icon_Craft_Material_0",
         "Name": "วัตถุดิบการสร้างขั้นต่ำ",
@@ -569,6 +570,7 @@
         "Tags": [
             "CraftItem"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Craft_Material_1",
         "Name": "วัตถุดิบการสร้างขั้นกลาง",
@@ -586,6 +588,7 @@
         "Tags": [
             "CraftItem"
         ],
+        "SynthQuality": 50,
         "Shops": [],
         "Icon": "Item_Icon_Craft_Material_2",
         "Name": "วัตถุดิบการสร้างขั้นสูง",
@@ -605,6 +608,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -616,17 +620,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_0",
@@ -647,6 +640,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -658,17 +652,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_1",
@@ -689,19 +672,8 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
-        "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
-            }
-        ],
+        "SynthQuality": 50,
+        "Shops": [],
         "Icon": "Item_Icon_Material_Nebra_2",
         "Name": "ดิสก์เนบราที่สึก",
         "Desc": "ดิสก์เนบราที่สึกและเก่าแก่\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
@@ -720,6 +692,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [],
         "Icon": "Item_Icon_Material_Nebra_3",
         "Name": "ดิสก์เนบราสมบูรณ์",
@@ -739,6 +712,111 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
+        "Shops": [
+            {
+                "ShopCategory": "General",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Currency",
+                "CostId": 1,
+                "CostAmount": 8000
+            }
+        ],
+        "Icon": "Item_Icon_Material_Phaistos_0",
+        "Name": "เศษจักรเฟสทอส",
+        "Desc": "เศษจากจักรเฟสทอสที่หัก\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
+    },
+    {
+        "Id": 111,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "R",
+        "Quality": 2,
+        "Tags": [
+            "MaterialItem",
+            "ExpendableItem",
+            "MaterialItemR"
+        ],
+        "SynthQuality": 20,
+        "Shops": [
+            {
+                "ShopCategory": "General",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Currency",
+                "CostId": 1,
+                "CostAmount": 25000
+            }
+        ],
+        "Icon": "Item_Icon_Material_Phaistos_1",
+        "Name": "จักรเฟสทอสที่พัง",
+        "Desc": "จักรเฟสทอสที่พังเสียรูปร่าง\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
+    },
+    {
+        "Id": 112,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SR",
+        "Quality": 3,
+        "Tags": [
+            "MaterialItem",
+            "ExpendableItem",
+            "MaterialItemSR"
+        ],
+        "SynthQuality": 50,
+        "Shops": [],
+        "Icon": "Item_Icon_Material_Phaistos_2",
+        "Name": "จักรเฟสทอสที่สึก",
+        "Desc": "จักรเฟสทอสที่สึก\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
+    },
+    {
+        "Id": 113,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SSR",
+        "Quality": 4,
+        "Tags": [
+            "MaterialItem",
+            "ExpendableItem",
+            "MaterialItemSSR"
+        ],
+        "SynthQuality": 80,
+        "Shops": [],
+        "Icon": "Item_Icon_Material_Phaistos_3",
+        "Name": "จักรเฟสทอสสมบูรณ์",
+        "Desc": "จักรเฟสทอสที่อยู่ในสภาพสมบูรณ์ ใช้สำหรับอัปเกรดและสร้างไอเทมต่างๆ"
+    },
+    {
+        "Id": 120,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [
+            "MaterialItem",
+            "ExpendableItem",
+            "MaterialItemN"
+        ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -763,12 +841,12 @@
                 ]
             }
         ],
-        "Icon": "Item_Icon_Material_Phaistos_0",
-        "Name": "เศษจักรเฟสทอส",
-        "Desc": "เศษจากจักรเฟสทอสที่หัก\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
+        "Icon": "Item_Icon_Material_Wolfsegg_0",
+        "Name": "เศษแร่วูล์ฟเซก",
+        "Desc": "เศษแร่วูล์ฟเซกที่ยังไม่ถลุง\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
     },
     {
-        "Id": 111,
+        "Id": 121,
         "IsReleased": [
             true,
             true
@@ -781,6 +859,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -805,118 +884,6 @@
                 ]
             }
         ],
-        "Icon": "Item_Icon_Material_Phaistos_1",
-        "Name": "จักรเฟสทอสที่พัง",
-        "Desc": "จักรเฟสทอสที่พังเสียรูปร่าง\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
-    },
-    {
-        "Id": 112,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SR",
-        "Quality": 3,
-        "Tags": [
-            "MaterialItem",
-            "ExpendableItem",
-            "MaterialItemSR"
-        ],
-        "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
-            }
-        ],
-        "Icon": "Item_Icon_Material_Phaistos_2",
-        "Name": "จักรเฟสทอสที่สึก",
-        "Desc": "จักรเฟสทอสที่สึก\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
-    },
-    {
-        "Id": 113,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SSR",
-        "Quality": 4,
-        "Tags": [
-            "MaterialItem",
-            "ExpendableItem",
-            "MaterialItemSSR"
-        ],
-        "Shops": [],
-        "Icon": "Item_Icon_Material_Phaistos_3",
-        "Name": "จักรเฟสทอสสมบูรณ์",
-        "Desc": "จักรเฟสทอสที่อยู่ในสภาพสมบูรณ์ ใช้สำหรับอัปเกรดและสร้างไอเทมต่างๆ"
-    },
-    {
-        "Id": 120,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "N",
-        "Quality": 1,
-        "Tags": [
-            "MaterialItem",
-            "ExpendableItem",
-            "MaterialItemN"
-        ],
-        "Shops": [
-            {
-                "ShopCategory": "General",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Currency",
-                "CostId": 1,
-                "CostAmount": 8000
-            }
-        ],
-        "Icon": "Item_Icon_Material_Wolfsegg_0",
-        "Name": "เศษแร่วูล์ฟเซก",
-        "Desc": "เศษแร่วูล์ฟเซกที่ยังไม่ถลุง\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
-    },
-    {
-        "Id": 121,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "R",
-        "Quality": 2,
-        "Tags": [
-            "MaterialItem",
-            "ExpendableItem",
-            "MaterialItemR"
-        ],
-        "Shops": [
-            {
-                "ShopCategory": "General",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Currency",
-                "CostId": 1,
-                "CostAmount": 25000
-            }
-        ],
         "Icon": "Item_Icon_Material_Wolfsegg_1",
         "Name": "เศษเหล็กวูล์ฟเซก",
         "Desc": "เศษเหล็กวูล์ฟเซกที่ร่วงขณะถลุง\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
@@ -935,7 +902,20 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
-        "Shops": [],
+        "SynthQuality": 50,
+        "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
+            }
+        ],
         "Icon": "Item_Icon_Material_Wolfsegg_2",
         "Name": "เหล็กวูล์ฟเซกปนเปื้อน",
         "Desc": "เหล็กวูล์ฟเซกที่ปนเปื้อนสารแปลกปลอม\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
@@ -954,6 +934,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [],
         "Icon": "Item_Icon_Material_Wolfsegg_3",
         "Name": "เหล็กวูล์ฟเซกบริสุทธิ์",
@@ -973,6 +954,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -989,7 +971,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1015,6 +997,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1031,7 +1014,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1057,12 +1040,13 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1088,6 +1072,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [],
         "Icon": "Item_Icon_Material_Nimrud_3",
         "Name": "เลนส์นิมรุดสมบูรณ์",
@@ -1107,6 +1092,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1123,7 +1109,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1160,6 +1146,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1176,7 +1163,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1213,12 +1200,13 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1255,6 +1243,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Chaser",
@@ -1286,6 +1275,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1328,6 +1318,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1370,6 +1361,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
@@ -1401,6 +1393,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [],
         "Icon": "Item_Icon_Material_Rohonc_3",
         "Name": "สำเนาโรฮอนช์สมบูรณ์",
@@ -1420,6 +1413,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1451,6 +1445,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1482,6 +1477,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [],
         "Icon": "Item_Icon_Material_Ether_2",
         "Name": "ผลึกอีเธอร์",
@@ -1501,6 +1497,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [],
         "Icon": "Item_Icon_Material_Ether_3",
         "Name": "เอสเซนซ์อีเธอร์",
@@ -1520,6 +1517,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1562,6 +1560,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1604,6 +1603,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Chaser",
@@ -1635,6 +1635,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Chaser",
@@ -1666,6 +1667,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1677,17 +1679,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_0",
@@ -1708,6 +1699,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1719,17 +1711,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_1",
@@ -1750,19 +1731,8 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
-        "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
-            }
-        ],
+        "SynthQuality": 50,
+        "Shops": [],
         "Icon": "Item_Icon_Material_Voynich_2",
         "Name": "สำเนาวอยนิชเข้าเล่ม",
         "Desc": "สำเนาวอยนิชที่เข้าเล่มรวมไว้ด้วยกัน\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
@@ -1781,6 +1751,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [],
         "Icon": "Item_Icon_Material_Voynich_3",
         "Name": "สำเนาวอยนิชสมบูรณ์",
@@ -1800,6 +1771,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1831,6 +1803,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "General",
@@ -1862,6 +1835,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [],
         "Icon": "Item_Icon_Material_CrystalHaniwa_2",
         "Name": "คริสตัลฮานิวาที่สึก",
@@ -1881,6 +1855,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [],
         "Icon": "Item_Icon_Material_CrystalHaniwa_3",
         "Name": "คริสตัลฮานิวาสมบูรณ์",
@@ -1900,6 +1875,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -1911,6 +1887,17 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 2
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_TotemPole_0",
@@ -1931,6 +1918,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -1942,6 +1930,17 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 9
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_TotemPole_1",
@@ -1962,6 +1961,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -1973,6 +1973,17 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 12
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_TotemPole_2",
@@ -1993,6 +2004,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2024,6 +2036,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2035,17 +2048,6 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 2
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_Baghdad_0",
@@ -2066,6 +2068,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2077,17 +2080,6 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 9
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_Baghdad_1",
@@ -2108,6 +2100,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2119,17 +2112,6 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 12
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_Baghdad_2",
@@ -2150,6 +2132,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2181,6 +2164,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
@@ -2223,6 +2207,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
@@ -2265,6 +2250,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
@@ -2307,6 +2293,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2338,6 +2325,7 @@
             "ExpendableItem",
             "MaterialItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2369,6 +2357,7 @@
             "ExpendableItem",
             "MaterialItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2400,6 +2389,7 @@
             "ExpendableItem",
             "MaterialItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2431,6 +2421,7 @@
             "ExpendableItem",
             "MaterialItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "TimeAttack",
@@ -2462,6 +2453,7 @@
             "ExpendableItem",
             "CDItemN"
         ],
+        "SynthQuality": 30,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2504,6 +2496,7 @@
             "ExpendableItem",
             "CDItemR"
         ],
+        "SynthQuality": 60,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2546,6 +2539,7 @@
             "ExpendableItem",
             "CDItemSR"
         ],
+        "SynthQuality": 150,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2588,6 +2582,7 @@
             "ExpendableItem",
             "CDItemSSR"
         ],
+        "SynthQuality": 200,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2630,6 +2625,7 @@
             "ExpendableItem",
             "CDItemN"
         ],
+        "SynthQuality": 30,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2672,6 +2668,7 @@
             "ExpendableItem",
             "CDItemR"
         ],
+        "SynthQuality": 60,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2714,6 +2711,7 @@
             "ExpendableItem",
             "CDItemSR"
         ],
+        "SynthQuality": 150,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2756,6 +2754,7 @@
             "ExpendableItem",
             "CDItemSSR"
         ],
+        "SynthQuality": 200,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2798,6 +2797,7 @@
             "ExpendableItem",
             "CDItemN"
         ],
+        "SynthQuality": 30,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2840,6 +2840,7 @@
             "ExpendableItem",
             "CDItemR"
         ],
+        "SynthQuality": 60,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2882,6 +2883,7 @@
             "ExpendableItem",
             "CDItemSR"
         ],
+        "SynthQuality": 150,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2924,6 +2926,7 @@
             "ExpendableItem",
             "CDItemSSR"
         ],
+        "SynthQuality": 200,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -2966,6 +2969,7 @@
             "ExpendableItem",
             "CDItemN"
         ],
+        "SynthQuality": 30,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3008,6 +3012,7 @@
             "ExpendableItem",
             "CDItemR"
         ],
+        "SynthQuality": 60,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3050,6 +3055,7 @@
             "ExpendableItem",
             "CDItemSR"
         ],
+        "SynthQuality": 150,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3092,6 +3098,7 @@
             "ExpendableItem",
             "CDItemSSR"
         ],
+        "SynthQuality": 200,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3134,6 +3141,7 @@
             "ExpendableItem",
             "CDItemN"
         ],
+        "SynthQuality": 30,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3187,6 +3195,7 @@
             "ExpendableItem",
             "CDItemR"
         ],
+        "SynthQuality": 60,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3240,6 +3249,7 @@
             "ExpendableItem",
             "CDItemSR"
         ],
+        "SynthQuality": 150,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3293,6 +3303,7 @@
             "ExpendableItem",
             "CDItemSSR"
         ],
+        "SynthQuality": 200,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3346,6 +3357,7 @@
             "ExpendableItem",
             "CDItemN"
         ],
+        "SynthQuality": 30,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3388,6 +3400,7 @@
             "ExpendableItem",
             "CDItemR"
         ],
+        "SynthQuality": 60,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3430,6 +3443,7 @@
             "ExpendableItem",
             "CDItemSR"
         ],
+        "SynthQuality": 150,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3472,6 +3486,7 @@
             "ExpendableItem",
             "CDItemSSR"
         ],
+        "SynthQuality": 200,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3514,6 +3529,7 @@
             "ExpendableItem",
             "CDItemN"
         ],
+        "SynthQuality": 30,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3556,6 +3572,7 @@
             "ExpendableItem",
             "CDItemR"
         ],
+        "SynthQuality": 60,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3598,6 +3615,7 @@
             "ExpendableItem",
             "CDItemSR"
         ],
+        "SynthQuality": 150,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3640,6 +3658,7 @@
             "ExpendableItem",
             "CDItemSSR"
         ],
+        "SynthQuality": 200,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3682,6 +3701,7 @@
             "ExpendableItem",
             "CDItemN"
         ],
+        "SynthQuality": 30,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3735,6 +3755,7 @@
             "ExpendableItem",
             "CDItemR"
         ],
+        "SynthQuality": 60,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3788,6 +3809,7 @@
             "ExpendableItem",
             "CDItemSR"
         ],
+        "SynthQuality": 150,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3841,6 +3863,7 @@
             "ExpendableItem",
             "CDItemSSR"
         ],
+        "SynthQuality": 200,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3894,6 +3917,7 @@
             "ExpendableItem",
             "CDItemN"
         ],
+        "SynthQuality": 30,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3936,6 +3960,7 @@
             "ExpendableItem",
             "CDItemR"
         ],
+        "SynthQuality": 60,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -3978,6 +4003,7 @@
             "ExpendableItem",
             "CDItemSR"
         ],
+        "SynthQuality": 150,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4020,6 +4046,7 @@
             "ExpendableItem",
             "CDItemSSR"
         ],
+        "SynthQuality": 200,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4062,6 +4089,7 @@
             "ExpendableItem",
             "BookItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4104,6 +4132,7 @@
             "ExpendableItem",
             "BookItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4146,6 +4175,7 @@
             "ExpendableItem",
             "BookItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4188,6 +4218,7 @@
             "ExpendableItem",
             "BookItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4230,6 +4261,7 @@
             "ExpendableItem",
             "BookItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4272,6 +4304,7 @@
             "ExpendableItem",
             "BookItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4314,6 +4347,7 @@
             "ExpendableItem",
             "BookItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4356,6 +4390,7 @@
             "ExpendableItem",
             "BookItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4398,6 +4433,7 @@
             "ExpendableItem",
             "BookItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4440,6 +4476,7 @@
             "ExpendableItem",
             "BookItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4482,6 +4519,7 @@
             "ExpendableItem",
             "BookItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4524,6 +4562,7 @@
             "ExpendableItem",
             "BookItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4566,6 +4605,7 @@
             "ExpendableItem",
             "BookItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4608,6 +4648,7 @@
             "ExpendableItem",
             "BookItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4650,6 +4691,7 @@
             "ExpendableItem",
             "BookItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4692,6 +4734,7 @@
             "ExpendableItem",
             "BookItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4734,6 +4777,7 @@
             "ExpendableItem",
             "BookItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4787,6 +4831,7 @@
             "ExpendableItem",
             "BookItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4840,6 +4885,7 @@
             "ExpendableItem",
             "BookItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4893,6 +4939,7 @@
             "ExpendableItem",
             "BookItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4946,6 +4993,7 @@
             "ExpendableItem",
             "BookItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -4988,6 +5036,7 @@
             "ExpendableItem",
             "BookItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5030,6 +5079,7 @@
             "ExpendableItem",
             "BookItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5072,6 +5122,7 @@
             "ExpendableItem",
             "BookItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5114,6 +5165,7 @@
             "ExpendableItem",
             "BookItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5156,6 +5208,7 @@
             "ExpendableItem",
             "BookItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5198,6 +5251,7 @@
             "ExpendableItem",
             "BookItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5240,6 +5294,7 @@
             "ExpendableItem",
             "BookItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5282,6 +5337,7 @@
             "ExpendableItem",
             "BookItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5335,6 +5391,7 @@
             "ExpendableItem",
             "BookItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5388,6 +5445,7 @@
             "ExpendableItem",
             "BookItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5441,6 +5499,7 @@
             "ExpendableItem",
             "BookItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5494,6 +5553,7 @@
             "ExpendableItem",
             "BookItemN"
         ],
+        "SynthQuality": 10,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5536,6 +5596,7 @@
             "ExpendableItem",
             "BookItemR"
         ],
+        "SynthQuality": 20,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5578,6 +5639,7 @@
             "ExpendableItem",
             "BookItemSR"
         ],
+        "SynthQuality": 50,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5620,6 +5682,7 @@
             "ExpendableItem",
             "BookItemSSR"
         ],
+        "SynthQuality": 80,
         "Shops": [
             {
                 "ShopCategory": "Raid",
@@ -5665,6 +5728,7 @@
             "F_Tsubaki",
             "F_Sena"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_0",
         "Name": "หมอนเวฟแคท",
@@ -5688,6 +5752,7 @@
             "F_Shiroko",
             "F_Hihumi_Swimsuit"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_1",
         "Name": "ลูกกลิ้งบริหารท้อง\nเพโรโร่",
@@ -5710,6 +5775,7 @@
             "F_Hibiki",
             "F_Moe"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_2",
         "Name": "แอร์พอดส์โปร",
@@ -5733,6 +5799,7 @@
             "F_Koharu",
             "F_Tsurugi_Swimsuit"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_3",
         "Name": "นิยายความรักต้องห้าม [รักนี้มิอาจกั้น]",
@@ -5755,6 +5822,7 @@
             "F_Hare",
             "F_Aris"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_4",
         "Name": "นิตยสารเกม [ฮิตเกิร์ล]",
@@ -5776,6 +5844,7 @@
             "Girlish",
             "F_Asuna"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_5",
         "Name": "ลิปกลอสเชอรี่โรส",
@@ -5798,6 +5867,7 @@
             "F_Hanae",
             "F_Saori"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_6",
         "Name": "BB ครีมผิวเด้ง",
@@ -5820,6 +5890,7 @@
             "F_Mashiro",
             "F_Saki"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_7",
         "Name": "ครีมพรางตัวทหาร\nรุ่น 3 สี",
@@ -5843,6 +5914,7 @@
             "F_Yoshimi",
             "F_Shun_Kid"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_8",
         "Name": "กล่องคุกกี้หรู",
@@ -5866,6 +5938,7 @@
             "F_Miyako",
             "F_Ayane_Swimsuit"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_9",
         "Name": "หนังสือ [ปืน ความน่ารักและวัยรุ่น]",
@@ -5889,6 +5962,7 @@
             "F_Nodoka",
             "F_Utaha_Cheerleader"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_10",
         "Name": "กล้องส่องดูดาว",
@@ -5911,6 +5985,7 @@
             "F_Momoi",
             "F_Neru_BunnyGirl"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_11",
         "Name": "เครื่องเกมเกิร์ลสี\nรุ่นผลิตใหม่",
@@ -5932,6 +6007,7 @@
             "Army",
             "F_Mashiro_Swimsuit"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_12",
         "Name": "แป้งทำขนมแบบ C MX-เรชั่น",
@@ -5952,6 +6028,7 @@
             "Dessert",
             "Freakish"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_13",
         "Name": "น้ำรามูเนะรสชาเขียว",
@@ -5974,6 +6051,7 @@
             "F_Serina",
             "F_Midori"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_14",
         "Name": "หมอนเจลลี่",
@@ -5996,6 +6074,7 @@
             "F_Shimiko",
             "F_Koharu"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_15",
         "Name": "หนังสือกระต่ายยอดนักสืบ\n[คดีในหมอกน้ำพุร้อน]",
@@ -6017,6 +6096,7 @@
             "Game",
             "F_Sumire"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_16",
         "Name": "O-ริงฟิต",
@@ -6042,6 +6122,7 @@
             "F_Cherino_Onsen",
             "F_Hoshino_Swimsuit"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_17",
         "Name": "แผนที่ขุมทรัพย์",
@@ -6065,6 +6146,7 @@
             "F_Mutsuki",
             "F_Saya_Casual"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_18",
         "Name": "แว่นแฟนซีลายวน",
@@ -6088,6 +6170,7 @@
             "F_Hanako",
             "F_Hina_swimsuit"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_19",
         "Name": "เครื่องที่ไร้ประโยชน์\nที่สุดในโลก",
@@ -6116,6 +6199,7 @@
             "F_Misaki",
             "F_Wakamo_Swimsuit"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_20",
         "Name": "ตุ๊กตาหมีผูกโบว์",
@@ -6137,6 +6221,7 @@
             "Movie",
             "F_Pina"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_21",
         "Name": "ตั๋วหนังแบบ\nจองล่วงหน้า",
@@ -6158,6 +6243,7 @@
             "Art",
             "F_Juri"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_22",
         "Name": "เซ็ตสีน้ำ 30 สี",
@@ -6179,6 +6265,7 @@
             "PureLiterature",
             "F_Tomoe"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_23",
         "Name": "บทกวีคลาสสิก",
@@ -6201,6 +6288,7 @@
             "F_Akane",
             "F_Hiyori"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_24",
         "Name": "เซ็ตจานชามลายน่ารัก",
@@ -6223,6 +6311,7 @@
             "F_Yuuka",
             "F_Karin"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_25",
         "Name": "รูบิคลับสมอง",
@@ -6245,6 +6334,7 @@
             "F_Cherino",
             "F_Asuna_BunnyGirl"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_26",
         "Name": "เค้กก้อนใหญ่",
@@ -6267,6 +6357,7 @@
             "F_Akari",
             "F_Nodoka_Onsen"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_27",
         "Name": "บัตรบุฟเฟ่ต์หรู",
@@ -6288,6 +6379,7 @@
             "CuriousFellow",
             "F_Hinata"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_28",
         "Name": "กระถางต้นไม้กินแมลง",
@@ -6310,6 +6402,7 @@
             "F_Serika",
             "F_Serika_Newyear"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_29",
         "Name": "ไหทองคำที่ดูแพง",
@@ -6331,6 +6424,7 @@
             "Music",
             "F_Chinatsu_Onsen"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_30",
         "Name": "กล่องดนตรีไขลาน",
@@ -6357,6 +6451,7 @@
             "F_Miyu",
             "F_Izuna_Swimsuit"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_31",
         "Name": "ผ้าเช็ดหน้าปักลาย",
@@ -6378,6 +6473,7 @@
             "Specialized",
             "F_Atsuko"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_32",
         "Name": "สารานุกรม",
@@ -6401,6 +6497,7 @@
             "F_Ako",
             "F_Shizuko_Swimsuit"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_33",
         "Name": "อาหารเสริมเพื่อสุขภาพ",
@@ -6421,6 +6518,7 @@
             "Swimsuit",
             "WaterPlay"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_Favor_34",
         "Name": "ห่วงยางฤดูร้อน",
@@ -6853,10 +6951,11 @@
         "Tags": [
             "SkillBookUltimatePieace"
         ],
+        "SynthQuality": 20,
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Ultimate_Piece",
         "Name": "เศษตำราสกิลลับ",
-        "Desc": "เศษของตำราสกิลที่บันทึกยุทธวิธีลับเอาไว้\nสร้างตำราสกิลลับได้ด้วยการผสมเศษที่รวบรวมได้"
+        "Desc": "เศษของตำราสกิลที่บันทึกยุทธวิธีลับเอาไว้\nสร้างตำราสกิลลับได้ด้วยการรวมเศษที่รวบรวมได้"
     },
     {
         "Id": 9999,
@@ -6916,6 +7015,21 @@
                 "CostAmount": 500
             }
         ],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                0
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "SkillBookUltimatePieace"
+            ],
+            "IngredientExp": 300
+        },
         "Icon": "Item_Icon_SkillBook_Ultimate",
         "Name": "ตำราสกิลลับ",
         "Desc": "ตำราสกิลที่บันทึกกลยุทธ์ลับ"
@@ -7560,7 +7674,7 @@
         "Shops": [],
         "Icon": "Item_Icon_SecretStone_CH0155",
         "Name": "เอลเลฟของนัตสึ",
-        "Desc": "เอลเลฟที่มีอักษรชื่อของนัตสึอยู่"
+        "Desc": "เอลเลฟที่มีอักษรชื่อของนัตสึ"
     },
     {
         "Id": 10030,
@@ -7687,7 +7801,7 @@
         "Id": 10035,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "SecretStone",
         "Rarity": "N",
@@ -7698,13 +7812,13 @@
         "Shops": [],
         "Icon": "Item_Icon_SecretStone_CH0169",
         "Name": "เอลเลฟของอุย",
-        "Desc": "เอลเลฟที่มีอักษรชื่อของอุยอยู่"
+        "Desc": "เอลเลฟที่มีอักษรชื่อของอุย"
     },
     {
         "Id": 10036,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "SecretStone",
         "Rarity": "N",
@@ -7715,7 +7829,7 @@
         "Shops": [],
         "Icon": "Item_Icon_SecretStone_Hinata",
         "Name": "เอลเลฟของฮินาตะ",
-        "Desc": "เอลเลฟที่มีอักษรชื่อของฮินาตะอยู่"
+        "Desc": "เอลเลฟที่มีอักษรชื่อของฮินาตะ"
     },
     {
         "Id": 10037,
@@ -7732,7 +7846,7 @@
         "Shops": [],
         "Icon": "Item_Icon_SecretStone_Marina",
         "Name": "เอลเลฟของมารินะ",
-        "Desc": "เอลเลฟที่มีอักษรชื่อของมารินะอยู่"
+        "Desc": "เอลเลฟที่มีอักษรชื่อของมารินะ"
     },
     {
         "Id": 10038,
@@ -9960,7 +10074,7 @@
         "Id": 80100,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -9975,7 +10089,7 @@
         "Id": 80101,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -9992,7 +10106,7 @@
         "Id": 80102,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -10009,7 +10123,7 @@
         "Id": 80103,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -10641,6 +10755,22 @@
             "ShiftingCraftCategory_FavorItem"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                82,
+                1
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "CraftMaterial_FavorItemSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 40
+        },
         "Icon": "Item_Icon_Favor_Selection",
         "Name": "選択式・贈り物ボックス",
         "Desc": "お好みの贈り物が選べる贈り物ボックス"
@@ -10673,6 +10803,22 @@
             "ShiftingCraftCategory_BookItem"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "BookItemN",
+                "CraftItem"
+            ],
+            "IngredientExp": 20
+        },
         "Icon": "Item_Icon_SkillBook_Selection_0",
         "Name": "ชุดเลือกตำราสกิลขั้นต่ำ",
         "Desc": "ชุดเลือกที่เลือกรับตำราสกิลที่ต้องการได้"
@@ -10690,6 +10836,22 @@
             "ShiftingCraftCategory_BookItem"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                81,
+                3
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "BookItemR",
+                "CraftItem"
+            ],
+            "IngredientExp": 40
+        },
         "Icon": "Item_Icon_SkillBook_Selection_1",
         "Name": "ชุดเลือกตำราสกิลขั้นกลาง",
         "Desc": "ชุดเลือกที่เลือกรับตำราสกิลที่ต้องการได้"
@@ -10707,6 +10869,22 @@
             "ShiftingCraftCategory_BookItem"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                82,
+                3
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "BookItemSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 100
+        },
         "Icon": "Item_Icon_SkillBook_Selection_2",
         "Name": "ชุดเลือกตำราสกิลขั้นสูง",
         "Desc": "ชุดเลือกที่เลือกรับตำราสกิลที่ต้องการได้"
@@ -10724,6 +10902,22 @@
             "ShiftingCraftCategory_BookItem"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "BookItemSSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 160
+        },
         "Icon": "Item_Icon_SkillBook_Selection_3",
         "Name": "ชุดเลือกตำราสกิลขั้นสูงสุด",
         "Desc": "ชุดเลือกที่เลือกรับตำราสกิลที่ต้องการได้"
@@ -10741,6 +10935,22 @@
             "ShiftingCraftCategory_CDItem"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "CDItemN",
+                "CraftItem"
+            ],
+            "IngredientExp": 60
+        },
         "Icon": "Item_Icon_ExSkillCD_Selection_0",
         "Name": "ชุดเลือก BD เรียนสกิลขั้นต่ำ",
         "Desc": "ชุดเลือกที่เลือกรับ BD เรียนสกิลที่ต้องการได้"
@@ -10758,6 +10968,22 @@
             "ShiftingCraftCategory_CDItem"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                81,
+                3
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "CDItemR",
+                "CraftItem"
+            ],
+            "IngredientExp": 120
+        },
         "Icon": "Item_Icon_ExSkillCD_Selection_1",
         "Name": "ชุดเลือก BD เรียนสกิลขั้นกลาง",
         "Desc": "ชุดเลือกที่เลือกรับ BD เรียนสกิลที่ต้องการได้"
@@ -10775,6 +11001,22 @@
             "ShiftingCraftCategory_CDItem"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                82,
+                3
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "CDItemSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 300
+        },
         "Icon": "Item_Icon_ExSkillCD_Selection_2",
         "Name": "ชุดเลือก BD เรียนสกิลขั้นสูง",
         "Desc": "ชุดเลือกที่เลือกรับ BD เรียนสกิลที่ต้องการได้"
@@ -10792,6 +11034,22 @@
             "ShiftingCraftCategory_CDItem"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "CDItemSSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_ExSkillCD_Selection_3",
         "Name": "ชุดเลือก BD เรียนสกิลขั้นสูงสุด",
         "Desc": "ชุดเลือกที่เลือกรับ BD เรียนสกิลที่ต้องการได้"
@@ -10809,6 +11067,22 @@
             "ShiftingCraftCategory_CommonMaterial"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "MaterialItemN",
+                "CraftItem"
+            ],
+            "IngredientExp": 20
+        },
         "Icon": "Item_Icon_Material_Selection_0",
         "Name": "ชุดเลือกวัตถุหลงยุค 1",
         "Desc": "ชุดเลือกที่เลือกรับวัตถุหลงยุคที่ต้องการได้"
@@ -10826,6 +11100,22 @@
             "ShiftingCraftCategory_CommonMaterial"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                81,
+                3
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "MaterialItemR",
+                "CraftItem"
+            ],
+            "IngredientExp": 40
+        },
         "Icon": "Item_Icon_Material_Selection_1",
         "Name": "ชุดเลือกวัตถุหลงยุค 2",
         "Desc": "ชุดเลือกที่เลือกรับวัตถุหลงยุคที่ต้องการได้"
@@ -10843,6 +11133,22 @@
             "ShiftingCraftCategory_CommonMaterial"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                82,
+                3
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "MaterialItemSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 100
+        },
         "Icon": "Item_Icon_Material_Selection_2",
         "Name": "ชุดเลือกวัตถุหลงยุค 3",
         "Desc": "ชุดเลือกที่เลือกรับวัตถุหลงยุคที่ต้องการได้"
@@ -10860,6 +11166,22 @@
             "ShiftingCraftCategory_CommonMaterial"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "MaterialItemSSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 160
+        },
         "Icon": "Item_Icon_Material_Selection_3",
         "Name": "ชุดเลือกวัตถุหลงยุค 4",
         "Desc": "ชุดเลือกที่เลือกรับวัตถุหลงยุคที่ต้องการได้"
@@ -11240,6 +11562,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 100
+        },
         "Icon": "Item_Icon_Furniture_Selection_Normal",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ขั้นต่ำ",
         "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ขั้นต่ำได้"
@@ -11257,6 +11595,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group100",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ธีม MOMO FRIENDS",
         "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมคาเฟ่ MOMO FRIENDS ได้"
@@ -11274,6 +11628,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group101",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมเกมเจลลี่",
         "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมเกมเจลลี่ได้"
@@ -11291,6 +11661,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group102",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมวาเลนไทน์",
         "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมวาเลนไทน์ได้"
@@ -11308,6 +11694,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group103",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมรีสอร์ทฤดูร้อน",
         "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมรีสอร์ทฤดูร้อนได้"
@@ -11325,6 +11727,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group104",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมฮาโลวีน",
         "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมฮาโลวีนได้"
@@ -11342,6 +11760,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group105",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมออนเซ็นดั้งเดิม",
         "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมออนเซ็นดั้งเดิมได้"
@@ -11359,6 +11793,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group106",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมปีใหม่",
         "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมปีใหม่ได้"
@@ -11376,6 +11826,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group107",
         "Name": "選択式・ミリタリーアウトドアシリーズ",
         "Desc": "ミリタリーアウトドアシリーズの中から、任意の家具を選択して交換することができる。"
@@ -11393,6 +11859,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group108",
         "Name": "選択式・ビーチサイドシリーズ",
         "Desc": "ビーチサイドシリーズの中から、任意の家具を選択して交換することができる。"
@@ -11410,6 +11892,22 @@
             "ShiftingCraftCategory_Furniture"
         ],
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 400
+        },
         "Icon": "Item_Icon_Furniture_Selection_Group109",
         "Name": "選択式・大運動会シリーズ",
         "Desc": "大運動会シリーズの中から、任意の家具を選択して交換することができる。"
@@ -12491,10 +12989,27 @@
         "Tags": [
             "ShiftingCraftCategory_BookItem"
         ],
+        "SynthQuality": 10,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                80,
+                1
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "BookItemN",
+                "CraftItem"
+            ],
+            "IngredientExp": 10
+        },
         "Icon": "Item_Icon_SkillBook_Random_0",
         "Name": "ชุดสุ่มตำราสกิลขั้นต่ำ",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในตำราสกิลขั้นต่ำ"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในตำราสกิลขั้นต่ำ ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190001,
@@ -12508,10 +13023,27 @@
         "Tags": [
             "ShiftingCraftCategory_BookItem"
         ],
+        "SynthQuality": 20,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                81,
+                1
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "BookItemR",
+                "CraftItem"
+            ],
+            "IngredientExp": 20
+        },
         "Icon": "Item_Icon_SkillBook_Random_1",
         "Name": "ชุดสุ่มตำราสกิลขั้นกลาง",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในตำราสกิลขั้นกลาง"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในตำราสกิลขั้นกลาง ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190002,
@@ -12525,10 +13057,27 @@
         "Tags": [
             "ShiftingCraftCategory_BookItem"
         ],
+        "SynthQuality": 50,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                82,
+                1
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "BookItemSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 50
+        },
         "Icon": "Item_Icon_SkillBook_Random_2",
         "Name": "ชุดสุ่มตำราสกิลขั้นสูง",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในตำราสกิลขั้นสูง"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในตำราสกิลขั้นสูง ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190003,
@@ -12542,10 +13091,27 @@
         "Tags": [
             "ShiftingCraftCategory_BookItem"
         ],
+        "SynthQuality": 80,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "BookItemSSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 80
+        },
         "Icon": "Item_Icon_SkillBook_Random_3",
         "Name": "ชุดสุ่มตำราสกิลขั้นสูงสุด",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในตำราสกิลขั้นสูงสุด"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในตำราสกิลขั้นสูงสุด ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190010,
@@ -12559,10 +13125,27 @@
         "Tags": [
             "ShiftingCraftCategory_CDItem"
         ],
+        "SynthQuality": 30,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                80,
+                1
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "CDItemN",
+                "CraftItem"
+            ],
+            "IngredientExp": 30
+        },
         "Icon": "Item_Icon_ExSkillCD_Random_0",
         "Name": "ชุดสุ่ม BD เรียนสกิลขั้นต่ำ",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ใน BD เรียนสกิลขั้นต่ำ"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ใน BD เรียนสกิลขั้นต่ำ ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190011,
@@ -12576,10 +13159,27 @@
         "Tags": [
             "ShiftingCraftCategory_CDItem"
         ],
+        "SynthQuality": 60,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                81,
+                1
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "CDItemR",
+                "CraftItem"
+            ],
+            "IngredientExp": 60
+        },
         "Icon": "Item_Icon_ExSkillCD_Random_1",
         "Name": "ชุดสุ่ม BD เรียนสกิลขั้นกลาง",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ใน BD เรียนสกิลขั้นกลาง"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ใน BD เรียนสกิลขั้นกลาง ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190012,
@@ -12593,10 +13193,27 @@
         "Tags": [
             "ShiftingCraftCategory_CDItem"
         ],
+        "SynthQuality": 150,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                82,
+                1
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "CDItemSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 150
+        },
         "Icon": "Item_Icon_ExSkillCD_Random_2",
         "Name": "ชุดสุ่ม BD เรียนสกิลขั้นสูง",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ใน BD เรียนสกิลขั้นสูง"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ใน BD เรียนสกิลขั้นสูง ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190013,
@@ -12610,10 +13227,27 @@
         "Tags": [
             "ShiftingCraftCategory_CDItem"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "CDItemSSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_ExSkillCD_Random_3",
         "Name": "ชุดสุ่ม BD เรียนสกิลขั้นสูงสุด",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ใน BD เรียนสกิลขั้นสูงสุด"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ใน BD เรียนสกิลขั้นสูงสุด ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190020,
@@ -12627,10 +13261,27 @@
         "Tags": [
             "ShiftingCraftCategory_CommonMaterial"
         ],
+        "SynthQuality": 10,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                80,
+                1
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "MaterialItemN",
+                "CraftItem"
+            ],
+            "IngredientExp": 10
+        },
         "Icon": "Item_Icon_Material_Random_0",
         "Name": "ชุดสุ่มวัตถุหลงยุค 1",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับวัตถุหลงยุคได้ 1 ชิ้น"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับวัตถุหลงยุคได้ 1 ชิ้น ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190021,
@@ -12644,10 +13295,27 @@
         "Tags": [
             "ShiftingCraftCategory_CommonMaterial"
         ],
+        "SynthQuality": 20,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                81,
+                1
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "MaterialItemR",
+                "CraftItem"
+            ],
+            "IngredientExp": 20
+        },
         "Icon": "Item_Icon_Material_Random_1",
         "Name": "ชุดสุ่มวัตถุหลงยุค 2",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับวัตถุหลงยุคได้ 1 ชิ้น"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับวัตถุหลงยุคได้ 1 ชิ้น ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190022,
@@ -12661,10 +13329,27 @@
         "Tags": [
             "ShiftingCraftCategory_CommonMaterial"
         ],
+        "SynthQuality": 50,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                82,
+                1
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "MaterialItemSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 50
+        },
         "Icon": "Item_Icon_Material_Random_2",
         "Name": "ชุดสุ่มวัตถุหลงยุค 3",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับวัตถุหลงยุคได้ 1 ชิ้น"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับวัตถุหลงยุคได้ 1 ชิ้น ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 190023,
@@ -12678,10 +13363,27 @@
         "Tags": [
             "ShiftingCraftCategory_CommonMaterial"
         ],
+        "SynthQuality": 80,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "MaterialItemSSR",
+                "CraftItem"
+            ],
+            "IngredientExp": 80
+        },
         "Icon": "Item_Icon_Material_Random_3",
         "Name": "ชุดสุ่มวัตถุหลงยุค 4",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับวัตถุหลงยุคได้ 1 ชิ้น"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับวัตถุหลงยุคได้ 1 ชิ้น ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 191000,
@@ -12695,10 +13397,27 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 50,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                80,
+                1
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 50
+        },
         "Icon": "Item_Icon_Furniture_Random_Normal",
         "Name": "ชุดสุ่มเฟอร์นิเจอร์ขั้นต่ำ",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ขั้นต่ำ"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ขั้นต่ำ ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 191001,
@@ -12712,10 +13431,27 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group100",
         "Name": "ชุดสุ่มเฟอร์นิเจอร์ธีม MOMO FRIENDS",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีม MOMO FRIENDS"
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีม MOMO FRIENDS ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 191002,
@@ -12729,10 +13465,27 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group101",
-        "Name": "ชุดสุ่มเฟอร์นิเจอร์ธีมเกมเจลลี่",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมเกมเจลลี่"
+        "Name": "ชุดสุ่มเฟอร์นิเจอร์ ธีมเกมเจลลี่",
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมเกมเจลลี่ ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 191003,
@@ -12746,10 +13499,27 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group102",
-        "Name": "ชุดสุ่มเฟอร์นิเจอร์ธีมวาเลนไทน์",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมวาเลนไทน์"
+        "Name": "ชุดสุ่มเฟอร์นิเจอร์ ธีมวาเลนไทน์",
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมวาเลนไทน์ ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 191004,
@@ -12763,10 +13533,27 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group103",
-        "Name": "ชุดสุ่มเฟอร์นิเจอร์ธีมรีสอร์ทฤดูร้อน",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมรีสอร์ทฤดูร้อน"
+        "Name": "ชุดสุ่มเฟอร์นิเจอร์ ธีมรีสอร์ทฤดูร้อน",
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมรีสอร์ทฤดูร้อน ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 191005,
@@ -12780,10 +13567,27 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group104",
-        "Name": "ชุดสุ่มเฟอร์นิเจอร์ธีมฮาโลวีน",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมฮาโลวีน"
+        "Name": "ชุดสุ่มเฟอร์นิเจอร์ ธีมฮาโลวีน",
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมฮาโลวีน ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 191006,
@@ -12797,10 +13601,27 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group105",
-        "Name": "ชุดสุ่มเฟอร์นิเจอร์ธีมออนเซ็นดั้งเดิม",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมออนเซ็นดั้งเดิม"
+        "Name": "ชุดสุ่มเฟอร์นิเจอร์ ธีมออนเซ็นดั้งเดิม",
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมออนเซ็นดั้งเดิม ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 191007,
@@ -12814,10 +13635,27 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group106",
-        "Name": "ชุดสุ่มเฟอร์นิเจอร์ธีมปีใหม่",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมปีใหม่"
+        "Name": "ชุดสุ่มเฟอร์นิเจอร์ ธีมปีใหม่",
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมปีใหม่ ตามอัตราการได้รับที่กำหนด"
     },
     {
         "Id": 191008,
@@ -12831,7 +13669,24 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group107",
         "Name": "ランダム式・ミリタリーアウトドアシリーズ",
         "Desc": "ミリタリーアウトドアシリーズの家具の中から、一つをランダムで獲得することができる。"
@@ -12848,7 +13703,24 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group108",
         "Name": "ランダム式・ビーチサイドシリーズ",
         "Desc": "ビーチサイドシリーズの家具の中から、一つをランダムで獲得することができる。"
@@ -12865,7 +13737,24 @@
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
+        "SynthQuality": 200,
         "Shops": [],
+        "SynthRecipe": {
+            "Released": [
+                true,
+                true
+            ],
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "ShiftingCraftMaterial_Furniture",
+                "CraftItem"
+            ],
+            "IngredientExp": 200
+        },
         "Icon": "Item_Icon_Furniture_Random_Group109",
         "Name": "ランダム式・大運動会シリーズ",
         "Desc": "大運動会シリーズの家具の中から、一つをランダムで獲得することができる。"
