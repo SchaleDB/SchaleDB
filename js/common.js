@@ -22,7 +22,7 @@ const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePow
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_02", "Defense": "TimeAttack_SlotBG_01", "Destruction": "TimeAttack_SlotBG_03"}
 const searchDelay = 100
-const altSprite = [10033, 10041, 10042, 10043, 10048]
+const altSprite = [10017, 10033, 10041, 10042, 10043, 10048, 20009, 20014]
 
 const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','AmmoCount']
 const studentStatListFull = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','AttackSpeed','BlockRate','DefensePenetration', 'AmmoCount']
@@ -4770,7 +4770,7 @@ function getPassiveSkillBonus(skill, level) {
  */
 function stageIsReleased(stage) {
     if (stage.Id > 8000000) {
-        return (stage.EventId in data.common.regions[regionID].events)
+        return (data.common.regions[regionID].events.includes(stage.EventId))
     } else if (stage.Id > 1000000) {
         return (stage.Area <= data.common.regions[regionID].campaign_max)
     } else if (stage.Id > 60000) {
@@ -4789,11 +4789,11 @@ function updateStatPreviewTitle() {
         $('#ba-statpreview-status-title, #ba-student-stat-modal-title').text(getTranslatedString(summon, "Name"))
         $('#ba-statpreview-status-title-icon, #ba-student-stat-modal-title-icon').attr('src', `images/skill/${student.Skills[0].Icon}.png`).addClass(`bg-skill-${student.BulletType.toLowerCase()}`)
     } else {
-        $('#ba-statpreview-status-title, #ba-student-stat-modal-title').html(getTranslatedString(student, "PersonalName"))//.removeClass('d-none d-md-block')
+        $('#ba-statpreview-status-title, #ba-student-stat-modal-title').html(getTranslatedString(student, "Name"))//.removeClass('d-none d-md-block')
         $('#ba-statpreview-status-title-icon, #ba-student-stat-modal-title-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
     }
     if (compareMode) {
-        $('#ba-statpreview-status-title-compare').html(getTranslatedString(studentCompare, "PersonalName"))
+        $('#ba-statpreview-status-title-compare').html(getTranslatedString(studentCompare, "Name"))
         $('#ba-statpreview-status-title, #ba-statpreview-status-title-compare')//.addClass('d-none d-md-block')
         $('#ba-statpreview-status-title-compare-icon').attr('src', `images/student/icon/${studentCompare.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
     }

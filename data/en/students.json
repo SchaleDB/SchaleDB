@@ -6154,7 +6154,9 @@
                 34
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            20019
+        ],
         "MemoryLobby": [
             9,
             9
@@ -8402,7 +8404,7 @@
             {
                 "SkillType": "normal",
                 "Name": "Explosive Aria",
-                "Desc": "Every 20s, places 3 landmines a fixed distance in front of Mutsuki that each deal <?1> damage if triggered. Landmines last for 15s.",
+                "Desc": "Every 20s, places 3 mines a fixed distance in front of Mutsuki that each deal <?1> damage if triggered. Mines last for 15s.",
                 "Parameters": [
                     [
                         "334%",
@@ -11047,7 +11049,7 @@
             10028
         ],
         "MemoryLobby": [
-            0,
+            6,
             0
         ],
         "FurnitureInteraction": [
@@ -28064,7 +28066,9 @@
             3
         ],
         "FurnitureInteraction": [
-            [],
+            [
+                207303
+            ],
             []
         ],
         "FavorItemTags": [
@@ -28474,7 +28478,9 @@
             2
         ],
         "FurnitureInteraction": [
-            [],
+            [
+                207305
+            ],
             []
         ],
         "FavorItemTags": [
@@ -28904,7 +28910,9 @@
             2
         ],
         "FurnitureInteraction": [
-            [],
+            [
+                207304
+            ],
             []
         ],
         "FavorItemTags": [
@@ -46784,6 +46792,404 @@
                 12,
                 5,
                 8
+            ],
+            [
+                12,
+                8,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 20019,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 114,
+        "PathName": "Akane_Bunny",
+        "DevName": "CH0099",
+        "Name": "Akane (Bunny)",
+        "School": "Millennium",
+        "Club": "CleanNClearing",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "DamageDealer",
+        "SummonIds": [],
+        "Position": "Back",
+        "BulletType": "Mystic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 0,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "HG",
+        "WeaponImg": "Weapon_Icon_CH0099",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_BunnyGirl_Collection",
+        "CollectionTexture": "Student_Portrait_CH0099_Collection",
+        "FamilyName": "Murokasa",
+        "PersonalName": "Akane",
+        "SchoolYear": "2nd Year",
+        "CharacterAge": "16 years old",
+        "FamilyNameRuby": "むろかさ",
+        "Birthday": "4月1日",
+        "CharacterSSRNew": "ご主人様のメイド……\nいえ、今は\nご主人様のウサギ、と申しましょうか",
+        "ProfileIntroduction": "ミレニアムサイエンススクール所属、潜入ミッションのためバニーガール姿へと着替えた「C&amp;C」のエージェント。\n\n不慣れな環境下でも、バニー服を率先して用意したり、C4を爆発させて障害物を片付けるなど、いつもと変わらず落ち着いて作戦を遂行する姿が見られる。普段とは違う服装に少し浮かれているのか、随所にウキウキした表情が垣間見えることも。",
+        "Hobby": "お掃除",
+        "CharacterVoice": "Yumi Hara",
+        "BirthDay": "4/1",
+        "ArtistName": "Mx2j",
+        "CharHeightMetric": "164cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1141,
+        "AttackPower1": 289,
+        "AttackPower100": 2897,
+        "MaxHP1": 1988,
+        "MaxHP100": 14858,
+        "DefensePower1": 66,
+        "DefensePower100": 397,
+        "HealPower1": 1618,
+        "HealPower100": 4856,
+        "DodgePoint": 1093,
+        "AccuracyPoint": 1131,
+        "CriticalPoint": 251,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "Careful Preparation",
+                "Desc": "Places a mine that explodes automatically when an enemy is in range, dealing <?1> damage. The mine lasts for 90s.",
+                "Parameters": [
+                    [
+                        "351%",
+                        "404%",
+                        "509%",
+                        "562%",
+                        "667%",
+                        "720%",
+                        "826%",
+                        "878%",
+                        "984%",
+                        "1036%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "SummonStat": [],
+                "SummonStatCoefficient": [],
+                "Icon": "COMMON_SKILLICON_BATTLEITEM",
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "Elegant Cleaning",
+                "Desc": "Every 30s, deals <?1> damage to enemies in a circular area.",
+                "Parameters": [
+                    [
+                        "216%",
+                        "227%",
+                        "238%",
+                        "281%",
+                        "292%",
+                        "302%",
+                        "346%",
+                        "356%",
+                        "367%",
+                        "411%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "Accurate Capture",
+                "Desc": "Increases <b:ATK> by <?1>.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackPower"
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "Prompt Assistance",
+                "Desc": "Increases the <b:ATK> of all allies who use <b class='ba-col-mystic'>Mystic</b> type attacks by <?1>.",
+                "Parameters": [
+                    [
+                        "12.7%",
+                        "13.4%",
+                        "14%",
+                        "16.5%",
+                        "17.2%",
+                        "17.8%",
+                        "20.4%",
+                        "21%",
+                        "21.7%",
+                        "24.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF"
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "Accurate Capture+",
+                "Desc": "Increases <b:ATK> by <?1> plus a further <?2>.",
+                "Parameters": [
+                    [
+                        "347",
+                        "365",
+                        "382",
+                        "451",
+                        "469",
+                        "486",
+                        "555",
+                        "573",
+                        "590",
+                        "659"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackPower",
+                    "AttackPower"
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                6,
+                37
+            ],
+            [
+                7,
+                45
+            ],
+            [
+                2,
+                8
+            ],
+            [
+                3,
+                12
+            ],
+            [
+                5,
+                20
+            ]
+        ],
+        "FavorAlts": [
+            13000
+        ],
+        "MemoryLobby": [
+            6,
+            0
+        ],
+        "FurnitureInteraction": [
+            [
+                207302
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Household",
+            "Food"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Akane_BunnyGirl",
+            "F_Akane_BunnyGirl2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "サイレントソリューション",
+            "Desc": "アカネが常に所持しているピストル。\n\n潜入任務にはこれ以上なく相応しいモノである。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 127,
+            "AttackPower100": 1273,
+            "MaxHP1": 432,
+            "MaxHP100": 4324,
+            "HealPower1": 190,
+            "HealPower100": 1902,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3050,
+                150
+            ],
+            [
+                3051,
+                3050,
+                151,
+                180
+            ],
+            [
+                3052,
+                3051,
+                152,
+                181
+            ],
+            [
+                3053,
+                3052,
+                153,
+                182
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                12
+            ],
+            [
+                12,
+                18,
+                13,
+                27
+            ],
+            [
+                12,
+                18,
+                7,
+                23
+            ],
+            [
+                8,
+                18,
+                12,
+                18
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4050
+            ],
+            [
+                4050
+            ],
+            [
+                4051,
+                4050,
+                150
+            ],
+            [
+                4051,
+                151,
+                180
+            ],
+            [
+                4052,
+                4051,
+                151,
+                180
+            ],
+            [
+                4052,
+                152,
+                181
+            ],
+            [
+                4053,
+                4052,
+                153,
+                182
+            ],
+            [
+                4053,
+                153,
+                182
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                7
+            ],
+            [
+                8,
+                5,
+                14
+            ],
+            [
+                5,
+                12,
+                10,
+                16
+            ],
+            [
+                8,
+                5,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                10
             ],
             [
                 12,
