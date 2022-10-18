@@ -936,7 +936,6 @@ function loadModule(moduleName, entry=null) {
             }
             
             if (regionID == 1) {
-                $('#ba-raid-list-tab-timeattack').hide()
                 $('#ba-raid-list-tab-worldraid').hide()
             }
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
@@ -2064,7 +2063,6 @@ function loadRaid(raidId) {
     selectedEnemy = 0
     if (loadedModule == 'raids') {
         if (isNaN(parseInt(raidId))) {raidId = 1}
-        if (regionID == 1 && raidId >= 1000) {raidId = 1}
         if (loadedRaid) $('#raid-select-'+loadedRaid.Id).removeClass('selected')
         let raidName
 
