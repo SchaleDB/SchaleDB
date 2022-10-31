@@ -149,6 +149,12 @@ $break-xxl: 1400px;
     }
 }
 
+@mixin xl-down() {
+    @media only screen and (max-width: ($break-xxl - 1px)) {
+        @content;
+    }
+}
+
 @mixin sm-up() {
     @media only screen and (min-width: $break-sm) {
         @content;

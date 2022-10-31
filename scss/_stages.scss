@@ -308,3 +308,9 @@
     max-height: 348px;
     @include scrollable(auto);
 }
+
+#ba-stage-enemy-img {
+    @include md-down {
+        display: none;
+    }
+}

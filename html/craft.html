@@ -3,11 +3,29 @@
         <div class="col-12 col-md-6 ba-page">
             <div class="px-0 px-xl-1 sidebar">
                 <div id="ba-craft-list-container" class="card p-2 screen-height mobile-scroll">
+                    <div class="card-header">
+                        <div class="d-flex flex-wrap gap-2">
+                            <nav id="ba-craft-list-tabs" class="nav nav-pills nav-justified flex-fill">
+                                <a id="ba-item-list-tab-synthesis" class="active nav-link" data-bs-toggle="tab" href="#ba-craft-list-nodes" data-localize-id="ui,synthesis"></a>
+                                <a id="ba-item-list-tab-fusion" class="nav-link" data-bs-toggle="tab" href="#ba-fusion-list-recipes" data-localize-id="ui,fusion"></a>
+                            </nav>
+                            <div class="flex-fill d-flex gap-2">
+                                <input type="search" class="form-control h-100" id="craft-search-text" data-ph-localize-id="ui,filter_by_name" autocomplete="off">
+                                <button id="craft-toggle-chance" class="btn btn-dark tooltip-button" type="button"><i class="fa-solid fa-percent"></i></button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card-body">
                         <div class="tab-content">
                             <div id="ba-craft-list-nodes" class="ba-craft-list tab-pane active show">
                                 <div id="ba-craft-list" class="ba-item-list">
                                     <div id="craft-select-grid" class="selection-grid craft align-top flex-fill">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ba-fusion-list-recipes" class="ba-craft-list tab-pane">
+                                <div id="ba-fusion-list" class="ba-item-list">
+                                    <div id="fusion-select-grid" class="selection-grid items align-top flex-fill">
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +55,7 @@
                         <div class="ba-panel p-2">
                             <p id="ba-craft-description" class="mb-0"></p>
                         </div>
-                        <h5 class="text-bold mt-4" data-localize-id="ui,craft_rewards"></h5>
+                        <h5 id="ba-craft-rewards-title" class="text-bold mt-4" data-localize-id="ui,craft_rewards"></h5>
                         <div class="ba-panel p-2 pb-0 mt-2">
                             <div id="ba-craft-rewards" class="d-flex flex-wrap justify-content-center">
                             </div>

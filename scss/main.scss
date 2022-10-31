@@ -99,7 +99,12 @@ h1 small {
 
 .ba-panel-separator {
     border-top: var(--col-panel-separator) 1px solid;
-    min-width: 100%
+    min-width: 100%;
+}
+
+.ba-panel-separator-vertical {
+    border-left: var(--col-panel-separator) 1px solid;
+    min-height: 100%;
 }
 
 .ba-bg-theme {
@@ -542,22 +547,23 @@ h1 small {
     width: auto;
 }
 
-#ba-student-weapon {
-    order: 1;
-}
+// #ba-student-school {
+//     @include flex(center, center);
+//     flex-direction: column;
 
-#ba-student-gear {
-    order: 4;
-}
+//     height: 78px;
+//     min-width: 100px;
 
-@media(min-width: 1100px) {
-    #ba-student-gear {
-        order: 2;
-    }
-}
+//     img {
+//         height: 50px;
+//     }
+// }
 
-#ba-student-terrain {
-    order: 3;
+hr {
+    flex-basis: 100%;
+    height: 0 !important;
+    margin: 0;
+    border: none; 
 }
 
 .ba-bond-icon {

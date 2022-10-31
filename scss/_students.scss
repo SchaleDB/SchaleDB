@@ -256,3 +256,45 @@ a.ba-statpreview-icon {
 
 
 }
+
+#ba-student-attributes {
+    order: 1;
+    max-width: 100%;
+    flex-basis: 100%;
+    gap: 0.25rem 0.5rem;
+
+    @include xxl-up {
+        flex: 1;
+        flex-basis: 50%;
+        gap: 0.5rem;
+    }
+}
+
+#ba-student-terrain {
+    order: 2;
+
+    @include xl-down {
+        order: 3;
+    }
+}
+
+#ba-student-weapon {
+    order: 3;
+
+    @include xl-down {
+        order: 2;
+    }
+}
+
+#ba-student-gear {
+    order: 4;
+}
+
+#ba-student-academy, #ba-student-club {
+    max-width: 100%;
+
+    span {
+        white-space: normal;
+        @include truncate-text;
+    }
+}

@@ -155,6 +155,7 @@ let loadedItemType
 let loadedStage
 let loadedConquest
 let loadedCraftNode
+let loadedCraftId = 0
 
 let itemList
 let furnitureList
@@ -174,6 +175,7 @@ let selectedEnemy = 0
 let raid_difficulty = 0
 let ta_difficulty = 0
 let gridItemDisplayStyle = 'detailed'
+let showNodeProbability = false
 
 // searchbar properties
 let searchResultsCount = 0
@@ -1002,8 +1004,29 @@ function loadModule(moduleName, entry=null) {
                 loadCraft(1)
             }
             populateCraftList()
-            $('.ba-craft-list').addClass('fade')
-            $('.ba-craft-list.active').addClass('show')
+
+            if (loadedCraftId >= 100000) {
+                $('#ba-item-list-tab-fusion').tab('show')
+            } else {
+                $('#ba-item-list-tab-synthesis').tab('show')
+            }
+
+            $('#fusion-select-grid').on('click', 'div[data-itemid]', function(e){loadCraft($(this).data('itemid'))})
+
+            $('#craft-toggle-chance').tooltip({title: getBasicTooltip(translateUI('craft_toggle_chance')), html: true, placement: 'top'})
+            $('#craft-toggle-chance').toggleClass('active', showNodeProbability)
+            $('#craft-toggle-chance').on('click', function() {
+                showNodeProbability = !showNodeProbability
+                $(this).toggleClass('active', showNodeProbability).tooltip('hide')
+                $('#craft-select-grid .stage-droprate').toggleClass('hidden', !showNodeProbability)
+            })
+
+            $('#craft-search-text').on('input', function() {
+                if (searchDelayTimeout) {
+                    clearTimeout(searchDelayTimeout)
+                }
+                searchDelayTimeout = setTimeout(populateCraftList, searchDelay)
+            })
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
@@ -1555,8 +1578,10 @@ function processStudent() {
     $("#ba-student-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${student.BulletType.toLowerCase()}`)
     $("#ba-student-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${student.ArmorType.toLowerCase()}`)
     
-    $("#ba-student-school-label").text(student.School)
-    $("#ba-student-school-img").attr("src", `images/schoolicon/School_Icon_${student.School.toUpperCase()}_W.png`)
+    //$("#ba-student-academy-label").text(`${getLocalizedString('School',student.School)} / ${getLocalizedString('Club',student.Club)}`)
+    $("#ba-student-academy-label").text(`${getLocalizedString('School',student.School)}`)
+    $("#ba-student-club-label").text(`${getLocalizedString('Club',student.Club)}`)
+    $("#ba-student-school-img, #ba-student-academy-icon").attr("src", `images/schoolicon/School_Icon_${student.School.toUpperCase()}_W.png`)
     $("#ba-student-position-label").text(student.Position.toUpperCase())
     $("#ba-student-attacktype-label").text(getLocalizedString('BulletType',student.BulletType))
     $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',student.BulletType)}`, translateUI('attacktype'), null, getAttackTypeText(student.BulletType), 32), placement: 'top',  html: true})
@@ -1639,7 +1664,8 @@ function processStudent() {
         $('#ba-student-tab-gear, #ba-statpreview-ex-gear-container').show()
         $("#ba-student-gear-name, #ba-statpreview-ex-gear-name").html(student.Gear.Name)
         $("#ba-student-gear-description").html(`${student.Gear.Desc}\n\n<i>${translateUI('bond_req_equip',['20', student.Name])}`)
-        $("#ba-student-gear-icon, #ba-statpreview-ex-gear-icon").attr("src", `images/gear/${student.Gear.Icon}.png`)
+        $("#ba-student-gear-icon, #ba-statpreview-ex-gear-icon, #ba-student-gear-4-icon").attr("src", `images/gear/${student.Gear.Icon}.png`)
+        $("#ba-student-gear-4-icon").tooltip('dispose').tooltip({title: getRichTooltip(`images/gear/${student.Gear.Icon}.png`, getTranslatedString(student.Gear, 'Name'), translateUI('student_ex_gear'), null, getTranslatedString(student.Gear, 'Desc') + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(student.Gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !statPreviewIncludeExGear)
         let gearMaterialsHtml = ""
         for (let i = 0; i < student.Gear.TierUpMaterial[0].length; i++) {
             gearMaterialsHtml += getMaterialIconHTML(student.Gear.TierUpMaterial[0][i], student.Gear.TierUpMaterialAmount[0][i])
@@ -1665,6 +1691,8 @@ function processStudent() {
         if ($('#ba-student-tab-gear').hasClass('active')) {
             $('#ba-student-tab-stats').tab('show')
         }
+
+        $('#ba-student-gear-4-icon').attr('src', 'images/gear/Gear_Icon_Empty.png').tooltip('dispose').toggleClass("gear-disabled", true)
     }
 
     //Profile
@@ -2015,44 +2043,92 @@ function loadItem(id) {
 
 function loadCraft(id) {
     if (loadedModule == 'craft') {
-        let craftNode = findOrDefault(data.crafting.Nodes[regionID], "Id", id, 1)[0]
-        if (loadedCraftNode) $('#craft-select-'+loadedCraftNode.Id).removeClass('selected')
-        loadedCraftNode = craftNode
-        $('#ba-craft-name').html(getTranslatedString(craftNode,'Name'))
-        $('#ba-craft-type').html(getLocalizedString("NodeTier", ''+craftNode.Tier))
-        $('#ba-craft-rarity').html(getLocalizedString("NodeQuality", ''+craftNode.Quality))
-        $('#ba-craft-icon').removeClass('ba-node-quality-1 ba-node-quality-2').addClass('ba-node-quality-'+craftNode.Quality)
-        $('#ba-craft-icon-img').attr('src', `images/ui/${craftNode.Icon}.png`)
-        $('#ba-craft-description').html(getTranslatedString(craftNode, 'Desc'))
-        $('#ba-craft-rewards').empty()
-        let rewardsHtml = ''
-        let nodeWeightTotal = 0
-        craftNode.Groups.forEach(grp => {nodeWeightTotal += grp.Weight})
-        $.each(craftNode.Groups, function(i,el){
-            let itemGroup = data.crafting.Groups[regionID][el.GroupId], maxWeight = 0
-            for (let j = 0; j < itemGroup.length; j++) {
-                maxWeight += itemGroup[j].Weight
-            }
-            for (let j = 0; j < itemGroup.length; j++) {
-                let itemWeight = ((el.Weight / nodeWeightTotal) * (itemGroup[j].Weight / maxWeight)).toFixed(4)
-                let itemId = itemGroup[j].ItemId
-                if (itemGroup[j].Type == "Furniture") {
-                    itemId += 1000000
-                } else if (itemGroup[j].Type == "Equipment") {
-                    itemId += 2000000
-                }  else if (itemGroup[j].Type == "Currency") {
-                    itemId += 3000000
-                }
-                rewardsHtml += getDropIconHTML(itemId,itemWeight,itemGroup[j].AmountMin,itemGroup[j].AmountMax)
-            }
-        })
-        $('#ba-craft-rewards').html(rewardsHtml)
-        $('#ba-craft-rewards div').each(function(i,el) {
-            $(el).tooltip({html: true})
-        })
 
-        $('#craft-select-'+loadedCraftNode.Id).addClass('selected')
-        finalizeLoad(getTranslatedString(craftNode, 'Name'), "craftnode", craftNode.Id, 'View Crafting', craftNode.Id)
+        if (loadedCraftId > 0) $('#craft-select-'+loadedCraftId).removeClass('selected')
+
+        if (id < 100000) {
+            const craftNode = findOrDefault(data.crafting.Nodes[regionID], "Id", id, 1)[0]
+            loadedCraftNode = craftNode
+            loadedCraftId = craftNode.Id
+
+            $('#ba-craft-name').html(getTranslatedString(craftNode,'Name'))
+            $('#ba-craft-type').html(getLocalizedString("NodeTier", ''+craftNode.Tier))
+            $('#ba-craft-rarity').html(getLocalizedString("NodeQuality", ''+craftNode.Quality))
+            $('#ba-craft-icon').removeClass('ba-node-quality-1 ba-node-quality-2').addClass('ba-node-quality-'+craftNode.Quality)
+            $('#ba-craft-icon-img').attr('src', `images/ui/${craftNode.Icon}.png`)
+            $('#ba-craft-description').html(getTranslatedString(craftNode, 'Desc'))
+            $('#ba-craft-rewards-title').text(translateUI('craft_rewards'))
+            $('#ba-craft-rewards').empty()
+            let rewardsHtml = ''
+            let nodeWeightTotal = 0
+            craftNode.Groups.forEach(grp => {nodeWeightTotal += grp.Weight})
+            $.each(craftNode.Groups, function(i,el){
+                let itemGroup = data.crafting.Groups[regionID][el.GroupId], maxWeight = 0
+                for (let j = 0; j < itemGroup.length; j++) {
+                    maxWeight += itemGroup[j].Weight
+                }
+                for (let j = 0; j < itemGroup.length; j++) {
+                    let itemWeight = ((el.Weight / nodeWeightTotal) * (itemGroup[j].Weight / maxWeight)).toFixed(4)
+                    let itemId = itemGroup[j].ItemId
+                    if (itemGroup[j].Type == "Furniture") {
+                        itemId += 1000000
+                    } else if (itemGroup[j].Type == "Equipment") {
+                        itemId += 2000000
+                    }  else if (itemGroup[j].Type == "Currency") {
+                        itemId += 3000000
+                    }
+                    rewardsHtml += getDropIconHTML(itemId,itemWeight,itemGroup[j].AmountMin,itemGroup[j].AmountMax,true)
+                }
+            })
+            $('#ba-craft-rewards').html(rewardsHtml)
+            $('#ba-craft-rewards div').each(function(i,el) {
+                $(el).tooltip({html: true})
+            })
+    
+            $('#craft-select-'+loadedCraftNode.Id).addClass('selected')
+            finalizeLoad(getTranslatedString(craftNode, 'Name'), "craftnode", craftNode.Id, 'View Crafting', craftNode.Id)
+        } else {
+            const recipe = findOrDefault(data.crafting.Fusion, "Id", id % 100000, 1)[0]
+            const itemList = recipe.ResultId >= 1000000 ? 'furniture' : 'items'
+            const item = find(data[itemList], 'Id', recipe.ResultId % 1000000)[0]
+            loadedCraftNode = recipe
+            loadedCraftId = recipe.Id + 100000
+
+            $('#ba-craft-name').html(getTranslatedString(item,'Name'))
+            $('#ba-craft-type').html(translateUI('craft_fusion'))
+            $('#ba-craft-rarity').html(getRarityTier(item.Rarity))
+            $('#ba-craft-icon').removeClass('ba-node-quality-1 ba-node-quality-2 ba-item-n ba-item-r ba-item-sr ba-item-ssr').addClass('ba-item-'+item.Rarity.toLowerCase())
+            $('#ba-craft-icon-img').attr('src', `images/${itemList}/${item.Icon}.png`)
+            $('#ba-craft-description').html(getTranslatedString(item, 'Desc'))
+            $('#ba-craft-rewards-title').text(translateUI('craft_recipe_items'))
+            $('#ba-craft-rewards').empty()
+
+            let html = ''
+            html += getMaterialIconHTML(recipe.RequireItem[0], recipe.RequireItem[1])
+            html += getMaterialIconHTML(3000001, recipe.RequireGold)
+            html += '<div class="ba-panel-separator mb-2"></div>'
+
+            data.items.forEach(item => {
+                if (item.IsReleased[regionID] && item.Tags.filter(tag => recipe.IngredientTag.includes(tag)).length > 0) {
+                    html += getDropIconHTML(item.Id, item.SynthQuality / recipe.IngredientExp, 1, 1, true)
+                }
+            })
+
+            data.furniture.forEach(item => {
+                if (item.IsReleased[regionID] && item.Tags.filter(tag => recipe.IngredientTag.includes(tag)).length > 0) {
+                    html += getDropIconHTML(item.Id+1000000, item.SynthQuality / recipe.IngredientExp, 1, 1, true)
+                }
+            })
+
+            $('#ba-craft-rewards').html(html)
+            $('#ba-craft-rewards div').each(function(i,el) {
+                $(el).tooltip({html: true})
+            })
+
+            $('#craft-select-'+loadedCraftId).addClass('selected')
+            finalizeLoad(getTranslatedString(item, 'Name'), "craftnode", loadedCraftId, 'View Crafting', loadedCraftId)
+
+        }
 
     } else {
         loadModule('craft', id)
@@ -2605,6 +2681,11 @@ function loadRegion(regID) {
         $('#item-search-filter-furnitureset-108').hide()
         $('#item-search-filter-furnitureset-109').hide()
         $('#item-search-filter-equipmenttier-7').hide()
+
+        //hide gear slot 4
+        $('#ba-student-gear-separator').hide()
+        $('#ba-student-gear-4').hide()
+        
     }
 }
 
@@ -2683,6 +2764,7 @@ function togglePassiveSkill() {
 
 function toggleExGear() {
     statPreviewIncludeExGear = !statPreviewIncludeExGear
+    updateGearIcon()
     recalculateStatPreview()
 }
 
@@ -2804,9 +2886,12 @@ function updateGearIcon() {
         tier = statPreviewIncludeEquipment ? $(`#ba-statpreview-gear${i}-range`).val() : 1
         tierText += ((tierText == "") ? "" : " / ") + "T"+$(`#ba-statpreview-gear${i}-range`).val()
         gear = find(data.equipment, "Id", gearId[student.Equipment[i-1]]+(tier-1))[0]
-        $("#ba-student-gear-"+i).attr("src", `images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`, getTranslatedString(gear, 'Name'), getLocalizedString('ItemCategory', gear.Category), `T${tier}`, getTranslatedString(gear, 'Desc') + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !statPreviewIncludeEquipment)
-        $("#ba-student-gear-"+i).attr('onclick', `loadItem(${gear.Id+2000000})`)
+        $(`#ba-student-gear-${i}-icon`).attr("src", `images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`, getTranslatedString(gear, 'Name'), getLocalizedString('ItemCategory', gear.Category), `T${tier}`, getTranslatedString(gear, 'Desc') + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !statPreviewIncludeEquipment)
+        $(`#ba-student-gear-${i}-icon`).attr('onclick', `loadItem(${gear.Id+2000000})`)
+    }
 
+    if ("Released" in student.Gear && student.Gear.Released[regionID]) {
+        $("#ba-student-gear-4-icon").toggleClass("gear-disabled", !statPreviewIncludeExGear)
     }
 }
 
@@ -3377,7 +3462,7 @@ function getMaterialIconHTML(id, amount) {
     return html
 }
 
-function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1) {
+function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false) {
     let item, type, group, haslink, itemType
     if (id >= 4000000) {
         groups = find(data.common.GachaGroup, "Id", id-4000000)
@@ -3495,7 +3580,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1) {
             html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${icon}.png`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/${icon}.png"><span class="ba-material-label">${getProbabilityText(chance)}</span></div>`
         }
     } else {
-        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, getTranslatedString(item, 'Desc').replace('&','&amp;'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}</div>`
+        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, getTranslatedString(item, 'Desc').replace('&','&amp;'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 || forcePercent ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}</div>`
     }
     return html
 }
@@ -3769,7 +3854,7 @@ function getItemIdOffset(type) {
 }
 
 function populateCraftList() {
-    html = []
+    html = ["", "", ""]
     html[0] = ""
     html[1] = ""
     html[2] = ""
@@ -3778,24 +3863,58 @@ function populateCraftList() {
     html_h3 = `<div id="craft-list-grid-header-3" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"3")}</h3></div>`
     data.crafting.Nodes[regionID].sort((a,b) => a.Quality - b.Quality)
     data.crafting.Nodes[regionID].sort((a,b) => b.Icon.localeCompare(a.Icon))
+
+    const searchTerm = $('#craft-search-text').val()
+
     $.each(data.crafting.Nodes[regionID], function(i,el) {
-        if (el.Weight > 0)
-        html[el.Tier-1] += getCraftingCardHTML(el)
+        if (el.Weight > 0 && (searchTerm == '' || getTranslatedString(el, "Name").toLowerCase().includes(searchTerm.toLowerCase())))
+        html[el.Tier-1] += getCraftingCardHTML(el, el.Weight / data.crafting.TotalWeight[regionID][el.Tier-1])
     })
 
-    $('#craft-select-grid').html(html_h1 + html[0] + html_h2 + html[1] + (regionID == 0 ? html_h3 + html[2] : ""))
-
-    $('#craft-select-'+loadedCraftNode.Id).addClass('selected')
-    if (loadedCraftNode) {
-        let offset = $(`#craft-select-${loadedCraftNode.Id}`).prop('offsetTop') - 100
-        $('#ba-craft-list-container .card-body').scrollTop((offset === undefined) ? 0 : offset)
+    $('#craft-select-grid').empty()
+    for (let i = 0; i < 3; i++) {
+        if (html[i] != "") {
+            $('#craft-select-grid').append(`<div id="craft-list-grid-header-${i+1}" class="w-100 ba-grid-header mb-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',i+1)}</h3></div>${html[i]}`)
+        }
     }
+    if ($('#craft-select-grid').children().length == 0) {
+        $('#craft-select-grid').append(`<div id="craft-select-noresult" class="p-2 grid-text">${translateUI('no_results')}</div>`)
+    }
+
+
+    html = ''
+    data.crafting.Fusion.forEach(recipe => {
+        const itemList = recipe.ResultId >= 1000000 ? 'furniture' : 'items'
+        const item = find(data[itemList], 'Id', recipe.ResultId % 1000000)[0]
+
+        if (recipe.Released[regionID] && item.IsReleased[regionID]) {
+            const name = getTranslatedString(item, "Name")
+            const smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
+
+            if (searchTerm == '' || name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                html += `<div id="craft-select-${recipe.Id+100000}" data-itemid="${recipe.Id+100000}" class="selection-grid-card card-items"><div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${itemList}/${item.Icon}.png"></div><div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span></div></div>`
+            }
+        }
+    })
+    if (html != "") {
+        $('#fusion-select-grid').html(html)
+    } else {
+        $('#fusion-select-grid').html(`<div id="fusion-select-noresult" class="p-2 grid-text">${translateUI('no_results')}</div>`)
+    }
+    
+
+    $('#craft-select-'+loadedCraftId).addClass('selected')
+    let offset = $(`#craft-select-${loadedCraftId}`).prop('offsetTop') - 100
+    $('#ba-craft-list-container .card-body').scrollTop((offset === undefined) ? 0 : offset)
 }
 
-function getCraftingCardHTML(node) {
+function getCraftingCardHTML(node, chance = -1) {
     let name = getTranslatedString(node, "Name")
     let smallTextThreshold = label_craft_smalltext_threshold[userLang]
     let html = `<div id="craft-select-${node.Id}" class="selection-grid-card card-craft" onclick="loadCraft(${node.Id})"><div class="card-img ba-node-quality-${node.Quality}"><img loading="lazy" src="images/ui/${node.Icon}.png"></div>`
+    if (chance >= 0) {
+        html += `<span class="card-badge stage-droprate ${showNodeProbability ? "" : "hidden"}">${getProbabilityText(chance)}</span>`
+    }
     html += `<div class="card-label">`
     html += `<span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
     html += `</div></div>`
@@ -3990,7 +4109,7 @@ function populateRaidList() {
 }
 
 function getUsedByStudents(item, mode) {
-    let html = '', headerText = translateUI('item_usedby')
+    let html = '', headerText = translateUI('item_usedby'), bondGearStudentsHtml = ''
     if (mode == 'equipment') {
         $.each(data.students, function(i,el){
             if (!el.IsReleased[regionID]) return
@@ -4042,6 +4161,14 @@ function getUsedByStudents(item, mode) {
                 }
                 if (uses)
                 html += getStudentIconSmall(el)
+
+                if ("Released" in el.Gear && el.Gear.Released[regionID]) {
+                    el.Gear.TierUpMaterial.forEach(x => {
+                        if (x.includes(item.Id)) {
+                            bondGearStudentsHtml += getStudentIconSmall(el)
+                        }
+                    })
+                }
             })
         } else if (item.Category == 'SecretStone') {
             headerText = translateUI('item_usedby_eleph')
@@ -4051,7 +4178,11 @@ function getUsedByStudents(item, mode) {
     }
     if (html != '') {
         $('#ba-item-usage').show()
-        return `<div class="mb-2"><i>${headerText}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap">` + html + '</div>'
+        html = `<div class="mb-2"><i>${headerText}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap">` + html + '</div>'
+        if (bondGearStudentsHtml != "") {
+            html += `<div class="mb-2"><i>${translateUI('item_usedby_gear')}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${bondGearStudentsHtml}</div>`
+        }
+        return html
     } else {
         return ''
     }
@@ -4079,6 +4210,7 @@ function getEquipmentRecipe(item) {
 function getLikedByStudents(item) {
     let studentsHtml = ["", ""]
     let likedStudentsHtml =  ""
+    let bondGearStudentsHtml = ""
 
     $.each(data.students, function(i,el){
         if (!el.IsReleased[regionID])
@@ -4108,6 +4240,14 @@ function getLikedByStudents(item) {
                 
             })
         }
+
+        if ("Released" in el.Gear && el.Gear.Released[regionID]) {
+            el.Gear.TierUpMaterial.forEach(x => {
+                if (x.includes(item.Id)) {
+                    bondGearStudentsHtml += getStudentIconSmall(el)
+                }
+            })
+        }
         
     })
     studentsHtml.forEach((html, ind) => {
@@ -4115,6 +4255,10 @@ function getLikedByStudents(item) {
             likedStudentsHtml += `<div class="mb-2"><i>${translateUI('item_likedbystudent_list_'+ind, [`<img class="inline-img" src="images/ui/Cafe_Interaction_Gift_0${(item.Rarity == "SSR" ? 4 : 3) - ind}.png">`])}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${studentsHtml[ind]}</div>`
         }
     })
+
+    if (bondGearStudentsHtml != "") {
+        likedStudentsHtml += `<div class="mb-2"><i>${translateUI('item_usedby_gear')}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${bondGearStudentsHtml}</div>`
+    }
 
     $('#ba-item-usage').show()
     return likedStudentsHtml

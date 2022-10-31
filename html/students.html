@@ -39,30 +39,35 @@
                     <div class="card-body">
                         <div class="tab-content">
                             <div id="ba-student-page-stats" class="tab-pane fade show active" style="border-radius: .25em;">
-                                <div class="d-flex flex-row flex-wrap align-items-center mb-1">
-                                    <span id="ba-student-role" class="ba-info-pill bg-theme" style="position: relative;"><img id="ba-student-role-icon" class="invert-light" src="" style="height:26px;"><span id="ba-student-role-label" class="ba-pill-label"></span></span>
-                                    <span id="ba-student-attacktype" class="ba-info-pill"><img src="images/ui/Type_Attack.png"><span id="ba-student-attacktype-label" class="ba-pill-label"></span></span>
-                                    <span id="ba-student-defensetype" class="ba-info-pill"><img src="images/ui/Type_Defense.png"><span id="ba-student-defensetype-label" class="ba-pill-label"></span></span>                                    
-                                    <span id="ba-student-position" class="ba-info-pill"><span id="ba-student-position-label"></span></span>
-                                </div>
-                                <div class="d-flex flex-row align-items-stretch flex-wrap justify-content-between">
-                                    <div id="ba-student-weapon" class="ba-type-weapon ba-panel d-inline-block align-text-top me-1 mb-2 position-relative">
-                                        <img id="ba-student-usescover-icon" src="images/ui/Combat_Icon_Cover_Ally.png">
-                                        <p id="ba-student-weapontype-label" class="ba-weapon-label"></p>
-                                        <p id="ba-student-weapon-level" class="text-bold float-end"></p>
+                                <div class="d-flex flex-row flex-wrap align-items-center justify-content-between mb-1 gap-1">
+                                    <div id="ba-student-attributes" class="d-flex flex-row flex-wrap align-items-center">
+                                        <span id="ba-student-role" class="ba-info-pill bg-theme m-0" style="position: relative;"><img id="ba-student-role-icon" class="invert-light" src="" style="height:26px;"><span id="ba-student-role-label" class="ba-pill-label"></span></span>
+                                        <span id="ba-student-attacktype" class="ba-info-pill m-0"><img src="images/ui/Type_Attack.png"><span id="ba-student-attacktype-label" class="ba-pill-label"></span></span>
+                                        <span id="ba-student-defensetype" class="ba-info-pill m-0"><img src="images/ui/Type_Defense.png"><span id="ba-student-defensetype-label" class="ba-pill-label"></span></span>                                        
+                                        <span id="ba-student-position" class="ba-info-pill m-0"><span id="ba-student-position-label"></span></span>
+                                        <span id="ba-student-academy" class="ba-info-pill bg-theme m-0" style="position: relative;"><img id="ba-student-academy-icon" class="invert-light" src="" style="height:26px;"><span id="ba-student-academy-label" class="ba-pill-label"></span></span>
+                                        <span id="ba-student-club" class="ba-info-pill bg-theme m-0" style="position: relative;"><span id="ba-student-club-label" class="ba-pill-label"></span></span>
                                     </div>
-                                    <div id="ba-student-gear" class="flex-fill ba-panel mb-2">
-                                        <div class="d-flex align-items-center justify-content-evenly" style="height: 78px;">
-                                            <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-1" class="ba-gear-icon" style="cursor:pointer;" src=""></div>
-                                            <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-2" class="ba-gear-icon" style="cursor:pointer;" src=""></div>
-                                            <div class="d-inline-block position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-3" class="ba-gear-icon" style="cursor:pointer;" src=""></div>
-                                        </div>
-                                    </div>
-                                    <div id="ba-student-terrain" class="mb-2 ms-1" style="min-width: fit-content;">
+                                    <div id="ba-student-terrain" class="" style="min-width: fit-content;">
                                         <div id="ba-student-terrain-street" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_Street.png"></span><br><img id="ba-student-terrain-street-icon" class="ba-student-affinity-icon" src=""></div>
                                         <div id="ba-student-terrain-outdoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_Outdoor.png"></span><br><img id="ba-student-terrain-outdoor-icon" class="ba-student-affinity-icon" src=""></div>
                                         <div id="ba-student-terrain-indoor" class="ba-type-terrain ba-panel"><span style="display:inline-block;background-color: var(--col-theme-accent);border-radius: 0.25rem;"><img class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_Indoor.png"></span><br><img id="ba-student-terrain-indoor-icon" class="ba-student-affinity-icon" src=""></div>
                                     </div>
+                                    <div id="ba-student-weapon" class="ba-type-weapon ba-panel d-inline-block align-text-top position-relative">
+                                        <img id="ba-student-usescover-icon" src="images/ui/Combat_Icon_Cover_Ally.png">
+                                        <p id="ba-student-weapontype-label" class="ba-weapon-label"></p>
+                                        <p id="ba-student-weapon-level" class="text-bold float-end"></p>
+                                    </div>
+                                    <div id="ba-student-gear" class="flex-fill ba-panel">
+                                        <div class="d-flex align-items-center flex-wrap gap-3 justify-content-center py-1 px-2" style="min-height: 78px;">
+                                            <div id="ba-student-gear-1" class="position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-1-icon" class="ba-gear-icon" style="cursor:pointer;" src=""></div>
+                                            <div id="ba-student-gear-2" class="position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-2-icon" class="ba-gear-icon" style="cursor:pointer;" src=""></div>
+                                            <div id="ba-student-gear-3" class="position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-3-icon" class="ba-gear-icon" style="cursor:pointer;" src=""></div>
+                                            <div id="ba-student-gear-separator" class="ba-panel-separator-vertical" style="height:64px;"></div>
+                                            <div id="ba-student-gear-4" class="position-relative drop-shadow ba-item-n circle"><img id="ba-student-gear-4-icon" class="ba-gear-icon" src=""></div>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="row g-1 mt-1">
