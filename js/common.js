@@ -1055,12 +1055,14 @@ function loadModule(moduleName, entry=null) {
             let gachatext = translateUI('gacha_pickup') + "\n", gachalistHtml = ""
             let currentTime = new Date().getTime()/1000, dateOptions = {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short"}
             let found = false
+            $('#events-row-1').hide()
             $.each(data.common.regions[regionID].current_gacha, function(i, el){
                 if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
                     for (let j = 0; j < el.characters.length; j++) {
                         var char = find(data.students, "Id", el.characters[j])[0]
                         gachalistHtml += getStudentListCardHTML(char)
                     }
+                    $('#events-row-1').show()
                     gachatext += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
                     gachatext += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end-currentTime)) : translateUI('event_starts', duration(el.start-currentTime)))
                     found = true
@@ -1578,9 +1580,7 @@ function processStudent() {
     $("#ba-student-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${student.BulletType.toLowerCase()}`)
     $("#ba-student-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${student.ArmorType.toLowerCase()}`)
     
-    //$("#ba-student-academy-label").text(`${getLocalizedString('School',student.School)} / ${getLocalizedString('Club',student.Club)}`)
-    $("#ba-student-academy-label").text(`${getLocalizedString('School',student.School)}`)
-    $("#ba-student-club-label").text(`${getLocalizedString('Club',student.Club)}`)
+    $("#ba-student-academy-label").text(`${getLocalizedString('School',student.School)} / ${getLocalizedString('Club',student.Club)}`)
     $("#ba-student-school-img, #ba-student-academy-icon").attr("src", `images/schoolicon/School_Icon_${student.School.toUpperCase()}_W.png`)
     $("#ba-student-position-label").text(student.Position.toUpperCase())
     $("#ba-student-attacktype-label").text(getLocalizedString('BulletType',student.BulletType))
