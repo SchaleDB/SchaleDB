@@ -753,18 +753,21 @@
                                         <li><a id="ba-student-search-sortby-criticalpoint" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('CriticalPoint')" class="btn btn-dark"><span data-localize-id="Stat,CriticalPoint"></span><span class="sort-direction-label"></span></a></li>
                                         <li><a id="ba-student-search-sortby-stabilitypoint" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('StabilityPoint')" class="btn btn-dark"><span data-localize-id="Stat,StabilityPoint"></span><span class="sort-direction-label"></span></a></li>
                                         <li><a id="ba-student-search-sortby-range" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('Range')" class="btn btn-dark"><span data-localize-id="Stat,Range"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-excost" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('EXCost')" class="btn btn-dark"><span data-localize-id="Stat,SkillCost"></span><span class="sort-direction-label"></span></a></li>
+                                        <li><a id="ba-student-search-sortby-exhits" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('EXHits')" class="btn btn-dark"><span data-localize-id="Stat,EXHits"></span><span class="sort-direction-label"></span></a></li>
                                     </ul>
                                 </div>
+                                <button id="ba-student-search-showinfo" class="btn btn-sm btn-dark m-0 mb-1"><i class="fa-solid fa-circle-info"></i></button>
                             </div>
                             <div id="ba-student-search-filter-collection" class="mb-2">
                                 <h5 data-localize-id="ui,collection"></h5>
                                 <button id="ba-student-search-filter-collection-owned" class="btn btn-sm btn-dark btn-search-filter mutually-exclusive" onclick="searchSetFilter('Collection','Owned')"><i class="fa-solid fa-circle-check me-2"></i><span data-localize-id="ui,collection_owned"></span></button>
                                 <button id="ba-student-search-filter-collection-notowned" class="btn btn-sm btn-dark btn-search-filter mutually-exclusive" onclick="searchSetFilter('Collection','NotOwned')"><i class="fa-solid fa-circle-xmark me-2"></i><span data-localize-id="ui,collection_notowned"></span></button>
                             </div>
-                            <div class="mb-2">
+                            <div id="ba-student-search-filter-squadtype" class="mb-2">
                                 <h5 data-localize-id="ui,type"></h5>
-                                <button id="ba-student-search-filter-squadtype-main" class="btn btn-sm btn-dark btn-search-filter ba-col-striker text-bold text-italic" onclick="searchSetFilter('SquadType','Main')">STRIKER</button>
-                                <button id="ba-student-search-filter-squadtype-support" class="btn btn-sm btn-dark btn-search-filter ba-col-special text-bold text-italic" onclick="searchSetFilter('SquadType','Support')">SPECIAL</button>
+                                <button id="ba-student-search-filter-squadtype-main" class="btn btn-sm btn-dark btn-search-filter ba-col-striker text-bold text-italic mutually-exclusive" onclick="searchSetFilter('SquadType','Main')">STRIKER</button>
+                                <button id="ba-student-search-filter-squadtype-support" class="btn btn-sm btn-dark btn-search-filter ba-col-special text-bold text-italic mutually-exclusive" onclick="searchSetFilter('SquadType','Support')">SPECIAL</button>
                             </div>
                             <div class="mb-2">
                                 <h5 data-localize-id="ui,role"></h5>
@@ -826,6 +829,25 @@
                                 <button id="ba-student-search-filter-weapontype-rg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','RG')">RG</button>
                                 <button id="ba-student-search-filter-weapontype-mg" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','MG')">MG</button>
                                 <button id="ba-student-search-filter-weapontype-mt" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('WeaponType','MT')">MT</button>
+                            </div>
+                            <div class="mb-2">
+                                <h5 data-localize-id="ui,student_gear"></h5>
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <button id="ba-student-search-filter-gear1-hat" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('Gear1','Hat')"><img class="ba-btn-img" src="images/ui/Icon_Inven_Hat.png"><span style="margin-left: 22px" data-localize-id="ItemCategory,Hat"></span></button>
+                                    <button id="ba-student-search-filter-gear1-gloves" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('Gear1','Gloves')"><img class="ba-btn-img" src="images/ui/Icon_Inven_Gloves.png"><span style="margin-left: 22px" data-localize-id="ItemCategory,Gloves"></span></button>
+                                    <button id="ba-student-search-filter-gear1-shoes" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('Gear1','Shoes')"><img class="ba-btn-img" src="images/ui/Icon_Inven_Shoes.png"><span style="margin-left: 22px" data-localize-id="ItemCategory,Shoes"></span></button>
+                                </div>
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <button id="ba-student-search-filter-gear2-bag" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('Gear2','Bag')"><img class="ba-btn-img" src="images/ui/Icon_Inven_Bag.png"><span style="margin-left: 22px" data-localize-id="ItemCategory,Bag"></span></button>
+                                    <button id="ba-student-search-filter-gear2-badge" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('Gear2','Badge')"><img class="ba-btn-img" src="images/ui/Icon_Inven_Badge.png"><span style="margin-left: 22px" data-localize-id="ItemCategory,Badge"></span></button>
+                                    <button id="ba-student-search-filter-gear2-hairpin" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('Gear2','Hairpin')"><img class="ba-btn-img" src="images/ui/Icon_Inven_Hairpin.png"><span style="margin-left: 22px" data-localize-id="ItemCategory,Hairpin"></span></button>
+                                </div>
+                                <div class="d-flex align-items-center flex-wrap">
+                                    <button id="ba-student-search-filter-gear3-charm" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('Gear3','Charm')"><img class="ba-btn-img" src="images/ui/Icon_Inven_Charm.png"><span style="margin-left: 22px" data-localize-id="ItemCategory,Charm"></span></button>
+                                    <button id="ba-student-search-filter-gear3-necklace" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('Gear3','Necklace')"><img class="ba-btn-img" src="images/ui/Icon_Inven_Necklace.png"><span style="margin-left: 22px" data-localize-id="ItemCategory,Necklace"></span></button>
+                                    <button id="ba-student-search-filter-gear3-watch" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('Gear3','Watch')"><img class="ba-btn-img" src="images/ui/Icon_Inven_Watch.png"><span style="margin-left: 22px" data-localize-id="ItemCategory,Watch"></span></button>
+                                </div>
+                                <button id="ba-student-search-filter-bondgear" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilter('BondGear',null)"><span data-localize-id="ui,student_ex_gear"></span></button>
                             </div>
                             <div class="mb-2">
                                 <h5 data-localize-id="ui,combat_power"></h5>
