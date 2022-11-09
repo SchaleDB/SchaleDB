@@ -146,6 +146,7 @@ let studentCollection = {}
 let collectionUpdateTimeout
 let toastMessageTimeout
 let searchDelayTimeout
+let eventRefreshInterval
 
 let compareMode = false
 let selectCompareMode = false
@@ -731,6 +732,7 @@ function loadLastModule() {
  */
 function loadModule(moduleName, entry=null) {
     if (loadObserver) loadObserver.disconnect()
+    clearInterval(eventRefreshInterval)
     if (moduleName == 'students') {
         loadedModule = 'students'
         $(".navbar-nav .nav-link").removeClass('active')
@@ -810,6 +812,12 @@ function loadModule(moduleName, entry=null) {
             activeFilters = getNumActiveFilters()
             $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
             $('#ba-student-search-reset').toggle(activeFilters > 0 || $('#ba-student-search-text').val() != "")
+            $('#ba-student-search-filters-panel').on('show.bs.collapse', function() {
+                $('#student-search-filters-btn').toggleClass('active', true)
+            }).on('hide.bs.collapse', function() {
+                $('#student-search-filters-btn').toggleClass('active', false)
+            })
+
 
             updateStudentList(updateSortMethod = true)
     
@@ -856,9 +864,9 @@ function loadModule(moduleName, entry=null) {
                 showStudentListInfo = !showStudentListInfo
                 localStorage.setItem('show_student_list_info', showStudentListInfo)
                 $(this).toggleClass('active', showStudentListInfo).tooltip('hide')
-                $('.card-badge').toggleClass('show', showStudentListInfo)
+                $('#student-select-grid').toggleClass('show-info', showStudentListInfo)
             })
-            $('.card-badge').toggleClass('show', showStudentListInfo)
+            $('#student-select-grid').toggleClass('show-info', showStudentListInfo)
             
             $('#ba-student-modal-statpreview').on('shown.bs.modal', recalculateStatPreview)
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
@@ -1095,94 +1103,9 @@ function loadModule(moduleName, entry=null) {
                 changelogHtml += '</ul>'
             })
             $("#ba-home-modal-changelog-content").html(changelogHtml)
-            let gachatext = translateUI('gacha_pickup') + "\n", gachalistHtml = ""
-            let currentTime = new Date().getTime()/1000, dateOptions = {month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short"}
-            let found = false
-            $('#events-row-1').hide()
-            $.each(data.common.regions[regionID].current_gacha, function(i, el){
-                if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
-                    for (let j = 0; j < el.characters.length; j++) {
-                        var char = find(data.students, "Id", el.characters[j])[0]
-                        gachalistHtml += getStudentListCardHTML(char)
-                    }
-                    $('#events-row-1').show()
-                    gachatext += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
-                    gachatext += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end-currentTime)) : translateUI('event_starts', duration(el.start-currentTime)))
-                    found = true
-                }
-            })
-        
-            $('#ba-home-gacha-text').html(gachatext)
-            $('#ba-home-gacha-list').html(gachalistHtml)
 
-            let raidText = "", raidHtml = ""
-            $('#events-row-2').hide()
-            found = false
-            $.each(data.common.regions[regionID].current_raid, function(i, el){
-                if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
-                    if (el.raid >= 1000) {
-                        raidText = getLocalizedString("StageType", "TimeAttack") + "\n"
-                        let raid = find(data.raids.TimeAttack, "Id", el.raid)[0]
-                        raidHtml += getTimeAttackCardHTML(raid, raid.Terrain)
-                    } else {
-                        raidText = getLocalizedString("StageType", "Raid") + "\n"
-                        let raid = find(data.raids.Raid, "Id", el.raid)[0]
-                        raidHtml += getRaidCardHTML(raid, el.terrain)
-                    }
-                    $('#events-row-2').show()
-                    raidText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
-                    raidText += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end-currentTime)) : translateUI('event_starts', duration(el.start-currentTime)))
-                    found = true
-                }
-            })
-            $('#ba-home-raid-text').html(raidText)
-            $('#ba-home-raid-list').html(raidHtml)
-
-            let eventText = "", eventHtml = ""
-            $('#ba-home-event').hide()
-            found = false
-            $.each(data.common.regions[regionID].current_events, function(i, el){
-                if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
-                    eventText = getLocalizedString("StageType", "Event") + "\n"
-                    eventHtml += getEventCardHTML(el.event)
-                    
-                    $('#ba-home-event').show()
-                    eventText += new Date(el.start*1000).toLocaleString([], dateOptions)+' - '+new Date(el.end*1000).toLocaleString([], dateOptions)
-                    eventText += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end-currentTime)) : translateUI('event_starts', duration(el.start-currentTime)))
-                    found = true
-                }
-            })
-            $('#ba-home-event-text').html(eventText)
-            $('#ba-home-event-list').html(eventHtml)
-
-            //birthdays
-            var birthdaysHtml = ''
-            var currentDate = new Date()
-            currentDate.setHours(0, 0, 0, 0)
-            var nextWeek = new Date()
-            nextWeek.setHours(0, 0, 0, 0)
-            nextWeek.setDate(currentDate.getDate()+7)
-            birthdayStudents = []
-
-            data.students.forEach(el => {
-                if (el.IsReleased[regionID] && !el.PathName.includes('_')) {
-                    var nextBirthday = getNextBirthdayDate(el.BirthDay)
-                    if (nextBirthday.getTime() < nextWeek.getTime() && nextBirthday.getTime() >= currentDate.getTime())
-                    birthdayStudents.push(el)
-                }
-            })
-
-            if (birthdayStudents.length > 0) {
-                birthdayStudents.sort((a,b) => getNextBirthdayDate(a.BirthDay).getTime() - getNextBirthdayDate(b.BirthDay).getTime())
-                for (let i = 0; i < birthdayStudents.length; i++) {
-                    birthdaysHtml += '<div class="d-flex flex-column mx-1 mb-1">'+getStudentIconSmall(birthdayStudents[i])+'<div class="ba-panel mt-1 mx-1 p-1 text-center">'+getNextBirthdayDate(birthdayStudents[i].BirthDay).toLocaleDateString([], {month: "numeric", day: "numeric"})+'</div></div>'
-                }
-                $('#ba-home-birthdays-list').html(birthdaysHtml)
-            } else {
-                $('#ba-home-birthdays').hide()
-            }
-            
-            $('.ba-item-student').tooltip({html: true})
+            populateEvents()
+            eventRefreshInterval = window.setInterval(updateEventTimers, 60000)
 
             $('#ba-home-server-info').text(translateUI('current_events', [getLocalizedString('ServerName', regionID)]))
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
@@ -1198,6 +1121,110 @@ function loadModule(moduleName, entry=null) {
         })
     }
     localStorage.setItem("module", loadedModule)
+}
+
+function populateEvents() {
+    let gachatext = translateUI('gacha_pickup') + "\n", gachalistHtml = ""
+    let currentTime = new Date().getTime() / 1000, dateOptions = { month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short" }
+    let found = false
+    $('#events-row-1').hide()
+    $.each(data.common.regions[regionID].current_gacha, function (i, el) {
+        if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
+            for (let j = 0; j < el.characters.length; j++) {
+                var char = find(data.students, "Id", el.characters[j])[0]
+                gachalistHtml += getStudentListCardHTML(char)
+            }
+            $('#events-row-1').show()
+            gachatext += new Date(el.start * 1000).toLocaleString([], dateOptions) + ' - ' + new Date(el.end * 1000).toLocaleString([], dateOptions)
+            gachatext += `\n<span id="ba-home-gacha-timer" class="home-timer" data-start="${el.start}" data-end="${el.end}"></span>`
+            // gachatext += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end - currentTime)) : translateUI('event_starts', duration(el.start - currentTime)))
+            found = true
+        }
+    })
+
+    $('#ba-home-gacha-text').html(gachatext)
+    $('#ba-home-gacha-list').html(gachalistHtml)
+
+    let raidText = "", raidHtml = ""
+    $('#events-row-2').hide()
+    found = false
+    $.each(data.common.regions[regionID].current_raid, function (i, el) {
+        if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
+            if (el.raid >= 1000) {
+                raidText = getLocalizedString("StageType", "TimeAttack") + "\n"
+                let raid = find(data.raids.TimeAttack, "Id", el.raid)[0]
+                raidHtml += getTimeAttackCardHTML(raid, raid.Terrain)
+            } else {
+                raidText = getLocalizedString("StageType", "Raid") + "\n"
+                let raid = find(data.raids.Raid, "Id", el.raid)[0]
+                raidHtml += getRaidCardHTML(raid, el.terrain)
+            }
+            $('#events-row-2').show()
+            raidText += new Date(el.start * 1000).toLocaleString([], dateOptions) + ' - ' + new Date(el.end * 1000).toLocaleString([], dateOptions)
+            raidText += `\n<span id="ba-home-raid-timer" class="home-timer" data-start="${el.start}" data-end="${el.end}"></span>`
+            // raidText += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end - currentTime)) : translateUI('event_starts', duration(el.start - currentTime)))
+            found = true
+        }
+    })
+    $('#ba-home-raid-text').html(raidText)
+    $('#ba-home-raid-list').html(raidHtml)
+
+    let eventText = "", eventHtml = ""
+    $('#ba-home-event').hide()
+    found = false
+    $.each(data.common.regions[regionID].current_events, function (i, el) {
+        if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
+            eventText = getLocalizedString("StageType", "Event") + "\n"
+            eventHtml += getEventCardHTML(el.event)
+
+            $('#ba-home-event').show()
+            eventText += new Date(el.start * 1000).toLocaleString([], dateOptions) + ' - ' + new Date(el.end * 1000).toLocaleString([], dateOptions)
+            eventText += `\n<span id="ba-home-event-timer" class="home-timer" data-start="${el.start}" data-end="${el.end}"></span>`
+            // eventText += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end - currentTime)) : translateUI('event_starts', duration(el.start - currentTime)))
+            found = true
+        }
+    })
+    $('#ba-home-event-text').html(eventText)
+    $('#ba-home-event-list').html(eventHtml)
+
+    //birthdays
+    var birthdaysHtml = ''
+    var currentDate = new Date()
+    currentDate.setHours(0, 0, 0, 0)
+    var nextWeek = new Date()
+    nextWeek.setHours(0, 0, 0, 0)
+    nextWeek.setDate(currentDate.getDate() + 7)
+    birthdayStudents = []
+
+    data.students.forEach(el => {
+        if (el.IsReleased[regionID] && !el.PathName.includes('_')) {
+            var nextBirthday = getNextBirthdayDate(el.BirthDay)
+            if (nextBirthday.getTime() < nextWeek.getTime() && nextBirthday.getTime() >= currentDate.getTime())
+                birthdayStudents.push(el)
+        }
+    })
+
+    if (birthdayStudents.length > 0) {
+        birthdayStudents.sort((a, b) => getNextBirthdayDate(a.BirthDay).getTime() - getNextBirthdayDate(b.BirthDay).getTime())
+        for (let i = 0; i < birthdayStudents.length; i++) {
+            birthdaysHtml += '<div class="d-flex flex-column mx-1 mb-1">' + getStudentIconSmall(birthdayStudents[i]) + '<div class="ba-panel mt-1 mx-1 p-1 text-center">' + getNextBirthdayDate(birthdayStudents[i].BirthDay).toLocaleDateString([], { month: "numeric", day: "numeric" }) + '</div></div>'
+        }
+        $('#ba-home-birthdays-list').html(birthdaysHtml)
+    } else {
+        $('#ba-home-birthdays').hide()
+    }
+
+    $('.ba-item-student').tooltip({ html: true })
+    updateEventTimers()
+}
+
+function updateEventTimers() {
+    const currentTime = new Date().getTime() / 1000
+    $('.home-timer').each(function(i) {
+        const start = $(this).data('start')
+        const end = $(this).data('end')
+        $(this).html(currentTime >= start ? translateUI('event_ends', duration(end - currentTime)) : translateUI('event_starts', duration(start - currentTime)))
+    })
 }
 
 function finalizeLoad(pageTitle, searchParamKey, searchParamValue, gtagEvent = null, gtagEventLabel = null) {
@@ -1236,6 +1263,9 @@ function getNextBirthdayDate(birthday) {
 }
 
 function duration(seconds) {
+    if (seconds < 0) {
+        return [0, 0, 0]
+    }
     let totalSeconds = seconds
     let days = Math.floor(totalSeconds/86400)
     totalSeconds -= days*86400
@@ -2749,11 +2779,9 @@ function loadRegion(regID) {
 
     if (regionID == 1) {
         //hide filters not relevant to global
-        $('#ba-student-search-filter-school-srt').hide()
         $('#ba-student-search-filter-school-arius').hide()
         $('#ba-student-search-filter-weapontype-rl').hide()
         
-        $('#item-search-filter-furnitureset-107').hide()
         $('#item-search-filter-furnitureset-108').hide()
         $('#item-search-filter-furnitureset-109').hide()
         $('#item-search-filter-equipmenttier-7').hide()

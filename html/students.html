@@ -724,14 +724,13 @@
                     <div id="ba-student-search-filters" class="d-flex flex-column">
                         <div class="mb-3 d-flex align-items-stretch" style="min-height:38px;">
                             <div class="d-lg-none pe-2 flex-shrink-0">
-                                <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters-panel"><i class="fa-solid fa-filter me-2"></i><span data-localize-id="ui,student_search_filters"></span><span id="ba-student-search-filter-amount"></span></button>
+                                <button id="student-search-filters-btn" class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#ba-student-search-filters-panel"><i class="fa-solid fa-filter"></i><span id="ba-student-search-filter-amount"></span></button>
                             </div>
                             <div class="flex-fill">
                                 <input type="search" class="form-control h-100" id="ba-student-search-text" data-ph-localize-id="ui,filter_by_name" autocomplete="off">
                             </div>
-
                             <button id="ba-student-search-reset" class="btn btn-dark tooltip-button ms-2" type="button" onclick="searchResetFilter()"><i class="fa-solid fa-filter-circle-xmark"></i></button>
-
+                            <button id="ba-student-search-showinfo" class="btn btn-dark ms-2"><i class="fa-solid fa-circle-info"></i></button>
                             <div class="d-lg-none ms-2 p-1" style="min-width:32px;">
                                 <button type="button" class="btn-close btn-close-white btn" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 0.15rem;"></button>
                             </div>
@@ -757,7 +756,6 @@
                                         <li><a id="ba-student-search-sortby-exhits" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('EXHits')" class="btn btn-dark"><span data-localize-id="Stat,EXHits"></span><span class="sort-direction-label"></span></a></li>
                                     </ul>
                                 </div>
-                                <button id="ba-student-search-showinfo" class="btn btn-sm btn-dark m-0 mb-1"><i class="fa-solid fa-circle-info"></i></button>
                             </div>
                             <div id="ba-student-search-filter-collection" class="mb-2">
                                 <h5 data-localize-id="ui,collection"></h5>

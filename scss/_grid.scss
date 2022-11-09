@@ -207,20 +207,6 @@
                 z-index: 20;
             }
 
-            &.show {
-
-                opacity: 100%;
-
-                &.atk {
-                    transform: translateY(22px);
-                }
-
-                &.def {
-                    transform: translateY(42px);
-                }
-
-            }
-
         }
 
         &.student-rarity {
@@ -243,12 +229,6 @@
 
             @include transition(transform, opacity);
 
-            &.show {
-
-                opacity: 100%;
-                //transform: translateX(22px);
-
-            }
         }
 
         &.stage-droprate {
@@ -639,6 +619,33 @@
     &.card-shop {
 
         cursor: default;
+    }
+
+}
+
+.show-info .selection-grid-card {
+
+    .card-badge {
+
+        &.student-type {
+            opacity: 100%;
+
+            &.atk {
+                transform: translateY(22px);
+            }
+
+            &.def {
+                transform: translateY(42px);
+            }
+        }
+
+        &.student-rarity {
+
+            opacity: 100%;
+            //transform: translateX(22px);
+
+        }
+
     }
 
 }
