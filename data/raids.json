@@ -968,7 +968,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL02",
                     "NameEn": "Vulgate's Sacred Book",
-                    "DescEn": "Inflicts <d:Hieronymus> on one enemy for 10s, continuously dealing 20% damage over time. After 10s, the target will explode dealing 325% damage in a circular area around them. If the target is healed to 100% HP, the curse will be removed.<?1>",
+                    "DescEn": "Inflicts <d:Hieronymus> on one enemy for 10s, continuously dealing 20% damage to them every 1s. After 10s, the target will explode dealing 325% damage in a circular area around them. If the target is healed to 100% HP, the curse will be removed.<?1>",
                     "ParametersEn": [
                         [
                             "",
@@ -1193,7 +1193,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL05",
                     "NameEn": "Holy Light (Relic)",
-                    "DescEn": "When a relic is healed to 100% HP, it loses 95% of its HP while decreasing own <d:HealEffectiveness> by 50% for 20s and activates one of the following effects depending on the relic:\n<b>Green Relic</b>: Increases Hieronymus's <d:DamagedRatio> by 55% until the end of battle. Effect can stack up to 5 times.<?1>",
+                    "DescEn": "When a relic is healed to 100% HP, it loses 95% of its HP while decreasing its <d:HealEffectiveness> by 50% for 20s and activates one of the following effects depending on the relic:\n<b>Green Relic</b>: Increases Hieronymus's <d:DamagedRatio> by 55% until the end of battle. Effect can stack up to 5 times.<?1>",
                     "ParametersEn": [
                         [
                             "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, increases Hieronymus's groggy gauge significantly and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
@@ -1272,7 +1272,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL05",
                     "NameEn": "Ominous Light (Relic)",
-                    "DescEn": "When the purple relic's HP reaches 0%, increases the <b:ATK> of all students by <b>25%</b> but decreases their <d:HealEffectiveness> by <b>7,000</b> and decreases Hieronymus's <d:DEF> by <b>1,500</b>.\nDuring this effect, students under the effect of <d:Hieronymus> have their <b:HealEffectiveness> increased by a further <b>4,000</b> for 10s.\nThe purple relic cannot be targeted by normal attacks or basic skills.",
+                    "DescEn": "When the violet relic's HP reaches 0%, increases the <b:ATK> of all students by <b>25%</b> but decreases their <d:HealEffectiveness> by <b>7,000</b>. Also decreases Hieronymus's <d:DEF> by <b>1,500</b>.\nFollowing this, students inflicted with <d:Hieronymus> will have their <b:HealEffectiveness> increased by a further <b>4,000</b> for 10s.\nThe violet relic cannot be targeted by normal attacks or basic skills.",
                     "NameJp": "不浄なる光（聖遺物）",
                     "DescJp": "聖遺物のHPが0%になるとスキル発動。\n紫色の聖遺物の場合、全てのストライカー、スペシャル生徒の<b:ATK>を25%増加し\n<d:HealEffectiveness>を7000減少。\nさらにヒエロニムスの<d:DEF>を1500減少。\n発動後、<d:Hieronymus>になった生徒の<b:HealEffectiveness>を4000増加（10秒間）\n（紫色の聖遺物は通常攻撃、ノーマルスキルのターゲットになりません）",
                     "NameKr": "불길한 빛 (성유물)",
@@ -2171,7 +2171,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_PASSIVESKILL02",
                     "NameEn": "Behind the Glory",
-                    "DescEn": "Hod and all summoned Erosion Towers are immune to the effects of Crowd Control. However, Crowd Control abilities will fill their circular <b>CC gauge</b> proportional to the duration of the effect that would be inflicted.<?2>\nOnce the CC gauge reaches a total equivalent to <?1> of Crowd Control duration, inflicts the following effects:\n<b>Hod</b>: Increases <d:DamagedRatio> by 300% for 30s and decrease Hod's ATG gauge.\n<b>Erosion Tower</b>: Increases <d:DamagedRatio> by 300% for 30s and reduce the tower's area of effect by 1 stage.",
+                    "DescEn": "Hod and all summoned Erosion Towers are immune to the effects of Crowd Control. However, Crowd Control abilities will fill their circular <b>CC gauge</b> proportional to the duration of the effect that would've been inflicted.<?2>\nOnce the CC gauge reaches a total equivalent to <?1> of Crowd Control duration, inflicts the following effects:\n<b>Hod</b>: Increases <d:DamagedRatio> by 300% for 30s and decrease Hod's ATG gauge.\n<b>Erosion Tower</b>: Increases <d:DamagedRatio> by 300% for 30s and reduce the tower's area of effect by 1 stage.",
                     "ParametersEn": [
                         [
                             "6s",
@@ -2490,7 +2490,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL03",
                     "NameEn": "Magical Coin Hats",
-                    "DescEn": "Goz shuffles hats with coins hidden inside them. After the hats have been shuffled, enemies in a straight line from the hats without coins in them will be dealt 800% damage, knocked back and inflicted with <c:Stunned> for 5s.",
+                    "DescEn": "Goz shuffles three hats with coins hidden inside two of them. After the hats have been shuffled, enemies in a straight line from the hat without a coin in it will be dealt 800% damage, knocked back and inflicted with <c:Stunned> for 5s.",
                     "NameJp": "マジカルコインハット",
                     "DescJp": "帽子を出してコインを隠した後にシャッフルします。コインがないエリアは次の効果が適用されます。/\nノックバック、<c:Stunned>を付与（5秒間）、攻撃力の800%分のダメージ",
                     "NameKr": "매지컬 코인햇",
@@ -2526,7 +2526,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL05",
                     "NameEn": "Scream Rider",
-                    "DescEn": "The Scream Rider will periodically appear, dealing 1200% damage to any enemies in its path <?1>and summoning Slumpian automaton soldiers at its location.",
+                    "DescEn": "The Scream Rider will periodically appear, dealing 1200% damage to enemies in its path while knocking back<?1> enemies in the area nearby and summoning Slumpian automaton soldiers at the location where it travels through.",
                     "ParametersEn": [
                         [
                             "",
@@ -2534,7 +2534,7 @@
                             "",
                             "",
                             "",
-                            "and 600% damage to nearby enemies "
+                            " and dealing 600% damage to"
                         ]
                     ],
                     "NameJp": "スクリームライダー",
@@ -2569,7 +2569,7 @@
                             "",
                             "",
                             "",
-                            "and 600% damage to nearby enemies "
+                            " and dealing 600% damage to"
                         ]
                     ],
                     "NameCn": null,
@@ -2581,7 +2581,7 @@
                             "",
                             "",
                             "",
-                            "and 600% damage to nearby enemies "
+                            " and dealing 600% damage to"
                         ]
                     ],
                     "NameTh": "สครีม ไรเดอร์",
@@ -23379,888 +23379,6 @@
     "SeasonRewardGlobal": [
         {
             "Season": 1,
-            "RaidId": 1,
-            "Terrain": "Outdoor",
-            "Start": 1634182200,
-            "End": 1635951600,
-            "Rewards": [
-                [
-                    250000,
-                    [
-                        [
-                            2000001,
-                            16
-                        ]
-                    ]
-                ],
-                [
-                    500000,
-                    [
-                        [
-                            10,
-                            12
-                        ]
-                    ]
-                ],
-                [
-                    750000,
-                    [
-                        [
-                            190,
-                            6
-                        ],
-                        [
-                            160,
-                            6
-                        ]
-                    ]
-                ],
-                [
-                    1000000,
-                    [
-                        [
-                            3000001,
-                            300000
-                        ]
-                    ]
-                ],
-                [
-                    1250000,
-                    [
-                        [
-                            2000002,
-                            8
-                        ]
-                    ]
-                ],
-                [
-                    1500000,
-                    [
-                        [
-                            11,
-                            6
-                        ]
-                    ]
-                ],
-                [
-                    1750000,
-                    [
-                        [
-                            191,
-                            3
-                        ],
-                        [
-                            161,
-                            3
-                        ]
-                    ]
-                ],
-                [
-                    2000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ],
-                [
-                    2500000,
-                    [
-                        [
-                            2000003,
-                            4
-                        ]
-                    ]
-                ],
-                [
-                    3000000,
-                    [
-                        [
-                            12,
-                            3
-                        ]
-                    ]
-                ],
-                [
-                    3500000,
-                    [
-                        [
-                            192,
-                            2
-                        ],
-                        [
-                            162,
-                            2
-                        ]
-                    ]
-                ],
-                [
-                    4000000,
-                    [
-                        [
-                            3000003,
-                            150
-                        ]
-                    ]
-                ],
-                [
-                    4500000,
-                    [
-                        [
-                            2000004,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    5000000,
-                    [
-                        [
-                            13,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    5500000,
-                    [
-                        [
-                            193,
-                            1
-                        ],
-                        [
-                            163,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    6000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ],
-                [
-                    7000000,
-                    [
-                        [
-                            2000001,
-                            32
-                        ],
-                        [
-                            2000002,
-                            16
-                        ]
-                    ]
-                ],
-                [
-                    8000000,
-                    [
-                        [
-                            10,
-                            24
-                        ],
-                        [
-                            11,
-                            12
-                        ]
-                    ]
-                ],
-                [
-                    9000000,
-                    [
-                        [
-                            190,
-                            12
-                        ],
-                        [
-                            160,
-                            12
-                        ],
-                        [
-                            191,
-                            6
-                        ],
-                        [
-                            161,
-                            6
-                        ]
-                    ]
-                ],
-                [
-                    10000000,
-                    [
-                        [
-                            3000001,
-                            500000
-                        ],
-                        [
-                            3000003,
-                            150
-                        ]
-                    ]
-                ],
-                [
-                    12000000,
-                    [
-                        [
-                            2000003,
-                            4
-                        ],
-                        [
-                            2000004,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    14000000,
-                    [
-                        [
-                            12,
-                            3
-                        ],
-                        [
-                            13,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    16000000,
-                    [
-                        [
-                            192,
-                            2
-                        ],
-                        [
-                            162,
-                            2
-                        ],
-                        [
-                            193,
-                            1
-                        ],
-                        [
-                            163,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    18000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ],
-                [
-                    20000000,
-                    [
-                        [
-                            2000001,
-                            32
-                        ],
-                        [
-                            2000002,
-                            16
-                        ]
-                    ]
-                ],
-                [
-                    22000000,
-                    [
-                        [
-                            10,
-                            24
-                        ],
-                        [
-                            11,
-                            12
-                        ]
-                    ]
-                ],
-                [
-                    24000000,
-                    [
-                        [
-                            190,
-                            12
-                        ],
-                        [
-                            160,
-                            12
-                        ],
-                        [
-                            191,
-                            6
-                        ],
-                        [
-                            161,
-                            6
-                        ]
-                    ]
-                ],
-                [
-                    26000000,
-                    [
-                        [
-                            3000001,
-                            1200000
-                        ],
-                        [
-                            3000003,
-                            150
-                        ]
-                    ]
-                ],
-                [
-                    29000000,
-                    [
-                        [
-                            2000003,
-                            8
-                        ],
-                        [
-                            2000004,
-                            2
-                        ]
-                    ]
-                ],
-                [
-                    32000000,
-                    [
-                        [
-                            12,
-                            6
-                        ],
-                        [
-                            13,
-                            2
-                        ]
-                    ]
-                ],
-                [
-                    35000000,
-                    [
-                        [
-                            192,
-                            4
-                        ],
-                        [
-                            162,
-                            4
-                        ],
-                        [
-                            193,
-                            2
-                        ],
-                        [
-                            163,
-                            2
-                        ]
-                    ]
-                ],
-                [
-                    38000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ],
-                [
-                    41000000,
-                    [
-                        [
-                            3000001,
-                            3000000
-                        ]
-                    ]
-                ],
-                [
-                    44000000,
-                    [
-                        [
-                            2000002,
-                            32
-                        ],
-                        [
-                            2000003,
-                            16
-                        ]
-                    ]
-                ],
-                [
-                    47000000,
-                    [
-                        [
-                            3000003,
-                            200
-                        ]
-                    ]
-                ],
-                [
-                    50000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "Season": 2,
-            "RaidId": 1,
-            "Terrain": "Outdoor",
-            "Start": 1637033400,
-            "End": 1637593200,
-            "Rewards": [
-                [
-                    250000,
-                    [
-                        [
-                            2000001,
-                            16
-                        ]
-                    ]
-                ],
-                [
-                    500000,
-                    [
-                        [
-                            10,
-                            12
-                        ]
-                    ]
-                ],
-                [
-                    750000,
-                    [
-                        [
-                            190,
-                            6
-                        ],
-                        [
-                            160,
-                            6
-                        ]
-                    ]
-                ],
-                [
-                    1000000,
-                    [
-                        [
-                            3000001,
-                            300000
-                        ]
-                    ]
-                ],
-                [
-                    1250000,
-                    [
-                        [
-                            2000002,
-                            8
-                        ]
-                    ]
-                ],
-                [
-                    1500000,
-                    [
-                        [
-                            11,
-                            6
-                        ]
-                    ]
-                ],
-                [
-                    1750000,
-                    [
-                        [
-                            191,
-                            3
-                        ],
-                        [
-                            161,
-                            3
-                        ]
-                    ]
-                ],
-                [
-                    2000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ],
-                [
-                    2500000,
-                    [
-                        [
-                            2000003,
-                            4
-                        ]
-                    ]
-                ],
-                [
-                    3000000,
-                    [
-                        [
-                            12,
-                            3
-                        ]
-                    ]
-                ],
-                [
-                    3500000,
-                    [
-                        [
-                            192,
-                            2
-                        ],
-                        [
-                            162,
-                            2
-                        ]
-                    ]
-                ],
-                [
-                    4000000,
-                    [
-                        [
-                            3000003,
-                            150
-                        ]
-                    ]
-                ],
-                [
-                    4500000,
-                    [
-                        [
-                            2000004,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    5000000,
-                    [
-                        [
-                            13,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    5500000,
-                    [
-                        [
-                            193,
-                            1
-                        ],
-                        [
-                            163,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    6000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ],
-                [
-                    7000000,
-                    [
-                        [
-                            2000001,
-                            32
-                        ],
-                        [
-                            2000002,
-                            16
-                        ]
-                    ]
-                ],
-                [
-                    8000000,
-                    [
-                        [
-                            10,
-                            24
-                        ],
-                        [
-                            11,
-                            12
-                        ]
-                    ]
-                ],
-                [
-                    9000000,
-                    [
-                        [
-                            190,
-                            12
-                        ],
-                        [
-                            160,
-                            12
-                        ],
-                        [
-                            191,
-                            6
-                        ],
-                        [
-                            161,
-                            6
-                        ]
-                    ]
-                ],
-                [
-                    10000000,
-                    [
-                        [
-                            3000001,
-                            500000
-                        ],
-                        [
-                            3000003,
-                            150
-                        ]
-                    ]
-                ],
-                [
-                    12000000,
-                    [
-                        [
-                            2000003,
-                            4
-                        ],
-                        [
-                            2000004,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    14000000,
-                    [
-                        [
-                            12,
-                            3
-                        ],
-                        [
-                            13,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    16000000,
-                    [
-                        [
-                            192,
-                            2
-                        ],
-                        [
-                            162,
-                            2
-                        ],
-                        [
-                            193,
-                            1
-                        ],
-                        [
-                            163,
-                            1
-                        ]
-                    ]
-                ],
-                [
-                    18000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ],
-                [
-                    20000000,
-                    [
-                        [
-                            2000001,
-                            32
-                        ],
-                        [
-                            2000002,
-                            16
-                        ]
-                    ]
-                ],
-                [
-                    22000000,
-                    [
-                        [
-                            10,
-                            24
-                        ],
-                        [
-                            11,
-                            12
-                        ]
-                    ]
-                ],
-                [
-                    24000000,
-                    [
-                        [
-                            190,
-                            12
-                        ],
-                        [
-                            160,
-                            12
-                        ],
-                        [
-                            191,
-                            6
-                        ],
-                        [
-                            161,
-                            6
-                        ]
-                    ]
-                ],
-                [
-                    26000000,
-                    [
-                        [
-                            3000001,
-                            1200000
-                        ],
-                        [
-                            3000003,
-                            150
-                        ]
-                    ]
-                ],
-                [
-                    29000000,
-                    [
-                        [
-                            2000003,
-                            8
-                        ],
-                        [
-                            2000004,
-                            2
-                        ]
-                    ]
-                ],
-                [
-                    32000000,
-                    [
-                        [
-                            12,
-                            6
-                        ],
-                        [
-                            13,
-                            2
-                        ]
-                    ]
-                ],
-                [
-                    35000000,
-                    [
-                        [
-                            192,
-                            4
-                        ],
-                        [
-                            162,
-                            4
-                        ],
-                        [
-                            193,
-                            2
-                        ],
-                        [
-                            163,
-                            2
-                        ]
-                    ]
-                ],
-                [
-                    38000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ],
-                [
-                    41000000,
-                    [
-                        [
-                            3000001,
-                            3000000
-                        ]
-                    ]
-                ],
-                [
-                    44000000,
-                    [
-                        [
-                            2000002,
-                            32
-                        ],
-                        [
-                            2000003,
-                            16
-                        ]
-                    ]
-                ],
-                [
-                    47000000,
-                    [
-                        [
-                            3000003,
-                            200
-                        ]
-                    ]
-                ],
-                [
-                    50000000,
-                    [
-                        [
-                            23,
-                            20
-                        ]
-                    ]
-                ]
-            ]
-        },
-        {
-            "Season": 3,
             "RaidId": 3,
             "Terrain": "Street",
             "Start": 1638156600,
@@ -24701,7 +23819,7 @@
             ]
         },
         {
-            "Season": 4,
+            "Season": 2,
             "RaidId": 2,
             "Terrain": "Outdoor",
             "Start": 1639452600,
@@ -25142,7 +24260,7 @@
             ]
         },
         {
-            "Season": 5,
+            "Season": 3,
             "RaidId": 3,
             "Terrain": "Indoor",
             "Start": 1640662200,
@@ -25583,7 +24701,7 @@
             ]
         },
         {
-            "Season": 6,
+            "Season": 4,
             "RaidId": 2,
             "Terrain": "Outdoor",
             "Start": 1641871800,
@@ -26024,7 +25142,7 @@
             ]
         },
         {
-            "Season": 7,
+            "Season": 5,
             "RaidId": 4,
             "Terrain": "Indoor",
             "Start": 1643081400,
@@ -26501,7 +25619,7 @@
             ]
         },
         {
-            "Season": 8,
+            "Season": 6,
             "RaidId": 1,
             "Terrain": "Outdoor",
             "Start": 1644291000,
@@ -26978,7 +26096,7 @@
             ]
         },
         {
-            "Season": 9,
+            "Season": 7,
             "RaidId": 3,
             "Terrain": "Indoor",
             "Start": 1645500600,
@@ -27455,7 +26573,7 @@
             ]
         },
         {
-            "Season": 10,
+            "Season": 8,
             "RaidId": 2,
             "Terrain": "Indoor",
             "Start": 1646710200,
@@ -27932,7 +27050,7 @@
             ]
         },
         {
-            "Season": 11,
+            "Season": 9,
             "RaidId": 5,
             "Terrain": "Outdoor",
             "Start": 1647919800,
@@ -28409,7 +27527,7 @@
             ]
         },
         {
-            "Season": 12,
+            "Season": 10,
             "RaidId": 3,
             "Terrain": "Street",
             "Start": 1649129400,
@@ -28886,7 +28004,7 @@
             ]
         },
         {
-            "Season": 13,
+            "Season": 11,
             "RaidId": 4,
             "Terrain": "Street",
             "Start": 1650339000,
@@ -29363,7 +28481,7 @@
             ]
         },
         {
-            "Season": 14,
+            "Season": 12,
             "RaidId": 5,
             "Terrain": "Outdoor",
             "Start": 1651548600,
@@ -29840,7 +28958,7 @@
             ]
         },
         {
-            "Season": 15,
+            "Season": 13,
             "RaidId": 1,
             "Terrain": "Street",
             "Start": 1652758200,
@@ -30317,7 +29435,7 @@
             ]
         },
         {
-            "Season": 16,
+            "Season": 14,
             "RaidId": 6,
             "Terrain": "Indoor",
             "Start": 1653967800,
@@ -30794,7 +29912,7 @@
             ]
         },
         {
-            "Season": 17,
+            "Season": 15,
             "RaidId": 5,
             "Terrain": "Street",
             "Start": 1655177400,
@@ -31271,7 +30389,7 @@
             ]
         },
         {
-            "Season": 18,
+            "Season": 16,
             "RaidId": 1,
             "Terrain": "Outdoor",
             "Start": 1656387000,
@@ -31748,7 +30866,7 @@
             ]
         },
         {
-            "Season": 19,
+            "Season": 17,
             "RaidId": 6,
             "Terrain": "Indoor",
             "Start": 1657596600,
@@ -32225,7 +31343,7 @@
             ]
         },
         {
-            "Season": 20,
+            "Season": 18,
             "RaidId": 4,
             "Terrain": "Indoor",
             "Start": 1658806200,
@@ -32702,7 +31820,7 @@
             ]
         },
         {
-            "Season": 21,
+            "Season": 19,
             "RaidId": 2,
             "Terrain": "Outdoor",
             "Start": 1660015800,
@@ -33179,7 +32297,7 @@
             ]
         },
         {
-            "Season": 22,
+            "Season": 20,
             "RaidId": 6,
             "Terrain": "Outdoor",
             "Start": 1661225400,
@@ -33656,7 +32774,7 @@
             ]
         },
         {
-            "Season": 23,
+            "Season": 21,
             "RaidId": 7,
             "Terrain": "Street",
             "Start": 1663034400,
@@ -34133,7 +33251,7 @@
             ]
         },
         {
-            "Season": 24,
+            "Season": 22,
             "RaidId": 3,
             "Terrain": "Street",
             "Start": 1664244000,
@@ -34682,7 +33800,7 @@
             ]
         },
         {
-            "Season": 25,
+            "Season": 23,
             "RaidId": 5,
             "Terrain": "Outdoor",
             "Start": 1665453600,
@@ -35231,7 +34349,7 @@
             ]
         },
         {
-            "Season": 26,
+            "Season": 24,
             "RaidId": 1,
             "Terrain": "Street",
             "Start": 1666663200,
@@ -35780,7 +34898,7 @@
             ]
         },
         {
-            "Season": 27,
+            "Season": 25,
             "RaidId": 7,
             "Terrain": "Street",
             "Start": 1667872800,
