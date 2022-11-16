@@ -30,6 +30,7 @@ a.ba-statpreview-status {
     @include circular;
     padding-right: 0.25rem !important;
     padding-left: 2px !important;
+    margin: 0;
     color: var(--col-theme-text);
     text-decoration: none;
 
@@ -200,8 +201,11 @@ a.ba-statpreview-icon {
     }
 
     .panel-sliders {
-        @include scrollable(auto);
         padding: 0 0.5rem;
+
+        @include lg-up {
+            @include scrollable(scroll);
+        }
     }
 
     .panel-stats {
@@ -298,3 +302,167 @@ a.ba-statpreview-icon {
         @include truncate-text;
     }
 }
+
+.transferable-skill-icon {
+
+    position: relative;
+
+    .student-icon {
+        height: 40px;
+        min-width: 40px;
+        margin-right: 8px;
+        @include circular;
+    }
+
+    .skill-icon {
+        position: absolute;
+        left: 24px;
+        top: 22px;
+        height: 24px;
+        width: 24px;
+        @include circular;
+    }
+}
+
+#ba-student-modal-statpreview {
+    .modal-body {
+        overflow-y: hidden;
+    }
+}
+
+#statpreview-buff-transferable-search {
+
+    .results-container {
+        
+        height: 320px;
+        display: flex;
+        flex-direction: column;
+        z-index: 100;
+
+        &[data-popper-placement^='top'] {
+            justify-content: end;
+        }
+
+        &[data-popper-placement^='bottom'] {
+            justify-content: start;
+        }
+
+        .results-list {
+
+            max-height: 100%;
+            background-color: var(--col-btn-secondary);
+    
+            padding: 0.5rem 0.25rem 0.5rem 0.5rem;
+            border-radius: 0.25rem;
+            z-index: 200;
+            
+            @include drop-shadow;
+
+            >div {
+                
+                max-height: 100%;
+                padding-right: 0.25rem;
+                @include scrollable(auto);
+    
+                .list-item {
+                    display: flex;
+                    padding: 0.5rem 0.25rem;
+                    cursor: pointer;
+                    border-radius: 0.25rem;
+                    color: var(--col-theme-text);
+                    position: relative;
+                    @include unselectable;
+
+                    small {
+                        font-style: italic;
+                    }
+            
+                    &:hover {
+                        background-color: var(--col-btn-active-secondary);
+                        color: var(--col-btn-active-primary);
+                    }
+            
+                    &.disabled {
+                        
+                        pointer-events: none;
+                        opacity: 0.6;
+            
+                        img {
+                            filter: grayscale(1);
+                        }
+                    }
+            
+                    .skill-text {
+                        display: flex;
+                        flex-direction: column;
+                        
+            
+                        .skill-details {
+                            font-size: 0.875rem;
+                        }
+            
+                    }
+            
+                }
+    
+            }
+
+        }
+
+    }
+
+}
+
+#statpreview-buff-transferable-controls {
+    .transferable-skill-icon {
+        .student-icon {
+            height: 52px;
+            min-width: 52px;
+            margin-bottom: 8px;
+        }
+    
+        .skill-icon {
+            left: 32px;
+            top: 30px;
+            height: 28px;
+            width: 28px;
+        }
+    }
+
+    small {
+        font-size: 0.75em;
+        font-style: italic;
+    }
+
+    .buff-description .invalid {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
+
+    .buff-remove {
+        padding: 0.25rem;
+        line-height: 0px;
+        @include circular;
+
+        i {
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    .stack-count {
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--col-btn-secondary);
+        }
+
+        img.stack-icon {
+            height: 22px;
+            width: auto;
+            margin-top: -2px;
+            margin-left: -4px;
+        }
+    }
+}
+

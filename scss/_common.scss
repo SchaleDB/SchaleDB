@@ -98,8 +98,8 @@ p {
 }
 
 .gear-disabled {
-    opacity: 0.6;
-    filter: grayscale(0.35);
+    opacity: 0.7;
+    filter: grayscale(1);
     pointer-events: none;
 }
 
@@ -301,6 +301,10 @@ input[type="search" i]::-webkit-search-cancel-button {
         .zero {
             color: var(--col-theme-text-t) !important;
         }
+
+        .negative {
+            color: var(--col-text-compare-less) !important;
+        }
     }
 
     .has-tooltip {
@@ -314,6 +318,18 @@ input[type="search" i]::-webkit-search-cancel-button {
         }
     }
 
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.ba-slider-label {
+    img {
+        height: 18px;
+        width: auto;
+        margin-top: -2px;
+    }
 }
 
 #toast-message-container {

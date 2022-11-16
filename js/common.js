@@ -140,6 +140,7 @@ let statPreviewIncludeBondAlts
 let statPreviewIncludeEquipment
 let statPreviewSupportStats = false
 let statPreviewSummonStats = false
+let statPreviewExternalBuffs
 let studentCollection = {}
 
 // Shared Timeouts
@@ -429,7 +430,13 @@ let itemSearchOptions = {
         this.stats['AttackSpeed'] = [10000,0,1]
         this.stats['BlockRate'] = [0,0,1]
         this.stats['DefensePenetration'] = [0,0,1]
-        this.stats['MoveSpeed'] = [character.MoveSpeed ? character.MoveSpeed : 10000,0,1]
+        this.stats['MoveSpeed'] = [character.MoveSpeed ? character.MoveSpeed : 200,0,1]
+        this.stats['EnhanceExplosionRate'] = [10000,0,1]
+        this.stats['EnhancePierceRate'] = [10000,0,1]
+        this.stats['EnhanceMysticRate'] = [10000,0,1]
+        this.stats['ExtendBuffDuration'] = [10000,0,1]
+        this.stats['ExtendDebuffDuration'] = [10000,0,1]
+        this.stats['ExtendCCDuration'] = [10000,0,1]
     }
 
     addBuff(stat, amount) {
@@ -461,7 +468,7 @@ let itemSearchOptions = {
      * @returns 
      */
     getTotal(stat) {
-        return Math.round(((this.stats[stat][0] + this.stats[stat][1]) * this.stats[stat][2]).toFixed(4))
+        return Math.max(Math.round(((this.stats[stat][0] + this.stats[stat][1]) * this.stats[stat][2]).toFixed(4)), 0)
     }
 
     /**
@@ -500,7 +507,8 @@ let itemSearchOptions = {
      * @returns 
      */
     getFlatString(stat) {
-        return "+" + this.stats[stat][1].toLocaleString()
+        const sign = this.stats[stat][1] >= 0 ? '+' : ''
+        return sign + this.stats[stat][1].toLocaleString()
     }
 
     /**
@@ -509,7 +517,11 @@ let itemSearchOptions = {
      * @returns 
      */
     getCoefficientString(stat) {
-        return "+" + parseFloat(((this.stats[stat][2]-1)*100).toFixed(1)).toLocaleString() + "%"
+        let val = (this.stats[stat][2] - 1) * 100
+        const sign = (val >= 0) ? '+' : ''
+        //hide decimal when > 100%
+        val = (Math.abs(val) < 100) ? val.toFixed(1) : val.toFixed(0)
+        return sign + parseFloat(val).toLocaleString() + "%"
     }
 
     getStrikerBonus(stat) {
@@ -560,6 +572,228 @@ let itemSearchOptions = {
             return ((level-1)/99).toFixed(4)
         }
     }
+}
+
+class ExternalBuffs {
+
+    elements = {
+        controls: null,
+        searchBox: null,
+        searchResults: null,
+    }
+    buffs = []
+    searchBoxTimeout = null
+
+    constructor(elements) {
+        this.elements = elements
+
+        //Bind control update events
+        $(this.elements.controls).on('input', 'input[type="range"]', (e) => {this.updateBuffLevel(e.currentTarget.dataset.index, e.currentTarget.value)})
+        $(this.elements.controls).on('click', '.stack-count', (e) => {this.updateStackCount(e.currentTarget.dataset.index)})
+        $(this.elements.controls).on('click', 'button.buff-remove', (e) => {this.removeBuff(e.currentTarget.dataset.index)})
+
+        //Bind search result popup
+        const searchResultPopper = Popper.createPopper(this.elements.searchBox, this.elements.searchResults, {
+            placement: 'top-start',
+            modifiers: [
+                {
+                    name: 'offset',
+                    options: {
+                        offset: [0, 8]
+                    }
+                },
+                {
+                    name: 'flip',
+                    options: {
+                        fallbackPlacements: ['bottom-start', 'top-start'],
+                    }
+                },
+                {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: $('ba-info-statpreview-panel .panel-sliders')[0],
+                    }
+                },
+                {
+                    name: 'updateWidth',
+                    enabled: true,
+                    phase: 'main',
+                    fn: ({state}) => {
+                        state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`
+                    },
+                }
+            ]
+        })
+
+        $(this.elements.searchResults).find('.results-list > div').on('click', 'div[data-student-id]', (e) => {
+            const student = find(data.students, "Id", e.currentTarget.dataset["studentId"])[0]
+            const skill = find(student.Skills, "SkillType", e.currentTarget.dataset["skillType"])[0]
+            this.addBuff(student.Id, skill)
+            $(e.currentTarget).toggleClass('disabled', true)
+            $(this.elements.searchResults).hide()
+            $(this.elements.searchBox).val('')
+        })
+
+        $(this.elements.searchBox).on('input', (e) => {
+
+            if (this.searchBoxTimeout) {
+                clearTimeout(this.searchBoxTimeout)
+            }
+            this.searchBoxTimeout = setTimeout(() => {
+                if (e.currentTarget.value != "") {
+                    $(this.elements.searchResults).show()
+                    this.searchBuffs()
+                    //this.updateAvailableBuffs(student.Id)
+                    searchResultPopper.update()
+                } else {
+                    $(this.elements.searchResults).hide()
+                }
+            }, searchDelay)
+        }).on('blur', (e) => {
+            if (this.searchBoxTimeout) {
+                clearTimeout(this.searchBoxTimeout)
+            }
+            if (e.currentTarget.value == "") $(this.elements.searchResults).hide()
+        })
+    }
+
+    addBuff(studentId, skill) {
+        const maxLevel = skill.SkillType == 'ex' ? 5 : 10
+        const maxStacks = 'StackSame' in skill.Effect.Effects[0] ? skill.Effect.Effects[0].StackSame : skill.Effect.Effects[0].Value.length
+        this.buffs.push({"StudentId": studentId, "Skill": skill, "MaxLevel": maxLevel, "Level": maxLevel, "Stacks": 1, "MaxStacks": maxStacks})
+        this.renderControls()
+        recalculateStatPreview()
+    }
+
+    removeBuff(index, rerender = true) {
+        this.buffs.splice(index, 1)
+        if (rerender) {
+            this.renderControls()
+            recalculateStatPreview()
+        } 
+    }
+
+    changeStudent(studentId) {
+        //removes invalid buffs
+        let rerender = false
+        for (let i = 0; i < this.buffs.length; i++) {
+            const buff = this.buffs[i]
+            if (buff.Skill.Effect.Type == 1 && buff.StudentId != studentId) {
+                this.removeBuff(i--, false)
+                rerender = true
+            }
+        }
+        if (rerender) this.renderControls()
+        $(this.elements.searchBox).val('').trigger('blur')
+    }
+
+    updateBuffLevel(index, level) {
+        const buff = this.buffs[index]
+        const student = find(data.students, "Id", buff.StudentId)[0]
+        buff.Level = level
+        $(this.elements.controls).find(`div[data-index='${index}'] .ba-slider-label.skill-level`).html(level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${level}`)
+        $(this.elements.controls).find(`div[data-index='${index}'] .buff-description`).html(ExternalBuffs.getBuffAmountText(buff))
+        recalculateStatPreview()
+    }
+
+    updateStackCount(index) {
+        const buff = this.buffs[index]
+        const student = find(data.students, "Id", buff.StudentId)[0]
+        if (++buff.Stacks > buff.MaxStacks) {
+            buff.Stacks = 1
+        } 
+        $(this.elements.controls).find(`div[data-index='${index}'] .ba-slider-label.stack-count .label`).html(`&times;${buff.Stacks}`)
+        $(this.elements.controls).find(`div[data-index='${index}'] .buff-description`).html(ExternalBuffs.getBuffAmountText(buff))
+        recalculateStatPreview()
+    }
+
+    renderControls() {
+        let html = ''
+        this.buffs.forEach((buff, i) => {
+            const student = find(data.students, "Id", buff.StudentId)[0]
+            html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon"><img class="skill-icon bg-skill-${student.BulletType.toLowerCase()}" src="images/skill/${buff.Skill.Icon}.png"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${ExternalBuffs.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-count" data-index="${i}"><img class="stack-icon invert-light" src="images/skill/${buff.Skill.Icon}.png"><span class="label">&times;${buff.Stacks}</span></span>` : ''}<input type="range" data-index="${i}" class="form-range flex-fill" value="${buff.Level}" min="1" max="${buff.MaxLevel}"><span class="ba-slider-label skill-level">${buff.Level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${buff.Level}`}</span></div></div>`
+        })
+        $(this.elements.controls).html(html)
+    }
+
+    searchBuffs() {
+        let html = ""
+        const currentStudentId = student.Id
+        const searchTerm = this.elements.searchBox.value.toLowerCase()
+        data.students.forEach(student => {
+            if (student.IsReleased[regionID]) {
+                student.Skills.forEach(skill => {
+                    if ('Effect' in skill) {
+                        if ((student.Id == currentStudentId || skill.Effect.Type == 2) && (searchContains(searchTerm, getTranslatedString(student, "Name")) || searchContains(searchTerm, getTranslatedString(skill, "Name")))) {
+                            let available = true
+                            find(this.buffs, "StudentId", student.Id).forEach((buff) => {
+                                if (buff.Skill.SkillType == skill.SkillType) available = false
+                            })
+                            if (skill.SkillType == 'gearnormal' && !student.Gear.Released[regionID]) available = false
+                            if (available) {
+    
+                                let desc = ""
+                                const maxLevel = skill.SkillType == "ex" ? 4 : 9
+    
+                                skill.Effect.Effects.forEach(effect => {
+                                    if (desc != "") {
+                                        desc += ", "
+                                    }
+                                    desc += `${getStatName(effect.Stat)} <b>${effect.Value[0][0] < 0 ? '' : '+'}${ExternalBuffs.statValueToString(effect.Stat, effect.Value[0][0])}`
+                                    let maxValue
+                                    if ('StackSame' in effect) {
+                                        maxValue = effect.Value[0][maxLevel] * effect.StackSame
+                                    } else {
+                                        maxValue = effect.Value[effect.Value.length-1][maxLevel]
+                                    }
+                                    if (effect.Value[0][0] != maxValue) {
+                                        desc += `~${ExternalBuffs.statValueToString(effect.Stat, maxValue)}`
+                                    }
+                                    desc += '</b>'
+                                })
+                                html += ExternalBuffs.getSearchResultListItemHtml(student, skill, desc)
+                            }
+                        }
+                    }
+                })
+            }
+        })
+        $(this.elements.searchResults).toggle(html != "").find('.results-list > div').html(html)
+    }
+
+    static getBuffAmountText(buff) {
+        let text = ''
+        buff.Skill.Effect.Effects.forEach((effect, i) => {
+            if (text != "") {
+                text += ", "
+            }
+            let value
+            if ('StackSame' in effect) {
+                value = effect.Value[0][buff.Level-1] * buff.Stacks
+            } else {
+                value = effect.Value[buff.Stacks-1][buff.Level-1]
+            }
+            text += `<span data-effect='${i}'>${getStatName(effect.Stat)} <b>${value < 0 ? '' : '+'}${ExternalBuffs.statValueToString(effect.Stat, value)}</b></span>`
+            
+        })
+        return text
+    }
+
+    static statValueToString(stat, val) {
+        if (stat.endsWith('_Coefficient')) {
+            return `${parseFloat((val/100).toFixed(1))}%`
+        } else {
+            return val
+        }
+    }
+
+    static getSearchResultListItemHtml(student, skill, desc) {
+        return `<div class="list-item" data-student-id="${student.Id}" data-skill-type="${skill.SkillType}"><div class="transferable-skill-icon me-2">
+        <img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"><img class="skill-icon bg-skill-${student.BulletType.toLowerCase()}" src="images/skill/${skill.Icon}.png"></div>
+            <div class="skill-text"><span class="skill-name">${getTranslatedString(skill, "Name")} <small>(${translateUI(`student_skill_${skill.SkillType}`)})</small></span><span class="skill-details">${desc}</span></div>
+        </div>`
+    }
+
 }
 
 /** Functions */
@@ -764,6 +998,13 @@ function loadModule(moduleName, entry=null) {
 
             $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
             $(".tooltip").tooltip("hide")
+
+            statPreviewExternalBuffs = new ExternalBuffs({
+                controls: $('#statpreview-buff-transferable-controls')[0],
+                searchBox: $('#statpreview-buff-transferable-search-text')[0],
+                searchResults: $('#statpreview-buff-transferable-search .results-container')[0],
+            })
+
             var urlVars = new URL(window.location.href).searchParams
 
             if (entry != null) {
@@ -1940,6 +2181,8 @@ function processStudent() {
         $('#ba-student-collection-btn').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_collection_add')), placement: 'top', html: true})
     }
 
+    statPreviewExternalBuffs.changeStudent(student.Id)
+
     updateGearIcon()
     updateStatPreviewTitle()
 
@@ -2884,7 +3127,7 @@ function changeStatPreviewLevel(el, recalculate = true) {
 
 function changeSkillPreviewLevel(el) {
     if (el.value == el.max) {
-        $('#ba-skill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
+        $('#ba-skill-level').html(`<img src="images/ui/ImageFont_Max.png">`)
     } else {
         $('#ba-skill-level').html("Lv." + el.value)
     }
@@ -2893,7 +3136,7 @@ function changeSkillPreviewLevel(el) {
 
 function changeWeaponSkillPreviewLevel(el) {
     if (el.value == el.max) {
-        $('#ba-weapon-skill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
+        $('#ba-weapon-skill-level').html(`<img src="images/ui/ImageFont_Max.png">`)
     } else {
         $('#ba-weapon-skill-level').html("Lv." + el.value)
     }
@@ -2902,7 +3145,7 @@ function changeWeaponSkillPreviewLevel(el) {
 
 function changeGearSkillPreviewLevel(el) {
     if (el.value == el.max) {
-        $('#ba-gear-skill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
+        $('#ba-gear-skill-level').html(`<img src="images/ui/ImageFont_Max.png">`)
     } else {
         $('#ba-gear-skill-level').html("Lv." + el.value)
     }
@@ -2911,7 +3154,7 @@ function changeGearSkillPreviewLevel(el) {
 
 function changeEXSkillPreviewLevel(el) {
     if (el.value == el.max) {
-        $('#ba-skill-ex-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
+        $('#ba-skill-ex-level').html(`<img src="images/ui/ImageFont_Max.png">`)
     } else {
         $('#ba-skill-ex-level').html("Lv." + el.value)
     }
@@ -2956,7 +3199,7 @@ function updateWeaponLevelStatPreview(level) {
 
 function changeStatPreviewPassiveSkillLevel(el, recalculate = true) {
     if (el.value == el.max) {
-        $('#ba-statpreview-passiveskill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
+        $('#ba-statpreview-passiveskill-level').html(`<img src="images/ui/ImageFont_Max.png">`)
     } else {
         $('#ba-statpreview-passiveskill-level').html("Lv." + el.value)
     }
@@ -2967,7 +3210,7 @@ function changeStatPreviewPassiveSkillLevel(el, recalculate = true) {
 
 function changeStatPreviewSummonExSkillLevel(el, recalculate = true) {
     if (el.value == el.max) {
-        $('#ba-statpreview-exskill-level').html(`<img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;">`)
+        $('#ba-statpreview-exskill-level').html(`<img src="images/ui/ImageFont_Max.png">`)
     } else {
         $('#ba-statpreview-exskill-level').html("Lv." + el.value)
     }
@@ -2977,7 +3220,7 @@ function changeStatPreviewSummonExSkillLevel(el, recalculate = true) {
 }
 
 function getBondTargetsHTML(num, student) {
-    return `<div class="d-flex ${num != 1 ? "mt-3": ""}"><label for="ba-statpreview-bond-${num}-toggle"><h5>${(num == 1) ? translateUI('student_bond') : translateUI('student_bond_alt')}</h5></label><div class="flex-fill"></div><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="ba-statpreview-bond-${num}-toggle" onchange="toggleBond(${num})"></div></div><div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mt-2 mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5 class="d-inline">${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center mb-2"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${num == 1 ? statPreviewBondLevel : statPreviewBondAltLevel}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div>`
+    return `<div class="d-flex ${num != 1 ? "mt-3": ""}"><label for="ba-statpreview-bond-${num}-toggle"><h5>${(num == 1) ? translateUI('student_bond') : translateUI('student_bond_alt')}</h5></label><div class="flex-fill"></div><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="ba-statpreview-bond-${num}-toggle" onchange="toggleBond(${num})"></div></div><div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5>${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${num == 1 ? statPreviewBondLevel : statPreviewBondAltLevel}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div>`
 }
 
 function changeBondLevel(el) {
@@ -2996,7 +3239,7 @@ function updateGearIcon() {
     }
 
     if ("Released" in student.Gear && student.Gear.Released[regionID]) {
-        $("#ba-student-gear-4-icon").toggleClass("gear-disabled", !statPreviewIncludeExGear)
+        $("#ba-student-gear-4-icon").toggleClass("gear-disabled", !statPreviewIncludeExGear || !statPreviewIncludeEquipment)
     }
 }
 
@@ -3076,6 +3319,19 @@ function recalculateStatPreview() {
                 }
             }
         }
+
+        //Include Fav Item
+        if (statPreviewIncludeExGear && "Released" in student.Gear && student.Gear.Released[regionID]) {
+            studentStats.addBuff(student.Gear.StatType[0], student.Gear.StatValue[0][1])
+
+            if (statPreviewSummonStats && summon.Id != 99999) {
+                summonStats.addBuff(student.Gear.StatType[0], student.Gear.StatValue[0][1])
+            }
+
+            if (compareMode && "Released" in studentCompare.Gear && studentCompare.Gear.Released[regionID]) {
+                studentCompareStats.addBuff(studentCompare.Gear.StatType[0], studentCompare.Gear.StatValue[0][1])
+            }
+        }
     }
 
     //Include Relationship
@@ -3120,6 +3376,27 @@ function recalculateStatPreview() {
         }
     }
 
+    $('#statpreview-buff-transferable-incompatible').hide()
+    $(`#statpreview-buff-transferable-controls .buff-description span`).toggleClass('invalid', false)
+    //Include External Skill Buffs
+    if (statPreviewExternalBuffs !== undefined && !statPreviewSupportStats && !compareMode) {
+        let uniqueChannels = []
+        statPreviewExternalBuffs.buffs.forEach((tbuff, index) => {
+            tbuff.Skill.Effect.Effects.forEach((effect, effectIndex) => {
+                if (uniqueChannels.find(e => e.type == tbuff.Skill.SkillType && e.channel == effect.Channel)) {
+                    $('#statpreview-buff-transferable-incompatible').show()
+                    $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
+                } else {
+                    const value = ('StackSame' in effect ? effect.Value[0][tbuff.Level-1] * tbuff.Stacks : effect.Value[tbuff.Stacks-1][tbuff.Level-1])
+                    studentStats.addBuff(effect.Stat, value)
+                    if (statPreviewSummonStats && summon.Id != 99999) {
+                        summonStats.addBuff(effect.Stat, value)
+                    }
+                    uniqueChannels.push({type: tbuff.Skill.SkillType, channel: effect.Channel})
+                }
+            })
+        })
+    }
     //Include Ex. Weapon
     if ((statPreviewStarGrade == 5) && (statPreviewWeaponGrade > 0)) {
         let weaponStats = getWeaponStats(student, $('#ba-statpreview-weapon-range').val())
@@ -3134,19 +3411,6 @@ function recalculateStatPreview() {
             Object.entries(weaponStats).forEach(el => {
                 studentCompareStats.addBuff(el[0], el[1])
             })
-        }
-    }
-
-    //Include Fav Item
-    if (statPreviewIncludeExGear && "Released" in student.Gear && student.Gear.Released[regionID]) {
-        studentStats.addBuff(student.Gear.StatType[0], student.Gear.StatValue[0][1])
-
-        if (statPreviewSummonStats && summon.Id != 99999) {
-            summonStats.addBuff(student.Gear.StatType[0], student.Gear.StatValue[0][1])
-        }
-
-        if (compareMode && "Released" in studentCompare.Gear && studentCompare.Gear.Released[regionID]) {
-            studentCompareStats.addBuff(studentCompare.Gear.StatType[0], studentCompare.Gear.StatValue[0][1])
         }
     }
 
@@ -3221,10 +3485,13 @@ function recalculateStatPreview() {
         //Modal
         if ($('#ba-student-modal-statpreview').hasClass('show')) {
             modText = `<span class="stat-base">${stats.getBaseString(stat)}</span>`
+
             let flatBonus = stats.getFlatString(stat)
-            modText += `<span class="stat-flat${(flatBonus == "+0") ? " zero" : ""}">${flatBonus}</span>`
+            modText += `<span class="stat-flat${(flatBonus == "+0") ? " zero" : (flatBonus.startsWith('-') ? " negative" : "")}">${flatBonus}</span>`
+
             let coefBonus = stats.getCoefficientString(stat)
-            modText += `<span class="stat-coefficient${(coefBonus == "+0%") ? " zero" : ""}">${coefBonus}</span>`
+            modText += `<span class="stat-coefficient${(coefBonus == "+0%") ? " zero" : (coefBonus.startsWith('-') ? " negative" : "")}">${coefBonus}</span>`
+
             modText += `<span class="stat-final">${text}</span>`
             $(`#ba-student-stat-modal-table .stat-${stat} .stat-value`).html(modText)
         }
@@ -3831,6 +4098,7 @@ function updatePassiveSkillStatPreview() {
         let value = el[1]
         if (el[0].includes('_Coefficient')) value /= 10000
         if (value > 0) desc += `${getStatName(el[0])} <b>+${getFormattedStatAmount(value)}</b>, `
+        if (value < 0) desc += `${getStatName(el[0])} <b>${getFormattedStatAmount(value)}</b>, `
     })
     $('#ba-statpreview-passiveskill-desc').html(desc.substring(0, desc.length-2))
     passivePlus ? $('.passive-skill-plus').show() : $('.passive-skill-plus').hide()
@@ -4855,15 +5123,6 @@ function allSearch() {
         }
     })
 
-    // if (results.length < maxResults)
-    // $.each(data.raids.TimeAttack, function(i,el){
-    //     let name = getLocalizedString('TimeAttackStage', el.DungeonType)
-    //     if (el.IsReleased[regionID] && (searchContains(searchTerm, name) || searchContains(searchTerm, getLocalizedString('StageType', 'TimeAttack')))) {
-    //         results.push({'name': name, 'icon': `images/enemy/${el.Icon}.png`, 'type': getLocalizedString('StageType', 'TimeAttack'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
-    //         if (results.length >= maxResults) return false
-    //     }
-    // })
-
     if (results.length > 0) {
         let html = '<div>'
         for (let i = 0; i < results.length; i++) {
@@ -5010,6 +5269,15 @@ function getPassiveSkillBonus(skill, level) {
         }
         
     })
+    if ('StatFixed' in skill) {
+        skill.StatFixed.forEach(el => {
+            if (el[1].includes("%")) {
+                bonuses[el[0] + '_Coefficient'] = Math.round(parseFloat(el[1].replace("%",""))*100)
+            } else {
+                bonuses[el[0] + '_Base'] = Math.round(el[1])
+            }
+        })
+    }
     return bonuses
 }
 

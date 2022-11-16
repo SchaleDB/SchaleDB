@@ -404,33 +404,40 @@
                 10801, 10802, 10803, 10804, 10805, 10806
             ], 
             "event_701_max": 10, 
-            "event_701_challenge_max": 1, 
+            "event_701_challenge_max": 4, 
             "commission_max": 11, 
             "bounty_max": 9, 
             "schooldungeon_max": 4, 
             "current_gacha": [
                 {
-                    "characters": [10053, 10054], 
-                    "start": 1666749600, 
-                    "end": 1667959200
-                }, 
-                {
-                    "characters": [10020, 10007], 
-                    "start": 1667959200, 
-                    "end": 1668564000
+                    "characters": [
+                        20020,
+                        10001
+                    ],
+                    "start": 1668564000,
+                    "end": 1669773600
                 }
             ], 
             "current_events": [
-                {"event": 818, "start": 1666749600, "end": 1667959200}
+                {
+                    "event": 701,
+                    "start": 1668564000,
+                    "end": 1669773600
+                }
             ], 
             "current_raid": [
+                {"raid": 9000, "start": 1667959200, "end": 1668538800},
                 {
-                    "raid": 8, 
-                    "terrain": "Indoor", 
-                    "start": 1667354400, 
-                    "end": 1667934000
-                }, 
-                {"raid": 9000, "start": 1667959200, "end": 1668538800}
+                    "raid": 1,
+                    "terrain": "Street",
+                    "start": 1668564000,
+                    "end": 1669143600
+                },
+                {
+                    "raid": 10000,
+                    "start": 1669773600,
+                    "end": 1670353200
+                }
             ]
         }, 
         {
@@ -443,7 +450,7 @@
             "campaign_max": 18, 
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810, 
-                  811,   812,   701, 10801, 10802
+                  811,   812,   701, 10801, 10802, 10803
             ], 
             "event_701_max": 8, 
             "event_701_challenge_max": 0, 
@@ -455,21 +462,39 @@
                     "characters": [10038, 20014, 10039, 10013], 
                     "start": 1667872800, 
                     "end": 1669082400
+                }, 
+                {
+                    "characters": [20004, 10021, 20005], 
+                    "start": 1669082400, 
+                    "end": 1669687200
                 }
             ], 
-            "current_events": [], 
+            "current_events": [
+                {"event": 10803, "start": 1669082400, "end": 1669687200}
+            ], 
             "current_raid": [
+                {"raid": 2000, "start": 1668477600, "end": 1669057200}, 
                 {
-                    "raid": 7, 
-                    "terrain": "Street", 
-                    "start": 1667872800, 
-                    "end": 1668452400
+                    "raid": 2, 
+                    "terrain": "Indoor", 
+                    "start": 1669082400, 
+                    "end": 1669662000
                 }, 
-                {"raid": 2000, "start": 1668477600, "end": 1669057200}
+                {"raid": 3000, "start": 1669687200, "end": 1670266800}
             ]
         }
     ], 
     "changelog": [
+        {
+            "date": "2022/11/16", 
+            "contents": [
+                "Added information for Himari.", 
+                "Added the ability to set student buffs on a student's stat display screen.",
+                "A student's own buffs as well as buffs that can be applied from other students can be set.",
+                "For skills that grant stacking or conditional buffs, the stack count/condition state can be toggled by clicking on the stack counter.",
+                "When selecting two skills that grant buffs that overwrite each other, a warning will be displayed and only the first effect will be applied."
+            ]
+        }, 
         {
             "date": "2022/11/05", 
             "contents": [

@@ -106,10 +106,10 @@
                                     </div>
                                 </div>
     
-                                <div class="row g-1 mt-2">
-                                    <div class="d-flex flex-row flex-wrap align-items-stretch">
-                                        <div class="d-flex flex-row align-items-stretch me-2">
-                                            <div id="ba-statpreview-stars" class="d-inline-block ba-panel statpreview-stars px-2 mb-2 d-flex align-items-center">
+                                <div class="row g-1 my-2">
+                                    <div class="d-flex flex-row flex-wrap align-items-stretch gap-2">
+                                        <div class="d-flex flex-row align-items-stretch">
+                                            <div id="ba-statpreview-stars" class="d-inline-block ba-panel statpreview-stars px-2 d-flex align-items-center">
                                                 <span id="ba-statpreview-star-1" class="ba-statpreview-star statpreview-star-1" onclick="changeStatPreviewStars(1,0)"><i class="fa-solid fa-star"></i></span>
                                                 <span id="ba-statpreview-star-2" class="ba-statpreview-star statpreview-star-2" onclick="changeStatPreviewStars(2,0)"><i class="fa-solid fa-star"></i></span>
                                                 <span id="ba-statpreview-star-3" class="ba-statpreview-star statpreview-star-3" onclick="changeStatPreviewStars(3,0)"><i class="fa-solid fa-star"></i></span>
@@ -121,25 +121,24 @@
                                             </div>
                                         </div>
                                         <div class="flex-fill"></div>
-                                        <div class="d-flex align-items-stretch flex-wrap">
-                                            <a id="ba-statpreview-status-equipment" onclick="toggleGear()" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
+                                        <div class="d-flex align-items-stretch flex-wrap gap-2">
+                                            <a id="ba-statpreview-status-equipment" onclick="toggleGear()" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center px-2">
                                                 <span class="statpreview-label" data-localize-id="ui,student_gear_short"></span>
                                             </a>
-                                            <a id="ba-statpreview-status-bond-level" onclick="toggleBond(1)" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
+                                            <a id="ba-statpreview-status-bond-level" onclick="toggleBond(1)" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center px-2">
                                                 <img id="ba-statpreview-status-bond-icon" src="" class="sharp-img">
                                                 <span class="statpreview-label"></span>
                                             </a>
-                                            <a id="ba-statpreview-status-bond-alt-level" onclick="toggleBond(2)" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center me-2 px-2">
+                                            <a id="ba-statpreview-status-bond-alt-level" onclick="toggleBond(2)" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center px-2">
                                                 <img id="ba-statpreview-status-bond-alt-icon" src="" class="sharp-img">
                                                 <span class="statpreview-label"></span>
                                             </a>
-                                            <a id="ba-statpreview-status-passive-level" onclick="togglePassiveSkill()" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center me-0 px-2">
+                                            <a id="ba-statpreview-status-passive-level" onclick="togglePassiveSkill()" class="ba-statpreview-status tooltip-button unselectable ba-info-pill bg-theme align-items-center px-2">
                                                 <img id="ba-statpreview-status-passive-icon" src="" class="sharp-img ba-skill">
                                                 <span class="passive-skill-plus unselectable ba-weapon-skill-plus"><i class="fa-solid fa-plus"></i></span>
                                                 <span class="statpreview-label"></span>
                                             </a>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -524,7 +523,7 @@
                                 <div class="col-12 col-xl-6 mb-3 pe-xl-3">
                                     <h5 data-localize-id="Stat,Level"></h5>
                                     <div class="p-2 ba-panel">
-                                        <div class="pt-2 d-flex flex-column">
+                                        <div class="pt-1 d-flex flex-column">
                                             <div class="d-flex flex-row flex-wrap align-items-center mb-2">
                                                 <div class="d-flex flex-row align-items-stretch me-2">
                                                     <div id="ba-statpreview-stars-modal" class="d-inline-block ba-panel statpreview-stars px-2 d-flex align-items-center">
@@ -542,7 +541,7 @@
                                                 <span id="ba-statpreview-level-modal" class="ba-slider-label statpreview-level-label">Lv.1</span>
                                             </div>
                                             
-                                            <div class="d-flex flex-row align-items-center mb-2">
+                                            <div class="d-flex flex-row align-items-center">
                                                 <input id="ba-statpreview-levelrange-modal" oninput="changeStatPreviewLevel(this)" type="range" class="form-range statpreview-level flex-fill" value="1" min="1" max="100">
                                             </div>                                 
                                         </div>
@@ -556,8 +555,8 @@
                                                 </div>
                                             </div>
                                             <h5 id="ba-statpreview-weapon-name" class="mt-2 d-inline px-2"></h5>
-                                            <p id="ba-statpreview-weapon-description" class="mb-2 px-2" style="font-size: 0.875rem; line-height: 1rem;"></p>
-                                            <div class="d-flex flex-row align-items-center mb-2">
+                                            <p id="ba-statpreview-weapon-description" class="mb-1 px-2" style="font-size: 0.875rem; line-height: 1rem;"></p>
+                                            <div class="d-flex flex-row align-items-center">
                                                 <input id="ba-statpreview-weapon-range" oninput="changeStatPreviewWeaponLevel(this)" type="range" class="statpreview-weapon-range form-range me-2 flex-fill" value="1" min="1" max="50">
                                                 <span id="ba-statpreview-weapon-level" class="ba-slider-label"></span>
                                             </div>                                  
@@ -573,51 +572,73 @@
                                         </div>
                                     </div>
                                     <div id="ba-statpreview-gear" class="p-2 ba-panel">
-                                        <div class="pt-2 d-flex flex-column">
+                                        <div class="d-flex flex-column gap-2">
                                             <div id="ba-statpreview-gear1">
-                                                <div class="d-flex flex-row align-items-center">
+                                                <div class="d-flex flex-row align-items-center mb-1">
                                                     <div class="me-3" style="position: relative;">
-                                                        <img id="ba-statpreview-gear1-icon" class="ba-gear-icon ba-item-n drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
+                                                        <img id="ba-statpreview-gear1-icon" class="ba-gear-icon-s ba-item-n">
                                                     </div>
                                                     <div class="flex-fill">
-                                                        <h5 id="ba-statpreview-gear1-name" class="d-inline"></h5>
+                                                        <h5 id="ba-statpreview-gear1-name"></h5>
                                                         <p id="ba-statpreview-gear1-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex flex-row align-items-center mb-2">
+                                                <div class="d-flex flex-row align-items-center">
                                                     <input id="ba-statpreview-gear1-range" oninput="changeGearLevel(1, this)" type="range" class="form-range me-2 flex-fill" value="99" min="1" max="99">
                                                     <span id="ba-statpreview-gear1-level" class="ba-slider-label"></span>
                                                 </div> 
                                             </div>
-                                            <div id="ba-statpreview-gear2" class="mt-2">
-                                                <div class="d-flex flex-row align-items-center">
+                                            <div id="ba-statpreview-gear2">
+                                                <div class="d-flex flex-row align-items-center mb-1">
                                                     <div class="me-3" style="position: relative;">
-                                                        <img id="ba-statpreview-gear2-icon" class="ba-gear-icon ba-item-n drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
+                                                        <img id="ba-statpreview-gear2-icon" class="ba-gear-icon-s ba-item-n">
                                                     </div>
                                                     <div class="flex-fill">
-                                                        <h5 id="ba-statpreview-gear2-name" class="d-inline"></h5>
+                                                        <h5 id="ba-statpreview-gear2-name"></h5>
                                                         <p id="ba-statpreview-gear2-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex flex-row align-items-center mb-2">
+                                                <div class="d-flex flex-row align-items-center">
                                                     <input id="ba-statpreview-gear2-range" oninput="changeGearLevel(2, this)" type="range" class="form-range me-2 flex-fill" value="99" min="1" max="99">
                                                     <span id="ba-statpreview-gear2-level" class="ba-slider-label"></span>
                                                 </div>
                                             </div>
-                                            <div id="ba-statpreview-gear3" class="mt-2">
-                                                <div class="d-flex flex-row align-items-center">
+                                            <div id="ba-statpreview-gear3">
+                                                <div class="d-flex flex-row align-items-center mb-1">
                                                     <div class="me-3" style="position: relative;">
-                                                        <img id="ba-statpreview-gear3-icon" class="ba-gear-icon ba-item-n drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
+                                                        <img id="ba-statpreview-gear3-icon" class="ba-gear-icon-s ba-item-n">
                                                     </div>
                                                     <div class="flex-fill">
-                                                        <h5 id="ba-statpreview-gear3-name" class="d-inline"></h5>
+                                                        <h5 id="ba-statpreview-gear3-name"></h5>
                                                         <p id="ba-statpreview-gear3-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
                                                     </div>  
                                                 </div>
-                                                <div class="d-flex flex-row align-items-center mb-2">
+                                                <div class="d-flex flex-row align-items-center">
                                                     <input id="ba-statpreview-gear3-range" oninput="changeGearLevel(3, this)" type="range" class="form-range me-2 flex-fill" value="99" min="1" max="99">
                                                     <span id="ba-statpreview-gear3-level" class="ba-slider-label"></span>
                                                 </div>   
+                                            </div>
+                                            <div id="ba-statpreview-ex-gear-container">
+                                                <div class="d-flex">
+                                                    <label for="ba-statpreview-ex-gear-toggle">
+                                                        <h5 data-localize-id="ui,student_ex_gear"></h5>
+                                                    </label>
+                                                    <div class="flex-fill"></div>
+                                                    <div class="form-check form-switch">
+                                                        <input class="form-check-input" type="checkbox" id="ba-statpreview-ex-gear-toggle" onchange="toggleExGear()">
+                                                    </div>
+                                                </div>
+                                                <div id="ba-statpreview-ex-gear" class="">
+                                                    <div class="d-flex flex-row align-items-center mb-1">
+                                                        <div class="me-3" style="position: relative;">
+                                                            <img id="ba-statpreview-ex-gear-icon" class="ba-gear-icon-s ba-item-n">
+                                                        </div>
+                                                        <div class="flex-fill">
+                                                            <h5 id="ba-statpreview-ex-gear-name"></h5>
+                                                            <p id="ba-statpreview-ex-gear-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
+                                                        </div>  
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -638,40 +659,18 @@
                                         <div class="d-flex flex-column">
                                             <div class="d-flex flex-row align-items-center mb-1">
                                                 <div class="position-relative me-2">
-                                                    <img id="ba-statpreview-passiveskill-icon" class="ba-skill d-inline-block me-3 drop-shadow" src="">
-                                                    <span id="ba-statpreview-passiveskill-icon-plus" class="ba-weapon-skill-plus passive-skill-plus drop-shadow unselectable"><i class="fa-solid fa-plus"></i></span>
+                                                    <img id="ba-statpreview-passiveskill-icon" class="ba-skill ba-skill-s d-inline-block me-2 drop-shadow" src="">
+                                                    <span id="ba-statpreview-passiveskill-icon-plus" class="ba-weapon-skill-plus ba-weapon-skill-plus-s passive-skill-plus drop-shadow unselectable"><i class="fa-solid fa-plus"></i></span>
                                                 </div>
                                                 <div class="flex-fill">
-                                                    <h5 id="ba-statpreview-passiveskill-name" class="d-inline"></h5>
+                                                    <h5 id="ba-statpreview-passiveskill-name"></h5>
                                                     <p id="ba-statpreview-passiveskill-desc" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
                                                 </div>
                                             </div>
-                                            <div class="d-flex flex-row align-items-center mb-2">
-                                                <input id="ba-statpreview-passiveskill-range" oninput="changeStatPreviewPassiveSkillLevel(this)" type="range" class="form-range me-2 flex-fill" value="10" min="1" max="10">
-                                                <span id="ba-statpreview-passiveskill-level" class="ba-slider-label"><img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;"></span>
-                                            </div>                                  
-                                        </div>
-                                    </div>
-                                    <div id="ba-statpreview-ex-gear-container">
-                                        <div class="d-flex mt-3">
-                                            <label for="ba-statpreview-ex-gear-toggle">
-                                                <h5 data-localize-id="ui,student_ex_gear"></h5>
-                                            </label>
-                                            <div class="flex-fill"></div>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="ba-statpreview-ex-gear-toggle" onchange="toggleExGear()">
-                                            </div>
-                                        </div>
-                                        <div id="ba-statpreview-ex-gear" class="p-2 ba-panel">
                                             <div class="d-flex flex-row align-items-center">
-                                                <div class="me-3" style="position: relative;">
-                                                    <img id="ba-statpreview-ex-gear-icon" class="ba-gear-icon ba-item-n drop-shadow ms-0" style="height:64px; margin-bottom: 0px;">
-                                                </div>
-                                                <div class="flex-fill">
-                                                    <h5 id="ba-statpreview-ex-gear-name" class="d-inline"></h5>
-                                                    <p id="ba-statpreview-ex-gear-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
-                                                </div>  
-                                            </div>
+                                                <input id="ba-statpreview-passiveskill-range" oninput="changeStatPreviewPassiveSkillLevel(this)" type="range" class="form-range me-2 flex-fill" value="10" min="1" max="10">
+                                                <span id="ba-statpreview-passiveskill-level" class="ba-slider-label"><img src="images/ui/ImageFont_Max.png"></span>
+                                            </div>                                  
                                         </div>
                                     </div>
                                     <div id="ba-statpreview-summon-level">
@@ -680,19 +679,31 @@
                                             <div class="d-flex flex-column">
                                                 <div class="d-flex flex-row align-items-center mb-1">
                                                     <div class="position-relative me-2">
-                                                        <img id="ba-statpreview-exskill-icon" class="ba-skill d-inline-block me-3 drop-shadow" src="">
+                                                        <img id="ba-statpreview-exskill-icon" class="ba-skill ba-skill-s d-inline-block me-2 drop-shadow" src="">
                                                     </div>
                                                     <div class="flex-fill">
-                                                        <h5 id="ba-statpreview-exskill-name" class="d-inline"></h5>
+                                                        <h5 id="ba-statpreview-exskill-name"></h5>
                                                         <p id="ba-statpreview-exskill-desc" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
                                                     </div>
                                                 </div>
-                                                <div class="d-flex flex-row align-items-center mb-2">
+                                                <div class="d-flex flex-row align-items-center">
                                                     <input id="ba-statpreview-exskill-range" oninput="changeStatPreviewSummonExSkillLevel(this)" type="range" class="form-range me-2 flex-fill" value="5" min="1" max="5">
-                                                    <span id="ba-statpreview-exskill-level" class="ba-slider-label"><img src="images/ui/ImageFont_Max.png" style="height: 18px;width: auto;margin-top: -2px;"></span>
+                                                    <span id="ba-statpreview-exskill-level" class="ba-slider-label"><img src="images/ui/ImageFont_Max.png"></span>
                                                 </div>                                  
                                             </div>
                                         </div>
+                                    </div>
+                                    <div id="statpreview-buff-transferable-search">
+                                        <h5 class="mt-3" data-localize-id="ui,buff_transferable"></h5>
+                                        <div class="my-2">
+                                            <input type="search" class="form-control" id="statpreview-buff-transferable-search-text" data-ph-localize-id="ui,buff_transferable_search" autocomplete="off">
+                                        </div>
+                                        <div class="results-container" style="display:none;">
+                                            <div class="results-list"><div></div></div>
+                                        </div>
+                                    </div>
+                                    <p id="statpreview-buff-transferable-incompatible" class="text-italic mb-2"><i class="fa-solid fa-triangle-exclamation me-2"></i><span data-localize-id="ui,buff_transferable_incompatible"></span></p>
+                                    <div id="statpreview-buff-transferable-controls" class="d-flex flex-column gap-2">
                                     </div>
                                 </div>
                             </div>
