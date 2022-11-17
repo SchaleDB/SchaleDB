@@ -37106,6 +37106,120 @@
                     1582447562
                 ]
             ]
+        },
+        {
+            "Id": 10000,
+            "IsReleased": [
+                false,
+                false
+            ],
+            "DungeonType": "Shooting",
+            "Icon": "EnemyInfo_Boxcat_Terror",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "Unarmed",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 912000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7812001
+                    ]
+                },
+                {
+                    "Id": 912000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7812002
+                    ]
+                },
+                {
+                    "Id": 912000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7812003
+                    ]
+                },
+                {
+                    "Id": 912000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7812004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    1329507091,
+                    2060888564
+                ],
+                [
+                    1329507091,
+                    2060888564
+                ],
+                [
+                    1329507091,
+                    2060888564,
+                    4033973365
+                ],
+                [
+                    1329507091,
+                    2060888564,
+                    4033973365,
+                    3951708717
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -37480,6 +37594,34 @@
             "DescCn": "全体敌人<b:Penetration>提升<b>2,000</b>。",
             "NameTh": "เพิ่มค่าเจาะเกราะของศัตรูทั้งหมด",
             "DescTh": "เพิ่ม<b:Penetration>ของฝ่ายศัตรู <b>2,000</b>"
+        },
+        {
+            "Id": 4033973365,
+            "Icon": "TimeAttack_Icon_Buff_AttackPower_Ally_01",
+            "NameEn": "Increased T.S./AR Ally Attack",
+            "DescEn": "Increases <b:ATK> for all T.S. students and students who use AR type weapons by ??%. (Effect is only applied once)",
+            "NameJp": "T.Sクラス、AR武器の攻撃力が増加",
+            "DescJp": "T.S生徒の攻撃力が増加します。/\nAR武器を使用する味方生徒の攻撃力が増加します。/\n（二つの効果は重複しません）",
+            "NameKr": "T.S 클래스, AR 무기 공격력 증가",
+            "DescKr": "T.S 학생의 공격력이 증가합니다./\nAR 무기를 사용하는 아군 학생의 공격력이 증가합니다./\n(두 효과는 중첩되지 않습니다.)",
+            "NameCn": "T.Sクラス、AR武器の攻撃力が増加",
+            "DescCn": "T.S生徒の攻撃力が増加します。/\nAR武器を使用する味方生徒の攻撃力が増加します。/\n（二つの効果は重複しません）",
+            "NameTh": "เพิ่มค่าโจมตีของของฝ่ายเราที่เป็นประเภท T.S. หรือใช้อาวุธประเภท AR",
+            "DescTh": "เพิ่ม<b:ATK>ให้กับฝ่ายเราที่เป็นประเภท T.S. หรือใช้อาวุธประเภท AR ??% (เอฟเฟกต์นี้ไม่ทับซ้อนกัน)"
+        },
+        {
+            "Id": 3951708717,
+            "Icon": "TimeAttackGeas_Enemy_Immune_AttackedExSkill",
+            "NameEn": "EX Skill Invulnerability",
+            "DescEn": "Enemies will take no damage from EX Skills.",
+            "NameJp": "EXスキルダメージ無効化",
+            "DescJp": "敵はEXスキルによるダメージを受けません。",
+            "NameKr": "EX 스킬 대미지 면역",
+            "DescKr": "적은 EX 스킬로 인한 대미지를 받지 않습니다.",
+            "NameCn": "EXスキルダメージ無効化",
+            "DescCn": "敵はEXスキルによるダメージを受けません。",
+            "NameTh": "ต้านทานสกิล EX",
+            "DescTh": "ศัตรูจะไม่ได้รับความเสียหายจากสกิล EX"
         }
     ],
     "WorldRaid": [
