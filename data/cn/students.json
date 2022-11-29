@@ -14,7 +14,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -520,7 +520,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -937,7 +937,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -1354,8 +1354,23 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [
-            40002
+        "Summons": [
+            {
+                "Id": 40002,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "MaxHP"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        16006,
+                        16006,
+                        16006,
+                        16006,
+                        16006
+                    ]
+                ]
+            }
         ],
         "Position": "Middle",
         "BulletType": "Pierce",
@@ -1446,18 +1461,6 @@
                     5,
                     5,
                     5
-                ],
-                "SummonStat": [
-                    "MaxHP"
-                ],
-                "SummonStatCoefficient": [
-                    [
-                        16006,
-                        16006,
-                        16006,
-                        16006,
-                        16006
-                    ]
                 ],
                 "Icon": "SKILLICON_HIHUMI_EXSKILL",
                 "DamageDist": [
@@ -1802,7 +1805,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -2234,7 +2237,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -2646,7 +2649,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -3044,7 +3047,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -3487,7 +3490,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -4006,7 +4009,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -4462,7 +4465,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -4891,7 +4894,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -5342,7 +5345,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -5786,7 +5789,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -6304,7 +6307,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -6711,7 +6714,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -7117,7 +7120,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -7557,7 +7560,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -7997,7 +8000,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -8419,7 +8422,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -8825,7 +8828,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -9248,7 +9251,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -9661,7 +9664,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -10112,7 +10115,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -10539,7 +10542,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -11041,7 +11044,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -11489,7 +11492,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -11959,7 +11962,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -12398,7 +12401,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -12815,7 +12818,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -13271,7 +13274,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -13690,7 +13693,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -14118,7 +14121,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -14541,7 +14544,7 @@
         "StarGrade": 2,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -14970,7 +14973,7 @@
         "StarGrade": 2,
         "SquadType": "Support",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -15403,7 +15406,7 @@
         "StarGrade": 2,
         "SquadType": "Support",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -15835,7 +15838,7 @@
         "StarGrade": 2,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -16310,9 +16313,44 @@
         "StarGrade": 2,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [
-            40004,
-            40005
+        "Summons": [
+            {
+                "Id": 40004,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "AttackPower"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        8141,
+                        9362,
+                        11805,
+                        13026,
+                        15468
+                    ]
+                ]
+            },
+            {
+                "Id": 40005,
+                "SourceSkill": "normal",
+                "InheritCasterStat": [
+                    "AttackPower"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        3824,
+                        4015,
+                        4207,
+                        4971,
+                        5162,
+                        5354,
+                        6118,
+                        6310,
+                        6501,
+                        7265
+                    ]
+                ]
+            }
         ],
         "Position": "Back",
         "BulletType": "Pierce",
@@ -16386,18 +16424,6 @@
                     4,
                     4,
                     4
-                ],
-                "SummonStat": [
-                    "AttackPower"
-                ],
-                "SummonStatCoefficient": [
-                    [
-                        8141,
-                        9362,
-                        11805,
-                        13026,
-                        15468
-                    ]
                 ],
                 "Icon": "SKILLICON_UTAHA_EXSKILL",
                 "DamageDist": []
@@ -16788,7 +16814,7 @@
         "StarGrade": 2,
         "SquadType": "Support",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -17222,7 +17248,7 @@
         "StarGrade": 1,
         "SquadType": "Support",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -17670,7 +17696,7 @@
         "StarGrade": 1,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -18105,7 +18131,7 @@
         "StarGrade": 1,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -18529,7 +18555,7 @@
         "StarGrade": 1,
         "SquadType": "Support",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -18939,8 +18965,23 @@
         "StarGrade": 1,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [
-            99999
+        "Summons": [
+            {
+                "Id": 99999,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "MaxHP"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        0,
+                        0,
+                        2019,
+                        2019,
+                        3804
+                    ]
+                ]
+            }
         ],
         "Position": "Back",
         "BulletType": "Explosion",
@@ -19026,18 +19067,6 @@
                     3,
                     3,
                     3
-                ],
-                "SummonStat": [
-                    "MaxHP"
-                ],
-                "SummonStatCoefficient": [
-                    [
-                        0,
-                        0,
-                        2019,
-                        2019,
-                        3804
-                    ]
                 ],
                 "Icon": "COMMON_SKILLICON_OBSTACLE",
                 "Effect": {
@@ -19397,7 +19426,7 @@
         "StarGrade": 1,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -19820,7 +19849,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -20260,7 +20289,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -20705,8 +20734,23 @@
         "StarGrade": 2,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [
-            99999
+        "Summons": [
+            {
+                "Id": 99999,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "MaxHP"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        2926,
+                        3365,
+                        3804,
+                        4243,
+                        4682
+                    ]
+                ]
+            }
         ],
         "Position": "Back",
         "BulletType": "Mystic",
@@ -20792,18 +20836,6 @@
                     3,
                     3,
                     3
-                ],
-                "SummonStat": [
-                    "MaxHP"
-                ],
-                "SummonStatCoefficient": [
-                    [
-                        2926,
-                        3365,
-                        3804,
-                        4243,
-                        4682
-                    ]
                 ],
                 "Icon": "COMMON_SKILLICON_OBSTACLE",
                 "Effect": {
@@ -21183,7 +21215,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "Unarmed",
@@ -21645,7 +21677,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -22102,7 +22134,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -22582,7 +22614,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -23050,7 +23082,7 @@
         "StarGrade": 1,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -23474,7 +23506,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -23891,7 +23923,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -24312,7 +24344,7 @@
         "StarGrade": 2,
         "SquadType": "Support",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -24746,7 +24778,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -25174,7 +25206,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -25610,7 +25642,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -26067,7 +26099,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Mystic",
         "ArmorType": "Unarmed",
@@ -26507,8 +26539,23 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Vehicle",
-        "SummonIds": [
-            30000
+        "Summons": [
+            {
+                "Id": 30000,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "AttackPower"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        1941,
+                        2232,
+                        2814,
+                        3105,
+                        3687
+                    ]
+                ]
+            }
         ],
         "Position": "Back",
         "BulletType": "Pierce",
@@ -26594,18 +26641,6 @@
                     10,
                     10,
                     10
-                ],
-                "SummonStat": [
-                    "AttackPower"
-                ],
-                "SummonStatCoefficient": [
-                    [
-                        1941,
-                        2232,
-                        2814,
-                        3105,
-                        3687
-                    ]
                 ],
                 "Icon": "SKILLICON_CH0058_EXSKILL",
                 "DamageDist": []
@@ -26949,7 +26984,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -27410,7 +27445,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -27822,7 +27857,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -28257,7 +28292,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -28675,7 +28710,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -29169,7 +29204,7 @@
         "StarGrade": 2,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -29588,7 +29623,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -30024,7 +30059,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Explosion",
         "ArmorType": "HeavyArmor",
@@ -30509,7 +30544,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -30954,7 +30989,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -31496,7 +31531,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -31943,7 +31978,7 @@
         "StarGrade": 2,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "Unarmed",
@@ -32361,7 +32396,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -32852,7 +32887,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -33321,8 +33356,23 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Vehicle",
-        "SummonIds": [
-            30001
+        "Summons": [
+            {
+                "Id": 30001,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "AttackPower"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        903,
+                        1038,
+                        1309,
+                        1444,
+                        1715
+                    ]
+                ]
+            }
         ],
         "Position": "Back",
         "BulletType": "Explosion",
@@ -33432,18 +33482,6 @@
                     6,
                     6,
                     6
-                ],
-                "SummonStat": [
-                    "AttackPower"
-                ],
-                "SummonStatCoefficient": [
-                    [
-                        903,
-                        1038,
-                        1309,
-                        1444,
-                        1715
-                    ]
                 ],
                 "Icon": "SKILLICON_CH0164_EXSKILL",
                 "DamageDist": []
@@ -33853,7 +33891,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -34296,7 +34334,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -34783,7 +34821,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -35249,7 +35287,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -35710,7 +35748,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -36163,7 +36201,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -36626,7 +36664,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -37033,7 +37071,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -37486,8 +37524,23 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Vehicle",
-        "SummonIds": [
-            30002
+        "Summons": [
+            {
+                "Id": 30002,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "HealPower"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        1625,
+                        1868,
+                        2112,
+                        2356,
+                        2599
+                    ]
+                ]
+            }
         ],
         "Position": "Back",
         "BulletType": "Mystic",
@@ -37570,18 +37623,6 @@
                     5,
                     5,
                     4
-                ],
-                "SummonStat": [
-                    "HealPower"
-                ],
-                "SummonStatCoefficient": [
-                    [
-                        1625,
-                        1868,
-                        2112,
-                        2356,
-                        2599
-                    ]
                 ],
                 "Icon": "COMMON_SKILLICON_TRUCK",
                 "Effect": {
@@ -37972,7 +38013,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -38392,7 +38433,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -38572,6 +38613,13 @@
                                     2425,
                                     2710
                                 ]
+                            ],
+                            "Restrictions": [
+                                {
+                                    "Property": "SquadType",
+                                    "Operand": "Equal",
+                                    "Value": "Main"
+                                }
                             ],
                             "Channel": 103
                         }
@@ -38830,7 +38878,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -39290,7 +39338,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -39753,7 +39801,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -40196,7 +40244,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -40601,7 +40649,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -41043,7 +41091,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -41447,7 +41495,7 @@
         "Id": 20015,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "DefaultOrder": 93,
         "PathName": "Kaede",
@@ -41458,7 +41506,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -41714,13 +41762,15 @@
         "FavorAlts": [],
         "MemoryLobby": [
             6,
-            0
+            6
         ],
         "FurnitureInteraction": [
             [
                 6102
             ],
-            []
+            [
+                6102
+            ]
         ],
         "FavorItemTags": [
             "Toy",
@@ -41878,7 +41928,7 @@
         "Id": 20016,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "DefaultOrder": 94,
         "PathName": "Iroha",
@@ -41889,8 +41939,23 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Vehicle",
-        "SummonIds": [
-            30003
+        "Summons": [
+            {
+                "Id": 30003,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "AttackPower"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        1128,
+                        1557,
+                        2290,
+                        2888,
+                        3858
+                    ]
+                ]
+            }
         ],
         "Position": "Back",
         "BulletType": "Mystic",
@@ -41966,18 +42031,6 @@
                     7,
                     7,
                     6
-                ],
-                "SummonStat": [
-                    "AttackPower"
-                ],
-                "SummonStatCoefficient": [
-                    [
-                        1128,
-                        1557,
-                        2290,
-                        2888,
-                        3858
-                    ]
                 ],
                 "Icon": "SKILLICON_CH0156_EXSKILL",
                 "DamageDist": []
@@ -42148,13 +42201,15 @@
         "FavorAlts": [],
         "MemoryLobby": [
             6,
-            0
+            6
         ],
         "FurnitureInteraction": [
             [
                 6105
             ],
-            []
+            [
+                6105
+            ]
         ],
         "FavorItemTags": [
             "Books",
@@ -42311,7 +42366,7 @@
         "Id": 16009,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "DefaultOrder": 95,
         "PathName": "Michiru",
@@ -42322,7 +42377,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -42643,13 +42698,15 @@
         "FavorAlts": [],
         "MemoryLobby": [
             6,
-            0
+            6
         ],
         "FurnitureInteraction": [
             [
                 7102
             ],
-            []
+            [
+                7102
+            ]
         ],
         "FavorItemTags": [
             "Curios",
@@ -42817,7 +42874,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -43077,13 +43134,15 @@
         "FavorAlts": [],
         "MemoryLobby": [
             6,
-            0
+            6
         ],
         "FurnitureInteraction": [
             [
                 4106
             ],
-            []
+            [
+                4106
+            ]
         ],
         "FavorItemTags": [
             "Horticulture",
@@ -43251,7 +43310,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -43801,7 +43860,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -44237,7 +44296,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -44672,7 +44731,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -45197,7 +45256,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -45663,8 +45722,31 @@
         "StarGrade": 1,
         "SquadType": "Support",
         "TacticRole": "Vehicle",
-        "SummonIds": [
-            36001
+        "Summons": [
+            {
+                "Id": 36001,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "AttackPower",
+                    "CriticalPoint"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        1252,
+                        1799,
+                        2722,
+                        3504,
+                        4756
+                    ],
+                    [
+                        1252,
+                        1615,
+                        2147,
+                        2603,
+                        3266
+                    ]
+                ]
+            }
         ],
         "Position": "Back",
         "BulletType": "Pierce",
@@ -45754,26 +45836,6 @@
                     4,
                     4,
                     4
-                ],
-                "SummonStat": [
-                    "AttackPower",
-                    "CriticalPoint"
-                ],
-                "SummonStatCoefficient": [
-                    [
-                        1252,
-                        1799,
-                        2722,
-                        3504,
-                        4756
-                    ],
-                    [
-                        1252,
-                        1615,
-                        2147,
-                        2603,
-                        3266
-                    ]
                 ],
                 "Icon": "SKILLICON_CH0176_EXSKILL",
                 "DamageDist": []
@@ -46131,7 +46193,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -46658,7 +46720,7 @@
         "StarGrade": 1,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -47096,7 +47158,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Mystic",
         "ArmorType": "Unarmed",
@@ -47538,7 +47600,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "LightArmor",
@@ -47988,7 +48050,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -48470,7 +48532,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",
@@ -48916,7 +48978,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "HeavyArmor",
@@ -49392,7 +49454,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Pierce",
         "ArmorType": "Unarmed",
@@ -49789,7 +49851,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Mystic",
         "ArmorType": "Unarmed",
@@ -50207,7 +50269,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "Unarmed",
@@ -50610,7 +50672,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "LightArmor",
@@ -51055,7 +51117,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -51217,6 +51279,13 @@
                                     2170,
                                     2425
                                 ]
+                            ],
+                            "Restrictions": [
+                                {
+                                    "Property": "BulletType",
+                                    "Operand": "Equal",
+                                    "Value": "Mystic"
+                                }
                             ],
                             "Channel": 102
                         }
@@ -51474,7 +51543,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Tanker",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Front",
         "BulletType": "Mystic",
         "ArmorType": "Unarmed",
@@ -51921,7 +51990,7 @@
         "StarGrade": 3,
         "SquadType": "Main",
         "TacticRole": "Healer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Middle",
         "BulletType": "Mystic",
         "ArmorType": "Unarmed",
@@ -52352,7 +52421,7 @@
         "StarGrade": 1,
         "SquadType": "Main",
         "TacticRole": "DamageDealer",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "Unarmed",
@@ -52751,7 +52820,7 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Supporter",
-        "SummonIds": [],
+        "Summons": [],
         "Position": "Back",
         "BulletType": "Pierce",
         "ArmorType": "LightArmor",

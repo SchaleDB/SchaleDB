@@ -13,17 +13,17 @@
 
     --col-bg-explosive: rgba(167, 12, 25, 1);
     --col-bg-piercing: rgba(178, 109, 31, 1);
-    --col-bg-mystic-t: rgba(33, 111, 156, 1);
+    --col-bg-mystic: rgba(33, 111, 156, 1);
     --col-bg-explosive-t: rgba(167, 12, 25, 0.835);
     --col-bg-piercing-t: rgba(178, 109, 31, 0.835);
-    --col-bg-mystic: rgba(33, 111, 156, 0.835);
+    --col-bg-mystic-t: rgba(33, 111, 156, 0.835);
     --col-bg-buff: rgba(255, 79, 50, 0.122);
     --col-bg-debuff: rgba(63, 158, 238, 0.122);
     --col-bg-cc: rgba(175, 105, 246, 0.122);
     --col-bg-status: rgba(255, 200, 50, 0.122);
     --col-bg-normal: hsl(60, 0%, 45%);
-    --col-bg-striker: rgba(255, 255, 255, 0.3);
-    --col-bg-special: rgba(255, 255, 255, 0.3);
+    --col-bg-striker: rgba(204, 26, 37, 1);
+    --col-bg-special: rgba(0, 107, 255, 1);
     --col-bg-striker-t: rgba(204, 26, 37, 0.835);
     --col-bg-special-t: rgba(0, 107, 255, 0.835);
     --col-bg-position: rgb(44, 69, 99);
@@ -49,10 +49,10 @@
     --col-text-debuff: rgb(12, 39, 76);
     --col-text-cc: rgb(47, 12, 76);
     --col-text-status: rgb(76, 38, 12);
-    --col-text-striker: rgba(204, 26, 37, 1);
-    --col-text-special: rgba(0, 107, 255, 1);
+    --col-text-striker: rgb(255, 255, 255);
+    --col-text-special: rgb(255, 255, 255);
     --col-text-emphasis: rgb(0, 107, 255);
-    --col-text-stars: hsl(44, 100%, 48%);
+    --col-text-stars: rgb(219, 128, 0);
     --col-text-weaponstars: hsl(192, 100%, 48%);
     --col-text-compare-greater: hsl(152, 100%, 25%);
     --col-text-compare-less: hsl(355, 87%, 35%);
@@ -91,6 +91,7 @@
     --var-invert-dark-hue: 0deg;
     --var-animation-duration: 200ms;
     --var-tile-default-opacity: 0.4;
+    --var-brightness-filter: brightness(1.5); 
 }
 
 .theme-dark {
@@ -107,8 +108,6 @@
     --col-bg-debuff: rgba(12, 39, 76, 0.439);
     --col-bg-cc: rgba(50, 12, 78, 0.361);
     --col-bg-status: rgba(111, 53, 29, 0.478);
-    --col-bg-striker: rgba(204, 26, 37, 1);
-    --col-bg-special: rgba(0, 107, 255, 1);
     --col-bg-item-n: rgb(140, 147, 158);
     --col-bg-item-r: rgb(101, 141, 191);
     --col-bg-item-sr: rgb(168, 125, 81);
@@ -126,10 +125,8 @@
     --col-text-debuff: rgb(63, 158, 238);
     --col-text-cc: rgb(174, 106, 247);
     --col-text-status: rgb(255, 203, 51);
-    --col-text-striker: rgb(255, 255, 255);
-    --col-text-special: rgb(255, 255, 255);
     --col-text-emphasis: rgb(84, 168, 255);
-    --col-text-stars: hsl(44, 100%, 60%);
+    --col-text-stars: rgb(255, 201, 51);
     --col-text-weaponstars: hsl(192, 100%, 60%);
     --col-text-compare-greater: hsl(152, 100%, 35%);
     --col-text-compare-less: hsl(355, 87%, 48%);
@@ -154,6 +151,7 @@
     --var-invert-light-hue: 0deg;
     --var-invert-dark-hue: 180deg;
     --var-tile-default-opacity: 0.7;
+    --var-brightness-filter: brightness(0.5); 
 }
 
 .high-contrast {

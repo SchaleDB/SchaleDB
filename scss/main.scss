@@ -322,22 +322,6 @@ h1 small {
     background-color: var(--col-bg-mystic-t);
 }
 
-.ba-slider-label {
-    cursor: default;
-    font-weight: bold;
-    min-width: 60px;
-    text-align: center;
-
-    background-color: var(--col-theme-accent);
-    transition: background-color ease var(--var-animation-duration);
-    border-radius: 1rem;
-    padding: 0.1rem 0.5rem;
-    border: 1px solid transparent;
-    color: var(--col-theme-text);
-
-    @include unselectable;
-}
-
 .ba-gear-icon {
     height: 64px;
     width: 64px;
@@ -495,10 +479,6 @@ h1 small {
     background-position: center center; */
 }
 
-.ba-skill-s {
-    height: 54px !important;
-    min-width: 54px !important;
-}
 
 .ba-raid-skill {
     height: 64px;
@@ -507,16 +487,20 @@ h1 small {
     object-position: center;
 }
 
-.bg-skill-explosion {
-    background-color: var(--col-bg-explosive);
-}
+.bg-skill {
 
-.bg-skill-pierce {
-    background-color: var(--col-bg-piercing);
-}
+    &.explosion {
+        background-color: var(--col-bg-explosive);
+    }
+    
+    &.pierce {
+        background-color: var(--col-bg-piercing);
+    }
+    
+    &.mystic {
+        background-color: var(--col-bg-mystic);
+    }
 
-.bg-skill-mystic {
-    background-color: var(--col-bg-mystic);
 }
 
 .ba-panel {
@@ -583,12 +567,29 @@ hr {
 }
 
 .ba-bond-icon {
-    width: 54px;
-    border-radius: 32px;
-    height: 54px;
-    object-fit: cover;
-    object-position: top;
-    @include card-shadow;
+
+    img {
+        width: 52px;
+        height: 52px;
+        margin-right: 4px;
+        margin-bottom: 4px;
+        object-fit: cover;
+        object-position: top;
+        @include circular;
+        @include card-shadow;
+    }
+
+    &::after {
+        content: "";
+        height: 24px;
+        width: 24px;
+        background-image: url(../images/ui/School_Icon_Schedule_Favor.png);
+        background-size: contain;
+
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
 }
 
 #ba-student-img {
@@ -605,26 +606,6 @@ hr {
 #ba-student-weapon-img {
     width: 100%;
     @include sharp-img;
-}
-
-.ba-weapon-skill-plus {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 10px;
-    left: 52px;
-    top: 4px;
-    color: white;
-    padding: 2px;
-    line-height: 16px;
-    font-size: 16px;
-    text-align: center;
-}
-
-.ba-weapon-skill-plus-s {
-    @extend .ba-weapon-skill-plus;
-
-    left: 42px;
 }
 
 .label-qty {
@@ -1100,6 +1081,7 @@ a.nav-link.disabled {
 .ba-search-result-item {
     padding: 0.5rem 0.25rem;
     display: flex;
+    width: 100%;
     align-items: stretch;
     cursor: pointer;
     border-radius: 0.25rem;
@@ -1114,16 +1096,15 @@ a.nav-link.disabled {
 }
 
 .ba-search-img {
-    display: flex;
-    align-items: center;
     margin-right: 0.75rem;
-}
 
-.ba-search-img img {
-    object-fit: cover;
-    object-position: center;
-    /* @include sharp-img; */
-    @include circular;
+    img {
+        object-fit: cover;
+        @include circular;
+
+        width: 48px;
+        height: 48px;
+    }
 }
 
 .ba-search-name {
@@ -1131,6 +1112,7 @@ a.nav-link.disabled {
     font-size: 1.125rem;
     font-weight: 400;
     line-height: 1.25;
+    @include truncate-text;
 }
 
 .ba-search-subtitle {

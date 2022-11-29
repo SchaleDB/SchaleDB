@@ -12,12 +12,13 @@
     <script src="./lib/popperjs-2.11.6/popper.min.js"></script>
     <link href="./lib/fontawesome-free-6.1.1/css/fontawesome.min.css" rel="stylesheet">
     <link href="./lib/fontawesome-free-6.1.1/css/solid.min.css" rel="stylesheet">
+    <link href="./lib/fontawesome-free-6.1.1/css/regular.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Oswald&display=swap" rel="stylesheet"> 
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="manifest" href="./manifest.json" crossorigin="use-credentials">
-    <link href="css/main.css?v=63" rel="stylesheet">
+    <link href="css/main.css?v=65" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQEWDXR13H"></script>
     <script>
@@ -113,8 +114,20 @@
                                     </div>
                                 </span>
                             </div>
-                            <div class="text-muted">
+                            <div class="text-muted mb-3">
                                 <small data-localize-id="ui,navbar_settings_collection_description"></small>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="flex-fill me-4" data-localize-id="ui,navbar_settings_custombuffs"></span>
+                                <span class="d-flex align-items-center">
+                                    <div id="ba-navbar-custombuffs-toggle" class="btn-group">
+                                        <button type="button" id="ba-navbar-custombuffs-toggle-false" class="btn btn-sm btn-dark" onclick="toggleCustomBuffs(false)" data-localize-id="ui,setting_off"></button>
+                                        <button type="button" id="ba-navbar-custombuffs-toggle-true" class="btn btn-sm btn-dark" onclick="toggleCustomBuffs(true)" data-localize-id="ui,setting_on"></button>
+                                    </div>
+                                </span>
+                            </div>
+                            <div class="text-muted">
+                                <small data-localize-id="ui,navbar_settings_custombuffs_description"></small>
                             </div>
                         </div>
                     </div>
@@ -192,8 +205,19 @@
                                 <button id="collection-data-import-planner-btn" type="button" class="btn btn-dark" onclick="importResourcePlannerData()"><i class="fa-solid fa-right-to-bracket me-2"></i><span data-localize-id="ui,collection_import_planner"></span></button>
                             </div>
                         </div>
-                        
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-changelog" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: none;">
+                    <h5 class="modal-title" data-localize-id="ui,changelog"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="modal-changelog-content" class="modal-body m-3 p-0 changelog">
                 </div>
             </div>
         </div>
@@ -206,9 +230,9 @@
     </div>
 </body>
 <script>
-    const cache_ver = 63
+    const cache_ver = 65
     document.getElementById('loading-spinner').style.display = null;
     window.setTimeout(x => {document.getElementById('loading-skipmsg').style.display = null;}, 10000);
 </script>
-<script src="js/common.min.js?v=63"></script>
+<script src="js/common.min.js?v=65"></script>
 </html>

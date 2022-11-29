@@ -14,7 +14,7 @@
 
                             <div class="flex-fill d-flex gap-2">
                                 <input type="search" class="form-control h-100" id="item-search-text" data-ph-localize-id="ui,filter_by_name" autocomplete="off">
-                                <button id="item-search-filters-btn" class="btn btn-dark tooltip-button" type="button" data-bs-toggle="collapse" data-bs-target="#item-search-filters-panel"><i class="fa-solid fa-filter"></i></button>
+                                <button id="item-search-filters-btn" class="btn btn-dark tooltip-button" type="button" data-tooltip-id="ui,filters" data-bs-toggle="collapse" data-bs-target="#item-search-filters-panel"><i class="fa-solid fa-filter"></i></button>
                             </div>
                         </div>
                         <div id="item-search-filters-panel" class="collapse">
@@ -28,12 +28,12 @@
                                     <div class="flex-fill"></div>
                                     <div id="item-search-displaytype" class="ms-4">
                                         <div class="btn-group">
-                                            <button id="item-search-displaytype-detailed" class="btn btn-sm btn-dark" onclick="setGridItemDisplayStyle('detailed')" style="font-size: 0;">
+                                            <button id="item-search-displaytype-detailed" class="btn btn-sm btn-dark tooltip-button" onclick="setGridItemDisplayStyle('detailed')" data-tooltip-id="ui,list_style_detailed" style="font-size: 0;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-grid-fill" viewBox="0 0 16 16" style="padding: 2px;">
                                                     <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/>
                                                 </svg>
                                             </button>
-                                            <button id="item-search-displaytype-compact" class="btn btn-sm btn-dark" onclick="setGridItemDisplayStyle('compact')" style="font-size: 0;">
+                                            <button id="item-search-displaytype-compact" class="btn btn-sm btn-dark tooltip-button" onclick="setGridItemDisplayStyle('compact')" data-tooltip-id="ui,list_style_compact" style="font-size: 0;">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-grid-3x3-gap-fill" viewBox="0 0 16 16" style="padding: 2px;">
                                                     <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"/>
                                                 </svg>

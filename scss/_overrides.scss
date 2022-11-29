@@ -27,6 +27,12 @@
         z-index: 5 !important;
     }
 
+    &.disabled, &:disabled {
+        background-color: var(--col-theme-accent);
+        color: var(--col-btn-primary);
+        opacity: 0.5;
+    }
+
 }
 
 .dropdown-menu {
@@ -48,6 +54,7 @@
     background-color: var(--col-theme-background);
     border-color: var(--col-theme-accent);
     @include transition(background-color);
+    min-width: 5rem;
 
     .dropdown-item {
         color: var(--col-btn-primary);
@@ -63,6 +70,11 @@
             background-color: var(--col-btn-active-secondary);
         }
     }
+}
+
+.dropdown-toggle::after {
+    //content: "<i class='caret fa-solid fa-caret-down me-2'></i>";
+    //display: none;
 }
 
 // Navs
@@ -144,6 +156,11 @@
         font-style: italic;
         color: var(--col-theme-text-t);
     }
+
+    &:disabled {
+        background-color: var(--col-theme-accent);
+        opacity: 0.5;
+    }
 }
 
 .form-select {
@@ -152,7 +169,7 @@
     border-color: transparent !important;
     box-shadow: none !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
-    
+
     option {
         background-color: var(--col-theme-background);
         color: var(--col-theme-text);
@@ -202,6 +219,11 @@
 ::-webkit-slider-runnable-track {
     background-color: var(--col-theme-accent) !important;
 }
+
+// ::-webkit-inner-spin-button {
+//     -webkit-appearance: none;
+// }
+
 
 ::-moz-range-thumb {
     background-color: var(--col-theme-text) !important;

@@ -7,7 +7,7 @@
 }
 
 @mixin circular {
-    border-radius: 999px;
+    border-radius: 999px !important;
 }
 
 @mixin drop-shadow {
@@ -48,6 +48,13 @@
 
 @mixin flex($align, $justify) {
     display: flex;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+@mixin flex-column($align, $justify) {
+    display: flex;
+    flex-direction: column;
     align-items: $align;
     justify-content: $justify;
 }
@@ -119,11 +126,18 @@
 
 //breakpoints
 
+$break-xs: 370px;
 $break-sm: 576px;
 $break-md: 768px;
 $break-lg: 992px;
 $break-xl: 1200px;
 $break-xxl: 1400px;
+
+@mixin xxs-down() {
+    @media only screen and (max-width: ($break-xs - 1px)) {
+        @content;
+    }
+}
 
 @mixin xs-down() {
     @media only screen and (max-width: ($break-sm - 1px)) {

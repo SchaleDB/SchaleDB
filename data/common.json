@@ -410,34 +410,23 @@
             "schooldungeon_max": 4, 
             "current_gacha": [
                 {
-                    "characters": [
-                        20020,
-                        10001
-                    ],
-                    "start": 1668564000,
+                    "characters": [20020, 10001], 
+                    "start": 1668564000, 
                     "end": 1669773600
                 }
             ], 
             "current_events": [
-                {
-                    "event": 701,
-                    "start": 1668564000,
-                    "end": 1669773600
-                }
+                {"event": 701, "start": 1668564000, "end": 1669773600}
             ], 
             "current_raid": [
-                {"raid": 9000, "start": 1667959200, "end": 1668538800},
+                {"raid": 9000, "start": 1667959200, "end": 1668538800}, 
                 {
-                    "raid": 1,
-                    "terrain": "Street",
-                    "start": 1668564000,
+                    "raid": 1, 
+                    "terrain": "Street", 
+                    "start": 1668564000, 
                     "end": 1669143600
-                },
-                {
-                    "raid": 10000,
-                    "start": 1669773600,
-                    "end": 1670353200
-                }
+                }, 
+                {"raid": 10000, "start": 1669773600, "end": 1670353200}
             ]
         }, 
         {
@@ -450,7 +439,7 @@
             "campaign_max": 18, 
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810, 
-                  811,   812,   701, 10801, 10802, 10803
+                  811,   812,   813,   701, 10801, 10802, 10803
             ], 
             "event_701_max": 8, 
             "event_701_challenge_max": 0, 
@@ -459,39 +448,51 @@
             "schooldungeon_max": 3, 
             "current_gacha": [
                 {
-                    "characters": [10038, 20014, 10039, 10013], 
-                    "start": 1667872800, 
-                    "end": 1669082400
+                    "characters": [20015, 20016], 
+                    "start": 1669687200, 
+                    "end": 1670896800
                 }, 
                 {
-                    "characters": [20004, 10021, 20005], 
-                    "start": 1669082400, 
-                    "end": 1669687200
+                    "characters": [10040, 10018], 
+                    "start": 1670896800, 
+                    "end": 1671501600
                 }
             ], 
             "current_events": [
-                {"event": 10803, "start": 1669082400, "end": 1669687200}
+                {"event": 813, "start": 1669687200, "end": 1670896800}
             ], 
             "current_raid": [
-                {"raid": 2000, "start": 1668477600, "end": 1669057200}, 
+                {"raid": 3000, "start": 1669687200, "end": 1670266800}, 
                 {
-                    "raid": 2, 
+                    "raid": 6, 
                     "terrain": "Indoor", 
-                    "start": 1669082400, 
-                    "end": 1669662000
-                }, 
-                {"raid": 3000, "start": 1669687200, "end": 1670266800}
+                    "start": 1670292000, 
+                    "end": 1670871600
+                }
             ]
         }
     ], 
     "changelog": [
         {
+            "date": "2022/11/29", 
+            "contents": [
+                "<h6>Support Stats for Striker Students</h6>", 
+                "<ul><li>Ability to set up to two Special students and add the calculated support stats on to the Striker's stats.</li><li>The level, equipment etc. of added Specials can be customised by clicking the <i class='fa-solid fa-gear'></i> icon.</li><li>Specials that are saved to your collection will automatically be set with the saved parameters.</li></ul>", 
+                "<h6>Custom Buff Input (Experimental)</h6>", 
+                "<ul><li>Added an experimental feature to add custom amounts as buffs. Supports adding both base or percentage amounts and negative values can be added for debuffs.</li><li>To use this feature you must enable the option in the settings menu.</li></ul>", 
+                "<h6>Other Improvements</h6>", 
+                "<ul><li>Introduced a tabbed layout for the student stat settings menu.</li><li>Student summons and vehicles are now selected via a dropdown menu above the attributes table.</li><li>The attributes for Utaha's Basic Skill turret can now be viewed.</li><li>The search box for selecting buffs to apply to a student can now be navigated with the keyboard.</li><li>Added a button to quickly add the selected character's buffs as well as buffs from the selected Specials.</li><li>A toggle has been added to turn buff effects on/off.</li><li>A visual overview of the buffs applied to a character will now be displayed.</li></ul>", 
+                "<h6>Bug Fixes</h6>", 
+                "<ul><li>Specials' sub skill buffs that affect the whole party no longer incorrectly affect summons' stats directly.</li><li>Fixed a bug that could cause the popup window to become stuck when navigating back or forward in the browser.</li><li>Buffs granted by targeted EX/Basic skills will no longer be applied to Special students if they are chosen.</li><li>Buffs that are only applied conditionally to students (e.g. Akane (Bunny)'s sub skill) will no longer be applied if the student does not meet the conditions.</li><li>Fixed rounding inconsistencies in the calculation of support stats.</li></ul>"
+            ]
+        }, 
+        {
             "date": "2022/11/16", 
             "contents": [
                 "Added information for Himari.", 
-                "Added the ability to set student buffs on a student's stat display screen.",
-                "A student's own buffs as well as buffs that can be applied from other students can be set.",
-                "For skills that grant stacking or conditional buffs, the stack count/condition state can be toggled by clicking on the stack counter.",
+                "Added the ability to set student buffs on a student's stat display screen.", 
+                "A student's own buffs as well as buffs that can be applied from other students can be set.", 
+                "For skills that grant stacking or conditional buffs, the stack count/condition state can be toggled by clicking on the stack counter.", 
                 "When selecting two skills that grant buffs that overwrite each other, a warning will be displayed and only the first effect will be applied."
             ]
         }, 
@@ -554,94 +555,6 @@
             "date": "2022/09/14", 
             "contents": [
                 "Add alternate maskless sprites for Wakamo and Arius students."
-            ]
-        }, 
-        {
-            "date": "2022/09/11", 
-            "contents": [
-                "Display damage reduction from DEF for enemies.", 
-                "Improved Crit Chance tooltip to display more calculations for common enemy Crit RES values.", 
-                "Added icons for stats.", 
-                "Fixed some incorrect EN skill descriptions.", 
-                "Added new keybind for Search [/] and Student List [L]. <a href='https://github.com/lonqie/SchaleDB/pull/12'>(pr/12)</a>"
-            ]
-        }, 
-        {
-            "date": "2022/09/03", 
-            "contents": [
-                "Items: Improved load performance of item lists.", 
-                "Items: Shops from which an item can be purchased are now displayed."
-            ]
-        }, 
-        {
-            "date": "2022/08/31", 
-            "contents": [
-                "Items: Visual overhaul for item lists (can be toggled between the old, more compact layout and the new, more detailed layout) and added filters and sort options.", 
-                "Items: Rearranged items into three tabs (Items, Furniture and Equipment) and added information for Consumable and Collectible type items.", 
-                "Crafting: Visual overhaul to match the other pages.", 
-                "Crafting: Corrected crafting nodes for Global server. (Note: the probability for 2nd Node items shown assume that the 2nd Node is chosen, this is not guaranteed for common grade nodes. i.e. you may get an item from either the 1st or 2nd Node)", 
-                "Improved the Search Bar to show more results and now searches Craft Nodes and Event Stages. Stages can now be searched for by name, area, stage type or event name.", 
-                "Recollection Lobbies and Furniture Interactions will no longer display if it has not been implemented yet on the selected Game Server.", 
-                "Changing Game Server or Language is now instant without a page reload.", 
-                "Various Translation updates and fixes."
-            ]
-        }, 
-        {
-            "date": "2022/08/24", 
-            "contents": [
-                "Students: Added information for Kazusa and Moe.", 
-                "Stages: Added information for \"Sweet Secrets and Gun Fights\" Event Stages."
-            ]
-        }, 
-        {
-            "date": "2022/08/23", 
-            "contents": [
-                "Students: Added tooltips to show calculated DMG reduction from DEF, Crit Chance and Stability Minimum DMG on student stat tables.", 
-                "Items: Corrected drop chances from bounty stages on Artifact pages. (Probability shown is the chance of obtaining at least one item)", 
-                "Translation updates."
-            ]
-        }, 
-        {
-            "date": "2022/08/15", 
-            "contents": [
-                "Items: Show drop stages for which the item can drop through an item box."
-            ]
-        }, 
-        {
-            "date": "2022/08/14", 
-            "contents": [
-                "Localization Update: Added and updated various translations including Raid skills in all languages."
-            ]
-        }, 
-        {
-            "date": "2022/08/09", 
-            "contents": [
-                "Students: Added information for Saori.", 
-                "Added more Thai and Chinese Translations (Thanks <a href='https://github.com/Blue-Roar'>Blue-Roar</a> & <a href='https://github.com/TKRotund'>TKRotund</a>)."
-            ]
-        }, 
-        {
-            "date": "2022/08/05", 
-            "contents": [
-                "Added Thai language support.", 
-                "Crafting: Show drop quantity ranges on crafting node items.", 
-                "Students: Fixed incorrect Enhanced+ Skill on Nonomi (Swimsuit)."
-            ]
-        }, 
-        {
-            "date": "2022/08/02", 
-            "contents": [
-                "New feature: Ability to track students in your collection. Schale DB will remember the level, stars, equipment and relationship that you set for each student that you add to your collection. Once you add a student to your collection, you can filter students by owned / not owned.", 
-                "Added ability to import and export your student collection to transfer to another person or browser. Also supports importing data from <a href='https://justin163.com/planner/' class='text-emphasis'>Justin163's Resource Planner</a> (Go to Transfer > Export to get the data string you can import)", 
-                "Added More Simplified Chinese translations (<a href='https://github.com/Blue-Roar'>Blue-Roar</a>)"
-            ]
-        }, 
-        {
-            "date": "2022/07/31", 
-            "contents": [
-                "Added Simplified Chinese language support. (Huge thanks to <a href='https://github.com/Blue-Roar'>Blue-Roar</a> for providing these.)", 
-                "Crafting: Added English translations for new craft nodes.", 
-                "Improved font display for Korean and Chinese languages."
             ]
         }
     ]

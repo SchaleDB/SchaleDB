@@ -8,19 +8,15 @@
                             <div class="p-2 ba-panel">
                                 <div class="d-flex align-items-end p-2">
                                     <img src="images/ui/Image_Char_Arona2.png" height="120">
-                                    <h1>Welcome, Sensei!</h1>
+                                    <h1 data-localize-id="ui,home_welcome"></h1>
                                 </div>
-                                <div class="">
-                                    <p>Schale DB is an unofficial database for the mobile game <i class="text-bold">Blue Archive</i> developed by Nexon Games and published by Yostar (Japan) and Nexon (Global) for iOS and Android.</p>
-                                    <p>Please select your game server using the settings menu <i class="fa-solid fa-gear mx-1"></i> to see only information that has been released on that server.</p>
-                                    <h5>Features</h5>
-                                    <ul>
-                                        <li>View Student info, skills and calculate their stats at any level, star grade or equipment tier, including their summon or vehicle.</li>
-                                        <li>Complete Items, Equipment and Furniture database.</li>
-                                        <li>Reward drops, maps and detailed enemy information for all Campaign, Event Quest, Challenge and Daily stages.</li>
-                                        <li>Stats and Skill information for Total Assault, Joint Exercise and Combined Operation raids.</li>
-                                        <li>View the chances of possible items received from crafting nodes.</li>
+                                <div>
+                                    <p data-localize-id="ui,home_introduction"></p>
+                                    <p data-localize-id="ui,home_change_server"></p>
+                                    <h5 data-localize-id="ui,home_features"></h5>
+                                    <ul data-localize-id="ui,home_features_list">
                                     </ul>
+                                    <p data-localize-id="ui,home_translations_help"></p>
                                 </div>
                             </div>
                         </div>
@@ -69,13 +65,12 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="d-flex flex-wrap align-items-center justify-content-center mb-1">
-                                <button class="btn btn-dark m-1" data-bs-toggle="modal" data-bs-target="#ba-home-modal-changelog"><i class="fa-solid fa-file-lines me-2"></i>Changelog</button>
+                                <button class="btn btn-dark m-1" data-bs-toggle="modal" data-bs-target="#modal-changelog"><i class="fa-solid fa-file-lines me-2"></i><span data-localize-id="ui,changelog"></span></button>
                                 <div class="m-1">
                                     <a href='https://ko-fi.com/A0A8CH8Q4' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi1.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com'/></a>
                                 </div>
                             </div>
-                            <small class="d-inline-block w-100 text-center">Schale DB is developed and maintained by lonqie.<br>Additional translations contributed by Blue-Roar (CN), TKRotund (TH)<br>Please report any issues, feedback or suggestions to me on Discord: lonqie#2708.<br>All game artwork, information and assets used in this database are the property and copyright of Nexon Games &amp; Yostar.
-                                <br>
+                            <small class="d-inline-block w-100 text-center"><p class="mb-1" data-localize-id="ui,home_footer_text"></p>
                                 <a href='#' class="text-emphasis" data-bs-toggle="modal" data-bs-target="#ba-home-modal-privacy">Privacy</a> | <a href='https://github.com/lonqie/SchaleDB' class="text-emphasis">GitHub</a> | <a href='https://trello.com/b/7FnXxi05' class="text-emphasis">Trello</a>
                             </small>
                         </div>
@@ -84,18 +79,6 @@
             </div>
         </div>
     </div>    
-</div>
-<div class="modal fade" id="ba-home-modal-changelog" tabindex="-1">
-    <div class="modal-dialog modal-lg modal-fullscreen-sm-down">
-        <div class="modal-content">
-            <div class="modal-header" style="border-bottom: none;">
-                <h5 class="modal-title">Changelog</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div id="ba-home-modal-changelog-content" class="modal-body p-3 changelog">
-            </div>
-        </div>
-    </div>
 </div>
 <div class="modal fade" id="ba-home-modal-privacy" tabindex="-1">
     <div class="modal-dialog modal-lg modal-fullscreen-sm-down">

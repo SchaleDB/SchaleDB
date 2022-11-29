@@ -23,7 +23,7 @@ const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 50
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_02", "Defense": "TimeAttack_SlotBG_01", "Destruction": "TimeAttack_SlotBG_03"}
 const searchDelay = 100
 const altSprite = [10017, 10033, 10041, 10042, 10043, 10048, 20009, 20014]
-
+const buffIconKeys = {"AttackPower": "ATK","DefensePower": "DEF","CriticalPoint": "CriticalChance","CriticalDamageRate": "CriticalDamage","CriticalDamageResistRate": "CriticalDamageRateResist","DodgePoint": "Dodge","HealEffectivenessRate": "HealEffectiveness","AccuracyPoint": "HIT","MaxHP": "MAXHP","DefensePenetration": "Penetration","StabilityPoint": "Stability","RegenCost": "CostRegen"}
 const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','AmmoCount']
 const studentStatListFull = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','AttackSpeed','BlockRate','DefensePenetration', 'AmmoCount']
 const enemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','MoveSpeed','AmmoCount']
@@ -138,9 +138,12 @@ let statPreviewIncludeExGear
 let statPreviewIncludeBond
 let statPreviewIncludeBondAlts
 let statPreviewIncludeEquipment
-let statPreviewSupportStats = false
-let statPreviewSummonStats = false
+let statPreviewIncludeBuffs
+let statPreviewViewSupportStats = false
+let statPreviewSelectedChar = 0
 let statPreviewExternalBuffs
+let statPreviewCustomBuffs
+let statPreviewSupportStats
 let studentCollection = {}
 
 // Shared Timeouts
@@ -148,6 +151,7 @@ let collectionUpdateTimeout
 let toastMessageTimeout
 let searchDelayTimeout
 let eventRefreshInterval
+let recalculationLimitTimeout
 
 let compareMode = false
 let selectCompareMode = false
@@ -175,6 +179,7 @@ let region
 let student_bondalts
 let darkTheme
 let highContrast
+let enableCustomBuffs = false
 let raid
 let selectedEnemy = 0
 let raid_difficulty = 0
@@ -408,6 +413,17 @@ let itemSearchOptions = {
         let AttackPower = Math.ceil((Math.round((character.AttackPower1 + (character.AttackPower100-character.AttackPower1)*levelscale).toFixed(4))*transcendenceAttack).toFixed(4))
         let DefensePower = Math.round((character.DefensePower1 + (character.DefensePower100-character.DefensePower1)*levelscale).toFixed(4))
         let HealPower = Math.ceil((Math.round((character.HealPower1 + (character.HealPower100-character.HealPower1)*levelscale).toFixed(4))*transcendenceHeal).toFixed(4))
+        
+        this.level = level
+        this.terrain = [
+            character.StreetBattleAdaptation ? character.StreetBattleAdaptation : 2,
+            character.OutdoorBattleAdaptation ? character.OutdoorBattleAdaptation : 2,
+            character.IndoorBattleAdaptation ? character.IndoorBattleAdaptation : 2
+        ]
+        this.activeBuffs = {}
+        this.bulletType = character.BulletType
+        this.armorType = character.ArmorType
+
         this.stats['MaxHP'] = [MaxHP,0,1]
         this.stats['AttackPower'] = [AttackPower,0,1]
         this.stats['DefensePower'] = [DefensePower,0,1]
@@ -525,22 +541,60 @@ let itemSearchOptions = {
     }
 
     getStrikerBonus(stat) {
-        return Math.floor(((this.stats[stat][0]+this.stats[stat][1])*this.stats[stat][2]).toFixed(4)*striker_bonus_coefficient[stat])
+        return Math.floor(this.getTotal(stat)*striker_bonus_coefficient[stat])
+    }
+
+    getStabilityMinDamageMod() {
+        let stability =  this.getTotal('StabilityPoint')
+        return (stability / (stability + 1000)) + 0.2
     }
 
     getStabilityMinDamage() {
-        let stability =  this.getTotal('StabilityPoint')
-        return parseFloat((((stability / (stability + 1000)) + 0.2)*100).toFixed(2)) + "%"
+        return parseFloat(((this.getStabilityMinDamageMod())*100).toFixed(2)) + "%"
+    }
+
+    getDefenseDamageReductionMod(piercing = 0) {
+        let defense =  Math.max(this.getTotal('DefensePower') - piercing, 0)
+        return (10000000 / (defense * 6000 + 10000000))
     }
 
     getDefenseDamageReduction() {
-        let defense =  this.getTotal('DefensePower')
-        return parseFloat(((1 - (10000000 / (defense * 6000 + 10000000)))*100).toFixed(2)) + "%"
+        return parseFloat(((1 - this.getDefenseDamageReductionMod())*100).toFixed(2)) + "%"
     }
 
     getCriticalHitChance(critRes) {
         let crit =  this.getTotal('CriticalPoint')
-        return Math.max(Math.min(parseFloat(((1 - (4000000 / ((crit - critRes) * 6000 + 4000000)))*100).toFixed(2)), 80), 0) + "%"
+        return Math.max(Math.min(parseFloat(((1 - (4000000 / ((crit - critRes) * 6000 + 4000000)))*100).toFixed(2)), 100), 0) + "%"
+    }
+
+    addActiveBuffIcon(stat, value, stacks = 1) {
+        stat = stat.replace('_Coefficient','').replace('_Base','').replace('100','').replace('1','')
+        let buffIconKey
+        if (stat.startsWith('Special_')) {
+            buffIconKey = stat
+        } else {
+            buffIconKey = `${(value > 0) ? 'Buff' : 'Debuff'}_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
+        }
+        if (buffIconKey in this.activeBuffs) {
+            this.activeBuffs[buffIconKey] += stacks
+        } else {
+            this.activeBuffs[buffIconKey] = stacks
+        }
+    }
+
+    renderActiveBuffs(container, max) {
+        let buffIcons = '', buffCount = 0, buffExtraCount = 0
+        for (const buffIcon in this.activeBuffs) {
+            const stackCount = this.activeBuffs[buffIcon]
+            buffCount++
+            if (buffCount <= max) {
+                buffIcons += `<div class="active-buff"><img src="images/buff/Combat_Icon_${buffIcon}.png" width="22" height="26" class="">${stackCount > 1 ? `<span class="stack-count">${stackCount}</span>` : ''}</div>`
+            } else {
+                buffExtraCount++
+            }
+        }
+        if (buffExtraCount) buffIcons += `<div class="px-1"><b>+${buffExtraCount}</b></div>`
+        $(container).toggle(buffCount > 0).html(buffIcons)
     }
 
     static isRateStat(stat) {
@@ -572,19 +626,106 @@ let itemSearchOptions = {
             return ((level-1)/99).toFixed(4)
         }
     }
+
+    /**
+     * Calculates the maximum damage dealt to a target by this character
+     * @param {CharacterStats} target 
+     */
+    calculateDamage(target, damageRate, terrain) {
+        const totalAttack = this.getTotal('AttackPower')
+        const damagedRatio = (20000 - target.getTotal('DamagedRatio')) / 10000
+        const levelMod = Math.max(Math.min(1 - (target.level - this.level) * 0.02, 1), 0.4)
+        const defMod = target.getDefenseDamageReductionMod()
+        const terrainMod = 0.8 + this.terrain[terrain] * 0.1
+        const effectiveMod = this.getEffectiveMod(target.armorType)
+        return totalAttack * terrainMod * effectiveMod * damageRate * defMod * damagedRatio * levelMod
+    }
+
+    getEffectiveMod(armorType) {
+        let effMod = 1
+        switch (this.bulletType) {
+            case 'Explosion':
+                if (armorType == 'LightArmor') {
+                    effMod += this.getTotal('EnhanceExplosionRate') / 10000
+                } else if (armorType == 'Unarmed') {
+                    effMod -= 0.5
+                }
+                break
+            case 'Pierce':
+                if (armorType == 'HeavyArmor') {
+                    effMod += this.getTotal('EnhancePierceRate') / 10000
+                } else if (armorType == 'LightArmor') {
+                    effMod -= 0.5
+                }
+                break
+            case 'Mystic':
+                if (armorType == 'Unarmed') {
+                    effMod += this.getTotal('EnhanceMysticRate') / 10000
+                } else if (armorType == 'HeavyArmor') {
+                    effMod -= 0.5
+                }
+                break
+        }
+        return effMod
+    }
+
 }
 
-class ExternalBuffs {
+class Buffs {
+
+    buffs = []
+
+    addBuff(buff) {
+        this.buffs.push(buff)
+    }
+
+    removeBuff(index) {
+        this.buffs.splice(index, 1)
+    }
+
+    static getBuffAmountText(buff) {
+        let text = ''
+        buff.Skill.Effect.Effects.forEach((effect, i) => {
+            if (text != "") {
+                text += ", "
+            }
+            let value
+            if ('StackSame' in effect) {
+                value = effect.Value[0][buff.Level-1] * buff.Stacks
+            } else {
+                value = effect.Value[buff.Stacks-1][buff.Level-1]
+            }
+            text += `<span data-effect='${i}'>${getStatName(effect.Stat)} <b>${value < 0 ? '' : '+'}${ExternalBuffs.statValueToString(effect.Stat, value)}</b></span>`
+            
+        })
+        return text
+    }
+
+    static statValueToString(stat, val) {
+        if (stat.endsWith('_Coefficient')) {
+            return `${parseFloat((val/100).toFixed(1))}%`
+        } else {
+            return val.toLocaleString()
+        }
+    }
+}
+
+class ExternalBuffs extends Buffs {
 
     elements = {
         controls: null,
         searchBox: null,
+        searchButton: null,
+        autoAddButton: null,
         searchResults: null,
     }
-    buffs = []
+    searchResultPopper = null
     searchBoxTimeout = null
+    searchResultsSelection = 0
+    searchResultsCount = 0
 
     constructor(elements) {
+        super()
         this.elements = elements
 
         //Bind control update events
@@ -592,46 +733,52 @@ class ExternalBuffs {
         $(this.elements.controls).on('click', '.stack-count', (e) => {this.updateStackCount(e.currentTarget.dataset.index)})
         $(this.elements.controls).on('click', 'button.buff-remove', (e) => {this.removeBuff(e.currentTarget.dataset.index)})
 
-        //Bind search result popup
-        const searchResultPopper = Popper.createPopper(this.elements.searchBox, this.elements.searchResults, {
-            placement: 'top-start',
-            modifiers: [
-                {
-                    name: 'offset',
-                    options: {
-                        offset: [0, 8]
-                    }
-                },
-                {
-                    name: 'flip',
-                    options: {
-                        fallbackPlacements: ['bottom-start', 'top-start'],
-                    }
-                },
-                {
-                    name: 'preventOverflow',
-                    options: {
-                        boundary: $('ba-info-statpreview-panel .panel-sliders')[0],
-                    }
-                },
-                {
-                    name: 'updateWidth',
-                    enabled: true,
-                    phase: 'main',
-                    fn: ({state}) => {
-                        state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`
-                    },
-                }
-            ]
-        })
+        this.searchResultPopper = new ResultsPopper($(this.elements.searchBox).parent()[0], this.elements.searchResults)
 
-        $(this.elements.searchResults).find('.results-list > div').on('click', 'div[data-student-id]', (e) => {
+        $(this.elements.searchResults).find('.search-list > div').on('click', 'div[data-student-id]', (e) => {
             const student = find(data.students, "Id", e.currentTarget.dataset["studentId"])[0]
             const skill = find(student.Skills, "SkillType", e.currentTarget.dataset["skillType"])[0]
             this.addBuff(student.Id, skill)
             $(e.currentTarget).toggleClass('disabled', true)
-            $(this.elements.searchResults).hide()
+            this.searchResultPopper.hide()
             $(this.elements.searchBox).val('')
+        })
+
+        $(this.elements.searchButton).on('click', (e) => {
+            if ($(this.elements.searchResults).is(':visible')) {
+                this.searchResultPopper.hide()
+            } else {
+                if (this.searchBoxTimeout) {
+                    clearTimeout(this.searchBoxTimeout)
+                }
+                this.searchBuffs()
+            }
+
+        })
+
+        $(this.elements.autoAddButton).on('click', (e) => {
+            if ($(this.elements.searchResults).is(':visible')) {
+                this.searchResultPopper.hide()
+            }
+            const currentStudentId = student.Id
+            //automatically add all own buffs as well as the set supports' skills
+            let studentsToAdd = [currentStudentId]
+            statPreviewSupportStats.supportStudents.forEach(s => {
+                studentsToAdd.push(s.student.Id)
+            })
+            studentsToAdd.forEach(studentId => {
+                const student = find(data.students, "Id", studentId)[0]
+                student.Skills.forEach(skill => {
+                    if ('Effect' in skill && (student.Id == currentStudentId || skill.Effect.Type == 2)) {
+                        let available = true
+                        find(this.buffs, "StudentId", student.Id).forEach((buff) => {
+                            if (buff.Skill.SkillType == skill.SkillType) available = false
+                        })
+                        if (skill.SkillType == 'gearnormal' && !student.Gear.Released[regionID]) available = false
+                        if (available) this.addBuff(student.Id, skill)                           
+                    }
+                })
+            })
         })
 
         $(this.elements.searchBox).on('input', (e) => {
@@ -641,49 +788,81 @@ class ExternalBuffs {
             }
             this.searchBoxTimeout = setTimeout(() => {
                 if (e.currentTarget.value != "") {
-                    $(this.elements.searchResults).show()
                     this.searchBuffs()
-                    //this.updateAvailableBuffs(student.Id)
-                    searchResultPopper.update()
                 } else {
-                    $(this.elements.searchResults).hide()
+                    this.searchResultPopper.hide()
                 }
             }, searchDelay)
         }).on('blur', (e) => {
             if (this.searchBoxTimeout) {
                 clearTimeout(this.searchBoxTimeout)
             }
-            if (e.currentTarget.value == "") $(this.elements.searchResults).hide()
+            if (e.currentTarget.value == "") this.searchResultPopper.hide()
+        }).on('keyup keydown', (e) => {
+            switch (e.code) {
+                case 'Enter':
+                    e.preventDefault()
+                    if ($(this.elements.searchResults).is(':visible') && e.type == "keyup") {
+                        if (this.searchResultsSelection == 0 && this.searchResultsCount > 0) {
+                            $(this.elements.searchResults).find(`.search-list-item[data-index="1"]`).trigger("click")
+                        } else {
+                            $(this.elements.searchResults).find(`.search-list-item[data-index="${this.searchResultsSelection}"]`).trigger("click")
+                        }
+                    }
+                    break
+                case 'ArrowDown':
+                    e.preventDefault()
+                    if (e.type == "keydown" && this.searchResultsSelection < this.searchResultsCount) {
+                        this.searchResultsSelection++
+                        $(this.elements.searchResults).find('.search-list-item').removeClass("selected")
+                        const listItem = $(this.elements.searchResults).find(`.search-list-item[data-index="${this.searchResultsSelection}"]`)
+                        listItem.addClass("selected")
+                        listItem[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
+                    }
+                    break
+                case 'ArrowUp':
+                    e.preventDefault()
+                    if (e.type == "keydown" && this.searchResultsSelection > 1)  {
+                        this.searchResultsSelection--
+                        $(this.elements.searchResults).find('.search-list-item').removeClass("selected")
+                        const listItem = $(this.elements.searchResults).find(`.search-list-item[data-index="${this.searchResultsSelection}"]`)
+                        listItem.addClass("selected")
+                        listItem[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
+                    }
+                    break
+                case 'Escape':
+                    e.preventDefault()
+                    $(this.elements.searchBox).val('').trigger('blur')
+                    break
+            }
         })
     }
 
     addBuff(studentId, skill) {
         const maxLevel = skill.SkillType == 'ex' ? 5 : 10
         const maxStacks = 'StackSame' in skill.Effect.Effects[0] ? skill.Effect.Effects[0].StackSame : skill.Effect.Effects[0].Value.length
-        this.buffs.push({"StudentId": studentId, "Skill": skill, "MaxLevel": maxLevel, "Level": maxLevel, "Stacks": 1, "MaxStacks": maxStacks})
+        super.addBuff({"StudentId": studentId, "Skill": skill, "MaxLevel": maxLevel, "Level": maxLevel, "Stacks": 1, "MaxStacks": maxStacks})
         this.renderControls()
-        recalculateStatPreview()
+        recalculateStats()
     }
 
     removeBuff(index, rerender = true) {
-        this.buffs.splice(index, 1)
+        super.removeBuff(index)
         if (rerender) {
             this.renderControls()
-            recalculateStatPreview()
+            recalculateStats()
         } 
     }
 
     changeStudent(studentId) {
         //removes invalid buffs
-        let rerender = false
         for (let i = 0; i < this.buffs.length; i++) {
             const buff = this.buffs[i]
             if (buff.Skill.Effect.Type == 1 && buff.StudentId != studentId) {
                 this.removeBuff(i--, false)
-                rerender = true
             }
         }
-        if (rerender) this.renderControls()
+        this.renderControls()
         $(this.elements.searchBox).val('').trigger('blur')
     }
 
@@ -693,7 +872,7 @@ class ExternalBuffs {
         buff.Level = level
         $(this.elements.controls).find(`div[data-index='${index}'] .ba-slider-label.skill-level`).html(level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${level}`)
         $(this.elements.controls).find(`div[data-index='${index}'] .buff-description`).html(ExternalBuffs.getBuffAmountText(buff))
-        recalculateStatPreview()
+        recalculateStats()
     }
 
     updateStackCount(index) {
@@ -704,20 +883,22 @@ class ExternalBuffs {
         } 
         $(this.elements.controls).find(`div[data-index='${index}'] .ba-slider-label.stack-count .label`).html(`&times;${buff.Stacks}`)
         $(this.elements.controls).find(`div[data-index='${index}'] .buff-description`).html(ExternalBuffs.getBuffAmountText(buff))
-        recalculateStatPreview()
+        recalculateStats()
     }
 
     renderControls() {
         let html = ''
         this.buffs.forEach((buff, i) => {
             const student = find(data.students, "Id", buff.StudentId)[0]
-            html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon"><img class="skill-icon bg-skill-${student.BulletType.toLowerCase()}" src="images/skill/${buff.Skill.Icon}.png"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${ExternalBuffs.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-count" data-index="${i}"><img class="stack-icon invert-light" src="images/skill/${buff.Skill.Icon}.png"><span class="label">&times;${buff.Stacks}</span></span>` : ''}<input type="range" data-index="${i}" class="form-range flex-fill" value="${buff.Level}" min="1" max="${buff.MaxLevel}"><span class="ba-slider-label skill-level">${buff.Level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${buff.Level}`}</span></div></div>`
+            html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"><img class="skill-icon bg-skill ${student.BulletType.toLowerCase()}" src="images/skill/${buff.Skill.Icon}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${ExternalBuffs.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-count" data-index="${i}"><img class="stack-icon invert-light" src="images/skill/${buff.Skill.Icon}.png"><span class="label">&times;${buff.Stacks}</span></span>` : ''}<input type="range" data-index="${i}" class="form-range flex-fill" value="${buff.Level}" min="1" max="${buff.MaxLevel}"><span class="ba-slider-label skill-level">${buff.Level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${buff.Level}`}</span></div></div>`
         })
+        $('#ba-statpreview-status-buffs').toggleClass('disabled', this.buffs.length == 0)
+        $('#ba-statpreview-status-buffs-count').text(`(${this.buffs.length})`)
         $(this.elements.controls).html(html)
     }
 
     searchBuffs() {
-        let html = ""
+        let html = "", resultCount = 0
         const currentStudentId = student.Id
         const searchTerm = this.elements.searchBox.value.toLowerCase()
         data.students.forEach(student => {
@@ -751,49 +932,510 @@ class ExternalBuffs {
                                     }
                                     desc += '</b>'
                                 })
-                                html += ExternalBuffs.getSearchResultListItemHtml(student, skill, desc)
+                                html += ExternalBuffs.getSearchResultListItemHtml(student, skill, desc, ++resultCount)
                             }
                         }
                     }
                 })
             }
         })
-        $(this.elements.searchResults).toggle(html != "").find('.results-list > div').html(html)
-    }
-
-    static getBuffAmountText(buff) {
-        let text = ''
-        buff.Skill.Effect.Effects.forEach((effect, i) => {
-            if (text != "") {
-                text += ", "
-            }
-            let value
-            if ('StackSame' in effect) {
-                value = effect.Value[0][buff.Level-1] * buff.Stacks
-            } else {
-                value = effect.Value[buff.Stacks-1][buff.Level-1]
-            }
-            text += `<span data-effect='${i}'>${getStatName(effect.Stat)} <b>${value < 0 ? '' : '+'}${ExternalBuffs.statValueToString(effect.Stat, value)}</b></span>`
-            
-        })
-        return text
-    }
-
-    static statValueToString(stat, val) {
-        if (stat.endsWith('_Coefficient')) {
-            return `${parseFloat((val/100).toFixed(1))}%`
+        this.searchResultsSelection = 0
+        this.searchResultsCount = resultCount
+        if (html != "") {
+            this.searchResultPopper.show()
         } else {
-            return val
+            this.searchResultPopper.hide()
         }
+        $(this.elements.searchResults).find('.search-list > div').html(html)
     }
 
-    static getSearchResultListItemHtml(student, skill, desc) {
-        return `<div class="list-item" data-student-id="${student.Id}" data-skill-type="${skill.SkillType}"><div class="transferable-skill-icon me-2">
-        <img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"><img class="skill-icon bg-skill-${student.BulletType.toLowerCase()}" src="images/skill/${skill.Icon}.png"></div>
-            <div class="skill-text"><span class="skill-name">${getTranslatedString(skill, "Name")} <small>(${translateUI(`student_skill_${skill.SkillType}`)})</small></span><span class="skill-details">${desc}</span></div>
+    toggleDisabled(disabled) {
+        $(this.elements.searchBox).add(this.elements.searchButton).add(this.elements.autoAddButton).attr('disabled', disabled)
+        $(this.elements.controls).toggleClass('disabled', disabled)
+    }
+
+    static getSearchResultListItemHtml(student, skill, desc, index) {
+        return `<div class="search-list-item" data-index="${index}" data-student-id="${student.Id}" data-skill-type="${skill.SkillType}"><div class="transferable-skill-icon me-2"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"><img class="skill-icon bg-skill ${student.BulletType.toLowerCase()}" src="images/skill/${skill.Icon}.png"></div><div class="search-list-item-detail"><span class="skill-name">${getTranslatedString(skill, "Name")} <small>(${translateUI(`student_skill_${skill.SkillType}`)})</small></span><span class="skill-details">${desc}</span></div></div>`
+    }
+
+}
+
+class CustomBuffs extends Buffs {
+    container
+    elements = {
+        controls: null,
+        inputForm: null,
+    }
+    isCoefficient = false
+
+    constructor(container) {
+        super()
+        this.container = container
+        $(this.container).find('button.add-base').on('click', (e) => {this.addBuff(false)})
+        $(this.container).find('button.add-coefficient').on('click', (e) => {this.addBuff(true)})
+        $(this.container).on('click', 'button.buff-remove', (e) => {this.removeBuff(e.currentTarget.dataset.index)})       
+        this.renderForm()
+    }
+
+    renderForm() {
+        let html
+        studentStatListFull.forEach(stat => {
+            html += `<option value="${stat}">${getLocalizedString('Stat', stat)}</option>`
+        })
+        $(this.container).find('.stat-select').html(html)
+    }
+
+    renderControls() {
+        let html = ''
+        this.buffs.forEach((buff, i) => {
+            html += `<div data-index="${i}" class="ba-panel p-2">
+            <div class="d-flex flex-row align-items-center gap-2">
+                <div class="flex-fill">
+                    ${(buff.Name != '') ? `<h5 class="px-1">${buff.Name}</h5>` : ''}
+                    <div class="d-flex">
+                        <span class="stat-icon"><img class="invert-light" src="images/staticon/Stat_${buff.Stat.split('_')[0]}.png"></span>
+                        <p class="mb-0">${getStatName(buff.Stat)} <b>${(buff.Amount >= 0 ? '+' : '')}${Buffs.statValueToString(buff.Stat, buff.Amount)}</b></p>
+                    </div>
+                </div>
+                <button class="btn btn-sm btn-dark buff-remove stat-panel-btn-sm no-wrap align-self-start" type="button" data-index="${i}">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
         </div>`
+        })
+        $(this.container).find('.controls').html(html)
+
+
     }
 
+    addBuff(asCoefficient) {
+        const stat = $(this.container).find('.stat-select').val()
+        const amount = $(this.container).find('.amount-input').val()
+        const name = $(this.container).find('.name-input').val()
+        if (isNaN(parseInt(amount))) {
+            toastMessage(`<i class="fa-solid fa-circle-xmark me-2"></i>${translateUI('toast_amount_invalid')}`, 2500, 'failure')
+            return
+        }
+        if (asCoefficient) {
+            super.addBuff({"Name": name, "Stat": stat + '_Coefficient', "Amount": parseInt(amount * 100)})
+        } else {
+            super.addBuff({"Name": name, "Stat": stat + '_Base', "Amount": parseInt(amount)})
+        }
+        this.renderControls()
+        recalculateStats()
+    }
+
+    removeBuff(index) {
+        super.removeBuff(index)
+        this.renderControls()
+        recalculateStats()
+    }
+}
+
+class ResultsPopper {
+    popperInstance = null 
+    reference = null
+    popup = null
+
+    constructor(reference, popup) {
+        //Bind search result popup
+        this.reference = reference
+        this.popup = popup
+        this.popperInstance = Popper.createPopper(reference, popup, {
+            placement: 'bottom-start',
+            modifiers: [
+                {
+                    name: 'offset',
+                    options: {
+                        offset: [0, 8]
+                    }
+                },
+                {
+                    name: 'flip',
+                    options: {
+                        fallbackPlacements: ['bottom-start', 'top-start'],
+                    }
+                },
+                {
+                    name: 'preventOverflow',
+                    options: {
+                        boundary: $('ba-info-statpreview-panel .panel-sliders')[0],
+                    }
+                },
+                {
+                    name: 'updateWidth',
+                    enabled: true,
+                    phase: 'main',
+                    fn: ({state}) => {
+                        state.elements.popper.style.width = `${state.elements.reference.offsetWidth}px`
+                    },
+                }
+            ]
+        })
+    }
+
+    show() {
+        $(this.popup).show()
+        this.popperInstance.setOptions((options) => ({...options, modifiers: [...options.modifiers.filter(o => o.name != 'eventListeners'), {name: 'eventListeners', enabled: true}]}))
+    }
+
+    hide() {
+        $(this.popup).hide()
+        this.popperInstance.setOptions((options) => ({...options, modifiers: [...options.modifiers.filter(o => o.name != 'eventListeners'), {name: 'eventListeners', enabled: false}]}))
+    }
+}
+
+class SupportStats {
+
+    elements = {
+        controls: null,
+        searchBox: null,
+        searchButton: null,
+        searchResults: null,
+    }
+    supportStudents = []
+
+    searchBoxTimeout = null
+    searchResultsSelection = 0
+    searchResultsCount = 0
+
+    constructor(elements) {
+        //populate the list
+        this.elements = elements
+        this.searchResultPopper = new ResultsPopper($(this.elements.searchBox).parent()[0], this.elements.searchResults)
+        
+        $(this.elements.searchResults).find('.search-list > div').on('click', 'div[data-student-id]', (e) => {
+            this.addSupportStudent(e.currentTarget.dataset["studentId"])
+            this.searchResultPopper.hide()
+            $(this.elements.searchBox).val('')
+        })
+
+        $(this.elements.searchButton).on('click', (e) => {
+            if ($(this.elements.searchResults).is(':visible')) {
+                this.searchResultPopper.hide()
+            } else {
+                if (this.searchBoxTimeout) {
+                    clearTimeout(this.searchBoxTimeout)
+                }
+                this.searchResultPopper.show()
+                this.searchStudents()
+            }
+        })
+
+        $(this.elements.searchBox).on('input', (e) => {
+            if (this.searchBoxTimeout) {
+                clearTimeout(this.searchBoxTimeout)
+            }
+            this.searchBoxTimeout = setTimeout(() => {
+                if (e.currentTarget.value != "") {
+                    this.searchResultPopper.show()
+                    this.searchStudents()
+                } else {
+                    this.searchResultPopper.hide()
+                }
+            }, searchDelay)
+        }).on('blur', (e) => {
+            if (this.searchBoxTimeout) {
+                clearTimeout(this.searchBoxTimeout)
+            }
+            if (e.currentTarget.value == "") this.searchResultPopper.hide()
+        }).on('keyup keydown', (e) => {
+            switch (e.code) {
+                case 'Enter':
+                    e.preventDefault()
+                    if ($(this.elements.searchResults).is(':visible') && e.type == "keyup") {
+                        if (this.searchResultsSelection == 0 && this.searchResultsCount > 0) {
+                            $(this.elements.searchResults).find(`.search-list-item[data-index="1"]`).trigger("click")
+                        } else {
+                            $(this.elements.searchResults).find(`.search-list-item[data-index="${this.searchResultsSelection}"]`).trigger("click")
+                        }
+                    }
+                    break
+                case 'ArrowDown':
+                    e.preventDefault()
+                    if (e.type == "keydown" && this.searchResultsSelection < this.searchResultsCount) {
+                        this.searchResultsSelection++
+                        $(this.elements.searchResults).find('.search-list-item').removeClass("selected")
+                        const listItem = $(this.elements.searchResults).find(`.search-list-item[data-index="${this.searchResultsSelection}"]`)
+                        listItem.addClass("selected")
+                        listItem[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
+                    }
+                    break
+                case 'ArrowUp':
+                    e.preventDefault()
+                    if (e.type == "keydown" && this.searchResultsSelection > 1)  {
+                        this.searchResultsSelection--
+                        $(this.elements.searchResults).find('.search-list-item').removeClass("selected")
+                        const listItem = $(this.elements.searchResults).find(`.search-list-item[data-index="${this.searchResultsSelection}"]`)
+                        listItem.addClass("selected")
+                        listItem[0].scrollIntoView({behavior: 'auto', block: 'nearest'})
+                    }
+                    break
+                case 'Escape':
+                    e.preventDefault()
+                    $(this.elements.searchBox).val('').trigger('blur')
+                    break
+            }
+        })
+
+        //Bind controls
+        $(this.elements.controls).on('input', '.support-level input', (e) => {
+            const index = $(e.currentTarget).closest('[data-index]').data('index')
+            this.supportStudents[index].level = e.currentTarget.value
+            const panel = $(`#supportstats-controls-${index}`)
+            const support = this.supportStudents[index]
+            $(`#supportstats-controls-${index} .support-level .ba-slider-label`).text(`Lv.${support.level}`)
+            recalculateStatsWithDelay()
+        })
+        $(this.elements.controls).on('click', '.ba-statpreview-star', (e) => {
+            const index = $(e.currentTarget).closest('[data-index]').data('index')
+            const stars = parseInt(e.currentTarget.dataset.val)
+            this.supportStudents[index].starGrade = stars
+            this.supportStudents[index].weaponStarGrade = 0
+            this.updateControlValues(index)
+        })
+
+        $(this.elements.controls).on('click', '.ba-weaponpreview-star', (e) => {
+            const index = $(e.currentTarget).closest('[data-index]').data('index')
+            const weaponStars = parseInt(e.currentTarget.dataset.val)
+            this.supportStudents[index].starGrade = 5
+            this.supportStudents[index].weaponStarGrade = weaponStars
+            this.supportStudents[index].weaponLevel = 20 + (weaponStars*10)
+            this.updateControlValues(index)
+        })
+
+        $(this.elements.controls).on('change', '.support-bond', (e) => {
+            const index = $(e.currentTarget).closest('[data-index]').data('index')
+            const bondNum = e.currentTarget.dataset.bond
+            const level = Math.min(Math.max(parseInt(e.currentTarget.value), 1), parseInt(e.currentTarget.max))
+            this.supportStudents[index].bond[bondNum] = level
+            this.updateControlValues(index)
+        }).on('click', '.support-bond', (e) => {e.currentTarget.select()})
+
+        $(this.elements.controls).on('change', '.support-stat-weapon-level', (e) => {
+            const index = $(e.currentTarget).closest('[data-index]').data('index')
+            const weaponLevel = Math.min(Math.max(parseInt(e.currentTarget.value), 1), parseInt(e.currentTarget.max))
+            this.supportStudents[index].weaponLevel = weaponLevel
+            this.updateControlValues(index)
+        })
+
+        $(this.elements.controls).on('click', '.support-gear .dropdown-item', (e) => {
+            const index = $(e.currentTarget).closest('[data-index]').data('index')
+            const slot = $(e.currentTarget).closest('[data-slot]').data('slot')
+            this.supportStudents[index].equipment[slot-1] = parseInt(e.currentTarget.dataset.tier)
+            this.updateControlValues(index)
+        })
+
+        $(this.elements.controls).on('click', '.support-ex-gear', (e) => {
+            const index = $(e.currentTarget).closest('[data-index]').data('index')
+            this.supportStudents[index].gear = !this.supportStudents[index].gear
+            $(e.currentTarget).toggleClass('deactivated', !this.supportStudents[index].gear)
+            this.updateControlValues(index)
+        })
+
+        $(this.elements.controls).on('click', '.student-remove', (e) => {
+            const index = $(e.currentTarget).closest('[data-index]').data('index')
+            this.removeSupportStudent(index)
+        })
+
+        $(this.elements.controls).on('click', 'button.panel-collapse', (e) => {
+            const index = $(e.currentTarget).closest('[data-index]').data('index')
+            if ($(`#supportstats-controls-${index}`).hasClass('collapsing')) return
+            this.supportStudents[index].panelOpen = !this.supportStudents[index].panelOpen
+            $(e.currentTarget).toggleClass('active', this.supportStudents[index].panelOpen)
+            $(`#supportstats-controls-${index}`).collapse(this.supportStudents[index].panelOpen ? 'show' : 'hide')
+        })
+
+    }
+
+    showSearchResults() {
+        $(this.elements.searchResults).show()
+        this.searchResultPopper.setOptions((options) => ({...options, modifiers: [...options.modifiers.filter(o => o.name != 'eventListeners'), {name: 'eventListeners', enabled: true}]}))
+    }
+
+    hideSearchResults() {
+        $(this.elements.searchResults).hide()
+        this.searchResultPopper.setOptions((options) => ({...options, modifiers: [...options.modifiers.filter(o => o.name != 'eventListeners'), {name: 'eventListeners', enabled: false}]}))
+    }
+
+    addSupportStudent(studentId) {
+
+        const student = find(data.students, 'Id', studentId)[0]
+        //initialise using the saved stats
+        const supportStudent = {"student": student}
+
+        if (studentId in studentCollection) {
+            const savedStudent = studentCollection[studentId]
+            supportStudent.level = savedStudent.l
+            supportStudent.starGrade = savedStudent.s
+            supportStudent.weaponStarGrade = savedStudent.ws
+            supportStudent.weaponLevel = savedStudent.wl
+            supportStudent.equipment = [savedStudent.e1, savedStudent.e2, savedStudent.e3]
+            supportStudent.gear = false
+            supportStudent.bond = [savedStudent.b]
+        } else {
+            supportStudent.level = data.common.regions[regionID].studentlevel_max
+            supportStudent.starGrade = 5
+            supportStudent.weaponStarGrade = 3
+            supportStudent.weaponLevel = data.common.regions[regionID].weaponlevel_max
+            supportStudent.equipment = [data.common.regions[regionID].gear1_max, data.common.regions[regionID].gear2_max, data.common.regions[regionID].gear3_max]
+            supportStudent.gear = false
+            supportStudent.bond = [20]
+
+        }
+        student.FavorAlts.forEach(altId => {
+            supportStudent.bond.push(altId in studentCollection ? studentCollection[altId].b : 1)
+        })
+        supportStudent.panelOpen = false
+        this.supportStudents.push(supportStudent)
+
+        this.renderControls()
+    }
+
+    removeSupportStudent(index) {
+        this.supportStudents.splice(index, 1)
+        this.renderControls()
+    }
+
+    searchStudents() {
+        let html = "", resultCount = 0
+        const searchTerm = this.elements.searchBox.value.toLowerCase()
+        data.students.forEach(student => {
+            if (student.SquadType == 'Support' && student.IsReleased[regionID]) {
+                if (!this.supportStudents.find(s => s.student.Id == student.Id) && searchContains(searchTerm, getTranslatedString(student, "Name"))) {
+                    html += SupportStats.getSearchResultListItemHtml(student, ++resultCount)
+                }
+            }
+        })
+        this.searchResultsSelection = 0
+        this.searchResultsCount = resultCount
+        if (html != "") {
+            this.searchResultPopper.show()
+        } else {
+            this.searchResultPopper.hide()
+        }
+        $(this.elements.searchResults).find('.search-list > div').html(html)
+    }
+
+    static getSearchResultListItemHtml(student, index) {
+        return `<div class="search-list-item" data-index="${index}" data-student-id="${student.Id}"><div class="search-list-item-icon"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="search-list-item-detail"><span>${getTranslatedString(student, "Name")}</span>${student.Id in studentCollection ? `<span class="text-small"><i class="me-1 fa-solid fa-circle-check"></i><span>${translateUI("collection_owned")}</span></span>` : `<span class="text-small text-muted"><i class="me-1 fa-solid fa-circle-xmark"></i><span>${translateUI("collection_notowned")}</span></span>`}</div></div>`
+    }
+
+    renderControls() {
+        let html = ''
+        this.supportStudents.forEach((support, index) => {
+            html += `
+            <div data-index="${index}" class="ba-panel p-2">
+                <div class="d-flex flex-row align-items-center gap-2">
+                    <div class="support-stats">
+                        <img src="images/student/icon/${support.student.CollectionTexture}.png">
+                    </div>
+                    <div class="flex-fill">
+                        <h5 class="support-stats-name">${support.student.Name}</h5>
+                        <p class="support-stats-desc mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
+                    </div>
+                    <div class="d-flex flex-column justify-content-between align-self-stretch">
+                        <button class="btn btn-sm btn-dark stat-panel-btn-sm no-wrap student-remove" type="button"><i class="fa-solid fa-xmark"></i></button>
+                        <button class="btn btn-sm btn-dark stat-panel-btn-sm no-wrap panel-collapse ${support.panelOpen ? ' active' : ''}"><i class="fa-solid fa-gear"></i></button>
+                    </div>
+                </div>
+                <div class="collapse${support.panelOpen ? ' show' : ''}" id="supportstats-controls-${index}">
+                    <div class="d-flex flex-column gap-2 pt-3">
+                        <div class="d-flex flex-row align-items-center gap-2 support-level">
+                            <input type="range" class="form-range flex-fill" value="${support.level}" min="1" max="${data.common.regions[regionID].studentlevel_max}">
+                            <span class="ba-slider-label">Lv.${support.level}</span>
+                        </div>  
+                        <div class="d-flex flex-row flex-wrap align-items-center justify-content-center gap-2">
+                            <div class="d-inline-block ba-panel statpreview-stars px-2 d-flex align-items-center">
+                                <span class="ba-statpreview-star" data-val="1"><i class="fa-solid fa-star"></i></span>
+                                <span class="ba-statpreview-star" data-val="2"><i class="fa-solid fa-star"></i></span>
+                                <span class="ba-statpreview-star" data-val="3"><i class="fa-solid fa-star"></i></span>
+                                <span class="ba-statpreview-star" data-val="4"><i class="fa-solid fa-star"></i></span>
+                                <span class="ba-statpreview-star" data-val="5"><i class="fa-solid fa-star"></i></span>
+                                <span class="ba-weaponpreview-star ms-2" data-val="1"><i class="fa-solid fa-star"></i></span>
+                                <span class="ba-weaponpreview-star" data-val="2"><i class="fa-solid fa-star"></i></span>
+                                <span class="ba-weaponpreview-star" data-val="3"><i class="fa-solid fa-star"></i></span>
+                            </div>
+                            ${SupportStats.renderBondControls(support.student)}
+                            <input style="display:none;" type="number" class="support-stat-weapon-level form-control" value="${support.weaponLevel}" min="1" step="1" max="50"></span>
+                            
+
+                            
+                        </div>
+                        <div class="d-flex flex-row flex-wrap align-items-center justify-content-center gap-2 text-bold">
+                            ${SupportStats.renderGearDropdown(1, support.student.Equipment[0])}
+                            ${SupportStats.renderGearDropdown(2, support.student.Equipment[1])}
+                            ${SupportStats.renderGearDropdown(3, support.student.Equipment[2])}`
+
+            if ("Released" in support.student.Gear && support.student.Gear.Released[regionID]) {
+                html += `
+                <button class="btn-pill support-ex-gear ${ support.gear ? '' : 'deactivated'}">
+                    <div class="icon"><img class="ba-item-n" src="images/gear/Gear_Icon_${support.student.Id}.png" width="28" height="28"></div>
+                    <i class="fa-regular fa-square off mx-2"></i>
+                    <i class="fa-solid fa-square-check on mx-2"></i>
+                </button>
+                `
+            }
+            html += `  </div>
+                    </div>
+                </div>
+            </div>
+            `
+        })
+        $(this.elements.controls).html(html)
+        this.supportStudents.forEach((s, index) => this.updateControlValues(index, false))
+        $(this.elements.searchBox).add(this.elements.searchButton).attr('disabled', this.supportStudents.length >= 2)
+        recalculateStats()
+    }
+
+    updateControlValues(index, recalculate = true) {
+        //const panel = $(this.elements.controls).find(`> div[data-index="${index}"]`)
+        const panel = $(`#supportstats-controls-${index}`)
+        const support = this.supportStudents[index]
+        panel.find('.support-level .ba-slider-label').text(`Lv.${support.level}`)
+        for (let i = 1; i <= 5; i++) {
+            panel.find(`.ba-statpreview-star[data-val="${i}"]`).toggleClass('active', i <= support.starGrade)
+        }
+        for (let i = 1; i <= 3; i++) {
+            panel.find(`.ba-weaponpreview-star[data-val="${i}"]`).toggleClass('active', i <= support.weaponStarGrade)
+        }
+        for (let i = 0; i < support.bond.length; i++) {
+            panel.find(`.support-bond[data-bond="${i}"]`).val(support.bond[i])
+        }
+        panel.find('.support-stat-weapon-level').attr('max', 20 + (support.weaponStarGrade*10)).val(support.weaponLevel).attr('disabled', support.weaponStarGrade == 0)
+        panel.find('.support-gear .dropdown-item.active').removeClass('active')
+        for (let i = 1; i <= 3; i++) {
+            panel.find(`.support-gear[data-slot="${i}"] .dropdown-item[data-tier="${support.equipment[i-1]}"]`).addClass('active')
+            panel.find(`.support-gear[data-slot="${i}"] .support-gear-icon`).attr('src', `images/equipment/Equipment_Icon_${support.student.Equipment[i-1]}_Tier${support.equipment[i-1]}.png`)
+            panel.find(`.support-gear[data-slot="${i}"] .support-gear-label`).text(`T${support.equipment[i-1]}`)
+        }
+        if (recalculate) recalculateStats()
+    }
+
+    static renderGearDropdown(slot, gear) {
+        let html = `<div class="support-gear" data-slot="${slot}">
+        <button class="btn-pill" data-bs-toggle="dropdown">
+            <div class="icon"><img class="support-gear-icon ba-item-n" src="" width="28" height="28"></div>
+            <span class="support-gear-label label"></span>
+            <i class="caret fa-solid fa-caret-down me-2"></i>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start">`
+        for (let i = 1; i <= data.common.regions[regionID][`gear${slot}_max`]; i++) {
+            html += `<li><a class="dropdown-item dropdown-item-icon" data-tier="${i}" href="javascript:;"><img class="ba-item-n" src="images/equipment/Equipment_Icon_${gear}_Tier${i}.png"><span>T${i}</span></a></li>`
+        }
+        html += `</ul></div>`
+        return html
+    }
+
+    static renderBondControls(student) {
+        let html = `<div class="d-flex align-items-center justify-content-center gap-2"><div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${student.CollectionTexture}.png"></div><input data-bond="0" class="form-control support-bond" type="number" value="1" min="1" max="${data.common.regions[regionID].bondlevel_max}"></div>`
+        student.FavorAlts.forEach((id, i) => {
+            const alt = find(data.students, 'Id', id)[0]
+            html += `<div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${alt.CollectionTexture}.png"></div><input data-bond="${i+1}" class="form-control support-bond" type="number" value="1" min="1" max="${data.common.regions[regionID].bondlevel_max}"></div>`
+        })
+        html += '</div>'
+        return html
+    }
 }
 
 /** Functions */
@@ -852,7 +1494,21 @@ $.when($.ready, loadPromise).then(function() {
     } else {
         highContrast = (!CSS.supports('backdrop-filter', 'blur(1px)')) || window.matchMedia('(prefers-contrast: more)').matches 
     }
+
+    if (localStorage.getItem("enable_custom_buffs")) {
+        enableCustomBuffs = (localStorage.getItem("enable_custom_buffs") == "true")
+    }
+
     $('body').toggleClass("high-contrast", highContrast)
+
+    //prevent tooltips from sticking on buttons 
+    $('body').on('click', '.tooltip-button', e => {
+        if (e.originalEvent.pointerType == "touch") {
+            $(".tooltip").tooltip("hide")
+        }
+    }).on('mouseleave', '.tooltip-button', (e) => {
+        $(".tooltip").tooltip("hide")
+    })
     
     $('#collection-data-import-planner-btn').tooltip({title: getBasicTooltip(translateUI('tooltip_import_planner')), placement: 'top', html: true})
 
@@ -861,6 +1517,7 @@ $.when($.ready, loadPromise).then(function() {
     $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).addClass("active")
     $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
     $(`#ba-navbar-contrast-toggle-${highContrast}`).addClass("active")
+    $(`#ba-navbar-custombuffs-toggle-${enableCustomBuffs}`).addClass("active")
 
     $('#ba-navbar-search').on('input', function() {
         if (searchDelayTimeout) {
@@ -874,6 +1531,28 @@ $.when($.ready, loadPromise).then(function() {
         allSearch()
         $(this).hide()
     })
+
+    //populate Changelog
+    let changelogHtml = ""
+    $.each(data.common.changelog, function(i, el) {
+        changelogHtml += `<h5 class="text-emphasis px-2">${el.date}</h5>`
+        changelogHtml += '<div class="p-2 mb-3">'
+        for (let j = 0; j < el.contents.length; j++) {
+            changelogHtml += `<div>${el.contents[j]}</div>`
+        }
+        changelogHtml += '</div>'
+    })
+    $("#modal-changelog-content").html(changelogHtml)
+    const currentChangelog = parseInt(data.common.changelog[0].date.replaceAll('/',''))
+    if (localStorage.getItem("changelog_seen")) {
+        if (currentChangelog > parseInt(localStorage.getItem("changelog_seen"))) {
+            $("#modal-changelog").modal('show')
+            localStorage.setItem("changelog_seen", currentChangelog)
+        } 
+    } else {
+        $("#modal-changelog").modal('show')
+        localStorage.setItem("changelog_seen", currentChangelog)
+    }
 
     //Keyboard Shortcut for search
     $(document).on('keydown', function(e) {
@@ -966,6 +1645,7 @@ function loadLastModule() {
  */
 function loadModule(moduleName, entry=null) {
     if (loadObserver) loadObserver.disconnect()
+    $('.modal').not('#modal-changelog').modal('hide')
     clearInterval(eventRefreshInterval)
     if (moduleName == 'students') {
         loadedModule = 'students'
@@ -974,17 +1654,20 @@ function loadModule(moduleName, entry=null) {
         $("#loaded-module").load(html_list['students'], function() {
             loadRegion(regionID)
             loadLanguage(userLang)
+            $('#statpreview-buff-custom').toggle(enableCustomBuffs)
+
             studentSelectorModal = new bootstrap.Modal(document.getElementById("ba-student-modal-students"), {})
             document.getElementById("ba-student-modal-students").addEventListener('hidden.bs.modal', function (e) {
                 selectCompareMode = false
             })
 
             generateStatTable('#ba-student-stat-table', studentStatList, 6)
-            generateStatTable('#ba-student-stat-modal-table', studentStatListFull, 12)
+            generateStatTable('#ba-student-stat-modal-table', studentStatListFull, 12, 1)
             generateStatTable('#ba-weapon-stat-table', ['AttackPower', 'MaxHP', 'HealPower'], 6)
 
-            statPreviewSupportStats = false
+            statPreviewViewSupportStats = false
             compareMode = false
+            updateCompareModeControl()
             selectCompareMode = false
 
             $('#ba-statpreview-levelrange').val(statPreviewLevel)
@@ -994,7 +1677,7 @@ function loadModule(moduleName, entry=null) {
             $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
             $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
             $('#ba-statpreview-passiveskill-range').val(statPreviewPassiveLevel)
-            $('#ba-statpreview-exskill-range').val(statPreviewExLevel)
+            $('#ba-statpreview-summon-range').val(statPreviewExLevel)
 
             $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
             $(".tooltip").tooltip("hide")
@@ -1002,7 +1685,18 @@ function loadModule(moduleName, entry=null) {
             statPreviewExternalBuffs = new ExternalBuffs({
                 controls: $('#statpreview-buff-transferable-controls')[0],
                 searchBox: $('#statpreview-buff-transferable-search-text')[0],
-                searchResults: $('#statpreview-buff-transferable-search .results-container')[0],
+                searchButton: $('#statpreview-buff-transferable-search-btn')[0],
+                autoAddButton: $('#statpreview-buff-transferable-autoadd-btn')[0],
+                searchResults: $('#statpreview-buff-transferable-search .search-list-container')[0],
+            })
+
+            statPreviewCustomBuffs = new CustomBuffs($('#statpreview-buff-custom')[0])
+
+            statPreviewSupportStats = new SupportStats({
+                controls: $('#statpreview-supportstats-controls')[0],
+                searchBox: $('#statpreview-supportstats-search-text')[0],
+                searchButton: $('#statpreview-supportstats-search-btn')[0],
+                searchResults: $('#statpreview-supportstats-search-list')[0],
             })
 
             var urlVars = new URL(window.location.href).searchParams
@@ -1059,20 +1753,19 @@ function loadModule(moduleName, entry=null) {
                 $('#student-search-filters-btn').toggleClass('active', false)
             })
 
+            $('.summon-list').on('click', '.dropdown-item', function() {
+                changeStudentSummon($(this).data('summon-id'))
+            })
 
             updateStudentList(updateSortMethod = true)
     
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         
             $('#ba-student, #ba-student-list-btn').show()
-            $('#ba-statpreview-status-bond-level').tooltip({title: getBasicTooltip(translateUI('tooltip_relationship_bonus')), placement: 'top', html: true})
             $('#ba-statpreview-status-equipment').tooltip({title: getBasicTooltip(translateUI('tooltip_equipment_bonus')), placement: 'top', html: true})
-            $('#ba-statpreview-status-bond-alt-level').tooltip({title: getBasicTooltip(translateUI('tooltip_relationship_bonus_alt')), placement: 'top', html: true})
+            $('#ba-statpreview-status-buffs').tooltip({title: getBasicTooltip(translateUI('tooltip_buffs_bonus')), placement: 'top', html: true})
             $('#ba-statpreview-status-passive-level').tooltip({title: getBasicTooltip(translateUI('tooltip_passiveskill_bonus')), placement: 'top', html: true})
             $('#ba-statpreview-status-strikerbonus').tooltip({title: getBasicTooltip(translateUI('tooltip_supportstats')), placement: 'top', html: true})
-            $('.ba-summon-toggle').tooltip({title: getBasicTooltip(translateUI('tooltip_vehiclestats')), placement: 'top', html: true})
-            $('#ba-student-search-reset').tooltip({title: getBasicTooltip(translateUI('student_search_filters_clear')), placement: 'top', html: true})
-            $('#ba-student-toggle-sprite-btn').tooltip({title: getBasicTooltip(translateUI('tooltip_sprite_toggle')), placement: 'top', html: true})
 
             $('#ba-student-modal-students').on('shown.bs.modal', function (ev) {
                 if (ev.relatedTarget === 'shortcut') {
@@ -1092,13 +1785,6 @@ function loadModule(moduleName, entry=null) {
                 $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.DevName}${showAltSprite ? '_2' : ''}.webp`)
             })
 
-            $('.tooltip-button').on('click', e => {
-                if (e.originalEvent.pointerType == "touch") {
-                    $(e.currentTarget)
-                    $(".tooltip").tooltip("hide")
-                }
-            })
-
             $('#ba-student-search-showinfo').tooltip({title: getBasicTooltip(translateUI('student_search_info')), html: true, placement: 'top'})
             $('#ba-student-search-showinfo').toggleClass('active', showStudentListInfo)
             $('#ba-student-search-showinfo').on('click', function() {
@@ -1109,7 +1795,7 @@ function loadModule(moduleName, entry=null) {
             })
             $('#student-select-grid').toggleClass('show-info', showStudentListInfo)
             
-            $('#ba-student-modal-statpreview').on('shown.bs.modal', recalculateStatPreview)
+            $('#ba-student-modal-statpreview').on('shown.bs.modal hidden.bs.modal', recalculateStats)
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
 
         })
@@ -1155,9 +1841,6 @@ function loadModule(moduleName, entry=null) {
             }
 
             $('#item-select-grid').on('click', 'div[data-itemid]', function(e){loadItem($(this).data('itemid'))})
-
-            $('#item-search-displaytype-detailed').tooltip({title: getBasicTooltip(translateUI('list_style_detailed')), html: true, placement: 'top'})
-            $('#item-search-displaytype-compact').tooltip({title: getBasicTooltip(translateUI('list_style_compact')), html: true, placement: 'top'})
         
             Object.entries(itemSearchOptions.filter).forEach(i => {
                 if (typeof i[1] === 'boolean') {
@@ -1303,12 +1986,11 @@ function loadModule(moduleName, entry=null) {
 
             $('#fusion-select-grid').on('click', 'div[data-itemid]', function(e){loadCraft($(this).data('itemid'))})
 
-            $('#craft-toggle-chance').tooltip({title: getBasicTooltip(translateUI('craft_toggle_chance')), html: true, placement: 'top'})
             $('#craft-toggle-chance').toggleClass('active', showNodeProbability)
             $('#craft-toggle-chance').on('click', function() {
                 showNodeProbability = !showNodeProbability
                 localStorage.setItem('show_node_probability', showNodeProbability)
-                $(this).toggleClass('active', showNodeProbability).tooltip('hide')
+                $(this).toggleClass('active', showNodeProbability)
                 $('#craft-select-grid .stage-droprate').toggleClass('hidden', !showNodeProbability)
             })
             $('#craft-select-grid .stage-droprate').toggleClass('hidden', !showNodeProbability)
@@ -1334,16 +2016,6 @@ function loadModule(moduleName, entry=null) {
         $("#loaded-module").load(html_list['home'], function() {
             loadLanguage(userLang)
             loadRegion(regionID)
-
-            let changelogHtml = ""
-            $.each(data.common.changelog, function(i, el) {
-                changelogHtml += `<h5 class="text-emphasis">${el.date}</h5><ul>`
-                for (let j = 0; j < el.contents.length; j++) {
-                    changelogHtml += `<li>${el.contents[j]}</li>`
-                }
-                changelogHtml += '</ul>'
-            })
-            $("#ba-home-modal-changelog-content").html(changelogHtml)
 
             populateEvents()
             eventRefreshInterval = window.setInterval(updateEventTimers, 60000)
@@ -1877,7 +2549,6 @@ function searchResetFilter() {
 }
 
 function setGridItemDisplayStyle(style) {
-    $(".tooltip").tooltip("hide")
     if (gridItemDisplayStyle != style) {
         gridItemDisplayStyle = style
         localStorage.setItem("grid_item_display_style", gridItemDisplayStyle)
@@ -1916,14 +2587,22 @@ function processStudent() {
         $("#ba-student-stargrade").append(`<span class="ms-1">(${getLocalizedString('IsLimited',''+student.IsLimited)})</span>`)
     } 
 
-    statPreviewSummonStats = false
-    $('.ba-summon-toggle').toggleClass('deactivated',true)
-    $('.ba-summon-toggle').toggle((student.SummonIds.length > 0))
+    $('.summon-list').toggleClass('disabled', student.Summons.length == 0)
+    let summonList = ''
+    summonList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-summon-id="0" class="btn btn-dark"><img src="images/student/icon/${student.CollectionTexture}.png"><span>${getTranslatedString(student, "Name")}</span></a></li>`
+    student.Summons.forEach((summon, index) => {
+        const summonInfo = find(data.summons, 'Id', summon.Id)[0]
+        const sourceSkill = find(student.Skills, 'SkillType', summon.SourceSkill)[0]
+        summonList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-summon-id="${index+1}" class="btn btn-dark"><img class="bg-skill ${student.BulletType.toLowerCase()}" src="images/skill/${sourceSkill.Icon}.png"><span>${getTranslatedString(summonInfo, "Name")}</span></a></li>`
+    })
+    $('.summon-list .dropdown-menu').html(summonList)
+
+    changeStudentSummon(0, false)
 
     $("#ba-student-role-label").text(getLocalizedString('TacticRole', student.TacticRole))
     $("#ba-student-role-icon").attr("src", `images/ui/Role_${student.TacticRole}.png`)
 
-    $(".ba-skill, .ba-weapon-skill-plus").removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic").addClass(`bg-skill-${student.BulletType.toLowerCase()}`)
+    $(".bg-skill").removeClass("explosion pierce mystic").addClass(`${student.BulletType.toLowerCase()}`)
     $("#ba-student-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${student.BulletType.toLowerCase()}`)
     $("#ba-student-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed").addClass(`bg-def-${student.ArmorType.toLowerCase()}`)
     
@@ -1948,7 +2627,6 @@ function processStudent() {
             $('#ba-statpreview-passiveskill-icon, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${el.Icon}.png`)
         }
         if (el.SkillType == "ex") {
-            $('#ba-statpreview-exskill-icon').attr("src", `images/skill/${el.Icon}.png`)
             $("#ba-skill-ex-cost").removeClass("ba-col-explosion ba-col-pierce ba-col-mystic")
             if (el.Cost[0] != el.Cost[4]) {
                 $("#ba-skill-ex-cost").addClass(`ba-col-${student.BulletType.toLowerCase()}`)
@@ -2126,29 +2804,33 @@ function processStudent() {
 
     generateStatTable('#ba-bond-stat-table', student.FavorStatType, 6)
 
-    // $('#ba-student-bond-1').text(getStatName(student.FavorStatType[0]))
-    // $('#ba-student-bond-2').text(getStatName(student.FavorStatType[1]))
-
     if (student.SquadType == "Main") {
         $('#ba-student-stat-table').removeClass("striker-bonus")
         $('#ba-statpreview-status-strikerbonus').hide()
-        statPreviewSupportStats = false
+        $('#statpreview-supportstats').show()
+        statPreviewViewSupportStats = false
     } else {
         $('#ba-statpreview-status-strikerbonus').show()
+        $('#statpreview-supportstats').hide()
     }
-    $('#ba-statpreview-status-strikerbonus').toggleClass("deactivated", !statPreviewSupportStats)
+    $('#ba-statpreview-status-strikerbonus').toggleClass("deactivated", !statPreviewViewSupportStats)
     
     $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(1, student))
     $('#ba-statpreview-status-bond-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`)
     student_bondalts = []
+
+    $('#ba-statpreview-status-bond-level').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_relationship_bonus', [student.Name])), placement: 'top', html: true})
+
     for (let i = 0; i < student.FavorAlts.length; i++) {
         var extraTarget = find(data.students,"Id",student.FavorAlts[i])[0]
         if (extraTarget.IsReleased[regionID]) {
             student_bondalts.push(extraTarget)
             $('#ba-statpreview-status-bond-alt-icon').attr('src', `images/student/icon/${extraTarget.CollectionTexture}.png`)
             $('#ba-statpreview-bond-targets').append(getBondTargetsHTML(1 + student_bondalts.length, extraTarget))
+            $('#ba-statpreview-status-bond-alt-level').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_relationship_bonus', [extraTarget.Name])), placement: 'top', html: true})
         }
     }
+
     $('#ba-statpreview-status-bond-alt-level').toggle(student_bondalts.length > 0)
 
     if (student.Id in studentCollection) {
@@ -2184,12 +2866,10 @@ function processStudent() {
     statPreviewExternalBuffs.changeStudent(student.Id)
 
     updateGearIcon()
-    updateStatPreviewTitle()
 
     changeStatPreviewStars(statPreviewStarGrade, statPreviewWeaponGrade, false)
     recalculateTerrainAffinity()
     changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
-    changeStatPreviewSummonExSkillLevel(document.getElementById('ba-statpreview-exskill-range'), false)
     recalculateWeaponPreview()
     updateWeaponLevelStatPreview($('#ba-statpreview-weapon-range').val())
 
@@ -2212,7 +2892,8 @@ function processStudent() {
         changeStatPreviewBondLevel(i, false)
     }
     
-    recalculateStatPreview()
+    refreshStatTableControls()
+    recalculateStats()
 
     finalizeLoad(getTranslatedString(student, 'Name'), "chara", student.PathName, 'View Student', student.Id)
 
@@ -2229,14 +2910,11 @@ function loadStudent(studentName) {
             }
             studentCompare = studentCompare[0]
             selectCompareMode = false
+            changeStudentSummon(0, false)
             compareMode = true
-            if (statPreviewSummonStats) {
-                statPreviewSummonStats = false
-                $('.ba-summon-toggle').toggleClass('deactivated',true)
-            }
-            recalculateStatPreview()
+            updateCompareModeControl()
+            recalculateStats()
             studentSelectorModal.hide()
-            updateStatPreviewTitle()
         } else {
             student = find(data.students, "PathName", studentName)
             if (student.length == 0) {
@@ -2249,6 +2927,7 @@ function loadStudent(studentName) {
             if (compareMode) {
                 if (student.Id == studentCompare.Id) {
                     compareMode = false
+                    updateCompareModeControl()
                 }
             }
 
@@ -2268,19 +2947,6 @@ function loadStudentById(studentId) {
     } else {
         loadModule('students')
     }
-}
-
-function toggleStudentSummon() {
-    statPreviewSummonStats = !statPreviewSummonStats
-    if (statPreviewSupportStats && statPreviewSummonStats) toggleStrikerBonus()
-    if (compareMode) {
-        compareMode = false
-        $('#ba-statpreview-status-compare').toggleClass('deactivated', true)
-    }
-    recalculateStatPreview()
-    $('.ba-summon-toggle').toggleClass('deactivated', (!statPreviewSummonStats))
-    $('#ba-statpreview-summon-level').toggle(statPreviewSummonStats)
-    updateStatPreviewTitle()
 }
 
 function loadItem(id) {
@@ -3060,7 +3726,7 @@ function changeGearLevel(slot, el, recalculate = true) {
     $(`#ba-statpreview-gear${slot}-name`).text(getTranslatedString(equipment, 'Name'))
     $(`#ba-statpreview-gear${slot}-description`).html(getGearStatsText(equipment))
     if (statPreviewIncludeEquipment) {
-        if (recalculate) recalculateStatPreview()
+        if (recalculate) recalculateStatsWithDelay()
         updateGearIcon()
     }
 }
@@ -3083,37 +3749,65 @@ function getGearStatsText(equipment, delimiter=', ') {
 }
 
 function toggleStrikerBonus() {
-    statPreviewSupportStats = !statPreviewSupportStats
-    if (statPreviewSupportStats && statPreviewSummonStats) toggleStudentSummon()
-    $('#ba-student-stat-table').toggleClass("striker-bonus", statPreviewSupportStats)
-    $('#ba-statpreview-status-strikerbonus').toggleClass("deactivated", !statPreviewSupportStats)
-    recalculateStatPreview()
+    statPreviewViewSupportStats = !statPreviewViewSupportStats
+    if (statPreviewViewSupportStats && statPreviewSelectedChar > 0) changeStudentSummon(0, false)
+    $('#ba-student-stat-table').toggleClass("striker-bonus", statPreviewViewSupportStats)
+    $('#ba-statpreview-status-strikerbonus').toggleClass("deactivated", !statPreviewViewSupportStats)
+    recalculateStats()
 }
 
 function toggleGear() {
     statPreviewIncludeEquipment = !statPreviewIncludeEquipment
+    $('#ba-statpreview-status-equipment').toggleClass('deactivated', !statPreviewIncludeEquipment)
+    $('#ba-statpreview-gear').toggleClass("disabled", !statPreviewIncludeEquipment)
+    $('#ba-statpreview-gear-toggle').toggleClass("checked", statPreviewIncludeEquipment)
+    $('#ba-statpreview-gear input').prop("disabled", !statPreviewIncludeEquipment)
     updateGearIcon()
-    recalculateStatPreview()
+    recalculateStats()
+}
+
+function toggleBuffs() {
+    statPreviewIncludeBuffs = !statPreviewIncludeBuffs
+    $('#ba-statpreview-status-buffs').toggleClass('deactivated', !statPreviewIncludeBuffs)
+    $('#ba-statpreview-buff-toggle').toggleClass("checked", statPreviewIncludeBuffs)
+    statPreviewExternalBuffs.toggleDisabled(!statPreviewIncludeBuffs)
+    recalculateStats()
 }
 
 function toggleBond(num) {
     if (num == 1) {
         statPreviewIncludeBond = !statPreviewIncludeBond
+        $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
+        $('#ba-statpreview-bond-1-toggle').toggleClass("checked", statPreviewIncludeBond)
+        $('#ba-statpreview-bond-1').toggleClass("disabled", !statPreviewIncludeBond)
+        $('#ba-statpreview-bond-1 input').prop("disabled", !statPreviewIncludeBond)
     } else {
         statPreviewIncludeBondAlts = !statPreviewIncludeBondAlts
+        if (student_bondalts.length > 0) {
+            $('#ba-statpreview-status-bond-alt-level').toggleClass('deactivated', !statPreviewIncludeBondAlts)
+            $(`#ba-statpreview-bond-${num}-toggle`).toggleClass("checked", statPreviewIncludeBondAlts)
+            $(`#ba-statpreview-bond-${num}`).toggleClass("disabled", !statPreviewIncludeBondAlts)
+            $(`#ba-statpreview-bond-${num} input`).prop("disabled", !statPreviewIncludeBondAlts)
+        }
     }
-    recalculateStatPreview()
+    recalculateStats()
 }
 
 function togglePassiveSkill() {
     statPreviewIncludePassive = !statPreviewIncludePassive
-    recalculateStatPreview()
+    $('#ba-statpreview-status-passive-level').toggleClass('deactivated', !statPreviewIncludePassive)
+    $('#ba-statpreview-passiveskill-toggle').toggleClass("checked", statPreviewIncludePassive)
+    $('#ba-statpreview-passiveskill').toggleClass("disabled", !statPreviewIncludePassive)
+    $('#ba-statpreview-passiveskill input').prop("disabled", !statPreviewIncludePassive)
+    recalculateStats()
 }
 
 function toggleExGear() {
     statPreviewIncludeExGear = !statPreviewIncludeExGear
+    $('#ba-statpreview-ex-gear-toggle').toggleClass("checked", statPreviewIncludeExGear)
+    $('#ba-statpreview-ex-gear').toggleClass("disabled", !statPreviewIncludeExGear)
     updateGearIcon()
-    recalculateStatPreview()
+    recalculateStats()
 }
 
 function changeStatPreviewLevel(el, recalculate = true) {
@@ -3121,8 +3815,16 @@ function changeStatPreviewLevel(el, recalculate = true) {
     $('.statpreview-level').val(level)
     $('#ba-statpreview-level').text("Lv." + level)
     $('#ba-statpreview-level-modal').text(`Lv.${level} / ${el.max}`)
+    //enable or disable equipment controls
+    if (statPreviewIncludeEquipment) {
+        for (let i = 0; i < 3; i++) {
+            $(`#ba-statpreview-gear${i+1}`).toggleClass('disabled', (level < gear_minlevelreq[i]))
+            $(`#ba-statpreview-gear${i+1}-range`).prop('disabled', (level < gear_minlevelreq[i]))
+        }
+    }
+
     statPreviewLevel = level
-    if (recalculate) recalculateStatPreview()
+    if (recalculate) recalculateStatsWithDelay()
 }
 
 function changeSkillPreviewLevel(el) {
@@ -3168,22 +3870,24 @@ function changeWeaponPreviewLevel(el) {
 
 function changeStatPreviewBondLevel(i, recalculate = true) {
     const level = parseInt($(`#ba-statpreview-bond-${i}-range`).val())
-    $(`#ba-statpreview-bond-${i}-level`).html(`<i class="fa-solid fa-heart"></i> ${level}`)
+    $(`#ba-statpreview-bond-${i}-level`).html(`<i class="fa-solid fa-heart me-1"></i> ${level}`)
     var bondStats
     if (i == 1) {
         bondStats = Object.entries(getBondStats(student, level))
         statPreviewBondLevel = level
+        $('#ba-statpreview-status-bond-level .label').html(level)
     } else {
         bondStats = Object.entries(getBondStats(student_bondalts[i-2], level))
         statPreviewBondAltLevel = level
+        $('#ba-statpreview-status-bond-alt-level .label').html(level)
     }
     $(`#ba-statpreview-bond-${i}-description`).html(`${getStatName(bondStats[0][0])} <b>+${getFormattedStatAmount(bondStats[0][1])}</b>, ${getStatName(bondStats[1][0])} <b>+${getFormattedStatAmount(bondStats[1][1])}</b>`)
-    if (recalculate) recalculateStatPreview()
+    if (recalculate) recalculateStatsWithDelay()
 }
 
 function changeStatPreviewWeaponLevel(el) {
     updateWeaponLevelStatPreview(el.value)
-    recalculateStatPreview()
+    recalculateStatsWithDelay()
 }
 
 function updateWeaponLevelStatPreview(level) {
@@ -3205,26 +3909,26 @@ function changeStatPreviewPassiveSkillLevel(el, recalculate = true) {
     }
     statPreviewPassiveLevel = parseInt(el.value)
     updatePassiveSkillStatPreview()
-    if (recalculate) recalculateStatPreview()
+    if (recalculate) recalculateStatsWithDelay()
 }
 
-function changeStatPreviewSummonExSkillLevel(el, recalculate = true) {
-    if (el.value == el.max) {
-        $('#ba-statpreview-exskill-level').html(`<img src="images/ui/ImageFont_Max.png">`)
-    } else {
-        $('#ba-statpreview-exskill-level').html("Lv." + el.value)
-    }
+function changeStatPreviewSummonSourceSkillLevel(el, recalculate = true) {
+
     statPreviewExLevel = parseInt(el.value)
-    updateSummonExSkillStatPreview()
-    if (recalculate) recalculateStatPreview()
+    updateSummonSourceSkill()
+    if (recalculate) recalculateStatsWithDelay()
 }
 
 function getBondTargetsHTML(num, student) {
-    return `<div class="d-flex ${num != 1 ? "mt-3": ""}"><label for="ba-statpreview-bond-${num}-toggle"><h5>${(num == 1) ? translateUI('student_bond') : translateUI('student_bond_alt')}</h5></label><div class="flex-fill"></div><div class="form-check form-switch"><input class="form-check-input" type="checkbox" id="ba-statpreview-bond-${num}-toggle" onchange="toggleBond(${num})"></div></div><div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mb-1 d-flex flex-row align-items-center"><div class="me-3" style="position: relative;"><img class="ba-bond-icon ms-0" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5>${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${num == 1 ? statPreviewBondLevel : statPreviewBondAltLevel}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div>`
+    return `<div><div id="ba-statpreview-bond-${num}-toggle" class="d-flex header-toggle" onclick="toggleBond(${num})">
+    <h5 class="flex-fill">${translateUI('student_bond')}</h5>
+    <i class="fa-regular fa-square off"></i>
+    <i class="fa-solid fa-square-check on"></i></div>
+    <div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mb-1 d-flex flex-row align-items-center"><div class="ba-bond-icon me-2" style="position: relative;"><img src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5>${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${num == 1 ? statPreviewBondLevel : statPreviewBondAltLevel}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div></div>`
 }
 
 function changeBondLevel(el) {
-    $('#ba-bond-level').html('<i class="fa-solid fa-heart"></i> ' + el.value)
+    $('#ba-bond-level').html(el.value)
     recalculateBondPreview()
 }
 
@@ -3261,30 +3965,31 @@ function recalculateWeaponPreview() {
     $(`#ba-weapon-stat-table .stat-HealPower .stat-value`).text('+'+weaponStats.HealPower.toLocaleString())
 }
 
-function generateStatTable(container, statList, columnWidth) {
+function generateStatTable(container, statList, columnWidth, detailedView = 0) {
     let innerHtml = ''
     statList.forEach(function(statName){
         innerHtml += `
-            <div class="col-${columnWidth}">
-                <div class="stat-${statName} d-flex align-items-center">
-                    <span class="stat-icon"><img class="invert-light" src="images/staticon/Stat_${statName}.png"></span>
-                    <span class="stat-name">${getLocalizedString('Stat', statName)}</span>
-                    <span class="flex-fill"></span>
-                    <span class="stat-value"></span>
-                </div>
-            </div>
-        `
+            <div class="col-${columnWidth}"><div class="stat-${statName} d-flex align-items-center"><span class="stat-icon"><img class="invert-light" src="images/staticon/Stat_${statName}.png"></span><span class="stat-name">${getLocalizedString('Stat', statName)}</span><span class="flex-fill"></span><span class="stat-value">`
+        if (detailedView) {
+            innerHtml += `<span class="stat-base"></span><span class="stat-flat"></span><span class="stat-coefficient"></span><span class="stat-final"></span>`
+        }
+        innerHtml += `</span></div></div>`
     })
     innerHtml = `<div class="row g-0">${innerHtml}</div>`
     $(container).html(innerHtml)
 }
 
-function recalculateStatPreview() {
+function recalculateStatsWithDelay() {
+    if (recalculationLimitTimeout) clearTimeout(recalculationLimitTimeout)
+    setTimeout(recalculateStats, 50)
+}
+
+function recalculateStats() {
     let strikerBonus = $('#ba-student-stat-table').hasClass("striker-bonus")
     let level = $("#ba-statpreview-levelrange").val()
     let studentStats, summonStats, summon
-    if (statPreviewSummonStats) {
-        summon = find(data.summons, 'Id', student.SummonIds[0])[0]
+    if (statPreviewSelectedChar > 0) {
+        summon = find(data.summons, 'Id', student.Summons[statPreviewSelectedChar-1].Id)[0]
         summonStats = new CharacterStats(summon, level, (summon.StarBonus ? statPreviewStarGrade : 1))
     }
     studentStats = new CharacterStats(student, level, statPreviewStarGrade)
@@ -3303,7 +4008,7 @@ function recalculateStatPreview() {
             if (level >= gear_minlevelreq[i]) {
                 for (let j = 0; j < gear.StatType.length; j++) {
                     studentStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
-                    if (statPreviewSummonStats && summon.Id != 99999) {
+                    if (statPreviewSelectedChar > 0 && summon.Id != 99999) {
                         summonStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
                     }
                 }
@@ -3324,7 +4029,7 @@ function recalculateStatPreview() {
         if (statPreviewIncludeExGear && "Released" in student.Gear && student.Gear.Released[regionID]) {
             studentStats.addBuff(student.Gear.StatType[0], student.Gear.StatValue[0][1])
 
-            if (statPreviewSummonStats && summon.Id != 99999) {
+            if (statPreviewSelectedChar > 0 && summon.Id != 99999) {
                 summonStats.addBuff(student.Gear.StatType[0], student.Gear.StatValue[0][1])
             }
 
@@ -3359,12 +4064,71 @@ function recalculateStatPreview() {
         }
     }
 
+    $('#statpreview-buff-transferable-conflict').hide()
+    $('#statpreview-buff-transferable-incompatible').hide()
+    $(`#statpreview-buff-transferable-controls .buff-description span`).toggleClass('invalid', false)
+    //Include External Skill Buffs
+    if (statPreviewIncludeBuffs && statPreviewExternalBuffs !== undefined && !statPreviewViewSupportStats && !compareMode) {
+        let uniqueChannels = []
+        statPreviewExternalBuffs.buffs.forEach((tbuff, index) => {
+            tbuff.Skill.Effect.Effects.forEach((effect, effectIndex) => {
+                //check conditions
+                let compatible = true
+                if ("Restrictions" in effect) {
+                    effect.Restrictions.forEach(({Property, Operand, Value}) => {
+                        switch (Operand) {
+                            case 'Equal':
+                                compatible = (student[Property] == Value)
+                                break
+                        } 
+                    })
+                }
+
+                if (!compatible || (student.SquadType == 'Support' && statPreviewSelectedChar == 0 && tbuff.Skill.SkillType != 'sub')) {
+                    //exclude other character's Ex/Basic skills on Special characters
+                    $('#statpreview-buff-transferable-incompatible').toggle(statPreviewIncludeBuffs)
+                    $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
+                } else {
+                    if (uniqueChannels.find(e => e.type == tbuff.Skill.SkillType && e.channel == effect.Channel)) {
+                        //discount the buff if there is a channel conflict
+                        $('#statpreview-buff-transferable-conflict').toggle(statPreviewIncludeBuffs)
+                        $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
+                    } else {
+                        const value = ('StackSame' in effect ? effect.Value[0][tbuff.Level-1] * tbuff.Stacks : effect.Value[tbuff.Stacks-1][tbuff.Level-1])
+                        studentStats.addBuff(effect.Stat, value)
+    
+                        if (statPreviewSelectedChar > 0 && tbuff.Skill.SkillType == 'sub') {
+                            //for summoned entities, only apply the buff to the character and not the summon
+                        } else {
+                            if ('Icon' in effect) {
+                                studentStats.addActiveBuffIcon(effect.Icon, 0, 'StackSame' in effect ? tbuff.Stacks : 1)
+                            } else {
+                                studentStats.addActiveBuffIcon(effect.Stat, value, 'StackSame' in effect ? tbuff.Stacks : 1)
+                            }
+        
+                            
+                            if (statPreviewSelectedChar > 0 && summon.Id != 99999) {
+                                summonStats.addBuff(effect.Stat, value)
+                            }
+                        }
+                        uniqueChannels.push({type: tbuff.Skill.SkillType, channel: effect.Channel})
+                    }
+                }
+            })
+        })
+    }
+
+    //studentStats.renderActiveBuffs('#ba-statpreview-status-buffs .active-buffs', 7)
+
     //Include Passive Skill
-    if (statPreviewIncludePassive && !statPreviewSupportStats) {
+    if (statPreviewIncludePassive && !statPreviewViewSupportStats) {
         let passiveSkill = find(student.Skills, 'SkillType', ((statPreviewWeaponGrade >= 2) ? 'weapon' : '') + 'passive')[0]
         let passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
         Object.entries(passiveBonus).forEach(el => {
             studentStats.addBuff(el[0], el[1])
+            if (statPreviewSelectedChar == 0) {
+                studentStats.addActiveBuffIcon(el[0], el[1])
+            }
         })
 
         if (compareMode) {
@@ -3376,33 +4140,24 @@ function recalculateStatPreview() {
         }
     }
 
-    $('#statpreview-buff-transferable-incompatible').hide()
-    $(`#statpreview-buff-transferable-controls .buff-description span`).toggleClass('invalid', false)
-    //Include External Skill Buffs
-    if (statPreviewExternalBuffs !== undefined && !statPreviewSupportStats && !compareMode) {
-        let uniqueChannels = []
-        statPreviewExternalBuffs.buffs.forEach((tbuff, index) => {
-            tbuff.Skill.Effect.Effects.forEach((effect, effectIndex) => {
-                if (uniqueChannels.find(e => e.type == tbuff.Skill.SkillType && e.channel == effect.Channel)) {
-                    $('#statpreview-buff-transferable-incompatible').show()
-                    $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
-                } else {
-                    const value = ('StackSame' in effect ? effect.Value[0][tbuff.Level-1] * tbuff.Stacks : effect.Value[tbuff.Stacks-1][tbuff.Level-1])
-                    studentStats.addBuff(effect.Stat, value)
-                    if (statPreviewSummonStats && summon.Id != 99999) {
-                        summonStats.addBuff(effect.Stat, value)
-                    }
-                    uniqueChannels.push({type: tbuff.Skill.SkillType, channel: effect.Channel})
-                }
-            })
+    //Include Custom Buffs
+    if (enableCustomBuffs && statPreviewCustomBuffs !== undefined && !statPreviewViewSupportStats && !compareMode) {
+        statPreviewCustomBuffs.buffs.forEach((buff, index) => {
+
+            studentStats.addBuff(buff.Stat, buff.Amount)
+            studentStats.addActiveBuffIcon(buff.Stat, buff.Amount)
+            if (statPreviewSelectedChar > 0 && summon.Id != 99999) {
+                summonStats.addBuff(buff.Stat, buff.Amount)
+            }
         })
     }
+
     //Include Ex. Weapon
     if ((statPreviewStarGrade == 5) && (statPreviewWeaponGrade > 0)) {
         let weaponStats = getWeaponStats(student, $('#ba-statpreview-weapon-range').val())
         Object.entries(weaponStats).forEach(el => {
             studentStats.addBuff(el[0], el[1])
-            if (statPreviewSummonStats && summon.Id != 99999) {
+            if (statPreviewSelectedChar > 0 && summon.Id != 99999) {
                 summonStats.addBuff(el[0], el[1])
             }
         })
@@ -3414,11 +4169,79 @@ function recalculateStatPreview() {
         }
     }
 
+    //Support Stats
+    if (student.SquadType == 'Main' && statPreviewSupportStats !== undefined && !statPreviewViewSupportStats && !compareMode) {
+        statPreviewSupportStats.supportStudents.forEach((support, index) => {
+
+            const supportStats = new CharacterStats(support.student, support.level, support.starGrade)
+
+            //equipment
+            for (let i = 0; i < 3; i++) {
+                const tier = support.equipment[i]
+                const gear = find(data.equipment, "Id", gearId[support.student.Equipment[i]]+tier-1)[0]
+
+                if (support.level >= gear_minlevelreq[i]) {
+                    for (let j = 0; j < gear.StatType.length; j++) {
+                        supportStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
+                    }
+                }
+            }
+
+            //bond gear
+            if (support.gear && "Released" in support.student.Gear && support.student.Gear.Released[regionID]) {
+                supportStats.addBuff(support.student.Gear.StatType[0], support.student.Gear.StatValue[0][1])
+            }
+
+            //weapon
+            if ((support.starGrade == 5) && (support.weaponStarGrade > 0)) {
+                const weaponStats = getWeaponStats(support.student, support.weaponLevel)
+                Object.entries(weaponStats).forEach(el => {
+                    supportStats.addBuff(el[0], el[1])
+                })
+            }
+
+            //bond level
+            const bondBonus = getBondStats(support.student, Math.min(maxbond[support.starGrade-1], support.bond[0]))
+            Object.entries(bondBonus).forEach(el => {
+                supportStats.addBuff(el[0], el[1])
+            })
+
+            for (let i = 1; i < support.bond.length; i++) {
+                const bondAlt = find(data.students, 'Id', support.student.FavorAlts[i-1])[0]
+                const bondBonus = getBondStats(bondAlt, support.bond[i])
+                Object.entries(bondBonus).forEach(el => {
+                    supportStats.addBuff(el[0], el[1])
+                })
+            }
+
+            const bonusMaxHP = supportStats.getStrikerBonus('MaxHP')
+            const bonusAttackPower = supportStats.getStrikerBonus('AttackPower')
+            const bonusDefensePower = supportStats.getStrikerBonus('DefensePower')
+            const bonusHealPower = supportStats.getStrikerBonus('HealPower')
+
+            let desc = ''
+            desc += getStatName('MaxHP') + ` +<b>${bonusMaxHP}</b>, `
+            desc += getStatName('AttackPower') + ` +<b>${bonusAttackPower}</b>, `
+            desc += getStatName('DefensePower') + ` +<b>${bonusDefensePower}</b>, `
+            desc += getStatName('HealPower') + ` +<b>${bonusHealPower}</b>`
+
+            $(statPreviewSupportStats.elements.controls).find(`div[data-index="${index}"] .support-stats-desc`).html(desc)
+
+            studentStats.addBuff('MaxHP_Base', bonusMaxHP)
+            studentStats.addBuff('AttackPower_Base', bonusAttackPower)
+            studentStats.addBuff('DefensePower_Base', bonusDefensePower)
+            studentStats.addBuff('HealPower_Base', bonusHealPower)
+
+        })
+    }
+
     //add student stat to summon/vehicle
-    if (statPreviewSummonStats && !compareMode) {
-        let exLevel = $('#ba-statpreview-exskill-range').val()
-        for (let i = 0; i < student.Skills[0].SummonStat.length; i++) {
-            summonStats.addCharacterStatsAsBuff(studentStats, student.Skills[0].SummonStat[i], student.Skills[0].SummonStatCoefficient[i][exLevel-1]) 
+    if (statPreviewSelectedChar > 0 && !compareMode) {
+        const summonLevel = $('#ba-statpreview-summon-range').val()
+        const summon = student.Summons[statPreviewSelectedChar-1]
+        for (let i = 0; i < summon.InheritCasterStat.length; i++) {
+            summonStats.addCharacterStatsAsBuff(studentStats, summon.InheritCasterStat[i], summon.InheritCasterAmount[i][summonLevel-1])
+            studentStats.addActiveBuffIcon(summon.InheritCasterStat[i], 1)
         }
         
     }
@@ -3430,12 +4253,12 @@ function recalculateStatPreview() {
         studentCompareStats.stats["AmmoCount"][0] = 0
     }
 
-    let stats = (statPreviewSummonStats ? summonStats : studentStats)
+    let stats = (statPreviewSelectedChar > 0 ? summonStats : studentStats)
     const helpStats = ['DefensePower', 'CriticalPoint', 'StabilityPoint']
 
     studentStatListFull.forEach((stat, index) => {
         let text, modText, compareText = ""
-        if ((strikerBonus) && (!statPreviewSummonStats) && (index < 4)) {
+        if ((strikerBonus) && (statPreviewSelectedChar == 0) && (index < 4)) {
             text = '+' + stats.getStrikerBonus(stat).toLocaleString()
         } else {
             if (stat == 'AmmoCount') {
@@ -3470,30 +4293,33 @@ function recalculateStatPreview() {
             }
 
             if (diff < 0) {
-                compareText = `<small class="comparison less">&#9660;&nbsp;${amount}</small>`
+                compareText = `<small class="comparison less"><i class="fa-solid fa-circle-chevron-down"></i>&nbsp;${amount}</small>`
             } else if (diff > 0) {
-                compareText = `<small class="comparison greater">&#9650;&nbsp;${amount}</small>`
+                compareText = `<small class="comparison greater"><i class="fa-solid fa-circle-chevron-up"></i>&nbsp;${amount}</small>`
             } else {
-                compareText = `<small class="comparison">&#9654;&nbsp;0</small>`
+                compareText = `<small class="comparison"><i class="fa-solid fa-circle-dot"></i>&nbsp;0</small>`
             }
         }
         if (helpStats.includes(stat) && (!strikerBonus || index > 4)) {
             text = '<span class="has-tooltip">' + text + '</span>'
         }
-        $(`#ba-student-stat-table .stat-${stat} .stat-value`).html(text + compareText)
-
         //Modal
         if ($('#ba-student-modal-statpreview').hasClass('show')) {
-            modText = `<span class="stat-base">${stats.getBaseString(stat)}</span>`
+            //modText = `<span class="stat-base">${stats.getBaseString(stat)}</span>`
+            $(`#ba-student-stat-modal-table .stat-${stat} .stat-value .stat-base`).text(stats.getBaseString(stat))
+            const flatBonus = stats.getFlatString(stat)
+            $(`#ba-student-stat-modal-table .stat-${stat} .stat-value .stat-flat`).text(flatBonus).toggleClass('zero', flatBonus == "+0").toggleClass('negative', flatBonus.startsWith('-'))
+            //modText += `<span class="stat-flat${(flatBonus == "+0") ? " zero" : (flatBonus.startsWith('-') ? " negative" : "")}">${flatBonus}</span>`
 
-            let flatBonus = stats.getFlatString(stat)
-            modText += `<span class="stat-flat${(flatBonus == "+0") ? " zero" : (flatBonus.startsWith('-') ? " negative" : "")}">${flatBonus}</span>`
+            const coefBonus = stats.getCoefficientString(stat)
+            $(`#ba-student-stat-modal-table .stat-${stat} .stat-value .stat-coefficient`).text(coefBonus).toggleClass('zero', coefBonus == "+0%").toggleClass('negative', coefBonus.startsWith('-'))
+            //modText += `<span class="stat-coefficient${(coefBonus == "+0%") ? " zero" : (coefBonus.startsWith('-') ? " negative" : "")}">${coefBonus}</span>`
 
-            let coefBonus = stats.getCoefficientString(stat)
-            modText += `<span class="stat-coefficient${(coefBonus == "+0%") ? " zero" : (coefBonus.startsWith('-') ? " negative" : "")}">${coefBonus}</span>`
-
-            modText += `<span class="stat-final">${text}</span>`
-            $(`#ba-student-stat-modal-table .stat-${stat} .stat-value`).html(modText)
+            //modText += `<span class="stat-final">${text}</span>`
+            $(`#ba-student-stat-modal-table .stat-${stat} .stat-value .stat-final`).html(text)
+            //$(`#ba-student-stat-modal-table .stat-${stat} .stat-value`).html(modText)
+        } else {
+            $(`#ba-student-stat-table .stat-${stat} .stat-value`).html(text + compareText)
         }
     })
 
@@ -3511,42 +4337,10 @@ function recalculateStatPreview() {
     $('.stat-StabilityPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
 
     if (stats.getTotalString('AmmoCount') != 0) {
-        $('.stat-AmmoCount .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(getNormalAttackHitsText((statPreviewSummonStats ? summon.DamageDist : student.DamageDist), stats.getTotalString('AmmoCost'), (statPreviewSummonStats ? summon.WeaponType : student.WeaponType), student.BulletType.toLowerCase())), html: true, placement: 'top'})
+        $('.stat-AmmoCount .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(getNormalAttackHitsText((statPreviewSelectedChar > 0 ? summon.DamageDist : student.DamageDist), stats.getTotalString('AmmoCost'), (statPreviewSelectedChar > 0 ? summon.WeaponType : student.WeaponType), student.BulletType.toLowerCase())), html: true, placement: 'top'})
     }
 
-    $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
-    $('#ba-statpreview-status-bond-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-1-range').val()}`)
-    $('#ba-statpreview-bond-1-toggle').prop("checked", statPreviewIncludeBond)
-    $('#ba-statpreview-bond-1').toggleClass("disabled", !statPreviewIncludeBond)
-    $('#ba-statpreview-bond-1 input').prop("disabled", !statPreviewIncludeBond)
-    if (student_bondalts.length > 0) {
-        $('#ba-statpreview-status-bond-alt-level').toggleClass('deactivated', !statPreviewIncludeBondAlts)
-        $('#ba-statpreview-status-bond-alt-level .statpreview-label').html(`<i class="fa-solid fa-heart me-1"></i> ${$('#ba-statpreview-bond-2-range').val()}`)
-        $('#ba-statpreview-bond-2-toggle').prop("checked", statPreviewIncludeBondAlts)
-        $('#ba-statpreview-bond-2').toggleClass("disabled", !statPreviewIncludeBondAlts)
-        $('#ba-statpreview-bond-2 input').prop("disabled", !statPreviewIncludeBondAlts)
-    }
-    $('#ba-statpreview-status-passive-level').toggleClass('deactivated', !statPreviewIncludePassive)
-    $('#ba-statpreview-passiveskill-toggle').prop("checked", statPreviewIncludePassive)
-    $('#ba-statpreview-passiveskill').toggleClass("disabled", !statPreviewIncludePassive)
-    $('#ba-statpreview-passiveskill input').prop("disabled", !statPreviewIncludePassive)
-
-    $('#ba-statpreview-status-equipment').toggleClass('deactivated', !statPreviewIncludeEquipment)
-    $('#ba-statpreview-gear').toggleClass("disabled", !statPreviewIncludeEquipment)
-    $('#ba-statpreview-gear-toggle').prop("checked", statPreviewIncludeEquipment)
-    $('#ba-statpreview-gear input').prop("disabled", !statPreviewIncludeEquipment)
-
-    $('#ba-statpreview-ex-gear-toggle').prop("checked", statPreviewIncludeExGear)
-    $('#ba-statpreview-ex-gear').toggleClass("disabled", !statPreviewIncludeExGear)
-
-    if (statPreviewIncludeEquipment) {
-        for (let i = 0; i < 3; i++) {
-            $(`#ba-statpreview-gear${i+1}`).toggleClass('disabled', (level < gear_minlevelreq[i]))
-            $(`#ba-statpreview-gear${i+1}-range`).prop('disabled', (level < gear_minlevelreq[i]))
-        }
-    }
-
-    $('#ba-statpreview-status-compare').toggleClass('deactivated', !compareMode)
+    studentStats.renderActiveBuffs('.active-buffs', 7)
 
     //save settings
     if (student.Id in studentCollection) {
@@ -3560,6 +4354,45 @@ function recalculateStatPreview() {
         collectionUpdateTimeout = window.setTimeout(() => {
             statPreviewSettingsSave()
         }, 50)
+    }
+}
+
+function refreshStatTableControls() {
+    $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
+    $('#ba-statpreview-status-bond-level .label').html($('#ba-statpreview-bond-1-range').val())
+    $('#ba-statpreview-bond-1-toggle').toggleClass("checked", statPreviewIncludeBond)
+    $('#ba-statpreview-bond-1').toggleClass("disabled", !statPreviewIncludeBond)
+    $('#ba-statpreview-bond-1 input').prop("disabled", !statPreviewIncludeBond)
+    if (student_bondalts.length > 0) {
+        $('#ba-statpreview-status-bond-alt-level').toggleClass('deactivated', !statPreviewIncludeBondAlts)
+        $('#ba-statpreview-status-bond-alt-level .label').html($('#ba-statpreview-bond-2-range').val())
+        $('#ba-statpreview-bond-2-toggle').toggleClass("checked", statPreviewIncludeBondAlts)
+        $('#ba-statpreview-bond-2').toggleClass("disabled", !statPreviewIncludeBondAlts)
+        $('#ba-statpreview-bond-2 input').prop("disabled", !statPreviewIncludeBondAlts)
+    }
+    $('#ba-statpreview-status-passive-level').toggleClass('deactivated', !statPreviewIncludePassive)
+    $('#ba-statpreview-passiveskill-toggle').toggleClass("checked", statPreviewIncludePassive)
+    $('#ba-statpreview-passiveskill').toggleClass("disabled", !statPreviewIncludePassive)
+    $('#ba-statpreview-passiveskill input').prop("disabled", !statPreviewIncludePassive)
+
+    $('#ba-statpreview-status-buffs').toggleClass('deactivated', !statPreviewIncludeBuffs)
+    statPreviewExternalBuffs.toggleDisabled(!statPreviewIncludeBuffs)
+    $('#ba-statpreview-buff-toggle').toggleClass("checked", statPreviewIncludeBuffs)
+    // $('#ba-statpreview-buffs').toggleClass("disabled", !statPreviewIncludeBuffs)
+
+    $('#ba-statpreview-ex-gear-toggle').toggleClass("checked", statPreviewIncludeExGear)
+    $('#ba-statpreview-ex-gear').toggleClass("disabled", !statPreviewIncludeExGear)
+
+    $('#ba-statpreview-status-equipment').toggleClass('deactivated', !statPreviewIncludeEquipment)
+    $('#ba-statpreview-gear').toggleClass("disabled", !statPreviewIncludeEquipment)
+    $('#ba-statpreview-gear-toggle').toggleClass("checked", statPreviewIncludeEquipment)
+    $('#ba-statpreview-gear input').prop("disabled", !statPreviewIncludeEquipment)
+
+    if (statPreviewIncludeEquipment) {
+        for (let i = 0; i < 3; i++) {
+            $(`#ba-statpreview-gear${i+1}`).toggleClass('disabled', (student.level < gear_minlevelreq[i]))
+            $(`#ba-statpreview-gear${i+1}-range`).prop('disabled', (student.level < gear_minlevelreq[i]))
+        }
     }
 }
 
@@ -4084,14 +4917,15 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
         updatePassiveSkillStatPreview()
     }
 
-    if (recalculate) recalculateStatPreview()
+    if (recalculate) recalculateStats()
 }
 
 function updatePassiveSkillStatPreview() {
     //update passive skill info in preview
-    let passivePlus = (statPreviewWeaponGrade >= 2)
-    let passiveSkill = find(student.Skills, 'SkillType', (passivePlus ? 'weapon' : '') + 'passive')[0]
-    let passiveBonus = getPassiveSkillBonus(passiveSkill, $('#ba-statpreview-passiveskill-range').val())
+    const passiveLevel = $('#ba-statpreview-passiveskill-range').val()
+    const passivePlus = (statPreviewWeaponGrade >= 2)
+    const passiveSkill = find(student.Skills, 'SkillType', (passivePlus ? 'weapon' : '') + 'passive')[0]
+    const passiveBonus = getPassiveSkillBonus(passiveSkill, passiveLevel)
     $('#ba-statpreview-passiveskill-name').text(getTranslatedString(passiveSkill, 'Name'))
     let desc = ""
     $(Object.entries(passiveBonus)).each(function(i, el) {
@@ -4101,29 +4935,37 @@ function updatePassiveSkillStatPreview() {
         if (value < 0) desc += `${getStatName(el[0])} <b>${getFormattedStatAmount(value)}</b>, `
     })
     $('#ba-statpreview-passiveskill-desc').html(desc.substring(0, desc.length-2))
-    passivePlus ? $('.passive-skill-plus').show() : $('.passive-skill-plus').hide()
-    $('#ba-statpreview-status-passive-level .statpreview-label').text(`Lv.${$('#ba-statpreview-passiveskill-range').val()}`)
+    $('.statpreview-passive-plus').toggle(passivePlus)
+    
+    $('#ba-statpreview-status-passive-level .label').html(passiveLevel < 10 ? `Lv.${passiveLevel}` : `<img class="sharp-img" src="images/ui/ImageFont_Max.png" style="height:16px;">`)
 }
 
-function updateSummonExSkillStatPreview() {
-    if (student.SummonIds.length > 0) {
-        $('#ba-statpreview-summon-level').toggle(statPreviewSummonStats)
+function updateSummonSourceSkill() {
+    if (statPreviewSelectedChar > 0) {
+        $('#ba-statpreview-summon').show()
         //update ex skill info in preview
-        let exSkill = find(student.Skills, 'SkillType', 'ex')[0]
-        let summon = find(data.summons, "Id", student.SummonIds[0])[0]
-        
-        let level = $('#ba-statpreview-exskill-range').val()
+        const summon = student.Summons[statPreviewSelectedChar-1]
+        const sourceSkill = find(student.Skills, 'SkillType', summon.SourceSkill)[0]
+        const levelMax = summon.SourceSkill == 'ex' ? 5 : 10
+        $('#ba-statpreview-summon-range').attr('max', levelMax)
+        const level = $('#ba-statpreview-summon-range').val()
 
-        $('#ba-statpreview-exskill-name').text(getTranslatedString(exSkill, 'Name'))
-        $('#ba-statpreview-exskill-desc').empty()
-        for (let i = 0; i < exSkill.SummonStat.length; i++) {
-            
-            $('#ba-statpreview-exskill-desc').append((i == 0 ? "": "\n") + translateUI('summon_ex_bonus',[getTranslatedString(summon, "Name"), getStatName(exSkill.SummonStat[i]), parseFloat((exSkill.SummonStatCoefficient[i][level-1]/100).toPrecision(3)), getTranslatedString(student, "Name")]))
+        if (level == levelMax) {
+            $('#ba-statpreview-summon-level').html(`<img src="images/ui/ImageFont_Max.png">`)
+        } else {
+            $('#ba-statpreview-summon-level').html("Lv." + level)
+        }
+       
+        $('#ba-statpreview-summon-name').text(getTranslatedString(sourceSkill, 'Name'))
+        $('#ba-statpreview-summon-desc').empty()
+        $('#ba-statpreview-summon-icon').attr("src", `images/skill/${sourceSkill.Icon}.png`)
+
+        for (let i = 0; i < summon.InheritCasterStat.length; i++) {
+            $('#ba-statpreview-summon-desc').append((i == 0 ? "": "\n") + translateUI('summon_inheritance',[`<b>${parseFloat((summon.InheritCasterAmount[i][level-1]/100).toPrecision(3))}%</b>`, getTranslatedString(student, "Name"), getStatName(summon.InheritCasterStat[i])]))
         }
         
-        //$('#ba-statpreview-status-passive-level .statpreview-label').text(`Lv.${$('#ba-statpreview-passiveskill-range').val()}`)
     } else {
-        $('#ba-statpreview-summon-level').hide()
+        $('#ba-statpreview-summon').hide()
     }
 
 }
@@ -4922,6 +5764,14 @@ function toggleHighContrast(state) {
     $('body').toggleClass("high-contrast", highContrast)
 }
 
+function toggleCustomBuffs(state) {
+    enableCustomBuffs = state
+    $(`#ba-navbar-custombuffs-toggle button`).removeClass("active")
+    $(`#ba-navbar-custombuffs-toggle-${enableCustomBuffs}`).addClass("active")
+    localStorage.setItem("enable_custom_buffs", enableCustomBuffs)
+    $('#statpreview-buff-custom').toggle(enableCustomBuffs)
+}
+
 function changeRegion(regID) {
     if (regID != regionID) {
         $(`#ba-navbar-regionselector-${regionID}`).removeClass("active")
@@ -4968,6 +5818,11 @@ function loadLanguage(lang) {
     $('*[data-ph-localize-id]').each(function (i,el) {
         let key = $(el).data('ph-localize-id').split(',')[0], value = $(el).data('ph-localize-id').split(',')[1]
         $(el).attr('placeholder', getLocalizedString(key,value))
+    })
+
+    $('*[data-tooltip-id]').each(function (i,el) {
+        let key = $(el).data('tooltip-id').split(',')[0], value = $(el).data('tooltip-id').split(',')[1]
+        $(el).tooltip({title: getBasicTooltip(getLocalizedString(key,value)), placement: 'top', html: true})
     })
 }
 
@@ -5029,7 +5884,7 @@ function allSearch() {
 
     $.each(data.students, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/student/collection/'+el.CollectionTexture+'.webp', 'type': translateUI('student'), 'rarity': '', 'rarity_text': getRarityStars(el.StarGrade), 'onclick': `loadStudent('${el.PathName}')`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/student/icon/'+el.CollectionTexture+'.png', 'type': translateUI('student'), 'rarity': '', 'rarity_text': getRarityStars(el.StarGrade), 'onclick': `loadStudent('${el.PathName}')`})
             if (results.length >= maxResults) return false
         }
     })
@@ -5127,8 +5982,8 @@ function allSearch() {
         let html = '<div>'
         for (let i = 0; i < results.length; i++) {
             html += `<div id="ba-search-result-item-${i+1}" class="ba-search-result-item" onclick="${results[i].onclick}; $('#navbar-search-clear').trigger('click');">
-            <div class='ba-search-img'><img src='${results[i].icon}' class='ba-item-${results[i].rarity.toLowerCase()}' width=50 height=50></div>
-            <div class='flex-fill d-flex flex-column'><div class='flex-fill d-flex flex-column justify-content-end'><div class='ba-search-name'>${results[i].name}</div></div>
+            <div class='ba-search-img'><img src='${results[i].icon}' class='ba-item-${results[i].rarity.toLowerCase()}'></div>
+            <div class='flex-fill d-flex flex-column' style="min-width:0;"><div class='flex-fill d-flex flex-column justify-content-center'><div class='ba-search-name'>${results[i].name}</div></div>
             <div class='d-flex align-items-center mt-auto'>
             <span class='ba-search-subtitle flex-fill'>${results[i].type}</span>
             <span class='ba-search-rarity'>${results[i].rarity_text}</span></div></div></div>`
@@ -5298,23 +6153,41 @@ function stageIsReleased(stage) {
     } else return false
 }
 
-function updateStatPreviewTitle() {
-    //$('#ba-statpreview-status-title-compare').removeClass('d-none d-md-block')
-    if (statPreviewSummonStats) {
-        let summon  = find(data.summons, 'Id', student.SummonIds[0])[0]
-        $('#ba-statpreview-status-title, #ba-student-stat-modal-title').text(getTranslatedString(summon, "Name"))
-        $('#ba-statpreview-status-title-icon, #ba-student-stat-modal-title-icon').attr('src', `images/skill/${student.Skills[0].Icon}.png`).addClass(`bg-skill-${student.BulletType.toLowerCase()}`)
-    } else {
-        $('#ba-statpreview-status-title, #ba-student-stat-modal-title').html(getTranslatedString(student, "Name"))//.removeClass('d-none d-md-block')
-        $('#ba-statpreview-status-title-icon, #ba-student-stat-modal-title-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
+function changeStudentSummon(id, recalculate = true) {
+
+    statPreviewSelectedChar = id
+
+    if (statPreviewViewSupportStats && statPreviewSelectedChar > 0) toggleStrikerBonus()
+    if (compareMode) {
+        compareMode = false
+        updateCompareModeControl()
     }
+
+    $('.summon-list .dropdown-item').removeClass('active')
+    $(`.summon-list .dropdown-item[data-summon-id="${id}"]`).addClass('active')
+    $('.summon-list .summon-list-active-icon').attr('img')
+
+    if (statPreviewSelectedChar > 0) {
+        const summonInfo = find(data.summons, 'Id', student.Summons[id-1].Id)[0]
+        const sourceSkill = find(student.Skills, 'SkillType', student.Summons[id-1].SourceSkill)[0]
+        $('.summon-list .summon-list-active-name').text(getTranslatedString(summonInfo, "Name"))
+        $('.summon-list .summon-list-active-icon').attr('src', `images/skill/${sourceSkill.Icon}.png`).addClass(`bg-skill ${student.BulletType.toLowerCase()}`)
+    } else {
+        $('.summon-list .summon-list-active-name').html(getTranslatedString(student, "Name"))
+        $('.summon-list .summon-list-active-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill explosion pierce mystic")
+    }
+
+    updateSummonSourceSkill()
+    if (recalculate) recalculateStats()
+}
+
+function updateCompareModeControl() {
+    $('.comparemode-on').toggle(compareMode)
+    $('#ba-student-stat-table').toggleClass('compare', compareMode)
+    $('#ba-statpreview-status-compare').toggleClass('deactivated', !compareMode)
     if (compareMode) {
         $('#ba-statpreview-status-title-compare').html(getTranslatedString(studentCompare, "Name"))
-        $('#ba-statpreview-status-title, #ba-statpreview-status-title-compare')//.addClass('d-none d-md-block')
-        $('#ba-statpreview-status-title-compare-icon').attr('src', `images/student/icon/${studentCompare.CollectionTexture}.png`).removeClass("bg-skill-explosion bg-skill-pierce bg-skill-mystic")
-    }
-    $('.statpreview-compare').toggle(compareMode)
-    if (compareMode) {
+        $('#ba-statpreview-status-title-compare-icon').attr('src', `images/student/icon/${studentCompare.CollectionTexture}.png`).removeClass("bg-skill explosion pierce mystic")
         $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_compare_remove')), placement: 'top', html: true})
     } else {
         $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_compare')), placement: 'top', html: true})
@@ -5325,8 +6198,8 @@ function updateStatPreviewTitle() {
 function openStudentComparison() {
     if (compareMode) {
         compareMode = false
-        recalculateStatPreview()
-        updateStatPreviewTitle()
+        updateCompareModeControl()
+        recalculateStats()
     } else {
         $('#student-select-grid .selection-grid-card.disabled').removeClass('disabled')
         $(`#student-select-${student.Id}`).addClass('disabled')
@@ -5675,7 +6548,8 @@ function statPreviewSettingsSave() {
         IncludeExGear: statPreviewIncludeExGear,
         IncludeBond: statPreviewIncludeBond,
         IncludeBondAlts: statPreviewIncludeBondAlts,
-        IncludeEquipment: statPreviewIncludeEquipment
+        IncludeEquipment: statPreviewIncludeEquipment,
+        IncludeBuffs: statPreviewIncludeBuffs
     }
     localStorage.setItem('student_settings', JSON.stringify(statPreviewSettings))
 }
@@ -5699,6 +6573,7 @@ function statPreviewSettingsLoad() {
     statPreviewIncludeBond = statPreviewSettings.IncludeBond ? statPreviewSettings.IncludeBond : false
     statPreviewIncludeBondAlts = statPreviewSettings.IncludeBondAlts ? statPreviewSettings.IncludeBondAlts : false
     statPreviewIncludeEquipment = statPreviewSettings.IncludeEquipment ? statPreviewSettings.IncludeEquipment : false
+    statPreviewIncludeBuffs = statPreviewSettings.IncludeBuffs ? statPreviewSettings.IncludeBuffs : false
 }
 
 function exportDataString() {
