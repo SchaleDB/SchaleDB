@@ -623,14 +623,25 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1,
+                "CostAmount": 1
+            },
+            {
+                "ShopCategory": "Chaser",
                 "Released": [
-                    false,
-                    true
-                ]
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_0",
@@ -666,14 +677,25 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4,
+                "CostAmount": 4
+            },
+            {
+                "ShopCategory": "Chaser",
                 "Released": [
-                    false,
-                    true
-                ]
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_1",
@@ -698,14 +720,25 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8,
+                "CostAmount": 8
+            },
+            {
+                "ShopCategory": "Chaser",
                 "Released": [
-                    false,
-                    true
-                ]
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_2",
@@ -727,7 +760,19 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Nebra_3",
         "Name": "ดิสก์เนบราสมบูรณ์",
         "Desc": "ดิสก์เนบราสภาพสมบูรณ์\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
@@ -760,15 +805,15 @@
                 "CostAmount": 8000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
+                "CostId": 23,
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_0",
@@ -803,15 +848,15 @@
                 "CostAmount": 25000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
+                "CostId": 23,
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_1",
@@ -835,15 +880,15 @@
         "SynthQuality": 50,
         "Shops": [
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
+                "CostId": 23,
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_2",
@@ -865,19 +910,7 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Phaistos_3",
         "Name": "จักรเฟสทอสสมบูรณ์",
         "Desc": "จักรเฟสทอสที่อยู่ในสภาพสมบูรณ์ ใช้สำหรับอัปเกรดและสร้างไอเทมต่างๆ"
@@ -1012,17 +1045,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_0",
@@ -1055,17 +1077,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_1",
@@ -1087,19 +1098,7 @@
             "MaterialItemSR"
         ],
         "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Nimrud_2",
         "Name": "เลนส์นิมรุดที่สึก",
         "Desc": "เลนส์นิมรุดที่ซ่อมส่วนที่หายไป\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
@@ -1119,19 +1118,7 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Nimrud_3",
         "Name": "เลนส์นิมรุดสมบูรณ์",
         "Desc": "เลนส์นิมรุดที่อยู่ในสภาพสมบูรณ์ ใช้สำหรับอัปเกรดและสร้างไอเทมต่างๆ"
@@ -1372,15 +1359,15 @@
                 "CostAmount": 8000
             },
             {
-                "ShopCategory": "SecretStoneGrowth",
+                "ShopCategory": "Chaser",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Ether_0",
@@ -1415,15 +1402,15 @@
                 "CostAmount": 25000
             },
             {
-                "ShopCategory": "SecretStoneGrowth",
+                "ShopCategory": "Chaser",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Ether_1",
@@ -1447,15 +1434,15 @@
         "SynthQuality": 50,
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
+                "ShopCategory": "Chaser",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_Ether_2",
@@ -1477,7 +1464,19 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Ether_3",
         "Name": "เอสเซนซ์อีเธอร์",
         "Desc": "เอสเซนซ์ที่สร้างจากอีเธอร์บริสุทธิ์\nใช้อัปเกรดและสร้างไอเทมต่างๆ"
@@ -1508,17 +1507,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_0",
@@ -1551,17 +1539,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_1",
@@ -1583,19 +1560,7 @@
             "MaterialItemSR"
         ],
         "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Antikythera_2",
         "Name": "อุปกรณ์แอนเทราที่สึก",
         "Desc": "อุปกรณ์แอนเทราที่เสียหรือใช้งานไม่ได้ ใช้สำหรับอัปเกรดและสร้างไอเทมต่างๆ"
@@ -1649,14 +1614,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_0",
@@ -1692,14 +1657,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_1",
@@ -1724,14 +1689,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_2",
@@ -1787,14 +1752,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1
+                "CostAmount": 1,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_0",
@@ -1830,14 +1795,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4
+                "CostAmount": 4,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_1",
@@ -1862,14 +1827,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_2",
@@ -1913,17 +1878,6 @@
         "SynthQuality": 10,
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
-            },
-            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -1956,17 +1910,6 @@
         "SynthQuality": 20,
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
-            },
-            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -1998,17 +1941,6 @@
         ],
         "SynthQuality": 50,
         "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
-            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2074,6 +2006,17 @@
         "SynthQuality": 10,
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2106,6 +2049,17 @@
         "SynthQuality": 20,
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2137,6 +2091,17 @@
         ],
         "SynthQuality": 50,
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2511,178 +2476,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_0",
-        "Name": "BD เรียนสกิลขั้นต่ำ\n(เฮียกคิยาโค)",
-        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเฮียกคิยาโค"
-    },
-    {
-        "Id": 3001,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "R",
-        "Quality": 2,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemR"
-        ],
-        "SynthQuality": 60,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 20
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 20
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_1",
-        "Name": "BD เรียนสกิลขั้นกลาง\n(เฮียกคิยาโค)",
-        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเฮียกคิยาโค"
-    },
-    {
-        "Id": 3002,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SR",
-        "Quality": 3,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemSR"
-        ],
-        "SynthQuality": 150,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 50
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 50
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_2",
-        "Name": "BD เรียนสกิลขั้นสูง\n(เฮียกคิยาโค)",
-        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเฮียกคิยาโค"
-    },
-    {
-        "Id": 3003,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SSR",
-        "Quality": 4,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemSSR"
-        ],
-        "SynthQuality": 200,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 100
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 100
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_3",
-        "Name": "BD เรียนสกิลขั้นสูงสุด\n(เฮียกคิยาโค)",
-        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเฮียกคิยาโค"
-    },
-    {
-        "Id": 3010,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "N",
-        "Quality": 1,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemN"
-        ],
-        "SynthQuality": 30,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 10
             },
             {
                 "ShopCategory": "Chaser",
@@ -2696,12 +2489,12 @@
                 "CostAmount": 80
             }
         ],
-        "Icon": "Item_Icon_Material_ExSkill_RedWinter_0",
-        "Name": "BD เรียนสกิลขั้นต่ำ\n(เรดวินเทอร์)",
-        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเรดวินเทอร์"
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_0",
+        "Name": "BD เรียนสกิลขั้นต่ำ\n(เฮียกคิยาโค)",
+        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเฮียกคิยาโค"
     },
     {
-        "Id": 3011,
+        "Id": 3001,
         "IsReleased": [
             true,
             true
@@ -2750,12 +2543,12 @@
                 "CostAmount": 160
             }
         ],
-        "Icon": "Item_Icon_Material_ExSkill_RedWinter_1",
-        "Name": "BD เรียนสกิลขั้นกลาง\n(เรดวินเทอร์)",
-        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเรดวินเทอร์"
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_1",
+        "Name": "BD เรียนสกิลขั้นกลาง\n(เฮียกคิยาโค)",
+        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเฮียกคิยาโค"
     },
     {
-        "Id": 3012,
+        "Id": 3002,
         "IsReleased": [
             true,
             true
@@ -2804,12 +2597,12 @@
                 "CostAmount": 400
             }
         ],
-        "Icon": "Item_Icon_Material_ExSkill_RedWinter_2",
-        "Name": "BD เรียนสกิลขั้นสูง\n(เรดวินเทอร์)",
-        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเรดวินเทอร์"
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_2",
+        "Name": "BD เรียนสกิลขั้นสูง\n(เฮียกคิยาโค)",
+        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเฮียกคิยาโค"
     },
     {
-        "Id": 3013,
+        "Id": 3003,
         "IsReleased": [
             true,
             true
@@ -2856,6 +2649,178 @@
                 "CostType": "Item",
                 "CostId": 61,
                 "CostAmount": 800
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_3",
+        "Name": "BD เรียนสกิลขั้นสูงสุด\n(เฮียกคิยาโค)",
+        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเฮียกคิยาโค"
+    },
+    {
+        "Id": 3010,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemN"
+        ],
+        "SynthQuality": 30,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 10
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_RedWinter_0",
+        "Name": "BD เรียนสกิลขั้นต่ำ\n(เรดวินเทอร์)",
+        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเรดวินเทอร์"
+    },
+    {
+        "Id": 3011,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "R",
+        "Quality": 2,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemR"
+        ],
+        "SynthQuality": 60,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 20
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_RedWinter_1",
+        "Name": "BD เรียนสกิลขั้นกลาง\n(เรดวินเทอร์)",
+        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเรดวินเทอร์"
+    },
+    {
+        "Id": 3012,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SR",
+        "Quality": 3,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemSR"
+        ],
+        "SynthQuality": 150,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 50
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_RedWinter_2",
+        "Name": "BD เรียนสกิลขั้นสูง\n(เรดวินเทอร์)",
+        "Desc": "BD สื่อการสอนที่บันทึก\nกลยุทธ์ของนักเรียนเรดวินเทอร์"
+    },
+    {
+        "Id": 3013,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SSR",
+        "Quality": 4,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemSSR"
+        ],
+        "SynthQuality": 200,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 100
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_RedWinter_3",
@@ -3071,17 +3036,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_0",
@@ -3125,17 +3079,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_1",
@@ -3179,17 +3122,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_2",
@@ -3233,17 +3165,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_3",
@@ -3631,6 +3552,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_0",
@@ -3674,6 +3606,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_1",
@@ -3717,6 +3660,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_2",
@@ -3760,6 +3714,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_3",
@@ -4147,178 +4112,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_0",
-        "Name": "ตำราสกิลขั้นต่ำ\n(เฮียกคิยาโค)",
-        "Desc": "บันทึกลับรวมกลยุทธ์ของเฮียกคิยาโค"
-    },
-    {
-        "Id": 4001,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "R",
-        "Quality": 2,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemR"
-        ],
-        "SynthQuality": 20,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 5
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 5
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_1",
-        "Name": "ตำราสกิลขั้นกลาง\n(เฮียกคิยาโค)",
-        "Desc": "บันทึกลับรวมกลยุทธ์ของเฮียกคิยาโค"
-    },
-    {
-        "Id": 4002,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SR",
-        "Quality": 3,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemSR"
-        ],
-        "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 10
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_2",
-        "Name": "ตำราสกิลขั้นสูง\n(เฮียกคิยาโค)",
-        "Desc": "บันทึกลับรวมกลยุทธ์ของเฮียกคิยาโค"
-    },
-    {
-        "Id": 4003,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SSR",
-        "Quality": 4,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemSSR"
-        ],
-        "SynthQuality": 80,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 25
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 25
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_3",
-        "Name": "ตำราสกิลขั้นสูงสุด\n(เฮียกคิยาโค)",
-        "Desc": "บันทึกลับรวมกลยุทธ์ของเฮียกคิยาโค"
-    },
-    {
-        "Id": 4010,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "N",
-        "Quality": 1,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemN"
-        ],
-        "SynthQuality": 10,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 3
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 3
             },
             {
                 "ShopCategory": "Chaser",
@@ -4332,12 +4125,12 @@
                 "CostAmount": 24
             }
         ],
-        "Icon": "Item_Icon_SkillBook_RedWinter_0",
-        "Name": "ตำราสกิลขั้นต่ำ\n(เรดวินเทอร์)",
-        "Desc": "บันทึกลับรวมกลยุทธ์ของเรดวินเทอร์"
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_0",
+        "Name": "ตำราสกิลขั้นต่ำ\n(เฮียกคิยาโค)",
+        "Desc": "บันทึกลับรวมกลยุทธ์ของเฮียกคิยาโค"
     },
     {
-        "Id": 4011,
+        "Id": 4001,
         "IsReleased": [
             true,
             true
@@ -4386,12 +4179,12 @@
                 "CostAmount": 40
             }
         ],
-        "Icon": "Item_Icon_SkillBook_RedWinter_1",
-        "Name": "ตำราสกิลขั้นกลาง\n(เรดวินเทอร์)",
-        "Desc": "บันทึกลับรวมกลยุทธ์ของเรดวินเทอร์"
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_1",
+        "Name": "ตำราสกิลขั้นกลาง\n(เฮียกคิยาโค)",
+        "Desc": "บันทึกลับรวมกลยุทธ์ของเฮียกคิยาโค"
     },
     {
-        "Id": 4012,
+        "Id": 4002,
         "IsReleased": [
             true,
             true
@@ -4440,12 +4233,12 @@
                 "CostAmount": 80
             }
         ],
-        "Icon": "Item_Icon_SkillBook_RedWinter_2",
-        "Name": "ตำราสกิลขั้นสูง\n(เรดวินเทอร์)",
-        "Desc": "บันทึกลับรวมกลยุทธ์ของเรดวินเทอร์"
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_2",
+        "Name": "ตำราสกิลขั้นสูง\n(เฮียกคิยาโค)",
+        "Desc": "บันทึกลับรวมกลยุทธ์ของเฮียกคิยาโค"
     },
     {
-        "Id": 4013,
+        "Id": 4003,
         "IsReleased": [
             true,
             true
@@ -4492,6 +4285,178 @@
                 "CostType": "Item",
                 "CostId": 61,
                 "CostAmount": 200
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_3",
+        "Name": "ตำราสกิลขั้นสูงสุด\n(เฮียกคิยาโค)",
+        "Desc": "บันทึกลับรวมกลยุทธ์ของเฮียกคิยาโค"
+    },
+    {
+        "Id": 4010,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemN"
+        ],
+        "SynthQuality": 10,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 3
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_RedWinter_0",
+        "Name": "ตำราสกิลขั้นต่ำ\n(เรดวินเทอร์)",
+        "Desc": "บันทึกลับรวมกลยุทธ์ของเรดวินเทอร์"
+    },
+    {
+        "Id": 4011,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "R",
+        "Quality": 2,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemR"
+        ],
+        "SynthQuality": 20,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 5
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_RedWinter_1",
+        "Name": "ตำราสกิลขั้นกลาง\n(เรดวินเทอร์)",
+        "Desc": "บันทึกลับรวมกลยุทธ์ของเรดวินเทอร์"
+    },
+    {
+        "Id": 4012,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SR",
+        "Quality": 3,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemSR"
+        ],
+        "SynthQuality": 50,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 10
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_RedWinter_2",
+        "Name": "ตำราสกิลขั้นสูง\n(เรดวินเทอร์)",
+        "Desc": "บันทึกลับรวมกลยุทธ์ของเรดวินเทอร์"
+    },
+    {
+        "Id": 4013,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SSR",
+        "Quality": 4,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemSSR"
+        ],
+        "SynthQuality": 80,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 25
             }
         ],
         "Icon": "Item_Icon_SkillBook_RedWinter_3",
@@ -4707,17 +4672,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_0",
@@ -4761,17 +4715,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_1",
@@ -4815,17 +4758,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_2",
@@ -4869,17 +4801,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_3",
@@ -5267,6 +5188,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_0",
@@ -5310,6 +5242,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_1",
@@ -5353,6 +5296,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_2",
@@ -5396,6 +5350,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_3",
@@ -6797,7 +6762,9 @@
             "F_Juri",
             "F_Juri2",
             "F_Serina",
-            "F_Serina2"
+            "F_Serina2",
+            "F_Shigure",
+            "F_Shigure2"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_7",
@@ -8177,6 +8144,23 @@
         "Icon": "Item_Icon_SecretStone_CH0186",
         "Name": "เอลเลฟของมารี (ชุดพละ)",
         "Desc": "เอลเลฟที่มีอักษรชื่อของมารี (ชุดพละ)"
+    },
+    {
+        "Id": 10055,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_Shigure",
+        "Name": "シグレの神名文字",
+        "Desc": "シグレの神秘が詰まった神名文字。"
     },
     {
         "Id": 13000,
@@ -10977,6 +10961,66 @@
         "Desc": "ลูกเต๋าที่พบได้ทั่วไปในเรือ มันเป็นแค่ของเล่น แต่บางครั้งก็ถูกใช้เพื่อแก้ปัญหาความขัดแย้งระหว่างนักเรียน"
     },
     {
+        "Id": 85060,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Item_0",
+        "Name": "แต้มกิจกรรม",
+        "Desc": "แต้มที่ได้รับทุกครั้งที่ทำกิจกรรม\nยิ่งมีแต้มมากขึ้น จะสามารถแลกรับ\nรางวัลได้หลากหลายขึ้น"
+    },
+    {
+        "Id": 85061,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S10",
+        "Name": "ผ้าขนหนูออนเซ็น",
+        "Desc": "ผ้าขนหนูปกติที่ถูกเตรียมไว้ในออนเซ็นหมายเลข 227 เนื่องจากมีเนื้อผ้าค่อนข้างหยาบ ถ้าถูกับร่างกายแรงๆ อาจทำให้ผิวเสียหายได้"
+    },
+    {
+        "Id": 85062,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 3,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_1_S10",
+        "Name": "แชมพูหนวด",
+        "Desc": "แชมพูสูตรพิเศษของสหภาพเรดวินเทอร์ ที่ประธานเชริโน่ใช้เป็นประจำ ไม่เหมาะจะนำมาใช้กับหนวด ต่างจากชื่อของมัน"
+    },
+    {
+        "Id": 85063,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_2_S10",
+        "Name": "บาธบอมบ์แคพิบารา",
+        "Desc": "บาธบอมบ์ก้อนแข็งๆ ที่ทำเป็นรูปแคพิบารา เมื่อใส่ลงไปในน้ำจะละลายและมีกลิ่นส้มอ่อนๆ ออกมา"
+    },
+    {
         "Id": 100008,
         "IsReleased": [
             true,
@@ -13246,7 +13290,7 @@
         ],
         "Category": "Consumable",
         "Rarity": "SSR",
-        "Quality": 4,
+        "Quality": 1,
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],

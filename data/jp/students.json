@@ -44489,7 +44489,7 @@
                                     3910
                                 ]
                             ],
-                            "Channel": 7
+                            "Channel": 11007
                         }
                     ]
                 },
@@ -52971,7 +52971,7 @@
             {
                 "SkillType": "ex",
                 "Name": "実力をお見せしましょう",
-                "Desc": "味方1人に対して、攻撃力の<?1>増加（13秒間）",
+                "Desc": "味方1人に対して、<b:ATK>を<?1>増加（13秒間）",
                 "Parameters": [
                     [
                         "55.2%",
@@ -53353,6 +53353,471 @@
                 12,
                 8,
                 14
+            ]
+        ]
+    },
+    {
+        "Id": 10055,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 119,
+        "PathName": "Shigure",
+        "DevName": "Shigure",
+        "Name": "シグレ",
+        "School": "RedWinter",
+        "Club": "Class227",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Explosion",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "GL",
+        "WeaponImg": "Weapon_Icon_Shigure",
+        "Cover": true,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Redwinter_Collection",
+        "CollectionTexture": "Student_Portrait_Shigure_Collection",
+        "FamilyName": "間宵",
+        "FamilyNameRuby": "まよい",
+        "PersonalName": "シグレ",
+        "SchoolYear": "2年生",
+        "CharacterAge": "16歳",
+        "Birthday": "1月22日",
+        "CharacterSSRNew": "体を温めるものが必要？\nふふっ……任せて",
+        "ProfileIntroduction": "レッドウィンター連邦学園所属、ただし停学処分を受けて現在は旧校舎227号特別クラスで謹慎中の生徒。\n\n停学の理由は「配給用カンポット」に密かにアルコールを混ぜた行為」とのこと。227号特別クラスのノドカとは幼馴染で、噂によるとノドカが懲戒処分で特別クラス行きになったため、わざと事故を起こしたのだとか。事件の真相とは関係なく、自分で仕込んだカンポットが大好きで、ポケットウイスキーの瓶に入れていつも持ち歩いている。",
+        "Hobby": "自家製ドリンクを作ること",
+        "CharacterVoice": "河瀬茉希",
+        "BirthDay": "1/22",
+        "ArtistName": "ミミトケ",
+        "CharHeightMetric": "156cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 940,
+        "AttackPower1": 270,
+        "AttackPower100": 2702,
+        "MaxHP1": 2116,
+        "MaxHP100": 21170,
+        "DefensePower1": 18,
+        "DefensePower100": 112,
+        "HealPower1": 1482,
+        "HealPower100": 4447,
+        "DodgePoint": 188,
+        "AccuracyPoint": 105,
+        "CriticalPoint": 211,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 6,
+        "AmmoCost": 1,
+        "DamageDist": [
+            10000
+        ],
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "シグレ特製ボトルグレネード",
+                "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n攻撃力の<?2>分の<d:Burn>持続ダメージを付与（20秒間）",
+                "Parameters": [
+                    [
+                        "425%",
+                        "489%",
+                        "553%",
+                        "617%",
+                        "681%",
+                        "745%",
+                        "809%",
+                        "873%",
+                        "937%",
+                        "969%"
+                    ],
+                    [
+                        "64%",
+                        "64%",
+                        "73.5%",
+                        "73.5%",
+                        "83.1%",
+                        "83.1%",
+                        "92.7%",
+                        "92.7%",
+                        "102%",
+                        "107%"
+                    ]
+                ],
+                "Cost": [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                ],
+                "Icon": "COMMON_SKILLICON_RECZONE",
+                "DamageDist": [
+                    2500,
+                    2500,
+                    2500,
+                    2500
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "一杯、どう？",
+                "Desc": "60秒毎に、自身を除く攻撃力が最も高い味方1人の<b:ATK>を<?1>増加、<d:HIT>を27.5%減少（30秒間）",
+                "Parameters": [
+                    [
+                        "26.4%",
+                        "27.7%",
+                        "29%",
+                        "34.3%",
+                        "35.6%",
+                        "37%",
+                        "42.3%",
+                        "43.6%",
+                        "44.9%",
+                        "50.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONDUALEFFECT",
+                "Effect": {
+                    "Type": 2,
+                    "Effects": [
+                        {
+                            "Stat": "AttackPower_Coefficient",
+                            "Value": [
+                                [
+                                    2644,
+                                    2777,
+                                    2908,
+                                    3437,
+                                    3569,
+                                    3701,
+                                    4231,
+                                    4362,
+                                    4494,
+                                    5023
+                                ]
+                            ],
+                            "Channel": 102
+                        },
+                        {
+                            "Stat": "AccuracyPoint_Coefficient",
+                            "Value": [
+                                [
+                                    -2754,
+                                    -2754,
+                                    -2754,
+                                    -2754,
+                                    -2754,
+                                    -2754,
+                                    -2754,
+                                    -2754,
+                                    -2754,
+                                    -2754
+                                ]
+                            ],
+                            "Channel": 605
+                        }
+                    ]
+                },
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "甘い発酵",
+                "Desc": "<b:CriticalChance>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "CriticalPoint"
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "野生の勘",
+                "Desc": "<s:FormChange>の範囲の半径が<?1>倍に増加し、攻撃力の<?2>分のダメージを与えるように変更",
+                "Parameters": [
+                    [
+                        "1.5",
+                        "1.5",
+                        "1.5",
+                        "1.5",
+                        "1.5",
+                        "1.5",
+                        "1.5",
+                        "1.5",
+                        "1.5",
+                        "2"
+                    ],
+                    [
+                        "61.6%",
+                        "62.9%",
+                        "64.1%",
+                        "69%",
+                        "70.3%",
+                        "71.5%",
+                        "76.4%",
+                        "77.6%",
+                        "78.9%",
+                        "83.8%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLERADIUSINCREASE"
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "甘い発酵+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:CriticalChance>を<?2>増加",
+                "Parameters": [
+                    [
+                        "311",
+                        "327",
+                        "342",
+                        "405",
+                        "420",
+                        "436",
+                        "498",
+                        "513",
+                        "529",
+                        "591"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackPower",
+                    "CriticalPoint"
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                53
+            ],
+            [
+                7,
+                63
+            ],
+            [
+                2,
+                11
+            ],
+            [
+                3,
+                17
+            ],
+            [
+                4,
+                28
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            5,
+            0
+        ],
+        "FurnitureInteraction": [
+            [
+                9107
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Functional",
+            "Specialized"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Shigure",
+            "F_Shigure2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "スプリングパンチ",
+            "Desc": "シグレが普段持ち歩いているグレネードランチャー。\n\nこの榴弾が直撃した相手は、その名の通りくらくらしてしまう。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 119,
+            "AttackPower100": 1187,
+            "MaxHP1": 609,
+            "MaxHP100": 6087,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3010,
+                170
+            ],
+            [
+                3011,
+                3010,
+                171,
+                160
+            ],
+            [
+                3012,
+                3011,
+                172,
+                161
+            ],
+            [
+                3013,
+                3012,
+                173,
+                162
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                12
+            ],
+            [
+                12,
+                18,
+                11,
+                26
+            ],
+            [
+                12,
+                18,
+                9,
+                23
+            ],
+            [
+                8,
+                18,
+                8,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4010
+            ],
+            [
+                4010
+            ],
+            [
+                4011,
+                4010,
+                170
+            ],
+            [
+                4011,
+                171,
+                160
+            ],
+            [
+                4012,
+                4011,
+                171,
+                160
+            ],
+            [
+                4012,
+                172,
+                161
+            ],
+            [
+                4013,
+                4012,
+                173,
+                162
+            ],
+            [
+                4013,
+                173,
+                162
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                4
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                16
+            ],
+            [
+                8,
+                2,
+                15
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                8,
+                13
             ]
         ]
     }

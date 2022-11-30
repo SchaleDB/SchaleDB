@@ -623,14 +623,25 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1,
+                "CostAmount": 1
+            },
+            {
+                "ShopCategory": "Chaser",
                 "Released": [
-                    false,
-                    true
-                ]
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_0",
@@ -666,14 +677,25 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4,
+                "CostAmount": 4
+            },
+            {
+                "ShopCategory": "Chaser",
                 "Released": [
-                    false,
-                    true
-                ]
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_1",
@@ -698,14 +720,25 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8,
+                "CostAmount": 8
+            },
+            {
+                "ShopCategory": "Chaser",
                 "Released": [
-                    false,
-                    true
-                ]
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_2",
@@ -727,7 +760,19 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Nebra_3",
         "Name": "온전한 네브라 디스크",
         "Desc": "온전한 상태의 네브라 디스크. 각종 제조 및 강화에 사용된다."
@@ -760,15 +805,15 @@
                 "CostAmount": 8000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
+                "CostId": 23,
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_0",
@@ -803,15 +848,15 @@
                 "CostAmount": 25000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
+                "CostId": 23,
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_1",
@@ -835,15 +880,15 @@
         "SynthQuality": 50,
         "Shops": [
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
+                "CostId": 23,
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_2",
@@ -865,19 +910,7 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Phaistos_3",
         "Name": "온전한 파에스토스 원반",
         "Desc": "온전한 상태의 파에스토스 원반. 각종 제조 및 강화에 사용된다."
@@ -1012,17 +1045,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_0",
@@ -1055,17 +1077,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_1",
@@ -1087,19 +1098,7 @@
             "MaterialItemSR"
         ],
         "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Nimrud_2",
         "Name": "마모된 님루드 렌즈",
         "Desc": "조각을 맞추어 수리한 님루드 렌즈. 각종 제조 및 강화에 사용된다."
@@ -1119,19 +1118,7 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Nimrud_3",
         "Name": "온전한 님루드 렌즈",
         "Desc": "온전한 상태의 님루드 렌즈. 각종 제조 및 강화에 사용된다."
@@ -1372,15 +1359,15 @@
                 "CostAmount": 8000
             },
             {
-                "ShopCategory": "SecretStoneGrowth",
+                "ShopCategory": "Chaser",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Ether_0",
@@ -1415,15 +1402,15 @@
                 "CostAmount": 25000
             },
             {
-                "ShopCategory": "SecretStoneGrowth",
+                "ShopCategory": "Chaser",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Ether_1",
@@ -1447,15 +1434,15 @@
         "SynthQuality": 50,
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
+                "ShopCategory": "Chaser",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_Ether_2",
@@ -1477,7 +1464,19 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Ether_3",
         "Name": "에테르 정수",
         "Desc": "가장 순수하고 강력한 에테르만을 모아 만든 에테르의 정수. 각종 제조 및 강화에 사용된다."
@@ -1508,17 +1507,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_0",
@@ -1551,17 +1539,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_1",
@@ -1583,19 +1560,7 @@
             "MaterialItemSR"
         ],
         "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Antikythera_2",
         "Name": "마모된 안티키테라 장치",
         "Desc": "고장 나 작동하지 않는 안티키테라 장치. 각종 제조 및 강화에 사용된다."
@@ -1649,14 +1614,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_0",
@@ -1692,14 +1657,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_1",
@@ -1724,14 +1689,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_2",
@@ -1787,14 +1752,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1
+                "CostAmount": 1,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_0",
@@ -1830,14 +1795,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4
+                "CostAmount": 4,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_1",
@@ -1862,14 +1827,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_2",
@@ -1913,17 +1878,6 @@
         "SynthQuality": 10,
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
-            },
-            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -1956,17 +1910,6 @@
         "SynthQuality": 20,
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
-            },
-            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -1998,17 +1941,6 @@
         ],
         "SynthQuality": 50,
         "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
-            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2074,6 +2006,17 @@
         "SynthQuality": 10,
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2106,6 +2049,17 @@
         "SynthQuality": 20,
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2137,6 +2091,17 @@
         ],
         "SynthQuality": 50,
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2511,178 +2476,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_0",
-        "Name": "기초 전술 교육 BD\n(백귀야행)",
-        "Desc": "백귀야행 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
-    },
-    {
-        "Id": 3001,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "R",
-        "Quality": 2,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemR"
-        ],
-        "SynthQuality": 60,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 20
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 20
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_1",
-        "Name": "일반 전술 교육 BD\n(백귀야행)",
-        "Desc": "백귀야행 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
-    },
-    {
-        "Id": 3002,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SR",
-        "Quality": 3,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemSR"
-        ],
-        "SynthQuality": 150,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 50
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 50
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_2",
-        "Name": "상급 전술 교육 BD\n(백귀야행)",
-        "Desc": "백귀야행 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
-    },
-    {
-        "Id": 3003,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SSR",
-        "Quality": 4,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemSSR"
-        ],
-        "SynthQuality": 200,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 100
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 100
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_3",
-        "Name": "최상급 전술 교육 BD\n(백귀야행)",
-        "Desc": "백귀야행 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
-    },
-    {
-        "Id": 3010,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "N",
-        "Quality": 1,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemN"
-        ],
-        "SynthQuality": 30,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 10
             },
             {
                 "ShopCategory": "Chaser",
@@ -2696,12 +2489,12 @@
                 "CostAmount": 80
             }
         ],
-        "Icon": "Item_Icon_Material_ExSkill_RedWinter_0",
-        "Name": "기초 전술 교육 BD\n(붉은겨울)",
-        "Desc": "붉은겨울 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_0",
+        "Name": "기초 전술 교육 BD\n(백귀야행)",
+        "Desc": "백귀야행 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
     },
     {
-        "Id": 3011,
+        "Id": 3001,
         "IsReleased": [
             true,
             true
@@ -2750,12 +2543,12 @@
                 "CostAmount": 160
             }
         ],
-        "Icon": "Item_Icon_Material_ExSkill_RedWinter_1",
-        "Name": "일반 전술 교육 BD\n(붉은겨울)",
-        "Desc": "붉은겨울 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_1",
+        "Name": "일반 전술 교육 BD\n(백귀야행)",
+        "Desc": "백귀야행 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
     },
     {
-        "Id": 3012,
+        "Id": 3002,
         "IsReleased": [
             true,
             true
@@ -2804,12 +2597,12 @@
                 "CostAmount": 400
             }
         ],
-        "Icon": "Item_Icon_Material_ExSkill_RedWinter_2",
-        "Name": "상급 전술 교육 BD\n(붉은겨울)",
-        "Desc": "붉은겨울 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_2",
+        "Name": "상급 전술 교육 BD\n(백귀야행)",
+        "Desc": "백귀야행 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
     },
     {
-        "Id": 3013,
+        "Id": 3003,
         "IsReleased": [
             true,
             true
@@ -2856,6 +2649,178 @@
                 "CostType": "Item",
                 "CostId": 61,
                 "CostAmount": 800
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_3",
+        "Name": "최상급 전술 교육 BD\n(백귀야행)",
+        "Desc": "백귀야행 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
+    },
+    {
+        "Id": 3010,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemN"
+        ],
+        "SynthQuality": 30,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 10
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_RedWinter_0",
+        "Name": "기초 전술 교육 BD\n(붉은겨울)",
+        "Desc": "붉은겨울 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
+    },
+    {
+        "Id": 3011,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "R",
+        "Quality": 2,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemR"
+        ],
+        "SynthQuality": 60,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 20
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_RedWinter_1",
+        "Name": "일반 전술 교육 BD\n(붉은겨울)",
+        "Desc": "붉은겨울 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
+    },
+    {
+        "Id": 3012,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SR",
+        "Quality": 3,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemSR"
+        ],
+        "SynthQuality": 150,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 50
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_RedWinter_2",
+        "Name": "상급 전술 교육 BD\n(붉은겨울)",
+        "Desc": "붉은겨울 학생들의 전술 활동을 영상으로 기록한 교육용 BD"
+    },
+    {
+        "Id": 3013,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SSR",
+        "Quality": 4,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemSSR"
+        ],
+        "SynthQuality": 200,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 100
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_RedWinter_3",
@@ -3071,17 +3036,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_0",
@@ -3125,17 +3079,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_1",
@@ -3179,17 +3122,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_2",
@@ -3233,17 +3165,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_3",
@@ -3631,6 +3552,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_0",
@@ -3674,6 +3606,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_1",
@@ -3717,6 +3660,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_2",
@@ -3760,6 +3714,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_3",
@@ -4147,178 +4112,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_0",
-        "Name": "기초 기술 노트\n(백귀야행)",
-        "Desc": "백귀야행 학원의 전술 핵심이 요약된 비법 노트."
-    },
-    {
-        "Id": 4001,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "R",
-        "Quality": 2,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemR"
-        ],
-        "SynthQuality": 20,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 5
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 5
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_1",
-        "Name": "일반 기술 노트\n(백귀야행)",
-        "Desc": "백귀야행 학원의 전술 핵심이 요약된 비법 노트."
-    },
-    {
-        "Id": 4002,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SR",
-        "Quality": 3,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemSR"
-        ],
-        "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 10
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_2",
-        "Name": "상급 기술 노트\n(백귀야행)",
-        "Desc": "백귀야행 학원의 전술 핵심이 요약된 비법 노트."
-    },
-    {
-        "Id": 4003,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SSR",
-        "Quality": 4,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemSSR"
-        ],
-        "SynthQuality": 80,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 25
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 25
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_3",
-        "Name": "최상급 기술 노트\n(백귀야행)",
-        "Desc": "백귀야행 학원의 전술 핵심이 요약된 비법 노트."
-    },
-    {
-        "Id": 4010,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "N",
-        "Quality": 1,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemN"
-        ],
-        "SynthQuality": 10,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 3
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 3
             },
             {
                 "ShopCategory": "Chaser",
@@ -4332,12 +4125,12 @@
                 "CostAmount": 24
             }
         ],
-        "Icon": "Item_Icon_SkillBook_RedWinter_0",
-        "Name": "기초 기술 노트\n(붉은겨울)",
-        "Desc": "붉은겨울 학원의 전술 핵심이 요약된 비법 노트."
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_0",
+        "Name": "기초 기술 노트\n(백귀야행)",
+        "Desc": "백귀야행 학원의 전술 핵심이 요약된 비법 노트."
     },
     {
-        "Id": 4011,
+        "Id": 4001,
         "IsReleased": [
             true,
             true
@@ -4386,12 +4179,12 @@
                 "CostAmount": 40
             }
         ],
-        "Icon": "Item_Icon_SkillBook_RedWinter_1",
-        "Name": "일반 기술 노트\n(붉은겨울)",
-        "Desc": "붉은겨울 학원의 전술 핵심이 요약된 비법 노트."
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_1",
+        "Name": "일반 기술 노트\n(백귀야행)",
+        "Desc": "백귀야행 학원의 전술 핵심이 요약된 비법 노트."
     },
     {
-        "Id": 4012,
+        "Id": 4002,
         "IsReleased": [
             true,
             true
@@ -4440,12 +4233,12 @@
                 "CostAmount": 80
             }
         ],
-        "Icon": "Item_Icon_SkillBook_RedWinter_2",
-        "Name": "상급 기술 노트\n(붉은겨울)",
-        "Desc": "붉은겨울 학원의 전술 핵심이 요약된 비법 노트."
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_2",
+        "Name": "상급 기술 노트\n(백귀야행)",
+        "Desc": "백귀야행 학원의 전술 핵심이 요약된 비법 노트."
     },
     {
-        "Id": 4013,
+        "Id": 4003,
         "IsReleased": [
             true,
             true
@@ -4492,6 +4285,178 @@
                 "CostType": "Item",
                 "CostId": 61,
                 "CostAmount": 200
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_3",
+        "Name": "최상급 기술 노트\n(백귀야행)",
+        "Desc": "백귀야행 학원의 전술 핵심이 요약된 비법 노트."
+    },
+    {
+        "Id": 4010,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemN"
+        ],
+        "SynthQuality": 10,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 3
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_RedWinter_0",
+        "Name": "기초 기술 노트\n(붉은겨울)",
+        "Desc": "붉은겨울 학원의 전술 핵심이 요약된 비법 노트."
+    },
+    {
+        "Id": 4011,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "R",
+        "Quality": 2,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemR"
+        ],
+        "SynthQuality": 20,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 5
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_RedWinter_1",
+        "Name": "일반 기술 노트\n(붉은겨울)",
+        "Desc": "붉은겨울 학원의 전술 핵심이 요약된 비법 노트."
+    },
+    {
+        "Id": 4012,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SR",
+        "Quality": 3,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemSR"
+        ],
+        "SynthQuality": 50,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 10
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_RedWinter_2",
+        "Name": "상급 기술 노트\n(붉은겨울)",
+        "Desc": "붉은겨울 학원의 전술 핵심이 요약된 비법 노트."
+    },
+    {
+        "Id": 4013,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SSR",
+        "Quality": 4,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemSSR"
+        ],
+        "SynthQuality": 80,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 25
             }
         ],
         "Icon": "Item_Icon_SkillBook_RedWinter_3",
@@ -4707,17 +4672,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_0",
@@ -4761,17 +4715,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_1",
@@ -4815,17 +4758,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_2",
@@ -4869,17 +4801,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_3",
@@ -5267,6 +5188,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_0",
@@ -5310,6 +5242,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_1",
@@ -5353,6 +5296,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_2",
@@ -5396,6 +5350,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_3",
@@ -5977,7 +5942,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_9",
         "Name": "&lt;총, 귀여움, 청춘&gt;",
-        "Desc": "총과 귀여움, 그리고 청춘.\n키보토스 대중문화의 기원을 거슬러 올라가 그 근원을 분석한 올해 최고의 베스트셀러"
+        "Desc": "총과 귀여움, 그리고 청춘.\n키보토스 대중문화의 기원을 거슬러 올라가 그 근원을 분석한 올해 최고의 베스트셀러."
     },
     {
         "Id": 5010,
@@ -6797,7 +6762,9 @@
             "F_Juri",
             "F_Juri2",
             "F_Serina",
-            "F_Serina2"
+            "F_Serina2",
+            "F_Shigure",
+            "F_Shigure2"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_7",
@@ -8177,6 +8144,23 @@
         "Icon": "Item_Icon_SecretStone_CH0186",
         "Name": "마리(체육복)의 엘레프",
         "Desc": "마리(체육복)의 신비가 담겨 있는 신명문자(神名文字)."
+    },
+    {
+        "Id": 10055,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_Shigure",
+        "Name": "시구레의 엘레프",
+        "Desc": "시구레의 신비가 담겨 있는 신명문자(神名文字)."
     },
     {
         "Id": 13000,
@@ -10277,7 +10261,7 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_Event_Token_1_S15",
-        "Name": "학원 교류회 전단지",
+        "Name": "학원교류회 전단지",
         "Desc": "백귀야행과 게헨나 학원 간의 교류회가 열린 걸 알리는 전단지. 주최자인 니야의 인사말과 함께 이번 교류회의 주요 일정이 적혀 있다."
     },
     {
@@ -10975,6 +10959,66 @@
         "Icon": "Item_Icon_Event_Token_3_S9",
         "Name": "주사위（Rerun）",
         "Desc": "배 안에서 자주 발견되는 주사위. 단순한 장난감이지만, 가끔 학생들 간의 갈등을 해결하는 데에 사용되기도 한다."
+    },
+    {
+        "Id": 85060,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Item_0",
+        "Name": "이벤트 포인트（Rerun）",
+        "Desc": "이벤트를 진행할 때마다 획득할 수 있는 포인트. 많이 얻을수록 다양한 보상을 얻을 수 있다."
+    },
+    {
+        "Id": 85061,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S10",
+        "Name": "온천 타월（Rerun）",
+        "Desc": "온천장 227호에서 제공하는 기본 타월. 소재가 다소 거칠기 때문에 몸에 대고 세게 문지르면 피부가 상할 수도 있다."
+    },
+    {
+        "Id": 85062,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 3,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_1_S10",
+        "Name": "수염 샴푸（Rerun）",
+        "Desc": "체리노 회장이 애용하는 붉은겨울 학원 특제 샴푸. 이름과는 달리 수염을 씻는 데에는 적합하지 않다고 한다."
+    },
+    {
+        "Id": 85063,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_2_S10",
+        "Name": "카피바라 입욕제（Rerun）",
+        "Desc": "카피바라의 모양을 한 고체형 입욕제. 물에 넣으면 은은한 감귤 향기를 풍기며 녹아 내린다."
     },
     {
         "Id": 100008,
@@ -12465,7 +12509,7 @@
         "Shops": [],
         "Icon": "Event_Vallentine_Chocolate_Midori",
         "Name": "미도리의 수제 초콜릿",
-        "Desc": "미도리가 선생님을 위해 이른 새벽부터 일어나 직접 만든 수제 초콜릿, 누구보다 가장 먼저, 처음으로 초콜릿을 주고 싶다는 두둥실 하면서 조금은 뜨거운 마음으로 만들었다."
+        "Desc": "미도리가 선생님을 위해 이른 새벽부터 일어나 직접 만든 수제 초콜릿. 누구보다 가장 먼저, 처음으로 초콜릿을 주고 싶다는 두둥실 하면서 조금은 뜨거운 마음으로 만들었다."
     },
     {
         "Id": 180045,
@@ -12479,7 +12523,7 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Event_Vallentine_Chocolate_Chise",
-        "Name": "치세표 초콜릿 쓰지우라센베이",
+        "Name": "치세표 초콜릿 츠지우라센베이",
         "Desc": "치세가 준비한 각종 사자성어가 담겨 있는 조금은 신기한 형태의 초콜릿 과자. 그 내용물은 멀쩡한 것도 있지만, 가끔 희귀한 확률로 영 엉뚱한 문구가 적혀 있는 것도 있다."
     },
     {
@@ -13246,7 +13290,7 @@
         ],
         "Category": "Consumable",
         "Rarity": "SSR",
-        "Quality": 4,
+        "Quality": 1,
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],

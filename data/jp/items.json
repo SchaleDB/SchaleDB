@@ -623,14 +623,25 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1,
+                "CostAmount": 1
+            },
+            {
+                "ShopCategory": "Chaser",
                 "Released": [
-                    false,
-                    true
-                ]
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_0",
@@ -666,14 +677,25 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4,
+                "CostAmount": 4
+            },
+            {
+                "ShopCategory": "Chaser",
                 "Released": [
-                    false,
-                    true
-                ]
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_1",
@@ -698,14 +720,25 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8,
+                "CostAmount": 8
+            },
+            {
+                "ShopCategory": "Chaser",
                 "Released": [
-                    false,
-                    true
-                ]
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_Nebra_2",
@@ -727,7 +760,19 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Nebra_3",
         "Name": "完全なネブラディスク",
         "Desc": "完全な状態のネブラディスク。製造や強化に使用される。"
@@ -760,15 +805,15 @@
                 "CostAmount": 8000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
+                "CostId": 23,
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_0",
@@ -803,15 +848,15 @@
                 "CostAmount": 25000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
+                "CostId": 23,
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_1",
@@ -835,15 +880,15 @@
         "SynthQuality": 50,
         "Shops": [
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
+                "CostId": 23,
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_2",
@@ -865,19 +910,7 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Phaistos_3",
         "Name": "完全なファイストス円盤",
         "Desc": "完全な状態のファイストス円盤。製造や強化に使用される。"
@@ -1012,17 +1045,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_0",
@@ -1055,17 +1077,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_1",
@@ -1087,19 +1098,7 @@
             "MaterialItemSR"
         ],
         "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Nimrud_2",
         "Name": "摩耗したニムルドレンズ",
         "Desc": "欠片を寄せ集めて修復したニムルドレンズ。製造や強化に使用される。"
@@ -1119,19 +1118,7 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Nimrud_3",
         "Name": "完全なニムルドレンズ",
         "Desc": "完全な状態のニムルドレンズ。製造や強化に使用される。"
@@ -1372,15 +1359,15 @@
                 "CostAmount": 8000
             },
             {
-                "ShopCategory": "SecretStoneGrowth",
+                "ShopCategory": "Chaser",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Ether_0",
@@ -1415,15 +1402,15 @@
                 "CostAmount": 25000
             },
             {
-                "ShopCategory": "SecretStoneGrowth",
+                "ShopCategory": "Chaser",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Ether_1",
@@ -1447,15 +1434,15 @@
         "SynthQuality": 50,
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
+                "ShopCategory": "Chaser",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_Ether_2",
@@ -1477,7 +1464,19 @@
             "MaterialItemSSR"
         ],
         "SynthQuality": 80,
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Ether_3",
         "Name": "エーテルのエッセンス",
         "Desc": "最も純粋で強力なエーテルだけを集めて作ったエーテルの上澄み。製造や強化に使用される。"
@@ -1508,17 +1507,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_0",
@@ -1551,17 +1539,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_1",
@@ -1583,19 +1560,7 @@
             "MaterialItemSR"
         ],
         "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Antikythera_2",
         "Name": "摩耗したアンティキティラ装置",
         "Desc": "壊れて正常に作動しないアンティキティラ装置。製造や強化に使用される。"
@@ -1649,14 +1614,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_0",
@@ -1692,14 +1657,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_1",
@@ -1724,14 +1689,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_2",
@@ -1787,14 +1752,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1
+                "CostAmount": 1,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_0",
@@ -1830,14 +1795,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4
+                "CostAmount": 4,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_1",
@@ -1862,14 +1827,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    true
-                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_2",
@@ -1913,17 +1878,6 @@
         "SynthQuality": 10,
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1
-            },
-            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -1956,17 +1910,6 @@
         "SynthQuality": 20,
         "Shops": [
             {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4
-            },
-            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -1998,17 +1941,6 @@
         ],
         "SynthQuality": 50,
         "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8
-            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2074,6 +2006,17 @@
         "SynthQuality": 10,
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2106,6 +2049,17 @@
         "SynthQuality": 20,
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2137,6 +2091,17 @@
         ],
         "SynthQuality": 50,
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2511,178 +2476,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_0",
-        "Name": "初級戦術教育BD\n（百鬼夜行）",
-        "Desc": "百鬼夜行の生徒の戦術活動を映像として記録した教育用BD。"
-    },
-    {
-        "Id": 3001,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "R",
-        "Quality": 2,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemR"
-        ],
-        "SynthQuality": 60,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 20
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 20
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_1",
-        "Name": "中級戦術教育BD\n（百鬼夜行）",
-        "Desc": "百鬼夜行の生徒の戦術活動を映像として記録した教育用BD。"
-    },
-    {
-        "Id": 3002,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SR",
-        "Quality": 3,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemSR"
-        ],
-        "SynthQuality": 150,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 50
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 50
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_2",
-        "Name": "上級戦術教育BD\n（百鬼夜行）",
-        "Desc": "百鬼夜行の生徒の戦術活動を映像として記録した教育用BD。"
-    },
-    {
-        "Id": 3003,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SSR",
-        "Quality": 4,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemSSR"
-        ],
-        "SynthQuality": 200,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 100
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 100
-            }
-        ],
-        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_3",
-        "Name": "最上級戦術教育BD\n（百鬼夜行）",
-        "Desc": "百鬼夜行の生徒の戦術活動を映像として記録した教育用BD。"
-    },
-    {
-        "Id": 3010,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "N",
-        "Quality": 1,
-        "Tags": [
-            "CDItem",
-            "ExpendableItem",
-            "CDItemN"
-        ],
-        "SynthQuality": 30,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 10
             },
             {
                 "ShopCategory": "Chaser",
@@ -2696,12 +2489,12 @@
                 "CostAmount": 80
             }
         ],
-        "Icon": "Item_Icon_Material_ExSkill_RedWinter_0",
-        "Name": "初級戦術教育BD\n（レッドウィンター）",
-        "Desc": "レッドウィンターの生徒の戦術活動を映像として記録した教育用BD。"
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_0",
+        "Name": "初級戦術教育BD\n（百鬼夜行）",
+        "Desc": "百鬼夜行の生徒の戦術活動を映像として記録した教育用BD。"
     },
     {
-        "Id": 3011,
+        "Id": 3001,
         "IsReleased": [
             true,
             true
@@ -2750,12 +2543,12 @@
                 "CostAmount": 160
             }
         ],
-        "Icon": "Item_Icon_Material_ExSkill_RedWinter_1",
-        "Name": "中級戦術教育BD\n（レッドウィンター）",
-        "Desc": "レッドウィンターの生徒の戦術活動を映像として記録した教育用BD。"
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_1",
+        "Name": "中級戦術教育BD\n（百鬼夜行）",
+        "Desc": "百鬼夜行の生徒の戦術活動を映像として記録した教育用BD。"
     },
     {
-        "Id": 3012,
+        "Id": 3002,
         "IsReleased": [
             true,
             true
@@ -2804,12 +2597,12 @@
                 "CostAmount": 400
             }
         ],
-        "Icon": "Item_Icon_Material_ExSkill_RedWinter_2",
-        "Name": "上級戦術教育BD\n（レッドウィンター）",
-        "Desc": "レッドウィンターの生徒の戦術活動を映像として記録した教育用BD。"
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_2",
+        "Name": "上級戦術教育BD\n（百鬼夜行）",
+        "Desc": "百鬼夜行の生徒の戦術活動を映像として記録した教育用BD。"
     },
     {
-        "Id": 3013,
+        "Id": 3003,
         "IsReleased": [
             true,
             true
@@ -2856,6 +2649,178 @@
                 "CostType": "Item",
                 "CostId": 61,
                 "CostAmount": 800
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_Hyakkiyako_3",
+        "Name": "最上級戦術教育BD\n（百鬼夜行）",
+        "Desc": "百鬼夜行の生徒の戦術活動を映像として記録した教育用BD。"
+    },
+    {
+        "Id": 3010,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemN"
+        ],
+        "SynthQuality": 30,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 10
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_RedWinter_0",
+        "Name": "初級戦術教育BD\n（レッドウィンター）",
+        "Desc": "レッドウィンターの生徒の戦術活動を映像として記録した教育用BD。"
+    },
+    {
+        "Id": 3011,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "R",
+        "Quality": 2,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemR"
+        ],
+        "SynthQuality": 60,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 20
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_RedWinter_1",
+        "Name": "中級戦術教育BD\n（レッドウィンター）",
+        "Desc": "レッドウィンターの生徒の戦術活動を映像として記録した教育用BD。"
+    },
+    {
+        "Id": 3012,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SR",
+        "Quality": 3,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemSR"
+        ],
+        "SynthQuality": 150,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 50
+            }
+        ],
+        "Icon": "Item_Icon_Material_ExSkill_RedWinter_2",
+        "Name": "上級戦術教育BD\n（レッドウィンター）",
+        "Desc": "レッドウィンターの生徒の戦術活動を映像として記録した教育用BD。"
+    },
+    {
+        "Id": 3013,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SSR",
+        "Quality": 4,
+        "Tags": [
+            "CDItem",
+            "ExpendableItem",
+            "CDItemSSR"
+        ],
+        "SynthQuality": 200,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 100
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_RedWinter_3",
@@ -3071,17 +3036,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_0",
@@ -3125,17 +3079,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_1",
@@ -3179,17 +3122,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_2",
@@ -3233,17 +3165,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_3",
@@ -3631,6 +3552,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_0",
@@ -3674,6 +3606,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_1",
@@ -3717,6 +3660,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_2",
@@ -3760,6 +3714,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Arius_3",
@@ -4147,178 +4112,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_0",
-        "Name": "初級技術ノート\n（百鬼夜行）",
-        "Desc": "百鬼夜行連合学院の戦術の極意がまとめられているノート。"
-    },
-    {
-        "Id": 4001,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "R",
-        "Quality": 2,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemR"
-        ],
-        "SynthQuality": 20,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 5
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 5
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_1",
-        "Name": "中級技術ノート\n（百鬼夜行）",
-        "Desc": "百鬼夜行連合学院の戦術の極意がまとめられているノート。"
-    },
-    {
-        "Id": 4002,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SR",
-        "Quality": 3,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemSR"
-        ],
-        "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 10
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_2",
-        "Name": "上級技術ノート\n（百鬼夜行）",
-        "Desc": "百鬼夜行連合学院の戦術の極意がまとめられているノート。"
-    },
-    {
-        "Id": 4003,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "SSR",
-        "Quality": 4,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemSSR"
-        ],
-        "SynthQuality": 80,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 25
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 25
-            }
-        ],
-        "Icon": "Item_Icon_SkillBook_Hyakkiyako_3",
-        "Name": "最上級技術ノート\n（百鬼夜行）",
-        "Desc": "百鬼夜行連合学院の戦術の極意がまとめられているノート。"
-    },
-    {
-        "Id": 4010,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Material",
-        "Rarity": "N",
-        "Quality": 1,
-        "Tags": [
-            "BookItem",
-            "ExpendableItem",
-            "BookItemN"
-        ],
-        "SynthQuality": 10,
-        "Shops": [
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 7,
-                "CostAmount": 3
-            },
-            {
-                "ShopCategory": "Raid",
-                "Released": [
-                    true,
-                    true
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 9,
-                "CostAmount": 3
             },
             {
                 "ShopCategory": "Chaser",
@@ -4332,12 +4125,12 @@
                 "CostAmount": 24
             }
         ],
-        "Icon": "Item_Icon_SkillBook_RedWinter_0",
-        "Name": "初級技術ノート\n（レッドウィンター）",
-        "Desc": "レッドウィンター連邦学園の戦術の極意がまとめられているノート。"
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_0",
+        "Name": "初級技術ノート\n（百鬼夜行）",
+        "Desc": "百鬼夜行連合学院の戦術の極意がまとめられているノート。"
     },
     {
-        "Id": 4011,
+        "Id": 4001,
         "IsReleased": [
             true,
             true
@@ -4386,12 +4179,12 @@
                 "CostAmount": 40
             }
         ],
-        "Icon": "Item_Icon_SkillBook_RedWinter_1",
-        "Name": "中級技術ノート\n（レッドウィンター）",
-        "Desc": "レッドウィンター連邦学園の戦術の極意がまとめられているノート。"
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_1",
+        "Name": "中級技術ノート\n（百鬼夜行）",
+        "Desc": "百鬼夜行連合学院の戦術の極意がまとめられているノート。"
     },
     {
-        "Id": 4012,
+        "Id": 4002,
         "IsReleased": [
             true,
             true
@@ -4440,12 +4233,12 @@
                 "CostAmount": 80
             }
         ],
-        "Icon": "Item_Icon_SkillBook_RedWinter_2",
-        "Name": "上級技術ノート\n（レッドウィンター）",
-        "Desc": "レッドウィンター連邦学園の戦術の極意がまとめられているノート。"
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_2",
+        "Name": "上級技術ノート\n（百鬼夜行）",
+        "Desc": "百鬼夜行連合学院の戦術の極意がまとめられているノート。"
     },
     {
-        "Id": 4013,
+        "Id": 4003,
         "IsReleased": [
             true,
             true
@@ -4492,6 +4285,178 @@
                 "CostType": "Item",
                 "CostId": 61,
                 "CostAmount": 200
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_Hyakkiyako_3",
+        "Name": "最上級技術ノート\n（百鬼夜行）",
+        "Desc": "百鬼夜行連合学院の戦術の極意がまとめられているノート。"
+    },
+    {
+        "Id": 4010,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemN"
+        ],
+        "SynthQuality": 10,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 3
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_RedWinter_0",
+        "Name": "初級技術ノート\n（レッドウィンター）",
+        "Desc": "レッドウィンター連邦学園の戦術の極意がまとめられているノート。"
+    },
+    {
+        "Id": 4011,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "R",
+        "Quality": 2,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemR"
+        ],
+        "SynthQuality": 20,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 5
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_RedWinter_1",
+        "Name": "中級技術ノート\n（レッドウィンター）",
+        "Desc": "レッドウィンター連邦学園の戦術の極意がまとめられているノート。"
+    },
+    {
+        "Id": 4012,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SR",
+        "Quality": 3,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemSR"
+        ],
+        "SynthQuality": 50,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 10
+            }
+        ],
+        "Icon": "Item_Icon_SkillBook_RedWinter_2",
+        "Name": "上級技術ノート\n（レッドウィンター）",
+        "Desc": "レッドウィンター連邦学園の戦術の極意がまとめられているノート。"
+    },
+    {
+        "Id": 4013,
+        "IsReleased": [
+            true,
+            true
+        ],
+        "Category": "Material",
+        "Rarity": "SSR",
+        "Quality": 4,
+        "Tags": [
+            "BookItem",
+            "ExpendableItem",
+            "BookItemSSR"
+        ],
+        "SynthQuality": 80,
+        "Shops": [
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 7,
+                "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Raid",
+                "Released": [
+                    true,
+                    true
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 9,
+                "CostAmount": 25
             }
         ],
         "Icon": "Item_Icon_SkillBook_RedWinter_3",
@@ -4707,17 +4672,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_0",
@@ -4761,17 +4715,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_1",
@@ -4815,17 +4758,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_2",
@@ -4869,17 +4801,6 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
-            },
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_3",
@@ -5267,6 +5188,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_0",
@@ -5310,6 +5242,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_1",
@@ -5353,6 +5296,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_2",
@@ -5396,6 +5350,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Arius_3",
@@ -6797,7 +6762,9 @@
             "F_Juri",
             "F_Juri2",
             "F_Serina",
-            "F_Serina2"
+            "F_Serina2",
+            "F_Shigure",
+            "F_Shigure2"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_7",
@@ -8177,6 +8144,23 @@
         "Icon": "Item_Icon_SecretStone_CH0186",
         "Name": "マリー（体操服）の神名文字",
         "Desc": "マリー（体操服）の神秘が詰まった神名文字。"
+    },
+    {
+        "Id": 10055,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_Shigure",
+        "Name": "シグレの神名文字",
+        "Desc": "シグレの神秘が詰まった神名文字。"
     },
     {
         "Id": 13000,
@@ -10977,6 +10961,66 @@
         "Desc": "ゴールデンフリース号の中でよく見かけるサイコロ。時々生徒間のトラブルを解決するのに使われることもあるらしい。"
     },
     {
+        "Id": 85060,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Item_0",
+        "Name": "イベントPt（復刻）",
+        "Desc": "イベントで入手できるポイント。たくさん手に入れることで、様々な報酬を獲得することができる。"
+    },
+    {
+        "Id": 85061,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S10",
+        "Name": "温泉タオル（復刻）",
+        "Desc": "227号温泉郷で提供しているタオル。素材はあまり良くないため、身体に当てる際に強くこすり過ぎないようご注意を。"
+    },
+    {
+        "Id": 85062,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 3,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_1_S10",
+        "Name": "おひげシャンプー（復刻）",
+        "Desc": "チェリノが愛用している、レッドウィンター連邦学園の特製シャンプー。名前に「ひげ」と付いているものの、お髭を洗うのには適していないらしい。"
+    },
+    {
+        "Id": 85063,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_2_S10",
+        "Name": "カピバラ型の入浴剤（復刻）",
+        "Desc": "カピバラの形をした固形の入浴剤。水中に入れると、ほのかな柑橘系の香りが漂う。"
+    },
+    {
         "Id": 100008,
         "IsReleased": [
             true,
@@ -10990,7 +11034,7 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Selection",
-        "Name": "選択式・贈り物ボックス",
+        "Name": "贈り物選択ボックス",
         "Desc": "お好みの贈り物が選べる贈り物ボックス"
     },
     {
@@ -11022,8 +11066,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_0",
-        "Name": "選択式・初級技術ノート",
-        "Desc": "任意の初級技術ノートを選択して交換することができる。"
+        "Name": "初級技術ノート選択ボックス",
+        "Desc": "任意の初級技術ノートを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150001,
@@ -11039,8 +11083,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_1",
-        "Name": "選択式・中級技術ノート",
-        "Desc": "任意の中級技術ノートを選択して交換することができる。"
+        "Name": "中級技術ノート選択ボックス",
+        "Desc": "任意の中級技術ノートを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150002,
@@ -11056,8 +11100,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_2",
-        "Name": "選択式・上級技術ノート",
-        "Desc": "任意の上級技術ノートを選択して交換することができる。"
+        "Name": "上級技術ノート選択ボックス",
+        "Desc": "任意の上級技術ノートを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150003,
@@ -11073,8 +11117,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_3",
-        "Name": "選択式・最上級技術ノート",
-        "Desc": "任意の最上級技術ノートを選択して交換することができる。"
+        "Name": "最上級技術ノート選択ボックス",
+        "Desc": "任意の最上級技術ノートを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150004,
@@ -11090,8 +11134,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_0",
-        "Name": "選択式・初級戦術教育BD",
-        "Desc": "任意の初級戦術教育BDを選択して交換することができる。"
+        "Name": "初級戦術教育BD選択ボックス",
+        "Desc": "任意の初級戦術教育BDを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150005,
@@ -11107,8 +11151,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_1",
-        "Name": "選択式・中級戦術教育BD",
-        "Desc": "任意の中級戦術教育BDを選択して交換することができる。"
+        "Name": "中級戦術教育BD選択ボックス",
+        "Desc": "任意の中級戦術教育BDを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150006,
@@ -11124,8 +11168,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_2",
-        "Name": "選択式・上級戦術教育BD",
-        "Desc": "任意の上級戦術教育BDを選択して交換することができる。"
+        "Name": "上級戦術教育BD選択ボックス",
+        "Desc": "任意の上級戦術教育BDを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150007,
@@ -11141,8 +11185,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_3",
-        "Name": "選択式・最上級戦術教育BD",
-        "Desc": "任意の最上級戦術教育BDを選択して交換することができる。"
+        "Name": "最上級戦術教育BD選択ボックス",
+        "Desc": "任意の最上級戦術教育BDを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150008,
@@ -11158,8 +11202,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Material_Selection_0",
-        "Name": "選択式・オーパーツ（1）",
-        "Desc": "任意のオーパーツを選択して交換することができる。"
+        "Name": "オーパーツ（１）選択ボックス",
+        "Desc": "任意のオーパーツを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150009,
@@ -11175,8 +11219,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Material_Selection_1",
-        "Name": "選択式・オーパーツ（2）",
-        "Desc": "任意のオーパーツを選択して交換することができる。"
+        "Name": "オーパーツ（２）選択ボックス",
+        "Desc": "任意のオーパーツを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150010,
@@ -11192,8 +11236,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Material_Selection_2",
-        "Name": "選択式・オーパーツ（3）",
-        "Desc": "任意のオーパーツを選択して交換することができる。"
+        "Name": "オーパーツ（３）選択ボックス",
+        "Desc": "任意のオーパーツを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150011,
@@ -11209,8 +11253,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Material_Selection_3",
-        "Name": "選択式・オーパーツ（4）",
-        "Desc": "任意のオーパーツを選択して交換することができる。"
+        "Name": "オーパーツ（４）選択ボックス",
+        "Desc": "任意のオーパーツを選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150012,
@@ -11224,8 +11268,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_0",
-        "Name": "選択式・初級技術ノート",
-        "Desc": "任意の初級技術ノートを選択して交換することができる（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
+        "Name": "初級技術ノート選択ボックス",
+        "Desc": "任意の初級技術ノートを選択して交換することができる選択ボックス（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
     },
     {
         "Id": 150013,
@@ -11239,8 +11283,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_1",
-        "Name": "選択式・中級技術ノート",
-        "Desc": "任意の中級技術ノートを選択して交換することができる（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
+        "Name": "中級技術ノート選択ボックス",
+        "Desc": "任意の中級技術ノートを選択して交換することができる選択ボックス（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
     },
     {
         "Id": 150014,
@@ -11254,8 +11298,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_2",
-        "Name": "選択式・上級技術ノート",
-        "Desc": "任意の上級技術ノートを選択して交換することができる（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
+        "Name": "上級技術ノート選択ボックス",
+        "Desc": "任意の上級技術ノートを選択して交換することができる選択ボックス（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
     },
     {
         "Id": 150015,
@@ -11269,8 +11313,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_3",
-        "Name": "選択式・最上級技術ノート",
-        "Desc": "任意の最上級技術ノートを選択して交換することができる（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
+        "Name": "最上級技術ノート選択ボックス",
+        "Desc": "任意の最上級技術ノートを選択して交換することができる選択ボックス（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
     },
     {
         "Id": 150016,
@@ -11284,8 +11328,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_0",
-        "Name": "選択式・初級技術ノート",
-        "Desc": "任意の初級技術ノートを選択して交換することができる（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
+        "Name": "初級技術ノート選択ボックス",
+        "Desc": "任意の初級技術ノートを選択して交換することができる選択ボックス（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
     },
     {
         "Id": 150017,
@@ -11299,8 +11343,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_1",
-        "Name": "選択式・中級技術ノート",
-        "Desc": "任意の中級技術ノートを選択して交換することができる（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
+        "Name": "中級技術ノート選択ボックス",
+        "Desc": "任意の中級技術ノートを選択して交換することができる選択ボックス（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
     },
     {
         "Id": 150018,
@@ -11314,8 +11358,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_2",
-        "Name": "選択式・上級技術ノート",
-        "Desc": "任意の上級技術ノートを選択して交換することができる（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
+        "Name": "上級技術ノート選択ボックス",
+        "Desc": "任意の上級技術ノートを選択して交換することができる選択ボックス（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
     },
     {
         "Id": 150019,
@@ -11329,8 +11373,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_SkillBook_Selection_3",
-        "Name": "選択式・最上級技術ノート",
-        "Desc": "任意の最上級技術ノートを選択して交換することができる（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
+        "Name": "最上級技術ノート選択ボックス",
+        "Desc": "任意の最上級技術ノートを選択して交換することができる選択ボックス（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
     },
     {
         "Id": 150020,
@@ -11344,8 +11388,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_0",
-        "Name": "選択式・初級戦術教育BD",
-        "Desc": "任意の初級戦術教育BDを選択して交換することができる（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
+        "Name": "初級戦術教育BD選択ボックス",
+        "Desc": "任意の初級戦術教育BDを選択して交換することができる選択ボックス（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
     },
     {
         "Id": 150021,
@@ -11359,8 +11403,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_1",
-        "Name": "選択式・中級戦術教育BD",
-        "Desc": "任意の中級戦術教育BDを選択して交換することができる（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
+        "Name": "中級戦術教育BD選択ボックス",
+        "Desc": "任意の中級戦術教育BDを選択して交換することができる選択ボックス（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
     },
     {
         "Id": 150022,
@@ -11374,8 +11418,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_2",
-        "Name": "選択式・上級戦術教育BD",
-        "Desc": "任意の上級戦術教育BDを選択して交換することができる（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
+        "Name": "上級戦術教育BD選択ボックス",
+        "Desc": "任意の上級戦術教育BDを選択して交換することができる選択ボックス（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
     },
     {
         "Id": 150023,
@@ -11389,8 +11433,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_3",
-        "Name": "選択式・最上級戦術教育BD",
-        "Desc": "任意の最上級戦術教育BDを選択して交換することができる（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
+        "Name": "最上級戦術教育BD選択ボックス",
+        "Desc": "任意の最上級戦術教育BDを選択して交換することができる選択ボックス（ゲヘナ、山海経、トリニティ、ヴァルキューレ、アリウス）。"
     },
     {
         "Id": 150024,
@@ -11404,8 +11448,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_0",
-        "Name": "選択式・初級戦術教育BD",
-        "Desc": "任意の初級戦術教育BDを選択して交換することができる（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
+        "Name": "初級戦術教育BD選択ボックス",
+        "Desc": "任意の初級戦術教育BDを選択して交換することができる選択ボックス（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
     },
     {
         "Id": 150025,
@@ -11419,8 +11463,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_1",
-        "Name": "選択式・中級戦術教育BD",
-        "Desc": "任意の中級戦術教育BDを選択して交換することができる（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
+        "Name": "中級戦術教育BD選択ボックス",
+        "Desc": "任意の中級戦術教育BDを選択して交換することができる選択ボックス（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
     },
     {
         "Id": 150026,
@@ -11434,8 +11478,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_2",
-        "Name": "選択式・上級戦術教育BD",
-        "Desc": "任意の上級戦術教育BDを選択して交換することができる（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
+        "Name": "上級戦術教育BD選択ボックス",
+        "Desc": "任意の上級戦術教育BDを選択して交換することができる選択ボックス（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
     },
     {
         "Id": 150027,
@@ -11449,8 +11493,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_ExSkillCD_Selection_3",
-        "Name": "選択式・最上級戦術教育BD",
-        "Desc": "任意の最上級戦術教育BDを選択して交換することができる（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
+        "Name": "最上級戦術教育BD選択ボックス",
+        "Desc": "任意の最上級戦術教育BDを選択して交換することができる選択ボックス（百鬼夜行、レッドウィンター、アビドス、ミレニアム）。"
     },
     {
         "Id": 150028,
@@ -11476,8 +11520,8 @@
             }
         ],
         "Icon": "Equipment_Icon_Selection_Tier2_Piece",
-        "Name": "選択式・T2装備設計図",
-        "Desc": "任意のT2装備の設計図を選択して交換することができる。"
+        "Name": "T2装備設計図選択ボックス",
+        "Desc": "任意のT2装備の設計図を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150029,
@@ -11503,8 +11547,8 @@
             }
         ],
         "Icon": "Equipment_Icon_Selection_Tier3_Piece",
-        "Name": "選択式・T3装備設計図",
-        "Desc": "任意のT3装備の設計図を選択して交換することができる。"
+        "Name": "T3装備設計図選択ボックス",
+        "Desc": "任意のT3装備の設計図を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150030,
@@ -11530,8 +11574,8 @@
             }
         ],
         "Icon": "Equipment_Icon_Selection_Tier4_Piece",
-        "Name": "選択式・T4装備設計図",
-        "Desc": "任意のT4装備の設計図を選択して交換することができる。"
+        "Name": "T4装備設計図選択ボックス",
+        "Desc": "任意のT4装備の設計図を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150031,
@@ -11557,8 +11601,8 @@
             }
         ],
         "Icon": "Equipment_Icon_Selection_Tier5_Piece",
-        "Name": "選択式・T5装備設計図",
-        "Desc": "任意のT5装備の設計図を選択して交換することができる。"
+        "Name": "T5装備設計図選択ボックス",
+        "Desc": "任意のT5装備の設計図を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 150032,
@@ -11572,8 +11616,8 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Equipment_Icon_Selection_Tier6_Piece",
-        "Name": "選択式・T6装備設計図",
-        "Desc": "任意のT6装備の設計図を選択して交換することができる。"
+        "Name": "T6装備設計図選択ボックス",
+        "Desc": "任意のT6装備の設計図を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151000,
@@ -11589,8 +11633,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Normal",
-        "Name": "選択式・ノーマル家具シリーズ",
-        "Desc": "ノーマル家具シリーズ（特定のシリーズに属さない家具）の中から、任意の家具を選択して交換することができる。"
+        "Name": "ノーマル家具シリーズ選択ボックス",
+        "Desc": "ノーマル家具シリーズ（特定のシリーズに属さない家具）の中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151001,
@@ -11606,8 +11650,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group100",
-        "Name": "選択式・モモフレンズカフェシリーズ",
-        "Desc": "モモフレンズカフェシリーズの中から、任意の家具を選択して交換することができる。"
+        "Name": "モモフレンズカフェシリーズ選択ボックス",
+        "Desc": "モモフレンズカフェシリーズの中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151002,
@@ -11623,8 +11667,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group101",
-        "Name": "選択式・ゼリーズゲーセンシリーズ",
-        "Desc": "ゼリーズゲーセンシリーズの中から、任意の家具を選択して交換することができる。"
+        "Name": "ゼリーズゲーセンシリーズ選択ボックス",
+        "Desc": "ゼリーズゲーセンシリーズの中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151003,
@@ -11640,8 +11684,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group102",
-        "Name": "選択式・バレンタインシリーズ",
-        "Desc": "バレンタインシリーズのから、任意の家具を選択して交換することができる。"
+        "Name": "バレンタインシリーズ選択ボックス",
+        "Desc": "バレンタインシリーズのから、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151004,
@@ -11657,8 +11701,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group103",
-        "Name": "選択式・サマーリゾートシリーズ",
-        "Desc": "サマーリゾートシリーズの中から、任意の家具を選択して交換することができる。"
+        "Name": "サマーリゾートシリーズ選択ボックス",
+        "Desc": "サマーリゾートシリーズの中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151005,
@@ -11674,8 +11718,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group104",
-        "Name": "選択式・ハロウィーンカフェシリーズ",
-        "Desc": "ハロウィーンカフェシリーズの中から、任意の家具を選択して交換することができる。"
+        "Name": "ハロウィーンカフェシリーズ選択ボックス",
+        "Desc": "ハロウィーンカフェシリーズの中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151006,
@@ -11691,8 +11735,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group105",
-        "Name": "選択式・伝統的な温泉郷シリーズ",
-        "Desc": "伝統的な温泉郷シリーズの中から、任意の家具を選択して交換することができる。"
+        "Name": "伝統的な温泉郷シリーズ選択ボックス",
+        "Desc": "伝統的な温泉郷シリーズの中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151007,
@@ -11708,8 +11752,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group106",
-        "Name": "選択式・お正月シリーズ",
-        "Desc": "お正月シリーズの中から、任意の家具を選択して交換することができる。"
+        "Name": "お正月シリーズ選択ボックス",
+        "Desc": "お正月シリーズの中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151008,
@@ -11725,8 +11769,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group107",
-        "Name": "選択式・ミリタリーアウトドアシリーズ",
-        "Desc": "ミリタリーアウトドアシリーズの中から、任意の家具を選択して交換することができる。"
+        "Name": "ミリタリーアウトドアシリーズ選択ボックス",
+        "Desc": "ミリタリーアウトドアシリーズの中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151009,
@@ -11742,8 +11786,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group108",
-        "Name": "選択式・ビーチサイドシリーズ",
-        "Desc": "ビーチサイドシリーズの中から、任意の家具を選択して交換することができる。"
+        "Name": "ビーチサイドシリーズ選択ボックス",
+        "Desc": "ビーチサイドシリーズの中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 151010,
@@ -11759,8 +11803,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group109",
-        "Name": "選択式・大運動会シリーズ",
-        "Desc": "大運動会シリーズの中から、任意の家具を選択して交換することができる。"
+        "Name": "大運動会シリーズ選択ボックス",
+        "Desc": "大運動会シリーズの中から、任意の家具を選択して交換することができる選択ボックス。"
     },
     {
         "Id": 160002,
@@ -13246,7 +13290,7 @@
         ],
         "Category": "Consumable",
         "Rarity": "SSR",
-        "Quality": 4,
+        "Quality": 1,
         "Tags": [
             "ShiftingCraftCategory_Furniture"
         ],
