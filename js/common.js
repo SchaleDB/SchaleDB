@@ -1543,7 +1543,7 @@ $.when($.ready, loadPromise).then(function() {
         changelogHtml += '</div>'
     })
     $("#modal-changelog-content").html(changelogHtml)
-    const currentChangelog = parseInt(data.common.changelog[0].date.replaceAll('/',''))
+    const currentChangelog = parseInt(data.common.changelog[0].date.replace(/\//g,''))
     if (localStorage.getItem("changelog_seen")) {
         if (currentChangelog > parseInt(localStorage.getItem("changelog_seen"))) {
             $("#modal-changelog").modal('show')
