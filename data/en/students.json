@@ -275,7 +275,10 @@
                         "487%"
                     ]
                 ],
-                "Icon": "COMMON_SKILLICON_TARGET"
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "DamageDist": [
+                    10000
+                ]
             }
         ],
         "FavorStatType": [
@@ -3838,7 +3841,8 @@
         ],
         "FurnitureInteraction": [
             [
-                2302
+                2302,
+                207307
             ],
             [
                 2302
@@ -6062,7 +6066,8 @@
                             "Channel": 24
                         }
                     ]
-                }
+                },
+                "DamageDist": []
             }
         ],
         "FavorStatType": [
@@ -8934,6 +8939,8 @@
                 ],
                 "Icon": "COMMON_SKILLICON_BATTLEITEM",
                 "DamageDist": [
+                    10000,
+                    10000,
                     10000
                 ]
             },
@@ -10799,7 +10806,18 @@
                             "Channel": 7
                         }
                     ]
-                }
+                },
+                "DamageDist": [
+                    1112,
+                    1111,
+                    1111,
+                    1111,
+                    1111,
+                    1111,
+                    1111,
+                    1111,
+                    1111
+                ]
             }
         ],
         "FavorStatType": [
@@ -16070,7 +16088,8 @@
                         "67.6%"
                     ]
                 ],
-                "Icon": "COMMON_SKILLICON_STATDEBUFF"
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "DamageDist": []
             }
         ],
         "FavorStatType": [
@@ -16569,7 +16588,8 @@
                         "72.6%"
                     ]
                 ],
-                "Icon": "SKILLICON_UTAHA_EXSKILL"
+                "Icon": "SKILLICON_UTAHA_EXSKILL",
+                "DamageDist": []
             }
         ],
         "FavorStatType": [
@@ -21456,7 +21476,9 @@
             8
         ],
         "FurnitureInteraction": [
-            [],
+            [
+                207307
+            ],
             []
         ],
         "FavorItemTags": [
@@ -28772,7 +28794,10 @@
                         "44%"
                     ]
                 ],
-                "Icon": "COMMON_SKILLICON_TARGET"
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "DamageDist": [
+                    10000
+                ]
             }
         ],
         "FavorStatType": [
@@ -31047,7 +31072,8 @@
                             "Channel": 2
                         }
                     ]
-                }
+                },
+                "DamageDist": []
             }
         ],
         "FavorStatType": [
@@ -33347,7 +33373,10 @@
                         "49.6%"
                     ]
                 ],
-                "Icon": "COMMON_SKILLICON_CIRCLE"
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "DamageDist": [
+                    10000
+                ]
             }
         ],
         "FavorStatType": [
@@ -39185,7 +39214,12 @@
                         "148%"
                     ]
                 ],
-                "Icon": "COMMON_SKILLICON_TARGET"
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "DamageDist": [
+                    3000,
+                    3000,
+                    4000
+                ]
             }
         ],
         "FavorStatType": [
@@ -51371,7 +51405,30 @@
                         "59.1%"
                     ]
                 ],
-                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF"
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effect": {
+                    "Type": 1,
+                    "Effects": [
+                        {
+                            "Stat": "EnhanceMysticRate_Base",
+                            "Value": [
+                                [
+                                    3111,
+                                    3267,
+                                    3422,
+                                    4045,
+                                    4200,
+                                    4356,
+                                    4977,
+                                    5134,
+                                    5289,
+                                    5912
+                                ]
+                            ],
+                            "Channel": 34
+                        }
+                    ]
+                }
             },
             {
                 "SkillType": "weaponpassive",
