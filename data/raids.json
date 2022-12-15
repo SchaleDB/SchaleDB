@@ -144,6 +144,18 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_BINAH_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DefensePower_Coefficient",
+                            "Channel": 603
+                        }
+                    ],
                     "NameEn": "Purifying Storm",
                     "DescEn": "Deals 300% damage to all enemies and decreases their <d:DEF> by 50% for 30s.",
                     "NameJp": "浄化の嵐",
@@ -163,6 +175,28 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_PASSIVESKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -2000
+                                ]
+                            ],
+                            "Stat": "AccuracyPoint_Coefficient",
+                            "Channel": 605
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "StabilityRate_Coefficient",
+                            "Channel": 615
+                        }
+                    ],
                     "NameEn": "Heavy Sandstorm",
                     "DescEn": "Decreases all enemies' <d:HIT> by 20% and <d:Stability> by 50%. This debuff cannot be removed.",
                     "NameJp": "吹き荒れる砂塵",
@@ -384,6 +418,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_CHESED_PASSIVESKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -9000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7301100,
+                                7301200,
+                                7301300,
+                                7301400,
+                                7301500,
+                                7301600
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 527
+                        }
+                    ],
                     "NameEn": "Exposed Throne",
                     "DescEn": "Immune to all effects that increase <d:DamagedRatio>.\nWhen Chesed's groggy gauge is full, reveals Chesed's core and increases <d:DamagedRatio> by 900% for 20s.",
                     "NameJp": "剥き出しの玉座",
@@ -590,6 +644,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500,
+                                7302600
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 527
+                        }
+                    ],
                     "NameEn": "Keep Rollin' Rollin' Rollin'! (Shiro)",
                     "DescEn": "Summons a rolling bomb that deals <?1> damage to enemies in a straight line.\nThe bomb deals 300% damage to obstacles in its path. If an obstacle is hit but not destroyed, the bomb will bounce in the opposite direction towards Shiro, increasing her groggy gauge by a significant amount.<?2>",
                     "ParametersEn": [
@@ -717,6 +791,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501,
+                                7302601
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 527
+                        }
+                    ],
                     "NameEn": "Charge! (Kuro)",
                     "DescEn": "Summons theme park rides that deals <?1> damage to enemies in a straight line.\nIf Kuro is hit by this attack herself, increases Kuro's groggy gauge by a significant amount.<?2>",
                     "ParametersEn": [
@@ -863,6 +957,18 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_PASSIVESKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -8000
+                                ]
+                            ],
+                            "Stat": "HealEffectivenessRate_Coefficient",
+                            "Channel": 621
+                        }
+                    ],
                     "NameEn": "Horror of Slumpia",
                     "DescEn": "Decreases all enemies' <d:HealEffectiveness> by 80%. This debuff cannot be removed.",
                     "NameJp": "スランピアの恐怖",
@@ -1192,6 +1298,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -2200
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 150018
+                        }
+                    ],
                     "NameEn": "Holy Light (Relic)",
                     "DescEn": "When a relic is healed to 100% HP, it loses 95% of its HP while decreasing its <d:HealEffectiveness> by 50% for 20s and activates one of the following effects depending on the relic:\n<b>Green Relic</b>: Increases Hieronymus's <d:DamagedRatio> by 55% until the end of battle. Effect can stack up to 5 times.<?1>",
                     "ParametersEn": [
@@ -1271,6 +1398,41 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    2500
+                                ]
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 150024
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -7000
+                                ]
+                            ],
+                            "Stat": "HealEffectivenessRate_Base",
+                            "Channel": 150025
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -1500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303600
+                            ],
+                            "Stat": "DefensePower_Base",
+                            "Channel": 150027
+                        }
+                    ],
                     "NameEn": "Ominous Light (Relic)",
                     "DescEn": "When the violet relic's HP reaches 0%, increases the <b:ATK> of all students by <b>25%</b> but decreases their <d:HealEffectiveness> by <b>7,000</b>. Also decreases Hieronymus's <d:DEF> by <b>1,500</b>.\nFollowing this, students inflicted with <d:Hieronymus> will have their <b:HealEffectiveness> increased by a further <b>4,000</b> for 10s.\nThe violet relic cannot be targeted by normal attacks or basic skills.",
                     "NameJp": "不浄なる光（聖遺物）",
@@ -1412,6 +1574,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 27
+                        }
+                    ],
                     "NameEn": "Infinite Cycle - Ultra Cap Shield",
                     "DescEn": "<b>Left Arm (green)</b>: Decreases <b:DamagedRatio> by 50%. This buff is removed after taking 10 hits from any EX skill.",
                     "NameJp": "無限回転・ULTRAお皿シールド",
@@ -1469,6 +1651,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_PASSIVE01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    1000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Stat": "DefensePower_Base",
+                            "Channel": 150034
+                        }
+                    ],
                     "NameEn": "Endless Burning Heart",
                     "DescEn": "Every 20s, each component of KAITEN FX Mk.0 will activate in the following order: Right Arm (pink), Chest (red), Left Arm (green). When a component is activated, KAITEN FX Mk.0 will gain one of the following effects:\n<b>Right Arm (pink)</b>: Increases <b:ATK> by 50%.\n<b>Chest (red)</b>: KAITEN FX Mk.0's EX skills will also inflict <c:Stunned> for 5s.\n<b>Left Arm (green)</b>: Increases <b:DEF> by <b>1,000</b><?1>.\nIf a total of <b><?2></b> damage is dealt while a component is active, that component will be destroyed, increasing KAITEN FX Mk.0's groggy gauge significantly and disabling both the component from activating and the corresponding EX skill until the end of battle.",
                     "ParametersEn": [
@@ -2170,6 +2372,44 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_PASSIVESKILL02",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -3000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 527
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -6000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306101,
+                                7306201,
+                                7306301,
+                                7306401,
+                                7306501,
+                                7306601
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 527
+                        }
+                    ],
                     "NameEn": "Behind the Glory",
                     "DescEn": "Hod and all summoned Erosion Towers are immune to the effects of Crowd Control. However, Crowd Control abilities will fill their circular <b>CC gauge</b> proportional to the duration of the effect that would've been inflicted.<?2>\nOnce the CC gauge reaches a total equivalent to <?1> of Crowd Control duration, inflicts the following effects:\n<b>Hod</b>: Increases <d:DamagedRatio> by 300% for 30s and decrease Hod's ATG gauge.\n<b>Erosion Tower</b>: Increases <d:DamagedRatio> by 300% for 30s and reduce the tower's area of effect by 1 stage.",
                     "ParametersEn": [
@@ -2597,6 +2837,21 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_PASSIVESKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ],
+                                [
+                                    -9000
+                                ]
+                            ],
+                            "Stat": "HealEffectivenessRate_Coefficient",
+                            "Channel": 621
+                        }
+                    ],
                     "NameEn": "Prank or Protect",
                     "DescEn": "Reduces Goz's damage dealt to targets protected by a <b:Shield> by <?1>. Also reduces all enemies' <d:HealEffectiveness> by <?2>. This debuff cannot be removed.",
                     "ParametersEn": [

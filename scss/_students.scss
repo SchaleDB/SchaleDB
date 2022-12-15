@@ -148,7 +148,6 @@
     }
 
     .panel-stats {
-        @include scrollable(auto);
         @include lg-up {
             max-width: 420px;
             min-width: 420px;
@@ -161,7 +160,12 @@
             min-width: 480px;
             max-width: 480px;
         }
-        padding: 0 0.5rem;
+
+
+        .panel-stats-table {
+            @include scrollable(auto);
+            padding: 0 0.5rem;
+        }
     }
 }
 
@@ -254,7 +258,7 @@
 
     .student-icon {
         height: 40px;
-        min-width: 40px;
+        width: 40px;
         margin-right: 8px;
         @include circular;
     }
@@ -266,6 +270,16 @@
         height: 24px;
         width: 24px;
         @include circular;
+    }
+
+    .raid-skill-icon {
+        position: absolute;
+        left: 24px;
+        top: 22px;
+        height: 24px;
+        width: 24px;
+        object-fit: contain;
+        object-position: bottom;
     }
 }
 
@@ -340,6 +354,7 @@
                 .search-list-item-icon {
 
                     margin-right: 0.5rem;
+                    position: relative;
 
                     img {
                         width: 42px;
@@ -353,12 +368,23 @@
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
+                    flex-grow: 1;
                     
                     .text-small {
                         font-size: 0.75rem;
                     }
                     .skill-details {
                         font-size: 0.875rem;
+                    }
+                    .enemy-details {
+                        font-size: 0.875rem;
+                        display: flex;
+                        align-items: end;
+                        gap: 0.5rem;
+
+                        b {
+                            margin-left: auto;
+                        }
                     }
         
                 }
@@ -371,7 +397,68 @@
 
 }
 
-#statpreview-buff-transferable-controls {
+.enemy-select-icon {
+
+    --var-icon-size: 56px;
+
+    &.small {
+        --var-icon-size: 48px;
+    }
+
+    position: relative;
+
+    .icon-enemy {
+        width: var(--var-icon-size);
+        height: var(--var-icon-size);
+        @include circular;
+        background-color: var(--col-bg-item-n);
+        overflow: hidden;
+        
+
+        img {
+            transform: scale(1.7);
+            width: var(--var-icon-size) !important;
+            height: var(--var-icon-size) !important;
+        }
+    }
+
+    .icon-enemy-raid {
+        @include circular;
+        overflow: hidden;
+        img {
+            width: var(--var-icon-size) !important;
+            height: var(--var-icon-size) !important;
+        }
+    }
+
+    &.elite::after {
+        content: "";
+        height: 18px;
+        width: 18px;
+        background-image: url(../images/ui/Common_Icon_Enemy_Elite.png);
+        background-size: 18px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: absolute;
+        right: -4px;
+        top: 0;
+    }
+
+    &.champion::after, &.boss::after {
+        content: "";
+        height: 26px;
+        width: 26px;
+        background-image: url(../images/ui/Common_Icon_Enemy_Champion.png);
+        background-size: 26px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        position: absolute;
+        right: -9px;
+        top: -4px;
+    }
+}
+
+.buff-transferable-controls {
 
     &.disabled {
         .ba-panel {
@@ -395,6 +482,16 @@
             height: 28px;
             width: 28px;
         }
+
+        .raid-skill-icon {
+            position: absolute;
+            left: 32px;
+            top: 30px;
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
+            object-position: bottom;
+        }
     }
 
     small {
@@ -407,20 +504,48 @@
         opacity: 0.6;
     }
 
-    .stack-count {
-        cursor: pointer;
+}
 
-        &:hover {
-            background-color: var(--col-btn-secondary);
-        }
+.stack-toggle {
+    cursor: pointer;
 
-        img.stack-icon {
-            height: 22px;
-            width: auto;
-            margin-top: -2px;
-            margin-left: -4px;
-        }
+    &:hover {
+        background-color: var(--col-btn-secondary);
     }
+
+    img.stack-icon {
+        height: 22px;
+        width: auto;
+        margin-top: -2px;
+        margin-left: -4px;
+    }
+
+    &.wide {
+        min-width: 80px;
+    }
+
+    &.deactivated {
+
+        .label {
+            color: var(--col-panel-separator);
+        }
+
+        img {
+            opacity: 0.5;
+            filter: grayscale(1);
+        }
+
+    }
+}
+
+.terrain-list {
+
+    .btn-pill {
+
+        border-radius: 0.25rem !important;
+
+    }
+
 }
 
 .stat-panel-btn-sm {
@@ -434,7 +559,7 @@
     }
 }
 
-#statpreview-buff-custom {
+.buff-custom {
 
     .name-input {
         width: auto;
@@ -492,7 +617,7 @@
     }
 }
 
-.active-buffs {
+.active-buffs, .enemy-active-buffs {
 
     @include flex(center, start);
     @include circular;
@@ -557,5 +682,19 @@
         position: absolute;
         right: 0;
         bottom: 0;
+    }
+}
+
+.skill-calculation {
+
+    .row-name {
+        position: relative;
+        @include truncate-text;
+    }
+
+    .row-value {
+        padding-left: 0.5rem;
+        white-space: nowrap;
+        font-weight: 700;
     }
 }

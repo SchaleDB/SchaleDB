@@ -216,6 +216,11 @@
     box-shadow: 0 0 0 1px var(--col-theme-text), 0 0 0 0.25rem var(--col-btn-primary-glow);
 }
 
+.form-range:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 ::-webkit-slider-runnable-track {
     background-color: var(--col-theme-accent) !important;
 }

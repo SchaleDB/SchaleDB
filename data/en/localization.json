@@ -112,6 +112,7 @@
         "CriticalChanceResistPoint": "Crit RES",
         "CriticalDamageResistRate": "Crit DMG RES",
         "StabilityPoint": "Stability",
+        "StabilityRate": "Stability Rate",
         "Range": "Range",
         "AmmoCount": "Mag Count",
         "MoveSpeed": "MOV SPD",
@@ -213,10 +214,11 @@
         "815": "Business Trip! Momoyodou Beach House Franchise Plan",
         "816": "After School Sweets Story: Sweet Secrets and Gun Fights",
         "817": "On Your Mark @ Millennium",
-        "818": "Get Set, Go!: Kivotos Grand Sports Festival"
+        "818": "Get Set, Go!: Kivotos Grand Sports Festival",
+        "819": "Merry Christmas in the Cathedral"
     },
     "StageType": {
-        "Campaign": "Mission",
+        "Campaign": "Missions",
         "Bounty": "Bounty",
         "WeekDungeon": "Commissions",
         "SchoolDungeon": "Scrimmage",
@@ -266,6 +268,14 @@
         "1": "1st Node",
         "2": "2nd Node",
         "3": "3rd Node"
+    },
+    "RaidDifficulty": {
+        "0": "Normal",
+        "1": "Hard",
+        "2": "Very Hard",
+        "3": "Hardcore",
+        "4": "Extreme",
+        "5": "Insane"
     },
     "WeaponPartExpBonus": {
         "WeaponExpGrowthA": "Provides 1.5&times; EXP when used to enhance SMG, SG and HG type weapons.",
@@ -363,7 +373,8 @@
         "Special_CostRegenBan": "Recovery Stop",
         "Special_ImmuneCC": "CC Immune",
         "Special_SuddenDeath": "Wakamo's Mark",
-        "Special_Stamp": "Flower Stamp"
+        "Special_Stamp": "Flower Stamp",
+        "Special_Holiday": "Holy Night Blessing"
     },
     "BuffNameLong": {
         "Buff_AmmoCount": "Mag Count Up",
@@ -449,7 +460,8 @@
         "Special_CostRegenBan": "Cost Recovery Stop",
         "Special_ImmuneCC": "CC Immunity",
         "Special_SuddenDeath": "Wakamo's Mark",
-        "Special_Stamp": "Flower Stamps"
+        "Special_Stamp": "Flower Stamps",
+        "Special_Holiday": "Holy Night Blessings"
     },
     "BuffTooltip": {
         "Buff_AmmoCount": "Increases the maximum amount of weapon ammunition used by Normal Attacks.",
@@ -535,7 +547,8 @@
         "Special_CostRegenBan": "Cost Recovery is reduced to 0.",
         "Special_ImmuneCC": "Immune to all Crowd Control effects.",
         "Special_SuddenDeath": "A stack of 5 will deal lethal damage to the character.",
-        "Special_Stamp": "Reduces allies' EX skill cost and restores own HP when Kokona reaches 5 stacks."
+        "Special_Stamp": "Reduces allies' EX skill cost and restores own HP when Kokona reaches 5 stacks.",
+        "Special_Holiday": "Increases the effects of certain EX skills on this character."
     },
     "ServerName": {
         "0": "Japan",
@@ -613,14 +626,20 @@
         "buff_transferable_search": "Search for Student or Skill Name",
         "buff_transferable_conflict": "Some of the selected buffs' effects conflict with each other. Only the first effect will be applied.",
         "buff_transferable_incompatible": "Some of the selected buffs cannot be applied to the current character.",
+        "enemy_debuffs": "Enemy Debuffs",
+        "enemy_select": "Select Enemy",
         "buff_custom": "Custom Buffs",
+        "buff_custom_enemy": "Enemy Custom Buffs",
         "buff_custom_base": "Add as base amount",
         "buff_custom_coefficient": "Add as percentage amount",
+        "buff_custom_name_placeholder": "Name (Optional)",
+        "buff_custom_value_placeholder": "Value",
         "supportstats_search": "Search for Special Student",
         "student_skill_normal": "Basic Skill",
         "student_skill_gearnormal": "Basic Skill+",
         "student_skill_passive": "Enhanced Skill",
         "student_skill_sub": "Sub Skill",
+        "student_skills_upgrades": "Upgrades",
         "student_skills_materials": "Materials",
         "student_skills_materials_none": "No materials required.",
         "student_weapon_rank_2star_desc": "Exclusive Weapon Max Level Lv.30 → <b>Lv.40</b> / Upgrades Enhanced Skill",
@@ -667,8 +686,9 @@
         "memory_lobby_unlock": "Unlocks after reaching relationship rank {0} with {1}",
         "terrain_adaption": "{0} Combat Power",
         "terrain_adaption_details": "Deals <b>{0}&times;</b> damage in <b>{1}</b> terrain.\nBlock rate when taking cover <b>+{2}%</b>.\nChance to ignore block when attacking <b>+{2}%</b>",
-        "statpreview_title": "Stat Display Options",
+        "statpreview_title": "Stat / Skill Details",
         "buffs": "Buffs",
+        "enemy_target": "Target",
         "summon": "Summon",
         "summon_inheritance": "Inherits {0} of {1}'s {2}",
         "stability_mindamage": "Minimum Damage: {0}",
@@ -694,6 +714,7 @@
         "furniture_set": "Set",
         "others": "Other",
         "options": "Options",
+        "details": "Details",
         "options_short": "Opts.",
         "raid_rules": "Rules",
         "ta_phase": "Stage ",
@@ -781,6 +802,37 @@
         "home_translations_help": "Schale DB is currently available in 6 languages. Want to help translate? Please get in touch via Discord (lonqie#2708) or check out the <a class=\"text-emphasis\" href=\"https://github.com/lonqie/SchaleDB-Localization\">localization project</a>!",
         "home_features_list": "<li>Full information on all students and skills, including summons or vehicles.</li><li>Comprehensive stats calculation that can display a student's stats under any configuration of stars, level, equipment, and buffs from skills.</li><li>Complete Items, Equipment and Furniture database.</li><li>Reward drops, maps and detailed enemy information for all Campaign, Event Quest, Challenge and Daily stages.</li><li>Stats and Skill information for Total Assault bosses and Joint Firing Drill events.</li><li>View the chances of possible items received from crafting nodes.</li>",
         "home_footer_text": "Schale DB is developed and maintained by lonqie, with additional translation work by Blue-Roar & TKRotund.\nSchale DB is not affiliated with Nexon, Nexon Games or Yostar. All game artwork, information and assets used in this database are the property and copyright of the respective authors.",
-        "changelog": "Changelog"
+        "changelog": "Changelog",
+        "skillinfo_empty": "The selected character has no damage-dealing or healing skills to display.",
+        "skill_normalattack": "Normal Attack",
+        "skill_normalattack_target": "Deals <?1> damage to one enemy.",
+        "skill_normalattack_circle": "Deals <?1> damage to enemies in a circular area.",
+        "skill_normalattack_line": "Deals <?1> damage to enemies in a straight line.",
+        "type_effectiveness": "Type Effectiveness",
+        "level_difference": "Level Difference",
+        "hit_chance": "Hit Chance",
+        "crit_chance": "Crit Chance",
+        "stab_variance": "Stability Variance",
+        "dmginfo_hit_count": "Hit Count",
+        "dmginfo_heal_count": "Heal Count",
+        "dmginfo_ignore_def": "Ignore DEF",
+        "dmginfo_hit_avg": "Avg. Hit DMG",
+        "dmginfo_crit": " (Crit)",
+        "dmginfo_total_avg": "Avg. Total DMG",
+        "dmginfo_dmg": "DMG",
+        "dmginfo_dmg_avg": "Average DMG",
+        "dmginfo_rate_of_fire": "Rate of Fire",
+        "time_seconds": "{0}s",
+        "time_seconds_frames": "{0}s ({1} frames)",
+        "normalattack_burst": "burst",
+        "dmginfo_rate_of_fire_tooltip": "Attack Duration: {0}\nAttack Delay: {1}",
+        "dmginfo_reload_time": "Reload Time",
+        "dmginfo_reload_time_tooltip": "Reload Duration: {0}\nStart Delay: {1}\nEnd Delay: {2}",
+        "dmginfo_avg_dps": "Average DPS",
+        "dmginfo_heal_amount": "Amount Healed",
+        "dmginfo_shield_amount": "Barrier HP",
+        "dmginfo_cc_effect_chance": "{0} Chance",
+        "dmginfo_cc_effect_duration": "{0} Duration (Hod Insane)",
+        "dmginfo_accumulation_limit": "{0} DMG Limit"
     }
 }

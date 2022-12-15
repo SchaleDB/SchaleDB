@@ -112,6 +112,7 @@
         "CriticalChanceResistPoint": "暴击抵抗力",
         "CriticalDamageResistRate": "暴击伤害抵抗率",
         "StabilityPoint": "稳定性",
+        "StabilityRate": "稳定性",
         "Range": "射程",
         "AmmoCount": "载弹量",
         "MoveSpeed": "移速",
@@ -213,7 +214,8 @@
         "815": "出差！百夜堂 海之家FC计划",
         "816": "放学后甜点故事 甜香的秘密与枪战",
         "817": "On Your Mark @ Millennium",
-        "818": "Get Set, Go! ~ 基沃托斯大运动会 晄轮大祭"
+        "818": "Get Set, Go! ~ 基沃托斯大运动会 晄轮大祭",
+        "819": "Merry Christmas in the Cathedral"
     },
     "StageType": {
         "Campaign": "任务",
@@ -266,6 +268,14 @@
         "1": "第1次节点",
         "2": "第2次节点",
         "3": "第3次节点"
+    },
+    "RaidDifficulty": {
+        "0": "Normal",
+        "1": "Hard",
+        "2": "Very Hard",
+        "3": "Hardcore",
+        "4": "Extreme",
+        "5": "Insane"
     },
     "WeaponPartExpBonus": {
         "WeaponExpGrowthA": "用于强化 SMG、SG、HG 类型武器时提供 1.5 倍经验",
@@ -363,7 +373,8 @@
         "Special_CostRegenBan": "COST停止回复",
         "Special_ImmuneCC": "群控免疫",
         "Special_SuddenDeath": "若藻的印记",
-        "Special_Stamp": "Flower Stamp"
+        "Special_Stamp": "Flower Stamp",
+        "Special_Holiday": "Holy Night Blessing"
     },
     "BuffNameLong": {
         "Buff_AmmoCount": "载弹量提升",
@@ -449,7 +460,8 @@
         "Special_CostRegenBan": "COST停止回复",
         "Special_ImmuneCC": "群控免疫",
         "Special_SuddenDeath": "若藻的印记",
-        "Special_Stamp": "Flower Stamps"
+        "Special_Stamp": "Flower Stamps",
+        "Special_Holiday": "Holy Night Blessings"
     },
     "BuffTooltip": {
         "Buff_AmmoCount": "提升普通攻击武器载弹量",
@@ -535,7 +547,8 @@
         "Special_CostRegenBan": "COST回复力降低为0",
         "Special_ImmuneCC": "免疫所有群控效果",
         "Special_SuddenDeath": "5层叠加将对人物造成致命伤害。",
-        "Special_Stamp": "当心奈进行5次攻击时降低队伍中其他学生的EX技能费用并恢复自身生命值。"
+        "Special_Stamp": "当心奈进行5次攻击时降低队伍中其他学生的EX技能费用并恢复自身生命值。",
+        "Special_Holiday": "Increases the effects of certain EX skills on this character."
     },
     "ServerName": {
         "0": "日服",
@@ -613,14 +626,20 @@
         "buff_transferable_search": "搜索学生或技能名称",
         "buff_transferable_conflict": "部分已选择的增益效果之间有冲突，将仅应用第一个效果。",
         "buff_transferable_incompatible": "部分已选择的增益效果无法被应用于当前学生。",
+        "enemy_debuffs": "Enemy Debuffs",
+        "enemy_select": "Select Enemy",
         "buff_custom": "自定义增益效果",
+        "buff_custom_enemy": "Enemy Custom Buffs",
         "buff_custom_base": "作为基准值添加",
         "buff_custom_coefficient": "作为百分比值添加",
+        "buff_custom_name_placeholder": "Name (Optional)",
+        "buff_custom_value_placeholder": "Value",
         "supportstats_search": "搜索特殊学生",
         "student_skill_normal": "普通技能",
         "student_skill_gearnormal": "普通技能+",
         "student_skill_passive": "被动技能",
         "student_skill_sub": "辅助技能",
+        "student_skills_upgrades": "Upgrades",
         "student_skills_materials": "技能材料",
         "student_skills_materials_none": "无需成长材料。",
         "student_weapon_rank_2star_desc": "固有武器最大等级 Lv.30 → <b>Lv.40</b> / 解锁强化技能+",
@@ -669,6 +688,7 @@
         "terrain_adaption_details": "在<b>{1}</b>地形造成<b>{0}倍</b>伤害。\n寻找掩体时掩护成功率<b>+{2}%</b>。\n攻击时绕过掩体概率<b>增加{2}%</b>。",
         "statpreview_title": "数据预览选项",
         "buffs": "增益效果",
+        "enemy_target": "Target",
         "summon": "召唤",
         "summon_inheritance": "继承{1}{0}的{2}",
         "stability_mindamage": "最低伤害：{0}",
@@ -694,6 +714,7 @@
         "furniture_set": "组合",
         "others": "其它",
         "options": "选项",
+        "details": "詳情",
         "options_short": "选项",
         "raid_rules": "规则",
         "ta_phase": "阶段",
@@ -781,6 +802,37 @@
         "home_translations_help": "Schale DB 目前支持6种语言。如果想帮助翻译请通过Discord (lonqie#2708)联系或查看<a class=\"text-emphasis\" href=\"https://github.com/lonqie/SchaleDB-Localization\">本地化项目</a>！",
         "home_features_list": "<li>有关全体学生和技能，包含召唤单位与载具单位的完整信息。</li><li>全面的数据计算，可以显示学生在任何星级、等级、装备和技能的增益效果下的面板数据。</li><li>完整的物品、装备和家具数据库。</li><li>所有关卡的奖励掉落、地图和详细的敌人信息。</li><li>总力战BOSS与综合战术考试的数据与技能信息。</li><li>查看从合成节点可能获取物品的几率。</li>",
         "home_footer_text": "Schale DB 由 lonqie 开发与维护，Blue-Roar 与 TKRotund 提供额外翻译。\nSchale DB 与悠星、Nexon、Nexon Games 没有关联。本数据库中使用的所有游戏作品、信息和素材均为各自作者的财产和版权。",
-        "changelog": "更新日志"
+        "changelog": "更新日志",
+        "skillinfo_empty": "The selected character has no damage-dealing or healing skills to display.",
+        "skill_normalattack": "Normal Attack",
+        "skill_normalattack_target": "Deals <?1> damage to one enemy.",
+        "skill_normalattack_circle": "Deals <?1> damage to enemies in a circular area.",
+        "skill_normalattack_line": "Deals <?1> damage to enemies in a straight line.",
+        "type_effectiveness": "Type Effectiveness",
+        "level_difference": "Level Difference",
+        "hit_chance": "Hit Chance",
+        "crit_chance": "暴击几率",
+        "stab_variance": "Stability Variance",
+        "dmginfo_hit_count": "Hit Count",
+        "dmginfo_heal_count": "Heal Count",
+        "dmginfo_ignore_def": "Ignore DEF",
+        "dmginfo_hit_avg": "Avg. Hit DMG",
+        "dmginfo_crit": " (Crit)",
+        "dmginfo_total_avg": "Avg. Total DMG",
+        "dmginfo_dmg": "DMG",
+        "dmginfo_dmg_avg": "Average DMG",
+        "dmginfo_rate_of_fire": "Rate of Fire",
+        "time_seconds": "{0}s",
+        "time_seconds_frames": "{0}s ({1} frames)",
+        "normalattack_burst": "burst",
+        "dmginfo_rate_of_fire_tooltip": "Attack Duration: {0}\nAttack Delay: {1}",
+        "dmginfo_reload_time": "Reload Time",
+        "dmginfo_reload_time_tooltip": "Reload Duration: {0}\nStart Delay: {1}\nEnd Delay: {2}",
+        "dmginfo_avg_dps": "Average DPS",
+        "dmginfo_heal_amount": "Amount Healed",
+        "dmginfo_shield_amount": "Barrier HP",
+        "dmginfo_cc_effect_chance": "{0} Chance",
+        "dmginfo_cc_effect_duration": "{0} Duration (Hod Insane)",
+        "dmginfo_accumulation_limit": "{0} DMG Limit"
     }
 }

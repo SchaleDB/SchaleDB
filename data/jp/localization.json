@@ -112,6 +112,7 @@
         "CriticalChanceResistPoint": "会心発生抵抗力",
         "CriticalDamageResistRate": "会心ダメージ抵抗率",
         "StabilityPoint": "安定値",
+        "StabilityRate": "安定率",
         "Range": "射程距離",
         "AmmoCount": "装弾数",
         "MoveSpeed": "移動速度",
@@ -213,7 +214,8 @@
         "815": "出張！百夜堂海の家FC計画",
         "816": "放課後スイーツ物語　～甘い秘密と銃撃戦～",
         "817": "On your mark ＠ millennium",
-        "818": "Get set, go！～キヴォトス晄輪大祭～"
+        "818": "Get set, go！～キヴォトス晄輪大祭～",
+        "819": "聖堂のメリークリスマス"
     },
     "StageType": {
         "Campaign": "任務",
@@ -266,6 +268,14 @@
         "1": "1次ノード",
         "2": "2次ノード",
         "3": "3次ノード"
+    },
+    "RaidDifficulty": {
+        "0": "Normal",
+        "1": "Hard",
+        "2": "VeryHard",
+        "3": "HardCore",
+        "4": "Extreme",
+        "5": "Insane"
     },
     "WeaponPartExpBonus": {
         "WeaponExpGrowthA": "SMG、SG、HGの固有武器の強化に使用すると、獲得EXPが1.5倍になる。",
@@ -363,7 +373,8 @@
         "Special_CostRegenBan": "Recovery Stop",
         "Special_ImmuneCC": "CC Immune",
         "Special_SuddenDeath": "ワカモの刻印",
-        "Special_Stamp": "「花丸スタンプ」"
+        "Special_Stamp": "「花丸スタンプ」",
+        "Special_Holiday": "「聖夜の祝福」"
     },
     "BuffNameLong": {
         "Buff_AmmoCount": "Mag Count Up",
@@ -449,7 +460,8 @@
         "Special_CostRegenBan": "Cost Recovery Stop",
         "Special_ImmuneCC": "CC Immunity",
         "Special_SuddenDeath": "ワカモの刻印",
-        "Special_Stamp": "「花丸スタンプ」"
+        "Special_Stamp": "「花丸スタンプ」",
+        "Special_Holiday": "「聖夜の祝福」"
     },
     "BuffTooltip": {
         "Buff_AmmoCount": "Increases the maximum amount of weapon ammunition used by Normal Attacks.",
@@ -535,7 +547,8 @@
         "Special_CostRegenBan": "Cost Recovery is reduced to 0.",
         "Special_ImmuneCC": "Immune to all Crowd Control effects.",
         "Special_SuddenDeath": "A stack of 5 will deal lethal damage to the character.",
-        "Special_Stamp": "Reduces allies' EX skill cost and restores own HP when Kokona reaches 5 stacks."
+        "Special_Stamp": "Reduces allies' EX skill cost and restores own HP when Kokona reaches 5 stacks.",
+        "Special_Holiday": "Increases the effects of certain EX skills on this character."
     },
     "ServerName": {
         "0": "日本",
@@ -613,14 +626,20 @@
         "buff_transferable_search": "Search for Student or Skill Name",
         "buff_transferable_conflict": "Some of the selected buffs' effects conflict with each other. Only the first effect will be applied.",
         "buff_transferable_incompatible": "Some of the selected buffs cannot be applied to the current character.",
+        "enemy_debuffs": "Enemy Debuffs",
+        "enemy_select": "Select Enemy",
         "buff_custom": "Custom Buffs",
+        "buff_custom_enemy": "Enemy Custom Buffs",
         "buff_custom_base": "Add as base amount",
         "buff_custom_coefficient": "Add as percentage amount",
+        "buff_custom_name_placeholder": "Name (Optional)",
+        "buff_custom_value_placeholder": "Value",
         "supportstats_search": "Search for Special Student",
         "student_skill_normal": "ノーマルスキル",
         "student_skill_gearnormal": "ノーマルスキル+",
         "student_skill_passive": "パッシブスキル",
         "student_skill_sub": "サブスキル",
+        "student_skills_upgrades": "Upgrades",
         "student_skills_materials": "材料リスト",
         "student_skills_materials_none": "成長材料が不要。",
         "student_weapon_rank_2star_desc": "固有武器のMax Level Lv.30 → <b>Lv.40</b> / パッシブスキル+をアンロック",
@@ -669,6 +688,7 @@
         "terrain_adaption_details": "{1}では<b>{0}倍</b>のダメージを与える。\n隠れている時、遮蔽成功値を<b>{2}%</b>増加。\n遮蔽貫通値を<b>{2}%</b>増加。",
         "statpreview_title": "ステータスオプション",
         "buffs": "バフ",
+        "enemy_target": "Target",
         "summon": "召喚",
         "summon_inheritance": "Inherits {0} of {1}'s {2}",
         "stability_mindamage": "Minimum Damage: {0}",
@@ -694,6 +714,7 @@
         "furniture_set": "セット",
         "others": "Other",
         "options": "オプション",
+        "details": "詳細",
         "options_short": "オプション",
         "raid_rules": "ルール",
         "ta_phase": "フェーズ",
@@ -781,6 +802,37 @@
         "home_translations_help": "Schale DB is currently available in 6 languages. Want to help translate? Please get in touch via Discord (lonqie#2708) or check out the <a class=\"text-emphasis\" href=\"https://github.com/lonqie/SchaleDB-Localization\">localization project</a>!",
         "home_features_list": "<li>Full information on all students and skills, including summons or vehicles.</li><li>Comprehensive stats calculation that can display a student's stats under any configuration of stars, level, equipment, and buffs from skills.</li><li>Complete Items, Equipment and Furniture database.</li><li>Reward drops, maps and detailed enemy information for all Campaign, Event Quest, Challenge and Daily stages.</li><li>Stats and Skill information for Total Assault bosses and Joint Firing Drill events.</li><li>View the chances of possible items received from crafting nodes.</li>",
         "home_footer_text": "Schale DB is developed and maintained by lonqie, with additional translation work by Blue-Roar & TKRotund.\nSchale DB is not affiliated with Nexon, Nexon Games or Yostar. All game artwork, information and assets used in this database are the property and copyright of the respective authors.",
-        "changelog": "Changelog"
+        "changelog": "Changelog",
+        "skillinfo_empty": "The selected character has no damage-dealing or healing skills to display.",
+        "skill_normalattack": "Normal Attack",
+        "skill_normalattack_target": "Deals <?1> damage to one enemy.",
+        "skill_normalattack_circle": "Deals <?1> damage to enemies in a circular area.",
+        "skill_normalattack_line": "Deals <?1> damage to enemies in a straight line.",
+        "type_effectiveness": "Type Effectiveness",
+        "level_difference": "Level Difference",
+        "hit_chance": "Hit Chance",
+        "crit_chance": "Crit Chance",
+        "stab_variance": "Stability Variance",
+        "dmginfo_hit_count": "Hit Count",
+        "dmginfo_heal_count": "Heal Count",
+        "dmginfo_ignore_def": "Ignore DEF",
+        "dmginfo_hit_avg": "Avg. Hit DMG",
+        "dmginfo_crit": " (Crit)",
+        "dmginfo_total_avg": "Avg. Total DMG",
+        "dmginfo_dmg": "DMG",
+        "dmginfo_dmg_avg": "Average DMG",
+        "dmginfo_rate_of_fire": "Rate of Fire",
+        "time_seconds": "{0}s",
+        "time_seconds_frames": "{0}s ({1} frames)",
+        "normalattack_burst": "burst",
+        "dmginfo_rate_of_fire_tooltip": "Attack Duration: {0}\nAttack Delay: {1}",
+        "dmginfo_reload_time": "Reload Time",
+        "dmginfo_reload_time_tooltip": "Reload Duration: {0}\nStart Delay: {1}\nEnd Delay: {2}",
+        "dmginfo_avg_dps": "Average DPS",
+        "dmginfo_heal_amount": "Amount Healed",
+        "dmginfo_shield_amount": "Barrier HP",
+        "dmginfo_cc_effect_chance": "{0} Chance",
+        "dmginfo_cc_effect_duration": "{0} Duration (Hod Insane)",
+        "dmginfo_accumulation_limit": "{0} DMG Limit"
     }
 }

@@ -540,11 +540,21 @@ h1 small {
 }
 
 .ba-buff-icon {
-    /* @include sharp-img; */
     position: absolute;
     top: 0px;
     height: 22px;
     width: auto;
+    @include unselectable;
+}
+
+.skill-description {
+    .ba-buff-icon {
+        height: 18px;
+    }
+
+    .ba-buff-icon-spacer {
+        width: 18px;
+    }
 }
 
 // #ba-student-school {
@@ -576,6 +586,7 @@ hr {
         object-fit: cover;
         object-position: top;
         @include circular;
+        @include unselectable;
         @include card-shadow;
     }
 
@@ -861,6 +872,22 @@ a.nav-link.disabled {
 
 .ba-skill-special {
     background-color: var(--col-bg-status);
+    color: var(--col-text-status);
+}
+
+.text-buff {
+    color: var(--col-text-buff);
+}
+
+.text-debuff {
+    color: var(--col-text-debuff);
+}
+
+.text-cc {
+    color: var(--col-text-cc);
+}
+
+.text-special {
     color: var(--col-text-status);
 }
 

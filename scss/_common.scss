@@ -103,6 +103,10 @@ p {
     pointer-events: none;
 }
 
+img {
+    @include unselectable;
+}
+
 //utilities
 
 .screen-height {
@@ -158,7 +162,7 @@ p {
 }
 
 .invert-light {
-    @include transition(filter);
+    //@include transition(filter);
     filter: var(--var-invert-light) hue-rotate(var(--var-invert-light-hue));
 }
 
@@ -200,6 +204,12 @@ input[type="search" i]::-webkit-search-cancel-button {
         margin-right: 0.5rem;
     } 
 
+    &:active, &.active {
+        img.invert-light {
+            filter: var(--var-invert-dark) !important;
+        }
+    }
+
 }
 
 .bond-small {
@@ -221,6 +231,12 @@ input[type="search" i]::-webkit-search-cancel-button {
 }
 
 .input-small {
+
+    &.disabled, &:disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        opacity: 0.5;
+    }
 
     position: relative;
 
@@ -254,6 +270,18 @@ input[type="search" i]::-webkit-search-cancel-button {
             background-color: var(--col-bg-item-n);
             border-radius: 999px;
         }
+    }
+
+    .label {
+        position: absolute;
+        height: 32px;
+        padding: 4px;
+
+        left: 8px;
+
+        display: flex;
+        align-items: center;
+        font-weight: bold;
     }
 
     .controls {
@@ -310,10 +338,12 @@ input[type="search" i]::-webkit-search-cancel-button {
         height: 28px;
         width: 28px;
         position: relative;
+        @include circular;
 
         img {
             object-fit: contain;
             @include circular;
+            @include unselectable;
         }
 
         .icon-compare {
@@ -326,6 +356,26 @@ input[type="search" i]::-webkit-search-cancel-button {
             background-color: rgba(0,0,0,.5);
             background-image: url(../images/ui/Image_Compare.png);
             background-size: cover;
+        }
+
+        &.plus::after {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            content: "\2b";
+            background-color: inherit;
+            color: #ffffff;
+            position: absolute;
+    
+            top: 0px;
+            right: -4px;
+    
+            height: 12px;
+            width: 12px;
+            
+            @include circular;
+    
+            font-size: 8px;
+            text-align: center;
         }
     }
 
@@ -341,22 +391,6 @@ input[type="search" i]::-webkit-search-cancel-button {
 
     .off {
         display: none;
-    }
-
-    .skill-plus {
-        color: #ffffff;
-        position: absolute;
-
-        top: 0px;
-        right: -4px;
-
-        height: 12px;
-        width: 12px;
-        
-        @include circular;
-        @include flex(center, center);
-
-        font-size: 8px;
     }
 
     &:hover {
@@ -490,6 +524,7 @@ input[type="search" i]::-webkit-search-cancel-button {
 
     position: relative;
     @include drop-shadow;
+    @include circular;
 
     &.small {
 
@@ -498,7 +533,7 @@ input[type="search" i]::-webkit-search-cancel-button {
             height: 54px;
         }
 
-        .plus {
+        &.plus::after {
             width: 18px;
             height: 18px;
             padding: 3px;
@@ -513,10 +548,16 @@ input[type="search" i]::-webkit-search-cancel-button {
         height: 64px;
         object-fit: contain;
         object-position: center;
-        @include circular;
+        @include unselectable;
     }
 
-    .plus {
+    &.plus::after {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        content: "\2b";
+        background-color: inherit;
+        color: #ffffff;
+
         position: absolute;
         right: -4px;
         top: 2px;
@@ -526,7 +567,6 @@ input[type="search" i]::-webkit-search-cancel-button {
 
         @include circular;
 
-        color: #ffffff;
         padding: 2px;
         line-height: 16px;
         font-size: 16px;
@@ -647,17 +687,42 @@ input[type="search" i]::-webkit-search-cancel-button {
         }
     }
 
-    .has-tooltip {
-        text-decoration: underline dotted 2px var(--col-theme-text-t);
-        text-underline-position: under;
-        cursor: help;
-        @include transition(text-decoration-color);
+}
 
-        &:hover {
-            text-decoration-color: var(--col-theme-text);
-        }
+.has-tooltip {
+    text-decoration: underline dotted 2px var(--col-theme-text-t);
+    text-underline-position: under;
+    cursor: help;
+    @include transition(text-decoration-color);
+
+    &:hover {
+        text-decoration-color: var(--col-theme-text);
     }
+}
 
+.text-weak {
+    color: #ff690b;
+}
+
+.text-resist {
+    color: var(--col-text-emphasis);
+}
+
+.text-negative {
+    color: var(--col-text-compare-less);
+}
+
+.text-heal {
+    color: var(--col-text-compare-greater);
+}
+
+.text-shield {
+    color: var(--col-text-emphasis);
+}
+
+.text-crit {
+    color: var(--col-text-compare-less);
+    //text-shadow: 0px 0px 3px var(--col-text-compare-less);
 }
 
 .no-wrap {

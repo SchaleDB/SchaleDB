@@ -90,10 +90,10 @@
                                             <button id="ba-statpreview-status-strikerbonus" onclick="toggleStrikerBonus()" class="btn-pill tooltip-button deactivated" >
                                                 <div class="icon" style="padding:3px"><img src="images/ui/Special_StatBonus.png" class="sharp-img invert-light" width="22" height="22" style="border-radius:0!important;"></div>
                                             </button>
-                                            <button id="ba-statpreview-status-options" data-bs-toggle="modal" data-bs-target="#ba-student-modal-statpreview" class="btn-pill">
-                                                <div class="d-flex align-items-center justify-content-center" style="width:28px;height:28px;"><i class="fa-solid fa-cogs"></i></div>
+                                            <button id="ba-statpreview-status-options" class="btn-pill">
+                                                <div class="d-flex align-items-center justify-content-center" style="width:28px;height:28px;"><i class="fa-solid fa-magnifying-glass"></i></div>
                                                 <span class="label d-none d-md-block ps-1">
-                                                    <span data-localize-id="ui,options"></span>
+                                                    <span data-localize-id="ui,details"></span>
                                                 </span>
                                             </button>
                                         </div>
@@ -150,7 +150,7 @@
                                     </div>
                                     <div class="d-flex flex-row flex-wrap align-items-stretch gap-2 mb-1">
                                         <button id="ba-statpreview-status-passive-level" onclick="togglePassiveSkill()" class="btn-pill tooltip-button">
-                                            <div class="icon"><img id="ba-statpreview-status-passive-icon" src="" class="bg-skill" width="28" height="28"><span class="skill-plus bg-skill statpreview-passive-plus"><i class="fa-solid fa-plus"></i></span></div>
+                                            <div class="icon statpreview-passive bg-skill"><img id="ba-statpreview-status-passive-icon" src="" width="28" height="28"></div>
                                             <span class="label"></span>
                                         </button>
                                         <button id="ba-statpreview-status-buffs" onclick="toggleBuffs()" class="btn-pill tooltip-button">
@@ -169,9 +169,25 @@
 
                             <div id="ba-student-page-skills" class="tab-pane fade" style="border-radius: .25em;">
 
+                                <div class="mb-2 d-flex ">
+                                    <button id="skills-show-upgrades" class="btn-pill tooltip-button">
+                                        <span class="label">
+                                            <i class="fa-regular fa-square off"></i>
+                                            <i class="fa-solid fa-square-check on"></i>
+                                            <span class="ps-2" data-localize-id="ui,student_skills_upgrades"></span>
+                                        </span>
+                                    </button>
+                                    <div class="flex-fill"></div>
+                                    <button id="skill-show-details" class="btn-pill">
+                                        <div class="d-flex align-items-center justify-content-center" style="width:28px;height:28px;"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                        <span class="label ps-1">
+                                            <span data-localize-id="ui,details"></span>
+                                        </span>
+                                    </button>
+                                </div>
                                 <div class="mb-3 p-2 pb-0 d-flex flex-column ba-panel align-items-start">
                                     <div class="d-flex flex-row align-items-center gap-3">
-                                        <div class="skill-icon"><img id="ba-skill-ex-icon" class="bg-skill" src=""></div>
+                                        <div id="ba-skill-ex-icon" class="skill-icon bg-skill"><img src=""></div>
                                         <div class="d-inline-block">
                                             <div>
                                                 <h4 id="ba-skill-ex-name" class="me-2 d-inline"></h4>
@@ -208,39 +224,39 @@
 
                                 <div class="my-3 p-2 pb-0 d-flex flex-column ba-panel align-items-start">
                                     <div class="d-flex flex-row align-items-center gap-3">
-                                        <div class="skill-icon"><img id="ba-skill-normal-icon" class="bg-skill" src=""></div>
+                                        <div id="ba-skill-normal-icon" class="skill-icon bg-skill"><img src=""></div>
                                         <div class="d-inline-block">
                                             <div>
                                                 <h4 id="ba-skill-normal-name" class="me-2 d-inline"></h4>
                                             </div>
                                             <div class="mt-1">
-                                                <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_normal"></p>
+                                                <p class="d-inline" style="font-style: italic; font-weight: 500;"><span data-localize-id="ui,student_skill_normal"></span><span id="ba-skill-normal-plus" data-localize-id="ui,skill_plus"></span></p>
                                             </div>
                                         </div>
                                     </div>
                                     <p id="ba-skill-normal-description" class="mt-2 mb-2 p-1"></p>
                                     <div class="ba-panel-separator"></div>
                                     <div class="mt-2 d-flex flex-row align-items-center gap-3">
-                                        <div class="skill-icon"><img id="ba-skill-passive-icon" class="bg-skill" src=""></div>
+                                        <div id="ba-skill-passive-icon" class="skill-icon bg-skill"><img src=""></div>
                                         <div class="d-inline-block">
                                             <div>
                                                 <h4 id="ba-skill-passive-name" class="me-2 d-inline"></h4>
                                             </div>
                                             <div class="mt-1">
-                                                <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_passive"></p>
+                                                <p class="d-inline" style="font-style: italic; font-weight: 500;"><span data-localize-id="ui,student_skill_passive"></span><span id="ba-skill-passive-plus" data-localize-id="ui,skill_plus"></span></p>
                                             </div>
                                         </div>
                                     </div>
                                     <p id="ba-skill-passive-description" class="mt-2 mb-2 p-1"></p>
                                     <div class="ba-panel-separator"></div>
                                     <div class="mt-2 d-flex flex-row align-items-center gap-3">
-                                        <div class="skill-icon"><img id="ba-skill-sub-icon" class="bg-skill" src=""></div>
+                                        <div id="ba-skill-sub-icon" class="skill-icon bg-skill"><img src=""></div>
                                         <div class="d-inline-block">
                                             <div>
                                                 <h4 id="ba-skill-sub-name" class="me-2 d-inline"></h4>
                                             </div>
                                             <div class="mt-1">
-                                                <p class="d-inline" style="font-style: italic; font-weight: 500;" data-localize-id="ui,student_skill_sub"></p>
+                                                <p class="d-inline" style="font-style: italic; font-weight: 500;"><span data-localize-id="ui,student_skill_sub"></span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -302,12 +318,6 @@
                                     <li class="nav-item ba-weapon-rank-tab">
                                         <a class="nav-link" data-bs-toggle="tab" href="#ba-weapon-page-3star"><i class="fa-solid fa-star me-1"></i><b>3</b></a>
                                     </li>
-                                    <!-- <li class="nav-item ba-weapon-rank-tab">
-                                        <a class="nav-link disabled" data-bs-toggle="tab" href="#ba-weapon-page-4star"><i class="fa-solid fa-star"></i> 4</a>
-                                    </li>
-                                    <li class="nav-item ba-weapon-rank-tab">
-                                        <a class="nav-link disabled" data-bs-toggle="tab" href="#ba-weapon-page-5star"><i class="fa-solid fa-star"></i> 5</a>
-                                    </li> -->
                                 </ul>
 
                                 <div class="tab-content">
@@ -322,9 +332,8 @@
 
                                         <div class="mb-3 p-2 d-flex flex-column ba-panel align-items-start">
                                             <div class="d-flex flex-row align-items-center gap-3">
-                                                <div class="skill-icon">
-                                                    <img id="ba-skill-weaponpassive-icon" class="bg-skill" src="">
-                                                    <span class="plus bg-skill"><i class="fa-solid fa-plus"></i></span>
+                                                <div id="ba-skill-weaponpassive-icon" class="skill-icon plus bg-skill">
+                                                    <img src="">
                                                 </div>
                                                 <div class="d-inline-block">
                                                     <div>
@@ -405,9 +414,8 @@
 
                                         <div class="mt-2 mb-3 p-2 d-flex flex-column ba-panel align-items-start">
                                             <div class="d-flex flex-row align-items-center gap-3">
-                                                <div class="skill-icon">
-                                                    <img id="ba-skill-gearnormal-icon" class="bg-skill" src="">
-                                                    <span class="plus bg-skill"><i class="fa-solid fa-plus"></i></span>
+                                                <div id="ba-skill-gearnormal-icon" class="skill-icon bg-skill plus">
+                                                    <img src="">
                                                 </div>
                                                 <div class="d-inline-block">
                                                     <div>
@@ -547,12 +555,13 @@
                     <div class="panel-sliders">
 
                         <nav id="statpreview-tabs" class="nav nav-pills justify-content-center mb-3">
-                            <a id="statpreview-tab-attributes" class="nav-link active" data-bs-toggle="tab" href="#statpreview-tab-pane-attributes" data-localize-id="ui,attributes"></a>
+                            <a id="statpreview-tab-attributes" class="nav-link" data-bs-toggle="tab" href="#statpreview-tab-pane-attributes" data-localize-id="ui,attributes"></a>
                             <a id="statpreview-tab-buffs" class="nav-link" data-bs-toggle="tab" href="#statpreview-tab-pane-buffs" data-localize-id="ui,buffs"></a>
+                            <a id="statpreview-tab-calculations" class="nav-link" data-bs-toggle="tab" href="#statpreview-tab-pane-calculations" data-localize-id="ui,enemy_target"></a>
                         </nav>
 
                         <div class="tab-content">
-                            <div id="statpreview-tab-pane-attributes" class="tab-pane active">
+                            <div id="statpreview-tab-pane-attributes" class="tab-pane">
                                 <div class="row g-0">
                                     <div class="col-12 col-xl-6 mb-3 pe-xl-2">
                                         <h5 data-localize-id="Stat,Level"></h5>
@@ -692,9 +701,8 @@
                                         <div id="ba-statpreview-passiveskill" class="p-2 ba-panel">
                                             <div class="d-flex flex-column">
                                                 <div class="d-flex flex-row align-items-center mb-1 gap-3">
-                                                    <div class="skill-icon small">
-                                                        <img id="ba-statpreview-passiveskill-icon" class="bg-skill" src="">
-                                                        <span class="plus bg-skill statpreview-passive-plus"><i class="fa-solid fa-plus"></i></span>
+                                                    <div id="ba-statpreview-passiveskill-icon" class="statpreview-passive skill-icon bg-skill small">
+                                                        <img src="">
                                                     </div>
                                                     <div class="flex-fill">
                                                         <h5 id="ba-statpreview-passiveskill-name"></h5>
@@ -712,8 +720,8 @@
                                             <div class="p-2 ba-panel">
                                                 <div class="d-flex flex-column">
                                                     <div class="d-flex flex-row align-items-center mb-1 gap-3">
-                                                        <div class="skill-icon small">
-                                                            <img id="ba-statpreview-summon-icon" class="bg-skill" src="">
+                                                        <div id="ba-statpreview-summon-icon" class="skill-icon bg-skill small">
+                                                            <img src="">
                                                         </div>
                                                         <div class="flex-fill">
                                                             <h5 id="ba-statpreview-summon-name"></h5>
@@ -740,24 +748,6 @@
                                             <div id="statpreview-supportstats-controls" class="my-2 d-flex flex-column gap-2">
                                             </div>
                                         </div>
-                                        <div id="statpreview-buff-custom">
-                                            <div class="d-flex mt-3">
-                                                <h5 data-localize-id="ui,buff_custom"></h5>
-                                            </div>
-                                            <div class="mb-2">
-                                                <div class="d-flex align-items-stretch mb-2 gap-2">
-                                                    <input type="text" class="form-control name-input flex-fill" id="statpreview-buff-custom-name-input" placeholder="Name (Optional)" autocomplete="off">
-                                                </div>
-                                                <div class="d-flex align-items-stretch gap-2">
-                                                    <select id="statpreview-buff-custom-stat-select" class="form-select stat-select">
-                                                    </select>
-                                                    <input type="number" class="form-control amount-input" id="statpreview-buff-custom-amount-input" placeholder="Value" step="0.01" autocomplete="off">
-                                                    <button id="statpreview-buff-custom-add-base" class="btn btn-dark tooltip-button add-base" data-tooltip-id="ui,buff_custom_base"><i class="fa-solid fa-plus"></i></button>
-                                                    <button id="statpreview-buff-custom-add-coefficient" class="btn btn-dark tooltip-button add-coefficient" data-tooltip-id="ui,buff_custom_coefficient"><i class="fa-solid fa-percent"></i></button>
-                                                </div>
-                                            </div>
-                                            <div id="statpreview-buff-custom-controls" class="d-flex flex-column gap-1 controls"></div>
-                                        </div>
                                     </div>
                                     <div class="col-12 col-xl-6 mb-3 ps-xl-2">
                                         <div id="statpreview-buff-transferable-search">
@@ -779,7 +769,144 @@
                                         </div>
                                         <p id="statpreview-buff-transferable-incompatible" class="text-italic mb-2 panel-alert p-2"><i class="fa-solid fa-triangle-exclamation me-2"></i><span data-localize-id="ui,buff_transferable_incompatible"></span></p>
                                         <p id="statpreview-buff-transferable-conflict" class="text-italic mb-2 panel-alert p-2"><i class="fa-solid fa-triangle-exclamation me-2"></i><span data-localize-id="ui,buff_transferable_conflict"></span></p>
-                                        <div id="statpreview-buff-transferable-controls" class="d-flex flex-column gap-2">
+                                        <div id="statpreview-buff-transferable-controls" class="d-flex flex-column gap-2 buff-transferable-controls">
+                                        </div>
+                                        <div id="statpreview-buff-custom" class="buff-custom">
+                                            <div class="d-flex mt-3">
+                                                <h5 data-localize-id="ui,buff_custom"></h5>
+                                            </div>
+                                            <div class="mb-2">
+                                                <div class="d-flex align-items-stretch mb-2 gap-2">
+                                                    <input type="text" class="form-control name-input flex-fill" id="statpreview-buff-custom-name-input" data-ph-localize-id="ui,buff_custom_name_placeholder" autocomplete="off">
+                                                </div>
+                                                <div class="d-flex align-items-stretch gap-2">
+                                                    <select id="statpreview-buff-custom-stat-select" class="form-select stat-select">
+                                                    </select>
+                                                    <input type="number" class="form-control amount-input" id="statpreview-buff-custom-amount-input" data-ph-localize-id="ui,buff_custom_value_placeholder" step="0.01" autocomplete="off">
+                                                    <button id="statpreview-buff-custom-add-base" class="btn btn-dark tooltip-button add-base" data-tooltip-id="ui,buff_custom_base"><i class="fa-solid fa-plus"></i></button>
+                                                    <button id="statpreview-buff-custom-add-coefficient" class="btn btn-dark tooltip-button add-coefficient" data-tooltip-id="ui,buff_custom_coefficient"><i class="fa-solid fa-percent"></i></button>
+                                                </div>
+                                            </div>
+                                            <div id="statpreview-buff-custom-controls" class="d-flex flex-column gap-1 controls"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="statpreview-tab-pane-calculations" class="tab-pane">
+                                <div class="row g-0">
+                                    <div class="col-12 col-xl-6 mb-3 pe-xl-2">
+                                        <h5 data-localize-id="ui,enemy_select"></h5>
+
+                                        <div class="my-2 d-flex align-items-stretch gap-2">
+                                            <input type="search" class="form-control" id="statpreview-enemysearch-search-text" data-ph-localize-id="ui,search" autocomplete="off" style="height:38px;">
+                                            <!-- <button id="statpreview-enemysearch-search-btn" class="btn btn-dark tooltip-button" data-tooltip-id="ui,search"><i class="fa-solid fa-magnifying-glass"></i></button> -->
+                                        </div>
+                                        <div id="statpreview-enemysearch-search-list" class="search-list-container" style="display:none;">
+                                            <div class="search-list"><div></div></div>
+                                        </div>
+
+                                        <div class="ba-panel p-2 mb-2">
+                                            <div class="d-flex align-items-start gap-3">
+                                                <div id="statpreview-enemy-icon" class="enemy-select-icon">                                                    
+                                                </div>
+                                                <div class="flex-fill">
+                                                    <h5 id="statpreview-enemy-name" class="title-text"></h5>
+                                                    <span id="statpreview-enemy-desc" class="mb-0"></span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-wrap align-items-center mt-3">
+                                                <span id="statpreview-enemy-attacktype" class="ba-info-pill-s"><img class="me-2" width="18" height="18" src="images/ui/Type_Attack.png"><span id="statpreview-enemy-attacktype-label"></span></span>
+                                                <span id="statpreview-enemy-defensetype" class="ba-info-pill-s"><img class="me-2" width="18" height="18" src="images/ui/Type_Defense.png"><span id="statpreview-enemy-defensetype-label"></span></span>
+                                                <span id="statpreview-enemy-size" class="ba-info-pill-s ba-panel ba-panel text-bold" style="transition-duration: 0s;"></span>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mt-2">
+                                            <div id="calculation-enemy-level" class="input-small">
+                                                <div class="label">Lv.</div>
+                                                <input class="form-control" type="number" min="1" max="200">
+                                            </div>
+                                            <div id="student-stat-modal-enemy-active-buffs" class="ba-panel px-2 ms-auto enemy-active-buffs"></div>
+                                        </div>
+                                        <div id="calculation-enemy-stat-table" class="ba-stats mt-2"></div>
+                                        <div id="calculation-intermediate-table" class="ba-stats mt-2 py-2 px-1">
+                                            <div class="d-flex p-1 align-items-center">
+                                                <div class="terrain-list">
+                                                    <button class="btn-pill" data-bs-toggle="dropdown">
+                                                        <div class="icon"><img src="" class="terrain-list-active-icon invert-light" style="padding: 1px;" width="28" height="28"></div>
+                                                        <span class="terrain-list-active-name label"></span>
+                                                        <i class="caret fa-solid fa-caret-down me-2"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start">
+                                                    </ul>
+                                                </div>
+                                                <span class="flex-fill"></span>
+                                                <span id="calculation-intermediate-terrain" class="text-bold d-flex align-items-center gap-2"></span>
+                                            </div>
+                                            <div class="ba-panel-separator my-2"></div>
+                                            <div class="d-flex p-1">
+                                                <span data-localize-id="ui,type_effectiveness"></span>
+                                                <span class="flex-fill"></span>
+                                                <span id="calculation-intermediate-effectiveness" class="text-bold"></span>
+                                            </div>
+                                            <div class="d-flex p-1">
+                                                <span data-localize-id="ui,level_difference"></span>
+                                                <span class="flex-fill"></span>
+                                                <span id="calculation-intermediate-leveldiff" class="text-bold"></span>
+                                            </div>
+                                            <div class="ba-panel-separator my-2"></div>
+                                            <div class="d-flex p-1">
+                                                <span data-localize-id="ui,hit_chance"></span>
+                                                <span class="flex-fill"></span>
+                                                <span id="calculation-intermediate-hitchance" class="text-bold"></span>
+                                            </div>
+                                            <div class="d-flex p-1">
+                                                <span data-localize-id="ui,crit_chance"></span>
+                                                <span class="flex-fill"></span>
+                                                <span id="calculation-intermediate-critchance" class="text-bold"></span>
+                                            </div>
+                                            <div class="d-flex p-1">
+                                                <span data-localize-id="ui,stab_variance"></span>
+                                                <span class="flex-fill"></span>
+                                                <span id="calculation-intermediate-variance" class="text-bold"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-xl-6 mb-3 ps-xl-2">
+                                        <div id="statpreview-enemy-buff-transferable-search">
+                                            <h5 class="flex-fill">
+                                                <span data-localize-id="ui,enemy_debuffs"></span>
+                                            </h5>
+                                            <div class="my-2 d-flex align-items-stretch gap-2">
+                                                <input type="search" class="form-control" id="statpreview-enemy-buff-transferable-search-text" data-ph-localize-id="ui,buff_transferable_search" autocomplete="off">
+                                                <button id="statpreview-enemy-buff-transferable-search-btn" class="btn btn-dark tooltip-button" data-tooltip-id="ui,search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                                <button id="statpreview-enemy-buff-transferable-autoadd-btn" class="btn btn-dark tooltip-button" data-tooltip-id="ui,add_own"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+                                            </div>
+                                            <div class="search-list-container" style="display:none;">
+                                                <div class="search-list"><div></div></div>
+                                            </div>
+                                        </div>
+                                        <p id="statpreview-enemy-buff-transferable-incompatible" class="text-italic mb-2 panel-alert p-2"><i class="fa-solid fa-triangle-exclamation me-2"></i><span data-localize-id="ui,buff_transferable_incompatible"></span></p>
+                                        <p id="statpreview-enemy-buff-transferable-conflict" class="text-italic mb-2 panel-alert p-2"><i class="fa-solid fa-triangle-exclamation me-2"></i><span data-localize-id="ui,buff_transferable_conflict"></span></p>
+                                        <div id="statpreview-enemy-buff-transferable-controls" class="d-flex flex-column gap-2 buff-transferable-controls">
+                                        </div>
+                                        <div id="statpreview-enemy-buff-custom" class="buff-custom">
+                                            <div class="d-flex mt-3">
+                                                <h5 data-localize-id="ui,buff_custom_enemy"></h5>     
+                                            </div>
+                                            <div class="mb-2">
+                                                <div class="d-flex align-items-stretch mb-2 gap-2">
+                                                    <input type="text" class="form-control name-input flex-fill" id="statpreview-enemy-buff-custom-name-input" data-ph-localize-id="ui,buff_custom_name_placeholder" autocomplete="off">
+                                                </div>
+                                                <div class="d-flex align-items-stretch gap-2">
+                                                    <select id="statpreview-enemy-buff-custom-stat-select" class="form-select stat-select">
+                                                    </select>
+                                                    <input type="number" class="form-control amount-input" id="statpreview-enemy-buff-custom-amount-input" data-ph-localize-id="ui,buff_custom_value_placeholder" step="0.01" autocomplete="off">
+                                                    <button id="statpreview-enemy-buff-custom-add-base" class="btn btn-dark tooltip-button add-base" data-tooltip-id="ui,buff_custom_base"><i class="fa-solid fa-plus"></i></button>
+                                                    <button id="statpreview-enemy-buff-custom-add-coefficient" class="btn btn-dark tooltip-button add-coefficient" data-tooltip-id="ui,buff_custom_coefficient"><i class="fa-solid fa-percent"></i></button>
+                                                </div>
+                                            </div>
+                                            <div id="statpreview-enemy-buff-custom-controls" class="d-flex flex-column gap-1 controls"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -787,8 +914,8 @@
                         </div>
 
                     </div>
-                    <div class="panel-stats">
-                        <div class="d-flex flex-row align-items-stretch gap-1">
+                    <div class="d-flex flex-column gap-2 panel-stats">
+                        <div class="d-flex flex-row align-items-stretch gap-1 px-2">
                             <div class="summon-list">
                                 <button class="btn-pill" data-bs-toggle="dropdown">
                                     <div class="icon"><img src="" class="summon-list-active-icon" width="28" height="28"></div>
@@ -800,9 +927,14 @@
                             </div>
                             <div class="flex-fill"></div>
                             <div id="student-stat-modal-active-buffs" class="active-buffs px-2 ba-panel"></div>
+                            <button id="student-stat-modal-skill-calc-toggle" class="btn-pill deactivated"><span class="label" data-localize-id="ui,skills"></span></button>
                         </div>
-                        <div id="ba-student-stat-modal-table" class="ba-stats mt-2 mb-0">
+                        <div class="panel-stats-table">
+                            <div id="ba-student-stat-modal-table" class="ba-stats mb-0">
+                            </div>
+                            <div id="student-stat-modal-skill-calculations" class="" style="display:none;"></div>
                         </div>
+
                     </div>
                 </div>
             </div>

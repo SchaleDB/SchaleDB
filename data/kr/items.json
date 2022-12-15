@@ -6094,7 +6094,8 @@
             "CraftMaterial_FavorItemSR",
             "Sports",
             "Game",
-            "F_Sumire"
+            "F_Sumire",
+            "F_Hanae_Holiday"
         ],
         "SynthQuality": 20,
         "Shops": [],
@@ -6544,7 +6545,9 @@
             "F_Misaki",
             "F_Misaki2",
             "F_Hoshino_Swimsuit",
-            "F_Hoshino_Swimsuit2"
+            "F_Hoshino_Swimsuit2",
+            "F_Serina_Holiday",
+            "F_Serina_Holiday2"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_0",
@@ -6862,7 +6865,9 @@
             "FavorItem",
             "CraftMaterial_FavorItemSSR",
             "Gift1",
-            "Sports"
+            "Sports",
+            "F_Hanae_Holiday",
+            "F_Hanae_Holiday2"
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_11",
@@ -7882,7 +7887,7 @@
         "Id": 10040,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "SecretStone",
         "Rarity": "N",
@@ -8161,6 +8166,23 @@
         "Icon": "Item_Icon_SecretStone_Shigure",
         "Name": "시구레의 엘레프",
         "Desc": "시구레의 신비가 담겨 있는 신명문자(神名文字)."
+    },
+    {
+        "Id": 10056,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0194",
+        "Name": "세리나(크리스마스)의 엘레프",
+        "Desc": "세리나(크리스마스)의 신비가 담겨 있는 신명문자(神名文字)."
     },
     {
         "Id": 13000,
@@ -9003,6 +9025,23 @@
         "Icon": "Item_Icon_SecretStone_CH0159",
         "Name": "히마리의 엘레프",
         "Desc": "히마리의 신비가 담겨 있는 신명문자(神名文字)."
+    },
+    {
+        "Id": 20021,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0195",
+        "Name": "하나에(크리스마스)의 엘레프",
+        "Desc": "하나에(크리스마스)의 신비가 담겨 있는 신명문자(神名文字)."
     },
     {
         "Id": 23000,
@@ -10595,6 +10634,66 @@
         "Desc": "황륜대제 운영 본부에서 나누어주는 안내 팸플릿. 경기 일정은 물론이고 경기장 근처의 맛집 지도까지 상세히 적혀 있다."
     },
     {
+        "Id": 80170,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S21",
+        "Name": "크리스마스 선물",
+        "Desc": "크리스마스 날, 모두가 기다리는 바로 그것. 우는 아이에게는 선물을 주지 않는다는 전설이 전해진다."
+    },
+    {
+        "Id": 80171,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_1_S21",
+        "Name": "크리스마스 양말",
+        "Desc": "뜻밖의 선물을 기다리는 마음으로 걸어 두는 양말. 신으면 따뜻하기까지 하다."
+    },
+    {
+        "Id": 80172,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 3,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_2_S21",
+        "Name": "캔디 케인",
+        "Desc": "지팡이 모양으로 만든 크리스마스 사탕. 보통은 박하 맛이다. "
+    },
+    {
+        "Id": 80173,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_3_S21",
+        "Name": "에그노그",
+        "Desc": "우유와 달걀, 설탕으로 만드는 따뜻한 음료. 추운 날 마시면 몸이 따스해진다. "
+    },
+    {
         "Id": 85000,
         "IsReleased": [
             true,
@@ -11805,21 +11904,6 @@
         "Icon": "Item_Icon_Furniture_Selection_Group109",
         "Name": "대운동회 테마 가구 선택권",
         "Desc": "대운동회 테마 가구를 선택할 수 있는 선택권"
-    },
-    {
-        "Id": 160002,
-        "IsReleased": [
-            true,
-            true
-        ],
-        "Category": "Coin",
-        "Rarity": "N",
-        "Quality": 1,
-        "Tags": [],
-        "Shops": [],
-        "Icon": "Item_Icon_Event_Token_Special_1",
-        "Name": "작전 데이터2: D-X Type",
-        "Desc": "데카그라마톤을 분석할 수 있는 데이터."
     },
     {
         "Id": 160003,
