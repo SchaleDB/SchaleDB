@@ -55035,7 +55035,7 @@
                             ]
                         ],
                         "Stat": "AttackPower_Coefficient",
-                        "Channel": 11002
+                        "Channel": -1
                     },
                     {
                         "Type": "BuffAlly",
@@ -64165,7 +64165,7 @@
             false
         ],
         "DefaultOrder": 120,
-        "PathName": "CH0194",
+        "PathName": "Serina_Christmas",
         "DevName": "CH0194",
         "Name": "セリナ（クリスマス）",
         "School": "Trinity",
@@ -64191,10 +64191,10 @@
         "CollectionBG": "BG_Holiday_Collection",
         "CollectionTexture": "Student_Portrait_CH0194_Collection",
         "FamilyName": "鷲見",
+        "FamilyNameRuby": null,
         "PersonalName": "セリナ",
         "SchoolYear": "2年生",
         "CharacterAge": "16歳",
-        "FamilyNameRuby": "すみ",
         "Birthday": "1月6日",
         "CharacterSSRNew": "救護騎士団がクリスマスをお伝えに来ました！\nどうか、素敵なクリスマスになりますように！",
         "ProfileIntroduction": "トリニティ総合学園所属、クリスマスを迎えてサンタ服に着替えた救護騎士団の団員。\n\nクリスマスに行う街頭ボランティアのため、ふさわしい格好に着替えたセリナ。キャロルを歌いながら手作りのプレゼントを配る彼女の姿は、クリスマスに舞い降りた天使のよう。",
@@ -64237,8 +64237,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "祝福の響き",
-                "Desc": "自身を除く円形範囲内の味方に対して、<b:CriticalDamage>を<?1>増加（50秒間）、<s:Holiday>を1個獲得（<s:Holiday>は最大15個まで重複）/\n獲得された<s:Holiday>数x<?2>の貫通特効を加算(50秒間)",
+                "Name": "ท่วงทำนองแห่งการอวยพร",
+                "Desc": "เพิ่ม<b:CriticalDamage> <?1> ให้กับฝ่ายเราในรัศมีรอบตัว ยกเว้นตัวเอง (เป็นเวลา 50 วินาที)\nมอบ<s:Holiday>ให้กับฝ่ายเราในรัศมีรอบตัว 1 ชั้น (สูงสุด 15 ชั้น) (มีผลจนกว่าจะจบการต่อสู้)\nเพิ่ม<b:EnhancePierceRate>ให้กับฝ่ายเราในรัศมีรอบตัว ยกเว้นตัวเอง <?2> ต่อ 1 <s:Holiday>ที่เป้าหมายมี (เป็นเวลา 50 วินาที)",
                 "Parameters": [
                     [
                         "27.2%",
@@ -64499,8 +64499,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "プレゼントセットC",
-                "Desc": "<s:FormChange>21回毎に、自身を除く円形範囲内の味方に対して、プレゼントを投擲（30秒間）\n緑の箱：<b:CriticalDamage><?1>増加\n赤い箱：<b:CriticalDamage><?2>増加\nくまのぬいぐるみ：<b:CriticalDamage><?3>増加",
+                "Name": "เซ็ตของขวัญ C",
+                "Desc": "โยนของขวัญที่จะเพิ่ม<b:CriticalDamage>ให้กับฝ่ายเราในรัศมีรอบตัว ยกเว้นตัวเอง ทุกการโจมตี 21 ครั้ง (เป็นเวลา 30 วินาที)\n<b>กล่องสีเขียว</b>: เพิ่ม<b:CriticalDamage> <?1>\n<b>กล่องสีแดง</b>: เพิ่ม<b:CriticalDamage> <?2>\n<b>ตุ๊กตาหมี</b>: เพิ่ม<b:CriticalDamage> <?3>",
                 "Parameters": [
                     [
                         "11%",
@@ -64543,6 +64543,13 @@
                 "Effects": [
                     {
                         "Type": "BuffAlly",
+                        "Restrictions": [
+                            {
+                                "Property": "Id",
+                                "Operand": "NotEqual",
+                                "Value": 10056
+                            }
+                        ],
                         "Value": [
                             [
                                 1107,
@@ -64589,8 +64596,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "守護天使の意志",
-                "Desc": "<b:MAXHP>を<?1>増加",
+                "Name": "ความตั้งใจของนางฟ้าผู้พิทักษ์",
+                "Desc": "เพิ่ม<b:MAXHP> <?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -64630,8 +64637,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "聖なる加護",
-                "Desc": "リロード時、<b:Dodge>を<?1>増加（15秒間）",
+                "Name": "การอวยพรอันศักดิ์สิทธิ์",
+                "Desc": "เพิ่ม<b:Dodge>ขณะรีโหลดกระสุน <?1>",
                 "Parameters": [
                     [
                         "18.1%",
@@ -64671,8 +64678,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "守護天使の意志+",
-                "Desc": "<b:DEF>を<?1>増加/\nさらに<b:MAXHP>を<?2>増加",
+                "Name": "ความตั้งใจของนางฟ้าผู้พิทักษ์+",
+                "Desc": "เพิ่ม<b:DEF> <?1>\nเพิ่ม<b:MAXHP>เพิ่มเติม <?2>",
                 "Parameters": [
                     [
                         "200",
@@ -64931,7 +64938,7 @@
             false
         ],
         "DefaultOrder": 121,
-        "PathName": "CH0195",
+        "PathName": "Hanae_Christmas",
         "DevName": "CH0195",
         "Name": "ハナエ（クリスマス）",
         "School": "Trinity",
@@ -64957,10 +64964,10 @@
         "CollectionBG": "BG_Holiday_Collection",
         "CollectionTexture": "Student_Portrait_CH0195_Collection",
         "FamilyName": "朝顔",
+        "FamilyNameRuby": null,
         "PersonalName": "ハナエ",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
-        "FamilyNameRuby": "あさがお",
         "Birthday": "5月12日",
         "CharacterSSRNew": "メリークリスマース！\n サンタさんの代わりに、救護の天使がやってきましたよ～！",
         "ProfileIntroduction": "トリニティ総合学園所属、クリスマスを迎えてサンタ姿に着替えた救護騎士団の団員。\n\n普段活発なハナエらしく、サンタ服も動きやすいものを選んでいる。なんでも楽しめるハナエにとって、クリスマスはまさにお祭りそのものなのだとか。プレゼントの包みを持って鐘を鳴らし、みんなに幸せを伝えるべくボランティアに参加している。",
@@ -64991,8 +64998,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "プレゼントの時間ですよ～",
-                "Desc": "円形範囲内の味方に対して、<s:Holiday>を1個獲得（<s:Holiday>は最大15個まで重複）/\n治癒力の<?1>分の<b:DotHeal>を付与（60秒間）/\n獲得された<s:Holiday>数x治癒力の<?2>分で<b:DotHeal>を強化",
+                "Name": "ถึงเวลาแจกของขวัญแล้ว~",
+                "Desc": "มอบ<s:Holiday>ให้ฝ่ายเราในรัศมี 1 ชั้น (สูงสุด 15 ชั้น) (มีผลจนกว่าจะจบการต่อสู้)\nฟื้นฟู<b:DotHeal> <?1> ของค่ารักษาให้ฝ่ายเราในรัศมี (เป็นเวลา 60 วินาที)\nฟื้นฟูเพิ่มเติม <?2> ของค่ารักษาต่อ 1 <s:Holiday>ที่เป้าหมายมี",
                 "Parameters": [
                     [
                         "7%",
@@ -65293,8 +65300,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "元気出してください！",
-                "Desc": "35秒毎に、HPが最も低い味方1人の<b:HealEffectiveness>を<?1>増加（15秒間）",
+                "Name": "ร่าเริงเข้าไว้นะ!",
+                "Desc": "เพิ่ม<b:HealEffectiveness> <?1> ให้กับฝ่ายเราที่มี HP ต่ำที่สุด 1 เป้าหมายทุก 35 วินาที (เป็นเวลา 15 วินาที)",
                 "Parameters": [
                     [
                         "22.7%",
@@ -65335,8 +65342,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "祝福の救護",
-                "Desc": "<b:HealPower>を<?1>増加",
+                "Name": "พรแห่งการรักษา",
+                "Desc": "เพิ่ม<b:HealPower> <?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -65376,8 +65383,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "応援しています！",
-                "Desc": "味方の<b:CriticalDamage>を<?1>増加",
+                "Name": "จะเป็นกำลังใจให้นะ!",
+                "Desc": "เพิ่ม<b:CriticalDamage>ของฝ่ายเรา <?1>",
                 "Parameters": [
                     [
                         "9.1%",
@@ -65417,8 +65424,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "祝福の救護+",
-                "Desc": "<b:HealPower>を<?1>増加/\nさらに<b:HealPower>を<?2>増加",
+                "Name": "พรแห่งการรักษา+",
+                "Desc": "เพิ่ม<b:HealPower> <?1>\nเพิ่ม<b:HealPower>เพิ่มเติม <?2>",
                 "Parameters": [
                     [
                         "1008",

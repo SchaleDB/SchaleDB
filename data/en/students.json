@@ -54566,7 +54566,7 @@
                             ]
                         ],
                         "Stat": "AttackPower_Coefficient",
-                        "Channel": 11002
+                        "Channel": -1
                     },
                     {
                         "Type": "BuffAlly",
@@ -63696,7 +63696,7 @@
             false
         ],
         "DefaultOrder": 120,
-        "PathName": "CH0194",
+        "PathName": "Serina_Christmas",
         "DevName": "CH0194",
         "Name": "Serina (Christmas)",
         "School": "Trinity",
@@ -64074,6 +64074,13 @@
                 "Effects": [
                     {
                         "Type": "BuffAlly",
+                        "Restrictions": [
+                            {
+                                "Property": "Id",
+                                "Operand": "NotEqual",
+                                "Value": 10056
+                            }
+                        ],
                         "Value": [
                             [
                                 1107,
@@ -64462,7 +64469,7 @@
             false
         ],
         "DefaultOrder": 121,
-        "PathName": "CH0195",
+        "PathName": "Hanae_Christmas",
         "DevName": "CH0195",
         "Name": "Hanae (Christmas)",
         "School": "Trinity",
