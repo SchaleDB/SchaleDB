@@ -143,6 +143,7 @@ let statPreviewIncludeBuffs
 let statPreviewViewSupportStats = false
 let statPreviewSelectedChar = 0
 let statPreviewTerrain = 'Street'
+let statPreviewEnemyList = []
 let statPreviewSelectedEnemyId = 7000001
 let statPreviewSelectedEnemyLevel = 1
 let statPreviewSelectedEnemyGrade = 1
@@ -1021,7 +1022,7 @@ class ExternalBuffs extends Buffs {
         this.buffs.forEach((buff, i) => {
             if (buff.RaidId) {
                 const raid = find(data.raids.Raid, "Id", buff.RaidId)[0]
-                html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/raid/icon/Icon_${raid.PathName}.png"><img class="raid-skill-icon" src="images/raid/skill/${buff.Skill.Icon}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType.toLowerCase()}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><span class="label">&times;${buff.Stacks}</span></span>` : ''}</div></div>`
+                html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/raid/icon/Icon_${buff.Skill.MinDifficulty >= 5 ? raid.PathName + "_Insane" : raid.PathName}.png"><img class="raid-skill-icon" src="images/raid/skill/${buff.Skill.Icon}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType.toLowerCase()}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><span class="label">&times;${buff.Stacks}</span></span>` : ''}</div></div>`
             } else {
                 const student = find(data.students, "Id", buff.StudentId)[0]
                 html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"><img class="skill-icon bg-atk-${student.BulletType.toLowerCase()}" src="images/skill/${buff.Skill.Icon}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><img class="stack-icon invert-light" src="images/skill/${buff.Skill.Icon}.png"><span class="label">&times;${buff.Stacks}</span></span>` : ''}<input type="range" data-index="${i}" class="form-range flex-fill" value="${buff.Level}" min="1" max="${buff.MaxLevel}"><span class="ba-slider-label skill-level">${buff.Level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${buff.Level}`}</span></div></div>`
@@ -1701,7 +1702,6 @@ class EnemyFinder {
         //populate the list
         this.elements = elements
         this.searchResultPopper = new ResultsPopper($(this.elements.searchBox).parent()[0], this.elements.searchResults)
-        this.generateEnemyList()
 
         $(this.elements.searchResults).find('.search-list > div').on('click', 'div[data-enemy-list-index]', (e) => {
 
@@ -1787,8 +1787,8 @@ class EnemyFinder {
         })
     }
 
-    generateEnemyList() {
-        this.enemyList = []
+    static generateEnemyList() {
+        statPreviewEnemyList = []
         data.raids.Raid.forEach(raid => {
             raid.EnemyList.forEach((difficulty, difficultyId) => {
                 if (!raid.IsReleased[regionID] || (difficultyId >= 5 && !raid.IsReleasedInsane[regionID])) return
@@ -1796,7 +1796,7 @@ class EnemyFinder {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && !enemy.DevName.includes('_HolyRelic_') && !enemy.DevName.includes('_HolyRelic02_') && enemy.Rank != "Hallucination") {
                         if (enemy.Icon !== undefined && enemy.Icon != "") {
-                            this.enemyList.push({
+                            statPreviewEnemyList.push({
                                 id: enemy.Id,
                                 name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", difficultyId)})`,
                                 searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", difficultyId)],
@@ -1807,7 +1807,7 @@ class EnemyFinder {
                                 grade: 1
                             })
                         } else {
-                            this.enemyList.push({
+                            statPreviewEnemyList.push({
                                 id: enemy.Id,
                                 name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", difficultyId)})`,
                                 searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", difficultyId)],
@@ -1829,7 +1829,7 @@ class EnemyFinder {
                 formation.EnemyList.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
-                        this.enemyList.push({
+                        statPreviewEnemyList.push({
                             id: enemy.Id,
                             name: `${enemy.Name} (${translateUI('ta_phase') + (formationId + 1)})`,
                             searchTerms: [getLocalizedString("StageType", "TimeAttack")],
@@ -1850,7 +1850,7 @@ class EnemyFinder {
                 difficulty.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
-                        this.enemyList.push({
+                        statPreviewEnemyList.push({
                             id: enemy.Id,
                             name: enemy.Name,
                             searchTerms: [getTranslatedString(raid, 'Name')],
@@ -1867,13 +1867,12 @@ class EnemyFinder {
 
         data.stages.Event.forEach(stage => {
             if (stage.Difficulty != 2 || !data.common.regions[regionID].events.includes(stage.EventId)) return
-            const eventName = getLocalizedString("EventName", stage.EventId % 10000)
             stage.Formations.forEach((formation) => {
                 formation.EnemyList.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.Id >= 8010000 && enemy.SquadType == 'Main') {
                         if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
-                            this.enemyList.push({
+                            statPreviewEnemyList.push({
                                 id: enemy.Id,
                                 name: `${enemy.Name} (Challenge)`,
                                 searchTerms: [getStageName(stage, 'Event')],
@@ -1895,7 +1894,7 @@ class EnemyFinder {
             formation.EnemyList.forEach(enemyId => {
                 const enemy = find(data.enemies, 'Id', enemyId)[0]
                 if (enemy.SquadType == 'Main') {
-                    this.enemyList.push({
+                    statPreviewEnemyList.push({
                         id: enemy.Id,
                         name: `${enemy.Name} (${getStageTitle(stage, "SchoolDungeon")})`,
                         searchTerms: [getStageTitle(stage, "SchoolDungeon"), getLocalizedString("StageType", "SchoolDungeon")],
@@ -1912,7 +1911,7 @@ class EnemyFinder {
         data.enemies.forEach(enemy => {
             if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned" && enemy.Id >= 7000000 && enemy.Id < 7200000) {
                 if (enemy.Id <= 7199999) {
-                    this.enemyList.push({
+                    statPreviewEnemyList.push({
                         id: enemy.Id,
                         name: enemy.Name,
                         searchTerms: [],
@@ -1929,7 +1928,7 @@ class EnemyFinder {
 
     setEnemyFromList(index) {
 
-        const enemyListItem = this.enemyList[index]
+        const enemyListItem = statPreviewEnemyList[index]
         const enemy = find(data.enemies, 'Id', enemyListItem.id)[0]
         const enemysize = getEnemySize(enemy)
 
@@ -1970,9 +1969,9 @@ class EnemyFinder {
         let html = "", resultCount = 0
         const searchTerm = this.elements.searchBox.value.toLowerCase()
 
-        for (let i = 0; i < this.enemyList.length; i++) {
+        for (let i = 0; i < statPreviewEnemyList.length; i++) {
             if (resultCount >= searchMaxResults) break
-            const el = this.enemyList[i]
+            const el = statPreviewEnemyList[i]
 
             if (searchContains(searchTerm, el.name) || searchContains(searchTerm, el.id.toString()) || el.searchTerms.some(t => searchContains(searchTerm, t))) {
                 let iconClass = 'icon-enemy'
@@ -2179,7 +2178,7 @@ class SkillDamageInfo {
                 const healTotal = studentStats.calculateHealing(effect.Scale[this.skillLevel-1] / 10000)
                 const suffix = (effect.Type == 'HealDot' ? ' / ' + translateUI('time_seconds', [effect.Period / 1000]) : "")
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-scaling"]`).text(`${parseFloat((effect.Scale[this.skillLevel-1]/100).toFixed(2)).toLocaleString()}%`)
-                $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-heal-total"]`).html(`<span class="text-heal">+${healTotal.toLocaleString()}</span>` + suffix)
+                $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-heal-total"]`).html(`<span class="text-heal">${healTotal.toLocaleString()}</span>` + suffix)
             } else if (effect.Type == 'Shield') {
                 const shieldTotal = studentStats.calculateHealing(effect.Scale[this.skillLevel-1] / 10000)
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-scaling"]`).text(`${parseFloat((effect.Scale[this.skillLevel-1]/100).toFixed(2)).toLocaleString()}%`)
@@ -2311,8 +2310,9 @@ class SkillDamageInfo {
                         html += this.addStaticRow(index, translateUI('dmginfo_dmg_avg'), '', 'dmg-final-avg')
                     }
                 } else {
-                    html += this.addStaticRow(index, `<span class="ba-skill-debuff"><img class="ba-buff-icon" src="images/buff/Combat_Icon_${effect.Icon}.png"><span class="ba-buff-icon-spacer"></span><span class="text-debuff">${getLocalizedString("BuffName", effect.Icon)}</span></span> ${getLocalizedString("Stat", "AttackPower")} %`, '', 'scaling') 
-                    html += this.addStaticRow(index, `<span class="ba-skill-debuff"><img class="ba-buff-icon" src="images/buff/Combat_Icon_${effect.Icon}.png"><span class="ba-buff-icon-spacer"></span><span class="text-debuff">${getLocalizedString("BuffName", effect.Icon)}</span></span> ${translateUI('dmginfo_dmg')}`, '', 'dmg-range')
+                    const dotEffectIcon = `<span class="ba-skill-debuff"><img class="ba-buff-icon" src="images/buff/Combat_Icon_${effect.Icon}.png"><span class="ba-buff-icon-spacer"></span><span class="text-debuff">${getLocalizedString("BuffName", effect.Icon)}</span></span>`
+                    html += this.addStaticRow(index, `${dotEffectIcon} ${getLocalizedString("Stat", "AttackPower")} %`, '', 'scaling') 
+                    html += this.addStaticRow(index, `${dotEffectIcon} ${translateUI('dmginfo_dmg')}`, '', 'dmg-range')
                 }
 
                 if (this.skill.SkillType == 'autoattack' || effect.Type == "FormChange") {
@@ -2325,33 +2325,40 @@ class SkillDamageInfo {
 
             } else if (effect.Type.startsWith('Heal')) {
                 html += this.addSeparator()
-                html += this.addStaticRow(index, `${getLocalizedString("Stat", "HealPower")} %`, '', 'scaling') 
 
-                if (effect.Type == 'HealZone') {
-                    html += this.addStaticRow(index, translateUI('dmginfo_heal_count'), effect.HitFrames.length, 'hit-count')
+                if (effect.Type == 'HealDot') {
+                    const regenEffectIcon = `<span class="ba-skill-buff"><img class="ba-buff-icon" src="images/buff/Combat_Icon_Buff_DotHeal.png"><span class="ba-buff-icon-spacer"></span><span class="text-buff">${getLocalizedString("BuffName", "Buff_DotHeal")}</span></span>`
+                    html += this.addStaticRow(index, `${regenEffectIcon} ${getLocalizedString("Stat", "HealPower")} %`, '', 'scaling') 
+                    html += this.addStaticRow(index, `${regenEffectIcon} ${translateUI('dmginfo_heal')}`, '', 'heal-total')
+                } else {
+                    html += this.addStaticRow(index, `${getLocalizedString("Stat", "HealPower")} %`, '', 'scaling') 
+                    if (effect.Type == 'HealZone') {
+                        html += this.addStaticRow(index, translateUI('dmginfo_heal_count'), effect.HitFrames.length, 'hit-count')
+                    }
+    
+                    html += this.addStaticRow(index, translateUI('dmginfo_heal_amount'), '', 'heal-total', '') 
                 }
-
-                html += this.addStaticRow(index, translateUI('dmginfo_heal_amount'), '', 'heal-total', '') 
-
             } else if (effect.Type.startsWith('Shield')) {
+                const shieldEffectIcon = `<span class="ba-skill-buff"><img class="ba-buff-icon" src="images/buff/Combat_Icon_Buff_Shield.png"><span class="ba-buff-icon-spacer"></span><span class="text-buff">${getLocalizedString("BuffName", "Buff_Shield")}</span></span>`
+
                 html += this.addSeparator()
 
-                html += this.addStaticRow(index, `${getLocalizedString("Stat", "HealPower")} %`, '', 'scaling') 
-                html += this.addStaticRow(index, translateUI('dmginfo_shield_amount'), '', 'heal-total', 'text-shield')
+                html += this.addStaticRow(index, `${shieldEffectIcon} ${getLocalizedString("Stat", "HealPower")} %`, '', 'scaling') 
+                html += this.addStaticRow(index, translateUI('dmginfo_shield_amount', [shieldEffectIcon]), '', 'heal-total', 'text-shield')
             } else if (effect.Type.startsWith('CrowdControl')) {
-                const ccEffect = `<span class="ba-skill-cc"><img class="ba-buff-icon" src="images/buff/Combat_Icon_${effect.Icon}.png"><span class="ba-buff-icon-spacer"></span><span class="text-cc">${getLocalizedString("BuffName", effect.Icon)}</span></span>`
+                const ccEffectIcon = `<span class="ba-skill-cc"><img class="ba-buff-icon" src="images/buff/Combat_Icon_${effect.Icon}.png"><span class="ba-buff-icon-spacer"></span><span class="text-cc">${getLocalizedString("BuffName", effect.Icon)}</span></span>`
                 
                 html += this.addSeparator()
                 
-                html += this.addStaticRow(index, translateUI('dmginfo_cc_effect_chance', [ccEffect]), '', 'cc-chance')
-                html += this.addStaticRow(index, translateUI('dmginfo_cc_effect_duration', [ccEffect]), '', 'cc-duration')
+                html += this.addStaticRow(index, translateUI('dmginfo_cc_effect_chance', [ccEffectIcon]), '', 'cc-chance')
+                html += this.addStaticRow(index, translateUI('dmginfo_cc_effect_duration', [ccEffectIcon]), '', 'cc-duration')
             } else if (effect.Type.startsWith('Accumulation')) {
-                const accumulationEffect = `<span class="ba-skill-special"><img class="ba-buff-icon" src="images/buff/Combat_Icon_Special_Accumulation.png"><span class="ba-buff-icon-spacer"></span><span class="text-special">${getLocalizedString("BuffName", "Special_Accumulation")}</span></span>`
+                const accumulationEffectIcon = `<span class="ba-skill-special"><img class="ba-buff-icon" src="images/buff/Combat_Icon_Special_Accumulation.png"><span class="ba-buff-icon-spacer"></span><span class="text-special">${getLocalizedString("BuffName", "Special_Accumulation")}</span></span>`
                 
                 html += this.addSeparator()
 
-                html += this.addStaticRow(index, accumulationEffect + ` ${getLocalizedString("Stat", "AttackPower")} %`, '', 'accumulation-scaling')
-                html += this.addStaticRow(index, translateUI('dmginfo_accumulation_limit', [accumulationEffect]), '', 'accumulation-limit')
+                html += this.addStaticRow(index, accumulationEffectIcon + ` ${getLocalizedString("Stat", "AttackPower")} %`, '', 'accumulation-scaling')
+                html += this.addStaticRow(index, translateUI('dmginfo_accumulation_limit', [accumulationEffectIcon]), '', 'accumulation-limit')
             }
             html += `</div>`
         })
@@ -2435,6 +2442,7 @@ $.when($.ready, loadPromise).then(function() {
     loadRegion(regionID)
 
     setSortedDataLists()
+    EnemyFinder.generateEnemyList()
 
     if (localStorage.getItem("theme")) {
         darkTheme = localStorage.getItem("theme")
@@ -3223,7 +3231,7 @@ function duration(seconds) {
 
 function setSortedDataLists() {
     // Make a copy of the data objects for sorting/filtering so we retain the original order in the loaded data
-    data.students.sort(sort_functions.Name)
+    data.students.sort((a,b) => getTranslatedString(a, 'Name').localeCompare(getTranslatedString(b, 'Name')))
     studentList = data.students.map(x => x)
 
     itemList = data.items.map(x => x)
@@ -3441,11 +3449,11 @@ function searchOptionSet(option, value, runSearch = true) {
     $(`#ba-student-search-${option} a`).removeClass("active")
     $(`#ba-student-search-${option} button`).removeClass("active")
     $(`#ba-student-search-${option}-${value}`).addClass("active")
-    $(`#ba-student-search-sortby-stat`).text(translateUI('stat')+" ")
+    $(`#ba-student-search-sortby-stat .label`).text(translateUI('stat')+" ")
 
     if (option == "sortby" && value != "default" && value != "name") {
         $(`#ba-student-search-sortby-stat`).addClass("active")
-        $(`#ba-student-search-sortby-stat`).text($(`#ba-student-search-sortby-${value}`).text() + " ")
+        $(`#ba-student-search-sortby-stat .label`).text($(`#ba-student-search-sortby-${value}`).text() + " ")
     }
     search_options[option] = value
     localStorage.setItem(`chara_${option}`, value)
@@ -3483,16 +3491,16 @@ function searchSetOrder(value, runSearch = true, swapDir = true) {
     }
 
     $(`#ba-student-search-sortby a`).removeClass("active")
-    $(`#ba-student-search-sortby .btn-search-filter`).removeClass("active")
+    $(`#ba-student-search-sortby .btn-pill`).removeClass("active")
     $(`#ba-student-search-sortby-${value.toLowerCase()}`).addClass("active")
-    $('#ba-student-search-sortby-stat').text(translateUI('stat'))
+    $('#ba-student-search-sortby-stat .label').text(translateUI('stat'))
     $('.sort-direction-label').text("")
 
-    $(`#ba-student-search-sortby-${value.toLowerCase()} > .sort-direction-label`).html((search_options["sortby_dir"] == 1) != (value == "Name" || value == "Default") ? '<i class="fa-solid fa-arrow-down-long ms-2"></i>' : '<i class="fa-solid fa-arrow-up-long ms-2"></i>')
+    $(`#ba-student-search-sortby-${value.toLowerCase()} .sort-direction-label`).html((search_options["sortby_dir"] == 1) != (value == "Name" || value == "Default") ? '<i class="fa-solid fa-arrow-down-long ms-2"></i>' : '<i class="fa-solid fa-arrow-up-long ms-2"></i>')
 
     if (value != "Default" && value != "Name") {
         $('#ba-student-search-sortby-stat').addClass("active")
-        $('#ba-student-search-sortby-stat').html($(`#ba-student-search-sortby-${value.toLowerCase()}`).html())
+        $('#ba-student-search-sortby-stat .label').html($(`#ba-student-search-sortby-${value.toLowerCase()}`).html())
     }
 
     search_options["sortby"] = value
@@ -3518,7 +3526,7 @@ function searchSetOrderItems(value, runSearch = true, swapDir = true) {
     $(`#item-search-sortby-${value.toLowerCase()}`).addClass("active")
     $('.sort-direction-label').text("")
 
-    $(`#item-search-sortby-${value.toLowerCase()} > .sort-direction-label`).html((itemSearchOptions["sortby_dir"] == 1) ? '<i class="fa-solid fa-arrow-up-long ms-2"></i>' : '<i class="fa-solid fa-arrow-down-long ms-2"></i>')
+    $(`#item-search-sortby-${value.toLowerCase()} .sort-direction-label`).html((itemSearchOptions["sortby_dir"] == 1) ? '<i class="fa-solid fa-arrow-up-long ms-2"></i>' : '<i class="fa-solid fa-arrow-down-long ms-2"></i>')
 
     itemSearchOptions["sortby"] = value
     localStorage.setItem('item_sortby', value)
@@ -3533,7 +3541,7 @@ function searchSetFilter(prop, value, runSearch = true) {
         search_options["filter"][prop][value] = !search_options["filter"][prop][value]
         if ($(`#ba-student-search-filter-${prop.toLowerCase()}-${String(value).toLowerCase()}`).hasClass('mutually-exclusive')) {
             //deactivate all other options
-            $(`#ba-student-search-filter-${prop.toLowerCase()} .btn-search-filter`).toggleClass("active", false)
+            $(`#ba-student-search-filter-${prop.toLowerCase()} .btn-pill`).toggleClass("active", false)
             for (option in search_options["filter"][prop]) {
                 if (option != value) search_options["filter"][prop][option] = false
             }
@@ -4816,12 +4824,8 @@ function loadRegion(regID) {
 
     if (regionID == 1) {
         //hide filters not relevant to global
-        $('#ba-student-search-filter-school-arius').hide()
-        $('#ba-student-search-filter-weapontype-rl').hide()
-        
         $('#item-search-filter-furnitureset-108').hide()
         $('#item-search-filter-furnitureset-109').hide()
-        $('#item-search-filter-equipmenttier-7').hide()
 
         //hide gear slot 4
         $('#ba-student-gear-separator').hide()
@@ -6252,8 +6256,8 @@ function populateItemList(tab) {
     })
 
     itemsHtml += `<div id="item-select-noresult" class="p-2 grid-text">${translateUI('no_results')}</div>`
-    $('#item-search-filters-panel >div >div').hide()
-    $(`#item-search-filters-panel >div >div.show-${tab}`).show()
+    $('#item-search-filters-panel .item-filter-group').hide()
+    $(`#item-search-filters-panel .item-filter-group.show-${tab}`).show()
 
     loadedItemList = tab
 
@@ -7045,7 +7049,8 @@ function changeRegion(regID) {
         regionID = regID
         localStorage.setItem("region", regionID)
         $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
-        loadModule(loadedModule)        
+        EnemyFinder.generateEnemyList()
+        loadModule(loadedModule)
     }
 }
 
@@ -7056,6 +7061,7 @@ function changeLanguage(lang) {
             data = Object.assign(data, result)
         }).then(function(val){
             setSortedDataLists()
+            EnemyFinder.generateEnemyList()
             $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).removeClass("active")
             $('body').removeClass(`font-${userLang.toLowerCase()}`)
     

@@ -219,8 +219,8 @@ input[type="search" i]::-webkit-search-cancel-button {
 
     &::after {
         content: "";
-        height: 16px;
-        width: 16px;
+        height: 14px;
+        width: 14px;
         background-image: url(../images/ui/School_Icon_Schedule_Favor.png);
         background-size: cover;
 
@@ -343,7 +343,6 @@ input[type="search" i]::-webkit-search-cancel-button {
         img {
             object-fit: contain;
             @include circular;
-            @include unselectable;
         }
 
         .icon-compare {
@@ -382,7 +381,17 @@ input[type="search" i]::-webkit-search-cancel-button {
     .label {
         @include flex(center, center);
         @include truncate-text;
-        padding: 0 10px 0 8px;
+        padding: 0 8px;
+    }
+
+    .label-filter {
+        @extend .label;
+        padding-left: 4px;
+        gap: 4px;
+
+        img {
+            object-fit: contain;
+        }
     }
 
     .on {
@@ -395,6 +404,15 @@ input[type="search" i]::-webkit-search-cancel-button {
 
     &:hover {
         background-color: var(--col-btn-secondary);
+    }
+
+    &.active {
+        background-color: var(--col-btn-active-secondary);
+        color: var(--col-btn-active-primary);
+
+        img.invert-light {
+            filter: var(--var-invert-dark) !important;
+        }
     }
 
     &.deactivated {
@@ -459,6 +477,18 @@ input[type="search" i]::-webkit-search-cancel-button {
             }
         }
     }
+}
+
+.search-filter-group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.search-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
 }
 
 #navbar-search {

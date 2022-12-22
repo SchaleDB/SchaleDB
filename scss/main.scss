@@ -656,20 +656,14 @@ a.nav-link.disabled {
 }
 
 #ba-student-search-filters {
-    min-width: 338px;
-    max-width: 338px;
-    padding: 0.5rem;
+    min-width: 340px;
+    max-width: 340px;
+    padding: 0.5rem 0 0 0.5rem;
     margin-right: 0.5rem;
-    font-size: 0;
-    padding-bottom: 0;
 }
 
 #ba-student-search-filters-panel {
     @include scrollable(auto);
-}
-
-.btn-search-filter {
-    margin: 0 0.25rem 0.25rem 0;
 }
 
 #ba-student-search-results {
@@ -713,7 +707,7 @@ a.nav-link.disabled {
     }
 
     #ba-student-search-filters {
-        min-width: 336px;
+        min-width: 340px;
         max-width: none;
         padding: 1rem 1rem 0 1rem;
         margin-right: 0;
@@ -722,6 +716,7 @@ a.nav-link.disabled {
 
     #ba-student-search-filters-panel {
         overflow-y: hidden;
+        padding-bottom: 1rem;
     }
 }
 

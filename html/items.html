@@ -18,100 +18,115 @@
                             </div>
                         </div>
                         <div id="item-search-filters-panel" class="collapse">
-                            <div class="p-2 mt-2 ba-panel bg-theme" style="font-size: 0;">
-                                <div class="d-flex show-items show-furniture show-equipment">
-                                    <div id="item-search-sortby" class="">
-                                        <h5 data-localize-id="ui,sortby"></h5>
-                                        <button id="item-search-sortby-default" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrderItems('Default')"><span data-localize-id="ui,default"></span><span class="sort-direction-label"></span></button>
-                                        <button id="item-search-sortby-name" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetOrderItems('Name')"><span data-localize-id="ui,name"></span><span class="sort-direction-label"></span></button>
-                                    </div>
-                                    <div class="flex-fill"></div>
-                                    <div id="item-search-displaytype" class="ms-4">
-                                        <div class="btn-group">
-                                            <button id="item-search-displaytype-detailed" class="btn btn-sm btn-dark tooltip-button" onclick="setGridItemDisplayStyle('detailed')" data-tooltip-id="ui,list_style_detailed" style="font-size: 0;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-grid-fill" viewBox="0 0 16 16" style="padding: 2px;">
-                                                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/>
-                                                </svg>
-                                            </button>
-                                            <button id="item-search-displaytype-compact" class="btn btn-sm btn-dark tooltip-button" onclick="setGridItemDisplayStyle('compact')" data-tooltip-id="ui,list_style_compact" style="font-size: 0;">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-grid-3x3-gap-fill" viewBox="0 0 16 16" style="padding: 2px;">
-                                                    <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"/>
-                                                </svg>
-                                            </button>
+                            <div class="p-2 mt-2 ba-panel bg-theme">
+                                <div class="search-filter-group-list">
+                                    <div class="d-flex">
+                                        <div id="item-search-sortby" class="">
+                                            <h5 data-localize-id="ui,sortby"></h5>
+                                            <div class="search-filter-group">
+                                                <button id="item-search-sortby-default" class="btn-pill" onclick="searchSetOrderItems('Default')"><span class="label"><span data-localize-id="ui,default"></span><span class="sort-direction-label"></span></span></button>
+                                                <button id="item-search-sortby-name" class="btn-pill" onclick="searchSetOrderItems('Name')"><span class="label"><span data-localize-id="ui,name"></span><span class="sort-direction-label"></span></span></button>    
+                                            </div>
+                                        </div>
+                                        <div class="flex-fill"></div>
+                                        <div id="item-search-displaytype" class="ms-4">
+                                            <div class="btn-group">
+                                                <button id="item-search-displaytype-detailed" class="btn btn-sm btn-dark tooltip-button" onclick="setGridItemDisplayStyle('detailed')" data-tooltip-id="ui,list_style_detailed" style="font-size: 0;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-grid-fill" viewBox="0 0 16 16" style="padding: 2px;">
+                                                        <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/>
+                                                    </svg>
+                                                </button>
+                                                <button id="item-search-displaytype-compact" class="btn btn-sm btn-dark tooltip-button" onclick="setGridItemDisplayStyle('compact')" data-tooltip-id="ui,list_style_compact" style="font-size: 0;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-grid-3x3-gap-fill" viewBox="0 0 16 16" style="padding: 2px;">
+                                                        <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"/>
+                                                    </svg>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div id="item-search-filter-itemcategory" class="mt-2 show-items">
-                                    <h5 data-localize-id="ui,category"></h5>
-                                    <button id="item-search-filter-itemcategory-material" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Material')"><span data-localize-id="ItemCategory,Material"></span></button>
-                                    <button id="item-search-filter-itemcategory-coin" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Coin')"><span data-localize-id="ItemCategory,Coin"></span></button>
-                                    <button id="item-search-filter-itemcategory-favor" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Favor')"><span data-localize-id="ItemCategory,Favor"></span></button>
-                                    <button id="item-search-filter-itemcategory-secretstone" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','SecretStone')"><span data-localize-id="ItemCategory,SecretStone"></span></button>
-                                    <button id="item-search-filter-itemcategory-consumable" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Consumable')"><span data-localize-id="ItemCategory,Consumable"></span></button>
-                                    <button id="item-search-filter-itemcategory-collectible" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('ItemCategory','Collectible')"><span data-localize-id="ItemCategory,Collectible"></span></button>
-                                </div>
-                                <div id="item-search-filter-furnituresubcategory" class="mt-2 show-furniture">
-                                    <h5 data-localize-id="ui,category"></h5>
-                                    <button id="item-search-filter-furnituresubcategory-wallpaper" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Wallpaper')"><span data-localize-id="ItemCategory,Wallpaper"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-floor" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Floor')"><span data-localize-id="ItemCategory,Floor"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-background" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Background')"><span data-localize-id="ItemCategory,Background"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-table" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Table')"><span data-localize-id="ItemCategory,Table"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-chair" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Chair')"><span data-localize-id="ItemCategory,Chair"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-closet" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Closet')"><span data-localize-id="ItemCategory,Closet"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-floordecoration" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','FloorDecoration')"><span data-localize-id="ItemCategory,FloorDecoration"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-walldecoration" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','WallDecoration')"><span data-localize-id="ItemCategory,WallDecoration"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-prop" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Prop')"><span data-localize-id="ItemCategory,Prop"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-homeappliance" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','HomeAppliance')"><span data-localize-id="ItemCategory,HomeAppliance"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-bed" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','Bed')"><span data-localize-id="ItemCategory,Bed"></span></button>
-                                    <button id="item-search-filter-furnituresubcategory-furnitureetc" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSubCategory','FurnitureEtc')"><span data-localize-id="ItemCategory,FurnitureEtc"></span></button>
-                                </div>
-                                <div id="item-search-filter-equipmentcategory" class="mt-2 show-equipment">
-                                    <h5 data-localize-id="ui,category"></h5>
-                                    <button id="item-search-filter-equipmentcategory-exp" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Exp')"><span data-localize-id="ItemCategory,Exp"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-weaponexpgrowth" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','WeaponExpGrowth')"><span data-localize-id="ItemCategory,WeaponExpGrowth"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-hat" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Hat')"><span data-localize-id="ItemCategory,Hat"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-gloves" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Gloves')"><span data-localize-id="ItemCategory,Gloves"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-shoes" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Shoes')"><span data-localize-id="ItemCategory,Shoes"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-bag" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Bag')"><span data-localize-id="ItemCategory,Bag"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-badge" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Badge')"><span data-localize-id="ItemCategory,Badge"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-hairpin" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Hairpin')"><span data-localize-id="ItemCategory,Hairpin"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-charm" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Charm')"><span data-localize-id="ItemCategory,Charm"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-necklace" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Necklace')"><span data-localize-id="ItemCategory,Necklace"></span></button>
-                                    <button id="item-search-filter-equipmentcategory-watch" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentCategory','Watch')"><span data-localize-id="ItemCategory,Watch"></span></button>
-                                </div>
-                                <div id="item-search-filter-furnitureset" class="mt-2 show-furniture">
-                                    <h5 data-localize-id="ui,furniture_set"></h5>
-                                    <button id="item-search-filter-furnitureset-100" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','100')"><span data-localize-id="FurnitureSet,100"></span></button>
-                                    <button id="item-search-filter-furnitureset-101" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','101')"><span data-localize-id="FurnitureSet,101"></span></button>
-                                    <button id="item-search-filter-furnitureset-102" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','102')"><span data-localize-id="FurnitureSet,102"></span></button>
-                                    <button id="item-search-filter-furnitureset-103" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','103')"><span data-localize-id="FurnitureSet,103"></span></button>
-                                    <button id="item-search-filter-furnitureset-104" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','104')"><span data-localize-id="FurnitureSet,104"></span></button>
-                                    <button id="item-search-filter-furnitureset-105" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','105')"><span data-localize-id="FurnitureSet,105"></span></button>
-                                    <button id="item-search-filter-furnitureset-106" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','106')"><span data-localize-id="FurnitureSet,106"></span></button>
-                                    <button id="item-search-filter-furnitureset-107" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','107')"><span data-localize-id="FurnitureSet,107"></span></button>
-                                    <button id="item-search-filter-furnitureset-108" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','108')"><span data-localize-id="FurnitureSet,108"></span></button>
-                                    <button id="item-search-filter-furnitureset-109" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureSet','109')"><span data-localize-id="FurnitureSet,109"></span></button>
-                                </div>
-                                <div id="item-search-filter-equipmenttier" class="mt-2 show-equipment">
-                                    <h5 data-localize-id="ui,equipment_tier"></h5>
-                                    <button id="item-search-filter-equipmenttier-1" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','1')">T1</button>
-                                    <button id="item-search-filter-equipmenttier-2" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','2')">T2</button>
-                                    <button id="item-search-filter-equipmenttier-3" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','3')">T3</button>
-                                    <button id="item-search-filter-equipmenttier-4" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','4')">T4</button>
-                                    <button id="item-search-filter-equipmenttier-5" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','5')">T5</button>
-                                    <button id="item-search-filter-equipmenttier-6" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','6')">T6</button>
-                                    <button id="item-search-filter-equipmenttier-7" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('EquipmentTier','7')">T7</button>
-                                </div>
-                                <div id="item-search-filter-rarity" class="mt-2 show-items show-furniture">
-                                    <h5 data-localize-id="ui,rarity"></h5>
-                                    <button id="item-search-filter-rarity-n" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('Rarity','N')"><i class="fa-solid fa-circle me-2 col-item-n"></i><span>N</span></button>
-                                    <button id="item-search-filter-rarity-r" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('Rarity','R')"><i class="fa-solid fa-circle me-2 col-item-r"></i><span>R</span></button>
-                                    <button id="item-search-filter-rarity-sr" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('Rarity','SR')"><i class="fa-solid fa-circle me-2 col-item-sr"></i><span>SR</span></button>
-                                    <button id="item-search-filter-rarity-ssr" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('Rarity','SSR')"><i class="fa-solid fa-circle me-2 col-item-ssr"></i><span>SSR</span></button>
-                                </div>
-                                <div id="item-search-filter-misc" class="mt-2 show-furniture">
-                                    <button id="item-search-filter-furnitureinteraction" class="btn btn-sm btn-dark btn-search-filter" onclick="searchSetFilterItems('FurnitureInteraction',null)"><span data-localize-id="ui,furniture_title"></span></button>
+                                    <div id="item-search-filter-itemcategory" class="item-filter-group show-items">
+                                        <h5 data-localize-id="ui,category"></h5>
+                                        <div class="search-filter-group">
+                                            <button id="item-search-filter-itemcategory-material" class="btn-pill" onclick="searchSetFilterItems('ItemCategory','Material')"><span class="label" data-localize-id="ItemCategory,Material"></span></button>
+                                            <button id="item-search-filter-itemcategory-coin" class="btn-pill" onclick="searchSetFilterItems('ItemCategory','Coin')"><span class="label" data-localize-id="ItemCategory,Coin"></span></button>
+                                            <button id="item-search-filter-itemcategory-favor" class="btn-pill" onclick="searchSetFilterItems('ItemCategory','Favor')"><span class="label" data-localize-id="ItemCategory,Favor"></span></button>
+                                            <button id="item-search-filter-itemcategory-secretstone" class="btn-pill" onclick="searchSetFilterItems('ItemCategory','SecretStone')"><span class="label" data-localize-id="ItemCategory,SecretStone"></span></button>
+                                            <button id="item-search-filter-itemcategory-consumable" class="btn-pill" onclick="searchSetFilterItems('ItemCategory','Consumable')"><span class="label" data-localize-id="ItemCategory,Consumable"></span></button>
+                                            <button id="item-search-filter-itemcategory-collectible" class="btn-pill" onclick="searchSetFilterItems('ItemCategory','Collectible')"><span class="label" data-localize-id="ItemCategory,Collectible"></span></button>    
+                                        </div>
+                                    </div>
+                                    <div id="item-search-filter-furnituresubcategory" class="item-filter-group show-furniture">
+                                        <h5 data-localize-id="ui,category"></h5>
+                                        <div class="search-filter-group">
+                                            <button id="item-search-filter-furnituresubcategory-wallpaper" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','Wallpaper')"><span class="label" data-localize-id="ItemCategory,Wallpaper"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-floor" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','Floor')"><span class="label" data-localize-id="ItemCategory,Floor"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-background" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','Background')"><span class="label" data-localize-id="ItemCategory,Background"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-table" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','Table')"><span class="label" data-localize-id="ItemCategory,Table"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-chair" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','Chair')"><span class="label" data-localize-id="ItemCategory,Chair"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-closet" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','Closet')"><span class="label" data-localize-id="ItemCategory,Closet"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-floordecoration" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','FloorDecoration')"><span class="label" data-localize-id="ItemCategory,FloorDecoration"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-walldecoration" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','WallDecoration')"><span class="label" data-localize-id="ItemCategory,WallDecoration"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-prop" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','Prop')"><span class="label" data-localize-id="ItemCategory,Prop"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-homeappliance" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','HomeAppliance')"><span class="label" data-localize-id="ItemCategory,HomeAppliance"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-bed" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','Bed')"><span class="label" data-localize-id="ItemCategory,Bed"></span></button>
+                                            <button id="item-search-filter-furnituresubcategory-furnitureetc" class="btn-pill" onclick="searchSetFilterItems('FurnitureSubCategory','FurnitureEtc')"><span class="label" data-localize-id="ItemCategory,FurnitureEtc"></span></button>    
+                                        </div>
+                                    </div>
+                                    <div id="item-search-filter-equipmentcategory" class="item-filter-group show-equipment">
+                                        <h5 data-localize-id="ui,category"></h5>
+                                        <div class="search-filter-group">
+                                            <button id="item-search-filter-equipmentcategory-exp" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Exp')"><span class="label" data-localize-id="ItemCategory,Exp"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-weaponexpgrowth" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','WeaponExpGrowth')"><span class="label" data-localize-id="ItemCategory,WeaponExpGrowth"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-hat" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Hat')"><span class="label" data-localize-id="ItemCategory,Hat"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-gloves" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Gloves')"><span class="label" data-localize-id="ItemCategory,Gloves"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-shoes" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Shoes')"><span class="label" data-localize-id="ItemCategory,Shoes"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-bag" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Bag')"><span class="label" data-localize-id="ItemCategory,Bag"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-badge" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Badge')"><span class="label" data-localize-id="ItemCategory,Badge"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-hairpin" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Hairpin')"><span class="label" data-localize-id="ItemCategory,Hairpin"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-charm" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Charm')"><span class="label" data-localize-id="ItemCategory,Charm"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-necklace" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Necklace')"><span class="label" data-localize-id="ItemCategory,Necklace"></span></button>
+                                            <button id="item-search-filter-equipmentcategory-watch" class="btn-pill" onclick="searchSetFilterItems('EquipmentCategory','Watch')"><span class="label" data-localize-id="ItemCategory,Watch"></span></button>    
+                                        </div>
+                                    </div>
+                                    <div id="item-search-filter-furnitureset" class="item-filter-group show-furniture">
+                                        <h5 data-localize-id="ui,furniture_set"></h5>
+                                        <div class="search-filter-group">
+                                            <button id="item-search-filter-furnitureset-100" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','100')"><span class="label" data-localize-id="FurnitureSet,100"></span></button>
+                                            <button id="item-search-filter-furnitureset-101" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','101')"><span class="label" data-localize-id="FurnitureSet,101"></span></button>
+                                            <button id="item-search-filter-furnitureset-102" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','102')"><span class="label" data-localize-id="FurnitureSet,102"></span></button>
+                                            <button id="item-search-filter-furnitureset-103" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','103')"><span class="label" data-localize-id="FurnitureSet,103"></span></button>
+                                            <button id="item-search-filter-furnitureset-104" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','104')"><span class="label" data-localize-id="FurnitureSet,104"></span></button>
+                                            <button id="item-search-filter-furnitureset-105" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','105')"><span class="label" data-localize-id="FurnitureSet,105"></span></button>
+                                            <button id="item-search-filter-furnitureset-106" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','106')"><span class="label" data-localize-id="FurnitureSet,106"></span></button>
+                                            <button id="item-search-filter-furnitureset-107" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','107')"><span class="label" data-localize-id="FurnitureSet,107"></span></button>
+                                            <button id="item-search-filter-furnitureset-108" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','108')"><span class="label" data-localize-id="FurnitureSet,108"></span></button>
+                                            <button id="item-search-filter-furnitureset-109" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','109')"><span class="label" data-localize-id="FurnitureSet,109"></span></button>    
+                                        </div>
+                                    </div>
+                                    <div id="item-search-filter-equipmenttier" class="item-filter-group show-equipment">
+                                        <h5 data-localize-id="ui,equipment_tier"></h5>
+                                        <div class="search-filter-group">
+                                            <button id="item-search-filter-equipmenttier-1" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','1')"><span class="label">T1</span></button>
+                                            <button id="item-search-filter-equipmenttier-2" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','2')"><span class="label">T2</span></button>
+                                            <button id="item-search-filter-equipmenttier-3" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','3')"><span class="label">T3</span></button>
+                                            <button id="item-search-filter-equipmenttier-4" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','4')"><span class="label">T4</span></button>
+                                            <button id="item-search-filter-equipmenttier-5" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','5')"><span class="label">T5</span></button>
+                                            <button id="item-search-filter-equipmenttier-6" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','6')"><span class="label">T6</span></button>
+                                            <button id="item-search-filter-equipmenttier-7" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','7')"><span class="label">T7</span></button>    
+                                        </div>
+                                    </div>
+                                    <div id="item-search-filter-rarity" class="item-filter-group show-items show-furniture">
+                                        <h5 data-localize-id="ui,rarity"></h5>
+                                        <div class="search-filter-group">
+                                            <button id="item-search-filter-rarity-n" class="btn-pill" onclick="searchSetFilterItems('Rarity','N')"><span class="label"><i class="fa-solid fa-circle me-2 col-item-n"></i><span>N</span></span></button>
+                                            <button id="item-search-filter-rarity-r" class="btn-pill" onclick="searchSetFilterItems('Rarity','R')"><span class="label"><i class="fa-solid fa-circle me-2 col-item-r"></i><span>R</span></span></button>
+                                            <button id="item-search-filter-rarity-sr" class="btn-pill" onclick="searchSetFilterItems('Rarity','SR')"><span class="label"><i class="fa-solid fa-circle me-2 col-item-sr"></i><span>SR</span></span></button>
+                                            <button id="item-search-filter-rarity-ssr" class="btn-pill" onclick="searchSetFilterItems('Rarity','SSR')"><span class="label"><i class="fa-solid fa-circle me-2 col-item-ssr"></i><span>SSR</span></span></button>    
+                                        </div>
+                                    </div>
+                                    <div id="item-search-filter-misc" class="item-filter-group show-furniture">
+                                        <button id="item-search-filter-furnitureinteraction" class="btn-pill" onclick="searchSetFilterItems('FurnitureInteraction',null)"><span class="label-filter"><img width="22" height="22" src="images/ui/Cafe_Icon_Interaction.png"><span data-localize-id="ui,furniture_title"></span></span></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
