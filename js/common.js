@@ -3895,7 +3895,7 @@ function processStudent() {
 
         statPreviewWeaponGrade = studentCollection[student.Id].ws
         statPreviewWeaponLevel = studentCollection[student.Id].wl
-        $('#ba-statpreview-weapon-range').val(statPreviewWeaponLevel)
+        $('#ba-statpreview-weapon-range').attr("max",region.weaponlevel_max).val(statPreviewWeaponLevel)
 
         statPreviewBondLevel = studentCollection[student.Id].b
         $('#ba-statpreview-bond-1-range').val(statPreviewBondLevel)
@@ -5658,16 +5658,20 @@ function recalculateSkillPreview() {
 
         if (showSkillUpgrades && skillType == 'normal' && "Released" in student.Gear && student.Gear.Released[regionID]) {
             skill = find(student.Skills, 'SkillType', 'gearnormal')[0]
-            $(`#ba-skill-${skillType}-icon`).toggleClass('plus', true)
-            $(`#ba-skill-${skillType}-plus`).toggle(true)
-        } else if (showSkillUpgrades && skillType == 'passive') {
-            skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
-            $(`#ba-skill-${skillType}-icon`).toggleClass('plus', true)
-            $(`#ba-skill-${skillType}-plus`).toggle(true)
+            $(`#ba-skill-normal-icon`).toggleClass('plus', true)
+            $(`#ba-skill-normal-plus`).toggle(true)
+        } else if (skillType == 'passive') {
+            if (showSkillUpgrades) {
+                skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
+                $(`#ba-skill-passive-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.png`)
+                $(`#ba-skill-passive-plus`).toggle(true)
+            } else {
+                skill = find(student.Skills, 'SkillType', 'passive')[0]
+                $(`#ba-skill-passive-icon`).toggleClass('plus', false).find('img').attr("src", `images/skill/${skill.Icon}.png`)
+                $(`#ba-skill-passive-plus`).toggle(false)
+            }
         } else {
             skill = find(student.Skills, 'SkillType', skillType)[0]
-            $(`#ba-skill-${skillType}-icon`).toggleClass('plus', false)
-            $(`#ba-skill-${skillType}-plus`).toggle(false)
         }
 
         $(`#ba-skill-${skillType}-name`).html(skill.Name)
@@ -6193,8 +6197,10 @@ function updatePassiveSkillStatPreview() {
             if (value < 0) desc += `${getStatName(eff.Stat)} <b>${getFormattedStatAmount(value)}</b>, `
         })
         $('#ba-statpreview-passiveskill-name').text(getTranslatedString(weaponPassiveSkill, 'Name'))  
+        $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${weaponPassiveSkill.Icon}.png`)
     } else {
         $('#ba-statpreview-passiveskill-name').text(getTranslatedString(passiveSkill, 'Name'))
+        $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${passiveSkill.Icon}.png`)
     }
 
     $('#ba-statpreview-passiveskill-desc').html(desc.substring(0, desc.length-2))
@@ -7549,7 +7555,7 @@ function drawHexamap(stage, container) {
                 html += `<span class="tile-item" style="z-index:${yy}" title="${getBasicTooltip(getTranslatedString(item, 'Name')+' &times;50')}"><i class="fa-solid fa-gift"></i></span>`
 
             } else switch (tile.Entity) {
-                case 101101:
+                case 101101: case 101102: case 101103: case 101104: case 101105:
                     //Start Tile
                     html += `<span class="start-tile"></span>`
                     break
@@ -7620,7 +7626,7 @@ function drawHexamap(stage, container) {
                     break
             }
         }
-        html = `<div class="ba-stage-map-tile map-tile-${ind} ${(tile.Type.startsWith("TileRemoveObject_TargetTile") && spawnTiles.includes(stage.HexaMap[tile.Trigger].Entity)) ? "hidden-tile" : ""} ${(tile.Type.startsWith("DisposableTileObject")) ? "cracked-tile" : ""}" ${onclick} style="left:${x}px;top:${y.toFixed(0)}px;${onclick != '' ? 'cursor:pointer;' : ''}">${html}</div>`
+        html = `<div class="ba-stage-map-tile map-tile-${ind} ${(tile.Type.startsWith("TileRemoveObject_TargetTile") && tile.Trigger !== undefined && spawnTiles.includes(stage.HexaMap[tile.Trigger].Entity)) ? "hidden-tile" : ""} ${(tile.Type.startsWith("DisposableTileObject")) ? "cracked-tile" : ""}" ${onclick} style="left:${x}px;top:${y.toFixed(0)}px;${onclick != '' ? 'cursor:pointer;' : ''}">${html}</div>`
         $(container).css('width', `${rightOffset-leftOffset}px`)
         $(container).css('height', `${topOffset + 10 + scale + (y_max-y_min)*Math.sqrt(Math.pow(scale/2, 2)*3)}px`)
         $(container).append(html)

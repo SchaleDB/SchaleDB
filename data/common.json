@@ -397,11 +397,11 @@
             "gear1_max": 7, 
             "gear2_max": 7, 
             "gear3_max": 7, 
-            "campaign_max": 20, 
+            "campaign_max": 21, 
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810, 
                   811,   812,   813,   814,   815,   816,   817,   818,   819, 
-                  701, 10801, 10802, 10803, 10804, 10805, 10806, 10808
+                  820,   701, 10801, 10802, 10803, 10804, 10805, 10806, 10808
             ], 
             "event_701_max": 10, 
             "event_701_challenge_max": 4, 
@@ -409,36 +409,20 @@
             "bounty_max": 9, 
             "schooldungeon_max": 4, 
             "current_gacha": [
-                {
-                    "characters": [
-                        10056,
-                        20021
-                    ],
-                    "start": 1670983200,
-                    "end": 1672192800
-                }
+                { "characters": [10057, 20022], "start": 1672192800, "end": 1673402400 }
             ], 
             "current_events": [
-                {
-                    "event": 819,
-                    "start": 1670983200,
-                    "end": 1672192800
-                }
+                {"event":   820, "start": 1672192800, "end": 1673402400}, 
+                {"event": 10810, "start": 1673402400, "end": 1674525600}
             ], 
             "current_raid": [
+                {"raid": 11000, "start": 1672192800, "end": 1672772400}, 
                 {
-                    "raid": 2, 
+                    "raid": 4, 
                     "terrain": "Indoor", 
-                    "start": 1670378400, 
-                    "end": 1670958000
-                }, 
-                {
-                    "raid": 6, 
-                    "terrain": "Indoor", 
-                    "start": 1671588000, 
-                    "end": 1672167600
-                }, 
-                {"raid": 11000, "start": 1672192800, "end": 1672772400}
+                    "start": 1672797600, 
+                    "end": 1673377200
+                }
             ]
         }, 
         {
@@ -459,7 +443,11 @@
             "bounty_max": 9, 
             "schooldungeon_max": 3, 
             "current_gacha": [
-                { "characters": [10041, 20017], "start": 1671501600, "end": 1672711200 }
+                {
+                    "characters": [10041, 20017], 
+                    "start": 1671501600, 
+                    "end": 1672711200
+                }
             ], 
             "current_events": [
                 {"event": 701, "start": 1672106400, "end": 1673316000}
@@ -483,11 +471,23 @@
     ], 
     "changelog": [
         {
+            "date": "2022/12/28", 
+            "contents": [
+                "<h6>New Year's Event Update</h6>", 
+                "<ul><li>Added information for New Year event characters and stages.</li></ul>", 
+                "<h6>Other Improvements</h6>", 
+                "<ul><li>Increased the contrast of certain text colours to improve legibility.</li><li>Added the ability to filter by permanently available students.</li></ul>",
+                "<h6>Bug Fixes</h6>", 
+                "<ul><li>Fixed an <a href=\"https://github.com/lonqie/SchaleDB/issues/19\">issue</a> that caused exclusive weapon levels of saved students to not be loaded correctly.</li><li>Fixed incorrect attributes for Small Perorominions on Perorodzilla (Insane).</li></ul>"
+
+            ]
+        }, 
+        {
             "date": "2022/12/14", 
             "contents": [
                 "<h6>Skill Damage Calculations</h6>", 
                 "<ul><li>Added the ability to estimate damage dealt by student skills, as well as healing and CC amounts.</li><li>Click the \"Skills\" button above the stats table when viewing the details window to toggle the display between the stats table and skill calculations.</li><li>A \"Details\" button has also been added to the Skills tab that will open the details window showing the skill calculations.</li><li>Added a new tab to the Stat Details window to configure the target, level and terrain used for damage calculation.</li><li>Students' debuff skills can be applied to the selected target, as well as custom amounts if the setting is enabled.</li><li>In addition to skills, the student's normal attack will be displayed where available, containing reload and rate of fire information.</li><li>Tactical Support vehicles and summons' attacks can also be viewed by selecting them.</li><li>Please note that calculations should be viewed as an estimate and there is some degree of error expected on the final values.</li></ul>", 
-                "<h6>Other Improvements</h6>",
+                "<h6>Other Improvements</h6>", 
                 "<ul><li>Added a button on the Skills tab to toggle the display of skills and their upgraded versions.</li><li>Select buffs and debuffs from Total Assault bosses have been added to \"Other Buffs\".</li><li>Crit DMG RES of certain enemies is now correctly capped at 80%.</li></ul>"
             ]
         }, 

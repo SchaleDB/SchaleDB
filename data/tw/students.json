@@ -1420,7 +1420,9 @@
                 25
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10057
+        ],
         "MemoryLobby": [
             6,
             6
@@ -11430,7 +11432,9 @@
                 30
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            16012
+        ],
         "MemoryLobby": [
             8,
             8
@@ -18205,7 +18209,9 @@
                 25
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            20022
+        ],
         "MemoryLobby": [
             6,
             6
@@ -21805,7 +21811,7 @@
         ],
         "FavorAlts": [],
         "MemoryLobby": [
-            0,
+            6,
             0
         ],
         "FurnitureInteraction": [
@@ -43527,7 +43533,7 @@
             {
                 "SkillType": "ex",
                 "Name": "緋紅花占卜",
-                "Desc": "對1名敵人造成攻擊力<?1>的傷害之後\n將我軍對敵人造成的<s:Accumulation>10秒後引爆，依照累積的量給予神秘屬性的傷害。\n(累積的最大值套用若藻攻擊力的<?2>為止)\n(累積傷害不發動暴擊攻擊。)",
+                "Desc": "對1名敵人造成攻擊力<?1>的傷害之後\n將我軍對敵人造成的<s:Accumulation>10秒後引爆，依照累積的量給予神秘類型的傷害。\n(累積的最大值套用若藻攻擊力的<?2>為止)\n(累積傷害不發動暴擊攻擊。)",
                 "Parameters": [
                     [
                         "203%",
@@ -51748,19 +51754,19 @@
             {
                 "SkillType": "sub",
                 "Name": "等價交換",
-                "Desc": "攻擊擁有危險效果的敵人時，依據危險效果的個數，攻擊力<?1>的額外傷害（最多5個）",
+                "Desc": "攻擊具減益效果的敵人時，根據減益效果的個數，造成攻擊力<?1>的額外傷害（最多5個）",
                 "Parameters": [
                     [
-                        "1.1%／2.2%／3.3%／4.4%／5.4%",
-                        "1.1%／2.3%／3.4%／4.6%／5.7%",
-                        "1.2%／2.4%／3.6%／4.8%／6%",
-                        "1.4%／2.8%／4.2%／5.7%／7.1%",
-                        "1.4%／2.9%／4.4%／5.9%／7.3%",
-                        "1.5%／3%／4.6%／6.1%／7.6%",
-                        "1.7%／3.5%／5.2%／7%／8.7%",
-                        "1.8%／3.6%／5.4%／7.2%／8.9%",
-                        "1.8%／3.7%／5.5%／7.4%／9.2%",
-                        "2.1%／4.1%／6.2%／8.3%／10.3%"
+                        "1.1%/2.2%/3.3%/4.4%/5.4%",
+                        "1.1%/2.3%/3.4%/4.6%/5.7%",
+                        "1.2%/2.4%/3.6%/4.8%/6%",
+                        "1.4%/2.8%/4.2%/5.7%/7.1%",
+                        "1.4%/2.9%/4.4%/5.9%/7.3%",
+                        "1.5%/3%/4.6%/6.1%/7.6%",
+                        "1.7%/3.5%/5.2%/7%/8.7%",
+                        "1.8%/3.6%/5.4%/7.2%/8.9%",
+                        "1.8%/3.7%/5.5%/7.4%/9.2%",
+                        "2.1%/4.1%/6.2%/8.3%/10.3%"
                     ]
                 ],
                 "Icon": "COMMON_SKILLICON_EXTRADAMAGE",
@@ -52171,7 +52177,7 @@
             {
                 "SkillType": "ex",
                 "Name": "我、我來支援！",
-                "Desc": "發射子彈。子彈朝直線飛去，對第1個命中的敵人1名造成攻擊力<?1>的傷害／\n部隊的奧利斯小隊學生為2人以下時，命中的敵人<d:DEF>減少<?2>;為3人以上時，命中之敵人的<d:DEF>減少<?3>（30秒間）",
+                "Desc": "發射子彈。子彈朝直線飛去，對第1個命中的敵人1名造成攻擊力<?1>的傷害/\n部隊的奧利斯小隊學生為2人以下時，命中的敵人<d:DEF>減少<?2>;為3人以上時，命中之敵人的<d:DEF>減少<?3>（30秒間）",
                 "Parameters": [
                     [
                         "207%",
@@ -59414,7 +59420,7 @@
         "Hobby": "発明や修理全般",
         "CharacterVoice": "青地希望",
         "BirthDay": "11/13",
-        "ArtistName": "Samra",
+        "ArtistName": "Paruru",
         "CharHeightMetric": "162cm",
         "CharHeightImperial": null,
         "StabilityPoint": 1384,
@@ -63190,9 +63196,7 @@
                         "Channel": 102
                     }
                 ],
-                "DamageDist": [
-                    10000
-                ]
+                "DamageDist": []
             },
             {
                 "SkillType": "normal",
@@ -65320,9 +65324,7 @@
                 "EffectCombine": [
                     "HealDot"
                 ],
-                "DamageDist": [
-                    10000
-                ]
+                "DamageDist": []
             },
             {
                 "SkillType": "normal",
@@ -65698,6 +65700,1539 @@
             [
                 12,
                 9,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 10057,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 122,
+        "PathName": "Haruna_NewYear",
+        "DevName": "CH0191",
+        "Name": "ハルナ（正月）",
+        "School": "Gehenna",
+        "Club": "GourmetClub",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Explosion",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "SR",
+        "WeaponImg": "Weapon_Icon_CH0191",
+        "Cover": true,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_NewYearFestival2",
+        "CollectionTexture": "Student_Portrait_CH0191_Collection",
+        "FamilyName": "黒舘",
+        "PersonalName": "ハルナ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "17歳",
+        "FamilyNameRuby": "くろだて",
+        "Birthday": "3月1日",
+        "CharacterSSRNew": "この時期のお料理はどれも魅力的ですね……。\nお正月といえば、おせちやお雑煮、お汁粉……。\nああ……お腹が空いてきましたわ",
+        "ProfileIntroduction": "ゲヘナ学園所属、新年を迎え、着物に着替えた美食研究会の会長。\n\n美食において、時節に合った装いをする事も美食探究の一環であるという信念のもと、晴れ着を纏って美食の道を歩む。見た目だけはこの上なく優雅なお嬢さんなのだが……\n\n彼女の美食に相応しい食べ物が用意される事を祈ろう。",
+        "Hobby": "美味しいもの探し",
+        "CharacterVoice": "田所あずさ",
+        "BirthDay": "3/1",
+        "ArtistName": "whoisshe",
+        "CharHeightMetric": "163cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1908,
+        "AttackPower1": 333,
+        "AttackPower100": 3339,
+        "MaxHP1": 2147,
+        "MaxHP100": 18610,
+        "DefensePower1": 19,
+        "DefensePower100": 114,
+        "HealPower1": 1463,
+        "HealPower100": 4391,
+        "DodgePoint": 190,
+        "AccuracyPoint": 941,
+        "CriticalPoint": 209,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "DamageDist": [
+            10000
+        ],
+        "AttackFrames": {
+            "AttackEnterDuration": 42,
+            "AttackStartDuration": 22,
+            "AttackIngDuration": 42,
+            "AttackEndDuration": 20,
+            "AttackBurstRoundOverDelay": 30,
+            "AttackReloadDuration": 70
+        },
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "美食家の怒り",
+                "Desc": "最大で敵5人に対して、順番にそれぞれ攻撃力の<?1>分のダメージを与え、周囲の円形範囲内の敵に対して、攻撃力の<?2>分のダメージ",
+                "Parameters": [
+                    [
+                        "106%",
+                        "122%",
+                        "154%",
+                        "170%",
+                        "202%",
+                        "218%",
+                        "250%",
+                        "266%",
+                        "298%",
+                        "314%"
+                    ],
+                    [
+                        "52%",
+                        "59.8%",
+                        "75.3%",
+                        "83.2%",
+                        "98.7%",
+                        "106%",
+                        "122%",
+                        "129%",
+                        "145%",
+                        "153%"
+                    ]
+                ],
+                "Cost": [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10664,
+                            12265,
+                            15462,
+                            17063,
+                            20260,
+                            21861,
+                            25057,
+                            26659,
+                            29855,
+                            31457
+                        ]
+                    },
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            5202,
+                            5983,
+                            7539,
+                            8320,
+                            9876,
+                            10657,
+                            12220,
+                            12994,
+                            14557,
+                            15338
+                        ]
+                    }
+                ],
+                "DamageDist": [
+                    10000,
+                    10000,
+                    10000,
+                    10000,
+                    10000
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "美食家の信念",
+                "Desc": "40秒毎に、<b:ATK>を<?1>増加（30秒間）",
+                "Parameters": [
+                    [
+                        "15.9%",
+                        "16.7%",
+                        "17.5%",
+                        "20.7%",
+                        "21.5%",
+                        "22.3%",
+                        "25.5%",
+                        "26.3%",
+                        "27.1%",
+                        "30.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1597,
+                                1677,
+                                1757,
+                                2077,
+                                2156,
+                                2236,
+                                2555,
+                                2635,
+                                2715,
+                                3034
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ],
+                "DamageDist": []
+            },
+            {
+                "SkillType": "passive",
+                "Name": "新年のヴィアンド",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackPower"
+                ],
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "送別のデセール",
+                "Desc": "攻撃時、20%の確率で<d:DEF>を<?1>減少（17秒間）（クールタイム5秒）",
+                "Parameters": [
+                    [
+                        "7.8%",
+                        "8.2%",
+                        "8.5%",
+                        "10.1%",
+                        "10.5%",
+                        "10.9%",
+                        "12.4%",
+                        "12.8%",
+                        "13.2%",
+                        "14.8%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -781,
+                                -820,
+                                -859,
+                                -1015,
+                                -1054,
+                                -1093,
+                                -1249,
+                                -1288,
+                                -1327,
+                                -1483
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "新年のヴィアンド+",
+                "Desc": "<b:EnhanceExplosionRate>を<?1>加算/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "26%",
+                        "27.3%",
+                        "28.6%",
+                        "33.8%",
+                        "35.1%",
+                        "36.4%",
+                        "41.6%",
+                        "42.9%",
+                        "44.2%",
+                        "49.4%"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Stat": [
+                    "EnhanceExplosionRate",
+                    "AttackPower"
+                ],
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Scale": [
+                            2600,
+                            2730,
+                            2860,
+                            3380,
+                            3510,
+                            3640,
+                            4160,
+                            4290,
+                            4420,
+                            4940
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                7,
+                47
+            ],
+            [
+                8,
+                56
+            ],
+            [
+                2,
+                10
+            ],
+            [
+                3,
+                15
+            ],
+            [
+                5,
+                24
+            ]
+        ],
+        "FavorAlts": [
+            10002
+        ],
+        "MemoryLobby": [
+            5,
+            0
+        ],
+        "FurnitureInteraction": [
+            [
+                7201
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Simplicity",
+            "Delicious"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Haruna_Newyear",
+            "F_Haruna_Newyear2"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "アイディール",
+            "Desc": "ハルナが扱うスナイパーライフル。\n\n年が変わろうとも、彼女の美食探究にふさわしいパートナーはこの銃以外にいないだろう。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 147,
+            "AttackPower100": 1467,
+            "MaxHP1": 538,
+            "MaxHP100": 5381,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                140
+            ],
+            [
+                3031,
+                3030,
+                141,
+                210
+            ],
+            [
+                3032,
+                3031,
+                142,
+                211
+            ],
+            [
+                3033,
+                3032,
+                143,
+                212
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                13
+            ],
+            [
+                12,
+                18,
+                12,
+                30
+            ],
+            [
+                12,
+                18,
+                8,
+                25
+            ],
+            [
+                8,
+                18,
+                7,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                140
+            ],
+            [
+                4031,
+                141,
+                210
+            ],
+            [
+                4032,
+                4031,
+                141,
+                210
+            ],
+            [
+                4032,
+                142,
+                211
+            ],
+            [
+                4033,
+                4032,
+                143,
+                212
+            ],
+            [
+                4033,
+                143,
+                212
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                9,
+                18
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                9
+            ],
+            [
+                12,
+                8,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 20022,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 124,
+        "PathName": "Fuuka_NewYear",
+        "DevName": "CH0177",
+        "Name": "フウカ（正月）",
+        "School": "Gehenna",
+        "Club": "FoodService",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Pierce",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 0,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "SMG",
+        "WeaponImg": "Weapon_Icon_CH0177",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Badge",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_NewYearFestival2",
+        "CollectionTexture": "Student_Portrait_CH0177_Collection",
+        "FamilyName": "愛清",
+        "PersonalName": "フウカ",
+        "SchoolYear": "2年生",
+        "CharacterAge": "16歳",
+        "FamilyNameRuby": "あいきよ",
+        "Birthday": "4月30日",
+        "CharacterSSRNew": "先生、年越しそばは食べましたか？\n今年はお互い、穏やかな一年でありますように",
+        "ProfileIntroduction": "ゲヘナ学園所属、新年を迎え、着物に着替えた給食部の部員。\n\n今年こそどうか平穏な日々が続くようにと願っているものの、周囲の環境がそれを許してくれるかはまだ未知数のようだ。",
+        "Hobby": "家庭料理、お弁当作り",
+        "CharacterVoice": "ファイルーズあい",
+        "BirthDay": "4/30",
+        "ArtistName": "7peach",
+        "CharHeightMetric": "159cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1477,
+        "AttackPower1": 249,
+        "AttackPower100": 2494,
+        "MaxHP1": 2294,
+        "MaxHP100": 17147,
+        "DefensePower1": 76,
+        "DefensePower100": 458,
+        "HealPower1": 1742,
+        "HealPower100": 5227,
+        "DodgePoint": 1101,
+        "AccuracyPoint": 703,
+        "CriticalPoint": 270,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "AttackFrames": {},
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "給食部のおせち",
+                "Desc": "味方1人の<b:CostChange>を最大で50%減少（Exスキルの使用1回分）（ただし減少値は小数点以下切り捨て）/\n<b:CriticalDamage>を<?1>増加（35秒間）",
+                "Parameters": [
+                    [
+                        "18.3%",
+                        "21.1%",
+                        "26.6%",
+                        "29.3%",
+                        "32.1%",
+                        "34.8%",
+                        "40.3%",
+                        "43.1%",
+                        "48.6%",
+                        "51.3%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    2
+                ],
+                "Icon": "COMMON_SKILLICON_COSTDECREASE",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1835,
+                                2110,
+                                2661,
+                                2936,
+                                3211,
+                                3486,
+                                4037,
+                                4312,
+                                4863,
+                                5138
+                            ]
+                        ],
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Channel": 111
+                    }
+                ],
+                "DamageDist": []
+            },
+            {
+                "SkillType": "normal",
+                "Name": "試食タイム！",
+                "Desc": "60秒毎に、HPが最も低い味方1人に対して治癒力の<?1>分の<b:Shield>効果を発動（20秒間）",
+                "Parameters": [
+                    [
+                        "119%",
+                        "125%",
+                        "131%",
+                        "155%",
+                        "161%",
+                        "167%",
+                        "191%",
+                        "197%",
+                        "203%",
+                        "227%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_SHIELD",
+                "Effects": [
+                    {
+                        "Type": "Shield",
+                        "Scale": [
+                            11982,
+                            12582,
+                            13182,
+                            15578,
+                            16174,
+                            16774,
+                            19170,
+                            19770,
+                            20370,
+                            22763
+                        ]
+                    }
+                ],
+                "DamageDist": []
+            },
+            {
+                "SkillType": "passive",
+                "Name": "最高の一口",
+                "Desc": "<b:HealPower>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Stat": [
+                    "HealPower"
+                ],
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "給食部の差し入れ",
+                "Desc": "味方の<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "最高の一口+",
+                "Desc": "<b:HealPower>を<?1>増加/\nさらに<b:HealPower>を<?2>増加",
+                "Parameters": [
+                    [
+                        "697",
+                        "732",
+                        "767",
+                        "906",
+                        "941",
+                        "976",
+                        "1115",
+                        "1150",
+                        "1185",
+                        "1324"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Stat": [
+                    "HealPower",
+                    "HealPower"
+                ],
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Base",
+                        "Scale": [
+                            697,
+                            732,
+                            767,
+                            906,
+                            941,
+                            976,
+                            1115,
+                            1150,
+                            1185,
+                            1324
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "HealPower",
+            "AttackPower"
+        ],
+        "FavorStatValue": [
+            [
+                5,
+                0
+            ],
+            [
+                8,
+                0
+            ],
+            [
+                10,
+                6
+            ],
+            [
+                13,
+                7
+            ],
+            [
+                3,
+                1
+            ],
+            [
+                5,
+                2
+            ],
+            [
+                8,
+                3
+            ]
+        ],
+        "FavorAlts": [
+            23001
+        ],
+        "MemoryLobby": [
+            5,
+            0
+        ],
+        "FurnitureInteraction": [
+            [
+                7200
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Household",
+            "Food",
+            "Functional"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Fuuka_Newyear",
+            "F_Fuuka_Newyear2"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "給食部の護身用銃typeA",
+            "Desc": "フウカが常に携帯しているサブマシンガン。\n\n新年を迎え、使われる事がないようにと願うフウカだが、世の中はままならぬもので……",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 110,
+            "AttackPower100": 1096,
+            "MaxHP1": 499,
+            "MaxHP100": 4991,
+            "HealPower1": 205,
+            "HealPower100": 2048,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                100
+            ],
+            [
+                3031,
+                3030,
+                101,
+                180
+            ],
+            [
+                3032,
+                3031,
+                102,
+                181
+            ],
+            [
+                3033,
+                3032,
+                103,
+                182
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                13,
+                29
+            ],
+            [
+                12,
+                18,
+                9,
+                24
+            ],
+            [
+                8,
+                18,
+                9,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                100
+            ],
+            [
+                4031,
+                101,
+                180
+            ],
+            [
+                4032,
+                4031,
+                101,
+                180
+            ],
+            [
+                4032,
+                102,
+                181
+            ],
+            [
+                4033,
+                4032,
+                103,
+                182
+            ],
+            [
+                4033,
+                103,
+                182
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                18
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                9
+            ],
+            [
+                12,
+                7,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 16012,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 125,
+        "PathName": "Junko_NewYear",
+        "DevName": "CH0192",
+        "Name": "ジュンコ（正月）",
+        "School": "Gehenna",
+        "Club": "GourmetClub",
+        "StarGrade": 1,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Mystic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "AR",
+        "WeaponImg": "Weapon_Icon_CH0192",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_NewYearFestival2",
+        "CollectionTexture": "Student_Portrait_CH0192_Collection",
+        "FamilyName": "赤司",
+        "PersonalName": "ジュンコ",
+        "SchoolYear": "1年生",
+        "CharacterAge": "15歳",
+        "FamilyNameRuby": "あかし",
+        "Birthday": "12月27日",
+        "CharacterSSRNew": "",
+        "ProfileIntroduction": "ゲヘナ学園所属、新年を迎え、着物に着替えた美食研究会の部員。\n\n新年の料理を楽しみに、装いを新たにしたジュンコ。食べる時に邪魔が入ってくる事には、未だ我慢できない様子。",
+        "Hobby": "グルメ巡り",
+        "CharacterVoice": "金元 寿子",
+        "BirthDay": "12/27",
+        "ArtistName": "DoReMi",
+        "CharHeightMetric": "149cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1368,
+        "AttackPower1": 300,
+        "AttackPower100": 3009,
+        "MaxHP1": 2204,
+        "MaxHP100": 22040,
+        "DefensePower1": 19,
+        "DefensePower100": 117,
+        "HealPower1": 1428,
+        "HealPower100": 4284,
+        "DodgePoint": 783,
+        "AccuracyPoint": 714,
+        "CriticalPoint": 204,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "DamageDist": [
+            3333,
+            3333,
+            3334
+        ],
+        "AttackFrames": {
+            "AttackEnterDuration": 45,
+            "AttackStartDuration": 20,
+            "AttackEndDuration": 16,
+            "AttackBurstRoundOverDelay": 50,
+            "AttackIngDuration": 28,
+            "AttackReloadDuration": 56
+        },
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "食べ物の恨み",
+                "Desc": "円形範囲内の敵に対して、攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "344%",
+                        "395%",
+                        "498%",
+                        "550%",
+                        "653%",
+                        "705%",
+                        "808%",
+                        "860%",
+                        "963%",
+                        "1015%"
+                    ]
+                ],
+                "Cost": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            34407,
+                            39573,
+                            49897,
+                            55055,
+                            65379,
+                            70538,
+                            80862,
+                            86021,
+                            96345,
+                            101504
+                        ]
+                    }
+                ],
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "食べたかったのに……",
+                "Desc": "通常攻撃21回毎に、敵1人に対して攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "400%",
+                        "420%",
+                        "440%",
+                        "520%",
+                        "540%",
+                        "560%",
+                        "640%",
+                        "660%",
+                        "680%",
+                        "760%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            40027,
+                            42027,
+                            44027,
+                            52035,
+                            54035,
+                            56036,
+                            64044,
+                            66044,
+                            68044,
+                            76046
+                        ]
+                    }
+                ],
+                "DamageDist": [
+                    1000,
+                    1000,
+                    1000,
+                    1000,
+                    1000,
+                    1000,
+                    1000,
+                    1000,
+                    1000,
+                    1000
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "早く終わらせるわよ！",
+                "Desc": "<b:AttackSpeed>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackSpeed"
+                ],
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackSpeed_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "一着しかないのに！",
+                "Desc": "EXスキル並びにノーマルスキルの発動と同時に、<b:CriticalChance>を<?1>増加（20秒間）",
+                "Parameters": [
+                    [
+                        "10.4%",
+                        "11%",
+                        "11.5%",
+                        "13.6%",
+                        "14.1%",
+                        "14.6%",
+                        "16.7%",
+                        "17.3%",
+                        "17.8%",
+                        "19.9%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1049,
+                                1102,
+                                1154,
+                                1363,
+                                1416,
+                                1468,
+                                1678,
+                                1731,
+                                1783,
+                                1993
+                            ]
+                        ],
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Channel": 9
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "早く終わらせるわよ！＋",
+                "Desc": "<b:AttackSpeed>を<?1>増加/\nさらに<b:AttackSpeed>を<?2>増加",
+                "Parameters": [
+                    [
+                        "1400",
+                        "1470",
+                        "1540",
+                        "1820",
+                        "1890",
+                        "1960",
+                        "2240",
+                        "2310",
+                        "2380",
+                        "2660"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Stat": [
+                    "AttackSpeed",
+                    "AttackSpeed"
+                ],
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackSpeed_Base",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                6,
+                55
+            ],
+            [
+                8,
+                66
+            ],
+            [
+                2,
+                12
+            ],
+            [
+                3,
+                17
+            ],
+            [
+                5,
+                29
+            ]
+        ],
+        "FavorAlts": [
+            13007
+        ],
+        "MemoryLobby": [
+            5,
+            0
+        ],
+        "FurnitureInteraction": [
+            [
+                7201
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Dessert",
+            "Delicious"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Junko_Newyear",
+            "F_Junko_Newyear2"
+        ],
+        "IsLimited": 2,
+        "Weapon": {
+            "Name": "ダイナーズアウトロー",
+            "Desc": "ジュンコが使用する2丁のアサルトライフル。\n\n彼女の美食を邪魔する者は、何人たりとも許されはしない。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 106,
+            "AttackPower100": 1057,
+            "MaxHP1": 507,
+            "MaxHP100": 5070,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                190
+            ],
+            [
+                3031,
+                3030,
+                191,
+                130
+            ],
+            [
+                3032,
+                3031,
+                192,
+                131
+            ],
+            [
+                3033,
+                3032,
+                193,
+                132
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                14,
+                28
+            ],
+            [
+                12,
+                18,
+                9,
+                25
+            ],
+            [
+                8,
+                18,
+                7,
+                18
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                190
+            ],
+            [
+                4031,
+                191,
+                130
+            ],
+            [
+                4032,
+                4031,
+                191,
+                130
+            ],
+            [
+                4032,
+                192,
+                131
+            ],
+            [
+                4033,
+                4032,
+                193,
+                132
+            ],
+            [
+                4033,
+                193,
+                132
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                4
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                18
+            ],
+            [
+                8,
+                2,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                7,
                 14
             ]
         ]
