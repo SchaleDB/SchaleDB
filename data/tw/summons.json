@@ -613,6 +613,121 @@
         "RegenCost": 0
     },
     {
+        "Id": 40007,
+        "Skills": [
+            {
+                "Name": "特製料理！",
+                "Desc": "Every 3s, Nodoka throws one of three snacks that restore HP by different amounts of Healing, to the ally with the lowest HP in range.\n<b>Hot Spring Manju</b>: <?1> of Healing.\n<b>Corn Stick</b>: <?2> of Healing.\n<b>Milk</b>: <?3> of Healing.",
+                "Parameters": [
+                    [
+                        "20.3%",
+                        "23.3%",
+                        "29.4%",
+                        "32.5%",
+                        "38.6%"
+                    ],
+                    [
+                        "24.8%",
+                        "28.5%",
+                        "36%",
+                        "39.7%",
+                        "47.1%"
+                    ],
+                    [
+                        "29.3%",
+                        "33.7%",
+                        "42.5%",
+                        "46.9%",
+                        "55.7%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "SkillType": "normal",
+                "IsSummonSkill": true,
+                "Effects": [
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            2033,
+                            2335,
+                            2945,
+                            3250,
+                            3860,
+                            4163,
+                            4773,
+                            5078,
+                            5688,
+                            5990
+                        ]
+                    },
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            2483,
+                            2855,
+                            3600,
+                            3973,
+                            4718,
+                            5088,
+                            5833,
+                            6205,
+                            6950,
+                            7323
+                        ]
+                    },
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            2935,
+                            3375,
+                            4255,
+                            4693,
+                            5573,
+                            6013,
+                            6893,
+                            7333,
+                            8213,
+                            8653
+                        ]
+                    }
+                ],
+                "DamageDist": [
+                    10000
+                ]
+            }
+        ],
+        "Name": "和香",
+        "DevName": "SM016501",
+        "Type": "Summoned",
+        "BulletType": "Explosion",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 0,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "SMG",
+        "DamageDist": [],
+        "AttackFrames": {},
+        "StabilityPoint": 0,
+        "StabilityRate": 2000,
+        "AttackPower1": 0,
+        "AttackPower100": 0,
+        "MaxHP1": 30000,
+        "MaxHP100": 30000,
+        "DefensePower1": 0,
+        "DefensePower100": 0,
+        "HealPower1": 0,
+        "HealPower100": 0,
+        "DodgePoint": 0,
+        "AccuracyPoint": 0,
+        "CriticalPoint": 0,
+        "CriticalDamageRate": 0,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 1000,
+        "MoveSpeed": 180,
+        "RegenCost": 0
+    },
+    {
         "Id": 99999,
         "DevName": "Obstacle",
         "Type": "Obstacle",

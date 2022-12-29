@@ -40989,7 +40989,24 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Healer",
-        "Summons": [],
+        "Summons": [
+            {
+                "Id": 40007,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "HealPower"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        10000,
+                        10000,
+                        10000,
+                        10000,
+                        10000
+                    ]
+                ]
+            }
+        ],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -41042,7 +41059,7 @@
             {
                 "SkillType": "ex",
                 "Name": "Hot Springs Resort No. 227, Open for Business!",
-                "Desc": "Deploys Nodoka (Hot Springs) at the selected location for 32s. Every 3s, Nodoka throws one of three snacks that restore HP by different amounts of Healing, to the ally with the lowest HP in range.\n<b>Hot Spring Manju</b>: <?1> of Healing.\n<b>Corn Stick</b>: <?2> of Healing.\n<b>Milk</b>: <?3> of Healing.",
+                "Desc": "Summons Nodoka to the selected location for 32s. Every 3s, Nodoka throws one of three snacks that restore HP by different amounts of Healing, to the ally with the lowest HP in range.\n<b>Hot Spring Manju</b>: <?1> of Healing.\n<b>Corn Stick</b>: <?2> of Healing.\n<b>Milk</b>: <?3> of Healing.",
                 "Parameters": [
                     [
                         "20.3%",
@@ -41074,53 +41091,6 @@
                     4
                 ],
                 "Icon": "COMMON_SKILLICON_HEAL",
-                "Effects": [
-                    {
-                        "Type": "Heal",
-                        "Scale": [
-                            2033,
-                            2335,
-                            2945,
-                            3250,
-                            3860,
-                            4163,
-                            4773,
-                            5078,
-                            5688,
-                            5990
-                        ]
-                    },
-                    {
-                        "Type": "Heal",
-                        "Scale": [
-                            2483,
-                            2855,
-                            3600,
-                            3973,
-                            4718,
-                            5088,
-                            5833,
-                            6205,
-                            6950,
-                            7323
-                        ]
-                    },
-                    {
-                        "Type": "Heal",
-                        "Scale": [
-                            2935,
-                            3375,
-                            4255,
-                            4693,
-                            5573,
-                            6013,
-                            6893,
-                            7333,
-                            8213,
-                            8653
-                        ]
-                    }
-                ],
                 "DamageDist": []
             },
             {

@@ -41305,7 +41305,24 @@
         "StarGrade": 3,
         "SquadType": "Support",
         "TacticRole": "Healer",
-        "Summons": [],
+        "Summons": [
+            {
+                "Id": 40007,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "HealPower"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        10000,
+                        10000,
+                        10000,
+                        10000,
+                        10000
+                    ]
+                ]
+            }
+        ],
         "Position": "Back",
         "BulletType": "Explosion",
         "ArmorType": "Unarmed",
@@ -41405,53 +41422,6 @@
                     4
                 ],
                 "Icon": "COMMON_SKILLICON_HEAL",
-                "Effects": [
-                    {
-                        "Type": "Heal",
-                        "Scale": [
-                            2033,
-                            2335,
-                            2945,
-                            3250,
-                            3860,
-                            4163,
-                            4773,
-                            5078,
-                            5688,
-                            5990
-                        ]
-                    },
-                    {
-                        "Type": "Heal",
-                        "Scale": [
-                            2483,
-                            2855,
-                            3600,
-                            3973,
-                            4718,
-                            5088,
-                            5833,
-                            6205,
-                            6950,
-                            7323
-                        ]
-                    },
-                    {
-                        "Type": "Heal",
-                        "Scale": [
-                            2935,
-                            3375,
-                            4255,
-                            4693,
-                            5573,
-                            6013,
-                            6893,
-                            7333,
-                            8213,
-                            8653
-                        ]
-                    }
-                ],
                 "DamageDist": []
             },
             {

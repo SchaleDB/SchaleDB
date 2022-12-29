@@ -440,7 +440,7 @@ let itemSearchOptions = {
         this.stats['CriticalPoint'] = [character.CriticalPoint,0,1]
         this.stats['CriticalDamageRate'] = [character.CriticalDamageRate,0,1]
         this.stats['CriticalChanceResistPoint'] = [character.CriticalResistPoint !== undefined ? character.CriticalResistPoint : 100,0,1]
-        this.stats['CriticalDamageResistRate'] = [character.CriticalDamageResistRate !== undefined ? MathHelper.clamp(character.CriticalDamageResistRate, -8000, 8000) : 5000,0,1]
+        this.stats['CriticalDamageResistRate'] = [character.CriticalDamageResistRate !== undefined ? character.CriticalDamageResistRate : 5000,0,1]
         this.stats['StabilityPoint'] = [character.StabilityPoint,0,1]
         this.stats['StabilityRate'] = [character.StabilityRate !== undefined ? character.StabilityRate : 2000, 0,1]
         this.stats['AmmoCount'] = [character.AmmoCount,0,1]
