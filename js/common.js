@@ -5656,22 +5656,18 @@ function recalculateSkillPreview() {
 
         let skill
 
-        if (showSkillUpgrades && skillType == 'normal' && "Released" in student.Gear && student.Gear.Released[regionID]) {
+        if (skillType == 'normal' && showSkillUpgrades && "Released" in student.Gear && student.Gear.Released[regionID]) {
             skill = find(student.Skills, 'SkillType', 'gearnormal')[0]
-            $(`#ba-skill-normal-icon`).toggleClass('plus', true)
+            $(`#ba-skill-normal-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.png`)
             $(`#ba-skill-normal-plus`).toggle(true)
-        } else if (skillType == 'passive') {
-            if (showSkillUpgrades) {
-                skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
-                $(`#ba-skill-passive-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.png`)
-                $(`#ba-skill-passive-plus`).toggle(true)
-            } else {
-                skill = find(student.Skills, 'SkillType', 'passive')[0]
-                $(`#ba-skill-passive-icon`).toggleClass('plus', false).find('img').attr("src", `images/skill/${skill.Icon}.png`)
-                $(`#ba-skill-passive-plus`).toggle(false)
-            }
+        } else if (skillType == 'passive' && showSkillUpgrades) {
+            skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
+            $(`#ba-skill-passive-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.png`)
+            $(`#ba-skill-passive-plus`).toggle(true)
         } else {
             skill = find(student.Skills, 'SkillType', skillType)[0]
+            $(`#ba-skill-${skillType}-icon`).toggleClass('plus', false).find('img').attr("src", `images/skill/${skill.Icon}.png`)
+            $(`#ba-skill-${skillType}-plus`).toggle(false)
         }
 
         $(`#ba-skill-${skillType}-name`).html(skill.Name)
