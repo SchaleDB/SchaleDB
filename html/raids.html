@@ -62,16 +62,36 @@
                     <div class="card-body">                      
                         <div id="ba-raid-page-stats" class="tab-pane fade show active" style="border-radius: 0 0 .25em .25em;">
 
-                            <div class="row g-1 mt-2">
+                            <div class="row g-1">
                                 <div class="col">
-                                    <nav id="ba-raid-enemy-tabs" class="nav nav-pills mb-2">
-                                    </nav>
-                                    <div class="d-flex py-2">
-                                        <span id="ba-raid-attacktype" class="ba-info-pill"><img src="images/ui/Type_Attack.png"><span id="ba-raid-attacktype-label"></span></span>
-                                        <span id="ba-raid-defensetype" class="ba-info-pill"><img src="images/ui/Type_Defense.png"><span id="ba-raid-defensetype-label"></span></span>            
-                                        <span id="ba-raid-enemy-size" class="ba-student-info ba-panel ba-panel text-bold" style="transition-duration: 0s;"></span>
-                                    </div>
-                                    <div id="ba-raid-enemy-stats" class="ba-stats mb-2">
+                                    <div id="ba-raid-enemy-info" class="enemy-info-panel mb-2">
+                                        <div class="d-flex gap-3 enemy-attributes" style="min-width: 0;">
+                                            <div id="ba-raid-enemy-icon" class="drop-shadow enemy-select-icon large">
+                                                <div class="icon-enemy"><img src=""></div>
+                                            </div>
+                                            <div class="flex-fill d-flex flex-column justify-content-between gap-2" style="min-width: 0;">
+                                                <div class="d-flex gap-2">
+                                                    <div id="raid-enemy-list" class="dropdown-character-list">
+                                                        <button class="btn-pill" data-bs-toggle="dropdown">
+                                                            <span class="active-name label"></span>
+                                                            <i class="caret fa-solid fa-caret-down me-2"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start">
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex gap-1 flex-wrap">
+                                                    <!-- <span id="ba-raid-enemy-class" class="ba-info-pill-s"><span class="label"></span></span> -->
+                                                    <span id="ba-raid-enemy-level" class="ba-info-pill-s bg-theme text-bold"><span class="label"></span></span>
+                                                    <span id="ba-raid-enemy-attacktype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Attack_s.png"></span><span class="label" id="ba-raid-enemy-attacktype-label"></span></span>
+                                                    <span id="ba-raid-enemy-defensetype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Defense_s.png"></span><span class="label" id="ba-raid-enemy-defensetype-label"></span></span>
+                                                    <span id="ba-raid-enemy-size" class="ba-info-pill-s bg-theme text-bold"><span class="label"></span></span>
+                                                    <span id="ba-raid-enemy-terrain" class="ba-info-pill-s bg-theme text-bold"><span class="icon-terrain-strength"><img width="20" height="20"></span><span class="label"></span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="ba-raid-enemy-stats" class="ba-stats">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +106,7 @@
                                     </div>
                                 </div>
                                 <div id="ba-raid-page-rewards" class="tab-pane fade">
-                                    <div id="ba-raid-rewards" class="ba-panel p-2 pb-0">
+                                    <div id="ba-raid-rewards" class="ba-panel p-2 item-icon-list">
                                     </div>
                                     <div id="ba-raid-season">
                                         <h5 class="text-bold mt-3" data-localize-id="ui,rewards_season"></h5>
@@ -140,27 +160,27 @@
                             <div id="ba-stage-enemies" class="selection-grid enemy selection-grid-flex enemy-list">
                             </div>
                         </div>
-                        <div class="ba-panel p-2">
-                            <div id="ba-stage-enemy-info" class="">
-                                <div class="d-flex align-items-center px-2 mb-1">
-                                    <div class="flex-fill me-2">
-                                        <h2 id="ba-stage-enemy-name" class="title-text mb-2"></h2>
-                                        <div class="mb-3">
-                                            <span id="ba-stage-enemy-rank" class="ba-info-pill-s bg-theme text-bold" style="transition-duration: 0s;"></span>
-                                            <span id="ba-stage-enemy-class" class="ba-info-pill-s" style="transition-duration: 0s;"></span>
-                                        </div>
-                                        <div class="d-flex flex-wrap align-items-center mb-2">
-                                            <span id="ba-stage-enemy-attacktype" class="ba-info-pill"><img src="images/ui/Type_Attack.png"><span id="ba-stage-enemy-attacktype-label"></span></span>
-                                            <span id="ba-stage-enemy-defensetype" class="ba-info-pill"><img src="images/ui/Type_Defense.png"><span id="ba-stage-enemy-defensetype-label"></span></span>
-                                            <span id="ba-stage-enemy-size" class="ba-student-info ba-panel ba-panel text-bold" style="transition-duration: 0s;"></span>
-                                        </div>
-                                        <div class="d-flex flex-row d-none">
+
+                        <div id="ba-stage-enemy-info" class="enemy-info-panel">
+                            <div class="enemy-attributes">
+                                <div class="d-flex gap-3">
+                                    <div id="ba-stage-enemy-icon" class="drop-shadow enemy-select-icon large">
+                                        <div class="icon-enemy"><img src=""></div>
+                                    </div>
+                                    <div class="flex-fill d-flex flex-column justify-content-between gap-2">
+                                        <h3 id="ba-stage-enemy-name" class="title-text mb-0"></h3>
+                                        <div class="d-flex gap-1 flex-wrap">
+                                            <span id="ba-stage-enemy-class" class="ba-info-pill-s"><span class="label"></span></span>
+                                            <span id="ba-stage-enemy-level" class="ba-info-pill-s bg-theme text-bold"><span class="label"></span></span>
+                                            <span id="ba-stage-enemy-attacktype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Attack_s.png"></span><span class="label"></span></span>
+                                            <span id="ba-stage-enemy-defensetype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Defense_s.png"></span><span class="label"></span></span>
+                                            <span id="ba-stage-enemy-size" class="ba-info-pill-s bg-theme text-bold"><span class="label"></span></span>
+                                            <span id="ba-stage-enemy-terrain" class="ba-info-pill-s bg-theme text-bold"><span class="icon-terrain-strength"><img width="20" height="20"></span><span class="label"></span></span>
                                         </div>
                                     </div>
-                                    <img id="ba-stage-enemy-img" src="" style="width: 150px; image-rendering: -webkit-optimize-contrast;">
                                 </div>
-                                <div id="ba-stage-enemy-stat-table" class="ba-stats mb-0">
-                                </div>
+                            </div>
+                            <div id="ba-stage-enemy-stat-table" class="ba-stats mb-0">
                             </div>
                         </div>
                     </div>

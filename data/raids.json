@@ -302,7 +302,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_CHESED_EXSKILL01",
                     "NameEn": "Call of the Throne",
-                    "DescEn": "Summons automaton soldiers. Chesed's ATG gauge gradually fills while soldiers are alive and resets after all soldiers have been defeated. Automaton soldiers also increase Chesed's groggy gauge <?1>when defeated.\nIf not killed within 20s, automaton soldiers will use the skill \"Self-Destruct Activated\", changing their <s:FormChange> to a self-destruct attack that deals 3000% damage to enemies in a circular area around them.\nWhenever a Goliath is defeated, releases an EMP blast that inflicts <c:Paralysis> on all other automaton soldiers in a circular area for 3s.",
+                    "DescEn": "Summons automaton soldiers. Chesed's ATG gauge gradually fills while soldiers are alive and resets after all soldiers have been defeated. Automaton soldiers also fill Chesed's groggy gauge (25% total per wave) <?1>when defeated.\nIf not killed within 20s, automaton soldiers will use the skill \"Self-Destruct Activated\", changing their <s:FormChange> to a self-destruct attack that deals 3000% damage to enemies in a circular area around them.\nWhenever a Goliath is defeated, releases an EMP blast that inflicts <c:Paralysis> on all other automaton soldiers in a circular area for 3s.",
                     "ParametersEn": [
                         [
                             "",
@@ -362,7 +362,7 @@
                         ]
                     ],
                     "NameTh": "เสียงเพรียกจากบัลลังก์",
-                    "DescTh": "เรียกทหารจักรกล\nขณะที่เรียกทหารนี้ออกมา ATG จะเพิ่มขึ้นต่อเนื่องและจะรีเซ็ทหากทหารจักรกลทั้งหมดถูกทำลายพร้อมทั้งเพิ่มเกจมึนงงให้กับเชเซ็ด <?1>\nหากเวลาผ่านไป 20 วินาที ทหารจักรกลจะใช้ [โหมดทำลายตัวเอง], ทำให้การ<s:FormChange>เปลี่ยนเป็นการทำลายตัวเองเพื่อสร้างความเสียหาย 3000% ของค่าโจมตีให้กับศัตรู\nเมื่อหุ่นยักษ์โกลิอัทถูกทำลาย, หุ่นยักษ์จะปล่อยคลื่นไฟฟ้าที่จะทำให้ทหารจักรกลทั้งหมดในรัศมีเป็น<c:Paralysis> (เป็นเวลา 3 วินาที)",
+                    "DescTh": "เรียกทหารจักรกล\nขณะที่เรียกทหารนี้ออกมา ATG จะเพิ่มขึ้นต่อเนื่องและจะรีเซ็ทหากทหารจักรกลทั้งหมดถูกทำลายพร้อมทั้งเพิ่มเกจมึนงงให้กับเชเซ็ด 25% ต่อเวฟ <?1>\nหากเวลาผ่านไป 20 วินาที ทหารจักรกลจะใช้ [โหมดสละชีพ], ทำให้การ<s:FormChange>เปลี่ยนเป็นการทำลายตัวเองเพื่อสร้างความเสียหาย 3000% ของค่าโจมตีให้กับศัตรู\nเมื่อหุ่นยักษ์โกลิอัทถูกทำลาย, หุ่นยักษ์จะปล่อยคลื่นไฟฟ้าที่จะทำให้ทหารจักรกลทั้งหมดในรัศมีเป็น<c:Paralysis> (เป็นเวลา 3 วินาที)",
                     "ParametersTh": [
                         [
                             "",
@@ -665,7 +665,7 @@
                         }
                     ],
                     "NameEn": "Keep Rollin' Rollin' Rollin'! (Shiro)",
-                    "DescEn": "Summons a rolling bomb that deals <?1> damage to enemies in a straight line.\nThe bomb deals 300% damage to obstacles in its path. If an obstacle is hit but not destroyed, the bomb will bounce in the opposite direction towards Shiro, increasing her groggy gauge by a significant amount.<?2>",
+                    "DescEn": "Summons a rolling bomb that deals <?1> damage to enemies in a straight line.\nThe bomb deals 300% damage to obstacles in its path. If an obstacle is hit but not destroyed, the bomb will bounce in the opposite direction towards Shiro, filling her groggy gauge by <?3>.<?2>",
                     "ParametersEn": [
                         [
                             "600%",
@@ -682,6 +682,14 @@
                             "",
                             "",
                             "\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>600,000</b> damage.\nIf Shiro is hit, also increases her <d:DamagedRatio> by 50% for 40s."
+                        ],
+                        [
+                            "43,000",
+                            "80,000",
+                            "110,000",
+                            "200,000",
+                            "1,500,000",
+                            "4,000,000"
                         ]
                     ],
                     "NameJp": "転がれ転がれー！（シロ）",
@@ -742,6 +750,14 @@
                             "",
                             "",
                             "\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>600,000</b> damage.\nIf Shiro is hit, also increases her <d:DamagedRatio> by 50% for 40s."
+                        ],
+                        [
+                            "43,000",
+                            "80,000",
+                            "110,000",
+                            "200,000",
+                            "1,500,000",
+                            "4,000,000"
                         ]
                     ],
                     "NameCn": "滚动吧！！(白)",
@@ -762,10 +778,18 @@
                             "",
                             "",
                             "\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>600,000</b> damage.\nIf Shiro is hit, also increases her <d:DamagedRatio> by 50% for 40s."
+                        ],
+                        [
+                            "43,000",
+                            "80,000",
+                            "110,000",
+                            "200,000",
+                            "1,500,000",
+                            "4,000,000"
                         ]
                     ],
                     "NameTh": "กลิ้งกลิ้งกลิ้ง!! (ชิโระ)",
-                    "DescTh": "เรียกลูกบอลที่สร้างความเสียหาย <?1> ของค่าโจมตี\nสร้างความเสียหาย 300% ของค่าโจมตีกับวัตถุกำบัง ถ้าวัตถุกำบังไม่ถูกทำลายจะกระเด็นออกมาทางชิโระ<?2>",
+                    "DescTh": "เรียกลูกบอลที่สร้างความเสียหาย <?1> ของค่าโจมตี\nสร้างความเสียหาย 300% ของค่าโจมตีกับวัตถุกำบัง ถ้าวัตถุกำบังไม่ถูกทำลายจะกระเด็นออกมาทางชิโระ สร้างความเสียหายให้กับชิโระและเพิ่มเกจมึนงงให้กับชิโระจำนวน <?3><?2>",
                     "ParametersTh": [
                         [
                             "600%",
@@ -782,6 +806,14 @@
                             "",
                             "",
                             "\nสร้างความเสียหายเพิ่มเติม <b>600,000</b> เมื่อโจมตีศัตรูที่<d:MoveSpeed>ลดลง\nเพิ่ม<d:DamagedRatio> 50% เมื่อชิโระโดนการโจมตีของตัวเอง (เป็นเวลา 40 วินาที)"
+                        ],
+                        [
+                            "43,000 หน่วย",
+                            "80,000 หน่วย",
+                            "110,000 หน่วย",
+                            "200,000 หน่วย",
+                            "1,500,000 หน่วย",
+                            "4,000,000 หน่วย"
                         ]
                     ]
                 },
@@ -812,7 +844,7 @@
                         }
                     ],
                     "NameEn": "Charge! (Kuro)",
-                    "DescEn": "Summons theme park rides that deals <?1> damage to enemies in a straight line.\nIf Kuro is hit by this attack herself, increases Kuro's groggy gauge by a significant amount.<?2>",
+                    "DescEn": "Summons theme park rides that deals <?1> damage to enemies in a straight line.\nIf Kuro is hit by this attack herself, fills Kuro's groggy gauge by <?3>.<?2>",
                     "ParametersEn": [
                         [
                             "400%",
@@ -829,6 +861,14 @@
                             "",
                             "",
                             "\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>600,000</b> damage.\nIf Kuro is hit, also increases <d:DamagedRatio> by 50% for 40s."
+                        ],
+                        [
+                            "43,000",
+                            "80,000",
+                            "110,000",
+                            "200,000",
+                            "1,500,000",
+                            "4,000,000"
                         ]
                     ],
                     "NameJp": "突進だぁ！！！（クロ）",
@@ -889,6 +929,14 @@
                             "",
                             "",
                             "\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>600,000</b> damage.\nIf Kuro is hit, also increases <d:DamagedRatio> by 50% for 40s."
+                        ],
+                        [
+                            "43,000",
+                            "80,000",
+                            "110,000",
+                            "200,000",
+                            "1,500,000",
+                            "4,000,000"
                         ]
                     ],
                     "NameCn": "突击-！！！(黑)",
@@ -909,10 +957,18 @@
                             "",
                             "",
                             "\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>600,000</b> damage.\nIf Kuro is hit, also increases <d:DamagedRatio> by 50% for 40s."
+                        ],
+                        [
+                            "43,000",
+                            "80,000",
+                            "110,000",
+                            "200,000",
+                            "1,500,000",
+                            "4,000,000"
                         ]
                     ],
                     "NameTh": "พุ่งไปเลย!!! (คุโระ)",
-                    "DescTh": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรู\nATG ยิ่งสูงยิ่งทำความเสียหายรุนแรงขึ้น<?2>",
+                    "DescTh": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรู\nATG ยิ่งสูงยิ่งทำความเสียหายรุนแรงขึ้น หากคุโระโดนการโจมตีของตัวเองจะเพิ่มเกจมึนงงให้กับคุโระจำนวน <?3><?2>",
                     "ParametersTh": [
                         [
                             "400%",
@@ -929,6 +985,14 @@
                             "",
                             "",
                             "\nสร้างความเสียหายเพิ่มเติม <b>600,000</b> เมื่อโจมตีศัตรูที่<d:MoveSpeed>ลดลง\nเพิ่ม<d:DamagedRatio> 50% เมื่อคุโระโดนการโจมตีของตัวเอง (เป็นเวลา 40 วินาที)"
+                        ],
+                        [
+                            "43,000 หน่วย",
+                            "80,000 หน่วย",
+                            "110,000 หน่วย",
+                            "200,000 หน่วย",
+                            "1,500,000 หน่วย",
+                            "4,000,000 หน่วย"
                         ]
                     ]
                 },
@@ -972,7 +1036,7 @@
                     "NameEn": "Horror of Slumpia",
                     "DescEn": "Decreases all enemies' <d:HealEffectiveness> by 80%. This debuff cannot be removed.",
                     "NameJp": "スランピアの恐怖",
-                    "DescJp": "全ての敵の<d:HealEffectiveness>を80%減少",
+                    "DescJp": "全ての敵の<d:HealEffectiveness>率を80%減少",
                     "NameKr": "슬럼피아의 공포",
                     "DescKr": "모든 적 <d:HealEffectiveness> 80% 감소",
                     "NameTw": "史林皮亞的恐懼",
@@ -1004,7 +1068,7 @@
             ],
             "IsReleasedInsane": [
                 true,
-                false
+                true
             ],
             "PathName": "Hieronymus",
             "Faction": "CommunioSanctorum",
@@ -1086,7 +1150,7 @@
                         ]
                     ],
                     "NameJp": "ウルガータ",
-                    "DescJp": "敵1人に対して、<d:Hieronymus>を付与。\n<d:Hieronymus>は攻撃力の20%分の持続ダメージを付与、10秒後に爆発し円形範囲内の敵に対して、攻撃力の325%分のダメージを与えた後、解除されます。\n<d:Hieronymus>が付与された敵のHPが100%だった場合、あるいは100%まで回復した場合にも、<d:Hieronymus>は解除されます。<?2>",
+                    "DescJp": "敵1人に対して、<d:Hieronymus>を付与。\n<d:Hieronymus>は攻撃力の20%分の持続ダメージを付与、10秒後に爆発し円形範囲内の敵に対して、攻撃力の325%分のダメージを与えた後、解除されます。\n<d:Hieronymus>が付与された敵のHPが100%だった場合、あるいは100%まで回復した場合にも、<d:Hieronymus>は解除されます。<?1>",
                     "ParametersJp": [
                         [
                             "",
@@ -1094,11 +1158,11 @@
                             "",
                             "",
                             "",
-                            "\nさらに<d:Hieronymus>の敵の<b:HealEffectiveness>を<b>3000</b>増加。（10秒間）"
+                            "\nさらに<d:Hieronymus>の敵の<b:HealEffectiveness>値を<b>3000</b>増加。（10秒間）"
                         ]
                     ],
                     "NameKr": "불가타의 경전",
-                    "DescKr": "적 1인에게 <d:Hieronymus>를 부여\n저주는 공격력의 20%만큼 지속 대미지를 주며 10초 후 폭발하여 \n원형 범위 내 적에게 공격력의 325% 만큼 대미지를 주고 사라진다.\n저주에 걸린 대상의 체력이 100%가 되면 저주는 즉시 사라진다.<?2>",
+                    "DescKr": "적 1인에게 <d:Hieronymus>를 부여\n저주는 공격력의 20%만큼 지속 대미지를 주며 10초 후 폭발하여 \n원형 범위 내 적에게 공격력의 325% 만큼 대미지를 주고 사라진다.\n저주에 걸린 대상의 체력이 100%가 되면 저주는 즉시 사라진다.<?1>",
                     "ParametersKr": [
                         [
                             "",
@@ -1134,7 +1198,7 @@
                         ]
                     ],
                     "NameTh": "คัมภีร์ศักดิ์สิทธิ์",
-                    "DescTh": "สาปศัตรู 1 เป้าหมาย\n<d:Hieronymus>สร้างความเสียหายต่อเนื่อง 20% ของค่าโจมตีและระเบิดใน 10 วินาทีต่อมา \nสร้างความเสียหาย 325% ของค่าโจมตีให้กับศัตรูในรัศมีและหายไป\nถ้าเป้าหมายที่ถูกสาปมี HP เต็ม 100% <d:Hieronymus>จะหายไปทันที<?2>",
+                    "DescTh": "สาปศัตรู 1 เป้าหมาย\n<d:Hieronymus>สร้างความเสียหายต่อเนื่อง 20% ของค่าโจมตีและระเบิดใน 10 วินาทีต่อมา \nสร้างความเสียหาย 325% ของค่าโจมตีให้กับศัตรูในรัศมีและหายไป\nถ้าเป้าหมายที่ถูกสาปมี HP เต็ม 100% <d:Hieronymus>จะหายไปทันที<?1>",
                     "ParametersTh": [
                         [
                             "",
@@ -1208,7 +1272,7 @@
                             "\nATGの値がMAXの場合、全ての敵に対して、敵の最大HPの1000%分のダメージ",
                             "\nATGの値がMAXの場合、全ての敵に対して、敵の最大HPの1000%分のダメージ",
                             "\nATGの値がMAXの場合、全ての敵に対して、敵の最大HPの1000%分のダメージ",
-                            "\nATGの値がMAXの場合、全ての敵に対して、<s:Immortal>を付与（10秒間）\nさらにHPの1000%分のダメージを付与、\n<b:HealEffectiveness>を2000増加。（10秒間）"
+                            "\nATGの値がMAXの場合、全ての敵に対して、<s:Immortal>を付与（10秒間）\nさらにHPの1000%分のダメージを付与、\n<b:HealEffectiveness>値を2000増加。（10秒間）"
                         ]
                     ],
                     "NameKr": "사막의 고행",
@@ -1288,7 +1352,7 @@
                             "\nหาก ATG เต็มจะสร้างความเสียหาย 1000% ของค่า HP สูงสุดให้กับศัตรูทั้งหมด",
                             "\nหาก ATG เต็มจะสร้างความเสียหาย 1000% ของค่า HP สูงสุดให้กับศัตรูทั้งหมด",
                             "\nหาก ATG เต็มจะสร้างความเสียหาย 1000% ของค่า HP สูงสุดให้กับศัตรูทั้งหมด",
-                            "\nหาก ATG เต็มจะทำให้ศัตรูทั้งหมด<s:Immortal> (เป็นเวลา 10 วินาที)\nสร้างความเสียหาย 1000% ของค่า HP สูงสุดให้กับศัตรูทั้งหมด\nเพิ่ม<b:HealEffectiveness>ให้กับศัตรู <b>2,000</b> (เป็นเวลา 10 วินาที)"
+                            "\nหาก ATG เต็ม ศัตรูเป้าหมายทั้งหมดจะ<s:Immortal> (เป็นเวลา 10 วินาที)\nสร้างความเสียหาย 1000% ของค่า HP สูงสุดให้กับศัตรูทั้งหมด\nเพิ่ม<b:HealEffectiveness>ให้กับศัตรู <b>2,000</b> (เป็นเวลา 10 วินาที)"
                         ]
                     ]
                 },
@@ -1323,11 +1387,11 @@
                     "DescEn": "When a relic is healed to 100% HP, it loses 95% of its HP while decreasing its <d:HealEffectiveness> by 50% for 20s and activates one of the following effects depending on the relic:\n<b>Green Relic</b>: Increases Hieronymus's <d:DamagedRatio> by 55% until the end of battle. Effect can stack up to 5 times.<?1>",
                     "ParametersEn": [
                         [
-                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, increases Hieronymus's groggy gauge significantly and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
-                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, increases Hieronymus's groggy gauge significantly and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
-                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, increases Hieronymus's groggy gauge significantly and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
-                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, increases Hieronymus's groggy gauge significantly and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
-                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, increases Hieronymus's groggy gauge significantly and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
+                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, fills Hieronymus's groggy gauge to the maximum and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
+                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, fills Hieronymus's groggy gauge to the maximum and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
+                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, fills Hieronymus's groggy gauge to the maximum and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
+                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, fills Hieronymus's groggy gauge to the maximum and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
+                            "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, fills Hieronymus's groggy gauge to the maximum and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
                             ""
                         ]
                     ],
@@ -1436,7 +1500,7 @@
                     "NameEn": "Ominous Light (Relic)",
                     "DescEn": "When the violet relic's HP reaches 0%, increases the <b:ATK> of all students by <b>25%</b> but decreases their <d:HealEffectiveness> by <b>7,000</b>. Also decreases Hieronymus's <d:DEF> by <b>1,500</b>.\nFollowing this, students inflicted with <d:Hieronymus> will have their <b:HealEffectiveness> increased by a further <b>4,000</b> for 10s.\nThe violet relic cannot be targeted by normal attacks or basic skills.",
                     "NameJp": "不浄なる光（聖遺物）",
-                    "DescJp": "聖遺物のHPが0%になるとスキル発動。\n紫色の聖遺物の場合、全てのストライカー、スペシャル生徒の<b:ATK>を25%増加し\n<d:HealEffectiveness>を7000減少。\nさらにヒエロニムスの<d:DEF>を1500減少。\n発動後、<d:Hieronymus>になった生徒の<b:HealEffectiveness>を4000増加（10秒間）\n（紫色の聖遺物は通常攻撃、ノーマルスキルのターゲットになりません）",
+                    "DescJp": "聖遺物のHPが0%になるとスキル発動。\n紫色の聖遺物の場合、全てのストライカー、スペシャル生徒の<b:ATK>を25%増加し\n<d:HealEffectiveness>値を7000減少。\nさらにヒエロニムスの<d:DEF>を1500減少。\n発動後、<d:Hieronymus>になった生徒の<b:HealEffectiveness>値を4000増加（10秒間）\n（紫色の聖遺物は通常攻撃、ノーマルスキルのターゲットになりません）",
                     "NameKr": "불길한 빛 (성유물)",
                     "DescKr": "성유물 체력이 0% 가 되면 스킬 발동\n자색 성유물: 모든 스트라이커, 스페셜 학생의 <b:ATK>이 25% 증가하고\n<d:HealEffectiveness>이 7000 만큼 감소한다.\n추가로 예로니무스의 <d:DEF>이 1500 만큼 감소한다.\n이후 <d:Hieronymus>를 받는 아군의 <b:HealEffectiveness>이 4000 만큼 증가한다. (10초간)\n(자색 성유물은 일반 공격, 기본 스킬의 타겟이 되지 않습니다.)",
                     "NameTw": "不祥之光（聖遺物）",
@@ -1444,7 +1508,7 @@
                     "NameCn": null,
                     "DescCn": null,
                     "NameTh": "แสงกาลกิณี (เรลิก)",
-                    "DescTh": "เมื่อ HP ของเรลิกม่วงเหลือ 0% เพิ่ม<b:ATK> ของฝ่ายเรา <b>25%</b>\nลด<d:HealEffectiveness> 7000\nลด<d:DEF>ของไฮโรนีมัสลง 1500\nเป้าหมายที่มี<d:Hieronymus> จะได้รับ<b:HealEffectiveness> เพิ่ม 4000 (เป็นเวลา 10 วินาที)\nเรลิกม่วงจะไม่ถูกเล็งโดยการโจมตีปกติและสกิลพื้นฐาน"
+                    "DescTh": "เมื่อ HP ของเรลิกเป็น 0% จะเปิดใช้งานสกิล\nเรลิกม่วง : เพิ่ม<b:ATK> ของฝ่ายเรา <b>25%</b>\nลด<d:HealEffectiveness> 7000\nลด<d:DEF>ของไฮโรนีมัสลง 1500\nเป้าหมายที่มี<d:Hieronymus> จะได้รับ<b:HealEffectiveness> เพิ่ม 4000 (เป็นเวลา 10 วินาที)\nเรลิกม่วงจะไม่ตกเป็นเป้าหมายของการโจมตีปกติและสกิลพื้นฐาน"
                 }
             ],
             "NameEn": "Hieronymus",
@@ -1672,7 +1736,7 @@
                         }
                     ],
                     "NameEn": "Endless Burning Heart",
-                    "DescEn": "Every 20s, each component of KAITEN FX Mk.0 will activate in the following order: Right Arm (pink), Chest (red), Left Arm (green). When a component is activated, KAITEN FX Mk.0 will gain one of the following effects:\n<b>Right Arm (pink)</b>: Increases <b:ATK> by 50%.\n<b>Chest (red)</b>: KAITEN FX Mk.0's EX skills will also inflict <c:Stunned> for 5s.\n<b>Left Arm (green)</b>: Increases <b:DEF> by <b>1,000</b><?1>.\nIf a total of <b><?2></b> damage is dealt while a component is active, that component will be destroyed, increasing KAITEN FX Mk.0's groggy gauge significantly and disabling both the component from activating and the corresponding EX skill until the end of battle.",
+                    "DescEn": "Every 20s, each component of KAITEN FX Mk.0 will activate in the following order: Right Arm (pink), Chest (red), Left Arm (green). When a component is activated, KAITEN FX Mk.0 will gain one of the following effects:\n<b>Right Arm (pink)</b>: Increases <b:ATK> by 50%.\n<b>Chest (red)</b>: KAITEN FX Mk.0's EX skills will also inflict <c:Stunned> for 5s.\n<b>Left Arm (green)</b>: Increases <b:DEF> by <b>1,000</b><?1>.\nIf a total of <b><?2></b> damage is dealt while a component is active, that component will be destroyed, filling KAITEN FX Mk.0's groggy gauge to the maximum and disabling both the component from activating and the corresponding EX skill until the end of battle.",
                     "ParametersEn": [
                         [
                             "",
@@ -1700,7 +1764,7 @@
                             "",
                             "",
                             "",
-                            "、さらにExスキルの攻撃時、敵の<d:HealEffectiveness>を80%減少（30秒間）"
+                            "、さらにExスキルの攻撃時、敵の<d:HealEffectiveness>率を80%減少（30秒間）"
                         ],
                         [
                             "70000",
@@ -1772,7 +1836,7 @@
                         ]
                     ],
                     "NameTh": "หัวใจที่เร่าร้อนไม่สิ้นสุด",
-                    "DescTh": "เปิดใช้งานแขนขวา (พิงค์), หน้าอก (เรด) และแขนซ้าย (กรีน) แต่ละส่วนทุก 20 วินาที ตามลำดับ\nแขนขวา (พิงค์): เพิ่ม<b:ATK> 50%\nหน้าอก (เรด): เมื่อใช้สกิล EX โจมตีจะทำให้เป้าหมาย<c:Stunned> (เป็นเวลา 5 วินาที)\nแขนซ้าย (กรีน): เพิ่ม<b:DEF> 1000<?1>\nถ้าส่วนที่เปิดใช้งานได้รับความเสียหายเกินกว่า <?2> ส่วนนั้นจะถูกทำลาย และไม่สามารถใช้งานได้อีก\nสกิลของส่วนที่ถูกทำลายจะใช้งานไม่ได้",
+                    "DescTh": "เปิดใช้งานแขนขวา (พิงค์), หน้าอก (เรด) และแขนซ้าย (กรีน) แต่ละส่วนทุก 20 วินาที ตามลำดับ\nแขนขวา (พิงค์): เพิ่ม<b:ATK> 50%\nหน้าอก (เรด): เมื่อใช้สกิล EX โจมตีจะทำให้เป้าหมาย<c:Stunned> (เป็นเวลา 5 วินาที)\nแขนซ้าย (กรีน): เพิ่ม<b:DEF> 1000<?1>\nถ้าส่วนที่เปิดใช้งานได้รับความเสียหายเกินกว่า <?2> ส่วนนั้นจะถูกทำลาย และไม่สามารถใช้งานได้อีก\nสกิลของส่วนที่ถูกทำลายจะใช้งานไม่ได้และตัวของ Kaiten FX Mk.0 จะอยู่ในสถานะมึนงง",
                     "ParametersTh": [
                         [
                             "",
@@ -2109,17 +2173,77 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL04",
                     "NameEn": "Absorb Minion",
-                    "DescEn": "Absorbs all Perorominions. For every Perorominion that was knocked down, increases Perorodzilla's groggy gauge by a fixed amount. When Perorodzilla's groggy gauge is full, summons 5 Small Perorominions with reduced defense. Small Perorominions are <s:Immortal> and 100% of the damage taken by them will also be taken by Perorodzilla.",
+                    "DescEn": "Absorbs all Perorominions and increases ATG gauge by 50%. For every Perorominion that was knocked down, fills <?1> of Perorodzilla's groggy gauge. When Perorodzilla's groggy gauge is full, summons 5 Small Perorominions with reduced defense. Small Perorominions are <s:Immortal> and 100% of the damage taken by them will also be taken by Perorodzilla.",
+                    "ParametersEn": [
+                        [
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/10th</b>"
+                        ]
+                    ],
                     "NameJp": "ペロロミニオン吸収",
                     "DescJp": "転倒している大きなペロロミニオンの数に比例して、グロッキーゲージが上昇",
+                    "ParametersJp": [
+                        [
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/10th</b>"
+                        ]
+                    ],
                     "NameKr": "미니언 흡수",
                     "DescKr": "넘어진 빅 페로로 미니언의 수에 비례하여 그로기 게이지 증가",
+                    "ParametersKr": [
+                        [
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/10th</b>"
+                        ]
+                    ],
                     "NameTw": "吸收士兵",
                     "DescTw": "格羅基量表的進度與倒地的巨大佩洛洛士兵數量成正比",
+                    "ParametersTw": [
+                        [
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/10th</b>"
+                        ]
+                    ],
                     "NameCn": "吸收士兵",
                     "DescCn": "格罗基量表的进度与倒地的巨大佩洛洛士兵数量成正比",
+                    "ParametersCn": [
+                        [
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/7th</b>",
+                            "<b>1/10th</b>"
+                        ]
+                    ],
                     "NameTh": "ดูดซับลูกสมุน",
-                    "DescTh": "เกจมึนงงจะเพิ่มขึ้นตามจำนวนลูกสมุนบิ๊กเพโรโร่ที่ล้มลง/\nหากเกจมึนงงเต็ม เพโรโร่ซิลล่าจะอยู่ในสถานะมึนงงพร้อมกับเรียกลูกสมุนเพโรโร่ออกมา 5 ตัว เมื่อลูกสมุนเพโรโร่ได้รับความเสียหาย สร้างความเสียหาย 100% ของความเสียหายที่ได้รับให้กับเพโรโร่ซิลล่าด้วย"
+                    "DescTh": "เพิ่มเกจมึนงงของตัวเอง <?1> ของเกจต่อจำนวนลูกสมุนบิ๊กเพโรโร่ที่ล้มลง และเพิ่มเกจ ATG ของตัวเองขึ้น 50%/\nหากเกจมึนงงเต็ม เพโรโร่ซิลล่าจะอยู่ในสถานะมึนงงพร้อมกับเรียกลูกสมุนเพโรโร่ออกมา 5 ตัว เมื่อลูกสมุนเพโรโร่ได้รับความเสียหาย สร้างความเสียหาย 100% ของความเสียหายที่ได้รับให้กับเพโรโร่ซิลล่าด้วย",
+                    "ParametersTh": [
+                        [
+                            "<b>14.28%</b>",
+                            "<b>14.28%</b>",
+                            "<b>14.28%</b>",
+                            "<b>14.28%</b>",
+                            "<b>14.28%</b>",
+                            "<b>10%</b>"
+                        ]
+                    ]
                 },
                 {
                     "Id": "Perorozilla01Ex10",
@@ -2306,17 +2430,67 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL03",
                     "NameEn": "Erosion Tower Construction",
-                    "DescEn": "Summons an Erosion Tower, decreasing the <d:CostRegen> of enemies by <b>350</b> in a circular area around it and forcing nearby defense turrets to attack enemies instead of Hod. The tower's area of effect expands every 15s.",
+                    "DescEn": "Summons <?1> decreasing the <d:CostRegen> of enemies by <b>350</b> in a circular area around it (effect does not stack multiple times) and forcing nearby defense turrets to attack enemies instead of Hod. The tower's area of effect expands every 15s.\nWhen Erosion Towers summoned by Hod are defeated, decreases Hod's ATG gauge by 50% and fills Hod's groggy gauge by 25%.",
+                    "ParametersEn": [
+                        [
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "two Erosion Towers, each"
+                        ]
+                    ],
                     "NameJp": "インベイドピラー生成",
                     "DescJp": "インベイドピラーを召喚。インベイドピラーは15秒毎に、侵食範囲を拡大していきます。\n侵食範囲内に入った敵の<d:CostRegen>を350減少。侵食範囲内に入ったフィールドターレットは、ホドではなく敵を攻撃するようになります。",
+                    "ParametersJp": [
+                        [
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "two Erosion Towers, each"
+                        ]
+                    ],
                     "NameKr": "침식 타워 생성",
                     "DescKr": "침식 타워를 소환합니다. 침식 타워는 15초마다 침식 범위를 넓혀갑니다. \n침식 범위 내에 들어온 적은 <d:CostRegen>이 350 감소합니다. 침식 범위 내에 들어온 방어 포탑은 아군을 공격합니다.",
+                    "ParametersKr": [
+                        [
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "two Erosion Towers, each"
+                        ]
+                    ],
                     "NameTw": "侵蝕之塔生成",
                     "DescTw": null,
+                    "ParametersTw": [
+                        [
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "two Erosion Towers, each"
+                        ]
+                    ],
                     "NameCn": null,
                     "DescCn": null,
+                    "ParametersCn": [
+                        [
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "an Erosion Tower,",
+                            "two Erosion Towers, each"
+                        ]
+                    ],
                     "NameTh": "สร้างเสากัดกร่อน",
-                    "DescTh": "สร้างเสากัดกร่อนออกมา<?1> เสากัดกร่อนจะขยายขอบเขตการกัดกร่อนขึ้นทุก 15 วินาที\nลด<d:CostRegen> <b>350</b> กับศัตรูที่อยู่ในขอบเขตการกัดกร่อน\nป้อมปืนคุ้มกันที่เข้ามาในขอบเขตการกัดกร่อนจะโจมตีฝ่ายเรา",
+                    "DescTh": "สร้างเสากัดกร่อนออกมา<?1> เสากัดกร่อนจะขยายขอบเขตการกัดกร่อนขึ้นทุก 15 วินาที\nลด<d:CostRegen> <b>350</b> กับศัตรูที่อยู่ในขอบเขตการกัดกร่อน\nป้อมปืนคุ้มกันที่เข้ามาในขอบเขตการกัดกร่อนจะโจมตีฝ่ายเรา\nเมื่อเสากัดกร่อนถูกทำลาย, ลดเกจ ATG ของ Hod ลง 50% และเพิ่มเกจมึนงงของ Hod 25%",
                     "ParametersTh": [
                         [
                             "",
@@ -2411,7 +2585,7 @@
                         }
                     ],
                     "NameEn": "Behind the Glory",
-                    "DescEn": "Hod and all summoned Erosion Towers are immune to the effects of Crowd Control. However, Crowd Control abilities will fill their circular <b>CC gauge</b> proportional to the duration of the effect that would've been inflicted.<?2>\nOnce the CC gauge reaches a total equivalent to <?1> of Crowd Control duration, inflicts the following effects:\n<b>Hod</b>: Increases <d:DamagedRatio> by 300% for 30s and decrease Hod's ATG gauge.\n<b>Erosion Tower</b>: Increases <d:DamagedRatio> by 300% for 30s and reduce the tower's area of effect by 1 stage.",
+                    "DescEn": "Hod and all summoned Erosion Towers are immune to the effects of Crowd Control. However, Crowd Control abilities will fill their circular <b>CC gauge</b> proportional to the duration of the effect that would've been inflicted.<?2>\nOnce the CC gauge reaches a total equivalent to <?1> of Crowd Control duration, inflicts the following effects:\n<b>Hod</b>: Increases <d:DamagedRatio> by 300% for 30s, decreases Hod's ATG gauge by 50% and fills Hod's groggy gauge by 25%.\n<b>Erosion Tower</b>: Increases <d:DamagedRatio> by 300% for 30s and reduces the tower's area of effect by 1 stage.",
                     "ParametersEn": [
                         [
                             "6s",
@@ -2511,7 +2685,7 @@
                         ]
                     ],
                     "NameTh": "อีกด้านของเกียรติยศ",
-                    "DescTh": "Hod และเสากัดกร่อนจะไม่ได้รับผลจากเอฟเฟคกดขี่ แต่ระยะเวลาของเอฟเฟคกดขี่ที่ได้รับจะถูกนำไปเพิ่มเกจพิเศษแทน<?2>\nเมื่อเกจพิเศษมีระยะเวลาของเอฟเฟคกดขี่ครบ <?1> จะส่งผลต่อไปนี้\nHod : เพิ่ม<d:DamagedRatio> 300% (เป็นเวลา 30 วินาที), เพิ่มเกจมึนงงและลด ATG\nเสากัดกร่อน : เพิ่ม<d:DamagedRatio> 300% (เป็นเวลา 30 วินาที), ลดขอบกัดกร่อน 1 ขั้น",
+                    "DescTh": "Hod และเสากัดกร่อนจะไม่ได้รับผลจากเอฟเฟกต์กดขี่ แต่ระยะเวลาของเอฟเฟกต์กดขี่ที่ได้รับจะถูกนำไปเพิ่มเกจพิเศษแทน<?2>\nเมื่อเกจพิเศษมีระยะเวลาของเอฟเฟกต์กดขี่ครบ <?1> จะส่งผลต่อไปนี้\nHod : เพิ่ม<d:DamagedRatio> 300% (เป็นเวลา 30 วินาที), เพิ่มเกจมึนงงของ Hod 25% และลดเกจ ATG ลง 50%\nเสากัดกร่อน : เพิ่ม<d:DamagedRatio> 300% (เป็นเวลา 30 วินาที), ลดขอบกัดกร่อน 1 ขั้น",
                     "ParametersTh": [
                         [
                             "6 วินาที",
@@ -2527,7 +2701,7 @@
                             "",
                             "",
                             "",
-                            " ยิ่งเรามีประสิทธิภาพกดขี่สูงเท่าไหร่, เอฟเฟคกดขี่ที่ใช้ก็จะยิ่งเพิ่มเกจพิเศษเยอะขึ้นไปด้วย"
+                            " ยิ่งเรามีประสิทธิภาพกดขี่สูงเท่าไหร่, เอฟเฟกต์กดขี่ที่ใช้ก็จะยิ่งเพิ่มเกจพิเศษมากขึ้นไปด้วย"
                         ]
                     ]
                 },
@@ -2547,7 +2721,7 @@
                     "NameCn": null,
                     "DescCn": null,
                     "NameTh": "เงาแห่งเกียรติยศ",
-                    "DescTh": "Hod และเสากัดกร่อนจะมีค่าต้านทานคริเพิ่ม 400%\nเสากัดกร่อนจะไม่ได้รับผลจากเอฟเฟค<d:ConcentratedTarget>"
+                    "DescTh": "Hod และเสากัดกร่อนจะมีค่าต้านทานคริเพิ่ม 400%\nเสากัดกร่อนจะไม่ได้รับผลจากเอฟเฟกต์<d:ConcentratedTarget>"
                 }
             ],
             "NameEn": "Hod",
@@ -2715,7 +2889,7 @@
                     "NameCn": null,
                     "DescCn": null,
                     "NameTh": "ทรี ไลท์ มอนท์",
-                    "DescTh": "Goz และร่างแยกจะทำการส่องแสงสามสีไปยังพื้นที่ด้านหน้าของตัวเอง, หลังจากนั้นบริเวณที่ถูกแสงสีเดียวกับของร่างแยกส่องจะระเบิดและสร้างความเสียหาย 1500% ของค่าโจมตีให้กับศัตรูที่อยู่ในพื้นที่นั้น"
+                    "DescTh": "Goz และร่างแยกจะทำการส่องแสงไปยังพื้นที่ด้านหน้าของตัวเอง, หลังจากนั้นบริเวณที่ถูกแสงของร่างแยกส่องจะระเบิดและสร้างความเสียหาย 1500% ของค่าโจมตีให้กับศัตรูที่อยู่ในพื้นที่นั้น"
                 },
                 {
                     "Id": "GozEx03",
@@ -2819,7 +2993,7 @@
                         ]
                     ],
                     "NameTh": "สครีม ไรเดอร์",
-                    "DescTh": "ทุกช่วงเวลาหนึ่ง, สครีม ไรเดอร์จะปรากฏตัวออกมาเพื่อสร้างความเสียหาย 1200% ของค่าโจมตีให้กับศัตรูที่อยู่ในเส้นทางของมัน<?1>\nสครีม ไรเดอร์จะทำการเรียกทหารจักรกลสลัมเพียออกมาจากตำแหน่งที่มันปรากฏตัวขึ้น",
+                    "DescTh": "ทุกช่วงเวลาหนึ่ง, สครีม ไรเดอร์จะปรากฏตัวออกมาเพื่อสร้างความเสียหาย 1200% ของค่าโจมตีให้กับศัตรูที่อยู่ในเส้นทางของมันพร้อมทั้งผลักศัตรูออกไปด้านข้าง<?1>\nสครีม ไรเดอร์จะทำการเรียกทหารจักรกลสลัมเพียออกมาจากตำแหน่งที่มันปรากฏตัวขึ้น",
                     "ParametersTh": [
                         [
                             "",
@@ -2873,7 +3047,7 @@
                         ]
                     ],
                     "NameJp": "Prank or Protect",
-                    "DescJp": "<b:Shield>効果がある場合、ゴズが与える全てのダメージを<?1>減少/\n<d:HealEffectiveness>を<?2>減少",
+                    "DescJp": "<b:Shield>効果がある場合、ゴズが与える全てのダメージを<?1>減少/\n<d:HealEffectiveness>率を<?2>減少",
                     "ParametersJp": [
                         [
                             "75%",
@@ -25270,6 +25444,555 @@
                     ]
                 ]
             ]
+        },
+        {
+            "Season": 45,
+            "RaidId": 4,
+            "Terrain": "Indoor",
+            "Start": 1672797600,
+            "End": 1673377200,
+            "Rewards": [
+                [
+                    250000,
+                    [
+                        [
+                            2000001,
+                            16
+                        ]
+                    ]
+                ],
+                [
+                    500000,
+                    [
+                        [
+                            10,
+                            12
+                        ]
+                    ]
+                ],
+                [
+                    750000,
+                    [
+                        [
+                            120,
+                            6
+                        ],
+                        [
+                            140,
+                            6
+                        ]
+                    ]
+                ],
+                [
+                    1000000,
+                    [
+                        [
+                            3000001,
+                            300000
+                        ]
+                    ]
+                ],
+                [
+                    1250000,
+                    [
+                        [
+                            2000002,
+                            8
+                        ]
+                    ]
+                ],
+                [
+                    1500000,
+                    [
+                        [
+                            11,
+                            6
+                        ]
+                    ]
+                ],
+                [
+                    1750000,
+                    [
+                        [
+                            121,
+                            3
+                        ],
+                        [
+                            141,
+                            3
+                        ]
+                    ]
+                ],
+                [
+                    2000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    2500000,
+                    [
+                        [
+                            2000003,
+                            4
+                        ]
+                    ]
+                ],
+                [
+                    3000000,
+                    [
+                        [
+                            12,
+                            3
+                        ]
+                    ]
+                ],
+                [
+                    3500000,
+                    [
+                        [
+                            122,
+                            2
+                        ],
+                        [
+                            142,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    4000000,
+                    [
+                        [
+                            3000003,
+                            150
+                        ]
+                    ]
+                ],
+                [
+                    4500000,
+                    [
+                        [
+                            2000004,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    5000000,
+                    [
+                        [
+                            13,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    5500000,
+                    [
+                        [
+                            123,
+                            1
+                        ],
+                        [
+                            143,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    6000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    7000000,
+                    [
+                        [
+                            2000001,
+                            32
+                        ],
+                        [
+                            2000002,
+                            16
+                        ]
+                    ]
+                ],
+                [
+                    8000000,
+                    [
+                        [
+                            10,
+                            24
+                        ],
+                        [
+                            11,
+                            12
+                        ]
+                    ]
+                ],
+                [
+                    9000000,
+                    [
+                        [
+                            120,
+                            12
+                        ],
+                        [
+                            140,
+                            12
+                        ],
+                        [
+                            121,
+                            6
+                        ],
+                        [
+                            141,
+                            6
+                        ]
+                    ]
+                ],
+                [
+                    10000000,
+                    [
+                        [
+                            3000001,
+                            500000
+                        ],
+                        [
+                            3000003,
+                            150
+                        ]
+                    ]
+                ],
+                [
+                    12000000,
+                    [
+                        [
+                            2000003,
+                            4
+                        ],
+                        [
+                            2000004,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    14000000,
+                    [
+                        [
+                            12,
+                            3
+                        ],
+                        [
+                            13,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    16000000,
+                    [
+                        [
+                            122,
+                            2
+                        ],
+                        [
+                            142,
+                            2
+                        ],
+                        [
+                            123,
+                            1
+                        ],
+                        [
+                            143,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    18000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    20000000,
+                    [
+                        [
+                            2000001,
+                            32
+                        ],
+                        [
+                            2000002,
+                            16
+                        ]
+                    ]
+                ],
+                [
+                    22000000,
+                    [
+                        [
+                            10,
+                            24
+                        ],
+                        [
+                            11,
+                            12
+                        ]
+                    ]
+                ],
+                [
+                    24000000,
+                    [
+                        [
+                            120,
+                            12
+                        ],
+                        [
+                            140,
+                            12
+                        ],
+                        [
+                            121,
+                            6
+                        ],
+                        [
+                            141,
+                            6
+                        ]
+                    ]
+                ],
+                [
+                    26000000,
+                    [
+                        [
+                            3000001,
+                            1200000
+                        ],
+                        [
+                            3000003,
+                            150
+                        ]
+                    ]
+                ],
+                [
+                    29000000,
+                    [
+                        [
+                            2000003,
+                            8
+                        ],
+                        [
+                            2000004,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    32000000,
+                    [
+                        [
+                            12,
+                            6
+                        ],
+                        [
+                            13,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    35000000,
+                    [
+                        [
+                            122,
+                            4
+                        ],
+                        [
+                            142,
+                            4
+                        ],
+                        [
+                            123,
+                            2
+                        ],
+                        [
+                            143,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    38000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    41000000,
+                    [
+                        [
+                            3000001,
+                            3000000
+                        ]
+                    ]
+                ],
+                [
+                    44000000,
+                    [
+                        [
+                            2000002,
+                            32
+                        ],
+                        [
+                            2000003,
+                            16
+                        ]
+                    ]
+                ],
+                [
+                    47000000,
+                    [
+                        [
+                            3000003,
+                            200
+                        ]
+                    ]
+                ],
+                [
+                    50000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    60000000,
+                    [
+                        [
+                            2000003,
+                            8
+                        ],
+                        [
+                            2000004,
+                            2
+                        ],
+                        [
+                            12,
+                            6
+                        ],
+                        [
+                            13,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    70000000,
+                    [
+                        [
+                            121,
+                            6
+                        ],
+                        [
+                            141,
+                            6
+                        ],
+                        [
+                            122,
+                            4
+                        ],
+                        [
+                            142,
+                            4
+                        ]
+                    ]
+                ],
+                [
+                    80000000,
+                    [
+                        [
+                            2000003,
+                            8
+                        ],
+                        [
+                            2000004,
+                            2
+                        ],
+                        [
+                            12,
+                            6
+                        ],
+                        [
+                            13,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    90000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    100000000,
+                    [
+                        [
+                            3000001,
+                            1500000
+                        ]
+                    ]
+                ],
+                [
+                    120000000,
+                    [
+                        [
+                            3000001,
+                            2000000
+                        ]
+                    ]
+                ],
+                [
+                    150000000,
+                    [
+                        [
+                            3000001,
+                            2500000
+                        ]
+                    ]
+                ],
+                [
+                    180000000,
+                    [
+                        [
+                            3000001,
+                            3000000
+                        ]
+                    ]
+                ]
+            ]
         }
     ],
     "SeasonRewardGlobal": [
@@ -38988,6 +39711,555 @@
                     ]
                 ]
             ]
+        },
+        {
+            "Season": 29,
+            "RaidId": 4,
+            "Terrain": "Indoor",
+            "Start": 1672711200,
+            "End": 1673290800,
+            "Rewards": [
+                [
+                    250000,
+                    [
+                        [
+                            2000001,
+                            16
+                        ]
+                    ]
+                ],
+                [
+                    500000,
+                    [
+                        [
+                            10,
+                            12
+                        ]
+                    ]
+                ],
+                [
+                    750000,
+                    [
+                        [
+                            200,
+                            6
+                        ],
+                        [
+                            210,
+                            6
+                        ]
+                    ]
+                ],
+                [
+                    1000000,
+                    [
+                        [
+                            3000001,
+                            300000
+                        ]
+                    ]
+                ],
+                [
+                    1250000,
+                    [
+                        [
+                            2000002,
+                            8
+                        ]
+                    ]
+                ],
+                [
+                    1500000,
+                    [
+                        [
+                            11,
+                            6
+                        ]
+                    ]
+                ],
+                [
+                    1750000,
+                    [
+                        [
+                            201,
+                            3
+                        ],
+                        [
+                            211,
+                            3
+                        ]
+                    ]
+                ],
+                [
+                    2000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    2500000,
+                    [
+                        [
+                            2000003,
+                            4
+                        ]
+                    ]
+                ],
+                [
+                    3000000,
+                    [
+                        [
+                            12,
+                            3
+                        ]
+                    ]
+                ],
+                [
+                    3500000,
+                    [
+                        [
+                            202,
+                            2
+                        ],
+                        [
+                            212,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    4000000,
+                    [
+                        [
+                            3000003,
+                            150
+                        ]
+                    ]
+                ],
+                [
+                    4500000,
+                    [
+                        [
+                            2000004,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    5000000,
+                    [
+                        [
+                            13,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    5500000,
+                    [
+                        [
+                            203,
+                            1
+                        ],
+                        [
+                            213,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    6000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    7000000,
+                    [
+                        [
+                            2000001,
+                            32
+                        ],
+                        [
+                            2000002,
+                            16
+                        ]
+                    ]
+                ],
+                [
+                    8000000,
+                    [
+                        [
+                            10,
+                            24
+                        ],
+                        [
+                            11,
+                            12
+                        ]
+                    ]
+                ],
+                [
+                    9000000,
+                    [
+                        [
+                            200,
+                            12
+                        ],
+                        [
+                            210,
+                            12
+                        ],
+                        [
+                            201,
+                            6
+                        ],
+                        [
+                            211,
+                            6
+                        ]
+                    ]
+                ],
+                [
+                    10000000,
+                    [
+                        [
+                            3000001,
+                            500000
+                        ],
+                        [
+                            3000003,
+                            150
+                        ]
+                    ]
+                ],
+                [
+                    12000000,
+                    [
+                        [
+                            2000003,
+                            4
+                        ],
+                        [
+                            2000004,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    14000000,
+                    [
+                        [
+                            12,
+                            3
+                        ],
+                        [
+                            13,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    16000000,
+                    [
+                        [
+                            202,
+                            2
+                        ],
+                        [
+                            212,
+                            2
+                        ],
+                        [
+                            203,
+                            1
+                        ],
+                        [
+                            213,
+                            1
+                        ]
+                    ]
+                ],
+                [
+                    18000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    20000000,
+                    [
+                        [
+                            2000001,
+                            32
+                        ],
+                        [
+                            2000002,
+                            16
+                        ]
+                    ]
+                ],
+                [
+                    22000000,
+                    [
+                        [
+                            10,
+                            24
+                        ],
+                        [
+                            11,
+                            12
+                        ]
+                    ]
+                ],
+                [
+                    24000000,
+                    [
+                        [
+                            200,
+                            12
+                        ],
+                        [
+                            210,
+                            12
+                        ],
+                        [
+                            201,
+                            6
+                        ],
+                        [
+                            211,
+                            6
+                        ]
+                    ]
+                ],
+                [
+                    26000000,
+                    [
+                        [
+                            3000001,
+                            1200000
+                        ],
+                        [
+                            3000003,
+                            150
+                        ]
+                    ]
+                ],
+                [
+                    29000000,
+                    [
+                        [
+                            2000003,
+                            8
+                        ],
+                        [
+                            2000004,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    32000000,
+                    [
+                        [
+                            12,
+                            6
+                        ],
+                        [
+                            13,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    35000000,
+                    [
+                        [
+                            202,
+                            4
+                        ],
+                        [
+                            212,
+                            4
+                        ],
+                        [
+                            203,
+                            2
+                        ],
+                        [
+                            213,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    38000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    41000000,
+                    [
+                        [
+                            3000001,
+                            3000000
+                        ]
+                    ]
+                ],
+                [
+                    44000000,
+                    [
+                        [
+                            2000002,
+                            32
+                        ],
+                        [
+                            2000003,
+                            16
+                        ]
+                    ]
+                ],
+                [
+                    47000000,
+                    [
+                        [
+                            3000003,
+                            200
+                        ]
+                    ]
+                ],
+                [
+                    50000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    60000000,
+                    [
+                        [
+                            2000003,
+                            8
+                        ],
+                        [
+                            2000004,
+                            2
+                        ],
+                        [
+                            12,
+                            6
+                        ],
+                        [
+                            13,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    70000000,
+                    [
+                        [
+                            201,
+                            6
+                        ],
+                        [
+                            211,
+                            6
+                        ],
+                        [
+                            202,
+                            4
+                        ],
+                        [
+                            212,
+                            4
+                        ]
+                    ]
+                ],
+                [
+                    80000000,
+                    [
+                        [
+                            2000003,
+                            8
+                        ],
+                        [
+                            2000004,
+                            2
+                        ],
+                        [
+                            12,
+                            6
+                        ],
+                        [
+                            13,
+                            2
+                        ]
+                    ]
+                ],
+                [
+                    90000000,
+                    [
+                        [
+                            23,
+                            20
+                        ]
+                    ]
+                ],
+                [
+                    100000000,
+                    [
+                        [
+                            3000001,
+                            1500000
+                        ]
+                    ]
+                ],
+                [
+                    120000000,
+                    [
+                        [
+                            3000001,
+                            2000000
+                        ]
+                    ]
+                ],
+                [
+                    150000000,
+                    [
+                        [
+                            3000001,
+                            2500000
+                        ]
+                    ]
+                ],
+                [
+                    180000000,
+                    [
+                        [
+                            3000001,
+                            3000000
+                        ]
+                    ]
+                ]
+            ]
         }
     ],
     "TimeAttack": [
@@ -39365,7 +40637,7 @@
             "Id": 4000,
             "IsReleased": [
                 true,
-                false
+                true
             ],
             "DungeonType": "Shooting",
             "Icon": "EnemyInfo_Boxcat_Terror",
@@ -41058,7 +42330,7 @@
                     "NameCn": null,
                     "DescCn": null,
                     "NameTh": "เพื่อนายท่านแต่เพียงผู้เดียว",
-                    "DescTh": "ทุก 60 วินาที, ได้รับเอฟเฟคดังต่อไปนี้ (ทับซ้อนได้สูงสุด 3 ขั้น)\nเพิ่ม<b:ATK>：30%/60%/90%\nเพิ่ม<b:CriticalChance>：35%/70%/105%\nเพิ่มอัตราการฟื้นฟู ATG:15%/30%/80%\nเพิ่ม<d:DamagedRatio>：10%/20%/50%"
+                    "DescTh": "ทุก 60 วินาที, ได้รับเอฟเฟคดังต่อไปนี้ (ทับซ้อนได้สูงสุด 3 ขั้น)\nเพิ่ม<b:ATK>：30%/60%/90%\nเพิ่ม<b:CriticalChance>：35%/70%/105%\nเพิ่ม<b>อัตราการฟื้นฟู ATG</b> : 15%/30%/80%\nเพิ่ม<d:DamagedRatio>：10%/20%/50%"
                 },
                 {
                     "Id": "WakamoSwimsuit01Passive01",

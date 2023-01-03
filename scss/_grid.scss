@@ -363,6 +363,26 @@
             padding: 0;
         }
 
+        &.ta-rules {
+            left: 4px;
+            top: 4px;
+            border-radius: 0;
+
+            display: grid;
+            gap: 0px;
+            grid-template-columns: repeat(2, 1fr);
+
+            img {
+                height: 32px;
+                width: 32px;
+
+                @include md-down {
+                    height: 28px;
+                    width: 28px;
+                }
+            }
+        }
+
     }
 
     .card-label {
@@ -579,10 +599,13 @@
                 object-position: -55px center;
             }
 
-            &.ta-img img {
+            &.ta-img {
+                text-align: right;
 
-                width: 75%;
-                object-position: center 70% !important;
+                img {
+                    width: 75%;
+                    object-position: center 70% !important;
+                }
             }
         }
     }
@@ -709,6 +732,12 @@
                 }
             }
         }
+
+        // .card-badge {
+
+        //     &.ta-rules
+
+        // }
     }
 
 }

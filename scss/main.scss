@@ -127,7 +127,6 @@ h1 small {
     cursor: default;
     border-radius: 999px !important;
     padding: 0rem 0.6rem;
-    margin: 0 0.25rem 0.25rem 0;
 }
 
 .ba-info-pill {
@@ -139,7 +138,6 @@ h1 small {
     white-space: nowrap;
     cursor: default;
     @include circular;
-    margin: 0 0.4rem 0.25rem 0;
     
     span {
         padding: 0.25rem 0.5rem;
@@ -150,11 +148,48 @@ h1 small {
     @extend .ba-info-pill;
     //display: inline-block;
     height: 24px;
-    padding: 0rem 0.6rem;
-    margin: 0 0.25rem 0.25rem 0;
+    padding: 0;
 
-    span {
-        padding: 0;
+    .label {
+        @include flex(center, center);
+        padding: 0rem 0.6rem 0rem 0.3rem;
+
+        &:first-child {
+            padding-left: 0.6rem;
+        }
+    }
+
+    .icon-type {
+
+        @include circular;
+        @include flex(center, center);
+
+        width: 20px;
+        height: 20px;
+        padding: 4px;
+        margin-left: 2px;
+
+
+        img {
+            width: 12px;
+            height: 12px;
+        }
+        
+    }
+
+    .icon-terrain-strength {
+
+        @include circular;
+        @include flex(center, center);
+
+        width: 20px;
+        height: 20px;
+        margin-left: 2px;
+    
+        img {
+            width: 20px;
+            height: 20px;
+        }
     }
 }
 
@@ -170,7 +205,7 @@ h1 small {
     color: #fff;
 }
 
-#ba-student-attacktype img, #ba-student-defensetype img, #ba-raid-attacktype img, #ba-raid-defensetype img, #ba-stage-enemy-attacktype img, #ba-stage-enemy-defensetype img {
+#ba-student-attacktype img, #ba-student-defensetype img {
     height: 18px;
 }
 
@@ -187,21 +222,38 @@ h1 small {
     background-position: center 24px;
 }
 
-.ba-type-terrain {
+.terrain-group {
+    @include flex(center, center);
+    gap: 0.25rem;
+}
+
+.terrain-info {
     display: inline-block;
     padding: 3px;
     margin: auto;
+
+    .terrain-icon {
+
+        display: inline-block;
+        background-color: var(--col-theme-accent);
+        border-radius: 0.25rem;
+
+        img {
+            height: 34px;
+            width: 34px;
+        }
+    }
+
+    .affinity-icon {
+        height: 30px;
+        width: 30px;
+        margin: 6px 2px 2px 2px;
+    }
 }
 
 .ba-student-terrain-icon {
     height: 34px;
     width: 34px;
-}
-
-.ba-student-affinity-icon {
-    height: 30px;
-    width: 30px;
-    margin: 6px 2px 2px 2px;
 }
 
 .ba-student-icon::before {
@@ -268,7 +320,6 @@ h1 small {
     font-weight: 700;
     text-transform: uppercase;
     font-style: italic;
-    @include transition(background-color, color);
     background-color: var(--col-bg-striker);
     color: var(--col-text-striker);
 }
@@ -277,7 +328,6 @@ h1 small {
     font-weight: 700;
     text-transform: uppercase;
     font-style: italic;
-    @include transition(background-color, color);
     background-color: var(--col-bg-special);
     color: var(--col-text-special);
 }
@@ -353,13 +403,21 @@ h1 small {
     border: 1px solid #d4d9e2;
 }
 
+.item-icon-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+}
+
 .ba-item-icon {
     height: 64px;
     width: 64px;
     padding: 3px;
     margin-right: 0.5rem;
     margin-left: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     object-fit: cover;
     @include circular;
     @include sharp-img;
@@ -413,20 +471,38 @@ h1 small {
 }
 
 .ba-item-student {
+    position: relative;
     height: 60px;
     width: 60px;
     transition: filter var(--var-animation-duration) ease;
-    @include circular;
-    overflow: hidden;
     margin: 0.25rem;
-}
 
-.ba-item-student img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    object-position: center;
-    /* @include sharp-img; */
+    img {
+        height: 100%;
+        width: 100%;
+        @include circular;
+        object-fit: cover;
+        object-position: center;
+        /* @include sharp-img; */
+    }
+
+    .bonus-label {
+        font-weight: 400;
+        font-size: 0.75rem;
+        font-style: italic;
+        position: absolute;
+
+        background-color: var(--col-btn-secondary);
+        color: var(--col-btn-primary);
+
+        border-radius: 1rem;
+        right: -2px;
+        bottom: -4px;
+        padding: 0.1rem 0.25rem;
+
+        cursor: default;
+    }
+
 }
 
 .ba-item img {
@@ -455,7 +531,7 @@ h1 small {
     border-radius: 1rem;
     right: 0px;
     padding: 0.1rem 0.25rem;
-    bottom: 0.5rem;
+    bottom: 0;
     cursor: default;
 }
 
@@ -632,6 +708,12 @@ hr {
     top: 0.2rem;
 }
 
+.label-droptype {
+    @extend .label-qty;
+    // background-color: #f5e94b;
+    // color: #2c4563;
+}
+
 #ba-item-list, #ba-stages-list, .ba-item-list {
     @include promote-layer;
     font-size: 0;
@@ -648,7 +730,7 @@ hr {
     text-transform: uppercase;
     font-style: italic;
     font-weight: 400;
-    padding: 0.5rem 0.25rem;
+    padding: 0.5rem 0.5rem;
 }
 
 a.nav-link.disabled {
@@ -820,13 +902,6 @@ a.nav-link.disabled {
     left: 56px;
     top: 50px;
     font-weight: 700;
-}
-
-.ba-skill-materials, .ba-skill-ex-materials {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 #loading-cover {

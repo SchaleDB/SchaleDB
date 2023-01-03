@@ -129,7 +129,9 @@
         "ExtendDebuffDuration": "해로운 효과 유지력",
         "ExtendCrowdControlDuration": "군중제어 유지력",
         "SkillCost": "Ex 스킬 코스트",
-        "EXHits": "EX Skill Hits"
+        "EXHits": "EX Skill Hits",
+        "GroggyGauge": "Groggy Gauge",
+        "GroggyTime": "Groggy Duration"
     },
     "IsLimited": {
         "0": "Permanent",
@@ -566,11 +568,19 @@
         "MasterCoin": "숙련 증서",
         "Chaser": "현상수배 상점"
     },
+    "GroggyCondition": {
+        "TypeDamage": "Increases when dealt {0} damage.",
+        "Chesed": "Increases when automaton soldiers are defeated.",
+        "Hieronymus": "Increases when EX Skills are interrupted.",
+        "KaitenFxMk0": "Increases when components are destroyed.",
+        "Perorozilla": "Increases when stunned Perorominions are absorbed.",
+        "HOD": "Increases when Erosion Towers are destroyed or Hod's CC Gauge is filled."
+    },
     "ui": {
         "navbar_home": "홈페이지",
         "navbar_students": "학생",
         "student": "학생",
-        "navbar_stages": "스테이지",
+        "stages": "스테이지",
         "navbar_raids": "총력전",
         "navbar_craft": "제조",
         "synthesis": "물질 생성",
@@ -606,7 +616,7 @@
         "home_timezone": "All dates are converted to your local timezone.",
         "event_starts": "Starts in <b>{0} days, {1} hours and {2} minutes</b>.",
         "event_ends": "Ends in <b>{0} days, {1} hours and {2} minutes</b>.",
-        "student_birthdays": "The following students are celebrating their birthday this week!",
+        "student_birthdays": "The following students are celebrating their birthday in the next 7 days!",
         "attributes": "스탯 정보",
         "skills": "스킬",
         "ex_weapon": "고유 무기",
@@ -688,7 +698,7 @@
         "memory_lobby_student": "{0}의 메모리얼 로비",
         "memory_lobby_unlock": "Unlocks after reaching relationship rank {0} with {1}",
         "terrain_adaption": "{0} 전투력",
-        "terrain_adaption_details": "Deals <b>{0}&times;</b> damage in <b>{1}</b> terrain.\nBlock rate when taking cover <b>+{2}%</b>.\nChance to ignore block when attacking <b>+{2}%</b>",
+        "terrain_adaption_details": "Deals <b>{0}&times;</b> damage in <b>{1}</b> terrain.\nBlock rate when taking cover is increased by <b>{2}%</b>. Enemy block rate reduced by <b>{2}%</b> when attacking.",
         "statpreview_title": "Stat / Skill Details",
         "buffs": "버프",
         "enemy_target": "Target",
@@ -755,6 +765,7 @@
         "item_usedby_eleph": "Used to unlock mystic in the following student",
         "item_obtainedfrom_stage": "Obtained from the following stages",
         "item_purchasedfrom": "Purchased from the following shops",
+        "item_eventbonus": "The following students earn bonus amounts of this currency.",
         "item_randombox_tier": "Random {0} {1}",
         "item_artifact_box": "Contains one of the following artifacts:",
         "item_equipment_box": "Contains one of the following equipment pieces:",
@@ -804,7 +815,7 @@
         "home_features": "Features",
         "home_translations_help": "Schale DB is currently available in 6 languages. Want to help translate? Please get in touch via Discord (lonqie#2708) or check out the <a class=\"text-emphasis\" href=\"https://github.com/lonqie/SchaleDB-Localization\">localization project</a>!",
         "home_features_list": "<li>Full information on all students and skills, including summons or vehicles.</li><li>Comprehensive stats calculation that can display a student's stats under any configuration of stars, level, equipment, and buffs from skills.</li><li>Complete Items, Equipment and Furniture database.</li><li>Reward drops, maps and detailed enemy information for all Campaign, Event Quest, Challenge and Daily stages.</li><li>Stats and Skill information for Total Assault bosses and Joint Firing Drill events.</li><li>View the chances of possible items received from crafting nodes.</li>",
-        "home_footer_text": "Schale DB is developed and maintained by lonqie, with additional translation work by Blue-Roar & TKRotund.\nSchale DB is not affiliated with Nexon, Nexon Games or Yostar. All game artwork, information and assets used in this database are the property and copyright of the respective authors.",
+        "home_footer_text": "Schale DB is developed and maintained by lonqie, with additional translation work by Blue-Roar, TKRotund & G3danke.\nSchale DB is not affiliated with Nexon, Nexon Games or Yostar. All game artwork, information and assets used in this database are the property and copyright of the respective authors.",
         "changelog": "Changelog",
         "skillinfo_empty": "The selected character has no damage-dealing or healing skills to display.",
         "skill_normalattack": "Normal Attack",

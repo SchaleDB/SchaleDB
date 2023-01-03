@@ -303,6 +303,11 @@
     color: var(--col-text-stars);
 }
 
+.stage-challenge {
+    width: 18px;
+    text-align: center;
+}
+
 .enemy-list {
     padding: 0.5rem 0;
     max-height: 348px;
@@ -313,4 +318,18 @@
     @include md-down {
         display: none;
     }
+}
+
+.enemy-info-panel {
+
+    @extend .ba-panel;
+
+    .enemy-attributes {
+        padding: 0.5rem;
+    }
+
+    .ba-stats {
+        background: none;
+    }
+
 }

@@ -81,11 +81,25 @@
     }
 }
 
-.summon-list {
+.dropdown-character-list {
 
     min-width: 0;
 
-    .summon-list-active-name {
+    .icon {
+
+        &.enemy-chibi {
+            background-color: var(--col-bg-item-n);
+            overflow: hidden;
+            @include circular;
+
+            img {
+                transform: scale(1.7);
+            }
+        }
+
+    }
+
+    .active-name {
         display: inline-block;
         @include truncate-text;
     }
@@ -405,6 +419,23 @@
         --var-icon-size: 48px;
     }
 
+    &.large {
+        --var-icon-size: 64px;
+
+        &.elite::after {
+            height: 22px;
+            width: 22px;
+            background-size: 22px;
+        }
+
+        &.champion::after, &.boss::after {
+            height: 31px;
+            width: 31px;
+            background-size: 31px;
+            top: -5px;
+        }
+    }
+
     position: relative;
 
     .icon-enemy {
@@ -429,6 +460,20 @@
             width: var(--var-icon-size) !important;
             height: var(--var-icon-size) !important;
         }
+    }
+
+    .label-level {
+        font-size: 0.75rem;
+        font-weight: 600;
+        position: absolute;
+        background-color: var(--col-btn-secondary);
+        color: var(--col-btn-primary);
+        @include circular;
+
+        left: 0px;
+        bottom: -4px;
+        padding: 0.1rem 0.25rem;
+        cursor: default;
     }
 
     &.elite::after {

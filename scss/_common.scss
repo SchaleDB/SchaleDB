@@ -194,15 +194,18 @@ input[type="search" i]::-webkit-search-cancel-button {
     @include flex(center, left);
     padding: 0.25rem 1rem 0.25rem 0.5rem;
 
-    img {
-
-        @include circular;
-        height: 28px;
-        width: 28px;
-        object-fit: contain;
-
+    .icon {
         margin-right: 0.5rem;
-    } 
+
+        img {
+
+            @include circular;
+            height: 28px;
+            width: 28px;
+            object-fit: contain;
+    
+        } 
+    }
 
     &:active, &.active {
         img.invert-light {

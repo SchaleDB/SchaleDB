@@ -391,6 +391,7 @@
     ], 
     "regions": [
         {
+            "name": "jp",
             "studentlevel_max": 83, 
             "weaponlevel_max": 50, 
             "bondlevel_max": 50, 
@@ -426,6 +427,7 @@
             ]
         }, 
         {
+            "name": "global",
             "studentlevel_max": 80, 
             "weaponlevel_max": 50, 
             "bondlevel_max": 50, 
@@ -444,9 +446,9 @@
             "schooldungeon_max": 3, 
             "current_gacha": [
                 {
-                    "characters": [10041, 20017], 
-                    "start": 1671501600, 
-                    "end": 1672711200
+                    "characters": [10042, 10019, 23007, 10005, 10004], 
+                    "start": 1672711200, 
+                    "end": 1673920800
                 }
             ], 
             "current_events": [
@@ -454,22 +456,35 @@
             ], 
             "current_raid": [
                 {
-                    "raid": 5, 
-                    "terrain": "Street", 
-                    "start": 1671501600, 
-                    "end": 1672081200
-                }, 
-                {
                     "raid": 4, 
                     "terrain": "Indoor", 
                     "start": 1672711200, 
                     "end": 1673290800
                 }, 
-                {"raid": 4000, "start": 1673316000, "end": 1673895600}
+                {"raid": 4000, "start": 1673316000, "end": 1673895600}, 
+                {
+                    "raid": 1, 
+                    "terrain": "Outdoor", 
+                    "start": 1673920800, 
+                    "end": 1674500400
+                }, 
+                {"raid": 5000, "start": 1674525600, "end": 1675105200}
             ]
         }
     ], 
     "changelog": [
+        {
+            "date": "2023/01/07", 
+            "contents": [
+                "<h6>Japanese Translation</h6>", 
+                "<ul><li>User interface translation into Japanese, and improvements to existing Japanese translations. (Thanks, G3danke)</li></ul>", 
+                "<h6>Other Improvements</h6>", 
+                "<ul><li>Added challenge mission requirements to stage information.</li><li>Display character bonus amounts on event currency item pages.</li><li>Changed display of stage rewards to show all types of rewards together.</li><li>Added groggy gauge, duration and gauge fill conditions for Total Assault bosses.</li><li>Terrain strength for enemies is now displayed.</li><li>Stability minimum damage tooltip is now displayed for enemies.</li><li>Various other UI improvements.</li></ul>",
+                "<h6>Bug Fixes</h6>", 
+                "<ul><li>Fixed issues with the display of rewards for Momoyodou Beach House Franchise Plan event stages.</li></ul>"
+
+            ]
+        }, 
         {
             "date": "2022/12/28", 
             "contents": [
