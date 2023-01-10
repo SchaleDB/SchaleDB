@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Schale DB</title>
+    <title>Schale</title>
     <meta charset="utf-8">
-    <meta name="description" content="Schale DB is a database for the mobile game Blue Archive containing detailed information on students, items, stages and more. Available in multiple languages.">
+    <meta name="description" content="Schale is a database and calculation tool for the mobile game Blue Archive. Available in multiple languages.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="" />
     <link href="./lib/bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Oswald&display=swap" rel="stylesheet"> 
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="manifest" href="./manifest.json" crossorigin="use-credentials">
-    <link href="css/main.css?v=80" rel="stylesheet">
+    <link href="css/main.css?v=82" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQEWDXR13H"></script>
     <script>
@@ -30,7 +30,7 @@
 </head>
 <body class="reduced-motion">
     <div id="loading-cover">
-        <noscript class="d-flex justify-content-center text-center mb-1 text-light">Schale DB requires JavaScript in order to function correctly.<br>Please enable JavaScript for this site and reload the page.</noscript>
+        <noscript class="d-flex justify-content-center text-center mb-1 text-light">Schale requires JavaScript in order to function correctly.<br>Please enable JavaScript for this site and reload the page.</noscript>
         <div id="loading-spinner" class="d-flex justify-content-center" style="display:none!important;">
             <div class="spinner-border text-light" style="width: 4rem; height: 4rem;" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -48,7 +48,7 @@
                 <div class="container-xl">
                     <img id="navbar-logo" src="images/schale.png" class="" style="height:38px; width:auto">
                     <a class="navbar-brand me-4 unselectable" onclick="window.scrollTo(0,0);" translate="no">
-                        SCHALE <span class="navbar-accent">DB</span>
+                        SCHALE<span class="navbar-accent">.gg</span>
                     </a>
                     <div class="dropdown ms-auto order-lg-1">
                         <a class="btn btn-dark" href="#" id="ba-navbar-regionselector" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" >
@@ -110,7 +110,7 @@
                                 <span class="flex-fill me-4" data-localize-id="ui,navbar_settings_collection"></span>
                                 <span class="d-flex align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" id="ba-navbar-collection" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#collection-data-modal" onclick="$('#collection-export-string').val('');$('#collection-import-string').val('');" data-localize-id="ui,setting_open"></button>
+                                        <button type="button" id="ba-navbar-collection" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#collection-data-modal" onclick="$('#collection-export-string').val('');" data-localize-id="ui,setting_open"></button>
                                     </div>
                                 </span>
                             </div>
@@ -193,16 +193,17 @@
                     <div class="modal-body pt-0">
                         <div class="p-2 h-100 d-flex flex-column">
                             <h5 data-localize-id="ui,collection_export_collection"></h5>
-                            <div class="d-flex flex-wrap mb-2" style="gap:0.5rem;">
-                                <button id="collection-data-export-btn" type="button" class="btn btn-dark" onclick="exportDataString()"><i class="fa-solid fa-right-from-bracket me-2"></i><span data-localize-id="ui,collection_export"></span></button>
+                            <div class="d-flex flex-wrap mb-2 gap-2">
+                                <button id="collection-data-export-btn" type="button" class="btn btn-dark"><i class="fa-solid fa-right-from-bracket me-2"></i><span data-localize-id="ui,collection_export"></span></button>
                             </div>
                             <textarea id="collection-export-string" readonly onclick="this.select()" data-ph-localize-id="ui,collection_export_placeholder"></textarea>
                             <h5 class="mt-3" data-localize-id="ui,collection_import_collection"></h5>
+                            <p class="mb-1"><span data-localize-id="ui,collection_import_help"></span></p>
                             <p class="text-italic mb-2"><i class="fa-solid fa-triangle-exclamation me-2"></i><span data-localize-id="ui,collection_import_warning"></span></p>
                             <textarea id="collection-import-string" data-ph-localize-id="ui,collection_import_placeholder"></textarea>
-                            <div class="d-flex flex-wrap mt-2" style="gap:0.5rem;">
-                                <button id="collection-data-import-btn" type="button" class="btn btn-dark" onclick="importDataString()"><i class="fa-solid fa-right-to-bracket me-2"></i><span data-localize-id="ui,collection_import"></span></button>
-                                <button id="collection-data-import-planner-btn" type="button" class="btn btn-dark" onclick="importResourcePlannerData()"><i class="fa-solid fa-right-to-bracket me-2"></i><span data-localize-id="ui,collection_import_planner"></span></button>
+                            <div class="d-flex flex-wrap align-items-center mt-2 gap-2">
+                                <button id="collection-data-import-btn" disabled="disabled" type="button" class="btn btn-dark"><i class="fa-solid fa-right-to-bracket me-2"></i><span data-localize-id="ui,collection_import"></span></button>
+                                <span id="collection-import-status"></span>
                             </div>
                         </div>
                     </div>
@@ -230,9 +231,9 @@
     </div>
 </body>
 <script>
-    const cache_ver = 80
+    const cache_ver = 82
     document.getElementById('loading-spinner').style.display = null;
     window.setTimeout(x => {document.getElementById('loading-skipmsg').style.display = null;}, 10000);
 </script>
-<script src="js/common.min.js?v=80"></script>
+<script src="js/common.min.js?v=82"></script>
 </html>

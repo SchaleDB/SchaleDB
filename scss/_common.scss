@@ -189,6 +189,10 @@ input[type="search" i]::-webkit-search-cancel-button {
     }
 }
 
+p a {
+    @extend .text-emphasis;
+}
+
 .dropdown-item-icon {
 
     @include flex(center, left);
@@ -745,7 +749,7 @@ input[type="search" i]::-webkit-search-cancel-button {
     color: var(--col-text-compare-less);
 }
 
-.text-heal {
+.text-heal, .text-positive {
     color: var(--col-text-compare-greater);
 }
 

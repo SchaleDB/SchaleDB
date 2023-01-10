@@ -371,6 +371,7 @@
             display: grid;
             gap: 0px;
             grid-template-columns: repeat(2, 1fr);
+            @include promote-layer;
 
             img {
                 height: 32px;
@@ -733,11 +734,6 @@
             }
         }
 
-        // .card-badge {
-
-        //     &.ta-rules
-
-        // }
     }
 
 }

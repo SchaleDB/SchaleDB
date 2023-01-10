@@ -2483,8 +2483,6 @@ $.when($.ready, loadPromise).then(function() {
         $(".tooltip").tooltip("hide")
     })
     
-    $('#collection-data-import-planner-btn').tooltip({title: getBasicTooltip(translateUI('tooltip_import_planner')), placement: 'top', html: true})
-
     $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
     $(`#ba-navbar-languageselector span`).text($(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).text())
     $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).addClass("active")
@@ -2573,8 +2571,59 @@ $.when($.ready, loadPromise).then(function() {
         
     })
 
+    //Import/Export controls
+    $('#collection-import-string').on('input', function(e) {
+        if ($('#collection-import-string').val() != "") {
+            const newCollection = parseImport($('#collection-import-string').val())
+            if (newCollection == null) {
+                $('#collection-import-status').html(`<i class="fa-solid fa-circle-xmark me-2 text-negative"></i>${translateUI('collection_import_status_invalid')}`)
+                $('#collection-data-import-btn').attr('disabled', true)
+            } else {
+                console.log(newCollection)
+                $('#collection-import-status').html(`<i class="fa-solid fa-circle-check me-2 text-positive"></i>${translateUI('collection_import_status_valid', [Object.keys(newCollection).length])}`)
+                $('#collection-data-import-btn').attr('disabled', false)
+            }
+        } else {
+            $('#collection-import-status').empty()
+            $('#collection-data-import-btn').attr('disabled', true)
+        }
+    })
+    $('#collection-data-import-btn').on('click', function(e) {importCollection(parseImport($('#collection-import-string').val()))})
+    $('#collection-data-export-btn').on('click', function(e) {exportDataString('#collection-export-string')})
+
+    const urlVars = new URL(window.location.href).searchParams
+    if (urlVars.get("importcollection")) {
+        try {
+            let collectionNew = {}
+            const importCharacters = urlVars.get("importcollection").split('__')
+            console.log(importCharacters)
+            importCharacters.forEach(charDataString => {
+                if (charDataString != '') {
+                    const charData = charDataString.split('_')
+                    collectionNew[charData[0]] = {
+                        s: charData[1],
+                        l: charData[2],
+                        e1: charData[3],
+                        e2: charData[4],
+                        e3: charData[5],
+                        ws: charData[6],
+                        wl: charData[7],
+                        b: charData[8],
+                        s3: charData[9]
+                    }
+                }
+            })
+            importCollection(collectionNew)
+        } catch (err) {
+            console.log(err)
+            toastMessage(`<i class="fa-solid fa-circle-xmark me-2"></i>${translateUI('toast_import_failure')}`, 2500, 'failure')
+        }
+        
+    }
+
     $(window).on('popstate', () => loadModuleFromURL(false))
     loadModuleFromURL(true)
+    
 })
 
 /**
@@ -3076,7 +3125,7 @@ function loadModule(moduleName, entry=null) {
                 url.searchParams.forEach((v,k) => url.searchParams.delete(k))
                 history.pushState(null, '', url)
             }
-            $('title').html(`Schale DB`)
+            $('title').html(`${translateUI('navbar_home')} | Schale`)
             $('#ba-navbar-content').collapse('hide')
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
@@ -3198,7 +3247,7 @@ function finalizeLoad(pageTitle, searchParamKey, searchParamValue, gtagEvent = n
         history.pushState(null, '', url)
     }
 
-    $('title').html(`${pageTitle} | Schale DB`)
+    $('title').html(`${pageTitle} | Schale`)
     $('#ba-navbar-content').collapse('hide')
     localStorage.setItem(searchParamKey, searchParamValue)
 
@@ -8016,15 +8065,17 @@ function statPreviewSettingsLoad() {
     statPreviewIncludeBuffs = statPreviewSettings.IncludeBuffs ? statPreviewSettings.IncludeBuffs : false
 }
 
-function exportDataString() {
-    $('#collection-export-string').val(btoa(JSON.stringify(studentCollection)))
-    navigator.clipboard.writeText($('#collection-export-string').val())
+function exportDataString(container) {
+    const exportStr = btoa(JSON.stringify(studentCollection))
+    $(container).val(exportStr)
+    navigator.clipboard.writeText(exportStr)
     toastMessage(`<i class="fa-solid fa-circle-exclamation me-2"></i>${translateUI('toast_import_copy')}`, 2500, 'alert')
 }
 
-function importDataString() {
+function parseImport(str) {
+    //try Schale format
     try {
-        let importData = JSON.parse(atob($('#collection-import-string').val()))
+        let importData = JSON.parse(atob(str))
         let collectionNew = {}
         Object.entries(importData).forEach((char) => {
             collectionNew[char[0]] = {
@@ -8039,24 +8090,14 @@ function importDataString() {
                 s3: char[1].s3
             }
         })
-        localStorage.setItem('student_collection', JSON.stringify(collectionNew))
-        studentCollection = JSON.parse(localStorage.getItem('student_collection'))
-        toastMessage(`<i class="fa-solid fa-circle-check me-2"></i>${translateUI('toast_import_success')}`, 2500, 'success')
-        if (loadedModule == 'students') {
-            loadStudent(student.PathName)
-            $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
-            if (search_options.filter.Collection.Owned || search_options.filter.Collection.NotOwned) updateStudentList()
-        }
+        return collectionNew
     } catch (error) {
         console.log(error)
-        toastMessage(`<i class="fa-solid fa-circle-xmark me-2"></i>${translateUI('toast_import_failure')}`, 2500, 'failure')
     }
-}
 
-function importResourcePlannerData() {
+    //try Justin's resource planner format
     try {
-        $('.tooltip').tooltip('hide')
-        let importData = JSON.parse($('#collection-import-string').val())
+        let importData = JSON.parse(str)
         let collectionNew = {}
         importData.characters.forEach((char) => {
             collectionNew[char.id] = {
@@ -8071,19 +8112,25 @@ function importResourcePlannerData() {
                 s3: Math.max(char.current.passive,1)
             }
         })
+        return collectionNew
+    } catch (error) {
+        console.log(error)
+    }
+
+    return null
+}
+
+function importCollection(collectionNew) {
+    if (collectionNew != null) {
         localStorage.setItem('student_collection', JSON.stringify(collectionNew))
         studentCollection = JSON.parse(localStorage.getItem('student_collection'))
-        toastMessage(`<i class="fa-solid fa-circle-check me-2"></i>${translateUI('toast_import_success')}`, 2500, 'success')
+        toastMessage(`<i class="fa-solid fa-circle-check me-2"></i>${translateUI('toast_import_success', [Object.keys(studentCollection).length])}`, 2500, 'success')
         if (loadedModule == 'students') {
             loadStudent(student.PathName)
             $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
             if (search_options.filter.Collection.Owned || search_options.filter.Collection.NotOwned) updateStudentList()
         }
-    } catch (error) {
-        console.log(error)
-        toastMessage(`<i class="fa-solid fa-circle-xmark me-2"></i>${translateUI('toast_import_failure')}`, 2500, 'failure')
     }
-    
 }
 
 function toastMessage(msg, duration, cssClass) {
