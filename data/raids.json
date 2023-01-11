@@ -41608,6 +41608,140 @@
                     3427259164
                 ]
             ]
+        },
+        {
+            "Id": 12000,
+            "IsReleased": [
+                false,
+                false
+            ],
+            "DungeonType": "Destruction",
+            "Icon": "EnemyInfo_Totem03_TimeAttack",
+            "MaxDifficulty": 4,
+            "Terrain": "Indoor",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 927000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7821001,
+                        7821201,
+                        7821101,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 927000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7821002,
+                        7821102,
+                        7821202,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 927000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7821003,
+                        7821203,
+                        7821103,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 927000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7821104,
+                        7821204,
+                        7821004,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    1329507091,
+                    2075498290
+                ],
+                [
+                    1329507091,
+                    2075498290
+                ],
+                [
+                    1329507091,
+                    2075498290,
+                    3153525398
+                ],
+                [
+                    1329507091,
+                    2075498290,
+                    3153525398,
+                    3902330525
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -42038,6 +42172,26 @@
             "DescCn": "SR、MG武器を使用する味方生徒の攻撃力が減少します。",
             "NameTh": "ลดค่าโจมตีของฝ่ายเราที่ใช้อาวุธประเภท SR/MG",
             "DescTh": "ลด<d:ATK>ของฝ่ายเราที่ใช้อาวุธประเภท SR หรือ MG 90%"
+        },
+        {
+            "Id": 3153525398,
+            "Icon": "TimeAttackGeas_Ally_Immune",
+            "NameEn": "Scarecrow State Change",
+            "DescEn": "Every 20s, the Scarecrow will alternate between two states.\n<b><d:HealedLimit> State</b>: The Scarecrow's HP will not recover and will instead deal 10,000 damage to all allies when healed.\n<b>Normal State</b>: The Scarecrow's HP will recover as normal when healed.",
+            "NameJp": "かかしの状態変化",
+            "DescJp": "かかしは一定時間ごとに状態が変化します。回復反転状態：回復効果を受けると味方生徒にダメージを与えます。回復効果は適用されません。通常状態：回復効果が適用できます。",
+            "NameKr": "허수아비 상태 변화",
+            "DescKr": "허수아비는 일정 시간마다 상태가 변화합니다.A상태: 회복 효과를 받으면 아군 학생에게 대미지를 줍니다. 회복 효과는 적용되지 않습니다.B상태: 회복 효과를 받을 수 있습니다."
+        },
+        {
+            "Id": 3902330525,
+            "Icon": "TimeAttackGeas_Enemy_FireArea_TriggerDie",
+            "NameEn": "Enemies Create Burning Zone on Defeat",
+            "DescEn": "When an enemy is defeated, they create a circular zone that continuously deals <b>100%</b> damage to allies inside it every 1s for 20s.",
+            "NameJp": "敵を倒した時に燃焼エリア生成",
+            "DescJp": "敵を倒した時に、その場所に燃焼エリアが生成されます。",
+            "NameKr": "적 사망 시 화염 지대",
+            "DescKr": "적 사망 시 해당 위치에 화염 지대가 생성됩니다."
         }
     ],
     "WorldRaid": [

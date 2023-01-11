@@ -67182,5 +67182,659 @@
                 14
             ]
         ]
+    },
+    {
+        "Id": 10058,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 125,
+        "PathName": "Mine",
+        "DevName": "CH0152",
+        "Name": "미네",
+        "School": "Trinity",
+        "Club": "KnightsHospitaller",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Tanker",
+        "Summons": [],
+        "Position": "Front",
+        "BulletType": "Explosion",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "SG",
+        "WeaponImg": "Weapon_Icon_CH0152",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Bag",
+            "Charm"
+        ],
+        "CollectionBG": "BG_Trinity_Collection",
+        "CollectionTexture": "Student_Portrait_CH0152_Collection",
+        "FamilyName": "아오모리",
+        "FamilyNameRuby": "",
+        "PersonalName": "미네",
+        "SchoolYear": "3학년",
+        "CharacterAge": "17세",
+        "Birthday": "11월 23일",
+        "CharacterSSRNew": "구호기사단 단장 아오모리 미네라고 합니다.\n구호가 필요한 분은 어디 계신가요?",
+        "ProfileIntroduction": "트리니티 구호기사단의 단장. 올곧고 심지가 굳으나 과격한 면도 있는 백의의 전사. \n\n &#x27;미네가 부수고 기사단이 치료한다&#x27;는 명성(?)은 이미 트리니티 전역에서 유명하다. 여유가 생기면 자신의 장비를 정비하거나, 다과를 준비하여 지인들을 초대해 마음을 달랜다. 홍차에 대한 조예는 정의실현부의 하스미와 비교해도 결코 밀리지 않는다는 말이 있다. ",
+        "Hobby": "의료용품 수집",
+        "CharacterVoice": "堀江由衣",
+        "BirthDay": "11/23",
+        "ArtistName": "ni02",
+        "CharHeightMetric": "168cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1816,
+        "AttackPower1": 166,
+        "AttackPower100": 1663,
+        "MaxHP1": 2726,
+        "MaxHP100": 45560,
+        "DefensePower1": 163,
+        "DefensePower100": 981,
+        "HealPower1": 1527,
+        "HealPower100": 4583,
+        "DodgePoint": 218,
+        "AccuracyPoint": 654,
+        "CriticalPoint": 218,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "DamageDist": [
+            3334,
+            3333,
+            3333
+        ],
+        "AttackFrames": {
+            "AttackEnterDuration": 36,
+            "AttackStartDuration": 15,
+            "AttackEndDuration": 15,
+            "AttackBurstRoundOverDelay": 35,
+            "AttackIngDuration": 25,
+            "AttackReloadDuration": 85
+        },
+        "Range": 350,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "신념과 긍지",
+                "Desc": "지정한 위치로 이동, 원형범위 내의 적에게 공격력 <?1> 대미지/\n회피 수치와 <d:DEF> <?2> 감소(40초간)/\n중형 대상에게는 회피 수치와 방어력의 감소치가 원래의 2.5배로 강화",
+                "Parameters": [
+                    [
+                        "103%",
+                        "118%",
+                        "150%",
+                        "165%",
+                        "196%",
+                        "211%",
+                        "243%",
+                        "258%",
+                        "289%",
+                        "305%"
+                    ],
+                    [
+                        "6.8%",
+                        "7.8%",
+                        "9.9%",
+                        "10.9%",
+                        "13%",
+                        "14%",
+                        "16.1%",
+                        "17.1%",
+                        "19.2%",
+                        "20.2%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "Icon": "COMMON_SKILLICON_EVASION",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10343,
+                            11892,
+                            15000,
+                            16549,
+                            19649,
+                            21199,
+                            24306,
+                            25856,
+                            28955,
+                            30505
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -686,
+                                -789,
+                                -995,
+                                -1098,
+                                -1304,
+                                -1407,
+                                -1613,
+                                -1715,
+                                -1921,
+                                -2024
+                            ],
+                            [
+                                -1715,
+                                -1972,
+                                -2487,
+                                -2744,
+                                -3258,
+                                -3516,
+                                -4030,
+                                -4287,
+                                -4802,
+                                -5059
+                            ]
+                        ],
+                        "Stat": "DodgePoint_Coefficient",
+                        "Channel": 607
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -686,
+                                -789,
+                                -995,
+                                -1098,
+                                -1304,
+                                -1407,
+                                -1613,
+                                -1715,
+                                -1921,
+                                -2024
+                            ],
+                            [
+                                -1715,
+                                -1972,
+                                -2487,
+                                -2744,
+                                -3258,
+                                -3516,
+                                -4030,
+                                -4287,
+                                -4802,
+                                -5059
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ],
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "준엄한 선고",
+                "Desc": "구호의 마음가짐 해제 이후 발동/\n발동 시 원형범위 내의 적에게 방어력 <?1> 대미지, 회피 수치와 <d:DEF> <?2> 감소(30초간)",
+                "Parameters": [
+                    [
+                        "475%",
+                        "498%",
+                        "522%",
+                        "617%",
+                        "641%",
+                        "665%",
+                        "760%",
+                        "783%",
+                        "807%",
+                        "902%"
+                    ],
+                    [
+                        "8%",
+                        "8.4%",
+                        "8.8%",
+                        "10.4%",
+                        "10.8%",
+                        "11.2%",
+                        "12.8%",
+                        "13.2%",
+                        "13.6%",
+                        "15.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "SourceStat": "DefensePower",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            47508,
+                            49881,
+                            52255,
+                            61758,
+                            64132,
+                            66506,
+                            76009,
+                            78383,
+                            80756,
+                            90259
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -801,
+                                -841,
+                                -881,
+                                -1041,
+                                -1081,
+                                -1121,
+                                -1281,
+                                -1321,
+                                -1361,
+                                -1522
+                            ]
+                        ],
+                        "Stat": "DodgePoint_Coefficient",
+                        "Channel": 607
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -801,
+                                -841,
+                                -881,
+                                -1041,
+                                -1081,
+                                -1121,
+                                -1281,
+                                -1321,
+                                -1361,
+                                -1522
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ],
+                "DamageDist": [
+                    10000
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "기사단의 의지",
+                "Desc": "<b:MAXHP> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Stat": [
+                    "MaxHP"
+                ],
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "불굴의 용기",
+                "Desc": "Ex스킬 사용 시 구호의 마음가짐 부여. 구호의 마음가짐은 치유력 <?1> <b:DotHeal>(10초간)/\n구호의 마음가짐이 이미 있을 경우 구호의 마음가짐 대신 <b:CriticalChanceResistPoint> <?2> 증가(20초간) ",
+                "Parameters": [
+                    [
+                        "64.8%",
+                        "68%",
+                        "71.2%",
+                        "84.2%",
+                        "87.4%",
+                        "90.7%",
+                        "103%",
+                        "106%",
+                        "110%",
+                        "123%"
+                    ],
+                    [
+                        "19.3%",
+                        "20.3%",
+                        "21.3%",
+                        "25.1%",
+                        "26.1%",
+                        "27.1%",
+                        "30.9%",
+                        "31.9%",
+                        "32.9%",
+                        "36.7%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "HealDot",
+                        "Duration": "10000",
+                        "Period": "4000",
+                        "Scale": [
+                            6480,
+                            6804,
+                            7128,
+                            8424,
+                            8748,
+                            9072,
+                            10368,
+                            10692,
+                            11016,
+                            12312
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1936,
+                                2033,
+                                2130,
+                                2517,
+                                2614,
+                                2710,
+                                3097,
+                                3194,
+                                3291,
+                                3678
+                            ]
+                        ],
+                        "Stat": "CriticalChanceResistPoint_Coefficient",
+                        "Channel": 22
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "기사단의 의지+",
+                "Desc": "<b:DEF> <?1> 증가/\n추가로 <b:MAXHP> <?2> 증가",
+                "Parameters": [
+                    [
+                        "200",
+                        "210",
+                        "220",
+                        "260",
+                        "270",
+                        "280",
+                        "320",
+                        "330",
+                        "340",
+                        "380"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Stat": [
+                    "DefensePower",
+                    "MaxHP"
+                ],
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "DefensePower_Base",
+                        "Scale": [
+                            200,
+                            210,
+                            220,
+                            260,
+                            270,
+                            280,
+                            320,
+                            330,
+                            340,
+                            380
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "DefensePower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                1,
+                0
+            ],
+            [
+                1,
+                0
+            ],
+            [
+                2,
+                114
+            ],
+            [
+                2,
+                137
+            ],
+            [
+                1,
+                24
+            ],
+            [
+                1,
+                36
+            ],
+            [
+                1,
+                60
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            6,
+            0
+        ],
+        "FurnitureInteraction": [
+            [
+                207310
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Cosmetics",
+            "Girlish"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Mine",
+            "F_Mine2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "구호의 증명",
+            "Desc": "미네의 샷건\n\n구호란 때로 양면성을 지닐 수 있다고 그녀는 주장한다.\n이 무기야말로 그녀의 주장에 대한 하나의 근거가 될 지도 모른다……",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 73,
+            "AttackPower100": 731,
+            "MaxHP1": 1291,
+            "MaxHP100": 12910,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                200
+            ],
+            [
+                3021,
+                3020,
+                201,
+                150
+            ],
+            [
+                3022,
+                3021,
+                202,
+                151
+            ],
+            [
+                3023,
+                3022,
+                203,
+                152
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                12,
+                29
+            ],
+            [
+                12,
+                18,
+                11,
+                25
+            ],
+            [
+                8,
+                18,
+                8,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                200
+            ],
+            [
+                4021,
+                201,
+                150
+            ],
+            [
+                4022,
+                4021,
+                201,
+                150
+            ],
+            [
+                4022,
+                202,
+                151
+            ],
+            [
+                4023,
+                4022,
+                203,
+                152
+            ],
+            [
+                4023,
+                203,
+                152
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                17
+            ],
+            [
+                8,
+                3,
+                15
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                8,
+                14
+            ]
+        ]
     }
 ]

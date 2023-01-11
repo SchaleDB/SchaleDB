@@ -125,8 +125,8 @@
         "EnhanceExplosionRate": "爆发伤害加成",
         "EnhancePierceRate": "贯穿伤害加成",
         "EnhanceMysticRate": "神秘伤害加成",
-        "ExtendBuffDuration": "Buff Duration",
-        "ExtendDebuffDuration": "Debuff Duration",
+        "ExtendBuffDuration": "增益效果持续力",
+        "ExtendDebuffDuration": "削弱状态持续力",
         "ExtendCrowdControlDuration": "群控状态持续力",
         "SkillCost": "EX 技能费用",
         "EXHits": "EX 技能击中次数",
@@ -294,6 +294,7 @@
         "Special": "状态效果"
     },
     "BuffName": {
+        "Buff_AidAttitude": "First Aid Ready",
         "Buff_AmmoCount": "载弹量",
         "Buff_ATK": "攻击力",
         "Buff_AttackSpeed": "攻速",
@@ -313,8 +314,8 @@
         "Buff_EnhanceExplosionRate": "爆发伤害加成",
         "Buff_EnhancePierceRate": "贯穿伤害加成",
         "Buff_EnhanceMysticRate": "神秘伤害加成",
-        "Buff_ExtendBuffDuration": "Buff Duration",
-        "Buff_ExtendDebuffDuration": "Debuff Duration",
+        "Buff_ExtendBuffDuration": "增益效果持续力",
+        "Buff_ExtendDebuffDuration": "削弱效果持续力",
         "Buff_ExtendCrowdControlDuration": "群控状态持续力",
         "Buff_HealByHit_Damaged": "击中回复",
         "Buff_HealEffectiveness": "所受恢复效果强化率",
@@ -378,9 +379,10 @@
         "Special_ImmuneCC": "群控免疫",
         "Special_SuddenDeath": "若藻的印记",
         "Special_Stamp": "Flower Stamp",
-        "Special_Holiday": "Holy Night Blessing"
+        "Special_Holiday": "圣夜的祝福"
     },
     "BuffNameLong": {
+        "Buff_AidAttitude": "First Aid Ready",
         "Buff_AmmoCount": "载弹量提升",
         "Buff_ATK": "攻击力提升",
         "Buff_AttackSpeed": "攻速提升",
@@ -400,9 +402,9 @@
         "Buff_EnhanceExplosionRate": "爆发伤害加成提升",
         "Buff_EnhancePierceRate": "贯穿伤害加成提升",
         "Buff_EnhanceMysticRate": "神秘伤害加成提升",
-        "Buff_ExtendBuffDuration": "Buff Duration Up",
-        "Buff_ExtendDebuffDuration": "Debuff Duration Up",
-        "Buff_ExtendCrowdControlDuration": "CC Duration Up",
+        "Buff_ExtendBuffDuration": "增益效果持续力增加",
+        "Buff_ExtendDebuffDuration": "削弱状态持续力增加",
+        "Buff_ExtendCrowdControlDuration": "群控状态持续力增加",
         "Buff_HealByHit_Damaged": "击中回复",
         "Buff_HealEffectiveness": "所受恢复效果强化率提升",
         "Buff_HealPower": "治愈力提升",
@@ -465,9 +467,10 @@
         "Special_ImmuneCC": "群控免疫",
         "Special_SuddenDeath": "若藻的印记",
         "Special_Stamp": "Flower Stamps",
-        "Special_Holiday": "Holy Night Blessings"
+        "Special_Holiday": "圣夜的祝福"
     },
     "BuffTooltip": {
+        "Buff_AidAttitude": "以一定时间间隔持续回复生命值",
         "Buff_AmmoCount": "提升普通攻击武器载弹量",
         "Buff_ATK": "提升攻击造成的伤害",
         "Buff_AttackSpeed": "提升普通攻击与换弹速度，同时降低攻击延迟",
@@ -552,7 +555,7 @@
         "Special_ImmuneCC": "免疫所有群控效果",
         "Special_SuddenDeath": "5层叠加将对人物造成致命伤害。",
         "Special_Stamp": "当心奈进行5次攻击时降低队伍中其他学生的EX技能费用并恢复自身生命值。",
-        "Special_Holiday": "Increases the effects of certain EX skills on this character."
+        "Special_Holiday": "提升此角色的特定EX技能的效果。"
     },
     "ServerName": {
         "0": "日服",
@@ -603,10 +606,10 @@
         "filter_by_name": "按名称筛选",
         "collection_export_collection": "导出集合",
         "collection_import_collection": "导入集合",
-        "collection_import_help": "Data can be imported from Schale or <a href=\"https://justin163.com/planner/\">Justin163's resource planner</a>. (Select Transfer > Export)",
+        "collection_import_help": "数据可以从 Schale 或 <a href=\"https://justin163.com/planner/\">Justin163's resource planner</a> 导入。(选择传输 > 导出)",
         "collection_import_warning": "这会覆盖你的当前集合",
-        "collection_import_status_valid": "Export data for {0} students found.",
-        "collection_import_status_invalid": "Export data is invalid.",
+        "collection_import_status_valid": "找到了{0}个学生的数据。",
+        "collection_import_status_invalid": "导出数据无效。",
         "collection_export_placeholder": "点击导出以生成集合的导出字符串",
         "collection_import_placeholder": "将导出字符串粘贴于此处并点击导入",
         "collection_export": "导出",

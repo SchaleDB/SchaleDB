@@ -391,7 +391,7 @@
     ], 
     "regions": [
         {
-            "name": "jp",
+            "name": "jp", 
             "studentlevel_max": 83, 
             "weaponlevel_max": 50, 
             "bondlevel_max": 50, 
@@ -402,7 +402,8 @@
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810, 
                   811,   812,   813,   814,   815,   816,   817,   818,   819, 
-                  820,   701, 10801, 10802, 10803, 10804, 10805, 10806, 10808
+                  820,   701, 10801, 10802, 10803, 10804, 10805, 10806, 10808, 
+                10810, 10811
             ], 
             "event_701_max": 10, 
             "event_701_challenge_max": 4, 
@@ -410,24 +411,28 @@
             "bounty_max": 9, 
             "schooldungeon_max": 4, 
             "current_gacha": [
-                { "characters": [10057, 20022], "start": 1672192800, "end": 1673402400 }
+                {
+                    "characters": [10058, 20012, 20013], 
+                    "start": 1673402400, 
+                    "end": 1674525600
+                }
             ], 
             "current_events": [
-                {"event":   820, "start": 1672192800, "end": 1673402400}, 
-                {"event": 10810, "start": 1673402400, "end": 1674525600}
+                {"event": 10810, "start": 1673402400, "end": 1674525600}, 
+                {"event": 10811, "start": 1673402400, "end": 1674525600}  
             ], 
             "current_raid": [
-                {"raid": 11000, "start": 1672192800, "end": 1672772400}, 
                 {
-                    "raid": 4, 
+                    "raid": 3, 
                     "terrain": "Indoor", 
-                    "start": 1672797600, 
-                    "end": 1673377200
-                }
+                    "start": 1674007200, 
+                    "end": 1674500400
+                }, 
+                {"raid": 12000, "start": 1676426400, "end": 1677006000}
             ]
         }, 
         {
-            "name": "global",
+            "name": "global", 
             "studentlevel_max": 80, 
             "weaponlevel_max": 50, 
             "bondlevel_max": 50, 
@@ -479,14 +484,14 @@
                 "<h6>Website domain change</h6>", 
                 "<ul><li>Schale DB is now <b>Schale.gg</b>. You should be automatically redirected to <a href='https://schale.gg'>schale.gg</a>.</li><li><b>Important:</b> Student Collection data will not have been automatically transferred over to schale.gg, please click <a href=\"https://lonqie.github.io/Schale-Migrate\">here</a> to migrate your collection data.</li><li>If you have installed Schale DB as an app to your homescreen (PWA), you may need to remove and reinstall it.</li><li>All existing links to lonqie.github.io/SchaleDB will continue to work and redirect to the correct page on schale.gg.</li></ul>"
             ]
-        },
+        }, 
         {
             "date": "2023/01/07", 
             "contents": [
                 "<h6>Japanese Translation</h6>", 
                 "<ul><li>User interface translation into Japanese, and improvements to existing Japanese translations. (Thanks, G3danke)</li></ul>", 
                 "<h6>Other Improvements</h6>", 
-                "<ul><li>Added challenge mission requirements to stage information.</li><li>Display character bonus amounts on event currency item pages.</li><li>Changed display of stage rewards to show all types of rewards together.</li><li>Added groggy gauge, duration and gauge fill conditions for Total Assault bosses.</li><li>Terrain strength for enemies is now displayed.</li><li>Stability minimum damage tooltip is now displayed for enemies.</li><li>Various other UI improvements.</li></ul>",
+                "<ul><li>Added challenge mission requirements to stage information.</li><li>Display character bonus amounts on event currency item pages.</li><li>Changed display of stage rewards to show all types of rewards together.</li><li>Added groggy gauge, duration and gauge fill conditions for Total Assault bosses.</li><li>Terrain strength for enemies is now displayed.</li><li>Stability minimum damage tooltip is now displayed for enemies.</li><li>Various other UI improvements.</li></ul>", 
                 "<h6>Bug Fixes</h6>", 
                 "<ul><li>Fixed issues with the display of rewards for Momoyodou Beach House Franchise Plan event stages.</li></ul>"
             ]
@@ -497,10 +502,9 @@
                 "<h6>New Year's Event Update</h6>", 
                 "<ul><li>Added information for New Year event characters and stages.</li></ul>", 
                 "<h6>Other Improvements</h6>", 
-                "<ul><li>Increased the contrast of certain text colours to improve legibility.</li><li>Added the ability to filter by permanently available students.</li><li>Added the ability to view the attributes of the summoned Nodoka (Hot Spring) and corrected the EX Skill calculation to use the Healing stat of the summon.</li></ul>",
+                "<ul><li>Increased the contrast of certain text colours to improve legibility.</li><li>Added the ability to filter by permanently available students.</li><li>Added the ability to view the attributes of the summoned Nodoka (Hot Spring) and corrected the EX Skill calculation to use the Healing stat of the summon.</li></ul>", 
                 "<h6>Bug Fixes</h6>", 
                 "<ul><li>Fixed an <a href=\"https://github.com/lonqie/SchaleDB/issues/19\">issue</a> that caused exclusive weapon levels of saved students to not be loaded correctly.</li><li>Fixed incorrect attributes for Small Perorominions on Perorodzilla (Insane).</li></ul>"
-
             ]
         }, 
         {

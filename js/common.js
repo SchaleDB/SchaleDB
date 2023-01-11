@@ -657,8 +657,8 @@ let itemSearchOptions = {
      * Calculates the maximum damage dealt to a target by this character
      * @param {CharacterStats} target 
      */
-    calculateDamage(target, damageRate, terrain, isCrit, ignoreDef = 10000) {
-        const totalAttack = this.getTotal('AttackPower')
+    calculateDamage(target, damageRate, sourceStat, terrain, isCrit, ignoreDef = 10000) {
+        const totalAttack = this.getTotal(sourceStat)
         const damagedRatio = (20000 - target.getTotal('DamagedRatio')) / 10000
         const levelMod = Math.max(Math.min(1 - (target.level - this.level) * 0.02, 1), 0.4)
         const defMod = target.getDefenseDamageReductionMod(this.getTotal('DefensePenetration'), ignoreDef)
@@ -672,8 +672,8 @@ let itemSearchOptions = {
      * Returns a string representing the minimum to maximum damage based on stability
      * @param {CharacterStats} target 
      */
-    calculateDamageRange(target, damageRate, terrain, isCrit) {
-        const maxDmg = this.calculateDamage(target, damageRate, terrain, isCrit)
+    calculateDamageRange(target, damageRate, sourceStat, terrain, isCrit) {
+        const maxDmg = this.calculateDamage(target, damageRate, sourceStat, terrain, isCrit)
         const minDmg = maxDmg * this.getStabilityMinDamageMod()
         return `${parseInt(minDmg).toLocaleString()} ~ ${parseInt(maxDmg).toLocaleString()}`
     }
@@ -684,10 +684,10 @@ let itemSearchOptions = {
      * @param {*} damageRate 
      * @param {*} terrain 
      */
-    calculateExpectedDamage(target, damageRate, terrain) {
+    calculateExpectedDamage(target, damageRate, sourceStat, terrain) {
         const critChance = this.getCriticalRate(target.getTotal("CriticalChanceResistPoint"))
         const critBonusMod = ((this.getTotal('CriticalDamageRate') - target.getTotal('CriticalDamageResistRate')) / 10000) - 1
-        const baseDmgMax = this.calculateDamage(target, damageRate, terrain, 0)
+        const baseDmgMax = this.calculateDamage(target, damageRate, sourceStat, terrain, 0)
         const critBonusDmgMax = baseDmgMax * critBonusMod
         const expDmgMax = baseDmgMax + (critBonusDmgMax * critChance)
         const expDmgMin = expDmgMax * this.getStabilityMinDamageMod()
@@ -2111,10 +2111,11 @@ class SkillDamageInfo {
                     hitTotal = 1
                 }
 
+                const sourceStat = effect.SourceStat !== undefined ? effect.SourceStat : 'AttackPower'
                 const critChance = studentStats.getCriticalRate(enemyStats.getTotal("CriticalChanceResistPoint"))
                 const critBonusMod = ((studentStats.getTotal('CriticalDamageRate') - enemyStats.getTotal('CriticalDamageResistRate')) / 10000) - 1
                 const stabMod = studentStats.getStabilityMinDamageMod()
-                const baseDmgMax = studentStats.calculateDamage(enemyStats, scaleTotal / hitTotal, terrain, 0, ("IgnoreDef" in effect ? effect.IgnoreDef[this.skillLevel-1] : 10000))
+                const baseDmgMax = studentStats.calculateDamage(enemyStats, scaleTotal / hitTotal, sourceStat, terrain, 0, ("IgnoreDef" in effect ? effect.IgnoreDef[this.skillLevel-1] : 10000))
                 const critBonusDmgMax = baseDmgMax * critBonusMod
                 const hitRate = studentStats.getHitChance(enemyStats.getTotal("DodgePoint"))
                 const suffix = (effect.Type == 'DMGDot' ? ' / ' + translateUI('time_seconds', [effect.Period / 1000]) : "")
@@ -2194,7 +2195,7 @@ class SkillDamageInfo {
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-cc-chance"]`).text(`${modifiedChance}%`)
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-cc-duration"]`).text(`${translateUI('time_seconds', [ccDuration])} (${translateUI('time_seconds', [ccGaugeFill])})`)
             } else if (effect.Type.startsWith('Accumulation')) {
-                const accumulateDMGLimit = studentStats.calculateDamage(enemyStats, effect.Scale[this.skillLevel-1], terrain, 0, 0)
+                const accumulateDMGLimit = studentStats.calculateDamage(enemyStats, effect.Scale[this.skillLevel-1], 'AttackPower', terrain, 0, 0)
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-accumulation-scaling"]`).text(`${MathHelper.toFixedFloat(effect.Scale[this.skillLevel-1]/100, 2).toLocaleString()}%`)
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-accumulation-limit"]`).text(`${parseInt(accumulateDMGLimit).toLocaleString()}`)
             }
@@ -2287,7 +2288,8 @@ class SkillDamageInfo {
 
                 if (effect.Type != 'DMGDot' && effect.Type != 'DMGByHit') {
 
-                    html += this.addStaticRow(index, `${getLocalizedString("Stat", "AttackPower")} %`, '', 'scaling') 
+                    const sourceStat = effect.SourceStat !== undefined ? effect.SourceStat : 'AttackPower'
+                    html += this.addStaticRow(index, `${getLocalizedString("Stat", sourceStat)} %`, '', 'scaling') 
 
                     if (effect.Type == 'DMGMulti' || effect.Type == 'DMGZone') {
                         html += this.addStaticRow(index, translateUI('dmginfo_hit_count'), this.skill.DamageDist.length, 'hit-count')
@@ -2596,7 +2598,6 @@ $.when($.ready, loadPromise).then(function() {
         try {
             let collectionNew = {}
             const importCharacters = urlVars.get("importcollection").split('__')
-            console.log(importCharacters)
             importCharacters.forEach(charDataString => {
                 if (charDataString != '') {
                     const charData = charDataString.split('_')
