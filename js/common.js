@@ -1510,13 +1510,13 @@ class SupportStats {
 
         if (studentId in studentCollection) {
             const savedStudent = studentCollection[studentId]
-            supportStudent.level = savedStudent.l
-            supportStudent.starGrade = savedStudent.s
-            supportStudent.weaponStarGrade = savedStudent.ws
-            supportStudent.weaponLevel = savedStudent.wl
-            supportStudent.equipment = [savedStudent.e1, savedStudent.e2, savedStudent.e3]
+            supportStudent.level = parseInt(savedStudent.l)
+            supportStudent.starGrade = parseInt(savedStudent.s)
+            supportStudent.weaponStarGrade = parseInt(savedStudent.ws)
+            supportStudent.weaponLevel = parseInt(savedStudent.wl)
+            supportStudent.equipment = [parseInt(savedStudent.e1), parseInt(savedStudent.e2), parseInt(savedStudent.e3)]
             supportStudent.gear = false
-            supportStudent.bond = [savedStudent.b]
+            supportStudent.bond = [parseInt(savedStudent.b)]
         } else {
             supportStudent.level = data.common.regions[regionID].studentlevel_max
             supportStudent.starGrade = 5
@@ -2602,15 +2602,15 @@ $.when($.ready, loadPromise).then(function() {
                 if (charDataString != '') {
                     const charData = charDataString.split('_')
                     collectionNew[charData[0]] = {
-                        s: charData[1],
-                        l: charData[2],
-                        e1: charData[3],
-                        e2: charData[4],
-                        e3: charData[5],
-                        ws: charData[6],
-                        wl: charData[7],
-                        b: charData[8],
-                        s3: charData[9]
+                        s: parseInt(charData[1]),
+                        l: parseInt(charData[2]),
+                        e1: parseInt(charData[3]),
+                        e2: parseInt(charData[4]),
+                        e3: parseInt(charData[5]),
+                        ws: parseInt(charData[6]),
+                        wl: parseInt(charData[7]),
+                        b: parseInt(charData[8]),
+                        s3: parseInt(charData[9])
                     }
                 }
             })
