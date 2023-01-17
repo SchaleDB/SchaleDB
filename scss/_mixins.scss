@@ -28,6 +28,19 @@
     transform: translateZ(0);
 }
 
+@mixin backdrop-filter($filter) {
+    backdrop-filter: $filter;
+    -webkit-backdrop-filter: $filter;
+}
+
+@mixin dotted-underline {
+    text-decoration-line: underline;
+    text-decoration-color: var(--col-theme-text-t);
+    text-decoration-style: dotted;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+}
+
 @mixin text-clamp($lines) {
     word-wrap: break-word;
     display: -webkit-box;

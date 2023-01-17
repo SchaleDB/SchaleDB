@@ -162,8 +162,9 @@ img {
 }
 
 .invert-light {
-    //@include transition(filter);
+    will-change: filter;
     filter: var(--var-invert-light) hue-rotate(var(--var-invert-light-hue));
+    -webkit-filter: var(--var-invert-light) hue-rotate(var(--var-invert-light-hue));
 }
 
 .sharp-img {
@@ -727,8 +728,7 @@ p a {
 }
 
 .has-tooltip {
-    text-decoration: underline dotted 2px var(--col-theme-text-t);
-    text-underline-position: under;
+    @include dotted-underline;
     cursor: help;
     @include transition(text-decoration-color);
 
@@ -852,7 +852,6 @@ p a {
     height: 24px;
     margin-top: -4px;
     width: auto;
-    @include sharp-img;
 }
 
 textarea {

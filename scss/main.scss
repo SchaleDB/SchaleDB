@@ -43,7 +43,6 @@
     width: 100%;
     object-fit: cover;
     object-position: center;
-    @include sharp-img;  
 }
 
 #ba-profile-school-label {
@@ -277,14 +276,6 @@ h1 small {
     cursor: pointer;
 }
 
-.ba-btn-img-noinvert {
-    height: 22px;
-    position: absolute;
-    left: 4px;
-    top: 3px;
-    @include sharp-img;
-}
-
 .ba-btn-img {
     will-change: filter;
     height: 22px;
@@ -297,14 +288,6 @@ h1 small {
 
 .active >.ba-btn-img {
     filter: var(--var-invert-dark) hue-rotate(var(--var-invert-dark-hue));;
-}
-
-#navbar-logo {
-    filter: invert(1);
-}
-
-.theme-dark #navbar-logo {
-    filter: invert(0);
 }
 
 .navbar-accent {
@@ -420,7 +403,6 @@ h1 small {
     margin-bottom: 0.5rem;
     object-fit: cover;
     @include circular;
-    @include sharp-img;
 }
 
 .ba-item-n {
@@ -483,7 +465,6 @@ h1 small {
         @include circular;
         object-fit: cover;
         object-position: center;
-        /* @include sharp-img; */
     }
 
     .bonus-label {
@@ -615,35 +596,12 @@ h1 small {
     border: none;
 }
 
-.ba-buff-icon {
-    position: absolute;
-    top: 0px;
-    height: 22px;
-    width: auto;
-    @include unselectable;
-}
-
 .skill-description {
-    .ba-buff-icon {
+
+    .buff-icon {
         height: 18px;
     }
-
-    .ba-buff-icon-spacer {
-        width: 18px;
-    }
 }
-
-// #ba-student-school {
-//     @include flex(center, center);
-//     flex-direction: column;
-
-//     height: 78px;
-//     min-width: 100px;
-
-//     img {
-//         height: 50px;
-//     }
-// }
 
 hr {
     flex-basis: 100%;
@@ -680,7 +638,6 @@ hr {
 }
 
 #ba-student-img {
-    @include sharp-img;
     @include promote-layer;
     transform: translate(0);
     position: fixed;
@@ -692,7 +649,6 @@ hr {
 
 #ba-student-weapon-img {
     width: 100%;
-    @include sharp-img;
 }
 
 .label-qty {
@@ -723,7 +679,6 @@ hr {
     background-size: contain;
     background-repeat: no-repeat;
     background-position-x: right;
-    @include sharp-img;
 }
 
 #ba-raid-difficulty a, #ba-timeattack-difficulty a, #ba-worldraid-difficulty a {
@@ -916,13 +871,26 @@ a.nav-link.disabled {
 }
 
 .ba-skill-buff, .ba-skill-debuff, .ba-skill-cc, .ba-skill-special {
-    position: relative;
+    display: inline-flex;
+    align-items: center;
+    vertical-align: text-bottom;
+
+    line-height: 22px;
     font-weight: 400;
     border-radius: 1rem;
     padding: 0rem 0.4rem;
     white-space: nowrap;
     cursor: default;
     transition: background-color ease var(--var-animation-duration), color ease var(--var-animation-duration);
+
+    .buff-label {
+        padding-left: 3px;
+    }
+
+    .buff-icon {
+        height: 22px;
+        width: auto;
+    }
 }
 
 .ba-skill-buff {
@@ -959,11 +927,6 @@ a.nav-link.disabled {
 
 .text-special {
     color: var(--col-text-status);
-}
-
-.ba-buff-icon-spacer {
-    display: inline-block;
-    width: 22px;
 }
 
 .ba-student-panel {
@@ -1087,7 +1050,6 @@ a.nav-link.disabled {
 .ba-tooltip-img img {
     object-fit: cover;
     object-position: center;
-    @include sharp-img;
 }
 
 .img-scale-larger {

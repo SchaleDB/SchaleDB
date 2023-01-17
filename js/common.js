@@ -2,11 +2,11 @@ const raid_level = [17, 25, 35, 50, 70, 80]
 const maxbond = [10, 10, 20, 20, 50]
 const gear_minlevelreq = [0, 15, 35]
 const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40]]
-const languages = ['En', 'Jp', 'Kr', 'Tw', 'Cn', 'Th']
-const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5, 'Cn': 5, 'Th': 11}
-const label_craft_smalltext_threshold = {'En':8, 'Jp':4, 'Kr':4, 'Tw':4, 'Cn': 4, 'Th': 8}
-const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6, 'Cn':6, 'Th': 12}
-const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':10, 'Cn':10, 'Th': 20}
+const languages = ['En', 'Jp', 'Kr', 'Tw', 'Cn', 'Th', 'Vi']
+const label_smalltext_threshold = {'En':11, 'Jp':5, 'Kr':5, 'Tw':5, 'Cn': 5, 'Th': 11, 'Vi': 11}
+const label_craft_smalltext_threshold = {'En':8, 'Jp':4, 'Kr':4, 'Tw':4, 'Cn': 4, 'Th': 8, 'Vi': 8}
+const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6, 'Cn':6, 'Th': 12, 'Vi': 12}
+const label_raid_smalltext_threshold = {'En':20, 'Jp':10, 'Kr':11, 'Tw':10, 'Cn':10, 'Th': 20, 'Vi': 20}
 const adaptationAmount = {0: "D", 1: "C", 2: "B", 3: "A", 4: "S", 5: "SS"}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
@@ -55,6 +55,9 @@ if (localStorage.getItem("language") && languages.includes(localStorage.getItem(
             } else {
                 userLang = 'Tw'
             }
+            break;
+        case 'vi':
+            userLang = 'Vi'
             break;
         default:
             userLang = 'En'
@@ -2315,7 +2318,7 @@ class SkillDamageInfo {
                         html += this.addStaticRow(index, translateUI('dmginfo_dmg_avg'), '', 'dmg-final-avg')
                     }
                 } else {
-                    const dotEffectIcon = `<span class="ba-skill-debuff"><img class="ba-buff-icon" src="images/buff/Combat_Icon_${effect.Icon}.png"><span class="ba-buff-icon-spacer"></span><span class="text-debuff">${getLocalizedString("BuffName", effect.Icon)}</span></span>`
+                    const dotEffectIcon = getBuffTag('Debuff', effect.Icon, {tooltip: false})
                     html += this.addStaticRow(index, `${dotEffectIcon} ${getLocalizedString("Stat", "AttackPower")} %`, '', 'scaling') 
                     html += this.addStaticRow(index, `${dotEffectIcon} ${translateUI('dmginfo_dmg')}`, '', 'dmg-range')
                 }
@@ -2332,7 +2335,7 @@ class SkillDamageInfo {
                 html += this.addSeparator()
 
                 if (effect.Type == 'HealDot') {
-                    const regenEffectIcon = `<span class="ba-skill-buff"><img class="ba-buff-icon" src="images/buff/Combat_Icon_Buff_DotHeal.png"><span class="ba-buff-icon-spacer"></span><span class="text-buff">${getLocalizedString("BuffName", "Buff_DotHeal")}</span></span>`
+                    const regenEffectIcon = getBuffTag('Buff', "DotHeal", {tooltip: false})
                     html += this.addStaticRow(index, `${regenEffectIcon} ${getLocalizedString("Stat", "HealPower")} %`, '', 'scaling') 
                     html += this.addStaticRow(index, `${regenEffectIcon} ${translateUI('dmginfo_heal')}`, '', 'heal-total')
                 } else {
@@ -2344,22 +2347,20 @@ class SkillDamageInfo {
                     html += this.addStaticRow(index, translateUI('dmginfo_heal_amount'), '', 'heal-total', '') 
                 }
             } else if (effect.Type.startsWith('Shield')) {
-                const shieldEffectIcon = `<span class="ba-skill-buff"><img class="ba-buff-icon" src="images/buff/Combat_Icon_Buff_Shield.png"><span class="ba-buff-icon-spacer"></span><span class="text-buff">${getLocalizedString("BuffName", "Buff_Shield")}</span></span>`
-
+                const shieldEffectIcon = getBuffTag('Buff', "Shield", {tooltip: false})
                 html += this.addSeparator()
 
                 html += this.addStaticRow(index, `${shieldEffectIcon} ${getLocalizedString("Stat", "HealPower")} %`, '', 'scaling') 
                 html += this.addStaticRow(index, translateUI('dmginfo_shield_amount', [shieldEffectIcon]), '', 'heal-total', 'text-shield')
             } else if (effect.Type.startsWith('CrowdControl')) {
-                const ccEffectIcon = `<span class="ba-skill-cc"><img class="ba-buff-icon" src="images/buff/Combat_Icon_${effect.Icon}.png"><span class="ba-buff-icon-spacer"></span><span class="text-cc">${getLocalizedString("BuffName", effect.Icon)}</span></span>`
-                
+                const ccEffectIcon = getBuffTag('CC', effect.Icon, {tooltip: false})
                 html += this.addSeparator()
                 
                 html += this.addStaticRow(index, translateUI('dmginfo_cc_effect_chance', [ccEffectIcon]), '', 'cc-chance')
                 html += this.addStaticRow(index, translateUI('dmginfo_cc_effect_duration', [ccEffectIcon]), '', 'cc-duration')
             } else if (effect.Type.startsWith('Accumulation')) {
-                const accumulationEffectIcon = `<span class="ba-skill-special"><img class="ba-buff-icon" src="images/buff/Combat_Icon_Special_Accumulation.png"><span class="ba-buff-icon-spacer"></span><span class="text-special">${getLocalizedString("BuffName", "Special_Accumulation")}</span></span>`
-                
+                const accumulationEffectIcon = getBuffTag('Special', "Accumulation", {tooltip: false})
+
                 html += this.addSeparator()
 
                 html += this.addStaticRow(index, accumulationEffectIcon + ` ${getLocalizedString("Stat", "AttackPower")} %`, '', 'accumulation-scaling')
@@ -3004,9 +3005,6 @@ function loadModule(moduleName, entry=null) {
                 loadRaid(1)
             }
             
-            if (regionID == 1) {
-                $('#ba-raid-list-tab-worldraid').hide()
-            }
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
         })
@@ -3866,16 +3864,14 @@ function processStudent() {
 
     let favItemsHtml = ""
     
-    if (regionID == 0) {
-        const favSSRItems = getFavouriteSSRItems(allTags)
-        $(favSSRItems[0]).each(function(i,el){
-            favItemsHtml += getFavourIconHTML(el, 4)
-        })
-        $(favSSRItems[1]).each(function(i,el){
-            favItemsHtml += getFavourIconHTML(el, 3)
-        })
-    }
-
+    const favSSRItems = getFavouriteSSRItems(allTags)
+    $(favSSRItems[0]).each(function(i,el){
+        favItemsHtml += getFavourIconHTML(el, 4)
+    })
+    $(favSSRItems[1]).each(function(i,el){
+        favItemsHtml += getFavourIconHTML(el, 3)
+    })
+    
     const favItems = getFavouriteItems(allTags)
     $(favItems[0]).each(function(i,el){
         favItemsHtml += getFavourIconHTML(el, 3)
@@ -5957,6 +5953,8 @@ function getEventCardHTML(eventId) {
     } else {
         if (userLang == 'Cn') {
             logoLang = 'Tw'
+        } else if (userLang == 'Vi') {
+            logoLang = 'Jp'
         } else {
             logoLang = userLang
         }
@@ -6401,7 +6399,7 @@ function updatePassiveSkillStatPreview() {
     $('#ba-statpreview-passiveskill-desc').html(desc.substring(0, desc.length-2))
     $('.statpreview-passive').toggleClass('plus', passivePlus)
     
-    $('#ba-statpreview-status-passive-level .label').html(skillLevel < 10 ? `Lv.${skillLevel}` : `<img class="sharp-img" src="images/ui/ImageFont_Max.png" style="height:16px;">`)
+    $('#ba-statpreview-status-passive-level .label').html(skillLevel < 10 ? `Lv.${skillLevel}` : `<img src="images/ui/ImageFont_Max.png" style="height:16px;">`)
 }
 
 function updateSummonSourceSkill() {
@@ -6698,6 +6696,8 @@ function populateEventStageList(eventId) {
         } else {
             if (userLang == 'Cn') {
                 logoLang = 'Tw'
+            } else if (userLang == 'Vi') {
+                logoLang = 'Jp'
             } else {
                 logoLang = userLang
             }
@@ -6743,31 +6743,6 @@ function populateEventStageList(eventId) {
             $('#stage-select-grid').html(html)
             $('#stage-select-'+loadedStage.Id).addClass('selected')
         }
-
-        //Character Bonus
-        // charBonusHtml = ''
-        // if (data.stages.EventInfo[eventId].CharacterBonus !== undefined) {
-        //     for (eventTokenId in data.stages.EventInfo[eventId].CharacterBonus) {
-        //         if (charBonusHtml != "") {
-        //             charBonusHtml += '<div class="ba-panel-separator my-2"></div>'
-        //         }
-
-        //         charBonusHtml += '<div class="d-flex">'
-        //         charBonusHtml += getMaterialIconHTML(eventTokenId, 0)
-        //         charBonusHtml += '<div class="item-icon-list">'
-
-        //         data.stages.EventInfo[eventId].CharacterBonus[eventTokenId].forEach(charBonus => {
-        //             charBonusHtml += getStudentIconSmall(find(data.students, 'Id', charBonus[0])[0], `+${charBonus[1]/100}%`)
-        //         })
-
-        //         charBonusHtml += '</div></div>'
-        //     }
-        //     $('#event-character-bonus-list').html(charBonusHtml)
-        //     $('#event-character-bonus-list .ba-item-student').tooltip({html: true})
-        // } else {
-        //     $('#event-tab-bonus').hide()
-        // }
-
 
         loadedStageList = '' + eventId
         $('#ba-stages-list-tab-events').tab('show')
@@ -7147,19 +7122,23 @@ function getSkillText(text, params, level, type, damageDist = [], damageDistPara
         regex = new RegExp(`<${type.slice(0,1).toLowerCase()}:(\\w+)>`, 'g')
         if (renderBuffs) {
             result = result.replace(regex, function(match, capture) {
-                const buffName = type + '_' + capture
-                return `<span class="ba-skill-${type.toLowerCase()}" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_${buffName}.png`, getLocalizedString('BuffNameLong', buffName), getLocalizedString('BuffType', type), null, getLocalizedString('BuffTooltip', buffName), 30)}"><img class=\"ba-buff-icon\" src=\"images/buff/Combat_Icon_${buffName}.png\"><span class="ba-buff-icon-spacer"></span>${getLocalizedString('BuffName', buffName)}</span>`
+                return getBuffTag(type, capture, {tooltip: true})
             })
         } else {
             result = result.replace(regex, function(match, capture) {
                 const buffName = type + '_' + capture
-                return `<span class="text-${type.toLowerCase()}">${getLocalizedString('BuffName', buffName)}</span>`
+                return `<b>${getLocalizedString('BuffName', buffName)}</b>`
             })
         }
 
     })
 
     return result
+}
+
+function getBuffTag(type, name, options={tooltip}) {
+    const buffName = `${type}_${name}`
+    return `<span class="ba-skill-${type.toLowerCase()}" ${options.tooltip ? `data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_${buffName}.png`, getLocalizedString('BuffNameLong', buffName), getLocalizedString('BuffType', type), null, getLocalizedString('BuffTooltip', buffName), 30)}"` : ''}><img class=\"buff-icon\" src=\"images/buff/Combat_Icon_${buffName}.png\"><span class="buff-label">${getLocalizedString('BuffName', buffName)}</span></span>`
 }
 
 function getSkillHitsText(damageDist, totalDamage, type) {
