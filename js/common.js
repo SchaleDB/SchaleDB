@@ -4145,11 +4145,11 @@ function loadItem(id) {
         $('#item-select-grid .card-items.selected').removeClass('selected')
         $('#ba-item-furniture-row').hide()
 
-        if (id >= 2000000) {
+        if (id >= 2000000 && id < 3000000) {
             mode = 'equipment'
             item = findOrDefault(data.equipment, "Id", id-2000000, 1)[0]
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.Category))
-        } else if (id >= 1000000) {
+        } else if (id >= 1000000 && id < 2000000) {
             mode = 'furniture'
             item = findOrDefault(data.furniture, "Id", id-1000000, 1)[0]
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.SubCategory))
@@ -4195,6 +4195,10 @@ function loadItem(id) {
             $('#ba-item-sources').html(getItemDropStages(item.Id))
         } else if (item.Category == 'Consumable') {
             $('#ba-item-sources').html(getItemDropStages(item.Id))
+            if (item.ConsumeType !== undefined) {
+                $('#ba-item-usage').html(getConsumableRewards(item))
+                $('#ba-item-usage .item-drop').tooltip({html: true})
+            }
         } else if (item.Category == 'Favor') {
             if (item.Id < 5998) {
                 $('#ba-item-usage').html(getLikedByStudents(item))
@@ -4599,14 +4603,14 @@ function changeWorldRaidDifficulty(difficultyId) {
     })
 
     let html = ''
-    raid.Rewards[raid_difficulty].forEach(val => {
-        html += getDropIconHTML(val[0], val[1])
+    const rewardsArray = (regionID == 1 && "RewardsGlobal" in raid) ? raid.RewardsGlobal : raid.Rewards
+
+    rewardsArray[raid_difficulty].forEach(val => {
+        html += getDropIconHTML(val[0], val[1], val[2], val[2], true)
     })
         
-    $(`#ba-raid-rewards`).html(`<div class="d-flex flex-wrap justify-content-center">${html}</div>`)
-    $(`#ba-raid-rewards>div div`).each((i, el) => {
-        $(el).tooltip({html: true})
-    })
+    $(`#ba-raid-rewards`).html(html)
+    $(`#ba-raid-rewards .item-drop`).tooltip({html: true})
     
     changeRaidEnemy(selectedEnemy)
 }
@@ -6114,7 +6118,7 @@ function getMaterialIconHTML(id, amount) {
 
 function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dropType=null) {
     let item, type, group, haslink, itemType
-    if (id >= 4000000) {
+    if (id >= 4000000 && id < 5000000) {
         groups = find(data.common.GachaGroup, "Id", id-4000000)
         if (groups.length > 0) {
             group = groups[0]
@@ -6123,19 +6127,19 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
             iconPath = 'items'
             haslink = false
         } else return ''
-    } else if (id >= 3000000) {
+    } else if (id >= 3000000 && id < 4000000) {
         item = find(data.currency, "Id", id-3000000)[0]
         type = 'Currency'
         itemType = 'Currency'
         iconPath = 'items'
         haslink = false
-    } else if (id >= 2000000) {
+    } else if (id >= 2000000 && id < 3000000) {
         item = find(data.equipment, "Id", id-2000000)[0]
         type = 'Equipment'
         itemType = item.Category
         iconPath = 'equipment'
         haslink = true
-    } else if (id >= 1000000) {
+    } else if (id >= 1000000 && id < 2000000) {
         item = find(data.furniture, "Id", id-1000000)[0]
         type = 'Furniture'
         itemType = item.Category
@@ -6230,7 +6234,15 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
             html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${icon}.png`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/${icon}.png"><span class="ba-material-label">${getProbabilityText(chance)}</span></div>`
         }
     } else {
-        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, getTranslatedString(item, 'Desc').replace('&','&amp;'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 || forcePercent ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
+        let description = getTranslatedString(item, 'Desc').replace('&','&amp;')
+        if (item.Id > 91000000 && item.ConsumeType == "Random") {
+            const containsArray = regionID == 1 && "ContainsGlobal" in item ? item.ContainsGlobal : item.Contains
+            containsArray.forEach(containedItem => {
+                const item = find(data.items, 'Id', containedItem[0])[0]
+                description += `\n${getTranslatedString(item, 'Name')} (${getProbabilityText(containedItem[1])})`
+            })
+        }
+        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, description, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 || forcePercent ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
     }
     return html
 }
@@ -6492,7 +6504,7 @@ function populateItemList(tab) {
     })
 
     function getItemGridCardDetailedInnerHTML(linkid) {
-        const item = find(data[loadedItemList], 'Id', linkid % 1000000)[0]
+        const item = find(data[loadedItemList], 'Id', linkid >= 91000000 ? linkid : linkid % 1000000)[0]
         const name = getTranslatedString(item, "Name")
         const smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
         
@@ -6508,7 +6520,7 @@ function populateItemList(tab) {
     }
     
     function getItemGridCardCompactInnerHTML(linkid) {
-        const item = find(data[loadedItemList], 'Id', linkid % 1000000)[0]
+        const item = find(data[loadedItemList], 'Id', linkid >= 91000000 ? linkid : linkid % 1000000)[0]
         const name = getTranslatedString(item, "Name")
         return `<div class="card-compact ba-item-${item.Rarity.toLowerCase()}" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><img loading="lazy" src="images/${loadedItemList}/${item.Icon}.png"></div>`
     }
@@ -6869,6 +6881,30 @@ function getUsedByStudents(item, mode) {
         return ''
     }
     
+}
+
+function getConsumableRewards(item) {
+    let html = '', headerText = ''
+    const containsArray = regionID == 1 && "ContainsGlobal" in item ? item.ContainsGlobal : item.Contains
+
+    switch (item.ConsumeType) {
+        case "Random":
+            headerText = translateUI('item_contains_random')
+            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[3])})
+            break;
+        case "Choice":
+            headerText = translateUI('item_contains_choice')
+            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[3])})
+            break;
+    }
+
+    if (html != '') {
+        $('#ba-item-usage').show()
+        html = `<div class="mb-2"><i>${headerText}</i></div><div class="item-icon-list">` + html + '</div>'
+        return html
+    } else {
+        return ''
+    }
 }
 
 function getEquipmentRecipe(item) {
