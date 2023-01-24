@@ -392,7 +392,7 @@
     "regions": [
         {
             "name": "jp", 
-            "studentlevel_max": 83, 
+            "studentlevel_max": 85, 
             "weaponlevel_max": 50, 
             "bondlevel_max": 50, 
             "gear1_max": 7, 
@@ -407,27 +407,16 @@
             ], 
             "event_701_max": 10, 
             "event_701_challenge_max": 4, 
-            "commission_max": 11, 
+            "commission_max": 12, 
             "bounty_max": 9, 
             "schooldungeon_max": 4, 
             "current_gacha": [
-                {
-                    "characters": [10058, 20012, 20013], 
-                    "start": 1673402400, 
-                    "end": 1674525600
-                }
+                { "characters": [10059], "start": 1674525600, "end": 1675130400 }, 
+                { "characters": [10060, 20023], "start": 1675130400, "end": 1675994400 }
             ], 
             "current_events": [
-                {"event": 10810, "start": 1673402400, "end": 1674525600}, 
-                {"event": 10811, "start": 1673402400, "end": 1674525600}  
             ], 
             "current_raid": [
-                {
-                    "raid": 3, 
-                    "terrain": "Indoor", 
-                    "start": 1674007200, 
-                    "end": 1674500400
-                }, 
                 {"raid": 12000, "start": 1676426400, "end": 1677006000}
             ]
         }, 
@@ -467,6 +456,17 @@
         }
     ], 
     "changelog": [
+        {
+            "date": "2023/01/24", 
+            "contents": [
+                "<h6>JP 2nd Anniversary</h6>",
+                "<ul><li>Added information for 2nd Anniversary Update characters, items and furniture.</li><li>Allied Operation info will be available at a later date.</li></ul>",
+                "<h6>Other Improvements</h6>", 
+                "<ul><li>Improved display of gifts to show the exact Relationship EXP granted.</li><li>Improved display of skill level-up materials to show the amount required by a student to fully level every skill.</li><li>The setting \"Enable Custom Buffs\" has been removed and the option to add custom buffs will now always be displayed.</li></ul>",
+                "<h6>Bug Fixes</h6>", 
+                "<ul><li>Fixed an <a href=\"https://github.com/lonqie/SchaleDB/issues/20\">issue</a> where the Accumulation damage cap was incorrectly multiplied by the enemy's Incoming DMG Resistance.</li><li>Removed check that prevented Total Assault debuffs from being applied to Special students.</li></ul>"
+            ]
+        }, 
         {
             "date": "2023/01/19", 
             "contents": [

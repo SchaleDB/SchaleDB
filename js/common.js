@@ -189,7 +189,6 @@ let region
 let student_bondalts
 let darkTheme
 let highContrast
-let enableCustomBuffs = false
 let raid
 let selectedEnemy = 0
 let raid_difficulty = 0
@@ -269,6 +268,7 @@ let search_options = {
             "MG": false,
             "RL": false,
             "MT": false,
+            "FT": false
         },
         "Position": {
             "Front": false,
@@ -451,7 +451,8 @@ let itemSearchOptions = {
         this.stats['AmmoCost'] = [character.AmmoCost,0,1]
         this.stats['Range'] = [character.Range,0,1]
         this.stats['RegenCost'] = [character.RegenCost,0,1]
-        this.stats['DamagedRatio'] = [character.DamagedRatio,0,1]
+        this.stats['DamageRatio'] = [character.DamageRatio !== undefined ? character.DamageRatio : 10000,0,1]
+        this.stats['DamagedRatio'] = [character.DamagedRatio !== undefined ? character.DamagedRatio : 10000,0,1]
         this.stats['HealEffectivenessRate'] = [10000,0,1]
         this.stats['OppressionPower'] = [100,0,1]
         this.stats['OppressionResist'] = [100,0,1]
@@ -662,13 +663,22 @@ let itemSearchOptions = {
      */
     calculateDamage(target, damageRate, sourceStat, terrain, isCrit, ignoreDef = 10000) {
         const totalAttack = this.getTotal(sourceStat)
+        const damageRatio = this.getTotal('DamageRatio') / 10000
         const damagedRatio = (20000 - target.getTotal('DamagedRatio')) / 10000
         const levelMod = Math.max(Math.min(1 - (target.level - this.level) * 0.02, 1), 0.4)
         const defMod = target.getDefenseDamageReductionMod(this.getTotal('DefensePenetration'), ignoreDef)
         const terrainMod = 0.8 + this.terrain[terrain] * 0.1
         const effectiveMod = this.getEffectiveMod(target.armorType)
         const critMod = (this.getTotal('CriticalDamageRate') - target.getTotal('CriticalDamageResistRate')) / 10000
-        return totalAttack * terrainMod * effectiveMod * (damageRate/10000) * defMod * damagedRatio * levelMod * (1 + (isCrit * (critMod - 1)))
+        return totalAttack * terrainMod * effectiveMod * (damageRate/10000) * defMod * damageRatio * damagedRatio * levelMod * (1 + (isCrit * (critMod - 1)))
+    }
+
+    calculateAccumulateDamageLimit(target, damageRate, sourceStat, terrain) {
+        const totalAttack = this.getTotal(sourceStat)
+        const levelMod = Math.max(Math.min(1 - (target.level - this.level) * 0.02, 1), 0.4)
+        const terrainMod = 0.8 + this.terrain[terrain] * 0.1
+        const effectiveMod = this.getEffectiveMod(target.armorType)
+        return totalAttack * terrainMod * effectiveMod * (damageRate/10000) * levelMod
     }
 
     /**
@@ -2198,7 +2208,7 @@ class SkillDamageInfo {
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-cc-chance"]`).text(`${modifiedChance}%`)
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-cc-duration"]`).text(`${translateUI('time_seconds', [ccDuration])} (${translateUI('time_seconds', [ccGaugeFill])})`)
             } else if (effect.Type.startsWith('Accumulation')) {
-                const accumulateDMGLimit = studentStats.calculateDamage(enemyStats, effect.Scale[this.skillLevel-1], 'AttackPower', terrain, 0, 0)
+                const accumulateDMGLimit = studentStats.calculateAccumulateDamageLimit(enemyStats, effect.Scale[this.skillLevel-1], 'AttackPower', terrain)
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-accumulation-scaling"]`).text(`${MathHelper.toFixedFloat(effect.Scale[this.skillLevel-1]/100, 2).toLocaleString()}%`)
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-accumulation-limit"]`).text(`${parseInt(accumulateDMGLimit).toLocaleString()}`)
             }
@@ -2471,10 +2481,6 @@ $.when($.ready, loadPromise).then(function() {
         highContrast = (!CSS.supports('backdrop-filter', 'blur(1px)')) || window.matchMedia('(prefers-contrast: more)').matches 
     }
 
-    if (localStorage.getItem("enable_custom_buffs")) {
-        enableCustomBuffs = (localStorage.getItem("enable_custom_buffs") == "true")
-    }
-
     $('body').toggleClass("high-contrast", highContrast)
 
     //prevent tooltips from sticking on buttons 
@@ -2491,7 +2497,6 @@ $.when($.ready, loadPromise).then(function() {
     $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).addClass("active")
     $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
     $(`#ba-navbar-contrast-toggle-${highContrast}`).addClass("active")
-    $(`#ba-navbar-custombuffs-toggle-${enableCustomBuffs}`).addClass("active")
 
     $('#ba-navbar-search').on('input', function() {
         if (searchDelayTimeout) {
@@ -2678,7 +2683,6 @@ function loadModule(moduleName, entry=null) {
         $("#loaded-module").load(html_list['students'], function() {
             loadRegion(regionID)
             loadLanguage(userLang)
-            $('.buff-custom').toggle(enableCustomBuffs)
 
             studentSelectorModal = new bootstrap.Modal(document.getElementById("ba-student-modal-students"), {})
             document.getElementById("ba-student-modal-students").addEventListener('hidden.bs.modal', function (e) {
@@ -3882,7 +3886,7 @@ function processStudent() {
 
     $('#ba-student-favoured-items').empty().html(favItemsHtml)
     if (favItemsHtml == "") {
-        $('#ba-student-favoured-items').empty().html(`<span class="pb-2 text-center">${translateUI('favoritem_none')}</span>`)
+        $('#ba-student-favoured-items').empty().html(`<span class="text-center">${translateUI('favoritem_none')}</span>`)
     } else {
         $('#ba-student-favoured-items').empty().html(favItemsHtml)
     }
@@ -4013,7 +4017,7 @@ function initCharacterSkillInfo() {
                 Name: translateUI('skill_normalattack'),
                 Parameters: [["100%"]],
                 DamageDist: student.DamageDist,
-                Effects: [{Type: (student.DamageDist.length > 1 ? "DMGMulti" : "DMGSingle"), Scale: [10000], AttackFrames: student.AttackFrames}],
+                Effects: [{Type: (student.DamageDist.length > 1 ? "DMGMulti" : "DMGSingle"), Scale: [10000], AttackFrames: student.AttackFrames, CriticalCheck: student.AttackCriticalCheck !== undefined ? student.AttackCriticalCheck : "Check" }],
             }
     
             switch (student.WeaponType) {
@@ -4178,7 +4182,11 @@ function loadItem(id) {
         
         $('#ba-item-icon').removeClass('ba-item-n ba-item-r ba-item-sr ba-item-ssr').addClass('ba-item-'+item.Rarity.toLowerCase())
         $('#ba-item-icon-img').attr('src', `images/${mode}/${item.Icon}.png`)
-        $('#ba-item-description').html(getTranslatedString(item, 'Desc'))
+        let description = getTranslatedString(item, 'Desc')
+        if (item.ImmediateUse) {
+            description += `\n\n<i>${translateUI('item_is_immediateuse')}</i>`
+        }
+        $('#ba-item-description').html(description)
         if (mode == 'equipment' && item.Id >= 1000 && item.Id <= 10000) {
             $('#ba-item-description').append(`\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(item, '\n'))
         }
@@ -4204,7 +4212,7 @@ function loadItem(id) {
                 $('#ba-item-usage').html(getLikedByStudents(item))
                 $('.ba-item-student').tooltip({html: true})
             } else {
-                $('#ba-item-usage').html(`<i>${translateUI('item_specialgift', ['<img class="inline-img" src="images/ui/Cafe_Interaction_Gift_03.png">'])}</i>`).show()
+                $('#ba-item-usage').html(`<i>${translateUI('item_student_favor_all', [180, '<img class="inline-img" src="images/ui/Cafe_Interaction_Gift_03.png">'])}</i>`).show()
             }
         } else if (item.Category == 'SecretStone') {
             $('#ba-item-sources').html(getItemDropStages(item.Id))
@@ -4421,12 +4429,20 @@ function loadRaid(raidId) {
                 $('#ba-raid-info-tab-skills').tab('show')
             }
             $('#ba-raid-info-tab-profile').hide()
-            raid = findOrDefault(data.raids.WorldRaid,"Id",raidId,1)[0]
-
-            if (raid_difficulty > 2)  {
+            raid = findOrDefault(data.raids.WorldRaid,"Id",raidId,814000)[0]
+            const maxDifficulty = raid.Level.length
+            if (raid_difficulty >= maxDifficulty)  {
                 raid_difficulty = 0
             }
             
+            //generate difficulty tabs
+            let difficultyHtml = ''
+            for (let i = 0; i < maxDifficulty; i++) {
+                const difficultyName = raidId >= 821001 ? getLocalizedString('RaidDifficulty', i) : String.fromCharCode(65+i) 
+                difficultyHtml += `<a id="ba-worldraid-difficulty-${i}" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeWorldRaidDifficulty(${i})">${difficultyName}</a>`
+                
+            }
+            $('#ba-worldraid-difficulty').html(difficultyHtml)
             $(`#ba-worldraid-difficulty-${raid_difficulty}`).tab('show')
         
             $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'WorldRaid'))
@@ -4578,7 +4594,9 @@ function changeWorldRaidDifficulty(difficultyId) {
     $('#raid-enemy-list .dropdown-menu').html(raidEnemyList)
     $('#raid-enemy-list').toggleClass('disabled', raid.EnemyList[raid_difficulty].length <= 1)
 
-    raid.RaidSkill.forEach(function(el, i) {
+    const raidSkillList = (raid.UseRaidSkillList !== undefined ? find(data.raids.Raid,'Id',raid.UseRaidSkillList)[0].RaidSkill : raid.RaidSkill) 
+
+    raidSkillList.forEach(function(el, i) {
         if (raid_difficulty < el.MinDifficulty) return
 
         let skillType
@@ -4606,7 +4624,7 @@ function changeWorldRaidDifficulty(difficultyId) {
     const rewardsArray = (regionID == 1 && "RewardsGlobal" in raid) ? raid.RewardsGlobal : raid.Rewards
 
     rewardsArray[raid_difficulty].forEach(val => {
-        html += getDropIconHTML(val[0], val[1], val[2], val[2], true)
+        html += getDropIconHTML(val[0], val[1], val[2], val[3], true)
     })
         
     $(`#ba-raid-rewards`).html(html)
@@ -4787,20 +4805,11 @@ function loadStage(id) {
                     labelText = '<i class="fa-solid fa-star"></i>'.repeat(3)//translateUI("stage_reward_threestar")
                 }
                 
-                if (stage.Type == "FindGift") {
-                    dropsHtml += getDropIconHTML(stage.Rewards[el][0][0], 0.1, stage.Rewards[el][0][1], stage.Rewards[el][0][1])
-                    dropsHtml += getDropIconHTML(stage.Rewards[el][1][0], 0.5, stage.Rewards[el][1][1], stage.Rewards[el][1][1])
-                    dropsHtml += getDropIconHTML(stage.Rewards[el][2][0], 0.4, stage.Rewards[el][2][1], stage.Rewards[el][2][1])
-                    stage.Rewards[el]
-                } else if (regionID == 1 && "RewardsGlobal" in stage) {
-                    $.each(stage.RewardsGlobal[el], function(i,el2){
-                        dropsHtml += getDropIconHTML(el2[0], el2[1], 1, 1, false, labelText)
-                    })
-                } else {
-                    $.each(stage.Rewards[el], function(i,el2){
-                        dropsHtml += getDropIconHTML(el2[0], el2[1], 1, 1, false, labelText)
-                    })
-                }
+                const rewardsArray = regionID == 1 && stage.RewardsGlobal !== undefined ? stage.RewardsGlobal[el] : stage.Rewards[el]
+                rewardsArray.forEach(reward => {
+                    const amount = stage.Type == "FindGift" ? reward[2] : 1
+                    dropsHtml += getDropIconHTML(reward[0], reward[1], amount, amount, false, labelText)
+                })
             }
         })
 
@@ -5005,8 +5014,10 @@ function loadRegion(regID) {
 
     if (regionID == 1) {
         //hide filters not relevant to global
+        $('#ba-student-search-filter-weapontype-ft').hide()
         $('#item-search-filter-furnitureset-108').hide()
         $('#item-search-filter-furnitureset-109').hide()
+        $('#item-search-filter-furnitureset-110').hide()
 
         //hide gear slot 4
         $('#ba-student-gear-separator').hide()
@@ -5393,7 +5404,7 @@ function recalculateStats() {
                 //check conditions
                 let compatible = ExternalBuffs.checkRestrictions(student, effect)
                 
-                if (!compatible || (student.SquadType == 'Support' && statPreviewSelectedChar == 0 && buff.Skill.SkillType != 'sub')) {
+                if (!compatible || (student.SquadType == 'Support' && statPreviewSelectedChar == 0 && (buff.Skill.SkillType != 'sub' && !buff.StudentId.startsWith("raid")))) {
                     //exclude other character's Ex/Basic skills on Special characters
                     $('#statpreview-buff-transferable-incompatible').toggle(statPreviewIncludeBuffs)
                     $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
@@ -5464,7 +5475,7 @@ function recalculateStats() {
     }
 
     //Include Custom Buffs
-    if (enableCustomBuffs && statPreviewCustomBuffs !== undefined && !statPreviewViewSupportStats && !compareMode) {
+    if (statPreviewCustomBuffs !== undefined && !statPreviewViewSupportStats && !compareMode) {
         statPreviewCustomBuffs.buffs.forEach((buff, index) => {
 
             studentStats.addBuff(buff.Stat, buff.Amount)
@@ -6235,6 +6246,9 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
         }
     } else {
         let description = getTranslatedString(item, 'Desc').replace('&','&amp;')
+        if (item.ImmediateUse) {
+            description += `\n<i>${translateUI('item_is_immediateuse')}</i>`
+        }
         if (item.Id > 91000000 && item.ConsumeType == "Random") {
             const containsArray = regionID == 1 && "ContainsGlobal" in item ? item.ContainsGlobal : item.Contains
             containsArray.forEach(containedItem => {
@@ -6266,8 +6280,8 @@ function getProbabilityText(chance) {
     return chance >= 1 ? '&times;'+abbreviateNumber(parseInt(chance).toFixed(0)).toLocaleString(): parseFloat((chance*100).toFixed(2)) + '&#37;'
 }
 
-function getStudentIconSmall(student, label=null) {
-    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student.PathName}')" title="${getRichTooltip(`images/student/icon/${student.CollectionTexture}.png`, getTranslatedString(student, 'Name'), translateUI('student'), getRarityStars(student.StarGrade), getTranslatedString(student, 'ProfileIntroduction').split('\n')[0], 50, 'circle')}"><img src="images/student/icon/${student.CollectionTexture}.png">${label != null ? `<span class="bonus-label" style="cursor:pointer;">${label}</span>` : ''}</div>`
+function getStudentIconSmall(student, label=null, description=null) {
+    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student.PathName}')" title="${getRichTooltip(`images/student/icon/${student.CollectionTexture}.png`, getTranslatedString(student, 'Name'), translateUI('student'), getRarityStars(student.StarGrade), description == null ? getTranslatedString(student, 'ProfileIntroduction').split('\n')[0] : description, 50, 'circle')}"><img src="images/student/icon/${student.CollectionTexture}.png">${label != null ? `<span class="bonus-label" style="cursor:pointer;">${label}</span>` : ''}</div>`
     return html
 }
 
@@ -6825,37 +6839,34 @@ function getUsedByStudents(item, mode) {
             $.each(data.students, function(i,el) {
                 if (!el.IsReleased[regionID])
                 return
-                let uses = false
+                let amount = [0, 0]
                 for (let i = 0; i < el.SkillExMaterial.length; i++) {
                     for (let j = 0; j < el.SkillExMaterial[i].length; j++) {
                         if (item.Id == el.SkillExMaterial[i][j]) {
-                            uses = true
-                            break
+                            amount[0] += el.SkillExMaterialAmount[i][j]
                         }
                     }
-                    if (uses)
-                    break
                 }
-                if (!uses)
                 for (let i = 0; i < el.SkillMaterial.length; i++) {
                     for (let j = 0; j < el.SkillMaterial[i].length; j++) {
                         if (item.Id == el.SkillMaterial[i][j]) {
-                            uses = true
-                            break
+                            amount[1] += el.SkillMaterialAmount[i][j]
                         }
                     }
-                    if (uses)
-                    break
                 }
-                if (uses)
-                html += getStudentIconSmall(el)
+                if (amount[0] > 0 || amount[1] > 0) {
+                    const totalUsed = amount[0] + amount[1]*3
+                    html += getStudentIconSmall(el, `&times;${totalUsed}`,`${translateUI('item_usedby_exskill_amount', [amount[0]])}\n${translateUI('item_usedby_skill_amount', [amount[1]])}`)
+                }
 
                 if ("Released" in el.Gear && el.Gear.Released[regionID]) {
-                    el.Gear.TierUpMaterial.forEach(x => {
-                        if (x.includes(item.Id)) {
-                            bondGearStudentsHtml += getStudentIconSmall(el)
+                    for (let i = 0; i < el.Gear.TierUpMaterial.length; i++) {
+                        for (let j = 0; j < el.Gear.TierUpMaterial[i].length; j++) {
+                            if (item.Id == el.Gear.TierUpMaterial[i][j]) {
+                                bondGearStudentsHtml += getStudentIconSmall(el, `&times;${el.Gear.TierUpMaterialAmount[i][j]}`)
+                            }
                         }
-                    })
+                    }
                 }
             })
         } else if (item.Category == 'SecretStone') {
@@ -6874,7 +6885,7 @@ function getUsedByStudents(item, mode) {
         $('#ba-item-usage').show()
         html = `<div class="mb-2"><i>${headerText}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap">` + html + '</div>'
         if (bondGearStudentsHtml != "") {
-            html += `<div class="mb-2"><i>${translateUI('item_usedby_gear')}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${bondGearStudentsHtml}</div>`
+            html += `<div class="my-2"><i>${translateUI('item_usedby_gear')}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${bondGearStudentsHtml}</div>`
         }
         return html
     } else {
@@ -6926,53 +6937,45 @@ function getEquipmentRecipe(item) {
 }
 
 function getLikedByStudents(item) {
-    let studentsHtml = ["", ""]
-    let likedStudentsHtml =  ""
+    let favorStudents = ["", "", ""]
     let bondGearStudentsHtml = ""
 
-    $.each(data.students, function(i,el){
-        if (!el.IsReleased[regionID])
-        return
-        let allTags = el.FavorItemTags
-        allTags.push(el.FavorItemUniqueTags[0])
-        allTags.push(el.FavorItemUniqueTags[0] + "2")
+    data.students.forEach((student) => {
 
-        if (item.Rarity == "SSR") {
-            const favItems = getFavouriteSSRItems(allTags)
-            favItems.forEach((items, grade) => {
-                items.forEach((itemId) => {
-                    if (item.Id == itemId) {
-                        studentsHtml[grade] += getStudentIconSmall(el)
-                    } 
-                })
-                
-            })
-        } else {
-            const favItems = getFavouriteItems(allTags)
-            favItems.forEach((items, grade) => {
-                items.forEach((itemId) => {
-                    if (item.Id == itemId) {
-                        studentsHtml[grade] += getStudentIconSmall(el)
-                    } 
-                })
-                
-            })
+        if (!student.IsReleased[regionID])
+        return
+
+        let allTags = [...student.FavorItemTags, ...student.FavorItemUniqueTags, "Gift1", "Gift2"]
+
+        const commonTags = item.Tags.filter(x => allTags.includes(x))
+        const favorGrade = Math.min(commonTags.length, 3)
+        
+        if (favorGrade > 0) {
+            favorStudents[favorGrade-1] += getStudentIconSmall(student)
         }
 
-        if ("Released" in el.Gear && el.Gear.Released[regionID]) {
-            el.Gear.TierUpMaterial.forEach(x => {
+        if ("Released" in student.Gear && student.Gear.Released[regionID]) {
+            student.Gear.TierUpMaterial.forEach(x => {
                 if (x.includes(item.Id)) {
-                    bondGearStudentsHtml += getStudentIconSmall(el)
+                    bondGearStudentsHtml += getStudentIconSmall(student)
                 }
             })
         }
         
     })
-    studentsHtml.forEach((html, ind) => {
-        if (html != "") {
-            likedStudentsHtml += `<div class="mb-2"><i>${translateUI('item_likedbystudent_list_'+ind, [`<img class="inline-img" src="images/ui/Cafe_Interaction_Gift_0${(item.Rarity == "SSR" ? 4 : 3) - ind}.png">`])}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${studentsHtml[ind]}</div>`
+
+    let likedStudentsHtml =  ""
+    const itemRarityBonus = item.Rarity == "SSR" ? 1 : 0
+    for (let i = favorStudents.length-1; i >= 0; i--) {
+        if (i == 0 && item.Rarity == "SSR")
+            continue
+        if (favorStudents[i] != "") {
+            likedStudentsHtml += `<div class="mb-2"><i>${translateUI('item_student_favor', [20*(i+2)*(itemRarityBonus ? 3 : 1), `<img class="inline-img" src="images/ui/Cafe_Interaction_Gift_0${2+i}.png">`])}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${favorStudents[i]}</div>`
         }
-    })
+        
+    }
+
+    likedStudentsHtml += `<div class="mb-2"><i>${translateUI('item_student_favor_default', [20*(itemRarityBonus ? 3 : 1), `<img class="inline-img" src="images/ui/Cafe_Interaction_Gift_0${1 + itemRarityBonus}.png">`])}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2"></div>`
 
     if (bondGearStudentsHtml != "") {
         likedStudentsHtml += `<div class="mb-2"><i>${translateUI('item_usedby_gear')}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${bondGearStudentsHtml}</div>`
@@ -6999,7 +7002,7 @@ function getItemDropStages(itemID) {
             if ("Default" in rewardList)
             for (let i = 0; i < rewardList.Default.length; i++) {
 
-                if (rewardList.Default[i][0] >= 4000000) {
+                if (rewardList.Default[i][0] >= 4000000 && rewardList.Default[i][0] < 5000000) {
                     // Reward is an Item Box
                     const box = find(data.common.GachaGroup, "Id", rewardList.Default[i][0] - 4000000)[0]
 
@@ -7282,14 +7285,6 @@ function toggleHighContrast(state) {
     $('body').toggleClass("high-contrast", highContrast)
 }
 
-function toggleCustomBuffs(state) {
-    enableCustomBuffs = state
-    $(`#ba-navbar-custombuffs-toggle button`).removeClass("active")
-    $(`#ba-navbar-custombuffs-toggle-${enableCustomBuffs}`).addClass("active")
-    localStorage.setItem("enable_custom_buffs", enableCustomBuffs)
-    $('.buff-custom').toggle(enableCustomBuffs)
-}
-
 function changeRegion(regID) {
     if (regID != regionID) {
         $(`#ba-navbar-regionselector-${regionID}`).removeClass("active")
@@ -7570,7 +7565,7 @@ function getLocalizedString(group, key, replacements=[]) {
         return formatString(data.localization[group][key], replacements)
     } else {
         console.log(`Localization not defined for "${group}, ${key}"`)
-        return "undefined!!!"
+        return `${group}_${key}`
     }
 }
 
