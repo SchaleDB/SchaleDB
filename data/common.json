@@ -411,10 +411,19 @@
             "bounty_max": 9, 
             "schooldungeon_max": 4, 
             "current_gacha": [
-                { "characters": [10059], "start": 1674525600, "end": 1675130400 }, 
-                { "characters": [10060, 20023], "start": 1675130400, "end": 1675994400 }
+                {
+                    "characters": [10059], 
+                    "start": 1674525600, 
+                    "end": 1675130400
+                }, 
+                {
+                    "characters": [10060, 20023], 
+                    "start": 1675130400, 
+                    "end": 1675994400
+                }
             ], 
             "current_events": [
+                {"event": 821, "start": 1674525600, "end": 1677031200}
             ], 
             "current_raid": [
                 {"raid": 12000, "start": 1676426400, "end": 1677006000}
@@ -439,10 +448,14 @@
             "bounty_max": 9, 
             "schooldungeon_max": 3, 
             "current_gacha": [
-                { "characters": [10043, 10044], "start": 1673920800, "end": 1675130400 }
+                {
+                    "characters": [10043, 10044], 
+                    "start": 1673920800, 
+                    "end": 1675130400
+                }
             ], 
             "current_events": [
-                {"event":   814, "start": 1673920800, "end": 1675130400}
+                {"event": 814, "start": 1673920800, "end": 1675130400}
             ], 
             "current_raid": [
                 {
@@ -457,12 +470,21 @@
     ], 
     "changelog": [
         {
+            "date": "2023/01/25", 
+            "contents": [
+                "<h6>JP 2nd Anniversary</h6>", 
+                "<ul><li>Added enemy information and reward drops for the False Sanctum event Allied Operation raids</li></ul>",  
+                "<h6>Other Improvements</h6>", 
+                "<ul><li>Calculation for Neru's EX skill will now use the correct \"Enraged\" bonus from the Basic+ skill when the Unique Item is enabled.</li></ul>"
+            ]
+        }, 
+        {
             "date": "2023/01/24", 
             "contents": [
-                "<h6>JP 2nd Anniversary</h6>",
-                "<ul><li>Added information for 2nd Anniversary Update characters, items and furniture.</li><li>Allied Operation info will be available at a later date.</li></ul>",
+                "<h6>JP 2nd Anniversary</h6>", 
+                "<ul><li>Added information for 2nd Anniversary Update characters, items and furniture.</li><li>Allied Operation info will be available at a later date.</li></ul>", 
                 "<h6>Other Improvements</h6>", 
-                "<ul><li>Improved display of gifts to show the exact Relationship EXP granted.</li><li>Improved display of skill level-up materials to show the amount required by a student to fully level every skill.</li><li>The setting \"Enable Custom Buffs\" has been removed and the option to add custom buffs will now always be displayed.</li></ul>",
+                "<ul><li>Improved display of gifts to show the exact Relationship EXP granted.</li><li>Improved display of skill level-up materials to show the amount required by a student to fully level every skill.</li><li>The setting \"Enable Custom Buffs\" has been removed and the option to add custom buffs will now always be displayed.</li></ul>", 
                 "<h6>Bug Fixes</h6>", 
                 "<ul><li>Fixed an <a href=\"https://github.com/lonqie/SchaleDB/issues/20\">issue</a> where the Accumulation damage cap was incorrectly multiplied by the enemy's Incoming DMG Resistance.</li><li>Removed check that prevented Total Assault debuffs from being applied to Special students.</li></ul>"
             ]

@@ -1827,7 +1827,7 @@ class EnemyFinder {
                                 searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", difficultyId)],
                                 source: getLocalizedString("StageType", "Raid"),
                                 rank: enemy.Rank,
-                                icon: `images/raid/icon/Icon_${raid.PathName}${difficultyId == 5 ? '_Insane' : ''}`,
+                                icon: `images/raid/icon/Icon_${raid.PathName}${difficultyId >= 5 ? '_Insane' : ''}`,
                                 level: raid_level[difficultyId],
                                 grade: 1
                             })
@@ -1864,13 +1864,14 @@ class EnemyFinder {
                 difficulty.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
+                        const raidIcon = (enemy.Icon !== undefined && enemy.Icon != "") ? `images/enemy/${enemy.Icon}` : `images/raid/icon/Icon_${raid.PathName}`
                         statPreviewEnemyList.push({
                             id: enemy.Id,
                             name: enemy.Name,
                             searchTerms: [getTranslatedString(raid, 'Name')],
                             source: getLocalizedString("StageType", "WorldRaid"),
                             rank: enemy.Rank,
-                            icon: `images/enemy/${enemy.Icon}`,
+                            icon: raidIcon,
                             level: raid.Level[difficultyId],
                             grade: 1
                         })
@@ -2113,14 +2114,21 @@ class SkillDamageInfo {
             if (effect.Type.startsWith('DMG') || effect.Type == "FormChange") {
                 let scaleTotal
                 let hitTotal
+                let scaleToUse = effect.Scale
+
+                if (effect.SubstituteCondition !== undefined) {
+                    if (this.checkSubstitutionCondition(effect.SubstituteCondition)) {
+                        scaleToUse = effect.SubstituteScale
+                    }
+                } 
 
                 if (effect.Type == 'DMGMulti' || effect.Type == 'DMGZone' ) {
                     scaleTotal = 0
                     let distTotal = 0
-                    this.skill.DamageDist.forEach(d => {scaleTotal += (d/10000) * effect.Scale[this.skillLevel-1];distTotal+=d})
+                    this.skill.DamageDist.forEach(d => {scaleTotal += (d/10000) * scaleToUse[this.skillLevel-1];distTotal+=d})
                     hitTotal = this.skill.DamageDist.length
                 } else {
-                    scaleTotal = effect.Scale[this.skillLevel-1]
+                    scaleTotal = scaleToUse[this.skillLevel-1]
                     hitTotal = 1
                 }
 
@@ -2420,6 +2428,17 @@ class SkillDamageInfo {
 
     addSeparator() {
         return `<div class="ba-panel-separator my-2"></div>`
+    }
+
+    checkSubstitutionCondition(condition) {
+        switch (condition) {
+            //GearPublic skill is unlocked
+            case "GearPublic":
+                return (statPreviewIncludeExGear && student.Gear.Released !== undefined && student.Gear.Released[regionID])
+            default:
+                console.log(`Unknown substitution condition ${effect.SubstituteCondition}`)
+                return false
+        }
     }
 }
 
@@ -4031,6 +4050,10 @@ function initCharacterSkillInfo() {
                     autoAttackSkill["Desc"] = translateUI('skill_normalattack_line')
                     autoAttackSkill["Icon"] = "COMMON_SKILLICON_LINE"
                     break
+                case "FT":
+                    autoAttackSkill["Desc"] = translateUI('skill_normalattack_fan')
+                    autoAttackSkill["Icon"] = "COMMON_SKILLICON_FAN"
+                    break
                 default:
                     autoAttackSkill["Desc"] = translateUI('skill_normalattack_target')
                     autoAttackSkill["Icon"] = "COMMON_SKILLICON_TARGET"
@@ -4072,6 +4095,10 @@ function initCharacterSkillInfo() {
                 case "RG":
                     summonAutoAttackSkill["Desc"] = translateUI('skill_normalattack_line')
                     summonAutoAttackSkill["Icon"] = "COMMON_SKILLICON_LINE"
+                    break
+                case "FT":
+                    summonAutoAttackSkill["Desc"] = translateUI('skill_normalattack_fan')
+                    summonAutoAttackSkill["Icon"] = "COMMON_SKILLICON_FAN"
                     break
                 default:
                     summonAutoAttackSkill["Desc"] = translateUI('skill_normalattack_target')
@@ -4438,7 +4465,7 @@ function loadRaid(raidId) {
             //generate difficulty tabs
             let difficultyHtml = ''
             for (let i = 0; i < maxDifficulty; i++) {
-                const difficultyName = raidId >= 821001 ? getLocalizedString('RaidDifficulty', i) : String.fromCharCode(65+i) 
+                const difficultyName = raidId >= 821000 ? getLocalizedString('RaidDifficulty', i) : String.fromCharCode(65+i) 
                 difficultyHtml += `<a id="ba-worldraid-difficulty-${i}" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeWorldRaidDifficulty(${i})">${difficultyName}</a>`
                 
             }
@@ -4622,10 +4649,30 @@ function changeWorldRaidDifficulty(difficultyId) {
 
     let html = ''
     const rewardsArray = (regionID == 1 && "RewardsGlobal" in raid) ? raid.RewardsGlobal : raid.Rewards
-
-    rewardsArray[raid_difficulty].forEach(val => {
-        html += getDropIconHTML(val[0], val[1], val[2], val[3], true)
+    html += `<div class="item-icon-list">`
+    rewardsArray[raid_difficulty].Items.forEach(val => {
+        html += getDropIconHTML(val[0], val[1], val[2], val[2], true)
     })
+    html += `</div>`
+
+    if (rewardsArray[raid_difficulty].Groups.length > 0) {
+        html += `<div class="item-icon-list mt-2">`
+        rewardsArray[raid_difficulty].Groups.forEach(group => {
+            itemsHtml = ''
+            group[0].forEach(item => {
+                itemsHtml += getDropIconHTML(item[0], item[1], item[2], item[2], true)
+            })
+            const certain = Math.floor(group[1])
+            const chance = group[1] % 1
+
+            let chanceStrings = []
+            if (certain > 0) chanceStrings.push(`&times;${certain} (100&#37;)`)
+            if (chance > 0) chanceStrings.push(`&times;1 (${getProbabilityText(chance)})`)
+
+            html += `<div class="item-group">${itemsHtml}<span class="label-chance">${chanceStrings.join(', ')}</span></div>`
+        })
+        html += `</div>`
+    }
         
     $(`#ba-raid-rewards`).html(html)
     $(`#ba-raid-rewards .item-drop`).tooltip({html: true})
@@ -4705,7 +4752,7 @@ function changeRaidEnemy(num) {
         $('#ba-raid-enemy-icon img').attr('src', `images/enemy/${enemy.Icon}.png`)
     } else {
         $('#ba-raid-enemy-icon div').toggleClass('icon-enemy', false).toggleClass('icon-enemy-raid', true)
-        $('#ba-raid-enemy-icon img').attr('src', `images/raid/icon/Icon_${raid.PathName}${raid_difficulty >= 5 ? '_Insane' : ''}.png`)
+        $('#ba-raid-enemy-icon img').attr('src', `images/raid/icon/Icon_${raid.PathName}${raid.Id < 1000 && raid_difficulty >= 5 ? '_Insane' : ''}.png`)
     }
 
     let bulletType = (raid_difficulty < 5) ? raid.BulletType : raid.BulletTypeInsane
@@ -4824,7 +4871,7 @@ function loadStage(id) {
                 $(el2).tooltip({html: true})
             })
         } else {
-            $(`#ba-stage-drops-${el.toLowerCase()}`).html(`<div class="d-flex flex-wrap justify-content-center"><span class="pb-2 text-center">${translateUI('rewards_none')}</span></div>`)
+            $(`#ba-stage-drops`).html(`<div class="d-flex flex-wrap justify-content-center"><span class="pb-0 text-center">${translateUI('rewards_none')}</span></div>`)
         }
 
 
@@ -5975,8 +6022,13 @@ function getEventCardHTML(eventId) {
         }
     }
 
+    let onClick = `populateEventStageList(${eventId});`
+    if (eventId == 821) {
+        onClick = `loadRaid(821001);`
+    }
+
     let html = `
-    <div id="event-select-${eventId}" class="selection-grid-card card-event" onclick="populateEventStageList(${eventId});">
+    <div id="event-select-${eventId}" class="selection-grid-card card-event" onclick="${onClick}">
         <div class="card-bg"><div style="background-image:url('images/campaign/Campaign_Event_${eventIdImg}_Normal.png');"></div>
         </div>
         <div class="card-img"><img src="images/eventlogo/Event_${eventIdImg}_${logoLang}.png"></div>`
@@ -6007,7 +6059,7 @@ function getRaidCardHTML(raid, terrain='', backgroundPath=null) {
             backgroundPath = `Boss_Portrait_${raid.PathName}_LobbyBG`
         }
     }
-    let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/raid/${backgroundPath}.png');"></div></div><div class="card-img"><img src="images/raid/Boss_Portrait_${raid.PathName}_Lobby.png"></div><div class="card-badge raid-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
+    let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/raid/${backgroundPath}.png');"></div></div><div class="card-img ${raid.Id > 100000 ? "worldraid" : ""}"><img src="images/raid/Boss_Portrait_${raid.PathName}_Lobby.png"></div><div class="card-badge raid-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
     if (terrain != '') {
         html += `<div class="card-badge raid-terrain"><img class="invert-light" src="images/ui/Terrain_${terrain}.png"></div>`
     }
@@ -7214,7 +7266,9 @@ function getNormalAttackHitsText(damageDist, ammoCost, weaponType, attackType) {
         case "RG":
             text = translateUI('stat_ammocount_tooltip_line', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
             break;
-    
+        case "FT":
+            text = translateUI('stat_ammocount_tooltip_fan', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
+            break;
         default:
             text = translateUI('stat_ammocount_tooltip', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
             break;
@@ -7415,7 +7469,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.raids.WorldRaid, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': `images/raid/Boss_Portrait_${el.PathName}_Lobby.png`, 'type': getLocalizedString('StageType', 'WorldRaid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': `images/raid/icon/Icon_${el.PathName}.png`, 'type': getLocalizedString('StageType', 'WorldRaid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
             if (results.length >= maxResults) return false
         }
     })
