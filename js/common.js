@@ -1860,7 +1860,7 @@ class EnemyFinder {
 
         data.raids.WorldRaid.forEach(raid => {
             raid.EnemyList.forEach((difficulty, difficultyId) => {
-                if (!raid.IsReleased[regionID]) return
+                if (!raid.IsReleased[regionID] || difficultyId > raid.DifficultyMax[regionID]) return
                 difficulty.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
@@ -4457,18 +4457,19 @@ function loadRaid(raidId) {
             }
             $('#ba-raid-info-tab-profile').hide()
             raid = findOrDefault(data.raids.WorldRaid,"Id",raidId,814000)[0]
-            const maxDifficulty = raid.Level.length
-            if (raid_difficulty >= maxDifficulty)  {
+            const maxDifficulty = raid.DifficultyMax[regionID]
+            if (raid_difficulty > maxDifficulty)  {
                 raid_difficulty = 0
             }
             
             //generate difficulty tabs
             let difficultyHtml = ''
-            for (let i = 0; i < maxDifficulty; i++) {
+            for (let i = 0; i <= maxDifficulty; i++) {
                 const difficultyName = raidId >= 821000 ? getLocalizedString('RaidDifficulty', i) : String.fromCharCode(65+i) 
                 difficultyHtml += `<a id="ba-worldraid-difficulty-${i}" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeWorldRaidDifficulty(${i})">${difficultyName}</a>`
                 
             }
+
             $('#ba-worldraid-difficulty').html(difficultyHtml)
             $(`#ba-worldraid-difficulty-${raid_difficulty}`).tab('show')
         
@@ -4516,9 +4517,12 @@ function loadRaidSeasonRewards(el) {
 
 function changeRaidDifficulty(difficultyId) {
     raid_difficulty = difficultyId
-    let skillsHTML = '', tabsHtml = ''
+    let tabsHtml = ''
     $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.PathName}${raid_difficulty == 5 ? "_Insane" : ""}_Lobby.png')`)
     $('#ba-raid-level').text(`Lv. ${raid_level[raid_difficulty]}`)
+    $('#ba-raid-entrycost').html(getStageEntryCurrency(8, 1))
+    $('#ba-raid-entrycost > span').tooltip({html: true})
+
     if (selectedEnemy >= raid.EnemyList[raid_difficulty].length) {selectedEnemy = 0}
 
     let raidEnemyList = ''
@@ -4535,29 +4539,7 @@ function changeRaidDifficulty(difficultyId) {
     $('#raid-enemy-list .dropdown-menu').html(raidEnemyList)
     $('#raid-enemy-list').toggleClass('disabled', raid.EnemyList[raid_difficulty].length <= 1)
 
-    raid.RaidSkill.forEach(function(el, i) {
-        if (raid_difficulty < el.MinDifficulty) return
-        
-        let skillType
-        switch (el.SkillType) {
-            case 'EX':
-                skillType = translateUI('student_skill_ex')
-                break;
-            case 'Passive':
-                skillType = translateUI('student_skill_passive')
-                break;
-            default:
-                skillType = 'unknown'
-                break;
-        }
-
-        if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
-        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${skillType}</p>${el.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG:</i> '+el.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), el["Parameters"+userLang], raid_difficulty+1, 'raid')}</p>`
-    })
-    $('#ba-raid-skills').empty().html(skillsHTML)
-    $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
-        $(el).tooltip({html: true})
-    })
+    populateRaidSkills('#ba-raid-skills', raid.RaidSkill, raid_difficulty)
 
     let html = ''
 
@@ -4578,6 +4560,8 @@ function changeTimeAttackDifficulty(difficultyId) {
     ta_difficulty = difficultyId
     let rulesHTML = '', enemyHTML = '';
     $('#ba-timeattack-level').text(`Lv.${raid.EnemyLevel[ta_difficulty]}`)
+    $('#ba-timeattack-entrycost').html(getStageEntryCurrency(17, 1))
+    $('#ba-timeattack-entrycost > span').tooltip({html: true})
 
     const enemyRanks = ['Minion','Elite','Champion','Boss']
     raid.Formations[ta_difficulty].EnemyList.forEach(function(el, i) {
@@ -4605,6 +4589,10 @@ function changeWorldRaidDifficulty(difficultyId) {
     let skillsHTML = ''
     $('#ba-raid-header').css('background-image', `url('images/raid/Boss_Portrait_${raid.PathName}_Lobby.png')`)
     $('#ba-raid-level').text(`Lv. ${raid.Level[raid_difficulty]}`)
+    $('#ba-raid-entrycost').html(getStageEntryCurrency(raid.EntryCost[raid_difficulty][0], raid.EntryCost[raid_difficulty][1]))
+    $('#ba-raid-entrycost > span').tooltip({html: true})
+
+
     if (selectedEnemy >= raid.EnemyList[raid_difficulty].length) {selectedEnemy = 0}
 
     let raidEnemyList = ''
@@ -4622,30 +4610,7 @@ function changeWorldRaidDifficulty(difficultyId) {
     $('#raid-enemy-list').toggleClass('disabled', raid.EnemyList[raid_difficulty].length <= 1)
 
     const raidSkillList = (raid.UseRaidSkillList !== undefined ? find(data.raids.Raid,'Id',raid.UseRaidSkillList)[0].RaidSkill : raid.RaidSkill) 
-
-    raidSkillList.forEach(function(el, i) {
-        if (raid_difficulty < el.MinDifficulty) return
-
-        let skillType
-        switch (el.SkillType) {
-            case 'EX':
-                skillType = translateUI('student_skill_ex')
-                break;
-            case 'Passive':
-                skillType = translateUI('student_skill_passive')
-                break;
-            default:
-                skillType = 'unknown'
-                break;
-        }
-
-        if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
-        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${el.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(el, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${skillType}</p>${el.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG:</i> '+el.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(el, 'Desc'), el.Parameters, raid_difficulty+1, 'raid')}</p>`
-    })
-    $('#ba-raid-skills').empty().html(skillsHTML)
-    $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
-        $(el).tooltip({html: true})
-    })
+    populateRaidSkills('#ba-raid-skills', raidSkillList, raid_difficulty)
 
     let html = ''
     const rewardsArray = (regionID == 1 && "RewardsGlobal" in raid) ? raid.RewardsGlobal : raid.Rewards
@@ -4666,8 +4631,8 @@ function changeWorldRaidDifficulty(difficultyId) {
             const chance = group[1] % 1
 
             let chanceStrings = []
-            if (certain > 0) chanceStrings.push(`&times;${certain} (100&#37;)`)
-            if (chance > 0) chanceStrings.push(`&times;1 (${getProbabilityText(chance)})`)
+            if (certain > 0) chanceStrings.push(`100&#37; (&times;${certain})`)
+            if (chance > 0) chanceStrings.push(`${getProbabilityText(chance)} (&times;1)`)
 
             html += `<div class="item-group">${itemsHtml}<span class="label-chance">${chanceStrings.join(', ')}</span></div>`
         })
@@ -4678,6 +4643,35 @@ function changeWorldRaidDifficulty(difficultyId) {
     $(`#ba-raid-rewards .item-drop`).tooltip({html: true})
     
     changeRaidEnemy(selectedEnemy)
+}
+
+function getStageEntryCurrency(currencyId, amount) {
+    const currency = find(data.currency, 'Id', currencyId)[0]
+    return `<span class="ba-info-pill bg-theme my-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${currency.Icon}.png`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger')}"><img src="images/items/${currency.Icon}.png" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${amount}</span></span>`
+}
+
+function populateRaidSkills(container, skills, difficulty) {
+    let skillsHTML = ''
+    skills.forEach(raidSkill => {
+        if (difficulty < raidSkill.MinDifficulty) return
+        
+        let skillType
+        switch (raidSkill.SkillType) {
+            case 'EX':
+                skillType = translateUI('student_skill_ex')
+                break;
+            case 'Passive':
+                skillType = translateUI('student_skill_passive')
+                break;
+            default:
+                skillType = 'unknown'
+                break;
+        }
+
+        if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
+        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${raidSkill.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(raidSkill, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${skillType}</p>${raidSkill.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG:</i> '+raidSkill.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(raidSkill, 'Desc'), raidSkill["Parameters"+userLang], difficulty+1, 'raid')}</p>`
+    })
+    $(container).empty().html(skillsHTML).find('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').tooltip({html: true})
 }
 
 function changeRaidEnemy(num) {
