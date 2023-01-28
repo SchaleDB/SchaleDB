@@ -2762,6 +2762,8 @@ function loadModule(moduleName, entry=null) {
                 $('#ba-student-modal-statpreview').modal('show')
             })
 
+            $('#statpreview-attributes-maxinput').on('click', maxStudentAttributes)
+
             $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
             $(".tooltip").tooltip("hide")
 
@@ -3867,7 +3869,7 @@ function processStudent() {
         $(".ba-student-lobby").show()
         $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.DevName}_01.png`)
         $("#ba-student-lobby-unlock").text(student.MemoryLobby[regionID])
-        $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, translateUI('memory_lobby_student', [getTranslatedString(student,'Name')]), null, null, translateUI('memory_lobby_unlock', [student.MemoryLobby[regionID], getTranslatedString(student,'Name')])), placement: 'top', html: true})
+        $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, translateUI('memory_lobby_student', [getTranslatedString(student,'Name')]), null, null, `${translateUI('memory_lobby_unlock', [student.MemoryLobby[regionID], getTranslatedString(student,'Name')])}\n${translateUI('memory_lobby_bgm', [student.MemoryLobbyBGM])}`), placement: 'top', html: true})
     } else {
         $(".ba-student-lobby").hide()
     }
@@ -4707,8 +4709,9 @@ function changeRaidEnemy(num) {
                     groggyTooltip += getLocalizedString('GroggyCondition', 'TypeDamage', [`<b class="ba-col-${weakTo.toLowerCase()}">${getLocalizedString('BulletType', weakTo)}</b>`])
                 }
 
-                if (raid.PathName in data.localization.GroggyCondition) {
-                    groggyTooltip += '\n' + getLocalizedString('GroggyCondition', raid.PathName)
+                const raidName = raid.PathName.split('_')[0]
+                if (raidName in data.localization.GroggyCondition) {
+                    groggyTooltip += (groggyTooltip != '' ? '\n' : '') + getLocalizedString('GroggyCondition', raidName)
                 }
                 
                 if (groggyTooltip != '') {
@@ -8079,6 +8082,43 @@ function studentCollectionSave() {
     }
     
     localStorage.setItem('student_collection', JSON.stringify(studentCollection))
+}
+
+function maxStudentAttributes() {
+    //Set all attributes to the maximum possible value
+    statPreviewStarGrade = 5
+    statPreviewLevel = data.common.regions[regionID].studentlevel_max
+    $('#ba-statpreview-levelrange').val(statPreviewLevel)
+    changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
+
+    statPreviewEquipment = [data.common.regions[regionID].gear1_max, data.common.regions[regionID].gear2_max, data.common.regions[regionID].gear3_max]
+    $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
+    $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
+    $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
+    changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'), false)
+    changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'), false)
+    changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'), false)
+    
+
+    statPreviewWeaponGrade = 3
+    statPreviewWeaponLevel = data.common.regions[regionID].weaponlevel_max
+    $('#ba-statpreview-weapon-range').attr("max",region.weaponlevel_max).val(statPreviewWeaponLevel)
+    changeStatPreviewStars(statPreviewStarGrade, statPreviewWeaponGrade, false)
+
+    
+    
+    statPreviewPassiveLevel = 10
+    $('#ba-statpreview-passiveskill-range').val(statPreviewPassiveLevel)
+    changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
+
+    statPreviewBondLevel = data.common.regions[regionID].bondlevel_max
+    $('#ba-statpreview-bond-1-range').val(statPreviewBondLevel)
+    changeStatPreviewBondLevel(1, false)
+    statPreviewIncludeBond = true
+    statPreviewIncludeEquipment = true
+
+    refreshStatTableControls()
+    recalculateStats()
 }
 
 function statPreviewSettingsSave() {
