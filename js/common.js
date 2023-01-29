@@ -1863,11 +1863,12 @@ class EnemyFinder {
                 if (!raid.IsReleased[regionID] || difficultyId > raid.DifficultyMax[regionID]) return
                 difficulty.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
-                    if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
+                    if (enemy.SquadType == 'Main' && !enemy.DevName.includes('_Resort_') && !enemy.DevName.includes('_HolyRelic_') && !enemy.DevName.includes('_HolyRelic02_')) {
                         const raidIcon = (enemy.Icon !== undefined && enemy.Icon != "") ? `images/enemy/${enemy.Icon}` : `images/raid/icon/Icon_${raid.PathName}`
+                        const raidDifficulty = raid.Id >= 821000 ? getLocalizedString('RaidDifficulty', difficultyId) : String.fromCharCode(65+difficultyId)
                         statPreviewEnemyList.push({
                             id: enemy.Id,
-                            name: enemy.Name,
+                            name: `${enemy.Name} (${raidDifficulty})`,
                             searchTerms: [getTranslatedString(raid, 'Name')],
                             source: getLocalizedString("StageType", "WorldRaid"),
                             rank: enemy.Rank,
