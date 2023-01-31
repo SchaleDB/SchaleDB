@@ -49,11 +49,11 @@
                             <div class="flex-grow-1 me-2">
                                 <h4 id="ba-stage-name" class="px-1 mb-1"></h4>
                                 <h2 id="ba-stage-title" class="title-text px-1 mb-2"></h2>
-                                <div class="d-flex align-items-center px-1">
+                                <div class="d-flex align-items-center flex-wrap gap-2 px-1">
                                     <span id="ba-stage-terrain" class="ba-panel"><img id="ba-stage-terrain-img" class="ba-student-terrain-icon invert-light" src=""></span>
-                                    <span id="ba-stage-fog" class="ba-panel ms-2"><img id="ba-stage-terrain-img" class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_fog.png"></span>
-                                    <span id="ba-stage-level" class="ba-student-info ba-panel text-bold mx-2 my-0"></span>
-                                    <span id="ba-stage-entrycost"></span>
+                                    <span id="ba-stage-fog" class="ba-panel"><img id="ba-stage-terrain-img" class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_fog.png"></span>
+                                    <span id="ba-stage-level" class="ba-student-info ba-panel text-bold m-0"></span>
+                                    <span id="ba-stage-entrycost" class="d-flex flex-wrap gap-2"></span>
                                 </div>
                             </div>
                         </div>
@@ -61,16 +61,16 @@
                     <div class="card-body">
                         <div class="tab-content">
                             <div id="ba-stage-page-info" class="tab-pane fade show active">
-                                <div class="ba-panel p-2 mb-2">
-                                    <div id="ba-stage-conditions" class="d-flex flex-column"></div>
+                                <div id="ba-stage-conditions" class="ba-panel p-2 mb-2">
                                 </div>
-                                <div class="ba-panel p-2 mt-2">
+                                <div class="ba-panel p-2">
                                     <div id="ba-stage-drops"></div>
                                 </div>
                             </div>
                             <nav id="ba-stage-page" class="nav nav-pills my-3">
                                 <a id="ba-stage-tab-enemies" class="nav-link active" data-bs-toggle="tab" href="#ba-stage-page-enemies" data-localize-id="ui,stage_enemies"></a>
                                 <a id="ba-stage-tab-map" class="nav-link" data-bs-toggle="tab" href="#ba-stage-page-map" data-localize-id="ui,stage_map"></a>
+                                <a id="ba-stage-tab-conquest" class="nav-link" data-bs-toggle="tab" href="#ba-stage-page-conquest" data-localize-id="ui,stage_conquest_tile"></a>
                             </nav>
                             <div class="tab-content">
                                 <div id="ba-stage-page-enemies" class="tab-pane show active">
@@ -113,6 +113,14 @@
                                     <div id="ba-stage-map-enemy-list" class="ba-panel p-2 my-2">
                                         <div id="ba-stage-map-enemies" class="selection-grid enemy selection-grid-flex enemy-list">
                                         </div>
+                                    </div>
+                                </div>
+                                <div id="ba-stage-page-conquest" class="tab-pane">
+                                    <h5 class="text-bold" data-localize-id="ui,conquest_settlement"></h5>
+                                    <div id="conquest-settlement-reward" class="ba-panel p-2 mb-2">
+                                    </div>
+                                    <h5 class="text-bold" data-localize-id="ui,school_bonus"></h5>
+                                    <div id="conquest-school-bonus" class="ba-panel p-2 mb-2">
                                     </div>
                                 </div>
                             </div>

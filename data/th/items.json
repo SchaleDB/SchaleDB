@@ -457,7 +457,7 @@
         ],
         "Icon": "Item_Icon_ShiftingCraftItem_0",
         "Name": "คีย์สโตนเร่งการรวม\nขั้นต่ำ",
-        "Desc": "คีย์สโตนเร่งปฏิกิริยาที่ใช้สำหรับการรวมวัตถุในคราฟต์แชมเบอร์\nใช้ในการรวมไอเทมขั้นต่ำ"
+        "Desc": "คีย์สโตนเร่งปฏิกิริยาขั้นต่ำ ใช้รวมวัตถุในคราฟต์แชมเบอร์"
     },
     {
         "Id": 81,
@@ -484,7 +484,7 @@
         ],
         "Icon": "Item_Icon_ShiftingCraftItem_1",
         "Name": "คีย์สโตนเร่งการรวม\nขั้นกลาง",
-        "Desc": "คีย์สโตนเร่งปฏิกิริยาที่ใช้สำหรับการรวมวัตถุในคราฟต์แชมเบอร์\nใช้ในการรวมไอเทมขั้นกลาง"
+        "Desc": "คีย์สโตนเร่งปฏิกิริยาขั้นกลาง ใช้รวมวัตถุในคราฟต์แชมเบอร์"
     },
     {
         "Id": 82,
@@ -511,7 +511,7 @@
         ],
         "Icon": "Item_Icon_ShiftingCraftItem_2",
         "Name": "คีย์สโตนเร่งการรวม\nขั้นสูง",
-        "Desc": "คีย์สโตนเร่งปฏิกิริยาที่ใช้สำหรับการรวมวัตถุในคราฟต์แชมเบอร์\nใช้ในการรวมไอเทมขั้นสูง"
+        "Desc": "คีย์สโตนเร่งปฏิกิริยาขั้นสูง ใช้รวมวัตถุในคราฟต์แชมเบอร์"
     },
     {
         "Id": 83,
@@ -538,7 +538,7 @@
         ],
         "Icon": "Item_Icon_ShiftingCraftItem_3",
         "Name": "คีย์สโตนเร่งการรวม\nขั้นสูงสุด",
-        "Desc": "คีย์สโตนเร่งปฏิกิริยาที่ใช้สำหรับการรวมวัตถุในคราฟต์แชมเบอร์\nใช้ในการรวมไอเทมขั้นสูงสุด"
+        "Desc": "คีย์สโตนเร่งปฏิกิริยาขั้นสูงสุด ใช้รวมวัตถุในคราฟต์แชมเบอร์"
     },
     {
         "Id": 90,
@@ -1082,17 +1082,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_Mandragora_0",
@@ -1125,17 +1114,6 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_Mandragora_1",
@@ -1157,19 +1135,7 @@
             "MaterialItemSR"
         ],
         "SynthQuality": 50,
-        "Shops": [
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Mandragora_2",
         "Name": "น้ำแมนดราโกร่า",
         "Desc": "น้ำแมนดราโกร่าที่คั้นจากแมนดราโกร่าสุก ใช้สำหรับอัปเกรดและสร้างไอเทมต่างๆ"
@@ -1225,7 +1191,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    true
+                    false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1279,7 +1245,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    true
+                    false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1322,7 +1288,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    true
+                    false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1408,7 +1374,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    true
+                    false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1451,7 +1417,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    true
+                    false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1483,7 +1449,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    true
+                    false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1546,7 +1512,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1589,7 +1555,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1621,7 +1587,7 @@
                 "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
@@ -1681,6 +1647,17 @@
                 "CostAmount": 8000
             },
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1,
+                "Released": [
+                    false,
+                    true
+                ]
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -1724,6 +1701,17 @@
                 "CostAmount": 25000
             },
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4,
+                "Released": [
+                    false,
+                    true
+                ]
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -1755,6 +1743,17 @@
         ],
         "SynthQuality": 50,
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
+            },
             {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
@@ -1840,6 +1839,17 @@
                 "CostType": "Item",
                 "CostId": 61,
                 "CostAmount": 24
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_0",
@@ -1883,6 +1893,17 @@
                 "CostType": "Item",
                 "CostId": 61,
                 "CostAmount": 40
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_1",
@@ -1915,6 +1936,17 @@
                 "CostType": "Item",
                 "CostId": 61,
                 "CostAmount": 80
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_2",
@@ -1979,17 +2011,6 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 2
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_TotemPole_0",
@@ -2022,17 +2043,6 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 9
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_TotemPole_1",
@@ -2065,17 +2075,6 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 12
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
             }
         ],
         "Icon": "Item_Icon_Material_TotemPole_2",
@@ -2140,6 +2139,17 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 2
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_Baghdad_0",
@@ -2172,6 +2182,17 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 9
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_Baghdad_1",
@@ -2204,6 +2225,17 @@
                 "CostType": "Item",
                 "CostId": 60,
                 "CostAmount": 12
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8,
+                "Released": [
+                    false,
+                    true
+                ]
             }
         ],
         "Icon": "Item_Icon_Material_Baghdad_2",
@@ -6235,7 +6267,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_10",
         "Name": "กล้องส่องดูดาว",
-        "Desc": "กล้องส่องดูดาวที่ถูกใช้เป็นอุปกรณ์สังเกตการณ์มาตรฐาน\nของสมาคมดาราศาสตร์แห่งคิโวทอส"
+        "Desc": "กล้องส่องดูดาว อุปกรณ์สังเกตการณ์มาตรฐาน ของสมาคมดาราศาสตร์แห่งคิโวทอส"
     },
     {
         "Id": 5011,
@@ -6258,7 +6290,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_11",
         "Name": "เครื่องเกมเกิร์ลสี\nรุ่นผลิตใหม่",
-        "Desc": "&lt;สร้างช่วงเวลาผ่อนคลายไปกับเกมอาร์เคด!&gt;\nเครื่องเกมเกิร์ลสีที่โด่งดังในสมัยก่อนนี้ได้ถูกผลิตขึ้นมาใหม่อีกครั้ง"
+        "Desc": "&lt;สร้างช่วงเวลาผ่อนคลาย ไปกับเกมอาร์เคด!&gt;เครื่องเกมเกิร์ลสีที่โด่งดังในสมัยก่อนนี้ ได้ถูกผลิตขึ้นมาใหม่อีกครั้ง"
     },
     {
         "Id": 5012,
@@ -6324,7 +6356,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_14",
         "Name": "หมอนเจลลี่",
-        "Desc": "สินค้าชิ้นสุดท้ายของตัวเอกในเกมคลาสสิก &#x27;ฟูรุเจลลี่&#x27; \nมีกิมมิกที่มีเจลลี่จับเจลลี่สีเดียวกันกินและกินแบบนั้นไปเรื่อยๆ!"
+        "Desc": "สินค้าชิ้นสุดท้ายของตัวเอก เกมคลาสสิก &#x27;ฟูรุเจลลี่&#x27; มีกิมมิกที่มีเจลลี่ จับเจลลี่สีเดียวกันกิน และกินแบบนั้นไปเรื่อยๆ!"
     },
     {
         "Id": 5015,
@@ -6370,7 +6402,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_16",
         "Name": "O-ริงฟิต",
-        "Desc": "&lt;มาสนุกกับการออกกำลังกายด้วยเกมกันเถอะ!&gt;\nใช้ O-ริงฟิต อุปกรณ์สำหรับออกกำลังกายได้ง่ายและสนุกเองที่บ้านของคุณ\nไม่ว่าจะออกกำลัง ไดเอทหรือแบบไหนก็ใช้ได้หมด!"
+        "Desc": "&lt;ออกกำลังกายด้วยเกมกันเถอะ!&gt; ใช้ O-ริงฟิต อุปกรณ์สำหรับออกกำลังกายได้ง่าย และสนุกเองที่บ้านของคุณ ไม่ว่าจะออกกำลัง ไดเอทหรือแบบไหนก็ใช้ได้หมด!"
     },
     {
         "Id": 5017,
@@ -6444,7 +6476,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_19",
         "Name": "เครื่องที่ไร้ประโยชน์\nที่สุดในโลก",
-        "Desc": "ไร้ประโยชน์แต่น่ารัก! ถึงจะไร้ประโยชน์! แต่น่ารักก็ไม่เป็นไร! ของเล่นที่เหมาะจะให้ของขวัญในวันพิเศษ เป็นของขวัญที่ติด 5 อันดับแรก"
+        "Desc": "ไร้ประโยชน์แต่น่ารัก! ถึงจะไร้ประโยชน์! แต่น่ารักก็ไม่เป็นไร! ของเล่นที่เหมาะจะให้เป็นของขวัญ เป็นของขวัญที่ติด 5 อันดับแรก"
     },
     {
         "Id": 5020,
@@ -6517,7 +6549,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_22",
         "Name": "เซ็ตสีน้ำ 30 สี",
-        "Desc": "เซ็ตสีน้ำสำหรับมืออาชีพที่มีสีน้ำหลากสีถึง 30 สี\nมาแต่งแต้มสีให้ทั้งโลกได้ด้วยสีน้ำเซ็ตนี้กันเถอะ!"
+        "Desc": "เซ็ตสีน้ำสำหรับมืออาชีพ มีสีน้ำหลากสีถึง 30 สี มาแต่งแต้มสีให้ทั้งโลก ด้วยสีน้ำเซ็ตนี้กันเถอะ!"
     },
     {
         "Id": 5023,
@@ -6539,7 +6571,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_23",
         "Name": "บทกวีคลาสสิก",
-        "Desc": "บทกวีคลาสสิกที่ให้ความรู้สึกถึงความเก่าแก่\nวรรณกรรมคลาสสิกแห่งยุคโบราณอยู่ในมือคุณ"
+        "Desc": "บทกวีคลาสสิก ให้ความรู้สึกถึงความเก่าแก่ วรรณกรรมคลาสสิก แห่งยุคโบราณอยู่ในมือคุณ"
     },
     {
         "Id": 5024,
@@ -6562,7 +6594,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_24",
         "Name": "เซ็ตจานชามลายน่ารัก",
-        "Desc": "เซ็ตภาชนะใส่อาหารที่มีลายตัวการ์ตูนสัตว์น่ารัก\nเซ็ตนี้ติด 10 อันดับภาชนะใส่อาหารในคิโวทอสทุกปี"
+        "Desc": "เซ็ตภาชนะใส่อาหาร ลายตัวการ์ตูนสัตว์น่ารัก เซ็ตนี้ติด 10 อันดับ ภาชนะใส่อาหารในคิโวทอสทุกปี"
     },
     {
         "Id": 5025,
@@ -6586,7 +6618,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_25",
         "Name": "รูบิคลับสมอง",
-        "Desc": "&lt;ถ้าคุณแก้รูบิคนี้ได้ คุณคือมิลเลเนียม!&gt;\nรูบิคระดับยากที่ผ่านการรับรองของโรงเรียนวิทย์มิลเลเนียม"
+        "Desc": "&lt;ถ้าแก้รูบิคนี้ได้ คุณคือมิลเลเนียม!&gt;รูบิคระดับยากที่ผ่านการรับรอง ของโรงเรียนวิทย์มิลเลเนียม"
     },
     {
         "Id": 5026,
@@ -6609,7 +6641,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_26",
         "Name": "เค้กก้อนใหญ่",
-        "Desc": "เค้กก้อนใหญ่ที่ทำให้คุณยินดีเพียงแค่ได้มอง\nมีบอกแคลอรี่ไว้ด้านหลัง"
+        "Desc": "เค้กก้อนใหญ่ ที่แค่มองก็ทำให้ใจฟูได้ มีบอกแคลอรี่ไว้ด้านหลัง"
     },
     {
         "Id": 5027,
@@ -6654,7 +6686,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_28",
         "Name": "กระถางต้นไม้กินแมลง",
-        "Desc": "กระถางต้นไม้กินแมลงที่กลุ่มคนที่มีรสนิยมเฉพาะตามหา\nเป็นที่นิยมเนื่องจากมันจับแมลงกินได้ผิดจากหน้าตาที่ดูน่ารัก"
+        "Desc": "กระถางต้นไม้กินแมลง ที่กลุ่มคนที่มีรสนิยมเฉพาะตามหา เป็นที่นิยมเพราะมันจับแมลงกินได้ ผิดจากหน้าตาที่ดูน่ารัก"
     },
     {
         "Id": 5029,
@@ -6699,7 +6731,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_30",
         "Name": "กล่องดนตรีไขลาน",
-        "Desc": "กล่องดนตรีไขลานหรูหราที่ทำจากไม้และให้ความรู้สึกวินเทจ\nเป็นที่นิยมในหมู่นักสะสม"
+        "Desc": "กล่องดนตรีไขลานหรูหรา ทำจากไม้และให้ความรู้สึกวินเทจ เป็นที่นิยมในหมู่นักสะสม"
     },
     {
         "Id": 5031,
@@ -6749,7 +6781,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_32",
         "Name": "สารานุกรม",
-        "Desc": "สิ่งนี้จะตอบทุกข้อสงสัยให้คุณได้ตั้งแต่ไม้จิ้มฟันยันเรือรบ"
+        "Desc": "สิ่งนี้จะตอบทุกข้อสงสัยให้คุณได้ ตั้งแต่ไม้จิ้มฟันยันเรือรบ"
     },
     {
         "Id": 5033,
@@ -6795,7 +6827,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_34",
         "Name": "ห่วงยางฤดูร้อน",
-        "Desc": "ฤดูร้อน! ทะเล! นี่คือของจำเป็นในการเล่นน้ำอย่างปลอดภัย\nไม่ว่าจะว่ายน้ำเก่งหรือไม่ ดีไซน์แฟนซีพร้อมความน่ารักขั้นสุด!"
+        "Desc": "ฤดูร้อน! ทะเล! นี่คือของจำเป็น ในการเล่นน้ำอย่างปลอดภัย ไม่ว่าจะว่ายน้ำเก่งหรือไม่ ดีไซน์แฟนซีๆ พร้อมความน่ารักขั้นสุด!"
     },
     {
         "Id": 5100,
@@ -7053,7 +7085,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_7",
         "Name": "เยลลี่วิตามินรวม",
-        "Desc": "ผลิตภัณฑ์เยลลี่ มีส่วนผสมของวิตามินรวม เพลิดเพลินไปกับการกินวิตามิน รสชาติของผลไม้หลากชนิด คำเตือน ระวังกินเพลินจนหมดกระปุก (เตือนแล้วนะ)"
+        "Desc": "ผลิตภัณฑ์เยลลี่ มีส่วนผสมของวิตามินรวม\nเพลิดเพลินไปกับการกินวิตามิน\nรสชาติของผลไม้หลากชนิด\nคำเตือน ระวังกินเพลินจนหมดกระปุก (เตือนแล้วนะ)"
     },
     {
         "Id": 5108,
@@ -7154,7 +7186,7 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Favor_Lv2_11",
-        "Name": "เซ็ตดัมเบลเช้ากลางวันเย็น",
+        "Name": "เซ็ตดัมเบล เช้า กลางวัน เย็น",
         "Desc": "เซ็ตสินค้า ประกอบด้วยดัมเบลขนาดน้ำหนักต่างๆ เวทเทรนนิ่งวันละ 3 ครั้ง เช้า กลางวัน เย็น เพื่อสร้างกล้ามเนื้อของคุณดูสิ!"
     },
     {
@@ -7658,7 +7690,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 5,
                 "CostType": "Item",
@@ -8258,7 +8290,7 @@
         "Id": 10045,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "SecretStone",
         "Rarity": "N",
@@ -8287,7 +8319,7 @@
         "Id": 10046,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "SecretStone",
         "Rarity": "N",
@@ -8316,7 +8348,7 @@
         "Id": 10047,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "SecretStone",
         "Rarity": "N",
@@ -8548,7 +8580,7 @@
     {
         "Id": 10060,
         "IsReleased": [
-            false,
+            true,
             false
         ],
         "Category": "SecretStone",
@@ -8778,7 +8810,7 @@
                 "ShopCategory": "Raid",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 5,
                 "CostType": "Item",
@@ -9458,7 +9490,7 @@
     {
         "Id": 20023,
         "IsReleased": [
-            false,
+            true,
             false
         ],
         "Category": "SecretStone",
@@ -9837,7 +9869,7 @@
         "Id": 26008,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "SecretStone",
         "Rarity": "N",
@@ -12419,7 +12451,7 @@
         "Id": 80130,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -12435,7 +12467,7 @@
         "Id": 80131,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -12451,7 +12483,7 @@
         "Id": 80132,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -12467,7 +12499,7 @@
         "Id": 80133,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -12475,7 +12507,7 @@
         "Tags": [],
         "Shops": [],
         "Icon": "Item_Icon_Event_Token_2_S17",
-        "Name": "คำภีร์ภาพศาสตร์นินจาหน้าร้อน",
+        "Name": "คำภีร์ศาสตร์นินจาฤดูร้อน",
         "Desc": "คำภีร์ที่บันทึกศาสตร์นินจา (ฉบับปรับปรุง) หลายศาสตร์ที่นำมาใช้ได้ในฤดูร้อน ส่วนใหญ่เป็นข้อมูลอุบัติเหตุโดยประมาท ที่เกิดขึ้นได้ในฤดูร้อน เพราะนินจาก็ต้องปลอดภัยไว้ก่อน",
         "EventBonus": []
     },
@@ -12483,7 +12515,7 @@
         "Id": 80134,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -12498,7 +12530,7 @@
         "Id": 80135,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -12513,7 +12545,7 @@
         "Id": 80136,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Coin",
         "Rarity": "N",
@@ -15296,7 +15328,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Favor_Random_Lv2",
         "Name": "กล่องของขวัญชั้นดี",
-        "Desc": "กล่องสุ่มของขวัญที่สุ่มรับของขวัญชั้นดีได้ 1 อย่าง",
+        "Desc": "กล่องของขวัญที่สามารถสุ่มรับ 1 ในของขวัญชั้นดีได้ ตามอัตราการได้รับที่กำหนด",
         "ConsumeType": "Random",
         "ImmediateUse": false,
         "Contains": [
@@ -18156,8 +18188,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group101",
-        "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมเกมเจลลี่",
-        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมเกมเจลลี่ได้",
+        "Name": "ชุดเลือกเฟอร์นิเจอร์ ธีมเกมเจลลี่",
+        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ ธีมเกมเจลลี่ได้",
         "ConsumeType": "Choice",
         "Contains": [
             [
@@ -18290,8 +18322,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group102",
-        "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมวาเลนไทน์",
-        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมวาเลนไทน์ได้",
+        "Name": "ชุดเลือกเฟอร์นิเจอร์ ธีมวาเลนไทน์",
+        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ ธีมวาเลนไทน์ได้",
         "ConsumeType": "Choice",
         "Contains": [
             [
@@ -18448,8 +18480,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group103",
-        "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมรีสอร์ทฤดูร้อน",
-        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมรีสอร์ทฤดูร้อนได้",
+        "Name": "ชุดเลือกเฟอร์นิเจอร์ ธีมรีสอร์ตฤดูร้อน",
+        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ ธีมรีสอร์ตฤดูร้อนได้",
         "ConsumeType": "Choice",
         "Contains": [
             [
@@ -18606,8 +18638,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group104",
-        "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมฮาโลวีน",
-        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมฮาโลวีนได้",
+        "Name": "ชุดเลือกเฟอร์นิเจอร์ ธีมฮาโลวีน",
+        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ ธีมฮาโลวีนได้",
         "ConsumeType": "Choice",
         "Contains": [
             [
@@ -18764,8 +18796,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group105",
-        "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมออนเซ็นดั้งเดิม",
-        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมออนเซ็นดั้งเดิมได้",
+        "Name": "ชุดเลือกเฟอร์นิเจอร์ ธีมออนเซ็นดั้งเดิม",
+        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ ธีมออนเซ็นดั้งเดิมได้",
         "ConsumeType": "Choice",
         "Contains": [
             [
@@ -18904,8 +18936,8 @@
         ],
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group106",
-        "Name": "ชุดเลือกเฟอร์นิเจอร์ธีมปีใหม่",
-        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมปีใหม่ได้",
+        "Name": "ชุดเลือกเฟอร์นิเจอร์ ธีมปีใหม่",
+        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ ธีมปีใหม่ได้",
         "ConsumeType": "Choice",
         "Contains": [
             [
@@ -19015,7 +19047,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group107",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ ธีมค่ายทหาร",
-        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมค่ายทหารได้",
+        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ ธีมค่ายทหารได้",
         "ConsumeType": "Choice",
         "Contains": [
             [
@@ -19254,7 +19286,7 @@
         "Id": 151009,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Consumable",
         "Rarity": "SSR",
@@ -19265,7 +19297,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Selection_Group108",
         "Name": "ชุดเลือกเฟอร์นิเจอร์ ธีมริมหาด",
-        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ธีมริมหาดได้",
+        "Desc": "ชุดเลือกที่สามารถเลือกรับเฟอร์นิเจอร์ ธีมริมหาดได้",
         "ConsumeType": "Choice",
         "Contains": [
             [
@@ -19382,8 +19414,7 @@
                 1,
                 1
             ]
-        ],
-        "ContainsGlobal": []
+        ]
     },
     {
         "Id": 151010,
@@ -22624,8 +22655,8 @@
         "SynthQuality": 200,
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Random_Group103",
-        "Name": "ชุดสุ่มเฟอร์นิเจอร์ ธีมรีสอร์ทฤดูร้อน",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมรีสอร์ทฤดูร้อน ตามอัตราการได้รับที่กำหนด",
+        "Name": "ชุดสุ่มเฟอร์นิเจอร์ ธีมรีสอร์ตฤดูร้อน",
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมรีสอร์ตฤดูร้อน ตามอัตราการได้รับที่กำหนด",
         "ConsumeType": "Random",
         "ImmediateUse": false,
         "Contains": [
@@ -23320,7 +23351,7 @@
         "Id": 191009,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "Category": "Consumable",
         "Rarity": "SSR",
@@ -23332,7 +23363,7 @@
         "Shops": [],
         "Icon": "Item_Icon_Furniture_Random_Group108",
         "Name": "ชุดสุ่มเฟอร์นิเจอร์ ธีมริมหาด",
-        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ธีมริมหาด",
+        "Desc": "ชุดสุ่มที่สามารถสุ่มรับ 1 ในเฟอร์นิเจอร์ ธีมริมหาดได้ 1 ชิ้น ตามอัตราการได้รับที่กำหนด",
         "ConsumeType": "Random",
         "ImmediateUse": false,
         "Contains": [
@@ -23431,8 +23462,7 @@
                 0.0526,
                 1
             ]
-        ],
-        "ContainsGlobal": []
+        ]
     },
     {
         "Id": 191010,

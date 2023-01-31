@@ -75,16 +75,20 @@
             opacity: var(--var-tile-default-opacity) !important;
         }
 
-        &::before {
-            content: "";
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background-color: var(--col-tile);
-            -webkit-mask-image: url("../images/stage-tile.svg");
-            mask-image: url("../images/stage-tile.svg");
-            opacity: 0.7;
+        &:not(.conquest-tile) {
+            &::before {
+                content: "";
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                background-color: var(--col-tile);
+                -webkit-mask-image: url("../images/stage-tile.svg");
+                mask-image: url("../images/stage-tile.svg");
+                opacity: 0.7;
+            }
         }
+
+
 
         &.hidden-tile {
             &::before {
@@ -99,10 +103,53 @@
             }
         }
 
+        &.conquest-tile {
+
+            &.selected::before {
+                filter: brightness(0.5);
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                width: 120px;
+                height: 120px;
+                background-size: 130%;
+                background-repeat: no-repeat;
+                background-position: center center;
+                pointer-events: none;
+            }
+
+            &.conquest-tile-base::before, &.conquest-tile-start::before {
+                background-image: url("../images/conquest/Conquest_815_Img_Tile_Base_0.png");
+            }
+
+            &.conquest-tile-battle::before {
+                background-image: url("../images/conquest/Conquest_815_Img_Tile_Battle_0.png");
+            }
+
+            &.conquest-tile-normal::before {
+                background-image: url("../images/conquest/Conquest_815_Img_Tile_Normal.png");
+            }
+
+            &.conquest-tile-boss{
+
+                &::before {
+                    background-size: 100%;
+                    width: 240px;
+                    height: 240px;
+                    background-image: url("../images/conquest/Conquest_815_Img_Tile_Boss_0.png");
+                    bottom: -80px;
+                }
+
+            }
+
+        }
+
         .start-tile {
             position: absolute;
             bottom: 32px;
-            z-index: 500;
+            z-index: 5000;
             width: 100%;
             height: 28px;
             background-repeat: no-repeat;
@@ -205,7 +252,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        z-index: 500;
+        z-index: 5000;
         gap: 4px;
 
         .move-type {
@@ -255,7 +302,7 @@
     .unit-grade {
         position: absolute;
         bottom: 34px;
-        z-index: 500;
+        z-index: 5000;
         width: 100%;
         height: 22px;
         color: var(--col-theme-text);
@@ -264,6 +311,7 @@
 
         .grade {
             font-size: 12px;
+            font-weight: 700;
             font-style: italic;
             padding: 0.125rem 0.25rem;
             background-color: var(--col-bg-imglabel);
@@ -296,7 +344,8 @@
 }
 
 #ba-stage-entrycost {
-    @include flex(center, center);
+    @include flex(center, start);
+    flex-wrap: wrap;
 }
 
 .stage-star {
@@ -330,6 +379,24 @@
 
     .ba-stats {
         background: none;
+    }
+
+}
+
+.school-bonus-list {
+    @include flex(center, center);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    
+    .school-bonus-icon {
+
+        @extend .ba-panel;
+        padding: 4px;
+    
+        img {
+            width: 64px;
+        }
+    
     }
 
 }
