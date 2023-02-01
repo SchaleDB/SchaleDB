@@ -1906,6 +1906,35 @@ class EnemyFinder {
             })            
         })
 
+        data.stages.ConquestMap.forEach(conquestMap => {
+            if (!data.common.regions[regionID].events.includes(conquestMap.EventId)) return
+            const mapName = getLocalizedString('ConquestMap', ''+conquestMap.EventId % 10000)
+            conquestMap.Maps.filter(m => m.Difficulty == "VeryHard").forEach(challengeMap => {
+                challengeMap.Tiles.filter(t => t.Type == "Battle").forEach(tile => {
+                    const stage = find(data.stages.Conquest, "Id", tile.Id)[0]
+                    stage.Formations.forEach((formation) => {
+                        formation.EnemyList.forEach(enemyId => {
+                            const enemy = find(data.enemies, 'Id', enemyId)[0]
+                            if (enemy.Id >= 8010000 && enemy.SquadType == 'Main') {
+                                if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
+                                    statPreviewEnemyList.push({
+                                        id: enemy.Id,
+                                        name: `${enemy.Name} (${getLocalizedString("StageType", "Conquest")})`,
+                                        searchTerms: [mapName],
+                                        source: mapName,
+                                        rank: enemy.Rank,
+                                        icon: `images/enemy/${enemy.Icon}`,
+                                        level: formation.Level[enemy_rank[enemy.Rank]],
+                                        grade: formation.Grade[enemy_rank[enemy.Rank]]
+                                    })
+                                }
+                            }
+                        })
+                    })
+                })
+            })
+        })
+
         data.stages.SchoolDungeon.forEach(stage => {
             if (stage.Stage > data.common.regions[regionID].schooldungeon_max) return
             const formation = stage.Formations[0]
@@ -4839,6 +4868,10 @@ function loadStage(id) {
         $('#ba-stage-tab-conquest').toggle(mode == 'Conquest')
         $('#ba-stage-tab-map').toggle(mode != 'Conquest')
 
+        if (mode != "Conquest" && $('#ba-stage-tab-conquest').hasClass('active')) {
+            $('#ba-stage-tab-enemies').tab('show')
+        }
+
         $('#ba-stage-name').html(getStageName(stage, mode))
         $('#ba-stage-title').html(getStageTitle(stage, mode))
         $('#ba-stage-level').text(translateUI('rec_level') + ' Lv.'+ stage.Level)
@@ -4884,13 +4917,16 @@ function loadStage(id) {
                         calculateRewardsHtml += getDropIconHTML(reward[0], reward[1], 1, 1, false, `Lv.${i+1}`)
                     })
                 }
-                $(`#conquest-settlement-reward`).html(`<div class="item-icon-list">${calculateRewardsHtml}</div>`).find('.item-drop').tooltip({html: true})
+
+                if (calculateRewardsHtml != "") {
+                    $(`#conquest-settlement-reward`).html(`<div class="item-icon-list">${calculateRewardsHtml}</div>`).find('.item-drop').tooltip({html: true})
+                } else {
+                    $(`#conquest-settlement-reward`).html(`<p class="mb-0 text-center">${translateUI('rewards_none')}</p>`)
+                }
             }
             
-            $(`#conquest-school-bonus`).empty()
-            
             if ("SchoolBuff" in stage) {
-                let schoolHtml = `<div class="d-flex justify-content-center gap-2">`
+                let schoolHtml = ""
                 let html = ""
                 stage.SchoolBuff[0].forEach(school => {
                     html += `<span class="school-bonus-icon"><img class="invert-light" src="images/schoolicon/School_Icon_${school.toUpperCase()}_W.png"></span>`
@@ -4900,8 +4936,21 @@ function loadStage(id) {
                 stage.SchoolBuff[1].forEach(school => {
                     html += `<span class="school-bonus-icon"><img class="invert-light" src="images/schoolicon/School_Icon_${school.toUpperCase()}_W.png"></span>`
                 })
-                if (html != "") schoolHtml += `<div class="p-2"><p class="mb-2 text-center">${translateUI('conquest_occupy')}</p><div class="school-bonus-list">${html}</div></div></div>`
-                $(`#conquest-school-bonus`).html(schoolHtml)
+                if (html != "") schoolHtml += `<div class="p-2"><p class="mb-2 text-center">${translateUI('conquest_occupy')}</p><div class="school-bonus-list">${html}</div></div>`
+                $(`#conquest-school-bonus-list`).html(`<div class="d-flex justify-content-center gap-2">${schoolHtml}</div>`)
+                if (schoolHtml != "") {
+                    let bonusText = ""
+                    bonusText += `<div class="ba-panel-separator my-2"></div>`
+
+                    for (let i = 1; i <= 3; i++) {
+                        bonusText += `<p class="mb-0"><b>${translateUI("school_bonus_num_students", [2*i])}</b>${translateUI("school_bonus_conquest", [40*i, 50*i])}</p>`
+                    }
+
+                    $(`#conquest-school-bonus-list`).append(bonusText)
+                }
+                $('#conquest-school-bonus').toggle(schoolHtml != "")
+            } else {
+                $('#conquest-school-bonus').hide()
             }
             
         }
@@ -8037,7 +8086,7 @@ function drawConquestHexamap(conquest, mapId, step, container) {
     const y_pad = 20
     let leftOffset = 999999
     let rightOffset = 0
-    let topOffset = 120
+    let topOffset = conquest.Maps[mapId].Difficulty == "VeryHard" ? 60 : 120
 
     filteredTiles.forEach(tile => {
         x_min = Math.min(x_min, tile.Pos[0])
