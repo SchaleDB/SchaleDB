@@ -5551,7 +5551,7 @@ function recalculateStats() {
                 //check conditions
                 let compatible = ExternalBuffs.checkRestrictions(student, effect)
                 
-                if (!compatible || (student.SquadType == 'Support' && statPreviewSelectedChar == 0 && (buff.Skill.SkillType != 'sub' && !buff.StudentId.startsWith("raid")))) {
+                if (!compatible || (student.SquadType == 'Support' && statPreviewSelectedChar == 0 && buff.Skill.SkillType != 'sub' && !buff.RaidId)) {
                     //exclude other character's Ex/Basic skills on Special characters
                     $('#statpreview-buff-transferable-incompatible').toggle(statPreviewIncludeBuffs)
                     $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
