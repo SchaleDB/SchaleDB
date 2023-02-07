@@ -77,7 +77,8 @@ let json_list = {
     common: getCacheVerResourceName("./data/common.min.json"),
     raids: getCacheVerResourceName("./data/raids.min.json"),
     stages: getCacheVerResourceName("./data/stages.min.json"),
-    crafting: getCacheVerResourceName(`./data/crafting.min.json`)
+    crafting: getCacheVerResourceName(`./data/crafting.min.json`),
+    config: getCacheVerResourceName("./data/config.min.json")
 }
 let json_lang_list = getLanguageJSONList(userLang.toLowerCase())
 
@@ -856,11 +857,15 @@ class ExternalBuffs extends Buffs {
                 this.searchResultPopper.hide()
             }
             const currentStudentId = student.Id
-            //automatically add all own buffs as well as the set supports' skills
+            //automatically add all own buffs as well as the set supports' skills if student is a striker
             let studentsToAdd = [currentStudentId]
-            statPreviewSupportStats.supportStudents.forEach(s => {
-                studentsToAdd.push(s.student.Id)
-            })
+            
+            if (student.SquadType == "Main") {
+                statPreviewSupportStats.supportStudents.forEach(s => {
+                    studentsToAdd.push(s.student.Id)
+                })
+            }
+
             studentsToAdd.forEach(studentId => {
                 const student = find(data.students, "Id", studentId)[0]
                 student.Skills.forEach(skill => {
@@ -2481,7 +2486,7 @@ let loadPromise = loadJSON(Object.assign(json_list, json_lang_list), result => {
 })
 
 if (localStorage.getItem("theme")) {
-    $('body').toggleClass("theme-dark", (localStorage.getItem("theme") == 'dark'))
+    applyThemeToBody(localStorage.getItem("theme"))
 }
 
 $.when($.ready, loadPromise).then(function() {
@@ -2520,8 +2525,7 @@ $.when($.ready, loadPromise).then(function() {
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
         if (darkTheme == 'auto') {
-            $('body').toggleClass("theme-dark", event.matches)
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', $('body').hasClass('theme-dark') ? '#212529' : '#dee2e6')
+            applyThemeToBody('auto')
         }
     })
 
@@ -2583,6 +2587,17 @@ $.when($.ready, loadPromise).then(function() {
         $("#modal-changelog").modal('show')
         localStorage.setItem("changelog_seen", currentChangelog)
     }
+
+    $('body').on('show.bs.modal', '#home-modal-links', function (e) {
+        let html = ''
+        data.config.links.forEach(section => {
+            html += `<h4>${section.section}</h4>`
+            section.content.forEach(content => {
+                html += `<p><a href="${content.url}">${content.title} <i class="fa-solid fa-external-link"></i></a> <small class="ms-1">by ${content.author}</small><br/>${content.description}</p>`
+            })
+        })
+        $('#home-modal-links-content').html(html)
+    })
 
     //Keyboard Shortcut for search
     $(document).on('keydown', function(e) {
@@ -6906,7 +6921,7 @@ function populateEventStageList(eventId) {
                 if (!(eventId == 701 && ((stage.Difficulty == 1 && stage.Stage > data.common.regions[regionID].event_701_max) || (stage.Difficulty == 2 && stage.Stage > data.common.regions[regionID].event_701_challenge_max)))) {
                     if (stage.Difficulty != diffPrev || stage.EventId != eventPrev) {
                         let name = stage.Difficulty == 1 ? "Quest" : "Challenge"
-                        name += stage.EventId > 10000 ? " (Rerun)" : ""
+                        name += stage.EventId > 10000 ? translateUI('event_rerun') : ""
                         let header = `<div class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${name}</h3></div>`
                         html += header
                     }
@@ -7423,12 +7438,13 @@ function toggleDarkTheme(theme) {
     $(`#ba-navbar-themeswitcher button`).removeClass("active")
     $(`#ba-navbar-themeswitcher-${theme}`).addClass("active")
     localStorage.setItem("theme", theme)
-    if (theme == 'auto') {
-        $('body').toggleClass("theme-dark", window.matchMedia('(prefers-color-scheme: dark)').matches)
-    } else {
-        $('body').toggleClass("theme-dark", (theme == 'dark'))
-    }
-    document.querySelector('meta[name="theme-color"]').setAttribute('content', $('body').hasClass('theme-dark') ? '#212529' : '#dee2e6')
+    applyThemeToBody(theme)
+}
+
+function applyThemeToBody(theme) {
+    const applyDarkTheme = (theme == 'auto') ? window.matchMedia('(prefers-color-scheme: dark)').matches : theme == 'dark'
+    $('body').toggleClass("theme-dark", applyDarkTheme)
+    $('meta[name="theme-color"]').attr('content', applyDarkTheme ? '#212529' : '#dee2e6')
 }
 
 function toggleHighContrast(state) {
