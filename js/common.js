@@ -2566,13 +2566,8 @@ $.when($.ready, loadPromise).then(function() {
         $(this).hide()
     })
 
-    let overrideChangelog = false;
-    if (window.location.hash) {
-        let hash = window.location.hash.substring(1);
-        if (hash == "links") {
-            overrideChangelog = true;
-        }
-    }
+    const urlVars = new URL(window.location.href).searchParams
+    const showLinks = urlVars.has("links")
 
     //populate Changelog
     let changelogHtml = ""
@@ -2585,8 +2580,24 @@ $.when($.ready, loadPromise).then(function() {
         changelogHtml += '</div>'
     })
     $("#modal-changelog-content").html(changelogHtml)
-    const currentChangelog = parseInt(data.common.changelog[0].date.replace(/\//g,''))
-    if (!overrideChangelog) {
+    
+
+    $('#modal-links').on('show.bs.modal', function (e) {
+        let html = ''
+        data.config.links.forEach(section => {
+            html += `<h4>${section.section}</h4>`
+            section.content.forEach(content => {
+                html += `<p><a href="${content.url}">${content.title} <i class="fa-solid fa-external-link"></i></a> <small class="ms-1">by ${content.author}</small><br/>${content.description}</p>`
+            })
+        })
+        $('#modal-links-content').html(html)
+    })
+
+    if (showLinks) {
+        $("#modal-links").modal('show')
+    } else {
+        const currentChangelog = parseInt(data.common.changelog[0].date.replace(/\//g,''))
+
         if (localStorage.getItem("changelog_seen")) {
             if (currentChangelog > parseInt(localStorage.getItem("changelog_seen"))) {
                 $("#modal-changelog").modal('show')
@@ -2597,17 +2608,6 @@ $.when($.ready, loadPromise).then(function() {
             localStorage.setItem("changelog_seen", currentChangelog)
         }
     }
-
-    $('body').on('show.bs.modal', '#home-modal-links', function (e) {
-        let html = ''
-        data.config.links.forEach(section => {
-            html += `<h4>${section.section}</h4>`
-            section.content.forEach(content => {
-                html += `<p><a href="${content.url}">${content.title} <i class="fa-solid fa-external-link"></i></a> <small class="ms-1">by ${content.author}</small><br/>${content.description}</p>`
-            })
-        })
-        $('#home-modal-links-content').html(html)
-    })
 
     //Keyboard Shortcut for search
     $(document).on('keydown', function(e) {
@@ -2675,7 +2675,6 @@ $.when($.ready, loadPromise).then(function() {
     $('#collection-data-import-btn').on('click', function(e) {importCollection(parseImport($('#collection-import-string').val()))})
     $('#collection-data-export-btn').on('click', function(e) {exportDataString('#collection-export-string')})
 
-    const urlVars = new URL(window.location.href).searchParams
     if (urlVars.get("importcollection")) {
         try {
             let collectionNew = {}
@@ -3210,13 +3209,6 @@ function loadModule(moduleName, entry=null) {
             $('#ba-navbar-content').collapse('hide')
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
 
-            if (window.location.hash) {
-                let hash = window.location.hash.substring(1);
-                if (hash == "links") {
-                    let linkModal = new bootstrap.Modal(document.getElementById('home-modal-links'), {});
-                    linkModal.show();
-                }
-            }
         })
     }
     localStorage.setItem("module", loadedModule)
