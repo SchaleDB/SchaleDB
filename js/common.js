@@ -2569,7 +2569,6 @@ $.when($.ready, loadPromise).then(function() {
     let overrideChangelog = false;
     if (window.location.hash) {
         let hash = window.location.hash.substring(1);
-        console.log(hash);
         if (hash == "links") {
             overrideChangelog = true;
         }
@@ -3213,7 +3212,6 @@ function loadModule(moduleName, entry=null) {
 
             if (window.location.hash) {
                 let hash = window.location.hash.substring(1);
-                console.log(hash);
                 if (hash == "links") {
                     let linkModal = new bootstrap.Modal(document.getElementById('home-modal-links'), {});
                     linkModal.show();
