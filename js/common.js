@@ -2566,6 +2566,15 @@ $.when($.ready, loadPromise).then(function() {
         $(this).hide()
     })
 
+    let overrideChangelog = false;
+    if (window.location.hash) {
+        let hash = window.location.hash.substring(1);
+        console.log(hash);
+        if (hash == "links") {
+            overrideChangelog = true;
+        }
+    }
+
     //populate Changelog
     let changelogHtml = ""
     $.each(data.common.changelog, function(i, el) {
@@ -2578,14 +2587,16 @@ $.when($.ready, loadPromise).then(function() {
     })
     $("#modal-changelog-content").html(changelogHtml)
     const currentChangelog = parseInt(data.common.changelog[0].date.replace(/\//g,''))
-    if (localStorage.getItem("changelog_seen")) {
-        if (currentChangelog > parseInt(localStorage.getItem("changelog_seen"))) {
+    if (!overrideChangelog) {
+        if (localStorage.getItem("changelog_seen")) {
+            if (currentChangelog > parseInt(localStorage.getItem("changelog_seen"))) {
+                $("#modal-changelog").modal('show')
+                localStorage.setItem("changelog_seen", currentChangelog)
+            } 
+        } else {
             $("#modal-changelog").modal('show')
             localStorage.setItem("changelog_seen", currentChangelog)
-        } 
-    } else {
-        $("#modal-changelog").modal('show')
-        localStorage.setItem("changelog_seen", currentChangelog)
+        }
     }
 
     $('body').on('show.bs.modal', '#home-modal-links', function (e) {
@@ -3199,6 +3210,15 @@ function loadModule(moduleName, entry=null) {
             $('title').html(`${translateUI('navbar_home')} | Schale`)
             $('#ba-navbar-content').collapse('hide')
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
+
+            if (window.location.hash) {
+                let hash = window.location.hash.substring(1);
+                console.log(hash);
+                if (hash == "links") {
+                    let linkModal = new bootstrap.Modal(document.getElementById('home-modal-links'), {});
+                    linkModal.show();
+                }
+            }
         })
     }
     localStorage.setItem("module", loadedModule)
