@@ -43462,7 +43462,7 @@
             "Id": 6000,
             "IsReleased": [
                 true,
-                false
+                true
             ],
             "DungeonType": "Destruction",
             "Icon": "EnemyInfo_Totem03_TimeAttack",
@@ -44331,13 +44331,127 @@
                     3902330525
                 ]
             ]
+        },
+        {
+            "Id": 13000,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "DungeonType": "Shooting",
+            "Icon": "EnemyInfo_Boxcat_Terror",
+            "MaxDifficulty": 4,
+            "Terrain": "Indoor",
+            "BulletType": "Normal",
+            "ArmorType": "LightArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 916000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7810001
+                    ]
+                },
+                {
+                    "Id": 916000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7810002
+                    ]
+                },
+                {
+                    "Id": 916000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7810003
+                    ]
+                },
+                {
+                    "Id": 916000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7810004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    990306261,
+                    2570956929
+                ],
+                [
+                    990306261,
+                    2570956929
+                ],
+                [
+                    990306261,
+                    2570956929,
+                    1246791085
+                ],
+                [
+                    990306261,
+                    2570956929,
+                    1246791085,
+                    3239764743
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
         {
             "Id": 990306261,
             "Icon": "TimeAttack_Icon_Terrain_Outdoor_01",
-            "NameEn": "Drill Terrain (Outdoor)",
+            "NameEn": "Drill Terrain (Field Warfare)",
             "DescEn": "This drill will take place in <b>outdoor</b> terrain.",
             "NameJp": "演習地形（屋外戦）",
             "DescJp": "こちらの演習は「屋外戦」の形式で行われます。",
@@ -44373,7 +44487,7 @@
         {
             "Id": 983164925,
             "Icon": "TimeAttack_Icon_Debuff_NormalAttackSpeed_Ally_01",
-            "NameEn": "Decreased Ally Attack Speed",
+            "NameEn": "ATK SPD Decrease",
             "DescEn": "All allies' <d:AttackSpeed> is decreased by 75%.",
             "NameJp": "攻撃速度減少",
             "DescJp": "味方の<d:AttackSpeed>を75%減少。",
@@ -44391,7 +44505,7 @@
         {
             "Id": 3257931121,
             "Icon": "TimeAttack_Icon_Buff_DodgePoint_Enemy_01",
-            "NameEn": "Increased Enemy Evasion",
+            "NameEn": "Evasion Increase",
             "DescEn": "All enemies' <b:Dodge> is increased by 1000%.",
             "NameJp": "回避値増加",
             "DescJp": "敵の<b:Dodge>を1000%増加。",
@@ -44427,7 +44541,7 @@
         {
             "Id": 2503860611,
             "Icon": "TimeAttack_Icon_Debuff_DefensePower_Ally_01",
-            "NameEn": "Decreased Ally Defense",
+            "NameEn": "DEF Decrease",
             "DescEn": "All allies' <d:DEF> is decreased by 90%.",
             "NameJp": "防御力減少",
             "DescJp": "味方の<d:DEF>を90%減少。",
@@ -44445,7 +44559,7 @@
         {
             "Id": 3301214750,
             "Icon": "TimeAttack_Icon_Special_TriggerDieDamage_Enemy_01",
-            "NameEn": "Enemies Explode on Defeat",
+            "NameEn": "Damage when enemy is defeated",
             "DescEn": "When an enemy is defeated, they deal <b>100%</b> damage to allies in a circular area around them.",
             "NameJp": "敵を倒した時にダメージ",
             "DescJp": "敵を倒した時、その位置を中心として円形の範囲内の味方に攻撃力の100%分のダメージが与えられます。",
@@ -44481,7 +44595,7 @@
         {
             "Id": 648270201,
             "Icon": "TimeAttack_Icon_Debuff_AttackPower_Ally_01",
-            "NameEn": "Decreased SR Ally Attack",
+            "NameEn": "SR Weapon ATK Decrease",
             "DescEn": "Decreases <d:ATK> for all allies who use SR type weapons by 90%.",
             "NameJp": "SRの攻撃力減少",
             "DescJp": "SRの武器を使用する味方生徒の<d:ATK>を90%減少。",
@@ -44499,7 +44613,7 @@
         {
             "Id": 2856565282,
             "Icon": "TimeAttack_Icon_Buff_AccuracyPoint_Enemy_01",
-            "NameEn": "Increased Enemy Accuracy",
+            "NameEn": "Accuracy Increase",
             "DescEn": "All enemies' <b:HIT> is increased by <b>1,500</b>.",
             "NameJp": "命中値の増加",
             "DescJp": "敵の<b:HIT>を1500増加。",
@@ -44517,7 +44631,7 @@
         {
             "Id": 1329507091,
             "Icon": "TimeAttack_Icon_Terrain_Indoor_01",
-            "NameEn": "Drill Terrain (Indoor)",
+            "NameEn": "Drill Terrain (Indoor Warfare)",
             "DescEn": "This drill will take place in <b>indoor</b> terrain.",
             "NameJp": "演習地形（屋内戦）",
             "DescJp": "こちらの演習は「屋内戦」の形式で行われます。",
@@ -44535,7 +44649,7 @@
         {
             "Id": 1949095289,
             "Icon": "TimeAttackGeas_Ally_StatChange_CriticalPoint_Up_Fixed",
-            "NameEn": "Increased Ally Critical Rate",
+            "NameEn": "Ally Crit Increase",
             "DescEn": "All allies' <b:CriticalChance> is increased by <b>2,000</b>.",
             "NameJp": "味方の会心値増加",
             "DescJp": "味方の<b:CriticalChance>を2000増加。",
@@ -44553,7 +44667,7 @@
         {
             "Id": 1428571194,
             "Icon": "TimeAttackGeas_Ally_StatChange_CostRegen_Down_Ratio_TriggerUseSkill",
-            "NameEn": "Ally Cost Recovery Decreases after using EX Skills",
+            "NameEn": "Cost Recovery Speed Decrease upon Skill Use",
             "DescEn": "Decreases all allies' <d:CostRegen> by <b>60</b> each time an ally uses their EX skill. Effect lasts until the end of battle.",
             "NameJp": "EXスキルの使用時、コスト回復速度減少",
             "DescJp": "EXスキルの使用時、味方の<d:CostRegen>を60減少。",
@@ -44571,7 +44685,7 @@
         {
             "Id": 3009801818,
             "Icon": "TimeAttack_Icon_Debuff_AttackPower_Ally_01",
-            "NameEn": "Decreased MT/AR Ally Attack",
+            "NameEn": "MT, AR Weapon ATK Decrease",
             "DescEn": "Decreases <d:ATK> for all allies who use MT or AR type weapons by 90%.",
             "NameJp": "武器種MT・ARの攻撃力減少",
             "DescJp": "武器種がMTもしくはARの味方の<d:ATK>を90%減少。",
@@ -44589,7 +44703,7 @@
         {
             "Id": 2490399639,
             "Icon": "TimeAttackGeas_Enemy_StatChange_MaxHP_TriggerCrowdControl_Damage",
-            "NameEn": "Additional Damage when inflicting CC",
+            "NameEn": "Additional Damage upon Crowd Control Hit",
             "DescEn": "Enemies have <b>100,000</b> increased <b:MAXHP>. Enemies receive an additional <b>120,000</b> damage whenever they are inflicted with a Crowd Control effect.",
             "NameJp": "CC効果の作用時に追加ダメージ",
             "DescJp": "敵の<b:MAXHP>を<b>100000</b>増加する代わりに、CC効果が敵に作用するたびに<b>120000</b>の追加ダメージを与えられます。",
@@ -44607,7 +44721,7 @@
         {
             "Id": 719379007,
             "Icon": "TimeAttackGeas_Ally_Damage_MaxHP_TriggerPeriodic",
-            "NameEn": "Scarecrow HP Damage over Time",
+            "NameEn": "Dummy's Continuous HP Decrease",
             "DescEn": "The Scarecrow will receive damage equal to 2% of its Max HP every 1s.",
             "NameJp": "かかしのHP持続減少",
             "DescJp": "かかしのHPが1秒毎に、2%減少していきます。",
@@ -44643,7 +44757,7 @@
         {
             "Id": 3938056289,
             "Icon": "TimeAttack_Icon_Terrain_Street_01",
-            "NameEn": "Drill Terrain (Street)",
+            "NameEn": "Drill Terrain (Urban Warfare)",
             "DescEn": "This drill will take place in <b>street</b> terrain.",
             "NameJp": "演習地形（市街地戦）",
             "DescJp": "こちらの演習は「市街地戦」の形式で行われます。",
@@ -44661,7 +44775,7 @@
         {
             "Id": 3091509634,
             "Icon": "TimeAttackGeas_Enemy_StatChange_AttackPower_CostRegen_CharacterCount",
-            "NameEn": "The Elite Few",
+            "NameEn": "The Select Few",
             "DescEn": "Increases all allies' <b:ATK> by 300%/150%/100%/50% and <b:CostRegen> by <b>3,500/2,450/1,400/1,050</b> if there are only <b>1/2/3/4</b> students in the unit.",
             "NameJp": "少数精鋭",
             "DescJp": "編成した生徒数によって攻撃力とコスト回復速度が変化します。編成した生徒数が少ないほど、より多くの数値が増加します。（最大4人まで）",
@@ -44679,7 +44793,7 @@
         {
             "Id": 3334829467,
             "Icon": "TimeAttackGeas_Enemy_Heal_TriggerPeriod",
-            "NameEn": "Enemy Continuous Healing",
+            "NameEn": "Interval Recovery",
             "DescEn": "All enemies restore 1.5% of their Max HP every 1s.",
             "NameJp": "一定時間毎に回復",
             "DescJp": "敵が一定時間毎に体力を回復します。",
@@ -44697,7 +44811,7 @@
         {
             "Id": 3839125090,
             "Icon": "TimeAttackGeas_Enemy_DamagedLimit_StatChange_MaxHP",
-            "NameEn": "Enemy Incoming DMG Limit",
+            "NameEn": "Max Damage Limit",
             "DescEn": "All enemies have greatly decreased Max HP, but also have an <b:DamagedLimit> that reduces the damage received from ally attacks to a maximum of <b>1</b>.",
             "NameJp": "最大ダメージ制限",
             "DescJp": "敵の最大体力が減少する代わりに、一度に最大1のダメージだけを受けます。",
@@ -44715,7 +44829,7 @@
         {
             "Id": 89307624,
             "Icon": "TimeAttackGeas_Ally_Damage_ExtraDamage_TriggerDamageHit",
-            "NameEn": "AR/HG Additional Damage",
+            "NameEn": "Additional Damage upon Attack",
             "DescEn": "Allies who use AR or HG type weapons will deal damage as an additional hit to enemies.",
             "NameJp": "攻撃時には追加ダメージ(AR、HG)",
             "DescJp": "AR、HG武器を使用する味方生徒が攻撃時、追加ダメージが適用されます。",
@@ -44733,7 +44847,7 @@
         {
             "Id": 2045771535,
             "Icon": "TImeAttackGeas_Ally_Dispel_Buff",
-            "NameEn": "Remove Ally Buffs",
+            "NameEn": "Buff Removal",
             "DescEn": "Buff effects on allies will be immediately removed as soon as they are applied. (Enhanced Skill effects, Special Students' Sub Skill effects and other buffs that cannot be normally removed are unaffected)",
             "NameJp": "バフ効果の除去",
             "DescJp": "味方にかかっているバフ効果が解除されます。\n（パッシブスキル効果、スペシャルキャラクターのサブスキル効果および解除不可能な効果は解除されません）",
@@ -44751,7 +44865,7 @@
         {
             "Id": 1582447562,
             "Icon": "TImeAttackGeas_Enemy_StatChange_DefensePenetration",
-            "NameEn": "Increased Enemy Defense Piercing",
+            "NameEn": "Defense Pierce Increase",
             "DescEn": "All enemies' <b:Penetration> is increased by <b>2,000</b>.",
             "NameJp": "防御貫通値の増加",
             "DescJp": "敵の防御貫通値が増加します。",
@@ -44801,7 +44915,7 @@
         {
             "Id": 328739473,
             "Icon": "TimeAttackGeas_Ally_Heal",
-            "NameEn": "Decreases ATK when defeating enemies. Reduction is removed when healed.",
+            "NameEn": "ATK Decrease when enemies are defeated",
             "DescEn": "Each time an ally defeats an enemy, their <d:ATK> decreases by 5% (effect stacks up to <b>50</b> times). Healing an ally will remove up to 5 stacks of this debuff from them.",
             "NameJp": "敵を倒した時攻撃力減少、回復時は減少解除",
             "DescJp": "敵を倒すたびに攻撃力が減少します。/\n回復効果を受けると、攻撃力減少効果を一定数だけ解除します。",
@@ -44834,7 +44948,7 @@
             "Id": 3153525398,
             "Icon": "TimeAttackGeas_Ally_Immune",
             "NameEn": "Scarecrow State Change",
-            "DescEn": "Every 20s, the Scarecrow will alternate between two states.\n<b>Debuffed State</b>: The Scarecrow has a <d:HealedLimit> that reduces HP restored to 1, and deals 10,000 damage to all allies each time it is healed.\n<b>Normal State</b>: The Scarecrow's HP will recover as normal when healed.",
+            "DescEn": "Every 10s, the Scarecrow will alternate between two states:\n<b>Debuffed State</b>: The Scarecrow has a <d:HealedLimit> that reduces HP restored by healing abilities to <b>1</b> and deals <b>10,000</b> damage (affected by DEF, can be evaded) to all allies each time it is healed.\n<b>Normal State</b>: The Scarecrow's HP will recover as normal when healed.",
             "NameJp": "かかしの状態変化",
             "DescJp": "かかしは一定時間ごとに状態が変化します。デバフ状態：かかしに回復効果を与えると味方生徒へダメージが発生します。かかしに対する回復効果は1に固定されます。通常状態：回復効果が適用されます。",
             "NameKr": "허수아비 상태 변화",
@@ -44861,6 +44975,26 @@
             "DescTh": "เมื่อศัตรูถูกกำจัด, จะทำการสร้างพื้นที่เผาไหม้ที่จะสร้างความเสียหาย <b>100%</b> ของค่าโจมตีให้กับฝ่ายเราที่อยู่ในพื้นที่นั้นทุก 1 วินาที (เป็นเวลา 20 วินาที)",
             "NameVi": "敵を倒した時に燃焼エリア生成",
             "DescVi": "敵を倒した時に、その場所に燃焼エリアが生成されます。"
+        },
+        {
+            "Id": 1246791085,
+            "Icon": "TImeAttackGeas_Enemy_DamageOverTime_DamageRatioUp_Ratio",
+            "NameEn": "Increased Burn, Chill, Poison & Cheer Fever Damage",
+            "DescEn": "Increases the damage dealt by <d:Burn>, <d:Chill>, <d:Poison> and <d:Cheerleading>. All enemies have increased <b:MAXHP>.",
+            "NameJp": "火傷、悪寒、中毒、応援の熱気ダメージ増加",
+            "DescJp": "敵に与えられる火傷、悪寒、中毒、応援の熱気のダメージが増加します。敵のHPが増加します。",
+            "NameKr": "화상, 오한, 중독, 응원의 열기 피해 증가",
+            "DescKr": "적이 받는 화상, 오한, 중독, 응원의 열기 대미지가 증가합니다. 적 체력이 증가합니다."
+        },
+        {
+            "Id": 3239764743,
+            "Icon": "TimeAttack_Icon_Buff_CriticalChanceResistPoint_Enemy_01",
+            "NameEn": "Increased Enemy Crit RES",
+            "DescEn": "All enemies' <b:CriticalChanceResistPoint> is increased.",
+            "NameJp": "会心抵抗値の増加",
+            "DescJp": "敵の会心抵抗値が増加します。",
+            "NameKr": "치명저항 수치 증가",
+            "DescKr": "적의 치명저항 수치가 증가합니다"
         }
     ],
     "WorldRaid": [
@@ -46268,7 +46402,7 @@
             "NameKr": "비나 (색채)",
             "NameTw": "ビナー（色彩）",
             "NameCn": "色彩化薇娜",
-            "NameTh": "บีนาห์ (แต้มสี)",
+            "NameTh": "บีนาห์ (สีสัน)",
             "NameVi": "ビナー（色彩）",
             "Rewards": [
                 {
@@ -48052,7 +48186,7 @@
             "NameKr": "헤세드 (색채)",
             "NameTw": "ケセド（色彩）",
             "NameCn": "色彩化赫赛德",
-            "NameTh": "เชเซ็ด (แต้มสี)",
+            "NameTh": "เชเซ็ด (สีสัน)",
             "NameVi": "ケセド（色彩）",
             "Rewards": [
                 {
@@ -51576,7 +51710,7 @@
             "NameKr": "예로니무스 (색채)",
             "NameTw": "ヒエロニムス（色彩）",
             "NameCn": "色彩化耶罗尼姆斯",
-            "NameTh": "ไฮโรนีมัส (แต้มสี)",
+            "NameTh": "ไฮโรนีมัส (สีสัน)",
             "NameVi": "ヒエロニムス（色彩）",
             "Rewards": [
                 {
@@ -53407,7 +53541,7 @@
             "NameKr": "호드 (색채)",
             "NameTw": "ホド（色彩）",
             "NameCn": "色彩化霍德",
-            "NameTh": "Hod (แต้มสี)",
+            "NameTh": "Hod (สีสัน)",
             "NameVi": "ホド（色彩）",
             "Rewards": [
                 {
@@ -55172,7 +55306,7 @@
             "NameKr": "페로로지라 (색채)",
             "NameTw": "ペロロジラ（色彩）",
             "NameCn": "色彩化佩洛洛吉拉",
-            "NameTh": "เพโรโร่ซิลล่า (แต้มสี)",
+            "NameTh": "เพโรโร่ซิลล่า (สีสัน)",
             "NameVi": "ペロロジラ（色彩）",
             "Rewards": [
                 {
