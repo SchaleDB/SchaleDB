@@ -8,12 +8,21 @@
         "Pierce": "貫穿",
         "Mystic": "神秘",
         "Normal": "一般",
-        "Siege": "攻城"
+        "Sonic": "Sonic"
     },
     "ArmorType": {
         "LightArmor": "輕裝甲",
         "HeavyArmor": "重裝甲",
         "Unarmed": "特殊裝甲",
+        "ElasticArmor": "Elastic",
+        "Normal": "一般手套"
+    },
+    "ArmorTypeLong": {
+        "LightArmor": "輕裝甲",
+        "HeavyArmor": "重裝甲",
+        "Unarmed": "特殊裝甲",
+        "Structure": "結構物",
+        "ElasticArmor": "Elastic Armor",
         "Normal": "一般手套"
     },
     "TacticRole": {
@@ -201,6 +210,22 @@
         "Watch": "手錶",
         "Artifact": "歐帕茲"
     },
+    "ArtifactClass": {
+        "10": "Nebra Sky Disk",
+        "11": "Phaistos Disc",
+        "12": "Wolfsegg Steel",
+        "13": "Nimrud Lens",
+        "14": "Mandrake",
+        "15": "Rohonc Codex",
+        "16": "Aether",
+        "17": "Antikythera",
+        "18": "Voynich Manuscript",
+        "19": "Crystal Haniwa",
+        "20": "Totem Pole",
+        "21": "Ancient Battery",
+        "24": "Disco Colgante",
+        "29": "Winnipesaukee Stone"
+    },
     "EnemyTags": {
         "EnemySmall": "小型",
         "EnemyMedium": "中型",
@@ -228,7 +253,8 @@
         "818": "Get Set, Go!: Kivotos Grand Sports Festival",
         "819": "Christmas in the Cathedral: The Remedial Knights' Gift",
         "820": "A Game Before the New Year's Feast",
-        "821": "Battle for the False Sanctum"
+        "821": "Battle for the False Sanctum",
+        "822": "Atra-Hasis' Ark Conquest"
     },
     "StageType": {
         "Campaign": "任務",
@@ -255,7 +281,8 @@
         "Destruction": "突破考試"
     },
     "ConquestMap": {
-        "815": "「失樂園渡假勝地」群島"
+        "815": "「失樂園渡假勝地」群島",
+        "822": "Atra-Hasis' Ark"
     },
     "StageTitle": {
         "ChaserA": "高架公路{0}",
@@ -288,7 +315,8 @@
         "2": "Very Hard",
         "3": "Hardcore",
         "4": "Extreme",
-        "5": "Insane"
+        "5": "Insane",
+        "6": "Torment"
     },
     "WeaponPartExpBonus": {
         "WeaponExpGrowthA": "用於強化 SMG、SG、HG 類型武器時提供 1.5 倍經驗",
@@ -397,7 +425,8 @@
         "Special_SuddenDeath": "若藻的印記",
         "Special_Stamp": "Flower Stamp",
         "Special_Holiday": "聖夜的祝福",
-        "Special_SilverBullet": "一般攻擊"
+        "Special_SilverBullet": "一般攻擊",
+        "Special_CH0187Mod": "Charge"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "準備急救",
@@ -494,7 +523,8 @@
         "Special_SuddenDeath": "若藻的印記",
         "Special_Stamp": "Flower Stamps",
         "Special_Holiday": "聖夜的祝福",
-        "Special_SilverBullet": "Silver Bullets"
+        "Special_SilverBullet": "Silver Bullets",
+        "Special_CH0187Mod": "Abi-Eshuh Mode Charge"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "以一定時間間隔持續回覆生命值",
@@ -591,7 +621,8 @@
         "Special_SuddenDeath": "A stack of 5 will deal lethal damage to the character.",
         "Special_Stamp": "Reduces allies' EX skill cost and restores own HP when Kokona reaches 5 stacks.",
         "Special_Holiday": "提升此角色的特定EX技能的效果。",
-        "Special_SilverBullet": "Augments Sakurako's normal attack to deal damage as an additional hit."
+        "Special_SilverBullet": "Augments Sakurako's normal attack to deal damage as an additional hit.",
+        "Special_CH0187Mod": "Allows the use of Toki's EX Skill while in Abi-Eshuh Mode. Abi-Eshuh mode ends once all stacks are consumed."
     },
     "ServerName": {
         "0": "日服",
@@ -690,6 +721,7 @@
         "student_skill_normal": "基本技能",
         "student_skill_gearnormal": "基本技能+",
         "student_skill_passive": "強化技能",
+        "student_skill_weaponpassive": "強化技能+",
         "student_skill_sub": "子技能",
         "student_skills_upgrades": "升級",
         "student_skills_materials": "材料清單",
@@ -697,9 +729,9 @@
         "student_weapon_rank_2star_desc": "固有武器最大等級 Lv.30 → <b>Lv.40</b> / 解鎖強化技能+",
         "student_weapon_rank_3star_desc": "固有武器最大等級 Lv.40 → <b>Lv.50</b> / 地形战力强化",
         "student_gear_t2_desc": "解鎖基本技能+",
-        "attack_type_desc": "對{0}目標造成<b>2倍</b>傷害。<br>對{1}目標造成<b>0.5倍</b>傷害。<br>對<b class='ba-col-siege'>構造物</b>造成<b>0.5倍</b>傷害。",
-        "attack_type_normal_desc": "對<b class='ba-col-explosion'>輕裝甲</b>、<b class='ba-col-pierce'>重裝甲</b>與<b class='ba-col-mystic'>神秘裝甲</b>目標造成<b>1倍</b>傷害。<br>對<b class='ba-col-siege'>構造物</b>造成<b>0.5倍</b>傷害。",
-        "defense_type_desc": "承受<b>2倍</b>{0}攻擊傷害。<br>承受<b>0.5倍</b>{1}攻擊傷害。",
+        "attack_type_desc": "對{1}目標造成<b>{0}倍</b>傷害。",
+        "attack_type_normal_desc": "對<b class='ba-col-explosion'>輕裝甲</b>、<b class='ba-col-pierce'>重裝甲</b>與<b class='ba-col-mystic'>神秘裝甲</b>目標造成<b>1倍</b>傷害。<br>對<b>構造物</b>造成<b>0.5倍</b>傷害。",
+        "defense_type_desc": "承受<b>{0}倍</b>{1}攻擊傷害。",
         "defense_type_normal_desc": "承受<b>1倍</b><b class='ba-col-explosion'>爆炸</b>、<b class='ba-col-pierce'>貫穿</b>與<b class='ba-col-mystic'>神秘</b>攻擊傷害。",
         "comfort": "舒適度",
         "age": "年紀",
@@ -734,6 +766,11 @@
         "position": "位置",
         "category": "類別",
         "combat_power": "地形戰鬥力",
+        "misc": "Misc.",
+        "uses_cover": "Uses Cover",
+        "can_cc": "Can CC",
+        "uses_artifact": "Uses Artifact",
+        "filter_include_weapon_upgrade": "Include Weapon Upgrade",
         "memory_lobby": "紀念大廳",
         "memory_lobby_student": "{0}的紀念大廳",
         "memory_lobby_unlock": "{1}羈絆等級達成{0}後解鎖",
@@ -820,6 +857,7 @@
         "item_contains_choice": "選擇獲得以下物品中的一件",
         "item_is_immediateuse": "※ 此物品在獲得后立刻被使用",
         "conquest_area": "區域{0}",
+        "conquest_title": "區域{0} 隊伍{1}",
         "conquest_occupy": "佔領",
         "conquest_operate": "營運",
         "conquest_settlement": "結算獲得獎勵",

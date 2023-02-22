@@ -1038,6 +1038,7 @@
                                         <button id="ba-student-search-filter-armortype-lightarmor" class="btn-pill ba-col-explosion text-bold" onclick="searchSetFilter('ArmorType','LightArmor')"><span class="label" data-localize-id="ArmorType,LightArmor"></span></button>
                                         <button id="ba-student-search-filter-armortype-heavyarmor" class="btn-pill ba-col-pierce text-bold" onclick="searchSetFilter('ArmorType','HeavyArmor')"><span class="label" data-localize-id="ArmorType,HeavyArmor"></span></button>
                                         <button id="ba-student-search-filter-armortype-unarmed" class="btn-pill ba-col-mystic text-bold" onclick="searchSetFilter('ArmorType','Unarmed')"><span class="label" data-localize-id="ArmorType,Unarmed"></span></button>
+                                        <button id="ba-student-search-filter-armortype-elasticarmor" class="btn-pill ba-col-sonic text-bold" onclick="searchSetFilter('ArmorType','ElasticArmor')"><span class="label" data-localize-id="ArmorType,ElasticArmor"></span></button>
                                     </div>    
                                 </div>
                                 <div>
@@ -1096,31 +1097,66 @@
                                     </div>    
                                 </div>
                                 <div>
+                                    <h5 data-localize-id="ui,misc"></h5>
+                                    <div class="search-filter-group">
+                                        <button id="ba-student-search-filter-cover" class="btn-pill" onclick="searchSetFilter('Cover',null)">
+                                            <span class="label" data-localize-id="ui,uses_cover"></span></button>
+                                        <button id="ba-student-search-filter-hascc" class="btn-pill" onclick="searchSetFilter('HasCC',null)"><span class="label" data-localize-id="ui,can_cc"></span></button>
+                                        <div class="btn-group">
+                                            <button id="ba-student-search-select-usesartifact" class="btn-pill" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"><span class="label" data-localize-id="ui,uses_artifact"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>
+                                            <ul id="ba-student-search-select-usesartifact-list" class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-scroll">
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button id="ba-student-search-select-passivebuff" class="btn-pill" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"><span class="label" data-localize-id="ui,student_skill_passive"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>
+                                            <ul id="ba-student-search-select-passivebuff-list" class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-scroll">
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button id="ba-student-search-select-weaponpassivebuff" class="btn-pill" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"><span class="label" data-localize-id="ui,student_skill_weaponpassive"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>
+                                            <ul id="ba-student-search-select-weaponpassivebuff-list" class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-scroll">
+                                            </ul>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button id="ba-student-search-select-subbuff" class="btn-pill" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"><span class="label" data-localize-id="ui,student_skill_sub"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>
+                                            <ul id="ba-student-search-select-subbuff-list" class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-scroll">
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div>
                                     <h5 data-localize-id="ui,combat_power"></h5>
                                     <div class="d-flex flex-column gap-1">
                                         <div class="search-filter-group">
                                             <span><img class="invert-light" src="images/ui/Terrain_Street.png" width="30" height="30"></span>
-                                            <button id="ba-student-search-filter-streetbattleadaptation-0" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',0)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultD.png"></div><span class="label" style="padding-left:2px;">D</span></button>
-                                            <button id="ba-student-search-filter-streetbattleadaptation-1" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',1)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultC.png"></div><span class="label" style="padding-left:2px;">C</span></button>
-                                            <button id="ba-student-search-filter-streetbattleadaptation-2" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',2)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultB.png"></div><span class="label" style="padding-left:2px;">B</span></button>
-                                            <button id="ba-student-search-filter-streetbattleadaptation-3" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',3)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultA.png"></div><span class="label" style="padding-left:2px;">A</span></button>
-                                            <button id="ba-student-search-filter-streetbattleadaptation-4" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',4)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultS.png"></div><span class="label" style="padding-left:2px;">S</span></button>
+                                            <button id="ba-student-search-filter-streetbattleadaptation-0" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',0)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultD.png"></div></button>
+                                            <button id="ba-student-search-filter-streetbattleadaptation-1" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',1)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultC.png"></div></button>
+                                            <button id="ba-student-search-filter-streetbattleadaptation-2" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',2)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultB.png"></div></button>
+                                            <button id="ba-student-search-filter-streetbattleadaptation-3" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',3)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultA.png"></div></button>
+                                            <button id="ba-student-search-filter-streetbattleadaptation-4" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',4)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultS.png"></div></button>
+                                            <button id="ba-student-search-filter-streetbattleadaptation-5" class="btn-pill" onclick="searchSetFilter('StreetBattleAdaptation',5)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultSS.png"></div></button>
                                         </div>
                                         <div class="search-filter-group">
                                             <span><img class="invert-light" src="images/ui/Terrain_Outdoor.png" width="30" height="30"></span>
-                                            <button id="ba-student-search-filter-outdoorbattleadaptation-0" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',0)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultD.png"></div><span class="label" style="padding-left:2px;">D</span></button>
-                                            <button id="ba-student-search-filter-outdoorbattleadaptation-1" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',1)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultC.png"></div><span class="label" style="padding-left:2px;">C</span></button>
-                                            <button id="ba-student-search-filter-outdoorbattleadaptation-2" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',2)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultB.png"></div><span class="label" style="padding-left:2px;">B</span></button>
-                                            <button id="ba-student-search-filter-outdoorbattleadaptation-3" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',3)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultA.png"></div><span class="label" style="padding-left:2px;">A</span></button>
-                                            <button id="ba-student-search-filter-outdoorbattleadaptation-4" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',4)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultS.png"></div><span class="label" style="padding-left:2px;">S</span></button>
+                                            <button id="ba-student-search-filter-outdoorbattleadaptation-0" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',0)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultD.png"></div></button>
+                                            <button id="ba-student-search-filter-outdoorbattleadaptation-1" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',1)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultC.png"></div></button>
+                                            <button id="ba-student-search-filter-outdoorbattleadaptation-2" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',2)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultB.png"></div></button>
+                                            <button id="ba-student-search-filter-outdoorbattleadaptation-3" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',3)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultA.png"></div></button>
+                                            <button id="ba-student-search-filter-outdoorbattleadaptation-4" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',4)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultS.png"></div></button>
+                                            <button id="ba-student-search-filter-outdoorbattleadaptation-5" class="btn-pill" onclick="searchSetFilter('OutdoorBattleAdaptation',5)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultSS.png"></div></button>
                                         </div>
                                         <div class="search-filter-group">
                                             <span><img class="invert-light" src="images/ui/Terrain_Indoor.png" width="30" height="30"></span>
-                                            <button id="ba-student-search-filter-indoorbattleadaptation-0" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',0)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultD.png"></div><span class="label" style="padding-left:2px;">D</span></button>
-                                            <button id="ba-student-search-filter-indoorbattleadaptation-1" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',1)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultC.png"></div><span class="label" style="padding-left:2px;">C</span></button>
-                                            <button id="ba-student-search-filter-indoorbattleadaptation-2" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',2)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultB.png"></div><span class="label" style="padding-left:2px;">B</span></button>
-                                            <button id="ba-student-search-filter-indoorbattleadaptation-3" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',3)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultA.png"></div><span class="label" style="padding-left:2px;">A</span></button>
-                                            <button id="ba-student-search-filter-indoorbattleadaptation-4" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',4)"><div class="icon"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultS.png"></div><span class="label" style="padding-left:2px;">S</span></button>
+                                            <button id="ba-student-search-filter-indoorbattleadaptation-0" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',0)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultD.png"></div></button>
+                                            <button id="ba-student-search-filter-indoorbattleadaptation-1" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',1)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultC.png"></div></button>
+                                            <button id="ba-student-search-filter-indoorbattleadaptation-2" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',2)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultB.png"></div></button>
+                                            <button id="ba-student-search-filter-indoorbattleadaptation-3" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',3)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultA.png"></div></button>
+                                            <button id="ba-student-search-filter-indoorbattleadaptation-4" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',4)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultS.png"></div></button>
+                                            <button id="ba-student-search-filter-indoorbattleadaptation-5" class="btn-pill" onclick="searchSetFilter('IndoorBattleAdaptation',5)"><div class="icon mx-1"><img width="22" height="22" src="images/ui/Ingame_Emo_AdaptresultSS.png"></div></button>
+                                        </div>
+                                        <div class="search-filter-group">
+                                            <button id="ba-student-search-filter-terrainupgrades" class="btn-pill" onclick="searchSetFilter('TerrainUpgrades',null)"><span class="label" data-localize-id="ui,filter_include_weapon_upgrade"></span></button>
                                         </div>
                                     </div>    
                                 </div>

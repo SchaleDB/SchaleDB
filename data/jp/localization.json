@@ -8,12 +8,21 @@
         "Pierce": "貫通",
         "Mystic": "神秘",
         "Normal": "ノーマル",
-        "Siege": "破壊"
+        "Sonic": "振動"
     },
     "ArmorType": {
         "LightArmor": "軽装備",
         "HeavyArmor": "重装甲",
         "Unarmed": "特殊装甲",
+        "ElasticArmor": "弾力装甲",
+        "Normal": "通常装甲"
+    },
+    "ArmorTypeLong": {
+        "LightArmor": "軽装備",
+        "HeavyArmor": "重装甲",
+        "Unarmed": "特殊装甲",
+        "Structure": "構造物",
+        "ElasticArmor": "弾力装甲",
         "Normal": "通常装甲"
     },
     "TacticRole": {
@@ -201,6 +210,22 @@
         "Watch": "腕時計",
         "Artifact": "オーパーツ"
     },
+    "ArtifactClass": {
+        "10": "Nebra Sky Disk",
+        "11": "Phaistos Disc",
+        "12": "Wolfsegg Steel",
+        "13": "Nimrud Lens",
+        "14": "Mandrake",
+        "15": "Rohonc Codex",
+        "16": "Aether",
+        "17": "Antikythera",
+        "18": "Voynich Manuscript",
+        "19": "Crystal Haniwa",
+        "20": "Totem Pole",
+        "21": "Ancient Battery",
+        "24": "Disco Colgante",
+        "29": "Winnipesaukee Stone"
+    },
     "EnemyTags": {
         "EnemySmall": "小型",
         "EnemyMedium": "中型",
@@ -228,7 +253,8 @@
         "818": "Get set, go！～キヴォトス晄輪大祭～",
         "819": "聖堂のメリークリスマス〜救護騎士団の贈り物〜",
         "820": "喰積の 前にいささか～一番勝負～",
-        "821": "虚妄のサンクトゥム攻略戦"
+        "821": "虚妄のサンクトゥム攻略戦",
+        "822": "アトラ・ハシースの箱舟占領戦"
     },
     "StageType": {
         "Campaign": "任務",
@@ -255,7 +281,8 @@
         "Destruction": "突破演習"
     },
     "ConquestMap": {
-        "815": "「ロスト・パラダイス・リゾート」群島"
+        "815": "「ロスト・パラダイス・リゾート」群島",
+        "822": "「アトラ・ハシースの箱舟」"
     },
     "StageTitle": {
         "ChaserA": "ハイウェイ{0}",
@@ -288,7 +315,8 @@
         "2": "VeryHard",
         "3": "HardCore",
         "4": "Extreme",
-        "5": "Insane"
+        "5": "Insane",
+        "6": "Torment"
     },
     "WeaponPartExpBonus": {
         "WeaponExpGrowthA": "SMG、SG、HGの固有武器の強化時に獲得EXPが1.5倍になる。",
@@ -397,7 +425,8 @@
         "Special_SuddenDeath": "ワカモの刻印",
         "Special_Stamp": "「花丸スタンプ」",
         "Special_Holiday": "「聖夜の祝福」",
-        "Special_SilverBullet": "通常攻撃"
+        "Special_SilverBullet": "通常攻撃",
+        "Special_CH0187Mod": "Charge"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "救護の心構え",
@@ -494,7 +523,8 @@
         "Special_SuddenDeath": "ワカモの刻印",
         "Special_Stamp": "花丸スタンプ",
         "Special_Holiday": "聖夜の祝福",
-        "Special_SilverBullet": "シルバーバレット"
+        "Special_SilverBullet": "シルバーバレット",
+        "Special_CH0187Mod": "Abi-Eshuh Mode Charge"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "一定間隔でHPを持続的に回復する。",
@@ -591,7 +621,8 @@
         "Special_SuddenDeath": "5個たまると対象キャラクターに致死ダメージを与える。",
         "Special_Stamp": "ココナが5個獲得した時、自身のHPを回復し自身を除く味方のスキルコストを1減少する。",
         "Special_Holiday": "保有キャラクターに対する特定のEXスキルの効果を増加する。",
-        "Special_SilverBullet": "サクラコの通常攻撃を追加ダメージ効果を与えるものに強化する。"
+        "Special_SilverBullet": "サクラコの通常攻撃を追加ダメージ効果を与えるものに強化する。",
+        "Special_CH0187Mod": "Allows the use of Toki's EX Skill while in Abi-Eshuh Mode. Abi-Eshuh mode ends once all stacks are consumed."
     },
     "ServerName": {
         "0": "日本",
@@ -690,6 +721,7 @@
         "student_skill_normal": "ノーマルスキル",
         "student_skill_gearnormal": "ノーマルスキル＋",
         "student_skill_passive": "パッシブスキル",
+        "student_skill_weaponpassive": "パッシブスキル＋",
         "student_skill_sub": "サブスキル",
         "student_skills_upgrades": "スキルを＋に変更",
         "student_skills_materials": "必要素材",
@@ -697,9 +729,9 @@
         "student_weapon_rank_2star_desc": "固有武器のMax Level Lv.30 → <b>Lv.40</b> / パッシブスキル＋を開放",
         "student_weapon_rank_3star_desc": "固有武器のMax Level Lv.40 → <b>Lv.50</b> / 地形別戦闘力を強化",
         "student_gear_t2_desc": "ノーマルスキル＋を開放",
-        "attack_type_desc": "{0}に<b>2倍</b>のダメージを与える。<br>{1}に<b>0.5倍</b>のダメージを与える。<br>構造物に<b>0.5倍</b>のダメージを与える。",
+        "attack_type_desc": "{1}に<b>{0}倍</b>のダメージを与える。",
         "attack_type_normal_desc": "すべての防御タイプに<b>1倍</b>のダメージを与える<br>構造物に<b>0.5倍</b>のダメージを与える。",
-        "defense_type_desc": "{0}攻撃から<b>2倍</b>のダメージを受ける。<br>{1}攻撃から<b>0.5倍</b>のダメージを受ける。",
+        "defense_type_desc": "{1}攻撃から<b>{0}倍</b>のダメージを受ける。",
         "defense_type_normal_desc": "<b class='ba-col-explosion'>爆発</b>、<b class='ba-col-pierce'>貫通</b>および<b class='ba-col-mystic'>神秘</b>攻撃から<b>1倍</b>のダメージを受ける。",
         "comfort": "快適度",
         "age": "年齢",
@@ -734,6 +766,11 @@
         "position": "ポジション",
         "category": "区分",
         "combat_power": "地形別戦闘力",
+        "misc": "Misc.",
+        "uses_cover": "Uses Cover",
+        "can_cc": "Can CC",
+        "uses_artifact": "Uses Artifact",
+        "filter_include_weapon_upgrade": "Include Weapon Upgrade",
         "memory_lobby": "メモリアルロビー",
         "memory_lobby_student": "{0}のメモリアルロビー",
         "memory_lobby_unlock": "{1}との絆ランクが{0}になると開放",
@@ -820,6 +857,7 @@
         "item_contains_choice": "以下のアイテムの中から一つを選択して獲得する",
         "item_is_immediateuse": "※ このアイテムは獲得した瞬間に使用される",
         "conquest_area": "エリア{0}",
+        "conquest_title": "エリア{0}、チーム{1}",
         "conquest_occupy": "占領",
         "conquest_operate": "運営",
         "conquest_settlement": "精算獲得報酬",

@@ -45,6 +45,12 @@
             background-color: var(--col-btn-active-secondary);
         }
     }
+
+    &.dropdown-menu-scroll {
+        max-height: 360px;
+        background-clip: border-box;
+        @include scrollable(auto);
+    }
 }
 
 // Dropdowns
@@ -60,7 +66,11 @@
         color: var(--col-btn-primary);
         background-color: var(--col-theme-background);
 
-        &:hover {
+        &.selectable {
+            padding-right: 24px;
+        }
+
+        &:hover, &:focus {
             color: var(--col-btn-primary);
             background-color: var(--col-theme-accent);
         }
@@ -68,6 +78,7 @@
         &:active, &.active {
             color: var(--col-btn-active-primary);
             background-color: var(--col-btn-active-secondary);
+
         }
     }
 }

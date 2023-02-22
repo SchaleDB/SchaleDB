@@ -120,28 +120,53 @@
                 pointer-events: none;
             }
 
-            &.conquest-tile-base::before, &.conquest-tile-start::before {
-                background-image: url("../images/conquest/Conquest_815_Img_Tile_Base_0.png");
-            }
-
-            &.conquest-tile-battle::before {
-                background-image: url("../images/conquest/Conquest_815_Img_Tile_Battle_0.png");
-            }
-
-            &.conquest-tile-normal::before {
-                background-image: url("../images/conquest/Conquest_815_Img_Tile_Normal.png");
-            }
-
             &.conquest-tile-boss{
 
                 &::before {
                     background-size: 100%;
                     width: 240px;
                     height: 240px;
-                    background-image: url("../images/conquest/Conquest_815_Img_Tile_Boss_0.png");
                     bottom: -80px;
                 }
 
+            }
+
+            //event tile backgrounds
+
+            &.event-815 {
+                &.conquest-tile-base::before, &.conquest-tile-start::before {
+                    background-image: url("../images/conquest/Conquest_815_Img_Tile_Base_0.png");
+                }
+    
+                &.conquest-tile-battle::before {
+                    background-image: url("../images/conquest/Conquest_815_Img_Tile_Battle_0.png");
+                }
+    
+                &.conquest-tile-normal::before {
+                    background-image: url("../images/conquest/Conquest_815_Img_Tile_Normal.png");
+                }
+    
+                &.conquest-tile-boss::before{
+                    background-image: url("../images/conquest/Conquest_815_Img_Tile_Boss_0.png");
+                }
+            }
+
+            &.event-822 {
+                &.conquest-tile-base::before, &.conquest-tile-start::before {
+                    background-image: url("../images/conquest/Conquest_822_Img_Tile_Base_0.png");
+                }
+    
+                &.conquest-tile-battle::before {
+                    background-image: url("../images/conquest/Conquest_822_Img_Tile_Battle_0.png");
+                }
+    
+                &.conquest-tile-normal::before {
+                    background-image: url("../images/conquest/Conquest_822_Img_Tile_Normal.png");
+                }
+    
+                &.conquest-tile-boss::before{
+                    background-image: url("../images/conquest/Conquest_822_Img_Tile_Boss_0.png");
+                }
             }
 
         }

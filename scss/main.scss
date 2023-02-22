@@ -335,6 +335,11 @@ h1 small {
     color: #fff;
 }
 
+.bg-atk-sonic, .bg-def-elasticarmor {
+    background-color: var(--col-bg-sonic);
+    color: #fff;
+}
+
 .bg-striker-t, .bg-main-t {
     background-color: var(--col-bg-striker-t);
 }
@@ -353,6 +358,10 @@ h1 small {
 
 .bg-atk-mystic-t, .bg-def-unarmed-t {
     background-color: var(--col-bg-mystic-t);
+}
+
+.bg-atk-sonic-t, .bg-def-elasticarmor-t {
+    background-color: var(--col-bg-sonic-t);
 }
 
 .ba-gear-icon {
@@ -711,6 +720,7 @@ hr {
     font-style: italic;
     font-weight: 400;
     padding: 0.5rem 0.5rem;
+    flex-basis: 25%;
 }
 
 a.nav-link.disabled {
@@ -979,18 +989,27 @@ a.nav-link.disabled {
     /* border-bottom: lightgrey 2px solid; */
 }
 
-.ba-col-explosion {
+.ba-col-explosion, .ba-col-lightarmor {
     color: var(--col-text-explosive) !important;
     font-weight: 700;
 }
 
-.ba-col-pierce {
+.ba-col-pierce, .ba-col-heavyarmor {
     color: var(--col-text-piercing) !important;
     font-weight: 700;
 }
 
-.ba-col-mystic {
-    color: var(--col-text-mystic)  !important;
+.ba-col-mystic, .ba-col-unarmed {
+    color: var(--col-text-mystic) !important;
+    font-weight: 700;
+}
+
+.ba-col-sonic, .ba-col-elasticarmor {
+    color: var(--col-text-sonic) !important;
+    font-weight: 700;
+}
+
+.ba-col-structure {
     font-weight: 700;
 }
 

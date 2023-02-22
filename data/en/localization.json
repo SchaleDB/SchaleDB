@@ -8,13 +8,22 @@
         "Pierce": "Piercing",
         "Mystic": "Mystic",
         "Normal": "Normal",
-        "Siege": "Siege"
+        "Sonic": "Sonic"
     },
     "ArmorType": {
         "LightArmor": "Light",
         "HeavyArmor": "Heavy",
         "Unarmed": "Special",
+        "ElasticArmor": "Elastic",
         "Normal": "Normal"
+    },
+    "ArmorTypeLong": {
+        "LightArmor": "Light Armor",
+        "HeavyArmor": "Heavy Armor",
+        "Unarmed": "Special Armor",
+        "Structure": "Structures",
+        "ElasticArmor": "Elastic Armor",
+        "Normal": "Normal Armor"
     },
     "TacticRole": {
         "DamageDealer": "Dealer",
@@ -201,6 +210,22 @@
         "Watch": "Wristwatch",
         "Artifact": "Artifact"
     },
+    "ArtifactClass": {
+        "10": "Nebra Sky Disk",
+        "11": "Phaistos Disc",
+        "12": "Wolfsegg Steel",
+        "13": "Nimrud Lens",
+        "14": "Mandrake",
+        "15": "Rohonc Codex",
+        "16": "Aether",
+        "17": "Antikythera",
+        "18": "Voynich Manuscript",
+        "19": "Crystal Haniwa",
+        "20": "Totem Pole",
+        "21": "Ancient Battery",
+        "24": "Disco Colgante",
+        "29": "Winnipesaukee Stone"
+    },
     "EnemyTags": {
         "EnemySmall": "Small",
         "EnemyMedium": "Medium",
@@ -228,7 +253,8 @@
         "818": "Get Set, Go!: Kivotos Grand Sports Festival",
         "819": "Christmas in the Cathedral: The Remedial Knights' Gift",
         "820": "A Game Before the New Year's Feast",
-        "821": "Battle for the False Sanctum"
+        "821": "Battle for the False Sanctum",
+        "822": "Atra-Hasis' Ark Conquest"
     },
     "StageType": {
         "Campaign": "Missions",
@@ -255,7 +281,8 @@
         "Destruction": "Breakthrough Drill"
     },
     "ConquestMap": {
-        "815": "Lost Paradise Resort Archipelago"
+        "815": "Lost Paradise Resort Archipelago",
+        "822": "Atra-Hasis' Ark"
     },
     "StageTitle": {
         "ChaserA": "Overpass {0}",
@@ -288,7 +315,8 @@
         "2": "Very Hard",
         "3": "Hardcore",
         "4": "Extreme",
-        "5": "Insane"
+        "5": "Insane",
+        "6": "Torment"
     },
     "WeaponPartExpBonus": {
         "WeaponExpGrowthA": "Provides 1.5&times; EXP when used to enhance SMG, SG and HG type weapons.",
@@ -397,7 +425,8 @@
         "Special_SuddenDeath": "Wakamo Imprint",
         "Special_Stamp": "Flower Stamp",
         "Special_Holiday": "Holy Night Blessing",
-        "Special_SilverBullet": "Normal Attack"
+        "Special_SilverBullet": "Normal Attack",
+        "Special_CH0187Mod": "Charge"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "First Aid Ready",
@@ -494,7 +523,8 @@
         "Special_SuddenDeath": "Wakamo Imprint",
         "Special_Stamp": "Flower Stamps",
         "Special_Holiday": "Holy Night Blessings",
-        "Special_SilverBullet": "Silver Bullets"
+        "Special_SilverBullet": "Silver Bullets",
+        "Special_CH0187Mod": "Abi-Eshuh Mode Charge"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "Continuously restores HP at set intervals.",
@@ -591,7 +621,8 @@
         "Special_SuddenDeath": "A stack of 5 will deal lethal damage to the character.",
         "Special_Stamp": "Reduces allies' EX skill cost and restores own HP when Kokona reaches 5 stacks.",
         "Special_Holiday": "Increases the effects of certain EX skills on this character.",
-        "Special_SilverBullet": "Augments Sakurako's normal attack to deal damage as an additional hit."
+        "Special_SilverBullet": "Augments Sakurako's normal attack to deal damage as an additional hit.",
+        "Special_CH0187Mod": "Allows the use of Toki's EX Skill while in Abi-Eshuh Mode. Abi-Eshuh mode ends once all stacks are consumed."
     },
     "ServerName": {
         "0": "Japan",
@@ -690,6 +721,7 @@
         "student_skill_normal": "Basic Skill",
         "student_skill_gearnormal": "Basic Skill+",
         "student_skill_passive": "Enhanced Skill",
+        "student_skill_weaponpassive": "Enhanced Skill+",
         "student_skill_sub": "Sub Skill",
         "student_skills_upgrades": "Upgrades",
         "student_skills_materials": "Materials",
@@ -697,10 +729,10 @@
         "student_weapon_rank_2star_desc": "Exclusive Weapon Max Level Lv.30 → <b>Lv.40</b> / Upgrades Enhanced Skill",
         "student_weapon_rank_3star_desc": "Exclusive Weapon Max Level Lv.40 → <b>Lv.50</b> / Upgrades Terrain Strength",
         "student_gear_t2_desc": "Unlocks Basic Skill+",
-        "attack_type_desc": "Deals <b>2&times;</b> damage to {0} armor targets.<br>Deals <b>0.5&times;</b> damage to {1} armor targets.<br>Deals <b>0.5&times;</b> damage to <b>Structures</b>.",
-        "attack_type_normal_desc": "Deals <b>1&times;</b> damage to <b class='ba-col-explosion'>Light</b>, <b class='ba-col-pierce'>Heavy</b> and <b class='ba-col-mystic'>Special</b> armor targets.<br>Deals <b>0.5&times;</b> damage to <b class='ba-col-siege'>Structures</b>.",
-        "defense_type_desc": "Receives <b>2&times;</b> damage from {0} attacks.<br>Receives <b>0.5&times;</b> damage from {1} attacks.",
-        "defense_type_normal_desc": "Receives <b>1&times;</b> damage from <b class='ba-col-explosion'>Explosive</b>, <b class='ba-col-pierce'>Piercing</b> and <b class='ba-col-mystic'>Mystic</b> attacks.",
+        "attack_type_desc": "Deals <b>{0}&times;</b> damage to {1}.",
+        "attack_type_normal_desc": "Deals <b>1&times;</b> damage to <b class='ba-col-explosion'>Light Armor</b>, <b class='ba-col-pierce'>Heavy Armor</b>, <b class='ba-col-mystic'>Special Armor</b> and <b class='ba-col-elasticarmor'>Elastic Armor</b>.<br>Deals <b>0.5&times;</b> damage to <b>Structures</b>.",
+        "defense_type_desc": "Receives <b>{0}&times;</b> damage from {1} attacks.",
+        "defense_type_normal_desc": "Receives <b>1&times;</b> damage from <b class='ba-col-explosion'>Explosive</b>, <b class='ba-col-pierce'>Piercing</b>, <b class='ba-col-mystic'>Mystic</b> and <b class='ba-col-sonic'>Sonic</b> attacks.",
         "comfort": "Comfort",
         "age": "Age",
         "birthday": "Birthday",
@@ -734,6 +766,11 @@
         "position": "Position",
         "category": "Category",
         "combat_power": "Terrain Strength",
+        "misc": "Misc.",
+        "uses_cover": "Uses Cover",
+        "can_cc": "Can CC",
+        "uses_artifact": "Uses Artifact",
+        "filter_include_weapon_upgrade": "Include Weapon Upgrade",
         "memory_lobby": "Recollection Lobby",
         "memory_lobby_student": "{0}'s Recollection Lobby",
         "memory_lobby_unlock": "Unlocks after reaching relationship rank {0} with {1}",
@@ -820,6 +857,7 @@
         "item_contains_choice": "Rewards a choice of one of the following items",
         "item_is_immediateuse": "※ This item is used immediately when acquired",
         "conquest_area": "Area {0}",
+        "conquest_title": "Area {0}, Team {1}",
         "conquest_occupy": "Occupy",
         "conquest_operate": "Operate",
         "conquest_settlement": "Settlement Acquisition Reward",

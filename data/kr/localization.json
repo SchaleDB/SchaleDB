@@ -8,12 +8,21 @@
         "Pierce": "관통",
         "Mystic": "신비",
         "Normal": "일반",
-        "Siege": "공성"
+        "Sonic": "진동"
     },
     "ArmorType": {
         "LightArmor": "경장갑",
         "HeavyArmor": "중장갑",
         "Unarmed": "특수장갑",
+        "ElasticArmor": "탄력장갑",
+        "Normal": "일반장갑"
+    },
+    "ArmorTypeLong": {
+        "LightArmor": "경장갑",
+        "HeavyArmor": "중장갑",
+        "Unarmed": "특수장갑",
+        "Structure": "구조물",
+        "ElasticArmor": "탄력장갑",
         "Normal": "일반장갑"
     },
     "TacticRole": {
@@ -201,6 +210,22 @@
         "Watch": "손목시계",
         "Artifact": "오파츠"
     },
+    "ArtifactClass": {
+        "10": "Nebra Sky Disk",
+        "11": "Phaistos Disc",
+        "12": "Wolfsegg Steel",
+        "13": "Nimrud Lens",
+        "14": "Mandrake",
+        "15": "Rohonc Codex",
+        "16": "Aether",
+        "17": "Antikythera",
+        "18": "Voynich Manuscript",
+        "19": "Crystal Haniwa",
+        "20": "Totem Pole",
+        "21": "Ancient Battery",
+        "24": "Disco Colgante",
+        "29": "Winnipesaukee Stone"
+    },
     "EnemyTags": {
         "EnemySmall": "소형",
         "EnemyMedium": "중형",
@@ -228,7 +253,8 @@
         "818": "Get set, go! ~키보토스 황륜대제~",
         "819": "성당의 메리 크리스마스 ~구호기사단의 선물~",
         "820": "새해의 아페리티프 ~신년 한판 승부~",
-        "821": "거짓된 성소 공략전"
+        "821": "거짓된 성소 공략전",
+        "822": "아트라하시스의 방주 점령전"
     },
     "StageType": {
         "Campaign": "임무",
@@ -255,7 +281,8 @@
         "Destruction": "돌파 시험"
     },
     "ConquestMap": {
-        "815": "<로스트 파라다이스 리조트> 군도"
+        "815": "<로스트 파라다이스 리조트> 군도",
+        "822": "<아트라하시스의 방주>"
     },
     "StageTitle": {
         "ChaserA": "고가 도로 {0}",
@@ -288,7 +315,8 @@
         "2": "VeryHard",
         "3": "HardCore",
         "4": "Extreme",
-        "5": "Insane"
+        "5": "Insane",
+        "6": "Torment"
     },
     "WeaponPartExpBonus": {
         "WeaponExpGrowthA": "SMG, SG, HG 유형의 무기를 강화할 때 경험치 1.5배 증가.",
@@ -397,7 +425,8 @@
         "Special_SuddenDeath": "와카모의 각인",
         "Special_Stamp": "칭찬 도장",
         "Special_Holiday": "성야의 축복",
-        "Special_SilverBullet": "일반 공격"
+        "Special_SilverBullet": "일반 공격",
+        "Special_CH0187Mod": "Charge"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "구호의 마음가짐",
@@ -494,7 +523,8 @@
         "Special_SuddenDeath": "와카모의 각인",
         "Special_Stamp": "칭찬 도장",
         "Special_Holiday": "성야의 축복",
-        "Special_SilverBullet": "Silver Bullets"
+        "Special_SilverBullet": "Silver Bullets",
+        "Special_CH0187Mod": "Abi-Eshuh Mode Charge"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "정해진 시간마다 HP를 지속적으로 회복합니다.",
@@ -591,7 +621,8 @@
         "Special_SuddenDeath": "A stack of 5 will deal lethal damage to the character.",
         "Special_Stamp": "Reduces allies' EX skill cost and restores own HP when Kokona reaches 5 stacks.",
         "Special_Holiday": "Increases the effects of certain EX skills on this character.",
-        "Special_SilverBullet": "Augments Sakurako's normal attack to deal damage as an additional hit."
+        "Special_SilverBullet": "Augments Sakurako's normal attack to deal damage as an additional hit.",
+        "Special_CH0187Mod": "Allows the use of Toki's EX Skill while in Abi-Eshuh Mode. Abi-Eshuh mode ends once all stacks are consumed."
     },
     "ServerName": {
         "0": "일본",
@@ -690,6 +721,7 @@
         "student_skill_normal": "기본 스킬",
         "student_skill_gearnormal": "기본 스킬+",
         "student_skill_passive": "강화 스킬",
+        "student_skill_weaponpassive": "강화 스킬+",
         "student_skill_sub": "서브 스킬",
         "student_skills_upgrades": "업그레이드",
         "student_skills_materials": "재료 리스트",
@@ -697,9 +729,9 @@
         "student_weapon_rank_2star_desc": "고유 무기 최대 레벨 Lv.30 -> <b>Lv.40</b> / 강화 스킬 업그레이드",
         "student_weapon_rank_3star_desc": "고유 무기 최대 레벨 Lv.40 -> <b>Lv.50</b> / 지형 적성 업그레이드",
         "student_gear_t2_desc": "기본 스킬+ 해제",
-        "attack_type_desc": "{0} 대상에게 <b>2&times;</b> 대미지.<br>{0} 대상에게 <b>0.5&times;</b> 대미지.<br>구조물 대상에게 <b>0.5&times;</b> 대미지.",
+        "attack_type_desc": "{1} 대상에게 <b>{0}&times;</b> 대미지.",
         "attack_type_normal_desc": "<b class='ba-col-explosion'>경장갑</b>, <b class='ba-col-pierce'>중장갑</b>, <b class='ba-col-mystic'>신비장갑</b> 대상에게 <b>1&times;</b> 대미지.<br>구조물 대상에게 <b>0.5&times;</b> 대미지.",
-        "defense_type_desc": "{0} 공격으로부터<b>2&times;</b> 대미지를 받습니다.<br>{1} 공격으로부터 <b>0.5&times;</b> 대미지를 받습니다.",
+        "defense_type_desc": "{1} 공격으로부터<b>{0}&times;</b> 대미지를 받습니다.",
         "defense_type_normal_desc": "<b class='ba-col-explosion'>폭발</b>, <b class='ba-col-pierce'>관통</b>, <b class='ba-col-mystic'>신비</b> 공격으로부터 <b>1&times;</b> 대미지를 받습니다.",
         "comfort": "쾌적도",
         "age": "나이",
@@ -734,6 +766,11 @@
         "position": "포지션",
         "category": "구분",
         "combat_power": "지형전투력",
+        "misc": "Misc.",
+        "uses_cover": "Uses Cover",
+        "can_cc": "Can CC",
+        "uses_artifact": "Uses Artifact",
+        "filter_include_weapon_upgrade": "Include Weapon Upgrade",
         "memory_lobby": "메모리얼 로비",
         "memory_lobby_student": "{0}의 메모리얼 로비",
         "memory_lobby_unlock": "{1}와의 인연 랭크 {0} 도달시 잠금해제",
@@ -820,6 +857,7 @@
         "item_contains_choice": "Rewards a choice of one of the following items",
         "item_is_immediateuse": "※ This item is used immediately when acquired",
         "conquest_area": "{0} 지역",
+        "conquest_title": "{0} 지역 {1}팀",
         "conquest_occupy": "점령",
         "conquest_operate": "운영",
         "conquest_settlement": "정산 획득 보상",
