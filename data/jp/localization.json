@@ -211,20 +211,20 @@
         "Artifact": "オーパーツ"
     },
     "ArtifactClass": {
-        "10": "Nebra Sky Disk",
-        "11": "Phaistos Disc",
-        "12": "Wolfsegg Steel",
-        "13": "Nimrud Lens",
-        "14": "Mandrake",
-        "15": "Rohonc Codex",
-        "16": "Aether",
-        "17": "Antikythera",
-        "18": "Voynich Manuscript",
-        "19": "Crystal Haniwa",
-        "20": "Totem Pole",
-        "21": "Ancient Battery",
-        "24": "Disco Colgante",
-        "29": "Winnipesaukee Stone"
+        "10": "ネブラディスク",
+        "11": "ファイストス円盤",
+        "12": "ヴォルフスエック鋼鉄",
+        "13": "ニムルドレンズ",
+        "14": "マンドレイク",
+        "15": "レヒニッツ写本",
+        "16": "エーテル",
+        "17": "アンティキティラ装置",
+        "18": "ヴォイニッチ手稿",
+        "19": "水晶埴輪",
+        "20": "トーテムポール",
+        "21": "古代の電池",
+        "24": "円盤型ペンダント",
+        "29": "ミステリーストーン"
     },
     "EnemyTags": {
         "EnemySmall": "小型",
@@ -426,7 +426,7 @@
         "Special_Stamp": "「花丸スタンプ」",
         "Special_Holiday": "「聖夜の祝福」",
         "Special_SilverBullet": "通常攻撃",
-        "Special_CH0187Mod": "Charge"
+        "Special_CH0187Mod": "チャージ"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "救護の心構え",
@@ -524,7 +524,7 @@
         "Special_Stamp": "花丸スタンプ",
         "Special_Holiday": "聖夜の祝福",
         "Special_SilverBullet": "シルバーバレット",
-        "Special_CH0187Mod": "Abi-Eshuh Mode Charge"
+        "Special_CH0187Mod": "アビ・エシュフモードチャージ"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "一定間隔でHPを持続的に回復する。",
@@ -622,7 +622,7 @@
         "Special_Stamp": "ココナが5個獲得した時、自身のHPを回復し自身を除く味方のスキルコストを1減少する。",
         "Special_Holiday": "保有キャラクターに対する特定のEXスキルの効果を増加する。",
         "Special_SilverBullet": "サクラコの通常攻撃を追加ダメージ効果を与えるものに強化する。",
-        "Special_CH0187Mod": "Allows the use of Toki's EX Skill while in Abi-Eshuh Mode. Abi-Eshuh mode ends once all stacks are consumed."
+        "Special_CH0187Mod": "アビ・エシュフモード中にトキのEXスキルを使用可能にする。すべてのチャージを使用するとアビ・エシュフモードは終了する。"
     },
     "ServerName": {
         "0": "日本",
@@ -730,9 +730,9 @@
         "student_weapon_rank_3star_desc": "固有武器のMax Level Lv.40 → <b>Lv.50</b> / 地形別戦闘力を強化",
         "student_gear_t2_desc": "ノーマルスキル＋を開放",
         "attack_type_desc": "{1}に<b>{0}倍</b>のダメージを与える。",
-        "attack_type_normal_desc": "すべての防御タイプに<b>1倍</b>のダメージを与える<br>構造物に<b>0.5倍</b>のダメージを与える。",
+        "attack_type_normal_desc": "<b class='ba-col-explosion'>軽装備</b>、<b class='ba-col-pierce'>重装甲</b>、<b class='ba-col-mystic'>特殊装甲</b>および<b class='ba-col-elasticarmor'>弾力装甲</b>に対して<b>1倍</b>のダメージを与える。<br>構造物に<b>0.5倍</b>のダメージを与える。",
         "defense_type_desc": "{1}攻撃から<b>{0}倍</b>のダメージを受ける。",
-        "defense_type_normal_desc": "<b class='ba-col-explosion'>爆発</b>、<b class='ba-col-pierce'>貫通</b>および<b class='ba-col-mystic'>神秘</b>攻撃から<b>1倍</b>のダメージを受ける。",
+        "defense_type_normal_desc": "<b class='ba-col-explosion'>爆発</b>、<b class='ba-col-pierce'>貫通</b>、<b class='ba-col-mystic'>神秘</b>および<b class='ba-col-sonic'>振動</b>攻撃から<b>1倍</b>のダメージを受ける。",
         "comfort": "快適度",
         "age": "年齢",
         "birthday": "誕生日",
@@ -766,11 +766,11 @@
         "position": "ポジション",
         "category": "区分",
         "combat_power": "地形別戦闘力",
-        "misc": "Misc.",
-        "uses_cover": "Uses Cover",
-        "can_cc": "Can CC",
-        "uses_artifact": "Uses Artifact",
-        "filter_include_weapon_upgrade": "Include Weapon Upgrade",
+        "misc": "その他",
+        "uses_cover": "遮蔽物使用",
+        "can_cc": "CC付与",
+        "uses_artifact": "使用オーパーツ",
+        "filter_include_weapon_upgrade": "固有武器による強化を含める",
         "memory_lobby": "メモリアルロビー",
         "memory_lobby_student": "{0}のメモリアルロビー",
         "memory_lobby_unlock": "{1}との絆ランクが{0}になると開放",
@@ -857,13 +857,14 @@
         "item_contains_choice": "以下のアイテムの中から一つを選択して獲得する",
         "item_is_immediateuse": "※ このアイテムは獲得した瞬間に使用される",
         "conquest_area": "エリア{0}",
-        "conquest_title": "エリア{0}、チーム{1}",
+        "conquest_title": "エリア{0}、部隊{1}",
         "conquest_occupy": "占領",
         "conquest_operate": "運営",
+        "conquest_analyze": "分析",
         "conquest_settlement": "精算獲得報酬",
         "school_bonus": "学園編成効果",
         "school_bonus_num_students": "{0}人: ",
-        "school_bonus_conquest": "運営報酬追加獲得+{0}%, 攻撃力増加+{1}%",
+        "school_bonus_conquest": "{2}報酬追加獲得+{0}%, 攻撃力増加+{1}%",
         "tooltip_relationship_bonus": "{0}の絆ランクボーナスを含める",
         "tooltip_equipment_bonus": "装備バフを含める",
         "tooltip_passiveskill_bonus": "パッシブスキルバフを含める",

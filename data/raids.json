@@ -220,7 +220,7 @@
                     "NameKr": "짙은 모래폭풍",
                     "DescKr": "모든 적에게 <d:HIT> 20% 감소, <d:Stability> 50% 감소",
                     "NameTw": "深沙塵暴",
-                    "DescTw": null,
+                    "DescTw": "使所有敵人的<d:HIT>減少20%，穩定性減少50%",
                     "NameCn": "飞沙走石",
                     "DescCn": "所有敌方单位<d:HIT>降低20%，<d:Stability>降低50%",
                     "NameTh": "พายุทรายหนาทึบ",
@@ -1501,8 +1501,8 @@
                             "\nATG提升至100%时，对所有敌方单位造成其最大生命值1000%的伤害",
                             "\nATG提升至100%时，对所有敌方单位造成其最大生命值1000%的伤害",
                             "\nATG提升至100%时，对所有敌方单位造成其最大生命值1000%的伤害",
-                            "\nATG提升至100%时，赋予所有敌方单位<s:Immortal>状态(持续10秒)\n对所有敌方单位造成其最大生命值1000%的伤害\n所有敌方单位<b:HealEffectiveness>提升2000(持续10秒)",
-                            "\nATG提升至100%时，赋予所有敌方单位<s:Immortal>状态(持续10秒)\n对所有敌方单位造成其最大生命值1000%的伤害\n所有敌方单位<b:HealEffectiveness>提升2000(持续10秒)"
+                            "\nATG提升至100%时，赋予所有敌方单位<s:Immortal>状态(持续10秒)\n对所有敌方单位各造成其最大生命值1000%的伤害\n所有敌方单位<b:HealEffectiveness>提升2000(持续10秒)",
+                            "\nATG提升至100%时，赋予所有敌方单位<s:Immortal>状态(持续10秒)\n对所有敌方单位各造成其最大生命值1000%的伤害\n所有敌方单位<b:HealEffectiveness>提升2000(持续10秒)"
                         ]
                     ],
                     "NameTh": "ทะเลทรายทารุณ",
@@ -1746,33 +1746,33 @@
                         ]
                     ],
                     "NameJp": "不浄なる光（聖遺物）",
-                    "DescJp": "聖遺物のHPが0%になるとスキル発動。\n紫色の聖遺物の場合、全てのストライカー、スペシャル生徒の<b:ATK>を25%増加し\n<d:HealEffectiveness>値を7000減少。\nさらにヒエロニムスの<d:DEF>を1500減少。\n発動後、<d:Hieronymus>になった生徒の<b:HealEffectiveness>値を4000増加（10秒間）\n（紫色の聖遺物は通常攻撃、ノーマルスキルのターゲットになりません）",
+                    "DescJp": "聖遺物のHPが0%になるとスキル発動。\n紫色の聖遺物の場合、全てのストライカー、スペシャル生徒の<b:ATK><?1>25%増加し<d:HealEffectiveness>値を7000減少。\nさらにヒエロニムスの<d:DEF>を1500減少。\n発動後、<d:Hieronymus>になった生徒の<b:HealEffectiveness>値を4000増加（10秒間）\n（紫色の聖遺物は通常攻撃、ノーマルスキルのターゲットになりません）",
                     "ParametersJp": [
                         [
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "and <b:DamageRatio> "
+                            "を",
+                            "を",
+                            "を",
+                            "を",
+                            "を",
+                            "を",
+                            "と<b:DamageRatio>が"
                         ]
                     ],
                     "NameKr": "불길한 빛 (성유물)",
-                    "DescKr": "성유물 체력이 0% 가 되면 스킬 발동\n자색 성유물: 모든 스트라이커, 스페셜 학생의 <b:ATK>이 25% 증가하고\n<d:HealEffectiveness>이 7000 만큼 감소한다.\n추가로 예로니무스의 <d:DEF>이 1500 만큼 감소한다.\n이후 <d:Hieronymus>를 받는 아군의 <b:HealEffectiveness>이 4000 만큼 증가한다. (10초간)\n(자색 성유물은 일반 공격, 기본 스킬의 타겟이 되지 않습니다.)",
+                    "DescKr": "성유물 체력이 0% 가 되면 스킬 발동\n자색 성유물: 모든 스트라이커, 스페셜 학생의 <b:ATK><?1> 25% 증가하고\n<d:HealEffectiveness>이 7000 만큼 감소한다.\n추가로 예로니무스의 <d:DEF>이 1500 만큼 감소한다.\n이후 <d:Hieronymus>를 받는 아군의 <b:HealEffectiveness>이 4000 만큼 증가한다. (10초간)\n(자색 성유물은 일반 공격, 기본 스킬의 타겟이 되지 않습니다.)",
                     "ParametersKr": [
                         [
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "and <b:DamageRatio> "
+                            "이",
+                            "이",
+                            "이",
+                            "이",
+                            "이",
+                            "이",
+                            "과 <b:DamageRatio>이"
                         ]
                     ],
                     "NameTw": "不祥之光（聖遺物）",
-                    "DescTw": null,
+                    "DescTw": "當聖遺物體力變成0% 時發動技能\n紫色聖遺物：所有前鋒、特殊學生的<b:ATK>增加25%，\n獲得的恢復效果強化率減少7000。\n額外減少耶羅尼姆斯<d:DEF>1500。\n此後，受<d:Hieronymus>我軍受到的恢復效果強化率增加4000。（10秒間）\n（紫色聖遺物不會成為一般攻擊、基本技能的目標。）",
                     "ParametersTw": [
                         [
                             "",
@@ -1785,7 +1785,7 @@
                         ]
                     ],
                     "NameCn": "不洁之光",
-                    "DescCn": "圣遗物生命值为0%时使用技能\n紫色圣遗物：当前编队内所有学生<b:ATK>提升25%，<d:HealEffectiveness>降低7000\n希罗尼穆斯<d:DEF>降低1500\n当有学生被施加<d:Hieronymus>状态时，该学生<b:HealEffectiveness>提升4000(持续10秒)\n(紫色圣遗物不会成为普通攻击和普通技能的攻击目标)",
+                    "DescCn": "圣遗物生命值为0%时使用技能\n紫色圣遗物：当前编队内所有学生<b:ATK><?1>提升25%，<d:HealEffectiveness>降低7000\n希罗尼穆斯<d:DEF>降低1500\n当有学生被施加<d:Hieronymus>状态时，该学生<b:HealEffectiveness>提升4000(持续10秒)\n(紫色圣遗物不会成为普通攻击和普通技能的攻击目标)",
                     "ParametersCn": [
                         [
                             "",
@@ -1794,11 +1794,11 @@
                             "",
                             "",
                             "",
-                            "and <b:DamageRatio> "
+                            "与<b:DamageRatio>"
                         ]
                     ],
                     "NameTh": "แสงกาลกิณี (เรลิก)",
-                    "DescTh": "เมื่อ HP ของเรลิกเป็น 0% จะเปิดใช้งานสกิล\nเรลิกม่วง : เพิ่ม<b:ATK> ของฝ่ายเรา <b>25%</b>\nลด<d:HealEffectiveness> 7000\nลด<d:DEF>ของไฮโรนีมัสลง 1500\nเป้าหมายที่มี<d:Hieronymus> จะได้รับ<b:HealEffectiveness> เพิ่ม 4000 (เป็นเวลา 10 วินาที)\nเรลิกม่วงจะไม่ตกเป็นเป้าหมายของการโจมตีปกติและสกิลพื้นฐาน",
+                    "DescTh": "เมื่อ HP ของเรลิกเป็น 0% จะเปิดใช้งานสกิล\nเรลิกม่วง : เพิ่ม<b:ATK><?1>ของฝ่ายเรา <b>25%</b>\nลด<d:HealEffectiveness> 7000\nลด<d:DEF>ของไฮโรนีมัสลง 1500\nเป้าหมายที่มี<d:Hieronymus> จะได้รับ<b:HealEffectiveness> เพิ่ม 4000 (เป็นเวลา 10 วินาที)\nเรลิกม่วงจะไม่ตกเป็นเป้าหมายของการโจมตีปกติและสกิลพื้นฐาน",
                     "ParametersTh": [
                         [
                             "",
@@ -1807,11 +1807,11 @@
                             "",
                             "",
                             "",
-                            "and <b:DamageRatio> "
+                            "และ<b:DamageRatio>"
                         ]
                     ],
                     "NameVi": "Ánh sáng tà ác (Thánh vật)",
-                    "DescVi": "Khi HP của thánh vật màu tím đạt 0%, tăng 25% <b:ATK> đối với tất cả học sinh thuộc Striker và Special nhưng giảm <d:HealEffectiveness> của tất cả học sinh xuống <b>7,000</b>. Đồng thời giảm <d:DEF> của Hieronymus xuống <b>1,500</b>.\nSau đó, đối với học sinh bị <d:Hieronymus> sẽ được tăng <b:HealEffectiveness> thêm <b>4,000</b> trong 10s.\nThánh vật màu tím không thể bị tấn công bởi các đòn tấn công thường hoặc kỹ năng cơ bản.",
+                    "DescVi": "Khi HP của thánh vật màu tím đạt 0%, tăng 25% <b:ATK> <?1>đối với tất cả học sinh thuộc Striker và Special nhưng giảm <d:HealEffectiveness> của tất cả học sinh xuống <b>7,000</b>. Đồng thời giảm <d:DEF> của Hieronymus xuống <b>1,500</b>.\nSau đó, đối với học sinh bị <d:Hieronymus> sẽ được tăng <b:HealEffectiveness> thêm <b>4,000</b> trong 10s.\nThánh vật màu tím không thể bị tấn công bởi các đòn tấn công thường hoặc kỹ năng cơ bản",
                     "ParametersVi": [
                         [
                             "",
@@ -1820,7 +1820,7 @@
                             "",
                             "",
                             "",
-                            "and <b:DamageRatio> "
+                            "và <b:DamageRatio> "
                         ]
                     ]
                 },
@@ -1835,7 +1835,13 @@
                     "NameJp": "苦行を経た悟り",
                     "DescJp": "<b:Penetration>を750増加します。",
                     "NameKr": "고행의 깨달음",
-                    "DescKr": "<b:Penetration> 수치가 750 만큼 증가합니다."
+                    "DescKr": "<b:Penetration> 수치가 750 만큼 증가합니다.",
+                    "NameCn": "苦行顿悟",
+                    "DescCn": "<b:Penetration>提升750",
+                    "NameTh": "รู้แจ้งจากทารุณ",
+                    "DescTh": "เพิ่ม<b:Penetration>ของไฮโรนีมัส <b>750</b>.",
+                    "NameVi": "Sự giác ngộ",
+                    "DescVi": "<b:Penetration> của Hieronymus tăng lên <b>750</b>."
                 }
             ],
             "NameEn": "Hieronymus",
@@ -44923,7 +44929,7 @@
             "DescTw": "根據編輯的學生數量，攻擊力和COST恢復速度將有所變化。編輯的學生數越少，數值則增加越多。（最多4名）",
             "NameCn": "少数的精英",
             "DescCn": "当队内仅剩<b>1/2/3/4</b>名学生时，提升我方学生300%/150%/100%/50%<b:ATK>与<b>3,500/2,450/1,400/1,050</b><b:CostRegen>。",
-            "NameTh": "หัวกระทิที่ถูกเลือก",
+            "NameTh": "น้อยคน มากความสามารถ",
             "DescTh": "เพิ่ม<b:ATK> 300%/150%/100%/50% และ<b:CostRegen> <b>3,500/2,450/1,400/1,050</b> ให้แก่ฝ่ายเราหากในทีมมีตัวละครจำนวน <b>1/2/3/4</b> คน",
             "NameVi": "少数精鋭",
             "DescVi": "編成した生徒数によって攻撃力とコスト回復速度が変化します。編成した生徒数が少ないほど、より多くの数値が増加します。（最大4人まで）"
@@ -45126,7 +45132,7 @@
             "NameCn": "火傷、悪寒、中毒、応援の熱気ダメージ増加",
             "DescCn": "敵に与えられる火傷、悪寒、中毒、応援の熱気のダメージが増加します。敵のHPが増加します。",
             "NameTh": "เพิ่มความเสียหายเผาไหม้,หนาวสั่น,พิษและร้อนแรง",
-            "DescTh": "เพิ่มความเสียหายที่เกิดจากเอฟเฟกต์เผา<d:Burn>, <d:Chill>, <d:Poison> และ <d:Cheerleading>\nศัตรูทั้งหมดจะมี<b:MAXHP>เพิ่มขึ้น",
+            "DescTh": "เพิ่มความเสียหายที่เกิดจากเอฟเฟกต์<d:Burn>, <d:Chill>, <d:Poison> และ <d:Cheerleading>\nศัตรูทั้งหมดจะมี<b:MAXHP>เพิ่มขึ้น",
             "NameVi": "火傷、悪寒、中毒、応援の熱気ダメージ増加",
             "DescVi": "敵に与えられる火傷、悪寒、中毒、応援の熱気のダメージが増加します。敵のHPが増加します。"
         },

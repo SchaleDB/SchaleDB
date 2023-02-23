@@ -5040,7 +5040,7 @@ function loadStage(id) {
 
                 if (mode == "Conquest") {
                     if (el == "Default" && !stage.SubStage) {
-                        labelText = translateUI('conquest_operate')
+                        labelText = getConquestManageString(stage.EventId)
                     } else if (el == "FirstClear" || stage.SubStage) {
                         labelText = translateUI('conquest_occupy')
                     }
@@ -5085,7 +5085,7 @@ function loadStage(id) {
                 stage.SchoolBuff[0].forEach(school => {
                     html += `<span class="school-bonus-icon"><img class="invert-light" src="images/schoolicon/School_Icon_${school.toUpperCase()}_W.png"></span>`
                 })
-                if (html != "") schoolHtml += `<div class="p-2"><p class="mb-2 text-center">${translateUI('conquest_operate')}</p><div class="school-bonus-list">${html}</div></div>`
+                if (html != "") schoolHtml += `<div class="p-2"><p class="mb-2 text-center">${getConquestManageString(stage.EventId)}</p><div class="school-bonus-list">${html}</div></div>`
                 html = ""
                 stage.SchoolBuff[1].forEach(school => {
                     html += `<span class="school-bonus-icon"><img class="invert-light" src="images/schoolicon/School_Icon_${school.toUpperCase()}_W.png"></span>`
@@ -5097,7 +5097,7 @@ function loadStage(id) {
                     bonusText += `<div class="ba-panel-separator my-2"></div>`
 
                     for (let i = 1; i <= 3; i++) {
-                        bonusText += `<p class="mb-0"><b>${translateUI("school_bonus_num_students", [2*i])}</b>${translateUI("school_bonus_conquest", [40*i, 50*i])}</p>`
+                        bonusText += `<p class="mb-0"><b>${translateUI("school_bonus_num_students", [2*i])}</b>${translateUI("school_bonus_conquest", [40*i, 50*i, getConquestManageString(stage.EventId)])}</p>`
                     }
 
                     $(`#conquest-school-bonus-list`).append(bonusText)
@@ -5220,7 +5220,7 @@ function loadStage(id) {
                     if (i == 0) {
                         currencyType = ` (${translateUI('conquest_occupy')})`
                     } else {
-                        currencyType = ` (${translateUI('conquest_operate')})`
+                        currencyType = ` (${getConquestManageString(stage.EventId)})`
                     }
                 }
 
@@ -8355,6 +8355,17 @@ function drawConquestHexamap(conquest, mapId, container) {
         $(container).append(html)
         $('.tile-icon, .tile-item').tooltip({html: true})
     })
+}
+
+function getConquestManageString(eventId) {
+    switch (eventId) {
+        case 815:
+            return translateUI('conquest_operate')
+        case 822:
+            return translateUI('conquest_analyze')
+        default:
+            return translateUI('conquest_operate')
+    }
 }
 
 function toggleOwned() {
