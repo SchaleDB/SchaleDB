@@ -75,7 +75,6 @@ let data = {}
 
 let json_list = {
     common: getCacheVerResourceName("./data/common.min.json"),
-    raids: getCacheVerResourceName("./data/raids.min.json"),
     stages: getCacheVerResourceName("./data/stages.min.json"),
     crafting: getCacheVerResourceName(`./data/crafting.min.json`),
     config: getCacheVerResourceName("./data/config.min.json")
@@ -92,6 +91,7 @@ function getLanguageJSONList(lang) {
         equipment: getCacheVerResourceName(`./data/${lang}/equipment.min.json`),
         currency: getCacheVerResourceName(`./data/${lang}/currency.min.json`),
         summons: getCacheVerResourceName(`./data/${lang}/summons.min.json`),
+        raids: getCacheVerResourceName(`./data/${lang}/raids.min.json`),
     }
 }
 
@@ -116,7 +116,7 @@ const sort_functions = {
     AccuracyPoint: (a,b) => (b.AccuracyPoint - a.AccuracyPoint)*search_options["sortby_dir"],
     DodgePoint: (a,b) => (b.DodgePoint - a.DodgePoint)*search_options["sortby_dir"],
     EXCost: (a,b) => (find(b.Skills, "SkillType", "ex")[0].Cost[4] - find(a.Skills, "SkillType", "ex")[0].Cost[4])*search_options["sortby_dir"],
-    EXHits: (a,b) => (find(b.Skills, "SkillType", "ex")[0].DamageDist.length - find(a.Skills, "SkillType", "ex")[0].DamageDist.length)*search_options["sortby_dir"],
+    EXHits: (a,b) => (getSkillHits(find(b.Skills, "SkillType", "ex")[0]) - getSkillHits(find(a.Skills, "SkillType", "ex")[0]))*search_options["sortby_dir"],
 }
 
 const itemSortFunctions = {
@@ -1933,7 +1933,7 @@ class EnemyFinder {
             const mapName = getLocalizedString('ConquestMap', ''+conquestMap.EventId % 10000)
             conquestMap.Maps.filter(m => m.Difficulty == "VeryHard").forEach(challengeMap => {
                 challengeMap.Tiles.filter(t => t.Type == "Battle").forEach(tile => {
-                    const stage = find(data.stages.Conquest, "Id", tile.Id)[0]
+                    const stage = find(data.stages.Conquest, "Id", tile.StageId)[0]
                     stage.Formations.forEach((formation) => {
                         formation.EnemyList.forEach(enemyId => {
                             const enemy = find(data.enemies, 'Id', enemyId)[0]
@@ -2167,35 +2167,65 @@ class SkillDamageInfo {
 
             if (effect.Type.startsWith('DMG') || effect.Type == "FormChange") {
                 let scaleTotal
-                let hitTotal
+                let hitTotal // this is the total number of hits
+                let hitFullDamage = false // hits are full (10000) damage hits
                 let scaleToUse = effect.Scale
 
                 if (effect.SubstituteCondition !== undefined) {
                     if (this.checkSubstitutionCondition(effect.SubstituteCondition)) {
                         scaleToUse = effect.SubstituteScale
                     }
-                } 
-
-                if (effect.Type == 'DMGMulti' || effect.Type == 'DMGZone' ) {
-                    scaleTotal = 0
-                    let distTotal = 0
-                    this.skill.DamageDist.forEach(d => {scaleTotal += (d/10000) * scaleToUse[this.skillLevel-1];distTotal+=d})
-                    hitTotal = this.skill.DamageDist.length
-                } else {
-                    scaleTotal = scaleToUse[this.skillLevel-1]
-                    hitTotal = 1
                 }
+
+                switch (effect.Type) {
+                    case "FormChange":
+                        if (scaleToUse === undefined) {
+                            scaleTotal = 10000
+                        } else {
+                            scaleTotal = scaleToUse[this.skillLevel-1]
+                        }
+                        hitTotal = effect.Hits.length
+                        break
+                    
+                    case "DMGMulti":
+                        scaleTotal = scaleToUse[this.skillLevel-1]
+                        hitTotal = effect.Hits.length
+                        if (effect.Hits.find(d => d == 10000) !== undefined) hitFullDamage = true
+                        break
+                         
+                    case "DMGZone":
+                        scaleTotal = scaleToUse[this.skillLevel-1]
+                        hitFullDamage = true
+                        if (effect.ZoneDuration) {
+                            hitTotal = Math.ceil(effect.ZoneDuration / effect.ZoneHitInterval)
+                            if (effect.Hits) hitTotal *= effect.Hits.length
+                        } else {
+                            hitTotal = effect.HitFrames.length
+                        }
+                        break
+
+                    default:
+                        scaleTotal = scaleToUse[this.skillLevel-1]
+                        hitTotal = 1
+                        break
+                }
+
+                const hitsSub = hitFullDamage ? 1 : hitTotal
+                const hitsFull = hitFullDamage ? hitTotal : 1
 
                 const sourceStat = effect.SourceStat !== undefined ? effect.SourceStat : 'AttackPower'
                 const critChance = studentStats.getCriticalRate(enemyStats.getTotal("CriticalChanceResistPoint"))
                 const critBonusMod = ((studentStats.getTotal('CriticalDamageRate') - enemyStats.getTotal('CriticalDamageResistRate')) / 10000) - 1
                 const stabMod = studentStats.getStabilityMinDamageMod()
-                const baseDmgMax = studentStats.calculateDamage(enemyStats, scaleTotal / hitTotal, sourceStat, terrain, 0, ("IgnoreDef" in effect ? effect.IgnoreDef[this.skillLevel-1] : 10000))
+                const baseDmgMax = studentStats.calculateDamage(enemyStats, (scaleTotal / hitsSub), sourceStat, terrain, 0, ("IgnoreDef" in effect ? effect.IgnoreDef[this.skillLevel-1] : 10000))
                 const critBonusDmgMax = baseDmgMax * critBonusMod
                 const hitRate = studentStats.getHitChance(enemyStats.getTotal("DodgePoint"))
                 const suffix = (effect.Type == 'DMGDot' ? ' / ' + translateUI('time_seconds', [effect.Period / 1000]) : "")
 
-                $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-scaling"]`).text(`${parseFloat((scaleTotal/100).toFixed(2)).toLocaleString()}%`)
+                let scalingText = `${parseFloat((scaleTotal/100).toFixed(2)).toLocaleString()}%`
+                if (hitsFull > 1) scalingText += ` &times; ${hitsFull}`
+                if (hitsSub > 1) scalingText += ` / ${hitsSub} hits`
+                $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-scaling"]`).html(scalingText)
                 if (effect.CriticalCheck != 'Always') {
                     $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-dmg-range"]`).text(`${parseInt(baseDmgMax*stabMod).toLocaleString()} ~ ${parseInt(baseDmgMax).toLocaleString()}${suffix}`)
                 }
@@ -2203,9 +2233,9 @@ class SkillDamageInfo {
 
                 let expDmgMax
                 if (effect.CriticalCheck == 'Always') {
-                    expDmgMax = (baseDmgMax + critBonusDmgMax) * hitTotal
+                    expDmgMax = (baseDmgMax + critBonusDmgMax) * hitsSub * hitsFull
                 } else {
-                    expDmgMax = (baseDmgMax + (critBonusDmgMax * critChance)) * hitTotal
+                    expDmgMax = (baseDmgMax + (critBonusDmgMax * critChance)) * hitsSub * hitsFull
                 }
                 const expDmgMin = expDmgMax * stabMod
                 const avgDmg = (expDmgMin + expDmgMax) * hitRate / 2
@@ -2219,11 +2249,11 @@ class SkillDamageInfo {
                 if (this.skill.SkillType == 'autoattack' || effect.Type == "FormChange") {
                     const speedMod = 10000 / studentStats.getTotal('AttackSpeed')
 
-                    const attackFrames = Math.ceil(effect.AttackFrames.AttackIngDuration * speedMod)
-                    const attackDelayFrames = Math.ceil(effect.AttackFrames.AttackBurstRoundOverDelay * speedMod)
-                    const reloadFrames = Math.ceil(effect.AttackFrames.AttackReloadDuration * speedMod)
-                    const startDelay = Math.ceil(effect.AttackFrames.AttackStartDuration * speedMod)
-                    const endDelay = Math.ceil(effect.AttackFrames.AttackEndDuration * speedMod)
+                    const attackFrames = Math.ceil(effect.Frames.AttackIngDuration * speedMod)
+                    const attackDelayFrames = Math.ceil(effect.Frames.AttackBurstRoundOverDelay * speedMod)
+                    const reloadFrames = Math.ceil(effect.Frames.AttackReloadDuration * speedMod)
+                    const startDelay = Math.ceil(effect.Frames.AttackStartDuration * speedMod)
+                    const endDelay = Math.ceil(effect.Frames.AttackEndDuration * speedMod)
 
                     const attackCount = studentStats.getTotal('AmmoCount') / student.AmmoCost
 
@@ -2233,8 +2263,6 @@ class SkillDamageInfo {
                     const reloadFramesString = `<b>${translateUI('time_seconds_frames', [MathHelper.toFixedFloat(reloadFrames / 30, 2), reloadFrames])}</b>`
                     const endDelayString = `<b>${translateUI('time_seconds_frames', [MathHelper.toFixedFloat(endDelay / 30, 2), endDelay])}</b>`
                     const ignoreDelayMod = effect.IgnoreDelay !== undefined ? effect.IgnoreDelay[this.skillLevel-1] + 1 : 1
-                    
-                    // $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-auto-duration"]`).text(`${parseFloat(((attackFrames / 30) + (attackDelayFrames / 30)).toFixed(2))}s / burst`).tooltip('dispose').tooltip({title: getBasicTooltip(`Attack Duration: <b>${parseFloat((attackFrames / 30).toFixed(2))}s (${attackFrames} frames)</b>\nAttack Delay: <b>${parseFloat((attackDelayFrames / 30).toFixed(2))}s (${attackDelayFrames} frames)</b>`), placement: 'top', html: true})
 
                     $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-auto-duration"]`).text(`${translateUI('time_seconds', [MathHelper.toFixedFloat((attackFrames + attackDelayFrames) / 30, 2)])} / ${translateUI('normalattack_burst')}`).tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('dmginfo_rate_of_fire_tooltip', [attackFramesString, attackDelayFramesString])), placement: 'top', html: true})
                     
@@ -2256,7 +2284,11 @@ class SkillDamageInfo {
             } else if (effect.Type.startsWith('Heal')) {
                 const healTotal = studentStats.calculateHealing(effect.Scale[this.skillLevel-1] / 10000)
                 const suffix = (effect.Type == 'HealDot' ? ' / ' + translateUI('time_seconds', [effect.Period / 1000]) : "")
-                $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-scaling"]`).text(`${parseFloat((effect.Scale[this.skillLevel-1]/100).toFixed(2)).toLocaleString()}%`)
+
+                let scalingText = `${parseFloat((effect.Scale[this.skillLevel-1]/100).toFixed(2)).toLocaleString()}%`
+                if (effect.Type == "HealZone") scalingText += ` &times; ${effect.HitFrames.length}`
+
+                $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-scaling"]`).html(scalingText)
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-heal-total"]`).html(`<span class="text-heal">${healTotal.toLocaleString()}</span>` + suffix)
             } else if (effect.Type == 'Shield') {
                 const shieldTotal = studentStats.calculateHealing(effect.Scale[this.skillLevel-1] / 10000)
@@ -2283,7 +2315,7 @@ class SkillDamageInfo {
             $(`#skill-info-${this.skill.SkillType} .skill-cost`).text(this.skill.Cost[this.skillLevel-1])
         }
         $(`#skill-info-${this.skill.SkillType} .ba-slider-label.skill-level`).html(this.skillLevel == this.maxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${this.skillLevel}`)
-        $(`#skill-info-${this.skill.SkillType} .skill-description`).html(getSkillText(this.skill.Desc, this.skill.Parameters, this.skillLevel, student.BulletType, [], 1, false))
+        $(`#skill-info-${this.skill.SkillType} .skill-description`).html(getSkillText(this.skill, this.skillLevel, {renderBuffs: false, renderSkillHits: false, bulletType: student.BulletType}))
         calculateSkills()
     }
 
@@ -2350,7 +2382,7 @@ class SkillDamageInfo {
             html += `<small class="text-italic">${translateUI(`student_skill_${this.skill.SkillType}`)}</small>`
         }
         html += `
-        <p class="mb-0 mt-1 skill-description" style="font-size: 0.875rem; line-height: 1rem;">${getSkillText(this.skill.Desc, this.skill.Parameters, this.skillLevel, student.BulletType, [], 1, false)}</p>
+        <p class="mb-0 mt-1 skill-description" style="font-size: 0.875rem; line-height: 1rem;">${getSkillText(this.skill, this.skillLevel, {renderBuffs: false, renderSkillHits: false, bulletType: student.BulletType})}</p>
                 </div>
             </div>
             <div class="skill-calculation mb-2">`
@@ -2360,21 +2392,18 @@ class SkillDamageInfo {
             html += `<div data-effect-index="${index}">`
             if (effect.Type.startsWith('DMG') || effect.Type == "FormChange") {
                 html += this.addSeparator()
+                const formChangeIcon = effect.Type == "FormChange" && !effect.HideFormChangeIcon ? getBuffTag('Special', 'FormChange', {tooltip: false, overrideName: getLocalizedString("BuffNameLong", "Special_FormChange")}) + ' ' : ''
 
                 if (effect.Type != 'DMGDot' && effect.Type != 'DMGByHit') {
 
                     const sourceStat = effect.SourceStat !== undefined ? effect.SourceStat : 'AttackPower'
-                    html += this.addStaticRow(index, `${getLocalizedString("Stat", sourceStat)} %`, '', 'scaling') 
-
-                    if (effect.Type == 'DMGMulti' || effect.Type == 'DMGZone') {
-                        html += this.addStaticRow(index, translateUI('dmginfo_hit_count'), this.skill.DamageDist.length, 'hit-count')
-                    }
+                    html += this.addStaticRow(index, `${formChangeIcon} ${getLocalizedString("Stat", sourceStat)} %`, '', 'scaling') 
 
                     if ("IgnoreDef" in effect) {
                         html += this.addDynamicRow(index, translateUI('dmginfo_ignore_def'), (ef) => {return `${(10000 - ef.IgnoreDef[this.skillLevel-1])/100}%`}, 'ignore-def') 
                     }
 
-                    if (effect.Type == 'DMGMulti' || effect.Type == 'DMGZone') {
+                    if (effect.Type == 'DMGMulti' || effect.Type == 'DMGZone' || (effect.Type == "FormChange" && effect.Hits.length > 0)) {
                         if (effect.CriticalCheck != 'Always') {
                             html += this.addStaticRow(index, translateUI('dmginfo_hit_avg'), '', 'dmg-range')
                         }
@@ -2398,9 +2427,9 @@ class SkillDamageInfo {
                 if (this.skill.SkillType == 'autoattack' || effect.Type == "FormChange") {
                     html += this.addSeparator()
 
-                    html += this.addStaticRow(index, translateUI('dmginfo_rate_of_fire'), '', 'auto-duration', 'has-tooltip')
-                    html += this.addStaticRow(index, translateUI('dmginfo_reload_time'), '', 'auto-reload', 'has-tooltip')
-                    html += this.addStaticRow(index, translateUI('dmginfo_avg_dps'), '', 'auto-dps')
+                    html += this.addStaticRow(index, formChangeIcon + translateUI('dmginfo_rate_of_fire'), '', 'auto-duration', 'has-tooltip')
+                    html += this.addStaticRow(index, formChangeIcon + translateUI('dmginfo_reload_time'), '', 'auto-reload', 'has-tooltip')
+                    html += this.addStaticRow(index, formChangeIcon + translateUI('dmginfo_avg_dps'), '', 'auto-dps')
                 }
 
             } else if (effect.Type.startsWith('Heal')) {
@@ -2412,9 +2441,9 @@ class SkillDamageInfo {
                     html += this.addStaticRow(index, `${regenEffectIcon} ${translateUI('dmginfo_heal')}`, '', 'heal-total')
                 } else {
                     html += this.addStaticRow(index, `${getLocalizedString("Stat", "HealPower")} %`, '', 'scaling') 
-                    if (effect.Type == 'HealZone') {
-                        html += this.addStaticRow(index, translateUI('dmginfo_heal_count'), effect.HitFrames.length, 'hit-count')
-                    }
+                    // if (effect.Type == 'HealZone') {
+                    //     html += this.addStaticRow(index, translateUI('dmginfo_heal_count'), effect.HitFrames.length, 'hit-count')
+                    // }
     
                     html += this.addStaticRow(index, translateUI('dmginfo_heal_amount'), '', 'heal-total', '') 
                 }
@@ -3477,7 +3506,7 @@ function updateStudentList(updateSortMethod = false) {
                     }
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else if (search_options["sortby"] == "EXHits") {
-                    const hits = find(el.Skills, "SkillType", "ex")[0].DamageDist.length
+                    const hits = getSkillHits(find(el.Skills, "SkillType", "ex")[0])
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(hits).toggleClass('smalltext', false).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else {
@@ -4205,86 +4234,25 @@ function initCharacterSkillInfo() {
     skillInfoCollection = []
 
     if (statPreviewSelectedChar == 0) {
-        if (student.SquadType == 'Main' && student.Id != 10055) {
-            const autoAttackSkill = {
-                SkillType: "autoattack",
-                Name: translateUI('skill_normalattack'),
-                Parameters: [["100%"]],
-                DamageDist: student.DamageDist,
-                Effects: [{Type: (student.DamageDist.length > 1 ? "DMGMulti" : "DMGSingle"), Scale: [10000], AttackFrames: student.AttackFrames, CriticalCheck: student.AttackCriticalCheck !== undefined ? student.AttackCriticalCheck : "Check" }],
-            }
-    
-            switch (student.WeaponType) {
-                case "GL":
-                case "RL":
-                case "Cannon":
-                    autoAttackSkill["Desc"] = translateUI('skill_normalattack_circle')
-                    autoAttackSkill["Icon"] = "COMMON_SKILLICON_CIRCLE"
-                    break
-                case "RG":
-                    autoAttackSkill["Desc"] = translateUI('skill_normalattack_line')
-                    autoAttackSkill["Icon"] = "COMMON_SKILLICON_LINE"
-                    break
-                case "FT":
-                    autoAttackSkill["Desc"] = translateUI('skill_normalattack_fan')
-                    autoAttackSkill["Icon"] = "COMMON_SKILLICON_FAN"
-                    break
-                default:
-                    autoAttackSkill["Desc"] = translateUI('skill_normalattack_target')
-                    autoAttackSkill["Icon"] = "COMMON_SKILLICON_TARGET"
-                    break
-            }
-    
-            skillInfoCollection.push(new SkillDamageInfo(autoAttackSkill, skillInfoContainer))
-        }
 
-        //Skills
         student.Skills.forEach((skill) => {
             if ('Effects' in skill) {
                 let show = false
                 skill.Effects.forEach(eff => {
                     if (eff.Type.startsWith('DMG') || eff.Type.startsWith("Heal") || eff.Type == "Shield" || eff.Type == "FormChange" || eff.Type == "CrowdControl") show = true
                 })
-                if (show) skillInfoCollection.push(new SkillDamageInfo(skill, skillInfoContainer))
+                if (show) {
+                    if (skill.SkillType == "autoattack") addNormalAttackSkillText(skill, student.WeaponType)
+                    skillInfoCollection.push(new SkillDamageInfo(skill, skillInfoContainer))
+                }
             }
         })
 
     } else {
         const summon = find(data.summons, 'Id', student.Summons[0].Id)[0]
-        if ("DamageDist" in summon && summon.DamageDist.length > 0) {
-            const summonAutoAttackSkill = {
-                SkillType: "autoattack",
-                Name: translateUI('skill_normalattack'),
-                Parameters: [["100%"]],
-                DamageDist: summon.DamageDist,
-                Effects: [{Type: (summon.DamageDist.length > 1 ? "DMGMulti" : "DMGSingle"), Scale: [10000], AttackFrames: summon.AttackFrames}],
-                IsSummonSkill: true
-            }
-            switch (student.WeaponType) {
-                case "GL":
-                case "RL":
-                case "Cannon":
-                    summonAutoAttackSkill["Desc"] = translateUI('skill_normalattack_circle')
-                    summonAutoAttackSkill["Icon"] = "COMMON_SKILLICON_CIRCLE"
-                    break
-                case "RG":
-                    summonAutoAttackSkill["Desc"] = translateUI('skill_normalattack_line')
-                    summonAutoAttackSkill["Icon"] = "COMMON_SKILLICON_LINE"
-                    break
-                case "FT":
-                    summonAutoAttackSkill["Desc"] = translateUI('skill_normalattack_fan')
-                    summonAutoAttackSkill["Icon"] = "COMMON_SKILLICON_FAN"
-                    break
-                default:
-                    summonAutoAttackSkill["Desc"] = translateUI('skill_normalattack_target')
-                    summonAutoAttackSkill["Icon"] = "COMMON_SKILLICON_TARGET"
-                    break
-            }
-    
-            skillInfoCollection.push(new SkillDamageInfo(summonAutoAttackSkill, skillInfoContainer))
-        }
     
         summon.Skills.forEach((skill) => {
+            if (skill.SkillType == "autoattack") addNormalAttackSkillText(skill, student.WeaponType)
             skillInfoCollection.push(new SkillDamageInfo(skill, skillInfoContainer))
         })
     
@@ -4292,6 +4260,31 @@ function initCharacterSkillInfo() {
 
     if (skillInfoCollection.length == 0) {
         skillInfoContainer.html(`<div class="d-flex px-2 my-2 justify-content-center text-center">${translateUI("skillinfo_empty")}</div>`)
+    }
+}
+
+function addNormalAttackSkillText(skill, weaponType) {
+    skill["Name"] = translateUI('skill_normalattack')
+    skill["Parameters"] = [["100%"]]
+    switch (weaponType) {
+        case "GL":
+        case "RL":
+        case "Cannon":
+            skill["Desc"] = translateUI('skill_normalattack_circle')
+            skill["Icon"] = "COMMON_SKILLICON_CIRCLE"
+            break
+        case "RG":
+            skill["Desc"] = translateUI('skill_normalattack_line')
+            skill["Icon"] = "COMMON_SKILLICON_LINE"
+            break
+        case "FT":
+            skill["Desc"] = translateUI('skill_normalattack_fan')
+            skill["Icon"] = "COMMON_SKILLICON_FAN"
+            break
+        default:
+            skill["Desc"] = translateUI('skill_normalattack_target')
+            skill["Icon"] = "COMMON_SKILLICON_TARGET"
+            break
     }
 }
 
@@ -4596,7 +4589,7 @@ function loadRaid(raidId) {
     
             changeRaidDifficulty(raid_difficulty)
             //populate raid seasons
-            raidSeasons = find(data.raids["SeasonReward"+(regionID == 0 ? "Jp" : "Global")], "RaidId", raid.Id)
+            raidSeasons = find(data.raids["RaidSeasons"][regionID]["Seasons"], "RaidId", raid.Id)
             let optionsHtml = `<option value="0" disabled selected>${translateUI('raid_season_select')}</option>`
             const dateOptions = {year: "numeric", month: "numeric", day: "numeric"}
             raidSeasons.forEach((season, index) => {
@@ -4671,10 +4664,12 @@ function loadRaid(raidId) {
 }
 
 function loadRaidSeasonRewards(el) {
-    const season = find(data.raids["SeasonReward"+(regionID == 0 ? "Jp" : "Global")], "Season", $(el).val())[0]
+    const season = find(data.raids["RaidSeasons"][regionID]["Seasons"], "Season", $(el).val())[0]
     if (season) {
         let html = ""
-        season.Rewards.forEach(([points, rewards]) => {
+        const rewardSet = data.raids["RaidSeasons"][regionID]["RewardSets"][`${season.RewardSet}`]
+        rewardSet.forEach(([points, rewards], rewardIndex) => {
+            if (rewardIndex > season.RewardSetMax) return
             if (html != "") html += '<div class="ba-panel-separator"></div>'
             html += `<div class="d-flex"><span class="reward-point">${points.toLocaleString() + " Pt"}</span><div class="season-rewards">`
             rewards.forEach(([itemId, amount]) => {
@@ -4749,7 +4744,7 @@ function changeTimeAttackDifficulty(difficultyId) {
     raid.Rules[difficultyId].forEach(id => {
         rule = find(data.raids.TimeAttackRules, 'Id', id)[0]
         if (rulesHTML != '') rulesHTML += '<div class="ba-panel-separator"></div>'
-        rulesHTML += `<div class="d-flex flex-row align-items-start mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/timeattack/${rule.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(rule, 'Name')}</h4><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(rule, 'Desc'), [], 0, 'raid')}</p></div></div></div>`
+        rulesHTML += `<div class="d-flex flex-row align-items-start mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/timeattack/${rule.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(rule, 'Name')}</h4><p class="mt-1 mb-2 p-1">${getSkillText({Desc: getTranslatedString(rule, 'Desc'), Parameters: []}, 0, {})}</p></div></div></div>`
     })
     $('#ba-timeattack-rules').empty().html(rulesHTML)
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -4842,7 +4837,7 @@ function populateRaidSkills(container, skills, difficulty) {
         }
 
         if (skillsHTML != '') skillsHTML += '<div class="ba-panel-separator"></div>'
-        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${raidSkill.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(raidSkill, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${skillType}</p>${raidSkill.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG:</i> '+raidSkill.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(getTranslatedString(raidSkill, 'Desc'), raidSkill["Parameters"+userLang], difficulty+1, 'raid')}</p>`
+        skillsHTML += `<div class="d-flex flex-row align-items-center mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/raid/skill/${raidSkill.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(raidSkill, 'Name')}</h4></div><div class="mt-1"><p class="d-inline" style="font-style: italic;">${skillType}</p>${raidSkill.ATGCost > 0 ? '<p class="d-inline text-bold"> ・ <i>ATG:</i> '+raidSkill.ATGCost+'</p>' : ''}</div></div></div><p class="mt-1 mb-2 p-1">${getSkillText(raidSkill, difficulty+1, {emphasiseChange: true})}</p>`
     })
     $(container).empty().html(skillsHTML).find('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').tooltip({html: true})
 }
@@ -4963,11 +4958,34 @@ function loadStage(id) {
             const eventId = parseInt(String(id).slice(0,3))
             if (conquest_events.includes(eventId)) {
                 mode = 'Conquest'
-                stage = findOrDefault(data.stages.Conquest, "Id", id, 8153902)[0]
+
+                //try stageId first
+                stages = find(data.stages.Conquest, "Id", id)
+
+                if (stages.length == 0) {
+                    //try tileid
+                    tiles = []
+                    data.stages.ConquestMap.forEach(conquestMap => {
+                        conquestMap.Maps.forEach(map => {
+                            tiles.push(...find(map.Tiles, "Id", id))
+                        })
+                    })
+
+                    stages = find(data.stages.Conquest, "Id", tiles.length > 0 ? tiles[0].StageId : 81511211)
+                    
+                }
+                
+                stage = stages[0]
+
                 loadedStage = stage
                 if (loadedStageList != '' + stage.EventId % 10000) populateEventStageList(stage.EventId)
+                const tab = `#ba-conquest-step-${stage.Difficulty == "VeryHard" ? "c" : "n"}${stage.Step}`
+                if (!$(tab).hasClass("active")) {
+                    $(tab).tab('show').trigger('click')
+                }
                 $('.ba-stage-map-tile').removeClass('selected')
-                $(`.ba-stage-map-tile[data-stage-id="${id}"]`).addClass('selected')
+                $(`.ba-stage-map-tile[data-stage-id="${stage.Id}"]`).addClass('selected')
+
             } else {
                 mode = 'Event'
                 stage = findOrDefault(data.stages.Event, "Id", id, 8012301)[0]
@@ -5012,22 +5030,7 @@ function loadStage(id) {
         }
 
         $('#ba-stage-name').html(getStageName(stage, mode))
-
-        let stageTitle = getStageTitle(stage, mode)
-        if (stageTitle == "" && mode == "Conquest") {
-            if (stage.EnemyType == "Challenge") {
-                stageTitle = `Challenge`
-            } else {
-                stageTitle = translateUI('conquest_title',[stage.Step+1, stage.Team.replace('Team', '')])
-                if (stage.EnemyType == "MiddleBoss") {
-                    stageTitle += ` Leader`
-                } else if (stage.EnemyType == "Boss") {
-                    stageTitle += ` Boss`
-                }
-            }
-        }
-
-        $('#ba-stage-title').html(stageTitle)
+        $('#ba-stage-title').html(getStageTitle(stage, mode))
         $('#ba-stage-level').text(translateUI('rec_level') + ' Lv.'+ stage.Level)
         $('#ba-stage-terrain-img').attr('src', `images/ui/Terrain_${stage.Terrain}.png`)
         $('#ba-stage-fog').toggle(mode == "Campaign" && stage.Difficulty == 1)
@@ -5233,7 +5236,7 @@ function loadStage(id) {
         $('#ba-stage-map-enemies').html(`<p class="grid-text">${translateUI('maptile_enemy_default_msg')}</p>`)
         $('#stage-select-'+stage.Id).addClass('selected')
 
-        finalizeLoad($('#ba-stage-title').text(), 'stage', id, 'View Stage', id)
+        finalizeLoad($('#ba-stage-title').text(), 'stage', stage.Id, 'View Stage', id)
 
     } else {
         loadModule('stages', id)
@@ -5982,7 +5985,10 @@ function recalculateStats() {
         $('.stat-StabilityPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
     
         if (stats.getTotalString('AmmoCount') != 0) {
-            $('.stat-AmmoCount .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(getNormalAttackHitsText((statPreviewSelectedChar > 0 ? summon.DamageDist : student.DamageDist), stats.getTotalString('AmmoCost'), (statPreviewSelectedChar > 0 ? summon.WeaponType : student.WeaponType), student.BulletType.toLowerCase())), html: true, placement: 'top'})
+            const autoAttackSkill = (statPreviewSelectedChar > 0 ? summon : student).Skills.find(s => s.SkillType == "autoattack")
+            if (autoAttackSkill) {
+                $('.stat-AmmoCount .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(getNormalAttackHitsText(autoAttackSkill.Effects[0].Hits, stats.getTotalString('AmmoCost'), (statPreviewSelectedChar > 0 ? summon.WeaponType : student.WeaponType), student.BulletType.toLowerCase())), html: true, placement: 'top'})
+            }
         }
 
     }
@@ -6127,7 +6133,7 @@ function recalculateEXSkillPreview() {
     const skillLevelEX = $("#ba-skillpreview-exrange").val()
     const skillEX = find(student.Skills, 'SkillType', 'ex')[0]
 
-    $('#ba-skill-ex-description').html(getSkillText(getTranslatedString(skillEX, 'Desc'), skillEX.Parameters, skillLevelEX, student.BulletType, skillEX.DamageDist ? skillEX.DamageDist : [], skillEX.DamageDistParam ? skillEX.DamageDistParam : 1))
+    $('#ba-skill-ex-description').html(getSkillText(skillEX, skillLevelEX, {bulletType: student.BulletType}))
     $(`#ba-skill-ex-description .skill-hitinfo`).tooltip({html: true})
 
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -6164,7 +6170,7 @@ function recalculateSkillPreview() {
         }
 
         $(`#ba-skill-${skillType}-name`).html(skill.Name)
-        $(`#ba-skill-${skillType}-description`).html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType, skill.DamageDist ? skill.DamageDist : [], skill.DamageDistParam ? skill.DamageDistParam : 1))
+        $(`#ba-skill-${skillType}-description`).html(getSkillText(skill, skillLevel, {bulletType: student.BulletType}))
         $(`#ba-skill-${skillType}-description .skill-hitinfo`).tooltip({html: true})
     })
 
@@ -6607,7 +6613,7 @@ function recalculateWeaponSkillPreview() {
     let skillLevel = $("#ba-weapon-skillpreview-range").val()
     let skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
 
-    $('#ba-skill-weaponpassive-description').html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType))
+    $('#ba-skill-weaponpassive-description').html(getSkillText(skill, skillLevel, {bulletType: student.BulletType}))
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })
@@ -6618,7 +6624,7 @@ function recalculateGearSkillPreview() {
     let skillLevel = $("#ba-gear-skillpreview-range").val()
     let skill = find(student.Skills, 'SkillType', 'gearnormal')[0]
 
-    $('#ba-skill-gearnormal-description').html(getSkillText(getTranslatedString(skill, 'Desc'), skill.Parameters, skillLevel, student.BulletType))
+    $('#ba-skill-gearnormal-description').html(getSkillText(skill, skillLevel, {bulletType: student.BulletType}))
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })
@@ -7438,29 +7444,48 @@ function getDefenseTypeText(armorType) {
     return text
 }
 
-function getSkillText(text, params, level, type, damageDist = [], damageDistParameter = 1, renderBuffs = true) {
+function getSkillText(skill, level, {renderBuffs = true, bulletType = null, emphasiseChange = false, renderSkillHits = true}) {
     
-    let result = text
-    let regex
+    let result = skill.Desc
+    const emphasisRegex = /[0-9.]+(?:%|s|秒|초| วินาที)/g
+ 
+    result = result.replace(emphasisRegex, function(match) {return `<strong>${match}</strong>`})
 
-    regex = /[0-9.]+(?:%|s|秒|초| วินาที)/g
-    result = result.replace(regex, function(match) {return `<strong>${match}</strong>`})
+    const parameterClass = bulletType == null ? 'ba-col-emphasis' : `ba-col-${bulletType.toLowerCase()}`
 
-    if (params) {
-        for (let i = 1; i <= params.length; i++) {
+    let skillHits = {}
+    if ("Effects" in skill) {
+        skill.Effects.filter(e => "HitsParameter" in e).forEach(effect => {
+            if ("HitFrames" in effect) {
+                skillHits[effect.HitsParameter] = []
+                if ("Hits" in effect) {
+                    effect.HitFrames.forEach(hf => skillHits[effect.HitsParameter].push(...effect.Hits))
+                } else {
+                    effect.HitFrames.forEach(hf => skillHits[effect.HitsParameter].push(10000))
+                }
+                
+            } else {
+                skillHits[effect.HitsParameter] = effect.Hits
+            }
+        })
+    }
+
+    if ("Parameters" in skill) {
+        for (let i = 1; i <= skill.Parameters.length; i++) {
             while (result.includes(`<?${i}>`)) {
-                if (type == "raid") {
-                    if ((level == 1 && params[i-1][level-1] != params[i-1][level]) || (level > 1 && params[i-1][level-1] != params[i-1][level-2])) {
-                        result = result.replace(`<?${i}>`, `<span class="ba-col-emphasis">${params[i-1][level-1]}</span>`)
+                if (emphasiseChange) {
+                    //only emphasise parameters once they change
+                    if ((level == 1 && skill.Parameters[i-1][level-1] != skill.Parameters[i-1][level]) || (level > 1 && skill.Parameters[i-1][level-1] != skill.Parameters[i-1][level-2])) {
+                        result = result.replace(`<?${i}>`, `<span class="${parameterClass}">${skill.Parameters[i-1][level-1]}</span>`)
                     } else {
-                        result = result.replace(`<?${i}>`, params[i-1][level-1].replace(regex, function(match) {return `<strong>${match}</strong>`}))   
+                        result = result.replace(`<?${i}>`, skill.Parameters[i-1][level-1].replace(emphasisRegex, function(match) {return `<strong>${match}</strong>`}))   
                     }
                 } else {
-                    if (i == damageDistParameter && damageDist.length > 1) {
-                        result = result.replace(`<?${i}>`, `<span class="ba-col-${type.toLowerCase()} skill-hitinfo" data-bs-toggle="tooltip" data-bs-placement="top" title="${getBasicTooltip(getSkillHitsText(damageDist, params[i-1][level-1], type.toLowerCase()))}">${params[i-1][level-1]}</span>`)
+                    if (renderSkillHits && i in skillHits) {
+                        result = result.replace(`<?${i}>`, `<span class="${parameterClass} skill-hitinfo" data-bs-toggle="tooltip" data-bs-placement="top" title="${getBasicTooltip(getSkillHitsText(skillHits[i], skill.Parameters[i-1][level-1], bulletType.toLowerCase()))}">${skill.Parameters[i-1][level-1]}</span>`)
 
                     } else {
-                        result = result.replace(`<?${i}>`, `<span class="ba-col-${type.toLowerCase()}">${params[i-1][level-1]}</span>`)
+                        result = result.replace(`<?${i}>`, `<span class="${parameterClass}">${skill.Parameters[i-1][level-1]}</span>`)
                     }
                 }
             }
@@ -7469,13 +7494,13 @@ function getSkillText(text, params, level, type, damageDist = [], damageDistPara
 
     const buffTypes = ['Buff', 'Debuff', 'CC', 'Special']
     buffTypes.forEach(type => {
-        regex = new RegExp(`<${type.slice(0,1).toLowerCase()}:(\\w+)>`, 'g')
+        const buffRegex = new RegExp(`<${type.slice(0,1).toLowerCase()}:(\\w+)>`, 'g')
         if (renderBuffs) {
-            result = result.replace(regex, function(match, capture) {
+            result = result.replace(buffRegex, function(match, capture) {
                 return getBuffTag(type, capture, {tooltip: true})
             })
         } else {
-            result = result.replace(regex, function(match, capture) {
+            result = result.replace(buffRegex, function(match, capture) {
                 const buffName = type + '_' + capture
                 return `<b>${getLocalizedString('BuffName', buffName)}</b>`
             })
@@ -7486,9 +7511,9 @@ function getSkillText(text, params, level, type, damageDist = [], damageDistPara
     return result
 }
 
-function getBuffTag(type, name, options={tooltip}) {
+function getBuffTag(type, name, {tooltip, overrideName = null}) {
     const buffName = `${type}_${name}`
-    return `<span class="ba-skill-${type.toLowerCase()}" ${options.tooltip ? `data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_${buffName}.png`, getLocalizedString('BuffNameLong', buffName), getLocalizedString('BuffType', type), null, getLocalizedString('BuffTooltip', buffName), 30)}"` : ''}><img class=\"buff-icon\" src=\"images/buff/Combat_Icon_${buffName}.png\"><span class="buff-label">${getLocalizedString('BuffName', buffName)}</span></span>`
+    return `<span class="ba-skill-${type.toLowerCase()}" ${tooltip ? `data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_${buffName}.png`, getLocalizedString('BuffNameLong', buffName), getLocalizedString('BuffType', type), null, getLocalizedString('BuffTooltip', buffName), 30)}"` : ''}><img class=\"buff-icon\" src=\"images/buff/Combat_Icon_${buffName}.png\"><span class="buff-label">${overrideName !== null ? overrideName : getLocalizedString('BuffName', buffName)}</span></span>`
 }
 
 function getSkillHitsText(damageDist, totalDamage, type) {
@@ -7505,10 +7530,20 @@ function getSkillHitsText(damageDist, totalDamage, type) {
     return translateUI('skill_hits_tooltip', [`<b>${damageDist.length}</b>`]) + `\n<small>${hitsText}</small>`
 }
 
-function getNormalAttackHitsText(damageDist, ammoCost, weaponType, attackType) {
+function getSkillHits(skill) {
+    const effectWithHits = skill.Effects.find(e => e.Hits !== undefined)
+    if (effectWithHits === undefined) {
+        if (skill.Effects.find(e => e.Type == "DMGSingle") !== undefined) return 1
+        return 0
+    } else {
+        return effectWithHits.Hits.length
+    }
+}
+
+function getNormalAttackHitsText(hitsArray, ammoCost, weaponType, attackType) {
     let hits = {}
     let hitsText = ''
-    damageDist.forEach((hit) => {
+    hitsArray.forEach((hit) => {
         hit = parseFloat(((hit / 10000) * 100).toFixed(1)) + '%'
         hits[hit] = hits[hit] ? hits[hit]+1 : 1
     })
@@ -7520,16 +7555,16 @@ function getNormalAttackHitsText(damageDist, ammoCost, weaponType, attackType) {
         case "GL":
         case "RL":
         case "Cannon":
-            text = translateUI('stat_ammocount_tooltip_area', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
+            text = translateUI('stat_ammocount_tooltip_area', [`<b>${ammoCost}</b>`, `<b>${hitsArray.length}</b>`])
             break;
         case "RG":
-            text = translateUI('stat_ammocount_tooltip_line', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
+            text = translateUI('stat_ammocount_tooltip_line', [`<b>${ammoCost}</b>`, `<b>${hitsArray.length}</b>`])
             break;
         case "FT":
-            text = translateUI('stat_ammocount_tooltip_fan', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
+            text = translateUI('stat_ammocount_tooltip_fan', [`<b>${ammoCost}</b>`, `<b>${hitsArray.length}</b>`])
             break;
         default:
-            text = translateUI('stat_ammocount_tooltip', [`<b>${ammoCost}</b>`, `<b>${damageDist.length}</b>`])
+            text = translateUI('stat_ammocount_tooltip', [`<b>${ammoCost}</b>`, `<b>${hitsArray.length}</b>`])
             break;
     }
     return text + `\n<small>${hitsText}</small>`
@@ -8317,10 +8352,9 @@ function drawConquestHexamap(conquest, mapId, container) {
             html += `<span class="start-tile"></span>`
         }
 
-        const stages = find(data.stages.Conquest, "Id", tile.Id)
-        if (stages.length > 0) {
+        if (tile.StageId) {
             //Enemy Unit Tile
-            const stage = stages[0]
+            const stage = find(data.stages.Conquest, "Id", tile.StageId)[0]
             const unit = stage.Formations[0]
             html += `<img class="ba-stage-map-enemy" src="images/enemy/${unit.MapIcon}.png" style="z-index:${100+yy}">`
             html += `<div class="map-info">`
@@ -8346,7 +8380,6 @@ function drawConquestHexamap(conquest, mapId, container) {
                 html += `<span class="unit-grade leader"></span>`
             }
 
-            
         }
 
         html = `<div data-x="${xx}" data-y="${yy}" ${stageId > 0 ? `data-stage-id="${stageId}" ` : ''} class="ba-stage-map-tile map-tile-${ind} conquest-tile event-${conquest.EventId} conquest-tile-${isBoss ? "boss" : tile.Type.toLowerCase()} ${loadedStage.Id == stageId ? "selected" : ""}" ${onclick} style="left:${x}px; top:${y.toFixed(0) - (isBoss*(y_scale/2))}px; ${onclick != '' ? 'cursor:pointer;' : ''}">${html}</div>`
