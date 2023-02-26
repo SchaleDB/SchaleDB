@@ -27,7 +27,7 @@ const altSprite = [10017, 10033, 10041, 10042, 10043, 10048, 20009, 20014, 10062
 const buffIconKeys = {"AttackPower": "ATK","DefensePower": "DEF","CriticalPoint": "CriticalChance","CriticalDamageRate": "CriticalDamage","CriticalDamageResistRate": "CriticalDamageRateResist","DodgePoint": "Dodge","HealEffectivenessRate": "HealEffectiveness","AccuracyPoint": "HIT","MaxHP": "MAXHP","DefensePenetration": "Penetration","StabilityPoint": "Stability","StabilityRate": "Stability","RegenCost": "CostRegen"}
 const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','AmmoCount']
 const studentStatListFull = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','AttackSpeed','BlockRate','DefensePenetration', 'AmmoCount']
-const enemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','MoveSpeed','AmmoCount']
+const enemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','DamagedRatio','AmmoCount']
 const raidEnemyStatList = ['MaxHP','AttackPower','DefensePower','DamagedRatio','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','GroggyGauge','GroggyTime']
 const enemyCalculationStatList = ['MaxHP','AttackPower','DefensePower','DamagedRatio','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range']
 
@@ -544,7 +544,7 @@ let itemSearchOptions = {
     getBaseString(stat) {
         let total = this.stats[stat][0]
         if (stat == 'DamagedRatio') {
-            return ((total-10000)/100).toFixed(0).toLocaleString() + "%"
+            return Math.floor((total-10000)/100).toLocaleString() + "%"
         } else if (CharacterStats.isRateStat(stat)) {
             return (total/100).toFixed(0).toLocaleString() + "%"
         } else {
@@ -2224,7 +2224,7 @@ class SkillDamageInfo {
 
                 let scalingText = `${parseFloat((scaleTotal/100).toFixed(2)).toLocaleString()}%`
                 if (hitsFull > 1) scalingText += ` &times; ${hitsFull}`
-                if (hitsSub > 1) scalingText += ` / ${hitsSub} hits`
+                if (hitsSub > 1) scalingText += ` / ${translateUI('dmginfo_numhits', [hitsSub])}`
                 $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-scaling"]`).html(scalingText)
                 if (effect.CriticalCheck != 'Always') {
                     $(`#skill-info-${this.skill.SkillType} .row-value[data-key="${index}-dmg-range"]`).text(`${parseInt(baseDmgMax*stabMod).toLocaleString()} ~ ${parseInt(baseDmgMax).toLocaleString()}${suffix}`)
