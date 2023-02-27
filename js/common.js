@@ -2180,7 +2180,7 @@ class SkillDamageInfo {
                 switch (effect.Type) {
                     case "FormChange":
                         if (scaleToUse === undefined) {
-                            scaleTotal = 10000
+                            scaleTotal = effect.Hits.reduce((sum, d) => sum + d, 0)
                         } else {
                             scaleTotal = scaleToUse[this.skillLevel-1]
                         }
