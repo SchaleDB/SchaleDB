@@ -4076,12 +4076,12 @@ function processStudent() {
         $(".ba-student-lobby").hide()
     }
     
-    $('#ba-student-profile-age').text(getTranslatedString(student,'CharacterAge'))
-    $('#ba-student-profile-birthday').text(getTranslatedString(student,'Birthday'))
-    $('#ba-student-profile-hobbies').text(getTranslatedString(student,'Hobby'))
-    $('#ba-student-profile-height').text(student.CharHeightMetric)
-    $('#ba-student-profile-cv').text(getTranslatedString(student,'CharacterVoice'))
-    $('#ba-student-profile-illustrator').text(student.ArtistName)
+    $('#ba-student-profile-age').html(getTranslatedString(student,'CharacterAge'))
+    $('#ba-student-profile-birthday').html(getTranslatedString(student,'Birthday'))
+    $('#ba-student-profile-hobbies').html(getTranslatedString(student,'Hobby'))
+    $('#ba-student-profile-height').html(student.CharHeightMetric)
+    $('#ba-student-profile-cv').html(getTranslatedString(student,'CharacterVoice'))
+    $('#ba-student-profile-illustrator').html(student.ArtistName)
 
     $('#ba-student-toggle-sprite-btn').toggle(altSprite.includes(student.Id))
 
@@ -7647,6 +7647,14 @@ function changeRegion(regID) {
 }
 
 function populateStudentSkillFilters() {
+    passiveStatList = []
+    weaponPassiveStatList = []
+    subStatList = []
+
+    search_options.filterSelect.PassiveBuff = []
+    search_options.filterSelect.WeaponPassiveBuff = []
+    search_options.filterSelect.SubBuff = []
+
     studentList.forEach(student => {
         if (!student.IsReleased[regionID]) {
             return

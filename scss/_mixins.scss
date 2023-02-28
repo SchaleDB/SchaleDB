@@ -14,7 +14,7 @@
     filter: drop-shadow(0 0.25rem 0.25rem rgba(0,0,0,0.125));
 }
 
-@mixin card-shadow {
+@mixin box-shadow {
     box-shadow: 0 0 0.5rem rgba(0,0,0,.125);
 }
 
@@ -24,6 +24,8 @@
 }
 
 @mixin promote-layer {
+    // used to force rendering of the element to a new layer
+    // improves performance in places and prevent certain rendering bugs
     will-change: transform;
     transform: translateZ(0);
 }

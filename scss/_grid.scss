@@ -105,6 +105,8 @@
 
     @include unselectable;
 
+    @include promote-layer;
+
     .card-img {
 
         position: absolute;
@@ -117,9 +119,12 @@
 
         border-radius: 10px;
         overflow: hidden;
-        will-change: transform;
+        
+        // prevents border-radius animation bug on safari
+        mask-image: linear-gradient(white, white);
+        -webkit-mask-image: -webkit-linear-gradient(white, white);
 
-        @include card-shadow;
+        @include box-shadow;
 
         img {
             width: 100%;
@@ -372,7 +377,6 @@
             display: grid;
             gap: 0px;
             grid-template-columns: repeat(2, 1fr);
-            @include promote-layer;
 
             img {
                 height: 32px;
@@ -402,8 +406,6 @@
         color: var(--col-theme-text);
 
         border-radius: 0px 0px 8px 8px;
-
-        will-change: transform;
 
         &.hover-only {
            display: none;

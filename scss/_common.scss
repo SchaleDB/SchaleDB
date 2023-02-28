@@ -114,7 +114,6 @@ img {
     overflow: hidden;
 
     .card-body {
-        @include promote-layer;
         @include scrollable(auto);
         overflow-x: hidden;
     }
@@ -162,7 +161,6 @@ img {
 }
 
 .invert-light {
-    will-change: filter;
     filter: var(--var-invert-light) hue-rotate(var(--var-invert-light-hue));
     -webkit-filter: var(--var-invert-light) hue-rotate(var(--var-invert-light-hue));
 }
@@ -539,22 +537,22 @@ p a {
 
 .stat-icon {
 
-    @include drop-shadow;
+    @include box-shadow;
     margin-top: -2px;
     width: 26px;
     min-width: 26px;
     height: 26px;
     margin-right: 0.5rem;
+    @include circular;
+    overflow: hidden;
     
 
     img {
-        @include unselectable;
         height: 100%;
         width: 100%;
         object-fit: cover;
         opacity: 0.85;
         background-color: rgba(0, 0, 0, 0.4);
-        @include circular;
     }
 }
 
@@ -644,27 +642,6 @@ p a {
     .row >div {
         position: relative;
         padding: 0.5rem;
-    }
-
-    .stat-icon {
-
-        @include drop-shadow;
-        margin-top: -2px;
-        width: 26px;
-        min-width: 26px;
-        height: 26px;
-        margin-right: 0.5rem;
-        
-
-        img {
-            @include unselectable;
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            opacity: 0.85;
-            background-color: rgba(0, 0, 0, 0.4);
-            @include circular;
-        }
     }
 
     .stat-name {

@@ -275,21 +275,6 @@ h1 small {
     object-fit: contain;
     cursor: pointer;
 }
-
-.ba-btn-img {
-    will-change: filter;
-    height: 22px;
-    position: absolute;
-    left: 4px;
-    top: 3px;
-    transition: opacity ease var(--var-animation-duration), filter ease var(--var-animation-duration);
-    filter: var(--var-invert-light) hue-rotate(var(--var-invert-light-hue));
-}
-
-.active >.ba-btn-img {
-    filter: var(--var-invert-dark) hue-rotate(var(--var-invert-dark-hue));;
-}
-
 .navbar-accent {
     color: var(--col-theme-logo)
 }
@@ -655,7 +640,7 @@ hr {
         object-position: top;
         @include circular;
         @include unselectable;
-        @include card-shadow;
+        @include box-shadow;
     }
 
     &::after {
