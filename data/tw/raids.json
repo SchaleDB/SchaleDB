@@ -202,17 +202,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_CHESED_EXSKILL01",
                     "Name": "我聽到王座的呼喚",
-                    "Desc": "召喚機械士兵。\n在士兵被召喚出的期間內，ATG會慢慢上升。",
-                    "Parameters": [
-                        [
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "and spawn a Sweeper "
-                        ]
-                    ]
+                    "Desc": "召喚機械士兵。\n在士兵被召喚出的期間內，ATG會慢慢上升。"
                 },
                 {
                     "Id": "ChesedExSkill02",
@@ -324,7 +314,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL01",
                     "Name": "哐哐哐哐哐哐哐！(白)",
-                    "Desc": "對敵人造成攻擊力<?1>傷害\nATG越高造成的傷害越猛烈。",
+                    "Desc": "對敵人造成攻擊力<?1>傷害\nATG越高造成的傷害越猛烈。<?2>",
                     "Parameters": [
                         [
                             "400%",
@@ -340,7 +330,7 @@
                             "",
                             "",
                             "",
-                            "\nAlso places ice bombs that additionally decrease <d:MoveSpeed> of enemies hit by 80% for 40s."
+                            "\n被部分炸彈攻擊時，移動速度80%(40秒內)"
                         ]
                     ]
                 },
@@ -377,7 +367,7 @@
                         }
                     ],
                     "Name": "滾動吧！！(白)",
-                    "Desc": "召喚可造成攻擊力<?1>傷害的炸彈。\n對掩蔽物造成攻擊力300%傷害後，如果掩蔽物沒被破壞會往反方向濺出。",
+                    "Desc": "召喚能造成攻擊力<?1>傷害的炸彈\n對隱蔽物造成攻擊力300%的傷害，若隱蔽物未被破壞，則會彈回給白。<?2>",
                     "Parameters": [
                         [
                             "600%",
@@ -393,15 +383,7 @@
                             "",
                             "",
                             "",
-                            "\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>600,000</b> damage.\nIf Shiro is hit, also increases her <d:DamagedRatio> by 50% for 40s."
-                        ],
-                        [
-                            "43,000",
-                            "80,000",
-                            "110,000",
-                            "200,000",
-                            "1,500,000",
-                            "4,000,000"
+                            "\n移動速度有被減少的敵人會受到600000的追加傷害\n白自己被攻擊時，受到的傷害量增加50%(40秒內)"
                         ]
                     ]
                 },
@@ -438,7 +420,7 @@
                         }
                     ],
                     "Name": "突擊-！！！(黑)",
-                    "Desc": "對敵人造成攻擊力<?1>傷害\nATG越高造成的傷害越猛烈。",
+                    "Desc": "對敵人造成攻擊力<?1>傷害\nATG越高造成的傷害越猛烈。<?2>",
                     "Parameters": [
                         [
                             "400%",
@@ -454,15 +436,7 @@
                             "",
                             "",
                             "",
-                            "\nIf an enemy with decreased <d:MoveSpeed> is hit, deals an additional <b>600,000</b> damage.\nIf Kuro is hit, also increases <d:DamagedRatio> by 50% for 40s."
-                        ],
-                        [
-                            "43,000",
-                            "80,000",
-                            "110,000",
-                            "200,000",
-                            "1,500,000",
-                            "4,000,000"
+                            "\n移動速度有被減少的敵人會受到600000的追加傷害\n黑自己被攻擊時，受到的傷害量增加50%(40秒內)"
                         ]
                     ]
                 },
@@ -473,7 +447,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL04",
                     "Name": "無力症(黑)",
-                    "Desc": null
+                    "Desc": "對敵人造成攻擊力100%的傷害\n<d:MoveSpeed>減少80%(40秒內)"
                 },
                 {
                     "Id": "ShiroKuroPassive01",
@@ -494,7 +468,7 @@
                         }
                     ],
                     "Name": "史林皮亞的恐懼",
-                    "Desc": null
+                    "Desc": "所有敵人得到的恢復效果強化率減少80%"
                 }
             ],
             "Name": "白&黑",
@@ -573,7 +547,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL02",
                     "Name": "聖經武加大譯本",
-                    "Desc": "賦予1名敵人<d:Hieronymus>，\n<d:Hieronymus>會造成攻擊力20%的持續傷害，10秒後爆炸， \n對圓形範圍內的敵人造成攻擊力325%的傷害後消失不見。\n受<d:Hieronymus>對象的體力為100%時，<d:Hieronymus>會立即消失。",
+                    "Desc": "賦予1名敵人<d:Hieronymus>，\n<d:Hieronymus>會造成攻擊力20%的持續傷害，10秒後爆炸， \n對圓形範圍內的敵人造成攻擊力325%的傷害後消失不見。\n受<d:Hieronymus>對象的體力為100%時，<d:Hieronymus>會立即消失。<?1>",
                     "Parameters": [
                         [
                             "",
@@ -581,8 +555,8 @@
                             "",
                             "",
                             "",
-                            "\nAlso increases the <b:HealEffectiveness> of the curse target by <b>3,000</b> for 10s.",
-                            "\nAlso increases the <b:HealEffectiveness> of the curse target by <b>3,000</b> for 10s."
+                            "\n額外<d:Hieronymus>對象遭受的恢復效果強化率增強3000。（10秒間）",
+                            "\n額外<d:Hieronymus>對象遭受的恢復效果強化率增強3000。（10秒間）"
                         ]
                     ]
                 },
@@ -602,7 +576,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL04",
                     "Name": "沙漠的苦行",
-                    "Desc": "每10秒對所有敵人造成攻擊力<?1>的傷害\nATG充滿時，對所有敵人造成最大體力1000%的傷害。",
+                    "Desc": "每10秒對所有敵人造成攻擊力<?1>的傷害<?2>",
                     "Parameters": [
                         [
                             "40%",
@@ -614,13 +588,13 @@
                             "30%"
                         ],
                         [
-                            "\nWhen Hieronymus's ATG gauge is full, deals damage to each enemy equal to 1000% of their Max HP.",
-                            "\nWhen Hieronymus's ATG gauge is full, deals damage to each enemy equal to 1000% of their Max HP.",
-                            "\nWhen Hieronymus's ATG gauge is full, deals damage to each enemy equal to 1000% of their Max HP.",
-                            "\nWhen Hieronymus's ATG gauge is full, deals damage to each enemy equal to 1000% of their Max HP.",
-                            "\nWhen Hieronymus's ATG gauge is full, deals damage to each enemy equal to 1000% of their Max HP.",
-                            "\nWhen Hieronymus's ATG gauge is full, makes all enemies <s:Immortal> for 10s and then deals damage to each enemy equal to 1000% of their Max HP.\nAlso increases all enemies' <b:HealEffectiveness> by <b>2,000</b> for 10s.",
-                            "\nWhen Hieronymus's ATG gauge is full, makes all enemies <s:Immortal> for 10s and then deals damage to each enemy equal to 1000% of their Max HP.\nAlso increases all enemies' <b:HealEffectiveness> by <b>2,000</b> for 10s."
+                            "\nATG充滿時，對所有敵人造成最大體力1000%的傷害。",
+                            "\nATG充滿時，對所有敵人造成最大體力1000%的傷害。",
+                            "\nATG充滿時，對所有敵人造成最大體力1000%的傷害。",
+                            "\nATG充滿時，對所有敵人造成最大體力1000%的傷害。",
+                            "\nATG充滿時，對所有敵人造成最大體力1000%的傷害。",
+                            "\nATG已滿時，對所有敵對對象<s:Immortal>（10秒間）\n額外造成最大體力1000%的傷害，\n受到的恢復效果強化率增加2000。（10秒間）",
+                            "\nATG已滿時，對所有敵對對象<s:Immortal>（10秒間）\n額外造成最大體力1000%的傷害，\n受到的恢復效果強化率增加2000。（10秒間）"
                         ]
                     ]
                 },
@@ -729,25 +703,16 @@
                         }
                     ],
                     "Name": "不祥之光（聖遺物）",
-                    "Desc": "當聖遺物體力變成0% 時發動技能\n紫色聖遺物：所有前鋒、特殊學生的<b:ATK>增加25%，\n獲得的恢復效果強化率減少7000。\n額外減少耶羅尼姆斯<d:DEF>1500。\n此後，受<d:Hieronymus>我軍受到的恢復效果強化率增加4000。（10秒間）\n（紫色聖遺物不會成為一般攻擊、基本技能的目標。）",
-                    "Parameters": [
-                        [
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "and <b:DamageRatio> "
-                        ]
-                    ]
+                    "Desc": "當聖遺物體力變成0% 時發動技能\n紫色聖遺物：所有前鋒、特殊學生的<b:ATK>增加25%，\n獲得的恢復效果強化率減少7000。\n額外減少耶羅尼姆斯<d:DEF>1500。\n此後，受<d:Hieronymus>我軍受到的恢復效果強化率增加4000。（10秒間）\n（紫色聖遺物不會成為一般攻擊、基本技能的目標。）"
                 },
                 {
                     "Id": "HieronymusTormentPassive03",
                     "SkillType": "Passive",
                     "MinDifficulty": 6,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_HIERONYMUS_PASSIVE01"
+                    "Icon": "SKILLICON_HIERONYMUS_PASSIVE01",
+                    "Name": "苦行を経た悟り",
+                    "Desc": "<b:Penetration>を750増加します。"
                 }
             ],
             "Name": "耶羅尼姆斯",
@@ -886,7 +851,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL05",
                     "Name": "無限迴轉・無敵蛋超載",
-                    "Desc": null
+                    "Desc": "腿部(黃)：自身<b:ATK>增加4000 (30秒內)"
                 },
                 {
                     "Id": "KaitenFxMk0PassiveSkill01",
@@ -915,7 +880,7 @@
                         }
                     ],
                     "Name": "無限燃燒的熱烈之心",
-                    "Desc": "每20秒依序啟動右手臂(粉紅色)、胸部(紅色)、左手臂(綠色)。\n右手臂(粉紅色)：攻擊力增加50%\n胸部(紅色)：用Ex技能攻擊時，使對象昏厥(5秒內)\n左手臂(綠色)：防禦力增加1000\n啟動部位時，如受到一定以上的傷害，該部位將會被破壞，且無法再次啟動。\n無法使用被破壞部位的技能。",
+                    "Desc": "每20秒依序啟動右手臂(粉紅色)、胸部(紅色)、左手臂(綠色)。\n右手臂(粉紅色)：攻擊力增加50%\n胸部(紅色)：用Ex技能攻擊時，使對象昏厥(5秒內)\n左手臂(綠色)：防禦力增加1000<?1>\n各部位啟用時，如有造成一定傷害以上時，各部位會被破壞並無法再啟用。\n不使用破壞部位的技能。",
                     "Parameters": [
                         [
                             "",
@@ -923,15 +888,7 @@
                             "",
                             "",
                             "",
-                            " and KAITEN FX Mk.0's EX skills will also decrease enemies' <d:HealEffectiveness> by 80% for 30s"
-                        ],
-                        [
-                            "70,000",
-                            "157,500",
-                            "350,000",
-                            "595,000",
-                            "2,500,000",
-                            "3,500,000"
+                            "，用Ex技能攻擊時，對象得到的恢復效果強化率減少80%(30秒內)"
                         ]
                     ]
                 },
@@ -942,7 +899,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
                     "Name": "迴轉之力！",
-                    "Desc": null
+                    "Desc": "カイテンジャーは定期的にEXスキルを発動する\n<b>熱血のレッド！</b>：円形範囲内の敵に<c:Provoke>を付与（10秒間）\n<b>冷徹なブラック！</b>：敵1人に対して攻撃力の300%分のダメージ/\n<d:DamagedRatio>を50%増加（5秒間）\n<b>休出のグリーン……</b>：扇形範囲内の敵に対して、攻撃力の350%分のダメージ\n<b>気合のイエロー！</b>：敵1人に対して、攻撃力の500%分のダメージ\n<b>純情のピンク！</b>：円形範囲内の味方の<b:ATK>を6%増加（15秒間）"
                 }
             ],
             "Name": "KAITEN FX Mk.0",
@@ -1007,7 +964,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL01",
                     "Name": "白熱光線",
-                    "Desc": "對1名敵人造成等同90%攻擊力的持續傷害（10秒內）\n<d:DEF>減少9999（60秒內）",
+                    "Desc": "對1名敵人造成等同90%攻擊力的持續傷害（10秒內）\n<d:DEF>減少9999（60秒內）<?1>",
                     "Parameters": [
                         [
                             "",
@@ -1015,7 +972,7 @@
                             "",
                             "",
                             "",
-                            "\nIf the defense reduction debuff is not removed before the end of the skill's duration, deals 250% damage to enemies in a fan-shaped area."
+                            "\n技能結束時，若防禦力減少效果尚未消失，可對扇形範圍造成攻擊力250%傷害"
                         ]
                     ]
                 },
@@ -1035,23 +992,15 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL03",
                     "Name": "召喚士兵",
-                    "Desc": "以100%所受傷害召喚傳送給佩洛洛吉拉的巨大佩洛洛士兵\n巨大佩洛洛士兵的體力低於50%時將自動倒地。",
+                    "Desc": "以100%所受傷害召喚傳送給佩洛洛吉拉的巨大佩洛洛士兵\n巨大佩洛洛士兵的體力低於50%時將自動倒地。<?1>",
                     "Parameters": [
                         [
                             "",
                             "",
                             "",
                             "",
-                            " with 110% increased <b:MAXHP> (Indoor only)",
-                            " with up to 200% increased <b:MAXHP>"
-                        ],
-                        [
                             "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "\nAlso summons glowing Perorominions which, when knocked down, deal 200,000 damage to other Perorominions in a circular area around it."
+                            "\n閃亮巨大佩洛洛士兵倒下時，會對圓形範圍內的佩洛洛造成傷害。"
                         ]
                     ]
                 },
@@ -1062,17 +1011,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL04",
                     "Name": "吸收士兵",
-                    "Desc": "格羅基量表的進度與倒地的巨大佩洛洛士兵數量成正比",
-                    "Parameters": [
-                        [
-                            "<b>1/7th</b>",
-                            "<b>1/7th</b>",
-                            "<b>1/7th</b>",
-                            "<b>1/7th</b>",
-                            "<b>1/7th</b>",
-                            "<b>1/10th</b>"
-                        ]
-                    ]
+                    "Desc": "格羅基量表的進度與倒地的巨大佩洛洛士兵數量成正比"
                 },
                 {
                     "Id": "Perorozilla01Ex10",
@@ -1141,15 +1080,15 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL01",
                     "Name": "破壞—Type I",
-                    "Desc": "對圓形範圍內敵人造成150%的傷害",
+                    "Desc": "<?1>",
                     "Parameters": [
                         [
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            " that expands 3 times"
+                            "對圓形範圍內的敵人造成攻擊力150%的傷害",
+                            "對圓形範圍內的敵人造成攻擊力150%的傷害",
+                            "對圓形範圍內的敵人造成攻擊力150%的傷害",
+                            "對圓形範圍內的敵人造成攻擊力150%的傷害",
+                            "對圓形範圍內的敵人造成攻擊力150%的傷害",
+                            "圓形範圍逐漸擴大，共爆炸3次對敵人造成攻擊力150%傷害"
                         ]
                     ]
                 },
@@ -1169,17 +1108,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL03",
                     "Name": "侵蝕之塔生成",
-                    "Desc": null,
-                    "Parameters": [
-                        [
-                            "an Erosion Tower,",
-                            "an Erosion Tower,",
-                            "an Erosion Tower,",
-                            "an Erosion Tower,",
-                            "an Erosion Tower,",
-                            "two Erosion Towers, each"
-                        ]
-                    ]
+                    "Desc": "召喚侵蝕之塔。侵蝕之塔會在每15秒擴展侵蝕範圍。\n進入侵蝕範圍內的敵人會減少350<d:CostRegen>。進入侵蝕範圍內的防禦砲塔會攻擊我軍。"
                 },
                 {
                     "Id": "HODEx04",
@@ -1188,7 +1117,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL04",
                     "Name": "釋放過載能量",
-                    "Desc": null
+                    "Desc": "對所有敵人造成攻擊力150%的傷害\n霍德的體力在50%以下石，可對所有敵人造成攻擊力300%的傷害，防禦砲塔全部破壞"
                 },
                 {
                     "Id": "HODEx05",
@@ -1197,7 +1126,7 @@
                     "ATGCost": 3,
                     "Icon": "SKILLICON_HOD_EXSKILL05",
                     "Name": "榮耀之光",
-                    "Desc": null
+                    "Desc": "對所有敵人造成攻擊力740%的傷害\n每次使用榮耀之光技能時，霍德的攻擊力增加50%(最多可堆疊99次)"
                 },
                 {
                     "Id": "HODPassive01",
@@ -1256,15 +1185,15 @@
                         }
                     ],
                     "Name": "榮耀的另一面",
-                    "Desc": null,
+                    "Desc": "霍德、侵蝕之塔雖然不會受到群控效果，但是時間會累積<?2>\n霍德：累積<?1>時受到的傷害量增加300%(30秒內)，格羅基量表增加、ATG減少\n侵蝕之塔：累積<?1>時，受到的傷害量增加300%(30秒內)，侵蝕範圍減少1階段",
                     "Parameters": [
                         [
-                            "6s",
-                            "7s",
-                            "8s",
-                            "9s",
-                            "10s",
-                            "15s"
+                            "6秒",
+                            "7秒",
+                            "8秒",
+                            "9秒",
+                            "10秒",
+                            "15秒"
                         ],
                         [
                             "",
@@ -1272,7 +1201,7 @@
                             "",
                             "",
                             "",
-                            "\nThe amount added to the CC gauge is multiplied by the inflicter's CC Power stat."
+                            "（如果群控強化力越高，時間適用越多。）"
                         ]
                     ]
                 },
@@ -1282,7 +1211,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_PASSIVESKILL01",
                     "Name": "榮耀的影子",
-                    "Desc": null
+                    "Desc": "使霍德、侵蝕之塔的暴擊抵抗力增加400%。\n侵蝕之塔對<d:ConcentratedTarget>效果免疫。"
                 }
             ],
             "Name": "霍德",
@@ -1353,15 +1282,16 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL01",
-                    "Desc": null,
+                    "Name": "Now You See Us",
+                    "Desc": "ゴズが少しの間姿を消し、弱体状態を解除します。その後自身と同じ動きをする分身と共に登場<?1>",
                     "Parameters": [
                         [
-                            "(Clones have <b>0</b> ATK)",
-                            "(Clones have <b>0</b> ATK)",
-                            "(Clones have <b>0</b> ATK)",
-                            "(Clones have <b>0</b> ATK)",
-                            "(Clones have <b>0</b> ATK)",
-                            "(Clones have <b>50%</b> of Goz's ATK)"
+                            "（分身は攻撃力がありません）",
+                            "（分身は攻撃力がありません）",
+                            "（分身は攻撃力がありません）",
+                            "（分身は攻撃力がありません）",
+                            "（分身は攻撃力がありません）",
+                            "（分身はゴズの攻撃力の<b>50%</b>の分の攻撃力を持ちます）"
                         ]
                     ]
                 },
@@ -1371,7 +1301,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_GOZ_EXSKILL02",
-                    "Desc": null
+                    "Name": "スリーライトモンテ",
+                    "Desc": "ゴズと分身が自身の前のエリアに光を照らします。分身が照らした光は一定時間後に爆発し、攻撃力の1500%分のダメージ"
                 },
                 {
                     "Id": "GozEx03",
@@ -1379,7 +1310,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL03",
-                    "Desc": null
+                    "Name": "マジカルコインハット",
+                    "Desc": "帽子を出してコインを隠した後にシャッフルします。コインがないエリアは次の効果が適用されます。/\nノックバック、<c:Stunned>を付与（5秒間）、攻撃力の800%分のダメージ"
                 },
                 {
                     "Id": "GozEx04",
@@ -1387,7 +1319,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL04",
-                    "Desc": null
+                    "Name": "サプライズプレゼント",
+                    "Desc": "敵を指定して帽子から爆弾を取り出し、攻撃力の900%分のダメージ"
                 },
                 {
                     "Id": "GozEx05",
@@ -1395,7 +1328,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL05",
-                    "Desc": null,
+                    "Name": "スクリームライダー",
+                    "Desc": "一定時間毎に、スクリームライダーが登場し直線範囲内の敵に対して、攻撃力の1200%分のダメージ/<?1>\nスクリームライダーが通り過ぎた場所にスランピアの兵士を召喚",
                     "Parameters": [
                         [
                             "",
@@ -1403,7 +1337,7 @@
                             "",
                             "",
                             "",
-                            " and dealing 600% damage to"
+                            "\nスクリームライダーの付近にいる敵には600%分のダメージ/"
                         ]
                     ]
                 },
@@ -1428,7 +1362,8 @@
                             "Channel": 621
                         }
                     ],
-                    "Desc": null,
+                    "Name": "Prank or Protect",
+                    "Desc": "<b:Shield>効果がある場合、ゴズが与える全てのダメージを<?1>減少/\n<d:HealEffectiveness>率を<?2>減少",
                     "Parameters": [
                         [
                             "75%",
@@ -18930,35 +18865,51 @@
         },
         {
             "Id": 4033973365,
-            "Icon": "TimeAttack_Icon_Buff_AttackPower_Ally_01"
+            "Icon": "TimeAttack_Icon_Buff_AttackPower_Ally_01",
+            "Name": "T.Sクラス、AR武器の攻撃力が増加",
+            "Desc": "T.Sクラス生徒の攻撃力が増加します。/\nAR武器を使用する味方生徒の攻撃力が増加します。/\n（二つの効果は重複しません）"
         },
         {
             "Id": 3951708717,
-            "Icon": "TimeAttackGeas_Enemy_Immune_AttackedExSkill"
+            "Icon": "TimeAttackGeas_Enemy_Immune_AttackedExSkill",
+            "Name": "EXスキルダメージ無効化",
+            "Desc": "敵はEXスキルによるダメージを受けません。"
         },
         {
             "Id": 328739473,
-            "Icon": "TimeAttackGeas_Ally_Heal"
+            "Icon": "TimeAttackGeas_Ally_Heal",
+            "Name": "敵を倒した時攻撃力減少、回復時は減少解除",
+            "Desc": "敵を倒すたびに攻撃力が減少します。/\n回復効果を受けると、攻撃力減少効果を一定数だけ解除します。"
         },
         {
             "Id": 3427259164,
-            "Icon": "TimeAttack_Icon_Debuff_AttackPower_Ally_01"
+            "Icon": "TimeAttack_Icon_Debuff_AttackPower_Ally_01",
+            "Name": "SR、MG武器攻撃力減少",
+            "Desc": "SR、MG武器を使用する味方生徒の攻撃力が減少します。"
         },
         {
             "Id": 3153525398,
-            "Icon": "TimeAttackGeas_Ally_Immune"
+            "Icon": "TimeAttackGeas_Ally_Immune",
+            "Name": "かかしの状態変化",
+            "Desc": "かかしは一定時間ごとに状態が変化します。デバフ状態：かかしに回復効果を与えると味方生徒へダメージが発生します。かかしに対する回復効果は1に固定されます。通常状態：回復効果が適用されます。"
         },
         {
             "Id": 3902330525,
-            "Icon": "TimeAttackGeas_Enemy_FireArea_TriggerDie"
+            "Icon": "TimeAttackGeas_Enemy_FireArea_TriggerDie",
+            "Name": "敵を倒した時に燃焼エリア生成",
+            "Desc": "敵を倒した時に、その場所に燃焼エリアが生成されます。"
         },
         {
             "Id": 1246791085,
-            "Icon": "TImeAttackGeas_Enemy_DamageOverTime_DamageRatioUp_Ratio"
+            "Icon": "TImeAttackGeas_Enemy_DamageOverTime_DamageRatioUp_Ratio",
+            "Name": "火傷、悪寒、中毒、応援の熱気追加ダメージ",
+            "Desc": "敵に火傷、悪寒、中毒、応援の熱気の効果が適用されたり、ダメージを受けたりする度に追加ダメージを与えます。\n敵のHPが増加します。"
         },
         {
             "Id": 3239764743,
-            "Icon": "TimeAttack_Icon_Buff_CriticalChanceResistPoint_Enemy_01"
+            "Icon": "TimeAttack_Icon_Buff_CriticalChanceResistPoint_Enemy_01",
+            "Name": "会心抵抗値の増加",
+            "Desc": "敵の会心抵抗値が増加します。"
         }
     ],
     "WorldRaid": [
