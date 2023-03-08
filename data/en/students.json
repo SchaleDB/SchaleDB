@@ -71392,5 +71392,678 @@
                 14
             ]
         ]
+    },
+    {
+        "Id": 10063,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 132,
+        "PathName": "Koyuki",
+        "DevName": "CH0198",
+        "Name": "Koyuki",
+        "School": "Millennium",
+        "Club": "TheSeminar",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Mystic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 0,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "MG",
+        "WeaponImg": "Weapon_Icon_CH0198",
+        "Cover": false,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Millennium_Collection",
+        "CollectionTexture": "Student_Portrait_CH0198_Collection",
+        "FamilyName": "Kurosaki",
+        "PersonalName": "Koyuki",
+        "SchoolYear": "1st Year",
+        "CharacterAge": "15 years old",
+        "FamilyNameRuby": "くろさき",
+        "Birthday": "2月14日",
+        "CharacterSSRNew": "思い通りにいかない時こそ、\n人生は面白くなるんですよ！",
+        "ProfileIntroduction": "ミレニアムサイエンススクール所属、生徒会「セミナー」のトラブルメーカーな天才少女。\n\n数学的な暗号の解読に関して、天賦の才を持っているが、本人にはその自覚が全くない。また、自分では制御できない運が絡む要素が好きで、様々な方法で自分の運を試している。苦難にあっても諦めない。",
+        "Hobby": "運試し、脱出",
+        "CharacterVoice": "Natsune Inui",
+        "BirthDay": "2/14",
+        "ArtistName": "MISOM150",
+        "CharHeightMetric": "149cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1332,
+        "AttackPower1": 347,
+        "AttackPower100": 3471,
+        "MaxHP1": 2141,
+        "MaxHP100": 18560,
+        "DefensePower1": 76,
+        "DefensePower100": 456,
+        "HealPower1": 1467,
+        "HealPower100": 4402,
+        "DodgePoint": 190,
+        "AccuracyPoint": 104,
+        "CriticalPoint": 209,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 25,
+        "AmmoCost": 5,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 30,
+                            "AttackStartDuration": 18,
+                            "AttackEndDuration": 11,
+                            "AttackBurstRoundOverDelay": 42,
+                            "AttackIngDuration": 41,
+                            "AttackReloadDuration": 70
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "Tricky Variables",
+                "Desc": "Randomly throws one of three bombs that deal a different amount of damage to enemies in a circular area, depending on the bomb chosen.\n<b>Bullet Bomb</b>: <?1> damage.\n<b>Electric Field Bomb</b>: <?2> damage.\n<b>Explosive Bomb</b>: <?3> damage.",
+                "Parameters": [
+                    [
+                        "233%",
+                        "268%",
+                        "339%",
+                        "374%",
+                        "444%",
+                        "479%",
+                        "549%",
+                        "584%",
+                        "654%",
+                        "689%"
+                    ],
+                    [
+                        "221%",
+                        "255%",
+                        "321%",
+                        "354%",
+                        "421%",
+                        "454%",
+                        "521%",
+                        "554%",
+                        "620%",
+                        "654%"
+                    ],
+                    [
+                        "209%",
+                        "241%",
+                        "304%",
+                        "335%",
+                        "398%",
+                        "429%",
+                        "492%",
+                        "524%",
+                        "587%",
+                        "618%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "Icon": "SKILLICON_CH0198_EXSKILL",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            23380,
+                            26889,
+                            33901,
+                            37404,
+                            44415,
+                            47925,
+                            54936,
+                            58446,
+                            65457,
+                            68960
+                        ]
+                    },
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            3334,
+                            3334,
+                            3334
+                        ],
+                        "HitsParameter": 2,
+                        "Scale": [
+                            22176,
+                            25503,
+                            32149,
+                            35476,
+                            42129,
+                            45455,
+                            52108,
+                            55434,
+                            62081,
+                            65407
+                        ]
+                    },
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            10000
+                        ],
+                        "HitsParameter": 3,
+                        "Scale": [
+                            20967,
+                            24117,
+                            30404,
+                            33548,
+                            39842,
+                            42985,
+                            49273,
+                            52416,
+                            58710,
+                            61854
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "Did You Think You're Alone!?",
+                "Desc": "Every 30s, deals <?1> damage to one enemy that ricochets and deals the same damage to up to two nearby enemies. Koyuki reloads immediately after activation.",
+                "Parameters": [
+                    [
+                        "202%",
+                        "212%",
+                        "223%",
+                        "263%",
+                        "273%",
+                        "283%",
+                        "324%",
+                        "334%",
+                        "344%",
+                        "385%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BOUNCEPROJECTILE",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            20280,
+                            21294,
+                            22309,
+                            26366,
+                            27380,
+                            28395,
+                            32452,
+                            33466,
+                            34480,
+                            38538
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "Do You Believe in Miracles?",
+                "Desc": "Increases <b:ATK> by <?1>.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "Chaos Theory",
+                "Desc": "When Koyuki activates her EX Skill, increases her <b:ATK> by a different amount depending on the bomb chosen.\n<b>Bullet Bomb</b>: <?1> for 40s.\n<b>Electric Field Bomb</b>: <?2> for 40s.\n<b>Explosive Bomb</b>: <?3> for 40s.",
+                "Parameters": [
+                    [
+                        "15.3%",
+                        "16.1%",
+                        "16.8%",
+                        "19.9%",
+                        "20.6%",
+                        "21.4%",
+                        "24.5%",
+                        "25.2%",
+                        "26%",
+                        "29.1%"
+                    ],
+                    [
+                        "14.5%",
+                        "15.2%",
+                        "15.9%",
+                        "18.8%",
+                        "19.6%",
+                        "20.3%",
+                        "23.2%",
+                        "23.9%",
+                        "24.6%",
+                        "27.5%"
+                    ],
+                    [
+                        "13.7%",
+                        "14.4%",
+                        "15%",
+                        "17.8%",
+                        "18.5%",
+                        "19.2%",
+                        "21.9%",
+                        "22.6%",
+                        "23.3%",
+                        "26%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1533,
+                                1610,
+                                1686,
+                                1993,
+                                2069,
+                                2146,
+                                2453,
+                                2529,
+                                2605,
+                                2912
+                            ],
+                            [
+                                1452,
+                                1525,
+                                1597,
+                                1888,
+                                1960,
+                                2033,
+                                2323,
+                                2396,
+                                2469,
+                                2758
+                            ],
+                            [
+                                1372,
+                                1440,
+                                1509,
+                                1783,
+                                1851,
+                                1920,
+                                2194,
+                                2263,
+                                2331,
+                                2605
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "Do You Believe in Miracles?+",
+                "Desc": "Increases <b:ATK> by <?1> plus a further <?2>.",
+                "Parameters": [
+                    [
+                        "417",
+                        "438",
+                        "459",
+                        "542",
+                        "563",
+                        "583",
+                        "667",
+                        "688",
+                        "708",
+                        "792"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            417,
+                            438,
+                            459,
+                            542,
+                            563,
+                            583,
+                            667,
+                            688,
+                            708,
+                            792
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                7,
+                47
+            ],
+            [
+                9,
+                56
+            ],
+            [
+                2,
+                10
+            ],
+            [
+                3,
+                15
+            ],
+            [
+                6,
+                24
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            8,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 104",
+        "FurnitureInteraction": [
+            [
+                2204
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Toy",
+            "Smart",
+            "Mystery"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Koyuki",
+            "F_Koyuki2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "マリ・ガン",
+            "Desc": "コユキと共にあらゆる苦難を乗り越えてきたマシンガン。\n\n一度修理に出した際に色を変えた。些細なことを気にしないコユキに似て頑丈な銃だ。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 153,
+            "AttackPower100": 1525,
+            "MaxHP1": 537,
+            "MaxHP100": 5367,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3050,
+                180
+            ],
+            [
+                3051,
+                3050,
+                181,
+                190
+            ],
+            [
+                3052,
+                3051,
+                182,
+                191
+            ],
+            [
+                3053,
+                3052,
+                183,
+                192
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                12
+            ],
+            [
+                12,
+                18,
+                13,
+                31
+            ],
+            [
+                12,
+                18,
+                11,
+                24
+            ],
+            [
+                8,
+                18,
+                6,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4050
+            ],
+            [
+                4050
+            ],
+            [
+                4051,
+                4050,
+                180
+            ],
+            [
+                4051,
+                181,
+                190
+            ],
+            [
+                4052,
+                4051,
+                181,
+                190
+            ],
+            [
+                4052,
+                182,
+                191
+            ],
+            [
+                4053,
+                4052,
+                183,
+                192
+            ],
+            [
+                4053,
+                183,
+                192
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                4
+            ],
+            [
+                8,
+                4,
+                14
+            ],
+            [
+                5,
+                12,
+                10,
+                18
+            ],
+            [
+                8,
+                3,
+                14
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                8,
+                14
+            ]
+        ]
     }
 ]

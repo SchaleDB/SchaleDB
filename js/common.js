@@ -24,6 +24,7 @@ const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_02", "Defense": "TimeAttack
 const searchDelay = 100
 const searchMaxResults = 40
 const altSprite = [10017, 10033, 10041, 10042, 10043, 10048, 20009, 20014, 10062]
+const raidDifficultyName = ["Normal", "Hard", "VeryHard", "HardCore", "Extreme", "Insane", "Torment"]
 const buffIconKeys = {"AttackPower": "ATK","DefensePower": "DEF","CriticalPoint": "CriticalChance","CriticalDamageRate": "CriticalDamage","CriticalDamageResistRate": "CriticalDamageRateResist","DodgePoint": "Dodge","HealEffectivenessRate": "HealEffectiveness","AccuracyPoint": "HIT","MaxHP": "MAXHP","DefensePenetration": "Penetration","StabilityPoint": "Stability","StabilityRate": "Stability","RegenCost": "CostRegen"}
 const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','AmmoCount']
 const studentStatListFull = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','AttackSpeed','BlockRate','DefensePenetration', 'AmmoCount']
@@ -1836,8 +1837,8 @@ class EnemyFinder {
                         if (enemy.Icon !== undefined && enemy.Icon != "") {
                             statPreviewEnemyList.push({
                                 id: enemy.Id,
-                                name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", difficultyId)})`,
-                                searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", difficultyId)],
+                                name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])})`,
+                                searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])],
                                 source: getLocalizedString("StageType", "Raid"),
                                 rank: enemy.Rank,
                                 icon: `images/enemy/${enemy.Icon}`,
@@ -1847,8 +1848,8 @@ class EnemyFinder {
                         } else {
                             statPreviewEnemyList.push({
                                 id: enemy.Id,
-                                name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", difficultyId)})`,
-                                searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", difficultyId)],
+                                name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])})`,
+                                searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])],
                                 source: getLocalizedString("StageType", "Raid"),
                                 rank: enemy.Rank,
                                 icon: `images/raid/icon/Icon_${raid.PathName}${difficultyId >= 5 ? '_Insane' : ''}`,
@@ -1889,10 +1890,9 @@ class EnemyFinder {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && !enemy.DevName.includes('_Resort_') && !enemy.DevName.includes('_HolyRelic_') && !enemy.DevName.includes('_HolyRelic02_')) {
                         const raidIcon = (enemy.Icon !== undefined && enemy.Icon != "") ? `images/enemy/${enemy.Icon}` : `images/raid/icon/Icon_${raid.PathName}`
-                        const raidDifficulty = raid.Id >= 821000 ? getLocalizedString('RaidDifficulty', difficultyId) : String.fromCharCode(65+difficultyId)
                         statPreviewEnemyList.push({
                             id: enemy.Id,
-                            name: `${enemy.Name} (${raidDifficulty})`,
+                            name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", raid.DifficultyName[difficultyId])})`,
                             searchTerms: [getTranslatedString(raid, 'Name')],
                             source: getLocalizedString("StageType", "WorldRaid"),
                             rank: enemy.Rank,
@@ -4631,9 +4631,7 @@ function loadRaid(raidId) {
             //generate difficulty tabs
             let difficultyHtml = ''
             for (let i = 0; i <= maxDifficulty; i++) {
-                const difficultyName = raidId >= 821000 ? getLocalizedString('RaidDifficulty', i) : String.fromCharCode(65+i) 
-                difficultyHtml += `<a id="ba-worldraid-difficulty-${i}" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeWorldRaidDifficulty(${i})">${difficultyName}</a>`
-                
+                difficultyHtml += `<a id="ba-worldraid-difficulty-${i}" class="nav-link" data-bs-toggle="tab" href="#" onclick="changeWorldRaidDifficulty(${i})">${raid.DifficultyName[i]}</a>`
             }
 
             $('#ba-worldraid-difficulty').html(difficultyHtml)

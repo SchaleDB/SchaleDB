@@ -393,7 +393,7 @@
                             "",
                             "",
                             "",
-                            "\n命中<d:MoveSpeed>降低的敌方单位时，对其造成<b>600,000</b>的追加伤害\n白被弹回的球击中时，<d:DamagedRatio>提升50%(持续40秒)"
+                            "\n命中<d:MoveSpeed>降低的敌方单位时，对其造成<b>600,000</b>的追加伤害\n白被弹回的滚球击中时，<d:DamagedRatio>提升50%(持续40秒)"
                         ],
                         [
                             "43,000",
@@ -606,11 +606,11 @@
                             "30%"
                         ],
                         [
-                            "\nATG提升至100%时，对所有敌方单位造成其最大生命值1000%的伤害",
-                            "\nATG提升至100%时，对所有敌方单位造成其最大生命值1000%的伤害",
-                            "\nATG提升至100%时，对所有敌方单位造成其最大生命值1000%的伤害",
-                            "\nATG提升至100%时，对所有敌方单位造成其最大生命值1000%的伤害",
-                            "\nATG提升至100%时，对所有敌方单位造成其最大生命值1000%的伤害",
+                            "\nATG提升至100%时，对所有敌方单位各造成其最大生命值1000%的伤害",
+                            "\nATG提升至100%时，对所有敌方单位各造成其最大生命值1000%的伤害",
+                            "\nATG提升至100%时，对所有敌方单位各造成其最大生命值1000%的伤害",
+                            "\nATG提升至100%时，对所有敌方单位各造成其最大生命值1000%的伤害",
+                            "\nATG提升至100%时，对所有敌方单位各造成其最大生命值1000%的伤害",
                             "\nATG提升至100%时，赋予所有敌方单位<s:Immortal>状态(持续10秒)\n对所有敌方单位各造成其最大生命值1000%的伤害\n所有敌方单位<b:HealEffectiveness>提升2000(持续10秒)",
                             "\nATG提升至100%时，赋予所有敌方单位<s:Immortal>状态(持续10秒)\n对所有敌方单位各造成其最大生命值1000%的伤害\n所有敌方单位<b:HealEffectiveness>提升2000(持续10秒)"
                         ]
@@ -880,7 +880,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL05",
                     "Name": "无限回转・超级过充蛋头",
-                    "Desc": "足(黄)：<b:ATK>提升4000(持续30秒)"
+                    "Desc": "腿(黄)：<b:ATK>提升4000(持续30秒)"
                 },
                 {
                     "Id": "KaitenFxMk0PassiveSkill01",
@@ -1154,7 +1154,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL02",
                     "Name": "摧毁模式 II",
-                    "Desc": "对直线范围内的敌方单位造成攻击力200%的伤害"
+                    "Desc": "对直线范围内的敌方单位各造成攻击力200%的伤害"
                 },
                 {
                     "Id": "HODEx03",
@@ -1163,14 +1163,14 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL03",
                     "Name": "侵蚀之柱生成",
-                    "Desc": "生成<?1>能令其周围一定圆形范围内的敌方单位<d:CostRegen>降低<b>350</b>(效果无法叠加)\n侵蚀范围每15秒扩大1级，",
+                    "Desc": "生成<?1>能令其周围一定圆形范围内的敌方单位<d:CostRegen>降低<b>350</b>(至多叠加1层)\n侵蚀范围每15秒扩大1级，",
                     "Parameters": [
                         [
-                            "1根侵蚀之柱,侵蚀之柱",
-                            "1根侵蚀之柱,侵蚀之柱",
-                            "1根侵蚀之柱,侵蚀之柱",
-                            "1根侵蚀之柱,侵蚀之柱",
-                            "1根侵蚀之柱,侵蚀之柱",
+                            "1根侵蚀之柱，侵蚀之柱",
+                            "1根侵蚀之柱，侵蚀之柱",
+                            "1根侵蚀之柱，侵蚀之柱",
+                            "1根侵蚀之柱，侵蚀之柱",
+                            "1根侵蚀之柱，侵蚀之柱",
                             "2根侵蚀之柱，每根侵蚀之柱"
                         ]
                     ]
@@ -1182,7 +1182,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL04",
                     "Name": "能量过载",
-                    "Desc": "对全体敌方单位造成攻击力150%的伤害\nHod的生命值低于50%时，对全体敌方单位造成攻击力300%的伤害并摧毁所有炮台"
+                    "Desc": "对所有敌方单位造成攻击力150%的伤害\nHod的生命值低于50%时，对全体敌方单位造成攻击力300%的伤害并摧毁所有炮台"
                 },
                 {
                     "Id": "HODEx05",
@@ -18988,6 +18988,11 @@
                 2,
                 2
             ],
+            "DifficultyName": [
+                "A",
+                "B",
+                "C"
+            ],
             "PathName": "WakamoSwimsuit",
             "IconBG": "Boss_Portrait_HoverCraft_LobbyBG",
             "Terrain": [
@@ -19056,7 +19061,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_WAKAMOSWIMSUIT_PASSIVE01",
                     "Name": "……别来坏我好事！",
-                    "Desc": "被若藻EX技能命中的单位将被施加1层<s:SuddenDeath>状态\n叠加层数达到5时对该目标造成其最大生命值1000%的伤害。"
+                    "Desc": "被若藻EX技能命中的单位将被施加1层<s:SuddenDeath>\n叠加层数达到5时对该目标造成其最大生命值1000%的伤害。"
                 }
             ],
             "Name": "若藻(泳装)",
@@ -19569,6 +19574,11 @@
                 2,
                 2
             ],
+            "DifficultyName": [
+                "A",
+                "B",
+                "C"
+            ],
             "PathName": "HoverCraft",
             "IconBG": "Boss_Portrait_HoverCraft_LobbyBG",
             "Terrain": [
@@ -19616,7 +19626,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOVERCRAFT_EXSKILL01",
                     "Name": "双管加农炮",
-                    "Desc": "对至多8名敌方单位分别造成攻击力70%的伤害"
+                    "Desc": "对至多8名敌方单位各造成攻击力70%的伤害"
                 },
                 {
                     "Id": "WakamoHoverCraftEx02",
@@ -19625,7 +19635,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOVERCRAFT_EXSKILL02",
                     "Name": "烈焰火箭",
-                    "Desc": "对至多2名敌方单位分别造成攻击力250%的伤害"
+                    "Desc": "对至多2名敌方单位各造成攻击力250%的伤害"
                 },
                 {
                     "Id": "WakamoHoverCraftEx03",
@@ -20182,6 +20192,14 @@
             "DifficultyMax": [
                 5,
                 4
+            ],
+            "DifficultyName": [
+                "Normal",
+                "Hard",
+                "VeryHard",
+                "HardCore",
+                "Extreme",
+                "Insane"
             ],
             "PathName": "Binah_Colour",
             "IconBG": "Boss_Portrait_Binah_Colour_LobbyBG",
@@ -21930,6 +21948,14 @@
                 5,
                 4
             ],
+            "DifficultyName": [
+                "Normal",
+                "Hard",
+                "VeryHard",
+                "HardCore",
+                "Extreme",
+                "Insane"
+            ],
             "PathName": "Chesed_Colour",
             "IconBG": "Boss_Portrait_Chesed_Colour_LobbyBG",
             "Terrain": [
@@ -23671,6 +23697,14 @@
             "DifficultyMax": [
                 5,
                 4
+            ],
+            "DifficultyName": [
+                "Normal",
+                "Hard",
+                "VeryHard",
+                "HardCore",
+                "Extreme",
+                "Insane"
             ],
             "PathName": "ShiroKuro_Colour",
             "IconBG": "Boss_Portrait_ShiroKuro_Colour_LobbyBG",
@@ -25460,6 +25494,14 @@
             "DifficultyMax": [
                 5,
                 4
+            ],
+            "DifficultyName": [
+                "Normal",
+                "Hard",
+                "VeryHard",
+                "HardCore",
+                "Extreme",
+                "Insane"
             ],
             "PathName": "Hieronymus_Colour",
             "IconBG": "Boss_Portrait_Hieronymus_Colour_LobbyBG",
@@ -27292,6 +27334,14 @@
                 5,
                 4
             ],
+            "DifficultyName": [
+                "Normal",
+                "Hard",
+                "VeryHard",
+                "HardCore",
+                "Extreme",
+                "Insane"
+            ],
             "PathName": "HOD_Colour",
             "IconBG": "Boss_Portrait_HOD_Colour_LobbyBG",
             "Terrain": [
@@ -29044,6 +29094,14 @@
             "DifficultyMax": [
                 5,
                 4
+            ],
+            "DifficultyName": [
+                "Normal",
+                "Hard",
+                "VeryHard",
+                "HardCore",
+                "Extreme",
+                "Insane"
             ],
             "PathName": "Perorozilla_Colour",
             "IconBG": "Boss_Portrait_Perorozilla_Colour_LobbyBG",
