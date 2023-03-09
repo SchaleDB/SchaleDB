@@ -6281,9 +6281,17 @@ function getEventCardHTML(eventId) {
         }
     }
 
-    let onClick = `populateEventStageList(${eventId});`
-    if (eventId == 821) {
-        onClick = `loadRaid(821001);`
+    let onClick
+    switch (eventId) {
+        case 821:
+            onClick = `loadRaid(821001);`
+            break;
+        case 823:
+            onClick = `loadRaid(823000);`
+            break;
+        default:
+            onClick = `populateEventStageList(${eventId});`
+            break;
     }
 
     let html = `

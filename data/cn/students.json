@@ -42695,8 +42695,11 @@
                         "Type": "DMGMulti",
                         "CriticalCheck": "Check",
                         "Hits": [
-                            10000,
-                            10000
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
                         ],
                         "HitsParameter": 1,
                         "Scale": [
@@ -71746,7 +71749,7 @@
         "DefaultOrder": 132,
         "PathName": "Koyuki",
         "DevName": "CH0198",
-        "Name": "コユキ",
+        "Name": "小雪",
         "School": "Millennium",
         "Club": "TheSeminar",
         "StarGrade": 3,
@@ -71770,10 +71773,10 @@
         "CollectionBG": "BG_Millennium_Collection",
         "CollectionTexture": "Student_Portrait_CH0198_Collection",
         "FamilyName": "黒崎",
+        "FamilyNameRuby": null,
         "PersonalName": "コユキ",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
-        "FamilyNameRuby": "くろさき",
         "Birthday": "2月14日",
         "CharacterSSRNew": "思い通りにいかない時こそ、\n人生は面白くなるんですよ！",
         "ProfileIntroduction": "ミレニアムサイエンススクール所属、生徒会「セミナー」のトラブルメーカーな天才少女。\n\n数学的な暗号の解読に関して、天賦の才を持っているが、本人にはその自覚が全くない。また、自分では制御できない運が絡む要素が好きで、様々な方法で自分の運を試している。苦難にあっても諦めない。",
@@ -71830,8 +71833,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "トリッキーな変数",
-                "Desc": "円形範囲内の敵に対して、爆弾1個を投擲しダメージを与えます。\n銃弾：攻撃力の<?1>分のダメージ\n電界：攻撃力の<?2>分のダメージ\n爆炎：攻撃力の<?3>分のダメージ",
+                "Name": "诡计变数",
+                "Desc": "随机投掷1个炸弹，对圆形范围内的敌方单位造成伤害\n铳弹：造成攻击力<?1>的伤害\n电场：造成攻击力<?2>的伤害\n爆炎：造成攻击力<?3>的伤害",
                 "Parameters": [
                     [
                         "233%",
@@ -71954,8 +71957,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "1人だと思いましたか！？",
-                "Desc": "30秒毎に、敵1人に対して攻撃力の<?1>分のダメージ、対象の付近に敵がいる場合、付近の敵2体に対して同じダメージ/\n発動後すぐにリロード",
+                "Name": "觉得自己是孤身一人吗！？",
+                "Desc": "每30秒对1名敌方单位造成攻击力<?1>的伤害，目标周围存在其他敌方单位时，对其附近至多2名敌方单位造成同样的伤害/\n使用该技能后立即换弹",
                 "Parameters": [
                     [
                         "202%",
@@ -72035,8 +72038,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "ミラクルを信じてますか？",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Name": "你相信奇迹吗？",
+                "Desc": "<b:ATK>提升<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -72073,8 +72076,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "カオス理論",
-                "Desc": "Exスキルの発動と同時に、使用した爆弾の種類によって<b:ATK>を増加（40秒間）\n銃弾：<b:ATK>を<?1>増加\n電界：<b:ATK>を<?2>増加\n爆炎：<b:ATK>を<?3>増加",
+                "Name": "混沌理论",
+                "Desc": "使用EX技能时，基于使用的炸弹种类令自身<b:ATK>提升(持续40秒)\n铳弹：<b:ATK>提升<?1>\n电场：<b:ATK>提升<?2>\n爆炎：<b:ATK>提升<?3>",
                 "Parameters": [
                     [
                         "15.3%",
@@ -72162,8 +72165,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "ミラクルを信じてますか？+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Name": "你相信奇迹吗？+",
+                "Desc": "<b:ATK>提升<?1>\n<b:ATK>提升<?2>.",
                 "Parameters": [
                     [
                         "417",
