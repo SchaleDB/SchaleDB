@@ -18762,13 +18762,13 @@
             "Id": 983164925,
             "Icon": "TimeAttack_Icon_Debuff_NormalAttackSpeed_Ally_01",
             "Name": "공격 속도 감소",
-            "Desc": "아군의 공격 속도가 감소합니다."
+            "Desc": "아군의 <d:AttackSpeed>가 75% 감소합니다."
         },
         {
             "Id": 3257931121,
             "Icon": "TimeAttack_Icon_Buff_DodgePoint_Enemy_01",
             "Name": "회피 수치 증가",
-            "Desc": "적의 회피 수치가 증가합니다."
+            "Desc": "적의 <b:Dodge>가 1000% 증가합니다."
         },
         {
             "Id": 2570956929,
@@ -18780,13 +18780,13 @@
             "Id": 2503860611,
             "Icon": "TimeAttack_Icon_Debuff_DefensePower_Ally_01",
             "Name": "방어력 감소",
-            "Desc": "아군의 방어력이 감소합니다."
+            "Desc": "아군의 <d:DEF>이 90% 감소합니다."
         },
         {
             "Id": 3301214750,
             "Icon": "TimeAttack_Icon_Special_TriggerDieDamage_Enemy_01",
             "Name": "적 퇴치 시 피해",
-            "Desc": "적 퇴치 시 해당 위치를 중심으로 원형 범위 내의 아군에게 대미지를 줍니다."
+            "Desc": "적 퇴치 시 해당 위치를 중심으로 원형 범위 내의 아군에게 <b>100%</b> 대미지를 줍니다."
         },
         {
             "Id": 2075498290,
@@ -18798,13 +18798,13 @@
             "Id": 648270201,
             "Icon": "TimeAttack_Icon_Debuff_AttackPower_Ally_01",
             "Name": "SR 무기 공격력 감소",
-            "Desc": "SR 무기를 사용하는 아군 스트라이커의 공격력이 감소합니다."
+            "Desc": "SR 무기를 사용하는 아군 스트라이커의 <d:ATK>이 90% 감소합니다."
         },
         {
             "Id": 2856565282,
             "Icon": "TimeAttack_Icon_Buff_AccuracyPoint_Enemy_01",
             "Name": "명중 수치 증가",
-            "Desc": "적의 명중 수치가 증가합니다."
+            "Desc": "적의 <b:HIT>가 <b>1,500</b> 증가합니다."
         },
         {
             "Id": 1329507091,
@@ -18816,37 +18816,37 @@
             "Id": 1949095289,
             "Icon": "TimeAttackGeas_Ally_StatChange_CriticalPoint_Up_Fixed",
             "Name": "아군 치명 수치 증가",
-            "Desc": "아군의 치명 수치가 증가합니다."
+            "Desc": "아군의 <b:CriticalChance>가 <b>2,000</b> 증가합니다."
         },
         {
             "Id": 1428571194,
             "Icon": "TimeAttackGeas_Ally_StatChange_CostRegen_Down_Ratio_TriggerUseSkill",
             "Name": "스킬 사용 시 코스트 회복 속도 감소",
-            "Desc": "스킬 사용 시 아군의 코스트 회복 속도가 감소합니다."
+            "Desc": "EX 스킬 사용 시 아군의 <d:CostRegen>이 <b>60</b> 감소합니다. 효과는 전투가 끝날 대까지 지속됩니다."
         },
         {
             "Id": 3009801818,
             "Icon": "TimeAttack_Icon_Debuff_AttackPower_Ally_01",
             "Name": "MT, AR 무기 공격력 감소",
-            "Desc": "MT, AR 무기를 사용하는 아군 학생의 공격력이 감소합니다."
+            "Desc": "MT, AR 무기를 사용하는 아군 학생의 <d:ATK>이 90% 감소합니다."
         },
         {
             "Id": 2490399639,
             "Icon": "TimeAttackGeas_Enemy_StatChange_MaxHP_TriggerCrowdControl_Damage",
             "Name": "군중제어 적중 시 추가 피해",
-            "Desc": "적 체력이 증가하는 대신, 군중제어 효과가 적중할 때 마다 추가 피해를 받습니다."
+            "Desc": "적들의 <b:MAXHP>이 <b>100,000</b> 증가합니다. 군중제어 효과가 적중할 때 마다 추가로 <b>120,000</b> 대미지를 받습니다."
         },
         {
             "Id": 719379007,
             "Icon": "TimeAttackGeas_Ally_Damage_MaxHP_TriggerPeriodic",
             "Name": "허수아비 체력 지속 감소",
-            "Desc": "허수아비는 1초마다 현재 체력이 감소합니다."
+            "Desc": "허수아비는 1초마다 최대 체력의 2%의 대미지를 받습니다."
         },
         {
             "Id": 773473613,
             "Icon": "TimeAttackGeas_Ally_StatChange_CostRegen_RatioAllTacticRole",
             "Name": "모든 클래스 편성 ",
-            "Desc": "팀에 서포터, 어태커, 탱커, 힐러, T.S 가 모두 한명 이상 편성할 경우 아군 전체의 코스트 회복 속도가 증가합니다."
+            "Desc": "팀에 서포터, 어태커, 탱커, 힐러, T.S 가 모두 한명 이상 편성할 경우 아군 전체의 <b:CostRegen>이 <b>700</b> 증가합니다."
         },
         {
             "Id": 3938056289,
@@ -18858,13 +18858,13 @@
             "Id": 3091509634,
             "Icon": "TimeAttackGeas_Enemy_StatChange_AttackPower_CostRegen_CharacterCount",
             "Name": "소수정예",
-            "Desc": "편성한 학생 수에 따라 공격력과 코스트 회복 속도가 변화합니다. 편성한 학생의 수가 적을수록 더 많은 수치가 증가합니다. (최대 4명까지)"
+            "Desc": "부대에 학생을 <b>1/2/3/4</b>명만 편성할 경우, 모든 학생의 <b:ATK>이 300%/150%/100%/50% 증가하고 <b:CostRegen>이 <b>3,500/2,450/1,400/1,050</b> 증가합니다."
         },
         {
             "Id": 3334829467,
             "Icon": "TimeAttackGeas_Enemy_Heal_TriggerPeriod",
             "Name": "일정 시간마다 회복",
-            "Desc": "일정 시간마다 적이 체력을 회복합니다."
+            "Desc": "적이 1초마다 최대 체력의 1.5% 를 회복합니다."
         },
         {
             "Id": 3839125090,
@@ -18882,19 +18882,19 @@
             "Id": 2045771535,
             "Icon": "TImeAttackGeas_Ally_Dispel_Buff",
             "Name": "이로운 효과 제거",
-            "Desc": "아군에게 걸려있는 이로운 효과가 사라집니다.\n(강화 스킬 효과, 스페셜 캐릭터의 서브 스킬 효과 및 해제 불가능한 효과는 사라지지 않습니다)"
+            "Desc": "아군에게 적용된 이로운 효과가 즉시 사라집니다.\n(강화 스킬 효과, 스페셜 캐릭터의 서브 스킬 효과 및 해제 불가능한 효과는 사라지지 않습니다)"
         },
         {
             "Id": 1582447562,
             "Icon": "TImeAttackGeas_Enemy_StatChange_DefensePenetration",
             "Name": "방어관통 수치 증가",
-            "Desc": "적의 방어관통 수치가 증가합니다"
+            "Desc": "적의 <b:Penetration> 수치가 <b>2,000</b> 증가합니다"
         },
         {
             "Id": 4033973365,
             "Icon": "TimeAttack_Icon_Buff_AttackPower_Ally_01",
             "Name": "T.S 클래스, AR 무기 공격력 증가",
-            "Desc": "T.S 클래스 학생의 공격력이 증가합니다./\nAR 무기를 사용하는 아군 학생의 공격력이 증가합니다./\n(두 효과는 중첩되지 않습니다.)"
+            "Desc": "T.S 클래스 학생의 <b:ATK>이 300% 증가합니다.\nAR 무기를 사용하는 아군 학생의 <b:ATK>이 300% 증가합니다.\n(두 효과는 중첩되지 않습니다.)"
         },
         {
             "Id": 3951708717,
@@ -18906,37 +18906,37 @@
             "Id": 328739473,
             "Icon": "TimeAttackGeas_Ally_Heal",
             "Name": "적 처치 시 공격력 감소, 회복 시 제거",
-            "Desc": "적을 처치할 때마다 공격력이 감소합니다. /\n회복 효과를 받으면 공격력 감소 효과를 일정 개수만큼 제거합니다."
+            "Desc": "적을 처치할 때마다 <d:ATK>이 5% 감소합니다 (최대 <b>50</b>회 중첩).\n회복 효과를 받으면 공격력 감소 효과 중첩을 5회 제거합니다."
         },
         {
             "Id": 3427259164,
             "Icon": "TimeAttack_Icon_Debuff_AttackPower_Ally_01",
             "Name": "SR, MG 무기 공격력 감소",
-            "Desc": "SR, MG 무기를 사용하는 아군 학생의 공격력이 감소합니다."
+            "Desc": "SR, MG 무기를 사용하는 아군 학생의 <d:ATK>이 90% 감소합니다."
         },
         {
             "Id": 3153525398,
             "Icon": "TimeAttackGeas_Ally_Immune",
             "Name": "허수아비 상태 변화",
-            "Desc": "허수아비는 일정 시간마다 상태가 변화합니다.디버프 상태: 허수아비에 회복 효과를 주면 아군 학생에게 피해가 발생합니다. 허수아비에 대한 회복 효과는 1로 고정됩니다.통상 상태: 회복 효과가 적용됩니다."
+            "Desc": "허수아비는 일정 시간마다 상태가 변화합니다.\n<b>디버프 상태</b>: 허수아비에 회복 효과를 주면 아군 학생에게 <b>10,000</b> 대미지를 가합니다 (방어력으로 감소되며 회피 가능). 허수아비는 <d:HealedLimit> 상태가 되어 받는 회복 효과가 <b>1</b>로 고정됩니다.<b>통상 상태</b>: 회복 효과가 적용됩니다."
         },
         {
             "Id": 3902330525,
             "Icon": "TimeAttackGeas_Enemy_FireArea_TriggerDie",
             "Name": "적 사망 시 화염 지대",
-            "Desc": "적 사망 시 해당 위치에 화염 지대가 생성됩니다."
+            "Desc": "적 사망 시 해당 위치에 화염 지대가 생성되어 20초 동안 매 초 <b>100%</b>의 대미지를 가합니다."
         },
         {
             "Id": 1246791085,
             "Icon": "TImeAttackGeas_Enemy_DamageOverTime_DamageRatioUp_Ratio",
             "Name": "화상, 오한, 중독, 응원의 열기 추가 피해",
-            "Desc": "적이 화상, 오한, 중독, 응원의 열기 효과가 적용되거나, 대미지를 받을 때마다 추가 대미지를 받습니다.\n적 체력이 증가합니다."
+            "Desc": "적이 <d:Burn>, <d:Chill>, <d:Poison>, <d:Cheerleading> 효과가 적용되거나 그로 인한 대미지를 받을 때마다 추가로 <b>70,000</b> 대미지를 받습니다.\n적의 <b:MAXHP>이 150% 증가합니다."
         },
         {
             "Id": 3239764743,
             "Icon": "TimeAttack_Icon_Buff_CriticalChanceResistPoint_Enemy_01",
             "Name": "치명저항 수치 증가",
-            "Desc": "적의 치명저항 수치가 증가합니다"
+            "Desc": "적의 <b:CriticalChanceResistPoint> 수치가 <b>700</b> 증가합니다."
         }
     ],
     "WorldRaid": [
