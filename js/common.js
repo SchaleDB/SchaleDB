@@ -7220,11 +7220,15 @@ function getConsumableRewards(item) {
     switch (item.ConsumeType) {
         case "Random":
             headerText = translateUI('item_contains_random')
-            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[3])})
+            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[2])})
             break;
         case "Choice":
             headerText = translateUI('item_contains_choice')
-            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[3])})
+            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[2])})
+            break;
+        case "All":
+            headerText = translateUI('item_contains')
+            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[2])})
             break;
     }
 

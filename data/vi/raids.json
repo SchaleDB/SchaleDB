@@ -18789,6 +18789,128 @@
                     3239764743
                 ]
             ]
+        },
+        {
+            "Id": 14000,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "DungeonType": "Defense",
+            "Icon": "EnemyInfo_Sweeper_Decagram_Taser_White",
+            "MaxDifficulty": 4,
+            "Terrain": "Outdoor",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 904000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7801201,
+                        7801001,
+                        7801101
+                    ]
+                },
+                {
+                    "Id": 904000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7801002,
+                        7801202,
+                        7801102
+                    ]
+                },
+                {
+                    "Id": 904000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7801203,
+                        7801003,
+                        7801103
+                    ]
+                },
+                {
+                    "Id": 904000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7801204,
+                        7801104,
+                        7801004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    990306261,
+                    2075498290
+                ],
+                [
+                    990306261,
+                    2075498290
+                ],
+                [
+                    990306261,
+                    2075498290,
+                    4104132399
+                ],
+                [
+                    990306261,
+                    2075498290,
+                    4104132399,
+                    3258287232
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -18983,6 +19105,18 @@
             "Icon": "TimeAttack_Icon_Buff_CriticalChanceResistPoint_Enemy_01",
             "Name": "会心抵抗値の増加",
             "Desc": "敵の会心抵抗値が増加します。"
+        },
+        {
+            "Id": 4104132399,
+            "Icon": "TimeAttack_Icon_Buff_AttackPower_Enemy_01",
+            "Name": "移動速度の減少、攻撃力の増加",
+            "Desc": "敵の移動速度が減少する代わりに攻撃力が増加します。押されたり、引っ張られたりしません。"
+        },
+        {
+            "Id": 3258287232,
+            "Icon": "TimeAttack_Icon_Debuff_MaxHP_Ally_01",
+            "Name": "HP減少",
+            "Desc": "味方のタンクの生徒のHPが減少します。"
         }
     ],
     "WorldRaid": [
