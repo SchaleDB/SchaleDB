@@ -1391,7 +1391,27 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL03",
                     "Name": "Mũ đồng tiền ảo ma",
-                    "Desc": "Goz xáo trộn ba chiếc mũ có giấu đồng xu bên trong hai chiếc. Sau khi mũ bị xáo trộn, kẻ địch đứng trên đường thẳng tính từ mũ không có đồng xu sẽ nhận 800% sát thương, bị đẩy lùi bị <c:Stunned> trong 5s."
+                    "Desc": "Goz xáo trộn ba chiếc mũ có giấu đồng xu bên trong <?2>. Sau khi mũ bị xáo trộn, kẻ địch trong khu vực đường thẳng từ mũ không có xu sẽ nhận 800% sát thương, bị đẩy lùi và nhận hiệu ứng <c:Stunned> trong 5 giây.<?1>",
+                    "Parameters": [
+                        [
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "\nĐồng thời giảm <d:AttackSpeed> của kẻ địch bị trúng đòn xuống 50% trong 30s."
+                        ],
+                        [
+                            "hai chiếc mũ",
+                            "hai chiếc mũ",
+                            "hai chiếc mũ",
+                            "hai chiếc mũ",
+                            "hai chiếc mũ",
+                            "hai chiếc mũ",
+                            "một trong số chúng"
+                        ]
+                    ]
                 },
                 {
                     "Id": "GozEx04",
@@ -19174,7 +19194,7 @@
             "Id": 4104132399,
             "Icon": "TimeAttack_Icon_Buff_AttackPower_Enemy_01",
             "Name": "移動速度の減少、攻撃力の増加",
-            "Desc": "敵の移動速度が減少する代わりに攻撃力が増加します。押されたり、引っ張られたりしません。"
+            "Desc": "敵の移動速度が減少する代わりに攻撃力が増加し、押されたり、引っ張られたりしません。"
         },
         {
             "Id": 3258287232,

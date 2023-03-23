@@ -136,6 +136,7 @@ let statPreviewWeaponGrade
 let statPreviewLevel
 let statPreviewWeaponLevel
 let statPreviewEquipment
+let statPreviewGearLevel
 let statPreviewBondLevel
 let statPreviewBondAltLevel
 let statPreviewPassiveLevel
@@ -895,7 +896,13 @@ class ExternalBuffs extends Buffs {
                             if (buff.Skill.SkillType == skill.SkillType) available = false
                         })
 
-                        if (skill.SkillType == 'gearnormal' && !student.Gear.Released[regionID]) available = false
+                        if (student.Gear.Released != undefined && student.Gear.Released[regionID]) {
+                            if (student.Id == currentStudentId && skill.SkillType == 'gearnormal' && statPreviewGearLevel < 2) available = false
+                            if (student.Id == currentStudentId && skill.SkillType == 'normal' && statPreviewGearLevel >= 2) available = false
+                        } else {
+                            if (skill.SkillType == 'gearnormal') available = false
+                        }
+
                         if (available) this.addBuff(student.Id, skill)                           
                     }
                 })
@@ -1038,6 +1045,21 @@ class ExternalBuffs extends Buffs {
         $(this.elements.searchBox).val('').trigger('blur')
     }
 
+    toggleUpgrades(useUpgrades) {
+        //switch between normal and normal+
+        if (student.Gear.Released != undefined && student.Gear.Released[regionID]) {
+            for (let i = 0; i < this.buffs.length; i++) {
+                const buff = this.buffs[i]
+                if (buff.StudentId == student.Id && buff.Skill.SkillType.endsWith("normal")) {
+                    const skillType = useUpgrades ? "gearnormal" : "normal"
+                    const skillToReplace = student.Skills.find(s => s.SkillType == skillType)
+                    buff.Skill = skillToReplace
+                }
+            }
+            this.renderControls()
+        }
+    }
+
     updateBuffLevel(index, level) {
         const buff = this.buffs[index]
         buff.Level = level
@@ -1089,8 +1111,13 @@ class ExternalBuffs extends Buffs {
                             find(this.buffs, "StudentId", student.Id).forEach((buff) => {
                                 if (buff.Skill.SkillType == skill.SkillType) available = false
                             })
-
-                            if (skill.SkillType == 'gearnormal' && !student.Gear.Released[regionID]) available = false
+                            if (student.Gear.Released != undefined && student.Gear.Released[regionID]) {
+                                if (student.Id == currentStudentId && skill.SkillType == 'gearnormal' && statPreviewGearLevel < 2) available = false
+                                if (student.Id == currentStudentId && skill.SkillType == 'normal' && statPreviewGearLevel >= 2) available = false
+                            } else {
+                                if (skill.SkillType == 'gearnormal') available = false
+                            }
+                            
                             if (available) {
     
                                 let desc = ""
@@ -2517,7 +2544,7 @@ class SkillDamageInfo {
         switch (condition) {
             //GearPublic skill is unlocked
             case "GearPublic":
-                return (statPreviewIncludeExGear && student.Gear.Released !== undefined && student.Gear.Released[regionID])
+                return (statPreviewGearLevel >= 2 && student.Gear.Released !== undefined && student.Gear.Released[regionID])
             default:
                 console.log(`Unknown substitution condition ${effect.SubstituteCondition}`)
                 return false
@@ -2828,6 +2855,7 @@ function loadModule(moduleName, entry=null) {
             $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
             $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
             $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
+            $('#ba-statpreview-gear4-range').val(statPreviewGearLevel)
             $('#ba-statpreview-passiveskill-range').val(statPreviewPassiveLevel)
             $('#ba-statpreview-summon-range').val(statPreviewExLevel)
             $('#calculation-enemy-level input').val(statPreviewSelectedEnemyLevel)
@@ -2973,6 +3001,7 @@ function loadModule(moduleName, entry=null) {
 
             data.items.filter(i => i.Id >= 100 && i.Id < 1000 && i.Rarity == 'SSR').forEach(item => {
                 const classId = Math.floor(item.Id/10)
+                if (regionID == 1 && (classId == 23 || classId == 25)) return
                 const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="UsesArtifact" data-filter-select-value="${classId}" class="btn btn-dark"><div class="icon"><img src="images/items/${item.Icon}.png"></div><span>${getLocalizedString('ArtifactClass', classId)}</span></a></li>`
                 $('#ba-student-search-select-usesartifact-list').append(listItem)
             })
@@ -3893,7 +3922,7 @@ function setGridItemDisplayStyle(style) {
     }
 }
 
-function processStudent() {
+function renderStudent() {
 
     showAltSprite = false
     $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.DevName}.webp`)
@@ -4017,10 +4046,10 @@ function processStudent() {
     //Gear
     if ("Released" in student.Gear && student.Gear.Released[regionID]) {
         $('#ba-student-tab-gear, #ba-statpreview-ex-gear-container').show()
-        $("#ba-student-gear-name, #ba-statpreview-ex-gear-name").html(student.Gear.Name)
+        $("#ba-student-gear-name, #ba-statpreview-gear4-name").html(student.Gear.Name)
         $("#ba-student-gear-description").html(`${student.Gear.Desc}\n\n<i>${translateUI('bond_req_equip',['20', student.Name])}`)
-        $("#ba-student-gear-icon, #ba-statpreview-ex-gear-icon, #ba-student-gear-4-icon").attr("src", `images/gear/${student.Gear.Icon}.png`)
-        $("#ba-student-gear-4-icon").tooltip('dispose').tooltip({title: getRichTooltip(`images/gear/${student.Gear.Icon}.png`, getTranslatedString(student.Gear, 'Name'), translateUI('student_ex_gear'), null, getTranslatedString(student.Gear, 'Desc') + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(student.Gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !statPreviewIncludeExGear)
+        $("#ba-student-gear-icon, #ba-statpreview-gear4-icon, #ba-student-gear-4-icon").attr("src", `images/gear/${student.Gear.Icon}.png`)
+        $("#ba-student-gear-4-icon").tooltip('dispose').tooltip({title: getRichTooltip(`images/gear/${student.Gear.Icon}.png`, getTranslatedString(student.Gear, 'Name'), translateUI('student_ex_gear'), null, getTranslatedString(student.Gear, 'Desc') + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(student.Gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", statPreviewGearLevel == 0)
         let gearMaterialsHtml = ""
         for (let i = 0; i < student.Gear.TierUpMaterial[0].length; i++) {
             gearMaterialsHtml += getMaterialIconHTML(student.Gear.TierUpMaterial[0][i], student.Gear.TierUpMaterialAmount[0][i])
@@ -4037,7 +4066,7 @@ function processStudent() {
         }
 
         gearMaterialsHtml += getMaterialIconHTML(3000001, abbreviateNumber(gear_upgrade_credits[0]))
-        $("#ba-statpreview-ex-gear-description").html(getGearStatsText(student.Gear, ", "))
+        $("#ba-statpreview-gear4-description").html(getGearStatsText(student.Gear, ", "))
         $("#ba-student-gear-materials-t2").html(gearMaterialsHtml)
         $("#ba-student-gear-materials-t2>div").tooltip({html: true})
         $("#ba-student-bondreq-t2").html(translateUI('bond_req_upgrade',['25', student.Name]))
@@ -4211,7 +4240,9 @@ function processStudent() {
     changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'), false)
     changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'), false)
     changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'), false)
-
+    if ("Released" in student.Gear && student.Gear.Released[regionID]) {
+        changeExGearLevel(document.getElementById('ba-statpreview-gear4-range'), false)
+    }
     for (let i = 1; i <= student_bondalts.length+1; i++) {
         if (i > 1 && student_bondalts[i-2].Id in studentCollection) {
             statPreviewBondAltLevel = studentCollection[student_bondalts[i-2].Id].b
@@ -4236,6 +4267,7 @@ function initCharacterSkillInfo() {
     if (statPreviewSelectedChar == 0) {
 
         student.Skills.forEach((skill) => {
+            if (skill.SkillType == "gearnormal" && !student.Gear.Released[regionID]) return
             if ('Effects' in skill) {
                 let show = false
                 skill.Effects.forEach(eff => {
@@ -4247,6 +4279,11 @@ function initCharacterSkillInfo() {
                 }
             }
         })
+
+        if (student.Gear.Released != undefined && student.Gear.Released[regionID]) {
+            $('#skill-info-gearnormal').toggle(statPreviewGearLevel >= 2)
+            $('#skill-info-normal').toggle(statPreviewGearLevel < 2)
+        }
 
     } else {
         const summon = find(data.summons, 'Id', student.Summons[0].Id)[0]
@@ -4319,7 +4356,7 @@ function loadStudent(studentName) {
                 }
             }
 
-            processStudent()
+            renderStudent()
             
         }
 
@@ -4331,7 +4368,7 @@ function loadStudent(studentName) {
 function loadStudentById(studentId) {
     if (loadedModule == 'students') {
         student = findOrDefault(data.students, "Id", studentId, 10000)[0]
-        processStudent()
+        renderStudent()
     } else {
         loadModule('students')
     }
@@ -5433,8 +5470,28 @@ function toggleExGear() {
     statPreviewIncludeExGear = !statPreviewIncludeExGear
     $('#ba-statpreview-ex-gear-toggle').toggleClass("checked", statPreviewIncludeExGear)
     $('#ba-statpreview-ex-gear').toggleClass("disabled", !statPreviewIncludeExGear)
+    $('#skill-info-gearnormal').toggle(statPreviewIncludeExGear)
+    $('#skill-info-normal').toggle(!statPreviewIncludeExGear)
     updateGearIcon()
+    statPreviewExternalBuffs.toggleUpgrades(statPreviewIncludeExGear)
     recalculateStats()
+}
+
+function changeExGearLevel(el, recalculate = true) {
+    const tier = parseInt(el.value)
+    statPreviewGearLevel = tier
+
+    $('#ba-statpreview-gear4-detail').toggleClass("disabled", statPreviewGearLevel == 0)
+    $('#ba-statpreview-gear4-level').text(statPreviewGearLevel > 0 ? `T${tier}` : translateUI('setting_off'))
+
+    if (statPreviewSelectedChar == 0) {
+        $('#skill-info-gearnormal').toggle(statPreviewGearLevel >= 2)
+        $('#skill-info-normal').toggle(statPreviewGearLevel < 2)
+    }
+
+    updateGearIcon()
+    statPreviewExternalBuffs.toggleUpgrades(statPreviewGearLevel >= 2)
+    if (recalculate) recalculateStatsWithDelay()
 }
 
 function changeStatPreviewLevel(el, recalculate = true) {
@@ -5570,7 +5627,7 @@ function updateGearIcon() {
     }
 
     if ("Released" in student.Gear && student.Gear.Released[regionID]) {
-        $("#ba-student-gear-4-icon").toggleClass("gear-disabled", !statPreviewIncludeExGear || !statPreviewIncludeEquipment)
+        $("#ba-student-gear-4-icon").toggleClass("gear-disabled", statPreviewGearLevel == 0 || !statPreviewIncludeEquipment)
     }
 }
 
@@ -5657,7 +5714,7 @@ function recalculateStats() {
         }
 
         //Include Fav Item
-        if (statPreviewIncludeExGear && "Released" in student.Gear && student.Gear.Released[regionID]) {
+        if ("Released" in student.Gear && student.Gear.Released[regionID] && statPreviewGearLevel >= 1) {
             studentStats.addBuff(student.Gear.StatType[0], student.Gear.StatValue[0][1])
 
             if (statPreviewSelectedChar > 0 && summon.Id != 99999) {
@@ -6110,8 +6167,8 @@ function refreshStatTableControls() {
     $('#ba-statpreview-buff-toggle').toggleClass("checked", statPreviewIncludeBuffs)
     // $('#ba-statpreview-buffs').toggleClass("disabled", !statPreviewIncludeBuffs)
 
-    $('#ba-statpreview-ex-gear-toggle').toggleClass("checked", statPreviewIncludeExGear)
-    $('#ba-statpreview-ex-gear').toggleClass("disabled", !statPreviewIncludeExGear)
+    // $('#ba-statpreview-ex-gear-toggle').toggleClass("checked", statPreviewIncludeExGear)
+    // $('#ba-statpreview-ex-gear').toggleClass("disabled", !statPreviewIncludeExGear)
 
     $('#ba-statpreview-status-equipment').toggleClass('deactivated', !statPreviewIncludeEquipment)
     $('#ba-statpreview-gear').toggleClass("disabled", !statPreviewIncludeEquipment)
@@ -6955,7 +7012,8 @@ function populateStageList(mode) {
     switch (mode) {
         case 'missions':
             $.each(data.stages.Campaign, function(i,el) {
-                if (el.Area <= data.common.regions[regionID].campaign_max)
+                if (el.Area > data.common.regions[regionID].campaign_max) return
+                if (regionID == 1 && el.Stage == "A") return
                 html += getStageCardHTML(el)
             })
             $('.stage-list').hide()
@@ -8506,6 +8564,7 @@ function statPreviewSettingsSave() {
         BondAltLevel: statPreviewBondAltLevel,
         PassiveLevel: statPreviewPassiveLevel,
         ExLevel: statPreviewExLevel,
+        GearLevel: statPreviewGearLevel,
         IncludePassive: statPreviewIncludePassive,
         IncludeExGear: statPreviewIncludeExGear,
         IncludeBond: statPreviewIncludeBond,
@@ -8530,6 +8589,7 @@ function statPreviewSettingsLoad() {
     statPreviewBondAltLevel = statPreviewSettings.BondAltLevel ? statPreviewSettings.BondAltLevel : 20
     statPreviewPassiveLevel = statPreviewSettings.PassiveLevel ? statPreviewSettings.PassiveLevel : 10
     statPreviewExLevel = statPreviewSettings.ExLevel ? statPreviewSettings.ExLevel : 5
+    statPreviewGearLevel = statPreviewSettings.GearLevel ? statPreviewSettings.GearLevel : 0
     statPreviewIncludePassive = statPreviewSettings.IncludePassive ? statPreviewSettings.IncludePassive : false
     statPreviewIncludeExGear = statPreviewSettings.IncludeExGear ? statPreviewSettings.IncludeExGear : false
     statPreviewIncludeBond = statPreviewSettings.IncludeBond ? statPreviewSettings.IncludeBond : false

@@ -403,7 +403,7 @@
                   801,   802,   803,   804,   805,   806,   808,   809,   810, 
                   811,   812,   813,   814,   815,   816,   817,   818,   819, 
                   820,   822,   824,   701, 10801, 10802, 10803, 10804, 10805, 
-                10806, 10808, 10810, 10811, 10812
+                10806, 10808, 10809, 10810, 10811, 10812
             ], 
             "event_701_max": 10, 
             "event_701_challenge_max": 4, 
@@ -412,22 +412,22 @@
             "schooldungeon_max": 4, 
             "current_gacha": [
                 {
-                    "characters": [10063, 10010], 
-                    "start": 1678240800, 
-                    "end": 1679450400
+                    "characters": [10064, 20025, 10031, 10032, 20011], 
+                    "start": 1679450400, 
+                    "end": 1680660000
                 }
             ], 
             "current_events": [
-                {"event": 824, "start": 1678586400, "end": 1679450400}
+                {"event": 10809, "start": 1679450400, "end": 1680660000}
             ], 
             "current_raid": [
-                {"raid": 13000, "start": 1678240800, "end": 1678820400}, 
                 {
-                    "raid": 8, 
-                    "terrain": "Indoor", 
-                    "start": 1678845600, 
-                    "end": 1679425200
-                }
+                    "raid": 1, 
+                    "terrain": "Outdoor", 
+                    "start": 1680055200, 
+                    "end": 1680634800
+                }, 
+                {"raid": 14000, "start": 1680660000, "end": 1681239600}
             ]
         }, 
         {
@@ -442,7 +442,7 @@
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810, 
                   811,   812,   813,   814,   815,   816,   701, 10801, 10802, 
-                10803, 10804
+                10803, 10804, 10805
             ], 
             "event_701_max": 10, 
             "event_701_challenge_max": 1, 
@@ -483,6 +483,15 @@
         }
     ], 
     "changelog": [
+        {
+            "date": "2023/03/23", 
+            "contents": [
+                "<h6>JP Event Update</h6>", 
+                "<ul><li>Added information for new event characters, items and normal Extra stages.</li></ul>", 
+                "<h6>Improvements & Bug Fixes</h6>", 
+                "<ul><li>Unique Item can now be set to T1/T2. Setting to T2 will automatically show/hide the calculation for the upgraded Basic skill and change any set buffs.</li><li>Added several student buffs that were not available to be set.</ul>"
+            ]
+        }, 
         {
             "date": "2023/02/22", 
             "contents": [
@@ -630,15 +639,6 @@
             "contents": [
                 "Added information for Akane (Bunny) and Bunny Chaser Rerun stages.", 
                 "Added alternative sprites for more students."
-            ]
-        }, 
-        {
-            "date": "2022/09/28", 
-            "contents": [
-                "Added information for Noa, Utaha (Cheerleader) and Hibiki (Cheerleader).", 
-                "Added information for Mission 20 and On Your Mark @ Millennium stages.", 
-                "Added information for new items, furniture and equipment.", 
-                "Settings for student stats will now be remembered between visits. (Students marked as collected will still remember individual settings)"
             ]
         }
     ]
