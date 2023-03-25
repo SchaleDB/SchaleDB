@@ -4114,34 +4114,33 @@ function renderStudent() {
 
     $('#ba-student-toggle-sprite-btn').toggle(altSprite.includes(student.Id))
 
+    const pstart = performance.now()
+
     let allTags = student.FavorItemTags
     allTags.push(student.FavorItemUniqueTags[0])
     allTags.push(student.FavorItemUniqueTags[0] + "2")
 
-    let favItemsHtml = ""
-    
-    const favSSRItems = getFavouriteSSRItems(allTags)
-    $(favSSRItems[0]).each(function(i,el){
-        favItemsHtml += getFavourIconHTML(el, 4)
-    })
-    $(favSSRItems[1]).each(function(i,el){
-        favItemsHtml += getFavourIconHTML(el, 3)
-    })
-    
-    const favItems = getFavouriteItems(allTags)
-    $(favItems[0]).each(function(i,el){
-        favItemsHtml += getFavourIconHTML(el, 3)
-    })
-    $(favItems[1]).each(function(i,el){
-        favItemsHtml += getFavourIconHTML(el, 2)
-    })
+    const genericTags = ["Gift1", "Gift2"]
+    const allGifts = data.items.filter(x => x.Category == "Favor" && x.IsReleased[regionID]).sort((a,b) => b.ExpValue - a.ExpValue)
+    let favoriteGifts = ["", "", ""]
 
-    $('#ba-student-favoured-items').empty().html(favItemsHtml)
-    if (favItemsHtml == "") {
+    for (const gift of allGifts) {
+        const allTags = [...student.FavorItemTags, ...student.FavorItemUniqueTags, ...genericTags]
+        const genericTagCount = gift.Tags.filter(x => genericTags.includes(x)).length
+        const commonTags = gift.Tags.filter(x => allTags.includes(x))
+        const favorGrade = Math.min(commonTags.length, 3)
+        if (favorGrade - genericTagCount > 0) {
+            favoriteGifts[favorGrade-1] += getFavourIconHTML(gift, favorGrade)
+        }
+    }
+
+    if (favoriteGifts.join("") == "") {
         $('#ba-student-favoured-items').empty().html(`<span class="text-center">${translateUI('favoritem_none')}</span>`)
     } else {
-        $('#ba-student-favoured-items').empty().html(favItemsHtml)
+        $('#ba-student-favoured-items').empty().html(favoriteGifts.reverse().join(""))
     }
+
+    console.log(performance.now() - pstart)
 
     let favFurnitureHtml = ""
     $(student.FurnitureInteraction[regionID]).each(function(i,el){
@@ -4306,6 +4305,7 @@ function addNormalAttackSkillText(skill, weaponType) {
     switch (weaponType) {
         case "GL":
         case "RL":
+        case "MT":
         case "Cannon":
             skill["Desc"] = translateUI('skill_normalattack_circle')
             skill["Icon"] = "COMMON_SKILLICON_CIRCLE"
@@ -6661,10 +6661,8 @@ function getStudentIconSmall(student, label=null, description=null) {
     return html
 }
 
-function getFavourIconHTML(id, grade) {
-    var gift = find(data.items, "Id", id)[0]
-    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.Icon}.png`, getTranslatedString(gift, 'Name'), getLocalizedString('ItemCategory', gift.Category), getRarityTier(gift.Rarity), getTranslatedString(gift, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${gift.Rarity.toLowerCase()}" src="images/items/${gift.Icon}.png"><img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade}.png"></div>`
-    return html
+function getFavourIconHTML(gift, grade) {
+    return `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.Icon}.png`, getTranslatedString(gift, 'Name'), getLocalizedString('ItemCategory', gift.Category), getRarityTier(gift.Rarity), getTranslatedString(gift, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${gift.Rarity.toLowerCase()}" src="images/items/${gift.Icon}.png"><img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade+1}.png"></div>`
 }
 
 function getFurnitureIconHTML(item) {
@@ -7322,7 +7320,7 @@ function getLikedByStudents(item) {
     let bondGearStudentsHtml = ""
     const genericTags = ["Gift1", "Gift2"]
     const genericTagCount = item.Tags.filter(x => genericTags.includes(x)).length
-    console.log(genericTagCount)
+    
     data.students.forEach((student) => {
 
         if (!student.IsReleased[regionID])
@@ -7622,6 +7620,7 @@ function getNormalAttackHitsText(hitsArray, ammoCost, weaponType, attackType) {
     switch (weaponType) {
         case "GL":
         case "RL":
+        case "MT":
         case "Cannon":
             text = translateUI('stat_ammocount_tooltip_area', [`<b>${ammoCost}</b>`, `<b>${hitsArray.length}</b>`])
             break;
@@ -8056,32 +8055,6 @@ function getTranslatedString(obj, key) {
         console.log(`No translations defined for "${obj}.${key}"`)
         return ''
     }
-}
-
-function getFavouriteItems(tags) {
-    let gifts = [[],[]]
-    for (let i = 5000; i < 5000+max_gifts; i++) {
-        let commonTags = find(data.items, "Id", i)[0].Tags.filter(x => tags.includes(x))
-        if (commonTags.length == 1) {
-            gifts[1].push(i)
-        } else if (commonTags.length > 1) {
-            gifts[0].push(i)
-        }  
-    }
-    return gifts
-}
-
-function getFavouriteSSRItems(tags) {
-    let gifts = [[],[]]
-    for (let i = 5100; i < 5100+max_gifts_ssr; i++) {
-        let commonTags = find(data.items, "Id", i)[0].Tags.filter(x => tags.includes(x))
-        if (commonTags.length == 1) {
-            gifts[1].push(i)
-        } else if (commonTags.length > 1) {
-            gifts[0].push(i)
-        }  
-    }
-    return gifts
 }
 
 function getCacheVerResourceName(res) {
