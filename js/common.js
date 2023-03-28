@@ -2982,20 +2982,20 @@ function loadModule(moduleName, entry=null) {
             activeFilters = getNumActiveFilters()
 
             passiveStatList.forEach((stat) => {
-                const buffIcon = `Combat_Icon_Buff_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
-                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="PassiveBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/${buffIcon}.png"></div><span>${getLocalizedString('Stat',stat)}</span></a></li>`
+                const buffName = `Buff_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
+                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="PassiveBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/Combat_Icon_${buffName}.png"></div><span>${getLocalizedString('BuffName',buffName)}</span></a></li>`
                 $('#ba-student-search-select-passivebuff-list').append(listItem)
             })
 
             weaponPassiveStatList.forEach((stat) => {
-                const buffIcon = `Combat_Icon_Buff_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
-                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="WeaponPassiveBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/${buffIcon}.png"></div><span>${getLocalizedString('Stat',stat)}</span></a></li>`
+                const buffName = `Buff_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
+                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="WeaponPassiveBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/Combat_Icon_${buffName}.png"></div><span>${getLocalizedString('BuffName',buffName)}</span></a></li>`
                 $('#ba-student-search-select-weaponpassivebuff-list').append(listItem)
             })
 
             subStatList.forEach((stat) => {
-                const buffIcon = `Combat_Icon_Buff_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
-                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="SubBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/${buffIcon}.png"></div><span>${getLocalizedString('Stat',stat)}</span></a></li>`
+                const buffName = `Buff_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
+                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="SubBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/Combat_Icon_${buffName}.png"></div><span>${getLocalizedString('BuffName',buffName)}</span></a></li>`
                 $('#ba-student-search-select-subbuff-list').append(listItem)
             })
 
@@ -4114,8 +4114,6 @@ function renderStudent() {
 
     $('#ba-student-toggle-sprite-btn').toggle(altSprite.includes(student.Id))
 
-    const pstart = performance.now()
-
     let allTags = student.FavorItemTags
     allTags.push(student.FavorItemUniqueTags[0])
     allTags.push(student.FavorItemUniqueTags[0] + "2")
@@ -4139,8 +4137,6 @@ function renderStudent() {
     } else {
         $('#ba-student-favoured-items').empty().html(favoriteGifts.reverse().join(""))
     }
-
-    console.log(performance.now() - pstart)
 
     let favFurnitureHtml = ""
     $(student.FurnitureInteraction[regionID]).each(function(i,el){
@@ -5362,7 +5358,6 @@ function loadRegion(regID) {
         //hide filters not relevant to global
         $('#ba-student-search-filter-weapontype-ft').hide()
         $('#ba-student-search-filter-armortype-elasticarmor').hide()
-        $('#item-search-filter-furnitureset-109').hide()
         $('#item-search-filter-furnitureset-110').hide()
     }
 }
@@ -7355,9 +7350,6 @@ function getLikedByStudents(item) {
     }
     
     likedStudentsHtml += `<div class="mb-2"><i>${translateUI(likedStudentsHtml ==  "" ? 'item_student_favor_all' : 'item_student_favor_default', [item.ExpValue*(genericTagCount + 1), `<img class="inline-img" src="images/ui/Cafe_Interaction_Gift_0${1 + genericTagCount}.png">`])}</i></div>`
-
-    console.log(item.ExpValue)
-    console.log(favorStudents)
 
     if (bondGearStudentsHtml != "") {
         likedStudentsHtml += `<div class="mb-2"><i>${translateUI('item_usedby_gear')}</i></div><div class="d-flex align-items-center justify-content-center flex-wrap mb-2">${bondGearStudentsHtml}</div>`
