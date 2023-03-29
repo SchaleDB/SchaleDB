@@ -28,7 +28,7 @@ const raidDifficultyName = ["Normal", "Hard", "VeryHard", "HardCore", "Extreme",
 const buffIconKeys = {"AttackPower": "ATK","DefensePower": "DEF","CriticalPoint": "CriticalChance","CriticalDamageRate": "CriticalDamage","CriticalDamageResistRate": "CriticalDamageRateResist","DodgePoint": "Dodge","HealEffectivenessRate": "HealEffectiveness","AccuracyPoint": "HIT","MaxHP": "MAXHP","DefensePenetration": "Penetration","StabilityPoint": "Stability","StabilityRate": "Stability","RegenCost": "CostRegen"}
 const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','AmmoCount']
 const studentStatListFull = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','AttackSpeed','BlockRate','DefensePenetration', 'AmmoCount']
-const enemyStatList = ['MaxHP','AttackPower','DefensePower','DamagedRatio','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range']
+const enemyStatList = ['MaxHP','AttackPower','DefensePower','DamagedRatio','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist']
 const raidEnemyStatList = ['MaxHP','AttackPower','DefensePower','DamagedRatio','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','GroggyGauge','GroggyTime']
 const enemyCalculationStatList = ['MaxHP','AttackPower','DefensePower','DamagedRatio','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range']
 
@@ -476,8 +476,8 @@ let itemSearchOptions = {
         this.stats['DamageRatio'] = [character.DamageRatio !== undefined ? character.DamageRatio : 10000,0,1]
         this.stats['DamagedRatio'] = [character.DamagedRatio !== undefined ? character.DamagedRatio : 10000,0,1]
         this.stats['HealEffectivenessRate'] = [10000,0,1]
-        this.stats['OppressionPower'] = [100,0,1]
-        this.stats['OppressionResist'] = [100,0,1]
+        this.stats['OppressionPower'] = [character.OppressionPower !== undefined ? character.OppressionPower : 100,0,1]
+        this.stats['OppressionResist'] = [character.OppressionResist !== undefined ? character.OppressionResist : 100,0,1]
         this.stats['AttackSpeed'] = [10000,0,1]
         this.stats['BlockRate'] = [0,0,1]
         this.stats['DefensePenetration'] = [0,0,1]
@@ -4110,7 +4110,8 @@ function renderStudent() {
     $('#ba-student-profile-hobbies').html(getTranslatedString(student,'Hobby'))
     $('#ba-student-profile-height').html(student.CharHeightMetric)
     $('#ba-student-profile-cv').html(getTranslatedString(student,'CharacterVoice'))
-    $('#ba-student-profile-illustrator').html(student.ArtistName)
+    $('#ba-student-profile-designer').html(student.Designer)
+    $('#ba-student-profile-illustrator').html(student.Illustrator)
 
     $('#ba-student-toggle-sprite-btn').toggle(altSprite.includes(student.Id))
 
