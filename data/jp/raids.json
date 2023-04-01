@@ -49,6 +49,59 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    12000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    16000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "HitFrames": [
+                                90,
+                                180,
+                                270,
+                                360,
+                                480
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "アツィルトの光",
                     "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ<?2>",
                     "Parameters": [
@@ -78,6 +131,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        }
+                    ],
                     "Name": "大道の劫火",
                     "Desc": "敵4人に対して、攻撃力の<?1>分のダメージ",
                     "Parameters": [
@@ -99,6 +201,25 @@
                     "ATGCost": 3,
                     "Icon": "SKILLICON_BINAH_EXSKILL03",
                     "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
                         {
                             "Type": "BuffAlly",
                             "Value": [
@@ -156,6 +277,7 @@
                     ]
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "ビナー",
             "Profile": "デカグラマトンは、自身を神聖な求道者と主張する人工知能システムです。現在、その信奉者である10人の預言者がキヴォトスの随所に出没しています。\n\nビナーはデカグラマトンの3番目の預言者であり、アビドスの砂漠地帯にて初めて観測されました。\nビナーがなぜここに出現したのかは分かりませんが、このままにしておくには危険すぎる存在であることは間違いありません。"
         },
@@ -231,6 +353,58 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "ChesedDroidExSkill01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_CHESED_EXSKILL01",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    300000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7301101,
+                                7301201,
+                                7301301,
+                                7301401,
+                                7301501,
+                                7301601,
+                                7301103,
+                                7301203,
+                                7301303,
+                                7301403,
+                                7301503,
+                                7301603,
+                                7301105,
+                                7301205,
+                                7301305,
+                                7301405,
+                                7301505,
+                                7301605
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DefensePower_Coefficient",
+                            "Channel": 603
+                        }
+                    ],
+                    "Name": "自爆モード作動",
+                    "Desc": "円形範囲内の敵に対して3000%ダメージを与える。"
+                },
+                {
                     "Id": "ChesedExSkill01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -303,6 +477,14 @@
                     "Desc": "<d:DamagedRatio>の増加効果を無効化\nグロッキー状態の間、<d:DamagedRatio>が900%増加"
                 }
             ],
+            "ExcludeNormalAttack": [
+                7301100,
+                7301200,
+                7301300,
+                7301400,
+                7301500,
+                7301600
+            ],
             "Name": "ケセド",
             "Profile": "デカグラマトンは、自身を神聖な求道者と主張する人工知能システムです。現在、その信奉者である10人の預言者がキヴォトスの随所に出没しています。\n\nケセドはデカグラマトンの4番目の預言者であり、ミレニアム郊外にある軍需工場の生産システムを掌握していることが確認されました。\nケセドがこのまま兵力の無限生産に成功してしまった場合、キヴォトスは未曾有の厄災に見舞われることになるでしょう。"
         },
@@ -358,6 +540,108 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    100000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    110000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "ドッカァーン！！（シロ）",
                     "Desc": "敵に対して、攻撃力の<?1>分のダメージ\nATGが高いほど、ダメージが増加",
                     "Parameters": [
@@ -409,6 +693,48 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
                     "Name": "転がれ転がれー！（シロ）",
@@ -462,8 +788,108 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    62000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    85000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "突進だぁ！！！（クロ）",
                     "Desc": "敵に対して、攻撃力の<?1>分のダメージ/\nATGが高いほど、ダメージが増加<?2>",
                     "Parameters": [
@@ -491,6 +917,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "アパシー・シンドローム（クロ）",
                     "Desc": "敵に対して、攻撃力の100%分のダメージ\nさらにその敵の<d:MoveSpeed>を80%減少（40秒間）"
                 },
@@ -516,6 +957,7 @@
                     "Desc": "全ての敵の<d:HealEffectiveness>率を80%減少"
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "シロ&クロ",
             "Profile": "昔、財政難で閉鎖したアミューズメントパーク「スランピア」で、不思議な現象の発生が報告されています。それは停止したはずのドールや各種アトラクションが真夜中に再び動き出し、人々を襲撃するという噂です。\n\nそのドールであるシロとクロが再び動き出した理由は分かりませんが、過去の華やかだった頃のアミューズメントパークのパレードを再現しようとしている、ということは明らかなようです。"
         },
@@ -577,11 +1019,61 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "HieronymusNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    7000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
                     "Id": "HieronymusEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "ダマススの招請",
                     "Desc": "円形範囲内の敵に対して、攻撃力の350%分のダメージ/\n敵の残りHPが少ないほど、ダメージが増加します（最大50%まで）"
                 },
@@ -591,6 +1083,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGDot",
+                            "Scale": [
+                                2000
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "Duration": "10000",
+                            "Period": "1000",
+                            "Icon": "Hieronymus"
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    32500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "ウルガータ",
                     "Desc": "敵1人に対して、<d:Hieronymus>を付与。\n<d:Hieronymus>は攻撃力の20%分の持続ダメージを付与、10秒後に爆発し円形範囲内の敵に対して、攻撃力の325%分のダメージを与えた後、解除されます。\n<d:Hieronymus>が付与された敵のHPが100%だった場合、あるいは100%まで回復した場合にも、<d:Hieronymus>は解除されます。<?1>",
                     "Parameters": [
@@ -611,6 +1142,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "獅子の救済",
                     "Desc": "円形範囲内の敵に対して、攻撃力の90%分のダメージ"
                 },
@@ -620,6 +1172,39 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    3000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "砂漠の苦痛",
                     "Desc": "10秒毎に、全ての敵に対して攻撃力の<?1>分のダメージ/<?2>",
                     "Parameters": [
@@ -771,6 +1356,29 @@
                     "Desc": "<b:Penetration>を750増加します。"
                 }
             ],
+            "ExcludeNormalAttack": [
+                7303100,
+                7303200,
+                7303300,
+                7303400,
+                7303500,
+                7303600,
+                7403700,
+                7303900,
+                7303910,
+                7303901,
+                7303911,
+                7303902,
+                7303912,
+                7303903,
+                7303913,
+                7303904,
+                7303914,
+                7303905,
+                7303925,
+                7303906,
+                7303926
+            ],
             "Name": "ヒエロニムス",
             "Profile": "トリニティの古聖堂の地下にて、正体不明の存在が発見されました。\nその存在「ヒエロニムス」は「Communio Sanctorum」、「聖徒の交わり」と呼ばれる人工天使シリーズを率いる存在であり、ゲマトリアが古代の教義をもとに作り上げた実験体であるという説がまことしやかに囁かれています。\n強大な力を持つヒエロニムスをこのまま放置しておくわけにはいきません。キヴォトスの平和のためにも、立ち向かいましょう！"
         },
@@ -850,6 +1458,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                500,
+                                500,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "無限回転・SUPER海老マシンガン",
                     "Desc": "右腕（ピンク）：円形範囲内の敵に対して、攻撃力の400%分のダメージ"
                 },
@@ -859,6 +1516,46 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "無限回転・HYPER鰯ミサイル",
                     "Desc": "胸部（レッド）：敵全体に対して、攻撃力の300%分のダメージ"
                 },
@@ -897,6 +1594,42 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "無限回転・FINAL鯖スラッシュ",
                     "Desc": "敵全体に対して、攻撃力の400%分の回避不能ダメージ"
                 },
@@ -906,6 +1639,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Base",
+                            "Channel": 2
+                        }
+                    ],
                     "Name": "無限回転・MEGA玉子オーバーチャージ",
                     "Desc": "足（イエロー）：<b:ATK>を4000増加（30秒間）"
                 },
@@ -916,6 +1664,24 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_PASSIVE01",
                     "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 150031
+                        },
                         {
                             "Type": "BuffTarget",
                             "Value": [
@@ -957,15 +1723,206 @@
                     ]
                 },
                 {
-                    "Id": "KaitengerExSkill01",
+                    "Id": "KaitenrangerRedPublic02",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
-                    "Name": "カイテンポーズ！",
-                    "Desc": "カイテンジャーは定期的にEXスキルを発動する\n<b>熱血のレッド！</b>：円形範囲内の敵に<c:Provoke>を付与（10秒間）\n<b>冷徹なブラック！</b>：敵1人に対して攻撃力の300%分のダメージ/\n<d:DamagedRatio>を50%増加（5秒間）\n<b>休出のグリーン……</b>：扇形範囲内の敵に対して、攻撃力の350%分のダメージ\n<b>気合のイエロー！</b>：敵1人に対して、攻撃力の500%分のダメージ\n<b>純情のピンク！</b>：円形範囲内の味方の<b:ATK>を6%増加（15秒間）"
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                10000
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Provoke"
+                        }
+                    ],
+                    "Name": "カイテンポーズ！熱血のレッド！",
+                    "Desc": "円形範囲内の敵に<c:Provoke>を付与（10秒間）"
+                },
+                {
+                    "Id": "KaitenrangerBlackPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 627
+                        }
+                    ],
+                    "Name": "カイテンポーズ！冷徹なブラック！",
+                    "Desc": "敵1人に対して攻撃力の300%分のダメージ/<d:DamagedRatio>を50%増加（5秒間）"
+                },
+                {
+                    "Id": "KaitenrangerGreenPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                715,
+                                715,
+                                715,
+                                715,
+                                1430,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715
+                            ]
+                        }
+                    ],
+                    "Name": "カイテンポーズ、休出のグリーン……",
+                    "Desc": "扇形範囲内の敵に対して、攻撃力の350%分のダメージ"
+                },
+                {
+                    "Id": "KaitenrangerYellowPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
+                    "Name": "カイテンポーズ！気合のイエロー！",
+                    "Desc": "敵1人に対して、攻撃力の500%分のダメージ"
+                },
+                {
+                    "Id": "KaitenrangerPinkPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    600
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602,
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603,
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604,
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605,
+                                7304106,
+                                7304206,
+                                7304306,
+                                7304406,
+                                7304506,
+                                7304606
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 102
+                        }
+                    ],
+                    "Name": "カイテンポーズ！純情のピンク！",
+                    "Desc": "円形範囲内の味方の<b:ATK>を6%増加（15秒間）"
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "KAITEN FX Mk.0",
             "Profile": "本拠地までの行く手を遮るかのように、カイテンジャーたちの秘密兵器が登場しました。\nカイテンジャーたちはこれまでに奪ってきた資金と技術を元に、巨大な合体ロボット「KAITEN FX Mk.0」を作っていたようです。\n合体ロボは確かにロマンですが、これまでの行いを考えると、このまま楽しく見ているというわけには行かなそうです。"
         },
@@ -1027,6 +1984,61 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "HitFrames": [
+                                30,
+                                60,
+                                90,
+                                120,
+                                150,
+                                180,
+                                210,
+                                240,
+                                270,
+                                300
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -9999
+                                ]
+                            ],
+                            "Stat": "DefensePower_Base",
+                            "Channel": 603
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "白熱眼光",
                     "Desc": "敵1人に対して、攻撃力の90%分の持続ダメージを付与（10秒間）/\nさらに<d:DEF>を9999減少（60秒間）<?1>",
                     "Parameters": [
@@ -1046,6 +2058,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "泡沫",
                     "Desc": "敵1人に対して、攻撃力の400%分のダメージ"
                 },
@@ -1091,9 +2123,36 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "ハイパースパイラル熱視線",
                     "Desc": "敵全体に対して、攻撃力の300%分のダメージ"
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7305190
             ],
             "Name": "ペロロジラ",
             "Profile": "正体不明の巨大な何かがD.U.の近くの海域で観測されました。 どうやら情報によると、かつて海に沈んだとされる、モモフレンズのぬいぐるみの姿をしているようです。\nどうしてこのようなことになったのかは分かりませんが、まずは進撃を防がなければなりません！"
@@ -1151,6 +2210,43 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                3000,
+                                3000,
+                                4000
+                            ]
+                        }
+                    ],
                     "Name": "デストラクションType I",
                     "Desc": "<?1>攻撃力の150%分のダメージ",
                     "Parameters": [
@@ -1170,6 +2266,30 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "デストラクションType II",
                     "Desc": "直線範囲内の敵に対して、攻撃力の200%分のダメージ"
                 },
@@ -1188,6 +2308,44 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "オーバーロードエナジー",
                     "Desc": "敵全体に対して、攻撃力の150%分のダメージ\nホドのHPが50%以下の場合は、敵全体に対して攻撃力の300%分のダメージ、さらにフィールドターレットを全て破壊します。"
                 },
@@ -1197,6 +2355,76 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_HOD_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "HitFrames": [
+                                0,
+                                10,
+                                20,
+                                30,
+                                40,
+                                50,
+                                60,
+                                70,
+                                80,
+                                90,
+                                100
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 1002
+                        }
+                    ],
                     "Name": "栄光の輝き",
                     "Desc": "敵全体に対して、攻撃力の740%分のダメージ\nExスキル「栄光の輝き」を使用する毎に、ホドの<b:ATK>を50%増加（最大で99回分まで効果が重複）"
                 },
@@ -1286,6 +2514,7 @@
                     "Desc": "ホドとインベイドピラーの会心抵抗値を400%増加。\nインベイドピラーは<d:ConcentratedTarget>を無効化します。"
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "ホド",
             "Profile": "デカグラマトンは、自身を神聖な求道者と主張する人工知能システムです。現在、その信奉者である10人の預言者がキヴォトスの随所に出没しています。\n\nホドは元々ミレニアムの通信ユニットAIででしたが、正体不明のAIにハッキングされてしまい、今は自らをデカグラマトンの8番目の預言者であると主張しています。\nミレニアムの最先端技術が込められた演算機関の暴走とも言えます。早く止めないと、ミレニアム一帯の安全が脅かされてしまうに違いありません。"
         },
@@ -1355,6 +2584,93 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "GozNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    2500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    }
+                },
+                {
                     "Id": "GozEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -1380,6 +2696,71 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_GOZ_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    37500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    75000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "スリーライトモンテ",
                     "Desc": "ゴズと分身が自身の前のエリアに光を照らします。分身が照らした光は一定時間後に爆発し、攻撃力の1500%分のダメージ"
                 },
@@ -1389,6 +2770,88 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    80000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "マジカルコインハット",
                     "Desc": "帽子を出してコインを隠した後にシャッフルします。コインがないエリアは次の効果が適用されます。/\nノックバック、<c:Stunned>を付与（5秒間）、攻撃力の800%分のダメージ<?1>",
                     "Parameters": [
@@ -1409,6 +2872,85 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    22500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    45000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "サプライズプレゼント",
                     "Desc": "敵を指定して帽子から爆弾を取り出し、攻撃力の900%分のダメージ"
                 },
@@ -1418,6 +2960,83 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    120000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "スクリームライダー",
                     "Desc": "一定時間毎に、スクリームライダーが登場し直線範囲内の敵に対して、攻撃力の1200%分のダメージ/<?1>\nスクリームライダーが通り過ぎた場所にスランピアの兵士を召喚",
                     "Parameters": [
@@ -1476,6 +3095,22 @@
                         ]
                     ]
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7308100,
+                7308200,
+                7308300,
+                7308400,
+                7308500,
+                7308600,
+                7308700,
+                7308101,
+                7308201,
+                7308301,
+                7308401,
+                7308501,
+                7308601,
+                7308701
             ],
             "Name": "ゴズ",
             "Profile": "以前から、財政難で廃業したアミューズパーク「スランピア」で未知の怪奇現象が起きているという報告されています。停止していたアミューズドールと各種アトラクションが真夜中に動き出し、人々を襲うという噂が、この報告を裏付けています。 \n\nアミューズドール・ゴズは、空虚に満ちた「スランピア」で一人だけのショーを続けています。その奇妙な笑顔の下に隠された本性は善か悪か。私たちがそれを推測するのは容易ではないでしょう。"

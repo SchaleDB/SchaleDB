@@ -566,13 +566,11 @@
             <div class="modal-body">
                 <div id="ba-info-statpreview-panel" class="d-lg-flex flex-row">
                     <div class="panel-sliders">
-
                         <nav id="statpreview-tabs" class="nav nav-pills justify-content-center mb-3">
                             <a id="statpreview-tab-attributes" class="nav-link" data-bs-toggle="tab" href="#statpreview-tab-pane-attributes" data-localize-id="ui,attributes"></a>
                             <a id="statpreview-tab-buffs" class="nav-link" data-bs-toggle="tab" href="#statpreview-tab-pane-buffs" data-localize-id="ui,buffs"></a>
                             <a id="statpreview-tab-calculations" class="nav-link" data-bs-toggle="tab" href="#statpreview-tab-pane-calculations" data-localize-id="ui,enemy_target"></a>
                         </nav>
-
                         <div class="tab-content">
                             <div id="statpreview-tab-pane-attributes" class="tab-pane">
                                 <div class="row g-0">
@@ -753,7 +751,9 @@
                                                 <button id="statpreview-supportstats-search-btn" class="btn btn-dark tooltip-button" data-tooltip-id="ui,search"><i class="fa-solid fa-magnifying-glass"></i></button>
                                             </div>
                                             <div id="statpreview-supportstats-search-list" class="search-list-container" style="display:none;">
-                                                <div class="search-list"><div></div></div>
+                                                <div class="search-list">
+                                                    <div class="search-list-results"></div>
+                                                </div>
                                             </div>
                                             <div id="statpreview-supportstats-controls" class="my-2 d-flex flex-column gap-2">
                                             </div>
@@ -774,7 +774,9 @@
                                                 <button id="statpreview-buff-transferable-autoadd-btn" class="btn btn-dark tooltip-button" data-tooltip-id="ui,add_own"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
                                             </div>
                                             <div class="search-list-container" style="display:none;">
-                                                <div class="search-list"><div></div></div>
+                                                <div class="search-list">
+                                                    <div class="search-list-results"></div>
+                                                </div>
                                             </div>
                                         </div>
                                         <p id="statpreview-buff-transferable-incompatible" class="text-italic mb-2 panel-alert p-2"><i class="fa-solid fa-triangle-exclamation me-2"></i><span data-localize-id="ui,buff_transferable_incompatible"></span></p>
@@ -809,36 +811,60 @@
 
                                         <div class="my-2 d-flex align-items-stretch gap-2">
                                             <input type="search" class="form-control" id="statpreview-enemysearch-search-text" data-ph-localize-id="ui,search" autocomplete="off" style="height:38px;">
+                                            <button id="statpreview-enemysearch-search-btn" class="btn btn-dark tooltip-button" data-tooltip-id="ui,search"><i class="fa-solid fa-magnifying-glass"></i></button>
                                         </div>
                                         <div id="statpreview-enemysearch-search-list" class="search-list-container" style="display:none;">
-                                            <div class="search-list"><div></div></div>
+                                            <div class="search-list">
+                                                <div class="search-list-controls">
+                                                    <div class="search-list-filter">
+                                                        <button class="btn-pill" data-bs-toggle="dropdown">
+                                                            <i class="fa-solid fa-filter ms-2"></i>
+                                                            <span class="search-list-filter-active label"></span>
+                                                            <i class="caret fa-solid fa-caret-down me-2"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start">
+                                                            <li><a class="dropdown-item active" href="javascript:;" data-filter-key="all" data-localize-id="ui,filter_all"></a></li>
+                                                            <li><a class="dropdown-item" href="javascript:;" data-filter-key="raid" data-localize-id="StageType,Raid"></a></li>
+                                                            <li><a class="dropdown-item" href="javascript:;" data-filter-key="timeattack" data-localize-id="StageType,TimeAttack"></a></li>
+                                                            <li><a class="dropdown-item" href="javascript:;" data-filter-key="worldraid" data-localize-id="StageType,WorldRaid"></a></li>
+                                                            <li><a class="dropdown-item" href="javascript:;" data-filter-key="campaign" data-localize-id="StageType,Campaign"></a></li>
+                                                            <li><a class="dropdown-item" href="javascript:;" data-filter-key="event" data-localize-id="StageType,Event"></a></li>
+                                                            <li><a class="dropdown-item" href="javascript:;" data-filter-key="schooldungeon" data-localize-id="StageType,SchoolDungeon"></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <button class="search-list-bookmark ms-auto btn-pill tooltip-button" data-tooltip-id="ui,filter_bookmark"><span class="label"><i class="fa-solid fa-bookmark"></i></span></button>
+                                                </div>
+                                                <div class="search-list-results"></div>
+                                            </div>
                                         </div>
 
-                                        <div class="ba-panel p-2 mb-2">
-                                            <div class="d-flex align-items-start gap-3">
-                                                <div id="statpreview-enemy-icon" class="enemy-select-icon">                                                    
+                                        <div class="ba-panel enemy-info-panel mb-2">
+                                            <div class="px-2 pt-2">
+                                                <div class="d-flex align-items-start gap-3">
+                                                    <div id="statpreview-enemy-icon" class="enemy-select-icon">                                                    
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <h5 id="statpreview-enemy-name" class="title-text"></h5>
+                                                        <span id="statpreview-enemy-desc" class="mb-0"></span>
+                                                    </div>
                                                 </div>
-                                                <div class="flex-fill">
-                                                    <h5 id="statpreview-enemy-name" class="title-text"></h5>
-                                                    <span id="statpreview-enemy-desc" class="mb-0"></span>
+                                                <div class="d-flex flex-wrap align-items-center gap-1 mt-2 pb-1">
+                                                    <span id="statpreview-enemy-attacktype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Attack_s.png"></span><span class="label"></span></span>
+                                                    <span id="statpreview-enemy-defensetype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Defense_s.png"></span><span class="label"></span></span>
+                                                    <span id="statpreview-enemy-size" class="ba-info-pill-s bg-theme text-bold"><span class="label"></span></span>
+                                                    <button id="statpreview-enemy-bookmark" class="btn btn-sm btn-dark stat-panel-btn-sm no-wrap ms-auto" type="button"><i class="fa-solid fa-bookmark"></i></button>
                                                 </div>
+                                                <div class="ba-panel-separator my-2"></div>
                                             </div>
-                                            <div class="d-flex flex-wrap align-items-center gap-1 mt-2">
-                                                <span id="statpreview-enemy-attacktype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Attack_s.png"></span><span class="label"></span></span>
-                                                <span id="statpreview-enemy-defensetype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Defense_s.png"></span><span class="label"></span></span>
-                                                <span id="statpreview-enemy-size" class="ba-info-pill-s bg-theme text-bold"><span class="label"></span></span>
-    
-                                                
+                                            <div id="calculation-enemy-stat-table" class="ba-stats"></div>
+                                            <div class="d-flex p-2">
+                                                <div id="calculation-enemy-level" class="input-small">
+                                                    <div class="label">Lv.</div>
+                                                    <input class="form-control" type="number" min="1" max="200">
+                                                </div>
+                                                <div id="student-stat-modal-enemy-active-buffs" class="ps-2 ms-auto enemy-active-buffs"></div>
                                             </div>
                                         </div>
-                                        <div class="d-flex mt-2">
-                                            <div id="calculation-enemy-level" class="input-small">
-                                                <div class="label">Lv.</div>
-                                                <input class="form-control" type="number" min="1" max="200">
-                                            </div>
-                                            <div id="student-stat-modal-enemy-active-buffs" class="ba-panel px-2 ms-auto enemy-active-buffs"></div>
-                                        </div>
-                                        <div id="calculation-enemy-stat-table" class="ba-stats mt-2"></div>
                                         <div id="calculation-intermediate-table" class="ba-stats mt-2 py-2 px-1">
                                             <div class="d-flex p-1 align-items-center">
                                                 <div class="terrain-list">
@@ -893,7 +919,9 @@
                                                 <button id="statpreview-enemy-buff-transferable-autoadd-btn" class="btn btn-dark tooltip-button" data-tooltip-id="ui,add_own"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
                                             </div>
                                             <div class="search-list-container" style="display:none;">
-                                                <div class="search-list"><div></div></div>
+                                                <div class="search-list">
+                                                    <div class="search-list-results"></div>
+                                                </div>
                                             </div>
                                         </div>
                                         <p id="statpreview-enemy-buff-transferable-incompatible" class="text-italic mb-2 panel-alert p-2"><i class="fa-solid fa-triangle-exclamation me-2"></i><span data-localize-id="ui,buff_transferable_incompatible"></span></p>
@@ -942,9 +970,17 @@
                         <div class="panel-stats-table">
                             <div id="ba-student-stat-modal-table" class="ba-stats mb-0">
                             </div>
-                            <div id="student-stat-modal-skill-calculations" class="" style="display:none;"></div>
+                            <div id="student-stat-modal-skill-calculations" class="" style="display:none;">
+                                <nav id="skill-calculation-tabs" class="nav nav-pills justify-content-center mb-2">
+                                    <a id="skill-calculation-tab-student" class="py-1 nav-link active" data-bs-toggle="tab" href="#calculation-student-skills" data-localize-id="ui,student"></a>
+                                    <a id="skill-calculation-tab-enemy" class="py-1 nav-link" data-bs-toggle="tab" href="#calculation-enemy-skills" data-localize-id="ui,enemy"></a>
+                                </nav>
+                                <div class="tab-content">
+                                    <div id="calculation-student-skills" class="tab-pane active"></div>
+                                    <div id="calculation-enemy-skills" class="tab-pane"></div>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                 </div>
             </div>

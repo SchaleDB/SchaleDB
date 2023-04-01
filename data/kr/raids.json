@@ -49,6 +49,59 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    12000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    16000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "HitFrames": [
+                                90,
+                                180,
+                                270,
+                                360,
+                                480
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "아칠루트의 빛",
                     "Desc": "직선범위 내의 적에게 공격력 <?1> 대미지<?2>",
                     "Parameters": [
@@ -78,6 +131,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        }
+                    ],
                     "Name": "공의의 불꽃",
                     "Desc": "적 4인에게 공격력 <?1> 대미지",
                     "Parameters": [
@@ -99,6 +201,25 @@
                     "ATGCost": 3,
                     "Icon": "SKILLICON_BINAH_EXSKILL03",
                     "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
                         {
                             "Type": "BuffAlly",
                             "Value": [
@@ -156,6 +277,7 @@
                     ]
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "비나",
             "Profile": "데카그라마톤은 자신을 신성한 구도자라고 주장하는 인공지능 시스템입니다. 현재 그를 추종하는 10명의 예언자들이 키보토스 도처에 출몰하고 있습니다.\n\n비나는 데카그라마톤의 3번째 예언자로서, 아비도스의 사막 지구에서 처음 관측되었습니다.\n비나가 왜 이곳에 온 것인지는 알 수 없으나, 이대로 두기엔 너무 위험한 존재임은 틀림없습니다."
         },
@@ -231,6 +353,58 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "ChesedDroidExSkill01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_CHESED_EXSKILL01",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    300000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7301101,
+                                7301201,
+                                7301301,
+                                7301401,
+                                7301501,
+                                7301601,
+                                7301103,
+                                7301203,
+                                7301303,
+                                7301403,
+                                7301503,
+                                7301603,
+                                7301105,
+                                7301205,
+                                7301305,
+                                7301405,
+                                7301505,
+                                7301605
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DefensePower_Coefficient",
+                            "Channel": 603
+                        }
+                    ],
+                    "Name": "자폭 모드 가동",
+                    "Desc": "원형 범위 내의 적들에게 3000% 대미지."
+                },
+                {
                     "Id": "ChesedExSkill01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -293,6 +467,14 @@
                     "Desc": "<d:DamagedRatio> 증가 효과 면역\n그로기 상태가 유지되는 동안에는 <d:DamagedRatio> 900% 증가"
                 }
             ],
+            "ExcludeNormalAttack": [
+                7301100,
+                7301200,
+                7301300,
+                7301400,
+                7301500,
+                7301600
+            ],
             "Name": "헤세드",
             "Profile": "데카그라마톤은 자신을 신성한 구도자라고 주장하는 인공지능 시스템입니다. 현재 그를 추종하는 10명의 예언자들이 키보토스 도처에 출몰하고 있습니다.\n\n헤세드는 데카그라마톤의 4번째 예언자이며, 밀레니엄 외곽에 있는 버려진 군수 공장의 생산 시스템을 장악하고 있는 것으로 확인되었습니다.\n헤세드가 이대로 무한한 병력 생산에 성공하게 된다면, 키보토스는 미증유의 재앙에 처하게 될 것입니다."
         },
@@ -348,6 +530,108 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    100000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    110000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "콰콰콰콰쾅쾅콰앙!! (시로)",
                     "Desc": "적에게 공격력 <?1> 대미지\nATG가 높을수록 더 강한 대미지를 준다.",
                     "Parameters": [
@@ -399,6 +683,48 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
                     "Name": "굴려굴려굴려굴려!! (시로)",
@@ -452,8 +778,108 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    62000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    85000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "돌진이다-!!! (쿠로)",
                     "Desc": "적에게 공격력 <?1> 대미지\nATG가 높을수록 더 강한 대미지를 준다.<?2>",
                     "Parameters": [
@@ -481,6 +907,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "무기력증 (쿠로)",
                     "Desc": "적에게 공격력 100% 대미지\n<d:MoveSpeed> 80%감소(40초간)"
                 },
@@ -506,6 +947,7 @@
                     "Desc": "모든 적 <d:HealEffectiveness> 80% 감소"
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "시로&쿠로",
             "Profile": "오래 전 재정난으로 폐업한 어뮤즈 파크 <슬럼피아>에 알 수 없는 괴이 현상이 보고되고 있습니다. 작동을 멈춘 어뮤즈 돌과 각종 어트렉션이 한밤 중에 다시 작동하며 사람들을 습격한다는 소문이 바로 그것입니다. \n\n어뮤즈 돌 시로와 쿠로가 다시 움직이는 이유는 알 수 없지만, 과거의 화려했던 어뮤즈 파크의 축제를 재현하고 있는 것은 분명해 보입니다."
         },
@@ -567,11 +1009,61 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "HieronymusNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    7000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
                     "Id": "HieronymusEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "다마소의 부름",
                     "Desc": "원형 범위 내 적에게 공격력 350% 만큼 대미지\n대상의 체력%가 낮을수록 대미지가 최대 50%만큼 증가"
                 },
@@ -581,6 +1073,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGDot",
+                            "Scale": [
+                                2000
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "Duration": "10000",
+                            "Period": "1000",
+                            "Icon": "Hieronymus"
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    32500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "불가타의 경전",
                     "Desc": "적 1인에게 <d:Hieronymus>를 부여\n저주는 공격력의 20%만큼 지속 대미지를 주며 10초 후 폭발하여 \n원형 범위 내 적에게 공격력의 325% 만큼 대미지를 주고 사라진다.\n저주에 걸린 대상의 체력이 100%가 되면 저주는 즉시 사라진다.<?1>",
                     "Parameters": [
@@ -601,6 +1132,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "사자의 구제",
                     "Desc": "원형 범위 내 적에게 공격력 90% 만큼 대미지"
                 },
@@ -610,6 +1162,39 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    3000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "사막의 고행",
                     "Desc": "10초마다 모든 적에게 공격력의 <?1> 만큼 대미지<?2>",
                     "Parameters": [
@@ -761,6 +1346,29 @@
                     "Desc": "<b:Penetration> 수치가 750 만큼 증가합니다."
                 }
             ],
+            "ExcludeNormalAttack": [
+                7303100,
+                7303200,
+                7303300,
+                7303400,
+                7303500,
+                7303600,
+                7403700,
+                7303900,
+                7303910,
+                7303901,
+                7303911,
+                7303902,
+                7303912,
+                7303903,
+                7303913,
+                7303904,
+                7303914,
+                7303905,
+                7303925,
+                7303906,
+                7303926
+            ],
             "Name": "예로니무스",
             "Profile": "트리니티 지역의 고성당 유적 지하에서 정체불명의 존재가 발견되었습니다.\n예로니무스는 <콤뮤니오 상토룸>이라고 불리는 인공 천사 시리즈의 완성형으로, 게마트리아가 고대의 교의를 바탕으로 만들어낸 실험체라는 설이 있습니다.\n예로니무스의 압도적인 힘을 이대로 방치해둘 수 없습니다. 키보토스의 안녕을 위해 움직여야 할 때입니다!"
         },
@@ -840,6 +1448,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                500,
+                                500,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "무한회전 · 슈퍼 새우 머신건",
                     "Desc": "오른팔(핑크): 원형범위 내의 적에게 공격력 400% 대미지"
                 },
@@ -849,6 +1506,46 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "무한회전 · 하이퍼 정어리 미사일",
                     "Desc": "가슴(레드): 적 전체에게 공격력 300% 대미지"
                 },
@@ -887,6 +1584,42 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "무한회전 · 파이널 고등어 슬래쉬",
                     "Desc": "적 전체에게 공격력 400% 대미지, 회피 불가"
                 },
@@ -896,6 +1629,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Base",
+                            "Channel": 2
+                        }
+                    ],
                     "Name": "무한회전·인빈시블 계란 오버차지",
                     "Desc": "다리(옐로): 자신 <b:ATK> 4000 증가 (30초간)"
                 },
@@ -906,6 +1654,24 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_PASSIVE01",
                     "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 150031
+                        },
                         {
                             "Type": "BuffTarget",
                             "Value": [
@@ -947,15 +1713,206 @@
                     ]
                 },
                 {
-                    "Id": "KaitengerExSkill01",
+                    "Id": "KaitenrangerRedPublic02",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
-                    "Name": "카이텐 포즈!",
-                    "Desc": "각 카이텐져가 주기적으로 자신의 EX 스킬을 사용합니다.\n<b>열혈의 레드!</b>: 원형 범위 내의 적에게 <c:Provoke> (10초).\n<b>냉철의 블랙!</b>: 적 1인에게 공력력 <b>300%</b> 대미지, <d:DamagedRatio> <b>50%</b> 증가 (5초).\n<b>주휴의 그린</b>: 부채꼴범위 내의 적에게 공격력 <b>350%</b> 대미지.\n<b>열정의 옐로!</b>: 적 1인에게 공력력 <b>500%</b> 대미지.\n<b>순정의 핑크!</b>: 주변 아군의 <b:ATK> <b>6%</b> 증가 (15초)."
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                10000
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Provoke"
+                        }
+                    ],
+                    "Name": "카이텐 포즈! 열혈의 레드!",
+                    "Desc": "원형 범위 내의 적에게 <c:Provoke> (10초)."
+                },
+                {
+                    "Id": "KaitenrangerBlackPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 627
+                        }
+                    ],
+                    "Name": "카이텐 포즈! 냉철의 블랙!",
+                    "Desc": "적 1인에게 공력력 <b>300%</b> 대미지, <d:DamagedRatio> <b>50%</b> 증가 (5초)."
+                },
+                {
+                    "Id": "KaitenrangerGreenPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                715,
+                                715,
+                                715,
+                                715,
+                                1430,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715
+                            ]
+                        }
+                    ],
+                    "Name": "카이텐 포즈! 주휴의 그린",
+                    "Desc": "부채꼴범위 내의 적에게 공격력 <b>350%</b> 대미지."
+                },
+                {
+                    "Id": "KaitenrangerYellowPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
+                    "Name": "카이텐 포즈! 열정의 옐로!",
+                    "Desc": "적 1인에게 공력력 <b>500%</b> 대미지."
+                },
+                {
+                    "Id": "KaitenrangerPinkPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    600
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602,
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603,
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604,
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605,
+                                7304106,
+                                7304206,
+                                7304306,
+                                7304406,
+                                7304506,
+                                7304606
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 102
+                        }
+                    ],
+                    "Name": "카이텐 포즈! 순정의 핑크!",
+                    "Desc": "주변 아군의 <b:ATK> <b>6%</b> 증가 (15초)."
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "KAITEN FX Mk.0",
             "Profile": "본거지까지 가는길을 방해하듯이, 카이텐져들의 비밀병기가 등장했습니다.\n카이텐져들은 지금까지 빼앗은 자금과 기술을 토대로 거대한 합체로봇「KAITEN FX Mk.0」를 만들고 있던 것 같습니다.\n분명히 멋지긴 하지만, 이 로봇으로 발생하게 될 수많은 문제들을 생각해본다면, 이 로망은 여기서 끝이 나야만 합니다."
         },
@@ -1017,6 +1974,61 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "HitFrames": [
+                                30,
+                                60,
+                                90,
+                                120,
+                                150,
+                                180,
+                                210,
+                                240,
+                                270,
+                                300
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -9999
+                                ]
+                            ],
+                            "Stat": "DefensePower_Base",
+                            "Channel": 603
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "백열안광",
                     "Desc": "적 1인에게 공격력 90% 지속 대미지(10초간)/\n<d:DEF> 9999 감소(60초간)<?1>",
                     "Parameters": [
@@ -1036,6 +2048,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "아쿠아볼",
                     "Desc": "적 1인에게 공격력 400% 대미지"
                 },
@@ -1081,9 +2113,36 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "하이퍼 스파이럴 열시선",
                     "Desc": "적 전체에게 공격력 300% 대미지"
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7305190
             ],
             "Name": "페로로지라",
             "Profile": "정체불명의 거대 괴수가 D.U. 인근 해역에서 발견되었습니다. 이 괴수의 외형은 예전에 바다에 가라앉았던 모모프렌즈 장난감의 모습을 하고 있습니다.\n어째서 이런 일이 벌어졌는지는 알 수 없지만, 이 거대괴수의 진격을 막아내야만 합니다! "
@@ -1141,6 +2200,43 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                3000,
+                                3000,
+                                4000
+                            ]
+                        }
+                    ],
                     "Name": "파괴 - Type I",
                     "Desc": "<?1> 적에게 공격력 150% 만큼 대미지",
                     "Parameters": [
@@ -1160,6 +2256,30 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "파괴 - Type II",
                     "Desc": "직선 범위 내 적에게 공격력 200% 만큼 대미지"
                 },
@@ -1178,6 +2298,44 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "과부하 에너지 방출",
                     "Desc": "적 전체에게 공격력 150% 만큼 대미지\n호드의 체력이 50% 이하일 경우 적 전체에게 공격력 300% 만큼 대미지,방어 포탑 모두 파괴"
                 },
@@ -1187,6 +2345,76 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_HOD_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "HitFrames": [
+                                0,
+                                10,
+                                20,
+                                30,
+                                40,
+                                50,
+                                60,
+                                70,
+                                80,
+                                90,
+                                100
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 1002
+                        }
+                    ],
                     "Name": "영광의 빛",
                     "Desc": "적 전체에게 공격력 740% 대미지\n영광의 빛 스킬 사용 시 마다 호드의 <b:ATK> 50% 증가 (최대 99회 까지 중첩)"
                 },
@@ -1276,6 +2504,7 @@
                     "Desc": "호드, 침식타워의 치명 저항력이 400% 증가합니다.\n침식타워는 <d:ConcentratedTarget> 효과에 면역입니다."
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "호드",
             "Profile": "데카그라마톤은 자신을 신성한 구도자라고 주장하는 인공지능 시스템입니다. 현재 그를 추종하는 10명의 예언자들이 키보토스 도처에 출몰하고 있습니다.\n\n호드는 원래 밀레니엄 자치구의 통신망 가설 유닛 AI였으나, 정체불명의 AI에게 해킹당한 뒤에 스스로를 데카그라마톤의 8번째 예언자라고 주장하고 있습니다.\n밀레니엄의 기술의 정수가 담겨있는 이 연산기관의 폭주를 멈추지 않으면 밀레니엄 자치구의 안전은 장담할 수 없게 됩니다."
         },
@@ -1345,6 +2574,93 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "GozNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    2500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    }
+                },
+                {
                     "Id": "GozEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -1370,6 +2686,71 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_GOZ_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    37500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    75000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "쓰리 라이트 몬테",
                     "Desc": "고즈와 분신이 자기 앞에 있는 지역에 빛을 비춥니다. 분신이 비춘 빛은 일정 시간 뒤 폭발하여 공격력 1500% 대미지"
                 },
@@ -1379,6 +2760,88 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    80000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "매지컬 코인햇",
                     "Desc": "모자를 꺼내 코인을 감춘 뒤 섞습니다. 코인이 없는 지역은 다음 효과가 적용됩니다./\n넉백, <c:Stunned>(5초간), 공격력 800% 대미지<?1>",
                     "Parameters": [
@@ -1399,6 +2862,85 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    22500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    45000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "서프라이즈 프레젠트",
                     "Desc": "모자에서 폭탄을 꺼내 대상을 조준합니다. 폭탄은 대상에게 날아가 공격력 900% 대미지"
                 },
@@ -1408,6 +2950,83 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    120000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "스크림 라이더",
                     "Desc": "일정 시간마다 스크림 라이더가 등장하여 직선범위 내의 적에게 공격력 1200% 대미지/<?1>\n스크림 라이더가 지나간 자리에 슬럼피아 병사를 소환",
                     "Parameters": [
@@ -1466,6 +3085,22 @@
                         ]
                     ]
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7308100,
+                7308200,
+                7308300,
+                7308400,
+                7308500,
+                7308600,
+                7308700,
+                7308101,
+                7308201,
+                7308301,
+                7308401,
+                7308501,
+                7308601,
+                7308701
             ],
             "Name": "고즈",
             "Profile": "오래 전 재정난으로 폐업한 어뮤즈 파크 <슬럼피아>에 알 수 없는 괴이 현상이 보고되고 있습니다. 작동을 멈춘 어뮤즈 돌과 각종 어트렉션이 한밤 중에 다시 작동하며 사람들을 습격한다는 소문이 바로 그것입니다. \n\n어뮤즈 돌 고즈는 공허가 가득한 <슬럼피아>에서 혼자만의 쇼를 이어 나가고 있습니다. 그 기이한 미소 아래에 숨긴 본성은 선인가 악인가. 우리가 그것을 추측하는 건 쉽지 않을 겁니다."

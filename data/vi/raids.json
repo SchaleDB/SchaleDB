@@ -49,6 +49,59 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    12000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    16000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "HitFrames": [
+                                90,
+                                180,
+                                270,
+                                360,
+                                480
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "Ánh sáng của Atsilut",
                     "Desc": "Gây 120% sát thương lên kẻ địch trên một đường thẳng."
                 },
@@ -58,6 +111,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        }
+                    ],
                     "Name": "Biển lửa dữ dội",
                     "Desc": "Gây <?1> sát thương lên 4 kẻ địch.",
                     "Parameters": [
@@ -79,6 +181,25 @@
                     "ATGCost": 3,
                     "Icon": "SKILLICON_BINAH_EXSKILL03",
                     "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
                         {
                             "Type": "BuffAlly",
                             "Value": [
@@ -125,6 +246,7 @@
                     "Desc": "Giảm 20% <d:HIT> và 50% <d:Stability> tất cả kẻ địch xuống. Loại tác dụng phụ này không thể bị gỡ bỏ."
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "ビナー",
             "Profile": "デカグラマトンは、自身を神聖な求道者と主張する人工知能システムです。現在、その信奉者である10人の預言者がキヴォトスの随所に出没しています。\n\nビナーはデカグラマトンの3番目の預言者であり、アビドスの砂漠地帯にて初めて観測されました。\nビナーがなぜここに出現したのかは分かりませんが、このままにしておくには危険すぎる存在であることは間違いありません。"
         },
@@ -200,6 +322,58 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "ChesedDroidExSkill01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_CHESED_EXSKILL01",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    300000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7301101,
+                                7301201,
+                                7301301,
+                                7301401,
+                                7301501,
+                                7301601,
+                                7301103,
+                                7301203,
+                                7301303,
+                                7301403,
+                                7301503,
+                                7301603,
+                                7301105,
+                                7301205,
+                                7301305,
+                                7301405,
+                                7301505,
+                                7301605
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DefensePower_Coefficient",
+                            "Channel": 603
+                        }
+                    ],
+                    "Name": "自爆モード作動",
+                    "Desc": "Gây 3000% sát thương kẻ địch trong khu vực hình tròn."
+                },
+                {
                     "Id": "ChesedExSkill01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -272,6 +446,14 @@
                     "Desc": "Chesed miễn nhiễm với mọi hiệu ứng làm tăng <d:DamagedRatio>.\nKhi thanh choáng của Chesed đạt đủ, lõi của Chesed sẽ lộ ra và tăng <d:DamagedRatio> lên 900% trong 20s."
                 }
             ],
+            "ExcludeNormalAttack": [
+                7301100,
+                7301200,
+                7301300,
+                7301400,
+                7301500,
+                7301600
+            ],
             "Name": "ケセド",
             "Profile": "デカグラマトンは、自身を神聖な求道者と主張する人工知能システムです。現在、その信奉者である10人の預言者がキヴォトスの随所に出没しています。\n\nケセドはデカグラマトンの4番目の預言者であり、ミレニアム郊外にある軍需工場の生産システムを掌握していることが確認されました。\nケセドがこのまま兵力の無限生産に成功してしまった場合、キヴォトスは未曾有の厄災に見舞われることになるでしょう。"
         },
@@ -327,6 +509,108 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    100000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    110000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "Dun-Dun-Dun! (Shiro)",
                     "Desc": "Shiro thả những quả bom sẽ phát nổ sau một thời gian ngắn và gây <?1> sát thương lên kẻ địch trong khu vực hình tròn. Sát thương và số lượng bom được thả sẽ tăng lên khi thanh ATG của Shiro tăng dần.<?2>",
                     "Parameters": [
@@ -378,6 +662,48 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
                     "Name": "Tiếp tục lăn đi! (Shiro)",
@@ -439,8 +765,108 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    62000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    85000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "Tấn công! (Kuro)",
                     "Desc": "Triệu hồi các trò chơi ở công viên gây 500% sát thương lên kẻ địch trên một đường thẳng. Sát thương tăng lên khi thanh ATG của Kuro tăng lên.\nNếu Kuro bị trúng đòn do bản thân triệu hồi, thanh choáng của Kuro sẽ tăng thêm <?3>.<?2>",
                     "Parameters": [
@@ -476,6 +902,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Sự thờ ơ",
                     "Desc": "Gây 100% sát thương lên kẻ địch và giảm 80% <d:MoveSpeed> của chúng trong 40s."
                 },
@@ -501,6 +942,7 @@
                     "Desc": "Giảm 80% <d:HealEffectiveness> đối với tất cả kẻ địch. Loại tác dụng phụ này không thể bị gỡ bỏ."
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "シロ&クロ",
             "Profile": "昔、財政難で閉鎖したアミューズメントパーク「スランピア」で、不思議な現象の発生が報告されています。それは停止したはずのドールや各種アトラクションが真夜中に再び動き出し、人々を襲撃するという噂です。\n\nそのドールであるシロとクロが再び動き出した理由は分かりませんが、過去の華やかだった頃のアミューズメントパークのパレードを再現しようとしている、ということは明らかなようです。"
         },
@@ -562,11 +1004,61 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "HieronymusNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    7000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
                     "Id": "HieronymusEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Lời mời của Damasus",
                     "Desc": "Gây 350% sát thương lên kẻ địch trong khu vực hình tròn. Sát thương sẽ tăng lên tới 50% khi HP của mục tiêu thấp dần.\n\nDama<b>sus</b>"
                 },
@@ -576,6 +1068,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGDot",
+                            "Scale": [
+                                2000
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "Duration": "10000",
+                            "Period": "1000",
+                            "Icon": "Hieronymus"
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    32500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Kinh thánh của Vulgate",
                     "Desc": "Thả hiệu ứng <d:Hieronymus> lên một kẻ địch khoảng 10s, liên tục gây 20% sát thương lên chúng sau mỗi 1s trôi qua. Sau 10s, mục tiêu bị dính hiệu ứng <d:Hieronymus> sẽ phát nổ gây 325% sát thương trong khu vực hình tròn. Nếu mục tiêu được chữa lành bằng cách hồi phục 100% HP, hiệu ứng <d:Hieronymus> sẽ bị gỡ bỏ.",
                     "Parameters": [
@@ -596,6 +1127,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Sự hành quyết của Thần chết",
                     "Desc": "Gây 90% sát thương lên kẻ địch trong khu vực hình tròn."
                 },
@@ -605,6 +1157,39 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    3000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Sa mạc sám hối",
                     "Desc": "Cứ sau 10s, gây <?1> sát thương lên tất cả kẻ địch.<?2>",
                     "Parameters": [
@@ -756,6 +1341,29 @@
                     "Desc": "<b:Penetration> của Hieronymus tăng lên <b>750</b>."
                 }
             ],
+            "ExcludeNormalAttack": [
+                7303100,
+                7303200,
+                7303300,
+                7303400,
+                7303500,
+                7303600,
+                7403700,
+                7303900,
+                7303910,
+                7303901,
+                7303911,
+                7303902,
+                7303912,
+                7303903,
+                7303913,
+                7303904,
+                7303914,
+                7303905,
+                7303925,
+                7303906,
+                7303926
+            ],
             "Name": "ヒエロニムス",
             "Profile": "トリニティの古聖堂の地下にて、正体不明の存在が発見されました。\nその存在「ヒエロニムス」は「Communio Sanctorum」、「聖徒の交わり」と呼ばれる人工天使シリーズを率いる存在であり、ゲマトリアが古代の教義をもとに作り上げた実験体であるという説がまことしやかに囁かれています。\n強大な力を持つヒエロニムスをこのまま放置しておくわけにはいきません。キヴォトスの平和のためにも、立ち向かいましょう！"
         },
@@ -835,6 +1443,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                500,
+                                500,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "Vòng lặp vô tận - Súng máy tôm sú siêu cấp",
                     "Desc": "<b>Tay phải (hồng)</b>: Gây 400% sát thương cho kẻ địch trong khu vực hình tròn."
                 },
@@ -844,6 +1501,46 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "Vòng lặp vô tận - Siêu tên lửa cá mòi",
                     "Desc": "<b>Ngực (đỏ)</b>: Gây 300% sát thương cho tất cả kẻ địch."
                 },
@@ -882,6 +1579,42 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "Vòng lặp vô tận - Nhát chém cá thu cuối cùng",
                     "Desc": "Gây 400% sát thương cho tất cả kẻ địch. Đòn đánh này không thể bị chặn hoặc né."
                 },
@@ -891,6 +1624,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Base",
+                            "Channel": 2
+                        }
+                    ],
                     "Name": "Quá tải vô tận",
                     "Desc": "<b>Bàn chân (vàng)</b>: Tăng <b:ATK> lên <b>4,000</b> trong 30s."
                 },
@@ -901,6 +1649,24 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_PASSIVE01",
                     "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 150031
+                        },
                         {
                             "Type": "BuffTarget",
                             "Value": [
@@ -942,15 +1708,206 @@
                     ]
                 },
                 {
-                    "Id": "KaitengerExSkill01",
+                    "Id": "KaitenrangerRedPublic02",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
-                    "Name": "Tư thế Kaiten!",
-                    "Desc": "Mỗi Kaitenger sẽ thông thường kích hoạt kỹ năng EX bản thân của chúng:\n<b>Đỏ cuồng nhiệt!</b>: Gây hiệu ứng <c:Provoke> lên tất cả kẻ địch ở gần trong 10s.\n<b>Đen sắc sảo!</b>: Gây <b>300%</b> sát thương lên một kẻ địch và tăng <b>50%</b> <d:DamagedRatio> của chúng trong 5s.\n<b>Wasabi xanh lè</b>: Gây <b>350%</b> sát thương cho kẻ địch trong khu vực hình quạt.\n<b>Vàng phong cách!</b>: Gây <b>500%</b> sát thương lên một kẻ địch.\n<b>Con tim hồng trong sáng!</b>: Tăng <b>6%</b> <b:ATK> của tất cả đồng minh xung quanh trong 15s."
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                10000
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Provoke"
+                        }
+                    ],
+                    "Name": "Tư thế Kaiten! Đỏ cuồng nhiệt!",
+                    "Desc": "Gây hiệu ứng <c:Provoke> lên tất cả kẻ địch ở gần trong 10s."
+                },
+                {
+                    "Id": "KaitenrangerBlackPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 627
+                        }
+                    ],
+                    "Name": "Tư thế Kaiten! Đen sắc sảo!",
+                    "Desc": "Gây <b>300%</b> sát thương lên một kẻ địch và tăng <b>50%</b> <d:DamagedRatio> của chúng trong 5s."
+                },
+                {
+                    "Id": "KaitenrangerGreenPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                715,
+                                715,
+                                715,
+                                715,
+                                1430,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715
+                            ]
+                        }
+                    ],
+                    "Name": "Tư thế Kaiten! Wasabi xanh lè",
+                    "Desc": "Gây <b>350%</b> sát thương cho kẻ địch trong khu vực hình quạt."
+                },
+                {
+                    "Id": "KaitenrangerYellowPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
+                    "Name": "Tư thế Kaiten! Vàng phong cách!",
+                    "Desc": "Gây <b>500%</b> sát thương lên một kẻ địch."
+                },
+                {
+                    "Id": "KaitenrangerPinkPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    600
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602,
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603,
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604,
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605,
+                                7304106,
+                                7304206,
+                                7304306,
+                                7304406,
+                                7304506,
+                                7304606
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 102
+                        }
+                    ],
+                    "Name": "Tư thế Kaiten! Con tim hồng trong sáng!",
+                    "Desc": "Tăng <b>6%</b> <b:ATK> của tất cả đồng minh xung quanh trong 15s."
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "KAITEN FX Mk.0",
             "Profile": "本拠地までの行く手を遮るかのように、カイテンジャーたちの秘密兵器が登場しました。\nカイテンジャーたちはこれまでに奪ってきた資金と技術を元に、巨大な合体ロボット「KAITEN FX Mk.0」を作っていたようです。\n合体ロボは確かにロマンですが、これまでの行いを考えると、このまま楽しく見ているというわけには行かなそうです。"
         },
@@ -1012,6 +1969,61 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "HitFrames": [
+                                30,
+                                60,
+                                90,
+                                120,
+                                150,
+                                180,
+                                210,
+                                240,
+                                270,
+                                300
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -9999
+                                ]
+                            ],
+                            "Stat": "DefensePower_Base",
+                            "Channel": 603
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "Tia laze trắng nóng hổi",
                     "Desc": "Giảm <d:DEF> của một kẻ địch xuống <b>9.999</b> trong 60s và liên tục gây 90% sát thương cho chúng từng giây một trong tổng 10s.<?1>",
                     "Parameters": [
@@ -1031,6 +2043,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Bóng nước",
                     "Desc": "Gây 400% sát thương lên một kẻ địch."
                 },
@@ -1086,9 +2118,36 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "Tia chói siêu xoắn",
                     "Desc": "Khi thanh ATG đạt mức tối đa, gây 300% sát thương lên tất cả kẻ địch."
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7305190
             ],
             "Name": "ペロロジラ",
             "Profile": "正体不明の巨大な何かがD.U.の近くの海域で観測されました。 どうやら情報によると、かつて海に沈んだとされる、モモフレンズのぬいぐるみの姿をしているようです。\nどうしてこのようなことになったのかは分かりませんが、まずは進撃を防がなければなりません！"
@@ -1146,6 +2205,43 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                3000,
+                                3000,
+                                4000
+                            ]
+                        }
+                    ],
                     "Name": "Tàn phá loại I",
                     "Desc": "Gây 150% sát thương lên kẻ địch trong khu vực hình tròn <?1>.",
                     "Parameters": [
@@ -1165,6 +2261,30 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "Tàn phá loại II",
                     "Desc": "Gây 200% sát thương lên kẻ địch trên một đường thẳng."
                 },
@@ -1193,6 +2313,44 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Năng lượng quá tải",
                     "Desc": "Gây 150% sát thương lên tất cả kẻ địch. Nếu HP của HP thấp hơn 50%, gây 300% sát thương và phá huỷ toàn bộ tháp phòng thủ."
                 },
@@ -1202,6 +2360,76 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_HOD_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "HitFrames": [
+                                0,
+                                10,
+                                20,
+                                30,
+                                40,
+                                50,
+                                60,
+                                70,
+                                80,
+                                90,
+                                100
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 1002
+                        }
+                    ],
                     "Name": "Ánh sáng vinh quang",
                     "Desc": "Gây 740% sát thương lên tất cả kẻ địch và tăng 50% <b:ATK> của Hod cho đến khi kết thúc màn chơi. Hiệu ứng có thể cộng dồn tối đa 99 lần."
                 },
@@ -1291,6 +2519,7 @@
                     "Desc": "Hod và tất cả tháp truyền tải được triệu hồi đều tăng 400% kháng chí mạng.\nTháp truyền tải cũng miễn nhiễm với hiệu ứng <d:ConcentratedTarget>."
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "ホド",
             "Profile": "デカグラマトンは、自身を神聖な求道者と主張する人工知能システムです。現在、その信奉者である10人の預言者がキヴォトスの随所に出没しています。\n\nホドは元々ミレニアムの通信ユニットAIででしたが、正体不明のAIにハッキングされてしまい、今は自らをデカグラマトンの8番目の預言者であると主張しています。\nミレニアムの最先端技術が込められた演算機関の暴走とも言えます。早く止めないと、ミレニアム一帯の安全が脅かされてしまうに違いありません。"
         },
@@ -1360,6 +2589,93 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "GozNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    2500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    }
+                },
+                {
                     "Id": "GozEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -1385,6 +2701,71 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_GOZ_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    37500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    75000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "Chiếu sáng sân khấu",
                     "Desc": "Goz và bản sao của Goz sẽ chiếu ánh sáng vào khu vực trước họ. Sau một thời gian ngắn, các khu vực được chiếu sáng bởi bản sao sẽ phát nổ, gây 1500% lên kẻ địch trong ánh sáng được chiếu."
                 },
@@ -1394,6 +2775,88 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    80000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "Mũ đồng tiền ảo ma",
                     "Desc": "Goz xáo trộn ba chiếc mũ có giấu đồng xu bên trong <?2>. Sau khi mũ bị xáo trộn, kẻ địch trong khu vực đường thẳng từ mũ không có xu sẽ nhận 800% sát thương, bị đẩy lùi và nhận hiệu ứng <c:Stunned> trong 5 giây.<?1>",
                     "Parameters": [
@@ -1423,6 +2886,85 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    22500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    45000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "Món quà bất ngờ",
                     "Desc": "Goz lấy ra một quả bom từ chiếc mũ và nhắm vào một kẻ địch, gây 900% sát thương cho kẻ địch bị nhắm."
                 },
@@ -1432,6 +2974,83 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    120000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "Tàu lượn lao đến!",
                     "Desc": "Tàu lượn sẽ xuất hiện định kỳ, gây 1200% sát thương cho kẻ địch trên đường đi của nó, đồng thời đẩy lùi <?1> kẻ địch trong khu vực gần đó và triệu hồi lính máy tự động Slumpian tại vị trí mà nó đi qua.",
                     "Parameters": [
@@ -1490,6 +3109,22 @@
                         ]
                     ]
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7308100,
+                7308200,
+                7308300,
+                7308400,
+                7308500,
+                7308600,
+                7308700,
+                7308101,
+                7308201,
+                7308301,
+                7308401,
+                7308501,
+                7308601,
+                7308701
             ],
             "Name": "ゴズ",
             "Profile": "以前から、財政難で廃業したアミューズパーク「スランピア」で未知の怪奇現象が起きているという報告されています。停止していたアミューズドールと各種アトラクションが真夜中に動き出し、人々を襲うという噂が、この報告を裏付けています。 \n\nアミューズドール・ゴズは、空虚に満ちた「スランピア」で一人だけのショーを続けています。その奇妙な笑顔の下に隠された本性は善か悪か。私たちがそれを推測するのは容易ではないでしょう。"

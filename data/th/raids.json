@@ -49,6 +49,59 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    12000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    16000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "HitFrames": [
+                                90,
+                                180,
+                                270,
+                                360,
+                                480
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "แสงแห่งแอทซิลุธ",
                     "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรูในแนวเส้นตรง<?2>",
                     "Parameters": [
@@ -78,6 +131,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        }
+                    ],
                     "Name": "เปลวไฟแห่งความยุติธรรม",
                     "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรู 4 เป้าหมาย",
                     "Parameters": [
@@ -99,6 +201,25 @@
                     "ATGCost": 3,
                     "Icon": "SKILLICON_BINAH_EXSKILL03",
                     "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
                         {
                             "Type": "BuffAlly",
                             "Value": [
@@ -156,6 +277,7 @@
                     ]
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "บีนาห์",
             "Profile": "เดคาแกรมมาทอนคือปัญญาประดิษฐ์ที่อ้างว่าตนเป็นสมาชิกของลัทธิศักดิ์สิทธิ์ ปัจจุบันมีผู้เลื่อมใสนับ 10 คนติดตามเขาไปทั่วคิโวทอส\n\nบีนาห์คือผู้เลื่อมใสคนที่ 3 ของเดคาแกรมมาทอน ถูกพบเป็นครั้งแรกในโลกทะเลทราย ของโรงเรียนอะบิดอส ไม่มีใครรู้ว่าทำไมบีนาห์ถึงมาที่นี่ แต่ที่แน่ๆ มันเป็นภัยอันตรายเกินกว่าจะปล่อยไว้แบบนี้"
         },
@@ -231,6 +353,58 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "ChesedDroidExSkill01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_CHESED_EXSKILL01",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    300000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7301101,
+                                7301201,
+                                7301301,
+                                7301401,
+                                7301501,
+                                7301601,
+                                7301103,
+                                7301203,
+                                7301303,
+                                7301403,
+                                7301503,
+                                7301603,
+                                7301105,
+                                7301205,
+                                7301305,
+                                7301405,
+                                7301505,
+                                7301605
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DefensePower_Coefficient",
+                            "Channel": 603
+                        }
+                    ],
+                    "Name": "โหมดสละชีพ",
+                    "Desc": "สร้างความเสียหาย 3000% ของค่าโจมตีให้กับศัตรูในรัศมี"
+                },
+                {
                     "Id": "ChesedExSkill01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -303,6 +477,14 @@
                     "Desc": "เชเซ็ดจะต้านทานเอฟเฟกต์เพิ่ม<d:DamagedRatio>\nเพิ่ม<d:DamagedRatio>เมื่อเชเซ็ดอยู่ในสถานะมึนงงขึ้น 900% (เป็นเวลา 20 วินาที)"
                 }
             ],
+            "ExcludeNormalAttack": [
+                7301100,
+                7301200,
+                7301300,
+                7301400,
+                7301500,
+                7301600
+            ],
             "Name": "เชเซ็ด",
             "Profile": "เดคาแกรมมาทอนคือปัญญาประดิษฐ์ที่อ้างว่าตนเป็นสมาชิกของลัทธิศักดิ์สิทธิ์ ปัจจุบันมีผู้เลื่อมใสกว่า 10 คนติดตามเขาไปทั่วคิโวทอส\n\nเชเซ็ดคือผู้เลื่อมใสคนที่ 4 ของเดคาแกรมมาทอน เขาเป็นเจ้าของระบบการผลิต ของโรงงานอาวุธที่ถูกทิ้งร้างนอกโรงเรียนมิลเลเนียม หากเชเซ็ดสร้างกองทัพที่ไร้ขีดจำกัดแบบนี้ขึ้นสำเร็จแล้วล่ะก็ คิโวทอสจะต้องเผชิญกับหายนะครั้งใหญ่อย่างไม่เคยมีมาก่อน"
         },
@@ -358,6 +540,108 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    100000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    110000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "ตู้มๆๆ บูม!! (ชิโระ)",
                     "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรูที่โดนระเบิด\nATG ยิ่งสูงยิ่งทำความเสียหายรุนแรงขึ้น<?2>",
                     "Parameters": [
@@ -409,6 +693,48 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
                     "Name": "กลิ้งกลิ้งกลิ้ง!! (ชิโระ)",
@@ -470,8 +796,108 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    62000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    85000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "พุ่งไปเลย!!! (คุโระ)",
                     "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรู\nATG ยิ่งสูงยิ่งทำความเสียหายรุนแรงขึ้น หากคุโระโดนการโจมตีของตัวเองจะเพิ่มเกจมึนงงให้กับคุโระจำนวน <?3><?2>",
                     "Parameters": [
@@ -507,6 +933,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "เฉื่อยชา (คุโระ)",
                     "Desc": "สร้างความเสียหาย 100% ของค่าโจมตีให้กับศัตรู\nลด<d:MoveSpeed> 80% (เป็นเวลา 40 วินาที)"
                 },
@@ -532,6 +973,7 @@
                     "Desc": "ลด<d:HealEffectiveness>ของศัตรูทั้งหมด 80% เอฟเฟคนี้ไม่สามารถถูกลบล้างได้"
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "ชิโระ&คุโระ",
             "Profile": "มีรายงานเรื่องเหตุการณ์ประหลาดลึกลับที่สวนสนุก <สลัมเพีย>\nที่ต้องปิดกิจการลงเพราะปัญหาการเงินและถูกปล่อยร้างมีรายงานว่าตุ๊กตา\nและเครื่องเล่นต่างๆ ที่ควรจะหยุดทำงานไปแล้ว\nได้ถูกเปิดขึ้นมาอีกในตอนกลางคืน และออกอาละวาดทำร้ายผู้คน\n\nถึงจะไม่รู้สาเหตุที่เครื่องเล่นอื่นๆ และ คุโระ&ชิโระ เคลื่อนไหวได้อีกครั้งก็ตาม\nแต่ดูเหมือนว่าพวกมันพยายามที่จะสร้างเทศกาลสวนสนุกที่มีสีสัน\nแบบในอดีตขึ้นมาอีกครั้ง"
         },
@@ -593,11 +1035,61 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "HieronymusNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    7000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
                     "Id": "HieronymusEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "เสียงเรียกของดามัส",
                     "Desc": "สร้างความเสียหาย 350% ของค่าโจมตีให้กับศัตรูในรัศมี\nHP% ของเป้าหมายยิ่งต่ำ ความเสียหายยิ่งเพิ่มขึ้น สูงสุด 50%"
                 },
@@ -607,6 +1099,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGDot",
+                            "Scale": [
+                                2000
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "Duration": "10000",
+                            "Period": "1000",
+                            "Icon": "Hieronymus"
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    32500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "คัมภีร์ศักดิ์สิทธิ์",
                     "Desc": "สาปศัตรู 1 เป้าหมาย\n<d:Hieronymus>สร้างความเสียหายต่อเนื่อง 20% ของค่าโจมตีและระเบิดใน 10 วินาทีต่อมา \nสร้างความเสียหาย 325% ของค่าโจมตีให้กับศัตรูในรัศมีและหายไป\nถ้าเป้าหมายที่ถูกสาปมี HP เต็ม 100% <d:Hieronymus>จะหายไปทันที<?1>",
                     "Parameters": [
@@ -627,6 +1158,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "ปลดปล่อยมรณะ",
                     "Desc": "สร้างความเสียหาย 90% ของค่าโจมตีให้กับศัตรูในรัศมี"
                 },
@@ -636,6 +1188,39 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    3000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "ทะเลทรายทารุณ",
                     "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรูทั้งหมดทุก 10 วินาที<?2>",
                     "Parameters": [
@@ -787,6 +1372,29 @@
                     "Desc": "เพิ่ม<b:Penetration>ของไฮโรนีมัส <b>750</b>"
                 }
             ],
+            "ExcludeNormalAttack": [
+                7303100,
+                7303200,
+                7303300,
+                7303400,
+                7303500,
+                7303600,
+                7403700,
+                7303900,
+                7303910,
+                7303901,
+                7303911,
+                7303902,
+                7303912,
+                7303903,
+                7303913,
+                7303904,
+                7303914,
+                7303905,
+                7303925,
+                7303906,
+                7303926
+            ],
             "Name": "ไฮโรนีมัส",
             "Profile": "มีการค้นพบสิ่งมีชีวิตที่ไม่สามารถระบุตัวตนได้ที่ชั้นใต้ดินของซากปรัก\nหักพังของวิหารโบราณในเขตทรีนิตี้ ไฮโรนีมัสคือหุ่นเทวทูตประดิษฐ์\nรุ่นสมบูรณ์แบบที่เรียกว่า <สหพันธ์นักบุญ> ที่เกมาเทรียสร้างขึ้นโดย\nใช้ข้อมูลจากความรู้โบราณ\nจะปล่อยให้พลังของไฮโรนีมัสเพิ่มไปกว่านี้ไม่ได้! ได้เวลาเคลื่อนไหว\nเพื่อความผาสุขของคิโวทอสแล้ว!"
         },
@@ -866,6 +1474,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                500,
+                                500,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "ปืนกลกุ้งหมุนไม่ยั้ง",
                     "Desc": "แขนขวา (พิงค์): สร้างความเสียหาย 400% ของค่าโจมตีให้กับศัตรูในรัศมี"
                 },
@@ -875,6 +1532,46 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "มิสไซล์ปลาซาร์ดีนไฮเปอร์หมุนไม่ยั้ง",
                     "Desc": "หน้าอก (เรด): สร้างความเสียหาย 300% ของค่าโจมตีให้กับศัตรูทั้งหมด"
                 },
@@ -913,6 +1610,42 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "ดาบปลาซาบะไฟนอลหมุนไม่ยั้ง",
                     "Desc": "สร้างความเสียหาย 400% ของค่าโจมตีให้กับศัตรูทั้งหมด, หลบหลีกไม่ได้"
                 },
@@ -922,6 +1655,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Base",
+                            "Channel": 2
+                        }
+                    ],
                     "Name": "ชุดไข่พิเศษอินฟินิตี้สปิน",
                     "Desc": "ขา (เยลโล่ว): เพิ่ม<b:ATK> <b>4,000</b> (เป็นเวลา 30 วินาที)"
                 },
@@ -932,6 +1680,24 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_PASSIVE01",
                     "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 150031
+                        },
                         {
                             "Type": "BuffTarget",
                             "Value": [
@@ -973,15 +1739,206 @@
                     ]
                 },
                 {
-                    "Id": "KaitengerExSkill01",
+                    "Id": "KaitenrangerRedPublic02",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
-                    "Name": "ไคเทนโพสต์!",
-                    "Desc": "ไคเทนเจอร์แต่ละคนจะผลัดกันใช้สกิล EX ของตัวเองเป็นระยะ\n<b>เรดสายบ้าบิ่น</b>: <c:Provoke>ศัตรูในรัศมี (เป็นเวลา 10 วินาที)\n<b>แบล็คสายสุขุม</b>: สร้างความเสียหาย <b>300%</b> ของค่าโจมตีให้กับศัตรู 1 เป้าหมายและเพิ่ม<d:DamagedRatio> 50% (เป็นเวลา 5 วินาที)\n<b>กรีนสายชิล</b>: สร้างความเสียหาย <b>350%</b> ของค่าโจมตีให้กับศัตรูในพื้นที่รูปทรงกรวย\n<b>เยลโล่วสายไฟแรง</b>: สร้างความเสียหาย <b>500%</b> ของค่าโจมตีให้กับศัตรู 1 เป้าหมาย\n<b>พิงค์สายจริงใจ</b> : เพิ่ม<b:ATK> ให้กับฝ่ายเราในรัศมี <b>6%</b> (เป็นเวลา 15 วินาที)"
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                10000
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Provoke"
+                        }
+                    ],
+                    "Name": "ไคเทนโพสต์! เรดสายบ้าบิ่น!",
+                    "Desc": "<c:Provoke>ศัตรูในรัศมี (เป็นเวลา 10 วินาที)"
+                },
+                {
+                    "Id": "KaitenrangerBlackPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 627
+                        }
+                    ],
+                    "Name": "ไคเทนโพสต์! แบล็กสายสุขุม!",
+                    "Desc": "สร้างความเสียหาย <b>300%</b> ของค่าโจมตีให้กับศัตรู 1 เป้าหมายและเพิ่ม<d:DamagedRatio> 50% (เป็นเวลา 5 วินาที)"
+                },
+                {
+                    "Id": "KaitenrangerGreenPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                715,
+                                715,
+                                715,
+                                715,
+                                1430,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715
+                            ]
+                        }
+                    ],
+                    "Name": "ไคเทนโพสต์! กรีนสายชิล!",
+                    "Desc": "สร้างความเสียหาย <b>350%</b> ของค่าโจมตีให้กับศัตรูในพื้นที่รูปทรงกรวย"
+                },
+                {
+                    "Id": "KaitenrangerYellowPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
+                    "Name": "ไคเทนโพสต์! เยลโลว์สายไฟแรง!",
+                    "Desc": "สร้างความเสียหาย <b>500%</b> ของค่าโจมตีให้กับศัตรู 1 เป้าหมาย"
+                },
+                {
+                    "Id": "KaitenrangerPinkPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    600
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602,
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603,
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604,
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605,
+                                7304106,
+                                7304206,
+                                7304306,
+                                7304406,
+                                7304506,
+                                7304606
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 102
+                        }
+                    ],
+                    "Name": "ไคเทนโพสต์! พิงค์สายจริงใจ!",
+                    "Desc": "เพิ่ม<b:ATK> ให้กับฝ่ายเราในรัศมี <b>6%</b> (เป็นเวลา 15 วินาที)"
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "KAITEN FX Mk.0",
             "Profile": "พบศูนย์บัญชาการของไคเทนเจอร์ตัวปัญหาแล้ว\nไคเทนเจอร์กำลังสร้าง「KAITEN FX Mk.0」 หุ่นยนต์ที่รวมเอาเทคโนโลยี\nและเงินที่ปล้นมาได้ไว้ที่นี่ แน่นอนว่าเท่สุดๆ แต่พอมาคิดถึงปัญหาต่างๆ\nที่หุ่นยนต์นี้ก่อแล้ว ความฝันคงต้องสิ้นสุดลงตรงนี้"
         },
@@ -1043,6 +2000,61 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "HitFrames": [
+                                30,
+                                60,
+                                90,
+                                120,
+                                150,
+                                180,
+                                210,
+                                240,
+                                270,
+                                300
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -9999
+                                ]
+                            ],
+                            "Stat": "DefensePower_Base",
+                            "Channel": 603
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "แสงแยงตา",
                     "Desc": "สร้างความเสียหายต่อเนื่อง 90% ของค่าโจมตีกับศัตรู 1 เป้าหมาย (เป็นเวลา 10 วินาที) /\nลด<d:DEF> 9999 (เป็นเวลา 60 วินาที) <?1>",
                     "Parameters": [
@@ -1062,6 +2074,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "อควาบอล",
                     "Desc": "สร้างความเสียหาย 400% ของค่าโจมตีกับศัตรู 1 เป้าหมาย"
                 },
@@ -1117,9 +2149,36 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "ไฮเปอร์สไปรัลบีม",
                     "Desc": "สร้างความเสียหาย 300% ของค่าโจมตีกับศัตรูทั้งหมด"
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7305190
             ],
             "Name": "เพโรโร่ซิลล่า",
             "Profile": "ปีศาจยักษ์ปริศนาที่ถูกพบในเขตทะเลแถว D.U. มันมีรูปลักษณ์คล้ายกับ\nของเล่น MOMO FRIENDS ที่ตกทะเลมา แม้จะไม่รู้ว่ามันเกิดขึ้นได้อย่างไร\nแต่เราต้องขัดขวางการโจมตีของปีศาจยักษ์นี่ให้ได้!"
@@ -1177,6 +2236,43 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                3000,
+                                3000,
+                                4000
+                            ]
+                        }
+                    ],
                     "Name": "ทำลาย - Type I",
                     "Desc": "สร้างความเสียหาย 150% ของค่าโจมตีให้กับศัตรูในรัศมี<?1>",
                     "Parameters": [
@@ -1196,6 +2292,30 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "ทำลาย - Type II",
                     "Desc": "สร้างความเสียหาย 200% ของค่าโจมตีให้กับศัตรูในแนวเส้นตรง"
                 },
@@ -1224,6 +2344,44 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "ปล่อยพลังเต็มเหนี่ยว",
                     "Desc": "สร้างความเสียหาย 150% ของค่าโจมตีให้กับศัตรูทั้งหมด\nเมื่อ HP ของ Hod ต่ำกว่า 50% จะสร้างความเสียหาย 300% ของค่าโจมตีให้กับศัตรูทั้งหมดและทำลายป้อมปืนคุ้มกันทั้งหมด"
                 },
@@ -1233,6 +2391,76 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_HOD_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "HitFrames": [
+                                0,
+                                10,
+                                20,
+                                30,
+                                40,
+                                50,
+                                60,
+                                70,
+                                80,
+                                90,
+                                100
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 1002
+                        }
+                    ],
                     "Name": "แสงแห่งเกียรติยศ",
                     "Desc": "สร้างความเสียหาย 740% ของค่าโจมตีให้กับศัตรู\nเพิ่ม<b:ATK>ของ Hod 50% ทุกครั้งที่ใช้สกิลแสงแห่งเกียรติยศ (ซ้อนทับสูงสุด 99 ครั้ง)"
                 },
@@ -1322,6 +2550,7 @@
                     "Desc": "Hod และเสากัดกร่อนจะมีค่าต้านทานคริเพิ่ม 400%\nเสากัดกร่อนจะไม่ได้รับผลจากเอฟเฟกต์<d:ConcentratedTarget>"
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "HOD",
             "Profile": "เดคาแกรมมาทอนคือปัญญาประดิษฐ์ที่อ้างว่าตนเป็นสมาชิกของลัทธิศักดิ์สิทธิ์ ปัจจุบันมีผู้เลื่อมใสกว่า 10 คนติดตามเขาไปทั่วคิโวทอส\n\nเดิมที HOD เป็นหน่วย AI สร้างเครือข่ายสื่อสารในเขตปกครองตนเองของมิลเลเนียม แต่หลังจากที่ถูก AI ไม่ระบุตัวตนแฮ็ก ก็อ้างว่าตนเป็นผู้เลื่อมใสคนที่ 8 ของเดคาแกรมมาทอน เราต้องยับยั้งการจู่โจมเครื่องคำนวณที่มีแก่นเทคโนโลยีของมิลเลเนียมนี้ เพื่อรับประกันความปลอดภัยของเขตปกครองตนเองมิลเลเนียมไว้"
         },
@@ -1391,6 +2620,93 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "GozNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    2500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    }
+                },
+                {
                     "Id": "GozEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -1416,6 +2732,71 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_GOZ_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    37500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    75000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "ทรี ไลท์ มอนท์",
                     "Desc": "Goz และร่างแยกจะทำการส่องแสงไปยังพื้นที่ด้านหน้าของตัวเอง, หลังจากนั้นบริเวณที่ถูกแสงของร่างแยกส่องจะระเบิดและสร้างความเสียหาย 1500% ของค่าโจมตีให้กับศัตรูที่อยู่ในพื้นที่นั้น"
                 },
@@ -1425,6 +2806,88 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    80000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "เมจิคัล คอยน์ แฮ็ท",
                     "Desc": "Goz จะวางระเบิดไว้ในหมวก <?1> ใน 3 ใบก่อนที่จะทำการสับเปลี่ยนตำแหน่งของหมวกไปเรื่อยๆ/\nหากมีศัตรูอยู่ในแนวเส้นตรงเดียวกับหมวกที่มีระเบิดตอนเปิดออกมา ศัตรูจะได้รับความเสียหาย 800% ของค่าโจมตี, <c:Stunned> (เป็นเวลา 5 วินาที)<?2> และถูกผลักกระเด็นออกไป",
                     "Parameters": [
@@ -1454,6 +2917,85 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    22500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    45000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "เซอร์ไพรซ์ พรีเซนต์",
                     "Desc": "Goz จะทำการเล็งศัตรู 1 เป้าหมายก่อนหยิบระเบิดออกมาจากหมวก ระเบิดจะวิ่งไปยังเป้าหมายที่เล็งเพื่อสร้างความเสียหาย 900% ของค่าโจมตีให้กับเป้าหมาย"
                 },
@@ -1463,6 +3005,83 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    120000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "สครีม ไรเดอร์",
                     "Desc": "ทุกช่วงเวลาหนึ่ง, สครีม ไรเดอร์จะปรากฏตัวออกมาเพื่อสร้างความเสียหาย 1200% ของค่าโจมตีให้กับศัตรูที่อยู่ในเส้นทางของมัน<?1>พร้อมทั้งผลักศัตรูออกไปด้านข้าง\nสครีม ไรเดอร์จะทำการเรียกทหารจักรกลสลัมเพียออกมาจากตำแหน่งที่มันปรากฏตัวขึ้น",
                     "Parameters": [
@@ -1521,6 +3140,22 @@
                         ]
                     ]
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7308100,
+                7308200,
+                7308300,
+                7308400,
+                7308500,
+                7308600,
+                7308700,
+                7308101,
+                7308201,
+                7308301,
+                7308401,
+                7308501,
+                7308601,
+                7308701
             ],
             "Name": "Goz",
             "Profile": "以前から、財政難で廃業したアミューズパーク「スランピア」で未知の怪奇現象が起きているという報告されています。停止していたアミューズドールと各種アトラクションが真夜中に動き出し、人々を襲うという噂が、この報告を裏付けています。 \n\nアミューズドール・ゴズは、空虚に満ちた「スランピア」で一人だけのショーを続けています。その奇妙な笑顔の下に隠された本性は善か悪か。私たちがそれを推測するのは容易ではないでしょう。"

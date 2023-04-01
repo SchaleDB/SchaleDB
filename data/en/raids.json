@@ -49,6 +49,59 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    12000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    16000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "HitFrames": [
+                                90,
+                                180,
+                                270,
+                                360,
+                                480
+                            ],
+                            "RestrictTo": [
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "Atsilut's Light",
                     "Desc": "Deals <?1> damage to enemies in a straight line.<?2>",
                     "Parameters": [
@@ -78,6 +131,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1667,
+                                1667,
+                                1667,
+                                1667
+                            ]
+                        }
+                    ],
                     "Name": "Fires of Severity",
                     "Desc": "Deals <?1> damage to 4 enemies.",
                     "Parameters": [
@@ -99,6 +201,25 @@
                     "ATGCost": 3,
                     "Icon": "SKILLICON_BINAH_EXSKILL03",
                     "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
                         {
                             "Type": "BuffAlly",
                             "Value": [
@@ -156,6 +277,7 @@
                     ]
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "Binah",
             "Profile": "Decagrammaton is an artificial intelligence system claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\n\nBinah, the third prophet of Decagrammaton, was first seen in the desert district of Abydos.\nWhy Binah came here is unknown, but it's too dangerous to be left to do as it pleases."
         },
@@ -231,6 +353,58 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "ChesedDroidExSkill01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_CHESED_EXSKILL01",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    300000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7301101,
+                                7301201,
+                                7301301,
+                                7301401,
+                                7301501,
+                                7301601,
+                                7301103,
+                                7301203,
+                                7301303,
+                                7301403,
+                                7301503,
+                                7301603,
+                                7301105,
+                                7301205,
+                                7301305,
+                                7301405,
+                                7301505,
+                                7301605
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DefensePower_Coefficient",
+                            "Channel": 603
+                        }
+                    ],
+                    "Name": "Self-Destruct Activated",
+                    "Desc": "Deals 3000% damage to enemies in a circular area."
+                },
+                {
                     "Id": "ChesedExSkill01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -303,6 +477,14 @@
                     "Desc": "Immune to all effects that increase <d:DamagedRatio>.\nWhen Chesed's groggy gauge is full, reveals Chesed's core and increases <d:DamagedRatio> by 900% for 20s."
                 }
             ],
+            "ExcludeNormalAttack": [
+                7301100,
+                7301200,
+                7301300,
+                7301400,
+                7301500,
+                7301600
+            ],
             "Name": "Chesed",
             "Profile": "Decagrammaton is an artificial intelligence system claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\n\nChesed, the fourth prophet of Decagrammaton, has control of an abandoned munitions factory on the outskirts of Millennium.\nKivotos will face unprecedented disaster if Chesed produces an unlimited supply of troops."
         },
@@ -358,6 +540,108 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    100000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    110000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "Dun-Dun-Dun! (Shiro)",
                     "Desc": "Places bombs that explode after a short while and deal <?1> damage to enemies in a circular area. Damage and number of bombs placed increases as Shiro's ATG gauge increases.<?2>",
                     "Parameters": [
@@ -409,6 +693,48 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "SubstituteCondition": "TargetIsStructure",
+                            "SubstituteScale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
                     "Name": "Keep Rollin' Rollin' Rollin'! (Shiro)",
@@ -470,8 +796,108 @@
                             ],
                             "Stat": "DamagedRatio_Base",
                             "Channel": 527
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    70000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    62000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    85000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
                         }
                     ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabel": [
+                            "&times;1",
+                            "&times;2",
+                            "&times;3"
+                        ]
+                    },
                     "Name": "Charge! (Kuro)",
                     "Desc": "Summons theme park rides that deals <?1> damage to enemies in a straight line. Damage increases as Kuro's ATG gauge increases.\nIf Kuro is hit by this attack, fills Kuro's groggy gauge by <?3>.<?2>",
                     "Parameters": [
@@ -507,6 +933,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_SHIROKURO_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302601
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Lethargy (Kuro)",
                     "Desc": "Deals 100% damage to enemies and decreases their <d:MoveSpeed> by 80% for 40s."
                 },
@@ -532,6 +973,7 @@
                     "Desc": "Decreases all enemies' <d:HealEffectiveness> by 80%. This debuff cannot be removed."
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "Shiro & Kuro",
             "Profile": "A mysterious phenomenon has been reported in Slumpia, a theme park that went bankrupt long ago. Rumor has it that the animatronics and other attractions have now come back to life in the middle of the night to attack people.\n\nIt is unknown why the animatronics, Shiro and Kuro, are active again, but it seems clear that they are trying to recreate the wonderful festivals of the theme park's past."
         },
@@ -593,11 +1035,61 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "HieronymusNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    7000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
                     "Id": "HieronymusEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Damasus' Call",
                     "Desc": "Deals 350% damage to enemies in a circular area. Damage increases by up to 50% the lower the target's current HP."
                 },
@@ -607,6 +1099,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGDot",
+                            "Scale": [
+                                2000
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "Duration": "10000",
+                            "Period": "1000",
+                            "Icon": "Hieronymus"
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    32500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Vulgate's Sacred Book",
                     "Desc": "Inflicts <d:Hieronymus> on one enemy for 10s, continuously dealing 20% damage to them every 1s. After 10s, the target will explode dealing 325% damage in a circular area around them. If the target is healed to 100% HP, the curse will be removed.<?1>",
                     "Parameters": [
@@ -627,6 +1158,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500,
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Reaper's Execution",
                     "Desc": "Deals 90% damage to enemies in a circular area."
                 },
@@ -636,6 +1188,39 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HIERONYMUS_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303100,
+                                7303200,
+                                7303300,
+                                7303400,
+                                7303500
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    3000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7303600,
+                                7403700
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Desert Penance",
                     "Desc": "Every 10s, deals <?1> damage to all enemies.<?2>",
                     "Parameters": [
@@ -787,6 +1372,29 @@
                     "Desc": "Increases Hieronymus' <b:Penetration> by <b>750</b>."
                 }
             ],
+            "ExcludeNormalAttack": [
+                7303100,
+                7303200,
+                7303300,
+                7303400,
+                7303500,
+                7303600,
+                7403700,
+                7303900,
+                7303910,
+                7303901,
+                7303911,
+                7303902,
+                7303912,
+                7303903,
+                7303913,
+                7303904,
+                7303914,
+                7303905,
+                7303925,
+                7303906,
+                7303926
+            ],
             "Name": "Hieronymus",
             "Profile": "An unknown entity was discovered beneath the old cathedral ruins in Trinity, supposedly a test subject created by Gematria based on ancient doctrines.\nIt is Hieronymus, the final form of the artificial angel Communio Sanctorum. We can't leave its incredible power unchecked. For the safety of Kivotos!"
         },
@@ -866,6 +1474,55 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                500,
+                                500,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000,
+                                1000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "Infinite Cycle - Super Shrimp Machine Gun",
                     "Desc": "<b>Right Arm (pink)</b>: Deals 400% damage to enemies in a circular area."
                 },
@@ -875,6 +1532,46 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "Infinite Cycle - Hyper Sardine Missile",
                     "Desc": "<b>Chest (red)</b>: Deals 300% damage to all enemies."
                 },
@@ -913,6 +1610,42 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "Infinite Cycle - Final Mackerel Slash",
                     "Desc": "Deals 400% damage to all enemies. This attack cannot be blocked or evaded."
                 },
@@ -922,6 +1655,21 @@
                     "MinDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Base",
+                            "Channel": 2
+                        }
+                    ],
                     "Name": "Endless Eggvincible Overcharge",
                     "Desc": "<b>Feet (yellow)</b>: Increases <b:ATK> by <b>4,000</b> for 30s."
                 },
@@ -932,6 +1680,24 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_KAITENFXMK0_PASSIVE01",
                     "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 150031
+                        },
                         {
                             "Type": "BuffTarget",
                             "Value": [
@@ -973,15 +1739,206 @@
                     ]
                 },
                 {
-                    "Id": "KaitengerExSkill01",
+                    "Id": "KaitenrangerRedPublic02",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
-                    "Name": "Kaiten Pose!",
-                    "Desc": "Each Kaitenger will periodically activate their personal EX Skill:\n<b>Red of Zealousness!</b>: Inflicts <c:Provoke> on all nearby enemies for 10s.\n<b>Black of Shrewdness!</b>: Deals <b>300%</b> damage to one enemy and increases their <d:DamagedRatio> by <b>50%</b> for 5s.\n<b>Green of Weekend OT</b>: Deals <b>350%</b> damage to enemies in a fan-shaped area.\n<b>Yellow of Passion!</b>: Deals <b>500%</b> damage to one enemy.\n<b>Pink of Pure Heart!</b>: Increases all nearby allies' <b:ATK> by <b>6%</b> for 15s."
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                10000
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Provoke"
+                        }
+                    ],
+                    "Name": "Kaiten Pose! Red of Zealousness!",
+                    "Desc": "Inflicts <c:Provoke> on all nearby enemies for 10s."
+                },
+                {
+                    "Id": "KaitenrangerBlackPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 627
+                        }
+                    ],
+                    "Name": "Kaiten Pose! Black of Shrewdness!",
+                    "Desc": "Deals <b>300%</b> damage to one enemy and increases their <d:DamagedRatio> by <b>50%</b> for 5s."
+                },
+                {
+                    "Id": "KaitenrangerGreenPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                715,
+                                715,
+                                715,
+                                715,
+                                1430,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715,
+                                715
+                            ]
+                        }
+                    ],
+                    "Name": "Kaiten Pose! Green of Weekend OT",
+                    "Desc": "Deals <b>350%</b> damage to enemies in a fan-shaped area."
+                },
+                {
+                    "Id": "KaitenrangerYellowPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    50000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
+                    "Name": "Kaiten Pose! Yellow of Passion!",
+                    "Desc": "Deals <b>500%</b> damage to one enemy."
+                },
+                {
+                    "Id": "KaitenrangerPinkPublic02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    600
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304102,
+                                7304202,
+                                7304302,
+                                7304402,
+                                7304502,
+                                7304602,
+                                7304103,
+                                7304203,
+                                7304303,
+                                7304403,
+                                7304503,
+                                7304603,
+                                7304104,
+                                7304204,
+                                7304304,
+                                7304404,
+                                7304504,
+                                7304604,
+                                7304105,
+                                7304205,
+                                7304305,
+                                7304405,
+                                7304505,
+                                7304605,
+                                7304106,
+                                7304206,
+                                7304306,
+                                7304406,
+                                7304506,
+                                7304606
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 102
+                        }
+                    ],
+                    "Name": "Kaiten Pose! Pink of Pure Heart!",
+                    "Desc": "Increases all nearby allies' <b:ATK> by <b>6%</b> for 15s."
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "KAITEN FX Mk.0",
             "Profile": "The Kaitengers' secret weapon has appeared to block the road to their base. The Kaitengers plan to use the stolen funds and technologies to build a giant combination mecha: KAITEN FX Mk.0. It may look cool, but no good can come of letting them have something like that. Time to put a stop to it."
         },
@@ -1043,6 +2000,61 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    9000
+                                ]
+                            ],
+                            "HitFrames": [
+                                30,
+                                60,
+                                90,
+                                120,
+                                150,
+                                180,
+                                210,
+                                240,
+                                270,
+                                300
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -9999
+                                ]
+                            ],
+                            "Stat": "DefensePower_Base",
+                            "Channel": 603
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
                     "Name": "White-Hot Heat Vision",
                     "Desc": "Decreases the <d:DEF> of one enemy by <b>9,999</b> for 60s and continuously deals 90% damage to them every 1s for 10s.<?1>",
                     "Parameters": [
@@ -1062,6 +2074,26 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Aqua Ball",
                     "Desc": "Deals 400% damage to one enemy."
                 },
@@ -1117,9 +2149,36 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "Hyper Spiral Glare Beam",
                     "Desc": "When ATG gauge is full, deals 300% damage to all enemies."
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7305190
             ],
             "Name": "Perorodzilla",
             "Profile": "An unidentified giant monster has been sighted in the waters near DU. The monster looks like a Momo Friends toy that once sank into the sea.\nWe don't know why this happened, but we have to stop this giant monster from advancing!"
@@ -1177,6 +2236,43 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                3000,
+                                3000,
+                                4000
+                            ]
+                        }
+                    ],
                     "Name": "Destroy - Type I",
                     "Desc": "Deals 150% damage to enemies in a circular area<?1>.",
                     "Parameters": [
@@ -1196,6 +2292,30 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "Destroy - Type II",
                     "Desc": "Deals 200% damage to enemies in a straight line."
                 },
@@ -1224,6 +2344,44 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOD_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Excess Energy Release",
                     "Desc": "Deals 150% damage to all enemies. If Hod's HP is less than 50%, deals 300% damage and destroys all defense turrets."
                 },
@@ -1233,6 +2391,76 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_HOD_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    4000
+                                ]
+                            ],
+                            "HitFrames": [
+                                0,
+                                10,
+                                20,
+                                30,
+                                40,
+                                50,
+                                60,
+                                70,
+                                80,
+                                90,
+                                100
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 1002
+                        }
+                    ],
                     "Name": "Light of Glory",
                     "Desc": "Deals 740% damage to all enemies and increases Hod's <b:ATK> by 50% until the end of battle. Effect stacks up to 99 times."
                 },
@@ -1322,6 +2550,7 @@
                     "Desc": "Hod and all summoned Erosion Towers have 400% increased Crit RES.\nErosion Towers are also immune to the effects of <d:ConcentratedTarget>."
                 }
             ],
+            "ExcludeNormalAttack": [],
             "Name": "Hod",
             "Profile": "Decagrammaton is an AI claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\nHod was originally a built-in network unit at Millennium, but now claims to be the eighth prophet of Decagrammaton since being hacked by an unidentified AI.\nThe district's safety is in jeopardy until this computing unit powered by Millennium technology is stopped."
         },
@@ -1391,6 +2620,93 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "GozNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    2500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    }
+                },
+                {
                     "Id": "GozEx01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -1416,6 +2732,71 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_GOZ_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    150000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    37500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    75000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "Three Light Monte",
                     "Desc": "Goz and his clones shine lights on the area in front of him. After a short duration the areas lit by the clones will explode, dealing 1500% damage to enemies inside them."
                 },
@@ -1425,6 +2806,88 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    80000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "Magical Coin Hats",
                     "Desc": "Goz shuffles three hats with coins hidden inside <?2> of them. After the hats have been shuffled, enemies in a straight line area from hats without coins will be dealt 800% damage, knocked back and inflicted with <c:Stunned> for 5s.<?1>",
                     "Parameters": [
@@ -1454,6 +2917,85 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    90000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308600,
+                                7308700,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    22500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500,
+                                7308101,
+                                7308201,
+                                7308301,
+                                7308401,
+                                7308501
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    45000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700,
+                                7308601,
+                                7308701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "Surprise Present",
                     "Desc": "Goz pulls a bomb out of his hat and targets one enemy, dealing 900% damage to them."
                 },
@@ -1463,6 +3005,83 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_GOZ_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    120000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308100,
+                                7308200,
+                                7308300,
+                                7308400,
+                                7308500
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    60000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308600,
+                                7308700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    },
                     "Name": "Scream Rider",
                     "Desc": "The Scream Rider will periodically appear, dealing 1200% damage to enemies in its path while knocking back<?1> enemies in the area nearby and summoning Slumpian automaton soldiers at the location where it travels through.",
                     "Parameters": [
@@ -1521,6 +3140,22 @@
                         ]
                     ]
                 }
+            ],
+            "ExcludeNormalAttack": [
+                7308100,
+                7308200,
+                7308300,
+                7308400,
+                7308500,
+                7308600,
+                7308700,
+                7308101,
+                7308201,
+                7308301,
+                7308401,
+                7308501,
+                7308601,
+                7308701
             ],
             "Name": "Goz",
             "Profile": "以前から、財政難で廃業したアミューズパーク「スランピア」で未知の怪奇現象が起きているという報告されています。停止していたアミューズドールと各種アトラクションが真夜中に動き出し、人々を襲うという噂が、この報告を裏付けています。 \n\nアミューズドール・ゴズは、空虚に満ちた「スランピア」で一人だけのショーを続けています。その奇妙な笑顔の下に隠された本性は善か悪か。私たちがそれを推測するのは容易ではないでしょう。"
