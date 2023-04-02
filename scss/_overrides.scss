@@ -83,11 +83,6 @@
     }
 }
 
-.dropdown-toggle::after {
-    //content: "<i class='caret fa-solid fa-caret-down me-2'></i>";
-    //display: none;
-}
-
 // Navs
 
 .nav {
@@ -199,6 +194,7 @@
 .card {
     @include backdrop-filter(var(--var-glass-filter));
     background-color: var(--col-theme-glass);
+    @include promote-layer;
     font-weight: 400;
     color: var(--col-theme-text);
     border: none;

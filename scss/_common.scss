@@ -537,7 +537,7 @@ p a {
 
 .stat-icon {
 
-    @include box-shadow;
+    //@include box-shadow;
     margin-top: -2px;
     width: 26px;
     min-width: 26px;
@@ -545,6 +545,7 @@ p a {
     margin-right: 0.5rem;
     @include circular;
     overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.35);
     
 
     img {
@@ -552,7 +553,13 @@ p a {
         width: 100%;
         object-fit: cover;
         opacity: 0.85;
-        background-color: rgba(0, 0, 0, 0.4);
+        
+    }
+}
+
+.theme-dark {
+    .stat-icon {
+        background-color: rgba(0, 0, 0, 0.35);
     }
 }
 

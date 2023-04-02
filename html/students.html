@@ -217,8 +217,8 @@
                                         <button class="btn-pill" data-bs-toggle="collapse" data-bs-target="#ba-skill-ex-materials-page">
                                             <span class="label" data-localize-id="ui,student_skills_materials"></span>
                                         </button>
-                                        <input id="ba-skillpreview-exrange" oninput="changeEXSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="5">
-                                        <span id="ba-skill-ex-level" class="ba-slider-label">Lv.1</span>
+                                        <input id="ba-skillpreview-exrange" oninput="recalculateEXSkillPreview()" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="5">
+                                        <span id="ba-skill-ex-level" class="ba-slider-label"></span>
                                     </div>
                                 </div>
 
@@ -283,8 +283,8 @@
                                         <button class="btn-pill" data-bs-toggle="collapse" data-bs-target="#ba-skill-materials-page">
                                             <span class="label" data-localize-id="ui,student_skills_materials"></span>
                                         </button>
-                                        <input id="ba-skillpreview-range" oninput="changeSkillPreviewLevel(this)" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="10">
-                                        <span id="ba-skill-level" class="ba-slider-label">Lv.1</span>
+                                        <input id="ba-skillpreview-range" oninput="recalculateSkillPreview()" type="range" class="form-range mx-2 flex-fill" value="1" min="1" max="10">
+                                        <span id="ba-skill-level" class="ba-slider-label"></span>
                                     </div>
                                 </div>
                             </div>
@@ -775,6 +775,18 @@
                                             </div>
                                             <div class="search-list-container" style="display:none;">
                                                 <div class="search-list">
+                                                    <div class="search-list-controls">
+                                                        <div class="search-list-filter">
+                                                            <button class="btn-pill" data-bs-toggle="dropdown">
+                                                                <i class="fa-solid fa-filter ms-2"></i>
+                                                                <span class="search-list-filter-active label"></span>
+                                                                <i class="caret fa-solid fa-caret-down me-2"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start dropdown-menu-scroll">
+                                                                <li><a class="dropdown-item active" href="javascript:;" data-filter-select-value="all" data-localize-id="ui,filter_all"></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                     <div class="search-list-results"></div>
                                                 </div>
                                             </div>
@@ -920,6 +932,18 @@
                                             </div>
                                             <div class="search-list-container" style="display:none;">
                                                 <div class="search-list">
+                                                    <div class="search-list-controls">
+                                                        <div class="search-list-filter">
+                                                            <button class="btn-pill" data-bs-toggle="dropdown">
+                                                                <i class="fa-solid fa-filter ms-2"></i>
+                                                                <span class="search-list-filter-active label"></span>
+                                                                <i class="caret fa-solid fa-caret-down me-2"></i>
+                                                            </button>
+                                                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start dropdown-menu-scroll">
+                                                                <li><a class="dropdown-item active" href="javascript:;" data-filter-select-value="all" data-localize-id="ui,filter_all"></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
                                                     <div class="search-list-results"></div>
                                                 </div>
                                             </div>

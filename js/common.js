@@ -157,6 +157,8 @@ let statPreviewSelectedEnemyGrade = 1
 let statPreviewSelectedEnemyRaid = 0
 let statPreviewSelectedEnemyLevelFixed = false
 let statPreviewEnemyBookmarks = []
+let skillPreviewExSkillLevel = 1
+let skillPreviewOtherSkillLevel = 1
 let skillInfoCollection = []
 let raidSkillInfoCollection = []
 let studentCollection = {}
@@ -342,6 +344,8 @@ let search_options = {
 let passiveStatList = []
 let subStatList = []
 let weaponPassiveStatList = []
+let studentBuffStatFilters = []
+let enemyBuffStatFilters = []
 
 let itemSearchOptions = {
     "sortby": "Default",
@@ -824,6 +828,7 @@ class ExternalBuffs extends Buffs {
     filterFunc
     recalculationFunc
     effectTypeFilter
+    effectStatFilter = 'all'
 
     /**
      * 
@@ -847,7 +852,7 @@ class ExternalBuffs extends Buffs {
 
         this.searchResultPopper = new ResultsPopper($(this.elements.searchBox).parent()[0], this.elements.searchResults)
 
-        $(this.elements.searchResults).find('.search-list > div').on('click', 'div[data-student-id]', (e) => {
+        $(this.elements.searchResults).find('.search-list-results').on('click', 'div[data-student-id]', (e) => {
             const student = find(data.students, "Id", e.currentTarget.dataset["studentId"])[0]
             const skill = find(student.Skills, "SkillType", e.currentTarget.dataset["skillType"])[0]
             this.addBuff(student.Id, skill)
@@ -856,7 +861,7 @@ class ExternalBuffs extends Buffs {
             $(this.elements.searchBox).val('')
         })
 
-        $(this.elements.searchResults).find('.search-list > div').on('click', 'div[data-raid-id]', (e) => {
+        $(this.elements.searchResults).find('.search-list-results').on('click', 'div[data-raid-id]', (e) => {
             const raid = find(data.raids.Raid, "Id", e.currentTarget.dataset["raidId"])[0]
             const skill = find(raid.RaidSkill, "Id", e.currentTarget.dataset["skillId"])[0]
             this.addBuffRaid(raid.Id, skill)
@@ -872,6 +877,7 @@ class ExternalBuffs extends Buffs {
                 if (this.searchBoxTimeout) {
                     clearTimeout(this.searchBoxTimeout)
                 }
+                this.searchResultPopper.show()
                 this.searchBuffs()
             }
 
@@ -945,6 +951,7 @@ class ExternalBuffs extends Buffs {
             }
             this.searchBoxTimeout = setTimeout(() => {
                 if (e.currentTarget.value != "") {
+                    this.searchResultPopper.show()
                     this.searchBuffs()
                 } else {
                     this.searchResultPopper.hide()
@@ -993,6 +1000,17 @@ class ExternalBuffs extends Buffs {
                     break
             }
         })
+
+        //bind filter
+        $(this.elements.searchResults).find('.search-list-filter').on('click', 'a[data-filter-select-value]', (e) => {
+            const el = $(e.currentTarget)
+            this.effectStatFilter = el.data('filter-select-value')
+            $(this.elements.searchResults).find('a[data-filter-select-value]').removeClass('active')
+            el.addClass('active')
+            $(this.elements.searchResults).find('.search-list-filter-active').text(el.text())
+            this.searchBuffs()
+        })
+        $(this.elements.searchResults).find('.search-list-filter-active').text(translateUI('filter_all'))
     }
 
     addBuff(studentId, skill) {
@@ -1102,7 +1120,7 @@ class ExternalBuffs extends Buffs {
     }
 
     searchBuffs() {
-        let html = "", resultCount = 0
+        let html = "", listTop = "", resultCount = 0
         const currentStudentId = student.Id
         const searchTerm = this.elements.searchBox.value.toLowerCase()
         data.students.forEach(student => {
@@ -1123,6 +1141,7 @@ class ExternalBuffs extends Buffs {
                             } else {
                                 if (skill.SkillType == 'gearnormal') available = false
                             }
+                            if (this.effectStatFilter != 'all' && skill.Effects.findIndex(e => this.effectTypeFilter.includes(e.Type) && e.Stat.startsWith(this.effectStatFilter)) == -1) available = false
                             
                             if (available) {
     
@@ -1145,7 +1164,9 @@ class ExternalBuffs extends Buffs {
                                     }
                                     desc += '</b>'
                                 })
-                                html += ExternalBuffs.getSearchResultListItemHtml(student, skill, desc, ++resultCount)
+                                let listItemHtml = ExternalBuffs.getSearchResultListItemHtml(student, skill, desc, ++resultCount)
+                                if (student.Id == currentStudentId) listTop += listItemHtml
+                                else html += listItemHtml
                             }
                         }
                     }
@@ -1158,11 +1179,13 @@ class ExternalBuffs extends Buffs {
                     if (skill.MinDifficulty > raid.MaxDifficulty[regionID]) return
                     if (skill.Effects !== undefined && (searchContains(searchTerm, getTranslatedString(raid, "Name")) || searchContains(searchTerm, getTranslatedString(skill, "Name")))) {
                         let available = this.filterFunc(student.Id, skill)
+                        let boostResult = false
 
                         //exclude already added buffs
                         find(this.buffs, "StudentId", `raid${raid.Id}`).forEach((buff) => {
                             if (buff.Skill.Id == skill.Id) available = false
                         })
+                        if (this.effectStatFilter != 'all' && skill.Effects.findIndex(e => this.effectTypeFilter.includes(e.Type) && e.Stat.startsWith(this.effectStatFilter)) == -1) available = false
 
                         //check that raid debuff has an effect that can be applied to the current enemy
                         if (available) {
@@ -1171,6 +1194,7 @@ class ExternalBuffs extends Buffs {
                                 if (effect.Type == 'BuffTarget') {
                                     if (effect.RestrictTo !== undefined && effect.RestrictTo.includes(statPreviewSelectedEnemyId)) {
                                         hasAvailableEffect = true
+                                        boostResult = true
                                     }
                                 } else {
                                     hasAvailableEffect = true
@@ -1203,21 +1227,23 @@ class ExternalBuffs extends Buffs {
                                 desc += '</b>'
                                 
                             })
-                            html += ExternalBuffs.getSearchResultListItemHtmlRaid(raid, skill, desc, ++resultCount)
+                            let listItemHtml = ExternalBuffs.getSearchResultListItemHtmlRaid(raid, skill, desc, ++resultCount)
+
+                            if (boostResult) listTop += listItemHtml
+                            else html += listItemHtml
                         }
 
                     }
                 })
             }
         })
+
         this.searchResultsSelection = 0
         this.searchResultsCount = resultCount
-        if (html != "") {
-            this.searchResultPopper.show()
-        } else {
-            this.searchResultPopper.hide()
+        if (html == "" && listTop == "") {
+            html += `<div class="text-center p-2">${translateUI('no_results')}</div>`
         }
-        $(this.elements.searchResults).find('.search-list > div').html(html)
+        $(this.elements.searchResults).find('.search-list-results').html(listTop + html)
     }
 
     toggleDisabled(disabled) {
@@ -2352,7 +2378,7 @@ class SkillDamageInfo {
                 const avgDmg = (expDmgMin + expDmgMax) * hitRate / 2
 
                 if (this.skill.IsRaidSkill) {
-                    let rateText = (effect.CanEvade === false) ? '&infin;' : studentStats.getHitChanceString(enemyStats.getTotal("DodgePoint"))
+                    let rateText = (effect.CanEvade === false) ? translateUI("hit_chance_certain") : studentStats.getHitChanceString(enemyStats.getTotal("DodgePoint"))
                     this.element.find(`.row-value[data-key="${index}-hitrate"]`).html(rateText)
                     rateText += ` / <span class="text-crit">${studentStats.getCriticalHitChanceString(enemyStats.getTotal("CriticalChanceResistPoint"))}</span>`
                     this.element.find(`.row-value[data-key="${index}-hitcritrate"]`).html(rateText)
@@ -2728,6 +2754,15 @@ $.when($.ready, loadPromise).then(function() {
         statPreviewEnemyBookmarks = JSON.parse(localStorage.getItem("enemy_bookmarks"))
     }
 
+    //load saved skill level range
+    if (localStorage.getItem("student_skill_ex_level")) {
+        skillPreviewExSkillLevel = JSON.parse(localStorage.getItem("student_skill_ex_level"))
+    }
+
+    if (localStorage.getItem("student_skill_other_level")) {
+        skillPreviewOtherSkillLevel = JSON.parse(localStorage.getItem("student_skill_other_level"))
+    }
+
     loadRegion(regionID)
 
     setSortedDataLists()
@@ -3018,6 +3053,9 @@ function loadModule(moduleName, entry=null) {
             $('#skill-calculation-tab-student').on('click', calculateSkills)
             $('#skill-calculation-tab-enemy').on('click', calculateRaidSkills)
 
+            $("#ba-skillpreview-exrange").val(skillPreviewExSkillLevel)
+            $("#ba-skillpreview-range").val(skillPreviewOtherSkillLevel)
+
             $('#skills-show-upgrades').toggleClass('deactivated', !showSkillUpgrades).on('click', function (e) {
                 showSkillUpgrades = !showSkillUpgrades
                 $(this).toggleClass('deactivated', !showSkillUpgrades)
@@ -3146,6 +3184,16 @@ function loadModule(moduleName, entry=null) {
                 $('#ba-student-search-select-subbuff-list').append(listItem)
             })
 
+            studentBuffStatFilters.forEach((stat) => {
+                const listItem = `<li><a class="dropdown-item" href="javascript:;" data-filter-select-value="${stat}">${getLocalizedString('Stat',stat)}</a></li>`
+                $('#statpreview-buff-transferable-search ul.dropdown-menu').append(listItem)
+            })
+
+            enemyBuffStatFilters.forEach((stat) => {
+                const listItem = `<li><a class="dropdown-item" href="javascript:;" data-filter-select-value="${stat}">${getLocalizedString('Stat',stat)}</a></li>`
+                $('#statpreview-enemy-buff-transferable-search ul.dropdown-menu').append(listItem)
+            })
+
             data.items.filter(i => i.Id >= 100 && i.Id < 1000 && i.Rarity == 'SSR').forEach(item => {
                 const classId = Math.floor(item.Id/10)
                 if (regionID == 1 && (classId == 23 || classId == 25)) return
@@ -3218,8 +3266,8 @@ function loadModule(moduleName, entry=null) {
                 $('#ba-student-stat-modal-table').toggle(!state)
                 $('#student-stat-modal-skill-calculations').toggle(state)
                 if (state) {
-                    if ($('#calculation-student-skills').hasClass('active')) calculateSkills()
-                    if ($('#calculation-enemy-skills').hasClass('active')) calculateRaidSkills()
+                    calculateSkills()
+                    calculateRaidSkills()
                 } else {
                     recalculateStats()
                 }
@@ -3240,6 +3288,12 @@ function loadModule(moduleName, entry=null) {
         }
         bgimg.src = `images/background/BG_MainOffice_Night.jpg`
         $("#loaded-module").load(html_list['items'], function() {
+
+            equipmentFilters = $('#item-search-filter-equipmenttier .search-filter-group')
+            for (let i = 1; i <= data.common.regions[regionID].gear1_max; i++) {
+                equipmentFilters.append(`<button id="item-search-filter-equipmenttier-${i}" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','${i}')"><span class="label">T${i}</span></button>`)
+            }
+
             loadRegion(regionID)
             loadLanguage(userLang)
             loadedItemList = null
@@ -5734,24 +5788,6 @@ function changeWeaponSkillPreviewLevel(el) {
     recalculateWeaponSkillPreview()
 }
 
-function changeGearSkillPreviewLevel(el) {
-    if (el.value == el.max) {
-        $('#ba-gear-skill-level').html(`<img src="images/ui/ImageFont_Max.png">`)
-    } else {
-        $('#ba-gear-skill-level').html("Lv." + el.value)
-    }
-    recalculateGearSkillPreview()
-}
-
-function changeEXSkillPreviewLevel(el) {
-    if (el.value == el.max) {
-        $('#ba-skill-ex-level').html(`<img src="images/ui/ImageFont_Max.png">`)
-    } else {
-        $('#ba-skill-ex-level').html("Lv." + el.value)
-    }
-    recalculateEXSkillPreview()
-}
-
 function changeWeaponPreviewLevel(el) {
     $('#ba-weaponpreview-level').text("Lv." + el.value)
     recalculateWeaponPreview()
@@ -6255,8 +6291,8 @@ function recalculateStats() {
 
     studentStats.renderActiveBuffs('.active-buffs', 7)
 
-    if ($('#calculation-student-skills').hasClass('active')) calculateSkills()
-    if ($('#calculation-enemy-skills').hasClass('active')) calculateRaidSkills()
+    calculateSkills()
+    calculateRaidSkills()
 
     //save settings
     if (student.Id in studentCollection) {
@@ -6327,8 +6363,8 @@ function calculateEnemyStats() {
 
     statPreviewSelectedEnemyStats = enemyStats
 
-    if ($('#calculation-student-skills').hasClass('active')) calculateSkills()
-    if ($('#calculation-enemy-skills').hasClass('active')) calculateRaidSkills()
+    calculateSkills()
+    calculateRaidSkills()
 }
 
 function calculateSkills() {
@@ -6342,7 +6378,7 @@ function calculateSkills() {
         $(`#calculation-intermediate-critchance`).text(`${statPreviewCharacterStats.getCriticalHitChanceString(statPreviewSelectedEnemyStats.getTotal('CriticalChanceResistPoint'))}`)
         $(`#calculation-intermediate-variance`).text(`${statPreviewCharacterStats.getStabilityMinDamage()} ~ 100%`)
 
-        if (!$('#student-stat-modal-skill-calc-toggle').hasClass('deactivated')) {
+        if (!$('#student-stat-modal-skill-calc-toggle').hasClass('deactivated') && $('#calculation-student-skills').hasClass('active')) {
             skillInfoCollection.forEach((di) => {
                 di.update(statPreviewCharacterStats, statPreviewSelectedEnemyStats, statPreviewTerrain)
             })
@@ -6352,7 +6388,7 @@ function calculateSkills() {
 
 function calculateRaidSkills() {
     if ($('#ba-student-modal-statpreview').hasClass('show')) {
-        if (!$('#student-stat-modal-skill-calc-toggle').hasClass('deactivated')) {
+        if (!$('#student-stat-modal-skill-calc-toggle').hasClass('deactivated') && $('#calculation-enemy-skills').hasClass('active')) {
             raidSkillInfoCollection.forEach((di) => {
                 di.update(statPreviewSelectedEnemyStats, statPreviewCharacterStats, statPreviewTerrain)
             })
@@ -6401,10 +6437,11 @@ function refreshStatTableControls() {
 
 function recalculateEXSkillPreview() {
     $('.tooltip').tooltip('hide')
-    const skillLevelEX = $("#ba-skillpreview-exrange").val()
+    skillPreviewExSkillLevel = $("#ba-skillpreview-exrange").val()
     const skillEX = find(student.Skills, 'SkillType', 'ex')[0]
 
-    $('#ba-skill-ex-description').html(getSkillText(skillEX, skillLevelEX, {bulletType: student.BulletType}))
+    $('#ba-skill-ex-level').html(skillPreviewExSkillLevel == 5 ? `<img src="images/ui/ImageFont_Max.png">` : "Lv." + skillPreviewExSkillLevel)
+    $('#ba-skill-ex-description').html(getSkillText(skillEX, skillPreviewExSkillLevel, {bulletType: student.BulletType}))
     $(`#ba-skill-ex-description .skill-hitinfo`).tooltip({html: true})
 
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -6412,15 +6449,17 @@ function recalculateEXSkillPreview() {
     })
 
     $('#ba-skill-ex-materials-page .item-icon-list').hide()
-    $('#ba-skill-ex-materials-'+skillLevelEX).show()
-    $('#ba-skill-ex-cost').text(skillEX.Cost[skillLevelEX-1])
-
+    $('#ba-skill-ex-materials-'+skillPreviewExSkillLevel).show()
+    $('#ba-skill-ex-cost').text(skillEX.Cost[skillPreviewExSkillLevel-1])
+    localStorage.setItem("student_skill_ex_level", skillPreviewExSkillLevel)
 }
 
 function recalculateSkillPreview() {
     $('.tooltip').tooltip('hide')
-    const skillLevel = $("#ba-skillpreview-range").val()
+    skillPreviewOtherSkillLevel = $("#ba-skillpreview-range").val()
     const skillList = ['normal','passive','sub']
+
+    $('#ba-skill-level').html(skillPreviewOtherSkillLevel == 10 ? `<img src="images/ui/ImageFont_Max.png">` : "Lv." + skillPreviewOtherSkillLevel)
 
     skillList.forEach(skillType => {
 
@@ -6441,7 +6480,7 @@ function recalculateSkillPreview() {
         }
 
         $(`#ba-skill-${skillType}-name`).html(skill.Name)
-        $(`#ba-skill-${skillType}-description`).html(getSkillText(skill, skillLevel, {bulletType: student.BulletType}))
+        $(`#ba-skill-${skillType}-description`).html(getSkillText(skill, skillPreviewOtherSkillLevel, {bulletType: student.BulletType}))
         $(`#ba-skill-${skillType}-description .skill-hitinfo`).tooltip({html: true})
     })
 
@@ -6450,7 +6489,8 @@ function recalculateSkillPreview() {
     })
 
     $('#ba-skill-materials-page .item-icon-list').hide()
-    $('#ba-skill-materials-'+skillLevel).show()
+    $('#ba-skill-materials-'+skillPreviewOtherSkillLevel).show()
+    localStorage.setItem("student_skill_other_level", skillPreviewOtherSkillLevel)
 }
 
 function getStudentListCardHTML(student) {
@@ -7955,6 +7995,8 @@ function populateStudentSkillFilters() {
     passiveStatList = []
     weaponPassiveStatList = []
     subStatList = []
+    let studentBuffSet = new Set()
+    let enemyBuffSet = new Set()
 
     search_options.filterSelect.PassiveBuff = []
     search_options.filterSelect.WeaponPassiveBuff = []
@@ -7964,21 +8006,37 @@ function populateStudentSkillFilters() {
         if (!student.IsReleased[regionID]) {
             return
         }
-            
-        student.Skills.find(s => s.SkillType == "passive").Effects.forEach(effect => {
-            const statName = effect.Stat.split('_')[0]
-            if (!passiveStatList.includes(statName)) {
-                passiveStatList.push(statName)
-            }
-        })
 
-        student.Skills.find(s => s.SkillType == "weaponpassive").Effects.forEach(effect => {
-            const statName = effect.Stat.split('_')[0]
-            if (!weaponPassiveStatList.includes(statName)) {
-                weaponPassiveStatList.push(statName)
+        for (skill of student.Skills) {
+            switch (skill.SkillType) {
+                case "passive":
+                    skill.Effects.forEach(effect => {
+                        const statName = effect.Stat.split('_')[0]
+                        if (!passiveStatList.includes(statName)) {
+                            passiveStatList.push(statName)
+                        }
+                    })
+                    break;
+                case "weaponpassive":
+                    skill.Effects.forEach(effect => {
+                        const statName = effect.Stat.split('_')[0]
+                        if (!weaponPassiveStatList.includes(statName)) {
+                            weaponPassiveStatList.push(statName)
+                        }
+                    })
+                    break;       
+                default:
+                    skill.Effects.filter(e => e.Type.startsWith("Buff")).forEach(effect => {
+                        const statName = effect.Stat.split('_')[0]
+                        if (effect.Type == "BuffTarget") {
+                            enemyBuffSet.add(statName)
+                        } else {
+                            studentBuffSet.add(statName)
+                        }
+                    })
+                    break;
             }
-            
-        })
+        }
 
         if (student.SquadType == 'Support') {
             student.Skills.find(s => s.SkillType == "sub").Effects.forEach(effect => {
@@ -7995,6 +8053,9 @@ function populateStudentSkillFilters() {
     passiveStatList = passiveStatList.sort(alphabeticalSort)
     subStatList = subStatList.sort(alphabeticalSort)
     weaponPassiveStatList = weaponPassiveStatList.sort(alphabeticalSort)
+
+    studentBuffStatFilters = [...studentBuffSet].sort(alphabeticalSort)
+    enemyBuffStatFilters = [...enemyBuffSet].sort(alphabeticalSort)
 }
 
 function changeLanguage(lang) {
