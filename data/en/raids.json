@@ -21261,6 +21261,140 @@
                     3258287232
                 ]
             ]
+        },
+        {
+            "Id": 15000,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "DungeonType": "Destruction",
+            "Icon": "EnemyInfo_Totem03_TimeAttack",
+            "MaxDifficulty": 4,
+            "Terrain": "Outdoor",
+            "BulletType": "Normal",
+            "ArmorType": "LightArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 923000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7820001,
+                        7820201,
+                        7820101,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 923000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7820202,
+                        7820002,
+                        7820102,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 923000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7820003,
+                        7820203,
+                        7820103,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 923000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7820104,
+                        7820204,
+                        7820004,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    990306261,
+                    2060888564
+                ],
+                [
+                    990306261,
+                    2060888564
+                ],
+                [
+                    990306261,
+                    2060888564,
+                    1356579409
+                ],
+                [
+                    990306261,
+                    2060888564,
+                    1356579409,
+                    673863759
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -21459,14 +21593,26 @@
         {
             "Id": 4104132399,
             "Icon": "TimeAttack_Icon_Buff_AttackPower_Enemy_01",
-            "Name": "Increased Enemy Attack, Reduced MOV SPD",
-            "Desc": "All enemies' <b:ATK> is increased but their <d:MoveSpeed> is decreased. Enemies are also immune to being knocked back or pulled in by skills."
+            "Name": "Increased Enemy Attack, Decreased MOV SPD",
+            "Desc": "All enemies' <b:ATK> is increased by 500% but their <d:MoveSpeed> is decreased by 50%. Enemies are also immune to being knocked back or pulled in by skills."
         },
         {
             "Id": 3258287232,
             "Icon": "TimeAttack_Icon_Debuff_MaxHP_Ally_01",
             "Name": "Decreased Tank HP",
-            "Desc": "All Tank students' <d:MAXHP> is decreased."
+            "Desc": "All Tank students' <d:MAXHP> is decreased by 80%."
+        },
+        {
+            "Id": 1356579409,
+            "Icon": "TimeAttack_Icon_Buff_AttackPower_Ally_01",
+            "Name": "Increased Gehenna ATK",
+            "Desc": "All Gehenna students' <b:ATK> is increased."
+        },
+        {
+            "Id": 673863759,
+            "Icon": "TimeAttackGeas_Enemy_StatChange_AttackPower_CostRegen_CharacterCount",
+            "Name": "The Select Few II",
+            "Desc": "Increases all allies' <b:MAXHP> and <b:CostRegen> if there are 4 or fewer students in the unit. The fewer the number of students, the greater the increase."
         }
     ],
     "WorldRaid": [

@@ -569,6 +569,10 @@ let itemSearchOptions = {
         }
     }
 
+    setBase(stat, value) {
+        this.stats[stat][0] = value
+    }
+
     /**
      * Returns the flat buff as a locale-formatted string
      * @param {*} stat 
@@ -6699,6 +6703,21 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
     $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',enemy.ArmorType)}`, translateUI('defensetype'), null, getDefenseTypeText(enemy.ArmorType), 32), placement: 'top', html: true})        
 
     let enemyStats = new CharacterStats(enemy, level, grade, (enemy.Transcendence ? enemy.Transcendence : []), scaletype)
+
+    //override je #8 HP values
+    if (loadedModule == 'raids' && raid.Id == 8000) {
+        switch (id) {
+            case 7801003: case 7801103:
+                enemyStats.setBase('MaxHP', 10)
+                break
+            case 7801004: case 7801104: case 7801203:
+                enemyStats.setBase('MaxHP', 15)
+                break
+            case 7801204:
+                enemyStats.setBase('MaxHP', 23)
+                break
+        }
+    }
 
     enemyStatList.forEach((statName) => {
         if (statName == 'AmmoCount') {
