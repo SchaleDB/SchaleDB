@@ -1111,7 +1111,15 @@ class ExternalBuffs extends Buffs {
         this.buffs.forEach((buff, i) => {
             if (buff.RaidId) {
                 const raid = find(data.raids.Raid, "Id", buff.RaidId)[0]
-                html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/raid/icon/Icon_${buff.Skill.MinDifficulty >= 5 ? raid.PathName + "_Insane" : raid.PathName}.png"><img class="raid-skill-icon" src="images/raid/skill/${buff.Skill.Icon}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType.toLowerCase()}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><span class="label">&times;${buff.Stacks}</span></span>` : ''}</div></div>`
+                let iconPath, iconClass
+                if (buff.Skill.Icon.startsWith('COMMON_')) {
+                    iconPath = `images/skill/${buff.Skill.Icon}.png`
+                    iconClass = `skill-icon bg-atk-${raid.BulletType.toLowerCase()}`
+                } else {
+                    iconPath = `images/raid/skill/${buff.Skill.Icon}.png`
+                    iconClass = 'raid-skill-icon'
+                } 
+                html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/raid/icon/Icon_${buff.Skill.MinDifficulty >= 5 ? raid.PathName + "_Insane" : raid.PathName}.png"><img class="${iconClass}" src="${iconPath}"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType.toLowerCase()}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><span class="label">&times;${buff.Stacks}</span></span>` : ''}</div></div>`
             } else {
                 const student = find(data.students, "Id", buff.StudentId)[0]
                 html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"><img class="skill-icon bg-atk-${student.BulletType.toLowerCase()}" src="images/skill/${buff.Skill.Icon}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><img class="stack-icon invert-light" src="images/skill/${buff.Skill.Icon}.png"><span class="label">&times;${buff.Stacks}</span></span>` : ''}<input type="range" data-index="${i}" class="form-range flex-fill" value="${buff.Level}" min="1" max="${buff.MaxLevel}"><span class="ba-slider-label skill-level">${buff.Level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${buff.Level}`}</span></div></div>`
@@ -1280,7 +1288,15 @@ class ExternalBuffs extends Buffs {
     }
 
     static getSearchResultListItemHtmlRaid(raid, skill, desc, index) {
-        return `<div class="search-list-item" data-index="${index}" data-raid-id="${raid.Id}" data-skill-id="${skill.Id}"><div class="transferable-skill-icon me-2"><img class="student-icon" src="images/raid/icon/Icon_${raid.PathName}${skill.MinDifficulty >= 5 ? "_Insane" : ""}.png"><img class="raid-skill-icon" src="images/raid/skill/${skill.Icon}.png"></div><div class="search-list-item-detail"><span class="skill-name">${getTranslatedString(skill, "Name")} <small>(${translateUI(`student_skill_${skill.SkillType.toLowerCase()}`)})</small></span><span class="skill-details">${desc}</span></div></div>`
+        let iconPath, iconClass
+        if (skill.Icon.startsWith('COMMON_')) {
+            iconPath = `images/skill/${skill.Icon}.png`
+            iconClass = `skill-icon bg-atk-${raid.BulletType.toLowerCase()}`
+        } else {
+            iconPath = `images/raid/skill/${skill.Icon}.png`
+            iconClass = 'raid-skill-icon'
+        } 
+        return `<div class="search-list-item" data-index="${index}" data-raid-id="${raid.Id}" data-skill-id="${skill.Id}"><div class="transferable-skill-icon me-2"><img class="student-icon" src="images/raid/icon/Icon_${raid.PathName}${skill.MinDifficulty >= 5 ? "_Insane" : ""}.png"><img class="${iconClass}" src="${iconPath}"></div><div class="search-list-item-detail"><span class="skill-name">${getTranslatedString(skill, "Name")} <small>(${translateUI(`student_skill_${skill.SkillType.toLowerCase()}`)})</small></span><span class="skill-details">${desc}</span></div></div>`
     }
 
     static checkRestrictions(object, effect) {
@@ -2521,13 +2537,20 @@ class SkillDamageInfo {
         let skillUniqueKey = `${this.character.Id}_${this.skill.SkillType}`
         if (this.skill.Id) skillUniqueKey += `_${this.skill.Id}`
 
-        const iconPath = this.skill.IsRaidSkill ? `images/raid/skill/${this.skill.Icon}.png` : `images/skill/${this.skill.Icon}.png`
-
+        let iconPath, iconClass
+        if (!this.skill.IsRaidSkill || this.skill.Icon.startsWith('COMMON_')) {
+            iconPath = `images/skill/${this.skill.Icon}.png`
+            iconClass = `bg-atk-${this.character.BulletType.toLowerCase()}`
+        } else {
+            iconPath = `images/raid/skill/${this.skill.Icon}.png`
+            iconClass = ''
+        } 
+        
         html += `
         <div class="p-2 ba-panel mb-2 skill-info-${this.skill.SkillType}" data-skill-key="${skillUniqueKey}">
         <div class="d-flex flex-column">
             <div class="d-flex flex-row align-items-start mb-1 gap-3">
-                <div class="skill-icon ${!this.skill.IsRaidSkill ? `bg-atk-${this.character.BulletType.toLowerCase()}` : ''} small ${this.skill.SkillType == 'gearnormal' ? 'plus' : ''}">
+                <div class="skill-icon ${iconClass} small ${this.skill.SkillType == 'gearnormal' ? 'plus' : ''}">
                     <img src="${iconPath}">
                 </div>
                 <div class="flex-fill">
@@ -4530,7 +4553,6 @@ function initRaidSkillInfo(raidId, enemyId, raidDifficulty) {
             }
         
             addNormalAttackSkillText(autoAttackSkill, enemy.weaponType)
-            autoAttackSkill.Icon = 'SKILLICON_BINAH_NORMALSKILL'
         
             raidSkillInfoCollection.push(new SkillDamageInfo(autoAttackSkill, skillInfoContainer, enemy))
         }
@@ -5774,13 +5796,13 @@ function changeStatPreviewLevel(el, recalculate = true) {
     if (recalculate) recalculateStatsWithDelay()
 }
 
-function changeSkillPreviewLevel(el) {
+function changeGearSkillPreviewLevel(el) {
     if (el.value == el.max) {
-        $('#ba-skill-level').html(`<img src="images/ui/ImageFont_Max.png">`)
+        $('#ba-gear-skill-level').html(`<img src="images/ui/ImageFont_Max.png">`)
     } else {
-        $('#ba-skill-level').html("Lv." + el.value)
+        $('#ba-gear-skill-level').html("Lv." + el.value)
     }
-    recalculateSkillPreview()
+    recalculateGearSkillPreview()
 }
 
 function changeWeaponSkillPreviewLevel(el) {
@@ -6969,6 +6991,7 @@ function recalculateWeaponSkillPreview() {
     let skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
 
     $('#ba-skill-weaponpassive-description').html(getSkillText(skill, skillLevel, {bulletType: student.BulletType}))
+    $(`#ba-skill-weaponpassive-description .skill-hitinfo`).tooltip({html: true})
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })
@@ -6980,6 +7003,7 @@ function recalculateGearSkillPreview() {
     let skill = find(student.Skills, 'SkillType', 'gearnormal')[0]
 
     $('#ba-skill-gearnormal-description').html(getSkillText(skill, skillLevel, {bulletType: student.BulletType}))
+    $(`#ba-skill-gearnormal-description .skill-hitinfo`).tooltip({html: true})
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })

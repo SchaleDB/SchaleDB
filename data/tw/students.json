@@ -68524,10 +68524,27 @@
                 "Effects": [
                     {
                         "Type": "DMGMulti",
+                        "ExtraDamageSource": {
+                            "Side": "Target",
+                            "Stat": "CurrentHP",
+                            "Multiplier": [
+                                1,
+                                2
+                            ],
+                            "SliderTranslation": "ui,target_currenthp",
+                            "SliderStep": [
+                                0.01
+                            ],
+                            "SliderLabel": [
+                                0,
+                                100
+                            ],
+                            "SliderLabelSuffix": "%",
+                            "SimulatePerHit": true
+                        },
                         "CriticalCheck": "Always",
                         "Hits": [
                             500,
-                            5000,
                             500,
                             500,
                             500,
@@ -68536,7 +68553,8 @@
                             500,
                             500,
                             500,
-                            500
+                            500,
+                            5000
                         ],
                         "HitsParameter": 1,
                         "Scale": [
@@ -68557,7 +68575,6 @@
                         "CriticalCheck": "Always",
                         "Hits": [
                             500,
-                            5000,
                             500,
                             500,
                             500,
@@ -68566,7 +68583,8 @@
                             500,
                             500,
                             500,
-                            500
+                            500,
+                            5000
                         ],
                         "HitsParameter": 1,
                         "Scale": [

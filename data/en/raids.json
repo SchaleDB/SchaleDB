@@ -44,6 +44,35 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "BinahNormalSkill01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
                     "Id": "BinahExSkill01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -277,7 +306,15 @@
                     ]
                 }
             ],
-            "ExcludeNormalAttack": [],
+            "ExcludeNormalAttack": [
+                7300100,
+                7300200,
+                7300300,
+                7300400,
+                7300500,
+                7300600,
+                7300700
+            ],
             "Name": "Binah",
             "Profile": "Decagrammaton is an artificial intelligence system claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\n\nBinah, the third prophet of Decagrammaton, was first seen in the desert district of Abydos.\nWhy Binah came here is unknown, but it's too dangerous to be left to do as it pleases."
         },
@@ -357,7 +394,7 @@
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_CHESED_EXSKILL01",
+                    "Icon": "COMMON_SKILLICON_FORMCHANGE",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -389,16 +426,6 @@
                             ],
                             "CriticalCheck": "Check",
                             "CanEvade": false
-                        },
-                        {
-                            "Type": "BuffAlly",
-                            "Value": [
-                                [
-                                    -5000
-                                ]
-                            ],
-                            "Stat": "DefensePower_Coefficient",
-                            "Channel": 603
                         }
                     ],
                     "Name": "Self-Destruct Activated",
@@ -1740,10 +1767,10 @@
                 },
                 {
                     "Id": "KaitenrangerRedPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_PROVOKE",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1768,10 +1795,10 @@
                 },
                 {
                     "Id": "KaitenrangerBlackPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_STATDEBUFF",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1808,10 +1835,10 @@
                 },
                 {
                     "Id": "KaitenrangerGreenPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_FAN",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1855,10 +1882,10 @@
                 },
                 {
                     "Id": "KaitenrangerYellowPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_TARGET",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1885,10 +1912,10 @@
                 },
                 {
                     "Id": "KaitenrangerPinkPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_WEAPONBUFF",
                     "ShowInfo": false,
                     "Effects": [
                         {

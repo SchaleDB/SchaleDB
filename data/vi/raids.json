@@ -44,6 +44,35 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "BinahNormalSkill01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
                     "Id": "BinahExSkill01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -246,7 +275,15 @@
                     "Desc": "Giảm 20% <d:HIT> và 50% <d:Stability> tất cả kẻ địch xuống. Loại tác dụng phụ này không thể bị gỡ bỏ."
                 }
             ],
-            "ExcludeNormalAttack": [],
+            "ExcludeNormalAttack": [
+                7300100,
+                7300200,
+                7300300,
+                7300400,
+                7300500,
+                7300600,
+                7300700
+            ],
             "Name": "ビナー",
             "Profile": "デカグラマトンは、自身を神聖な求道者と主張する人工知能システムです。現在、その信奉者である10人の預言者がキヴォトスの随所に出没しています。\n\nビナーはデカグラマトンの3番目の預言者であり、アビドスの砂漠地帯にて初めて観測されました。\nビナーがなぜここに出現したのかは分かりませんが、このままにしておくには危険すぎる存在であることは間違いありません。"
         },
@@ -326,7 +363,7 @@
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_CHESED_EXSKILL01",
+                    "Icon": "COMMON_SKILLICON_FORMCHANGE",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -358,16 +395,6 @@
                             ],
                             "CriticalCheck": "Check",
                             "CanEvade": false
-                        },
-                        {
-                            "Type": "BuffAlly",
-                            "Value": [
-                                [
-                                    -5000
-                                ]
-                            ],
-                            "Stat": "DefensePower_Coefficient",
-                            "Channel": 603
                         }
                     ],
                     "Name": "自爆モード作動",
@@ -1709,10 +1736,10 @@
                 },
                 {
                     "Id": "KaitenrangerRedPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_PROVOKE",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1737,10 +1764,10 @@
                 },
                 {
                     "Id": "KaitenrangerBlackPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_STATDEBUFF",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1777,10 +1804,10 @@
                 },
                 {
                     "Id": "KaitenrangerGreenPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_FAN",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1824,10 +1851,10 @@
                 },
                 {
                     "Id": "KaitenrangerYellowPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_TARGET",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1854,10 +1881,10 @@
                 },
                 {
                     "Id": "KaitenrangerPinkPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_WEAPONBUFF",
                     "ShowInfo": false,
                     "Effects": [
                         {

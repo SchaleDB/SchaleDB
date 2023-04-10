@@ -44,6 +44,35 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "BinahNormalSkill01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7300100,
+                                7300200,
+                                7300300,
+                                7300400,
+                                7300500,
+                                7300600,
+                                7300700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
                     "Id": "BinahExSkill01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -246,7 +275,15 @@
                     "Desc": "使所有敵人的<d:HIT>減少20%，穩定性減少50%"
                 }
             ],
-            "ExcludeNormalAttack": [],
+            "ExcludeNormalAttack": [
+                7300100,
+                7300200,
+                7300300,
+                7300400,
+                7300500,
+                7300600,
+                7300700
+            ],
             "Name": "薇娜",
             "Profile": "十字神名是主張自己為神聖的求道者的人工智慧系統。目前追隨十字神名的10名預言者正在奇普托斯各地出沒。\n\n薇娜為十字神名第3預言者，第一次在阿拜多斯的沙漠地區探測到它的存在。\n雖然無法得知薇娜為何來到此地，但若就此放任不管，他肯定是極其危險的存在。"
         },
@@ -326,7 +363,7 @@
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_CHESED_EXSKILL01",
+                    "Icon": "COMMON_SKILLICON_FORMCHANGE",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -358,16 +395,6 @@
                             ],
                             "CriticalCheck": "Check",
                             "CanEvade": false
-                        },
-                        {
-                            "Type": "BuffAlly",
-                            "Value": [
-                                [
-                                    -5000
-                                ]
-                            ],
-                            "Stat": "DefensePower_Coefficient",
-                            "Channel": 603
                         }
                     ],
                     "Name": "啟動自爆模式",
@@ -1664,10 +1691,10 @@
                 },
                 {
                     "Id": "KaitenrangerRedPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_PROVOKE",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1692,10 +1719,10 @@
                 },
                 {
                     "Id": "KaitenrangerBlackPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_STATDEBUFF",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1732,10 +1759,10 @@
                 },
                 {
                     "Id": "KaitenrangerGreenPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_FAN",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1779,10 +1806,10 @@
                 },
                 {
                     "Id": "KaitenrangerYellowPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_TARGET",
                     "ShowInfo": false,
                     "Effects": [
                         {
@@ -1809,10 +1836,10 @@
                 },
                 {
                     "Id": "KaitenrangerPinkPublic02",
-                    "SkillType": "EX",
+                    "SkillType": "normal",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
-                    "Icon": "SKILLICON_BINAH_EXSKILLEMPTY",
+                    "Icon": "COMMON_SKILLICON_WEAPONBUFF",
                     "ShowInfo": false,
                     "Effects": [
                         {
