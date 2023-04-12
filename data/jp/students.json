@@ -20412,7 +20412,7 @@
         "Gear": {
             "Released": [
                 true,
-                false
+                true
             ],
             "StatType": [
                 "AttackSpeed_Base"
@@ -36746,7 +36746,9 @@
             [
                 207303
             ],
-            []
+            [
+                207303
+            ]
         ],
         "FavorItemTags": [
             "Game"
@@ -37294,7 +37296,9 @@
             [
                 207305
             ],
-            []
+            [
+                207305
+            ]
         ],
         "FavorItemTags": [
             "Doll"
@@ -37883,7 +37887,9 @@
             [
                 207304
             ],
-            []
+            [
+                207304
+            ]
         ],
         "FavorItemTags": [
             "Dessert"
@@ -40546,7 +40552,7 @@
         "Gear": {
             "Released": [
                 true,
-                false
+                true
             ],
             "StatType": [
                 "AttackPower_Base"
@@ -47530,7 +47536,7 @@
         "Gear": {
             "Released": [
                 true,
-                false
+                true
             ],
             "StatType": [
                 "AttackPower_Base"
@@ -61492,7 +61498,7 @@
         "Id": 20019,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "DefaultOrder": 114,
         "PathName": "Akane_Bunny",
@@ -61534,7 +61540,7 @@
         "Illustrator": "Mx2J",
         "Designer": "Mx2J",
         "CharHeightMetric": "164cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5&#x27;4&quot;",
         "StabilityPoint": 1141,
         "AttackPower1": 289,
         "AttackPower100": 2897,
@@ -61812,14 +61818,16 @@
         ],
         "MemoryLobby": [
             6,
-            0
+            6
         ],
         "MemoryLobbyBGM": "Aira",
         "FurnitureInteraction": [
             [
                 207302
             ],
-            []
+            [
+                207302
+            ]
         ],
         "FavorItemTags": [
             "Household",
@@ -73992,6 +74000,538 @@
                 12,
                 7,
                 12
+            ]
+        ]
+    },
+    {
+        "Id": 10065,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 135,
+        "PathName": "Kaho",
+        "DevName": "CH0107",
+        "Name": "カホ",
+        "School": "Hyakkiyako",
+        "Club": "Onmyobu",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Mystic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "Weapon_Icon_CH0107",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Hyakkiyako_Collection",
+        "CollectionTexture": "Student_Portrait_CH0107_Collection",
+        "FamilyName": "桑上",
+        "FamilyNameRuby": "くわかみ",
+        "PersonalName": "カホ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "17歳",
+        "Birthday": "10月9日",
+        "CharacterSSRNew": "百鬼夜行の様々な魅力を、\n先生にもお伝えいたしますね",
+        "ProfileIntroduction": "百鬼夜行連合学院、陰陽部の副部長兼、観光文化産業広報支援部の戦略リーダー。\n\n誰よりも百鬼夜行の文化を愛し、文化を作りあげていく生徒を大切にする少女。このような姿から、一部の百鬼夜行の生徒からは「部長よりも部長らしいカホさん」と呼ばれることもある模様。ちなみに、陰陽部内では貴重な常識人ポジションなのだとか。",
+        "Hobby": "百鬼夜行文化の広報、\n百鬼夜行グッズ集め",
+        "CharacterVoice": "松井恵理子 ",
+        "BirthDay": "10/9",
+        "Illustrator": "7peach",
+        "Designer": "7peach",
+        "CharHeightMetric": "173cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1388,
+        "AttackPower1": 244,
+        "AttackPower100": 2446,
+        "MaxHP1": 2235,
+        "MaxHP100": 22350,
+        "DefensePower1": 19,
+        "DefensePower100": 119,
+        "HealPower1": 1408,
+        "HealPower100": 4226,
+        "DodgePoint": 794,
+        "AccuracyPoint": 704,
+        "CriticalPoint": 201,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            3333,
+                            3333,
+                            3334
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 40,
+                            "AttackStartDuration": 16,
+                            "AttackEndDuration": 17,
+                            "AttackBurstRoundOverDelay": 40,
+                            "AttackIngDuration": 20,
+                            "AttackReloadDuration": 60
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "ファンたるもの",
+                "Desc": "敵1人に対して攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "745%",
+                        "856%",
+                        "1080%",
+                        "1192%",
+                        "1415%",
+                        "1527%",
+                        "1751%",
+                        "1862%",
+                        "2086%",
+                        "2198%"
+                    ]
+                ],
+                "Cost": [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            74519,
+                            85693,
+                            108048,
+                            119229,
+                            141584,
+                            152757,
+                            175112,
+                            186294,
+                            208648,
+                            219822
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "精神統一",
+                "Desc": "50秒毎に、<s:Dado>状態を付与、<b:ATK>を<?1>増加（<?2>間）",
+                "Parameters": [
+                    [
+                        "27.4%",
+                        "28.6%",
+                        "29.7%",
+                        "32%",
+                        "33.3%",
+                        "34.5%",
+                        "36.2%",
+                        "37.5%",
+                        "38.8%",
+                        "39.7%"
+                    ],
+                    [
+                        "25秒",
+                        "25秒",
+                        "25秒",
+                        "30秒",
+                        "30秒",
+                        "30秒",
+                        "35秒",
+                        "35秒",
+                        "35秒",
+                        "40秒"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2745,
+                                2862,
+                                2978,
+                                3206,
+                                3331,
+                                3456,
+                                3627,
+                                3756,
+                                3885,
+                                3972
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "ひたむきな情熱",
+                "Desc": "<b:CriticalDamage>率を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "ひたむきな情熱+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:CriticalDamage>率を<?2>増加",
+                "Parameters": [
+                    [
+                        "293",
+                        "308",
+                        "323",
+                        "381",
+                        "396",
+                        "410",
+                        "469",
+                        "484",
+                        "498",
+                        "557"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            293,
+                            308,
+                            323,
+                            381,
+                            396,
+                            410,
+                            469,
+                            484,
+                            498,
+                            557
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "静かなる余裕",
+                "Desc": "<s:Dado>状態での攻撃時、攻撃力の<?1>分の追加ダメージ",
+                "Parameters": [
+                    [
+                        "5.5%",
+                        "5.8%",
+                        "6.1%",
+                        "7.1%",
+                        "7.4%",
+                        "7.7%",
+                        "8.8%",
+                        "9.1%",
+                        "9.4%",
+                        "10.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_EXTRADAMAGE",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            556,
+                            580,
+                            612,
+                            717,
+                            749,
+                            773,
+                            886,
+                            910,
+                            942,
+                            1047
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                56
+            ],
+            [
+                6,
+                67
+            ],
+            [
+                2,
+                12
+            ],
+            [
+                2,
+                18
+            ],
+            [
+                4,
+                29
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            6,
+            0
+        ],
+        "MemoryLobbyBGM": "Walkthrough",
+        "FurnitureInteraction": [
+            [
+                209302
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Books",
+            "PureLiterature"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Kaho",
+            "F_Kaho2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "戦略リーダーのノウハウ",
+            "Desc": "カホが普段使用するライフル。\n\n百鬼夜行の素晴らしさを伝えようと、カホがオーダーメイドして作った。広報に役立つのはもちろん、その威力は学院の問題児を落ち着かせるのにも十分な効果を発揮してくれる。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 108,
+            "AttackPower100": 1075,
+            "MaxHP1": 643,
+            "MaxHP100": 6427,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3000,
+                110
+            ],
+            [
+                3001,
+                3000,
+                111,
+                150
+            ],
+            [
+                3002,
+                3001,
+                112,
+                151
+            ],
+            [
+                3003,
+                3002,
+                113,
+                152
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                14,
+                32
+            ],
+            [
+                12,
+                18,
+                9,
+                29
+            ],
+            [
+                8,
+                18,
+                10,
+                12
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4000
+            ],
+            [
+                4000
+            ],
+            [
+                4001,
+                4000,
+                110
+            ],
+            [
+                4001,
+                111,
+                150
+            ],
+            [
+                4002,
+                4001,
+                111,
+                150
+            ],
+            [
+                4002,
+                112,
+                151
+            ],
+            [
+                4003,
+                4002,
+                113,
+                152
+            ],
+            [
+                4003,
+                113,
+                152
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                3
+            ],
+            [
+                8,
+                6,
+                10
+            ],
+            [
+                5,
+                12,
+                11,
+                10
+            ],
+            [
+                8,
+                4,
+                17
+            ],
+            [
+                8,
+                12,
+                7,
+                6
+            ],
+            [
+                12,
+                7,
+                5
             ]
         ]
     }
