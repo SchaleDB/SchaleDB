@@ -70202,8 +70202,32 @@
                 "Icon": "COMMON_SKILLICON_MARK",
                 "Effects": [
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Check",
+                        "Hits": [
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            250,
+                            5000
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             39087,
                             44954,
@@ -72811,7 +72835,7 @@
         "FamilyNameRuby": null,
         "PersonalName": "佳代子",
         "SchoolYear": "3年级",
-        "CharacterAge": "18歳",
+        "CharacterAge": "18岁",
         "Birthday": "3月17日",
         "CharacterSSRNew": "今年はどうか、\nいい事がたくさんありますように",
         "ProfileIntroduction": "新年を迎えたゲヘナ学園所属、便利屋68の課長。\n\n新年を迎えて他のメンバーと同じく着飾ったはずなのに、まるで普段から袖を通しているかのように、その立ち居振る舞いには貫禄がある。騒動を面倒くさがってはいるものの、便利屋68のためなら知恵を貸してくれる。",
@@ -73378,8 +73402,8 @@
         "FamilyName": "伊草",
         "FamilyNameRuby": null,
         "PersonalName": "遥香",
-        "SchoolYear": "1年生",
-        "CharacterAge": "15歳",
+        "SchoolYear": "1年级",
+        "CharacterAge": "15岁",
         "Birthday": "5月13日",
         "CharacterSSRNew": "今年も……。\n死ぬほど頑張ります！！",
         "ProfileIntroduction": "新年を迎えたゲヘナ学園所属、便利屋68の平社員。\n\n大切な人たちと新年を過ごす事に慣れておらず、みんなと合わせるために、普段着ない服に袖を通して着飾った。",
@@ -73889,7 +73913,7 @@
         "DefaultOrder": 135,
         "PathName": "Kaho",
         "DevName": "CH0107",
-        "Name": "カホ",
+        "Name": "果穗",
         "School": "Hyakkiyako",
         "Club": "Onmyobu",
         "StarGrade": 3,
@@ -73914,9 +73938,9 @@
         "CollectionTexture": "Student_Portrait_CH0107_Collection",
         "FamilyName": "桑上",
         "FamilyNameRuby": null,
-        "PersonalName": "カホ",
-        "SchoolYear": "3年生",
-        "CharacterAge": "17歳",
+        "PersonalName": "果穗",
+        "SchoolYear": "3年级",
+        "CharacterAge": "17岁",
         "Birthday": "10月9日",
         "CharacterSSRNew": "百鬼夜行の様々な魅力を、\n先生にもお伝えいたしますね",
         "ProfileIntroduction": "百鬼夜行連合学院、陰陽部の副部長兼、観光文化産業広報支援部の戦略リーダー。\n\n誰よりも百鬼夜行の文化を愛し、文化を作りあげていく生徒を大切にする少女。このような姿から、一部の百鬼夜行の生徒からは「部長よりも部長らしいカホさん」と呼ばれることもある模様。ちなみに、陰陽部内では貴重な常識人ポジションなのだとか。",
@@ -73972,8 +73996,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "ファンたるもの",
-                "Desc": "敵1人に対して攻撃力の<?1>分のダメージ",
+                "Name": "One Who is a Fan",
+                "Desc": "对1名敌方单位造成攻击力<?1>的伤害",
                 "Parameters": [
                     [
                         "745%",
@@ -74036,8 +74060,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "精神統一",
-                "Desc": "50秒毎に、<s:Dado>状態を付与、<b:ATK>を<?1>増加（<?2>間）",
+                "Name": "Concentration of Mind",
+                "Desc": "每50秒赋予自身<s:Dado>状态，<b:ATK>提升<?1>(持续<?2>秒)",
                 "Parameters": [
                     [
                         "27.4%",
@@ -74052,16 +74076,16 @@
                         "39.7%"
                     ],
                     [
-                        "25秒",
-                        "25秒",
-                        "25秒",
-                        "30秒",
-                        "30秒",
-                        "30秒",
-                        "35秒",
-                        "35秒",
-                        "35秒",
-                        "40秒"
+                        "25s",
+                        "25s",
+                        "25s",
+                        "30s",
+                        "30s",
+                        "30s",
+                        "35s",
+                        "35s",
+                        "35s",
+                        "40s"
                     ]
                 ],
                 "Icon": "COMMON_SKILLICON_WEAPONBUFF",
@@ -74089,8 +74113,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "ひたむきな情熱",
-                "Desc": "<b:CriticalDamage>率を<?1>増加",
+                "Name": "Unwavering Passion",
+                "Desc": "<b:CriticalDamage>提升<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -74127,8 +74151,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "ひたむきな情熱+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:CriticalDamage>率を<?2>増加",
+                "Name": "Unwavering Passion+",
+                "Desc": "<b:ATK>提升<?1>/\n<b:CriticalDamage>提升<?2>",
                 "Parameters": [
                     [
                         "293",
@@ -74177,8 +74201,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "静かなる余裕",
-                "Desc": "<s:Dado>状態での攻撃時、攻撃力の<?1>分の追加ダメージ",
+                "Name": "Tranquility",
+                "Desc": "<s:Dado>效果下对敌方单位造成攻击力<?1>的追加伤害",
                 "Parameters": [
                     [
                         "5.5%",
