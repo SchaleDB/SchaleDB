@@ -403,7 +403,8 @@ let itemSearchOptions = {
             "107": false,
             "108": false,
             "109": false,
-            "110": false
+            "110": false,
+            "111": false
         },
         "EquipmentTier": {
             "1": false,
@@ -4838,13 +4839,13 @@ function loadCraft(id) {
 
             data.items.forEach(item => {
                 if (item.IsReleased[regionID] && item.Tags.filter(tag => recipe.IngredientTag.includes(tag)).length > 0) {
-                    html += getDropIconHTML(item.Id, item.SynthQuality / recipe.IngredientExp, 1, 1, true)
+                    html += getDropIconHTML(item.Id, item.SynthQuality[regionID] / recipe.IngredientExp, 1, 1, true)
                 }
             })
 
             data.furniture.forEach(item => {
                 if (item.IsReleased[regionID] && item.Tags.filter(tag => recipe.IngredientTag.includes(tag)).length > 0) {
-                    html += getDropIconHTML(item.Id+1000000, item.SynthQuality / recipe.IngredientExp, 1, 1, true)
+                    html += getDropIconHTML(item.Id+1000000, item.SynthQuality[regionID] / recipe.IngredientExp, 1, 1, true)
                 }
             })
 
@@ -5533,7 +5534,7 @@ function loadStage(id) {
         if ("EntryCost" in stage && stage.EntryCost.length > 0) {
             stage.EntryCost.forEach((ec, i) => {
                 let currency
-                if (ec[0] < 20) {
+                if (ec[0] < 100) {
                     currency = find(data.currency, 'Id', ec[0])[0]
                 } else {
                     currency = find(data.items, 'Id', ec[0])[0]
@@ -5649,6 +5650,7 @@ function loadRegion(regID) {
         $('#ba-student-search-filter-weapontype-ft').hide()
         $('#ba-student-search-filter-armortype-elasticarmor').hide()
         $('#item-search-filter-furnitureset-110').hide()
+        $('#item-search-filter-furnitureset-111').hide()
     }
 }
 
@@ -6918,13 +6920,14 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                     gearType += getLocalizedString('ItemCategory', gear.Category)                
                 }
                 name = translateUI('item_randombox_tier', [tier, gearType])
-            } else if (group.Id >= 10100 && group.Id <= 10103) {
+            } else if (group.Id >= 10100 && group.Id <= 10200) {
                 // Artifact Box
-                tier = group.Id - 10099
-                icon = group.Icon
-                name = translateUI('item_randombox_tier', ['T'+tier, getLocalizedString('ItemCategory', 'Artifact')])
+                const item = find(data.items, 'Id', group.ItemList[0][0])[0]
+                rarity = item.Rarity
+                icon = `Item_Icon_Material_Random_${item.Id.toString().slice(-1)}`
+                name = translateUI('item_randombox_tier', [rarity, getLocalizedString('ItemCategory', 'Artifact')])
                 desc = translateUI('item_artifact_box') + "\n"
-                rarity = group.Rarity
+                
 
                 // Count the total probability
                 const totalProb = group.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
