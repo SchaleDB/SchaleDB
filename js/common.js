@@ -2279,16 +2279,19 @@ class SkillDamageInfo {
         this.stackCount = 1
         if (skill.EffectCombine !== undefined) {
             this.stackTypes = skill.EffectCombine            
-            this.stackMax = skill.Effects.filter(e => e.Type == skill.EffectCombine[0] && (!skill.IsRaidSkill || e.RestrictTo.includes(character.Id))).length
+            this.stackMax = 0
             this.stackEffectIndex = {}
 
             //map the effect index to each stack
             skill.Effects.forEach((effect, index) => {
                 if (this.stackTypes.includes(effect.Type) && (!skill.IsRaidSkill || effect.RestrictTo.includes(character.Id))) {
-                    if (this.stackEffectIndex[effect.Type] == undefined) {
-                        this.stackEffectIndex[effect.Type] = []
+                    let indexKey = effect.Type + (effect.CombineGroup !== undefined ? `_${effect.CombineGroup}` : '')
+                    
+                    if (this.stackEffectIndex[indexKey] == undefined) {
+                        this.stackEffectIndex[indexKey] = []
                     }
-                    this.stackEffectIndex[effect.Type].push(index)
+                    this.stackEffectIndex[indexKey].push(index)
+                    this.stackMax = Math.max(this.stackMax, this.stackEffectIndex[indexKey].length)
                 }
             })
             
@@ -2316,7 +2319,8 @@ class SkillDamageInfo {
         this.skill.Effects.forEach((effect, index) => {
 
             if (this.stackTypes.includes(effect.Type)) {
-                if (this.stackEffectIndex[effect.Type][this.stackCount-1] != index) {
+                let indexKey = effect.Type + (effect.CombineGroup !== undefined ? `_${effect.CombineGroup}` : '')
+                if (this.stackEffectIndex[indexKey][this.stackCount-1] != index) {
                     this.element.find(`div[data-effect-index="${index}"]`).hide()
                 } else {
                     this.element.find(`div[data-effect-index="${index}"]`).show()
@@ -2522,7 +2526,8 @@ class SkillDamageInfo {
 
         this.skill.Effects.forEach((effect, index) => {
             if (this.stackTypes.includes(effect.Type)) {
-                if (this.stackEffectIndex[effect.Type][this.stackCount-1] != index) {
+                let indexKey = effect.Type + (effect.CombineGroup !== undefined ? `_${effect.CombineGroup}` : '')
+                if (this.stackEffectIndex[indexKey][this.stackCount-1] != index) {
                     this.element.find(`div[data-effect-index="${index}"]`).hide()
                     return
                 } else {
@@ -5140,7 +5145,7 @@ function getStageEntryCurrency(currencyId, amount) {
 function populateRaidSkills(container, skills, difficulty) {
     let skillsHTML = ''
     skills.forEach(raidSkill => {
-        if (difficulty < raidSkill.MinDifficulty) return
+        if (difficulty < raidSkill.MinDifficulty || (raidSkill.MaxDifficulty !== undefined && difficulty > raidSkill.MaxDifficulty)) return
         if (raidSkill.ShowInfo === false) return
         
         let skillType
