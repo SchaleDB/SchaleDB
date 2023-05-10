@@ -14349,6 +14349,15 @@
                     "End": 1682967600,
                     "RewardSet": 2300,
                     "RewardSetMax": 44
+                },
+                {
+                    "Season": 38,
+                    "RaidId": 3,
+                    "Terrain": "Street",
+                    "Start": 1683597600,
+                    "End": 1684177200,
+                    "RewardSet": 2400,
+                    "RewardSetMax": 44
                 }
             ],
             "RewardSets": {
@@ -22819,6 +22828,120 @@
                     673863759
                 ]
             ]
+        },
+        {
+            "Id": 16000,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "DungeonType": "Shooting",
+            "Icon": "EnemyInfo_Boxcat_Terror",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 911000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811001
+                    ]
+                },
+                {
+                    "Id": 911000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811002
+                    ]
+                },
+                {
+                    "Id": 911000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811003
+                    ]
+                },
+                {
+                    "Id": 911000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    3938056289,
+                    2075498290
+                ],
+                [
+                    3938056289,
+                    2075498290
+                ],
+                [
+                    3938056289,
+                    2075498290,
+                    3693849978
+                ],
+                [
+                    3938056289,
+                    2075498290,
+                    3693849978,
+                    3900019006
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -23037,6 +23160,18 @@
             "Icon": "TimeAttackGeas_Enemy_StatChange_AttackPower_CostRegen_CharacterCount",
             "Name": "소수정예2",
             "Desc": "편성한 학생 수에 따라 최대 체력과 코스트 회복 속도가 변화합니다. 편성한 학생의 수가 적을수록 더 많은 수치가 증가합니다. (최대 4명까지)"
+        },
+        {
+            "Id": 3693849978,
+            "Icon": "TimeAttack_Icon_Buff_AttackPower_Ally_01",
+            "Name": "스페셜 공격력 증가",
+            "Desc": "스페셜 학생의 공격력이 증가합니다."
+        },
+        {
+            "Id": 3900019006,
+            "Icon": "TImeAttackGeas_Enemy_DamageOverTime_FatalPoison",
+            "Name": "치명적인 중독",
+            "Desc": "아군은 치명적인 중독에 걸립니다. 치명적인 중독은 방어력을 무시하며, 해제되지 않습니다."
         }
     ],
     "WorldRaid": [

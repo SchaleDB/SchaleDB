@@ -14386,6 +14386,15 @@
                     "End": 1682967600,
                     "RewardSet": 2300,
                     "RewardSetMax": 44
+                },
+                {
+                    "Season": 38,
+                    "RaidId": 3,
+                    "Terrain": "Street",
+                    "Start": 1683597600,
+                    "End": 1684177200,
+                    "RewardSet": 2400,
+                    "RewardSetMax": 44
                 }
             ],
             "RewardSets": {
@@ -22856,6 +22865,120 @@
                     673863759
                 ]
             ]
+        },
+        {
+            "Id": 16000,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "DungeonType": "Shooting",
+            "Icon": "EnemyInfo_Boxcat_Terror",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 911000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811001
+                    ]
+                },
+                {
+                    "Id": 911000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811002
+                    ]
+                },
+                {
+                    "Id": 911000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811003
+                    ]
+                },
+                {
+                    "Id": 911000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    3938056289,
+                    2075498290
+                ],
+                [
+                    3938056289,
+                    2075498290
+                ],
+                [
+                    3938056289,
+                    2075498290,
+                    3693849978
+                ],
+                [
+                    3938056289,
+                    2075498290,
+                    3693849978,
+                    3900019006
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -23067,13 +23190,25 @@
             "Id": 1356579409,
             "Icon": "TimeAttack_Icon_Buff_AttackPower_Ally_01",
             "Name": "Increased Gehenna ATK",
-            "Desc": "All Gehenna students' <b:ATK> is increased."
+            "Desc": "All Gehenna students' <b:ATK> is increased by 100%."
         },
         {
             "Id": 673863759,
             "Icon": "TimeAttackGeas_Enemy_StatChange_AttackPower_CostRegen_CharacterCount",
             "Name": "The Select Few II",
-            "Desc": "Increases all allies' <b:MAXHP> and <b:CostRegen> if there are 4 or fewer students in the unit. The fewer the number of students, the greater the increase."
+            "Desc": "Increases all allies' <b:MAXHP> by 300%/150%/100%/50% and <b:CostRegen> by <b>5,600/2,100/1,050/350</b> if there are only <b>1/2/3/4</b> students in the unit."
+        },
+        {
+            "Id": 3693849978,
+            "Icon": "TimeAttack_Icon_Buff_AttackPower_Ally_01",
+            "Name": "Increased Special ATK",
+            "Desc": "All Special students' <b:ATK> is increased."
+        },
+        {
+            "Id": 3900019006,
+            "Icon": "TImeAttackGeas_Enemy_DamageOverTime_FatalPoison",
+            "Name": "Fatal Poison",
+            "Desc": "All allies will be inflicted with fatal <d:Poison>, dealing periodic damage to them that ignores defense. This debuff cannot be removed."
         }
     ],
     "WorldRaid": [

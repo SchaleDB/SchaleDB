@@ -76106,5 +76106,602 @@
                 4
             ]
         ]
+    },
+    {
+        "Id": 10068,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 139,
+        "PathName": "Reisa",
+        "DevName": "CH0167",
+        "Name": "Reisa",
+        "School": "Trinity",
+        "Club": "TrinityVigilance",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Tanker",
+        "Summons": [],
+        "Position": "Front",
+        "BulletType": "Pierce",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "SG",
+        "WeaponImg": "Weapon_Icon_CH0167",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Bag",
+            "Charm"
+        ],
+        "CollectionBG": "BG_Trinity_Collection",
+        "CollectionTexture": "Student_Portrait_CH0167_Collection",
+        "FamilyName": "Uzawa",
+        "PersonalName": "Reisa",
+        "SchoolYear": "1st Year",
+        "CharacterAge": "15 years old",
+        "FamilyNameRuby": "うざわ",
+        "Birthday": "5月31日",
+        "CharacterSSRNew": "正義を求める人の元に……私あり……そう私こそがスーパースター。\n宇沢レイサ、見参です！",
+        "ProfileIntroduction": "トリニティのあちこちに出没し、治安の維持活動をしているトリニティ総合学園所属、自警団のメンバー。\n\n掴みどころのない事を言うため、いたずら通報だと思われる時もあるが、誰よりも真剣に自警団活動をしているのだとか。名乗りあげる口上が、毎回少しずつ変わる模様。",
+        "Hobby": "決闘申込み、自己紹介",
+        "CharacterVoice": "Miyari Nemoto",
+        "BirthDay": "5/31",
+        "Illustrator": "kokosando",
+        "Designer": "kokosando",
+        "CharHeightMetric": "153cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1812,
+        "AttackPower1": 171,
+        "AttackPower100": 1711,
+        "MaxHP1": 2722,
+        "MaxHP100": 45500,
+        "DefensePower1": 163,
+        "DefensePower100": 980,
+        "HealPower1": 1529,
+        "HealPower100": 4588,
+        "DodgePoint": 217,
+        "AccuracyPoint": 655,
+        "CriticalPoint": 218,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 8,
+        "AmmoCost": 2,
+        "Range": 350,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            1668,
+                            1666,
+                            1666,
+                            1668,
+                            1666,
+                            1666
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 24,
+                            "AttackStartDuration": 16,
+                            "AttackEndDuration": 12,
+                            "AttackBurstRoundOverDelay": 28,
+                            "AttackIngDuration": 36,
+                            "AttackReloadDuration": 62
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "Accept My Challenge!",
+                "Desc": "Deals <?1> damage to enemies in a fan-shaped area. Removes one debuff from self.",
+                "Parameters": [
+                    [
+                        "372%",
+                        "428%",
+                        "539%",
+                        "595%",
+                        "707%",
+                        "763%",
+                        "874%",
+                        "930%",
+                        "1042%",
+                        "1097%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Icon": "COMMON_SKILLICON_FAN",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            3333,
+                            3333,
+                            3334
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            37221,
+                            42807,
+                            53972,
+                            59550,
+                            70715,
+                            76301,
+                            87465,
+                            93044,
+                            104209,
+                            109795
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "Victory Pose!",
+                "Desc": "Every 50s, gains <b:DotHeal>, continuously restoring HP equal to <?1> of Healing every 4s for 30s.",
+                "Parameters": [
+                    [
+                        "22.7%",
+                        "23.8%",
+                        "24.9%",
+                        "29.5%",
+                        "30.6%",
+                        "31.7%",
+                        "36.3%",
+                        "37.4%",
+                        "38.6%",
+                        "43.1%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_DOTHEAL",
+                "Effects": [
+                    {
+                        "Type": "HealDot",
+                        "Duration": "30000",
+                        "Period": "4000",
+                        "Scale": [
+                            2271,
+                            2384,
+                            2498,
+                            2952,
+                            3065,
+                            3179,
+                            3633,
+                            3746,
+                            3860,
+                            4314
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "All Day Long!",
+                "Desc": "Increases <b:ATK> by <?1> and <b:MAXHP> by <?2>.",
+                "Parameters": [
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_DUALBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1120,
+                            1148,
+                            1176,
+                            1288,
+                            1316,
+                            1344,
+                            1456,
+                            1484,
+                            1512,
+                            1624
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1120,
+                            1148,
+                            1176,
+                            1288,
+                            1316,
+                            1344,
+                            1456,
+                            1484,
+                            1512,
+                            1624
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "All Day Long!+",
+                "Desc": "Increases <b:ATK> by <?1> plus a further <?3> and <b:MAXHP> by <?2> plus a further <?4>.",
+                "Parameters": [
+                    [
+                        "165",
+                        "169",
+                        "173",
+                        "189",
+                        "193",
+                        "197",
+                        "214",
+                        "218",
+                        "222",
+                        "239"
+                    ],
+                    [
+                        "3485",
+                        "3572",
+                        "3659",
+                        "4007",
+                        "4094",
+                        "4181",
+                        "4530",
+                        "4617",
+                        "4704",
+                        "5053"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_DUALBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            165,
+                            169,
+                            173,
+                            189,
+                            193,
+                            197,
+                            214,
+                            218,
+                            222,
+                            239
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Base",
+                        "Scale": [
+                            3485,
+                            3572,
+                            3659,
+                            4007,
+                            4094,
+                            4181,
+                            4530,
+                            4617,
+                            4704,
+                            5053
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "Uzawa Reisa's Presence",
+                "Desc": "Reisa's EX skill also decreases the <d:DEF> of enemies hit by <?1> for 25s and inflicts <c:Provoke> for 1s.",
+                "Parameters": [
+                    [
+                        "6%",
+                        "6.3%",
+                        "6.6%",
+                        "7.8%",
+                        "8.1%",
+                        "8.4%",
+                        "9.6%",
+                        "9.9%",
+                        "10.2%",
+                        "11.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_PROVOKE",
+                "Effects": [
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -600,
+                                -630,
+                                -661,
+                                -780,
+                                -810,
+                                -840,
+                                -960,
+                                -990,
+                                -1020,
+                                -1140
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    },
+                    {
+                        "Type": "CrowdControl",
+                        "Chance": "10000",
+                        "Icon": "Provoke",
+                        "Scale": [
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "MaxHP",
+            "HealPower"
+        ],
+        "FavorStatValue": [
+            [
+                46,
+                0
+            ],
+            [
+                68,
+                0
+            ],
+            [
+                91,
+                12
+            ],
+            [
+                114,
+                14
+            ],
+            [
+                29,
+                2
+            ],
+            [
+                44,
+                4
+            ],
+            [
+                74,
+                6
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            6,
+            0
+        ],
+        "MemoryLobbyBGM": "someday, sometime",
+        "FurnitureInteraction": [
+            [
+                9106
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Electronic",
+            "Music",
+            "Dessert"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Reisa",
+            "F_Reisa2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "シューティング☆スター",
+            "Desc": "レイサの大切なショットガン。丁寧にカスタマイズされた銃身は誰が見てもレイサの銃だ。\n\nかわいい外観とは異なり、数々の戦場をくぐり抜けたであろう痕跡が見て取れる。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 75,
+            "AttackPower100": 752,
+            "MaxHP1": 1289,
+            "MaxHP100": 12893,
+            "HealPower1": 180,
+            "HealPower100": 1798,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                160
+            ],
+            [
+                3021,
+                3020,
+                161,
+                190
+            ],
+            [
+                3022,
+                3021,
+                162,
+                191
+            ],
+            [
+                3023,
+                3022,
+                163,
+                192
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                13,
+                30
+            ],
+            [
+                12,
+                18,
+                10,
+                25
+            ],
+            [
+                8,
+                18,
+                8,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                160
+            ],
+            [
+                4021,
+                161,
+                190
+            ],
+            [
+                4022,
+                4021,
+                161,
+                190
+            ],
+            [
+                4022,
+                162,
+                191
+            ],
+            [
+                4023,
+                4022,
+                163,
+                192
+            ],
+            [
+                4023,
+                163,
+                192
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                18
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                8,
+                14
+            ]
+        ]
     }
 ]

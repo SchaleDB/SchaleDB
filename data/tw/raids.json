@@ -14259,6 +14259,15 @@
                     "End": 1682967600,
                     "RewardSet": 2300,
                     "RewardSetMax": 44
+                },
+                {
+                    "Season": 38,
+                    "RaidId": 3,
+                    "Terrain": "Street",
+                    "Start": 1683597600,
+                    "End": 1684177200,
+                    "RewardSet": 2400,
+                    "RewardSetMax": 44
                 }
             ],
             "RewardSets": {
@@ -22729,6 +22738,120 @@
                     673863759
                 ]
             ]
+        },
+        {
+            "Id": 16000,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "DungeonType": "Shooting",
+            "Icon": "EnemyInfo_Boxcat_Terror",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 911000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811001
+                    ]
+                },
+                {
+                    "Id": 911000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811002
+                    ]
+                },
+                {
+                    "Id": 911000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811003
+                    ]
+                },
+                {
+                    "Id": 911000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    3938056289,
+                    2075498290
+                ],
+                [
+                    3938056289,
+                    2075498290
+                ],
+                [
+                    3938056289,
+                    2075498290,
+                    3693849978
+                ],
+                [
+                    3938056289,
+                    2075498290,
+                    3693849978,
+                    3900019006
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -22947,6 +23070,18 @@
             "Icon": "TimeAttackGeas_Enemy_StatChange_AttackPower_CostRegen_CharacterCount",
             "Name": "少数精鋭Ⅱ",
             "Desc": "編成した生徒数によってHPとコスト回復速度が変化します。編成した生徒数が少ないほど、より多くの数値が増加します。（最大4人まで）"
+        },
+        {
+            "Id": 3693849978,
+            "Icon": "TimeAttack_Icon_Buff_AttackPower_Ally_01",
+            "Name": "スペシャルの攻撃力増加",
+            "Desc": "スペシャル生徒の攻撃力が増加します。"
+        },
+        {
+            "Id": 3900019006,
+            "Icon": "TImeAttackGeas_Enemy_DamageOverTime_FatalPoison",
+            "Name": "致命的な中毒",
+            "Desc": "味方が致命的な中毒状態になります。致命的な中毒は防御力を無視し、解除されません。"
         }
     ],
     "WorldRaid": [
