@@ -118,6 +118,15 @@ const sort_functions = {
     DodgePoint: (a,b) => (b.DodgePoint - a.DodgePoint)*search_options["sortby_dir"],
     EXCost: (a,b) => (find(b.Skills, "SkillType", "ex")[0].Cost[4] - find(a.Skills, "SkillType", "ex")[0].Cost[4])*search_options["sortby_dir"],
     EXHits: (a,b) => (getSkillHits(find(b.Skills, "SkillType", "ex")[0]) - getSkillHits(find(a.Skills, "SkillType", "ex")[0]))*search_options["sortby_dir"],
+    StreetBattleAdaptation: (a,b) => (
+        (b.StreetBattleAdaptation + (b.Weapon.AdaptationType === "Street" ? b.Weapon.AdaptationValue - 0.1 : 0)) - (a.StreetBattleAdaptation + (a.Weapon.AdaptationType === "Street" ? a.Weapon.AdaptationValue - 0.1: 0))
+        )*search_options["sortby_dir"],
+    OutdoorBattleAdaptation: (a,b) => (
+        (b.OutdoorBattleAdaptation + (b.Weapon.AdaptationType === "Outdoor" ? b.Weapon.AdaptationValue - 0.1 : 0)) - (a.OutdoorBattleAdaptation + (a.Weapon.AdaptationType === "Outdoor" ? a.Weapon.AdaptationValue - 0.1 : 0))
+        )*search_options["sortby_dir"],
+    IndoorBattleAdaptation: (a,b) => (
+        (b.IndoorBattleAdaptation + (b.Weapon.AdaptationType === "Indoor" ? b.Weapon.AdaptationValue - 0.1 : 0)) - (a.IndoorBattleAdaptation + (a.Weapon.AdaptationType === "Indoor" ? a.Weapon.AdaptationValue - 0.1 : 0))
+        )*search_options["sortby_dir"],
 }
 
 const itemSortFunctions = {
@@ -3766,12 +3775,22 @@ function updateStudentList(updateSortMethod = false) {
                     if (cost[0] == cost[4]) {
                         $('#student-select-'+el.Id+' .label-text:not(.hover)').text(cost[0]).toggleClass('smalltext', false).toggleClass('unhover', true)
                     } else {
-                        $('#student-select-'+el.Id+' .label-text:not(.hover)').text(`${cost[0]}~${cost[4]}`).toggleClass('smalltext', false).toggleClass('unhover', true)
+                        $('#student-select-'+el.Id+' .label-text:not(.hover)').text(`${cost[0]} → ${cost[4]}`).toggleClass('smalltext', false).toggleClass('unhover', true)
                     }
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else if (search_options["sortby"] == "EXHits") {
                     const hits = getSkillHits(find(el.Skills, "SkillType", "ex")[0])
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(hits).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"].endsWith("BattleAdaptation")) {
+                    const terrain = search_options["sortby"].replace("BattleAdaptation", "")
+                    let label, baseValue = el[search_options["sortby"]]
+                    if (el.Weapon.AdaptationType === terrain) {
+                        label = `${adaptationAmount[baseValue]} → ${adaptationAmount[baseValue + el.Weapon.AdaptationValue]}`
+                    } else {
+                        label = adaptationAmount[baseValue]
+                    }
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').html(label).toggleClass('smalltext', false).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else {
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(el[search_options["sortby"]].toLocaleString()).toggleClass('smalltext', false).toggleClass('unhover', true)
@@ -8140,8 +8159,14 @@ function loadLanguage(lang) {
     $('body').addClass(`font-${lang.toLowerCase()}`)
 
     $('*[data-localize-id]').each(function (i,el) {
-        let key = $(el).data('localize-id').split(',')[0], value = $(el).data('localize-id').split(',')[1]
-        $(el).html(getLocalizedString(key,value))
+        let [key, value] = $(el).data('localize-id').split(',')
+        if ($(el).data('localize-replacement-id')) {
+            let [repKey, repValue] = $(el).data('localize-replacement-id').split(',')
+            $(el).html(getLocalizedString(key,value, [getLocalizedString(repKey, repValue)]))
+        } else {
+            $(el).html(getLocalizedString(key,value))
+        }
+        
     })
 
     $('*[data-ph-localize-id]').each(function (i,el) {
