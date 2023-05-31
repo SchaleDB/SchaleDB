@@ -2910,6 +2910,7 @@ $.when($.ready, loadPromise).then(function() {
         // Esc: Defocus current input field
         if (e.code === 'Escape') {
             $('input:focus').trigger('blur')
+            $('#ba-navbar-content').collapse('hide')
         }
 
         // Combination keyboard shortcuts
@@ -2943,6 +2944,7 @@ $.when($.ready, loadPromise).then(function() {
             if ($('#ba-student-modal-students').hasClass('show')) {
                 $('#ba-student-search-text').trigger('focus')
             } else {
+                $('#ba-navbar-content').collapse('show')
                 $('#ba-navbar-search').trigger('focus')
             }
         }

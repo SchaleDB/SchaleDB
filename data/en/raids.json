@@ -2344,7 +2344,7 @@
                 true
             ],
             "MaxDifficulty": [
-                5,
+                6,
                 5
             ],
             "PathName": "Perorozilla",
@@ -2386,6 +2386,11 @@
                     7305600,
                     7305601,
                     7305190
+                ],
+                [
+                    7305700,
+                    7305701,
+                    7305790
                 ]
             ],
             "RaidSkill": [
@@ -2393,6 +2398,7 @@
                     "Id": "Perorozilla01Ex01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
+                    "MaxDifficulty": 5,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_PEROROZILLA_EXSKILL01",
                     "Effects": [
@@ -2464,6 +2470,125 @@
                     ]
                 },
                 {
+                    "Id": "Perorozilla01TormentEx01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 6,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_PEROROZILLA_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "HitFrames": [
+                                30,
+                                60,
+                                90,
+                                120,
+                                150,
+                                180,
+                                210,
+                                240,
+                                270,
+                                300
+                            ],
+                            "RestrictTo": [
+                                7305700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    2000
+                                ]
+                            ],
+                            "HitFrames": [
+                                30,
+                                60,
+                                90,
+                                120,
+                                150,
+                                180,
+                                210,
+                                240,
+                                270,
+                                300
+                            ],
+                            "RestrictTo": [
+                                7305700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "DMGZone",
+                            "Scale": [
+                                [
+                                    1000
+                                ]
+                            ],
+                            "HitFrames": [
+                                30,
+                                60,
+                                90,
+                                120,
+                                150,
+                                180,
+                                210,
+                                240,
+                                270,
+                                300
+                            ],
+                            "RestrictTo": [
+                                7305700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -9999
+                                ]
+                            ],
+                            "Stat": "DefensePower_Base",
+                            "Channel": 603
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": false
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGZone"
+                    ],
+                    "EffectCombineLabel": {
+                        "StackLabelTranslated": [
+                            "ordinal_1",
+                            "ordinal_2",
+                            "ordinal_3"
+                        ]
+                    },
+                    "Name": "White-Hot Heat Vision",
+                    "Desc": "Emits White-Hot Heat Vision against one enemy that chains to the nearest enemy (up to 2 times).\n<b>1st target</b>: Decreases the <d:DEF> of the target by <b>9,999</b> for 60s and continuously deals 100% damage to them every 1s for 10s. If the defense reduction debuff is not removed before the end of the skill's duration, deals 250% damage to enemies in a fan-shaped area.\n<b>2nd target</b>: Continuously deals 20% damage to them every 1s for 10s.\n<b>3rd target</b>: Continuously deals 10% damage to them every 1s for 10s."
+                },
+                {
                     "Id": "Perorozilla01Ex02",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
@@ -2483,7 +2608,8 @@
                                 7305300,
                                 7305400,
                                 7305500,
-                                7305600
+                                7305600,
+                                7305700
                             ],
                             "CriticalCheck": "Check",
                             "CanEvade": true
@@ -2507,7 +2633,8 @@
                             "",
                             "",
                             " with 110% increased <b:MAXHP> (Indoor only)",
-                            " with up to 200% increased <b:MAXHP>"
+                            " with up to 200% increased <b:MAXHP>",
+                            ""
                         ],
                         [
                             "",
@@ -2515,7 +2642,8 @@
                             "",
                             "",
                             "",
-                            "\nAlso summons glowing Perorominions which, when knocked down, deal 200,000 damage to other Perorominions in a circular area around it."
+                            "\nAlso summons glowing Perorominions which, when knocked down, deal 200,000 damage to other Perorominions in a circular area around it.",
+                            "\nAlso summons glowing Perorominions which, when knocked down, deal 250,000 damage to other Perorominions in a circular area around it."
                         ]
                     ]
                 },
@@ -2534,7 +2662,8 @@
                             "<b>1/7th</b>",
                             "<b>1/7th</b>",
                             "<b>1/7th</b>",
-                            "<b>1/10th</b>"
+                            "<b>1/10th</b>",
+                            "<b>1/12th</b>"
                         ]
                     ]
                 },
@@ -2570,6 +2699,31 @@
                     ],
                     "Name": "Hyper Spiral Glare Beam",
                     "Desc": "When ATG gauge is full, deals 300% damage to all enemies."
+                },
+                {
+                    "Id": "Perorozilla01TormentPassive02",
+                    "SkillType": "Passive",
+                    "MinDifficulty": 6,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_PEROROZILLA_PASSIVESKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305700,
+                                7305701
+                            ],
+                            "Stat": "EnhanceMysticRate_Base",
+                            "Channel": 134
+                        }
+                    ],
+                    "Name": "Burning Perorodzilla",
+                    "Desc": "Increases Perorodzilla's and summoned Perorominions' <b:EnhanceMysticRate> by 50%."
                 }
             ],
             "ExcludeNormalAttack": [
@@ -4025,6 +4179,15 @@
                     "Start": 1684288800,
                     "End": 1684868400,
                     "RewardSet": 3600,
+                    "RewardSetMax": 48
+                },
+                {
+                    "Season": 53,
+                    "RaidId": 6,
+                    "Terrain": "Outdoor",
+                    "Start": 1685498400,
+                    "End": 1686078000,
+                    "RewardSet": 3700,
                     "RewardSetMax": 48
                 }
             ],
@@ -14656,6 +14819,584 @@
                             ],
                             [
                                 292,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        80000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        90000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        100000000,
+                        [
+                            [
+                                3000001,
+                                1500000
+                            ]
+                        ]
+                    ],
+                    [
+                        120000000,
+                        [
+                            [
+                                3000001,
+                                2000000
+                            ]
+                        ]
+                    ],
+                    [
+                        150000000,
+                        [
+                            [
+                                3000001,
+                                2500000
+                            ]
+                        ]
+                    ],
+                    [
+                        180000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        210000000,
+                        [
+                            [
+                                2000003,
+                                32
+                            ]
+                        ]
+                    ],
+                    [
+                        240000000,
+                        [
+                            [
+                                9998,
+                                5
+                            ]
+                        ]
+                    ],
+                    [
+                        270000000,
+                        [
+                            [
+                                2000004,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        310000000,
+                        [
+                            [
+                                100008,
+                                1
+                            ]
+                        ]
+                    ]
+                ],
+                "3700": [
+                    [
+                        250000,
+                        [
+                            [
+                                2000001,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        500000,
+                        [
+                            [
+                                10,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        750000,
+                        [
+                            [
+                                120,
+                                6
+                            ],
+                            [
+                                140,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1000000,
+                        [
+                            [
+                                3000001,
+                                300000
+                            ]
+                        ]
+                    ],
+                    [
+                        1250000,
+                        [
+                            [
+                                2000002,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        1500000,
+                        [
+                            [
+                                11,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1750000,
+                        [
+                            [
+                                121,
+                                3
+                            ],
+                            [
+                                141,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        2000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        2500000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        3000000,
+                        [
+                            [
+                                12,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        3500000,
+                        [
+                            [
+                                122,
+                                2
+                            ],
+                            [
+                                142,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        4000000,
+                        [
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        4500000,
+                        [
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5000000,
+                        [
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5500000,
+                        [
+                            [
+                                123,
+                                1
+                            ],
+                            [
+                                143,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        6000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        7000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        8000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        9000000,
+                        [
+                            [
+                                120,
+                                12
+                            ],
+                            [
+                                140,
+                                12
+                            ],
+                            [
+                                121,
+                                6
+                            ],
+                            [
+                                141,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        10000000,
+                        [
+                            [
+                                3000001,
+                                500000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        12000000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ],
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        14000000,
+                        [
+                            [
+                                12,
+                                3
+                            ],
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        16000000,
+                        [
+                            [
+                                122,
+                                2
+                            ],
+                            [
+                                142,
+                                2
+                            ],
+                            [
+                                123,
+                                1
+                            ],
+                            [
+                                143,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        18000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        20000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        22000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        24000000,
+                        [
+                            [
+                                120,
+                                12
+                            ],
+                            [
+                                140,
+                                12
+                            ],
+                            [
+                                121,
+                                6
+                            ],
+                            [
+                                141,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        26000000,
+                        [
+                            [
+                                3000001,
+                                1200000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        29000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        32000000,
+                        [
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        35000000,
+                        [
+                            [
+                                122,
+                                4
+                            ],
+                            [
+                                142,
+                                4
+                            ],
+                            [
+                                123,
+                                2
+                            ],
+                            [
+                                143,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        38000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        41000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        44000000,
+                        [
+                            [
+                                2000002,
+                                32
+                            ],
+                            [
+                                2000003,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        47000000,
+                        [
+                            [
+                                3000003,
+                                200
+                            ]
+                        ]
+                    ],
+                    [
+                        50000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        60000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        70000000,
+                        [
+                            [
+                                121,
+                                6
+                            ],
+                            [
+                                141,
+                                6
+                            ],
+                            [
+                                122,
+                                4
+                            ],
+                            [
+                                142,
                                 4
                             ]
                         ]
