@@ -717,6 +717,34 @@ p a {
 
 }
 
+.active-buff {
+    display: inline-block;
+    position: relative;
+
+    img {
+        height: 26px;
+        width: 22px;
+    }
+
+    .stack-count {
+        position: absolute;
+        right: -2px;
+        top: -4px;
+
+        font-size: 14px;
+        color: #fff;
+        text-shadow: -1px 1px 4px #000;
+        font-style: italic;
+        font-weight: bold;
+        @include unselectable;
+
+        &::before {
+            content: "\00D7";
+            font-size: 10px;
+        }
+    }
+}
+
 .has-tooltip {
     @include dotted-underline;
     cursor: help;

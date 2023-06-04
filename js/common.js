@@ -5241,6 +5241,43 @@ function changeRaidEnemy(num) {
             } else {
                 $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text('-')
             }
+        } else if (statName == 'MaxHP') {
+            
+            let tooltipText = ""
+
+            switch (enemy.Id) {
+                case 7305701:
+                    enemyStats.addBuff('MaxHP_Base', 100000)
+                case 7305601:
+                case 7965031:
+                    $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).html(`<span class="has-tooltip">${enemyStats.getTotalString(statName)}</span>`)
+   
+                    enemyStats.addBuff('MaxHP_Coefficient', 10000)
+                    tooltipText += `<div class="active-buff me-2"><img src="images/buff/Combat_Icon_Buff_MAXHP.png" width="22" height="26" class=""><span class="stack-count">2</span></div><b>${enemyStats.getTotalString(statName)}</b>`
+
+                    enemyStats.addBuff('MaxHP_Coefficient', 10000)
+                    tooltipText += `\n<div class="active-buff me-2"><img src="images/buff/Combat_Icon_Buff_MAXHP.png" width="22" height="26" class=""><span class="stack-count">3</span></div><b>${enemyStats.getTotalString(statName)}</b>`
+
+                    break
+                case 7305101:
+                case 7965002:
+                    $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).html(`<span class="has-tooltip">${enemyStats.getTotalString(statName)}</span>`)
+                    if (raid_difficulty == 4) {
+
+                        enemyStats.addBuff('MaxHP_Coefficient', 11000)
+                        tooltipText += `<div class="active-buff me-2"><img src="images/buff/Combat_Icon_Buff_MAXHP.png" width="22" height="26" class=""></div><b>${enemyStats.getTotalString(statName)}</b>`
+                        break
+
+                    }
+                default:
+                    $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text(enemyStats.getBaseString(statName))
+                    break
+            }
+
+            if (tooltipText != '') {
+                $('.stat-MaxHP .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(tooltipText), html: true, placement: 'top'})
+            }
+            
         } else {
             $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text(enemyStats.getBaseString(statName))
         }
