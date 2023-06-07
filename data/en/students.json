@@ -77997,5 +77997,542 @@
                 12
             ]
         ]
+    },
+    {
+        "Id": 20026,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 142,
+        "PathName": "Minori",
+        "DevName": "CH0214",
+        "Name": "Minori",
+        "School": "RedWinter",
+        "Club": "LaborParty",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Explosion",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "AR",
+        "WeaponImg": "Weapon_Icon_CH0214",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Bag",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Redwinter_Collection",
+        "CollectionTexture": "Student_Portrait_CH0214_Collection",
+        "FamilyName": "Yasumori",
+        "PersonalName": "Minori",
+        "SchoolYear": "3rd Year",
+        "CharacterAge": "17 years old",
+        "FamilyNameRuby": "やすもり",
+        "Birthday": "7月14日",
+        "CharacterSSRNew": "キヴォトス中のすべてのプリンは\n闘争する生徒のためのものだ！",
+        "ProfileIntroduction": "レッドウィンター連邦学園所属、工務部の部長。\n\n大規模な土木工事や建築など、人力が必要な所ならどこにだって人を派遣し現場を指揮する。仕事の手腕はたしかだが、些細なことでストライキやデモを起こすため雇い主たちから悪名高い模様。",
+        "Hobby": "ストライキ、デモ、工作",
+        "CharacterVoice": "Sayaka Kikuchi",
+        "BirthDay": "7/14",
+        "Illustrator": "7peach",
+        "Designer": "二色こぺ",
+        "CharHeightMetric": "158cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1592,
+        "AttackPower1": 302,
+        "AttackPower100": 3028,
+        "MaxHP1": 1978,
+        "MaxHP100": 14789,
+        "DefensePower1": 65,
+        "DefensePower100": 395,
+        "HealPower1": 1627,
+        "HealPower100": 4881,
+        "DodgePoint": 791,
+        "AccuracyPoint": 656,
+        "CriticalPoint": 252,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "Onward and Upward!",
+                "Desc": "Deals <?1> damage to enemies in a circular area. Consumes up to <b>3</b> additional units of skill cost, increasing the damage dealt by 35% for each additional unit of cost consumed. (EX Cost increase/decrease effects will be calculated using the base cost)",
+                "Parameters": [
+                    [
+                        "462%",
+                        "531%",
+                        "670%",
+                        "739%",
+                        "878%",
+                        "947%",
+                        "1086%",
+                        "1155%",
+                        "1293%",
+                        "1363%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            46212,
+                            53148,
+                            67008,
+                            73938,
+                            87804,
+                            94734,
+                            108600,
+                            115530,
+                            129396,
+                            136326
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            62386,
+                            71750,
+                            90461,
+                            99816,
+                            118535,
+                            127891,
+                            146610,
+                            155966,
+                            174685,
+                            184040
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            78560,
+                            90352,
+                            113914,
+                            125695,
+                            149267,
+                            161048,
+                            184620,
+                            196401,
+                            219973,
+                            231754
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            94735,
+                            108953,
+                            137366,
+                            151573,
+                            179998,
+                            194205,
+                            222630,
+                            236836,
+                            265262,
+                            279468
+                        ]
+                    }
+                ],
+                "EffectCombine": [
+                    "DMGSingle"
+                ],
+                "EffectCombineLabel": {
+                    "StackLabel": [
+                        "+0",
+                        "+1",
+                        "+2",
+                        "+3"
+                    ],
+                    "DisableFirst": true
+                }
+            },
+            {
+                "SkillType": "normal",
+                "Name": "United Will",
+                "Desc": "Every 25s, deals <?1> damage to enemies in a circular area.",
+                "Parameters": [
+                    [
+                        "77.8%",
+                        "81.7%",
+                        "85.6%",
+                        "101%",
+                        "105%",
+                        "108%",
+                        "124%",
+                        "128%",
+                        "132%",
+                        "147%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            7784,
+                            8176,
+                            8568,
+                            10122,
+                            10514,
+                            10899,
+                            12460,
+                            12845,
+                            13237,
+                            14791
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "Hand in Hand",
+                "Desc": "Increases <b:HIT> by <?1>.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AccuracyPoint_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "Hand in Hand+",
+                "Desc": "Increases <b:ATK> by <?1> and <b:HIT> by <?2>.",
+                "Parameters": [
+                    [
+                        "363",
+                        "381",
+                        "399",
+                        "472",
+                        "490",
+                        "508",
+                        "580",
+                        "598",
+                        "617",
+                        "689"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            363,
+                            381,
+                            399,
+                            472,
+                            490,
+                            508,
+                            580,
+                            598,
+                            617,
+                            689
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "Fruits of Our Labor",
+                "Desc": "Increases all allies' <b:EnhanceExplosionRate> by <?1>.",
+                "Parameters": [
+                    [
+                        "15.9%",
+                        "16.7%",
+                        "17.5%",
+                        "20.7%",
+                        "21.5%",
+                        "22.3%",
+                        "25.5%",
+                        "26.3%",
+                        "27%",
+                        "30.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1594,
+                                1674,
+                                1753,
+                                2073,
+                                2152,
+                                2232,
+                                2550,
+                                2630,
+                                2709,
+                                3029
+                            ]
+                        ],
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Channel": 132
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                6,
+                37
+            ],
+            [
+                8,
+                44
+            ],
+            [
+                2,
+                7
+            ],
+            [
+                3,
+                11
+            ],
+            [
+                5,
+                18
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            5,
+            0
+        ],
+        "MemoryLobbyBGM": "Walkthrough",
+        "FurnitureInteraction": [
+            [
+                210307
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Functional",
+            "Books",
+            "Humanities"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Minori",
+            "F_Minori2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "鋼鉄の松明",
+            "Desc": "ミノリが愛用する頑丈なアサルトライフル。\n\nシンプルな構造のこのアサルトライフルは、その名の通りミノリが進む闘争の道の前で黙々と火を灯してきた。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 133,
+            "AttackPower100": 1330,
+            "MaxHP1": 430,
+            "MaxHP100": 4304,
+            "HealPower1": 191,
+            "HealPower100": 1913,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3010,
+                130
+            ],
+            [
+                3011,
+                3010,
+                131,
+                150
+            ],
+            [
+                3012,
+                3011,
+                132,
+                151
+            ],
+            [
+                3013,
+                3012,
+                133,
+                152
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                18
+            ],
+            [
+                12,
+                18,
+                16,
+                36
+            ],
+            [
+                12,
+                18,
+                12,
+                27
+            ],
+            [
+                8,
+                18,
+                10,
+                22
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4010
+            ],
+            [
+                4010
+            ],
+            [
+                4011,
+                4010,
+                130
+            ],
+            [
+                4011,
+                131,
+                150
+            ],
+            [
+                4012,
+                4011,
+                131,
+                150
+            ],
+            [
+                4012,
+                132,
+                151
+            ],
+            [
+                4013,
+                4012,
+                133,
+                152
+            ],
+            [
+                4013,
+                133,
+                152
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                9,
+                16
+            ],
+            [
+                8,
+                3,
+                18
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                7,
+                14
+            ]
+        ]
     }
 ]

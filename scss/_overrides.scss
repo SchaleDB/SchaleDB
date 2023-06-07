@@ -51,6 +51,12 @@
         background-clip: border-box;
         @include scrollable(auto);
     }
+
+    &.dropdown-menu-scroll-large {
+        max-height: 560px;
+        background-clip: border-box;
+        @include scrollable(auto);
+    }
 }
 
 // Dropdowns

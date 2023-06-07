@@ -127,6 +127,18 @@ const sort_functions = {
     IndoorBattleAdaptation: (a,b) => (
         (b.IndoorBattleAdaptation + (b.Weapon.AdaptationType === "Indoor" ? b.Weapon.AdaptationValue - 0.1 : 0)) - (a.IndoorBattleAdaptation + (a.Weapon.AdaptationType === "Indoor" ? a.Weapon.AdaptationValue - 0.1 : 0))
         )*search_options["sortby_dir"],
+    BirthDay: (a,b) => (convertToDate(a.BirthDay) - convertToDate(b.BirthDay))*search_options["sortby_dir"],
+    CharacterAge: (a,b) => (MathHelper.extractNumber(b.CharacterAge) - MathHelper.extractNumber(a.CharacterAge))*search_options["sortby_dir"],
+    CharHeightMetric: (a,b) => (MathHelper.extractNumber(b.CharHeightMetric) - MathHelper.extractNumber(a.CharHeightMetric))*search_options["sortby_dir"],
+    Illustrator: (a,b) => getTranslatedString(a, 'Illustrator').localeCompare(getTranslatedString(b, 'Illustrator'))*search_options["sortby_dir"],
+    Designer: (a,b) => getTranslatedString(a, 'Designer').localeCompare(getTranslatedString(b, 'Designer'))*search_options["sortby_dir"],
+    Club: (a,b) => getLocalizedString('Club', a.Club).localeCompare(getLocalizedString('Club', b.Club))*search_options["sortby_dir"],
+    School: (a,b) => getLocalizedString('School', a.School).localeCompare(getLocalizedString('School', b.School))*search_options["sortby_dir"],
+    MemoryLobby: (a,b) => (b.MemoryLobby[regionID] - a.MemoryLobby[regionID])*search_options["sortby_dir"],
+    MemoryLobbyBGM: (a,b) => getTranslatedString(a, 'MemoryLobbyBGM').localeCompare(getTranslatedString(b, 'MemoryLobbyBGM'))*search_options["sortby_dir"],
+    CollectionStars: (a,b) => ((b.Id in studentCollection ? studentCollection[b.Id].s + studentCollection[b.Id].ws : 0) - (a.Id in studentCollection ? studentCollection[a.Id].s + studentCollection[a.Id].ws : 0))*search_options["sortby_dir"],
+    CollectionLevel: (a,b) => ((b.Id in studentCollection ? studentCollection[b.Id].l : 0) - (a.Id in studentCollection ? studentCollection[a.Id].l : 0))*search_options["sortby_dir"],
+    CollectionBond: (a,b) => ((b.Id in studentCollection ? studentCollection[b.Id].b : 0) - (a.Id in studentCollection ? studentCollection[a.Id].b : 0))*search_options["sortby_dir"]
 }
 
 const itemSortFunctions = {
@@ -803,6 +815,12 @@ class MathHelper {
 
     static toFixedFloat(value, maxPrecision) {
         return parseFloat((value).toFixed(maxPrecision))
+    }
+
+    static extractNumber(string) {
+        let result = parseInt(string.replace(/[^0-9]/g))
+        console.log(result)
+        return isNaN(result) ? 0 : result
     }
 }
 
@@ -3272,6 +3290,13 @@ function loadModule(moduleName, entry=null) {
             window.setTimeout(function(){$("#loading-cover").fadeOut()},50)
         
             $('#ba-student, #ba-student-list-btn').show()
+            $('#ba-student-list-btn').on('click', function() {
+                if (search_options["sortby"].startsWith("Collection")) {
+                    updateStudentList(updateSortMethod = true)
+                }
+                $('.card-student.disabled').removeClass('disabled')
+            })
+
             $('#ba-statpreview-status-equipment').tooltip({title: getBasicTooltip(translateUI('tooltip_equipment_bonus')), placement: 'top', html: true})
             $('#ba-statpreview-status-buffs').tooltip({title: getBasicTooltip(translateUI('tooltip_buffs_bonus')), placement: 'top', html: true})
             $('#ba-statpreview-status-passive-level').tooltip({title: getBasicTooltip(translateUI('tooltip_passiveskill_bonus')), placement: 'top', html: true})
@@ -3710,6 +3735,10 @@ function getNextBirthdayDate(birthday) {
     return birthdayDate
 }
 
+function convertToDate(dateString) {
+    return new Date(0, parseInt(dateString.split('/')[0])-1, parseInt(dateString.split('/')[1]))
+}
+
 function duration(seconds) {
     if (seconds < 0) {
         return [0, 0, 0]
@@ -3761,7 +3790,10 @@ function updateStudentList(updateSortMethod = false) {
     }
 
     if (updateSortMethod) {
-        studentList.sort(sortfunction)
+        studentList.sort(sort_functions.Default)
+        if (sort_functions[search_options["sortby"]] != "Default") {
+            studentList.sort(sortfunction)
+        }
     }
 
     let count = 0
@@ -3793,6 +3825,61 @@ function updateStudentList(updateSortMethod = false) {
                         label = adaptationAmount[baseValue]
                     }
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').html(label).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "CharacterAge") {
+                    const age = MathHelper.extractNumber(el[search_options["sortby"]])
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(age == 0 ? "??" : age).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "BirthDay") {
+                    const birthDate = convertToDate(el.BirthDay).toLocaleDateString([], { month: "numeric", day: "numeric"})
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(birthDate).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "CollectionStars") {
+                    const stars = el.Id in studentCollection ? studentCollection[el.Id].s : 0
+                    const weapon = el.Id in studentCollection ? studentCollection[el.Id].ws : 0
+
+                    let label
+                    if (stars > 0) {
+                        label = `<i class="fa fa-star col-star"></i> ${stars}`
+                        if (weapon > 0) label += ` <i class="fa fa-star col-weaponstar"></i> ${weapon}`
+                    } else {
+                        label = translateUI('collection_notowned')
+                    }
+
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').html(label).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "CollectionLevel") {
+                    const level = el.Id in studentCollection ? studentCollection[el.Id].l : 0
+                    let label
+                    if (level > 0) {
+                        label = `Lv. ${level}`
+                    } else {
+                        label = translateUI('collection_notowned')
+                    }
+
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').html(label).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "CollectionBond") {
+                    const level = el.Id in studentCollection ? studentCollection[el.Id].b : 0
+                    let label
+                    if (level > 0) {
+                        label = `<i class="fa fa-heart"></i> ${level}`
+                    } else {
+                        label = translateUI('collection_notowned')
+                    }
+                    
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').html(label).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "Club" || search_options["sortby"] == "School") {
+                    const label = getLocalizedString(search_options["sortby"], el[search_options["sortby"]])
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(label).toggleClass('smalltext', label.length > label_smalltext_threshold[userLang]).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "MemoryLobby") {
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').html(`<i class="fa fa-heart"></i> ${el.MemoryLobby[regionID]}`).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "MemoryLobbyBGM" || search_options["sortby"] == "Illustrator" || search_options["sortby"] == "Designer") {
+                    const label = el[search_options["sortby"]]
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(label).toggleClass('smalltext', label.length > label_smalltext_threshold["Jp"]).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else {
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(el[search_options["sortby"]].toLocaleString()).toggleClass('smalltext', false).toggleClass('unhover', true)
@@ -4034,10 +4121,10 @@ function searchSetOrder(value, runSearch = true, swapDir = true) {
     $(`#ba-student-search-sortby a`).removeClass("active")
     $(`#ba-student-search-sortby .btn-pill`).removeClass("active")
     $(`#ba-student-search-sortby-${value.toLowerCase()}`).addClass("active")
-    $('#ba-student-search-sortby-stat .label').text(translateUI('stat'))
+    $('#ba-student-search-sortby-stat .label').text(translateUI('others'))
     $('.sort-direction-label').text("")
 
-    $(`#ba-student-search-sortby-${value.toLowerCase()} .sort-direction-label`).html((search_options["sortby_dir"] == 1) != (value == "Name" || value == "Default") ? '<i class="fa-solid fa-arrow-down-long ms-2"></i>' : '<i class="fa-solid fa-arrow-up-long ms-2"></i>')
+    $(`#ba-student-search-sortby-${value.toLowerCase()} .sort-direction-label`).html((search_options["sortby_dir"] == 1) != (value == "Name" || value == "Default" || value == "BirthDay" || value == "Illustrator" || value == "Designer" || value == "MemoryLobbyBGM") ? '<i class="fa-solid fa-arrow-down-long ms-2"></i>' : '<i class="fa-solid fa-arrow-up-long ms-2"></i>')
 
     if (value != "Default" && value != "Name") {
         $('#ba-student-search-sortby-stat').addClass("active")
@@ -4048,7 +4135,7 @@ function searchSetOrder(value, runSearch = true, swapDir = true) {
     localStorage.setItem('chara_sortby', value)
     localStorage.setItem('chara_sortby_dir', search_options["sortby_dir"])
     if (runSearch) {
-        updateStudentList(updateSortMethod = true)  
+        updateStudentList(updateSortMethod = true)
     }
 }
 
@@ -9020,16 +9107,18 @@ function parseImport(str) {
         let importData = JSON.parse(str)
         let collectionNew = {}
         importData.characters.forEach((char) => {
-            collectionNew[char.id] = {
-                s: char.current.star,
-                l: char.current.level,
-                e1: Math.max(char.current.gear1,1),
-                e2: Math.max(char.current.gear2,1),
-                e3: Math.max(char.current.gear3,1),
-                ws: char.current.ue,
-                wl: char.current.ue_level,
-                b: char.current.bond,
-                s3: Math.max(char.current.passive,1)
+            if (char.eleph.unlocked) {
+                collectionNew[char.id] = {
+                    s: char.current.star,
+                    l: char.current.level,
+                    e1: Math.max(char.current.gear1,1),
+                    e2: Math.max(char.current.gear2,1),
+                    e3: Math.max(char.current.gear3,1),
+                    ws: char.current.ue,
+                    wl: char.current.ue_level,
+                    b: char.current.bond,
+                    s3: Math.max(char.current.passive,1)
+                }
             }
         })
         return collectionNew

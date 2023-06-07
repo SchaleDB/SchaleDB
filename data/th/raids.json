@@ -2745,10 +2745,9 @@
             ],
             "PathName": "HOD",
             "Faction": "Decagrammaton",
-            "Icon": "Boss_Portrait_HOD_Lobby",
-            "IconBG": "Boss_Portrait_HOD_LobbyBG",
             "Terrain": [
-                "Street"
+                "Street",
+                "Indoor"
             ],
             "BulletType": "Normal",
             "BulletTypeInsane": "Mystic",
@@ -15859,6 +15858,15 @@
                     "End": 1685386800,
                     "RewardSet": 2600,
                     "RewardSetMax": 44
+                },
+                {
+                    "Season": 40,
+                    "RaidId": 2,
+                    "Terrain": "Indoor",
+                    "Start": 1686016800,
+                    "End": 1686596400,
+                    "RewardSet": 2000,
+                    "RewardSetMax": 44
                 }
             ],
             "RewardSets": {
@@ -23594,7 +23602,7 @@
             "Id": 10000,
             "IsReleased": [
                 true,
-                false
+                true
             ],
             "DungeonType": "Shooting",
             "Icon": "EnemyInfo_Boxcat_Terror",
@@ -24443,6 +24451,128 @@
                     3900019006
                 ]
             ]
+        },
+        {
+            "Id": 17000,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "DungeonType": "Defense",
+            "Icon": "EnemyInfo_Sweeper_Decagram_Taser_White",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "LightArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 900000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7800001,
+                        7800201,
+                        7800101
+                    ]
+                },
+                {
+                    "Id": 900000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7800002,
+                        7800102,
+                        7800202
+                    ]
+                },
+                {
+                    "Id": 900000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7800003,
+                        7800203,
+                        7800103
+                    ]
+                },
+                {
+                    "Id": 900000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7800104,
+                        7800204,
+                        7800004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    3938056289,
+                    2060888564
+                ],
+                [
+                    3938056289,
+                    2060888564
+                ],
+                [
+                    3938056289,
+                    2060888564,
+                    1034510189
+                ],
+                [
+                    3938056289,
+                    2060888564,
+                    1034510189,
+                    2456483055
+                ]
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -24673,6 +24803,18 @@
             "Icon": "TImeAttackGeas_Enemy_DamageOverTime_FatalPoison",
             "Name": "พิษร้ายแรง",
             "Desc": "ฝ่ายเราจะได้รับเอฟเฟกต์พิษร้ายแรง, เอฟเฟกต์พิษร้ายแรงจะสร้างความเสียหายต่อเนื่องที่ไม่สนใจค่าป้องกันให้กับเป้าหมายที่ได้รับผล เอฟเฟกต์นี้ไม่สามารถลบล้างได้"
+        },
+        {
+            "Id": 1034510189,
+            "Icon": "TimeAttack_Enemy_HealByHitDamaged_MaxHp_01",
+            "Name": "最大体力増加、被弾時に回復",
+            "Desc": "敵の最大体力が増加し、攻撃を受けた時、HPを回復します。"
+        },
+        {
+            "Id": 2456483055,
+            "Icon": "TimeAttack_Icon_Buff_DodgePoint_Enemy_01",
+            "Name": "回避値増加",
+            "Desc": "敵の回避値が増加します。"
         }
     ],
     "WorldRaid": [
