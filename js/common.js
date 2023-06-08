@@ -491,44 +491,50 @@ let itemSearchOptions = {
         this.bulletType = character.BulletType
         this.armorType = character.ArmorType
 
-        this.stats['MaxHP'] = [MaxHP,0,1]
-        this.stats['AttackPower'] = [AttackPower,0,1]
-        this.stats['DefensePower'] = [DefensePower,0,1]
-        this.stats['HealPower'] = [HealPower,0,1]
-        this.stats['AccuracyPoint'] = [character.AccuracyPoint,0,1]
-        this.stats['DodgePoint'] = [character.DodgePoint,0,1]
-        this.stats['CriticalPoint'] = [character.CriticalPoint,0,1]
-        this.stats['CriticalDamageRate'] = [character.CriticalDamageRate,0,1]
-        this.stats['CriticalChanceResistPoint'] = [character.CriticalResistPoint !== undefined ? character.CriticalResistPoint : 100,0,1]
-        this.stats['CriticalDamageResistRate'] = [character.CriticalDamageResistRate !== undefined ? character.CriticalDamageResistRate : 5000,0,1]
-        this.stats['StabilityPoint'] = [character.StabilityPoint,0,1]
-        this.stats['StabilityRate'] = [character.StabilityRate !== undefined ? character.StabilityRate : 2000, 0,1]
-        this.stats['AmmoCount'] = [character.AmmoCount,0,1]
-        this.stats['AmmoCost'] = [character.AmmoCost,0,1]
-        this.stats['Range'] = [character.Range,0,1]
-        this.stats['RegenCost'] = [character.RegenCost,0,1]
-        this.stats['DamageRatio'] = [character.DamageRatio !== undefined ? character.DamageRatio : 10000,0,1]
-        this.stats['DamagedRatio'] = [character.DamagedRatio !== undefined ? character.DamagedRatio : 10000,0,1]
-        this.stats['HealEffectivenessRate'] = [10000,0,1]
-        this.stats['OppressionPower'] = [character.OppressionPower !== undefined ? character.OppressionPower : 100,0,1]
-        this.stats['OppressionResist'] = [character.OppressionResist !== undefined ? character.OppressionResist : 100,0,1]
-        this.stats['AttackSpeed'] = [10000,0,1]
-        this.stats['BlockRate'] = [0,0,1]
-        this.stats['DefensePenetration'] = [DefensePenetration,0,1]
-        this.stats['MoveSpeed'] = [character.MoveSpeed ? character.MoveSpeed : 200,0,1]
-        this.stats['EnhanceExplosionRate'] = [10000,0,1]
-        this.stats['EnhancePierceRate'] = [10000,0,1]
-        this.stats['EnhanceMysticRate'] = [10000,0,1]
-        this.stats['ExtendBuffDuration'] = [10000,0,1]
-        this.stats['ExtendDebuffDuration'] = [10000,0,1]
-        this.stats['ExtendCCDuration'] = [10000,0,1]
+        this.stats['MaxHP'] = [MaxHP,0,1,0]
+        this.stats['AttackPower'] = [AttackPower,0,1,0]
+        this.stats['DefensePower'] = [DefensePower,0,1,0]
+        this.stats['HealPower'] = [HealPower,0,1,0]
+        this.stats['AccuracyPoint'] = [character.AccuracyPoint,0,1,0]
+        this.stats['DodgePoint'] = [character.DodgePoint,0,1,0]
+        this.stats['CriticalPoint'] = [character.CriticalPoint,0,1,0]
+        this.stats['CriticalDamageRate'] = [character.CriticalDamageRate,0,1,0]
+        this.stats['CriticalChanceResistPoint'] = [character.CriticalResistPoint !== undefined ? character.CriticalResistPoint : 100,0,1,0]
+        this.stats['CriticalDamageResistRate'] = [character.CriticalDamageResistRate !== undefined ? character.CriticalDamageResistRate : 5000,0,1,0]
+        this.stats['StabilityPoint'] = [character.StabilityPoint,0,1,0]
+        this.stats['StabilityRate'] = [character.StabilityRate !== undefined ? character.StabilityRate : 2000, 0,1,0]
+        this.stats['AmmoCount'] = [character.AmmoCount,0,1,0]
+        this.stats['AmmoCost'] = [character.AmmoCost,0,1,0]
+        this.stats['Range'] = [character.Range,0,1,0]
+        this.stats['RegenCost'] = [character.RegenCost,0,1,0]
+        this.stats['DamageRatio'] = [character.DamageRatio !== undefined ? character.DamageRatio : 10000,0,1,0]
+        this.stats['DamagedRatio'] = [character.DamagedRatio !== undefined ? character.DamagedRatio : 10000,0,1,0]
+        this.stats['HealEffectivenessRate'] = [10000,0,1,0]
+        this.stats['OppressionPower'] = [character.OppressionPower !== undefined ? character.OppressionPower : 100,0,1,0]
+        this.stats['OppressionResist'] = [character.OppressionResist !== undefined ? character.OppressionResist : 100,0,1,0]
+        this.stats['AttackSpeed'] = [10000,0,1,0]
+        this.stats['BlockRate'] = [0,0,1,0]
+        this.stats['DefensePenetration'] = [DefensePenetration,0,1,0]
+        this.stats['MoveSpeed'] = [character.MoveSpeed ? character.MoveSpeed : 200,0,1,0]
+        this.stats['EnhanceExplosionRate'] = [10000,0,1,0]
+        this.stats['EnhancePierceRate'] = [10000,0,1,0]
+        this.stats['EnhanceMysticRate'] = [10000,0,1,0]
+        this.stats['ExtendBuffDuration'] = [10000,0,1,0]
+        this.stats['ExtendDebuffDuration'] = [10000,0,1,0]
+        this.stats['ExtendCCDuration'] = [10000,0,1,0]
     }
 
-    addBuff(stat, amount) {
+    addBuff(stat, amount, separatedFlat = false) {
         let stat_split = stat.split('_')
         if (stat_split.length > 1) {
             if (stat_split[1] == "Base") {
-                this.stats[stat_split[0]][1] += amount
+
+                if (separatedFlat) {
+                    this.stats[stat_split[0]][3] += amount
+                } else {
+                    this.stats[stat_split[0]][1] += amount
+                }
+                
             } else if (stat_split[1] == "Coefficient") {
                 this.stats[stat_split[0]][2] += amount/10000
             }
@@ -553,7 +559,7 @@ let itemSearchOptions = {
      * @returns 
      */
     getTotal(stat) {
-        return Math.max(Math.round(((this.stats[stat][0] + this.stats[stat][1]) * Math.max(this.stats[stat][2], 0.2)).toFixed(4)), 0)
+        return Math.max(Math.round(((this.stats[stat][0] + this.stats[stat][1]) * Math.max(this.stats[stat][2], 0.2)).toFixed(4)) + this.stats[stat][3], 0)
     }
 
     /**
@@ -601,8 +607,9 @@ let itemSearchOptions = {
      * @returns 
      */
     getFlatString(stat) {
-        const sign = this.stats[stat][1] >= 0 ? '+' : ''
-        return sign + this.stats[stat][1].toLocaleString()
+        const total = this.stats[stat][1] + this.stats[stat][3]
+        const sign = total >= 0 ? '+' : ''
+        return sign + total.toLocaleString()
     }
 
     /**
@@ -6231,7 +6238,7 @@ function recalculateStats() {
         if (statPreviewWeaponGrade >= 2) {
             const weaponPassiveSkill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
             weaponPassiveSkill.Effects.forEach(eff => {
-                studentStats.addBuff(eff.Stat, eff.Scale[skillLevel-1])
+                studentStats.addBuff(eff.Stat, eff.Scale[skillLevel-1], eff.Stat === "CriticalPoint_Base")
                 if (statPreviewSelectedChar == 0) {
                     studentStats.addActiveBuffIcon(eff.Stat, eff.Scale[skillLevel-1])
                 }
