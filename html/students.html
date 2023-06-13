@@ -1066,6 +1066,7 @@
                                                 <li><h6 class="dropdown-header" data-localize-id="ui,profile"></h6></li>
                                                 <li><a id="ba-student-search-sortby-school" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('School')" class="btn btn-dark"><span data-localize-id="ui,school"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-club" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('Club')" class="btn btn-dark"><span data-localize-id="ui,club"></span><span class="sort-direction-label"></span></a></li>
+                                                <li><a id="ba-student-search-sortby-charactervoice" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('CharacterVoice')" class="btn btn-dark"><span data-localize-id="ui,cv"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-birthday" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('BirthDay')" class="btn btn-dark"><span data-localize-id="ui,birthday"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-characterage" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('CharacterAge')" class="btn btn-dark"><span data-localize-id="ui,age"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-charheightmetric" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('CharHeightMetric')" class="btn btn-dark"><span data-localize-id="ui,height"></span><span class="sort-direction-label"></span></a></li>
@@ -1190,9 +1191,11 @@
                                 </div>
                                 <div>
                                     <h5 data-localize-id="ui,misc"></h5>
+                                    <div class="search-filter-group mb-1">
+                                        <button id="ba-student-search-filter-cover-uses" class="btn-pill mutually-exclusive" onclick="searchSetFilter('Cover','Uses')"><span class="label" data-localize-id="ui,uses_cover"></span></button>
+                                        <button id="ba-student-search-filter-cover-doesntuse" class="btn-pill mutually-exclusive" onclick="searchSetFilter('Cover','DoesntUse')"><span class="label" data-localize-id="ui,doesnt_use_cover"></span></button>
+                                    </div>
                                     <div class="search-filter-group">
-                                        <button id="ba-student-search-filter-cover" class="btn-pill" onclick="searchSetFilter('Cover',null)">
-                                            <span class="label" data-localize-id="ui,uses_cover"></span></button>
                                         <button id="ba-student-search-filter-hascc" class="btn-pill" onclick="searchSetFilter('HasCC',null)"><span class="label" data-localize-id="ui,can_cc"></span></button>
                                         <div class="btn-group">
                                             <button id="ba-student-search-select-usesartifact" class="btn-pill" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"><span class="label" data-localize-id="ui,uses_artifact"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>

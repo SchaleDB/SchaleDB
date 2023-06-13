@@ -127,6 +127,7 @@ const sort_functions = {
     IndoorBattleAdaptation: (a,b) => (
         (b.IndoorBattleAdaptation + (b.Weapon.AdaptationType === "Indoor" ? b.Weapon.AdaptationValue - 0.1 : 0)) - (a.IndoorBattleAdaptation + (a.Weapon.AdaptationType === "Indoor" ? a.Weapon.AdaptationValue - 0.1 : 0))
         )*search_options["sortby_dir"],
+    CharacterVoice: (a,b) => getTranslatedString(a, 'CharacterVoice').localeCompare(getTranslatedString(b, 'CharacterVoice'))*search_options["sortby_dir"],
     BirthDay: (a,b) => (convertToDate(a.BirthDay) - convertToDate(b.BirthDay))*search_options["sortby_dir"],
     CharacterAge: (a,b) => (MathHelper.extractNumber(b.CharacterAge) - MathHelper.extractNumber(a.CharacterAge))*search_options["sortby_dir"],
     CharHeightMetric: (a,b) => (MathHelper.extractNumber(b.CharHeightMetric) - MathHelper.extractNumber(a.CharHeightMetric))*search_options["sortby_dir"],
@@ -350,7 +351,10 @@ let search_options = {
             "Watch": false
         },
         "BondGear": false,
-        "Cover": false,
+        "Cover":  {
+            "Uses": false,
+            "DoesntUse": false,
+        },
         "HasCC": false,
         "TerrainUpgrades": false
     },
@@ -3884,7 +3888,7 @@ function updateStudentList(updateSortMethod = false) {
                 } else if (search_options["sortby"] == "MemoryLobby") {
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').html(`<i class="fa fa-heart"></i> ${el.MemoryLobby[regionID]}`).toggleClass('smalltext', false).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
-                } else if (search_options["sortby"] == "MemoryLobbyBGM" || search_options["sortby"] == "Illustrator" || search_options["sortby"] == "Designer") {
+                } else if (search_options["sortby"] == "MemoryLobbyBGM" || search_options["sortby"] == "Illustrator" || search_options["sortby"] == "Designer" || search_options["sortby"] == "CharacterVoice") {
                     const label = el[search_options["sortby"]]
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(label).toggleClass('smalltext', label.length > label_smalltext_threshold["Jp"]).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
@@ -3993,7 +3997,7 @@ function checkFilters(student, filterList, selectFilterList, searchTerm) {
         } else if (filterList[i] == 'BondGear') {
             if (search_options['filter'][filterList[i]] && !("Released" in student.Gear && student.Gear.Released[regionID])) return false
         } else if (filterList[i] == 'Cover') {
-            if (search_options['filter'][filterList[i]] && !student.Cover) return false
+            if (!search_options.filter.Cover[student.Cover ? 'Uses': 'DoesntUse']) return false
         } else if (filterList[i] == 'HasCC') {
             if (search_options['filter'][filterList[i]] && student.Skills.find(s => s.Effects !== undefined && s.Effects.find(e => e.Type == "CrowdControl") !== undefined) === undefined) return false
         } else if (filterList[i].endsWith('Adaptation') && search_options['filter']['TerrainUpgrades'] && filterList[i].startsWith(student.Weapon.AdaptationType)) {
@@ -4176,7 +4180,7 @@ function searchSetFilter(prop, value, runSearch = true) {
         search_options["filter"][prop][value] = !search_options["filter"][prop][value]
         if ($(`#ba-student-search-filter-${prop.toLowerCase()}-${String(value).toLowerCase()}`).hasClass('mutually-exclusive')) {
             //deactivate all other options
-            $(`#ba-student-search-filter-${prop.toLowerCase()} .btn-pill`).toggleClass("active", false)
+            $(`[id^="ba-student-search-filter-${prop.toLowerCase()}"].btn-pill`).toggleClass("active", false)
             for (option in search_options["filter"][prop]) {
                 if (option != value) search_options["filter"][prop][option] = false
             }
