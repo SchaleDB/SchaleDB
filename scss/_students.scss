@@ -183,6 +183,20 @@
     }
 }
 
+#student-modal-voice {
+    .tab-content {
+        padding: 0 0.5rem;
+
+        @include lg-up {
+            @include scrollable(scroll);
+        }
+    }
+
+    p {
+        white-space: normal;
+    }
+}
+
 .student-portrait-buttons {
     position: sticky;
     top: calc(56px + 1rem);
@@ -750,4 +764,24 @@
         white-space: nowrap;
         font-weight: 700;
     }
+}
+
+.skill-option-name {
+    padding: 0 0.25rem;
+    white-space: nowrap;
+}
+
+#student-voice-icon {
+
+    height: 54px;
+    width: 54px;
+
+    img {
+        height: 100%;
+        width: 100%;
+        border-radius: 999px !important;
+        object-fit: cover;
+        object-position: center;
+    }
+
 }

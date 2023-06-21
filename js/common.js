@@ -23,7 +23,7 @@ const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 50
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_02", "Defense": "TimeAttack_SlotBG_01", "Destruction": "TimeAttack_SlotBG_03"}
 const searchDelay = 100
 const searchMaxResults = 40
-const altSprite = [10017, 10033, 10041, 10042, 10043, 10048, 20009, 20014, 10062]
+const altSprite = [10017, 10033, 10041, 10042, 10043, 10048, 20009, 20014, 10062, 10071, 10072, 26010]
 const raidDifficultyName = ["Normal", "Hard", "VeryHard", "HardCore", "Extreme", "Insane", "Torment"]
 const buffIconKeys = {"AttackPower": "ATK","DefensePower": "DEF","CriticalPoint": "CriticalChance","CriticalDamageRate": "CriticalDamage","CriticalDamageResistRate": "CriticalDamageRateResist","DodgePoint": "Dodge","HealEffectivenessRate": "HealEffectiveness","AccuracyPoint": "HIT","MaxHP": "MAXHP","DefensePenetration": "Penetration","StabilityPoint": "Stability","StabilityRate": "Stability","RegenCost": "CostRegen"}
 const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','AmmoCount']
@@ -92,7 +92,7 @@ function getLanguageJSONList(lang) {
         equipment: getCacheVerResourceName(`./data/${lang}/equipment.min.json`),
         currency: getCacheVerResourceName(`./data/${lang}/currency.min.json`),
         summons: getCacheVerResourceName(`./data/${lang}/summons.min.json`),
-        raids: getCacheVerResourceName(`./data/${lang}/raids.min.json`),
+        raids: getCacheVerResourceName(`./data/${lang}/raids.min.json`)
     }
 }
 
@@ -184,6 +184,7 @@ let skillPreviewOtherSkillLevel = 1
 let skillInfoCollection = []
 let raidSkillInfoCollection = []
 let studentCollection = {}
+let lockedAttributes = false
 
 // Shared Timeouts
 let collectionUpdateTimeout
@@ -225,7 +226,7 @@ let raid_difficulty = 0
 let ta_difficulty = 0
 let gridItemDisplayStyle = 'detailed'
 let showNodeProbability = false
-
+let voiceClipVolume = 0.7
 // searchbar properties
 let searchResultsCount = 0
 let searchResultsSelection = 0
@@ -832,6 +833,11 @@ class MathHelper {
         let result = parseInt(string.replace(/[^0-9]/g))
         console.log(result)
         return isNaN(result) ? 0 : result
+    }
+
+    static formatDuration(seconds) {
+        const minutes = Math.floor(seconds / 60)
+        return `${minutes}:${`${seconds % 60}`.padStart(2, '0')}`
     }
 }
 
@@ -2417,10 +2423,82 @@ class SkillDamageInfo {
                 const critChance = effect.CriticalCheck == 'Never' ? 0 : studentStats.getCriticalRate(enemyStats.getTotal("CriticalChanceResistPoint"))
                 const critBonusMod = ((studentStats.getTotal('CriticalDamageRate') - enemyStats.getTotal('CriticalDamageResistRate')) / 10000) - 1
                 const stabMod = studentStats.getStabilityMinDamageMod()
-                const baseDmgMax = studentStats.calculateDamage(enemyStats, (scaleTotal / hitsSub), sourceStat, terrain, 0, ("IgnoreDef" in effect ? effect.IgnoreDef[this.skillLevel-1] : 10000))
-                const critBonusDmgMax = baseDmgMax * critBonusMod
-                const hitRate = (this.skill.IsRaidSkill && effect.CanEvade === false) ? 1 : studentStats.getHitChance(enemyStats.getTotal("DodgePoint"))
-                const suffix = (effect.Type == 'DMGDot' ? ' / ' + translateUI('time_seconds', [effect.Period / 1000]) : "")
+
+                let baseDmgMax, critBonusDmgMax, hitRate, suffix, expDmgMax, expDmgMin, avgDmg
+
+                hitRate = (this.skill.IsRaidSkill && effect.CanEvade === false) ? 1 : studentStats.getHitChance(enemyStats.getTotal("DodgePoint"))
+                suffix = (effect.Type == 'DMGDot' ? ' / ' + translateUI('time_seconds', [effect.Period / 1000]) : "")
+
+                if (effect.ExtraDamageSource) {
+                    
+                    let srcStats, sourceMaxValue
+                    switch (effect.ExtraDamageSource.Side) {
+                        case "Self": 
+                            srcStats = studentStats
+                            break;
+                        case "Target":
+                            srcStats = enemyStats
+                            break;
+                        default:
+                            throw new Error("Unrecognised damage source target side")
+                    }
+
+                    switch (effect.ExtraDamageSource.Stat) {
+                        case "CurrentHP": 
+                            sourceMaxValue = srcStats.getTotal('MaxHP')
+                            break;
+                        default:
+                            throw new Error("Unrecognised damage source stat")
+                    }
+
+                    if (effect.ExtraDamageSource.SimulatePerHit) {
+
+                        let sourceInitialValue = sourceMaxValue * (this.optionValue)
+
+                        baseDmgMax = 0
+                        critBonusDmgMax = 0
+                        avgDmg = 0
+
+                        for (let pass = 0; pass < effect.Hits.length; pass++) {
+
+                            let sourceCurrentValue = Math.max(sourceInitialValue - avgDmg, 0)
+    
+                            let multiplier = (effect.ExtraDamageSource.Multiplier[0] + (effect.ExtraDamageSource.Multiplier[1] - effect.ExtraDamageSource.Multiplier[0]) * (sourceCurrentValue / sourceMaxValue))
+    
+                            let hitDmgMax = studentStats.calculateDamage(enemyStats, scaleTotal * (effect.Hits[pass] / 10000) * multiplier, sourceStat, terrain, 0, ("IgnoreDef" in effect ? effect.IgnoreDef[this.skillLevel-1] : 10000))
+                            let hitCritBonusDmg = hitDmgMax * critBonusMod
+
+                            critBonusDmgMax += hitCritBonusDmg
+                            baseDmgMax += hitDmgMax
+
+                            if (effect.CriticalCheck == 'Always') {
+                                hitDmgMax = (hitDmgMax + hitCritBonusDmg)
+                            } else {
+                                hitDmgMax = (hitDmgMax + (hitCritBonusDmg * critChance))
+                            }
+
+                            let hitDmgMin = hitDmgMax * stabMod
+    
+                            
+                            avgDmg += (hitDmgMin + hitDmgMax) * hitRate / 2
+                        }
+
+                        baseDmgMax = baseDmgMax / effect.Hits.length
+                        critBonusDmgMax = critBonusDmgMax / effect.Hits.length
+                    }
+                    
+                } else {
+                    baseDmgMax = studentStats.calculateDamage(enemyStats, (scaleTotal / hitsSub), sourceStat, terrain, 0, ("IgnoreDef" in effect ? effect.IgnoreDef[this.skillLevel-1] : 10000))
+                    critBonusDmgMax = baseDmgMax * critBonusMod
+
+                    if (effect.CriticalCheck == 'Always') {
+                        expDmgMax = (baseDmgMax + critBonusDmgMax) * hitsSub * hitsFull
+                    } else {
+                        expDmgMax = (baseDmgMax + (critBonusDmgMax * critChance)) * hitsSub * hitsFull
+                    }
+                    expDmgMin = expDmgMax * stabMod
+                    avgDmg = (expDmgMin + expDmgMax) * hitRate / 2
+                }
 
                 let scalingText = `${parseFloat((scaleTotal/100).toFixed(2)).toLocaleString()}%`
                 if (hitsFull > 1) scalingText += ` &times; ${hitsFull}`
@@ -2430,15 +2508,6 @@ class SkillDamageInfo {
                     this.element.find(`.row-value[data-key="${index}-dmg-range"]`).text(`${parseInt(baseDmgMax*stabMod).toLocaleString()} ~ ${parseInt(baseDmgMax).toLocaleString()}${suffix}`)
                 }
                 this.element.find(`.row-value[data-key="${index}-dmg-range-crit"]`).text(`${parseInt((baseDmgMax+critBonusDmgMax)*stabMod).toLocaleString()} ~ ${parseInt(baseDmgMax+critBonusDmgMax).toLocaleString()}`)
-
-                let expDmgMax
-                if (effect.CriticalCheck == 'Always') {
-                    expDmgMax = (baseDmgMax + critBonusDmgMax) * hitsSub * hitsFull
-                } else {
-                    expDmgMax = (baseDmgMax + (critBonusDmgMax * critChance)) * hitsSub * hitsFull
-                }
-                const expDmgMin = expDmgMax * stabMod
-                const avgDmg = (expDmgMin + expDmgMax) * hitRate / 2
 
                 if (this.skill.IsRaidSkill) {
                     let rateText = (effect.CanEvade === false) ? translateUI("hit_chance_certain") : studentStats.getHitChanceString(enemyStats.getTotal("DodgePoint"))
@@ -2529,6 +2598,14 @@ class SkillDamageInfo {
         this.update(statPreviewCharacterStats, statPreviewSelectedEnemyStats, statPreviewTerrain)
     }
 
+    changeOptionValue(value, effectId) {
+        const src = this.skill.Effects[effectId].ExtraDamageSource
+        this.optionValue = value
+        const labelValue = MathHelper.toFixedFloat(src.SliderLabel[0] + (src.SliderLabel[1] - src.SliderLabel[0]) * value, 2)
+        this.element.find(`.skill-option-label`).text(labelValue + src.SliderLabelSuffix)
+        this.update(statPreviewCharacterStats, statPreviewSelectedEnemyStats, statPreviewTerrain)
+    }
+
     toggleStackCount(count) {
         if (count !== undefined) {
             this.stackCount = count
@@ -2577,7 +2654,7 @@ class SkillDamageInfo {
 
     render() {
         this.rows = []
-        let html = ''
+        let html = '', controlsHtml = ''
         let skillUniqueKey = `${this.character.Id}_${this.skill.SkillType}`
         if (this.skill.Id) skillUniqueKey += `_${this.skill.Id}`
 
@@ -2686,6 +2763,16 @@ class SkillDamageInfo {
                     html += this.addStaticRow(index, formChangeIcon + translateUI('dmginfo_avg_dps'), '', 'auto-dps')
                 }
 
+                if (effect.ExtraDamageSource) {
+                    const src = effect.ExtraDamageSource
+
+                    controlsHtml += `<div class="d-flex flex-row align-items-center mt-2 gap-2">`
+                    controlsHtml += `<span class="skill-option-name">${getLocalizedString(src.SliderTranslation.split(',')[0], src.SliderTranslation.split(',')[1])}</span>`
+                    controlsHtml += `<input type="range" class="skill-option-range form-range flex-fill" value="1" min="0" max="1" step="${src.SliderStep}" data-effect-id="${index}"><span class="ba-slider-label skill-option-label">${src.SliderLabel[1] + src.SliderLabelSuffix}</span>`
+                    controlsHtml += `</div>`
+                    this.optionValue = 1
+                }
+
             } else if (effect.Type.startsWith('Heal')) {
                 html += this.addSeparator()
 
@@ -2736,16 +2823,21 @@ class SkillDamageInfo {
                 html += `<span class="ba-slider-label stack-toggle ${this.skill.EffectCombineLabel && this.skill.EffectCombineLabel.Icon ? 'wide' : ''}"><span class="label">&times;${this.stackCount}</span></span>`
             }
             if (this.maxLevel > 1) {
-                html += `<input type="range" class="form-range flex-fill" value="${this.skillLevel}" min="1" max="${this.maxLevel}"><span class="ba-slider-label skill-level"><img src="images/ui/ImageFont_Max.png"></span>`
+                html += `<input type="range" class="skill-level-range form-range flex-fill" value="${this.skillLevel}" min="1" max="${this.maxLevel}"><span class="ba-slider-label skill-level"><img src="images/ui/ImageFont_Max.png"></span>`
             }
             html += `</div>`
         }
 
-        $(this.container).append(html)
+        
+        $(this.container).append(html + controlsHtml)
 
         this.element = $(this.container).find(`[data-skill-key="${skillUniqueKey}"]`)
-        this.element.find(`input[type="range"]`).on('input', (ev) => {this.changeSkillLevel(ev.currentTarget.value)})
+        this.element.find(`.skill-level-range`).on('input', (ev) => {this.changeSkillLevel(ev.currentTarget.value)})
         this.element.find(`.stack-toggle`).on('click', (ev) => {this.toggleStackCount()})
+
+        if (controlsHtml != '') {
+            this.element.find(`.skill-option-range`).on('input', (ev) => {this.changeOptionValue(ev.currentTarget.value, ev.currentTarget.dataset["effectId"])})
+        }
         
         if (this.stackMax > 1) this.toggleStackCount(1)
     }
@@ -3151,10 +3243,60 @@ function loadModule(moduleName, entry=null) {
                 $('#ba-student-modal-statpreview').modal('show')
             })
 
-            $('#statpreview-attributes-maxinput').on('click', maxStudentAttributes)
+            $('.btn-max-attributes').on('click', maxStudentAttributes)
+            $('.btn-lock-attributes').on('click', function (ev) {
+                if (student.Id in studentCollection) {
+                    lockedAttributes = !lockedAttributes
+                    $('.btn-lock-attributes').toggleClass('deactivated', !lockedAttributes)
+                    $('.btn-lock-attributes i').toggleClass('fa-lock', lockedAttributes).toggleClass('fa-lock-open', !lockedAttributes)
+
+                    studentCollectionSave()
+                }
+                
+            })
 
             $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
             $(".tooltip").tooltip("hide")
+
+            $('#student-voice-btn').on('click', function(ev) {
+                if (!data.voice) {
+                    loadJSON({voice: getCacheVerResourceName(`./data/${userLang.toLowerCase()}/voice.min.json`)}, result => {
+                        data = Object.assign(data, result)
+                    }).then(function(val){
+                        $('#student-modal-voice').modal('show')
+                    }, function(reason) {
+                        console.error(reason)
+                    })
+                } else {
+                    $('#student-modal-voice').modal('show')
+                }
+            })
+
+            $('#student-modal-voice').on('show.bs.modal', function (e) {
+
+                $('#student-voicegallery-tab-normal').tab('show')
+                for (group in data.voice[student.Id]) {
+                    let html = ''
+                    data.voice[student.Id][group].forEach(vc => {
+                        if (vc.EventId && !data.common.regions[regionID].events.includes(vc.EventId)) return
+                        const matches = vc.Group.match(/([0-9])$/)
+                        const order = matches && matches.length ? matches[1] : 1
+                        const group = vc.Group.replace(/[0-9]$/, "")
+                        html += `<div class="d-flex flex-row align-items-center"><h6 class="m-0">${getLocalizedString("VoiceClip", group, [order])}</h6><div class="flex-fill"></div><audio preload="metadata" controls><source src="./voice/${vc.AudioClip}" type="audio/mpeg"></audio></div>`
+                        if (vc.Transcription) {
+                            html += `<div class="ba-panel p-2"><p class="m-0">${vc.Transcription}</p></div>`
+                        }
+                    })
+                    $(`#student-voicegallery-list-${group.toLowerCase()}`).html(html)
+                    $(`#student-voicegallery-tab-${group.toLowerCase()}`).toggleClass("disabled", html == "")
+                    $(`#student-voicegallery-list-${group.toLowerCase()} audio`).prop('volume', voiceClipVolume)
+
+                    $('#student-voice-icon img').attr('src', `images/student/icon/${student.CollectionTexture}.png`)
+                    $('#student-voice-name').text(getTranslatedString(student, 'Name'))
+                    $('#student-voice-cv').text(getTranslatedString(student, 'CharacterVoice'))
+                }
+                
+            })
 
             statPreviewExternalBuffs = new ExternalBuffs({
                 controls: $('#statpreview-buff-transferable-controls')[0],
@@ -4561,13 +4703,19 @@ function renderStudent() {
         changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
         statPreviewIncludeBond = true
         statPreviewIncludeEquipment = true
+        lockedAttributes = studentCollection[student.Id].lock !== undefined ? studentCollection[student.Id].lock : false
 
         $('#ba-student-collection-btn').toggleClass('active', true).html('<i class="fa-solid fa-circle-check"></i>')
         $('#ba-student-collection-btn').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_collection_remove')), placement: 'top', html: true})
+        $('.btn-lock-attributes').show()
     } else {
         $('#ba-student-collection-btn').toggleClass('active', false).html('<i class="fa-solid fa-circle-plus"></i>')
         $('#ba-student-collection-btn').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_collection_add')), placement: 'top', html: true})
+        lockedAttributes = false
+        $('.btn-lock-attributes').hide()
     }
+    $('.btn-lock-attributes').toggleClass('deactivated', !lockedAttributes)
+    $('.btn-lock-attributes i').toggleClass('fa-lock', lockedAttributes).toggleClass('fa-lock-open', !lockedAttributes)
 
     statPreviewExternalBuffs.changeStudent(student.Id)
 
@@ -5133,6 +5281,7 @@ function changeRaidDifficulty(difficultyId) {
     $('#ba-raid-level').text(`Lv. ${raid_level[raid_difficulty]}`)
     $('#ba-raid-entrycost').html(getStageEntryCurrency(8, 1))
     $('#ba-raid-entrycost > span').tooltip({html: true})
+    $('#ba-raid-duration').text(MathHelper.formatDuration(raid.BattleDuration[raid_difficulty]))
 
     if (selectedEnemy >= raid.EnemyList[raid_difficulty].length) {selectedEnemy = 0}
 
@@ -5173,6 +5322,7 @@ function changeTimeAttackDifficulty(difficultyId) {
     $('#ba-timeattack-level').text(`Lv.${raid.EnemyLevel[ta_difficulty]}`)
     $('#ba-timeattack-entrycost').html(getStageEntryCurrency(17, 1))
     $('#ba-timeattack-entrycost > span').tooltip({html: true})
+    $('#ba-timeattack-duration').text(MathHelper.formatDuration(raid.BattleDuration[ta_difficulty]))
 
     const enemyRanks = ['Minion','Elite','Champion','Boss']
     raid.Formations[ta_difficulty].EnemyList.forEach(function(el, i) {
@@ -5202,7 +5352,7 @@ function changeWorldRaidDifficulty(difficultyId) {
     $('#ba-raid-level').text(`Lv. ${raid.Level[raid_difficulty]}`)
     $('#ba-raid-entrycost').html(getStageEntryCurrency(raid.EntryCost[raid_difficulty][0], raid.EntryCost[raid_difficulty][1]))
     $('#ba-raid-entrycost > span').tooltip({html: true})
-
+    $('#ba-raid-duration').text(MathHelper.formatDuration(raid.BattleDuration[raid_difficulty]))
 
     if (selectedEnemy >= raid.EnemyList[raid_difficulty].length) {selectedEnemy = 0}
 
@@ -5382,10 +5532,10 @@ function changeRaidEnemy(num) {
     })
 
     let defText = translateUI('stat_defense_tooltip', [`<b>${enemyStats.getDefenseDamageReduction()}</b>`])
-    $('.stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
+    $('#ba-raid-enemy-stats .stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
 
     let stabilityText = translateUI('stat_stability_tooltip', [`<b>${enemyStats.getStabilityMinDamage()}</b>`])
-    $('.stat-StabilityPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
+    $('#ba-raid-enemy-stats .stat-StabilityPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
 
     $('#raid-enemy-list .dropdown-item').removeClass('active')
     $(`#raid-enemy-list .dropdown-item[data-enemy-index="${num}"]`).addClass('active')
@@ -6465,9 +6615,9 @@ function recalculateStats() {
         })
         let stabilityText = translateUI('stat_stability_tooltip', [`<b>${stats.getStabilityMinDamage()}</b>`])
     
-        $('.stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
-        $('.stat-CriticalPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(critChanceText), html: true, placement: 'top'})
-        $('.stat-StabilityPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
+        $('.student-stat-table .stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
+        $('.student-stat-table .stat-CriticalPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(critChanceText), html: true, placement: 'top'})
+        $('.student-stat-table .stat-StabilityPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
     
         if (stats.getTotalString('AmmoCount') != 0) {
             const autoAttackSkill = (statPreviewSelectedChar > 0 ? summon : student).Skills.find(s => s.SkillType == "autoattack")
@@ -6485,11 +6635,13 @@ function recalculateStats() {
 
     //save settings
     if (student.Id in studentCollection) {
-        if (collectionUpdateTimeout) clearTimeout(collectionUpdateTimeout)
-        collectionUpdateTimeout = window.setTimeout(() => {
-            studentCollectionSave()
-            statPreviewSettingsSave()
-        }, 50)
+        if (!lockedAttributes) {
+            if (collectionUpdateTimeout) clearTimeout(collectionUpdateTimeout)
+            collectionUpdateTimeout = window.setTimeout(() => {
+                studentCollectionSave()
+                statPreviewSettingsSave()
+            }, 50)
+        }
     } else {
         if (collectionUpdateTimeout) clearTimeout(collectionUpdateTimeout)
         collectionUpdateTimeout = window.setTimeout(() => {
@@ -6547,8 +6699,15 @@ function calculateEnemyStats() {
     enemyStats.renderActiveBuffs('.enemy-active-buffs', 8)
 
     enemyCalculationStatList.forEach(statName => {
-        $(`#calculation-enemy-stat-table .stat-${statName} .stat-value`).html(enemyStats.getTotalString(statName, true))
+        let valueHtml = enemyStats.getTotalString(statName, true)
+        if (statName == 'DefensePower') {
+            valueHtml = `<span class="has-tooltip">${valueHtml}</span>`
+        }
+        $(`#calculation-enemy-stat-table .stat-${statName} .stat-value`).html(valueHtml)
     })
+
+    let defText = translateUI('stat_defense_tooltip', [`<b>${enemyStats.getDefenseDamageReduction()}</b>`])
+    $('#calculation-enemy-stat-table .stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
 
     statPreviewSelectedEnemyStats = enemyStats
 
@@ -8278,6 +8437,8 @@ function changeLanguage(lang) {
             $('body').removeClass(`font-${userLang.toLowerCase()}`)
     
             userLang = lang
+            
+            delete data.voice
             localStorage.setItem("language", lang)
     
             $(`#ba-navbar-languageselector span`).text($(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).text())
@@ -8968,11 +9129,18 @@ function toggleOwned() {
         delete studentCollection[student.Id]
         $('#ba-student-collection-btn').toggleClass('active', false).html('<i class="fa-solid fa-circle-plus"></i>')
         $('#ba-student-collection-btn').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_collection_add')), placement: 'top', html: true})
+        $('.btn-lock-attributes').hide()
     } else {
         studentCollectionSave()
         $('#ba-student-collection-btn').toggleClass('active', true).html('<i class="fa-solid fa-circle-check"></i>')
         $('#ba-student-collection-btn').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_collection_remove')), placement: 'top', html: true})
+        $('.btn-lock-attributes').show()
+        lockedAttributes = false
     }
+
+    $('.btn-lock-attributes').toggleClass('deactivated', !lockedAttributes)
+    $('.btn-lock-attributes i').toggleClass('fa-lock', lockedAttributes).toggleClass('fa-lock-open', !lockedAttributes)
+
     if (search_options.filter.Collection.Owned || search_options.filter.Collection.NotOwned) updateStudentList()
     localStorage.setItem('student_collection', JSON.stringify(studentCollection))
     $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
@@ -8988,7 +9156,8 @@ function studentCollectionSave() {
         ws: statPreviewWeaponGrade,
         wl: parseInt($('#ba-statpreview-weapon-range').val()),
         b: parseInt($('#ba-statpreview-bond-1-range').val()),
-        s3: parseInt($('#ba-statpreview-passiveskill-range').val())
+        s3: parseInt($('#ba-statpreview-passiveskill-range').val()),
+        lock: lockedAttributes
     }
 
     //update alt bond
@@ -9022,8 +9191,6 @@ function maxStudentAttributes() {
     $('#ba-statpreview-weapon-range').attr("max",region.weaponlevel_max).val(statPreviewWeaponLevel)
     changeStatPreviewStars(statPreviewStarGrade, statPreviewWeaponGrade, false)
 
-    
-    
     statPreviewPassiveLevel = 10
     $('#ba-statpreview-passiveskill-range').val(statPreviewPassiveLevel)
     changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
@@ -9032,6 +9199,14 @@ function maxStudentAttributes() {
     $('#ba-statpreview-bond-1-range').val(statPreviewBondLevel)
     changeStatPreviewBondLevel(1, false)
     statPreviewIncludeBond = true
+
+    if (student_bondalts.length > 0) {
+        statPreviewBondAltLevel = data.common.regions[regionID].bondlevel_max
+        $('#ba-statpreview-bond-2-range').val(statPreviewBondAltLevel)
+        changeStatPreviewBondLevel(2, false)
+        statPreviewIncludeBondAlts = true
+    }
+
     statPreviewIncludeEquipment = true
 
     refreshStatTableControls()
@@ -9105,7 +9280,7 @@ function parseImport(str) {
                 ws: char[1].ws,
                 wl: char[1].wl,
                 b: char[1].b,
-                s3: char[1].s3
+                s3: char[1].s3,
             }
         })
         return collectionNew

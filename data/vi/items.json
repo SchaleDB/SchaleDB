@@ -407,6 +407,21 @@
         "Desc": "Đồng xu này có thể dùng tại cửa hàng phần thưởng."
     },
     {
+        "Id": 70,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_EliminateRaidCoin",
+        "Name": "大決戦コイン",
+        "Desc": "大決戦ショップで利用可能なコイン。"
+    },
+    {
         "Id": 80,
         "IsReleased": [
             true,
@@ -609,14 +624,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 1
             },
             {
                 "ShopCategory": "Chaser",
@@ -666,14 +681,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 4
             },
             {
                 "ShopCategory": "Chaser",
@@ -712,14 +727,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 8
             },
             {
                 "ShopCategory": "Chaser",
@@ -804,14 +819,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_0",
@@ -850,14 +865,14 @@
             },
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_1",
@@ -885,14 +900,14 @@
         "Shops": [
             {
                 "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    true
+                ],
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Phaistos_2",
@@ -953,15 +968,15 @@
                 "CostAmount": 8000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
+                "CostId": 23,
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Wolfsegg_0",
@@ -999,15 +1014,15 @@
                 "CostAmount": 25000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
+                "CostId": 23,
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Wolfsegg_1",
@@ -1034,15 +1049,15 @@
         ],
         "Shops": [
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
+                "CostId": 23,
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Wolfsegg_2",
@@ -1067,19 +1082,7 @@
             80,
             80
         ],
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Wolfsegg_3",
         "Name": "Thép Wolfsegg độ tinh khiết cao",
         "Desc": "Thép Wolfsegg có độ tinh khiết cao không pha chế, được nấu chảy để hoàn thiện. Được sử dụng trong các vật phẩm và cải tiến thủ công khác nhau."
@@ -1113,6 +1116,17 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_0",
@@ -1148,6 +1162,17 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Nimrud_1",
@@ -1172,7 +1197,19 @@
             50,
             50
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            }
+        ],
         "Icon": "Item_Icon_Material_Nimrud_2",
         "Name": "Ống kính Nimrud bị hư hại",
         "Desc": "Một ống kính Nimrud được khôi phục bằng cách kết hợp các mảnh vỡ khác nhau lại với nhau. Được sử dụng trong các vật phẩm và cải tiến thủ công khác nhau."
@@ -1229,6 +1266,28 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Mandragora_0",
@@ -1264,6 +1323,28 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Mandragora_1",
@@ -1288,7 +1369,30 @@
             50,
             50
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
+            }
+        ],
         "Icon": "Item_Icon_Material_Mandragora_2",
         "Name": "Nước ép Mandrake",
         "Desc": "Nước ép chiết xuất từ một trái mandrake chín kỹ. Được sử dụng trong các vật phẩm chế tạo và cải tiến khác nhau."
@@ -1311,7 +1415,19 @@
             80,
             80
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Mandragora_3",
         "Name": "Chiết xuất Mandrake",
         "Desc": "Một chiết xuất cô đặc của nước ép mandrake. Được sử dụng trong các vật phẩm chế tạo và cải tiến khác nhau."
@@ -1345,6 +1461,28 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Rohonc_0",
@@ -1380,6 +1518,28 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 25000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Rohonc_1",
@@ -1404,7 +1564,30 @@
             50,
             50
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
+            }
+        ],
         "Icon": "Item_Icon_Material_Rohonc_2",
         "Name": "Trang Rohonc Codex được chú thích",
         "Desc": "Trang Rohonc Codex với chú thích cuối trang ở các khu vực bị hư hỏng. Được sử dụng trong các vật phẩm chế tạo và cải tiến khác nhau."
@@ -1427,7 +1610,19 @@
             80,
             80
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Rohonc_3",
         "Name": "Quyển Rohonc Codex nguyên vẹn",
         "Desc": "Một trang Rohonc Codex nguyên vẹn. Được sử dụng trong các vật phẩm chế tạo và cải tiến khác nhau."
@@ -1461,6 +1656,17 @@
                 "CostType": "Currency",
                 "CostId": 1,
                 "CostAmount": 8000
+            },
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
             },
             {
                 "ShopCategory": "Chaser",
@@ -1509,6 +1715,17 @@
                 "CostAmount": 25000
             },
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -1543,6 +1760,17 @@
             50
         ],
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
             {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
@@ -1634,6 +1862,17 @@
                 "CostType": "Item",
                 "CostId": 23,
                 "CostAmount": 1
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_0",
@@ -1680,6 +1919,17 @@
                 "CostType": "Item",
                 "CostId": 23,
                 "CostAmount": 4
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_1",
@@ -1715,6 +1965,17 @@
                 "CostType": "Item",
                 "CostId": 23,
                 "CostAmount": 8
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_Antikythera_2",
@@ -1739,7 +2000,19 @@
             80,
             80
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_Antikythera_3",
         "Name": "Cơ chế Antikythera nguyên vẹn",
         "Desc": "Cơ chế Antikythera còn nguyên vẹn. Được sử dụng trong các vật phẩm chế tạo và cải tiến khác nhau."
@@ -1775,26 +2048,15 @@
                 "CostAmount": 8000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 1,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 1
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_0",
@@ -1832,26 +2094,15 @@
                 "CostAmount": 25000
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 4,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 4
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_1",
@@ -1878,26 +2129,15 @@
         ],
         "Shops": [
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "SecretStoneGrowth",
                 "Released": [
                     true,
-                    false
+                    true
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
-            },
-            {
-                "ShopCategory": "SecretStoneGrowth",
-                "Amount": 1,
-                "CostType": "Item",
                 "CostId": 23,
-                "CostAmount": 8,
-                "Released": [
-                    false,
-                    true
-                ]
+                "CostAmount": 8
             }
         ],
         "Icon": "Item_Icon_Material_Voynich_2",
@@ -1922,19 +2162,7 @@
             80,
             80
         ],
-        "Shops": [
-            {
-                "ShopCategory": "Chaser",
-                "Released": [
-                    true,
-                    false
-                ],
-                "Amount": 1,
-                "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
-            }
-        ],
+        "Shops": [],
         "Icon": "Item_Icon_Material_Voynich_3",
         "Name": "Bản thảo Voynich còn nguyên vẹn",
         "Desc": "Một bản thảo Voynich còn nguyên vẹn. Được sử dụng trong các vật phẩm chế tạo và cải tiến khác nhau."
@@ -1979,6 +2207,17 @@
                 "CostType": "Item",
                 "CostId": 23,
                 "CostAmount": 1
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_0",
@@ -2025,6 +2264,17 @@
                 "CostType": "Item",
                 "CostId": 23,
                 "CostAmount": 4
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_1",
@@ -2060,6 +2310,17 @@
                 "CostType": "Item",
                 "CostId": 23,
                 "CostAmount": 8
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_2",
@@ -2084,7 +2345,19 @@
             80,
             80
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
+            }
+        ],
         "Icon": "Item_Icon_Material_CrystalHaniwa_3",
         "Name": "Pha lê Haniwa còn nguyên vẹn",
         "Desc": "Một pha lê Haniwa còn nguyên vẹn. Được sử dụng trong các vật phẩm chế tạo và cải tiến khác nhau."
@@ -2108,6 +2381,17 @@
             10
         ],
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2144,6 +2428,17 @@
         ],
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2178,6 +2473,17 @@
             50
         ],
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2422,6 +2728,17 @@
         ],
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2457,6 +2774,17 @@
         ],
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2491,6 +2819,17 @@
             50
         ],
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2562,6 +2901,17 @@
         ],
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2597,6 +2947,17 @@
         ],
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2631,6 +2992,17 @@
             50
         ],
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -2702,6 +3074,17 @@
         ],
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 1
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2737,6 +3120,17 @@
         ],
         "Shops": [
             {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 4
+            },
+            {
                 "ShopCategory": "TimeAttack",
                 "Released": [
                     true,
@@ -2771,6 +3165,17 @@
             50
         ],
         "Shops": [
+            {
+                "ShopCategory": "SecretStoneGrowth",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 23,
+                "CostAmount": 8
+            },
             {
                 "ShopCategory": "TimeAttack",
                 "Released": [
@@ -3037,6 +3442,17 @@
                 "CostAmount": 10
             },
             {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 10
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -3091,6 +3507,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 20
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 20
             },
             {
@@ -3151,6 +3578,17 @@
                 "CostAmount": 50
             },
             {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 50
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -3205,6 +3643,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 100
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 100
             },
             {
@@ -3263,6 +3712,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_RedWinter_0",
@@ -3309,6 +3780,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_RedWinter_1",
@@ -3355,6 +3848,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_RedWinter_2",
@@ -3401,6 +3916,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_RedWinter_3",
@@ -3446,6 +3983,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 10
             }
         ],
@@ -3493,6 +4041,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 20
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Trinity_1",
@@ -3538,6 +4097,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 50
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 50
             }
         ],
@@ -3585,6 +4155,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 100
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Trinity_3",
@@ -3631,6 +4212,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_0",
@@ -3677,6 +4280,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_1",
@@ -3723,6 +4348,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_2",
@@ -3769,6 +4416,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Gehenna_3",
@@ -3815,6 +4484,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Abydos_0",
@@ -3861,6 +4552,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Abydos_1",
@@ -3907,6 +4620,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Abydos_2",
@@ -3953,6 +4688,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Abydos_3",
@@ -4001,15 +4758,15 @@
                 "CostAmount": 10
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
+                "CostId": 70,
+                "CostAmount": 10
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Millennium_0",
@@ -4058,15 +4815,15 @@
                 "CostAmount": 20
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 160
+                "CostId": 70,
+                "CostAmount": 20
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Millennium_1",
@@ -4115,15 +4872,15 @@
                 "CostAmount": 50
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 400
+                "CostId": 70,
+                "CostAmount": 50
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Millennium_2",
@@ -4172,15 +4929,15 @@
                 "CostAmount": 100
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 800
+                "CostId": 70,
+                "CostAmount": 100
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Millennium_3",
@@ -4226,6 +4983,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 10
             },
             {
@@ -4286,6 +5054,17 @@
                 "CostAmount": 20
             },
             {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 20
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -4340,6 +5119,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 50
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 50
             },
             {
@@ -4400,6 +5190,17 @@
                 "CostAmount": 100
             },
             {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 100
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -4455,6 +5256,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Shanhaijing_0",
@@ -4501,6 +5324,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 20
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 20
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 160
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Shanhaijing_1",
@@ -4547,6 +5392,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 50
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 50
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 400
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Shanhaijing_2",
@@ -4593,6 +5460,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 100
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 100
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 800
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Shanhaijing_3",
@@ -4642,15 +5531,15 @@
                 "CostAmount": 10
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
+                "CostId": 70,
+                "CostAmount": 10
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Valkyrie_0",
@@ -4700,15 +5589,15 @@
                 "CostAmount": 20
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 160
+                "CostId": 70,
+                "CostAmount": 20
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Valkyrie_1",
@@ -4758,15 +5647,15 @@
                 "CostAmount": 50
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 400
+                "CostId": 70,
+                "CostAmount": 50
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Valkyrie_2",
@@ -4816,15 +5705,15 @@
                 "CostAmount": 100
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 800
+                "CostId": 70,
+                "CostAmount": 100
             }
         ],
         "Icon": "Item_Icon_Material_ExSkill_Valkyrie_3",
@@ -4870,6 +5759,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 3
             },
             {
@@ -4930,6 +5830,17 @@
                 "CostAmount": 5
             },
             {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 5
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -4984,6 +5895,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 10
             },
             {
@@ -5044,6 +5966,17 @@
                 "CostAmount": 25
             },
             {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 25
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -5099,6 +6032,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_RedWinter_0",
@@ -5145,6 +6100,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_RedWinter_1",
@@ -5191,6 +6168,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_RedWinter_2",
@@ -5237,6 +6236,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_RedWinter_3",
@@ -5282,6 +6303,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 3
             }
         ],
@@ -5329,6 +6361,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 5
             }
         ],
         "Icon": "Item_Icon_SkillBook_Trinity_1",
@@ -5374,6 +6417,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 10
             }
         ],
@@ -5421,6 +6475,17 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 25
             }
         ],
         "Icon": "Item_Icon_SkillBook_Trinity_3",
@@ -5467,6 +6532,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_0",
@@ -5513,6 +6600,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_1",
@@ -5559,6 +6668,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_2",
@@ -5605,6 +6736,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Gehenna_3",
@@ -5651,6 +6804,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Abydos_0",
@@ -5697,6 +6872,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Abydos_1",
@@ -5743,6 +6940,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Abydos_2",
@@ -5789,6 +7008,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Abydos_3",
@@ -5837,15 +7078,15 @@
                 "CostAmount": 3
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
+                "CostId": 70,
+                "CostAmount": 3
             }
         ],
         "Icon": "Item_Icon_SkillBook_Millennium_0",
@@ -5894,15 +7135,15 @@
                 "CostAmount": 5
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
+                "CostId": 70,
+                "CostAmount": 5
             }
         ],
         "Icon": "Item_Icon_SkillBook_Millennium_1",
@@ -5951,15 +7192,15 @@
                 "CostAmount": 10
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
+                "CostId": 70,
+                "CostAmount": 10
             }
         ],
         "Icon": "Item_Icon_SkillBook_Millennium_2",
@@ -6008,15 +7249,15 @@
                 "CostAmount": 25
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
+                "CostId": 70,
+                "CostAmount": 25
             }
         ],
         "Icon": "Item_Icon_SkillBook_Millennium_3",
@@ -6062,6 +7303,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 3
             },
             {
@@ -6122,6 +7374,17 @@
                 "CostAmount": 5
             },
             {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 5
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -6176,6 +7439,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 10
             },
             {
@@ -6236,6 +7510,17 @@
                 "CostAmount": 25
             },
             {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 25
+            },
+            {
                 "ShopCategory": "Chaser",
                 "Amount": 1,
                 "CostType": "Item",
@@ -6291,6 +7576,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 3
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 3
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 24
             }
         ],
         "Icon": "Item_Icon_SkillBook_Shanhaijing_0",
@@ -6337,6 +7644,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 5
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 5
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 40
             }
         ],
         "Icon": "Item_Icon_SkillBook_Shanhaijing_1",
@@ -6383,6 +7712,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 10
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 10
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 80
             }
         ],
         "Icon": "Item_Icon_SkillBook_Shanhaijing_2",
@@ -6429,6 +7780,28 @@
                 "CostType": "Item",
                 "CostId": 9,
                 "CostAmount": 25
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 25
+            },
+            {
+                "ShopCategory": "Chaser",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 61,
+                "CostAmount": 200
             }
         ],
         "Icon": "Item_Icon_SkillBook_Shanhaijing_3",
@@ -6478,15 +7851,15 @@
                 "CostAmount": 3
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 24
+                "CostId": 70,
+                "CostAmount": 3
             }
         ],
         "Icon": "Item_Icon_SkillBook_Valkyrie_0",
@@ -6536,15 +7909,15 @@
                 "CostAmount": 5
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 40
+                "CostId": 70,
+                "CostAmount": 5
             }
         ],
         "Icon": "Item_Icon_SkillBook_Valkyrie_1",
@@ -6594,15 +7967,15 @@
                 "CostAmount": 10
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 80
+                "CostId": 70,
+                "CostAmount": 10
             }
         ],
         "Icon": "Item_Icon_SkillBook_Valkyrie_2",
@@ -6652,15 +8025,15 @@
                 "CostAmount": 25
             },
             {
-                "ShopCategory": "Chaser",
+                "ShopCategory": "EliminateRaid",
                 "Released": [
                     true,
                     false
                 ],
                 "Amount": 1,
                 "CostType": "Item",
-                "CostId": 61,
-                "CostAmount": 200
+                "CostId": 70,
+                "CostAmount": 25
             }
         ],
         "Icon": "Item_Icon_SkillBook_Valkyrie_3",
@@ -6875,7 +8248,8 @@
             "Cosmetics",
             "Army",
             "F_Mashiro",
-            "F_Saki"
+            "F_Saki",
+            "F_Saki_Swimsuit"
         ],
         "SynthQuality": [
             20,
@@ -6932,7 +8306,8 @@
             "Humanities",
             "F_Ayane",
             "F_Miyako",
-            "F_Ayane_Swimsuit"
+            "F_Ayane_Swimsuit",
+            "F_Miyako_Swimsuit"
         ],
         "SynthQuality": [
             20,
@@ -7543,7 +8918,8 @@
             "F_Miyu",
             "F_Izuna_Swimsuit",
             "F_Haruna_Newyear",
-            "F_Rumi"
+            "F_Rumi",
+            "F_Miyu_Swimsuit"
         ],
         "SynthQuality": [
             20,
@@ -7569,8 +8945,7 @@
             "CraftMaterial_FavorItemSR",
             "Books",
             "Specialized",
-            "F_Atsuko",
-            "F_Minori"
+            "F_Atsuko"
         ],
         "SynthQuality": [
             20,
@@ -7657,7 +9032,9 @@
             "F_Hoshino_Swimsuit",
             "F_Hoshino_Swimsuit2",
             "F_Serina_Holiday",
-            "F_Serina_Holiday2"
+            "F_Serina_Holiday2",
+            "F_Miyako_Swimsuit",
+            "F_Miyako_Swimsuit2"
         ],
         "ExpValue": 60,
         "Shops": [],
@@ -7869,7 +9246,9 @@
             "F_Aris_Maid",
             "F_Aris_Maid2",
             "F_Rumi",
-            "F_Rumi2"
+            "F_Rumi2",
+            "F_Miyu_Swimsuit",
+            "F_Miyu_Swimsuit2"
         ],
         "ExpValue": 60,
         "Shops": [],
@@ -7912,7 +9291,9 @@
             "F_Kanna",
             "F_Kanna2",
             "F_Minori",
-            "F_Minori2"
+            "F_Minori2",
+            "F_Saki_Swimsuit",
+            "F_Saki_Swimsuit2"
         ],
         "ExpValue": 60,
         "Shops": [],
@@ -8181,6 +9562,17 @@
                 "Amount": 1,
                 "CostType": "Item",
                 "CostId": 9,
+                "CostAmount": 500
+            },
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 1,
+                "CostType": "Item",
+                "CostId": 70,
                 "CostAmount": 500
             },
             {
@@ -8588,7 +9980,19 @@
         "Tags": [
             "SecretStone"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 5,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 50
+            }
+        ],
         "Icon": "Item_Icon_SecretStone_Yuzu",
         "Name": "Eleph của Yuzu",
         "Desc": "Eleph huyền bí của Yuzu."
@@ -8980,7 +10384,19 @@
         "Tags": [
             "SecretStone"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "EliminateRaid",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 5,
+                "CostType": "Item",
+                "CostId": 70,
+                "CostAmount": 50
+            }
+        ],
         "Icon": "Item_Icon_SecretStone_Mimori",
         "Name": "Eleph của Mimori",
         "Desc": "Eleph huyền bí của Mimori."
@@ -9431,7 +10847,19 @@
         "Tags": [
             "SecretStone"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "MasterCoin",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 5,
+                "CostType": "Currency",
+                "CostId": 18,
+                "CostAmount": 1800
+            }
+        ],
         "Icon": "Item_Icon_SecretStone_CH0191",
         "Name": "Eleph của Haruna (Năm mới)",
         "Desc": "Eleph huyền bí của Haruna (Năm mới)."
@@ -9668,6 +11096,40 @@
         "Icon": "Item_Icon_SecretStone_CH0138",
         "Name": "ミナの神名文字",
         "Desc": "ミナの神秘が詰まった神名文字。"
+    },
+    {
+        "Id": 10071,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0215",
+        "Name": "ミヤコ（水着）の神名文字",
+        "Desc": "ミヤコ（水着）の神秘が詰まった神名文字。"
+    },
+    {
+        "Id": 10072,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0217",
+        "Name": "サキ（水着）の神名文字",
+        "Desc": "サキ（水着）の神秘が詰まった神名文字。"
     },
     {
         "Id": 13000,
@@ -10581,7 +12043,19 @@
         "Tags": [
             "SecretStone"
         ],
-        "Shops": [],
+        "Shops": [
+            {
+                "ShopCategory": "MasterCoin",
+                "Released": [
+                    true,
+                    false
+                ],
+                "Amount": 5,
+                "CostType": "Currency",
+                "CostId": 18,
+                "CostAmount": 1800
+            }
+        ],
         "Icon": "Item_Icon_SecretStone_CH0177",
         "Name": "Eleph của Fuuka (Năm mới)",
         "Desc": "Eleph huyền bí của Fuuka (Năm mới)."
@@ -11072,6 +12546,23 @@
         "Icon": "Item_Icon_SecretStone_CH0203",
         "Name": "ユズ（メイド）の神名文字",
         "Desc": "ユズ（メイド）の神秘が詰まった神名文字。"
+    },
+    {
+        "Id": 26010,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "SecretStone",
+        "Rarity": "N",
+        "Quality": 9,
+        "Tags": [
+            "SecretStone"
+        ],
+        "Shops": [],
+        "Icon": "Item_Icon_SecretStone_CH0218",
+        "Name": "ミユ（水着）の神名文字",
+        "Desc": "ミユ（水着）の神秘が詰まった神名文字。"
     },
     {
         "Id": 30000,
@@ -16401,6 +17892,334 @@
         "EventBonus": []
     },
     {
+        "Id": 80260,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 1,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S29",
+        "Name": "冷凍エビ",
+        "Desc": "獲ってからすぐに冷凍され、新鮮なまま保存されたエビ。この冷凍エビは夜戸浦村の特産品で、D.U.に納入されるエビのほとんどは夜戸浦村で獲れたものらしい。",
+        "EventBonus": [
+            [
+                10071,
+                2500
+            ],
+            [
+                10072,
+                2500
+            ],
+            [
+                26010,
+                2500
+            ],
+            [
+                10038,
+                1500
+            ],
+            [
+                20018,
+                1500
+            ],
+            [
+                13012,
+                1500
+            ],
+            [
+                10009,
+                1500
+            ],
+            [
+                16006,
+                1500
+            ],
+            [
+                16005,
+                1500
+            ]
+        ]
+    },
+    {
+        "Id": 80261,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 2,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_1_S29",
+        "Name": "小石",
+        "Desc": "海岸でよく見かける小さな小石。一見平凡に見えるが、波によって石同士が擦れて生まれた滑らかさと水で濡れた艶が人を魅了する。",
+        "EventBonus": [
+            [
+                10071,
+                2500
+            ],
+            [
+                10038,
+                1500
+            ],
+            [
+                20014,
+                1500
+            ],
+            [
+                16008,
+                1500
+            ],
+            [
+                20023,
+                1500
+            ],
+            [
+                16006,
+                1500
+            ],
+            [
+                26002,
+                1500
+            ]
+        ]
+    },
+    {
+        "Id": 80262,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 3,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_2_S29",
+        "Name": "貝殻",
+        "Desc": "海岸でよく見かける小さな貝殻。一見無個性に見えるが、細かい模様や形など同じ見た目のものは1つもない。",
+        "EventBonus": [
+            [
+                26010,
+                2500
+            ],
+            [
+                20014,
+                1500
+            ],
+            [
+                10039,
+                1500
+            ],
+            [
+                13012,
+                1500
+            ],
+            [
+                16008,
+                1500
+            ],
+            [
+                10009,
+                1500
+            ],
+            [
+                10013,
+                1500
+            ]
+        ]
+    },
+    {
+        "Id": 80263,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_3_S29",
+        "Name": "乾いたヒトデ",
+        "Desc": "船着き場の上に放置されて固く乾いたヒトデ。食べられないし、腐りにくいため村人たちには悩みの種だが、ミユはこのヒトデに妙な親近感を覚えるようだ。",
+        "EventBonus": [
+            [
+                10072,
+                2500
+            ],
+            [
+                10039,
+                1500
+            ],
+            [
+                20018,
+                1500
+            ],
+            [
+                20023,
+                1500
+            ],
+            [
+                26002,
+                1500
+            ],
+            [
+                10013,
+                1500
+            ],
+            [
+                16005,
+                1500
+            ]
+        ]
+    },
+    {
+        "Id": 80264,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Consumable",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Object_0_S29",
+        "Name": "サイコロ確定券",
+        "Desc": "サイコロの出目を確定してくれるクーポン。どの数字のチケットが出るかは誰にも分からない。",
+        "ConsumeType": "Random",
+        "ImmediateUse": true,
+        "Contains": [
+            [
+                80265,
+                0.1667,
+                1
+            ],
+            [
+                80266,
+                0.1667,
+                1
+            ],
+            [
+                80267,
+                0.1667,
+                1
+            ],
+            [
+                80268,
+                0.1667,
+                1
+            ],
+            [
+                80269,
+                0.1667,
+                1
+            ],
+            [
+                80270,
+                0.1667,
+                1
+            ]
+        ],
+        "ContainsGlobal": []
+    },
+    {
+        "Id": 80265,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Object_1_S29",
+        "Name": "サイコロ1確定券",
+        "Desc": "サイコロの出目を確定してくれるクーポン。1の目を選択すると、クーポンが消費されます。"
+    },
+    {
+        "Id": 80266,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Object_2_S29",
+        "Name": "サイコロ2確定券",
+        "Desc": "サイコロの出目を確定してくれるクーポン。2の目を選択すると、クーポンが消費されます。"
+    },
+    {
+        "Id": 80267,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Object_3_S29",
+        "Name": "サイコロ3確定券",
+        "Desc": "サイコロの出目を確定してくれるクーポン。3の目を選択すると、クーポンが消費されます。"
+    },
+    {
+        "Id": 80268,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Object_4_S29",
+        "Name": "サイコロ4確定券",
+        "Desc": "サイコロの出目を確定してくれるクーポン。4の目を選択すると、クーポンが消費されます。"
+    },
+    {
+        "Id": 80269,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Object_5_S29",
+        "Name": "サイコロ5確定券",
+        "Desc": "サイコロの出目を確定してくれるクーポン。5の目を選択すると、クーポンが消費されます。"
+    },
+    {
+        "Id": 80270,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Object_6_S29",
+        "Name": "サイコロ6確定券",
+        "Desc": "サイコロの出目を確定してくれるクーポン。6の目を選択すると、クーポンが消費されます。"
+    },
+    {
         "Id": 85000,
         "IsReleased": [
             true,
@@ -18747,6 +20566,71 @@
         "Desc": "Gối ôm nhân vật ninja được bán tại Whirlpool Movie Village. Nó bắt đầu như một sản phẩm phụ của một nhân vật khác, nhưng nó dần trở nên phổ biến và trở thành một sản phẩm độc lập, điều phổ biến trong ngành."
     },
     {
+        "Id": 85120,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "Category": "Coin",
+        "Rarity": "N",
+        "Quality": 4,
+        "Tags": [],
+        "Shops": [],
+        "Icon": "Item_Icon_Event_Token_0_S16",
+        "Name": "Hộp vật liệu (Lặp lại)",
+        "Desc": "Các hộp vật liệu bị bỏ rơi xung quanh khu nghỉ mát bỏ hoang. Chúng đã ở đấy trong một thời gian dài, vì vậy không biết có những gì bên trong.",
+        "EventBonus": [
+            [
+                10044,
+                2200
+            ],
+            [
+                26007,
+                2200
+            ],
+            [
+                10043,
+                2200
+            ],
+            [
+                20027,
+                2200
+            ],
+            [
+                13004,
+                1200
+            ],
+            [
+                23005,
+                1200
+            ],
+            [
+                10033,
+                1200
+            ],
+            [
+                10010,
+                1200
+            ],
+            [
+                10005,
+                1200
+            ],
+            [
+                13008,
+                1200
+            ],
+            [
+                10024,
+                1200
+            ],
+            [
+                20011,
+                1200
+            ]
+        ]
+    },
+    {
         "Id": 85140,
         "IsReleased": [
             true,
@@ -19097,317 +20981,332 @@
         "Contains": [
             [
                 1001300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1001301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1001302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1001303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1002300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1002301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1002302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1002303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1003300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1003301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1003302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1003303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1006301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1006300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1006302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1007301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1007300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1007302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1008300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1008301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1008302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1008303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010306,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011306,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1200301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1202301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1203303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1203302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1204301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1205301,
-                0.0159,
+                0.0152,
+                1
+            ],
+            [
+                1207307,
+                0.0152,
+                1
+            ],
+            [
+                1207308,
+                0.0152,
+                1
+            ],
+            [
+                1207309,
+                0.0152,
                 1
             ]
         ],
@@ -25240,6 +27139,24 @@
                 1,
                 1,
                 1
+            ],
+            [
+                1207307,
+                1,
+                1,
+                1
+            ],
+            [
+                1207308,
+                1,
+                1,
+                1
+            ],
+            [
+                1207309,
+                1,
+                1,
+                1
             ]
         ],
         "ContainsGlobal": []
@@ -29547,6 +31464,24 @@
                 1,
                 1,
                 1
+            ],
+            [
+                1207307,
+                1,
+                1,
+                1
+            ],
+            [
+                1207308,
+                1,
+                1,
+                1
+            ],
+            [
+                1207309,
+                1,
+                1,
+                1
             ]
         ],
         "ContainsGlobal": []
@@ -29625,6 +31560,24 @@
             ],
             [
                 1207305,
+                1,
+                1,
+                1
+            ],
+            [
+                1207307,
+                1,
+                1,
+                1
+            ],
+            [
+                1207308,
+                1,
+                1,
+                1
+            ],
+            [
+                1207309,
                 1,
                 1,
                 1
@@ -35698,317 +37651,332 @@
         "Contains": [
             [
                 1001300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1001301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1001302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1001303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1002300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1002301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1002302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1002303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1003300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1003301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1003302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1003303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1004305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1005305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1006301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1006300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1006302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1007301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1007300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1007302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1008300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1008301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1008302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1008303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1009304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1010306,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1011306,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012300,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012304,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1012305,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1200301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1202301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1203303,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1203302,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1204301,
-                0.0159,
+                0.0152,
                 1
             ],
             [
                 1205301,
-                0.0159,
+                0.0152,
+                1
+            ],
+            [
+                1207307,
+                0.0152,
+                1
+            ],
+            [
+                1207308,
+                0.0152,
+                1
+            ],
+            [
+                1207309,
+                0.0152,
                 1
             ]
         ],
@@ -36039,52 +38007,67 @@
         "Contains": [
             [
                 1200301,
-                0.1,
+                0.0769,
                 1
             ],
             [
                 1202301,
-                0.1,
+                0.0769,
                 1
             ],
             [
                 1203303,
-                0.1,
+                0.0769,
                 1
             ],
             [
                 1203302,
-                0.1,
+                0.0769,
                 1
             ],
             [
                 1204301,
-                0.1,
+                0.0769,
                 1
             ],
             [
                 1205301,
-                0.1,
+                0.0769,
                 1
             ],
             [
                 1207302,
-                0.1,
+                0.0769,
                 1
             ],
             [
                 1207303,
-                0.1,
+                0.0769,
                 1
             ],
             [
                 1207304,
-                0.1,
+                0.0769,
                 1
             ],
             [
                 1207305,
-                0.1,
+                0.0769,
+                1
+            ],
+            [
+                1207307,
+                0.0769,
+                1
+            ],
+            [
+                1207308,
+                0.0769,
+                1
+            ],
+            [
+                1207309,
+                0.0769,
                 1
             ]
         ],

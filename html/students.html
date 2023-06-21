@@ -9,6 +9,7 @@
                 <div class="d-md-none flex-fill"></div>
                 <button id="ba-student-collection-btn" type="button" class="btn btn-dark" onclick="toggleOwned()"></button>
                 <a id="ba-student-toggle-sprite-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,tooltip_sprite_toggle"><i class="fa-solid fa-repeat"></i></a>
+                <a id="student-voice-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,voicegallery"><i class="fa-solid fa-microphone-lines" style="width:16px;"></i></a>
             </div>
             <div class="d-block d-md-none" style="height: 412px;"></div>
         </div>
@@ -90,6 +91,9 @@
                                             <button id="ba-statpreview-status-strikerbonus" onclick="toggleStrikerBonus()" class="btn-pill tooltip-button deactivated" >
                                                 <div class="icon" style="padding:3px"><img src="images/ui/Special_StatBonus.png" class="invert-light" width="22" height="22" style="border-radius:0!important;"></div>
                                             </button>
+                                            <button id="statpreview-status-lockinput" class="btn-pill btn-lock-attributes tooltip-button deactivated" data-tooltip-id="ui,lock_attributes">
+                                                <div class="d-flex align-items-center justify-content-center" style="width:28px;height:28px;"><i class="fa-solid fa-lock"></i></div>
+                                            </button>
                                             <button id="ba-statpreview-status-options" class="btn-pill">
                                                 <div class="d-flex align-items-center justify-content-center" style="width:28px;height:28px;"><i class="fa-solid fa-magnifying-glass"></i></div>
                                                 <span class="label d-none d-md-block ps-1">
@@ -102,12 +106,12 @@
 
                                 <div class="row g-1 mt-1">
                                     <div class="col">
-                                        <div id="ba-student-stat-table" class="ba-stats mb-0">
+                                        <div id="ba-student-stat-table" class="student-stat-table ba-stats mb-0">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row g-1 mt-3">
+                                <div class="row g-1 mt-2">
                                     <div class="d-flex flex-row align-items-center">
                                         <input id="ba-statpreview-levelrange" oninput="changeStatPreviewLevel(this)" type="range" class="statpreview-level form-range me-2 flex-fill" value="1" min="1" max="100">
                                         <span id="ba-statpreview-level" class="ba-slider-label statpreview-level-label">Lv.1</span>
@@ -145,8 +149,10 @@
                                                 <div class="icon bond-small"><img id="ba-statpreview-status-bond-alt-icon" src="" width="28" height="28"></div>
                                                 <span class="label ps-2"></span>
                                             </button>
+                                            <button id="statpreview-status-maxinput" class="btn-pill btn-max-attributes tooltip-button" data-tooltip-id="ui,max_attributes">
+                                                <div class="d-flex align-items-center justify-content-center" style="width:28px;height:28px;"><i class="fa-solid fa-angles-up"></i></div>
+                                            </button>
                                         </div>
-
                                     </div>
                                     <div class="d-flex flex-row flex-wrap align-items-stretch gap-2 mb-1">
                                         <button id="ba-statpreview-status-passive-level" onclick="togglePassiveSkill()" class="btn-pill tooltip-button">
@@ -456,7 +462,7 @@
                                     </div>
 
                                 </div>
-                                <table class="table ba-stats mt-3 mb-4">
+                                <table class="table ba-stats mt-3 mb-2">
                                     <tbody>
                                         <tr>
                                             <td width="50%">
@@ -518,6 +524,13 @@
                                         </tr>
                                     </tbody>
                                 </table>
+
+                                <!-- <div class="mt-1">
+                                    <button id="student-voice-btn" class="btn-pill">
+                                        <i class="fa-solid fa-microphone-lines ms-2"></i>
+                                        <span class="label" data-localize-id="ui,voicegallery"></span>
+                                    </button>
+                                </div> -->
 
                                 <div class="mt-3">
                                     <h5 style="font-weight: bold;" data-localize-id="ui,bond_title"></h5>
@@ -992,7 +1005,7 @@
                             <button id="student-stat-modal-skill-calc-toggle" class="btn-pill deactivated"><span class="label" data-localize-id="ui,skills"></span></button>
                         </div>
                         <div class="panel-stats-table">
-                            <div id="ba-student-stat-modal-table" class="ba-stats mb-0">
+                            <div id="ba-student-stat-modal-table" class="student-stat-table ba-stats mb-0">
                             </div>
                             <div id="student-stat-modal-skill-calculations" class="" style="display:none;">
                                 <nav id="skill-calculation-tabs" class="nav nav-pills justify-content-center mb-2">
@@ -1260,6 +1273,52 @@
                     </div>
                     <div id="ba-student-search-results" class="flex-fill">
                         <div id="student-select-grid" class="selection-grid student align-top flex-fill">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="student-modal-voice" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-fullscreen-lg-down">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: none;">
+                <h5 class="modal-title" data-localize-id="ui,voicegallery"></h5><span class="ba-info-pill-s ba-panel px-2 ms-2">BETA</span>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body pt-1">
+                <div class="h-100">
+                    <div class="d-flex flex-column gap-2 h-100">
+                        <div id="student-voice-info" class="d-flex gap-2 align-items-center flex-wrap justify-content-between">
+                            <div class="d-flex gap-2 align-items-center">
+                                <span id="student-voice-icon"><img src=""></span>
+                                <div>
+                                    <h5 id="student-voice-name" class="mb-0"></h5>
+                                    <span class="me-1" data-localize-id="ui,cv"></span><span class="text-italic" id="student-voice-cv"></span>
+                                </div>
+                            </div>
+
+                            <nav id="voicegallery" class="nav nav-pills justify-content-center ms-auto">
+                                <a id="student-voicegallery-tab-normal" class="nav-link" data-bs-toggle="tab" href="#student-voicegallery-pane-normal" data-localize-id="VoiceClipGroup,Normal"></a>
+                                <a id="student-voicegallery-tab-battle" class="nav-link" data-bs-toggle="tab" href="#student-voicegallery-pane-battle" data-localize-id="VoiceClipGroup,Battle"></a>
+                                <a id="student-voicegallery-tab-lobby" class="nav-link" data-bs-toggle="tab" href="#student-voicegallery-pane-lobby" data-localize-id="VoiceClipGroup,Lobby"></a>
+                                <a id="student-voicegallery-tab-event" class="nav-link" data-bs-toggle="tab" href="#student-voicegallery-pane-event" data-localize-id="VoiceClipGroup,Event"></a>
+                            </nav>
+                        </div>
+                        <div class="tab-content">
+                            <div id="student-voicegallery-pane-normal" class="tab-pane">
+                                <div id="student-voicegallery-list-normal" class="py-2 d-flex flex-column gap-2"></div>
+                            </div>
+                            <div id="student-voicegallery-pane-battle" class="tab-pane">
+                                <div id="student-voicegallery-list-battle" class="py-2 d-flex flex-column gap-2"></div>
+                            </div>
+                            <div id="student-voicegallery-pane-lobby" class="tab-pane">
+                                <div id="student-voicegallery-list-lobby" class="py-2 d-flex flex-column gap-2"></div>
+                            </div>
+                            <div id="student-voicegallery-pane-event" class="tab-pane">
+                                <div id="student-voicegallery-list-event" class="py-2 d-flex flex-column gap-2"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
