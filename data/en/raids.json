@@ -25376,6 +25376,146 @@
                 210,
                 210
             ]
+        },
+        {
+            "Id": 18000,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "DungeonType": "Destruction",
+            "Icon": "EnemyInfo_Totem03_TimeAttack",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "Unarmed",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 922000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7822001,
+                        7822201,
+                        7822101,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 922000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7822002,
+                        7822202,
+                        7822102,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 922000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7822003,
+                        7822203,
+                        7822103,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 922000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7822104,
+                        7822004,
+                        7822204,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    3938056289,
+                    2570956929
+                ],
+                [
+                    3938056289,
+                    2570956929
+                ],
+                [
+                    3938056289,
+                    2570956929,
+                    159710181
+                ],
+                [
+                    3938056289,
+                    2570956929,
+                    159710181,
+                    200078526
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                130,
+                130
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -25611,13 +25751,25 @@
             "Id": 1034510189,
             "Icon": "TimeAttack_Enemy_HealByHitDamaged_MaxHp_01",
             "Name": "Increased Enemy Max HP and Heal When Hit",
-            "Desc": "All enemies have increased <b:MAXHP> and <b:HealByHit_Damaged>, restoring HP each time they are attacked."
+            "Desc": "All enemies' <b:MAXHP> is increased by 20% and gain <b:HealByHit_Damaged>, restoring HP equal to 10% of their Max HP each time they are attacked."
         },
         {
             "Id": 2456483055,
             "Icon": "TimeAttack_Icon_Buff_DodgePoint_Enemy_01",
-            "Name": "Increased Enemy Evasion",
-            "Desc": "All enemies' <b:Dodge> is increased."
+            "Name": "Evasion Increase",
+            "Desc": "All enemies' <b:Dodge> is increased by <b>430</b>."
+        },
+        {
+            "Id": 159710181,
+            "Icon": "TimeAttack_Icon_Ally_Special_ExtraDamage",
+            "Name": "Additional Damage, ATK Increase ",
+            "Desc": "All enemies' <b:ATK> is increased and enemies will deal additional damage."
+        },
+        {
+            "Id": 200078526,
+            "Icon": "TimeAttack_Icon_Ally_Special_HealConvertDamage",
+            "Name": "Enemy Damage When Scarecrow Heals",
+            "Desc": "Whenever the Scarecrow recovers HP, deals damage to enemies in proportion to the amount recovered."
         }
     ],
     "WorldRaid": [
