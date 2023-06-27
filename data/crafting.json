@@ -829,12 +829,12 @@
                 "DescJp": "カフェの家具（アビドス教室シリーズ）を生成することができます。",
                 "NameKr": "아비도스 교실 세트",
                 "DescKr": "카페 가구를 생성할 수 있습니다. (아비도스 교실 테마)",
-                "NameTw": "アビドス教室シリーズ",
-                "DescTw": "カフェの家具（アビドス教室シリーズ）を生成することができます。",
+                "NameTw": "阿拜多斯教室組合",
+                "DescTw": "可生產咖啡廳家具。(阿拜多斯教室主題)",
                 "NameCn": "阿拜多斯教室系列",
                 "DescCn": "可制造咖啡厅家具(阿拜多斯教室系列)",
-                "NameTh": "アビドス教室シリーズ",
-                "DescTh": "カフェの家具（アビドス教室シリーズ）を生成することができます。",
+                "NameTh": "เซ็ตห้องเรียนอะบิดอส",
+                "DescTh": "สร้างเฟอร์นิเจอร์ในคาเฟ่ (ธีมห้องเรียนอะบิดอส)",
                 "NameVi": "アビドス教室シリーズ",
                 "DescVi": "カフェの家具（アビドス教室シリーズ）を生成することができます。",
                 "Weight": 9583,
@@ -1870,12 +1870,12 @@
                 "DescJp": "カフェの家具（アビドス教室シリーズ）を生成することができます。",
                 "NameKr": "아비도스 교실 세트",
                 "DescKr": "카페 가구를 생성할 수 있습니다. (아비도스 교실 테마)",
-                "NameTw": "アビドス教室シリーズ",
-                "DescTw": "カフェの家具（アビドス教室シリーズ）を生成することができます。",
+                "NameTw": "阿拜多斯教室組合",
+                "DescTw": "可生產咖啡廳家具。(阿拜多斯教室主題)",
                 "NameCn": "阿拜多斯教室系列",
                 "DescCn": "可制造咖啡厅家具(阿拜多斯教室系列)",
-                "NameTh": "アビドス教室シリーズ",
-                "DescTh": "カフェの家具（アビドス教室シリーズ）を生成することができます。",
+                "NameTh": "เซ็ตห้องเรียนอะบิดอส",
+                "DescTh": "สร้างเฟอร์นิเจอร์ในคาเฟ่ (ธีมห้องเรียนอะบิดอส)",
                 "NameVi": "アビドス教室シリーズ",
                 "DescVi": "カフェの家具（アビドス教室シリーズ）を生成することができます。",
                 "Weight": 57500,
@@ -7417,24 +7417,28 @@
                 "Tier": 3,
                 "Quality": 1,
                 "NameEn": "Arius",
-                "DescEn": "This can create useful items for Arius students.",
+                "DescEn": "Can create useful objects for Arius students. Can rarely create the Eleph of Arius students.",
                 "NameJp": "アリウス",
-                "DescJp": "アリウスの生徒たちにとって有用なアイテムを生成することができます。",
+                "DescJp": "アリウスの生徒たちにとって有用なアイテムを生成することができます。稀にアリウスの生徒の神名文字を生成します。",
                 "NameKr": "아리우스",
-                "DescKr": "아리우스 학생들에게 유용한 물건을 생성할 수 있습니다.",
+                "DescKr": "아리우스 학생들에게 유용한 물건을 생성할 수 있습니다. 드물게 아리우스 학생들의 엘레프를 생성합니다.",
                 "NameTw": "奧利斯",
-                "DescTw": "可製造對奧利斯學生們有用的物品。",
+                "DescTw": "可製造對奧利斯學生們有用的物品。有極小機率可製造奧利斯學生的神名文字。",
                 "NameCn": "阿里乌斯",
-                "DescCn": "可制造对阿里乌斯学生有用的物品",
+                "DescCn": "可制造对阿里乌斯学生有用的物品\n低概率制造阿里乌斯学生的神名文字",
                 "NameTh": "อาเรียส",
-                "DescTh": "สร้างไอเทมสำหรับนักเรียนอาเรียส",
+                "DescTh": "สร้างไอเทมสำหรับนักเรียนอาเรียส มีโอกาสเล็กน้อยที่จะสร้างเอลเลฟของนักเรียนอาเรียสได้",
                 "NameVi": "アリウス",
-                "DescVi": "アリウスの生徒たちにとって有用なアイテムを生成することができます。",
+                "DescVi": "アリウスの生徒たちにとって有用なアイテムを生成することができます。稀にアリウスの生徒の神名文字を生成します。",
                 "Weight": 34444,
                 "Groups": [
                     {
                         "GroupId": 3008,
                         "Weight": 31111
+                    },
+                    {
+                        "GroupId": 3108,
+                        "Weight": 3333
                     }
                 ],
                 "Icon": "CraftNode_Item"
@@ -27741,6 +27745,30 @@
                     "AmountMin": 3,
                     "AmountMax": 5,
                     "Weight": 1
+                },
+                {
+                    "Type": "Item",
+                    "Rarity": "SSR",
+                    "ItemId": 10041,
+                    "AmountMin": 3,
+                    "AmountMax": 5,
+                    "Weight": 1
+                },
+                {
+                    "Type": "Item",
+                    "Rarity": "SSR",
+                    "ItemId": 10042,
+                    "AmountMin": 3,
+                    "AmountMax": 5,
+                    "Weight": 1
+                },
+                {
+                    "Type": "Item",
+                    "Rarity": "SSR",
+                    "ItemId": 20017,
+                    "AmountMin": 3,
+                    "AmountMax": 5,
+                    "Weight": 1
                 }
             ],
             "371": [
@@ -28380,6 +28408,30 @@
                     "Type": "Item",
                     "Rarity": "SSR",
                     "ItemId": 20016,
+                    "AmountMin": 1,
+                    "AmountMax": 5,
+                    "Weight": 1
+                },
+                {
+                    "Type": "Item",
+                    "Rarity": "SSR",
+                    "ItemId": 10041,
+                    "AmountMin": 1,
+                    "AmountMax": 5,
+                    "Weight": 1
+                },
+                {
+                    "Type": "Item",
+                    "Rarity": "SSR",
+                    "ItemId": 10042,
+                    "AmountMin": 1,
+                    "AmountMax": 5,
+                    "Weight": 1
+                },
+                {
+                    "Type": "Item",
+                    "Rarity": "SSR",
+                    "ItemId": 20017,
                     "AmountMin": 1,
                     "AmountMax": 5,
                     "Weight": 1
@@ -29828,6 +29880,32 @@
                     "Type": "Item",
                     "Rarity": "SSR",
                     "ItemId": 20014,
+                    "AmountMin": 1,
+                    "AmountMax": 5,
+                    "Weight": 1
+                }
+            ],
+            "3108": [
+                {
+                    "Type": "Item",
+                    "Rarity": "SSR",
+                    "ItemId": 10041,
+                    "AmountMin": 1,
+                    "AmountMax": 5,
+                    "Weight": 1
+                },
+                {
+                    "Type": "Item",
+                    "Rarity": "SSR",
+                    "ItemId": 10042,
+                    "AmountMin": 1,
+                    "AmountMax": 5,
+                    "Weight": 1
+                },
+                {
+                    "Type": "Item",
+                    "Rarity": "SSR",
+                    "ItemId": 20017,
                     "AmountMin": 1,
                     "AmountMax": 5,
                     "Weight": 1
