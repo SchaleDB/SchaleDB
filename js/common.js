@@ -2512,7 +2512,7 @@ class SkillDamageInfo {
                 if (this.skill.IsRaidSkill) {
                     let rateText = (effect.CanEvade === false) ? translateUI("hit_chance_certain") : studentStats.getHitChanceString(enemyStats.getTotal("DodgePoint"))
                     this.element.find(`.row-value[data-key="${index}-hitrate"]`).html(rateText)
-                    rateText += ` / <span class="text-crit">${studentStats.getCriticalHitChanceString(enemyStats.getTotal("CriticalChanceResistPoint"))}</span>`
+                    rateText += ` / <span class="text-crit">${effect.CriticalCheck != 'Always' ? studentStats.getCriticalHitChanceString(enemyStats.getTotal("CriticalChanceResistPoint")) : "100%"}</span>`
                     this.element.find(`.row-value[data-key="${index}-hitcritrate"]`).html(rateText)
 
                     const studentHP = enemyStats.getTotal('MaxHP')
@@ -3781,7 +3781,7 @@ function populateEvents() {
                 let raid = find(data.raids.TimeAttack, "Id", el.raid)[0]
                 raidHtml += getTimeAttackCardHTML(raid, raid.Terrain)
             } else {
-                raidText = getLocalizedString("StageType", "Raid") + "\n"
+                raidText = getLocalizedString("StageType", el.type) + "\n"
                 let raid = find(data.raids.Raid, "Id", el.raid)[0]
                 raidHtml += getRaidCardHTML(raid, el.terrain)
             }

@@ -541,16 +541,34 @@
             "schooldungeon_max": 4, 
             "current_gacha": [
                 {
-                    "characters": [10071, 10072], 
-                    "start": 1687312800, 
-                    "end": 1688522400
+                    "characters": [10022, 10023],
+                    "start": 1688522400,
+                    "end": 1689127200
                 }
             ], 
             "current_events": [
-                {"event": 827, "start": 1687312800, "end": 1688522400}
             ], 
             "current_raid": [
-                {"raid": 17000, "start": 1687312800, "end": 1687892400}
+                {
+                    "type": "Raid",
+                    "raid": 9,
+                    "terrain": "Indoor",
+                    "start": 1688522400,
+                    "end": 1689102000
+                },
+                {
+                    "type": "EliminateRaid",
+                    "raid": 5,
+                    "terrain": "Street",
+                    "start": 1689127200,
+                    "end": 1689706800
+                },
+                {
+                    "type": "TimeAttack",
+                    "raid": 18000,
+                    "start": 1690164000,
+                    "end": 1690916400
+                }
             ]
         }, 
         {
@@ -583,12 +601,18 @@
                 {"event": 820, "start": 1687831200, "end": 1689040800}
             ], 
             "current_raid": [
-                {"raid": 11000, "start": 1687831200, "end": 1688410800}, 
                 {
-                    "raid": 4, 
-                    "terrain": "Indoor", 
-                    "start": 1688436000, 
+                    "type": "Raid",
+                    "raid": 4,
+                    "terrain": "Indoor",
+                    "start": 1688436000,
                     "end": 1689015600
+                },
+                {
+                    "type": "TimeAttack",
+                    "raid": 12000,
+                    "start": 1692064800,
+                    "end": 1692644400
                 }
             ]
         }
