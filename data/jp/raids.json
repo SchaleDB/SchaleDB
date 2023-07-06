@@ -1630,6 +1630,12 @@
                             "Channel": 150027
                         }
                     ],
+                    "EffectStackLabel": {
+                        "Label": [
+                            "INS",
+                            "TOR"
+                        ]
+                    },
                     "Name": "不浄なる光（聖遺物）",
                     "Desc": "聖遺物のHPが0%になるとスキル発動。\n紫色の聖遺物の場合、全てのストライカー、スペシャル生徒の<b:ATK><?1>25%増加し<d:HealEffectiveness>値を7000減少。\nさらにヒエロニムスの<d:DEF>を1500減少。\n発動後、<d:Hieronymus>になった生徒の<b:HealEffectiveness>値を4000増加（10秒間）\n（紫色の聖遺物は通常攻撃、ノーマルスキルのターゲットになりません）",
                     "Parameters": [
@@ -3888,6 +3894,17 @@
                             ],
                             "CriticalCheck": "Always",
                             "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -4000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94601
                         }
                     ],
                     "Name": "聖者の囁き",
@@ -3899,6 +3916,35 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -1000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94601
+                        }
+                    ],
                     "Name": "厳粛なる悔悟",
                     "Desc": "自身が保有している弱体状態の数によって適用される効果が異なります。\n・弱体状態<?1>つ以下：味方全体の弱体状態を1つ解除\n・弱体状態<?2>つ以上：味方全体の<d:ATK>を10%減少（120秒間）",
                     "Parameters": [
@@ -3928,6 +3974,44 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94609
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94609
+                        }
+                    ],
                     "Name": "グレゴリオ聖歌",
                     "Desc": "中央のパイプオルガンが向いた方向によって味方全体、あるいは敵全体にスキルを使用し、スキルを使用する度にスキルの効果が変更されます。\n・1番目：黒いパイプが向いたチーム全体の<d:DamagedRatio>を50%増加（60秒間）\n・2番目：白いパイプが向いたチーム全体の弱体状態を1つ解除\n・3番目：白いパイプが向いたチーム全体の<d:DamagedRatio>を50%増加（60秒間）\n・4番目：黒いパイプが向いたチーム全体の弱体状態を1つ解除\n（この後、スキル使用時1番目から繰り返し）"
                 },
@@ -3946,6 +4030,112 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    0
+                                ],
+                                [
+                                    -10000
+                                ],
+                                [
+                                    -20000
+                                ]
+                            ],
+                            "StackingIcon": [
+                                "Special_DebuffCountRed",
+                                "Special_DebuffCountYellow",
+                                "Special_DebuffCountGreen"
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94100
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    0
+                                ],
+                                [
+                                    -10000
+                                ],
+                                [
+                                    -25000
+                                ]
+                            ],
+                            "StackingIcon": [
+                                "Special_DebuffCountRed",
+                                "Special_DebuffCountYellow",
+                                "Special_DebuffCountGreen"
+                            ],
+                            "RestrictTo": [
+                                7309700,
+                                7309710
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94100
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    4000
+                                ],
+                                [
+                                    2000
+                                ],
+                                [
+                                    0
+                                ]
+                            ],
+                            "StackingIcon": [
+                                "Special_DebuffCountRed",
+                                "Special_DebuffCountYellow",
+                                "Special_DebuffCountGreen"
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94614
+                        }
+                    ],
+                    "EffectStackLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Special_DebuffCountRed",
+                            "buff/Combat_Icon_Special_DebuffCountYellow",
+                            "buff/Combat_Icon_Special_DebuffCountGreen"
+                        ]
+                    },
                     "Name": "聖者のしもべのしもべ",
                     "Desc": "グレゴリオが保有した弱体状態の数によって自身と聖歌隊に効果を適用\n・<s:DebuffCountGreen>（弱体状態<?1>つ）：被ダメージ量を<?2>増加\n・<s:DebuffCountYellow>（弱体状態<?3>つまたは<?4>つ）：被ダメージ量を100%増加/攻撃力を20%増加\n・<s:DebuffCountRed>（弱体状態<?5>つ以下または<?6>つ以上）：攻撃力を40%増加",
                     "Parameters": [
@@ -4011,8 +4201,29 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL02",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94613
+                        }
+                    ],
                     "Name": "荘厳なる聖歌隊",
-                    "Desc": "左側、右側の壇上の聖歌隊は登場後40秒間合唱を終えたら攻撃力を100%増加/\n聖歌隊はHPが1％未満になったら倒れて攻撃不可状態になります。"
+                    "Desc": "左側、右側の壇上の聖歌隊は登場後40秒間合唱を終えたら<b:ATK>を100%増加/\n聖歌隊はHPが1％未満になったら倒れて攻撃不可状態になります。"
                 },
                 {
                     "Id": "EN0005_Passive03",
@@ -4020,6 +4231,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL03",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -3000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94601
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    300
+                                ]
+                            ],
+                            "StackSame": 9,
+                            "Stat": "RegenCost_Base",
+                            "Channel": 94607
+                        }
+                    ],
                     "Name": "サンクトゥス",
                     "Desc": "グレゴリオの能力値を変更する弱体状態が適用された場合、同じ効果が聖歌隊にも複製されます。/\n聖歌隊は被ダメージの100%分をグレゴリオに与えます。/\n戦闘開始直後、グレゴリオと聖歌隊の<d:ATK>を30%減少（30秒間）/\n演奏の後半部に全ての聖歌隊はグレゴリオの横に移動し合唱します。\nこの時、敵と味方が徐々に強化されます。\n・全ての聖歌隊は10秒毎に<b:AttackSpeed>を10%増加（この効果は重複可能）/\n・スペシャルを含め全ての敵は10秒毎に、<b:CostRegen>を<b>300</b>増加（この効果は重複可能）"
                 },

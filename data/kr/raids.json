@@ -1630,6 +1630,12 @@
                             "Channel": 150027
                         }
                     ],
+                    "EffectStackLabel": {
+                        "Label": [
+                            "INS",
+                            "TOR"
+                        ]
+                    },
                     "Name": "불길한 빛 (성유물)",
                     "Desc": "성유물 체력이 0% 가 되면 스킬 발동\n자색 성유물: 모든 스트라이커, 스페셜 학생의 <b:ATK><?1> 25% 증가하고\n<d:HealEffectiveness>이 7000 만큼 감소한다.\n추가로 예로니무스의 <d:DEF>이 1500 만큼 감소한다.\n이후 <d:Hieronymus>를 받는 아군의 <b:HealEffectiveness>이 4000 만큼 증가한다. (10초간)\n(자색 성유물은 일반 공격, 기본 스킬의 타겟이 되지 않습니다.)",
                     "Parameters": [
@@ -3899,6 +3905,17 @@
                             ],
                             "CriticalCheck": "Always",
                             "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -4000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94601
                         }
                     ],
                     "Name": "성자의 속삭임",
@@ -3910,6 +3927,35 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -1000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94601
+                        }
+                    ],
                     "Name": "엄격한 회개",
                     "Desc": "자신이 보유한 해로운 효과 수에 따라 적용하는 효과가 달라집니다.\n- 해로운 효과 <?1>개 이하: 아군 전체에게 해로운 효과 1개 제거\n- 해로운 효과 <?2>개 이상: 아군 전체에게 <d:ATK> 10% 감소(120초간)",
                     "Parameters": [
@@ -3939,6 +3985,44 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94609
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94609
+                        }
+                    ],
                     "Name": "그레고리오 성가",
                     "Desc": "중앙의 오르간 파이프가 향한 방향에 따라 아군 전체 혹은 적군 전체에게 스킬을 사용하며, 스킬을 사용할 때마다 효과가 변경됩니다.\n- 첫 번재: 검은 파이프가 향한 팀 전체 <d:DamagedRatio> 50% 증가(60초간)\n- 두 번째: 흰 파이프가 향한 팀 전체 해로운 효과 1개 제거\n- 세 번째: 흰 파이프가 향한 팀 전체 <d:DamagedRatio> 50% 증가(60초간)\n- 네 번째: 검은 파이프가 향한 팀 전체 해로운 효과 1개 제거\n(이후 스킬 사용 시 첫 번째 부터 다시 반복)"
                 },
@@ -3957,6 +4041,112 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    0
+                                ],
+                                [
+                                    -10000
+                                ],
+                                [
+                                    -20000
+                                ]
+                            ],
+                            "StackingIcon": [
+                                "Special_DebuffCountRed",
+                                "Special_DebuffCountYellow",
+                                "Special_DebuffCountGreen"
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94100
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    0
+                                ],
+                                [
+                                    -10000
+                                ],
+                                [
+                                    -25000
+                                ]
+                            ],
+                            "StackingIcon": [
+                                "Special_DebuffCountRed",
+                                "Special_DebuffCountYellow",
+                                "Special_DebuffCountGreen"
+                            ],
+                            "RestrictTo": [
+                                7309700,
+                                7309710
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94100
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    4000
+                                ],
+                                [
+                                    2000
+                                ],
+                                [
+                                    0
+                                ]
+                            ],
+                            "StackingIcon": [
+                                "Special_DebuffCountRed",
+                                "Special_DebuffCountYellow",
+                                "Special_DebuffCountGreen"
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94614
+                        }
+                    ],
+                    "EffectStackLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Special_DebuffCountRed",
+                            "buff/Combat_Icon_Special_DebuffCountYellow",
+                            "buff/Combat_Icon_Special_DebuffCountGreen"
+                        ]
+                    },
                     "Name": "성자의 종들의 종",
                     "Desc": "그레고리오가 보유한 해로운 효과의 수에 따라 자신과 성가대에게 효과 적용\n- <s:DebuffCountGreen>(해로운 효과 <?1>개): 받는 대미지량 <?2> 증가\n- <s:DebuffCountYellow>(해로운 효과 <?3>개 또는 <?4>개): 받는 대미지량 100% 증가/ 공격력 20% 증가\n- <s:DebuffCountRed>(해로운 효과 <?5>개 이하 또는 <?6>개 이상): 공격력 40% 증가",
                     "Parameters": [
@@ -4022,8 +4212,29 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL02",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94613
+                        }
+                    ],
                     "Name": "장엄한 성가대",
-                    "Desc": "좌측, 우측 단상의 성가대는 등장 후 40초간 합창을 마치면 공격력 100% 증가/\n성가대는 체력이 1% 미만이 되면 쓰러져서 공격불가 상태가 됩니다."
+                    "Desc": "좌측, 우측 단상의 성가대는 등장 후 40초간 합창을 마치면 <b:ATK> 100% 증가/\n성가대는 체력이 1% 미만이 되면 쓰러져서 공격불가 상태가 됩니다."
                 },
                 {
                     "Id": "EN0005_Passive03",
@@ -4031,6 +4242,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL03",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -3000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94601
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    300
+                                ]
+                            ],
+                            "StackSame": 9,
+                            "Stat": "RegenCost_Base",
+                            "Channel": 94607
+                        }
+                    ],
                     "Name": "거룩하시도다",
                     "Desc": "그레고리오의 능력치를 변경하는 해로운 효과 적용 시 동일한 효과가 성가대에게도 복제됩니다./\n성가대가 받은 피해의 100%를 그레고리오에게 전달합니다./\n전투 시작 직후 그레고리오와 성가대의 <d:ATK> 30% 감소(30초간) /\n연주의 후반부에 모든 성가대는 그레고리오 옆으로 이동하여 합창합니다.\n이 때, 적과 아군이 점차 강화됩니다.\n- 모든 성가대는 10초마다 <b:AttackSpeed> 10% 증가(이 효과는 중첩 가능)/\n- 스페셜을 포함한 모든 적은 10초마다 <b:CostRegen> <b>300</b> 증가(이 효과는 중첩 가능)"
                 },

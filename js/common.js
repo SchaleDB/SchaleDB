@@ -357,6 +357,7 @@ let search_options = {
             "DoesntUse": false,
         },
         "HasCC": false,
+        "HasDebuff": false,
         "TerrainUpgrades": false
     },
     "filterSelect": {
@@ -564,7 +565,22 @@ let itemSearchOptions = {
      * @returns 
      */
     getTotal(stat) {
-        return Math.max(Math.round(((this.stats[stat][0] + this.stats[stat][1]) * Math.max(this.stats[stat][2], 0.2)).toFixed(4)) + this.stats[stat][3], 0)
+        let applyBuffCap = true
+        let allowNegative = false
+
+        if (stat == "DamagedRatio") {
+            applyBuffCap = false
+            allowNegative = true
+        }
+
+        const statBase = this.stats[stat][0]
+        const flatBonus = this.stats[stat][1]
+        const coefficientBonus =  applyBuffCap ? Math.max(this.stats[stat][2], 0.2) : this.stats[stat][2]
+        const nonMultiFlatBonus = this.stats[stat][3]
+
+        const statTotal = Math.round(((statBase + flatBonus) * coefficientBonus).toFixed(4)) + nonMultiFlatBonus
+
+        return allowNegative ? statTotal : Math.max(statTotal, 0)
     }
 
     /**
@@ -582,7 +598,7 @@ let itemSearchOptions = {
         } else {
             result = total.toLocaleString()
         }
-        if (formatStatCap && this.stats[stat][2] <= 0.2) result = `<span class="stat-cap">${result}</span>`
+        if (stat != "DamagedRatio" && formatStatCap && this.stats[stat][2] <= 0.2) result = `<span class="stat-cap">${result}</span>`
         return result
     }
 
@@ -690,7 +706,10 @@ let itemSearchOptions = {
     renderActiveBuffs(container, max) {
         let buffIcons = '', buffCount = 0, buffExtraCount = 0
         for (const buffIcon in this.activeBuffs) {
-            const stackCount = this.activeBuffs[buffIcon]
+            let stackCount = this.activeBuffs[buffIcon]
+            if (buffIcon.includes("Special_DebuffCount")) {
+                stackCount = 1
+            }
             buffCount++
             if (buffCount <= max) {
                 buffIcons += `<div class="active-buff"><img src="images/buff/Combat_Icon_${buffIcon}.png" width="22" height="26" class="">${stackCount > 1 ? `<span class="stack-count">${stackCount}</span>` : ''}</div>`
@@ -1146,9 +1165,34 @@ class ExternalBuffs extends Buffs {
         if (++buff.Stacks > buff.MaxStacks) {
             buff.Stacks = 1
         } 
-        $(this.elements.controls).find(`div[data-index='${index}'] .ba-slider-label.stack-toggle .label`).html(`&times;${buff.Stacks}`)
+        
+        $(this.elements.controls).find(`div[data-index='${index}'] .ba-slider-label.stack-toggle .label`).html(this.getBuffStackLabel(buff))
         $(this.elements.controls).find(`div[data-index='${index}'] .buff-description`).html(this.getBuffAmountText(buff))
         this.recalculationFunc()
+    }
+
+    getBuffStackLabel(buff) {
+        if (buff.Skill.EffectStackLabel) {
+            let imageHtml = ''
+            let labelText = ''
+
+            if (buff.Skill.EffectStackLabel.Label !== undefined) {
+                labelText = buff.Skill.EffectStackLabel.Label[Math.min(buff.Skill.EffectStackLabel.Label.length-1, buff.Stacks-1)]
+            }
+
+            if (buff.Skill.EffectStackLabel.Icon !== undefined) {
+                const imgPath = buff.Skill.EffectStackLabel.Icon[Math.min(buff.Skill.EffectStackLabel.Icon.length-1, buff.Stacks-1)]
+                imageHtml = `<img class="stack-icon ${imgPath.startsWith('skill') ? "invert-light" : ""}" src="images/${imgPath}.png">`
+            }
+
+            if (labelText != '') {
+                labelText = `<span class="label ${imageHtml == '' ? '' : 'ps-1'}">${labelText}</span>`
+            }
+
+            return imageHtml + labelText
+        } else {
+            return `&times;${buff.Stacks}`
+        }
     }
 
     renderControls() {
@@ -1164,7 +1208,7 @@ class ExternalBuffs extends Buffs {
                     iconPath = `images/raid/skill/${buff.Skill.Icon}.png`
                     iconClass = 'raid-skill-icon'
                 } 
-                html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/raid/icon/Icon_${buff.Skill.MinDifficulty >= 5 ? raid.PathName + "_Insane" : raid.PathName}.png"><img class="${iconClass}" src="${iconPath}"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType.toLowerCase()}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><span class="label">&times;${buff.Stacks}</span></span>` : ''}</div></div>`
+                html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/raid/icon/Icon_${buff.Skill.MinDifficulty >= 5 ? raid.PathName + "_Insane" : raid.PathName}.png"><img class="${iconClass}" src="${iconPath}"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType.toLowerCase()}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><span class="label">${this.getBuffStackLabel(buff)}</span></span>` : ''}</div></div>`
             } else {
                 const student = find(data.students, "Id", buff.StudentId)[0]
                 html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"><img class="skill-icon bg-atk-${student.BulletType.toLowerCase()}" src="images/skill/${buff.Skill.Icon}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><img class="stack-icon invert-light" src="images/skill/${buff.Skill.Icon}.png"><span class="label">&times;${buff.Stacks}</span></span>` : ''}<input type="range" data-index="${i}" class="form-range flex-fill" value="${buff.Level}" min="1" max="${buff.MaxLevel}"><span class="ba-slider-label skill-level">${buff.Level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${buff.Level}`}</span></div></div>`
@@ -4142,6 +4186,8 @@ function checkFilters(student, filterList, selectFilterList, searchTerm) {
             if (!search_options.filter.Cover[student.Cover ? 'Uses': 'DoesntUse']) return false
         } else if (filterList[i] == 'HasCC') {
             if (search_options['filter'][filterList[i]] && student.Skills.find(s => s.Effects !== undefined && s.Effects.find(e => e.Type == "CrowdControl") !== undefined) === undefined) return false
+        } else if (filterList[i] == 'HasDebuff') {
+            if (search_options['filter'][filterList[i]] && student.Skills.find(s => s.Effects !== undefined && s.Effects.find(e => e.Type == "BuffTarget" || e.Type == "DMGDot") !== undefined) === undefined) return false
         } else if (filterList[i].endsWith('Adaptation') && search_options['filter']['TerrainUpgrades'] && filterList[i].startsWith(student.Weapon.AdaptationType)) {
             if (!search_options['filter'][filterList[i]][student[filterList[i]]] && !search_options['filter'][filterList[i]][student[filterList[i]] + student.Weapon.AdaptationValue]) return false
         } else {
@@ -6677,6 +6723,8 @@ function calculateEnemyStats() {
                     enemyStats.addBuff(effect.Stat, value)
                     if ('Icon' in effect) {
                         enemyStats.addActiveBuffIcon(effect.Icon, 1, 'StackSame' in effect ? buff.Stacks : 1)
+                    } else if ('StackingIcon' in effect) {
+                        enemyStats.addActiveBuffIcon(effect.StackingIcon[buff.Stacks-1], value, 'StackSame' in effect ? buff.Stacks : 1)
                     } else {
                         enemyStats.addActiveBuffIcon(effect.Stat, value, 'StackSame' in effect ? buff.Stacks : 1)
                     }

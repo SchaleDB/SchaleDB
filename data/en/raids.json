@@ -1648,6 +1648,12 @@
                             "Channel": 150027
                         }
                     ],
+                    "EffectStackLabel": {
+                        "Label": [
+                            "INS",
+                            "TOR"
+                        ]
+                    },
                     "Name": "Ominous Light (Relic)",
                     "Desc": "When the violet relic's HP reaches 0%, increases the <b:ATK> <?1>of all Striker and Special students by <b>25%</b> but decreases their <d:HealEffectiveness> by <b>7,000</b>. Also decreases Hieronymus's <d:DEF> by <b>1,500</b>.\nFollowing this, students inflicted with <d:Hieronymus> will have their <b:HealEffectiveness> increased by a further <b>4,000</b> for 10s.\nThe violet relic cannot be targeted by normal attacks or basic skills.",
                     "Parameters": [
@@ -3935,10 +3941,21 @@
                             ],
                             "CriticalCheck": "Always",
                             "CanEvade": true
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -4000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94601
                         }
                     ],
                     "Name": "Saints' Whispers",
-                    "Desc": "Deals 500% guaranteed critical damage to all enemies and decreases their <d:ATK> by 40% for 120s."
+                    "Desc": "Deals 500% guaranteed critical damage to all enemies and decreases their <d:ATK> by 40% for 120s (effect stacks multiple times)."
                 },
                 {
                     "Id": "EN0005_Ex01_DefenderSide",
@@ -3946,6 +3963,35 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -1000
+                                ]
+                            ],
+                            "StackSame": 5,
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94601
+                        }
+                    ],
                     "Name": "Solemn Repentance",
                     "Desc": "Inflicts the following effects depending on Gregorius' number of debuffs.\n<b><?1> or fewer debuffs</b>: Removes 1 debuff from all allies.\n<b><?2> or more debuffs</b>: Reduces the <d:ATK> of all allies by 10% for 120s.",
                     "Parameters": [
@@ -3975,6 +4021,44 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94609
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94609
+                        }
+                    ],
                     "Name": "Gregorian Chant",
                     "Desc": "Inflicts the following effects on allies or enemies, depending on the direction the Pipe Organ is facing. The effects change with each activation.\n<b>1st</b>: Increases the <d:DamagedRatio> of the team facing the black pipes by 50% for 60s.\n<b>2nd</b>: Removes 1 debuff from the team facing the white pipes.\n<b>3rd</b>: Increases the <d:DamagedRatio> of the team facing the white pipes by 50% for 60s.\n<b>4th</b>: Removes 1 debuff from the team facing the black pipes.\nAfter this, the effects repeat from the 1st activation again."
                 },
@@ -3993,6 +4077,112 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    0
+                                ],
+                                [
+                                    -10000
+                                ],
+                                [
+                                    -20000
+                                ]
+                            ],
+                            "StackingIcon": [
+                                "Special_DebuffCountRed",
+                                "Special_DebuffCountYellow",
+                                "Special_DebuffCountGreen"
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94100
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    0
+                                ],
+                                [
+                                    -10000
+                                ],
+                                [
+                                    -25000
+                                ]
+                            ],
+                            "StackingIcon": [
+                                "Special_DebuffCountRed",
+                                "Special_DebuffCountYellow",
+                                "Special_DebuffCountGreen"
+                            ],
+                            "RestrictTo": [
+                                7309700,
+                                7309710
+                            ],
+                            "Stat": "DamagedRatio_Coefficient",
+                            "Channel": 94100
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    4000
+                                ],
+                                [
+                                    2000
+                                ],
+                                [
+                                    0
+                                ]
+                            ],
+                            "StackingIcon": [
+                                "Special_DebuffCountRed",
+                                "Special_DebuffCountYellow",
+                                "Special_DebuffCountGreen"
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94614
+                        }
+                    ],
+                    "EffectStackLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Special_DebuffCountRed",
+                            "buff/Combat_Icon_Special_DebuffCountYellow",
+                            "buff/Combat_Icon_Special_DebuffCountGreen"
+                        ]
+                    },
                     "Name": "Servants of the Saint",
                     "Desc": "Applies the following effects to Gregorius and all Choir Members depending on the number of debuffs inflicted on Gregorius.\n<s:DebuffCountGreen> (<?1> debuffs): Increases incoming damage by <?2>.\n<s:DebuffCountYellow> (<?3> or <?4> debuffs): Increases incoming damage by 100% and ATK by 20%.\n<s:DebuffCountRed> (<?5> or fewer/<?6> or more debuffs): Increases ATK by 40%.",
                     "Parameters": [
@@ -4058,6 +4248,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL02",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94613
+                        }
+                    ],
                     "Name": "The Majestic Choir",
                     "Desc": "Choir Members on the left and right podiums will sing for 40s after they appear, increasing their <b:ATK> by 100% after finishing singing.\nIf a Choir Member's HP falls below 1%, they will collapse and become unable to attack."
                 },
@@ -4067,6 +4278,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL03",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -3000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7309100,
+                                7309200,
+                                7309300,
+                                7309400,
+                                7309500,
+                                7309600,
+                                7309700,
+                                7309110,
+                                7309210,
+                                7309310,
+                                7309410,
+                                7309510,
+                                7309610,
+                                7309710
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 94601
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    300
+                                ]
+                            ],
+                            "StackSame": 9,
+                            "Stat": "RegenCost_Base",
+                            "Channel": 94607
+                        }
+                    ],
                     "Name": "Sanctus",
                     "Desc": "If Gregorius is inflicted with a stat-reducing debuff, the same effect is replicated on all Choir Members.\n100% of the damage taken by Choir Members will also be taken by Gregorius.\nImmediately after the start of battle, Gregorius and all Choir Members' <d:ATK> is decreased by 30% for 30s.\nFor the final part of the performance, all Choir Members move to Gregorius' side and sing in chorus. During this, all enemies and allies are gradually strengthened.\nIncreases the <b:AttackSpeed> of all Choir Members by 10% every 10s. (effect stacks multiple times).\nIncreases all enemies' (including Special students) <b:CostRegen> by <b>300</b> every 10s. (effect stacks multiple times)"
                 },
