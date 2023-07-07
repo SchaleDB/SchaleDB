@@ -4523,7 +4523,7 @@ function renderStudent() {
 
     //Skills
     student.Skills.filter(skill => skill.SkillType != 'autoattack').forEach((skill) => {
-        $(`#ba-skill-${skill.SkillType}-name`).text(getTranslatedString(skill, 'Name'))
+        $(`#ba-skill-${skill.SkillType}-name`).html(getTranslatedString(skill, 'Name'))
         $(`#ba-skill-${skill.SkillType}-icon img`).attr("src", `images/skill/${skill.Icon}.png`)
         if (skill.SkillType == 'passive') {
             $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${skill.Icon}.png`)
@@ -7484,10 +7484,10 @@ function updatePassiveSkillStatPreview() {
             if (value > 0) desc += `${getStatName(eff.Stat)} <b>+${getFormattedStatAmount(value)}</b>, `
             if (value < 0) desc += `${getStatName(eff.Stat)} <b>${getFormattedStatAmount(value)}</b>, `
         })
-        $('#ba-statpreview-passiveskill-name').text(getTranslatedString(weaponPassiveSkill, 'Name'))  
+        $('#ba-statpreview-passiveskill-name').html(getTranslatedString(weaponPassiveSkill, 'Name'))  
         $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${weaponPassiveSkill.Icon}.png`)
     } else {
-        $('#ba-statpreview-passiveskill-name').text(getTranslatedString(passiveSkill, 'Name'))
+        $('#ba-statpreview-passiveskill-name').html(getTranslatedString(passiveSkill, 'Name'))
         $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${passiveSkill.Icon}.png`)
     }
 
@@ -7513,7 +7513,7 @@ function updateSummonSourceSkill() {
             $('#ba-statpreview-summon-level').html("Lv." + level)
         }
        
-        $('#ba-statpreview-summon-name').text(getTranslatedString(sourceSkill, 'Name'))
+        $('#ba-statpreview-summon-name').html(getTranslatedString(sourceSkill, 'Name'))
         $('#ba-statpreview-summon-desc').empty()
         $('#ba-statpreview-summon-icon img').attr("src", `images/skill/${sourceSkill.Icon}.png`)
 
@@ -8821,7 +8821,7 @@ function changeStudentSummon(id, recalculate = true) {
     if (statPreviewSelectedChar > 0) {
         const summonInfo = find(data.summons, 'Id', student.Summons[id-1].Id)[0]
         const sourceSkill = find(student.Skills, 'SkillType', student.Summons[id-1].SourceSkill)[0]
-        $('.summon-list .active-name').text(getTranslatedString(summonInfo, "Name"))
+        $('.summon-list .active-name').html(getTranslatedString(summonInfo, "Name"))
         $('.summon-list .active-icon img').attr('src', `images/skill/${sourceSkill.Icon}.png`).addClass(`bg-skill ${student.BulletType.toLowerCase()}`)
     } else {
         $('.summon-list .active-name').html(getTranslatedString(student, "Name"))
