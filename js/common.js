@@ -2970,6 +2970,12 @@ $.when($.ready, loadPromise).then(function() {
         skillPreviewOtherSkillLevel = JSON.parse(localStorage.getItem("student_skill_other_level"))
     }
 
+    //Bootstrap sanitiser config
+    let bsAllowList = bootstrap.Tooltip.Default.allowList
+    bsAllowList.ruby = []
+    bsAllowList.rt = []
+    bsAllowList.rp = []
+
     loadRegion(regionID)
 
     setSortedDataLists()
@@ -4624,7 +4630,7 @@ function renderStudent() {
     if (userLang != 'Jp') {
         $('#ba-student-fullname').text(getTranslatedString(student,'FamilyName')+' '+getTranslatedString(student,'PersonalName'))
     } else {
-        $('#ba-student-fullname').text(getTranslatedString(student,'FamilyName')+getTranslatedString(student,'PersonalName'))
+        $('#ba-student-fullname').html(`<ruby>${getTranslatedString(student,'FamilyName')}<rp>(</rp><rt>${getTranslatedString(student,'FamilyNameRuby')}</rt><rp>)</rp></ruby> `+getTranslatedString(student,'PersonalName'))
     }
     $('#ba-profile-school-label').text(getLocalizedString('SchoolLong',student.School))
     $('#ba-profile-club-label').text(getLocalizedString('Club',student.Club))
