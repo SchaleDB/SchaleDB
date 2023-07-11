@@ -68157,7 +68157,7 @@
         "Id": 10058,
         "IsReleased": [
             true,
-            false
+            true
         ],
         "DefaultOrder": 125,
         "PathName": "Mine",
@@ -68199,7 +68199,7 @@
         "Illustrator": "ni02",
         "Designer": "ni02",
         "CharHeightMetric": "168cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5&#x27;6&quot;",
         "StabilityPoint": 1816,
         "AttackPower1": 166,
         "AttackPower100": 1663,
@@ -68365,7 +68365,7 @@
             {
                 "SkillType": "normal",
                 "Name": "준엄한 선고",
-                "Desc": "구호의 마음가짐 해제 이후 발동/\n발동 시 원형범위 내의 적에게 방어력 <?1> 대미지, 회피 수치와 <d:DEF> <?2> 감소(30초간)",
+                "Desc": "<b:AidAttitude> 해제 이후 발동/\n발동 시 원형범위 내의 적에게 방어력 <?1> 대미지, 회피 수치와 <d:DEF> <?2> 감소(30초간)",
                 "Parameters": [
                     [
                         "475%",
@@ -68542,7 +68542,7 @@
             {
                 "SkillType": "sub",
                 "Name": "불굴의 용기",
-                "Desc": "EX 스킬 사용 시 구호의 마음가짐 부여. 구호의 마음가짐은 치유력 <?1> <b:DotHeal>(10초간)/\n구호의 마음가짐이 이미 있을 경우 구호의 마음가짐 대신 <b:CriticalChanceResistPoint> <?2> 증가(20초간) ",
+                "Desc": "EX 스킬 사용 시 <b:AidAttitude> 부여. <b:AidAttitude>은 치유력 <?1> <b:DotHeal>(10초간)/\n<b:AidAttitude>이 이미 있을 경우 <b:AidAttitude> 대신 <b:CriticalChanceResistPoint> <?2> 증가(20초간) ",
                 "Parameters": [
                     [
                         "64.8%",
@@ -68647,14 +68647,16 @@
         "FavorAlts": [],
         "MemoryLobby": [
             6,
-            0
+            6
         ],
         "MemoryLobbyBGM": "Luminous Memory",
         "FurnitureInteraction": [
             [
                 207310
             ],
-            []
+            [
+                207310
+            ]
         ],
         "FavorItemTags": [
             "Cosmetics",
