@@ -178,6 +178,7 @@ let statPreviewSelectedEnemyLevel = 1
 let statPreviewSelectedEnemyGrade = 1
 let statPreviewSelectedEnemyRaid = 0
 let statPreviewSelectedEnemyLevelFixed = false
+let statPreviewSelectedEnemyArmorType = null
 let statPreviewEnemyBookmarks = []
 let skillPreviewExSkillLevel = 1
 let skillPreviewOtherSkillLevel = 1
@@ -1892,6 +1893,7 @@ let statPreviewSupportStats = SupportStats
 
 class EnemyFinder {
 
+    armorTypes = ['Normal', 'LightArmor', 'HeavyArmor', 'Unarmed']
     enemyList = []
 
     elements = {
@@ -2033,6 +2035,8 @@ class EnemyFinder {
                     break
             }
         })
+
+        $('#statpreview-enemy-defensetype-list').on('click', '.dropdown-item', (ev) => {this.toggleEnemyArmorType(ev.currentTarget.dataset.value)})
     }
 
     static generateEnemyList() {
@@ -2046,10 +2050,10 @@ class EnemyFinder {
                         if (enemy.Icon !== undefined && enemy.Icon != "") {
                             statPreviewEnemyList.push({
                                 id: enemy.Id,
-                                name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])})`,
+                                name: `${enemy.Name}`,
                                 searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])],
                                 source: 'raid',
-                                sourceName: getLocalizedString("StageType", "Raid"),
+                                sourceName: `${getLocalizedString("StageType", "Raid")} / ${getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])}`,
                                 rank: enemy.Rank,
                                 icon: `images/enemy/${enemy.Icon}`,
                                 level: raid_level[difficultyId],
@@ -2060,10 +2064,10 @@ class EnemyFinder {
                         } else {
                             statPreviewEnemyList.push({
                                 id: enemy.Id,
-                                name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])})`,
+                                name: `${enemy.Name}`,
                                 searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])],
                                 source: 'raid',
-                                sourceName: getLocalizedString("StageType", "Raid"),
+                                sourceName: `${getLocalizedString("StageType", "Raid")} / ${getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])}`,
                                 rank: enemy.Rank,
                                 icon: `images/raid/icon/Icon_${raid.PathName}${difficultyId >= 5 ? '_Insane' : ''}`,
                                 level: raid_level[difficultyId],
@@ -2085,10 +2089,10 @@ class EnemyFinder {
                     if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
                         statPreviewEnemyList.push({
                             id: enemy.Id,
-                            name: `${enemy.Name} (${translateUI('ta_phase') + (formationId + 1)})`,
+                            name: `${enemy.Name}`,
                             searchTerms: [getLocalizedString("StageType", "TimeAttack")],
                             source: 'timeattack',
-                            sourceName: getLocalizedString("StageType", "TimeAttack"),
+                            sourceName: `${getLocalizedString("StageType", "TimeAttack")} / ${translateUI('ta_phase') + (formationId + 1)}`,
                             rank: enemy.Rank,
                             icon: `images/enemy/${enemy.Icon}`,
                             level: formation.Level[enemy_rank[enemy.Rank]],
@@ -2108,10 +2112,10 @@ class EnemyFinder {
                         const raidIcon = (enemy.Icon !== undefined && enemy.Icon != "") ? `images/enemy/${enemy.Icon}` : `images/raid/icon/Icon_${raid.PathName}`
                         statPreviewEnemyList.push({
                             id: enemy.Id,
-                            name: `${enemy.Name} (${getLocalizedString("RaidDifficulty", raid.DifficultyName[difficultyId])})`,
-                            searchTerms: [getTranslatedString(raid, 'Name')],
+                            name: enemy.Name,
+                            searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", raid.DifficultyName[difficultyId])],
                             source: 'worldraid',
-                            sourceName: getLocalizedString("StageType", "WorldRaid"),
+                            sourceName: `${getLocalizedString("StageType", "WorldRaid")} / ${getLocalizedString("RaidDifficulty", raid.DifficultyName[difficultyId])}`,
                             rank: enemy.Rank,
                             icon: raidIcon,
                             level: raid.Level[difficultyId],
@@ -2131,8 +2135,8 @@ class EnemyFinder {
                         if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
                             statPreviewEnemyList.push({
                                 id: enemy.Id,
-                                name: `${enemy.Name} (Challenge)`,
-                                searchTerms: [getStageName(stage, 'Event')],
+                                name: `${enemy.Name}`,
+                                searchTerms: [getStageName(stage, 'Event'), enemy.Name + ' challenge'],
                                 source: 'event',
                                 sourceName: getStageName(stage, 'Event'),
                                 rank: enemy.Rank,
@@ -2159,8 +2163,8 @@ class EnemyFinder {
                                 if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
                                     statPreviewEnemyList.push({
                                         id: enemy.Id,
-                                        name: `${enemy.Name} (${getLocalizedString("StageType", "Conquest")})`,
-                                        searchTerms: [mapName],
+                                        name: enemy.Name,
+                                        searchTerms: [mapName, enemy.Name + ' ' + getLocalizedString("StageType", "Conquest")],
                                         source: 'event',
                                         sourceName: mapName,
                                         rank: enemy.Rank,
@@ -2184,10 +2188,10 @@ class EnemyFinder {
                 if (enemy.SquadType == 'Main') {
                     statPreviewEnemyList.push({
                         id: enemy.Id,
-                        name: `${enemy.Name} (${getStageTitle(stage, "SchoolDungeon")})`,
-                        searchTerms: [getStageTitle(stage, "SchoolDungeon"), getLocalizedString("StageType", "SchoolDungeon")],
+                        name: enemy.Name,
+                        searchTerms: [getStageTitle(stage, "SchoolDungeon"), getLocalizedString("StageType", "SchoolDungeon"), enemy.Name + ' ' + getStageTitle(stage, "SchoolDungeon")],
                         source: 'schooldungeon',
-                        sourceName: getLocalizedString("StageType", "SchoolDungeon"),
+                        sourceName: `${getLocalizedString("StageType", "SchoolDungeon")} / ${getStageTitle(stage, "SchoolDungeon")}`,
                         rank: enemy.Rank,
                         icon: `images/enemy/${enemy.Icon}`,
                         level: formation.Level[enemy_rank[enemy.Rank]],
@@ -2245,7 +2249,15 @@ class EnemyFinder {
         $("#statpreview-enemy-attacktype .icon-type").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
         $("#statpreview-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
         $("#statpreview-enemy-attacktype .label").text(getLocalizedString('BulletType',enemy.BulletType))
-        $("#statpreview-enemy-defensetype .label").text(getLocalizedString('ArmorType',enemy.ArmorType))      
+        $("#statpreview-enemy-defensetype .label").text(getLocalizedString('ArmorType',enemy.ArmorType))
+        
+        let armorTypeListHtml = ''
+        for (let armorType of this.armorTypes) {
+            armorTypeListHtml += `<li><a class="dropdown-item dropdown-item-icon${enemy.ArmorType == armorType ? ' active' : ''}" href="javascript:;" data-value="${armorType}" class="btn btn-dark"><span>${getLocalizedString('ArmorType',armorType)}</span></a></li>`
+        }
+        $('#statpreview-enemy-defensetype-list').html(armorTypeListHtml)
+
+        statPreviewSelectedEnemyArmorType = enemy.ArmorType
 
         if (enemyListItem.level != -1) {
             $('#calculation-enemy-level').toggleClass('disabled', true)
@@ -2261,6 +2273,17 @@ class EnemyFinder {
         $('#statpreview-enemy-bookmark').toggleClass('active', statPreviewEnemyBookmarks.indexOf(uniqueKey) != -1)
 
         initRaidSkillInfo(enemyListItem.raidId, enemyListItem.id, enemyListItem.raidDifficulty)
+        calculateEnemyStats()
+    }
+
+    toggleEnemyArmorType(armorType) {
+        statPreviewSelectedEnemyArmorType = armorType
+
+        $('#statpreview-enemy-defensetype-list .dropdown-item').removeClass('active')
+        $(`#statpreview-enemy-defensetype-list .dropdown-item[data-value="${armorType}"]`).addClass('active')
+        $("#statpreview-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${statPreviewSelectedEnemyArmorType.toLowerCase()}`)
+        $("#statpreview-enemy-defensetype .label").text(getLocalizedString('ArmorType',statPreviewSelectedEnemyArmorType))
+
         calculateEnemyStats()
     }
 
@@ -6762,6 +6785,8 @@ function calculateEnemyStats() {
 
     let defText = translateUI('stat_defense_tooltip', [`<b>${enemyStats.getDefenseDamageReduction()}</b>`])
     $('#calculation-enemy-stat-table .stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
+
+    enemyStats.armorType = statPreviewSelectedEnemyArmorType
 
     statPreviewSelectedEnemyStats = enemyStats
 

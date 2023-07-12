@@ -185,9 +185,9 @@
                                     </button>
                                     <div class="flex-fill"></div>
                                     <button id="skill-show-details" class="btn-pill">
-                                        <div class="d-flex align-items-center justify-content-center" style="width:28px;height:28px;"><i class="fa-solid fa-magnifying-glass"></i></div>
-                                        <span class="label ps-1">
-                                            <span data-localize-id="ui,details"></span>
+                                        <div class="d-flex align-items-center justify-content-center" style="width:28px;height:28px;"><i class="fa-solid fa-calculator"></i></div>
+                                        <span class="label ps-0">
+                                            <span data-localize-id="ui,calculations"></span>
                                         </span>
                                     </button>
                                 </div>
@@ -875,7 +875,9 @@
                                                 </div>
                                                 <div class="d-flex flex-wrap align-items-center gap-1 mt-2 pb-1">
                                                     <span id="statpreview-enemy-attacktype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Attack_s.png"></span><span class="label"></span></span>
-                                                    <span id="statpreview-enemy-defensetype" class="ba-info-pill-s bg-theme text-bold"><span class="icon-type"><img src="images/ui/Type_Defense_s.png"></span><span class="label"></span></span>
+                                                    <button id="statpreview-enemy-defensetype" class="ba-info-pill-s btn btn-dark text-bold" data-bs-toggle="dropdown"><span class="icon-type"><img src="images/ui/Type_Defense_s.png"></span><span class="label"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>
+                                                    <ul id="statpreview-enemy-defensetype-list" class="dropdown-menu dropdown-menu-dark dropdown-menu-start">
+                                                    </ul>
                                                     <span id="statpreview-enemy-size" class="ba-info-pill-s bg-theme text-bold"><span class="label"></span></span>
                                                     <button id="statpreview-enemy-bookmark" class="btn btn-sm btn-dark stat-panel-btn-sm no-wrap ms-auto" type="button"><i class="fa-solid fa-bookmark"></i></button>
                                                 </div>
