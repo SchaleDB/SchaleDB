@@ -7273,7 +7273,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                     tier += `T${(gear.Id%10)+1}`
                 }
                 name = translateUI('item_randombox_tier', [tier, gearType])
-            } else if (group.Id >= 300000 && group.Id < 600000) {
+            } else if (group.Id >= 300000 && group.Id < 360000) {
                 // Equipment boxes that contain a random piece for an equipment slot (same tier)
                 desc = translateUI('item_equipment_box') + "\n"
                 iconPath = 'equipment'
@@ -7296,6 +7296,30 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                     gearType += getLocalizedString('ItemCategory', gear.Category)                
                 }
                 name = translateUI('item_randombox_tier', [tier, gearType])
+            } else if (group.Id >= 360000 && group.Id < 370000) {
+                // Random Tech Notes/BD
+                desc = translateUI('item_contains_random') + "\n" + translateUI('item_is_immediateuse') + "\n"
+                iconPath = 'items'
+                let maxTier = 0, itemType = 0
+
+                // Count the total probability
+                const totalProb = group.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
+
+                for (let i = 0; i < group.ItemList.length; i++) {
+
+                    let item = find(data.items, 'Id', group.ItemList[i][0])[0]
+                    desc += `${getTranslatedString(item, 'Name')} (${getProbabilityText(group.ItemList[i][1]/totalProb)})\n`
+
+                    maxTier = Math.max(item.Id % 10, maxTier)
+                    itemType = Math.floor(item.Id / 1000)             
+                }
+
+                //get the chest items
+                const boxItem = find(data.items, 'Id', itemType*10000 + maxTier)[0]
+                name = boxItem.Name
+                icon = boxItem.Icon
+                rarity = boxItem.Rarity
+                
             } else if (group.Id >= 10100 && group.Id <= 10200) {
                 // Artifact Box
                 const item = find(data.items, 'Id', group.ItemList[0][0])[0]
