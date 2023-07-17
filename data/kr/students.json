@@ -6214,7 +6214,8 @@
             ]
         ],
         "FavorAlts": [
-            10024
+            10024,
+            20027
         ],
         "MemoryLobby": [
             9,
@@ -34841,7 +34842,8 @@
             ]
         ],
         "FavorAlts": [
-            10010
+            10010,
+            20027
         ],
         "MemoryLobby": [
             3,
@@ -80663,6 +80665,520 @@
                 12,
                 7,
                 14
+            ]
+        ]
+    },
+    {
+        "Id": 20027,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 146,
+        "PathName": "Shiroko_Swimsuit",
+        "DevName": "CH0188",
+        "Name": "시로코(수영복)",
+        "School": "Abydos",
+        "Club": "Countermeasure",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Mystic",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "Weapon_Icon_CH0188",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Bag",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Swimsuit02_Collection",
+        "CollectionTexture": "Student_Portrait_CH0188_Collection",
+        "FamilyName": "스나오오카미",
+        "FamilyNameRuby": "",
+        "PersonalName": "시로코",
+        "SchoolYear": "2학년",
+        "CharacterAge": "16세",
+        "Birthday": "5월 16일",
+        "CharacterSSRNew": "들뜨지 않았어.\n해야 하는 일을 할 뿐.",
+        "ProfileIntroduction": "한여름 무인도의 리조트에 도착한 대책위원회 행동반장.\n\n난처한 상황 속에서도 리조트 재건과 식량 채취 등, 필요한 일에 앞장선다. 수영복으로 갈아입었어도 특유의 엉뚱함과 추진력을 잃지 않는 모습은 변함이 없다.",
+        "Hobby": "조깅, 체력 단련, 사이클 라이딩",
+        "CharacterVoice": "小倉唯",
+        "BirthDay": "5/16",
+        "Illustrator": "Mx2J",
+        "Designer": "Mx2J",
+        "CharHeightMetric": "156cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1582,
+        "AttackPower1": 304,
+        "AttackPower100": 3045,
+        "MaxHP1": 1967,
+        "MaxHP100": 14697,
+        "DefensePower1": 65,
+        "DefensePower100": 393,
+        "HealPower1": 1636,
+        "HealPower100": 4908,
+        "DodgePoint": 786,
+        "AccuracyPoint": 660,
+        "CriticalPoint": 254,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "월척이다",
+                "Desc": "적 1인에게 <d:DEF> <?1> 감소(30초간)/\n추가로 공격력 <?2> 대미지",
+                "Parameters": [
+                    [
+                        "18%",
+                        "20.7%",
+                        "26.1%",
+                        "28.8%",
+                        "34.2%",
+                        "36.9%",
+                        "42.3%",
+                        "45%",
+                        "50.5%",
+                        "53.2%"
+                    ],
+                    [
+                        "588%",
+                        "676%",
+                        "852%",
+                        "940%",
+                        "1117%",
+                        "1205%",
+                        "1381%",
+                        "1470%",
+                        "1646%",
+                        "1734%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            58800,
+                            67620,
+                            85260,
+                            94080,
+                            111720,
+                            120540,
+                            138180,
+                            147000,
+                            164640,
+                            173460
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -1804,
+                                -2075,
+                                -2616,
+                                -2886,
+                                -3427,
+                                -3697,
+                                -4238,
+                                -4508,
+                                -5050,
+                                -5320
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "&#x27;마침 여기&#x27;",
+                "Desc": "전투 시작 시 자신을 제외한 아군 <b:CriticalChance> <?1> 증가(60초간), EX 스킬 코스트 1 감소(EX 스킬 사용 1회까지)\n(전투 당 1회)",
+                "Parameters": [
+                    [
+                        "11.5%",
+                        "12.1%",
+                        "12.7%",
+                        "15%",
+                        "15.5%",
+                        "16.1%",
+                        "18.4%",
+                        "19%",
+                        "19.6%",
+                        "21.9%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_COSTDECREASE",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1154,
+                                1211,
+                                1270,
+                                1500,
+                                1557,
+                                1615,
+                                1846,
+                                1904,
+                                1961,
+                                2191
+                            ]
+                        ],
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Channel": 109
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "묘하게 들뜬",
+                "Desc": "<b:ATK> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "묘하게 들뜬+",
+                "Desc": "<b:ATK> <?1> 증가/\n추가로 <b:ATK> <?2> 증가",
+                "Parameters": [
+                    [
+                        "365",
+                        "384",
+                        "402",
+                        "475",
+                        "493",
+                        "511",
+                        "584",
+                        "602",
+                        "621",
+                        "694"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            365,
+                            384,
+                            402,
+                            475,
+                            493,
+                            511,
+                            584,
+                            602,
+                            621,
+                            694
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "단련된 체력",
+                "Desc": "아군의 <b:CostRegen> <?1> 증가",
+                "Parameters": [
+                    [
+                        "10.6%",
+                        "11.2%",
+                        "11.7%",
+                        "13.8%",
+                        "14.4%",
+                        "14.9%",
+                        "17%",
+                        "17.6%",
+                        "18.1%",
+                        "20.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_REGENCOST",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1068,
+                                1121,
+                                1175,
+                                1389,
+                                1442,
+                                1495,
+                                1709,
+                                1762,
+                                1815,
+                                2029
+                            ]
+                        ],
+                        "Stat": "RegenCost_Coefficient",
+                        "Channel": 330
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                6,
+                37
+            ],
+            [
+                8,
+                44
+            ],
+            [
+                2,
+                7
+            ],
+            [
+                3,
+                11
+            ],
+            [
+                5,
+                18
+            ]
+        ],
+        "FavorAlts": [
+            10010,
+            10024
+        ],
+        "MemoryLobby": [
+            2,
+            0
+        ],
+        "MemoryLobbyBGM": "DIVE INTO SUMMER",
+        "FurnitureInteraction": [
+            [
+                210311
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Swimsuit",
+            "WaterPlay",
+            "Sports"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Shiroko_Swimsuit",
+            "F_Shiroko_Swimsuit2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "WHITE FANG 465",
+            "Desc": "바다에서도 애용되는 시로코의 돌격소총.\n\n평소보다 신경 쓴 정비 덕에, 물기나 소금기에도 문제없다.",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 134,
+            "AttackPower100": 1338,
+            "MaxHP1": 428,
+            "MaxHP100": 4278,
+            "HealPower1": 192,
+            "HealPower100": 1923,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3040,
+                110
+            ],
+            [
+                3041,
+                3040,
+                111,
+                150
+            ],
+            [
+                3042,
+                3041,
+                112,
+                151
+            ],
+            [
+                3043,
+                3042,
+                113,
+                152
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                16
+            ],
+            [
+                12,
+                18,
+                11,
+                36
+            ],
+            [
+                12,
+                18,
+                11,
+                25
+            ],
+            [
+                8,
+                18,
+                10,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4040
+            ],
+            [
+                4040
+            ],
+            [
+                4041,
+                4040,
+                110
+            ],
+            [
+                4041,
+                111,
+                150
+            ],
+            [
+                4042,
+                4041,
+                111,
+                150
+            ],
+            [
+                4042,
+                112,
+                151
+            ],
+            [
+                4043,
+                4042,
+                113,
+                152
+            ],
+            [
+                4043,
+                113,
+                152
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                5,
+                14
+            ],
+            [
+                5,
+                12,
+                9,
+                16
+            ],
+            [
+                8,
+                4,
+                17
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                7,
+                13
             ]
         ]
     }

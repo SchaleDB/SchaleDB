@@ -159,14 +159,11 @@ let statPreviewLevel
 let statPreviewWeaponLevel
 let statPreviewEquipment
 let statPreviewGearLevel
-let statPreviewBondLevel
-let statPreviewBondAltLevel
+let statPreviewBondLevel = []
 let statPreviewPassiveLevel
 let statPreviewExLevel
 let statPreviewIncludePassive
-let statPreviewIncludeExGear
-let statPreviewIncludeBond
-let statPreviewIncludeBondAlts
+let statPreviewIncludeBond = []
 let statPreviewIncludeEquipment
 let statPreviewIncludeBuffs
 let statPreviewViewSupportStats = false
@@ -3182,7 +3179,8 @@ $.when($.ready, loadPromise).then(function() {
                         ws: parseInt(charData[6]),
                         wl: parseInt(charData[7]),
                         b: parseInt(charData[8]),
-                        s3: parseInt(charData[9])
+                        s3: parseInt(charData[9]),
+                        lock: false
                     }
                 }
             })
@@ -4738,23 +4736,22 @@ function renderStudent() {
     }
     $('#ba-statpreview-status-strikerbonus').toggleClass("deactivated", !statPreviewViewSupportStats)
     
-    $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(1, student))
-    $('#ba-statpreview-status-bond-icon').attr('src', `images/student/icon/${student.CollectionTexture}.png`)
+    $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(0, student))
+    $('#statpreview-status-bond').empty().html(getBondToggleHTML(0, student))
+
     student_bondalts = []
 
-    $('#ba-statpreview-status-bond-level').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_relationship_bonus', [student.Name])), placement: 'top', html: true})
+    $('#ba-statpreview-status-bond-0-toggle').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_relationship_bonus', [student.Name])), placement: 'top', html: true})
 
     for (let i = 0; i < student.FavorAlts.length; i++) {
         var extraTarget = find(data.students,"Id",student.FavorAlts[i])[0]
         if (extraTarget.IsReleased[regionID]) {
             student_bondalts.push(extraTarget)
-            $('#ba-statpreview-status-bond-alt-icon').attr('src', `images/student/icon/${extraTarget.CollectionTexture}.png`)
-            $('#ba-statpreview-bond-targets').append(getBondTargetsHTML(1 + student_bondalts.length, extraTarget))
-            $('#ba-statpreview-status-bond-alt-level').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_relationship_bonus', [extraTarget.Name])), placement: 'top', html: true})
+            $('#ba-statpreview-bond-targets').append(getBondTargetsHTML(student_bondalts.length, extraTarget))
+            $('#statpreview-status-bond').append(getBondToggleHTML(student_bondalts.length, extraTarget))
+            $(`#ba-statpreview-status-bond-${student_bondalts.length}-toggle`).tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_relationship_bonus', [extraTarget.Name])), placement: 'top', html: true})
         }
     }
-
-    $('#ba-statpreview-status-bond-alt-level').toggle(student_bondalts.length > 0)
 
     if (student.Id in studentCollection) {
         statPreviewStarGrade = studentCollection[student.Id].s
@@ -4772,11 +4769,11 @@ function renderStudent() {
         statPreviewWeaponLevel = studentCollection[student.Id].wl
         $('#ba-statpreview-weapon-range').attr("max",region.weaponlevel_max).val(statPreviewWeaponLevel)
 
-        statPreviewBondLevel = studentCollection[student.Id].b
-        $('#ba-statpreview-bond-1-range').val(statPreviewBondLevel)
+        statPreviewBondLevel[0] = studentCollection[student.Id].b
+        $('#ba-statpreview-bond-0-range').val(statPreviewBondLevel[0])
         $('#ba-statpreview-passiveskill-range').val(studentCollection[student.Id].s3)
         changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
-        statPreviewIncludeBond = true
+        statPreviewIncludeBond[0] = true
         statPreviewIncludeEquipment = true
         lockedAttributes = studentCollection[student.Id].lock !== undefined ? studentCollection[student.Id].lock : false
 
@@ -4815,11 +4812,11 @@ function renderStudent() {
     if ("Released" in student.Gear && student.Gear.Released[regionID]) {
         changeExGearLevel(document.getElementById('ba-statpreview-gear4-range'), false)
     }
-    for (let i = 1; i <= student_bondalts.length+1; i++) {
-        if (i > 1 && student_bondalts[i-2].Id in studentCollection) {
-            statPreviewBondAltLevel = studentCollection[student_bondalts[i-2].Id].b
-            $(`#ba-statpreview-bond-${i}-range`).val(studentCollection[student_bondalts[i-2].Id].b)
-            statPreviewIncludeBondAlts = true
+    for (let i = 0; i <= student_bondalts.length; i++) {
+        if (i > 0 && student_bondalts[i-1].Id in studentCollection) {
+            statPreviewBondLevel[i] = studentCollection[student_bondalts[i-1].Id].b
+            $(`#ba-statpreview-bond-${i}-range`).val(studentCollection[student_bondalts[i-1].Id].b)
+            statPreviewIncludeBond[i] = true
         }
         changeStatPreviewBondLevel(i, false)
     }
@@ -6112,21 +6109,13 @@ function toggleBuffs() {
 }
 
 function toggleBond(num) {
-    if (num == 1) {
-        statPreviewIncludeBond = !statPreviewIncludeBond
-        $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
-        $('#ba-statpreview-bond-1-toggle').toggleClass("checked", statPreviewIncludeBond)
-        $('#ba-statpreview-bond-1').toggleClass("disabled", !statPreviewIncludeBond)
-        $('#ba-statpreview-bond-1 input').prop("disabled", !statPreviewIncludeBond)
-    } else {
-        statPreviewIncludeBondAlts = !statPreviewIncludeBondAlts
-        if (student_bondalts.length > 0) {
-            $('#ba-statpreview-status-bond-alt-level').toggleClass('deactivated', !statPreviewIncludeBondAlts)
-            $(`#ba-statpreview-bond-${num}-toggle`).toggleClass("checked", statPreviewIncludeBondAlts)
-            $(`#ba-statpreview-bond-${num}`).toggleClass("disabled", !statPreviewIncludeBondAlts)
-            $(`#ba-statpreview-bond-${num} input`).prop("disabled", !statPreviewIncludeBondAlts)
-        }
-    }
+
+    statPreviewIncludeBond[num] = !statPreviewIncludeBond[num]
+    $(`#ba-statpreview-status-bond-${num}-toggle`).toggleClass('deactivated', !statPreviewIncludeBond[num])
+    $(`#ba-statpreview-bond-${num}-toggle`).toggleClass("checked", statPreviewIncludeBond[num])
+    $(`#ba-statpreview-bond-${num}`).toggleClass("disabled", !statPreviewIncludeBond[num])
+    $(`#ba-statpreview-bond-${num} input`).prop("disabled", !statPreviewIncludeBond[num])
+
     recalculateStats()
 }
 
@@ -6136,17 +6125,6 @@ function togglePassiveSkill() {
     $('#ba-statpreview-passiveskill-toggle').toggleClass("checked", statPreviewIncludePassive)
     $('#ba-statpreview-passiveskill').toggleClass("disabled", !statPreviewIncludePassive)
     $('#ba-statpreview-passiveskill input').prop("disabled", !statPreviewIncludePassive)
-    recalculateStats()
-}
-
-function toggleExGear() {
-    statPreviewIncludeExGear = !statPreviewIncludeExGear
-    $('#ba-statpreview-ex-gear-toggle').toggleClass("checked", statPreviewIncludeExGear)
-    $('#ba-statpreview-ex-gear').toggleClass("disabled", !statPreviewIncludeExGear)
-    $('#student-stat-modal-skill-calculations .skill-info-gearnormal').toggle(statPreviewIncludeExGear)
-    $('#student-stat-modal-skill-calculations .skill-info-normal').toggle(!statPreviewIncludeExGear)
-    updateGearIcon()
-    statPreviewExternalBuffs.toggleUpgrades(statPreviewIncludeExGear)
     recalculateStats()
 }
 
@@ -6209,17 +6187,13 @@ function changeWeaponPreviewLevel(el) {
 
 function changeStatPreviewBondLevel(i, recalculate = true) {
     const level = parseInt($(`#ba-statpreview-bond-${i}-range`).val())
+
     $(`#ba-statpreview-bond-${i}-level`).html(`<i class="fa-solid fa-heart me-1"></i> ${level}`)
-    var bondStats
-    if (i == 1) {
-        bondStats = Object.entries(getBondStats(student, level))
-        statPreviewBondLevel = level
-        $('#ba-statpreview-status-bond-level .label').html(level)
-    } else {
-        bondStats = Object.entries(getBondStats(student_bondalts[i-2], level))
-        statPreviewBondAltLevel = level
-        $('#ba-statpreview-status-bond-alt-level .label').html(level)
-    }
+    $(`#ba-statpreview-status-bond-${i}-toggle .label`).html(level)
+
+    const bondStats = Object.entries(getBondStats(i == 0 ? student : student_bondalts[i-1], level))
+    statPreviewBondLevel[i] = level
+
     $(`#ba-statpreview-bond-${i}-description`).html(`${getStatName(bondStats[0][0])} <b>+${getFormattedStatAmount(bondStats[0][1])}</b>, ${getStatName(bondStats[1][0])} <b>+${getFormattedStatAmount(bondStats[1][1])}</b>`)
     if (recalculate) recalculateStatsWithDelay()
 }
@@ -6263,7 +6237,14 @@ function getBondTargetsHTML(num, student) {
     <h5 class="flex-fill">${translateUI('student_bond')}</h5>
     <i class="fa-regular fa-square off"></i>
     <i class="fa-solid fa-square-check on"></i></div>
-    <div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mb-1 d-flex flex-row align-items-center"><div class="ba-bond-icon me-2" style="position: relative;"><img src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5>${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${num == 1 ? statPreviewBondLevel : statPreviewBondAltLevel}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div></div>`
+    <div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mb-1 d-flex flex-row align-items-center"><div class="ba-bond-icon me-2" style="position: relative;"><img src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5>${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${statPreviewBondLevel[num]}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div></div>`
+}
+
+function getBondToggleHTML(num, student) {
+    return `<button id="ba-statpreview-status-bond-${num}-toggle" onclick="toggleBond(${num})" class="btn-pill tooltip-button">
+    <div class="icon bond-small"><img src="images/student/icon/${student.CollectionTexture}.png" width="28" height="28"></div>
+    <span class="label ps-2"></span>
+    </button>`
 }
 
 function changeBondLevel(el) {
@@ -6383,12 +6364,14 @@ function recalculateStats() {
     }
 
     //Include Relationship
-    if (statPreviewIncludeBond) {
-        let bondlevel = $(`#ba-statpreview-bond-1-range`).val()
+    if (statPreviewIncludeBond[0]) {
+        let bondlevel = $(`#ba-statpreview-bond-0-range`).val()
         let bondbonus = getBondStats(student, Math.min(maxbond[statPreviewStarGrade-1], bondlevel))
+
         Object.entries(bondbonus).forEach(el => {
             studentStats.addBuff(el[0], el[1])
         })
+
         if (compareMode) {
             bondbonus = getBondStats(studentCompare, Math.min(maxbond[statPreviewStarGrade-1], bondlevel))
             Object.entries(bondbonus).forEach(el => {
@@ -6397,10 +6380,11 @@ function recalculateStats() {
         }
     }
 
-    if (statPreviewIncludeBondAlts) {
-        for (let i = 2; i <= student_bondalts.length+1; i++) {
+    for (let i = 1; i <= student_bondalts.length; i++) {
+        if (statPreviewIncludeBond[i]) {
             let bondlevel = $(`#ba-statpreview-bond-${i}-range`).val()
-            let bondbonus = getBondStats(student_bondalts[i-2], bondlevel)
+            let bondbonus = getBondStats(student_bondalts[i-1], bondlevel)
+    
             Object.entries(bondbonus).forEach(el => {
                 studentStats.addBuff(el[0], el[1])
             })
@@ -6824,18 +6808,14 @@ function calculateRaidSkills() {
 }
 
 function refreshStatTableControls() {
-    $('#ba-statpreview-status-bond-level').toggleClass('deactivated', !statPreviewIncludeBond)
-    $('#ba-statpreview-status-bond-level .label').html($('#ba-statpreview-bond-1-range').val())
-    $('#ba-statpreview-bond-1-toggle').toggleClass("checked", statPreviewIncludeBond)
-    $('#ba-statpreview-bond-1').toggleClass("disabled", !statPreviewIncludeBond)
-    $('#ba-statpreview-bond-1 input').prop("disabled", !statPreviewIncludeBond)
-    if (student_bondalts.length > 0) {
-        $('#ba-statpreview-status-bond-alt-level').toggleClass('deactivated', !statPreviewIncludeBondAlts)
-        $('#ba-statpreview-status-bond-alt-level .label').html($('#ba-statpreview-bond-2-range').val())
-        $('#ba-statpreview-bond-2-toggle').toggleClass("checked", statPreviewIncludeBondAlts)
-        $('#ba-statpreview-bond-2').toggleClass("disabled", !statPreviewIncludeBondAlts)
-        $('#ba-statpreview-bond-2 input').prop("disabled", !statPreviewIncludeBondAlts)
+    for (let i = 0; i <= student_bondalts.length; i++) {
+        $(`#ba-statpreview-status-bond-${i}-toggle`).toggleClass('deactivated', !statPreviewIncludeBond[i])
+        $(`#ba-statpreview-status-bond-${i}-toggle .label`).html(statPreviewBondLevel[i])
+        $(`#ba-statpreview-bond-${i}-toggle`).toggleClass("checked", statPreviewIncludeBond[i])
+        $(`#ba-statpreview-bond-${i}`).toggleClass("disabled", !statPreviewIncludeBond[i])
+        $(`#ba-statpreview-bond-${i} input`).prop("disabled", !statPreviewIncludeBond[i])
     }
+
     $('#ba-statpreview-status-passive-level').toggleClass('deactivated', !statPreviewIncludePassive)
     $('#ba-statpreview-passiveskill-toggle').toggleClass("checked", statPreviewIncludePassive)
     $('#ba-statpreview-passiveskill').toggleClass("disabled", !statPreviewIncludePassive)
@@ -6845,9 +6825,6 @@ function refreshStatTableControls() {
     statPreviewExternalBuffs.toggleDisabled(!statPreviewIncludeBuffs)
     $('#ba-statpreview-buff-toggle').toggleClass("checked", statPreviewIncludeBuffs)
     // $('#ba-statpreview-buffs').toggleClass("disabled", !statPreviewIncludeBuffs)
-
-    // $('#ba-statpreview-ex-gear-toggle').toggleClass("checked", statPreviewIncludeExGear)
-    // $('#ba-statpreview-ex-gear').toggleClass("disabled", !statPreviewIncludeExGear)
 
     $('#ba-statpreview-status-equipment').toggleClass('deactivated', !statPreviewIncludeEquipment)
     $('#ba-statpreview-gear').toggleClass("disabled", !statPreviewIncludeEquipment)
@@ -7457,12 +7434,12 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
         $(`.weaponpreview-star-${i}`).toggleClass("active", i <= weaponstars)
     }
 
-    const bondLevel = parseInt($('#ba-statpreview-bond-1-range').val())
+    const bondLevel = parseInt($('#ba-statpreview-bond-0-range').val())
     if (bondLevel > maxbond[stars-1]) {
-        $('#ba-statpreview-bond-1-range').val(maxbond[stars-1])
-        changeStatPreviewBondLevel(1, false)
+        $('#ba-statpreview-bond-0-range').val(maxbond[stars-1])
+        changeStatPreviewBondLevel(0, false)
     }
-    $('#ba-statpreview-bond-1-range').attr("max", maxbond[stars-1])
+    $('#ba-statpreview-bond-0-range').attr("max", maxbond[stars-1])
 
     if (weaponstars > 0) {
         $('#ba-statpreview-weapon').toggleClass('disabled', false)
@@ -9234,15 +9211,15 @@ function studentCollectionSave() {
         e3: parseInt($('#ba-statpreview-gear3-range').val()),
         ws: statPreviewWeaponGrade,
         wl: parseInt($('#ba-statpreview-weapon-range').val()),
-        b: parseInt($('#ba-statpreview-bond-1-range').val()),
+        b: parseInt($('#ba-statpreview-bond-0-range').val()),
         s3: parseInt($('#ba-statpreview-passiveskill-range').val()),
         lock: lockedAttributes
     }
 
     //update alt bond
-    for (let i = 2; i <= student_bondalts.length+1; i++) {
-        if (student_bondalts[i-2].Id in studentCollection) {
-            studentCollection[student_bondalts[i-2].Id].b = parseInt($(`#ba-statpreview-bond-${i}-range`).val())
+    for (let i = 1; i <= student_bondalts.length; i++) {
+        if (student_bondalts[i-1].Id in studentCollection && !studentCollection[student_bondalts[i-1].Id].lock) {
+            studentCollection[student_bondalts[i-1].Id].b = parseInt($(`#ba-statpreview-bond-${i}-range`).val())
         }
     }
     
@@ -9274,19 +9251,21 @@ function maxStudentAttributes() {
     $('#ba-statpreview-passiveskill-range').val(statPreviewPassiveLevel)
     changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
 
-    statPreviewBondLevel = data.common.regions[regionID].bondlevel_max
-    $('#ba-statpreview-bond-1-range').val(statPreviewBondLevel)
-    changeStatPreviewBondLevel(1, false)
-    statPreviewIncludeBond = true
-
-    if (student_bondalts.length > 0) {
-        statPreviewBondAltLevel = data.common.regions[regionID].bondlevel_max
-        $('#ba-statpreview-bond-2-range').val(statPreviewBondAltLevel)
-        changeStatPreviewBondLevel(2, false)
-        statPreviewIncludeBondAlts = true
+    for (let i = 0; i <= student_bondalts.length; i++) {
+        statPreviewBondLevel[i] = data.common.regions[regionID].bondlevel_max
+        $(`#ba-statpreview-bond-${i}-range`).val(statPreviewBondLevel[i])
+        changeStatPreviewBondLevel(i, false)
+        statPreviewIncludeBond[i] = true
+        
     }
 
     statPreviewIncludeEquipment = true
+
+    if ("Released" in student.Gear && student.Gear.Released[regionID]) {
+        const max = $('#ba-statpreview-gear4-range').attr('max')
+        $('#ba-statpreview-gear4-range').val(max)
+        changeExGearLevel(document.getElementById('ba-statpreview-gear4-range'), false)
+    }
 
     refreshStatTableControls()
     recalculateStats()
@@ -9300,14 +9279,11 @@ function statPreviewSettingsSave() {
         WeaponLevel: statPreviewWeaponLevel,
         Equipment: statPreviewEquipment,
         BondLevel: statPreviewBondLevel,
-        BondAltLevel: statPreviewBondAltLevel,
         PassiveLevel: statPreviewPassiveLevel,
         ExLevel: statPreviewExLevel,
         GearLevel: statPreviewGearLevel,
         IncludePassive: statPreviewIncludePassive,
-        IncludeExGear: statPreviewIncludeExGear,
         IncludeBond: statPreviewIncludeBond,
-        IncludeBondAlts: statPreviewIncludeBondAlts,
         IncludeEquipment: statPreviewIncludeEquipment,
         IncludeBuffs: statPreviewIncludeBuffs
     }
@@ -9324,15 +9300,12 @@ function statPreviewSettingsLoad() {
     statPreviewLevel = statPreviewSettings.Level ? statPreviewSettings.Level : 1
     statPreviewWeaponLevel = statPreviewSettings.WeaponLevel ? statPreviewSettings.WeaponLevel : 1
     statPreviewEquipment = statPreviewSettings.Equipment ? statPreviewSettings.Equipment : [99, 99, 99]
-    statPreviewBondLevel = statPreviewSettings.BondLevel ? statPreviewSettings.BondLevel : 20
-    statPreviewBondAltLevel = statPreviewSettings.BondAltLevel ? statPreviewSettings.BondAltLevel : 20
+    statPreviewBondLevel = Array.isArray(statPreviewSettings.BondLevel) ? statPreviewSettings.BondLevel : [20, 20, 20]
     statPreviewPassiveLevel = statPreviewSettings.PassiveLevel ? statPreviewSettings.PassiveLevel : 10
     statPreviewExLevel = statPreviewSettings.ExLevel ? statPreviewSettings.ExLevel : 5
     statPreviewGearLevel = statPreviewSettings.GearLevel ? statPreviewSettings.GearLevel : 0
     statPreviewIncludePassive = statPreviewSettings.IncludePassive ? statPreviewSettings.IncludePassive : false
-    statPreviewIncludeExGear = statPreviewSettings.IncludeExGear ? statPreviewSettings.IncludeExGear : false
-    statPreviewIncludeBond = statPreviewSettings.IncludeBond ? statPreviewSettings.IncludeBond : false
-    statPreviewIncludeBondAlts = statPreviewSettings.IncludeBondAlts ? statPreviewSettings.IncludeBondAlts : false
+    statPreviewIncludeBond = Array.isArray(statPreviewSettings.IncludeBond) ? statPreviewSettings.IncludeBond : [false, false, false]
     statPreviewIncludeEquipment = statPreviewSettings.IncludeEquipment ? statPreviewSettings.IncludeEquipment : false
     statPreviewIncludeBuffs = statPreviewSettings.IncludeBuffs ? statPreviewSettings.IncludeBuffs : false
 }
@@ -9360,6 +9333,7 @@ function parseImport(str) {
                 wl: char[1].wl,
                 b: char[1].b,
                 s3: char[1].s3,
+                lock: char[1].lock !== undefined ? char[1].lock : false
             }
         })
         return collectionNew
@@ -9382,7 +9356,8 @@ function parseImport(str) {
                     ws: char.current.ue,
                     wl: char.current.ue_level,
                     b: char.current.bond,
-                    s3: Math.max(char.current.passive,1)
+                    s3: Math.max(char.current.passive,1),
+                    lock: false
                 }
             }
         })
