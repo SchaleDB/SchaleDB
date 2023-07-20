@@ -759,6 +759,18 @@ p a {
     }
 }
 
+.help {
+
+    margin: 0 0.5rem;
+    opacity: 0.5;
+
+    @include transition(opacity);
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
 .text-weak {
     color: #ff690b;
 }

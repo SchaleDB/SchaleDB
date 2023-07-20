@@ -151,6 +151,8 @@ let loadedModule
 
 let student
 let studentList
+let studentStatsList = null
+let sortByCollectionStats = false
 let studentCompare 
 
 let statPreviewStarGrade
@@ -267,6 +269,7 @@ let search_options = {
             "Explosion": false,
             "Pierce": false,
             "Mystic": false,
+            "Sonic": false
         },
         "ArmorType": {
             "LightArmor": false,
@@ -494,6 +497,7 @@ let itemSearchOptions = {
         this.activeBuffs = {}
         this.bulletType = character.BulletType
         this.armorType = character.ArmorType
+        this.equipment = character.Equipment ? character.Equipment : []
 
         this.stats['MaxHP'] = [MaxHP,0,1,0]
         this.stats['AttackPower'] = [AttackPower,0,1,0]
@@ -829,6 +833,25 @@ let itemSearchOptions = {
                 break
         }
         return effMod / 10000
+    }
+
+    addEquipmentBonuses(type, tier) {
+        const equipment = find(data.equipment, "Id", gearId[type] + tier-1)[0]
+        equipment.StatType.forEach((stat, index) => {
+            this.addBuff(stat, equipment.StatValue[index][1])
+        })
+    }
+
+    addGearBonuses(gear, tier) {
+        this.addBuff(gear.StatType[0], gear.StatValue[0][1])
+    }
+
+    addWeaponBonuses(weapon, level) {
+        let levelscale = ((level-1)/99)
+        if (weapon.StatLevelUpType == 'Standard') levelscale = levelscale.toFixed(4)
+        this.addBuff("AttackPower_Base", Math.round(weapon.AttackPower1 + (weapon.AttackPower100-weapon.AttackPower1) * levelscale))
+        this.addBuff("MaxHP_Base", Math.round(weapon.MaxHP1 + (weapon.MaxHP100-weapon.MaxHP1) * levelscale))
+        this.addBuff("HealPower_Base", Math.round(weapon.HealPower1 + (weapon.HealPower100-weapon.HealPower1) * levelscale))
     }
 
 }
@@ -1890,7 +1913,7 @@ let statPreviewSupportStats = SupportStats
 
 class EnemyFinder {
 
-    armorTypes = ['Normal', 'LightArmor', 'HeavyArmor', 'Unarmed']
+    armorTypes = ['Normal', 'LightArmor', 'HeavyArmor', 'Unarmed', 'ElasticArmor']
     enemyList = []
 
     elements = {
@@ -2243,7 +2266,7 @@ class EnemyFinder {
         $('#statpreview-enemy-size').toggle(enemysize != null)
         $('#statpreview-enemy-size .label').text(enemysize != null ? getLocalizedString('EnemyTags', enemysize) : '')
 
-        $("#statpreview-enemy-attacktype .icon-type").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
+        $("#statpreview-enemy-attacktype .icon-type").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-sonic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
         $("#statpreview-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
         $("#statpreview-enemy-attacktype .label").text(getLocalizedString('BulletType',enemy.BulletType))
         $("#statpreview-enemy-defensetype .label").text(getLocalizedString('ArmorType',enemy.ArmorType))
@@ -3436,6 +3459,11 @@ function loadModule(moduleName, entry=null) {
             } else {
                 searchSetOrder('Default', false, false)
             }
+
+            if (localStorage.getItem("chara_sortby_collectionstats")) {
+                sortByCollectionStats = (localStorage.getItem("chara_sortby_collectionstats") == 'true')
+            }
+            $('#ba-student-search-sortby-usecollectionstats .item-toggle-icon').html(`<i class="fa-solid fa-toggle-${sortByCollectionStats ? 'on' : 'off'}"></i>`)
         
             if (localStorage.getItem("show_student_list_info")) {
                 showStudentListInfo = (localStorage.getItem("show_student_list_info") == 'true')
@@ -3515,7 +3543,8 @@ function loadModule(moduleName, entry=null) {
         
             $('#ba-student, #ba-student-list-btn').show()
             $('#ba-student-list-btn').on('click', function() {
-                if (search_options["sortby"].startsWith("Collection")) {
+                if (search_options["sortby"].startsWith("Collection") || isAttributeSort(search_options["sortby"])) {
+                    studentStatsList = null
                     updateStudentList(updateSortMethod = true)
                 }
                 $('.card-student.disabled').removeClass('disabled')
@@ -4016,7 +4045,68 @@ function updateStudentList(updateSortMethod = false) {
     if (updateSortMethod) {
         studentList.sort(sort_functions.Default)
         if (sort_functions[search_options["sortby"]] != "Default") {
-            studentList.sort(sortfunction)
+
+            if (isAttributeSort(search_options["sortby"])) {
+
+                if (studentStatsList == null) {
+                    studentStatsList = {}
+                    studentList.forEach((student) => {
+                        
+                        if (sortByCollectionStats && !(student.Id in studentCollection)) {
+                            studentStatsList[student.Id] = null
+                            return
+                        }
+    
+                        const level = sortByCollectionStats ? studentCollection[student.Id].l : data.common.regions[regionID].studentlevel_max
+                        const starGrade = sortByCollectionStats ? studentCollection[student.Id].s : 5
+                        const equipLevel = sortByCollectionStats ? [studentCollection[student.Id].e1, studentCollection[student.Id].e2, studentCollection[student.Id].e3] : [data.common.regions[regionID].gear1_max, data.common.regions[regionID].gear2_max, data.common.regions[regionID].gear3_max]
+                        const weaponLevel = sortByCollectionStats ? studentCollection[student.Id].wl : data.common.regions[regionID].weaponlevel_max
+                        const bondLevel = sortByCollectionStats ? studentCollection[student.Id].b : data.common.regions[regionID].bondlevel_max
+                        const gearLevel = 1
+
+                        const charStats = new CharacterStats(student, level, starGrade)
+
+                        const bondStats = getBondStats(student, bondLevel)
+                        for (let stat in bondStats) {
+                            charStats.addBuff(stat, bondStats[stat])
+                        }
+
+                        for (let favorAlt of student.FavorAlts) {
+                            if (sortByCollectionStats && !(favorAlt in studentCollection)) continue
+
+                            const altStudent = find(data.students, "Id", favorAlt)[0]
+                            const altBondLevel = sortByCollectionStats ? studentCollection[favorAlt].b : data.common.regions[regionID].bondlevel_max
+
+                            const altBondStats = getBondStats(altStudent, altBondLevel)
+                            for (let stat in altBondStats) {
+                                charStats.addBuff(stat, altBondStats[stat])
+                            }
+                        }
+    
+                        charStats.addEquipmentBonuses(student.Equipment[0], equipLevel[0])
+                        charStats.addEquipmentBonuses(student.Equipment[1], equipLevel[1])
+                        charStats.addEquipmentBonuses(student.Equipment[2], equipLevel[2])
+    
+                        if ("Released" in student.Gear && student.Gear.Released[regionID]) {
+                            charStats.addGearBonuses(student.Gear, gearLevel)
+                        }
+                        
+                        charStats.addWeaponBonuses(student.Weapon, weaponLevel)
+    
+                        studentStatsList[student.Id] = charStats
+                    })
+                }
+
+                studentList.sort(function(a,b) {
+                    const attributeName = search_options["sortby"].replace("100", "")
+                    const aTotal = studentStatsList[a.Id] != null ? studentStatsList[a.Id].getTotal(attributeName) : 0
+                    const bTotal = studentStatsList[b.Id] != null ? studentStatsList[b.Id].getTotal(attributeName) : 0
+                    return (bTotal - aTotal)*search_options["sortby_dir"]
+                })
+            } else {
+                studentList.sort(sortfunction)
+            }
+            
         }
     }
 
@@ -4105,6 +4195,16 @@ function updateStudentList(updateSortMethod = false) {
                     const label = el[search_options["sortby"]]
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(label).toggleClass('smalltext', label.length > label_smalltext_threshold["Jp"]).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (isAttributeSort(search_options["sortby"])) {
+                    let label
+                    if (studentStatsList[el.Id] != null) {
+                        label = studentStatsList[el.Id].getTotalString(search_options["sortby"].replace("100", ""))
+                    } else {
+                        label = translateUI('collection_notowned')
+                    }
+
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(label).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else {
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(el[search_options["sortby"]].toLocaleString()).toggleClass('smalltext', false).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
@@ -4122,6 +4222,23 @@ function updateStudentList(updateSortMethod = false) {
     const activeFilters = getNumActiveFilters()
     $('#ba-student-search-filter-amount').text(activeFilters == 0 ? '' : ` (${activeFilters})`)
     $('#ba-student-search-reset').toggle(activeFilters > 0 || $('#ba-student-search-text').val() != "")
+}
+
+function isAttributeSort(sortby) {
+    switch (sortby) {
+        case "AttackPower100":
+        case "DefensePower100":
+        case "MaxHP100":
+        case "HealPower100":
+        case "CriticalPoint":
+        case "StabilityPoint":
+        case "Range":
+        case "AccuracyPoint":
+        case "DodgePoint":
+            return true
+        default:
+            return false
+    }
 }
 
 function buildFilterList(options) {
@@ -4330,6 +4447,15 @@ function getNumActiveFilters() {
     return num
 }
 
+function searchToggleUseCollectionStats() {
+    sortByCollectionStats = !sortByCollectionStats
+    $('#ba-student-search-sortby-usecollectionstats .item-toggle-icon').html(`<i class="fa-solid fa-toggle-${sortByCollectionStats ? 'on' : 'off'}"></i>`)
+
+    studentStatsList = null
+    localStorage.setItem('chara_sortby_collectionstats', sortByCollectionStats)
+    updateStudentList(true)
+}
+
 function searchSetOrder(value, runSearch = true, swapDir = true) {
 
     if (swapDir) {
@@ -4363,6 +4489,7 @@ function searchSetOrder(value, runSearch = true, swapDir = true) {
     if (runSearch) {
         updateStudentList(updateSortMethod = true)
     }
+    $('#ba-student-search-sortby-stat').dropdown('hide')
 }
 
 function searchSetOrderItems(value, runSearch = true, swapDir = true) {
@@ -4526,7 +4653,7 @@ function renderStudent() {
     $("#ba-student-role-label").text(getLocalizedString('TacticRole', student.TacticRole))
     $("#ba-student-role-icon").attr("src", `images/ui/Role_${student.TacticRole}.png`)
 
-    $("#ba-student-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${student.BulletType.toLowerCase()}`)
+    $("#ba-student-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-sonic").addClass(`bg-atk-${student.BulletType.toLowerCase()}`)
     $("#ba-student-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-elasticarmor").addClass(`bg-def-${student.ArmorType.toLowerCase()}`)
     
     $("#ba-student-academy-label").text(`${getLocalizedString('School',student.School)} / ${getLocalizedString('Club',student.Club)}`)
@@ -4550,7 +4677,7 @@ function renderStudent() {
             $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${skill.Icon}.png`)
         }
         if (skill.SkillType == "ex") {
-            $("#ba-skill-ex-cost").removeClass("ba-col-explosion ba-col-pierce ba-col-mystic")
+            $("#ba-skill-ex-cost").removeClass("ba-col-explosion ba-col-pierce ba-col-mystic ba-col-sonic")
             if (skill.Cost[0] != skill.Cost[4]) {
                 $("#ba-skill-ex-cost").addClass(`ba-col-${student.BulletType.toLowerCase()}`)
             }
@@ -4559,7 +4686,7 @@ function renderStudent() {
 
     initCharacterSkillInfo()
 
-    $(".bg-skill").removeClass("explosion pierce mystic").addClass(`${student.BulletType.toLowerCase()}`)
+    $(".bg-skill").removeClass("explosion pierce mystic sonic").addClass(`${student.BulletType.toLowerCase()}`)
 
     //Skill Materials
     let html
@@ -5624,7 +5751,7 @@ function changeRaidEnemy(num) {
     let bulletType = (raid_difficulty < 5) ? raid.BulletType : raid.BulletTypeInsane
 
     $("#ba-raid-enemy-attacktype").tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType', bulletType)}`, translateUI('attacktype'), null, getAttackTypeText(bulletType), 32), placement: 'top', html: true})
-    $("#ba-raid-enemy-attacktype .icon-type").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-normal").addClass(`bg-atk-${bulletType.toLowerCase()}`)
+    $("#ba-raid-enemy-attacktype .icon-type").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-normal bg-atk-sonic").addClass(`bg-atk-${bulletType.toLowerCase()}`)
     $("#ba-raid-enemy-attacktype .label").text(getLocalizedString('BulletType',bulletType))
 
     $("#ba-raid-enemy-defensetype").tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType', enemy.ArmorType)}`, translateUI('defensetype'), null, getDefenseTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
@@ -6032,8 +6159,10 @@ function loadRegion(regID) {
         //hide filters not relevant to global
         $('#ba-student-search-filter-weapontype-ft').hide()
         $('#ba-student-search-filter-armortype-elasticarmor').hide()
+        $('#ba-student-search-filter-bullettype-sonic').hide()
         $('#item-search-filter-furnitureset-110').hide()
         $('#item-search-filter-furnitureset-111').hide()
+        $('#item-search-filter-furnitureset-112').hide()
     }
 }
 
@@ -7095,7 +7224,7 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
 
     $('#ba-stage-enemy-size .label').text(enemysize != null ? getLocalizedString('EnemyTags', enemysize) : '')
     $('#ba-stage-enemy-size').toggle(enemysize != null)
-    $("#ba-stage-enemy-attacktype .icon-type").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
+    $("#ba-stage-enemy-attacktype .icon-type").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-sonic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
     $("#ba-stage-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
     $("#ba-stage-enemy-attacktype .label").text(getLocalizedString('BulletType',enemy.BulletType))
     $("#ba-stage-enemy-defensetype .label").text(getLocalizedString('ArmorType',enemy.ArmorType))
@@ -7972,8 +8101,10 @@ function getUsedByStudents(item, mode) {
         } else if (item.Category == 'Coin' && item.EventBonus !== undefined) {
             headerText = translateUI('item_eventbonus')
             item.EventBonus.forEach(bonus => {
-                const bonusStudent = find(data.students, 'Id', bonus[0])[0]
-                html += getStudentIconSmall(bonusStudent, `+${bonus[1]/100}%`)
+                const bonusStudents = find(data.students, 'Id', bonus[0])
+                if (bonusStudents.length) {
+                    html += getStudentIconSmall(bonusStudents[0], `+${bonus[1]/100}%`)
+                }
             })
         }
     }
@@ -8433,6 +8564,7 @@ function changeRegion(regID) {
         $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
         EnemyFinder.generateEnemyList()
         populateStudentSkillFilters()
+        studentStatsList = null
         loadModule(loadedModule)
     }
 }
@@ -8851,7 +8983,7 @@ function changeStudentSummon(id, recalculate = true) {
         $('.summon-list .active-icon img').attr('src', `images/skill/${sourceSkill.Icon}.png`).addClass(`bg-skill ${student.BulletType.toLowerCase()}`)
     } else {
         $('.summon-list .active-name').html(getTranslatedString(student, "Name"))
-        $('.summon-list .active-icon img').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill explosion pierce mystic")
+        $('.summon-list .active-icon img').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill explosion pierce mystic sonic")
     }
 
     updateSummonSourceSkill()
@@ -8878,7 +9010,7 @@ function updateCompareModeControl() {
     $('#ba-statpreview-status-compare').toggleClass('deactivated', !compareMode)
     if (compareMode) {
         $('#ba-statpreview-status-title-compare').html(getTranslatedString(studentCompare, "Name"))
-        $('#ba-statpreview-status-title-compare-icon').attr('src', `images/student/icon/${studentCompare.CollectionTexture}.png`).removeClass("bg-skill explosion pierce mystic")
+        $('#ba-statpreview-status-title-compare-icon').attr('src', `images/student/icon/${studentCompare.CollectionTexture}.png`).removeClass("bg-skill explosion pierce mystic sonic")
         $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_compare_remove')), placement: 'top', html: true})
     } else {
         $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_compare')), placement: 'top', html: true})

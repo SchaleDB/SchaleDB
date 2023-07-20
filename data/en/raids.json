@@ -3993,7 +3993,7 @@
                         }
                     ],
                     "Name": "Solemn Repentance",
-                    "Desc": "Inflicts the following effects depending on Gregorius' number of debuffs.\n<b><?1> or fewer debuffs</b>: Removes 1 debuff from all allies.\n<b><?2> or more debuffs</b>: Reduces the <d:ATK> of all allies by 10% for 120s.",
+                    "Desc": "Inflicts the following effects depending on Gregorio's number of debuffs.\n<b><?1> or fewer debuffs</b>: Removes 1 debuff from all allies.\n<b><?2> or more debuffs</b>: Reduces the <d:ATK> of all allies by 10% for 120s.",
                     "Parameters": [
                         [
                             "4",
@@ -4184,7 +4184,7 @@
                         ]
                     },
                     "Name": "Servant of the Servants of the Saint",
-                    "Desc": "Applies the following effects to Gregorius and all Choir Members depending on the number of debuffs inflicted on Gregorius.\n<s:DebuffCountGreen> (<?1> debuffs): Increases incoming damage by <?2>.\n<s:DebuffCountYellow> (<?3> or <?4> debuffs): Increases incoming damage by 100% and ATK by 20%.\n<s:DebuffCountRed> (<?5> or fewer/<?6> or more debuffs): Increases ATK by 40%.",
+                    "Desc": "Applies the following effects to Gregorio and all Choir Members depending on the number of debuffs inflicted on Gregorio.\n<s:DebuffCountGreen> (<?1> debuffs): Increases incoming damage by <?2>.\n<s:DebuffCountYellow> (<?3> or <?4> debuffs): Increases incoming damage by 100% and ATK by 20%.\n<s:DebuffCountRed> (<?5> or fewer/<?6> or more debuffs): Increases ATK by 40%.",
                     "Parameters": [
                         [
                             "4~5",
@@ -4270,7 +4270,7 @@
                         }
                     ],
                     "Name": "The Majestic Choir",
-                    "Desc": "Choir Members on the left and right podiums will sing for 40s after they appear, increasing their <b:ATK> by 100% after finishing singing.\nIf a Choir Member's HP falls below 1%, they will be knocked down, become unable to attack and increase Gregorius' groggy gauge by 5%."
+                    "Desc": "Choir Members on the left and right podiums will sing for 40s after they appear, increasing their <b:ATK> by 100% after finishing singing.\nIf a Choir Member's HP falls below 1%, they will be knocked down, become unable to attack and increase Gregorio's groggy gauge by 5%."
                 },
                 {
                     "Id": "EN0005_Passive03",
@@ -4318,7 +4318,7 @@
                         }
                     ],
                     "Name": "Sanctus",
-                    "Desc": "If Gregorius is inflicted with a stat-reducing debuff, the same effect is replicated on all Choir Members.\n100% of the damage taken by Choir Members will also be taken by Gregorius.\nImmediately after the start of battle, Gregorius and all Choir Members' <d:ATK> is decreased by 30% for 30s.\nFor the final part of the performance, all Choir Members move to Gregorius' side and sing in chorus. During this, all enemies and allies are gradually strengthened.\nIncreases the <b:AttackSpeed> of all Choir Members by 10% every 10s. (effect stacks multiple times).\nIncreases all enemies' (including Special students) <b:CostRegen> by <b>300</b> every 10s. (effect stacks multiple times)"
+                    "Desc": "If Gregorio is inflicted with a stat-reducing debuff, the same effect is replicated on all Choir Members.\n100% of the damage taken by Choir Members will also be taken by Gregorio.\nImmediately after the start of battle, Gregorio and all Choir Members' <d:ATK> is decreased by 30% for 30s.\nFor the final part of the performance, all Choir Members move to Gregorio's side and sing in chorus. During this, all enemies and allies are gradually strengthened.\nIncreases the <b:AttackSpeed> of all Choir Members by 10% every 10s. (effect stacks multiple times).\nIncreases all enemies' (including Special students) <b:CostRegen> by <b>300</b> every 10s. (effect stacks multiple times)"
                 },
                 {
                     "Id": "EN0005_Passive04",
@@ -4362,7 +4362,7 @@
                 240,
                 240
             ],
-            "Name": "Gregorius",
+            "Name": "Gregorio",
             "Profile": "キヴォトスのどこかに存在する廃墟となった地下神殿にて、歪んだ神秘によって顕現した人工天使が観測されました。\n\nグレゴリオは「聖徒の交わり」と呼ばれる人工天使シリーズの完成形であり、ゲマトリアの実験で生まれた謎の怪物です。今もその怪物は地下神殿でオルガンの演奏を続けています。旋律の終わりに何が待ち受けているのか……それは誰も知りません。"
         }
     ],
@@ -17785,6 +17785,15 @@
                     "End": 1689015600,
                     "RewardSet": 2200,
                     "RewardSetMax": 44
+                },
+                {
+                    "Season": 43,
+                    "RaidId": 3,
+                    "Terrain": "Indoor",
+                    "Start": 1689645600,
+                    "End": 1690225200,
+                    "RewardSet": 2100,
+                    "RewardSetMax": 44
                 }
             ],
             "RewardSets": {
@@ -26730,8 +26739,8 @@
             "BattleDuration": [
                 180,
                 180,
-                130,
-                130
+                90,
+                90
             ]
         }
     ],
@@ -27001,9 +27010,9 @@
                 2
             ],
             "DifficultyName": [
-                "A",
-                "B",
-                "C"
+                "Normal",
+                "Hard",
+                "VeryHard"
             ],
             "PathName": "WakamoSwimsuit",
             "IconBG": "Boss_Portrait_HoverCraft_LobbyBG",
@@ -27592,9 +27601,9 @@
                 2
             ],
             "DifficultyName": [
-                "A",
-                "B",
-                "C"
+                "Normal",
+                "Hard",
+                "VeryHard"
             ],
             "PathName": "HoverCraft",
             "IconBG": "Boss_Portrait_HoverCraft_LobbyBG",
@@ -28261,7 +28270,7 @@
             ],
             "UseRaidSkillList": 1,
             "RaidSkill": [],
-            "Name": "Binah (Color)",
+            "Name": "Binah (Chroma)",
             "Rewards": [
                 {
                     "Items": [
@@ -30055,7 +30064,7 @@
             ],
             "UseRaidSkillList": 2,
             "RaidSkill": [],
-            "Name": "Chesed (Color)",
+            "Name": "Chesed (Chroma)",
             "Rewards": [
                 {
                     "Items": [
@@ -31788,7 +31797,7 @@
             ],
             "UseRaidSkillList": 3,
             "RaidSkill": [],
-            "Name": "Shiro & Kuro (Color)",
+            "Name": "Shiro & Kuro (Chroma)",
             "Rewards": [
                 {
                     "Items": [
@@ -33599,7 +33608,7 @@
             ],
             "UseRaidSkillList": 4,
             "RaidSkill": [],
-            "Name": "Hieronymus (Color)",
+            "Name": "Hieronymus (Chroma)",
             "Rewards": [
                 {
                     "Items": [
@@ -35440,7 +35449,7 @@
             ],
             "UseRaidSkillList": 7,
             "RaidSkill": [],
-            "Name": "Hod (Color)",
+            "Name": "Hod (Chroma)",
             "Rewards": [
                 {
                     "Items": [
@@ -37215,7 +37224,7 @@
             ],
             "UseRaidSkillList": 6,
             "RaidSkill": [],
-            "Name": "Perorodzilla (Color)",
+            "Name": "Perorodzilla (Chroma)",
             "Rewards": [
                 {
                     "Items": [
@@ -39035,7 +39044,7 @@
                     "Desc": "Phrenapates uses all the energy of the Atra-Hasis' Ark to fire at the enemy, dealing damage to all enemies equal to 1000% of their Max HP."
                 }
             ],
-            "Name": "Shiroko*Terror",
+            "Name": "Shiroko Terror",
             "Rewards": [
                 {
                     "Items": [

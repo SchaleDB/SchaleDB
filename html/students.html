@@ -1048,9 +1048,9 @@
                                         <button id="ba-student-search-sortby-default" class="btn-pill" onclick="searchSetOrder('Default')"><span class="label"><span data-localize-id="ui,default"></span><span class="sort-direction-label"></span></span></button>
                                         <button id="ba-student-search-sortby-name" class="btn-pill" onclick="searchSetOrder('Name')"><span class="label"><span data-localize-id="ui,name"></span><span class="sort-direction-label"></span></span></button>
                                         <div class="btn-group">
-                                            <button id="ba-student-search-sortby-stat" class="btn-pill" type="button" data-bs-toggle="dropdown"><span class="label" data-localize-id="ui,others"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>
+                                            <button id="ba-student-search-sortby-stat" class="btn-pill" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"><span class="label" data-localize-id="ui,others"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>
                                             <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-scroll-large">
-                                                <li><h6 class="dropdown-header" data-localize-id="ui,base_stats"></h6></li>
+                                                <li><h6 class="dropdown-header" data-localize-id="ui,max_stats"></h6></li>
                                                 <li><a id="ba-student-search-sortby-maxhp100" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('MaxHP100')" class="btn btn-dark"><span data-localize-id="Stat,MaxHP"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-attackpower100" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('AttackPower100')" class="btn btn-dark"><span data-localize-id="Stat,AttackPower"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-defensepower100" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('DefensePower100')" class="btn btn-dark"><span data-localize-id="Stat,DefensePower"></span><span class="sort-direction-label"></span></a></li>
@@ -1060,6 +1060,7 @@
                                                 <li><a id="ba-student-search-sortby-criticalpoint" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('CriticalPoint')" class="btn btn-dark"><span data-localize-id="Stat,CriticalPoint"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-stabilitypoint" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('StabilityPoint')" class="btn btn-dark"><span data-localize-id="Stat,StabilityPoint"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-range" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('Range')" class="btn btn-dark"><span data-localize-id="Stat,Range"></span><span class="sort-direction-label"></span></a></li>
+                                                <li><a id="ba-student-search-sortby-usecollectionstats" class="dropdown-item" href="javascript:;" onclick="searchToggleUseCollectionStats()" class="btn btn-dark"><div class="d-flex"><span class="item-toggle-icon me-2"></span><span data-localize-id="ui,collection_stats"></span></div></a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><h6 class="dropdown-header" data-localize-id="ui,attributes"></h6></li>
                                                 <li><a id="ba-student-search-sortby-streetbattleadaptation" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('StreetBattleAdaptation')" class="btn btn-dark"><span data-localize-id="ui,terrain_adaption" data-localize-replacement-id="AdaptationType,Street"></span><span class="sort-direction-label"></span></a></li>
@@ -1133,6 +1134,7 @@
                                         <button id="ba-student-search-filter-bullettype-explosion" class="btn-pill ba-col-explosion text-bold" onclick="searchSetFilter('BulletType','Explosion')"><span class="label" data-localize-id="BulletType,Explosion"></span></button>
                                         <button id="ba-student-search-filter-bullettype-pierce" class="btn-pill ba-col-pierce text-bold" onclick="searchSetFilter('BulletType','Pierce')"><span class="label" data-localize-id="BulletType,Pierce"></span></button>
                                         <button id="ba-student-search-filter-bullettype-mystic" class="btn-pill ba-col-mystic text-bold" onclick="searchSetFilter('BulletType','Mystic')"><span class="label" data-localize-id="BulletType,Mystic"></span></button>
+                                        <button id="ba-student-search-filter-bullettype-sonic" class="btn-pill ba-col-sonic text-bold" onclick="searchSetFilter('BulletType','Sonic')"><span class="label" data-localize-id="BulletType,Sonic"></span></button>
                                     </div>    
                                 </div>
                                 <div>
@@ -1224,7 +1226,7 @@
                                             </ul>
                                         </div>
                                         <div class="btn-group">
-                                            <button id="ba-student-search-select-subbuff" class="btn-pill" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"><span class="label" data-localize-id="ui,student_skill_sub"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>
+                                            <button id="ba-student-search-select-subbuff" class="btn-pill" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside"><span class="label" data-localize-id="ui,sp_sub_skill"></span><i class="caret fa-solid fa-caret-down me-2"></i></button>
                                             <ul id="ba-student-search-select-subbuff-list" class="dropdown-menu dropdown-menu-dark dropdown-menu-end dropdown-menu-scroll">
                                             </ul>
                                         </div>

@@ -302,7 +302,11 @@
         },
         {
             "Id": 360068,
-            "ItemList": [ [4000, 517, 1, 1], [4060, 138, 1, 1], [4080, 345, 1, 1] ]
+            "ItemList": [
+                [4000, 517, 1, 1],
+                [4060, 138, 1, 1],
+                [4080, 345, 1, 1]
+            ]
         },
         {
             "Id": 360069,
@@ -318,7 +322,11 @@
         },
         {
             "Id": 360072,
-            "ItemList": [ [4001, 414, 1, 1], [4061, 110, 1, 1], [4081, 276, 1, 1] ]
+            "ItemList": [
+                [4001, 414, 1, 1],
+                [4061, 110, 1, 1],
+                [4081, 276, 1, 1]
+            ]
         },
         {
             "Id": 360073,
@@ -334,7 +342,11 @@
         },
         {
             "Id": 360076,
-            "ItemList": [ [4002, 310, 1, 1], [4062, 83, 1, 1], [4082, 207, 1, 1] ]
+            "ItemList": [
+                [4002, 310, 1, 1],
+                [4062,  83, 1, 1],
+                [4082, 207, 1, 1]
+            ]
         },
         {
             "Id": 360077,
@@ -350,7 +362,11 @@
         },
         {
             "Id": 360080,
-            "ItemList": [ [4003, 259, 1, 1], [4063, 69, 1, 1], [4083, 172, 1, 1] ]
+            "ItemList": [
+                [4003, 259, 1, 1],
+                [4063,  69, 1, 1],
+                [4083, 172, 1, 1]
+            ]
         },
         {
             "Id": 360081,
@@ -366,7 +382,11 @@
         },
         {
             "Id": 360084,
-            "ItemList": [ [3000, 233, 1, 1], [3060, 62, 1, 1], [3080, 155, 1, 1] ]
+            "ItemList": [
+                [3000, 233, 1, 1],
+                [3060,  62, 1, 1],
+                [3080, 155, 1, 1]
+            ]
         },
         {
             "Id": 360085,
@@ -382,7 +402,11 @@
         },
         {
             "Id": 360088,
-            "ItemList": [ [3001, 194, 1, 1], [3061, 52, 1, 1], [3081, 129, 1, 1] ]
+            "ItemList": [
+                [3001, 194, 1, 1],
+                [3061,  52, 1, 1],
+                [3081, 129, 1, 1]
+            ]
         },
         {
             "Id": 360089,
@@ -398,7 +422,11 @@
         },
         {
             "Id": 360092,
-            "ItemList": [ [3002, 155, 1, 1], [3062, 41, 1, 1], [3082, 104, 1, 1] ]
+            "ItemList": [
+                [3002, 155, 1, 1],
+                [3062,  41, 1, 1],
+                [3082, 104, 1, 1]
+            ]
         },
         {
             "Id": 360093,
@@ -648,7 +676,7 @@
     "regions": [
         {
             "name": "jp",
-            "studentlevel_max": 85,
+            "studentlevel_max": 87,
             "weaponlevel_max": 50,
             "bondlevel_max": 50,
             "gear1_max": 8,
@@ -658,9 +686,9 @@
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810,
                   811,   812,   813,   814,   815,   816,   817,   818,   819,
-                  820,   822,   824,   825,   826,   827,   701, 10801, 10802,
-                10803, 10804, 10805, 10806, 10808, 10809, 10810, 10811, 10812,
-                10813, 10814, 10816
+                  820,   822,   824,   825,   826,   827,   828,   701, 10801,
+                10802, 10803, 10804, 10805, 10806, 10808, 10809, 10810, 10811,
+                10812, 10813, 10814, 10816
             ],
             "event_701_max": 10,
             "event_701_challenge_max": 4,
@@ -669,35 +697,34 @@
             "schooldungeon_max": 4,
             "current_gacha": [
                 {
-                    "characters": [
-                        20027,
-                        10044,
-                        10043
-                    ],
-                    "start": 1689559200,
-                    "end": 1690164000
+                    "characters": [10073, 20028],
+                    "start": 1690164000,
+                    "end": 1690941600
                 }
             ],
             "current_events": [
-                {
-                    "event": 10814,
-                    "start": 1689559200,
-                    "end": 1690164000
-                }
+                {"event": 828, "start": 1690164000, "end": 1691546400}
             ],
             "current_raid": [
                 {
-                    "type": "EliminateRaid",
-                    "raid": 5,
-                    "terrain": "Street",
-                    "start": 1689127200,
-                    "end": 1689706800
+                    "type": "Raid",
+                    "raid": 8,
+                    "terrain": "Outdoor",
+                    "start": 1690941600,
+                    "end": 1691521200
                 },
                 {
                     "type": "TimeAttack",
                     "raid": 18000,
-                    "start": 1690164000,
-                    "end": 1690916400
+                    "start": 1691546400,
+                    "end": 1692126000
+                },
+                {
+                    "type": "EliminateRaid",
+                    "raid": 6,
+                    "terrain": "Outdoor",
+                    "start": 1692151200,
+                    "end": 1692730800
                 }
             ]
         },
@@ -749,6 +776,12 @@
         }
     ],
     "changelog": [
+        {
+            "date": "2023/07/24",
+            "contents": [
+                "<ul><li>Sorting the student list by stats will now use the calculated value at maximum level, equipment, weapon, bond (inc. alts) and unique item.</li><li>Added the option to sort by their saved collection stats.</li><li>Added Elastic Armor as an option when changing the target enemy's armor type.</li></ul>"
+            ]
+        },
         {
             "date": "2023/07/12",
             "contents": [
@@ -922,15 +955,6 @@
                 "Added option to display appearance rates of Material Synthesis nodes.",
                 "Added list of Material Fusion recipes.",
                 "Updated display of student attributes page to show bond equipment."
-            ]
-        },
-        {
-            "date": "2022/10/26",
-            "contents": [
-                "Added information for Yuuka (Tracksuit), Mari (Tracksuit) and Hasumi (Tracksuit).",
-                "Added information for Get Set, Go! event stages.",
-                "Added information for Total Assault Boss Goz.",
-                "Added information for Utaha, Cherino (Hot Spring) and Hinata's bond equipment."
             ]
         }
     ]

@@ -12423,7 +12423,7 @@
                             909,
                             909,
                             909,
-                            909
+                            910
                         ],
                         "HitsParameter": 1,
                         "Scale": [
@@ -12437,6 +12437,58 @@
                             36962,
                             38080,
                             42562
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "gearnormal",
+                "Name": "狙い撃ち+",
+                "Desc": "25秒毎に、敵1人に対して攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "335%",
+                        "352%",
+                        "369%",
+                        "436%",
+                        "453%",
+                        "470%",
+                        "537%",
+                        "554%",
+                        "571%",
+                        "638%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            909,
+                            909,
+                            909,
+                            909,
+                            909,
+                            909,
+                            909,
+                            909,
+                            909,
+                            909,
+                            910
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            33597,
+                            35280,
+                            36962,
+                            43679,
+                            45362,
+                            47037,
+                            53761,
+                            55436,
+                            57119,
+                            63836
                         ]
                     }
                 ]
@@ -12639,7 +12691,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false
+            ],
+            "StatType": [
+                "AttackSpeed_Base"
+            ],
+            "StatValue": [
+                [
+                    500,
+                    500
+                ]
+            ],
+            "Name": "セリカのスポーツバッグ",
+            "Desc": "セリカの黒いスポーツバッグ。勉強用、アルバイト用、運動用、整備用……何でも入れて持ち出せる万能バッグだ。",
+            "Icon": "Gear_Icon_13008",
+            "TierUpMaterial": [
+                [
+                    5029,
+                    110,
+                    111
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3040,
@@ -30302,7 +30385,9 @@
                 28
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            16013
+        ],
         "MemoryLobby": [
             6,
             6
@@ -36178,6 +36263,74 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "探究に終わりはない！+",
+                "Desc": "30秒毎に、円形範囲内の敵に対して攻撃力の<?1>分のダメージ/\nさらに攻撃力の<?2>分の<d:Poison>持続ダメージを付与（20秒間）",
+                "Parameters": [
+                    [
+                        "223%",
+                        "235%",
+                        "246%",
+                        "290%",
+                        "302%",
+                        "313%",
+                        "358%",
+                        "369%",
+                        "380%",
+                        "425%"
+                    ],
+                    [
+                        "26.4%",
+                        "27.7%",
+                        "29%",
+                        "34.3%",
+                        "35.6%",
+                        "36.9%",
+                        "42.2%",
+                        "43.5%",
+                        "44.9%",
+                        "50.1%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            22386,
+                            23506,
+                            24619,
+                            29099,
+                            30219,
+                            31339,
+                            35812,
+                            36932,
+                            38052,
+                            42525
+                        ]
+                    },
+                    {
+                        "Type": "DMGDot",
+                        "Duration": "20000",
+                        "Period": "4000",
+                        "Icon": "Poison",
+                        "Scale": [
+                            2642,
+                            2775,
+                            2907,
+                            3434,
+                            3566,
+                            3699,
+                            4226,
+                            4358,
+                            4490,
+                            5017
+                        ]
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "Focus Elixir",
                 "Desc": "Increases <b:CriticalDamage> by <?1>.",
@@ -36375,7 +36528,38 @@
             "HealPower100": 1988,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base"
+            ],
+            "StatValue": [
+                [
+                    1000,
+                    1000
+                ]
+            ],
+            "Name": "サヤのスケートボード",
+            "Desc": "サヤ専用に飾られたスケートボード。自転車やスクーターと違って両手が自由に使えるが、その分熟練度も求められる。",
+            "Icon": "Gear_Icon_20006",
+            "TierUpMaterial": [
+                [
+                    5018,
+                    160,
+                    161
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3070,
@@ -44191,6 +44375,44 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "乱れ散る花吹雪+",
+                "Desc": "25秒毎に、敵1人に対して攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "339%",
+                        "356%",
+                        "373%",
+                        "441%",
+                        "458%",
+                        "475%",
+                        "541%",
+                        "560%",
+                        "577%",
+                        "645%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            21239,
+                            22305,
+                            23364,
+                            27614,
+                            28674,
+                            29739,
+                            33983,
+                            35049,
+                            36108,
+                            40359
+                        ]
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "Bloom of Destruction",
                 "Desc": "Increases <b:ATK> by <?1>.",
@@ -44388,7 +44610,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base"
+            ],
+            "StatValue": [
+                [
+                    2000,
+                    2000
+                ]
+            ],
+            "Name": "秘密を隠すキツネのお面",
+            "Desc": "ワカモが普段から愛用しているキツネのお面。ワカモのお気に入りのアイテムで、元々その用途は余計なことに巻き込まれないように自分の正体を隠すためだったが、今ではマスクの向こうに隠された秘密はそれだけではない。溢れる少女の純情を隠すのにも最適な、ファッショナブルなアイテム。",
+            "Icon": "Gear_Icon_10033",
+            "TierUpMaterial": [
+                [
+                    5020,
+                    210,
+                    211
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3000,
@@ -46234,6 +46487,95 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "お弁当を作ってきたんです+",
+                "Desc": "45秒毎に、自身を除きHPが最も低い味方1人に対して、お弁当を投擲して治癒力の<?1>分の<b:DotHeal>を付与、<b:AttackSpeed>を<?2>増加（それぞれ20秒間）\nさらに対象の付近に自身を除く味方がいる場合、お弁当がその方向へ跳ねて<b:AttackSpeed>を<?3>増加（20秒間）（最大2回まで）",
+                "Parameters": [
+                    [
+                        "26.4%",
+                        "27.8%",
+                        "29.1%",
+                        "34.4%",
+                        "35.7%",
+                        "37%",
+                        "42.3%",
+                        "43.6%",
+                        "45%",
+                        "50.3%"
+                    ],
+                    [
+                        "10.7%",
+                        "11.2%",
+                        "11.8%",
+                        "13.9%",
+                        "14.5%",
+                        "15%",
+                        "17.2%",
+                        "17.7%",
+                        "18.2%",
+                        "20.4%"
+                    ],
+                    [
+                        "10.7%",
+                        "11.2%",
+                        "11.8%",
+                        "13.9%",
+                        "14.5%",
+                        "15%",
+                        "17.2%",
+                        "17.7%",
+                        "18.2%",
+                        "20.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "Effects": [
+                    {
+                        "Type": "HealDot",
+                        "Duration": "20000",
+                        "Period": "4000",
+                        "Scale": [
+                            2648,
+                            2781,
+                            2913,
+                            3442,
+                            3575,
+                            3707,
+                            4236,
+                            4369,
+                            4501,
+                            5031
+                        ]
+                    },
+                    {
+                        "Type": "BuffAlly",
+                        "Restrictions": [
+                            {
+                                "Property": "Id",
+                                "Operand": "NotEqual",
+                                "Value": 10034
+                            }
+                        ],
+                        "Value": [
+                            [
+                                1075,
+                                1129,
+                                1183,
+                                1398,
+                                1451,
+                                1505,
+                                1720,
+                                1774,
+                                1827,
+                                2042
+                            ]
+                        ],
+                        "Stat": "AttackSpeed_Coefficient",
+                        "Channel": 124
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "How About Another Plate?",
                 "Desc": "Increases <b:DEF> by <?1>.",
@@ -46441,7 +46783,38 @@
             "HealPower100": 1730,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false
+            ],
+            "StatType": [
+                "HealPower_Base"
+            ],
+            "StatValue": [
+                [
+                    1000,
+                    1000
+                ]
+            ],
+            "Name": "夢が詰まった桜色エプロン",
+            "Desc": "ミモリの桜色のエプロン。掃除の時も、料理の時も。家事全般の友とも言えるエプロンだ。",
+            "Icon": "Gear_Icon_10034",
+            "TierUpMaterial": [
+                [
+                    5024,
+                    150,
+                    151
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3000,
@@ -46914,7 +47287,9 @@
                 3
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10073
+        ],
         "MemoryLobby": [
             6,
             6
@@ -47494,7 +47869,9 @@
                 29
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            20028
+        ],
         "MemoryLobby": [
             3,
             3
@@ -57278,6 +57655,104 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "びーちぼーる、しゅ～と～+",
+                "Desc": "50秒毎に、敵1人に対して、攻撃力の<?1>分のダメージ/\nさらに<c:Stunned>を付与（<?2>間）/\nさらに自身の<b:ATK>を<?3>増加（40秒間）",
+                "Parameters": [
+                    [
+                        "406%",
+                        "427%",
+                        "447%",
+                        "488%",
+                        "508%",
+                        "528%",
+                        "569%",
+                        "589%",
+                        "610%",
+                        "650%"
+                    ],
+                    [
+                        "2.4秒",
+                        "2.4秒",
+                        "2.4秒",
+                        "2.6秒",
+                        "2.6秒",
+                        "2.6秒",
+                        "2.8秒",
+                        "2.8秒",
+                        "2.8秒",
+                        "3.1秒"
+                    ],
+                    [
+                        "23.4%",
+                        "23.4%",
+                        "23.4%",
+                        "25.8%",
+                        "25.8%",
+                        "25.8%",
+                        "28.1%",
+                        "28.1%",
+                        "28.1%",
+                        "30.5%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            40692,
+                            42720,
+                            44756,
+                            48827,
+                            50863,
+                            52891,
+                            56962,
+                            58998,
+                            61034,
+                            65098
+                        ]
+                    },
+                    {
+                        "Type": "CrowdControl",
+                        "Chance": "10000",
+                        "Icon": "Stunned",
+                        "Scale": [
+                            2400,
+                            2400,
+                            2400,
+                            2600,
+                            2600,
+                            2600,
+                            2800,
+                            2800,
+                            2800,
+                            3100
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2347,
+                                2347,
+                                2347,
+                                2581,
+                                2581,
+                                2581,
+                                2816,
+                                2816,
+                                2816,
+                                3050
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "Ready To Go",
                 "Desc": "Increases <b:ATK> by <?1>.",
@@ -57479,7 +57954,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false
+            ],
+            "StatType": [
+                "OppressionPower_Base"
+            ],
+            "StatValue": [
+                [
+                    55,
+                    55
+                ]
+            ],
+            "Name": "宝物いっぱいポーチ",
+            "Desc": "チセが海辺に遊びに来た時に持ってきた、可愛くてファンシーなデザインのポーチ。外側には、忘れてしまうのではないかと、カホが心配してつけてくれた名札が付いている。チセは、海辺で見つけた数々の思い出をこのポーチに詰め込んだ。うっかり入れそびれたのもあったが、それでもその思い出は永遠に消えない。",
+            "Icon": "Gear_Icon_10047",
+            "TierUpMaterial": [
+                [
+                    5023,
+                    130,
+                    131
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3000,
@@ -80268,8 +80774,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "大物だ",
-                "Desc": "敵1人の<d:DEF>を<?1>減少（30秒間）/\nさらに攻撃力の<?2>分のダメージ",
+                "Name": "大家伙",
+                "Desc": "令1名敌方单位<d:DEF>降低<?1>(持续30秒)；\n并对该目标造成攻击力<?2>的伤害.",
                 "Parameters": [
                     [
                         "18%",
@@ -80344,8 +80850,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "「ちょうどここに」",
-                "Desc": "戦闘開始時、自身を除く味方の<b:CriticalChance>を<?1>増加（60秒間）、スキルコストを1減少（Exスキルの使用1回分）\n（戦闘中に1回のみ）",
+                "Name": "「就在这儿」",
+                "Desc": "战斗开始时，令除自身外的所有我方单位<b:CriticalChance>提升<?1>(持续60秒)，技能COST降低1(EX技能使用1次后失效)\n(每场战斗仅触发1次).",
                 "Parameters": [
                     [
                         "11.5%",
@@ -80385,8 +80891,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "少し浮かれて",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Name": "浮跃荡漾",
+                "Desc": "<b:ATK>提升<?1>.",
                 "Parameters": [
                     [
                         "14%",
@@ -80423,8 +80929,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "少し浮かれて＋",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Name": "浮跃荡漾＋",
+                "Desc": "<b:ATK>提升<?1>；\n<b:ATK>提升<?2>.",
                 "Parameters": [
                     [
                         "365",
@@ -80473,8 +80979,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "鍛えられた肉体",
-                "Desc": "味方の<b:CostRegen>を<?1>増加",
+                "Name": "训练有素的身体",
+                "Desc": "所有我方单位<b:CostRegen>提升<?1>.",
                 "Parameters": [
                     [
                         "10.6%",
@@ -80712,6 +81218,1571 @@
                 12,
                 7,
                 13
+            ]
+        ]
+    },
+    {
+        "Id": 10073,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 147,
+        "PathName": "Ui_Swimsuit",
+        "DevName": "CH0204",
+        "Name": "ウイ（水着）",
+        "School": "Trinity",
+        "Club": "BookClub",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Pierce",
+        "ArmorType": "ElasticArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 0,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "SR",
+        "WeaponImg": "Weapon_Icon_CH0204",
+        "Cover": true,
+        "Equipment": [
+            "Shoes",
+            "Hairpin",
+            "Charm"
+        ],
+        "CollectionBG": "BG_WaterFall",
+        "CollectionTexture": "Student_Portrait_CH0204_Collection",
+        "FamilyName": "古関",
+        "FamilyNameRuby": null,
+        "PersonalName": "ウイ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "17歳",
+        "Birthday": "4月23日",
+        "CharacterSSRNew": "はあ、はあ……暑い……\n最悪……",
+        "ProfileIntroduction": "遺跡調査に来たトリニティ総合学園所属、図書委員会の委員長。\n\n外に出て体を動かす事は苦手だが、古書や遺跡、遺物好きのため調査自体には真面目に取り組んでいる模様。",
+        "Hobby": "読書、書籍の管理、古書の研究",
+        "CharacterVoice": "後藤沙緒里",
+        "BirthDay": "4/23",
+        "Illustrator": "CHILD",
+        "Designer": "CHILD",
+        "CharHeightMetric": "165cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1800,
+        "AttackPower1": 257,
+        "AttackPower100": 2573,
+        "MaxHP1": 2026,
+        "MaxHP100": 17570,
+        "DefensePower1": 18,
+        "DefensePower100": 108,
+        "HealPower1": 1538,
+        "HealPower100": 4616,
+        "DodgePoint": 180,
+        "AccuracyPoint": 989,
+        "CriticalPoint": 219,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 30,
+                            "AttackStartDuration": 15,
+                            "AttackEndDuration": 16,
+                            "AttackBurstRoundOverDelay": 38,
+                            "AttackIngDuration": 42,
+                            "AttackReloadDuration": 78
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "プライベートカフェ",
+                "Desc": "自身を中心とした円形範囲内の自身を除く味方4人を自身の位置に移動させた後、<b:EnhancePierceRate>を<?1>加算（45秒間）",
+                "Parameters": [
+                    [
+                        "36.9%",
+                        "42.4%",
+                        "53.5%",
+                        "59%",
+                        "70.1%",
+                        "75.6%",
+                        "86.7%",
+                        "92.2%",
+                        "103%",
+                        "108%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                3690,
+                                4243,
+                                5350,
+                                5903,
+                                7010,
+                                7564,
+                                8671,
+                                9224,
+                                10331,
+                                10883
+                            ]
+                        ],
+                        "Stat": "EnhancePierceRate_Base",
+                        "Channel": 133
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "決定的な手がかり",
+                "Desc": "手がかりを3個獲得時、ストライカーの味方に<b:EnhancePierceRate>を<?1>加算（30秒間）/\n手がかりを3個消耗",
+                "Parameters": [
+                    [
+                        "15.2%",
+                        "15.9%",
+                        "16.7%",
+                        "19.7%",
+                        "20.5%",
+                        "21.3%",
+                        "24.3%",
+                        "25.1%",
+                        "25.8%",
+                        "28.9%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1521,
+                                1599,
+                                1674,
+                                1979,
+                                2054,
+                                2130,
+                                2434,
+                                2511,
+                                2587,
+                                2891
+                            ]
+                        ],
+                        "Stat": "EnhancePierceRate_Base",
+                        "Channel": 133
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "探求者の意志",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "探求者の意志+",
+                "Desc": "<b:MAXHP>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "3242",
+                        "3404",
+                        "3566",
+                        "4215",
+                        "4377",
+                        "4539",
+                        "5187",
+                        "5349",
+                        "5511",
+                        "6160"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Base",
+                        "Scale": [
+                            3242,
+                            3404,
+                            3566,
+                            4215,
+                            4377,
+                            4539,
+                            5187,
+                            5349,
+                            5511,
+                            6160
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "手がかりの把握",
+                "Desc": "自身を除く味方のExスキルを2回使用時、<b:ATK>を<?1>増加（30秒間）/\n手がかりを1個獲得",
+                "Parameters": [
+                    [
+                        "22.6%",
+                        "23.8%",
+                        "24.9%",
+                        "29.4%",
+                        "30.6%",
+                        "31.7%",
+                        "36.2%",
+                        "37.4%",
+                        "38.5%",
+                        "43.1%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2268,
+                                2382,
+                                2495,
+                                2949,
+                                3062,
+                                3176,
+                                3629,
+                                3743,
+                                3856,
+                                4310
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                44
+            ],
+            [
+                6,
+                53
+            ],
+            [
+                2,
+                9
+            ],
+            [
+                2,
+                13
+            ],
+            [
+                4,
+                22
+            ]
+        ],
+        "FavorAlts": [
+            10035
+        ],
+        "MemoryLobby": [
+            3,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 173",
+        "FurnitureInteraction": [
+            [
+                210313
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Swimsuit",
+            "WaterPlay",
+            "Books",
+            "Humanities",
+            "PureLiterature"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Ui_Swimsuit",
+            "F_Ui_Swimsuit2"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "ボリュームサプレッサー",
+            "Desc": "久しぶりの外出でも一緒のウイのスナイパーライフル。\n\n騒がしくない場所のはずなのに、なぜか使うことが多い。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 113,
+            "AttackPower100": 1130,
+            "MaxHP1": 508,
+            "MaxHP100": 5080,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                180
+            ],
+            [
+                3021,
+                3020,
+                181,
+                220
+            ],
+            [
+                3022,
+                3021,
+                182,
+                221
+            ],
+            [
+                3023,
+                3022,
+                183,
+                222
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                17
+            ],
+            [
+                12,
+                18,
+                11,
+                26
+            ],
+            [
+                12,
+                18,
+                11,
+                25
+            ],
+            [
+                8,
+                18,
+                9,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                180
+            ],
+            [
+                4021,
+                181,
+                220
+            ],
+            [
+                4022,
+                4021,
+                181,
+                220
+            ],
+            [
+                4022,
+                182,
+                221
+            ],
+            [
+                4023,
+                4022,
+                183,
+                222
+            ],
+            [
+                4023,
+                183,
+                222
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                6,
+                11
+            ],
+            [
+                5,
+                12,
+                9,
+                17
+            ],
+            [
+                8,
+                4,
+                15
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                8,
+                12
+            ]
+        ]
+    },
+    {
+        "Id": 20028,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 148,
+        "PathName": "Hinata_Swimsuit",
+        "DevName": "CH0210",
+        "Name": "ヒナタ（水着）",
+        "School": "Trinity",
+        "Club": "SisterHood",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Explosion",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "HG",
+        "WeaponImg": "Weapon_Icon_CH0210",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Bag",
+            "Watch"
+        ],
+        "CollectionBG": "BG_WaterFall",
+        "CollectionTexture": "Student_Portrait_CH0210_Collection",
+        "FamilyName": "若葉",
+        "FamilyNameRuby": null,
+        "PersonalName": "ヒナタ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "17歳",
+        "Birthday": "5月17日",
+        "CharacterSSRNew": "よかったら、荷物をお持ちしましょうか？",
+        "ProfileIntroduction": "遺跡調査を手伝うべく、共に島に向かったトリニティ総合学園所属、シスターフッドの少女。\n\n場所や状況が変わっても、彼女の人助けの本質は変わらない。のんびりとした島の空気に当てられて普段より少し浮かれている模様。",
+        "Hobby": "お祈り、整理整頓",
+        "CharacterVoice": "日高里菜",
+        "BirthDay": "5/17",
+        "Illustrator": "kokosando",
+        "Designer": "kokosando",
+        "CharHeightMetric": "166cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1145,
+        "AttackPower1": 300,
+        "AttackPower100": 3000,
+        "MaxHP1": 1996,
+        "MaxHP100": 14927,
+        "DefensePower1": 66,
+        "DefensePower100": 399,
+        "HealPower1": 1612,
+        "HealPower100": 4836,
+        "DodgePoint": 1098,
+        "AccuracyPoint": 750,
+        "CriticalPoint": 250,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "楽しい水遊び",
+                "Desc": "円形範囲内の敵に対して、攻撃力の<?1>分のダメージ（この攻撃は敵の防御力を<?2>無視します）",
+                "Parameters": [
+                    [
+                        "479%",
+                        "551%",
+                        "695%",
+                        "767%",
+                        "911%",
+                        "983%",
+                        "1126%",
+                        "1198%",
+                        "1342%",
+                        "1414%"
+                    ],
+                    [
+                        "40%",
+                        "40%",
+                        "60%",
+                        "60%",
+                        "80%",
+                        "80%",
+                        "80%",
+                        "80%",
+                        "80%",
+                        "80%"
+                    ]
+                ],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    6
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            666,
+                            676
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            47950,
+                            55146,
+                            69531,
+                            76720,
+                            91105,
+                            98301,
+                            112686,
+                            119875,
+                            134260,
+                            141456
+                        ],
+                        "IgnoreDef": [
+                            6000,
+                            6000,
+                            4000,
+                            4000,
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "涼しい水浴び",
+                "Desc": "40秒毎に、敵1人に対して、水風船を投擲して攻撃力の<?1>分のダメージ。投擲された水風船を中心として周囲にまだ攻撃が当たっていない敵がいる場合、水風船がその方向へ跳ねて同じダメージ（最大6回まで）\n（この攻撃は敵の防御力を<?2>無視します）",
+                "Parameters": [
+                    [
+                        "86.3%",
+                        "90.6%",
+                        "94.9%",
+                        "112%",
+                        "116%",
+                        "120%",
+                        "138%",
+                        "142%",
+                        "146%",
+                        "164%"
+                    ],
+                    [
+                        "50%",
+                        "50%",
+                        "50%",
+                        "60%",
+                        "60%",
+                        "60%",
+                        "70%",
+                        "70%",
+                        "70%",
+                        "80%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BOUNCEPROJECTILE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            8631,
+                            9065,
+                            9492,
+                            11221,
+                            11655,
+                            12082,
+                            13811,
+                            14238,
+                            14672,
+                            16401
+                        ],
+                        "IgnoreDef": [
+                            5000,
+                            5000,
+                            5000,
+                            4000,
+                            4000,
+                            4000,
+                            3000,
+                            3000,
+                            3000,
+                            2000
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "遠征隊の情熱",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "遠征隊の情熱+",
+                "Desc": "<b:EnhanceExplosionRate>を<?1>加算/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "26%",
+                        "27.3%",
+                        "28.6%",
+                        "33.8%",
+                        "35.1%",
+                        "36.4%",
+                        "41.6%",
+                        "42.9%",
+                        "44.2%",
+                        "49.4%"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Scale": [
+                            2600,
+                            2730,
+                            2860,
+                            3380,
+                            3510,
+                            3640,
+                            4160,
+                            4290,
+                            4420,
+                            4940
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "慈愛の手",
+                "Desc": "味方の<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 302
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                6,
+                37
+            ],
+            [
+                8,
+                45
+            ],
+            [
+                2,
+                7
+            ],
+            [
+                3,
+                11
+            ],
+            [
+                5,
+                18
+            ]
+        ],
+        "FavorAlts": [
+            10036
+        ],
+        "MemoryLobby": [
+            2,
+            0
+        ],
+        "MemoryLobbyBGM": "Guruguru Usagi",
+        "FurnitureInteraction": [
+            [
+                210314
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Swimsuit",
+            "WaterPlay",
+            "Household",
+            "Food",
+            "Simplicity"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Hinata_Swimsuit",
+            "F_Hinata_Swimsuit2"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "ブレッシング",
+            "Desc": "いつも身につけているヒナタの拳銃。\n\n高いところの実を取るなど、戦闘以外に使われることが多い。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 132,
+            "AttackPower100": 1318,
+            "MaxHP1": 435,
+            "MaxHP100": 4345,
+            "HealPower1": 190,
+            "HealPower100": 1895,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                140
+            ],
+            [
+                3021,
+                3020,
+                141,
+                260
+            ],
+            [
+                3022,
+                3021,
+                142,
+                261
+            ],
+            [
+                3023,
+                3022,
+                143,
+                262
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                15,
+                29
+            ],
+            [
+                12,
+                18,
+                12,
+                24
+            ],
+            [
+                8,
+                18,
+                8,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                140
+            ],
+            [
+                4021,
+                141,
+                260
+            ],
+            [
+                4022,
+                4021,
+                141,
+                260
+            ],
+            [
+                4022,
+                142,
+                261
+            ],
+            [
+                4023,
+                4022,
+                143,
+                262
+            ],
+            [
+                4023,
+                143,
+                262
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                11,
+                16
+            ],
+            [
+                8,
+                4,
+                14
+            ],
+            [
+                8,
+                12,
+                6,
+                9
+            ],
+            [
+                12,
+                6,
+                11
+            ]
+        ]
+    },
+    {
+        "Id": 16013,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 149,
+        "PathName": "Koharu_Swimsuit",
+        "DevName": "CH0205",
+        "Name": "コハル（水着）",
+        "School": "Trinity",
+        "Club": "RemedialClass",
+        "StarGrade": 1,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Mystic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "SR",
+        "WeaponImg": "Weapon_Icon_CH0205",
+        "Cover": true,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_WaterFall",
+        "CollectionTexture": "Student_Portrait_CH0205_Collection",
+        "FamilyName": "下江",
+        "FamilyNameRuby": null,
+        "PersonalName": "コハル",
+        "SchoolYear": "1年生",
+        "CharacterAge": "15歳",
+        "Birthday": "4月16日",
+        "CharacterSSRNew": "",
+        "ProfileIntroduction": "先生を監視すべく島にやってきたトリニティ総合学園所属、補習授業部の一員。\n\n正義実現委員会の一人として、風紀を乱すものを許さない！という使命感を持っているが、島でのバカンスも悪くないと思っている模様。",
+        "Hobby": "空想、妄想、エッチな雑誌集め",
+        "CharacterVoice": "赤尾ひかる",
+        "BirthDay": "4/16",
+        "Illustrator": "DoReMi",
+        "Designer": "DoReMi",
+        "CharHeightMetric": "148cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1888,
+        "AttackPower1": 286,
+        "AttackPower100": 2869,
+        "MaxHP1": 2124,
+        "MaxHP100": 18420,
+        "DefensePower1": 18,
+        "DefensePower100": 113,
+        "HealPower1": 1477,
+        "HealPower100": 4433,
+        "DodgePoint": 188,
+        "AccuracyPoint": 950,
+        "CriticalPoint": 211,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 27,
+                            "AttackStartDuration": 20,
+                            "AttackIngDuration": 30,
+                            "AttackEndDuration": 20,
+                            "AttackBurstRoundOverDelay": 30,
+                            "AttackReloadDuration": 75
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "そんな事ないんだから！",
+                "Desc": "円形範囲内の敵に攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "439%",
+                        "504%",
+                        "636%",
+                        "702%",
+                        "834%",
+                        "900%",
+                        "1031%",
+                        "1097%",
+                        "1229%",
+                        "1295%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            3333,
+                            6667
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            43904,
+                            50496,
+                            63665,
+                            70250,
+                            83419,
+                            90004,
+                            103173,
+                            109758,
+                            122935,
+                            129520
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "見ちゃダメなんだから！",
+                "Desc": "30秒毎に、<b:CriticalChance>を<?1>増加（25秒間）",
+                "Parameters": [
+                    [
+                        "20.8%",
+                        "21.9%",
+                        "22.9%",
+                        "27.1%",
+                        "28.2%",
+                        "29.2%",
+                        "33.4%",
+                        "34.4%",
+                        "35.5%",
+                        "39.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2089,
+                                2194,
+                                2298,
+                                2715,
+                                2820,
+                                2924,
+                                3342,
+                                3446,
+                                3551,
+                                3968
+                            ]
+                        ],
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Channel": 9
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "エリートの使命感",
+                "Desc": "<b:CriticalChance>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "エリートの使命感+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:CriticalChance>を<?2>増加",
+                "Parameters": [
+                    [
+                        "344",
+                        "361",
+                        "378",
+                        "447",
+                        "464",
+                        "481",
+                        "550",
+                        "567",
+                        "584",
+                        "653"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            344,
+                            361,
+                            378,
+                            447,
+                            464,
+                            481,
+                            550,
+                            567,
+                            584,
+                            653
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "エッチなのはダメ！死刑！",
+                "Desc": "攻撃時、中型の敵に対して攻撃力の<?1>分の追加ダメージ",
+                "Parameters": [
+                    [
+                        "10.4%",
+                        "10.9%",
+                        "11.5%",
+                        "13.5%",
+                        "14.1%",
+                        "14.6%",
+                        "16.7%",
+                        "17.2%",
+                        "17.7%",
+                        "19.8%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_EXTRADAMAGE",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            1046,
+                            1099,
+                            1153,
+                            1359,
+                            1412,
+                            1465,
+                            1671,
+                            1725,
+                            1778,
+                            1984
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                6,
+                46
+            ],
+            [
+                7,
+                55
+            ],
+            [
+                2,
+                9
+            ],
+            [
+                3,
+                14
+            ],
+            [
+                4,
+                23
+            ]
+        ],
+        "FavorAlts": [
+            10020
+        ],
+        "MemoryLobby": [
+            2,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 173",
+        "FurnitureInteraction": [
+            [
+                210315
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Swimsuit",
+            "WaterPlay",
+            "LoveStory",
+            "Humanities"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Koharu_Swimsuit",
+            "F_Koharu_Swimsuit2"
+        ],
+        "IsLimited": 2,
+        "Weapon": {
+            "Name": "ジャスティス・ブラック",
+            "Desc": "調査のために再整備したコハルのスナイパーライフル。\n\n湿気や海風の対策はバッチリのようだ。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 101,
+            "AttackPower100": 1008,
+            "MaxHP1": 426,
+            "MaxHP100": 4261,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                190
+            ],
+            [
+                3021,
+                3020,
+                191,
+                210
+            ],
+            [
+                3022,
+                3021,
+                192,
+                211
+            ],
+            [
+                3023,
+                3022,
+                193,
+                212
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                20
+            ],
+            [
+                12,
+                18,
+                13,
+                34
+            ],
+            [
+                12,
+                18,
+                11,
+                29
+            ],
+            [
+                8,
+                18,
+                10,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                190
+            ],
+            [
+                4021,
+                191,
+                210
+            ],
+            [
+                4022,
+                4021,
+                191,
+                210
+            ],
+            [
+                4022,
+                192,
+                211
+            ],
+            [
+                4023,
+                4022,
+                193,
+                212
+            ],
+            [
+                4023,
+                193,
+                212
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                4
+            ],
+            [
+                8,
+                5,
+                12
+            ],
+            [
+                5,
+                12,
+                8,
+                17
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                9
+            ],
+            [
+                12,
+                7,
+                14
             ]
         ]
     }
