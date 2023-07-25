@@ -730,7 +730,7 @@
         },
         {
             "name": "global",
-            "studentlevel_max": 83,
+            "studentlevel_max": 85,
             "weaponlevel_max": 50,
             "bondlevel_max": 50,
             "gear1_max": 7,
@@ -740,37 +740,51 @@
             "events": [
                   801,   802,   803,   804,   805,   806,   808,   809,   810,
                   811,   812,   813,   814,   815,   816,   817,   818,   819,
-                  820,   701, 10801, 10802, 10803, 10804, 10805, 10806, 10808,
-                10810
+                  820,   821,   701, 10801, 10802, 10803, 10804, 10805, 10806,
+                10808, 10810
             ],
             "event_701_max": 10,
             "event_701_challenge_max": 4,
-            "commission_max": 11,
+            "commission_max": 12,
             "bounty_max": 9,
             "schooldungeon_max": 4,
             "current_gacha": [
                 {
-                    "characters": [10058, 20012, 20013],
-                    "start": 1689040800,
-                    "end": 1690250400
+                    "characters": [
+                        10059
+                    ],
+                    "start": 1690250400,
+                    "end": 1690855200
+                },
+                {
+                    "characters": [
+                        10060,
+                        20023
+                    ],
+                    "start": 1690855200,
+                    "end": 1691719200
                 }
             ],
             "current_events": [
-                {"event": 10810, "start": 1689040800, "end": 1690250400}
+                {
+                    "event": 821,
+                    "start": 1690250400,
+                    "end": 1692669600
+                }
             ],
             "current_raid": [
-                {
-                    "type": "Raid",
-                    "raid": 3,
-                    "terrain": "Indoor",
-                    "start": 1689645600,
-                    "end": 1690225200
-                },
                 {
                     "type": "TimeAttack",
                     "raid": 12000,
                     "start": 1692064800,
                     "end": 1692644400
+                },
+                {
+                    "type": "Raid",
+                    "raid": 4,
+                    "terrain": "Street",
+                    "start": 1693274400,
+                    "end": 1693854000
                 }
             ]
         }

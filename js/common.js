@@ -6157,10 +6157,8 @@ function loadRegion(regID) {
 
     if (regionID == 1) {
         //hide filters not relevant to global
-        $('#ba-student-search-filter-weapontype-ft').hide()
         $('#ba-student-search-filter-armortype-elasticarmor').hide()
         $('#ba-student-search-filter-bullettype-sonic').hide()
-        $('#item-search-filter-furnitureset-110').hide()
         $('#item-search-filter-furnitureset-111').hide()
         $('#item-search-filter-furnitureset-112').hide()
     }
