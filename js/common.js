@@ -1409,19 +1409,26 @@ class ExternalBuffs extends Buffs {
         return `<div class="search-list-item" data-index="${index}" data-raid-id="${raid.Id}" data-skill-id="${skill.Id}"><div class="transferable-skill-icon me-2"><img class="student-icon" src="images/raid/icon/Icon_${raid.PathName}${skill.MinDifficulty >= 5 ? "_Insane" : ""}.png"><img class="${iconClass}" src="${iconPath}"></div><div class="search-list-item-detail"><span class="skill-name">${getTranslatedString(skill, "Name")} <small>(${translateUI(`student_skill_${skill.SkillType.toLowerCase()}`)})</small></span><span class="skill-details">${desc}</span></div></div>`
     }
 
-    static checkRestrictions(object, effect) {
+    static checkRestrictions(object, effect, overrides = {}) {
         let compatible = true
         if ("Restrictions" in effect) {
             effect.Restrictions.forEach(({Property, Operand, Value}) => {
+
+                let objProp = object[Property]
+
+                if (Property in overrides) {
+                    objProp = overrides[Property]
+                }
+
                 switch (Operand) {
                     case 'Equal':
-                        compatible = (compatible && object[Property] == Value)
+                        compatible = (compatible && objProp == Value)
                         break
                     case 'NotEqual':
-                        compatible = (compatible && object[Property] != Value)
+                        compatible = (compatible && objProp != Value)
                         break
                     case 'Contains':
-                        compatible = (compatible && object[Property].some(i => i == Value))
+                        compatible = (compatible && objProp.some(i => i == Value))
                         break
                 } 
             })
@@ -6850,7 +6857,7 @@ function calculateEnemyStats() {
     statPreviewEnemyBuffs.buffs.forEach((buff, index) => {
         let buffIncompatible = true
         buff.Skill.Effects.filter(e => statPreviewEnemyBuffs.effectTypeFilter.includes(e.Type)).forEach((effect, effectIndex) => {
-            if ((effect.RestrictTo && !effect.RestrictTo.includes(statPreviewSelectedEnemyId)) || effect.Type != "BuffTarget" || !ExternalBuffs.checkRestrictions(enemy, effect)) {
+            if ((effect.RestrictTo && !effect.RestrictTo.includes(statPreviewSelectedEnemyId)) || effect.Type != "BuffTarget" || !ExternalBuffs.checkRestrictions(enemy, effect, {"ArmorType": statPreviewSelectedEnemyArmorType})) {
                 $(`#statpreview-enemy-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
             } else {
                 buffIncompatible = false

@@ -29872,7 +29872,9 @@
                 25
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10074
+        ],
         "MemoryLobby": [
             2,
             2
@@ -82788,6 +82790,621 @@
                 12,
                 4,
                 9
+            ],
+            [
+                12,
+                7,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 10074,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 150,
+        "PathName": "Hanako_Swimsuit",
+        "DevName": "CH0209",
+        "Name": "Hanako (Swimsuit)",
+        "School": "Trinity",
+        "Club": "RemedialClass",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Sonic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 3,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "Weapon_Icon_CH0209",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_WaterFall",
+        "CollectionTexture": "Student_Portrait_CH0209_Collection",
+        "FamilyName": "Urawa",
+        "PersonalName": "Hanako",
+        "SchoolYear": "2nd Year",
+        "CharacterAge": "16 years old",
+        "FamilyNameRuby": "うらわ",
+        "Birthday": "1月3日",
+        "CharacterSSRNew": "あら……。\nこんなにびっしょり……♡",
+        "ProfileIntroduction": "夏を迎えて島を訪れたトリニティ総合学園所属、補習授業部の女の子。\n\n多少大胆な格好をしているものの、普段の人を試すような言動は鳴りを潜め、素直に心の内を開いてくれている模様。",
+        "Hobby": "徘徊",
+        "CharacterVoice": "Moe Toyota",
+        "BirthDay": "1/3",
+        "Illustrator": "Mx2J",
+        "Designer": "Mx2J",
+        "CharHeightMetric": "161cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1396,
+        "AttackPower1": 303,
+        "AttackPower100": 3033,
+        "MaxHP1": 2243,
+        "MaxHP100": 22430,
+        "DefensePower1": 19,
+        "DefensePower100": 119,
+        "HealPower1": 1403,
+        "HealPower100": 4211,
+        "DodgePoint": 797,
+        "AccuracyPoint": 701,
+        "CriticalPoint": 200,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            3333,
+                            3333,
+                            3334
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 24,
+                            "AttackStartDuration": 25,
+                            "AttackEndDuration": 25,
+                            "AttackBurstRoundOverDelay": 60,
+                            "AttackIngDuration": 20,
+                            "AttackReloadDuration": 75
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "たっぷりかけちゃいますね♡",
+                "Desc": "Deals <?1> damage to enemies in a fan-shaped area.\nIf Hanako's water gauge has at least 1 charge, consumes 1 charge and immediately redraws the EX Skill after activation.",
+                "Parameters": [
+                    [
+                        "337%",
+                        "388%",
+                        "489%",
+                        "540%",
+                        "642%",
+                        "692%",
+                        "794%",
+                        "844%",
+                        "946%",
+                        "996%"
+                    ]
+                ],
+                "Cost": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                ],
+                "Icon": "COMMON_SKILLICON_FAN",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            1670,
+                            1666,
+                            1666,
+                            1666,
+                            1666,
+                            1666
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            33794,
+                            38859,
+                            48996,
+                            54067,
+                            64204,
+                            69269,
+                            79406,
+                            84471,
+                            94608,
+                            99679
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "上手に受け取ってください♡",
+                "Desc": "Every 30s, deals <?1> damage to enemies in a circular area and creates a circular zone where enemies' <d:DEF> is decreased by <?2> for 20s.",
+                "Parameters": [
+                    [
+                        "118%",
+                        "124%",
+                        "130%",
+                        "154%",
+                        "160%",
+                        "166%",
+                        "190%",
+                        "196%",
+                        "201%",
+                        "225%"
+                    ],
+                    [
+                        "10.9%",
+                        "11.4%",
+                        "12%",
+                        "14.1%",
+                        "14.7%",
+                        "15.2%",
+                        "17.4%",
+                        "18%",
+                        "18.5%",
+                        "20.7%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            11882,
+                            12481,
+                            13073,
+                            15448,
+                            16040,
+                            16639,
+                            19014,
+                            19606,
+                            20198,
+                            22573
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -1092,
+                                -1146,
+                                -1201,
+                                -1419,
+                                -1474,
+                                -1529,
+                                -1746,
+                                -1801,
+                                -1855,
+                                -2074
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 11503
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "真夏に隠された本音",
+                "Desc": "Increases <b:ATK> by <?1> and <b:CriticalDamage> by <?2>.",
+                "Parameters": [
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1120,
+                            1148,
+                            1176,
+                            1288,
+                            1316,
+                            1344,
+                            1456,
+                            1484,
+                            1512,
+                            1624
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Scale": [
+                            1120,
+                            1148,
+                            1176,
+                            1288,
+                            1316,
+                            1344,
+                            1456,
+                            1484,
+                            1512,
+                            1624
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "真夏に隠された本音+",
+                "Desc": "Increases <b:ATK> by <?1> plus a further <?3> and <b:CriticalDamage> by <?2> plus a further <?4>.",
+                "Parameters": [
+                    [
+                        "247",
+                        "253",
+                        "260",
+                        "284",
+                        "290",
+                        "297",
+                        "321",
+                        "327",
+                        "334",
+                        "358"
+                    ],
+                    [
+                        "1600",
+                        "1640",
+                        "1680",
+                        "1840",
+                        "1880",
+                        "1920",
+                        "2080",
+                        "2120",
+                        "2160",
+                        "2320"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            247,
+                            253,
+                            260,
+                            284,
+                            290,
+                            297,
+                            321,
+                            327,
+                            334,
+                            358
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Base",
+                        "Scale": [
+                            1600,
+                            1640,
+                            1680,
+                            1840,
+                            1880,
+                            1920,
+                            2080,
+                            2120,
+                            2160,
+                            2320
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "準備は万端です♡",
+                "Desc": "Whenever an ally other than self uses their EX Skill, charges the water gauge by 40%. Each time the water gauge fully charges to 100%, increases own <b:ATK> by <?1> for 20s. (The water gauge can hold up to 2 full charges)",
+                "Parameters": [
+                    [
+                        "20.1%",
+                        "21.1%",
+                        "22.1%",
+                        "26.2%",
+                        "27.2%",
+                        "28.2%",
+                        "32.2%",
+                        "33.2%",
+                        "34.2%",
+                        "38.3%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0209_EXTRAPASSIVESKILL",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2016,
+                                2117,
+                                2218,
+                                2621,
+                                2722,
+                                2823,
+                                3226,
+                                3327,
+                                3428,
+                                3831
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                6,
+                56
+            ],
+            [
+                8,
+                67
+            ],
+            [
+                2,
+                11
+            ],
+            [
+                3,
+                17
+            ],
+            [
+                5,
+                28
+            ]
+        ],
+        "FavorAlts": [
+            23007
+        ],
+        "MemoryLobby": [
+            3,
+            0
+        ],
+        "MemoryLobbyBGM": "Midsummer cat",
+        "FurnitureInteraction": [
+            [
+                210316,
+                210315
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Swimsuit",
+            "WaterPlay",
+            "Cosmetics",
+            "Simplicity",
+            "Beauty"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Hanako_Swimsuit",
+            "F_Hanako_Swimsuit2"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "オネストウィッシュ",
+            "Desc": "海にも持ってきたハナコのアサルトライフル。\n\n相変わらず名前の意味は教えてくれないが、今は少しだけ分かるような気もする。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 133,
+            "AttackPower100": 1333,
+            "MaxHP1": 645,
+            "MaxHP100": 6450,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                120
+            ],
+            [
+                3021,
+                3020,
+                121,
+                170
+            ],
+            [
+                3022,
+                3021,
+                122,
+                171
+            ],
+            [
+                3023,
+                3022,
+                123,
+                172
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                18
+            ],
+            [
+                12,
+                18,
+                14,
+                28
+            ],
+            [
+                12,
+                18,
+                8,
+                24
+            ],
+            [
+                8,
+                18,
+                12,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                120
+            ],
+            [
+                4021,
+                121,
+                170
+            ],
+            [
+                4022,
+                4021,
+                121,
+                170
+            ],
+            [
+                4022,
+                122,
+                171
+            ],
+            [
+                4023,
+                4022,
+                123,
+                172
+            ],
+            [
+                4023,
+                123,
+                172
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                10,
+                16
+            ],
+            [
+                8,
+                3,
+                15
+            ],
+            [
+                8,
+                12,
+                4,
+                8
             ],
             [
                 12,
