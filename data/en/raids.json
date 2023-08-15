@@ -26489,7 +26489,7 @@
             "Id": 12000,
             "IsReleased": [
                 true,
-                false
+                true
             ],
             "DungeonType": "Destruction",
             "Icon": "EnemyInfo_Totem03_TimeAttack",
@@ -27400,6 +27400,126 @@
                 90,
                 90
             ]
+        },
+        {
+            "Id": 19000,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "DungeonType": "Shooting",
+            "Icon": "EnemyInfo_Boxcat_Terror",
+            "MaxDifficulty": 4,
+            "Terrain": "Indoor",
+            "BulletType": "Normal",
+            "ArmorType": "LightArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 916000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7810001
+                    ]
+                },
+                {
+                    "Id": 916000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7810002
+                    ]
+                },
+                {
+                    "Id": 916000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7810003
+                    ]
+                },
+                {
+                    "Id": 916000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7810004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    1329507091,
+                    2060888564
+                ],
+                [
+                    1329507091,
+                    2060888564
+                ],
+                [
+                    1329507091,
+                    2060888564,
+                    3839125090
+                ],
+                [
+                    1329507091,
+                    2060888564,
+                    3839125090,
+                    1463735831
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                180,
+                180
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -27647,13 +27767,19 @@
             "Id": 159710181,
             "Icon": "TimeAttack_Icon_Ally_Special_ExtraDamage",
             "Name": "Additional Damage, ATK Increase ",
-            "Desc": "All enemies' <b:ATK> is increased and enemies will deal additional damage."
+            "Desc": "All enemies' <b:ATK> is increased by 90% and enemies will deal <b>2×</b>100% damage as additional hits when attacking."
         },
         {
             "Id": 200078526,
             "Icon": "TimeAttack_Icon_Ally_Special_HealConvertDamage",
             "Name": "Enemy Damage When Scarecrow Heals",
-            "Desc": "Whenever the Scarecrow recovers HP, deals damage to enemies in proportion to the amount recovered."
+            "Desc": "Whenever the Scarecrow is healed, deals damage to enemies equal to 80% of the HP recovered (including overheals).\nThis damage is unaffected by enemies' resistance to Incoming DMG."
+        },
+        {
+            "Id": 1463735831,
+            "Icon": "TimeAttackGeas_Enemy_Immune_AttackedExSkill",
+            "Name": "Explosive Type Formation",
+            "Desc": "Enemies will only receive damage from <b class='ba-col-explosion'>Explosive</b> type attacks. Also increases the <b:CostRegen> of all allies who use <b class='ba-col-explosion'>Explosive</b> type attacks."
         }
     ],
     "WorldRaid": [
