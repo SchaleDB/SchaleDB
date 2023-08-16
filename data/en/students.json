@@ -46755,7 +46755,9 @@
                 32
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            20029
+        ],
         "MemoryLobby": [
             6,
             6
@@ -83405,6 +83407,518 @@
                 8,
                 3,
                 15
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                7,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 20029,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 151,
+        "PathName": "Mimori_Swimsuit",
+        "DevName": "CH0183",
+        "Name": "Mimori (Swimsuit)",
+        "School": "Hyakkiyako",
+        "Club": "Shugyobu",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "Supporter",
+        "Summons": [
+            {
+                "Id": 99999,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "MaxHP"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        4957,
+                        5701,
+                        7188,
+                        7932,
+                        9419
+                    ]
+                ]
+            }
+        ],
+        "Position": "Back",
+        "BulletType": "Mystic",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 0,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "HG",
+        "WeaponImg": "Weapon_Icon_CH0183",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Badge",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_Swimsuit03_Collection",
+        "CollectionTexture": "Student_Portrait_CH0183_Collection",
+        "FamilyName": "Mizuha",
+        "PersonalName": "Mimori",
+        "SchoolYear": "2nd Year",
+        "CharacterAge": "16 years old",
+        "FamilyNameRuby": "みずは",
+        "Birthday": "3月15日",
+        "CharacterSSRNew": "このまま、この時間が続いてくれたらいいのに……",
+        "ProfileIntroduction": "海に合わせて水着に着替えた百鬼夜行連合学院所属、修行部の副部長。\n\n普段は落ち着いていて穏やかな笑顔を浮かべる彼女だが、水着に着替えた今だけは、いつもより少しだけ浮かれている模様。",
+        "Hobby": "少女漫画、家事全般",
+        "CharacterVoice": "Rie Tanaka",
+        "BirthDay": "3/15",
+        "Illustrator": "tokki",
+        "Designer": "tokki",
+        "CharHeightMetric": "156cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1040,
+        "AttackPower1": 252,
+        "AttackPower100": 2521,
+        "MaxHP1": 2832,
+        "MaxHP100": 21172,
+        "DefensePower1": 94,
+        "DefensePower100": 566,
+        "HealPower1": 1760,
+        "HealPower100": 5282,
+        "DodgePoint": 997,
+        "AccuracyPoint": 820,
+        "CriticalPoint": 273,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "夏ですね！",
+                "Desc": "Deploys cover with HP equal to a set amount plus <?2> of Mimori's Max HP and increases the <b:AttackSpeed> of allies in a circular area around it by <?1> for 20s.",
+                "Parameters": [
+                    [
+                        "16.6%",
+                        "16.6%",
+                        "21.6%",
+                        "26.6%",
+                        "31.6%",
+                        "36.6%",
+                        "41.6%",
+                        "46.6%",
+                        "51.6%",
+                        "54.1%"
+                    ],
+                    [
+                        "49.5%",
+                        "57%",
+                        "71.8%",
+                        "79.3%",
+                        "94.1%",
+                        "101%",
+                        "116%",
+                        "123%",
+                        "138%",
+                        "146%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Icon": "COMMON_SKILLICON_OBSTACLE",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1666,
+                                1666,
+                                2166,
+                                2665,
+                                3165,
+                                3665,
+                                4165,
+                                4665,
+                                5164,
+                                5414
+                            ]
+                        ],
+                        "Stat": "AttackSpeed_Coefficient",
+                        "Channel": 124
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "これが必要ですか？",
+                "Desc": "Every 50s, grants a <b:Shield> with HP equal to <?1> of Healing to the ally with the lowest HP lasting up to 35s.",
+                "Parameters": [
+                    [
+                        "105%",
+                        "111%",
+                        "116%",
+                        "137%",
+                        "142%",
+                        "148%",
+                        "169%",
+                        "174%",
+                        "179%",
+                        "201%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_SHIELD",
+                "Effects": [
+                    {
+                        "Type": "Shield",
+                        "Scale": [
+                            10587,
+                            11115,
+                            11644,
+                            13763,
+                            14292,
+                            14820,
+                            16939,
+                            17468,
+                            17997,
+                            20115
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "たくさん用意しましたよ",
+                "Desc": "Increases <b:MAXHP> by <?1>.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "たくさん用意しましたよ+",
+                "Desc": "Increases <b:HealPower> by <?1> and <b:MAXHP> by <?2>.",
+                "Parameters": [
+                    [
+                        "673",
+                        "707",
+                        "740",
+                        "875",
+                        "908",
+                        "942",
+                        "1076",
+                        "1110",
+                        "1144",
+                        "1278"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Base",
+                        "Scale": [
+                            673,
+                            707,
+                            740,
+                            875,
+                            908,
+                            942,
+                            1076,
+                            1110,
+                            1144,
+                            1278
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "心配しないでください。私がついていますから",
+                "Desc": "Increases all allies' <b:AttackSpeed> by <?1>.",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "AttackSpeed_Coefficient",
+                        "Channel": 324
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "HealPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                5,
+                0
+            ],
+            [
+                8,
+                0
+            ],
+            [
+                11,
+                53
+            ],
+            [
+                13,
+                64
+            ],
+            [
+                3,
+                11
+            ],
+            [
+                5,
+                16
+            ],
+            [
+                8,
+                26
+            ]
+        ],
+        "FavorAlts": [
+            10034
+        ],
+        "MemoryLobby": [
+            5,
+            0
+        ],
+        "MemoryLobbyBGM": "Midnight Trip",
+        "FurnitureInteraction": [
+            [
+                9203
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Swimsuit",
+            "WaterPlay",
+            "Household",
+            "Cosmetics",
+            "Books"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Mimori_Swimsuit",
+            "F_Mimori_Swimsuit2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "柔らかな決意",
+            "Desc": "ミモリの自動式拳銃。\n\n大和撫子の修行はいつ、どこであっても続いている。それが例え、バカンスで訪れた海だとしても。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 111,
+            "AttackPower100": 1108,
+            "MaxHP1": 616,
+            "MaxHP100": 6162,
+            "HealPower1": 207,
+            "HealPower100": 2070,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3000,
+                130
+            ],
+            [
+                3001,
+                3000,
+                131,
+                200
+            ],
+            [
+                3002,
+                3001,
+                132,
+                201
+            ],
+            [
+                3003,
+                3002,
+                133,
+                202
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                18
+            ],
+            [
+                12,
+                18,
+                20,
+                34
+            ],
+            [
+                12,
+                18,
+                10,
+                27
+            ],
+            [
+                8,
+                18,
+                12,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4000
+            ],
+            [
+                4000
+            ],
+            [
+                4001,
+                4000,
+                130
+            ],
+            [
+                4001,
+                131,
+                200
+            ],
+            [
+                4002,
+                4001,
+                131,
+                200
+            ],
+            [
+                4002,
+                132,
+                201
+            ],
+            [
+                4003,
+                4002,
+                133,
+                202
+            ],
+            [
+                4003,
+                133,
+                202
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                4
+            ],
+            [
+                8,
+                3,
+                13
+            ],
+            [
+                5,
+                12,
+                8,
+                17
+            ],
+            [
+                8,
+                3,
+                16
             ],
             [
                 8,
