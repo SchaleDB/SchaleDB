@@ -454,14 +454,8 @@ let itemSearchOptions = {
  */
  class CharacterStats {
     
-    constructor(character, level, stargrade, transcendence=[], scaletype=0) {
+    constructor(character, level, stargrade, transcendence=[], statGrowthType='Standard') {
         this.stats = {}
-        let levelscale
-        if (scaletype == 0) {
-            levelscale = ((level-1)/99).toFixed(4)
-        } else if (scaletype == 1) {
-            levelscale = CharacterStats.getTimeAttackLevelScale(level)
-        }
 
         if (transcendence.length == 0) {
             transcendence = [[0, 1000, 1200, 1400, 1700], [0, 500, 700, 900, 1400], [0, 750, 1000, 1200, 1500]]
@@ -477,14 +471,14 @@ let itemSearchOptions = {
             transcendenceHeal += transcendence[2][i] / 10000
         }
 
-        let MaxHP = Math.ceil((Math.round((character.MaxHP1 + (character.MaxHP100-character.MaxHP1)*levelscale).toFixed(4))*transcendenceHP).toFixed(4))
-        let AttackPower = Math.ceil((Math.round((character.AttackPower1 + (character.AttackPower100-character.AttackPower1)*levelscale).toFixed(4))*transcendenceAttack).toFixed(4))
-        let DefensePower = Math.round((character.DefensePower1 + (character.DefensePower100-character.DefensePower1)*levelscale).toFixed(4))
-        let HealPower = Math.ceil((Math.round((character.HealPower1 + (character.HealPower100-character.HealPower1)*levelscale).toFixed(4))*transcendenceHeal).toFixed(4))
+        let MaxHP = CharacterStats.interpolateStat(character.MaxHP1, character.MaxHP100, level, transcendenceHP, statGrowthType)
+        let AttackPower = CharacterStats.interpolateStat(character.AttackPower1, character.AttackPower100, level, transcendenceAttack, statGrowthType)
+        let DefensePower = CharacterStats.interpolateStat(character.DefensePower1, character.DefensePower100, level, 1, statGrowthType)
+        let HealPower = CharacterStats.interpolateStat(character.HealPower1, character.HealPower100, level, transcendenceHeal, statGrowthType) 
 
         let DefensePenetration = 0
         if (character.DefensePenetration100 !== undefined) {
-            DefensePenetration = Math.round((character.DefensePenetration1 + (character.DefensePenetration100-character.DefensePenetration1)*levelscale).toFixed(4))
+            DefensePenetration = CharacterStats.interpolateStat(character.DefensePenetration1, character.DefensePenetration100, level, 1, statGrowthType)
         }
 
         this.level = level
@@ -751,6 +745,24 @@ let itemSearchOptions = {
         } else if (level >= 79) {
             return ((level-1)/99).toFixed(4)
         }
+    }
+
+    static interpolateStat(stat1, stat100, level, transcendence=1, statGrowthType='Standard') {
+        let levelScale
+        switch (statGrowthType) {
+            case 'TimeAttack':
+                levelScale = CharacterStats.getTimeAttackLevelScale(level)
+                break
+            case 'LateBloom':
+            case 'Premature':
+                levelScale = (level-1)/99
+                break
+            case 'Standard':
+            default:
+                levelScale = ((level-1)/99).toFixed(4)
+                break
+        }
+        return Math.ceil((Math.round((stat1+(stat100-stat1)*levelScale).toFixed(4))*transcendence).toFixed(4))
     }
 
     /**
@@ -5648,7 +5660,7 @@ function changeRaidEnemy(num) {
     let level
     (raid.Id < 1000) ? level = raid_level[raid_difficulty] : level = raid.Level[raid_difficulty]
 
-    let enemyStats = new CharacterStats(enemy, level, 1, (enemy.Transcendence ? enemy.Transcendence : []), 0)
+    let enemyStats = new CharacterStats(enemy, level, 1, (enemy.Transcendence ? enemy.Transcendence : []))
 
     raidEnemyStatList.forEach((statName) => {
         if (statName == 'AmmoCount') {
@@ -6447,8 +6459,13 @@ function recalculateStats() {
     let level = $("#ba-statpreview-levelrange").val()
     let studentStats, summonStats, summon
     if (statPreviewSelectedChar > 0) {
-        summon = find(data.summons, 'Id', student.Summons[statPreviewSelectedChar-1].Id)[0]
+        const studentSummon = student.Summons[statPreviewSelectedChar-1]
+        summon = find(data.summons, 'Id', studentSummon.Id)[0]
         summonStats = new CharacterStats(summon, level, 1)
+
+        if (studentSummon.Id == 99999) {
+            summonStats.setBase('MaxHP', CharacterStats.interpolateStat(studentSummon.ObstacleMaxHP1, studentSummon.ObstacleMaxHP100, level))
+        }
     }
     studentStats = new CharacterStats(student, level, statPreviewStarGrade)
     if (compareMode) {
@@ -7236,7 +7253,7 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
     $('#ba-stage-enemy-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',enemy.BulletType)}`, translateUI('attacktype'), null, getAttackTypeText(enemy.BulletType), 32), placement: 'top', html: true})
     $('#ba-stage-enemy-defensetype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType',enemy.ArmorType)}`, translateUI('defensetype'), null, getDefenseTypeText(enemy.ArmorType), 32), placement: 'top', html: true})        
 
-    let enemyStats = new CharacterStats(enemy, level, grade, (enemy.Transcendence ? enemy.Transcendence : []), scaletype)
+    let enemyStats = new CharacterStats(enemy, level, grade, (enemy.Transcendence ? enemy.Transcendence : []), scaletype == 1 ? 'TimeAttack' : 'Standard')
 
     //override je #8 HP values
     if (loadedModule == 'raids' && raid.Id == 8000) {
@@ -9394,6 +9411,7 @@ function maxStudentAttributes() {
     $('#ba-statpreview-levelrange').val(statPreviewLevel)
     changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
 
+    statPreviewIncludeEquipment = true
     statPreviewEquipment = [data.common.regions[regionID].gear1_max, data.common.regions[regionID].gear2_max, data.common.regions[regionID].gear3_max]
     $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
     $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
@@ -9401,7 +9419,6 @@ function maxStudentAttributes() {
     changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'), false)
     changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'), false)
     changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'), false)
-    
 
     statPreviewWeaponGrade = 3
     statPreviewWeaponLevel = data.common.regions[regionID].weaponlevel_max
@@ -9417,10 +9434,7 @@ function maxStudentAttributes() {
         $(`#ba-statpreview-bond-${i}-range`).val(statPreviewBondLevel[i])
         changeStatPreviewBondLevel(i, false)
         statPreviewIncludeBond[i] = true
-        
     }
-
-    statPreviewIncludeEquipment = true
 
     if ("Released" in student.Gear && student.Gear.Released[regionID]) {
         const max = $('#ba-statpreview-gear4-range').attr('max')
@@ -9428,6 +9442,7 @@ function maxStudentAttributes() {
         changeExGearLevel(document.getElementById('ba-statpreview-gear4-range'), false)
     }
 
+    recalculateTerrainAffinity()
     refreshStatTableControls()
     recalculateStats()
 }
