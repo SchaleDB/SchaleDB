@@ -5918,20 +5918,43 @@ function loadStage(id) {
 
         if (mode == 'Conquest') {
 
-            if ("Calculate" in stage.Rewards) {
-                let calculateRewardsHtml = ''
-                for (let i = 0; i < 3; i++) {
-                    stage.Rewards.Calculate[i].forEach(reward => {
-                        calculateRewardsHtml += getDropIconHTML(reward[0], reward[1], 1, 1, false, `Lv.${i+1}`)
+            const tileMaxLevel = 1 + stage.UpgradeCost.length
+            let tileInfoTable = ''
+
+            let tileType = "Base"
+            if (stage.SubStage || stage.EnemyType == "Challenge") tileType = "Battle"
+            if (stage.EnemyType == "Boss") tileType = "Boss"
+
+            tileInfoTable += `<table class="w-100"><thead class="text-center"><tr><th></th><th>${translateUI('base_upgrade_cost')}</th><th>${translateUI('rewards')}</th><th>${translateUI('base_settlement')}</th></tr></thead><tbody>`
+
+            for (let i = 0; i < tileMaxLevel; i++) {
+                tileInfoTable += '<tr>'
+                tileInfoTable += `<td><img src="images/conquest/Conquest_${stage.EventId}_Img_Tile_${tileType}_${i+1}${stage.EnemyType == "Challenge" ? "_Challenge" : ""}.png" style="height:80px;"><b class="p-2">Lv. ${i+1}</b></td>`
+
+                tileInfoTable += '<td><div class="item-icon-list">'
+                if (i > 0 && i-1 < stage.UpgradeCost.length) {
+                    tileInfoTable += getDropIconHTML(stage.UpgradeCost[i-1][0], stage.UpgradeCost[i-1][1], 1, 1)
+                }
+                tileInfoTable += '</div></td>'
+
+                tileInfoTable += '<td><div class="item-icon-list">'
+                if (stage.Rewards[`Upgrade${i+1}`]) {
+                    stage.Rewards[`Upgrade${i+1}`].forEach(reward => {
+                        tileInfoTable += getDropIconHTML(reward[0], reward[1], 1, 1)
                     })
                 }
+                tileInfoTable += '</div></td>'
 
-                if (calculateRewardsHtml != "") {
-                    $(`#conquest-settlement-reward`).html(`<div class="item-icon-list">${calculateRewardsHtml}</div>`).find('.item-drop').tooltip({html: true})
-                } else {
-                    $(`#conquest-settlement-reward`).html(`<p class="mb-0 text-center">${translateUI('rewards_none')}</p>`)
-                }
+                tileInfoTable += '<td><div class="item-icon-list">'
+                stage.Rewards.Calculate[i].forEach(reward => {
+                    tileInfoTable += getDropIconHTML(reward[0], reward[1], 1, 1)
+                })
+                tileInfoTable += '</div></td>'
+                tileInfoTable += '</tr>'
             }
+            tileInfoTable += '</tbody></table>'
+
+            $('#conquest-tile-info').html(tileInfoTable).find('.item-drop').tooltip({html: true})
             
             if ("SchoolBuff" in stage) {
                 let schoolHtml = ""
