@@ -46,14 +46,22 @@
                 <div id="ba-stages-details-container" class="card p-2">
                     <div class="card-header">
                         <div class="d-flex flex-row align-items-top pt-2">
-                            <div class="flex-grow-1 me-2">
+                            <div class="flex-grow-1">
                                 <h4 id="ba-stage-name" class="px-1 mb-1"></h4>
-                                <h2 id="ba-stage-title" class="title-text px-1 mb-2"></h2>
-                                <div class="d-flex align-items-center flex-wrap gap-2 px-1">
+                                <h2 id="ba-stage-title" class="title-text px-1 mb-3"></h2>
+                                <div class="d-flex align-items-center flex-wrap gap-2">
                                     <span id="ba-stage-terrain" class="ba-panel"><img id="ba-stage-terrain-img" class="ba-student-terrain-icon invert-light" src=""></span>
                                     <span id="ba-stage-fog" class="ba-panel"><img id="ba-stage-terrain-img" class="ba-student-terrain-icon invert-light" src="images/ui/Terrain_fog.png"></span>
                                     <span id="ba-stage-level" class="ba-student-info ba-panel text-bold m-0"></span>
                                     <span id="ba-stage-entrycost" class="d-flex flex-wrap gap-2"></span>
+                                    <div id="stage-version-list" class="ms-auto">
+                                        <button class="btn-pill" data-bs-toggle="dropdown">
+                                            <span class="label"></span>
+                                            <i class="caret fa-solid fa-caret-down me-2"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start">
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>

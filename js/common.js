@@ -203,6 +203,7 @@ let loadedRaid
 let loadedItem
 let loadedItemType
 let loadedStage
+let loadedStageVersion
 let loadedConquest
 let loadedCraftNode
 let loadedCraftId = 0
@@ -2186,7 +2187,7 @@ class EnemyFinder {
                         }
                     }
                 })
-            })            
+            })
         })
 
         data.stages.ConquestMap.forEach(conquestMap => {
@@ -3763,6 +3764,10 @@ function loadModule(moduleName, entry=null) {
             var urlVars = new URL(window.location.href).searchParams
         
             generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6)
+
+            $('#stage-version-list').on('click', '.dropdown-item', function(e) {
+                changeStageVersion($(this).data('version'))
+            })
 
             if (entry != null) {
                 loadStage(entry)
@@ -5876,6 +5881,41 @@ function loadStage(id) {
         $('#ba-stage-tab-conquest').toggle(mode == 'Conquest')
         $('#ba-stage-tab-map').toggle(mode != 'Conquest')
 
+        if (mode == "Event" && stage.EventId != 701) {
+            let dropdownHtml = ''
+            let versionsAvailable = []
+            stage.Versions.forEach(version => {
+                let checkEventId
+                switch (version) {
+                    case "Rerun":
+                        checkEventId = 10000 + stage.EventId
+                        break
+                    case "Permanent":
+                        checkEventId = 50000 + stage.EventId
+                        break
+                    default:
+                        checkEventId = stage.EventId
+                        break;
+                }
+                if (data.common.regions[regionID].events.includes(checkEventId)) {
+                    versionsAvailable.push(version)
+                    dropdownHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-version="${version}"><span>${translateUI('stage_' + version.toLowerCase())}</span></a></li>`
+                }
+            })
+            $('#stage-version-list .dropdown-menu').html(dropdownHtml)
+            $('#stage-version-list').show()
+
+            if (!versionsAvailable.includes(loadedStageVersion)) {
+                loadedStageVersion = versionsAvailable[0]
+            }
+
+            $(`#stage-version-list .dropdown-item[data-version="${loadedStageVersion}"`).toggleClass('active', true)
+            $(`#stage-version-list button .label`).text(translateUI('stage_' + loadedStageVersion.toLowerCase()))
+
+        } else {
+            $('#stage-version-list').hide()
+        }
+
         if (mode != "Conquest" && $('#ba-stage-tab-conquest').hasClass('active')) {
             $('#ba-stage-tab-enemies').tab('show')
         }
@@ -5888,6 +5928,25 @@ function loadStage(id) {
 
         const stageTypes = ["Default","FirstClear","ThreeStar"]
         let dropsHtml = ''
+
+        let rewardsArray
+
+        if (loadedStageVersion == "Rerun") {
+            if (regionID == 1 && stage.RewardsGlobalRerun) {
+                rewardsArray = stage.RewardsGlobalRerun
+            } else {
+                rewardsArray = stage.RewardsRerun
+            }
+        }
+
+        if (rewardsArray == undefined) {
+            if (regionID == 1 && stage.RewardsGlobal) {
+                rewardsArray = stage.RewardsGlobal
+            } else {
+                rewardsArray = stage.Rewards
+            }
+        }
+
         stageTypes.forEach(el => {
             if (el in stage.Rewards && stage.Rewards[el].length > 0) {
                 let labelText = null
@@ -5908,8 +5967,7 @@ function loadStage(id) {
                     labelText = '<i class="fa-solid fa-star"></i>'.repeat(3)
                 }
                 
-                const rewardsArray = regionID == 1 && stage.RewardsGlobal !== undefined ? stage.RewardsGlobal[el] : stage.Rewards[el]
-                rewardsArray.forEach(reward => {
+                rewardsArray[el].forEach(reward => {
                     const amount = stage.Type == "FindGift" ? reward[2] : 1
                     dropsHtml += getDropIconHTML(reward[0], reward[1], amount, amount, false, labelText)
                 })
@@ -6000,16 +6058,14 @@ function loadStage(id) {
             $(`#ba-stage-drops`).html(`<div class="d-flex flex-wrap justify-content-center"><span class="pb-0 text-center">${translateUI('rewards_none')}</span></div>`)
         }
 
-
         let html = ''
         let enemyList = {}
         const enemyRanks = ['Minion','Elite','Champion','Boss']
-        stage.Formations.forEach(el => {
+        getSuffixedProperty(stage, "Formations", loadedStageVersion).forEach(el => {
             for (let i = 0; i < el.EnemyList.length; i++) {
                 let enemy = find(data.enemies, "Id", el.EnemyList[i])[0]
                 let rankId = enemyRanks.indexOf(enemy.Rank)
                 enemyList[`${4-rankId}_${enemy.Id}_${el.Level[rankId]}_${el.Grade[rankId]}`] = enemy
-                //all_enemies[enemy_rank[enemy.Rank]+'_'+enemy.Id+'_'+el['Level'+enemy.Rank]+'_'+el['Grade'+enemy.Rank]] = enemy
             }
         })
 
@@ -6025,12 +6081,16 @@ function loadStage(id) {
         const starIcon = `<i class="fa-solid fa-star me-2 stage-star"></i>`
         const challengeIcon = `<i class="fa-solid fa-clipboard-list me-2 stage-challenge"></i>`
 
-        if ("HexaMap" in stage) {
+        let hexaMap = getSuffixedProperty(stage, "HexaMap", loadedStageVersion)
+        let starCondition = getSuffixedProperty(stage, "StarCondition", loadedStageVersion)
+        let challengeCondition = getSuffixedProperty(stage, "ChallengeCondition", loadedStageVersion)
+
+        if (hexaMap) {
             $('#ba-stage-tab-map').toggleClass('disabled', false)
             drawHexamap(stage, '#ba-stage-map-canvas')
             conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_complete')}</span></div>`
-            conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_sranks', [stage.StarCondition[0]])}</span></div>`
-            conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_clearturns', [stage.StarCondition[1]])}</span></div>`
+            conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_sranks', [starCondition[0]])}</span></div>`
+            conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_clearturns', [starCondition[1]])}</span></div>`
         } else {
             if ($('#ba-stage-tab-map').hasClass('active')) {
                 $('#ba-stage-tab-enemies').tab('show')
@@ -6043,7 +6103,7 @@ function loadStage(id) {
             } else if (mode == "Conquest") {
                 if (!stage.SubStage) {
                     conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_defeatall')}</span></div>`
-                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_defeatalltime', [stage.StarCondition[1]])}</span></div>`
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_defeatalltime', [starCondition[1]])}</span></div>`
                     conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_allsurvive')}</span></div>`
                 }
             } else if (stage.Type.slice(0,6) == "Chaser") {
@@ -6065,10 +6125,10 @@ function loadStage(id) {
             }
         }
 
-        if (stage.ChallengeCondition !== undefined && stage.ChallengeCondition.length > 0) {
+        if (challengeCondition !== undefined && challengeCondition.length > 0) {
 
             conditionsHtml += `<div class="ba-panel-separator my-2"></div>`
-            stage.ChallengeCondition.forEach(condition => {
+            challengeCondition.forEach(condition => {
                 switch (condition[0]) {
                     case "Turns":
                         conditionsHtml += `<div>${challengeIcon}<span>${translateUI('starcondition_clearturns', [condition[1]])}</span></div>`
@@ -6083,8 +6143,9 @@ function loadStage(id) {
         $('#ba-stage-conditions').toggle(conditionsHtml != "").html(`<div class="d-flex flex-column">${conditionsHtml}</div>`)
 
         html = ''
-        if ("EntryCost" in stage && stage.EntryCost.length > 0) {
-            stage.EntryCost.forEach((ec, i) => {
+        let entryCost = getSuffixedProperty(stage, "EntryCost", loadedStageVersion)
+        if (entryCost && entryCost.length > 0) {
+            entryCost.forEach((ec, i) => {
                 let currency
                 if (ec[0] < 100) {
                     currency = find(data.currency, 'Id', ec[0])[0]
@@ -6117,6 +6178,18 @@ function loadStage(id) {
     }
 }
 
+function changeStageVersion(version) {
+    loadedStageVersion = version
+    loadStage(loadedStage.Id)
+}
+
+function getSuffixedProperty(obj, prop, suffix) {
+    if (suffix) {
+        if (prop + suffix in obj) return obj[prop + suffix]
+    }
+    return obj[prop]
+}
+
 function populateEnemyList(containerId, formations) {
     let html = ''
     let enemyList = {}
@@ -6141,7 +6214,7 @@ function populateEnemyList(containerId, formations) {
 function getStageName(stage, type) {
     switch (type) {
         case "Event":
-            return `${getLocalizedString('EventName', ''+stage.EventId % 10000)}\n${stage.Difficulty == 1 ? "Quest" : "Challenge"} ${stage.Stage.toString().padStart(2,'0')}`
+            return `${getLocalizedString('EventName', ''+stage.EventId % 10000)} ${stage.Difficulty == 0 ? "Story" : (stage.Difficulty == 1 ? "Quest" : "Challenge")} ${stage.Stage.toString().padStart(2,'0')}`
         case "Campaign":
             return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
         case "WeekDungeon":
@@ -7118,7 +7191,7 @@ function getStageCardHTML(stage, dropChance = 0) {
     function getStageCardName() {
         switch (type) {
             case "Event":
-                return `${stage.Difficulty == 1 ? 'Quest' : 'Challenge'} ${stage.Stage.toString().padStart(2,'0')}`
+                return `${stage.Difficulty == 0 ? 'Story' : (stage.Difficulty == 1 ? 'Quest' : 'Challenge')} ${stage.Stage.toString().padStart(2,'0')}`
             case "Campaign":
                 return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
             case "WeekDungeon":
@@ -7197,7 +7270,7 @@ function getEventCardHTML(eventId) {
 function getStageIcon(stage, type) {
     switch (type) {
         case "Event":
-            return `Campaign_Event_${stage.EventId > 10000 ? stage.EventId - 10000 : stage.EventId}_${stage.Difficulty == 1 ? 'Normal' : 'Hard'}`
+            return `Campaign_Event_${stage.EventId > 10000 ? stage.EventId - 10000 : stage.EventId}_${stage.Difficulty == 2 ? 'Hard' : 'Normal'}`
         case "Campaign":
             return `Campaign_Image_${stage.Area.toString().padStart(2,'0')}_${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
         case "WeekDungeon":
@@ -8023,8 +8096,19 @@ function populateEventStageList(eventId) {
             eventStages.forEach(stage => {
                 if (!(eventId == 701 && ((stage.Difficulty == 1 && stage.Stage > data.common.regions[regionID].event_701_max) || (stage.Difficulty == 2 && stage.Stage > data.common.regions[regionID].event_701_challenge_max)))) {
                     if (stage.Difficulty != diffPrev || stage.EventId != eventPrev) {
-                        let name = stage.Difficulty == 1 ? "Quest" : "Challenge"
-                        name += stage.EventId > 10000 ? translateUI('event_rerun') : ""
+                        let name
+
+                        switch (stage.Difficulty) {
+                            case 0:
+                                name = "Story"
+                                break;
+                            case 1:
+                                name = "Quest"
+                                break;
+                            case 2:
+                                name = "Challenge"
+                                break;
+                        }
                         let header = `<div class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${name}</h3></div>`
                         html += header
                     }
