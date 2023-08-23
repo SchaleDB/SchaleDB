@@ -8465,6 +8465,7 @@ function getAttackTypeText(bulletType) {
     if (bulletType == "Normal") {
         text = translateUI("attack_type_normal_desc")
     } else for (armorType in data.config.TypeEffectiveness[bulletType]) {
+        if (armorType == "Structure") continue
         const factor = data.config.TypeEffectiveness[bulletType][armorType] / 10000
         if (factor != 1) {
             text += text == '' ? '' : '\n'
