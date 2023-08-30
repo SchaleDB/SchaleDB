@@ -2086,7 +2086,7 @@ class EnemyFinder {
                 if (!raid.IsReleased[regionID] || (difficultyId > raid.MaxDifficulty[regionID])) return
                 difficulty.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
-                    if (enemy.SquadType == 'Main' && !enemy.DevName.includes('_HolyRelic_') && !enemy.DevName.includes('_HolyRelic02_')) {
+                    if (enemy.SquadType == 'Main' && !enemy.DevName.includes('Resort_') && !enemy.DevName.includes('AAGun_') && !enemy.DevName.includes('_HolyRelic_') && !enemy.DevName.includes('_HolyRelic02_')) {
                         if (enemy.Icon !== undefined && enemy.Icon != "") {
                             statPreviewEnemyList.push({
                                 id: enemy.Id,
@@ -3528,9 +3528,8 @@ function loadModule(moduleName, entry=null) {
                 $('#statpreview-enemy-buff-transferable-search ul.dropdown-menu').append(listItem)
             })
 
-            data.items.filter(i => i.Id >= 100 && i.Id < 1000 && i.Rarity == 'SSR').forEach(item => {
+            data.items.filter(i => i.Id >= 100 && i.Id < 1000 && i.Rarity == 'SSR' && i.IsReleased[regionID]).forEach(item => {
                 const classId = Math.floor(item.Id/10)
-                if (regionID == 1 && (classId == 23 || classId == 25)) return
                 const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="UsesArtifact" data-filter-select-value="${classId}" class="btn btn-dark"><div class="icon"><img src="images/items/${item.Icon}.png"></div><span>${getLocalizedString('ArtifactClass', classId)}</span></a></li>`
                 $('#ba-student-search-select-usesartifact-list').append(listItem)
             })
@@ -3717,10 +3716,6 @@ function loadModule(moduleName, entry=null) {
             loadLanguage(userLang)
             $(".tooltip").tooltip("hide")
             let urlVars = new URL(window.location.href).searchParams
-        
-            if (regionID == 1) {
-                $('#ba-raid-difficulty-6').hide()
-            }
 
             generateStatTable('#ba-raid-enemy-stats', raidEnemyStatList, 6)
             generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6)
@@ -4977,6 +4972,10 @@ function renderStudent() {
 
     finalizeLoad(getTranslatedString(student, 'Name'), "chara", student.PathName, 'View Student', student.Id)
 
+    if (!student.IsReleased[regionID]) {
+        showReleaseWarning()
+    }
+
     studentSelectorModal.hide()
 }
 
@@ -5029,7 +5028,7 @@ function initRaidSkillInfo(raidId, enemyId, raidDifficulty) {
         const raid = find(data.raids.Raid, "Id", raidId)[0]
         const enemy = find(data.enemies, "Id", enemyId)[0]
         
-        if (!raid.ExcludeNormalAttack.includes(enemyId)) {
+        if (raid.HasNormalAttack.includes(enemyId)) {
             const autoAttackSkill = {
                 SkillType: "raidautoattack",
                 IsRaidSkill: true,
@@ -5260,6 +5259,10 @@ function loadItem(id) {
 
         finalizeLoad(getTranslatedString(item, 'Name'), "item", id, 'View Item', id)
 
+        if (!item.IsReleased[regionID]) {
+            showReleaseWarning()
+        }
+
     } else {
         loadModule('items', id)
     }
@@ -5352,6 +5355,9 @@ function loadCraft(id) {
             $('#craft-select-'+loadedCraftId).addClass('selected')
             finalizeLoad(getTranslatedString(item, 'Name'), "craftnode", loadedCraftId, 'View Crafting', loadedCraftId)
 
+            if (!item.IsReleased[regionID]) {
+                showReleaseWarning()
+            }
         }
 
     } else {
@@ -5471,6 +5477,10 @@ function loadRaid(raidId) {
         $('#raid-select-'+raid.Id).addClass('selected')
 
         finalizeLoad(raidName, "raid", raid.Id, 'View Raid', raid.Id)
+
+        if (!raid.IsReleased[regionID]) {
+            showReleaseWarning()
+        }
 
     } else {
         loadModule('raids', raidId)
@@ -5715,13 +5725,17 @@ function changeRaidEnemy(num) {
         } else if (statName == 'MaxHP') {
             
             let tooltipText = ""
+            let maxHPDisplay = ""
+
+            const hoverCraftMissileHPMod = [0, 1000, 2500, 5000, 10000, 25000, 35000]
 
             switch (enemy.Id) {
+                
                 case 7305701:
                     enemyStats.addBuff('MaxHP_Base', 100000)
                 case 7305601:
                 case 7965031:
-                    $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).html(`<span class="has-tooltip">${enemyStats.getTotalString(statName)}</span>`)
+                    maxHPDisplay = enemyStats.getTotalString('MaxHP')
    
                     enemyStats.addBuff('MaxHP_Coefficient', 10000)
                     tooltipText += `<div class="active-buff me-2"><img src="images/buff/Combat_Icon_Buff_MAXHP.png" width="22" height="26" class=""><span class="stack-count">2</span></div><b>${enemyStats.getTotalString(statName)}</b>`
@@ -5732,21 +5746,31 @@ function changeRaidEnemy(num) {
                     break
                 case 7305101:
                 case 7965002:
-                    $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).html(`<span class="has-tooltip">${enemyStats.getTotalString(statName)}</span>`)
+                    maxHPDisplay = enemyStats.getBaseString('MaxHP')
                     if (raid_difficulty == 4) {
-
                         enemyStats.addBuff('MaxHP_Coefficient', 11000)
                         tooltipText += `<div class="active-buff me-2"><img src="images/buff/Combat_Icon_Buff_MAXHP.png" width="22" height="26" class=""></div><b>${enemyStats.getTotalString(statName)}</b>`
-                        break
-
                     }
+                    break
+
+                case 610220107:
+                    enemyStats.addBuff('MaxHP_Coefficient', 20000)
+                case 610220106:
+                case 610220108:
+                    enemyStats.addBuff('MaxHP_Base', hoverCraftMissileHPMod[raid_difficulty])
+                    maxHPDisplay = enemyStats.getTotalString('MaxHP')
+                    break
+
                 default:
-                    $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text(enemyStats.getBaseString(statName))
+                    maxHPDisplay = enemyStats.getBaseString('MaxHP')
                     break
             }
 
             if (tooltipText != '') {
-                $('.stat-MaxHP .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(tooltipText), html: true, placement: 'top'})
+                $(`#ba-raid-enemy-stats .stat-MaxHP .stat-value`).html(`<span class="has-tooltip">${maxHPDisplay}</span>`)
+                $('#ba-raid-enemy-stats .stat-MaxHP .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(tooltipText), html: true, placement: 'top'})
+            } else {
+                $(`#ba-raid-enemy-stats .stat-MaxHP .stat-value`).text(maxHPDisplay)
             }
             
         } else {
@@ -5902,12 +5926,22 @@ function loadStage(id) {
                     dropdownHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-version="${version}"><span>${translateUI('stage_' + version.toLowerCase())}</span></a></li>`
                 }
             })
-            $('#stage-version-list .dropdown-menu').html(dropdownHtml)
-            $('#stage-version-list').show()
 
             if (!versionsAvailable.includes(loadedStageVersion)) {
-                loadedStageVersion = versionsAvailable[0]
+                if (versionsAvailable.length > 0) {
+                    loadedStageVersion = versionsAvailable[0]
+                } else {
+                    // use first version available if no versions are released
+                    const version = stage.Versions[0]
+                    loadedStageVersion = version
+                    dropdownHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-version="${version}"><span>${translateUI('stage_' + version.toLowerCase())}</span></a></li>`
+                    showReleaseWarning()
+                }
+                
             }
+
+            $('#stage-version-list .dropdown-menu').html(dropdownHtml)
+            $('#stage-version-list').show()
 
             $(`#stage-version-list .dropdown-item[data-version="${loadedStageVersion}"`).toggleClass('active', true)
             $(`#stage-version-list button .label`).text(translateUI('stage_' + loadedStageVersion.toLowerCase()))
@@ -6098,7 +6132,7 @@ function loadStage(id) {
             $('#ba-stage-tab-map').toggleClass('disabled', true)
             if (mode == "Campaign" || mode == "Event") {
                 conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_defeatall')}</span></div>`
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_defeatalltime', ['120'])}</span></div>`
+                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_defeatalltime', [starCondition[0]])}</span></div>`
                 conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_allsurvive')}</span></div>`
             } else if (mode == "Conquest") {
                 if (!stage.SubStage) {
@@ -6272,7 +6306,6 @@ function loadRegion(regID) {
 
     if (regionID == 1) {
         //hide filters not relevant to global
-        $('#ba-student-search-filter-armortype-elasticarmor').hide()
         $('#ba-student-search-filter-bullettype-sonic').hide()
         $('#item-search-filter-furnitureset-111').hide()
         $('#item-search-filter-furnitureset-112').hide()
@@ -9672,4 +9705,8 @@ function toastMessage(msg, duration, cssClass) {
     }
     $('#toast-message').removeClass().addClass('p-2 ba-panel show').addClass(cssClass).html(`<p class="m-0">${msg}</p>`)
     toastMessageTimeout = window.setTimeout(function(){$("#toast-message").removeClass('show')},duration)
+}
+
+function showReleaseWarning() {
+    toastMessage(`<i class="fa-solid fa-circle-exclamation me-2"></i>${translateUI('toast_release_warning')}`, 4000, 'alert')
 }

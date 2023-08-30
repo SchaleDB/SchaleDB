@@ -307,15 +307,7 @@
                     ]
                 }
             ],
-            "ExcludeNormalAttack": [
-                7300100,
-                7300200,
-                7300300,
-                7300400,
-                7300500,
-                7300600,
-                7300700
-            ],
+            "HasNormalAttack": [],
             "BattleDuration": [
                 180,
                 180,
@@ -529,14 +521,44 @@
                     "Desc": "<d:DamagedRatio> 증가 효과 면역\n그로기 상태가 유지되는 동안에는 <d:DamagedRatio> 900% 증가"
                 }
             ],
-            "ExcludeNormalAttack": [
-                7301100,
-                7301200,
-                7301300,
-                7301400,
-                7301500,
-                7301600,
-                7301700
+            "HasNormalAttack": [
+                7301101,
+                7301103,
+                7301105,
+                7301107,
+                7301109,
+                7301201,
+                7301203,
+                7301205,
+                7301207,
+                7301209,
+                7301301,
+                7301303,
+                7301305,
+                7301307,
+                7301309,
+                7301401,
+                7301403,
+                7301405,
+                7301407,
+                7301409,
+                7301501,
+                7301503,
+                7301505,
+                7301507,
+                7301509,
+                7301601,
+                7301603,
+                7301605,
+                7301607,
+                7301609,
+                7301611,
+                7301701,
+                7301703,
+                7301705,
+                7301707,
+                7301709,
+                7301711
             ],
             "BattleDuration": [
                 240,
@@ -601,6 +623,54 @@
                 ]
             ],
             "RaidSkill": [
+                {
+                    "Id": "ShiroNormalSkill01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302100,
+                                7302200,
+                                7302300,
+                                7302400,
+                                7302500,
+                                7302600,
+                                7302700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7302101,
+                                7302201,
+                                7302301,
+                                7302401,
+                                7302501,
+                                7302601,
+                                7302701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ]
+                },
                 {
                     "Id": "ShiroEx01",
                     "SkillType": "EX",
@@ -1245,7 +1315,7 @@
                     "Desc": "모든 적 <d:HealEffectiveness> 80% 감소"
                 }
             ],
-            "ExcludeNormalAttack": [],
+            "HasNormalAttack": [],
             "BattleDuration": [
                 240,
                 240,
@@ -1266,7 +1336,7 @@
             ],
             "MaxDifficulty": [
                 6,
-                5
+                6
             ],
             "PathName": "Hieronymus",
             "GroupName": "Hieronymus_Street",
@@ -1660,29 +1730,7 @@
                     "Desc": "<b:Penetration> 수치가 750 만큼 증가합니다."
                 }
             ],
-            "ExcludeNormalAttack": [
-                7303100,
-                7303200,
-                7303300,
-                7303400,
-                7303500,
-                7303600,
-                7403700,
-                7303900,
-                7303910,
-                7303901,
-                7303911,
-                7303902,
-                7303912,
-                7303903,
-                7303913,
-                7303904,
-                7303914,
-                7303905,
-                7303925,
-                7303906,
-                7303926
-            ],
+            "HasNormalAttack": [],
             "BattleDuration": [
                 240,
                 240,
@@ -1774,6 +1822,35 @@
                 ]
             ],
             "RaidSkill": [
+                {
+                    "Id": "KaitenFxMk0NormalSkill01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7304100,
+                                7304200,
+                                7304300,
+                                7304400,
+                                7304500,
+                                7304600,
+                                7304700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ]
+                },
                 {
                     "Id": "KaitenFxMk0ExSkill01",
                     "SkillType": "EX",
@@ -2362,7 +2439,43 @@
                     "Desc": "KAITEN FX Mk.0 탑승전 각 카이텐져가 군중제어 효과에 걸릴 경우 <d:DamagedRatio> 40% 증가(15초간)"
                 }
             ],
-            "ExcludeNormalAttack": [],
+            "HasNormalAttack": [
+                7304102,
+                7304103,
+                7304104,
+                7304105,
+                7304106,
+                7304202,
+                7304203,
+                7304204,
+                7304205,
+                7304206,
+                7304302,
+                7304303,
+                7304304,
+                7304305,
+                7304306,
+                7304402,
+                7304403,
+                7304404,
+                7304405,
+                7304406,
+                7304502,
+                7304503,
+                7304504,
+                7304505,
+                7304506,
+                7304602,
+                7304603,
+                7304604,
+                7304605,
+                7304606,
+                7304702,
+                7304703,
+                7304704,
+                7304705,
+                7304706
+            ],
             "BattleDuration": [
                 180,
                 180,
@@ -2433,6 +2546,64 @@
                 ]
             ],
             "RaidSkill": [
+                {
+                    "Id": "Perorozilla01NormalSkill01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305100,
+                                7305200,
+                                7305300,
+                                7305400,
+                                7305500,
+                                7305600,
+                                7305700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
+                    "Id": "Perorozilla01MiddleSize01NormalSkill01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "COMMON_SKILLICON_TARGET",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7305101,
+                                7305601,
+                                7305701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ]
+                },
                 {
                     "Id": "Perorozilla01Ex01",
                     "SkillType": "EX",
@@ -2766,9 +2937,7 @@
                     "Desc": "페로로지라와 빅 페로로 미니언의 <b:EnhanceMysticRate> 50% 가산"
                 }
             ],
-            "ExcludeNormalAttack": [
-                7305190
-            ],
+            "HasNormalAttack": [],
             "BattleDuration": [
                 240,
                 240,
@@ -2832,6 +3001,39 @@
                 ]
             ],
             "RaidSkill": [
+                {
+                    "Id": "HODNormalSkill01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7306100,
+                                7306200,
+                                7306300,
+                                7306400,
+                                7306500,
+                                7306600,
+                                7306700
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ]
+                },
                 {
                     "Id": "HODEx01",
                     "SkillType": "EX",
@@ -3165,7 +3367,15 @@
                     "Desc": "호드, 침식타워의 치명 저항력이 400% 증가합니다.\n침식타워는 <d:ConcentratedTarget> 효과에 면역입니다."
                 }
             ],
-            "ExcludeNormalAttack": [],
+            "HasNormalAttack": [
+                7306101,
+                7306201,
+                7306301,
+                7306401,
+                7306501,
+                7306601,
+                7306701
+            ],
             "BattleDuration": [
                 240,
                 240,
@@ -3320,6 +3530,212 @@
                     ],
                     "EffectCombine": [
                         "DMGSingle"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    }
+                },
+                {
+                    "Id": "GozKumabotPapaSlumpiaSGNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "COMMON_SKILLICON_TARGET",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308104,
+                                7308404,
+                                7308604,
+                                7308704
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1668,
+                                1666,
+                                1666,
+                                1668
+                            ]
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    2500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308104,
+                                7308404
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1668,
+                                1666,
+                                1666,
+                                1668
+                            ]
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308604,
+                                7308704
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                1666,
+                                1666,
+                                1668,
+                                1666,
+                                1666,
+                                1668
+                            ]
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGMulti"
+                    ],
+                    "EffectCombineLabel": {
+                        "Icon": [
+                            "buff/Combat_Icon_Buff_Shield"
+                        ],
+                        "StackLabelTranslated": [
+                            "setting_off",
+                            "setting_on"
+                        ],
+                        "DisableFirst": true
+                    }
+                },
+                {
+                    "Id": "GozUsagibotSlumpiaARNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "COMMON_SKILLICON_TARGET",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308105,
+                                7308405,
+                                7308605,
+                                7308705
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                716,
+                                716
+                            ]
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    2500
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308105,
+                                7308405
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                716,
+                                716
+                            ]
+                        },
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7308605,
+                                7308705
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                714,
+                                716,
+                                716
+                            ]
+                        }
+                    ],
+                    "EffectCombine": [
+                        "DMGMulti"
                     ],
                     "EffectCombineLabel": {
                         "Icon": [
@@ -3758,22 +4174,7 @@
                     ]
                 }
             ],
-            "ExcludeNormalAttack": [
-                7308100,
-                7308200,
-                7308300,
-                7308400,
-                7308500,
-                7308600,
-                7308700,
-                7308101,
-                7308201,
-                7308301,
-                7308401,
-                7308501,
-                7308601,
-                7308701
-            ],
+            "HasNormalAttack": [],
             "BattleDuration": [
                 240,
                 240,
@@ -3794,7 +4195,7 @@
             ],
             "MaxDifficulty": [
                 6,
-                5
+                6
             ],
             "PathName": "EN0005",
             "GroupName": "EN0005",
@@ -4295,29 +4696,7 @@
                     "Desc": "중앙의 오르간 파이프는 Ex 스킬로만 공격할 수 있으며, 체력이 1% 미만이면 180도 회전합니다.\n회전 직후 HP가 가득차고, 30초간 공격받지 않습니다."
                 }
             ],
-            "ExcludeNormalAttack": [
-                7309100,
-                7309200,
-                7309300,
-                7309400,
-                7309500,
-                7309600,
-                7309700,
-                7309110,
-                7309210,
-                7309310,
-                7309410,
-                7309510,
-                7309610,
-                7309710,
-                7309120,
-                7309121,
-                7309122,
-                7309123,
-                7309124,
-                7309125,
-                7309126
-            ],
+            "HasNormalAttack": [],
             "BattleDuration": [
                 240,
                 240,
@@ -4329,6 +4708,539 @@
             ],
             "Name": "그레고리오",
             "Profile": "키보토스 어딘가에 버려진 지하 성전에서 뒤틀린 신비에 의해 현현한 인공천사가 관측되었습니다.\n\n그레고리오는 <콤뮤니오 상토룸>이라고 불리는 인공천사 시리즈의 완성형으로 게마트리아의 실험으로 탄생한 신비의 괴물입니다. 지금도 그 괴물은 지하 성전에서 오르간을 연주하고 있습니다. 그 연주의 끝에 무엇이 기다리고 있을지, 그것은 아무도 알지 못합니다."
+        },
+        {
+            "Id": 10,
+            "IsReleased": [
+                true,
+                false
+            ],
+            "MaxDifficulty": [
+                6,
+                6
+            ],
+            "PathName": "RaidHoverCraft",
+            "GroupName": "HoverCraft",
+            "Faction": "SevenPrisoners",
+            "Terrain": [
+                "Outdoor"
+            ],
+            "BulletType": "Normal",
+            "BulletTypeInsane": "Pierce",
+            "ArmorType": "HeavyArmor",
+            "EnemyList": [
+                [
+                    610220101,
+                    610220102,
+                    610220103,
+                    610220104,
+                    610220105,
+                    610220106,
+                    610220107,
+                    610220108
+                ],
+                [
+                    610220201,
+                    610220202,
+                    610220203,
+                    610220204,
+                    610220105,
+                    610220106,
+                    610220107,
+                    610220108
+                ],
+                [
+                    610220301,
+                    610220302,
+                    610220303,
+                    610220304,
+                    610220105,
+                    610220106,
+                    610220107,
+                    610220108
+                ],
+                [
+                    610220401,
+                    610220402,
+                    610220403,
+                    610220404,
+                    610220105,
+                    610220106,
+                    610220107,
+                    610220108
+                ],
+                [
+                    610220501,
+                    610220502,
+                    610220503,
+                    610220504,
+                    610220105,
+                    610220106,
+                    610220107,
+                    610220108
+                ],
+                [
+                    610220601,
+                    610220602,
+                    610220603,
+                    610220604,
+                    610220605,
+                    610220106,
+                    610220107,
+                    610220108
+                ],
+                [
+                    610220701,
+                    610220702,
+                    610220703,
+                    610220704,
+                    610220705,
+                    610220106,
+                    610220107,
+                    610220108
+                ]
+            ],
+            "RaidSkill": [
+                {
+                    "Id": "HoverCraftWakamo01Normal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                610220101,
+                                610220201,
+                                610220301,
+                                610220401,
+                                610220501,
+                                610220601,
+                                610220701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ]
+                },
+                {
+                    "Id": "HoverCraftWakamo01Ex01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 3,
+                    "Icon": "SKILLICON_WAKAMOSWIMSUIT_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    15000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                610220101,
+                                610220201,
+                                610220301,
+                                610220401,
+                                610220501,
+                                610220601,
+                                610220701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                610220101,
+                                610220201,
+                                610220301,
+                                610220401,
+                                610220501,
+                                610220601,
+                                610220701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                5000
+                            ],
+                            "RestrictTo": [
+                                610220101,
+                                610220201,
+                                610220301,
+                                610220401,
+                                610220501,
+                                610220601,
+                                610220701
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
+                    "Name": "비색의 꽃점",
+                    "Desc": "ATG가 가득 찰 경우 스킬 사용\n매 사격마다 공격력 150% 대미지와 <c:Stunned>(5초간)/ 마지막 사격으로 공격력 300% 대미지와 <c:Stunned>(5초간)",
+                    "Parameters": [
+                        [
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "/\n모든 사격이 대상으로부터 가장 가까운 대상 1인에게 튕겨서 동일한 대미지\n(튕긴 사격은 <c:Stunned>과 <s:SuddenDeath>을 걸지 않는다.)",
+                            "/\n모든 사격이 대상으로부터 가장 가까운 대상 1인에게 튕겨서 동일한 대미지\n(튕긴 사격은 <c:Stunned>과 <s:SuddenDeath>을 걸지 않는다.)"
+                        ]
+                    ]
+                },
+                {
+                    "Id": "HoverCraftWakamo01Ex02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 3,
+                    "Icon": "SKILLICON_WAKAMOSWIMSUIT_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    75000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                610220101,
+                                610220201,
+                                610220301,
+                                610220401,
+                                610220501,
+                                610220601,
+                                610220701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "Name": "애타는 산탄",
+                    "Desc": "ATG가 가득 찰 경우 스킬 사용\n직선 범위 내 적에게 공격력 750% 대미지"
+                },
+                {
+                    "Id": "HoverCraftWakamo01Ex03",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 3,
+                    "Icon": "SKILLICON_WAKAMOSWIMSUIT_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    75000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                610220101,
+                                610220201,
+                                610220301,
+                                610220401,
+                                610220501,
+                                610220601,
+                                610220701
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "Name": "쏘아 맞추는 유탄",
+                    "Desc": "ATG가 가득 찰 경우 스킬 사용\n대상을 추적하는 미사일을 발사하여 공격력 750% 대미지를 입힌다.\n(미사일은 다른 학생, 소환물, 엄폐물에 의해 가로막힐 수 있습니다.)"
+                },
+                {
+                    "Id": "HoverCraftWakamo01Passive01",
+                    "SkillType": "Passive",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_WAKAMOSWIMSUIT_PASSIVE02",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    2500
+                                ]
+                            ],
+                            "StackSame": 3,
+                            "RestrictTo": [
+                                610220101,
+                                610220201,
+                                610220301,
+                                610220401,
+                                610220501,
+                                610220601,
+                                610220701
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 3706
+                        },
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -2500
+                                ]
+                            ],
+                            "StackSame": 3,
+                            "RestrictTo": [
+                                610220101,
+                                610220201,
+                                610220301,
+                                610220401,
+                                610220501,
+                                610220601,
+                                610220701
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 3712
+                        }
+                    ],
+                    "Name": "단지, 당신을 위해서",
+                    "Desc": "와카모는 군중제어 효과는 받지 않지만 시간은 누적된다. \n단계별로 각각 <?1> 만큼 누적 시 와카모가 즉시 그로기에 걸린다. (총 3회)\n(시간은 군중제어 강화력이 높을수록 더 많이 적용된다.)\n그로기가 되면 아군 전체에 걸려있는 <s:SuddenDeath>이 제거된다.\n그로기가 된 이후 아래의 효과를 자신에게 모두 적용 (총 3단계)\n<b:ATK> : 25%/50%/75% 만큼 증가\n<d:DamagedRatio>: 100%/200%/300% 만큼 증가",
+                    "Parameters": [
+                        [
+                            "6초/7초/8초",
+                            "6초/7초/8초",
+                            "6초/7초/8초",
+                            "6초/7초/8초",
+                            "6초/7초/8초",
+                            "10초/14초/18초",
+                            "10초/14초/18초"
+                        ]
+                    ]
+                },
+                {
+                    "Id": "HoverCraftWakamo01Passive02",
+                    "SkillType": "Passive",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_WAKAMOSWIMSUIT_PASSIVE01",
+                    "Name": "방해꾼은 제거하겠어요",
+                    "Desc": "와카모의 스킬에 피격된 대상은 와카모의 각인이 2개 생성된다.\n와카모의 각인이 5개 이상이 되면 해당 대상은 사망한다.\n(보호막, 불사 등의 효과를 무시한다.)<?1>",
+                    "Parameters": [
+                        [
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "\n추가로 와카모의 기본 공격이 대상으로부터 가장 가까운 대상 1인에게 튕긴다.",
+                            "\n추가로 와카모의 기본 공격이 대상으로부터 가장 가까운 대상 1인에게 튕긴다."
+                        ]
+                    ]
+                },
+                {
+                    "Id": "HoverCraftNormal01",
+                    "SkillType": "raidautoattack",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "ShowInfo": false,
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                610220102,
+                                610220202,
+                                610220302,
+                                610220402,
+                                610220502,
+                                610220602,
+                                610220702
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "Id": "HoverCraftEx01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_HOVERCRAFT_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                610220102,
+                                610220202,
+                                610220302,
+                                610220402,
+                                610220502,
+                                610220602,
+                                610220702
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    45000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                610220102,
+                                610220202,
+                                610220302,
+                                610220402,
+                                610220502,
+                                610220602,
+                                610220702
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
+                    "Name": "트윈 캐논/브레이즈 로켓",
+                    "Desc": "적 최대 4인에게 번갈아가며 사격하여 각각 공격력 300% 대미지/\n적 최대 2인에게 번갈아가며 사격하여 각각 공격력 450% 대미지"
+                },
+                {
+                    "Id": "HoverCraftEx02",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_HOVERCRAFT_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                610220102,
+                                610220202,
+                                610220302,
+                                610220402,
+                                610220502,
+                                610220602,
+                                610220702
+                            ],
+                            "Stat": "CriticalChanceResistPoint_Coefficient",
+                            "Channel": 522
+                        }
+                    ],
+                    "Name": "이렇게 되면…!",
+                    "Desc": "리조트를 파괴하기 위해 미사일 유도 장치를 호출하고 미사일 폭주 모드에 돌입\n리조트가 파괴되면 전투에서 패배한다.\n미사일 유도 장치에 가한 피해의 100% 만큼 호버크래프트에게 전달된다.\n미사일 유도 장치 파괴 시 미사일 폭주 모드가 종료되고 호버크래프트의 그로기 게이지 50% 만큼 증가\n그로기 상태의 호버크래프트는 치명 저항 수치 50% 만큼 감소"
+                },
+                {
+                    "Id": "HoverCraftEx03",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_HOVERCRAFTMISSILE05_EXSKILL03",
+                    "Name": "헬멧단 자체제작 미사일",
+                    "Desc": "호버크래프트가 미사일 폭주 모드에 돌입하면 다양한 미사일을 발사한다.\n미사일은 리조트만 노리고 날아가며\n리조트에 적중하면 리조트의 체력 1만큼 대미지를 입힌다.\n(미사일은 일반 공격, 기본 스킬의 타겟이 되지 않는다.)"
+                },
+                {
+                    "Id": "HoverCraftPassive01",
+                    "SkillType": "Passive",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_HOVERCRAFT_PASSIVE01",
+                    "Effects": [
+                        {
+                            "Type": "BuffTarget",
+                            "Value": [
+                                [
+                                    -250
+                                ]
+                            ],
+                            "StackSame": 30,
+                            "RestrictTo": [
+                                610220102,
+                                610220202,
+                                610220302,
+                                610220402,
+                                610220502,
+                                610220602,
+                                610220702,
+                                610220104,
+                                610220204,
+                                610220304,
+                                610220404,
+                                610220504,
+                                610220604,
+                                610220704
+                            ],
+                            "Stat": "DamagedRatio_Base",
+                            "Channel": 97506
+                        }
+                    ],
+                    "Name": "강습상륙작전",
+                    "Desc": "호버크래프트가 15회 공격 받을 때 마다 받는 대미지량 10%만큼 증가 (10초간)\n(최대 30회 까지 중첩)"
+                },
+                {
+                    "Id": "HoverCraftPassive03",
+                    "SkillType": "Passive",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_AAGUN_PASSIVE01",
+                    "Name": "능동방어체계",
+                    "Desc": "자체적으로 미사일을 격추하는 방어 장치\n미사일에게 공격력 100% 대미지",
+                    "Parameters": [
+                        [
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "/동시에 자신에게 5000 대미지\n체력이 1% 이하가 될 경우 기절, 체력이 회복되면 기절 해제",
+                            "/동시에 자신에게 5000 대미지\n체력이 1% 이하가 될 경우 기절, 체력이 회복되면 기절 해제"
+                        ]
+                    ]
+                }
+            ],
+            "HasNormalAttack": [],
+            "BattleDuration": [
+                240,
+                240,
+                240,
+                240,
+                240,
+                240,
+                240
+            ],
+            "Name": "호버크래프트",
+            "Profile": "교정국에서 탈옥한 <일곱 죄수> 중 한 명인 <재액의 여우>가 호버크래프트를 탈취해서 난동을 피우고 있다는 정보가 입수됐습니다.\n\n수영복 차림을 한 그녀가 무차별적인 파괴를 일삼는 경위에 대해선 알 도리가 없으나 이대로 그녀를 내버려 두면 키보토스의 반짝이는 해변은 불바다가 될 것입니다."
         }
     ],
     "RaidSeasons": [
@@ -4836,6 +5748,15 @@
                     "Start": 1690941600,
                     "End": 1691521200,
                     "RewardSet": 4200,
+                    "RewardSetMax": 54
+                },
+                {
+                    "Season": 57,
+                    "RaidId": 10,
+                    "Terrain": "Outdoor",
+                    "Start": 1693360800,
+                    "End": 1693940400,
+                    "RewardSet": 4300,
                     "RewardSetMax": 54
                 }
             ],
@@ -18025,6 +18946,654 @@
                             ]
                         ]
                     ]
+                ],
+                "4300": [
+                    [
+                        250000,
+                        [
+                            [
+                                2000001,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        500000,
+                        [
+                            [
+                                10,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        750000,
+                        [
+                            [
+                                190,
+                                6
+                            ],
+                            [
+                                160,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1000000,
+                        [
+                            [
+                                3000001,
+                                300000
+                            ]
+                        ]
+                    ],
+                    [
+                        1250000,
+                        [
+                            [
+                                2000002,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        1500000,
+                        [
+                            [
+                                11,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1750000,
+                        [
+                            [
+                                191,
+                                3
+                            ],
+                            [
+                                161,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        2000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        2500000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        3000000,
+                        [
+                            [
+                                12,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        3500000,
+                        [
+                            [
+                                192,
+                                2
+                            ],
+                            [
+                                162,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        4000000,
+                        [
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        4500000,
+                        [
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5000000,
+                        [
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5500000,
+                        [
+                            [
+                                193,
+                                1
+                            ],
+                            [
+                                163,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        6000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        7000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        8000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        9000000,
+                        [
+                            [
+                                190,
+                                12
+                            ],
+                            [
+                                160,
+                                12
+                            ],
+                            [
+                                191,
+                                6
+                            ],
+                            [
+                                161,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        10000000,
+                        [
+                            [
+                                3000001,
+                                500000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        12000000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ],
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        14000000,
+                        [
+                            [
+                                12,
+                                3
+                            ],
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        16000000,
+                        [
+                            [
+                                192,
+                                2
+                            ],
+                            [
+                                162,
+                                2
+                            ],
+                            [
+                                193,
+                                1
+                            ],
+                            [
+                                163,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        18000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        20000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        22000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        24000000,
+                        [
+                            [
+                                190,
+                                12
+                            ],
+                            [
+                                160,
+                                12
+                            ],
+                            [
+                                191,
+                                6
+                            ],
+                            [
+                                161,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        26000000,
+                        [
+                            [
+                                3000001,
+                                1200000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        29000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        32000000,
+                        [
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        35000000,
+                        [
+                            [
+                                192,
+                                4
+                            ],
+                            [
+                                162,
+                                4
+                            ],
+                            [
+                                193,
+                                2
+                            ],
+                            [
+                                163,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        38000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        41000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        44000000,
+                        [
+                            [
+                                2000002,
+                                32
+                            ],
+                            [
+                                2000003,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        47000000,
+                        [
+                            [
+                                3000003,
+                                200
+                            ]
+                        ]
+                    ],
+                    [
+                        50000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        60000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        70000000,
+                        [
+                            [
+                                191,
+                                6
+                            ],
+                            [
+                                161,
+                                6
+                            ],
+                            [
+                                192,
+                                4
+                            ],
+                            [
+                                162,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        80000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        90000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        100000000,
+                        [
+                            [
+                                3000001,
+                                1500000
+                            ]
+                        ]
+                    ],
+                    [
+                        120000000,
+                        [
+                            [
+                                3000001,
+                                2000000
+                            ]
+                        ]
+                    ],
+                    [
+                        150000000,
+                        [
+                            [
+                                3000001,
+                                2500000
+                            ]
+                        ]
+                    ],
+                    [
+                        180000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        210000000,
+                        [
+                            [
+                                2000003,
+                                32
+                            ]
+                        ]
+                    ],
+                    [
+                        240000000,
+                        [
+                            [
+                                9998,
+                                5
+                            ]
+                        ]
+                    ],
+                    [
+                        270000000,
+                        [
+                            [
+                                2000004,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        310000000,
+                        [
+                            [
+                                100008,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        320000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        340000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        360000000,
+                        [
+                            [
+                                7,
+                                300
+                            ]
+                        ]
+                    ],
+                    [
+                        380000000,
+                        [
+                            [
+                                12,
+                                12
+                            ],
+                            [
+                                13,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        400000000,
+                        [
+                            [
+                                7,
+                                200
+                            ]
+                        ]
+                    ],
+                    [
+                        420000000,
+                        [
+                            [
+                                9998,
+                                3
+                            ]
+                        ]
+                    ]
                 ]
             }
         },
@@ -18416,6 +19985,15 @@
                     "End": 1690225200,
                     "RewardSet": 2100,
                     "RewardSetMax": 44
+                },
+                {
+                    "Season": 44,
+                    "RaidId": 4,
+                    "Terrain": "Street",
+                    "Start": 1693274400,
+                    "End": 1693854000,
+                    "RewardSet": 2300,
+                    "RewardSetMax": 48
                 }
             ],
             "RewardSets": {
@@ -22319,6 +23897,42 @@
                             [
                                 3000001,
                                 3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        210000000,
+                        [
+                            [
+                                2000003,
+                                32
+                            ]
+                        ]
+                    ],
+                    [
+                        240000000,
+                        [
+                            [
+                                9998,
+                                5
+                            ]
+                        ]
+                    ],
+                    [
+                        270000000,
+                        [
+                            [
+                                2000004,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        310000000,
+                        [
+                            [
+                                100008,
+                                1
                             ]
                         ]
                     ]
