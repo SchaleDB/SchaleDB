@@ -3942,7 +3942,7 @@ function populateEvents() {
     birthdayStudents = []
 
     data.students.forEach(el => {
-        if (el.IsReleased[regionID] && !el.PathName.includes('_')) {
+        if (el.IsReleased[regionID] && (!el.Name.includes('（') && !el.Name.includes('('))) {
             var nextBirthday = getNextBirthdayDate(el.BirthDay)
             if (nextBirthday.getTime() < nextWeek.getTime() && nextBirthday.getTime() >= currentDate.getTime())
                 birthdayStudents.push(el)
