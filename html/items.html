@@ -91,6 +91,7 @@
                                     <div id="item-search-filter-furnitureset" class="item-filter-group show-furniture">
                                         <h5 data-localize-id="ui,furniture_set"></h5>
                                         <div class="search-filter-group">
+                                            <button id="item-search-filter-furnitureset-0" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','0')"><span class="label" data-localize-id="FurnitureSet,0"></span></button>
                                             <button id="item-search-filter-furnitureset-100" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','100')"><span class="label" data-localize-id="FurnitureSet,100"></span></button>
                                             <button id="item-search-filter-furnitureset-101" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','101')"><span class="label" data-localize-id="FurnitureSet,101"></span></button>
                                             <button id="item-search-filter-furnitureset-102" class="btn-pill" onclick="searchSetFilterItems('FurnitureSet','102')"><span class="label" data-localize-id="FurnitureSet,102"></span></button>
@@ -120,8 +121,19 @@
                                             <button id="item-search-filter-rarity-ssr" class="btn-pill" onclick="searchSetFilterItems('Rarity','SSR')"><span class="label"><i class="fa-solid fa-circle me-2 col-item-ssr"></i><span>SSR</span></span></button>    
                                         </div>
                                     </div>
-                                    <div id="item-search-filter-misc" class="item-filter-group show-furniture">
-                                        <button id="item-search-filter-furnitureinteraction" class="btn-pill" onclick="searchSetFilterItems('FurnitureInteraction',null)"><span class="label-filter"><img width="22" height="22" src="images/ui/Cafe_Icon_Interaction.png"><span data-localize-id="ui,furniture_title"></span></span></button>
+                                    <div id="item-search-filter-misc" class="item-filter-group show-items show-furniture">
+                                        <div class="search-filter-group">
+                                            <button id="item-search-filter-furnitureinteraction" class="btn-pill only-furniture" onclick="searchSetFilterItems('FurnitureInteraction',null)"><span class="label-filter"><img width="22" height="22" src="images/ui/Cafe_Icon_Interaction.png"><span data-localize-id="ui,furniture_title"></span></span></button>
+                                            <button id="item-search-filter-craftable" class="btn-pill" onclick="searchSetFilterItems('Craftable',null)"><span class="label"><span data-localize-id="ui,craftable"></span></span></button>
+                                            <button id="item-search-filter-stagedrop" class="btn-pill only-items" onclick="searchSetFilterItems('StageDrop',null)"><span class="label"><span data-localize-id="ui,stagedrop"></span></span></button>
+                                            <button id="item-search-filter-shop" class="btn-pill only-items" onclick="searchSetFilterItems('Shop',null)"><span class="label"><span data-localize-id="ui,shop"></span></span></button>    
+                                        </div>
+                                    </div>
+                                    <div id="item-search-filter-misc" class="item-filter-group show-items ">
+                                        <div class="search-filter-group">
+                                            <button id="item-search-filter-showimmediateuse" class="btn-pill" onclick="searchSetFilterItems('ShowImmediateUse',null)"><span class="label"><i class="fa-solid fa-box-open me-2"></i><span data-localize-id="ui,show_immediateuse"></span></span></button>
+                                            <button id="item-search-filter-showexpired" class="btn-pill" onclick="searchSetFilterItems('ShowExpired',null)"><span class="label"><i class="fa-solid fa-clock me-2"></i><span data-localize-id="ui,show_expired"></span></span></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -140,31 +152,55 @@
             <div class="px-0 ps-xl-3" id="ba-item-info">
                 <div id="ba-item-details-container" class="card p-2">
                     <div class="card-header">
-                        <div class="d-flex flex-row align-items-top px-1 py-2">
-                            <div class="flex-grow-1 me-2">
+                        <div class="d-flex flex-row align-items-top px-1 pt-2">
+                            <div class="flex-grow-1">
                                 <div>
                                     <h2 id="ba-item-name" class="title-text mb-3"></h2>
-                                    <h5 class="d-inline-block me-2" id="ba-item-type"></h5>
+                                    <h5 class="d-inline-block me-2 mb-0" id="ba-item-type"></h5>
                                     <span id="ba-item-rarity" class="ba-info-pill-s bg-theme"><span class="label"></span></span>
                                 </div>
-                                <div id="ba-item-furniture-row">
-                                    <span id="ba-item-furniture-comfort" class="text-bold"></span> <span class="me-1 d-inline-block" id="ba-item-furniture-set"></span>
-                                </div>
-                            </div>
-                            <div id="ba-item-icon">
-                                <img id="ba-item-icon-img" class="" src="">
                             </div>
                         </div>
                     </div>
     
                     <div class="card-body">
-                        <div class="ba-panel p-2">
-                            <p id="ba-item-description" class="mb-0"></p>
+                        <div class="ba-panel">
+                            <p class="text-center p-2 mb-0"><img id="item-icon-full" class="item-icon-full" src=""></p>
+                            <div id="ba-equipment-details" class="ba-stats"></div>
+                            <p id="ba-item-description" class="p-2 mb-0"></p>
+                            <table id="ba-furniture-details" class="table ba-stats mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="ui,comfort"></span>
+                                                <span id="furniture-comfort" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                        <td width="50%">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="ui,furniture_size"></span>
+                                                <span id="furniture-size" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <div class="d-flex align-items-top justify-content-between">
+                                                <span data-localize-id="ui,furniture_set"></span>
+                                                <span id="furniture-set" class="ms-2 text-bold text-end"></span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                         <div id="ba-equipment-recipe" class="ba-panel p-2 mt-2"></div>
                         <div id="ba-item-usage" class="ba-panel p-2 mt-2"></div>
                         <div id="ba-item-sources" class="ba-panel p-2 mt-2"></div>
                         <div id="ba-item-shops" class="ba-panel p-2 mt-2"></div>
+                        <div id="ba-item-craftnodes" class="ba-panel p-2 mt-2"></div>
+                        <div id="ba-item-consumables" class="ba-panel p-2 mt-2"></div>
                     </div>
                 </div>
             </div>

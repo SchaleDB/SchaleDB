@@ -2563,8 +2563,9 @@
                 818,
                 819,
                 820,
-                821,
                 822,
+                823,
+                824,
                 701,
                 10801,
                 10802,
@@ -2585,38 +2586,67 @@
             "current_gacha": [
                 {
                     "characters": [
-                        10062,
-                        20024
+                        10063,
+                        10010
                     ],
-                    "start": 1692669600,
-                    "end": 1693879200
+                    "start": 1693879200,
+                    "end": 1695088800
+                },
+                {
+                    "characters": [
+                        10024,
+                        10019,
+                        23007
+                    ],
+                    "start": 1695088800,
+                    "end": 1695693600
                 }
             ],
             "current_events": [
                 {
-                    "event": 822,
-                    "start": 1692669600,
-                    "end": 1693879200
+                    "event": 823,
+                    "start": 1693879200,
+                    "end": 1695088800
+                },
+                {
+                    "event": 824,
+                    "start": 1694224800,
+                    "end": 1695088800
                 }
             ],
             "current_raid": [
-                {
-                    "type": "Raid",
-                    "raid": 4,
-                    "terrain": "Street",
-                    "start": 1693274400,
-                    "end": 1693854000
-                },
                 {
                     "type": "TimeAttack",
                     "raid": 13000,
                     "start": 1694484000,
                     "end": 1695063600
+                },
+                {
+                    "type": "Raid",
+                    "raid": 1,
+                    "terrain": "Outdoor",
+                    "start": 1695088800,
+                    "end": 1695668400
+                },
+                {
+                    "type": "TimeAttack",
+                    "raid": 14000,
+                    "start": 1696903200,
+                    "end": 1697482800
                 }
             ]
         }
     ],
     "changelog": [
+        {
+            "date": "2023/09/05",
+            "contents": [
+                "<h6>Items page improvements</h6>",
+                "<ul><li>Show material synthesis nodes or fusion recipes that can produce an item or furniture.</li><li>Show consumable items that can reward an item or furniture.</li><li>Added more information such as furniture size, templates, item expiry and furniture interactions that require multiple students.</li><li>Expired and immediate use items are now hidden by default (Can be displayed by switching on in filters).</li><li>Added filters for items which can be obtained via synthesis, stage reward or purchased from shops.</li></ul>",
+                "<h6>Other Improvements & Bug Fixes</h6>",
+                "<ul><li>Show boosted skill heal amounts in brackets when adding a Recovery Boost buff to a student.</li><li>Fixed incorrect HP amounts shown on some raid enemies in skill calculations.</li></ul>"
+            ]
+        },
         {
             "date": "2023/07/24",
             "contents": [

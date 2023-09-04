@@ -22,12 +22,23 @@ body {
     font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
 
     .title-text {
-        font-family: 'Oswald', 'Noto Sans JP', sans-serif;
-        text-transform: uppercase;
+        font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
+        font-style: italic;
+        font-weight: 700;
     }
 
     .ba-tooltip{
         font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
+    }
+
+    &.font-jp {
+        &, .ba-tooltip {
+            font-family: 'Nunito Sans', 'Noto Sans JP', sans-serif;
+        }
+
+        .title-text {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
     }
 
     &.font-kr {
@@ -36,38 +47,37 @@ body {
         }
 
         .title-text {
-            font-family: 'Oswald', 'Noto Sans KR', 'Noto Sans JP', sans-serif;
-            text-transform: uppercase;
+            font-family: 'Noto Sans KR', 'Noto Sans JP', sans-serif;
         }
     }
+
     &.font-cn {
         &, .ba-tooltip {
             font-family: 'Nunito Sans', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
         }
 
         .title-text {
-            font-family: 'Oswald', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
-            text-transform: uppercase;
+            font-family: 'Noto Sans SC', 'Noto Sans JP', sans-serif;
         }
     }
+
     &.font-tw {
         &, .ba-tooltip {
             font-family: 'Nunito Sans', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
         }
 
         .title-text {
-            font-family: 'Oswald', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
-            text-transform: uppercase;
+            font-family: 'Noto Sans TC', 'Noto Sans JP', sans-serif;
         }
     }
+
     &.font-th {
         &, .ba-tooltip {
             font-family: 'Nunito Sans', 'Noto Sans Thai', 'Noto Sans JP', sans-serif;
         }
 
         .title-text {
-            font-family: 'Oswald', 'Noto Sans Thai', 'Noto Sans JP', sans-serif;
-            text-transform: uppercase;
+            font-family: 'Noto Sans Thai', 'Noto Sans JP', sans-serif;
         }
     }
 }

@@ -176,6 +176,7 @@ let statPreviewSelectedEnemyId = 7000001
 let statPreviewSelectedEnemyLevel = 1
 let statPreviewSelectedEnemyGrade = 1
 let statPreviewSelectedEnemyRaid = 0
+let statPreviewSelectedEnemyRaidDifficulty = 0
 let statPreviewSelectedEnemyLevelFixed = false
 let statPreviewSelectedEnemyArmorType = null
 let statPreviewEnemyBookmarks = []
@@ -422,6 +423,7 @@ let itemSearchOptions = {
             "SSR": false,
         },
         "FurnitureSet": {
+            "0": false,
             "100": false,
             "101": false,
             "102": false,
@@ -444,7 +446,12 @@ let itemSearchOptions = {
             "6": false,
             "7": false,
         },
-        "FurnitureInteraction": false
+        "FurnitureInteraction": false,
+        "Craftable": false,
+        "StageDrop": false,
+        "Shop": false,
+        "ShowImmediateUse": false,
+        "ShowExpired": false,
     }
 }
 
@@ -709,7 +716,7 @@ let itemSearchOptions = {
             }
             buffCount++
             if (buffCount <= max) {
-                buffIcons += `<div class="active-buff"><img src="images/buff/Combat_Icon_${buffIcon}.png" width="22" height="26" class="">${stackCount > 1 ? `<span class="stack-count">${stackCount}</span>` : ''}</div>`
+                buffIcons += `<div class="active-buff"><img src="images/buff/${buffIcon}.webp" width="22" height="26" class="">${stackCount > 1 ? `<span class="stack-count">${stackCount}</span>` : ''}</div>`
             } else {
                 buffExtraCount++
             }
@@ -820,9 +827,9 @@ let itemSearchOptions = {
      * Calculates the maximum damage dealt to a target by this character
      * @param {CharacterStats} target 
      */
-    calculateHealing(healRate) {
+    calculateHealing(healRate, recoveryRate = 10000) {
         const totalHeal = this.getTotal('HealPower')
-        return parseInt(totalHeal * healRate)
+        return parseInt(totalHeal * healRate * (recoveryRate/10000))
     }
 
     getEffectiveMod(armorType) {
@@ -1236,7 +1243,7 @@ class ExternalBuffs extends Buffs {
                 const raid = find(data.raids.Raid, "Id", buff.RaidId)[0]
                 let iconPath, iconClass
                 if (buff.Skill.Icon.startsWith('COMMON_')) {
-                    iconPath = `images/skill/${buff.Skill.Icon}.png`
+                    iconPath = `images/skill/${buff.Skill.Icon}.webp`
                     iconClass = `skill-icon bg-atk-${raid.BulletType.toLowerCase()}`
                 } else {
                     iconPath = `images/raid/skill/${buff.Skill.Icon}.png`
@@ -1245,7 +1252,7 @@ class ExternalBuffs extends Buffs {
                 html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/raid/icon/Icon_${buff.Skill.MinDifficulty >= 5 ? raid.PathName + "_Insane" : raid.PathName}.png"><img class="${iconClass}" src="${iconPath}"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType.toLowerCase()}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><span class="label">${this.getBuffStackLabel(buff)}</span></span>` : ''}</div></div>`
             } else {
                 const student = find(data.students, "Id", buff.StudentId)[0]
-                html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"><img class="skill-icon bg-atk-${student.BulletType.toLowerCase()}" src="images/skill/${buff.Skill.Icon}.png"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><img class="stack-icon invert-light" src="images/skill/${buff.Skill.Icon}.png"><span class="label">&times;${buff.Stacks}</span></span>` : ''}<input type="range" data-index="${i}" class="form-range flex-fill" value="${buff.Level}" min="1" max="${buff.MaxLevel}"><span class="ba-slider-label skill-level">${buff.Level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${buff.Level}`}</span></div></div>`
+                html += `<div data-index="${i}" class="ba-panel p-2"><div class="mb-1 d-flex flex-row align-items-center gap-2"><div class="transferable-skill-icon align-self-start"><img class="student-icon" src="images/student/icon/${student.Id}.webp"><img class="skill-icon bg-atk-${student.BulletType.toLowerCase()}" src="images/skill/${buff.Skill.Icon}.webp"></div><div class="flex-fill"><h5>${getTranslatedString(buff.Skill, 'Name')} <small>(${translateUI(`student_skill_${buff.Skill.SkillType}`)})</small></h5><p class="mb-0 buff-description" style="font-size: 0.875rem; line-height: 1rem;">${this.getBuffAmountText(buff)}</p></div><button class="btn btn-sm btn-dark stat-panel-btn-sm buff-remove no-wrap align-self-start" type="button" data-index="${i}"><i class="fa-solid fa-xmark"></i></button></div><div class="d-flex flex-row align-items-center gap-2">${buff.MaxStacks > 1 ? `<span class="ba-slider-label stack-toggle" data-index="${i}"><img class="stack-icon invert-light" src="images/skill/${buff.Skill.Icon}.webp"><span class="label">&times;${buff.Stacks}</span></span>` : ''}<input type="range" data-index="${i}" class="form-range flex-fill" value="${buff.Level}" min="1" max="${buff.MaxLevel}"><span class="ba-slider-label skill-level">${buff.Level == buff.MaxLevel ? '<img src="images/ui/ImageFont_Max.png">' : `Lv.${buff.Level}`}</span></div></div>`
             }
 
         })
@@ -1407,13 +1414,13 @@ class ExternalBuffs extends Buffs {
     }
 
     static getSearchResultListItemHtml(student, skill, desc, index) {
-        return `<div class="search-list-item" data-index="${index}" data-student-id="${student.Id}" data-skill-type="${skill.SkillType}"><div class="transferable-skill-icon me-2"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"><img class="skill-icon bg-atk-${student.BulletType.toLowerCase()}" src="images/skill/${skill.Icon}.png"></div><div class="search-list-item-detail"><span class="skill-name">${getTranslatedString(skill, "Name")} <small>(${translateUI(`student_skill_${skill.SkillType}`)})</small></span><span class="skill-details">${desc}</span></div></div>`
+        return `<div class="search-list-item" data-index="${index}" data-student-id="${student.Id}" data-skill-type="${skill.SkillType}"><div class="transferable-skill-icon me-2"><img class="student-icon" src="images/student/icon/${student.Id}.webp"><img class="skill-icon bg-atk-${student.BulletType.toLowerCase()}" src="images/skill/${skill.Icon}.webp"></div><div class="search-list-item-detail"><span class="skill-name">${getTranslatedString(skill, "Name")} <small>(${translateUI(`student_skill_${skill.SkillType}`)})</small></span><span class="skill-details">${desc}</span></div></div>`
     }
 
     static getSearchResultListItemHtmlRaid(raid, skill, desc, index) {
         let iconPath, iconClass
         if (skill.Icon.startsWith('COMMON_')) {
-            iconPath = `images/skill/${skill.Icon}.png`
+            iconPath = `images/skill/${skill.Icon}.webp`
             iconClass = `skill-icon bg-atk-${raid.BulletType.toLowerCase()}`
         } else {
             iconPath = `images/raid/skill/${skill.Icon}.png`
@@ -1809,7 +1816,7 @@ class SupportStats {
     }
 
     static getSearchResultListItemHtml(student, index) {
-        return `<div class="search-list-item" data-index="${index}" data-student-id="${student.Id}"><div class="search-list-item-icon"><img class="student-icon" src="images/student/icon/${student.CollectionTexture}.png"></div><div class="search-list-item-detail"><span>${getTranslatedString(student, "Name")}</span>${student.Id in studentCollection ? `<span class="text-small"><i class="me-1 fa-solid fa-circle-check"></i><span>${translateUI("collection_owned")}</span></span>` : `<span class="text-small text-muted"><i class="me-1 fa-solid fa-circle-xmark"></i><span>${translateUI("collection_notowned")}</span></span>`}</div></div>`
+        return `<div class="search-list-item" data-index="${index}" data-student-id="${student.Id}"><div class="search-list-item-icon"><img class="student-icon" src="images/student/icon/${student.Id}.webp"></div><div class="search-list-item-detail"><span>${getTranslatedString(student, "Name")}</span>${student.Id in studentCollection ? `<span class="text-small"><i class="me-1 fa-solid fa-circle-check"></i><span>${translateUI("collection_owned")}</span></span>` : `<span class="text-small text-muted"><i class="me-1 fa-solid fa-circle-xmark"></i><span>${translateUI("collection_notowned")}</span></span>`}</div></div>`
     }
 
     renderControls() {
@@ -1819,7 +1826,7 @@ class SupportStats {
             <div data-index="${index}" class="ba-panel p-2">
                 <div class="d-flex flex-row align-items-center gap-2">
                     <div class="support-stats">
-                        <img src="images/student/icon/${support.student.CollectionTexture}.png">
+                        <img src="images/student/icon/${support.student.Id}.webp">
                     </div>
                     <div class="flex-fill">
                         <h5 class="support-stats-name">${support.student.Name}</h5>
@@ -1861,7 +1868,7 @@ class SupportStats {
             if ("Released" in support.student.Gear && support.student.Gear.Released[regionID]) {
                 html += `
                 <button class="btn-pill support-ex-gear ${ support.gear ? '' : 'deactivated'}">
-                    <div class="icon"><img class="ba-item-n" src="images/gear/Gear_Icon_${support.student.Id}.png" width="28" height="28"></div>
+                    <div class="icon"><img class="ba-item-n" src="images/gear/icon/${support.student.Id}.webp" width="28" height="28"></div>
                     <i class="fa-regular fa-square off mx-2"></i>
                     <i class="fa-solid fa-square-check on mx-2"></i>
                 </button>
@@ -1897,7 +1904,7 @@ class SupportStats {
         panel.find('.support-gear .dropdown-item.active').removeClass('active')
         for (let i = 1; i <= 3; i++) {
             panel.find(`.support-gear[data-slot="${i}"] .dropdown-item[data-tier="${support.equipment[i-1]}"]`).addClass('active')
-            panel.find(`.support-gear[data-slot="${i}"] .support-gear-icon`).attr('src', `images/equipment/Equipment_Icon_${support.student.Equipment[i-1]}_Tier${support.equipment[i-1]}.png`)
+            panel.find(`.support-gear[data-slot="${i}"] .support-gear-icon`).attr('src', `images/equipment/icon/equipment_icon_${support.student.Equipment[i-1]}_tier${support.equipment[i-1]}.webp`)
             panel.find(`.support-gear[data-slot="${i}"] .support-gear-label`).text(`T${support.equipment[i-1]}`)
         }
         if (recalculate) recalculateStats()
@@ -1912,17 +1919,17 @@ class SupportStats {
         </button>
         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start">`
         for (let i = 1; i <= data.common.regions[regionID][`gear${slot}_max`]; i++) {
-            html += `<li><a class="dropdown-item dropdown-item-icon" data-tier="${i}" href="javascript:;"><div class="icon"><img class="ba-item-n" src="images/equipment/Equipment_Icon_${gear}_Tier${i}.png"></div><span>T${i}</span></a></li>`
+            html += `<li><a class="dropdown-item dropdown-item-icon" data-tier="${i}" href="javascript:;"><div class="icon"><img class="ba-item-n" src="images/equipment/icon/equipment_icon_${gear}_tier${i}.webp"></div><span>T${i}</span></a></li>`
         }
         html += `</ul></div>`
         return html
     }
 
     static renderBondControls(student) {
-        let html = `<div class="d-flex align-items-center justify-content-center gap-2"><div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${student.CollectionTexture}.png"></div><input data-bond="0" class="form-control support-bond" type="number" value="1" min="1" max="${data.common.regions[regionID].bondlevel_max}"></div>`
+        let html = `<div class="d-flex align-items-center justify-content-center gap-2"><div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${student.Id}.webp"></div><input data-bond="0" class="form-control support-bond" type="number" value="1" min="1" max="${data.common.regions[regionID].bondlevel_max}"></div>`
         student.FavorAlts.forEach((id, i) => {
             const alt = find(data.students, 'Id', id)[0]
-            html += `<div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${alt.CollectionTexture}.png"></div><input data-bond="${i+1}" class="form-control support-bond" type="number" value="1" min="1" max="${data.common.regions[regionID].bondlevel_max}"></div>`
+            html += `<div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${alt.Id}.webp"></div><input data-bond="${i+1}" class="form-control support-bond" type="number" value="1" min="1" max="${data.common.regions[regionID].bondlevel_max}"></div>`
         })
         html += '</div>'
         return html
@@ -2087,35 +2094,21 @@ class EnemyFinder {
                 difficulty.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && !enemy.DevName.includes('Resort_') && !enemy.DevName.includes('AAGun_') && !enemy.DevName.includes('_HolyRelic_') && !enemy.DevName.includes('_HolyRelic02_')) {
-                        if (enemy.Icon !== undefined && enemy.Icon != "") {
-                            statPreviewEnemyList.push({
-                                id: enemy.Id,
-                                name: `${enemy.Name}`,
-                                searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])],
-                                source: 'raid',
-                                sourceName: `${getLocalizedString("StageType", "Raid")} / ${getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])}`,
-                                rank: enemy.Rank,
-                                icon: `images/enemy/${enemy.Icon}`,
-                                level: raid_level[difficultyId],
-                                grade: 1,
-                                raidId: raid.Id,
-                                raidDifficulty: difficultyId
-                            })
-                        } else {
-                            statPreviewEnemyList.push({
-                                id: enemy.Id,
-                                name: `${enemy.Name}`,
-                                searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])],
-                                source: 'raid',
-                                sourceName: `${getLocalizedString("StageType", "Raid")} / ${getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])}`,
-                                rank: enemy.Rank,
-                                icon: `images/raid/icon/Icon_${raid.PathName}${difficultyId >= 5 ? '_Insane' : ''}`,
-                                level: raid_level[difficultyId],
-                                grade: 1,
-                                raidId: raid.Id,
-                                raidDifficulty: difficultyId
-                            })
-                        }
+                        const raidIcon = (enemy.Icon !== undefined && enemy.Icon != "") ? `images/enemy/${enemy.Icon}.webp` : `images/raid/icon/Icon_${raid.PathName}${difficultyId > 4 ? "_Insane" : ""}.png`
+                        statPreviewEnemyList.push({
+                            id: enemy.Id,
+                            name: `${enemy.Name}`,
+                            searchTerms: [getTranslatedString(raid, 'Name') + ' ' + getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])],
+                            source: 'raid',
+                            sourceName: `${getLocalizedString("StageType", "Raid")} / ${getLocalizedString("RaidDifficulty", raidDifficultyName[difficultyId])}`,
+                            rank: enemy.Rank,
+                            icon: raidIcon,
+                            level: raid_level[difficultyId],
+                            grade: 1,
+                            raidId: raid.Id,
+                            raidDifficulty: difficultyId
+                        })
+                        
                     }
                 })
             })
@@ -2134,7 +2127,7 @@ class EnemyFinder {
                             source: 'timeattack',
                             sourceName: `${getLocalizedString("StageType", "TimeAttack")} / ${translateUI('ta_phase') + (formationId + 1)}`,
                             rank: enemy.Rank,
-                            icon: `images/enemy/${enemy.Icon}`,
+                            icon: `images/enemy/${enemy.Icon}.webp`,
                             level: formation.Level[enemy_rank[enemy.Rank]],
                             grade: formation.Grade[enemy_rank[enemy.Rank]]
                         })
@@ -2149,7 +2142,7 @@ class EnemyFinder {
                 difficulty.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && !enemy.DevName.includes('_Resort_') && !enemy.DevName.includes('_HolyRelic_') && !enemy.DevName.includes('_HolyRelic02_')) {
-                        const raidIcon = (enemy.Icon !== undefined && enemy.Icon != "") ? `images/enemy/${enemy.Icon}` : `images/raid/icon/Icon_${raid.PathName}`
+                        const raidIcon = (enemy.Icon !== undefined && enemy.Icon != "") ? `images/enemy/${enemy.Icon}.webp` : `images/raid/icon/Icon_${raid.PathName}.png`
                         statPreviewEnemyList.push({
                             id: enemy.Id,
                             name: enemy.Name,
@@ -2180,7 +2173,7 @@ class EnemyFinder {
                                 source: 'event',
                                 sourceName: getStageName(stage, 'Event'),
                                 rank: enemy.Rank,
-                                icon: `images/enemy/${enemy.Icon}`,
+                                icon: `images/enemy/${enemy.Icon}.webp`,
                                 level: formation.Level[enemy_rank[enemy.Rank]],
                                 grade: formation.Grade[enemy_rank[enemy.Rank]]
                             })
@@ -2208,7 +2201,7 @@ class EnemyFinder {
                                         source: 'event',
                                         sourceName: mapName,
                                         rank: enemy.Rank,
-                                        icon: `images/enemy/${enemy.Icon}`,
+                                        icon: `images/enemy/${enemy.Icon}.webp`,
                                         level: formation.Level[enemy_rank[enemy.Rank]],
                                         grade: formation.Grade[enemy_rank[enemy.Rank]]
                                     })
@@ -2233,7 +2226,7 @@ class EnemyFinder {
                         source: 'schooldungeon',
                         sourceName: `${getLocalizedString("StageType", "SchoolDungeon")} / ${getStageTitle(stage, "SchoolDungeon")}`,
                         rank: enemy.Rank,
-                        icon: `images/enemy/${enemy.Icon}`,
+                        icon: `images/enemy/${enemy.Icon}.webp`,
                         level: formation.Level[enemy_rank[enemy.Rank]],
                         grade: formation.Grade[enemy_rank[enemy.Rank]]
                     })
@@ -2251,7 +2244,7 @@ class EnemyFinder {
                         source: 'campaign',
                         sourceName: getLocalizedString("StageType", EnemyFinder.getModeFromEnemyId(enemy.Id)),
                         rank: enemy.Rank,
-                        icon: `images/enemy/${enemy.Icon}`,
+                        icon: `images/enemy/${enemy.Icon}.webp`,
                         level: -1,
                         grade: 1
                     })
@@ -2269,6 +2262,7 @@ class EnemyFinder {
         statPreviewSelectedEnemyId = enemyListItem.id
         statPreviewSelectedEnemyGrade = enemyListItem.grade
         statPreviewSelectedEnemyRaid = enemyListItem.raidId === undefined ? 0 : enemyListItem.raidId
+        statPreviewSelectedEnemyRaidDifficulty = enemyListItem.raidDifficulty
         const uniqueKey = `${enemyListItem.id}_${enemyListItem.level}_${enemyListItem.grade}`
         localStorage.setItem('selected_enemy', uniqueKey)
         
@@ -2279,7 +2273,7 @@ class EnemyFinder {
 
         $('#statpreview-enemy-name').html(enemyListItem.name)
         $('#statpreview-enemy-desc').html(enemyListItem.sourceName)
-        $('#statpreview-enemy-icon').html(`<div class="${iconClass}"><img src="${enemyListItem.icon}.png"></div>`)
+        $('#statpreview-enemy-icon').html(`<div class="${iconClass}"><img src="${enemyListItem.icon}"></div>`)
 
         $('#statpreview-enemy-icon').removeClass('elite champion boss').addClass(enemyListItem.rank.toLowerCase())
 
@@ -2355,7 +2349,7 @@ class EnemyFinder {
                 if (item.icon.startsWith('images/raid/icon')) {
                     iconClass += '-raid'
                 }
-                html += `<div class="search-list-item" data-index="${++resultCount}" data-enemy-list-index="${i}"><div class="search-list-item-icon enemy-select-icon small me-3 ${item.rank.toLowerCase()}"><div class="${iconClass}"><img src="${item.icon}.png" loading="lazy"></div></div><div class="search-list-item-detail"><span class="enemy-name">${item.name}</span><span class="enemy-details"><i>${item.sourceName}</i>${item.level != -1 ? `<b>Lv.${item.level}</b>` : ''}</span></div></div>`
+                html += `<div class="search-list-item" data-index="${++resultCount}" data-enemy-list-index="${i}"><div class="search-list-item-icon enemy-select-icon small me-3 ${item.rank.toLowerCase()}"><div class="${iconClass}"><img src="${item.icon}" loading="lazy"></div></div><div class="search-list-item-detail"><span class="enemy-name">${item.name}</span><span class="enemy-details"><i>${item.sourceName}</i>${item.level != -1 ? `<b>Lv.${item.level}</b>` : ''}</span></div></div>`
             }
             
         }
@@ -2385,6 +2379,8 @@ class EnemyFinder {
             return 'Event701'
         } else if (id < 7900000) {
             return 'TimeAttack'
+        } else if (id > 600000000) {
+            return 'Raid'
         } else {
             return 'Event'
         }
@@ -2665,13 +2661,14 @@ class SkillDamageInfo {
                 
             } else if (effect.Type.startsWith('Heal')) {
                 const healTotal = studentStats.calculateHealing(effect.Scale[this.skillLevel-1] / 10000)
+                const healEffectiveTotal = studentStats.calculateHealing(effect.Scale[this.skillLevel-1] / 10000, studentStats.getTotal('HealEffectivenessRate'))
                 const suffix = (effect.Type == 'HealDot' ? ' / ' + translateUI('time_seconds', [effect.Period / 1000]) : "")
 
                 let scalingText = `${parseFloat((effect.Scale[this.skillLevel-1]/100).toFixed(2)).toLocaleString()}%`
                 if (effect.Type == "HealZone") scalingText += ` &times; ${effect.HitFrames.length}`
 
                 this.element.find(`.row-value[data-key="${index}-scaling"]`).html(scalingText)
-                this.element.find(`.row-value[data-key="${index}-heal-total"]`).html(`<span class="text-heal">${healTotal.toLocaleString()}</span>` + suffix)
+                this.element.find(`.row-value[data-key="${index}-heal-total"]`).html(`<span class="text-heal">${healTotal.toLocaleString() + (healEffectiveTotal > healTotal ? ` (<img src="images/buff/Buff_HealEffectiveness.webp" style="height: 22px;">${healEffectiveTotal.toLocaleString()})` : '')}</span>` + suffix)
             } else if (effect.Type == 'Shield') {
                 const shieldTotal = studentStats.calculateHealing(effect.Scale[this.skillLevel-1] / 10000)
                 this.element.find(`.row-value[data-key="${index}-scaling"]`).text(`${parseFloat((effect.Scale[this.skillLevel-1]/100).toFixed(2)).toLocaleString()}%`)
@@ -2767,7 +2764,7 @@ class SkillDamageInfo {
 
         let iconPath, iconClass
         if (!this.skill.IsRaidSkill || this.skill.Icon.startsWith('COMMON_')) {
-            iconPath = `images/skill/${this.skill.Icon}.png`
+            iconPath = `images/skill/${this.skill.Icon}.webp`
             iconClass = `bg-atk-${this.character.BulletType.toLowerCase()}`
         } else {
             iconPath = `images/raid/skill/${this.skill.Icon}.png`
@@ -3405,7 +3402,7 @@ function loadModule(moduleName, entry=null) {
                     $(`#student-voicegallery-tab-${group.toLowerCase()}`).toggleClass("disabled", html == "")
                     $(`#student-voicegallery-list-${group.toLowerCase()} audio`).prop('volume', voiceClipVolume)
 
-                    $('#student-voice-icon img').attr('src', `images/student/icon/${student.CollectionTexture}.png`)
+                    $('#student-voice-icon img').attr('src', `images/student/icon/${student.Id}.webp`)
                     $('#student-voice-name').text(getTranslatedString(student, 'Name'))
                     $('#student-voice-cv').text(getTranslatedString(student, 'CharacterVoice'))
                 }
@@ -3502,19 +3499,19 @@ function loadModule(moduleName, entry=null) {
 
             passiveStatList.forEach((stat) => {
                 const buffName = `Buff_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
-                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="PassiveBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/Combat_Icon_${buffName}.png"></div><span>${getLocalizedString('BuffName',buffName)}</span></a></li>`
+                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="PassiveBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/${buffName}.webp"></div><span>${getLocalizedString('BuffName',buffName)}</span></a></li>`
                 $('#ba-student-search-select-passivebuff-list').append(listItem)
             })
 
             weaponPassiveStatList.forEach((stat) => {
                 const buffName = `Buff_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
-                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="WeaponPassiveBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/Combat_Icon_${buffName}.png"></div><span>${getLocalizedString('BuffName',buffName)}</span></a></li>`
+                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="WeaponPassiveBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/${buffName}.webp"></div><span>${getLocalizedString('BuffName',buffName)}</span></a></li>`
                 $('#ba-student-search-select-weaponpassivebuff-list').append(listItem)
             })
 
             subStatList.forEach((stat) => {
                 const buffName = `Buff_${(stat in buffIconKeys) ? buffIconKeys[stat] : stat}`
-                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="SubBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/Combat_Icon_${buffName}.png"></div><span>${getLocalizedString('BuffName',buffName)}</span></a></li>`
+                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="SubBuff" data-filter-select-value="${stat}" class="btn btn-dark"><div class="icon"><img src="images/buff/${buffName}.webp"></div><span>${getLocalizedString('BuffName',buffName)}</span></a></li>`
                 $('#ba-student-search-select-subbuff-list').append(listItem)
             })
 
@@ -3530,7 +3527,7 @@ function loadModule(moduleName, entry=null) {
 
             data.items.filter(i => i.Id >= 100 && i.Id < 1000 && i.Rarity == 'SSR' && i.IsReleased[regionID]).forEach(item => {
                 const classId = Math.floor(item.Id/10)
-                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="UsesArtifact" data-filter-select-value="${classId}" class="btn btn-dark"><div class="icon"><img src="images/items/${item.Icon}.png"></div><span>${getLocalizedString('ArtifactClass', classId)}</span></a></li>`
+                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="UsesArtifact" data-filter-select-value="${classId}" class="btn btn-dark"><div class="icon"><img src="images/items/icon/${item.Icon}.webp"></div><span>${getLocalizedString('ArtifactClass', classId)}</span></a></li>`
                 $('#ba-student-search-select-usesartifact-list').append(listItem)
             })
 
@@ -3589,7 +3586,7 @@ function loadModule(moduleName, entry=null) {
 
             $('#ba-student-toggle-sprite-btn').on('click', e => {
                 showAltSprite = !showAltSprite
-                $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.DevName}${showAltSprite ? '_2' : ''}.webp`)
+                $('#ba-student-img').attr('src', `images/student/portrait/${student.Id}${showAltSprite ? '_2' : ''}.webp`)
             })
 
             $('#ba-student-search-showinfo').tooltip({title: getBasicTooltip(translateUI('student_search_info')), html: true, placement: 'top'})
@@ -3667,6 +3664,7 @@ function loadModule(moduleName, entry=null) {
             }
 
             $('#item-select-grid').on('click', 'div[data-itemid]', function(e){loadItem($(this).data('itemid'))})
+            $('#ba-item-craftnodes').on('click', 'div[data-itemid]', function(e){loadCraft($(this).data('itemid'))})
         
             Object.entries(itemSearchOptions.filter).forEach(i => {
                 if (typeof i[1] === 'boolean') {
@@ -4022,6 +4020,24 @@ function duration(seconds) {
     totalSeconds -= hours*3600
     let minutes = Math.floor(totalSeconds/60)
     return [days, hours, minutes]
+}
+
+function durationStringShort(seconds) {
+    if (seconds < 0) {
+        return ""
+    }
+    let totalSeconds = seconds
+
+    let days = Math.floor(totalSeconds/86400)
+    if (days > 0) return translateUI('duration_days', [days])
+    totalSeconds -= days*86400
+
+    let hours = Math.floor(totalSeconds/3600)
+    if (hours > 0) return translateUI('duration_hours', [hours])
+    totalSeconds -= hours*3600
+
+    let minutes = Math.floor(totalSeconds/60)
+    return translateUI('duration_minutes', [minutes])
 }
 
 function setSortedDataLists() {
@@ -4390,7 +4406,10 @@ function checkFilters(student, filterList, selectFilterList, searchTerm) {
  * @returns 
  */
  function itemCheckFilters(item, filterList, searchTerm) {
+    const currentTime = new Date().getTime() / 1000
     if (!item.IsReleased[regionID]) return false
+    if (item.ImmediateUse && !itemSearchOptions['filter']['ShowImmediateUse']) return false
+    if (item.ExpiryTime && item.ExpiryTime[regionID] && item.ExpiryTime[regionID] <= currentTime && !itemSearchOptions['filter']['ShowExpired']) return false
     if (filterList.length == 0) {
     } else {
         for (let i = 0; i < filterList.length; i++) {
@@ -4422,6 +4441,18 @@ function checkFilters(student, filterList, selectFilterList, searchTerm) {
                     break
                 case 'EquipmentTier':
                     if (loadedItemList == 'equipment' && !itemSearchOptions['filter'][filterList[i]][item['Tier']]) return false
+                    break
+                case 'Craftable':
+                    if ((loadedItemList == 'items' || loadedItemList == 'furniture') && !item[filterList[i]][regionID]) return false
+                    break
+                case 'StageDrop':
+                    if (loadedItemList == 'items' && !item[filterList[i]][regionID]) return false
+                    break
+                case 'Shop':
+                    if (loadedItemList == 'items' && !item['Shops'].some(s => s.Released[regionID])) return false
+                    break
+                case 'ShowImmediateUse':
+                case 'ShowExpired':
                     break
                 default:
                     if (!itemSearchOptions['filter'][filterList[i]][item[filterList[i]]]) return false
@@ -4640,7 +4671,7 @@ function setGridItemDisplayStyle(style) {
 function renderStudent() {
 
     showAltSprite = false
-    $('#ba-student-img').attr('src', `images/student/portrait/Portrait_${student.DevName}.webp`)
+    $('#ba-student-img').attr('src', `images/student/portrait/${student.Id}.webp`)
     let bgimg = new Image()
     bgimg.onload = function(){
         $("#ba-background").css('background-image', `url('${bgimg.src}')`)
@@ -4656,11 +4687,11 @@ function renderStudent() {
 
     $('.summon-list').toggleClass('disabled', student.Summons.length == 0)
     let summonList = ''
-    summonList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-summon-id="0" class="btn btn-dark"><div class="icon"><img src="images/student/icon/${student.CollectionTexture}.png"></div><span>${getTranslatedString(student, "Name")}</span></a></li>`
+    summonList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-summon-id="0" class="btn btn-dark"><div class="icon"><img src="images/student/icon/${student.Id}.webp"></div><span>${getTranslatedString(student, "Name")}</span></a></li>`
     student.Summons.forEach((summon, index) => {
         const summonInfo = find(data.summons, 'Id', summon.Id)[0]
         const sourceSkill = find(student.Skills, 'SkillType', summon.SourceSkill)[0]
-        summonList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-summon-id="${index+1}" class="btn btn-dark"><div class="icon"><img class="bg-atk-${student.BulletType.toLowerCase()}" src="images/skill/${sourceSkill.Icon}.png"></div><span>${getTranslatedString(summonInfo, "Name")}</span></a></li>`
+        summonList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-summon-id="${index+1}" class="btn btn-dark"><div class="icon"><img class="bg-atk-${student.BulletType.toLowerCase()}" src="images/skill/${sourceSkill.Icon}.webp"></div><span>${getTranslatedString(summonInfo, "Name")}</span></a></li>`
     })
     $('.summon-list .dropdown-menu').html(summonList)
 
@@ -4686,14 +4717,14 @@ function renderStudent() {
     $("#ba-student-usescover-icon").toggle(student.Cover)
 
     $("#ba-student-weapontype-label").text(student.WeaponType)
-    $(".ba-type-weapon").css("background-image", `url('images/weapon/${student.WeaponImg}.png')`)
+    $(".ba-type-weapon").css("background-image", `url('images/weapon/${student.WeaponImg}.webp')`)
 
     //Skills
     student.Skills.filter(skill => skill.SkillType != 'autoattack').forEach((skill) => {
         $(`#ba-skill-${skill.SkillType}-name`).html(getTranslatedString(skill, 'Name'))
-        $(`#ba-skill-${skill.SkillType}-icon img`).attr("src", `images/skill/${skill.Icon}.png`)
+        $(`#ba-skill-${skill.SkillType}-icon img`).attr("src", `images/skill/${skill.Icon}.webp`)
         if (skill.SkillType == 'passive') {
-            $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${skill.Icon}.png`)
+            $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${skill.Icon}.webp`)
         }
         if (skill.SkillType == "ex") {
             $("#ba-skill-ex-cost").removeClass("ba-col-explosion ba-col-pierce ba-col-mystic ba-col-sonic")
@@ -4748,7 +4779,7 @@ function renderStudent() {
     $("#ba-student-weapon-name, #ba-statpreview-weapon-name").text(getTranslatedString(student.Weapon, 'Name'))
     $('#ba-weapon-description').text(getTranslatedString(student.Weapon,'Desc').replace("\n\n", "\n"))
     $("#ba-student-weapon-type").text(student.WeaponType)
-    $("#ba-student-weapon-img, #ba-statpreview-weapon-img").attr("src", `images/weapon/${student.WeaponImg}.png`)
+    $("#ba-student-weapon-img, #ba-statpreview-weapon-img").attr("src", `images/weapon/${student.WeaponImg}.webp`)
 
     $('#ba-weapon-bonus-terrain-type').attr("src", `images/ui/Terrain_${student.Weapon.AdaptationType}.png`)
     let initialTerrainAmount = adaptationAmount[student[student.Weapon.AdaptationType+'BattleAdaptation']]
@@ -4762,8 +4793,9 @@ function renderStudent() {
         $('#ba-student-tab-gear, #ba-statpreview-ex-gear-container').show()
         $("#ba-student-gear-name, #ba-statpreview-gear4-name").html(student.Gear.Name)
         $("#ba-student-gear-description").html(`${student.Gear.Desc}\n\n<i>${translateUI('bond_req_equip',['20', student.Name])}`)
-        $("#ba-student-gear-icon, #ba-statpreview-gear4-icon, #ba-student-gear-4-icon").attr("src", `images/gear/${student.Gear.Icon}.png`)
-        $("#ba-student-gear-4-icon").tooltip('dispose').tooltip({title: getRichTooltip(`images/gear/${student.Gear.Icon}.png`, getTranslatedString(student.Gear, 'Name'), translateUI('student_ex_gear'), null, getTranslatedString(student.Gear, 'Desc') + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(student.Gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", statPreviewGearLevel == 0)
+        $("#ba-student-gear-icon").attr("src", `images/gear/full/${student.Id}.webp`)
+        $("#ba-statpreview-gear4-icon, #ba-student-gear-4-icon").attr("src", `images/gear/icon/${student.Id}.webp`)
+        $("#ba-student-gear-4-icon").tooltip('dispose').tooltip({title: getRichTooltip(`images/gear/icon/${student.Id}.webp`, getTranslatedString(student.Gear, 'Name'), translateUI('student_ex_gear'), null, getTranslatedString(student.Gear, 'Desc') + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(student.Gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", statPreviewGearLevel == 0)
         let gearMaterialsHtml = ""
         for (let i = 0; i < student.Gear.TierUpMaterial[0].length; i++) {
             gearMaterialsHtml += getMaterialIconHTML(student.Gear.TierUpMaterial[0][i], student.Gear.TierUpMaterialAmount[0][i])
@@ -4790,7 +4822,7 @@ function renderStudent() {
             $('#ba-student-tab-stats').tab('show')
         }
 
-        $('#ba-student-gear-4-icon').attr('src', 'images/gear/Gear_Icon_Empty.png').tooltip('dispose').toggleClass("gear-disabled", true)
+        $('#ba-student-gear-4-icon').attr('src', 'images/gear/empty.png').tooltip('dispose').toggleClass("gear-disabled", true)
     }
 
     //Profile
@@ -4802,7 +4834,7 @@ function renderStudent() {
     $('#ba-profile-school-label').text(getLocalizedString('SchoolLong',student.School))
     $('#ba-profile-club-label').text(getLocalizedString('Club',student.Club))
     $('#ba-profile-schoolyear-label').text(getTranslatedString(student,'SchoolYear')).toggle(getTranslatedString(student,'SchoolYear') != "")
-    $('#ba-profile-portrait-img').attr("src", `images/student/collection/${student.CollectionTexture}.webp`)
+    $('#ba-profile-portrait-img').attr("src", `images/student/collection/${student.Id}.webp`)
     var profileHtml = ''
     profileHtml += getTranslatedString(student,'ProfileIntroduction')
     if (student.StarGrade == 3) {
@@ -4812,7 +4844,7 @@ function renderStudent() {
 
     if (student.MemoryLobby[regionID] > 0) {
         $(".ba-student-lobby").show()
-        $("#ba-student-lobby-img").attr("src", `images/student/lobby/Lobbyillust_Icon_${student.DevName}_01.png`)
+        $("#ba-student-lobby-img").attr("src", `images/student/lobby/${student.Id}.webp`)
         $("#ba-student-lobby-unlock").text(student.MemoryLobby[regionID])
         $(".ba-student-lobby").tooltip('dispose').tooltip({title: getRichTooltip(null, translateUI('memory_lobby_student', [getTranslatedString(student,'Name')]), null, null, `${translateUI('memory_lobby_unlock', [student.MemoryLobby[regionID], getTranslatedString(student,'Name')])}\n${translateUI('memory_lobby_bgm', [student.MemoryLobbyBGM])}`), placement: 'top', html: true})
     } else {
@@ -4855,7 +4887,7 @@ function renderStudent() {
 
     let favFurnitureHtml = ""
     $(student.FurnitureInteraction[regionID]).each(function(i,el){
-        let item = find(data.furniture, "Id", el)[0]
+        let item = find(data.furniture, "Id", el[0])[0]
         if (item.IsReleased[regionID]) {
             favFurnitureHtml += getFurnitureIconHTML(item)
         }
@@ -5157,7 +5189,7 @@ function loadItem(id) {
         var mode = '', item
         $(".tooltip").tooltip("hide")
         $('#item-select-grid .card-items.selected').removeClass('selected')
-        $('#ba-item-furniture-row').hide()
+        $('#ba-furniture-details').hide()
 
         if (id >= 2000000 && id < 3000000) {
             mode = 'equipment'
@@ -5167,9 +5199,12 @@ function loadItem(id) {
             mode = 'furniture'
             item = findOrDefault(data.furniture, "Id", id-1000000, 1)[0]
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.SubCategory))
-            $('#ba-item-furniture-row').show()
-            $('#ba-item-furniture-set').html(item.SetGroupId == 0 ? '' : `・ <i>${getLocalizedString('FurnitureSet', String(item.SetGroupId))}</i>`)
-            $('#ba-item-furniture-comfort').html(`<img class="inline-img" src="images/ui/Cafe_Icon_Comfort.png"> ${item.ComfortBonus}`)
+
+            $('#ba-furniture-details').show()
+            $('#furniture-set').html(getLocalizedString('FurnitureSet', ''+item.SetGroupId))
+            $('#furniture-comfort').html(`<img class="inline-img" src="images/ui/Cafe_Icon_Comfort.png"> ${item.ComfortBonus}`)
+            $('#furniture-size').html(item.Category == 'Interiors' ? '-' : `${item.Size[0]} &times; ${item.Size[1]} &times; ${item.Size[2]}`)
+            
         } else {
             mode = 'items'
             item = findOrDefault(data.items, "Id", id, 1)[0]
@@ -5183,23 +5218,47 @@ function loadItem(id) {
         if (mode == 'equipment' && item.Id >= 1000) {
             $('#ba-item-rarity .label').html(`T${item.Tier}`)
         } else {
-            if (mode == 'furniture') {
-                $('#ba-item-rarity .label').html(getRarityStars(item.Rarity))
-            } else {
-                $('#ba-item-rarity .label').html(getRarityTier(item.Rarity))
-            }
+            $('#ba-item-rarity .label').html(getRarityTier(item.Rarity))
         }
         
         $('#ba-item-icon').removeClass('ba-item-n ba-item-r ba-item-sr ba-item-ssr').addClass('ba-item-'+item.Rarity.toLowerCase())
-        $('#ba-item-icon-img').attr('src', `images/${mode}/${item.Icon}.png`)
+        $('#ba-item-icon-img, #item-icon-full').attr('src', `images/${mode}/icon/${item.Icon}.webp`)
+        $('#item-icon-full').attr('src', `images/${mode}/full/${item.Icon}.webp`)
+
         let description = getTranslatedString(item, 'Desc')
         if (item.ImmediateUse) {
-            description += `\n\n<i>${translateUI('item_is_immediateuse')}</i>`
+            description += `\n\n<i><i class="fa-solid fa-box-open me-1"></i>${translateUI('item_is_immediateuse')}</i>`
         }
+        
+        if (item.ExpiryTime && item.ExpiryTime[regionID]) {
+            const currentTime = new Date().getTime() / 1000
+            const expiryTimeString = new Date(item.ExpiryTime[regionID] * 1000).toLocaleString([], { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" })
+            if (item.ExpiryTime[regionID] <= currentTime) {
+                description += `\n\n<i><i class="fa-solid fa-clock me-1"></i>${translateUI('item_is_expired', [expiryTimeString])}</i>`
+            } else {
+                description += `\n\n<i><i class="fa-solid fa-clock me-1"></i>${translateUI('item_is_expiring', [expiryTimeString])}</i>`
+            }
+        }
+
         $('#ba-item-description').html(description)
+
         if (mode == 'equipment' && item.Id >= 1000 && item.Id <= 10000) {
-            $('#ba-item-description').append(`\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(item, '\n'))
+            //$('#ba-item-description').append(`\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(item, '\n'))
+            $('#ba-equipment-details').show()
+            generateStatTable('#ba-equipment-details', item.StatType, 6)
+
+            item.StatType.forEach((statKey, index) =>  {
+                let maxValue = item.StatValue[index][1]
+                if (statKey.split('_')[1] == "Coefficient") {
+                    maxValue = parseFloat((maxValue/100).toFixed(2))+'%'
+                }
+                $(`#ba-equipment-details .stat-${statKey} .stat-value`).text('+'+maxValue)
+            })
+
+        } else {
+            $('#ba-equipment-details').hide()
         }
+
         if (item.Category.includes("WeaponExpGrowth")) {
             $('#ba-item-description').append(`\n\n<i>${getLocalizedString('WeaponPartExpBonus', item.Category)}</i>`)
         }
@@ -5207,6 +5266,8 @@ function loadItem(id) {
         $('#ba-item-usage').empty().hide()
         $('#ba-item-sources').empty().hide()
         $('#ba-item-shops').empty().hide()
+        $('#ba-item-craftnodes').empty().hide()
+        $('#ba-item-consumables').empty().hide()
         if (item.Category == 'Material' || item.Category == 'CharacterExpGrowth') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
@@ -5232,15 +5293,23 @@ function loadItem(id) {
                 $(el).tooltip({html: true})
             })
             $('.ba-item-student').tooltip({html: true})
+            $('#ba-item-craftnodes').html(getItemCraftNodes(item.Id, 'Equipment'))
         } else if (item.Category == 'Coin') {
-            $('#ba-item-sources').html(getItemDropStages(item.Id))
+            $('#ba-item-sources').html(getItemDropStages(item.Id, true))
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
         }
+
         if (mode == 'furniture') {
             $('#ba-item-usage').html(getUsedByStudents(item, mode))
             $('.ba-item-student').tooltip({html: true})
+            $('#ba-item-craftnodes').html(getItemCraftNodes(item.Id, 'Furniture'))
+        } else if (mode == 'items') {
+            $('#ba-item-craftnodes').html(getItemCraftNodes(item.Id, 'Item'))
         }
+
+        $('#ba-item-consumables').html(getItemConsumables(id))
+        $('#ba-item-consumables .item-icon-list div').tooltip({html: true})
 
         if (item.Shops) {
             let html = ''
@@ -5250,6 +5319,22 @@ function loadItem(id) {
             if (html != '') {
                 $('#ba-item-shops').html(`<div class="mb-2"><i>${translateUI('item_purchasedfrom')}</i></div><div class="selection-grid stage selection-grid-flex">${html}</div>`).show()
                 $('#ba-item-shops .shop-cost').tooltip({html: true, placement: 'top'})
+            }
+        }
+
+        if (regionID == 0 && item.Templates) {
+            let html = ''
+            item.Templates.forEach((template) => {
+                html += `<div class="selection-grid-card card-shop">
+                <div class="card-img"><img loading="lazy" src="images/furniture/template/${template[0]}.webp"></div>`
+                let templateName = getLocalizedString("FurnitureTemplate", template[0])
+                html += `<span class="card-badge shop-cost">&times;${template[1]}</span>`
+                html += `<div class="card-label">`
+                html += `<span class="label-text ${templateName.length > label_enemy_smalltext_threshold[userLang] ? "smalltext" : "" }">${templateName}</span>`
+                html += `</div></div>`
+            })
+            if (html != '') {
+                $('#ba-item-shops').html(`<div class="mb-2"><i>${translateUI('furniture_templates')}</i></div><div class="selection-grid stage selection-grid-flex">${html}</div>`).show()
             }
         }
 
@@ -5325,7 +5410,7 @@ function loadCraft(id) {
             $('#ba-craft-type').html(translateUI('craft_fusion'))
             $('#ba-craft-rarity .label').html(getRarityTier(item.Rarity))
             $('#ba-craft-icon').removeClass('ba-node-quality-1 ba-node-quality-2 ba-item-n ba-item-r ba-item-sr ba-item-ssr').addClass('ba-item-'+item.Rarity.toLowerCase())
-            $('#ba-craft-icon-img').attr('src', `images/${itemList}/${item.Icon}.png`)
+            $('#ba-craft-icon-img').attr('src', `images/${itemList}/icon/${item.Icon}.webp`)
             $('#ba-craft-description').html(getTranslatedString(item, 'Desc'))
             $('#ba-craft-rewards-title').text(translateUI('craft_recipe_items'))
             $('#ba-craft-rewards').empty()
@@ -5523,7 +5608,7 @@ function changeRaidDifficulty(difficultyId) {
     raid.EnemyList[raid_difficulty].forEach(function(el,i) {
         const enemy = find(data.enemies,'Id',el)[0]
         if (enemy.Icon != undefined) {
-            raidEnemyList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-enemy-index="${i}" class="btn btn-dark"><div class="icon enemy-chibi"><img src="images/enemy/${enemy.Icon}.png"></div><span>${getTranslatedString(enemy, "Name")}</span></a></li>`
+            raidEnemyList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-enemy-index="${i}" class="btn btn-dark"><div class="icon enemy-chibi"><img src="images/enemy/${enemy.Icon}.webp"></div><span>${getTranslatedString(enemy, "Name")}</span></a></li>`
         } else {
             raidEnemyList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-enemy-index="${i}" class="btn btn-dark"><div class="icon"><img src="images/raid/icon/Icon_${raid.PathName}${raid_difficulty >= 5 ? '_Insane' : ''}.png"></div><span>${getTranslatedString(enemy, "Name")}</span></a></li>`
         }
@@ -5570,7 +5655,7 @@ function changeTimeAttackDifficulty(difficultyId) {
     raid.Rules[difficultyId].forEach(id => {
         rule = find(data.raids.TimeAttackRules, 'Id', id)[0]
         if (rulesHTML != '') rulesHTML += '<div class="ba-panel-separator"></div>'
-        rulesHTML += `<div class="d-flex flex-row align-items-start mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/timeattack/${rule.Icon}.png"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(rule, 'Name')}</h4><p class="mt-1 mb-2 p-1">${getSkillText({Desc: getTranslatedString(rule, 'Desc'), Parameters: []}, 0, {})}</p></div></div></div>`
+        rulesHTML += `<div class="d-flex flex-row align-items-start mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/timeattack/${rule.Icon}.webp"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(rule, 'Name')}</h4><p class="mt-1 mb-2 p-1">${getSkillText({Desc: getTranslatedString(rule, 'Desc'), Parameters: []}, 0, {})}</p></div></div></div>`
     })
     $('#ba-timeattack-rules').empty().html(rulesHTML)
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -5594,7 +5679,7 @@ function changeWorldRaidDifficulty(difficultyId) {
     raid.EnemyList[raid_difficulty].forEach(function(el,i) {
         const enemy = find(data.enemies,'Id',el)[0]
         if (enemy.Icon != undefined) {
-            raidEnemyList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-enemy-index="${i}" class="btn btn-dark"><div class="icon enemy-chibi"><img src="images/enemy/${enemy.Icon}.png"></div><span>${getTranslatedString(enemy, "Name")}</span></a></li>`
+            raidEnemyList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-enemy-index="${i}" class="btn btn-dark"><div class="icon enemy-chibi"><img src="images/enemy/${enemy.Icon}.webp"></div><span>${getTranslatedString(enemy, "Name")}</span></a></li>`
         } else {
             raidEnemyList += `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-enemy-index="${i}" class="btn btn-dark"><div class="icon"><img src="images/raid/icon/Icon_${raid.PathName}.png"></div><span>${getTranslatedString(enemy, "Name")}</span></a></li>`
         }
@@ -5641,7 +5726,7 @@ function changeWorldRaidDifficulty(difficultyId) {
 
 function getStageEntryCurrency(currencyId, amount) {
     const currency = find(data.currency, 'Id', currencyId)[0]
-    return `<span class="ba-info-pill bg-theme my-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${currency.Icon}.png`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger')}"><img src="images/items/${currency.Icon}.png" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${amount}</span></span>`
+    return `<span class="ba-info-pill bg-theme my-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/icon/${currency.Icon}.webp`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger')}"><img src="images/items/icon/${currency.Icon}.webp" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${amount}</span></span>`
 }
 
 function populateRaidSkills(container, skills, difficulty) {
@@ -5721,62 +5806,13 @@ function changeRaidEnemy(num) {
                 $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text(translateUI('time_seconds', [enemy.GroggyTime/1000]))
             } else {
                 $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text('-')
-            }
-        } else if (statName == 'MaxHP') {
-            
-            let tooltipText = ""
-            let maxHPDisplay = ""
-
-            const hoverCraftMissileHPMod = [0, 1000, 2500, 5000, 10000, 25000, 35000]
-
-            switch (enemy.Id) {
-                
-                case 7305701:
-                    enemyStats.addBuff('MaxHP_Base', 100000)
-                case 7305601:
-                case 7965031:
-                    maxHPDisplay = enemyStats.getTotalString('MaxHP')
-   
-                    enemyStats.addBuff('MaxHP_Coefficient', 10000)
-                    tooltipText += `<div class="active-buff me-2"><img src="images/buff/Combat_Icon_Buff_MAXHP.png" width="22" height="26" class=""><span class="stack-count">2</span></div><b>${enemyStats.getTotalString(statName)}</b>`
-
-                    enemyStats.addBuff('MaxHP_Coefficient', 10000)
-                    tooltipText += `\n<div class="active-buff me-2"><img src="images/buff/Combat_Icon_Buff_MAXHP.png" width="22" height="26" class=""><span class="stack-count">3</span></div><b>${enemyStats.getTotalString(statName)}</b>`
-
-                    break
-                case 7305101:
-                case 7965002:
-                    maxHPDisplay = enemyStats.getBaseString('MaxHP')
-                    if (raid_difficulty == 4) {
-                        enemyStats.addBuff('MaxHP_Coefficient', 11000)
-                        tooltipText += `<div class="active-buff me-2"><img src="images/buff/Combat_Icon_Buff_MAXHP.png" width="22" height="26" class=""></div><b>${enemyStats.getTotalString(statName)}</b>`
-                    }
-                    break
-
-                case 610220107:
-                    enemyStats.addBuff('MaxHP_Coefficient', 20000)
-                case 610220106:
-                case 610220108:
-                    enemyStats.addBuff('MaxHP_Base', hoverCraftMissileHPMod[raid_difficulty])
-                    maxHPDisplay = enemyStats.getTotalString('MaxHP')
-                    break
-
-                default:
-                    maxHPDisplay = enemyStats.getBaseString('MaxHP')
-                    break
-            }
-
-            if (tooltipText != '') {
-                $(`#ba-raid-enemy-stats .stat-MaxHP .stat-value`).html(`<span class="has-tooltip">${maxHPDisplay}</span>`)
-                $('#ba-raid-enemy-stats .stat-MaxHP .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(tooltipText), html: true, placement: 'top'})
-            } else {
-                $(`#ba-raid-enemy-stats .stat-MaxHP .stat-value`).text(maxHPDisplay)
-            }
-            
+            }            
         } else {
             $(`#ba-raid-enemy-stats .stat-${statName} .stat-value`).text(enemyStats.getBaseString(statName))
         }
     })
+
+    addRaidEnemyBonusStats(enemy.Id, enemyStats, raid_difficulty, '#ba-raid-enemy-stats')
 
     let defText = translateUI('stat_defense_tooltip', [`<b>${enemyStats.getDefenseDamageReduction()}</b>`])
     $('#ba-raid-enemy-stats .stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
@@ -5790,7 +5826,7 @@ function changeRaidEnemy(num) {
     $('#raid-enemy-list .active-name').html(getTranslatedString(enemy, "Name"))
     if (enemy.Icon != undefined) {
         $('#ba-raid-enemy-icon div').toggleClass('icon-enemy', true).toggleClass('icon-enemy-raid', false)
-        $('#ba-raid-enemy-icon img').attr('src', `images/enemy/${enemy.Icon}.png`)
+        $('#ba-raid-enemy-icon img').attr('src', `images/enemy/${enemy.Icon}.webp`)
     } else {
         $('#ba-raid-enemy-icon div').toggleClass('icon-enemy', false).toggleClass('icon-enemy-raid', true)
         $('#ba-raid-enemy-icon img').attr('src', `images/raid/icon/Icon_${raid.PathName}${raid.Id < 1000 && raid_difficulty >= 5 ? '_Insane' : ''}.png`)
@@ -5822,6 +5858,59 @@ function changeRaidEnemy(num) {
     $(`#ba-raid-enemy-terrain`).show().tooltip('dispose').tooltip({title: getRichTooltip(`images/ui/Ingame_Emo_Adaptresult${adaptation}.png`,translateUI('terrain_adaption', [getLocalizedString('AdaptationType', raid.Terrain[0])])+' '+adaptation, null, null, getAdaptationText(raid.Terrain[0], adaptation), 30), placement: 'top', html: true})
 
     renderEnemySkills(enemy, $('#ba-raid-enemy-skills'))
+
+}
+
+function addRaidEnemyBonusStats(id, enemyStats, raidDifficulty, statsTableElement) {
+
+    let tooltipText = ""
+    let maxHPDisplay = ""
+
+    const hoverCraftMissileHPMod = [0, 1000, 2500, 5000, 10000, 25000, 35000]
+
+    switch (id) {
+        
+        case 7305701:
+            enemyStats.addBuff('MaxHP_Base', 100000)
+        case 7305601:
+        case 7965031:
+            maxHPDisplay = enemyStats.getTotalString('MaxHP')
+
+            enemyStats.addBuff('MaxHP_Coefficient', 10000)
+            tooltipText += `<div class="active-buff me-2"><img src="images/buff/Buff_MAXHP.webp" width="22" height="26" class=""><span class="stack-count">2</span></div><b>${enemyStats.getTotalString('MaxHP')}</b>`
+
+            enemyStats.addBuff('MaxHP_Coefficient', 10000)
+            tooltipText += `\n<div class="active-buff me-2"><img src="images/buff/Buff_MAXHP.webp" width="22" height="26" class=""><span class="stack-count">3</span></div><b>${enemyStats.getTotalString('MaxHP')}</b>`
+
+            break
+        case 7305101:
+        case 7965002:
+            maxHPDisplay = enemyStats.getTotalString('MaxHP')
+            if (raidDifficulty == 4) {
+                enemyStats.addBuff('MaxHP_Coefficient', 11000)
+                tooltipText += `<div class="active-buff me-2"><img src="images/buff/Buff_MAXHP.webp" width="22" height="26" class=""></div><b>${enemyStats.getTotalString('MaxHP')}</b>`
+            }
+            break
+
+        case 610220107:
+            enemyStats.addBuff('MaxHP_Coefficient', 20000)
+        case 610220106:
+        case 610220108:
+            enemyStats.addBuff('MaxHP_Base', hoverCraftMissileHPMod[raidDifficulty])
+            maxHPDisplay = enemyStats.getTotalString('MaxHP')
+            break
+
+        default:
+            maxHPDisplay = enemyStats.getBaseString('MaxHP')
+            break
+    }
+
+    if (tooltipText != '') {
+        $(`${statsTableElement} .stat-MaxHP .stat-value`).html(`<span class="has-tooltip">${maxHPDisplay}</span>`)
+        $(`${statsTableElement} .stat-MaxHP .has-tooltip`).tooltip('dispose').tooltip({title: getBasicTooltip(tooltipText), html: true, placement: 'top'})
+    } else {
+        $(`${statsTableElement} .stat-MaxHP .stat-value`).text(maxHPDisplay)
+    }
 
 }
 
@@ -6196,7 +6285,7 @@ function loadStage(id) {
                     }
                 }
 
-                html += `<span class="ba-info-pill bg-theme my-0" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${currency.Icon}.png`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger')}"><img src="images/items/${currency.Icon}.png" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${ec[1]}${currencyType}</span></span>`
+                html += `<span class="ba-info-pill bg-theme my-0" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/icon/${currency.Icon}.webp`, getTranslatedString(currency, 'Name'), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc'), 50, 'img-scale-larger')}"><img src="images/items/icon/${currency.Icon}.webp" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${ec[1]}${currencyType}</span></span>`
             })
             
         }
@@ -6330,7 +6419,7 @@ function changeGearLevel(slot, el, recalculate = true) {
     const equipment = find(data.equipment, "Id", gearId[geartype]+tier-1)[0]
     statPreviewEquipment[slot-1] = tier
     //var gearobj = find(data.common.gear, "type", geartype)[0]
-    $(`#ba-statpreview-gear${slot}-icon`).attr("src", `images/equipment/Equipment_Icon_${geartype}_Tier${tier}.png`)
+    $(`#ba-statpreview-gear${slot}-icon`).attr("src", `images/equipment/icon/${equipment.Icon}.webp`)
     $(`#ba-statpreview-gear${slot}-level`).text(`T${tier}`)
     $(`#ba-statpreview-gear${slot}-name`).text(getTranslatedString(equipment, 'Name'))
     $(`#ba-statpreview-gear${slot}-description`).html(getGearStatsText(equipment))
@@ -6512,12 +6601,12 @@ function getBondTargetsHTML(num, student) {
     <h5 class="flex-fill">${translateUI('student_bond')}</h5>
     <i class="fa-regular fa-square off"></i>
     <i class="fa-solid fa-square-check on"></i></div>
-    <div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mb-1 d-flex flex-row align-items-center"><div class="ba-bond-icon me-2" style="position: relative;"><img src="images/student/icon/${student.CollectionTexture}.png"></div><div class="flex-fill"><h5>${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${statPreviewBondLevel[num]}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div></div>`
+    <div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mb-1 d-flex flex-row align-items-center"><div class="ba-bond-icon me-2" style="position: relative;"><img src="images/student/icon/${student.Id}.webp"></div><div class="flex-fill"><h5>${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${statPreviewBondLevel[num]}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div></div>`
 }
 
 function getBondToggleHTML(num, student) {
     return `<button id="ba-statpreview-status-bond-${num}-toggle" onclick="toggleBond(${num})" class="btn-pill tooltip-button">
-    <div class="icon bond-small"><img src="images/student/icon/${student.CollectionTexture}.png" width="28" height="28"></div>
+    <div class="icon bond-small"><img src="images/student/icon/${student.Id}.webp" width="28" height="28"></div>
     <span class="label ps-2"></span>
     </button>`
 }
@@ -6533,7 +6622,7 @@ function updateGearIcon() {
         tier = statPreviewIncludeEquipment ? $(`#ba-statpreview-gear${i}-range`).val() : 1
         tierText += ((tierText == "") ? "" : " / ") + "T"+$(`#ba-statpreview-gear${i}-range`).val()
         gear = find(data.equipment, "Id", gearId[student.Equipment[i-1]]+(tier-1))[0]
-        $(`#ba-student-gear-${i}-icon`).attr("src", `images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/Equipment_Icon_${gear.Category}_Tier${tier}.png`, getTranslatedString(gear, 'Name'), getLocalizedString('ItemCategory', gear.Category), `T${tier}`, getTranslatedString(gear, 'Desc') + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !statPreviewIncludeEquipment)
+        $(`#ba-student-gear-${i}-icon`).attr("src", `images/equipment/icon/${gear.Icon}.webp`).tooltip('dispose').tooltip({title: getRichTooltip(`images/equipment/icon/${gear.Icon}.webp`, getTranslatedString(gear, 'Name'), getLocalizedString('ItemCategory', gear.Category), `T${tier}`, getTranslatedString(gear, 'Desc') + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", !statPreviewIncludeEquipment)
         $(`#ba-student-gear-${i}-icon`).attr('onclick', `loadItem(${gear.Id+2000000})`)
     }
 
@@ -6566,9 +6655,10 @@ function recalculateWeaponPreview() {
 
 function generateStatTable(container, statList, columnWidth, detailedView = 0) {
     let innerHtml = ''
-    statList.forEach(function(statName){
+    statList.forEach(function(statKey){
+        statName = statKey.replace('_Coefficient','').replace('_Base','')
         innerHtml += `
-            <div class="col-${columnWidth}"><div class="stat-${statName} d-flex align-items-center"><span class="stat-icon"><img class="invert-light" src="images/staticon/Stat_${statName}.png"></span><span class="stat-name">${getLocalizedString('Stat', statName)}</span><span class="flex-fill"></span><span class="stat-value">`
+            <div class="col-${columnWidth}"><div class="stat-${statKey} d-flex align-items-center"><span class="stat-icon"><img class="invert-light" src="images/staticon/Stat_${statName}.png"></span><span class="stat-name">${getLocalizedString('Stat', statName)}</span><span class="flex-fill"></span><span class="stat-value">`
         if (detailedView) {
             innerHtml += `<span class="stat-base"></span><span class="stat-flat"></span><span class="stat-coefficient"></span><span class="stat-final"></span>`
         }
@@ -7047,6 +7137,8 @@ function calculateEnemyStats() {
         $(`#calculation-enemy-stat-table .stat-${statName} .stat-value`).html(valueHtml)
     })
 
+    addRaidEnemyBonusStats(enemy.Id, enemyStats, statPreviewSelectedEnemyRaidDifficulty, '#calculation-enemy-stat-table')
+
     let defText = translateUI('stat_defense_tooltip', [`<b>${enemyStats.getDefenseDamageReduction()}</b>`])
     $('#calculation-enemy-stat-table .stat-DefensePower .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(defText), html: true, placement: 'top'})
 
@@ -7151,15 +7243,15 @@ function recalculateSkillPreview() {
 
         if (skillType == 'normal' && showSkillUpgrades && "Released" in student.Gear && student.Gear.Released[regionID]) {
             skill = find(student.Skills, 'SkillType', 'gearnormal')[0]
-            $(`#ba-skill-normal-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.png`)
+            $(`#ba-skill-normal-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.webp`)
             $(`#ba-skill-normal-plus`).toggle(true)
         } else if (skillType == 'passive' && showSkillUpgrades) {
             skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
-            $(`#ba-skill-passive-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.png`)
+            $(`#ba-skill-passive-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.webp`)
             $(`#ba-skill-passive-plus`).toggle(true)
         } else {
             skill = find(student.Skills, 'SkillType', skillType)[0]
-            $(`#ba-skill-${skillType}-icon`).toggleClass('plus', false).find('img').attr("src", `images/skill/${skill.Icon}.png`)
+            $(`#ba-skill-${skillType}-icon`).toggleClass('plus', false).find('img').attr("src", `images/skill/${skill.Icon}.webp`)
             $(`#ba-skill-${skillType}-plus`).toggle(false)
         }
 
@@ -7182,7 +7274,7 @@ function getStudentListCardHTML(student) {
     let html = `
     <div id="student-select-${student.Id}" class="selection-grid-card card-student" onclick="loadStudent('${student.PathName}')">
         <div class="card-img">
-            <img src="images/student/collection/${student.CollectionTexture}.webp">
+            <img src="images/student/collection/${student.Id}.webp">
         </div>
         <span class="card-badge student-role top-left bg-${student.SquadType.toLowerCase()}-t"><img src="images/ui/Role_${student.TacticRole}.png"></span>
         <span class="card-badge student-type atk bg-atk-${student.BulletType.toLowerCase()}-t"><img src="images/ui/Type_Attack_s.png"></span>
@@ -7196,7 +7288,7 @@ function getStudentListCardHTML(student) {
     return html
 }
 
-function getStageCardHTML(stage, dropChance = 0) {
+function getStageCardHTML(stage, dropChance = 0, includeEventName = false) {
     let type = ''
     let smallTextThreshold = label_enemy_smalltext_threshold["En"]
     if (stage.Id >= 7000000) {
@@ -7224,7 +7316,15 @@ function getStageCardHTML(stage, dropChance = 0) {
     function getStageCardName() {
         switch (type) {
             case "Event":
-                return `${stage.Difficulty == 0 ? 'Story' : (stage.Difficulty == 1 ? 'Quest' : 'Challenge')} ${stage.Stage.toString().padStart(2,'0')}`
+                if (includeEventName) {
+                    let eventNameShort = getLocalizedString('EventName', stage.EventId)
+                    if (eventNameShort.length > 16) {
+                        eventNameShort = eventNameShort.substring(0, 15) + '...'
+                    }
+                    return `${eventNameShort}\n${stage.Difficulty == 0 ? 'Story' : (stage.Difficulty == 1 ? 'Quest' : 'Challenge')} ${stage.Stage.toString().padStart(2,'0')}`
+                } else {
+                    return `${stage.Difficulty == 0 ? 'Story' : (stage.Difficulty == 1 ? 'Quest' : 'Challenge')} ${stage.Stage.toString().padStart(2,'0')}`
+                }
             case "Campaign":
                 return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
             case "WeekDungeon":
@@ -7253,7 +7353,7 @@ function getShopCardHTML(shop) {
     let html = `<div class="selection-grid-card card-shop">
     <div class="card-img"><img loading="lazy" src="images/ui/BG_Shop.png"></div>`
 
-    html += `<span class="card-badge shop-cost" title="${getRichTooltip(`images/items/${costItem.Icon}.png`, getTranslatedString(costItem, 'Name'), getLocalizedString('ItemCategory', costType), getRarityTier(costItem.Rarity), getTranslatedString(costItem, 'Desc').replace('&','&amp;'), 50, 'img-scale-larger')}"><img src="images/items/${costItem.Icon}.png"><span>&times;${abbreviateNumber(shop.CostAmount)}${shop.Amount > 1 ? ` (${shop.Amount})` : ''}</span></span>`
+    html += `<span class="card-badge shop-cost" title="${getRichTooltip(`images/items/icon/${costItem.Icon}.webp`, getTranslatedString(costItem, 'Name'), getLocalizedString('ItemCategory', costType), getRarityTier(costItem.Rarity), getTranslatedString(costItem, 'Desc').replace('&','&amp;'), 50, 'img-scale-larger')}"><img src="images/items/icon/${costItem.Icon}.webp"><span>&times;${abbreviateNumber(shop.CostAmount)}${shop.Amount > 1 ? ` (${shop.Amount})` : ''}</span></span>`
     html += `<div class="card-label">`
     html += `<span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
     html += `</div></div>`
@@ -7295,7 +7395,7 @@ function getEventCardHTML(eventId) {
     <div id="event-select-${eventId}" class="selection-grid-card card-event" onclick="${onClick}">
         <div class="card-bg"><div style="background-image:url('images/campaign/Campaign_Event_${eventIdImg}_Normal.png');"></div>
         </div>
-        <div class="card-img"><img src="images/eventlogo/Event_${eventIdImg}_${logoLang}.png"></div>`
+        <div class="card-img"><img src="images/eventlogo/${eventIdImg}_${logoLang}.webp"></div>`
     html += `<div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${name}</span></div></div>`
     return html
 }
@@ -7333,12 +7433,12 @@ function getRaidCardHTML(raid, terrain='', backgroundPath=null) {
 
 function getTimeAttackCardHTML(raid) {
     let name = getLocalizedString("TimeAttackStage", raid.DungeonType)
-    let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/timeattack/${timeAttackBG[raid.DungeonType]}.png');"></div></div><div class="card-img ta-img"><img src="images/enemy/${raid.Icon}.png"></div><div class="card-badge ta-rules">`
+    let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/timeattack/${timeAttackBG[raid.DungeonType]}.png');"></div></div><div class="card-img ta-img"><img src="images/enemy/${raid.Icon}.webp"></div><div class="card-badge ta-rules">`
     // <div class="card-badge raid-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png"></div>
     // <div class="card-badge raid-terrain"><img class="invert-light" src="images/ui/Terrain_${raid.Terrain}.png"></div>`
     raid.Rules[raid.Rules.length-1].forEach((ruleId) => {
         const rule = find(data.raids.TimeAttackRules, 'Id', ruleId)[0]
-        html += `<img src="images/timeattack/${rule.Icon}.png">`
+        html += `<img src="images/timeattack/${rule.Icon}.webp">`
     })
     html += `</div><div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${name}</span></div></div>`
     return html
@@ -7347,7 +7447,7 @@ function getTimeAttackCardHTML(raid) {
 function getEnemyCardHTML(enemy, level, terrain, grade, scaletype=0, data=true) {
     let name = getTranslatedString(enemy, 'Name')
     let smallTextThreshold = getSmallTextThreshold(name, label_enemy_smalltext_threshold)
-    let html = `<div class="selection-grid-card card-enemy" ${data ? `data-enemy='${enemy.Id}_${level}_${grade}_${scaletype}'` : ''} onclick='showEnemyInfo(${enemy.Id},${level},"${terrain}",${grade},${scaletype},${!data})'><div class="card-img"><img src="images/enemy/${enemy.Icon}.png"></div>`
+    let html = `<div class="selection-grid-card card-enemy" ${data ? `data-enemy='${enemy.Id}_${level}_${grade}_${scaletype}'` : ''} onclick='showEnemyInfo(${enemy.Id},${level},"${terrain}",${grade},${scaletype},${!data})'><div class="card-img"><img src="images/enemy/${enemy.Icon}.webp"></div>`
 
     if (enemy.Rank == 'Elite') html += `<div class="card-badge enemy-rank"><img src="images/ui/Common_Icon_Enemy_Elite.png" style="width:22px;"></div>`
     else if (enemy.Rank == 'Champion') html += `<div class="card-badge enemy-rank"><img src="images/ui/Common_Icon_Enemy_Champion.png" style="width:31px;"></div>`
@@ -7365,7 +7465,7 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
 
     let enemy = find(data.enemies, 'Id', id)[0]
     $('#ba-stage-enemy-name').html(getTranslatedString(enemy, 'Name'))
-    $('#ba-stage-enemy-icon img').attr('src', `images/enemy/${enemy.Icon}.png`)
+    $('#ba-stage-enemy-icon img').attr('src', `images/enemy/${enemy.Icon}.webp`)
     $('#ba-stage-enemy-icon').removeClass('elite champion boss').addClass(enemy.Rank.toLowerCase())
     $('#ba-stage-enemy-level .label').text(`Lv.${level}`)
     $('#ba-stage-enemy-class').removeClass("ba-class-main ba-class-support").addClass(`ba-class-${enemy.SquadType.toLowerCase()}`)
@@ -7385,18 +7485,31 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
     let enemyStats = new CharacterStats(enemy, level, grade, (enemy.Transcendence ? enemy.Transcendence : []), scaletype == 1 ? 'TimeAttack' : 'Standard')
 
     //override je #8 HP values
-    if (loadedModule == 'raids' && raid.Id == 8000) {
-        switch (id) {
-            case 7801003: case 7801103:
-                enemyStats.setBase('MaxHP', 10)
-                break
-            case 7801004: case 7801104: case 7801203:
-                enemyStats.setBase('MaxHP', 15)
-                break
-            case 7801204:
-                enemyStats.setBase('MaxHP', 23)
-                break
+    if (loadedModule == 'raids') {
+
+        if (raid.Id == 8000) {
+            switch (id) {
+                case 7801003: case 7801103:
+                    enemyStats.setBase('MaxHP', 10)
+                    break
+                case 7801004: case 7801104: case 7801203:
+                    enemyStats.setBase('MaxHP', 15)
+                    break
+                case 7801204:
+                    enemyStats.setBase('MaxHP', 23)
+                    break
+            }
         }
+
+        if (raid.Id == 19000) {
+            switch (id) {
+                case 7810003:
+                case 7810004:
+                    enemyStats.setBase('MaxHP', 250)
+                    break
+            }
+        }
+
     }
 
     enemyStatList.forEach((statName) => {
@@ -7473,7 +7586,7 @@ function getMaterialIconHTML(id, amount) {
         item = find(data.items, "Id", id)[0]
         itemType = item.Category
     }
-    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory', itemType), getRarityTier(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/${item.Icon}.png">${amount != 0 ? `<span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span>` : ''}</div>`
+    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/icon/${item.Icon}.webp`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory', itemType), getRarityTier(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/icon/${item.Icon}.webp" alt="${item.Name}">${amount != 0 ? `<span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span>` : ''}</div>`
     return html
 }
 
@@ -7604,7 +7717,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                 // Artifact Box
                 const item = find(data.items, 'Id', group.ItemList[0][0])[0]
                 rarity = item.Rarity
-                icon = `Item_Icon_Material_Random_${item.Id.toString().slice(-1)}`
+                icon = `item_icon_material_random_${item.Id.toString().slice(-1)}`
                 name = translateUI('item_randombox_tier', [rarity, getLocalizedString('ItemCategory', 'Artifact')])
                 desc = translateUI('item_artifact_box') + "\n"
                 
@@ -7617,7 +7730,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                     desc += `${getTranslatedString(item, 'Name')} (${getProbabilityText(group.ItemList[i][1]/totalProb)})\n`
                 }
             }
-            html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/${icon}.png`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/${icon}.png"><span class="ba-material-label">${getProbabilityText(chance)}</span>${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
+            html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/icon/${icon}.webp`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/icon/${icon}.webp" alt="${name}"><span class="ba-material-label">${getProbabilityText(chance)}</span>${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
         }
     } else {
         let description = getTranslatedString(item, 'Desc').replace('&','&amp;')
@@ -7631,7 +7744,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                 description += `\n${getTranslatedString(item, 'Name')} (${getProbabilityText(containedItem[1])})`
             })
         }
-        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/${item.Icon}.png`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, description, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/${item.Icon}.png"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 || forcePercent ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
+        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/icon/${item.Icon}.webp`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, description, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/icon/${item.Icon}.webp" alt="${item.Name}"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 || forcePercent ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
     }
     return html
 }
@@ -7656,16 +7769,16 @@ function getProbabilityText(chance) {
 }
 
 function getStudentIconSmall(student, label=null, description=null) {
-    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student.PathName}')" title="${getRichTooltip(`images/student/icon/${student.CollectionTexture}.png`, getTranslatedString(student, 'Name'), translateUI('student'), getRarityStars(student.StarGrade), description == null ? getTranslatedString(student, 'ProfileIntroduction').split('\n')[0] : description, 50, 'circle')}"><img src="images/student/icon/${student.CollectionTexture}.png">${label != null ? `<span class="bonus-label" style="cursor:pointer;">${label}</span>` : ''}</div>`
+    var html = `<div class="ba-item-student drop-shadow d-inline-block" style="position: relative; cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" onclick="loadStudent('${student.PathName}')" title="${getRichTooltip(`images/student/icon/${student.Id}.webp`, getTranslatedString(student, 'Name'), translateUI('student'), getRarityStars(student.StarGrade), description == null ? getTranslatedString(student, 'ProfileIntroduction').split('\n')[0] : description, 50, 'circle')}"><img src="images/student/icon/${student.Id}.webp" alt="${student.Name}">${label != null ? `<span class="bonus-label" style="cursor:pointer;">${label}</span>` : ''}</div>`
     return html
 }
 
 function getFavourIconHTML(gift, grade) {
-    return `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/${gift.Icon}.png`, getTranslatedString(gift, 'Name'), getLocalizedString('ItemCategory', gift.Category), getRarityTier(gift.Rarity), getTranslatedString(gift, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${gift.Rarity.toLowerCase()}" src="images/items/${gift.Icon}.png"><img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade+1}.png"></div>`
+    return `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/icon/${gift.Icon}.webp`, getTranslatedString(gift, 'Name'), getLocalizedString('ItemCategory', gift.Category), getRarityTier(gift.Rarity), getTranslatedString(gift, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${gift.Rarity.toLowerCase()}" src="images/items/icon/${gift.Icon}.webp" alt="${gift.Name}"><img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade+1}.png"></div>`
 }
 
 function getFurnitureIconHTML(item) {
-    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id+1000000})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/${item.Icon}.png`, getTranslatedString(item,'Name'), getLocalizedString('ItemCategory', item.Category), getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()} mb-2" src="images/furniture/${item.Icon}.png"></div>`
+    var html = `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id+1000000})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/furniture/icon/${item.Icon}.webp`, getTranslatedString(item,'Name'), getLocalizedString('ItemCategory', item.Category), getRarityStars(item.Rarity), getTranslatedString(item, 'Desc'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()} mb-2" src="images/furniture/icon/${item.Icon}.webp" alt="${item.Name}"></div>`
     return html
 }
 
@@ -7791,10 +7904,10 @@ function updatePassiveSkillStatPreview() {
             if (value < 0) desc += `${getStatName(eff.Stat)} <b>${getFormattedStatAmount(value)}</b>, `
         })
         $('#ba-statpreview-passiveskill-name').html(getTranslatedString(weaponPassiveSkill, 'Name'))  
-        $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${weaponPassiveSkill.Icon}.png`)
+        $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${weaponPassiveSkill.Icon}.webp`)
     } else {
         $('#ba-statpreview-passiveskill-name').html(getTranslatedString(passiveSkill, 'Name'))
-        $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${passiveSkill.Icon}.png`)
+        $('#ba-statpreview-passiveskill-icon img, #ba-statpreview-status-passive-icon').attr("src", `images/skill/${passiveSkill.Icon}.webp`)
     }
 
     $('#ba-statpreview-passiveskill-desc').html(desc.substring(0, desc.length-2))
@@ -7821,7 +7934,7 @@ function updateSummonSourceSkill() {
        
         $('#ba-statpreview-summon-name').html(getTranslatedString(sourceSkill, 'Name'))
         $('#ba-statpreview-summon-desc').empty()
-        $('#ba-statpreview-summon-icon img').attr("src", `images/skill/${sourceSkill.Icon}.png`)
+        $('#ba-statpreview-summon-icon img').attr("src", `images/skill/${sourceSkill.Icon}.webp`)
 
         for (let i = 0; i < summon.InheritCasterStat.length; i++) {
             $('#ba-statpreview-summon-desc').append((i == 0 ? "": "\n") + translateUI('summon_inheritance',[`<b>${parseFloat((summon.InheritCasterAmount[i][level-1]/100).toPrecision(3))}%</b>`, getTranslatedString(student, "Name"), getStatName(summon.InheritCasterStat[i])]))
@@ -7855,9 +7968,14 @@ function populateItemList(tab) {
         }
     })
 
+    const currentTime = new Date().getTime() / 1000
+
     itemsHtml += `<div id="item-select-noresult" class="p-2 grid-text">${translateUI('no_results')}</div>`
     $('#item-search-filters-panel .item-filter-group').hide()
     $(`#item-search-filters-panel .item-filter-group.show-${tab}`).show()
+
+    $('#item-search-filters-panel [class*="only-"]').hide()
+    $(`#item-search-filters-panel .only-${tab}`).show()
 
     loadedItemList = tab
 
@@ -7893,25 +8011,34 @@ function populateItemList(tab) {
     })
 
     function getItemGridCardDetailedInnerHTML(linkid) {
-        const item = find(data[loadedItemList], 'Id', linkid >= 91000000 ? linkid : linkid % 1000000)[0]
+        const item = find(data[loadedItemList], 'Id', linkid >= 20000000 ? linkid : linkid % 1000000)[0]
         const name = getTranslatedString(item, "Name")
         const smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
         
-        let html = `<div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${loadedItemList}/${item.Icon}.png"></div>`
+        let html = `<div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${loadedItemList}/icon/${item.Icon}.webp"></div>`
         if (loadedItemList == 'furniture' && item.Interaction[regionID]) {
             html += '<div class="card-badge furniture-interaction"><img src="images/ui/Cafe_Icon_Interaction.png"></div>'
         }
         if (loadedItemList == 'equipment' && item.Id >= 1000) {
             html += `<div class="card-badge equipment-tier">T${item.Tier}</div>`
         }
+        if (loadedItemList == 'items') {
+            if (item.ExpiryTime && item.ExpiryTime[regionID]) {
+                html += `<div class="card-badge equipment-tier"><i class="fa-solid fa-clock me-1"></i>${item.ExpiryTime[regionID] > currentTime ? durationStringShort(item.ExpiryTime[regionID] - currentTime) : '<i class="fa-solid fa-xmark"></i>'}</div>`
+            }
+
+            if (item.ImmediateUse) {
+                html += `<div class="card-badge equipment-tier"><i class="fa-solid fa-box-open"></i></div>`
+            }
+        }
         html += `<div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span></div>`
         return html
     }
     
     function getItemGridCardCompactInnerHTML(linkid) {
-        const item = find(data[loadedItemList], 'Id', linkid >= 91000000 ? linkid : linkid % 1000000)[0]
+        const item = find(data[loadedItemList], 'Id', linkid >= 20000000 ? linkid : linkid % 1000000)[0]
         const name = getTranslatedString(item, "Name")
-        return `<div class="card-compact ba-item-${item.Rarity.toLowerCase()}" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><img loading="lazy" src="images/${loadedItemList}/${item.Icon}.png"></div>`
+        return `<div class="card-compact ba-item-${item.Rarity.toLowerCase()}" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><img loading="lazy" src="images/${loadedItemList}/icon/${item.Icon}.webp"></div>`
     }
 }
 
@@ -7943,7 +8070,7 @@ function populateCraftList() {
 
     $.each(data.crafting.Nodes[regionID], function(i,el) {
         if (el.Weight > 0 && (searchTerm == '' || getTranslatedString(el, "Name").toLowerCase().includes(searchTerm.toLowerCase())))
-        html[el.Tier-1] += getCraftingCardHTML(el, el.Weight / data.crafting.TotalWeight[regionID][el.Tier-1])
+        html[el.Tier-1] += getCraftingCardHTML(el, el.Weight / data.crafting.TotalWeight[regionID][el.Tier-1], showNodeProbability)
     })
 
     $('#craft-select-grid').empty()
@@ -7963,12 +8090,7 @@ function populateCraftList() {
         const item = find(data[itemList], 'Id', recipe.ResultId % 1000000)[0]
 
         if (recipe.Released[regionID] && item.IsReleased[regionID]) {
-            const name = getTranslatedString(item, "Name")
-            const smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
-
-            if (searchTerm == '' || name.toLowerCase().includes(searchTerm.toLowerCase())) {
-                html += `<div id="craft-select-${recipe.Id+100000}" data-itemid="${recipe.Id+100000}" class="selection-grid-card card-items"><div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${itemList}/${item.Icon}.png"></div><div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span></div></div>`
-            }
+            html += getFusionRecipeCardHTML(recipe)
         }
     })
     if (html != "") {
@@ -7983,17 +8105,27 @@ function populateCraftList() {
     $('#ba-craft-list-container .card-body').scrollTop((offset === undefined) ? 0 : offset)
 }
 
-function getCraftingCardHTML(node, chance = -1) {
+function getCraftingCardHTML(node, chance = -1, chanceVisible = false, qtyMin = 0, qtyMax = 0) {
     let name = getTranslatedString(node, "Name")
     let smallTextThreshold = label_craft_smalltext_threshold[userLang]
     let html = `<div id="craft-select-${node.Id}" class="selection-grid-card card-craft" onclick="loadCraft(${node.Id})"><div class="card-img ba-node-quality-${node.Quality}"><img loading="lazy" src="images/ui/${node.Icon}.png"></div>`
     if (chance >= 0) {
-        html += `<span class="card-badge stage-droprate ${showNodeProbability ? "" : "hidden"}">${getProbabilityText(chance)}</span>`
+        html += `<span class="card-badge stage-droprate ${chanceVisible ? "" : "hidden"}">${getProbabilityText(chance) + (qtyMax > 1 ? ` (${qtyMin}${qtyMax > qtyMin ? `~${qtyMax}`:""})` : "")}</span>`
     }
     html += `<div class="card-label">`
     html += `<span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
     html += `</div></div>`
     return html
+}
+
+function getFusionRecipeCardHTML(recipe) {
+    const itemList = recipe.ResultId >= 1000000 ? 'furniture' : 'items'
+    const item = find(data[itemList], 'Id', recipe.ResultId % 1000000)[0]
+    const name = getTranslatedString(item, "Name")
+    const smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
+
+    return `<div id="craft-select-${recipe.Id+100000}" data-itemid="${recipe.Id+100000}" class="selection-grid-card card-items"><div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${itemList}/icon/${item.Icon}.webp"></div><div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span></div></div>`
+
 }
 
 function getSmallTextThreshold(text, thresholdArray) {
@@ -8104,7 +8236,7 @@ function populateEventStageList(eventId) {
                 logoLang = userLang
             }
         }
-        let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'Event')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/Event_${eventId}_${logoLang}.png"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>`
+        let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'Event')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/${eventId}_${logoLang}.webp"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>`
     
         if (conquest_events.includes(eventId)) {
             $('.stage-list').hide()
@@ -8208,18 +8340,36 @@ function getUsedByStudents(item, mode) {
     } else if (mode == 'furniture') {
         
         headerText = `<img class="inline-img" src="images/ui/Cafe_Icon_Interaction.png"> ${translateUI('furniture_interaction_list')}`
+        interactiveStudents = []
         $.each(data.students, function(i,el){
             if (!el.IsReleased[regionID])
             return
-            let uses = false
+
             for (let i = 0; i < el.FurnitureInteraction[regionID].length; i++) {
-                if (item.Id == el.FurnitureInteraction[regionID][i]) {
-                    uses = true
+                if (item.Id == el.FurnitureInteraction[regionID][i][0]) {
+                    interactiveStudents.push([el, el.FurnitureInteraction[regionID][i][1]])
+                    return
                 }
             }
-            if (uses)
-            html += getStudentIconSmall(el)
         })
+
+        interactiveStudents.forEach(interaction => {
+            if (interactiveStudents.length == 1) {
+                html += getStudentIconSmall(interaction[0])
+            } else {
+                if (interaction[1] == 1 || (interaction[1] == 0 && interactiveStudents.some(i => i[1] == 2))) {
+                    html += getStudentIconSmall(interaction[0], '<i class="fa-solid fa-user"></i><span class="mx-1">/</span><i class="fa-solid fa-users"></i>')
+                } else if (interaction[1] == 0) {
+                    html += getStudentIconSmall(interaction[0], '<i class="fa-solid fa-users"></i>')
+                } else if (interaction[1] == 2) {
+                    html += getStudentIconSmall(interaction[0], '<i class="fa-solid fa-users"></i>')
+                } else if (interaction[1] == 3) {
+                    html += getStudentIconSmall(interaction[0], '<i class="fa-solid fa-user"></i>')
+                }
+
+            }
+        })
+
     } else if (mode == 'items') {
         if (item.Category == 'Material') {
             headerText = translateUI('item_usedby_skill')
@@ -8290,11 +8440,11 @@ function getConsumableRewards(item) {
     switch (item.ConsumeType) {
         case "Random":
             headerText = translateUI('item_contains_random')
-            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[2])})
+            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[3])})
             break;
         case "Choice":
             headerText = translateUI('item_contains_choice')
-            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[2])})
+            containsArray.forEach(containedItem => {html += getDropIconHTML(containedItem[0], containedItem[1], containedItem[2], containedItem[3])})
             break;
         case "All":
             headerText = translateUI('item_contains')
@@ -8378,26 +8528,33 @@ function getLikedByStudents(item) {
     return likedStudentsHtml
 }
 
-function getItemDropStages(itemID) {
+function getItemDropStages(itemID, includeEvents = false) {
     let html = '', stages = []
-    $.each([data.stages.Campaign, data.stages.SchoolDungeon, data.stages.WeekDungeon], function(i, stageType) {
+    let stageList = [data.stages.Campaign, data.stages.SchoolDungeon, data.stages.WeekDungeon]
+    if (includeEvents) stageList.push(data.stages.Event)
+    $.each(stageList, function(i, stageType) {
         stageType.forEach(dropStage => {
             if (!stageIsReleased(dropStage)) return
             let drop = false, dropChance = 0, isItemBox = false, dropCertainCount = 0
 
             let rewardList
             if (regionID == 1 && "RewardsGlobal" in dropStage) {
-                rewardList = dropStage.RewardsGlobal
+                rewardList = dropStage.RewardsGlobal.Default
+                if ("RewardsGlobalRerun" in dropStage) {
+                    rewardList = rewardList.concat(dropStage.RewardsGlobalRerun.Default)
+                }
             } else {
-                rewardList = dropStage.Rewards
+                rewardList = dropStage.Rewards.Default
+                if ("RewardsRerun" in dropStage) {
+                    rewardList = rewardList.concat(dropStage.RewardsRerun.Default)
+                }
             }
 
-            if ("Default" in rewardList)
-            for (let i = 0; i < rewardList.Default.length; i++) {
+            for (let i = 0; i < rewardList.length; i++) {
 
-                if (rewardList.Default[i][0] >= 4000000 && rewardList.Default[i][0] < 5000000) {
+                if (rewardList[i][0] >= 4000000 && rewardList[i][0] < 5000000) {
                     // Reward is an Item Box
-                    const box = find(data.common.GachaGroup, "Id", rewardList.Default[i][0] - 4000000)[0]
+                    const box = find(data.common.GachaGroup, "Id", rewardList[i][0] - 4000000)[0]
 
                     // Count the total probability
                     const totalProb = box.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
@@ -8405,21 +8562,22 @@ function getItemDropStages(itemID) {
                         if (itemID == boxItem[0]) {
                             drop = true
                             isItemBox = true
-                            if (rewardList.Default[i][1] >= 1) {
-                                dropCertainCount = rewardList.Default[i][1]
+                            if (rewardList[i][1] >= 1) {
+                                dropCertainCount = rewardList[i][1]
                                 dropCertainChance = (boxItem[1]/totalProb)
                             } else {
-                                dropChance = rewardList.Default[i][1] * (boxItem[1]/totalProb)
+                                dropChance = rewardList[i][1] * (boxItem[1]/totalProb)
                             }
                         }
                     })
 
-                } else if (itemID == rewardList.Default[i][0]) {
+                } else if (itemID == rewardList[i][0]) {
                     drop = true
-                    dropChance = rewardList.Default[i][1]
+                    dropChance = rewardList[i][1]
                     break
                 }
             }
+
             if (drop) {
                 // Calculate the probability of receiving at least one drop
                 if (isItemBox && dropCertainCount > 0) {
@@ -8436,7 +8594,7 @@ function getItemDropStages(itemID) {
     })
     stages = stages.sort((a,b) => b.chance - a.chance)
     $.each(stages, function(i,el){
-        html += getStageCardHTML(el.stage, el.chance, el.box)
+        html += getStageCardHTML(el.stage, el.chance, false)
     })
     if (html != '') {
         $('#ba-item-sources').show()
@@ -8444,6 +8602,95 @@ function getItemDropStages(itemID) {
     } else {
         return ''
     }
+}
+
+function getItemCraftNodes(itemId, itemType) {
+    let html = ["", "", ""]
+    let nodesHtml = ""
+
+    data.crafting.Nodes[regionID].forEach((craftNode) => {
+        if (craftNode.Weight > 0) {
+
+            let groupWeightTotal = craftNode.Groups.reduce((sum, g) => sum + g.Weight, 0)
+
+            for (group of craftNode.Groups) {
+
+                const craftGroup = data.crafting.Groups[regionID][group.GroupId]
+
+                let itemWeightTotal = craftGroup.reduce((sum, g) => sum + g.Weight, 0)
+            
+                for (groupItem of craftGroup) {
+
+                    if (groupItem.Type == itemType && groupItem.ItemId == itemId) {
+
+                        let probability = (group.Weight / groupWeightTotal) * (groupItem.Weight / itemWeightTotal)
+
+                        html[craftNode.Tier-1] += getCraftingCardHTML(craftNode, probability, true/*, groupItem.AmountMin, groupItem.AmountMax*/)
+                    }
+
+                }
+            }
+        }
+    })
+
+    if (html[0] != "" || html[1] != "" || html[2] != "") {
+        nodesHtml += `<div class="mb-2"><i>${translateUI('item_obtainedfrom_synthesis')}</i></div>`
+        nodesHtml += `<table class="w-100 text-center"><tbody>`
+    
+        for (let i = 0; i < html.length; i++) {
+            if (html[i] != "") {
+                nodesHtml += `<tr><td><p class="p-2 m-0">${getLocalizedString('NodeTier', ''+(i+1))}</p></td><td><div class="selection-grid craft selection-grid-flex my-2">${html[i]}</div></td></tr>`
+                $('#ba-item-craftnodes').show()
+            }
+        }
+        nodesHtml += `</tbody></table>`
+    }
+
+    fusionRecipe = find(data.crafting.Fusion, 'ResultId', itemId + getItemIdOffset(itemType))
+    if (fusionRecipe.length > 0 && fusionRecipe[0].Released[regionID]) {
+        nodesHtml += `<div class="mb-2"><i>${translateUI('item_obtainedfrom_fusion')}</i></div>`
+        nodesHtml += `<div class="selection-grid craft selection-grid-flex my-2">${getFusionRecipeCardHTML(fusionRecipe[0])}</div>`
+        $('#ba-item-craftnodes').show()
+
+    }
+
+    
+    return nodesHtml
+}
+
+function getItemConsumables(itemId) {
+    let itemHtml = ["", ""]
+    let returnHtml = ""
+    data.items.filter(i => "ConsumeType" in i && !i.ImmediateUse).forEach((consumableItem) => {
+        const containsList = (regionID == 1 && "ContainsGlobal" in consumableItem ? consumableItem.ContainsGlobal : consumableItem.Contains)
+        containsList.forEach(containItem => {
+
+            if (containItem[0] == itemId) {
+
+                if (consumableItem.ConsumeType == 'Random') {
+                    itemHtml[1] += getDropIconHTML(consumableItem.Id, containItem[1], containItem[2], containItem[3])
+                } else {
+                    itemHtml[0] += getMaterialIconHTML(consumableItem.Id, 0)
+                }
+            }
+
+        })
+    })
+
+    if (itemHtml[0] != "" || itemHtml[1] != "") {
+        returnHtml += `<div class="mb-2"><i>${translateUI('item_obtainedfrom_consumable')}</i></div>`
+        returnHtml += `<div class="item-icon-list">`
+    
+        for (let i = 0; i < itemHtml.length; i++) {
+            if (itemHtml[i] != "") {
+                returnHtml += itemHtml[i]
+                $('#ba-item-consumables').show()
+            }
+        }
+        returnHtml += `</div>`
+    }
+    
+    return returnHtml
 }
 
 function loadJSON(list, success) {
@@ -8597,7 +8844,7 @@ function replaceBuffPlaceholders(text, renderBuffs = true) {
 
 function getBuffTag(type, name, {tooltip, overrideName = null}) {
     const buffName = `${type}_${name}`
-    return `<span class="ba-skill-${type.toLowerCase()}" ${tooltip ? `data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/Combat_Icon_${buffName}.png`, getLocalizedString('BuffNameLong', buffName), getLocalizedString('BuffType', type), null, getLocalizedString('BuffTooltip', buffName), 30)}"` : ''}><img class=\"buff-icon\" src=\"images/buff/Combat_Icon_${buffName}.png\"><span class="buff-label">${overrideName !== null ? overrideName : getLocalizedString('BuffName', buffName)}</span></span>`
+    return `<span class="ba-skill-${type.toLowerCase()}" ${tooltip ? `data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/buff/${buffName}.webp`, getLocalizedString('BuffNameLong', buffName), getLocalizedString('BuffType', type), null, getLocalizedString('BuffTooltip', buffName), 30)}"` : ''}><img class=\"buff-icon\" src=\"images/buff/${buffName}.webp\"><span class="buff-label">${overrideName !== null ? overrideName : getLocalizedString('BuffName', buffName)}</span></span>`
 }
 
 function getSkillHitsText(damageDist, totalDamage, type) {
@@ -8911,7 +9158,7 @@ function allSearch() {
 
     $.each(data.students, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/student/icon/'+el.CollectionTexture+'.png', 'type': translateUI('student'), 'rarity': '', 'rarity_text': getRarityStars(el.StarGrade), 'onclick': `loadStudent('${el.PathName}')`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/student/icon/'+el.Id+'.webp', 'type': translateUI('student'), 'rarity': '', 'rarity_text': getRarityStars(el.StarGrade), 'onclick': `loadStudent('${el.PathName}')`})
             if (results.length >= maxResults) return false
         }
     })
@@ -8935,7 +9182,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.items, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/items/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/items/icon/'+el.Icon+'.webp', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id})`})
             if (results.length >= maxResults) return false
         }
     })
@@ -8943,7 +9190,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.furniture, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/furniture/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityStars(el.Rarity), 'onclick': `loadItem(${el.Id+1000000})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/furniture/icon/'+el.Icon+'.webp', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityStars(el.Rarity), 'onclick': `loadItem(${el.Id+1000000})`})
             if (results.length >= maxResults) return false
         }
     })
@@ -8951,7 +9198,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.equipment, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/equipment/'+el.Icon+'.png', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': el.Id >= 1000 ? `T${el.Tier}` : getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id+2000000})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/equipment/icon'+el.Icon+'.webp', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': el.Id >= 1000 ? `T${el.Tier}` : getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id+2000000})`})
             if (results.length >= maxResults) return false
         }
     })
@@ -9143,10 +9390,10 @@ function changeStudentSummon(id, recalculate = true) {
         const summonInfo = find(data.summons, 'Id', student.Summons[id-1].Id)[0]
         const sourceSkill = find(student.Skills, 'SkillType', student.Summons[id-1].SourceSkill)[0]
         $('.summon-list .active-name').html(getTranslatedString(summonInfo, "Name"))
-        $('.summon-list .active-icon img').attr('src', `images/skill/${sourceSkill.Icon}.png`).addClass(`bg-skill ${student.BulletType.toLowerCase()}`)
+        $('.summon-list .active-icon img').attr('src', `images/skill/${sourceSkill.Icon}.webp`).addClass(`bg-skill ${student.BulletType.toLowerCase()}`)
     } else {
         $('.summon-list .active-name').html(getTranslatedString(student, "Name"))
-        $('.summon-list .active-icon img').attr('src', `images/student/icon/${student.CollectionTexture}.png`).removeClass("bg-skill explosion pierce mystic sonic")
+        $('.summon-list .active-icon img').attr('src', `images/student/icon/${student.Id}.webp`).removeClass("bg-skill explosion pierce mystic sonic")
     }
 
     updateSummonSourceSkill()
@@ -9173,7 +9420,7 @@ function updateCompareModeControl() {
     $('#ba-statpreview-status-compare').toggleClass('deactivated', !compareMode)
     if (compareMode) {
         $('#ba-statpreview-status-title-compare').html(getTranslatedString(studentCompare, "Name"))
-        $('#ba-statpreview-status-title-compare-icon').attr('src', `images/student/icon/${studentCompare.CollectionTexture}.png`).removeClass("bg-skill explosion pierce mystic sonic")
+        $('#ba-statpreview-status-title-compare-icon').attr('src', `images/student/icon/${studentCompare.Id}.webp`).removeClass("bg-skill explosion pierce mystic sonic")
         $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_compare_remove')), placement: 'top', html: true})
     } else {
         $('#ba-statpreview-status-compare').tooltip('dispose').tooltip({title: getBasicTooltip(translateUI('tooltip_compare')), placement: 'top', html: true})
@@ -9248,7 +9495,7 @@ function drawHexamap(stage, container) {
             if (tile.Entity > 100000000) {
                 //Enemy Unit Tile
                 let unit = find(stage.Formations, "Id", tile.Entity)[0]
-                html += `<img class="ba-stage-map-enemy" src="images/enemy/${unit.MapIcon}.png" style="z-index:${yy}">`
+                html += `<img class="ba-stage-map-enemy" src="images/enemy/${unit.MapIcon}.webp" style="z-index:${yy}">`
                 html += `<div class="map-info">`
                 onclick = ` onclick="populateMapEnemyList(${tile.Entity});" `
 
@@ -9453,7 +9700,7 @@ function drawConquestHexamap(conquest, mapId, container) {
             //Enemy Unit Tile
             const stage = find(data.stages.Conquest, "Id", tile.StageId)[0]
             const unit = stage.Formations[0]
-            html += `<img class="ba-stage-map-enemy" src="images/enemy/${unit.MapIcon}.png" style="z-index:${100+yy}">`
+            html += `<img class="ba-stage-map-enemy" src="images/enemy/${unit.MapIcon}.webp" style="z-index:${100+yy}">`
             html += `<div class="map-info">`
             onclick = ` onclick="loadStage(${stage.Id});" `
             stageId = stage.Id
