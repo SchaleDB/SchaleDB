@@ -1223,7 +1223,7 @@ class ExternalBuffs extends Buffs {
 
             if (buff.Skill.EffectStackLabel.Icon !== undefined) {
                 const imgPath = buff.Skill.EffectStackLabel.Icon[Math.min(buff.Skill.EffectStackLabel.Icon.length-1, buff.Stacks-1)]
-                imageHtml = `<img class="stack-icon ${imgPath.startsWith('skill') ? "invert-light" : ""}" src="images/${imgPath}.png">`
+                imageHtml = `<img class="stack-icon ${imgPath.startsWith('skill') ? "invert-light" : ""}" src="images/${imgPath}">`
             }
 
             if (labelText != '') {
@@ -2723,7 +2723,7 @@ class SkillDamageInfo {
 
             if (this.skill.EffectCombineLabel.Icon !== undefined) {
                 const imgPath = this.skill.EffectCombineLabel.Icon[Math.min(this.skill.EffectCombineLabel.Icon.length-1, this.stackCount-1)]
-                imageHtml = `<img class="stack-icon ${imgPath.startsWith('skill') ? "invert-light" : ""}" src="images/${imgPath}.png">`
+                imageHtml = `<img class="stack-icon ${imgPath.startsWith('skill') ? "invert-light" : ""}" src="images/${imgPath}">`
             }
 
             if (this.skill.EffectCombineLabel.StackLabelTranslated !== undefined) {
