@@ -8297,6 +8297,7 @@ function populateEventStageList(eventId) {
             //need a better way of defining a default here for conquest tiles
             loadModule('stages', find(data.stages.Conquest, 'EventId', eventId % 10000)[0].Id)
         } else {
+            if (eventId > 10000) loadedStageVersion = "Rerun"
             loadModule('stages', find(data.stages.Event, 'EventId', eventId % 10000)[0].Id)
         }
     }

@@ -15403,7 +15403,9 @@
                 26
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10076
+        ],
         "MemoryLobby": [
             6,
             6
@@ -73636,7 +73638,7 @@
             {
                 "SkillType": "ex",
                 "Name": "難以處理的變數",
-                "Desc": "円形範囲内の敵に対して、爆弾1個を投擲しダメージを与えます。\n銃弾：攻撃力の<?1>分のダメージ\n電界：攻撃力の<?2>分のダメージ\n爆炎：攻撃力の<?3>分のダメージ",
+                "Desc": "對圓形範圍內的敵人投擲1個炸彈造成傷害\n子彈：攻擊力<?1>的傷害\n電場：攻擊力<?2>的傷害\n爆炎：攻擊力<?3>的傷害 ",
                 "Parameters": [
                     [
                         "233%",
@@ -73760,7 +73762,7 @@
             {
                 "SkillType": "normal",
                 "Name": "以為只有一個人嗎！？",
-                "Desc": "30秒毎に、敵1人に対して攻撃力の<?1>分のダメージ、対象の付近に敵がいる場合、付近の敵2体に対して同じダメージ/\n発動後すぐにリロード",
+                "Desc": "每30秒，對1名敵人造成攻擊力<?1>的傷害，若目標周圍有敵人時，會對附近的2名敵人造成相同的傷害/\n發動後立即重新裝填彈藥",
                 "Parameters": [
                     [
                         "202%",
@@ -73841,7 +73843,7 @@
             {
                 "SkillType": "passive",
                 "Name": "你相信奇蹟嗎？",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Desc": "<b:ATK>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -73879,7 +73881,7 @@
             {
                 "SkillType": "weaponpassive",
                 "Name": "你相信奇蹟嗎？+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Desc": "<b:ATK>增加<?1>/\n並且，<b:ATK>增加<?2>",
                 "Parameters": [
                     [
                         "417",
@@ -73929,7 +73931,7 @@
             {
                 "SkillType": "sub",
                 "Name": "混沌理論",
-                "Desc": "Exスキルの発動と同時に、使用した爆弾の種類によって<b:ATK>を増加（40秒間）\n銃弾：<b:ATK>を<?1>増加\n電界：<b:ATK>を<?2>増加\n爆炎：<b:ATK>を<?3>増加",
+                "Desc": "EX技能發動的同時，根據使用的炸彈種類增加攻擊力(40秒內)\n子彈：<b:ATK>增加<?1>\n電場：<b:ATK>增加<?2>\n爆炎：<b:ATK>增加<?3>",
                 "Parameters": [
                     [
                         "15.3%",
@@ -85935,6 +85937,540 @@
                 12,
                 7,
                 14
+            ]
+        ]
+    },
+    {
+        "Id": 10076,
+        "IsReleased": [
+            true,
+            false
+        ],
+        "DefaultOrder": 154,
+        "PathName": "Kotori_Cheerleader",
+        "DevName": "CH0185",
+        "Name": "コトリ（応援団）",
+        "School": "Millennium",
+        "Club": "Engineer",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Explosion",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "MG",
+        "WeaponImg": "weapon_icon_ch0185",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Cheerleading_Collection",
+        "FamilyName": "豊見",
+        "PersonalName": " コトリ",
+        "SchoolYear": "1年生",
+        "CharacterAge": "15歳",
+        "FamilyNameRuby": "とよみ",
+        "Birthday": "12月31日",
+        "CharacterSSRNew": "場所が変わっても知識の価値は変わりません！",
+        "ProfileIntroduction": "大運動会でみんなを応援するべく、チア服に着替えたミレニアムサイエンススクール所属、エンジニア部の部員。\n\n元気良く明るい声で応援をする間も、いつもの説明や解説は欠かさない。",
+        "Hobby": "おしゃべり",
+        "CharacterVoice": "篠原なるみ",
+        "BirthDay": "12/31",
+        "Illustrator": "MISOM150",
+        "Designer": "MISOM150",
+        "CharHeightMetric": "151cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1392,
+        "AttackPower1": 319,
+        "AttackPower100": 3190,
+        "MaxHP1": 2242,
+        "MaxHP100": 19440,
+        "DefensePower1": 79,
+        "DefensePower100": 478,
+        "HealPower1": 1404,
+        "HealPower100": 4213,
+        "DodgePoint": 199,
+        "AccuracyPoint": 100,
+        "CriticalPoint": 200,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 30,
+                            "AttackStartDuration": 29,
+                            "AttackEndDuration": 26,
+                            "AttackBurstRoundOverDelay": 40,
+                            "AttackIngDuration": 32,
+                            "AttackReloadDuration": 77
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "祝砲の由来は……",
+                "Desc": "扇形範囲内の敵に対して、攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "205%",
+                        "236%",
+                        "297%",
+                        "328%",
+                        "390%",
+                        "420%",
+                        "482%",
+                        "513%",
+                        "574%",
+                        "605%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Icon": "COMMON_SKILLICON_FAN",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            833,
+                            833,
+                            834,
+                            833,
+                            833,
+                            834,
+                            833,
+                            833,
+                            834,
+                            833,
+                            833,
+                            834
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            20527,
+                            23606,
+                            29764,
+                            32843,
+                            39002,
+                            42081,
+                            48233,
+                            51312,
+                            57471,
+                            60550
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "あっ、それはですね！",
+                "Desc": "自身を除く味方がExスキルを5回使用する度に、自身を除く円形範囲内の味方に対して、<b:CriticalChance>を<?1>増加（30秒間）",
+                "Parameters": [
+                    [
+                        "11.4%",
+                        "12%",
+                        "12.6%",
+                        "14.9%",
+                        "15.5%",
+                        "16%",
+                        "18.3%",
+                        "18.9%",
+                        "19.5%",
+                        "21.8%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Restrictions": [
+                            {
+                                "Property": "Id",
+                                "Operand": "NotEqual",
+                                "Value": 10076
+                            }
+                        ],
+                        "Value": [
+                            [
+                                1149,
+                                1207,
+                                1264,
+                                1494,
+                                1551,
+                                1608,
+                                1838,
+                                1895,
+                                1953,
+                                2182
+                            ]
+                        ],
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Channel": 109
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "なんでも聞いてください！",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "なんでも聞いてください！+",
+                "Desc": "<b:HIT>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "160",
+                        "168",
+                        "176",
+                        "208",
+                        "216",
+                        "224",
+                        "256",
+                        "264",
+                        "272",
+                        "304"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AccuracyPoint_Base",
+                        "Scale": [
+                            160,
+                            168,
+                            176,
+                            208,
+                            216,
+                            224,
+                            256,
+                            264,
+                            272,
+                            304
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "お役に立てて嬉しいです！",
+                "Desc": "ノーマルスキルのバフ効果を味方1人に適用する度に、自身の<b:ATK>を<?1>増加（30秒間）（最大5回分まで重複）",
+                "Parameters": [
+                    [
+                        "6.6%",
+                        "6.9%",
+                        "7.3%",
+                        "8.6%",
+                        "8.9%",
+                        "9.3%",
+                        "10.6%",
+                        "10.9%",
+                        "11.3%",
+                        "12.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "StackSame": 5,
+                        "Value": [
+                            [
+                                666,
+                                699,
+                                732,
+                                865,
+                                899,
+                                932,
+                                1065,
+                                1098,
+                                1131,
+                                1265
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 1002
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                6,
+                49
+            ],
+            [
+                8,
+                58
+            ],
+            [
+                2,
+                10
+            ],
+            [
+                3,
+                14
+            ],
+            [
+                5,
+                24
+            ]
+        ],
+        "FavorAlts": [
+            16002
+        ],
+        "MemoryLobby": [
+            2,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 103",
+        "FurnitureInteraction": [
+            [
+                [
+                    10109,
+                    0
+                ]
+            ],
+            []
+        ],
+        "FavorItemTags": [
+            "Specialized",
+            "Sports",
+            "Smart"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Kotori_Cheerleader",
+            "F_Kotori_Cheerleader2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "プロフェッサーK",
+            "Desc": "「EX-Plain」とも呼ばれるコトリのマシンガン。\n\n大運動会を迎えるにあたって、やや改造が施されている。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 140,
+            "AttackPower100": 1401,
+            "MaxHP1": 562,
+            "MaxHP100": 5621,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3050,
+                110
+            ],
+            [
+                3051,
+                3050,
+                111,
+                240
+            ],
+            [
+                3052,
+                3051,
+                112,
+                241
+            ],
+            [
+                3053,
+                3052,
+                113,
+                242
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                15,
+                30
+            ],
+            [
+                12,
+                18,
+                9,
+                26
+            ],
+            [
+                8,
+                18,
+                8,
+                22
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4050
+            ],
+            [
+                4050
+            ],
+            [
+                4051,
+                4050,
+                110
+            ],
+            [
+                4051,
+                111,
+                240
+            ],
+            [
+                4052,
+                4051,
+                111,
+                240
+            ],
+            [
+                4052,
+                112,
+                241
+            ],
+            [
+                4053,
+                4052,
+                113,
+                242
+            ],
+            [
+                4053,
+                113,
+                242
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                4,
+                15
+            ],
+            [
+                5,
+                12,
+                10,
+                17
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                6,
+                9
+            ],
+            [
+                12,
+                6,
+                13
             ]
         ]
     }
