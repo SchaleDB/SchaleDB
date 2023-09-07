@@ -1,15 +1,22 @@
 <div class="container-xl py-md-3">
     <div class="row">
-        <div class="col-12 col-md-6 ba-page">
+        <div id="student-portrait-panel" class="col-12 col-md-6 ba-page">
             <div class="d-flex pe-xl-3" style="justify-content: center;">
                 <img id="ba-student-img">
             </div>
             <div class="student-portrait-buttons">
-                <button id="ba-student-list-btn" type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#ba-student-modal-students" style="display:none;"><i class="fa-solid fa-bars"></i><span class="d-inline ms-2" data-localize-id="ui,student_list"></span></button>
-                <div class="d-md-none flex-fill"></div>
+                <button id="ba-student-list-btn" type="button" class="btn btn-dark" style="display:none;">
+                    <i class="fa-solid fa-grip me-1"></i>
+                    <span class="d-none d-md-inline" data-localize-id="ui,student_list"></span>
+                    <span class="d-inline d-md-none" data-localize-id="ui,student_list_short"></span>
+                </button>
                 <button id="ba-student-collection-btn" type="button" class="btn btn-dark" onclick="toggleOwned()"></button>
-                <a id="ba-student-toggle-sprite-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,tooltip_sprite_toggle"><i class="fa-solid fa-repeat"></i></a>
-                <a id="student-voice-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,voicegallery"><i class="fa-solid fa-microphone-lines" style="width:16px;"></i></a>
+                <div class="d-md-none flex-fill"></div>
+                <button id="ba-student-toggle-sprite-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,tooltip_sprite_toggle"><i class="fa-solid fa-repeat"></i></button>
+                <button id="student-voice-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,voicegallery"><i class="fa-solid fa-microphone" style="width:16px;"></i></button>
+                <button id="btn-midokuni-link" class="btn btn-dark tooltip-button py-1 px-2" data-tooltip-id="ui,midokuni_link">
+                    <div class="icon"><img src="images/ui/midokuni.png" width="25" height="25"></div>
+                </button>
             </div>
             <div class="d-block d-md-none" style="height: 412px;"></div>
         </div>
@@ -1051,7 +1058,9 @@
                                                 <li><a id="ba-student-search-sortby-outdoorbattleadaptation" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('OutdoorBattleAdaptation')" class="btn btn-dark"><span data-localize-id="ui,terrain_adaption" data-localize-replacement-id="AdaptationType,Outdoor"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-indoorbattleadaptation" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('IndoorBattleAdaptation')" class="btn btn-dark"><span data-localize-id="ui,terrain_adaption" data-localize-replacement-id="AdaptationType,Indoor"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-excost" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('EXCost')" class="btn btn-dark"><span data-localize-id="Stat,SkillCost"></span><span class="sort-direction-label"></span></a></li>
+                                                <li><a id="ba-student-search-sortby-normalhits" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('NormalHits')" class="btn btn-dark"><span data-localize-id="Stat,NormalHits"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><a id="ba-student-search-sortby-exhits" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('EXHits')" class="btn btn-dark"><span data-localize-id="Stat,EXHits"></span><span class="sort-direction-label"></span></a></li>
+                                                <li><a id="ba-student-search-sortby-publichits" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('PublicHits')" class="btn btn-dark"><span data-localize-id="Stat,PublicHits"></span><span class="sort-direction-label"></span></a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><h6 class="dropdown-header" data-localize-id="ui,collection"></h6></li>
                                                 <li><a id="ba-student-search-sortby-collectionstars" class="dropdown-item" href="javascript:;" onclick="searchSetOrder('CollectionStars')" class="btn btn-dark"><span data-localize-id="ui,student_stars"></span><span class="sort-direction-label"></span></a></li>

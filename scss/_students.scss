@@ -197,16 +197,61 @@
     }
 }
 
-.student-portrait-buttons {
-    position: sticky;
-    top: calc(56px + 1rem);
-    display: flex;
-    gap: 0.5rem;
+#student-portrait-panel {
 
-    @include sm-down {
-        justify-content: space-between;
-        top: calc(56px + 0.5rem);
+    .student-portrait-buttons {
+        position: sticky;
+        top: calc(56px + 1rem);
+        display: flex;
+        gap: 0.5rem;
+    
+        button, a {
+            @include transition(opacity, background-color);
+            opacity: 0;
+            @include backdrop-filter(var(--var-glass-filter-navbar));
+
+            background-color: var(--col-theme-glass);
+
+            &:focus {
+                background-color: var(--col-btn-secondary);
+                opacity: 1 !important;
+            }
+        
+            &:hover {
+                background-color: var(--col-btn-secondary);
+            }
+        
+            &.active {
+                background-color: var(--col-btn-active-secondary);
+            }
+
+            &#ba-student-list-btn {
+                opacity: 0.6;
+            }
+        
+        }
+    
+        @include sm-down {
+            justify-content: space-between;
+            top: calc(56px + 0.5rem);
+
+            button, a {
+                opacity: 1 !important;
+            }
+        }
     }
+
+    &:hover {
+
+        .student-portrait-buttons {
+
+            button, a {
+                opacity: 1 !important;
+            }
+
+        }
+    }
+
 }
 
 .skill-hitinfo {

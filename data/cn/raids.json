@@ -29454,6 +29454,7 @@
                     "Desc": "被若藻EX技能命中的单位将被施加1层<s:SuddenDeath>\n叠加层数达到5时对该目标造成其最大生命值1000%的伤害。"
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "若藻(泳装)",
             "Rewards": [
                 {
@@ -30078,6 +30079,7 @@
                     "Desc": "对圆形范围内的敌方单位造成该导弹攻击力450%的伤害\n该导弹被摧毁时，对其周围圆形范围内的其它导弹造成攻击力400%的伤害"
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "若藻(气垫船)",
             "Rewards": [
                 {
@@ -30639,6 +30641,7 @@
             ],
             "UseRaidSkillList": 1,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "Binah(色彩)",
             "Rewards": [
                 {
@@ -34104,6 +34107,7 @@
             ],
             "UseRaidSkillList": 2,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "Chesed(色彩)",
             "Rewards": [
                 {
@@ -37472,6 +37476,7 @@
             ],
             "UseRaidSkillList": 3,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "白&黑(色彩)",
             "Rewards": [
                 {
@@ -40990,6 +40995,7 @@
             ],
             "UseRaidSkillList": 4,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "希罗尼穆斯(色彩)",
             "Rewards": [
                 {
@@ -44574,6 +44580,7 @@
             ],
             "UseRaidSkillList": 7,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "Hod(色彩)",
             "Rewards": [
                 {
@@ -48020,6 +48027,7 @@
             ],
             "UseRaidSkillList": 6,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "佩洛洛基拉(色彩)",
             "Rewards": [
                 {
@@ -51444,6 +51452,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                909,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                910,
+                                1112
+                            ]
+                        }
+                    ],
                     "Name": "召唤无人机：火力支援",
                     "Desc": "对1名敌方单位造成攻击力800%的伤害"
                 },
@@ -51453,6 +51500,38 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    55000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "骑行&手榴弹",
                     "Desc": "对1名敌方单位造成攻击力350%的伤害\n对圆形范围内的敌方单位造成攻击力550%的伤害"
                 },
@@ -51462,6 +51541,57 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                2500,
+                                2500,
+                                2500,
+                                2500
+                            ]
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                1500
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "战术镇压",
                     "Desc": "对扇形范围内的敌方单位造成攻击力650%的伤害\n并施加<c:Stunned>状态(持续1.5秒)"
                 },
@@ -51471,6 +51601,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "惩戒之时",
                     "Desc": "对扇形范围内的敌方单位造成攻击力400%的伤害"
                 },
@@ -51480,6 +51631,23 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Always",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "干扰",
                     "Desc": "对所有敌方单位造成攻击力250%的伤害(必定暴击)"
                 },
@@ -51511,6 +51679,7 @@
                     "Desc": "普雷纳帕特斯向敌方发射「阿特拉哈西斯方舟」所有的能量\n对所有敌方单位各造成其最大生命值1000%的伤害"
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "白子＊恐怖",
             "Rewards": [
                 {

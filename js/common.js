@@ -116,8 +116,10 @@ const sort_functions = {
     Range: (a,b) => (b.Range - a.Range)*search_options["sortby_dir"],
     AccuracyPoint: (a,b) => (b.AccuracyPoint - a.AccuracyPoint)*search_options["sortby_dir"],
     DodgePoint: (a,b) => (b.DodgePoint - a.DodgePoint)*search_options["sortby_dir"],
+    NormalHits: (a,b) => (getSkillHits(find(b.Skills, "SkillType", "autoattack")[0]) - getSkillHits(find(a.Skills, "SkillType", "autoattack")[0]))*search_options["sortby_dir"],
     EXCost: (a,b) => (find(b.Skills, "SkillType", "ex")[0].Cost[4] - find(a.Skills, "SkillType", "ex")[0].Cost[4])*search_options["sortby_dir"],
     EXHits: (a,b) => (getSkillHits(find(b.Skills, "SkillType", "ex")[0]) - getSkillHits(find(a.Skills, "SkillType", "ex")[0]))*search_options["sortby_dir"],
+    PublicHits: (a,b) => (getSkillHits(find(b.Skills, "SkillType", "normal")[0]) - getSkillHits(find(a.Skills, "SkillType", "normal")[0]))*search_options["sortby_dir"],
     StreetBattleAdaptation: (a,b) => (
         (b.StreetBattleAdaptation + (b.Weapon.AdaptationType === "Street" ? b.Weapon.AdaptationValue - 0.1 : 0)) - (a.StreetBattleAdaptation + (a.Weapon.AdaptationType === "Street" ? a.Weapon.AdaptationValue - 0.1: 0))
         )*search_options["sortby_dir"],
@@ -2152,7 +2154,9 @@ class EnemyFinder {
                             rank: enemy.Rank,
                             icon: raidIcon,
                             level: raid.Level[difficultyId],
-                            grade: 1
+                            grade: 1,
+                            raidId: raid.Id,
+                            raidDifficulty: difficultyId
                         })
                     }
                 })
@@ -3079,6 +3083,9 @@ $.when($.ready, loadPromise).then(function() {
     $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
     $(`#ba-navbar-contrast-toggle-${highContrast}`).addClass("active")
 
+    const updatedDaysAgo = duration(new Date().getTime() / 1000 - data.config.build)[0]
+    $('#navbar-version').text(`v${cache_ver} - ${translateUI("version_lastupdated", [new Date(data.config.build * 1000).toLocaleString([], { year: "numeric", month: "numeric", day: "numeric" }), updatedDaysAgo == 0 ? "<1" : updatedDaysAgo])}`)
+
     $('#ba-navbar-search').on('input', function() {
         if (searchDelayTimeout) {
             clearTimeout(searchDelayTimeout)
@@ -3409,6 +3416,11 @@ function loadModule(moduleName, entry=null) {
                 
             })
 
+            $('#btn-midokuni-link').on('click', () => {
+                window.open(`https://hina.loves.midokuni.com/StudentInsights/${student.Id}`, '_blank')
+                $("#btn-midokuni-link").blur()
+            })
+
             statPreviewExternalBuffs = new ExternalBuffs({
                 controls: $('#statpreview-buff-transferable-controls')[0],
                 searchBox: $('#statpreview-buff-transferable-search-text')[0],
@@ -3564,6 +3576,7 @@ function loadModule(moduleName, entry=null) {
                     updateStudentList(updateSortMethod = true)
                 }
                 $('.card-student.disabled').removeClass('disabled')
+                $('#ba-student-modal-students').modal('show')
             })
 
             $('#ba-statpreview-status-equipment').tooltip({title: getBasicTooltip(translateUI('tooltip_equipment_bonus')), placement: 'top', html: true})
@@ -4163,6 +4176,14 @@ function updateStudentList(updateSortMethod = false) {
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else if (search_options["sortby"] == "EXHits") {
                     const hits = getSkillHits(find(el.Skills, "SkillType", "ex")[0])
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(hits).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "NormalHits") {
+                    const hits = getSkillHits(find(el.Skills, "SkillType", "autoattack")[0])
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(hits).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    $('#student-select-'+el.Id+' .label-text.hover').show()
+                } else if (search_options["sortby"] == "PublicHits") {
+                    const hits = getSkillHits(find(el.Skills, "SkillType", "normal")[0])
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(hits).toggleClass('smalltext', false).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else if (search_options["sortby"].endsWith("BattleAdaptation")) {
@@ -5057,7 +5078,7 @@ function initRaidSkillInfo(raidId, enemyId, raidDifficulty) {
 
     if (raidId) {
 
-        const raid = find(data.raids.Raid, "Id", raidId)[0]
+        const raid = find(raidId < 800000 ? data.raids.Raid : data.raids.WorldRaid, "Id", raidId)[0]
         const enemy = find(data.enemies, "Id", enemyId)[0]
         
         if (raid.HasNormalAttack.includes(enemyId)) {
@@ -8863,6 +8884,7 @@ function getSkillHitsText(damageDist, totalDamage, type) {
 }
 
 function getSkillHits(skill) {
+    if (!skill || !skill.Effects) return 0
     const effectWithHits = skill.Effects.find(e => e.Hits !== undefined)
     if (effectWithHits === undefined) {
         if (skill.Effects.find(e => e.Type == "DMGSingle") !== undefined) return 1
@@ -9199,7 +9221,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.equipment, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/equipment/icon'+el.Icon+'.webp', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': el.Id >= 1000 ? `T${el.Tier}` : getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id+2000000})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/equipment/icon/'+el.Icon+'.webp', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': el.Id >= 1000 ? `T${el.Tier}` : getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id+2000000})`})
             if (results.length >= maxResults) return false
         }
     })
@@ -9760,6 +9782,8 @@ function toggleOwned() {
         $('.btn-lock-attributes').show()
         lockedAttributes = false
     }
+
+    $('#ba-student-collection-btn').blur()
 
     $('.btn-lock-attributes').toggleClass('deactivated', !lockedAttributes)
     $('.btn-lock-attributes i').toggleClass('fa-lock', lockedAttributes).toggleClass('fa-lock-open', !lockedAttributes)

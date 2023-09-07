@@ -29393,7 +29393,7 @@
             "Id": 1463735831,
             "Icon": "timeattackgeas_enemy_immune_attackedexskill",
             "Name": "Explosive Type Formation",
-            "Desc": "Enemies will only receive damage from <b class='ba-col-explosion'>Explosive</b> type attacks. Also increases the <b:CostRegen> of all allies who use <b class='ba-col-explosion'>Explosive</b> type attacks."
+            "Desc": "Enemies will only receive damage from <b class='ba-col-explosion'>Explosive</b> type attacks. Also increases the <b:CostRegen> of all allies who use <b class='ba-col-explosion'>Explosive</b> type attacks by <b>250</b>."
         }
     ],
     "WorldRaid": [
@@ -29483,6 +29483,7 @@
                     "Desc": "Wakamo's EX skills will additionally inflict one stack of <s:SuddenDeath> to the target.\nIf the target accumulates 5 stacks, they will be dealt damage equal to 1000% of their maximum HP."
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "Wakamo (Swimsuit)",
             "Rewards": [
                 {
@@ -30107,6 +30108,7 @@
                     "Desc": "Deals 450% damage to enemies in a circular area. If this missile is destroyed, deals 400% damage to all other missiles in a circular area."
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "Wakamo (Hovercraft)",
             "Rewards": [
                 {
@@ -30668,6 +30670,7 @@
             ],
             "UseRaidSkillList": 1,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "Binah (Chroma)",
             "Rewards": [
                 {
@@ -34133,6 +34136,7 @@
             ],
             "UseRaidSkillList": 2,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "Chesed (Chroma)",
             "Rewards": [
                 {
@@ -37501,6 +37505,7 @@
             ],
             "UseRaidSkillList": 3,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "Shiro & Kuro (Chroma)",
             "Rewards": [
                 {
@@ -41019,6 +41024,7 @@
             ],
             "UseRaidSkillList": 4,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "Hieronymus (Chroma)",
             "Rewards": [
                 {
@@ -44603,6 +44609,7 @@
             ],
             "UseRaidSkillList": 7,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "Hod (Chroma)",
             "Rewards": [
                 {
@@ -48049,6 +48056,7 @@
             ],
             "UseRaidSkillList": 6,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "Perorodzilla (Chroma)",
             "Rewards": [
                 {
@@ -51473,6 +51481,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                909,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                910,
+                                1112
+                            ]
+                        }
+                    ],
                     "Name": "Drone Support",
                     "Desc": "Deals 800% damage to one enemy."
                 },
@@ -51482,6 +51529,38 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    55000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Riding Grenade",
                     "Desc": "Deals 350% damage to one enemy and 550% damage to enemies in a circular area."
                 },
@@ -51491,6 +51570,57 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                2500,
+                                2500,
+                                2500,
+                                2500
+                            ]
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                1500
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "Tactical Suppression",
                     "Desc": "Deals 650% damage to enemies in a fan-shaped area and inflicts <c:Stunned> for 1.5s."
                 },
@@ -51500,6 +51630,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "Yup, It's Punishment Time",
                     "Desc": "Deals 400% damage to enemies in a fan-shaped area."
                 },
@@ -51509,6 +51660,23 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Always",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Intruders",
                     "Desc": "Deals 250% guaranteed critical damage to all enemies."
                 },
@@ -51540,6 +51708,7 @@
                     "Desc": "Phrenapates uses all the energy of the Atrahasis Ark to fire at the enemy, dealing damage to all enemies equal to 1000% of their Max HP."
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "Shiroko Terror",
             "Rewards": [
                 {

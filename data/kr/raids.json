@@ -29447,6 +29447,7 @@
                     "Desc": "와카모의 스킬에 피격된 대상은 <s:SuddenDeath> 생성된다.\n<s:SuddenDeath> 5개가 되면 해당 대상은 최대 생명력의 1000% 대미지를 받습니다."
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "와카모 (수영복)",
             "Rewards": [
                 {
@@ -30071,6 +30072,7 @@
                     "Desc": "원형 범위의 적에게 공격력 450% 대미지\n미사일을 파괴하면 원형 범위 내 미사일 전체에게 공격력 400% 대미지"
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "와카모 (호버크래프트)",
             "Rewards": [
                 {
@@ -30632,6 +30634,7 @@
             ],
             "UseRaidSkillList": 1,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "비나 (색채)",
             "Rewards": [
                 {
@@ -34097,6 +34100,7 @@
             ],
             "UseRaidSkillList": 2,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "헤세드 (색채)",
             "Rewards": [
                 {
@@ -37465,6 +37469,7 @@
             ],
             "UseRaidSkillList": 3,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "시로&쿠로 (색채)",
             "Rewards": [
                 {
@@ -40983,6 +40988,7 @@
             ],
             "UseRaidSkillList": 4,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "예로니무스 (색채)",
             "Rewards": [
                 {
@@ -44567,6 +44573,7 @@
             ],
             "UseRaidSkillList": 7,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "호드 (색채)",
             "Rewards": [
                 {
@@ -48013,6 +48020,7 @@
             ],
             "UseRaidSkillList": 6,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "페로로지라 (색채)",
             "Rewards": [
                 {
@@ -51437,6 +51445,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                909,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                910,
+                                1112
+                            ]
+                        }
+                    ],
                     "Name": "드론 소환 : 화력 지원",
                     "Desc": "적 1인에게 공격력 800% 대미지"
                 },
@@ -51446,6 +51493,38 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    55000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "라이딩 그레네이드",
                     "Desc": "적 1인에게 공격력 350% 대미지/\n원형범위 내의 적에게 공격력 550% 대미지"
                 },
@@ -51455,6 +51534,57 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                2500,
+                                2500,
+                                2500,
+                                2500
+                            ]
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                1500
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "전술 진압",
                     "Desc": "부채꼴범위 내의 적에게 공격력 650% 대미지\n기절 (1.5초간)"
                 },
@@ -51464,6 +51594,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "응. 혼날시간",
                     "Desc": "부채꼴범위 내의 적에게 공격력 400% 대미지"
                 },
@@ -51473,6 +51624,23 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Always",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "방해야",
                     "Desc": "적 전체에게 공격력 250% 확정 치명 대미지"
                 },
@@ -51504,6 +51672,7 @@
                     "Desc": "프레나파테스가 아트라하시스의 방주의 모든 에너지를 상대에게 발사한다.\n적 전체에게 대상의 최대 체력 1000% 대미지"
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "시로코 테러",
             "Rewards": [
                 {

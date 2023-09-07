@@ -29436,6 +29436,7 @@
                     "Desc": "ワカモのスキルで攻撃された対象は<s:SuddenDeath>状態になる。\n<s:SuddenDeath>が5枚貯まると、該当の対象は最大HPの1000%分のダメージが適用されます。"
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "ワカモ（水着）",
             "Rewards": [
                 {
@@ -30060,6 +30061,7 @@
                     "Desc": "円形範囲内の敵に対して、攻撃力の450%分のダメージ\nこのミサイルを破壊すると円形範囲内のミサイル全体に対して、攻撃力の400%分のダメージ"
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "ワカモ（ホバークラフト）",
             "Rewards": [
                 {
@@ -30621,6 +30623,7 @@
             ],
             "UseRaidSkillList": 1,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "ビナー（色彩）",
             "Rewards": [
                 {
@@ -34086,6 +34089,7 @@
             ],
             "UseRaidSkillList": 2,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "ケセド（色彩）",
             "Rewards": [
                 {
@@ -37454,6 +37458,7 @@
             ],
             "UseRaidSkillList": 3,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "シロ&クロ（色彩）",
             "Rewards": [
                 {
@@ -40972,6 +40977,7 @@
             ],
             "UseRaidSkillList": 4,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "ヒエロニムス（色彩）",
             "Rewards": [
                 {
@@ -44556,6 +44562,7 @@
             ],
             "UseRaidSkillList": 7,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "ホド（色彩）",
             "Rewards": [
                 {
@@ -48002,6 +48009,7 @@
             ],
             "UseRaidSkillList": 6,
             "RaidSkill": [],
+            "HasNormalAttack": [],
             "Name": "ペロロジラ（色彩）",
             "Rewards": [
                 {
@@ -51426,6 +51434,45 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                909,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                909,
+                                1111,
+                                910,
+                                1112
+                            ]
+                        }
+                    ],
                     "Name": "ドローン召喚：火力支援",
                     "Desc": "敵1人に対して、攻撃力の800%分のダメージ"
                 },
@@ -51435,6 +51482,38 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    35000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    55000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "ライド＆グレネード",
                     "Desc": "敵1人に対して、攻撃力の350%分のダメージ/\n円形範囲内の敵に対して、攻撃力の550%分のダメージ"
                 },
@@ -51444,6 +51523,57 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                2500,
+                                2500,
+                                2500,
+                                2500
+                            ]
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "CrowdControl",
+                            "Scale": [
+                                1500
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "Chance": "10000",
+                            "Icon": "Stunned"
+                        }
+                    ],
                     "Name": "戦略的制圧",
                     "Desc": "扇形範囲内の敵に対して、攻撃力の650%分のダメージ\n気絶状態を付与（1.5秒間）"
                 },
@@ -51453,6 +51583,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Check",
+                            "CanEvade": true,
+                            "Hits": [
+                                5000,
+                                5000
+                            ]
+                        }
+                    ],
                     "Name": "戒めの時",
                     "Desc": "扇形範囲内の敵に対して、攻撃力の400%分のダメージ"
                 },
@@ -51462,6 +51613,23 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                7967000,
+                                7967100,
+                                7967200
+                            ],
+                            "CriticalCheck": "Always",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "邪魔",
                     "Desc": "敵全体に対して攻撃力の250%分の確定会心ダメージ"
                 },
@@ -51493,6 +51661,7 @@
                     "Desc": "プレナパテスが「アトラ・ハシースの箱舟」の全てのエネルギーを相手に発射する。\n敵全体に対して、対象のHPの1000%分のダメージ"
                 }
             ],
+            "HasNormalAttack": [],
             "Name": "シロコ＊テラー",
             "Rewards": [
                 {
