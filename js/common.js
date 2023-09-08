@@ -32,6 +32,8 @@ const enemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','Accurac
 const raidEnemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','DefensePenetration','DamagedRatio','GroggyGauge','GroggyTime']
 const enemyCalculationStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','DefensePenetration','DamagedRatio']
 
+const staticAssetURL = "https://static.schale.gg"
+
 let userLang
 let regionID
 
@@ -3400,7 +3402,7 @@ function loadModule(moduleName, entry=null) {
                         const matches = vc.Group.match(/([0-9])$/)
                         const order = matches && matches.length ? matches[1] : 1
                         const group = vc.Group.replace(/[0-9]$/, "")
-                        html += `<div class="d-flex flex-row align-items-center"><h6 class="m-0">${getLocalizedString("VoiceClip", group, [order])}</h6><div class="flex-fill"></div><audio preload="metadata" controls><source src="./voice/${vc.AudioClip}" type="audio/mpeg"></audio></div>`
+                        html += `<div class="d-flex flex-row align-items-center gap-2"><h6 class="m-0">${getLocalizedString("VoiceClip", group, [order])}</h6><div class="flex-fill"></div><audio preload="none" controls><source src="${staticAssetURL}/voice/${vc.AudioClip}" type="audio/mpeg"></audio></div>`
                         if (vc.Transcription) {
                             html += `<div class="ba-panel p-2"><p class="m-0">${vc.Transcription}</p></div>`
                         }
@@ -5224,7 +5226,7 @@ function loadItem(id) {
             $('#ba-furniture-details').show()
             $('#furniture-set').html(getLocalizedString('FurnitureSet', ''+item.SetGroupId))
             $('#furniture-comfort').html(`<img class="inline-img" src="images/ui/Cafe_Icon_Comfort.png"> ${item.ComfortBonus}`)
-            $('#furniture-size').html(item.Category == 'Interiors' ? '-' : `${item.Size[0]} &times; ${item.Size[1]} &times; ${item.Size[2]}`)
+            $('#furniture-size').html(item.Category == 'Interiors' ? '-' : `${item.Size[0]} &times; ${item.Size[1]}`)
             
         } else {
             mode = 'items'

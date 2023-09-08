@@ -838,3 +838,32 @@
     }
 
 }
+
+#student-voice-header {
+
+    gap: 0.5rem;
+
+    @include md-down {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    #student-voice-info {
+        @include md-down {
+            margin: auto;
+        }
+    }
+
+    nav {
+
+        @include md-down {
+            margin: auto;
+        }
+
+        @include lg-up {
+            margin-left: auto;
+        }
+    }
+
+}
+
