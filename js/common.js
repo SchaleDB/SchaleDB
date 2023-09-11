@@ -69,7 +69,7 @@ if (localStorage.getItem("language") && languages.includes(localStorage.getItem(
 }
 
 if (localStorage.getItem("region")) {
-    regionID = localStorage.getItem("region")
+    regionID = parseInt(localStorage.getItem("region"))
 } else {
     regionID = 0
 }
@@ -79,11 +79,10 @@ let data = {}
 let json_list = {
     common: getCacheVerResourceName("./data/common.min.json"),
     stages: getCacheVerResourceName("./data/stages.min.json"),
-    crafting: getCacheVerResourceName(`./data/crafting.min.json`),
     config: getCacheVerResourceName("./data/config.min.json")
 }
-let json_lang_list = getLanguageJSONList(userLang.toLowerCase())
 
+let json_lang_list = getLanguageJSONList(userLang.toLowerCase())
 function getLanguageJSONList(lang) {
     return {
         localization: getCacheVerResourceName(`./data/${lang}/localization.min.json`),
@@ -95,6 +94,22 @@ function getLanguageJSONList(lang) {
         currency: getCacheVerResourceName(`./data/${lang}/currency.min.json`),
         summons: getCacheVerResourceName(`./data/${lang}/summons.min.json`),
         raids: getCacheVerResourceName(`./data/${lang}/raids.min.json`)
+    }
+}
+
+let json_server_list = getServerJSONList(regionID)
+function getServerJSONList(region) {
+    let regionName
+    switch (region) {
+        case 0: regionName = "jp"
+            break
+        case 1: regionName = "global"
+            break
+        case 2: regionName = "cn"
+            break
+    }
+    return {
+        crafting: getCacheVerResourceName(`./data/crafting_${regionName}.min.json`)
     }
 }
 
@@ -121,7 +136,9 @@ const sort_functions = {
     NormalHits: (a,b) => (getSkillHits(find(b.Skills, "SkillType", "autoattack")[0]) - getSkillHits(find(a.Skills, "SkillType", "autoattack")[0]))*search_options["sortby_dir"],
     EXCost: (a,b) => (find(b.Skills, "SkillType", "ex")[0].Cost[4] - find(a.Skills, "SkillType", "ex")[0].Cost[4])*search_options["sortby_dir"],
     EXHits: (a,b) => (getSkillHits(find(b.Skills, "SkillType", "ex")[0]) - getSkillHits(find(a.Skills, "SkillType", "ex")[0]))*search_options["sortby_dir"],
-    PublicHits: (a,b) => (getSkillHits(find(b.Skills, "SkillType", "normal")[0]) - getSkillHits(find(a.Skills, "SkillType", "normal")[0]))*search_options["sortby_dir"],
+    PublicHits: (a,b) => (
+        getSkillHits(find(b.Skills, "SkillType", "Released" in b.Gear && b.Gear.Released[regionID] ? "gearnormal" : "normal")[0]) - getSkillHits(find(a.Skills, "SkillType", "Released" in a.Gear && a.Gear.Released[regionID] ? "gearnormal" : "normal")[0])
+        )*search_options["sortby_dir"],
     StreetBattleAdaptation: (a,b) => (
         (b.StreetBattleAdaptation + (b.Weapon.AdaptationType === "Street" ? b.Weapon.AdaptationValue - 0.1 : 0)) - (a.StreetBattleAdaptation + (a.Weapon.AdaptationType === "Street" ? a.Weapon.AdaptationValue - 0.1: 0))
         )*search_options["sortby_dir"],
@@ -1768,19 +1785,19 @@ class SupportStats {
 
         if (studentId in studentCollection) {
             const savedStudent = studentCollection[studentId]
-            supportStudent.level = parseInt(savedStudent.l)
+            supportStudent.level = Math.min(parseInt(savedStudent.l), region.studentlevel_max)
             supportStudent.starGrade = parseInt(savedStudent.s)
-            supportStudent.weaponStarGrade = parseInt(savedStudent.ws)
-            supportStudent.weaponLevel = parseInt(savedStudent.wl)
-            supportStudent.equipment = [parseInt(savedStudent.e1), parseInt(savedStudent.e2), parseInt(savedStudent.e3)]
+            supportStudent.weaponStarGrade = region.weaponlevel_max > 0 ? parseInt(savedStudent.ws) : 0 
+            supportStudent.weaponLevel = Math.min(parseInt(savedStudent.wl), region.weaponlevel_max)
+            supportStudent.equipment = [Math.min(parseInt(savedStudent.e1), region.gear1_max), Math.min(parseInt(savedStudent.e2), region.gear2_max), Math.min(parseInt(savedStudent.e3), region.gear3_max)]
             supportStudent.gear = false
-            supportStudent.bond = [parseInt(savedStudent.b)]
+            supportStudent.bond = [Math.min(parseInt(savedStudent.b), region.bondlevel_max)]
         } else {
-            supportStudent.level = data.common.regions[regionID].studentlevel_max
+            supportStudent.level = region.studentlevel_max
             supportStudent.starGrade = 5
-            supportStudent.weaponStarGrade = 3
-            supportStudent.weaponLevel = data.common.regions[regionID].weaponlevel_max
-            supportStudent.equipment = [data.common.regions[regionID].gear1_max, data.common.regions[regionID].gear2_max, data.common.regions[regionID].gear3_max]
+            supportStudent.weaponStarGrade = region.weaponlevel_max > 0 ? 3 : 0
+            supportStudent.weaponLevel = region.weaponlevel_max
+            supportStudent.equipment = [region.gear1_max, region.gear2_max, region.gear3_max]
             supportStudent.gear = false
             supportStudent.bond = [20]
 
@@ -1844,7 +1861,7 @@ class SupportStats {
                 <div class="collapse${support.panelOpen ? ' show' : ''}" id="supportstats-controls-${index}">
                     <div class="d-flex flex-column gap-2 pt-3">
                         <div class="d-flex flex-row align-items-center gap-2 support-level">
-                            <input type="range" class="form-range flex-fill" value="${support.level}" min="1" max="${data.common.regions[regionID].studentlevel_max}">
+                            <input type="range" class="form-range flex-fill" value="${support.level}" min="1" max="${region.studentlevel_max}">
                             <span class="ba-slider-label">Lv.${support.level}</span>
                         </div>  
                         <div class="d-flex flex-row flex-wrap align-items-center justify-content-center gap-2">
@@ -1854,9 +1871,11 @@ class SupportStats {
                                 <span class="ba-statpreview-star" data-val="3"><i class="fa-solid fa-star"></i></span>
                                 <span class="ba-statpreview-star" data-val="4"><i class="fa-solid fa-star"></i></span>
                                 <span class="ba-statpreview-star" data-val="5"><i class="fa-solid fa-star"></i></span>
-                                <span class="ba-weaponpreview-star ms-2" data-val="1"><i class="fa-solid fa-star"></i></span>
+                                ${ region.weaponlevel_max > 0 ?
+                                `<span class="ba-weaponpreview-star ms-2" data-val="1"><i class="fa-solid fa-star"></i></span>
                                 <span class="ba-weaponpreview-star" data-val="2"><i class="fa-solid fa-star"></i></span>
-                                <span class="ba-weaponpreview-star" data-val="3"><i class="fa-solid fa-star"></i></span>
+                                <span class="ba-weaponpreview-star" data-val="3"><i class="fa-solid fa-star"></i></span>` : ''
+                                }
                             </div>
                             ${SupportStats.renderBondControls(support.student)}
                             <input style="display:none;" type="number" class="support-stat-weapon-level form-control" value="${support.weaponLevel}" min="1" step="1" max="50"></span>
@@ -1922,7 +1941,7 @@ class SupportStats {
             <i class="caret fa-solid fa-caret-down me-2"></i>
         </button>
         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start">`
-        for (let i = 1; i <= data.common.regions[regionID][`gear${slot}_max`]; i++) {
+        for (let i = 1; i <= region[`gear${slot}_max`]; i++) {
             html += `<li><a class="dropdown-item dropdown-item-icon" data-tier="${i}" href="javascript:;"><div class="icon"><img class="ba-item-n" src="images/equipment/icon/equipment_icon_${gear}_tier${i}.webp"></div><span>T${i}</span></a></li>`
         }
         html += `</ul></div>`
@@ -1930,10 +1949,12 @@ class SupportStats {
     }
 
     static renderBondControls(student) {
-        let html = `<div class="d-flex align-items-center justify-content-center gap-2"><div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${student.Id}.webp"></div><input data-bond="0" class="form-control support-bond" type="number" value="1" min="1" max="${data.common.regions[regionID].bondlevel_max}"></div>`
+        let html = `<div class="d-flex align-items-center justify-content-center gap-2"><div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${student.Id}.webp"></div><input data-bond="0" class="form-control support-bond" type="number" value="1" min="1" max="${region.bondlevel_max}"></div>`
         student.FavorAlts.forEach((id, i) => {
             const alt = find(data.students, 'Id', id)[0]
-            html += `<div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${alt.Id}.webp"></div><input data-bond="${i+1}" class="form-control support-bond" type="number" value="1" min="1" max="${data.common.regions[regionID].bondlevel_max}"></div>`
+            if (alt.IsReleased[regionID]) {
+                html += `<div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${alt.Id}.webp"></div><input data-bond="${i+1}" class="form-control support-bond" type="number" value="1" min="1" max="${region.bondlevel_max}"></div>`
+            }
         })
         html += '</div>'
         return html
@@ -2166,7 +2187,7 @@ class EnemyFinder {
         })
 
         data.stages.Event.forEach(stage => {
-            if (stage.Difficulty != 2 || !data.common.regions[regionID].events.includes(stage.EventId)) return
+            if (stage.Difficulty != 2 || !region.events.includes(stage.EventId)) return
             stage.Formations.forEach((formation) => {
                 formation.EnemyList.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
@@ -2190,7 +2211,7 @@ class EnemyFinder {
         })
 
         data.stages.ConquestMap.forEach(conquestMap => {
-            if (!data.common.regions[regionID].events.includes(conquestMap.EventId)) return
+            if (!region.events.includes(conquestMap.EventId)) return
             const mapName = getLocalizedString('ConquestMap', ''+conquestMap.EventId % 10000)
             conquestMap.Maps.filter(m => m.Difficulty == "VeryHard").forEach(challengeMap => {
                 challengeMap.Tiles.filter(t => t.Type == "Battle").forEach(tile => {
@@ -2220,7 +2241,7 @@ class EnemyFinder {
         })
 
         data.stages.SchoolDungeon.forEach(stage => {
-            if (stage.Stage > data.common.regions[regionID].schooldungeon_max) return
+            if (stage.Stage > region.schooldungeon_max) return
             const formation = stage.Formations[0]
             formation.EnemyList.forEach(enemyId => {
                 const enemy = find(data.enemies, 'Id', enemyId)[0]
@@ -2992,7 +3013,7 @@ class SkillDamageInfo {
 
 /** Functions */
 
-let loadPromise = loadJSON(Object.assign(json_list, json_lang_list), result => {
+let loadPromise = loadJSON(Object.assign(json_list, json_lang_list, json_server_list), result => {
     data = result
 })
 
@@ -3079,6 +3100,7 @@ $.when($.ready, loadPromise).then(function() {
         $(".tooltip").tooltip("hide")
     })
     
+    $(`#ba-navbar-regionselector span`).text(getLocalizedString("ServerName", ''+regionID))
     $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
     $(`#ba-navbar-languageselector span`).text($(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).text())
     $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).addClass("active")
@@ -3398,7 +3420,8 @@ function loadModule(moduleName, entry=null) {
                 for (group in data.voice[student.Id]) {
                     let html = ''
                     data.voice[student.Id][group].forEach(vc => {
-                        if (vc.EventId && !data.common.regions[regionID].events.includes(vc.EventId)) return
+                        if (vc.EventId && !region.events.includes(vc.EventId)) return
+                        if (vc.Group == "WeaponGetIdle1" && region.weaponlevel_max == 0) return
                         const matches = vc.Group.match(/([0-9])$/)
                         const order = matches && matches.length ? matches[1] : 1
                         const group = vc.Group.replace(/[0-9]$/, "")
@@ -3643,7 +3666,7 @@ function loadModule(moduleName, entry=null) {
         $("#loaded-module").load(html_list['items'], function() {
 
             equipmentFilters = $('#item-search-filter-equipmenttier .search-filter-group')
-            for (let i = 1; i <= data.common.regions[regionID].gear1_max; i++) {
+            for (let i = 1; i <= region.gear1_max; i++) {
                 equipmentFilters.append(`<button id="item-search-filter-equipmenttier-${i}" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','${i}')"><span class="label">T${i}</span></button>`)
             }
 
@@ -3727,6 +3750,16 @@ function loadModule(moduleName, entry=null) {
         bgimg.src = `images/background/BG_Raid.jpg`
         $("#loaded-module").load(html_list['raids'], function() {
             loadLanguage(userLang)
+
+            if (regionID == 2) {
+                $('#ba-raid-list-tab-timeattack').hide()
+                $('#ba-raid-list-tab-worldraid').hide()
+                $('#ba-raid-season').hide()
+                $('#ba-raid-difficulty-4').hide()
+                $('#ba-raid-difficulty-5').hide()
+                $('#ba-raid-difficulty-6').hide()
+            }
+
             $(".tooltip").tooltip("hide")
             let urlVars = new URL(window.location.href).searchParams
 
@@ -3810,7 +3843,11 @@ function loadModule(moduleName, entry=null) {
             if (localStorage.getItem("show_node_probability")) {
                 showNodeProbability = (localStorage.getItem("show_node_probability") == 'true')
             }
-        
+
+            if (regionID == 2) {
+                $('#ba-craft-list-tabs').hide()
+            }
+
             if (entry != null) {
                 loadCraft(entry)
             } else if (urlVars.has("craftnode")) {
@@ -3862,6 +3899,10 @@ function loadModule(moduleName, entry=null) {
             loadRegion(regionID)
 
             populateEvents()
+            if (regionID == 2) {
+                $('#events-row-1').html(`<p class="text-center">${translateUI('info_unavailable')}</p>`).show()
+            }
+
             eventRefreshInterval = window.setInterval(updateEventTimers, 60000)
 
             $('#ba-home-server-info').text(translateUI('current_events', [getLocalizedString('ServerName', regionID)]))
@@ -3886,7 +3927,7 @@ function populateEvents() {
     let currentTime = new Date().getTime() / 1000, dateOptions = { month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short" }
     let found = false
     $('#events-row-1').hide()
-    $.each(data.common.regions[regionID].current_gacha, function (i, el) {
+    $.each(region.current_gacha, function (i, el) {
         if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
             for (let j = 0; j < el.characters.length; j++) {
                 var char = find(data.students, "Id", el.characters[j])[0]
@@ -3906,7 +3947,7 @@ function populateEvents() {
     let raidText = "", raidHtml = ""
     $('#events-row-2').hide()
     found = false
-    $.each(data.common.regions[regionID].current_raid, function (i, el) {
+    $.each(region.current_raid, function (i, el) {
         if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
             if (el.raid >= 1000) {
                 raidText = getLocalizedString("StageType", "TimeAttack") + "\n"
@@ -3930,7 +3971,7 @@ function populateEvents() {
     let eventText = "", eventHtml = ""
     $('#ba-home-event').hide()
     found = false
-    $.each(data.common.regions[regionID].current_events, function (i, el) {
+    $.each(region.current_events, function (i, el) {
         if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
             eventText = getLocalizedString("StageType", "Event") + "\n"
             eventHtml += getEventCardHTML(el.event)
@@ -4107,11 +4148,11 @@ function updateStudentList(updateSortMethod = false) {
                             return
                         }
     
-                        const level = sortByCollectionStats ? studentCollection[student.Id].l : data.common.regions[regionID].studentlevel_max
+                        const level = sortByCollectionStats ? studentCollection[student.Id].l : region.studentlevel_max
                         const starGrade = sortByCollectionStats ? studentCollection[student.Id].s : 5
-                        const equipLevel = sortByCollectionStats ? [studentCollection[student.Id].e1, studentCollection[student.Id].e2, studentCollection[student.Id].e3] : [data.common.regions[regionID].gear1_max, data.common.regions[regionID].gear2_max, data.common.regions[regionID].gear3_max]
-                        const weaponLevel = sortByCollectionStats ? studentCollection[student.Id].wl : data.common.regions[regionID].weaponlevel_max
-                        const bondLevel = sortByCollectionStats ? studentCollection[student.Id].b : data.common.regions[regionID].bondlevel_max
+                        const equipLevel = sortByCollectionStats ? [studentCollection[student.Id].e1, studentCollection[student.Id].e2, studentCollection[student.Id].e3] : [region.gear1_max, region.gear2_max, region.gear3_max]
+                        const weaponLevel = sortByCollectionStats ? studentCollection[student.Id].wl : region.weaponlevel_max
+                        const bondLevel = sortByCollectionStats ? studentCollection[student.Id].b : region.bondlevel_max
                         const gearLevel = 1
 
                         const charStats = new CharacterStats(student, level, starGrade)
@@ -4125,7 +4166,9 @@ function updateStudentList(updateSortMethod = false) {
                             if (sortByCollectionStats && !(favorAlt in studentCollection)) continue
 
                             const altStudent = find(data.students, "Id", favorAlt)[0]
-                            const altBondLevel = sortByCollectionStats ? studentCollection[favorAlt].b : data.common.regions[regionID].bondlevel_max
+                            if (!altStudent.IsReleased[regionID]) continue
+
+                            const altBondLevel = sortByCollectionStats ? studentCollection[favorAlt].b : region.bondlevel_max
 
                             const altBondStats = getBondStats(altStudent, altBondLevel)
                             for (let stat in altBondStats) {
@@ -4140,8 +4183,10 @@ function updateStudentList(updateSortMethod = false) {
                         if ("Released" in student.Gear && student.Gear.Released[regionID]) {
                             charStats.addGearBonuses(student.Gear, gearLevel)
                         }
-                        
-                        charStats.addWeaponBonuses(student.Weapon, weaponLevel)
+
+                        if (weaponLevel > 0) {
+                            charStats.addWeaponBonuses(student.Weapon, weaponLevel)
+                        }
     
                         studentStatsList[student.Id] = charStats
                     })
@@ -4185,7 +4230,12 @@ function updateStudentList(updateSortMethod = false) {
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(hits).toggleClass('smalltext', false).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else if (search_options["sortby"] == "PublicHits") {
-                    const hits = getSkillHits(find(el.Skills, "SkillType", "normal")[0])
+                    let hits = getSkillHits(find(el.Skills, "SkillType", "normal")[0])
+                    if ("Released" in el.Gear && el.Gear.Released[regionID]) {
+                        const gearPublicHits = getSkillHits(find(el.Skills, "SkillType", "gearnormal")[0]) 
+                        if (gearPublicHits > hits) hits += ' → ' + gearPublicHits
+                    }
+
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(hits).toggleClass('smalltext', false).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else if (search_options["sortby"].endsWith("BattleAdaptation")) {
@@ -4957,20 +5007,20 @@ function renderStudent() {
     if (student.Id in studentCollection) {
         statPreviewStarGrade = studentCollection[student.Id].s
 
-        statPreviewLevel = studentCollection[student.Id].l
+        statPreviewLevel = Math.min(studentCollection[student.Id].l, region.studentlevel_max)
         $('#ba-statpreview-levelrange').val(statPreviewLevel)
         changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
 
-        statPreviewEquipment = [studentCollection[student.Id].e1, studentCollection[student.Id].e2, studentCollection[student.Id].e3]
+        statPreviewEquipment = [Math.min(studentCollection[student.Id].e1, region.gear1_max), Math.min(studentCollection[student.Id].e2, region.gear2_max), Math.min(studentCollection[student.Id].e3, region.gear3_max)]
         $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
         $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
         $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
 
-        statPreviewWeaponGrade = studentCollection[student.Id].ws
-        statPreviewWeaponLevel = studentCollection[student.Id].wl
+        statPreviewWeaponGrade = region.weaponlevel_max > 0 ? studentCollection[student.Id].ws : 0
+        statPreviewWeaponLevel = Math.min(studentCollection[student.Id].wl, region.weaponlevel_max)
         $('#ba-statpreview-weapon-range').attr("max",region.weaponlevel_max).val(statPreviewWeaponLevel)
 
-        statPreviewBondLevel[0] = studentCollection[student.Id].b
+        statPreviewBondLevel[0] = Math.min(studentCollection[student.Id].b, region.bondlevel_max)
         $('#ba-statpreview-bond-0-range').val(statPreviewBondLevel[0])
         $('#ba-statpreview-passiveskill-range').val(studentCollection[student.Id].s3)
         changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
@@ -5381,8 +5431,8 @@ function loadCraft(id) {
 
         if (loadedCraftId > 0) $('#craft-select-'+loadedCraftId).removeClass('selected')
 
-        if (id < 100000) {
-            const craftNode = findOrDefault(data.crafting.Nodes[regionID], "Id", id, 1)[0]
+        if (id < 100000 || regionID == 2) {
+            const craftNode = findOrDefault(data.crafting.Nodes, "Id", id, 1)[0]
             loadedCraftNode = craftNode
             loadedCraftId = craftNode.Id
 
@@ -5398,7 +5448,7 @@ function loadCraft(id) {
             let nodeWeightTotal = 0
             craftNode.Groups.forEach(grp => {nodeWeightTotal += grp.Weight})
             $.each(craftNode.Groups, function(i,el){
-                let itemGroup = data.crafting.Groups[regionID][el.GroupId], maxWeight = 0
+                let itemGroup = data.crafting.Groups[el.GroupId], maxWeight = 0
                 for (let j = 0; j < itemGroup.length; j++) {
                     maxWeight += itemGroup[j].Weight
                 }
@@ -5486,7 +5536,7 @@ function loadRaid(raidId) {
             $('#ba-timeattack-info').hide()
             $('#ba-worldraid-difficulty').hide()
             $('#ba-raid-difficulty').show()
-            $('#ba-raid-season').show()
+            $('#ba-raid-season').toggle(regionID != 2)
             $('#ba-raid-info-tab-profile').show()
             raid = findOrDefault(data.raids.Raid,"Id",raidId,1)[0]
 
@@ -5645,7 +5695,7 @@ function changeRaidDifficulty(difficultyId) {
     let html = ''
 
     html += getDropIconHTML(7, raid_reward_coin[raid_difficulty][0])
-    if (raid_reward_coin[raid_difficulty][1] != 0) {
+    if (raid_reward_coin[raid_difficulty][1] != 0 && find(data.items, "Id", 9)[0].IsReleased[regionID]) {
         html += getDropIconHTML(9, raid_reward_coin[raid_difficulty][1])
     }
     
@@ -5715,7 +5765,7 @@ function changeWorldRaidDifficulty(difficultyId) {
     populateRaidSkills('#ba-raid-skills', raidSkillList, raid_difficulty)
 
     let html = ''
-    const rewardsArray = (regionID == 1 && "RewardsGlobal" in raid) ? raid.RewardsGlobal : raid.Rewards
+    const rewardsArray = getServerProperty(raid, 'Rewards')
     html += `<div class="item-icon-list">`
     rewardsArray[raid_difficulty].Items.forEach(val => {
         html += getDropIconHTML(val[0], val[1], val[2], val[2], true)
@@ -6033,7 +6083,7 @@ function loadStage(id) {
                         checkEventId = stage.EventId
                         break;
                 }
-                if (data.common.regions[regionID].events.includes(checkEventId)) {
+                if (region.events.includes(checkEventId)) {
                     versionsAvailable.push(version)
                     dropdownHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-version="${version}"><span>${translateUI('stage_' + version.toLowerCase())}</span></a></li>`
                 }
@@ -6080,17 +6130,15 @@ function loadStage(id) {
         if (loadedStageVersion == "Rerun") {
             if (regionID == 1 && stage.RewardsGlobalRerun) {
                 rewardsArray = stage.RewardsGlobalRerun
+            } else if (regionID == 2 && stage.RewardsCnRerun) {
+                rewardsArray = stage.RewardsCnRerun
             } else {
                 rewardsArray = stage.RewardsRerun
             }
         }
 
         if (rewardsArray == undefined) {
-            if (regionID == 1 && stage.RewardsGlobal) {
-                rewardsArray = stage.RewardsGlobal
-            } else {
-                rewardsArray = stage.Rewards
-            }
+            rewardsArray = getServerProperty(stage, 'Rewards')
         }
 
         stageTypes.forEach(el => {
@@ -6329,6 +6377,11 @@ function changeStageVersion(version) {
     loadStage(loadedStage.Id)
 }
 
+function getServerProperty(obj, prop) {
+    const serverSuffix = region.name
+    return getSuffixedProperty(obj, prop, serverSuffix)
+}
+
 function getSuffixedProperty(obj, prop, suffix) {
     if (suffix) {
         if (prop + suffix in obj) return obj[prop + suffix]
@@ -6405,11 +6458,19 @@ function loadRegion(regID) {
     $("#ba-weaponpreview-levelrange, #ba-statpreview-weapon-range").attr("max",region.weaponlevel_max)
     if (region.weaponlevel_max == 0) {
         $("#ba-student-nav-weapon").hide()
-        $("#ba-statpreview-weapon").hide()
-        $("#ba-weaponpreview-star-1").hide()
-        $("#ba-weaponpreview-star-2").hide()
-        $("#ba-weaponpreview-star-3").hide()
+        $("#ba-statpreview-weapon-container").hide()
+        $(".weaponpreview-star-1").hide()
+        $(".weaponpreview-star-2").hide()
+        $(".weaponpreview-star-3").hide()
         statPreviewWeaponGrade = 0
+
+        $('#ba-student-search-filter-streetbattleadaptation-5').hide()
+        $('#ba-student-search-filter-outdoorbattleadaptation-5').hide()
+        $('#ba-student-search-filter-indoorbattleadaptation-5').hide()
+        $('#ba-student-search-filter-terrainupgrades').hide()
+        $('#ba-student-search-select-weaponpassivebuff').hide()
+        $('#ba-student-tab-weapon').hide()
+        $('#item-search-filter-equipmentcategory-weaponexpgrowth').hide()
     }
     $("#ba-bond-levelrange").attr("max",region.bondlevel_max)
     $("#ba-statpreview-gear1-range").attr("max",region.gear1_max)
@@ -6417,10 +6478,38 @@ function loadRegion(regID) {
     $("#ba-statpreview-gear3-range").attr("max",region.gear3_max)
 
     if (regionID == 1) {
-        //hide filters not relevant to global
         $('#ba-student-search-filter-bullettype-sonic').hide()
         $('#item-search-filter-furnitureset-111').hide()
         $('#item-search-filter-furnitureset-112').hide()
+    }
+
+    if (regionID == 2) {
+        //Student Filters
+        $('#ba-student-search-filter-tacticrole-vehicle').hide()
+
+        $('#ba-student-search-filter-bullettype-sonic').hide()
+        $('#ba-student-search-filter-armortype-elasticarmor').hide()
+
+        $('#ba-student-search-filter-school-valkyrie').hide()
+        $('#ba-student-search-filter-school-etc').hide()
+        $('#ba-student-search-filter-school-srt').hide()
+        $('#ba-student-search-filter-school-arius').hide()
+
+        $('#ba-student-search-filter-weapontype-rl').hide()
+        $('#ba-student-search-filter-weapontype-ft').hide()
+
+        $('#ba-student-search-filter-bondgear').hide()
+
+        //Student Page
+        $('#ba-student-gear-separator').hide()
+        $('#ba-student-gear-4').hide()
+
+        // Item/Furniture Filters
+        for (let i = 103; i <= 112; i++) {
+            $(`#item-search-filter-furnitureset-${i}`).hide()
+        }
+        $('#item-search-filter-showexpired').hide()
+
     }
 }
 
@@ -6940,10 +7029,12 @@ function recalculateStats() {
 
             for (let i = 1; i < support.bond.length; i++) {
                 const bondAlt = find(data.students, 'Id', support.student.FavorAlts[i-1])[0]
-                const bondBonus = getBondStats(bondAlt, support.bond[i])
-                Object.entries(bondBonus).forEach(el => {
-                    supportStats.addBuff(el[0], el[1])
-                })
+                if (bondAlt.IsReleased[regionID]) {
+                    const bondBonus = getBondStats(bondAlt, support.bond[i])
+                    Object.entries(bondBonus).forEach(el => {
+                        supportStats.addBuff(el[0], el[1])
+                    })
+                }
             }
 
             const bonusMaxHP = supportStats.getStrikerBonus('MaxHP')
@@ -7268,7 +7359,7 @@ function recalculateSkillPreview() {
             skill = find(student.Skills, 'SkillType', 'gearnormal')[0]
             $(`#ba-skill-normal-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.webp`)
             $(`#ba-skill-normal-plus`).toggle(true)
-        } else if (skillType == 'passive' && showSkillUpgrades) {
+        } else if (skillType == 'passive' && showSkillUpgrades && region.weaponlevel_max > 0) {
             skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
             $(`#ba-skill-passive-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.webp`)
             $(`#ba-skill-passive-plus`).toggle(true)
@@ -7388,7 +7479,7 @@ function getEventCardHTML(eventId) {
     let name = getLocalizedString("EventName", eventIdImg) + (eventId > 10000 ? translateUI('event_rerun') : '')
 
     let logoLang
-    if (regionID == 0 || !data.common.regions[regionID].events.includes(eventIdImg)) {
+    if (regionID == 0 || !region.events.includes(eventIdImg)) {
         //always use JP logo for Japan server
         logoLang = 'Jp'
     } else {
@@ -7761,7 +7852,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
             description += `\n<i>${translateUI('item_is_immediateuse')}</i>`
         }
         if (item.Id > 91000000 && item.ConsumeType == "Random") {
-            const containsArray = regionID == 1 && "ContainsGlobal" in item ? item.ContainsGlobal : item.Contains
+            const containsArray = getServerProperty(item, 'Contains')
             containsArray.forEach(containedItem => {
                 const item = find(data.items, 'Id', containedItem[0])[0]
                 description += `\n${getTranslatedString(item, 'Name')} (${getProbabilityText(containedItem[1])})`
@@ -7879,7 +7970,7 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
         $('#ba-statpreview-bond-0-range').val(maxbond[stars-1])
         changeStatPreviewBondLevel(0, false)
     }
-    $('#ba-statpreview-bond-0-range').attr("max", maxbond[stars-1])
+    $('#ba-statpreview-bond-0-range').attr("max", Math.min(maxbond[stars-1], region.bondlevel_max))
 
     if (weaponstars > 0) {
         $('#ba-statpreview-weapon').toggleClass('disabled', false)
@@ -8086,14 +8177,14 @@ function populateCraftList() {
     html_h1= `<div id="craft-list-grid-header-1" class="w-100 ba-grid-header mb-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"1")}</h3></div>`
     html_h2 = `<div id="craft-list-grid-header-2" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"2")}</h3></div>`
     html_h3 = `<div id="craft-list-grid-header-3" class="w-100 ba-grid-header my-2 p-2"><h3 class="mb-0">${getLocalizedString('NodeTier',"3")}</h3></div>`
-    data.crafting.Nodes[regionID].sort((a,b) => a.Quality - b.Quality)
-    data.crafting.Nodes[regionID].sort((a,b) => b.Icon.localeCompare(a.Icon))
+    data.crafting.Nodes.sort((a,b) => a.Quality - b.Quality)
+    data.crafting.Nodes.sort((a,b) => b.Icon.localeCompare(a.Icon))
 
     const searchTerm = $('#craft-search-text').val()
 
-    $.each(data.crafting.Nodes[regionID], function(i,el) {
+    $.each(data.crafting.Nodes, function(i,el) {
         if (el.Weight > 0 && (searchTerm == '' || getTranslatedString(el, "Name").toLowerCase().includes(searchTerm.toLowerCase())))
-        html[el.Tier-1] += getCraftingCardHTML(el, el.Weight / data.crafting.TotalWeight[regionID][el.Tier-1], showNodeProbability)
+        html[el.Tier-1] += getCraftingCardHTML(el, el.Weight / data.crafting.TotalWeight[el.Tier-1], showNodeProbability)
     })
 
     $('#craft-select-grid').empty()
@@ -8166,8 +8257,8 @@ function populateStageList(mode) {
     switch (mode) {
         case 'missions':
             $.each(data.stages.Campaign, function(i,el) {
-                if (el.Area > data.common.regions[regionID].campaign_max) return
-                if (regionID == 1 && el.Stage == "A") return
+                if (el.Area > region.campaign_max) return
+                if (regionID >= 1 && el.Stage == "A") return
                 html += getStageCardHTML(el)
             })
             $('.stage-list').hide()
@@ -8182,7 +8273,7 @@ function populateStageList(mode) {
                         let header = `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
                         html += header
                     }
-                    if (el.Stage <= data.common.regions[regionID].bounty_max) html += getStageCardHTML(el)
+                    if (el.Stage <= region.bounty_max) html += getStageCardHTML(el)
                     typePrev = el.Type
                 }
             })
@@ -8199,7 +8290,7 @@ function populateStageList(mode) {
                         let header = `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
                         html += header
                     }
-                    if (el.Stage <= data.common.regions[regionID].commission_max) html += getStageCardHTML(el)
+                    if (el.Stage <= region.commission_max) html += getStageCardHTML(el)
                     typePrev = el.Type
                 }
             })
@@ -8214,7 +8305,7 @@ function populateStageList(mode) {
                 if (el.Type != typePrev) {
                     html += `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
                 }
-                if (el.Stage <= data.common.regions[regionID].schooldungeon_max) html += getStageCardHTML(el)
+                if (el.Stage <= region.schooldungeon_max) html += getStageCardHTML(el)
                 typePrev = el.Type
             })
             $('.stage-list').hide()
@@ -8223,7 +8314,7 @@ function populateStageList(mode) {
             $('#stage-select-grid').html(html)
             break
         case 'events':
-            data.common.regions[regionID].events.forEach(val => {
+            region.events.forEach(val => {
                 if (val < 10000) html += getEventCardHTML(val)
             })
             $('.stage-list').hide()
@@ -8247,7 +8338,7 @@ function populateEventStageList(eventId) {
         let diffPrev = 0
         let eventPrev = 0
         let logoLang
-        if (regionID == 0  || !data.common.regions[regionID].events.includes(eventId)) {
+        if (regionID == 0  || !region.events.includes(eventId)) {
             //always use JP logo for Japan server
             logoLang = 'Jp'
         } else {
@@ -8277,12 +8368,9 @@ function populateEventStageList(eventId) {
         } else {
 
             let eventStages = find(data.stages.Event, 'EventId', eventId)
-            //Add rerun stages
-            if (data.common.regions[regionID].events.includes(eventId + 10000)) {
-                eventStages = eventStages.concat(find(data.stages.Event, 'EventId', eventId + 10000))
-            }
             eventStages.forEach(stage => {
-                if (!(eventId == 701 && ((stage.Difficulty == 1 && stage.Stage > data.common.regions[regionID].event_701_max) || (stage.Difficulty == 2 && stage.Stage > data.common.regions[regionID].event_701_challenge_max)))) {
+                if (!stage.Versions.includes("Original") && !region.events.includes(eventId + 10000)) return
+                if (!(eventId == 701 && ((stage.Difficulty == 1 && stage.Stage > region.event_701_max) || (stage.Difficulty == 2 && stage.Stage > region.event_701_challenge_max)))) {
                     if (stage.Difficulty != diffPrev || stage.EventId != eventPrev) {
                         let name
 
@@ -8459,7 +8547,7 @@ function getUsedByStudents(item, mode) {
 
 function getConsumableRewards(item) {
     let html = '', headerText = ''
-    const containsArray = regionID == 1 && "ContainsGlobal" in item ? item.ContainsGlobal : item.Contains
+    const containsArray = getServerProperty(item, 'Contains')
 
     switch (item.ConsumeType) {
         case "Random":
@@ -8632,14 +8720,14 @@ function getItemCraftNodes(itemId, itemType) {
     let html = ["", "", ""]
     let nodesHtml = ""
 
-    data.crafting.Nodes[regionID].forEach((craftNode) => {
+    data.crafting.Nodes.forEach((craftNode) => {
         if (craftNode.Weight > 0) {
 
             let groupWeightTotal = craftNode.Groups.reduce((sum, g) => sum + g.Weight, 0)
 
             for (group of craftNode.Groups) {
 
-                const craftGroup = data.crafting.Groups[regionID][group.GroupId]
+                const craftGroup = data.crafting.Groups[group.GroupId]
 
                 let itemWeightTotal = craftGroup.reduce((sum, g) => sum + g.Weight, 0)
             
@@ -8686,7 +8774,7 @@ function getItemConsumables(itemId) {
     let itemHtml = ["", ""]
     let returnHtml = ""
     data.items.filter(i => "ConsumeType" in i && !i.ImmediateUse).forEach((consumableItem) => {
-        const containsList = (regionID == 1 && "ContainsGlobal" in consumableItem ? consumableItem.ContainsGlobal : consumableItem.Contains)
+        const containsList = getServerProperty(consumableItem, 'Contains')
         containsList.forEach(containItem => {
 
             if (containItem[0] == itemId) {
@@ -8770,6 +8858,7 @@ function getAttackTypeText(bulletType) {
         text = translateUI("attack_type_normal_desc")
     } else for (armorType in data.config.TypeEffectiveness[bulletType]) {
         if (armorType == "Structure") continue
+        if (armorType == "ElasticArmor" && regionID == 2) continue
         const factor = data.config.TypeEffectiveness[bulletType][armorType] / 10000
         if (factor != 1) {
             text += text == '' ? '' : '\n'
@@ -8784,6 +8873,7 @@ function getDefenseTypeText(armorType) {
     if (armorType == "Normal") {
         text = translateUI("defense_type_normal_desc")
     } else for (bulletType in data.config.TypeEffectiveness) {
+        if (bulletType == "Sonic" && regionID == 2) continue
         const factor = data.config.TypeEffectiveness[bulletType][armorType] / 10000
         if (factor != 1) {
             text += text == '' ? '' : '\n'
@@ -8887,7 +8977,7 @@ function getSkillHitsText(damageDist, totalDamage, type) {
 
 function getSkillHits(skill) {
     if (!skill || !skill.Effects) return 0
-    const effectWithHits = skill.Effects.find(e => e.Hits !== undefined)
+    const effectWithHits = skill.Effects.find(e => (e.Type == "DMGMulti" || e.Type == "DMGZone") && e.Hits !== undefined)
     if (effectWithHits === undefined) {
         if (skill.Effects.find(e => e.Type == "DMGSingle") !== undefined) return 1
         return 0
@@ -8993,14 +9083,28 @@ function toggleHighContrast(state) {
 
 function changeRegion(regID) {
     if (regID != regionID) {
-        $(`#ba-navbar-regionselector-${regionID}`).removeClass("active")
-        regionID = regID
-        localStorage.setItem("region", regionID)
-        $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
-        EnemyFinder.generateEnemyList()
-        populateStudentSkillFilters()
-        studentStatsList = null
-        loadModule(loadedModule)
+
+        json_server_list = getServerJSONList(regID)
+        loadJSON(json_server_list, result => {
+            data = Object.assign(data, result)
+        }).then(function(val){
+
+            $(`#ba-navbar-regionselector-${regionID}`).removeClass("active")
+
+            regionID = regID
+            localStorage.setItem("region", regionID)
+    
+            $(`#ba-navbar-regionselector span`).text($(`#ba-navbar-regionselector-${regionID} span`).text())
+            $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
+    
+            EnemyFinder.generateEnemyList()
+            populateStudentSkillFilters()
+            studentStatsList = null
+            loadModule(loadedModule)
+
+        }, function(reason) {
+            console.error(reason)
+        })
     }
 }
 
@@ -9229,7 +9333,7 @@ function allSearch() {
     })
 
     if (results.length < maxResults)
-    $.each(data.crafting.Nodes[regionID], function(i,el){
+    $.each(data.crafting.Nodes, function(i,el){
         if (el.Weight > 0 && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
             results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/ui/'+el.Icon+'.png', 'type': getLocalizedString('NodeTier', el.Tier), 'rarity': `node-${el.Quality}`, 'rarity_text': getLocalizedString('NodeQuality', el.Quality), 'onclick': `loadCraft(${el.Id})`})
             if (results.length >= maxResults) return false
@@ -9240,7 +9344,7 @@ function allSearch() {
     $.each(data.stages.Campaign, function(i,el){
         let stagecode = getStageName(el, 'Campaign')
         let stageName = getStageTitle(el, 'Campaign')
-        if ((el.Area <= data.common.regions[regionID].campaign_max) && (searchContains(searchTerm, stagecode) || searchContains(searchTerm, stageName))) {
+        if ((el.Area <= region.campaign_max) && (searchContains(searchTerm, stagecode) || searchContains(searchTerm, stageName))) {
             results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,'Campaign')+'.png', 'type': stagecode, 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
             if (results.length >= maxResults) return false
         }
@@ -9271,7 +9375,7 @@ function allSearch() {
         let stagecode = getStageName(el, 'Event')
         let searchStageCode = stagecode.replace('\n', ' ')
         let stageName = getStageTitle(el, 'Event')
-        if ((data.common.regions[regionID].events.includes(el.EventId)) && (searchContains(searchTerm, searchStageCode) || searchContains(searchTerm, stageName))) {
+        if ((region.events.includes(el.EventId)) && (searchContains(searchTerm, searchStageCode) || searchContains(searchTerm, stageName))) {
             results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,'Event')+'.png', 'type': stagecode, 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
             if (results.length >= maxResults) return false
         }
@@ -9386,15 +9490,17 @@ function getCacheVerResourceName(res) {
  */
 function stageIsReleased(stage) {
     if (stage.Id > 8000000) {
-        return (data.common.regions[regionID].events.includes(stage.EventId))
+        return (region.events.includes(stage.EventId))
     } else if (stage.Id > 1000000) {
-        return (stage.Area <= data.common.regions[regionID].campaign_max)
+        if (stage.Area > region.campaign_max) return false
+        if (regionID > 0 && stage.Stage == "A") return false
+        return true
     } else if (stage.Id > 60000) {
-        return (stage.Stage <= data.common.regions[regionID].schooldungeon_max)
+        return (stage.Stage <= region.schooldungeon_max)
     } else if (stage.Id > 31000) {
-        return (stage.Stage <= data.common.regions[regionID].commission_max)
+        return (stage.Stage <= region.commission_max)
     } else if (stage.Id > 30000) {
-        return (stage.Stage <= data.common.regions[regionID].bounty_max)
+        return (stage.Stage <= region.bounty_max)
     } else return false
 }
 
@@ -9822,12 +9928,12 @@ function studentCollectionSave() {
 function maxStudentAttributes() {
     //Set all attributes to the maximum possible value
     statPreviewStarGrade = 5
-    statPreviewLevel = data.common.regions[regionID].studentlevel_max
+    statPreviewLevel = region.studentlevel_max
     $('#ba-statpreview-levelrange').val(statPreviewLevel)
     changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
 
     statPreviewIncludeEquipment = true
-    statPreviewEquipment = [data.common.regions[regionID].gear1_max, data.common.regions[regionID].gear2_max, data.common.regions[regionID].gear3_max]
+    statPreviewEquipment = [region.gear1_max, region.gear2_max, region.gear3_max]
     $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
     $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
     $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
@@ -9835,9 +9941,15 @@ function maxStudentAttributes() {
     changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'), false)
     changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'), false)
 
-    statPreviewWeaponGrade = 3
-    statPreviewWeaponLevel = data.common.regions[regionID].weaponlevel_max
-    $('#ba-statpreview-weapon-range').attr("max",region.weaponlevel_max).val(statPreviewWeaponLevel)
+    if (region.weaponlevel_max > 0) {
+        statPreviewWeaponGrade = 3
+        statPreviewWeaponLevel = region.weaponlevel_max
+        $('#ba-statpreview-weapon-range').attr("max",region.weaponlevel_max).val(statPreviewWeaponLevel)
+    } else {
+        statPreviewWeaponGrade = 0
+        statPreviewWeaponLevel = 0
+    }
+
     changeStatPreviewStars(statPreviewStarGrade, statPreviewWeaponGrade, false)
 
     statPreviewPassiveLevel = 10
@@ -9845,7 +9957,7 @@ function maxStudentAttributes() {
     changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
 
     for (let i = 0; i <= student_bondalts.length; i++) {
-        statPreviewBondLevel[i] = data.common.regions[regionID].bondlevel_max
+        statPreviewBondLevel[i] = region.bondlevel_max
         $(`#ba-statpreview-bond-${i}-range`).val(statPreviewBondLevel[i])
         changeStatPreviewBondLevel(i, false)
         statPreviewIncludeBond[i] = true
