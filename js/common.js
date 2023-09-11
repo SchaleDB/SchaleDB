@@ -9092,6 +9092,7 @@ function changeRegion(regID) {
             $(`#ba-navbar-regionselector-${regionID}`).removeClass("active")
 
             regionID = regID
+            region = data.common.regions[regionID]
             localStorage.setItem("region", regionID)
     
             $(`#ba-navbar-regionselector span`).text($(`#ba-navbar-regionselector-${regionID} span`).text())
