@@ -3107,9 +3107,6 @@ $.when($.ready, loadPromise).then(function() {
     $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
     $(`#ba-navbar-contrast-toggle-${highContrast}`).addClass("active")
 
-    const updatedDaysAgo = duration(new Date().getTime() / 1000 - data.config.build)[0]
-    $('#navbar-version').text(`v${cache_ver} - ${translateUI("version_lastupdated", [new Date(data.config.build * 1000).toLocaleString([], { year: "numeric", month: "numeric", day: "numeric" }), updatedDaysAgo == 0 ? "<1" : updatedDaysAgo])}`)
-
     $('#ba-navbar-search').on('input', function() {
         if (searchDelayTimeout) {
             clearTimeout(searchDelayTimeout)
@@ -3754,7 +3751,6 @@ function loadModule(moduleName, entry=null) {
             if (regionID == 2) {
                 $('#ba-raid-list-tab-timeattack').hide()
                 $('#ba-raid-list-tab-worldraid').hide()
-                $('#ba-raid-season').hide()
                 $('#ba-raid-difficulty-4').hide()
                 $('#ba-raid-difficulty-5').hide()
                 $('#ba-raid-difficulty-6').hide()
@@ -3899,9 +3895,6 @@ function loadModule(moduleName, entry=null) {
             loadRegion(regionID)
 
             populateEvents()
-            if (regionID == 2) {
-                $('#events-row-1').html(`<p class="text-center">${translateUI('info_unavailable')}</p>`).show()
-            }
 
             eventRefreshInterval = window.setInterval(updateEventTimers, 60000)
 
@@ -5536,7 +5529,6 @@ function loadRaid(raidId) {
             $('#ba-timeattack-info').hide()
             $('#ba-worldraid-difficulty').hide()
             $('#ba-raid-difficulty').show()
-            $('#ba-raid-season').toggle(regionID != 2)
             $('#ba-raid-info-tab-profile').show()
             raid = findOrDefault(data.raids.Raid,"Id",raidId,1)[0]
 
@@ -8655,6 +8647,11 @@ function getItemDropStages(itemID, includeEvents = false) {
                 if ("RewardsGlobalRerun" in dropStage) {
                     rewardList = rewardList.concat(dropStage.RewardsGlobalRerun.Default)
                 }
+            } else if (regionID == 2 && "RewardsCn" in dropStage) {
+                rewardList = dropStage.RewardsCn.Default
+                if ("RewardsCnRerun" in dropStage) {
+                    rewardList = rewardList.concat(dropStage.RewardsCnRerun.Default)
+                }
             } else {
                 rewardList = dropStage.Rewards.Default
                 if ("RewardsRerun" in dropStage) {
@@ -9228,6 +9225,10 @@ function loadLanguage(lang) {
         let key = $(el).data('tooltip-id').split(',')[0], value = $(el).data('tooltip-id').split(',')[1]
         $(el).tooltip({title: getBasicTooltip(getLocalizedString(key,value)), placement: 'top', html: true})
     })
+
+    const updatedDaysAgo = duration(new Date().getTime() / 1000 - data.config.build)[0]
+    $('#navbar-version').text(`v${cache_ver} - ${translateUI("version_lastupdated", [new Date(data.config.build * 1000).toLocaleString([], { year: "numeric", month: "numeric", day: "numeric" }), updatedDaysAgo == 0 ? "<1" : updatedDaysAgo])}`)
+    $(`#ba-navbar-regionselector span`).text($(`#ba-navbar-regionselector-${regionID} span`).text())
 }
 
 function getRarityStars(rarity) {
