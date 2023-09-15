@@ -1585,7 +1585,8 @@
             ]
         ],
         "FavorAlts": [
-            10057
+            10057,
+            20030
         ],
         "MemoryLobby": [
             6,
@@ -68203,7 +68204,8 @@
             ]
         ],
         "FavorAlts": [
-            10002
+            10002,
+            20030
         ],
         "MemoryLobby": [
             5,
@@ -86945,6 +86947,521 @@
             [
                 12,
                 6,
+                13
+            ]
+        ]
+    },
+    {
+        "Id": 20030,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 155,
+        "PathName": "Haruna_Track",
+        "DevName": "CH0193",
+        "Name": "하루나(체육복)",
+        "School": "Gehenna",
+        "Club": "GourmetClub",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "Healer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Sonic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "SR",
+        "WeaponImg": "weapon_icon_10002",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Bag",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_Cheerleading_Collection",
+        "FamilyName": "쿠로다테",
+        "FamilyNameRuby": "",
+        "PersonalName": "하루나",
+        "SchoolYear": "3학년",
+        "CharacterAge": "17세",
+        "Birthday": "3월 1일",
+        "CharacterSSRNew": "몸을 움직이는 만큼, 식욕이 돌겠죠.\n함께 떠나시겠어요?",
+        "ProfileIntroduction": "황륜대제를 맞아 체육복으로 갈아입은 하루나.\n\n언제, 어떤 곳이라도 하루나의 미식에 대한 탐구는 계속된다. 아니, 오히려 황륜대제라는 키보토스 최대의 체육제에서만 맛볼 수 있는 미식을 찾는 중이다. 특별히 뜨거워진 분위기 덕분일까, 평소보다 조금 신이 나 있는 듯이 보이기도, 어딘가 친절해진 듯이 보이기도 한다. ",
+        "Hobby": "맛집 탐방, 미식 리스트 작성",
+        "CharacterVoice": "田所あずさ",
+        "BirthDay": "3/1",
+        "Illustrator": "whoisshe",
+        "Designer": "whoisshe",
+        "CharHeightMetric": "163cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 2111,
+        "AttackPower1": 249,
+        "AttackPower100": 2492,
+        "MaxHP1": 2871,
+        "MaxHP100": 21459,
+        "DefensePower1": 95,
+        "DefensePower100": 574,
+        "HealPower1": 2610,
+        "HealPower100": 7832,
+        "DodgePoint": 183,
+        "AccuracyPoint": 540,
+        "CriticalPoint": 270,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "미식가의 제안",
+                "Desc": "원형범위 내의 아군 4인을 지정한 위치로 이동 후 치유력 <?1> 회복",
+                "Parameters": [
+                    [
+                        "63%",
+                        "72.4%",
+                        "91.3%",
+                        "100%",
+                        "119%",
+                        "129%",
+                        "148%",
+                        "157%",
+                        "176%",
+                        "185%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Icon": "SKILLICON_CH0193_EXSKILL",
+                "Effects": [
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            6303,
+                            7248,
+                            9138,
+                            10083,
+                            11973,
+                            12918,
+                            14808,
+                            15753,
+                            17643,
+                            18588
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "신중한 접근법",
+                "Desc": "40초마다 적 6인에게 공격력 <?1> 대미지/\n<d:DEF> <?2> 감소(20초간)",
+                "Parameters": [
+                    [
+                        "161%",
+                        "169%",
+                        "177%",
+                        "209%",
+                        "217%",
+                        "226%",
+                        "258%",
+                        "266%",
+                        "274%",
+                        "306%"
+                    ],
+                    [
+                        "5.8%",
+                        "6.1%",
+                        "6.4%",
+                        "7.5%",
+                        "7.8%",
+                        "8.1%",
+                        "9.3%",
+                        "9.6%",
+                        "9.9%",
+                        "11%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            16149,
+                            16954,
+                            17766,
+                            20993,
+                            21798,
+                            22610,
+                            25837,
+                            26642,
+                            27454,
+                            30681
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -583,
+                                -612,
+                                -641,
+                                -758,
+                                -787,
+                                -816,
+                                -932,
+                                -962,
+                                -990,
+                                -1107
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "프로마주 블랑",
+                "Desc": "<b:HealPower> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "프로마주 블랑+",
+                "Desc": "<b:HealPower> <?1> 증가/\n추가로 <b:HealPower> <?2> 증가",
+                "Parameters": [
+                    [
+                        "1044",
+                        "1097",
+                        "1149",
+                        "1358",
+                        "1410",
+                        "1462",
+                        "1671",
+                        "1723",
+                        "1775",
+                        "1984"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Base",
+                        "Scale": [
+                            1044,
+                            1097,
+                            1149,
+                            1358,
+                            1410,
+                            1462,
+                            1671,
+                            1723,
+                            1775,
+                            1984
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "스포츠 정찬",
+                "Desc": "아군의 <b:ATK> <?1> 증가",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 302
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "HealPower",
+            "AttackPower"
+        ],
+        "FavorStatValue": [
+            [
+                8,
+                0
+            ],
+            [
+                12,
+                0
+            ],
+            [
+                16,
+                6
+            ],
+            [
+                20,
+                7
+            ],
+            [
+                5,
+                1
+            ],
+            [
+                7,
+                2
+            ],
+            [
+                12,
+                3
+            ]
+        ],
+        "FavorAlts": [
+            10002,
+            10057
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Water Drop",
+        "FurnitureInteraction": [
+            [
+                [
+                    210320,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Dessert",
+            "Sports",
+            "Delicious"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Haruna_Track",
+            "F_Haruna_Track2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "Ideal",
+            "Desc": "하루나의 저격소총.\n\n날카로운 시선으로, 운동 중이든 언제든, 미식으로의 길을 그녀는 찾아낸다.",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 110,
+            "AttackPower100": 1095,
+            "MaxHP1": 625,
+            "MaxHP100": 6246,
+            "HealPower1": 307,
+            "HealPower100": 3068,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                190
+            ],
+            [
+                3031,
+                3030,
+                191,
+                220
+            ],
+            [
+                3032,
+                3031,
+                192,
+                221
+            ],
+            [
+                3033,
+                3032,
+                193,
+                222
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                19
+            ],
+            [
+                12,
+                18,
+                16,
+                33
+            ],
+            [
+                12,
+                18,
+                10,
+                22
+            ],
+            [
+                8,
+                18,
+                11,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                190
+            ],
+            [
+                4031,
+                191,
+                220
+            ],
+            [
+                4032,
+                4031,
+                191,
+                220
+            ],
+            [
+                4032,
+                192,
+                221
+            ],
+            [
+                4033,
+                4032,
+                193,
+                222
+            ],
+            [
+                4033,
+                193,
+                222
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                7,
+                12
+            ],
+            [
+                5,
+                12,
+                9,
+                15
+            ],
+            [
+                8,
+                5,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                7,
                 13
             ]
         ]

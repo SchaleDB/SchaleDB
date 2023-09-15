@@ -1585,7 +1585,8 @@
             ]
         ],
         "FavorAlts": [
-            10057
+            10057,
+            20030
         ],
         "MemoryLobby": [
             6,
@@ -68195,7 +68196,8 @@
             ]
         ],
         "FavorAlts": [
-            10002
+            10002,
+            20030
         ],
         "MemoryLobby": [
             5,
@@ -86937,6 +86939,521 @@
             [
                 12,
                 6,
+                13
+            ]
+        ]
+    },
+    {
+        "Id": 20030,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 155,
+        "PathName": "Haruna_Track",
+        "DevName": "CH0193",
+        "Name": "ハルナ（体操服）",
+        "School": "Gehenna",
+        "Club": "GourmetClub",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "Healer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Sonic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "SR",
+        "WeaponImg": "weapon_icon_10002",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Bag",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_Cheerleading_Collection",
+        "FamilyName": "黒舘",
+        "FamilyNameRuby": null,
+        "PersonalName": "ハルナ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "17歳",
+        "Birthday": "3月1日",
+        "CharacterSSRNew": "運動した分、お腹も減ったかと思います。\nさあ、ともに美食の旅へと参りましょう",
+        "ProfileIntroduction": "晄輪大祭のために体操服に着替えたゲヘナ学園所属、美食研究会の部長。\n\nいつでも、どこでも、美食への探求は続いており、晄輪大祭というキヴォトス最大の大運動会でしか味わえない美食を求めてさまよっている。盛り上がっている現場の雰囲気にあてられたのか、いつもより少し楽しそうだ。",
+        "Hobby": "美味しいもの探し",
+        "CharacterVoice": "田所あずさ",
+        "BirthDay": "3/1",
+        "Illustrator": "whoisshe",
+        "Designer": "whoisshe",
+        "CharHeightMetric": "163cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 2111,
+        "AttackPower1": 249,
+        "AttackPower100": 2492,
+        "MaxHP1": 2871,
+        "MaxHP100": 21459,
+        "DefensePower1": 95,
+        "DefensePower100": 574,
+        "HealPower1": 2610,
+        "HealPower100": 7832,
+        "DodgePoint": 183,
+        "AccuracyPoint": 540,
+        "CriticalPoint": 270,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "美食家のオススメ",
+                "Desc": "円形範囲内の味方4人を指定した位置に移動させた後、治癒力の<?1>分の回復",
+                "Parameters": [
+                    [
+                        "63%",
+                        "72.4%",
+                        "91.3%",
+                        "100%",
+                        "119%",
+                        "129%",
+                        "148%",
+                        "157%",
+                        "176%",
+                        "185%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Icon": "SKILLICON_CH0193_EXSKILL",
+                "Effects": [
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            6303,
+                            7248,
+                            9138,
+                            10083,
+                            11973,
+                            12918,
+                            14808,
+                            15753,
+                            17643,
+                            18588
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "美食家のアプローチ",
+                "Desc": "40秒毎に、敵6人に対して攻撃力の<?1>分のダメージ/\n<d:DEF>を<?2>減少（20秒間）",
+                "Parameters": [
+                    [
+                        "161%",
+                        "169%",
+                        "177%",
+                        "209%",
+                        "217%",
+                        "226%",
+                        "258%",
+                        "266%",
+                        "274%",
+                        "306%"
+                    ],
+                    [
+                        "5.8%",
+                        "6.1%",
+                        "6.4%",
+                        "7.5%",
+                        "7.8%",
+                        "8.1%",
+                        "9.3%",
+                        "9.6%",
+                        "9.9%",
+                        "11%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            16149,
+                            16954,
+                            17766,
+                            20993,
+                            21798,
+                            22610,
+                            25837,
+                            26642,
+                            27454,
+                            30681
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -583,
+                                -612,
+                                -641,
+                                -758,
+                                -787,
+                                -816,
+                                -932,
+                                -962,
+                                -990,
+                                -1107
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "癒やしのスイーツ",
+                "Desc": "<b:HealPower>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "癒やしのスイーツ+",
+                "Desc": "<b:HealPower>を<?1>増加/\nさらに<b:HealPower>を<?2>増加",
+                "Parameters": [
+                    [
+                        "1044",
+                        "1097",
+                        "1149",
+                        "1358",
+                        "1410",
+                        "1462",
+                        "1671",
+                        "1723",
+                        "1775",
+                        "1984"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Base",
+                        "Scale": [
+                            1044,
+                            1097,
+                            1149,
+                            1358,
+                            1410,
+                            1462,
+                            1671,
+                            1723,
+                            1775,
+                            1984
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "スポーツ正餐",
+                "Desc": "味方の<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 302
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "HealPower",
+            "AttackPower"
+        ],
+        "FavorStatValue": [
+            [
+                8,
+                0
+            ],
+            [
+                12,
+                0
+            ],
+            [
+                16,
+                6
+            ],
+            [
+                20,
+                7
+            ],
+            [
+                5,
+                1
+            ],
+            [
+                7,
+                2
+            ],
+            [
+                12,
+                3
+            ]
+        ],
+        "FavorAlts": [
+            10002,
+            10057
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Water Drop",
+        "FurnitureInteraction": [
+            [
+                [
+                    210320,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Dessert",
+            "Sports",
+            "Delicious"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Haruna_Track",
+            "F_Haruna_Track2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "アイディール",
+            "Desc": "ハルナのスナイパーライフル。\n\n美食への道を探求すべく、いつでも鋭い視線を張り巡らせている。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 110,
+            "AttackPower100": 1095,
+            "MaxHP1": 625,
+            "MaxHP100": 6246,
+            "HealPower1": 307,
+            "HealPower100": 3068,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                190
+            ],
+            [
+                3031,
+                3030,
+                191,
+                220
+            ],
+            [
+                3032,
+                3031,
+                192,
+                221
+            ],
+            [
+                3033,
+                3032,
+                193,
+                222
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                19
+            ],
+            [
+                12,
+                18,
+                16,
+                33
+            ],
+            [
+                12,
+                18,
+                10,
+                22
+            ],
+            [
+                8,
+                18,
+                11,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                190
+            ],
+            [
+                4031,
+                191,
+                220
+            ],
+            [
+                4032,
+                4031,
+                191,
+                220
+            ],
+            [
+                4032,
+                192,
+                221
+            ],
+            [
+                4033,
+                4032,
+                193,
+                222
+            ],
+            [
+                4033,
+                193,
+                222
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                7,
+                12
+            ],
+            [
+                5,
+                12,
+                9,
+                15
+            ],
+            [
+                8,
+                5,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                7,
                 13
             ]
         ]
