@@ -74,6 +74,22 @@
                                 <div class="ba-panel p-2">
                                     <div id="ba-stage-drops"></div>
                                 </div>
+                                <div id="stage-include-bonus" class="mt-2">
+                                    <div class="d-flex align-items-center">
+                                        <i data-localize-id="ui,stage_reward_include_bonuses"></i>
+                                        <div id="stage-include-bonus-list" class="ms-2">
+                                            <button class="btn-pill" data-bs-toggle="dropdown">
+                                                <span class="label"></span>
+                                                <i class="caret fa-solid fa-caret-down me-2"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start">
+                                                <li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-option="0"><span data-localize-id="ui,no_bonus"></span></a></li>
+                                                <li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-option="1"><span data-localize-id="ui,max_bonus"></span></a></li>
+                                                <li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-option="2"><span data-localize-id="ui,own_bonus"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <nav id="ba-stage-page" class="nav nav-pills my-3">
                                 <a id="ba-stage-tab-enemies" class="nav-link active" data-bs-toggle="tab" href="#ba-stage-page-enemies" data-localize-id="ui,stage_enemies"></a>

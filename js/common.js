@@ -226,6 +226,7 @@ let loadedItem
 let loadedItemType
 let loadedStage
 let loadedStageVersion
+let showEventCurrencyBonus = 1
 let loadedConquest
 let loadedCraftNode
 let loadedCraftId = 0
@@ -474,6 +475,11 @@ let itemSearchOptions = {
         "ShowImmediateUse": false,
         "ShowExpired": false,
     }
+}
+
+/** Extensions */
+Array.prototype.sum = function() {
+    return this.reduce((pv, cv) => pv + cv, 0)
 }
 
 /** Classes */
@@ -3800,10 +3806,20 @@ function loadModule(moduleName, entry=null) {
             $(".tooltip").tooltip("hide")
             var urlVars = new URL(window.location.href).searchParams
         
+            if (localStorage.getItem("show_event_currency_bonus")) {
+                showEventCurrencyBonus = localStorage.getItem("show_event_currency_bonus")
+            }
+
             generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6)
 
             $('#stage-version-list').on('click', '.dropdown-item', function(e) {
                 changeStageVersion($(this).data('version'))
+            })
+
+            $('#stage-include-bonus-list').on('click', '.dropdown-item', function(e) {
+                showEventCurrencyBonus = parseInt($(this).data('option'))
+                localStorage.setItem("show_event_currency_bonus", showEventCurrencyBonus)
+                loadStage(loadedStage.Id)
             })
 
             if (entry != null) {
@@ -3939,7 +3955,9 @@ function populateEvents() {
 
     let raidText = "", raidHtml = ""
     $('#events-row-2').hide()
+    $('#ba-home-raid').hide()
     found = false
+    let raidsVisible = false
     $.each(region.current_raid, function (i, el) {
         if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
             if (el.raid >= 1000) {
@@ -3952,10 +3970,11 @@ function populateEvents() {
                 raidHtml += getRaidCardHTML(raid, el.terrain)
             }
             $('#events-row-2').show()
+            $('#ba-home-raid').show()
             raidText += new Date(el.start * 1000).toLocaleString([], dateOptions) + ' - ' + new Date(el.end * 1000).toLocaleString([], dateOptions)
             raidText += `\n<span id="ba-home-raid-timer" class="home-timer" data-start="${el.start}" data-end="${el.end}"></span>`
-            // raidText += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end - currentTime)) : translateUI('event_starts', duration(el.start - currentTime)))
             found = true
+            raidsVisible = true
         }
     })
     $('#ba-home-raid-text').html(raidText)
@@ -3969,11 +3988,13 @@ function populateEvents() {
             eventText = getLocalizedString("StageType", "Event") + "\n"
             eventHtml += getEventCardHTML(el.event)
 
+            $('#events-row-2').show()
             $('#ba-home-event').show()
             eventText += new Date(el.start * 1000).toLocaleString([], dateOptions) + ' - ' + new Date(el.end * 1000).toLocaleString([], dateOptions)
             eventText += `\n<span id="ba-home-event-timer" class="home-timer" data-start="${el.start}" data-end="${el.end}"></span>`
-            // eventText += '\n' + (currentTime >= el.start ? translateUI('event_ends', duration(el.end - currentTime)) : translateUI('event_starts', duration(el.start - currentTime)))
             found = true
+
+            $('#ba-home-event').toggleClass('col-md-12', !raidsVisible)
         }
     })
     $('#ba-home-event-text').html(eventText)
@@ -6133,6 +6154,8 @@ function loadStage(id) {
             rewardsArray = getServerProperty(stage, 'Rewards')
         }
 
+        const eventCurrencies = []
+
         stageTypes.forEach(el => {
             if (el in stage.Rewards && stage.Rewards[el].length > 0) {
                 let labelText = null
@@ -6156,9 +6179,106 @@ function loadStage(id) {
                 rewardsArray[el].forEach(reward => {
                     const amount = stage.Type == "FindGift" ? reward[2] : 1
                     dropsHtml += getDropIconHTML(reward[0], reward[1], amount, amount, false, labelText)
+
+                    if (el == "Default" && (mode == "Event" || mode == "Conquest") && stage.EventId != 811 && reward[1] >= 1 && reward[0] >= 80000 && reward[0] < 90000) {
+                        eventCurrencies.push(reward)
+                    }
                 })
             }
         })
+
+        const hexaMap = getSuffixedProperty(stage, "HexaMap", loadedStageVersion)
+        const starCondition = getSuffixedProperty(stage, "StarCondition", loadedStageVersion)
+        const challengeCondition = getSuffixedProperty(stage, "ChallengeCondition", loadedStageVersion)
+
+        if (eventCurrencies.length) {
+
+            if (showEventCurrencyBonus) {
+
+                const teams = hexaMap ? hexaMap.filter(tile => tile.Entity <= 101105).length : 1
+
+                for (reward of eventCurrencies) {
+    
+                    const item = find(data.items, 'Id', reward[0])[0]
+                    let maxBonus = 0
+                    let useStudents = ''
+
+                    if (mode == "Event") {
+
+                        const studentBonus = {"Main": Array(teams*4).fill(0), "Support": Array(teams*2).fill(0)}
+                        const chosenStudent = {"Main": Array(teams*4).fill(null), "Support": Array(teams*2).fill(null)}
+    
+                        for (bonus of item.EventBonus) {
+        
+                            if (showEventCurrencyBonus == 1 || bonus[0] in studentCollection) {
+        
+                                const student = find(data.students, 'Id', bonus[0])[0]
+        
+                                for (let slot = 0; slot < studentBonus[student.SquadType].length; slot++) {
+                                    if (bonus[1] > studentBonus[student.SquadType][slot]) {
+                                        studentBonus[student.SquadType][slot] = bonus[1]
+                                        chosenStudent[student.SquadType][slot] = student.Id
+                                        break
+                                    }
+                                }
+        
+                            }
+        
+                        }
+
+                        maxBonus = studentBonus["Main"].concat(studentBonus["Support"]).sum()
+
+                        for (type in chosenStudent) {
+                            for (let slot = 0; slot < chosenStudent[type].length; slot++) {
+                                if (chosenStudent[type][slot] != null) {
+                                    useStudents += `<img class="inline-student-img" src="images/student/icon/${chosenStudent[type][slot]}.webp">`
+                                }
+                            }
+                        }
+                        
+
+                    } else if (mode == "Conquest") {
+
+                        if (showEventCurrencyBonus == 1) {
+                            maxBonus = 12000
+                        } else {
+                            const ownStudents = {"Main": 0, "Support": 0}
+
+                            for (studentId in studentCollection) {
+                                const student = find(data.students, 'Id', studentId)[0]
+
+                                if (stage.SchoolBuff[0].includes(student.School)) {
+                                    ownStudents[student.SquadType] += 1
+                                }
+
+                            }
+
+                            maxBonus = Math.min(Math.floor((ownStudents["Main"] + ownStudents["Support"]) / 2) * 4000, 12000)
+                        }
+                        
+                    }
+
+                    const amount = Math.ceil(reward[1] * (maxBonus / 10000))
+    
+                    if (amount > 0) {
+                        dropsHtml += getDropIconHTML(reward[0], amount, 1, 1, false, translateUI("stage_reward_bonus"), useStudents != '' ? `\n\n<i>${translateUI('max_bonus_amount', ['+' + (maxBonus / 100) + '%'])}</i>\n${useStudents}` : '')
+                    }
+
+                    
+    
+                }
+
+            }
+
+            $(`#stage-include-bonus`).show()
+            $(`#stage-include-bonus-list .dropdown-item`).toggleClass('active', false)
+            const $activeItem = $(`#stage-include-bonus-list .dropdown-item[data-option="${showEventCurrencyBonus}"`)
+            $activeItem.toggleClass('active', true)
+            $(`#stage-include-bonus-list button .label`).text($activeItem.text())
+
+        } else {
+            $(`#stage-include-bonus`).hide()
+        }
 
         if (mode == 'Conquest') {
 
@@ -6266,10 +6386,6 @@ function loadStage(id) {
         conditionsHtml = ""
         const starIcon = `<i class="fa-solid fa-star me-2 stage-star"></i>`
         const challengeIcon = `<i class="fa-solid fa-clipboard-list me-2 stage-challenge"></i>`
-
-        let hexaMap = getSuffixedProperty(stage, "HexaMap", loadedStageVersion)
-        let starCondition = getSuffixedProperty(stage, "StarCondition", loadedStageVersion)
-        let challengeCondition = getSuffixedProperty(stage, "ChallengeCondition", loadedStageVersion)
 
         if (hexaMap) {
             $('#ba-stage-tab-map').toggleClass('disabled', false)
@@ -6500,7 +6616,6 @@ function loadRegion(regID) {
         for (let i = 103; i <= 112; i++) {
             $(`#item-search-filter-furnitureset-${i}`).hide()
         }
-        $('#item-search-filter-showexpired').hide()
 
     }
 }
@@ -7696,7 +7811,7 @@ function getMaterialIconHTML(id, amount) {
     return html
 }
 
-function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dropType=null) {
+function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dropType=null, appendDescription=null) {
     let item, type, group, haslink, itemType
     if (id >= 4000000 && id < 5000000) {
         groups = find(data.common.GachaGroup, "Id", id-4000000)
@@ -7850,6 +7965,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                 description += `\n${getTranslatedString(item, 'Name')} (${getProbabilityText(containedItem[1])})`
             })
         }
+        if (appendDescription) description += appendDescription
         html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/icon/${item.Icon}.webp`, getTranslatedString(item, 'Name'), getLocalizedString('ItemCategory',itemType), rarityText, description, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/icon/${item.Icon}.webp" alt="${item.Name}"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 || forcePercent ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
     }
     return html
@@ -9614,9 +9730,10 @@ function drawHexamap(stage, container) {
         const x = xx*scale + (yy*scale*0.5) - leftOffset
         const y = yy* Math.sqrt(Math.pow(scale/2, 2)*3) + topOffset
         const spawnTiles = [102101, 902101, 903108]
+        const removeTiles = [102201, 903101]
         let html = ""
         let onclick = ""
-        if (tile.Type.startsWith("TileRemoveObject_TargetTile")) {
+        if (tile.Trigger !== undefined && (spawnTiles.includes(stage.HexaMap[tile.Trigger].Entity) || removeTiles.includes(stage.HexaMap[tile.Trigger].Entity))) {
             if (tilePairs[ind] == 0 && tilePairs[tile.Trigger] == 0) {
                 pairCount++
                 tilePairs[ind] = pairCount
@@ -9727,7 +9844,7 @@ function drawHexamap(stage, container) {
                     break
             }
         }
-        html = `<div class="ba-stage-map-tile map-tile-${ind} ${(tile.Type.startsWith("TileRemoveObject_TargetTile") && tile.Trigger !== undefined && spawnTiles.includes(stage.HexaMap[tile.Trigger].Entity)) ? "hidden-tile" : ""} ${(tile.Type.startsWith("DisposableTileObject")) ? "cracked-tile" : ""}" ${onclick} style="left:${x}px;top:${y.toFixed(0)}px;${onclick != '' ? 'cursor:pointer;' : ''}">${html}</div>`
+        html = `<div class="ba-stage-map-tile map-tile-${ind} ${(tile.Trigger !== undefined && spawnTiles.includes(stage.HexaMap[tile.Trigger].Entity)) ? "hidden-tile" : ""} ${(tile.Type.startsWith("DisposableTileObject")) ? "cracked-tile" : ""}" ${onclick} style="left:${x}px;top:${y.toFixed(0)}px;${onclick != '' ? 'cursor:pointer;' : ''}">${html}</div>`
         $(container).css('width', `${rightOffset-leftOffset}px`)
         $(container).css('height', `${topOffset + 10 + scale + (y_max-y_min)*Math.sqrt(Math.pow(scale/2, 2)*3)}px`)
         $(container).append(html)
