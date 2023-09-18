@@ -9,7 +9,7 @@
             ],
             "MaxDifficulty": [
                 6,
-                5,
+                6,
                 3
             ],
             "PathName": "Binah",
@@ -416,7 +416,7 @@
                             "CanEvade": false
                         }
                     ],
-                    "Name": "自爆モード作動",
+                    "Name": "Self-Destruct Activated",
                     "Desc": "Gây 3000% sát thương kẻ địch trong khu vực hình tròn."
                 },
                 {
@@ -945,7 +945,7 @@
                         ]
                     },
                     "Name": "Dun-Dun-Dun! (Shiro)",
-                    "Desc": "複数の爆弾を投擲し、敵を攻撃します。\nノーマル爆弾：円形範囲内の敵に対して、攻撃力の1800%~3000%分のダメージ（ATGが高いほど、ダメージが増加）\n氷の爆弾：円形範囲内の敵に対して、攻撃力の1000%~1800%分のダメージ（ATGが高いほど、ダメージが増加）、さらに移動速度を80%、攻撃力を40%減少（40秒間）\n粘着爆弾：円形範囲内の敵に対して、攻撃力の700%分のダメージ、さらに気絶状態を付与（4秒間）"
+                    "Desc": "Throws multiple types of bombs to attack enemies.\n<b>Normal Bomb</b>: Deals between 1800%~3000% damage to enemies in a circular area (damage increases as Shiro's ATG increases). \n<b>Ice Bomb</b>: Deals between 1000%~1800% damage to enemies in a circular area (damage increases as Shiro's ATG increases) and decreases <d:MoveSpeed> by 80% and <d:ATK> by 40% of enemies hit for 40s.\n<b>Sticky Bomb</b>: Deals 700% damage to enemies in a circular area and inflicts <c:Stunned> for 4s."
                 },
                 {
                     "Id": "ShiroEx04",
@@ -2410,8 +2410,8 @@
                             "Channel": 527
                         }
                     ],
-                    "Name": "悪党め！卑怯なり！",
-                    "Desc": "KAITEN FX Mk.0に搭乗前、各カイテンジャーがCC状態になる場合、<d:DamagedRatio>が40%増加（15秒間）"
+                    "Name": "Villains! How Cowardly!",
+                    "Desc": "Before boarding KAITEN FX Mk.0, whenever a Kaitenger is inflicted with a CC effect, increases their <d:DamagedRatio> by 40% for 15s."
                 }
             ],
             "HasNormalAttack": [
@@ -2772,8 +2772,8 @@
                             "ordinal_3"
                         ]
                     },
-                    "Name": "白熱眼光",
-                    "Desc": "白熱眼光を放出し、敵1人と対象の周囲から最も近い対象に対して、最大2回まで転移\n1番目の対象：攻撃力の100%分の持続ダメージ（10秒間）、<d:DEF>を9999減少（60秒間）\nスキル終了時、防御力の減少効果が残っている場合、扇形範囲内の敵に対して、攻撃力の250%分のダメージ\n2番目の対象：攻撃力の20%分の持続ダメージ（10秒間）\n3番目の対象：攻撃力の10%分の持続ダメージ（10秒間）"
+                    "Name": "White-Hot Heat Vision",
+                    "Desc": "Emits White-Hot Heat Vision against one enemy that chains to the nearest enemy (up to 2 times).\n<b>1st target</b>: Decreases the <d:DEF> of the target by <b>9,999</b> for 60s and continuously deals 100% damage to them every 1s for 10s. If the defense reduction debuff is not removed before the end of the skill's duration, deals 250% damage to enemies in a fan-shaped area.\n<b>2nd target</b>: Continuously deals 20% damage to them every 1s for 10s.\n<b>3rd target</b>: Continuously deals 10% damage to them every 1s for 10s."
                 },
                 {
                     "Id": "Perorozilla01Ex02",
@@ -2910,8 +2910,8 @@
                             "Channel": 134
                         }
                     ],
-                    "Name": "バーニングペロロジラ",
-                    "Desc": "ペロロジラと大きなペロロミニオンの<b:EnhanceMysticRate>を50%加算"
+                    "Name": "Burning Perorodzilla",
+                    "Desc": "Increases Perorodzilla's and summoned Perorominions' <b:EnhanceMysticRate> by 50%."
                 }
             ],
             "HasNormalAttack": [],
@@ -4312,8 +4312,8 @@
                             "Channel": 94601
                         }
                     ],
-                    "Name": "聖者の囁き",
-                    "Desc": "敵全体に対して攻撃力の500%分の確定会心ダメージ、<d:ATK>を40%減少（120秒間）（この効果は重複可能）"
+                    "Name": "Saints' Whispers",
+                    "Desc": "Deals 500% guaranteed critical damage to all enemies and decreases their <d:ATK> by 40% for 120s (effect stacks multiple times)."
                 },
                 {
                     "Id": "EN0005_Ex01_DefenderSide",
@@ -4350,8 +4350,8 @@
                             "Channel": 94601
                         }
                     ],
-                    "Name": "厳粛なる悔悟",
-                    "Desc": "自身が保有している弱体状態の数によって適用される効果が異なります。\n・弱体状態<?1>つ以下：味方全体の弱体状態を1つ解除\n・弱体状態<?2>つ以上：味方全体の<d:ATK>を10%減少（120秒間）",
+                    "Name": "Solemn Repentance",
+                    "Desc": "Inflicts the following effects depending on Gregorio's number of debuffs.\n<b><?1> or fewer debuffs</b>: Removes 1 debuff from all allies.\n<b><?2> or more debuffs</b>: Reduces the <d:ATK> of all allies by 10% for 120s.",
                     "Parameters": [
                         [
                             "4",
@@ -4417,8 +4417,8 @@
                             "Channel": 94609
                         }
                     ],
-                    "Name": "グレゴリオ聖歌",
-                    "Desc": "中央のパイプオルガンが向いた方向によって味方全体、あるいは敵全体にスキルを使用し、スキルを使用する度にスキルの効果が変更されます。\n・1番目：黒いパイプが向いたチーム全体の<d:DamagedRatio>を50%増加（60秒間）\n・2番目：白いパイプが向いたチーム全体の弱体状態を1つ解除\n・3番目：白いパイプが向いたチーム全体の<d:DamagedRatio>を50%増加（60秒間）\n・4番目：黒いパイプが向いたチーム全体の弱体状態を1つ解除\n（この後、スキル使用時1番目から繰り返し）"
+                    "Name": "Gregorian Chant",
+                    "Desc": "Inflicts the following effects on allies or enemies, depending on the direction the Pipe Organ is facing. The effects change with each activation.\n<b>1st</b>: Increases the <d:DamagedRatio> of the team facing the black pipes by 50% for 60s.\n<b>2nd</b>: Removes 1 debuff from the team facing the white pipes.\n<b>3rd</b>: Increases the <d:DamagedRatio> of the team facing the white pipes by 50% for 60s.\n<b>4th</b>: Removes 1 debuff from the team facing the black pipes.\nAfter this, the effects repeat from the 1st activation again."
                 },
                 {
                     "Id": "EN0005Ex04",
@@ -4426,8 +4426,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_EXSKILL04",
-                    "Name": "万人の救恤",
-                    "Desc": "敵全体に対して攻撃力の<b>999999</b>分のダメージ（この攻撃は<s:Immortal>を解除します）"
+                    "Name": "Salvation for All",
+                    "Desc": "Deals <b>999999</b> damage to all enemies. (This attack removes the <s:Immortal> status)"
                 },
                 {
                     "Id": "EN0005_Passive01",
@@ -4541,8 +4541,8 @@
                             "buff/Combat_Icon_Special_DebuffCountGreen"
                         ]
                     },
-                    "Name": "聖者のしもべのしもべ",
-                    "Desc": "グレゴリオが保有した弱体状態の数によって自身と聖歌隊に効果を適用\n・<s:DebuffCountGreen>（弱体状態<?1>つ）：被ダメージ量を<?2>増加\n・<s:DebuffCountYellow>（弱体状態<?3>つまたは<?4>つ）：被ダメージ量を100%増加/攻撃力を20%増加\n・<s:DebuffCountRed>（弱体状態<?5>つ以下または<?6>つ以上）：攻撃力を40%増加",
+                    "Name": "Servant of the Servants of the Saint",
+                    "Desc": "Applies the following effects to Gregorio and all Choir Members depending on the number of debuffs inflicted on Gregorio.\n<s:DebuffCountGreen> (<?1> debuffs): Increases incoming damage by <?2>.\n<s:DebuffCountYellow> (<?3> or <?4> debuffs): Increases incoming damage by 100% and ATK by 20%.\n<s:DebuffCountRed> (<?5> or fewer/<?6> or more debuffs): Increases ATK by 40%.",
                     "Parameters": [
                         [
                             "4~5",
@@ -4627,8 +4627,8 @@
                             "Channel": 94613
                         }
                     ],
-                    "Name": "荘厳なる聖歌隊",
-                    "Desc": "左側、右側の壇上の聖歌隊は登場後40秒間合唱を終えたら<b:ATK>を100%増加/\n聖歌隊はHPが1％未満になったら倒れて攻撃不可状態になります。"
+                    "Name": "The Majestic Choir",
+                    "Desc": "Choir Members on the left and right podiums will sing for 40s after they appear, increasing their <b:ATK> by 100% after finishing singing.\nIf a Choir Member's HP falls below 1%, they will be knocked down, become unable to attack and increase Gregorio's groggy gauge by 5%."
                 },
                 {
                     "Id": "EN0005_Passive03",
@@ -4675,8 +4675,8 @@
                             "Channel": 94607
                         }
                     ],
-                    "Name": "サンクトゥス",
-                    "Desc": "グレゴリオの能力値を変更する弱体状態が適用された場合、同じ効果が聖歌隊にも複製されます。/\n聖歌隊は被ダメージの100%分をグレゴリオに与えます。/\n戦闘開始直後、グレゴリオと聖歌隊の<d:ATK>を30%減少（30秒間）/\n演奏の後半部に全ての聖歌隊はグレゴリオの横に移動し合唱します。\nこの時、敵と味方が徐々に強化されます。\n・全ての聖歌隊は10秒毎に<b:AttackSpeed>を10%増加（この効果は重複可能）/\n・スペシャルを含め全ての敵は10秒毎に、<b:CostRegen>を<b>300</b>増加（この効果は重複可能）"
+                    "Name": "Sanctus",
+                    "Desc": "If Gregorio is inflicted with a stat-reducing debuff, the same effect is replicated on all Choir Members.\n100% of the damage taken by Choir Members will also be taken by Gregorio.\nImmediately after the start of battle, Gregorio and all Choir Members' <d:ATK> is decreased by 30% for 30s.\nFor the final part of the performance, all Choir Members move to Gregorio's side and sing in chorus. During this, all enemies and allies are gradually strengthened.\nIncreases the <b:AttackSpeed> of all Choir Members by 10% every 10s. (effect stacks multiple times).\nIncreases all enemies' (including Special students) <b:CostRegen> by <b>300</b> every 10s. (effect stacks multiple times)"
                 },
                 {
                     "Id": "EN0005_Passive04",
@@ -4684,8 +4684,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0005_PASSIVESKILL04",
-                    "Name": "苦難のオルガン",
-                    "Desc": "中央のパイプオルガンはExスキルでのみ攻撃可能で、HPが1%未満の場合は180度回転します。\n回転直後、HPが全回復し、30秒間攻撃されません。"
+                    "Name": "Organ of Suffering",
+                    "Desc": "The Pipe Organ can only be attacked using EX Skills and will rotate 180 degrees when its HP falls below 1%.\nImmediately after rotating, the Pipe Organ restores all HP and cannot be attacked again for 30s."
                 }
             ],
             "HasNormalAttack": [],
@@ -4998,17 +4998,17 @@
                             "Channel": 3712
                         }
                     ],
-                    "Name": "ただ、あなた様のため",
-                    "Desc": "ワカモはCC状態の影響を受けませんが、CC状態の時間量のみが累積されます。\n段階別にそれぞれ<?1>分累積時、ワカモは直ちにグロッキー状態になる。（計3回）\n（時間はCC強化力が高いほど、より多く適用される）\nグロッキー状態になれば味方全体に付与されている<s:SuddenDeath>が解除される。\nグロッキー状態になった後、以下の効果を自身にすべて適用。（計3段階）\n<b:ATK>：25%/50%/75%増加\n<d:DamagedRatio>：100%/200%/300%増加",
+                    "Name": "Just For You",
+                    "Desc": "Wakamo is immune to the effects of Crowd Control. However, Crowd Control abilities will fill her circular CC gauge proportional to the duration of the effect that would've been inflicted.\nOnce the gauge reaches a total equivalent to <?1> of CC duration, fills Wakamo's groggy gauge to the maximum (up to 3 times). The amount added to the CC gauge is multiplied by the inflicter's CC Power stat.\nAfter becoming groggy, removes all stacks of <s:SuddenDeath> from all enemies and grants Wakamo one level of the following effect (max. level 3):\nIncreases <b:ATK> by 25%/50%/75%\nIncreases <d:DamagedRatio> by 100%/200%/300%",
                     "Parameters": [
                         [
-                            "6秒/7秒/8秒",
-                            "6秒/7秒/8秒",
-                            "6秒/7秒/8秒",
-                            "6秒/7秒/8秒",
-                            "6秒/7秒/8秒",
-                            "10秒/14秒/18秒",
-                            "10秒/14秒/18秒"
+                            "6s/7s/8s",
+                            "6s/7s/8s",
+                            "6s/7s/8s",
+                            "6s/7s/8s",
+                            "6s/7s/8s",
+                            "10s/14s/18s",
+                            "10s/14s/18s"
                         ]
                     ]
                 },
@@ -5018,8 +5018,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_WAKAMOSWIMSUIT_PASSIVE01",
-                    "Name": "邪魔者は排除します",
-                    "Desc": "ワカモのスキルで攻撃された対象はワカモの刻印が2枚生成される。\nワカモの刻印が5枚以上になれば、該当する対象は倒れる。\n（シールド効果、不死身状態などの効果を無視する）<?1>",
+                    "Name": "Hecklers Begone",
+                    "Desc": "Wakamo's EX skills will additionally inflict <b>2</b> stacks of <s:SuddenDeath> to the target.\nIf the target accumulates 5 or more stacks, they will be immediately defeated. (Ignores <b:Shield>, <s:Immortal> and other similar effects)<?1>",
                     "Parameters": [
                         [
                             "",
@@ -5027,8 +5027,8 @@
                             "",
                             "",
                             "",
-                            "\nさらにワカモの通常攻撃が対象から最も近い対象1人に跳ねる。",
-                            "\nさらにワカモの通常攻撃が対象から最も近い対象1人に跳ねる。"
+                            "\nAdditionally, Wakamo's normal attacks will ricochet to the nearest enemy.",
+                            "\nAdditionally, Wakamo's normal attacks will ricochet to the nearest enemy."
                         ]
                     ]
                 },
@@ -5111,8 +5111,8 @@
                             "CanEvade": true
                         }
                     ],
-                    "Name": "ツインキャノン/ブレイズロケット",
-                    "Desc": "最大で敵4人に対して、順番にそれぞれ攻撃力の300%分のダメージ/\n最大で敵2人に対して、順番にそれぞれ攻撃力の450%分のダメージ"
+                    "Name": "Twin Cannon/Blaze Rocket",
+                    "Desc": "Deals 300% damage to up to 4 enemies.\nDeals 450% damage to up to 2 enemies."
                 },
                 {
                     "Id": "HoverCraftEx02",
@@ -5141,8 +5141,8 @@
                             "Channel": 522
                         }
                     ],
-                    "Name": "こうなったら……！",
-                    "Desc": "リゾートを破壊するためにミサイル誘導装置を召喚し、ミサイル暴走モードに突入\nリゾートが破壊されると敗北します。\nミサイル誘導装置に与えたダメージの100%分がホバークラフトに与えられます。\nミサイル誘導装置の破壊時、ミサイル暴走モードは終了し、ホバークラフトにグロッキーゲージを50%増加\nグロッキー状態の間、会心抵抗値が50%減少"
+                    "Name": "At This Point...!",
+                    "Desc": "Summons a Missile Guidance System and enters Missile Frenzy mode and begins targeting the resort. If the resort is destroyed, the battle is immediately lost. 100% of the damage taken by the Missile Guidance System will also be taken by the Hovercraft.\nOnce the Missile Guidance System is destroyed, fills the Hovercraft's groggy gauge by 50% and ends Missile Frenzy mode. While groggy, decreases the Hovercraft's <d:CriticalChanceResistPoint> by 50%."
                 },
                 {
                     "Id": "HoverCraftEx03",
@@ -5150,8 +5150,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_HOVERCRAFTMISSILE05_EXSKILL03",
-                    "Name": "ヘルメット団お手製ミサイル",
-                    "Desc": "ホバークラフトがミサイル暴走モードに突入すると様々なミサイルを発射します。\nミサイルはリゾートのみ狙って飛び\nリゾートに命中するとリゾートのHPが1減少。\n（ミサイルは通常攻撃、ノーマルスキルのターゲットになりません）"
+                    "Name": "Helmet Gangster Self-Produced Missile",
+                    "Desc": "While in Missile Frenzy Mode, the Hovercraft will launch various missiles towards the resort. If the missile hits the resort, it will deal <b>1</b> damage to it. Missiles cannot be targeted by normal attacks or basic skills."
                 },
                 {
                     "Id": "HoverCraftPassive01",
@@ -5188,8 +5188,8 @@
                             "Channel": 97506
                         }
                     ],
-                    "Name": "奇襲上陸作戦",
-                    "Desc": "ホバークラフトが15回攻撃される毎、被ダメージ量を10%増加（10秒間）\n（最大30回分まで重複）"
+                    "Name": "Surprise Landing Operation",
+                    "Desc": "Every 15 times the Hovercraft is attacked, increases its <d:DamagedRatio> by 10% for 10s. (Effect stacks up to 30 times)"
                 },
                 {
                     "Id": "HoverCraftPassive03",
@@ -5197,8 +5197,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_AAGUN_PASSIVE01",
-                    "Name": "アクティブ防護システム",
-                    "Desc": "自動的にミサイルを撃墜する防御装置\nミサイルに攻撃力の100%分のダメージ<?1>",
+                    "Name": "Active Protection System",
+                    "Desc": "Defensive device that automatically shoots down incoming missiles.\nDeals 100% damage to missiles.<?1>",
                     "Parameters": [
                         [
                             "",
@@ -5206,8 +5206,8 @@
                             "",
                             "",
                             "",
-                            "/同時に自身に5000ダメージ\nHPが1%以下になる場合は気絶状態、HPが回復する場合は気絶状態を解除",
-                            "/同時に自身に5000ダメージ\nHPが1%以下になる場合は気絶状態、HPが回復する場合は気絶状態を解除"
+                            " Also deals 5,000 damage to self. If HP falls below 1%, the device will be inflicted with <c:Stunned> until HP is restored.",
+                            " Also deals 5,000 damage to self. If HP falls below 1%, the device will be inflicted with <c:Stunned> until HP is restored."
                         ]
                     ]
                 }
@@ -5741,6 +5741,36 @@
                     "End": 1693940400,
                     "RewardSet": 4300,
                     "RewardSetMax": 54
+                }
+            ],
+            "EliminateSeasons": [
+                {
+                    "Season": 1,
+                    "ArmorTypes": [
+                        "LightArmor",
+                        "HeavyArmor",
+                        "Unarmed"
+                    ],
+                    "RaidId": 6,
+                    "Terrain": "Outdoor",
+                    "Start": 1692151200,
+                    "End": 1692730800,
+                    "RewardSet": 300,
+                    "RewardSetMax": 56
+                },
+                {
+                    "Season": 2,
+                    "ArmorTypes": [
+                        "LightArmor",
+                        "HeavyArmor",
+                        "Unarmed"
+                    ],
+                    "RaidId": 3,
+                    "Terrain": "Indoor",
+                    "Start": 1694570400,
+                    "End": 1695150000,
+                    "RewardSet": 400,
+                    "RewardSetMax": 56
                 }
             ],
             "RewardSets": {
@@ -19578,6 +19608,1364 @@
                         ]
                     ]
                 ]
+            },
+            "EliminateRewardSets": {
+                "300": [
+                    [
+                        250000,
+                        [
+                            [
+                                2000001,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        500000,
+                        [
+                            [
+                                10,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        750000,
+                        [
+                            [
+                                200,
+                                6
+                            ],
+                            [
+                                150,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1000000,
+                        [
+                            [
+                                3000001,
+                                300000
+                            ]
+                        ]
+                    ],
+                    [
+                        1250000,
+                        [
+                            [
+                                2000002,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        1500000,
+                        [
+                            [
+                                11,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1750000,
+                        [
+                            [
+                                201,
+                                3
+                            ],
+                            [
+                                151,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        2000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        2500000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        3000000,
+                        [
+                            [
+                                12,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        3500000,
+                        [
+                            [
+                                202,
+                                2
+                            ],
+                            [
+                                152,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        4000000,
+                        [
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        4500000,
+                        [
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5000000,
+                        [
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5500000,
+                        [
+                            [
+                                203,
+                                1
+                            ],
+                            [
+                                153,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        6000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        7000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        8000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        9000000,
+                        [
+                            [
+                                200,
+                                12
+                            ],
+                            [
+                                150,
+                                12
+                            ],
+                            [
+                                201,
+                                6
+                            ],
+                            [
+                                151,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        10000000,
+                        [
+                            [
+                                3000001,
+                                500000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        12000000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ],
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        14000000,
+                        [
+                            [
+                                12,
+                                3
+                            ],
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        16000000,
+                        [
+                            [
+                                202,
+                                2
+                            ],
+                            [
+                                152,
+                                2
+                            ],
+                            [
+                                203,
+                                1
+                            ],
+                            [
+                                153,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        18000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        20000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        22000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        24000000,
+                        [
+                            [
+                                200,
+                                12
+                            ],
+                            [
+                                150,
+                                12
+                            ],
+                            [
+                                201,
+                                6
+                            ],
+                            [
+                                151,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        26000000,
+                        [
+                            [
+                                3000001,
+                                1200000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        29000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        32000000,
+                        [
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        35000000,
+                        [
+                            [
+                                202,
+                                4
+                            ],
+                            [
+                                152,
+                                4
+                            ],
+                            [
+                                203,
+                                2
+                            ],
+                            [
+                                153,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        38000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        41000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        44000000,
+                        [
+                            [
+                                2000002,
+                                32
+                            ],
+                            [
+                                2000003,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        47000000,
+                        [
+                            [
+                                3000003,
+                                200
+                            ]
+                        ]
+                    ],
+                    [
+                        50000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        60000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        70000000,
+                        [
+                            [
+                                201,
+                                6
+                            ],
+                            [
+                                151,
+                                6
+                            ],
+                            [
+                                202,
+                                4
+                            ],
+                            [
+                                152,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        80000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        90000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        100000000,
+                        [
+                            [
+                                3000001,
+                                1500000
+                            ]
+                        ]
+                    ],
+                    [
+                        120000000,
+                        [
+                            [
+                                3000001,
+                                2000000
+                            ]
+                        ]
+                    ],
+                    [
+                        150000000,
+                        [
+                            [
+                                3000001,
+                                2500000
+                            ]
+                        ]
+                    ],
+                    [
+                        180000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        210000000,
+                        [
+                            [
+                                2000003,
+                                32
+                            ]
+                        ]
+                    ],
+                    [
+                        240000000,
+                        [
+                            [
+                                9998,
+                                5
+                            ]
+                        ]
+                    ],
+                    [
+                        270000000,
+                        [
+                            [
+                                2000004,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        310000000,
+                        [
+                            [
+                                100008,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        320000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        340000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        360000000,
+                        [
+                            [
+                                23,
+                                15
+                            ]
+                        ]
+                    ],
+                    [
+                        380000000,
+                        [
+                            [
+                                2000004,
+                                3
+                            ],
+                            [
+                                13,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        400000000,
+                        [
+                            [
+                                201,
+                                4
+                            ],
+                            [
+                                151,
+                                4
+                            ],
+                            [
+                                202,
+                                2
+                            ],
+                            [
+                                152,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        420000000,
+                        [
+                            [
+                                100008,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        450000000,
+                        [
+                            [
+                                100009,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        500000000,
+                        [
+                            [
+                                9998,
+                                3
+                            ]
+                        ]
+                    ]
+                ],
+                "400": [
+                    [
+                        250000,
+                        [
+                            [
+                                2000001,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        500000,
+                        [
+                            [
+                                10,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        750000,
+                        [
+                            [
+                                190,
+                                6
+                            ],
+                            [
+                                240,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1000000,
+                        [
+                            [
+                                3000001,
+                                300000
+                            ]
+                        ]
+                    ],
+                    [
+                        1250000,
+                        [
+                            [
+                                2000002,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        1500000,
+                        [
+                            [
+                                11,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1750000,
+                        [
+                            [
+                                191,
+                                3
+                            ],
+                            [
+                                241,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        2000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        2500000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        3000000,
+                        [
+                            [
+                                12,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        3500000,
+                        [
+                            [
+                                192,
+                                2
+                            ],
+                            [
+                                242,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        4000000,
+                        [
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        4500000,
+                        [
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5000000,
+                        [
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5500000,
+                        [
+                            [
+                                193,
+                                1
+                            ],
+                            [
+                                243,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        6000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        7000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        8000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        9000000,
+                        [
+                            [
+                                190,
+                                12
+                            ],
+                            [
+                                240,
+                                12
+                            ],
+                            [
+                                191,
+                                6
+                            ],
+                            [
+                                241,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        10000000,
+                        [
+                            [
+                                3000001,
+                                500000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        12000000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ],
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        14000000,
+                        [
+                            [
+                                12,
+                                3
+                            ],
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        16000000,
+                        [
+                            [
+                                192,
+                                2
+                            ],
+                            [
+                                242,
+                                2
+                            ],
+                            [
+                                193,
+                                1
+                            ],
+                            [
+                                243,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        18000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        20000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        22000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        24000000,
+                        [
+                            [
+                                190,
+                                12
+                            ],
+                            [
+                                240,
+                                12
+                            ],
+                            [
+                                191,
+                                6
+                            ],
+                            [
+                                241,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        26000000,
+                        [
+                            [
+                                3000001,
+                                1200000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        29000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        32000000,
+                        [
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        35000000,
+                        [
+                            [
+                                192,
+                                4
+                            ],
+                            [
+                                242,
+                                4
+                            ],
+                            [
+                                193,
+                                2
+                            ],
+                            [
+                                243,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        38000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        41000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        44000000,
+                        [
+                            [
+                                2000002,
+                                32
+                            ],
+                            [
+                                2000003,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        47000000,
+                        [
+                            [
+                                3000003,
+                                200
+                            ]
+                        ]
+                    ],
+                    [
+                        50000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        60000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        70000000,
+                        [
+                            [
+                                191,
+                                6
+                            ],
+                            [
+                                241,
+                                6
+                            ],
+                            [
+                                192,
+                                4
+                            ],
+                            [
+                                242,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        80000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        90000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        100000000,
+                        [
+                            [
+                                3000001,
+                                1500000
+                            ]
+                        ]
+                    ],
+                    [
+                        120000000,
+                        [
+                            [
+                                3000001,
+                                2000000
+                            ]
+                        ]
+                    ],
+                    [
+                        150000000,
+                        [
+                            [
+                                3000001,
+                                2500000
+                            ]
+                        ]
+                    ],
+                    [
+                        180000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        210000000,
+                        [
+                            [
+                                2000003,
+                                32
+                            ]
+                        ]
+                    ],
+                    [
+                        240000000,
+                        [
+                            [
+                                9998,
+                                5
+                            ]
+                        ]
+                    ],
+                    [
+                        270000000,
+                        [
+                            [
+                                2000004,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        310000000,
+                        [
+                            [
+                                100008,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        320000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        340000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        360000000,
+                        [
+                            [
+                                23,
+                                15
+                            ]
+                        ]
+                    ],
+                    [
+                        380000000,
+                        [
+                            [
+                                2000004,
+                                3
+                            ],
+                            [
+                                13,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        400000000,
+                        [
+                            [
+                                191,
+                                4
+                            ],
+                            [
+                                241,
+                                4
+                            ],
+                            [
+                                192,
+                                2
+                            ],
+                            [
+                                242,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        420000000,
+                        [
+                            [
+                                100008,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        450000000,
+                        [
+                            [
+                                100009,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        500000000,
+                        [
+                            [
+                                9998,
+                                3
+                            ]
+                        ]
+                    ]
+                ]
             }
         },
         {
@@ -19979,6 +21367,7 @@
                     "RewardSetMax": 48
                 }
             ],
+            "EliminateSeasons": [],
             "RewardSets": {
                 "800": [
                     [
@@ -26630,12 +28019,13 @@
                         ]
                     ]
                 ]
-            }
+            },
+            "EliminateRewardSets": {}
         },
         {
             "Seasons": [
                 {
-                    "Season": 1,
+                    "Season": 0,
                     "RaidId": 1,
                     "Terrain": "Outdoor",
                     "Start": 1691650800,
@@ -26644,7 +28034,7 @@
                     "RewardSetMax": 36
                 },
                 {
-                    "Season": 2,
+                    "Season": 1,
                     "RaidId": 3,
                     "Terrain": "Street",
                     "Start": 1692248400,
@@ -26653,7 +28043,7 @@
                     "RewardSetMax": 36
                 },
                 {
-                    "Season": 3,
+                    "Season": 2,
                     "RaidId": 1,
                     "Terrain": "Outdoor",
                     "Start": 1693458000,
@@ -26662,7 +28052,7 @@
                     "RewardSetMax": 36
                 },
                 {
-                    "Season": 4,
+                    "Season": 3,
                     "RaidId": 2,
                     "Terrain": "Outdoor",
                     "Start": 1694667600,
@@ -26671,6 +28061,7 @@
                     "RewardSetMax": 36
                 }
             ],
+            "EliminateSeasons": [],
             "RewardSets": {
                 "700": [
                     [
@@ -28408,7 +29799,8 @@
                         ]
                     ]
                 ]
-            }
+            },
+            "EliminateRewardSets": {}
         }
     ],
     "TimeAttack": [
@@ -53273,8 +54665,8 @@
                             ]
                         }
                     ],
-                    "Name": "ドローン召喚：火力支援",
-                    "Desc": "敵1人に対して、攻撃力の800%分のダメージ"
+                    "Name": "Drone Support",
+                    "Desc": "Deals 800% damage to one enemy."
                 },
                 {
                     "Id": "EN0002Ex02",
@@ -53314,8 +54706,8 @@
                             "CanEvade": true
                         }
                     ],
-                    "Name": "ライド＆グレネード",
-                    "Desc": "敵1人に対して、攻撃力の350%分のダメージ/\n円形範囲内の敵に対して、攻撃力の550%分のダメージ"
+                    "Name": "Riding Grenade",
+                    "Desc": "Deals 350% damage to one enemy and 550% damage to enemies in a circular area."
                 },
                 {
                     "Id": "EN0002Ex03",
@@ -53374,8 +54766,8 @@
                             "Icon": "Stunned"
                         }
                     ],
-                    "Name": "戦略的制圧",
-                    "Desc": "扇形範囲内の敵に対して、攻撃力の650%分のダメージ\n気絶状態を付与（1.5秒間）"
+                    "Name": "Tactical Suppression",
+                    "Desc": "Deals 650% damage to enemies in a fan-shaped area and inflicts <c:Stunned> for 1.5s."
                 },
                 {
                     "Id": "EN0002Ex04",
@@ -53404,8 +54796,8 @@
                             ]
                         }
                     ],
-                    "Name": "戒めの時",
-                    "Desc": "扇形範囲内の敵に対して、攻撃力の400%分のダメージ"
+                    "Name": "Yup, It's Punishment Time",
+                    "Desc": "Deals 400% damage to enemies in a fan-shaped area."
                 },
                 {
                     "Id": "EN0002Ex05",
@@ -53430,8 +54822,8 @@
                             "CanEvade": true
                         }
                     ],
-                    "Name": "邪魔",
-                    "Desc": "敵全体に対して攻撃力の250%分の確定会心ダメージ"
+                    "Name": "Intruders",
+                    "Desc": "Deals 250% guaranteed critical damage to all enemies."
                 },
                 {
                     "Id": "EN0002Ex06A",
@@ -53439,8 +54831,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL06",
-                    "Name": "色彩の反響 - アルファ",
-                    "Desc": "シロコ＊テラーとプレナパテスが同時にスキル使用\nシロコ＊テラー：直線範囲内の敵に対して、攻撃力の2500%分のダメージ\nプレナパテス：円環範囲内の敵に対して、攻撃力の6000%分のダメージ\nスキル使用中、プレナパテスにCC状態ゲージ生成。CC状態4.5秒分累積時、プレナパテスのスキルが中断され、敵全体の攻撃力を100%増加（17秒間）"
+                    "Name": "Echoes of Chroma - Alpha",
+                    "Desc": "Shiroko Terror and Phrenapates simulataneously use their skills.\n<b>Shiroko Terror</b>: Deals 2500% damage to enemies in a straight line.\n<b>Phrenapates</b>: Deals 6000% damage to enemies in a donut-shaped area.\nDuring this skill, CC effects inflicted will fill Phrenapates' CC gauge proportional to the duration of the effect. When the gauge reaches an amount equivalent to 4.5s, interrupts Phrenapates skill and increases the <b:ATK> of all enemies by 100% for 17s."
                 },
                 {
                     "Id": "EN0002Ex06B",
@@ -53448,8 +54840,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL06",
-                    "Name": "色彩の反響 - ベータ",
-                    "Desc": "シロコ＊テラーとプレナパテスが同時にスキル使用\nシロコ＊テラー：円環範囲内の敵に対して、攻撃力の2500%分のダメージ\nプレナパテス：直線範囲内の敵に対して、攻撃力の2500%分のダメージ\nスキル使用中、プレナパテスにCC状態ゲージ生成。CC状態4.5秒分累積時、プレナパテスのスキルが中断され、敵全体の攻撃力を100%増加（17秒間）"
+                    "Name": "Echoes of Chroma - Beta",
+                    "Desc": "Shiroko Terror and Phrenapates simulataneously use their skills.\n<b>Shiroko Terror</b>: Deals 2500% damage to enemies in a donut-shaped area.\n<b>Phrenapates</b>: Deals 2500% damage to enemies in a straight line.\nDuring this skill, CC effects inflicted will fill Phrenapates' CC gauge proportional to the duration of the effect. When the gauge reaches an amount equivalent to 4.5s, interrupts Phrenapates skill and increases the <b:ATK> of all enemies by 100% for 17s."
                 },
                 {
                     "Id": "EN0002Ex07",
@@ -53457,8 +54849,8 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0002_EXSKILL07",
-                    "Name": "アトラ・ハシースの箱舟・防衛システム",
-                    "Desc": "プレナパテスが「アトラ・ハシースの箱舟」の全てのエネルギーを相手に発射する。\n敵全体に対して、対象のHPの1000%分のダメージ"
+                    "Name": "Ark Defense System",
+                    "Desc": "Phrenapates uses all the energy of the Atrahasis Ark to fire at the enemy, dealing damage to all enemies equal to 1000% of their Max HP."
                 }
             ],
             "HasNormalAttack": [],

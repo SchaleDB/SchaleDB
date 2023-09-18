@@ -51,7 +51,7 @@ body {
         }
     }
 
-    &.font-cn {
+    &.font-cn, &.font-zh {
         &, .ba-tooltip {
             font-family: 'Nunito Sans', 'Noto Sans SC', 'Noto Sans JP', sans-serif;
         }
@@ -552,7 +552,7 @@ p a {
 
 .stat-icon {
 
-    //@include box-shadow;
+    position: relative;
     margin-top: -2px;
     width: 26px;
     min-width: 26px;
@@ -564,6 +564,8 @@ p a {
     
 
     img {
+        position: absolute;
+        top: 0;
         height: 100%;
         width: 100%;
         object-fit: cover;
