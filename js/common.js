@@ -5680,10 +5680,11 @@ function loadRaid(raidId) {
 
 function loadRaidSeasonRewards(el) {
     let season
-    if (el > 10000) {
-        season = find(data.raids["RaidSeasons"][regionID]["Seasons"], "Season", $(el).val())[0]
+    const seasonId = parseInt($(el).val())
+    if (seasonId > 10000) {
+        season = find(data.raids["RaidSeasons"][regionID]["EliminateSeasons"], "Season", seasonId - 10000)[0]
     } else {
-        season = find(data.raids["RaidSeasons"][regionID]["EliminateSeasons"], "Season", $(el).val() - 10000)[0]
+        season = find(data.raids["RaidSeasons"][regionID]["Seasons"], "Season", seasonId)[0] 
     }
 
     if (season) {
