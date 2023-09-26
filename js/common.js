@@ -5415,13 +5415,14 @@ function loadItem(id) {
             }
         }
 
-        if (regionID == 0 && item.Templates) {
+        if (region.furniture_templates && item.Templates) {
             let html = ''
             item.Templates.forEach((template) => {
+                if (template[0] > region.furniture_template_max) return
                 html += `<div class="selection-grid-card card-shop">
                 <div class="card-img"><img loading="lazy" src="images/furniture/template/${template[0]}.webp"></div>`
                 let templateName = getLocalizedString("FurnitureTemplate", template[0])
-                html += `<span class="card-badge shop-cost">&times;${template[1]}</span>`
+                html += `<span class="card-badge stage-droprate">&times;${template[1]}</span>`
                 html += `<div class="card-label">`
                 html += `<span class="label-text ${templateName.length > label_enemy_smalltext_threshold[userLang] ? "smalltext" : "" }">${templateName}</span>`
                 html += `</div></div>`
@@ -5599,7 +5600,7 @@ function loadRaid(raidId) {
                 optionsHtml += `<option value="${season.Season}">${translateUI('raid_season',[season.Season, getLocalizedString("AdaptationType", season.Terrain)]) + " [" + start + "~"+end+"]"}</option>`
             })
 
-            if (regionID == 0) {
+            if (data.raids["RaidSeasons"][regionID]["EliminateSeasons"].length) {
                 optionsHtml += `<option value="0" disabled>---${getLocalizedString('StageType', 'EliminateRaid')}---</option>`
                 const eliminateRaidSeasons = find(data.raids["RaidSeasons"][regionID]["EliminateSeasons"], "RaidId", raid.Id)
                 eliminateRaidSeasons.forEach((season) => {
@@ -6611,60 +6612,57 @@ function getEventStage(id) {
 function loadRegion(regID) {
     regionID = regID
     region = data.common.regions[regionID]
-    $(".statpreview-level").attr("max",region.studentlevel_max)
-    $('#ba-statpreview-level-modal').text(`Lv.1 / ${region.studentlevel_max}`)
-    $("#ba-weaponpreview-levelrange, #ba-statpreview-weapon-range").attr("max",region.weaponlevel_max)
-    if (region.weaponlevel_max == 0) {
-        $("#ba-student-nav-weapon").hide()
-        $("#ba-statpreview-weapon-container").hide()
-        $(".weaponpreview-star-1").hide()
-        $(".weaponpreview-star-2").hide()
-        $(".weaponpreview-star-3").hide()
-        statPreviewWeaponGrade = 0
 
-        $('#ba-student-search-filter-streetbattleadaptation-5').hide()
-        $('#ba-student-search-filter-outdoorbattleadaptation-5').hide()
-        $('#ba-student-search-filter-indoorbattleadaptation-5').hide()
-        $('#ba-student-search-filter-terrainupgrades').hide()
-        $('#ba-student-search-select-weaponpassivebuff').hide()
-        $('#ba-student-tab-weapon').hide()
-        $('#item-search-filter-equipmentcategory-weaponexpgrowth').hide()
+
+    if (loadedModule == 'students') {
+
+        $(".statpreview-level").attr("max",region.studentlevel_max)
+        $('#ba-statpreview-level-modal').text(`Lv.1 / ${region.studentlevel_max}`)
+        $("#ba-weaponpreview-levelrange, #ba-statpreview-weapon-range").attr("max",region.weaponlevel_max)
+        if (region.weaponlevel_max == 0) {
+            $("#ba-student-nav-weapon").hide()
+            $("#ba-statpreview-weapon-container").hide()
+            $(".weaponpreview-star-1").hide()
+            $(".weaponpreview-star-2").hide()
+            $(".weaponpreview-star-3").hide()
+            statPreviewWeaponGrade = 0
+    
+            $('#ba-student-search-filter-streetbattleadaptation-5').hide()
+            $('#ba-student-search-filter-outdoorbattleadaptation-5').hide()
+            $('#ba-student-search-filter-indoorbattleadaptation-5').hide()
+            $('#ba-student-search-filter-terrainupgrades').hide()
+            $('#ba-student-search-select-weaponpassivebuff').hide()
+            $('#ba-student-tab-weapon').hide()
+            $('#item-search-filter-equipmentcategory-weaponexpgrowth').hide()
+        }
+        $("#ba-bond-levelrange").attr("max",region.bondlevel_max)
+        $("#ba-statpreview-gear1-range").attr("max",region.gear1_max)
+        $("#ba-statpreview-gear2-range").attr("max",region.gear2_max)
+        $("#ba-statpreview-gear3-range").attr("max",region.gear3_max)
+
+        $('#ba-student-search-filter-bullettype-sonic').toggle(studentList.some((s) => s.IsReleased[regionID] && s.BulletType == 'Sonic'))
+        $('#ba-student-search-filter-armortype-elasticarmor').toggle(studentList.some((s) => s.IsReleased[regionID] && s.ArmorType == 'ElasticArmor'))
+    
+        $('#ba-student-search-filter-tacticrole-vehicle').toggle(studentList.some((s) => s.IsReleased[regionID] && s.TacticRole == 'Vehicle'))
+
+        $('#ba-student-search-filter-school-valkyrie').toggle(studentList.some((s) => s.IsReleased[regionID] && s.School == 'Valkyrie'))
+        $('#ba-student-search-filter-school-etc').toggle(studentList.some((s) => s.IsReleased[regionID] && s.School == 'ETC'))
+        $('#ba-student-search-filter-school-srt').toggle(studentList.some((s) => s.IsReleased[regionID] && s.School == 'SRT'))
+        $('#ba-student-search-filter-school-arius').toggle(studentList.some((s) => s.IsReleased[regionID] && s.School == 'Arius'))
+
+        $('#ba-student-search-filter-weapontype-rl').toggle(studentList.some((s) => s.IsReleased[regionID] && s.WeaponType == 'RL'))
+        $('#ba-student-search-filter-weapontype-ft').toggle(studentList.some((s) => s.IsReleased[regionID] && s.WeaponType == 'FT'))
+
+        const bondGearUnlocked = studentList.some((s) => s.IsReleased[regionID] && s.Gear.Released !== undefined && s.Gear.Released[regionID])
+        $('#ba-student-search-filter-bondgear').toggle(bondGearUnlocked)
+        $('#ba-student-gear-separator').toggle(bondGearUnlocked)
+        $('#ba-student-gear-4').toggle(bondGearUnlocked)
+
     }
-    $("#ba-bond-levelrange").attr("max",region.bondlevel_max)
-    $("#ba-statpreview-gear1-range").attr("max",region.gear1_max)
-    $("#ba-statpreview-gear2-range").attr("max",region.gear2_max)
-    $("#ba-statpreview-gear3-range").attr("max",region.gear3_max)
 
-    if (regionID == 1) {
-        $('#ba-student-search-filter-bullettype-sonic').hide()
-        $('#item-search-filter-furnitureset-111').hide()
-        $('#item-search-filter-furnitureset-112').hide()
-    }
-
-    if (regionID == 2) {
-        //Student Filters
-        $('#ba-student-search-filter-tacticrole-vehicle').hide()
-
-        $('#ba-student-search-filter-bullettype-sonic').hide()
-        $('#ba-student-search-filter-armortype-elasticarmor').hide()
-
-        $('#ba-student-search-filter-school-valkyrie').hide()
-        $('#ba-student-search-filter-school-etc').hide()
-        $('#ba-student-search-filter-school-srt').hide()
-        $('#ba-student-search-filter-school-arius').hide()
-
-        $('#ba-student-search-filter-weapontype-rl').hide()
-        $('#ba-student-search-filter-weapontype-ft').hide()
-
-        $('#ba-student-search-filter-bondgear').hide()
-
-        //Student Page
-        $('#ba-student-gear-separator').hide()
-        $('#ba-student-gear-4').hide()
-
-        // Item/Furniture Filters
-        for (let i = 103; i <= 112; i++) {
-            $(`#item-search-filter-furnitureset-${i}`).hide()
+    if (loadedModule == 'items') {
+        for (let i = 101; i <= data.common.regions[0].furniture_set; i++) {
+            $(`#item-search-filter-furnitureset-${i}`).toggle(i <= region.furniture_set)
         }
 
     }
@@ -7992,12 +7990,15 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                     desc += `${getTranslatedString(item, 'Name')} (${getProbabilityText(group.ItemList[i][1]/totalProb)})\n`
                 }
             }
-            html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/icon/${icon}.webp`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/icon/${icon}.webp" alt="${name}"><span class="ba-material-label">${getProbabilityText(chance)}</span>${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
+            if (itemType == 'Box' || item.ImmediateUse) {
+                desc += `<i><i class="fa-solid fa-box-open" style="font-size: 12px;"></i> ${translateUI('item_is_immediateuse')}</i>`
+            }
+            html = `<div class="item-drop drop-shadow" style="position: relative; data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/${iconPath}/icon/${icon}.webp`, name, getLocalizedString('ItemCategory','Box'), '', desc, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${rarity.toLowerCase()}" src="images/${iconPath}/icon/${icon}.webp" alt="${name}"><span class="ba-material-label">${itemType == 'Box' || item.ImmediateUse ? '<i class="fa-solid fa-box-open" style="font-size: 12px;"></i> ' : ''}${getProbabilityText(chance)}</span>${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
         }
     } else {
         let description = getTranslatedString(item, 'Desc').escapeHtml().replace('&','&amp;')
         if (item.ImmediateUse) {
-            description += `\n<i>${translateUI('item_is_immediateuse')}</i>`
+            description += `\n<i><i class="fa-solid fa-box-open" style="font-size: 12px;"></i> ${translateUI('item_is_immediateuse')}</i>`
         }
         if (item.Id > 91000000 && item.ConsumeType == "Random") {
             const containsArray = getServerProperty(item, 'Contains')
@@ -8007,7 +8008,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
             })
         }
         if (appendDescription) description += appendDescription
-        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/icon/${item.Icon}.webp`, getTranslatedString(item, 'Name').escapeHtml(), getLocalizedString('ItemCategory',itemType), rarityText, description, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/icon/${item.Icon}.webp" alt="${item.Name}"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${qtyMax > 1 || forcePercent ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
+        html = `<div class="item-drop drop-shadow" style="position: relative; ${haslink ? 'cursor:pointer;" onclick="loadItem('+id+')"' : '"'} title="${getRichTooltip(`images/${iconPath}/icon/${item.Icon}.webp`, getTranslatedString(item, 'Name').escapeHtml(), getLocalizedString('ItemCategory',itemType), rarityText, description, 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/${iconPath}/icon/${item.Icon}.webp" alt="${item.Name}"><span class="ba-material-label" ${haslink ? 'style="cursor:pointer;"' : ""}>${itemType == 'Box' || item.ImmediateUse ? '<i class="fa-solid fa-box-open" style="font-size: 12px;"></i> ' : ''}${qtyMax > 1 || forcePercent ? parseFloat((chance*100).toFixed(2)) + '&#37;' : getProbabilityText(chance)}</span>${qtyMax > 1 ? `<span class="label-qty">&times;${qtyMin != qtyMax ? abbreviateNumber(qtyMin) + '~' + abbreviateNumber(qtyMax) : abbreviateNumber(qtyMax)}</span>` : ''}${dropType != null ?  `<span class="label-droptype">${dropType}</span>` : ''}</div>`
     }
     return html
 }
@@ -8028,7 +8029,7 @@ function formatString(string, replacements=[]) {
  * @returns 
  */
 function getProbabilityText(chance) {
-    return chance >= 1 ? '&times;'+abbreviateNumber(parseInt(chance).toFixed(0)).toLocaleString(): parseFloat((chance*100).toFixed(2)) + '&#37;'
+    return chance >= 1 ? '&times;'+abbreviateNumber(parseInt(chance).toFixed(0)).toLocaleString(): parseFloat((chance*100).toFixed(1)) + '&#37;'
 }
 
 function getStudentIconSmall(student, label=null, description=null) {
@@ -8407,7 +8408,7 @@ function populateStageList(mode) {
         case 'missions':
             $.each(data.stages.Campaign, function(i,el) {
                 if (el.Area > region.campaign_max) return
-                if (regionID >= 1 && el.Stage == "A") return
+                if (!region.campaign_extra && el.Stage == "A") return
                 html += getStageCardHTML(el)
             })
             $('.stage-list').hide()
@@ -9652,7 +9653,7 @@ function stageIsReleased(stage) {
         return (region.events.includes(stage.EventId))
     } else if (stage.Id > 1000000) {
         if (stage.Area > region.campaign_max) return false
-        if (regionID > 0 && stage.Stage == "A") return false
+        if (!region.campaign_extra && stage.Stage == "A") return false
         return true
     } else if (stage.Id > 60000) {
         return (stage.Stage <= region.schooldungeon_max)
