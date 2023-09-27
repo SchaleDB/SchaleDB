@@ -112,9 +112,15 @@
                                     </div>
                                     <div id="ba-raid-season">
                                         <h5 class="text-bold mt-3" data-localize-id="ui,rewards_season"></h5>
-                                        <select id="ba-raid-season-select" class="form-select mb-2" onchange="loadRaidSeasonRewards(this)">
-                                        </select>
-                                        <div id="ba-raid-season-rewards" class="ba-panel p-2 pb-0">
+                                        <div id="ba-raid-season-list" class="">
+                                            <button class="btn-pill" data-bs-toggle="dropdown">
+                                                <span class="label"></span>
+                                                <i class="caret fa-solid fa-caret-down me-2"></i>
+                                            </button>
+                                            <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start dropdown-menu-scroll-large">
+                                            </ul>
+                                        </div>
+                                        <div id="ba-raid-season-rewards" class="ba-panel p-2 pb-0 mt-2">
                                         </div>
                                     </div>
                                 </div>

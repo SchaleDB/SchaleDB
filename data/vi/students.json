@@ -18511,7 +18511,7 @@
                             ]
                         ],
                         "Stat": "MoveSpeed_Coefficient",
-                        "Channel": 612
+                        "Channel": 11512
                     },
                     {
                         "Type": "BuffTarget",
@@ -77941,7 +77941,7 @@
             [
                 [
                     9106,
-                    0
+                    3
                 ]
             ],
             [],
@@ -87046,6 +87046,1070 @@
                 12,
                 7,
                 13
+            ]
+        ]
+    },
+    {
+        "Id": 10077,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 156,
+        "PathName": "Ichika",
+        "DevName": "CH0071",
+        "Name": "Ichika",
+        "School": "Trinity",
+        "Club": "Justice",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Sonic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "weapon_icon_ch0071",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Trinity_Collection",
+        "FamilyName": "仲正",
+        "FamilyNameRuby": "なかまさ",
+        "PersonalName": "イチカ",
+        "SchoolYear": "2年生",
+        "CharacterAge": "16歳",
+        "Birthday": "11月11日",
+        "CharacterSSRNew": "あれ？約束の時間ってまだっすよね？\n待たせちゃったっすか？",
+        "ProfileIntroduction": "いつも穏やかな表情のトリニティ総合学園所属、正義実現委員会の一員。\n\n様々な生徒が所属する正義実現委員会の中で、仲裁を主に担当している。他学園との関係も比較的良い方。人当たりの良い性格は、生来のものではなく努力の賜物なのだとか。",
+        "Hobby": "人助け、色々手を出している最中",
+        "CharacterVoice": "鷲見友美ジェナ",
+        "BirthDay": "11/11",
+        "Illustrator": "7peach",
+        "Designer": "7peach",
+        "CharHeightMetric": "163cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1380,
+        "AttackPower1": 280,
+        "AttackPower100": 2803,
+        "MaxHP1": 2223,
+        "MaxHP100": 22230,
+        "DefensePower1": 19,
+        "DefensePower100": 118,
+        "HealPower1": 1416,
+        "HealPower100": 4249,
+        "DodgePoint": 790,
+        "AccuracyPoint": 708,
+        "CriticalPoint": 202,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 20,
+        "AmmoCost": 4,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            2500,
+                            2500,
+                            2500,
+                            2500
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "ちょっと失礼するっす",
+                "Desc": "Deals <?1> damage to enemies in a fan-shaped area.",
+                "Parameters": [
+                    [
+                        "726%",
+                        "835%",
+                        "1053%",
+                        "1162%",
+                        "1380%",
+                        "1489%",
+                        "1707%",
+                        "1816%",
+                        "2034%",
+                        "2143%"
+                    ]
+                ],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    6
+                ],
+                "Icon": "COMMON_SKILLICON_FAN",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            72674,
+                            83573,
+                            105378,
+                            116277,
+                            138075,
+                            148981,
+                            170779,
+                            181678,
+                            203483,
+                            214382
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "正義実現委員会の連絡網",
+                "Desc": "Every 30s, increases <b:EnhanceSonicRate> by <?1> for <?2>.",
+                "Parameters": [
+                    [
+                        "32.9%",
+                        "34.6%",
+                        "36.2%",
+                        "42.8%",
+                        "44.5%",
+                        "46.1%",
+                        "52.7%",
+                        "54.3%",
+                        "56%",
+                        "63.1%"
+                    ],
+                    [
+                        "20s",
+                        "20s",
+                        "20s",
+                        "20s",
+                        "20s",
+                        "20s",
+                        "20s",
+                        "20s",
+                        "20s",
+                        "25s"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3296,
+                                3460,
+                                3626,
+                                4284,
+                                4450,
+                                4614,
+                                5273,
+                                5438,
+                                5602,
+                                6313
+                            ]
+                        ],
+                        "Stat": "EnhanceSonicRate_Base",
+                        "Channel": 43
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "鋭い本能",
+                "Desc": "Increases <b:HIT> by <?1>.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AccuracyPoint_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "鋭い本能+",
+                "Desc": "Increases <b:ATK> by <?1> and <b:HIT> by <?2>.",
+                "Parameters": [
+                    [
+                        "336",
+                        "353",
+                        "370",
+                        "437",
+                        "454",
+                        "471",
+                        "538",
+                        "555",
+                        "572",
+                        "639"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            336,
+                            353,
+                            370,
+                            437,
+                            454,
+                            471,
+                            538,
+                            555,
+                            572,
+                            639
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "そういう時もあるっすよね",
+                "Desc": "Deals <?1> damage as an additional hit to enemies not taking cover.",
+                "Parameters": [
+                    [
+                        "2.3%",
+                        "2.4%",
+                        "2.5%",
+                        "3%",
+                        "3.1%",
+                        "3.2%",
+                        "3.7%",
+                        "3.8%",
+                        "3.9%",
+                        "4.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_EXTRADAMAGE",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            238,
+                            245,
+                            259,
+                            308,
+                            315,
+                            329,
+                            378,
+                            385,
+                            399,
+                            448
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                6,
+                56
+            ],
+            [
+                7,
+                67
+            ],
+            [
+                2,
+                11
+            ],
+            [
+                3,
+                17
+            ],
+            [
+                4,
+                28
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            6,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 192",
+        "FurnitureInteraction": [
+            [
+                [
+                    10206,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Electronic",
+            "Fashion",
+            "Cosmetics"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Ichika",
+            "F_Ichika2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "レッドドラゴン",
+            "Desc": "あらゆる苦難を共にしてきたイチカのアサルトライフル。\n\n丁寧に整えられた外見とは裏腹に、内面は苛烈で、どんなことでもできるよう整備されている。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 123,
+            "AttackPower100": 1231,
+            "MaxHP1": 639,
+            "MaxHP100": 6392,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                170
+            ],
+            [
+                3021,
+                3020,
+                171,
+                230
+            ],
+            [
+                3022,
+                3021,
+                172,
+                231
+            ],
+            [
+                3023,
+                3022,
+                173,
+                232
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                17
+            ],
+            [
+                12,
+                18,
+                16,
+                27
+            ],
+            [
+                12,
+                18,
+                9,
+                25
+            ],
+            [
+                8,
+                18,
+                10,
+                23
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                170
+            ],
+            [
+                4021,
+                171,
+                230
+            ],
+            [
+                4022,
+                4021,
+                171,
+                230
+            ],
+            [
+                4022,
+                172,
+                231
+            ],
+            [
+                4023,
+                4022,
+                173,
+                232
+            ],
+            [
+                4023,
+                173,
+                232
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                14
+            ],
+            [
+                5,
+                12,
+                9,
+                18
+            ],
+            [
+                8,
+                3,
+                15
+            ],
+            [
+                8,
+                12,
+                4,
+                10
+            ],
+            [
+                12,
+                8,
+                12
+            ]
+        ]
+    },
+    {
+        "Id": 10078,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 157,
+        "PathName": "Kasumi",
+        "DevName": "CH0089",
+        "Name": "Kasumi",
+        "School": "Gehenna",
+        "Club": "HotSpringsDepartment",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Sonic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_ch0089",
+        "Cover": true,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Gehenna_Collection",
+        "FamilyName": "鬼怒川",
+        "FamilyNameRuby": "きぬがわ",
+        "PersonalName": "カスミ",
+        "SchoolYear": "2年生",
+        "CharacterAge": "16歳",
+        "Birthday": "5月24日",
+        "CharacterSSRNew": "温泉開発の定義なんて、話したことあっただろうか？",
+        "ProfileIntroduction": "ゲヘナ学園所属、温泉開発部の部長。\n\n源泉が流れる土地は全て温泉にしなければならないと主張し、一度決めたらどこであろうと手段を選ばず爆破してしまう。部員からは全面的な支持を得ているが、実際の言動や行動は指名手配中の犯罪者である。",
+        "Hobby": "爆破、温泉開発",
+        "CharacterVoice": "上坂すみれ ",
+        "BirthDay": "5/24",
+        "Illustrator": "Mx2J",
+        "Designer": "Mx2J",
+        "CharHeightMetric": "148cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 956,
+        "AttackPower1": 208,
+        "AttackPower100": 2089,
+        "MaxHP1": 2153,
+        "MaxHP100": 24950,
+        "DefensePower1": 19,
+        "DefensePower100": 114,
+        "HealPower1": 1459,
+        "HealPower100": 4378,
+        "DodgePoint": 1053,
+        "AccuracyPoint": 104,
+        "CriticalPoint": 208,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 8,
+        "AmmoCost": 2,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            5000,
+                            5000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "ジャイアントヒール・クラッシュ",
+                "Desc": "Decreases the <d:DEF> of enemies in a circular area by <?1> for 25s and deals <?2> damage to them.",
+                "Parameters": [
+                    [
+                        "17.6%",
+                        "20.3%",
+                        "25.6%",
+                        "28.2%",
+                        "33.5%",
+                        "36.1%",
+                        "41.4%",
+                        "44.1%",
+                        "49.4%",
+                        "52%"
+                    ],
+                    [
+                        "227.6%",
+                        "261.9%",
+                        "330.1%",
+                        "363.9%",
+                        "432.5%",
+                        "466.4%",
+                        "534.5%",
+                        "568.8%",
+                        "637%",
+                        "671.3%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            1428,
+                            1428,
+                            1428,
+                            1428,
+                            1428,
+                            1428,
+                            1428
+                        ],
+                        "HitsParameter": 2,
+                        "Scale": [
+                            22764,
+                            26194,
+                            33012,
+                            36393,
+                            43253,
+                            46641,
+                            53452,
+                            56882,
+                            63700,
+                            67130
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -1766,
+                                -2030,
+                                -2560,
+                                -2825,
+                                -3354,
+                                -3619,
+                                -4149,
+                                -4413,
+                                -4942,
+                                -5208
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "大切なメッセージだよ",
+                "Desc": "Every 35s, deals <?1> damage to enemies in a circular area.",
+                "Parameters": [
+                    [
+                        "227%",
+                        "238%",
+                        "250%",
+                        "295%",
+                        "307%",
+                        "318%",
+                        "363%",
+                        "375%",
+                        "386%",
+                        "432%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            22741,
+                            23880,
+                            25019,
+                            29561,
+                            30701,
+                            31840,
+                            36382,
+                            37521,
+                            38661,
+                            43210
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "狂人の戦略",
+                "Desc": "Increases <b:CriticalChance> by <?1>.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "狂人の戦略+",
+                "Desc": "Increases <b:CriticalDamage> by <?1> and <b:CriticalChance> by <?2>.",
+                "Parameters": [
+                    [
+                        "2000",
+                        "2100",
+                        "2200",
+                        "2600",
+                        "2700",
+                        "2800",
+                        "3200",
+                        "3300",
+                        "3400",
+                        "3800"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Base",
+                        "Scale": [
+                            2000,
+                            2100,
+                            2200,
+                            2600,
+                            2700,
+                            2800,
+                            3200,
+                            3300,
+                            3400,
+                            3800
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "ドリルの音は止まったのか？",
+                "Desc": "Each use of Kasumi's EX skill grants 1 <s:CH0089_ExtraPassive> stack. Upon reaching 3 stacks, deals an additional <?1> damage to the target(s) of Kasumi's EX skill.\nAll <s:CH0089_ExtraPassive> stacks are removed after activation.",
+                "Parameters": [
+                    [
+                        "633%",
+                        "665%",
+                        "697%",
+                        "824%",
+                        "855%",
+                        "887%",
+                        "1014%",
+                        "1045%",
+                        "1077%",
+                        "1204%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0089_EXTRAPASSIVESKILL",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            63391,
+                            66556,
+                            69728,
+                            82404,
+                            85576,
+                            88741,
+                            101416,
+                            104589,
+                            107761,
+                            120436
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                62
+            ],
+            [
+                5,
+                75
+            ],
+            [
+                1,
+                12
+            ],
+            [
+                2,
+                18
+            ],
+            [
+                3,
+                31
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            2,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Shady Girls",
+        "FurnitureInteraction": [
+            [
+                [
+                    9106,
+                    3
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Observational",
+            "Mystery",
+            "Roman"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Kasumi",
+            "F_Kasumi2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "レッド·レクター",
+            "Desc": "カスミが持ち歩いている拳銃。\n\n普段は場を盛り上げるために空に向けて発砲することが多い。小さくて可愛らしい見た目とは裏腹に、実際の火力も申し分ない。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 92,
+            "AttackPower100": 918,
+            "MaxHP1": 714,
+            "MaxHP100": 7139,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                150
+            ],
+            [
+                3031,
+                3030,
+                151,
+                260
+            ],
+            [
+                3032,
+                3031,
+                152,
+                261
+            ],
+            [
+                3033,
+                3032,
+                153,
+                262
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                16,
+                27
+            ],
+            [
+                12,
+                18,
+                9,
+                24
+            ],
+            [
+                8,
+                18,
+                10,
+                22
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                150
+            ],
+            [
+                4031,
+                151,
+                260
+            ],
+            [
+                4032,
+                4031,
+                151,
+                260
+            ],
+            [
+                4032,
+                152,
+                261
+            ],
+            [
+                4033,
+                4032,
+                153,
+                262
+            ],
+            [
+                4033,
+                153,
+                262
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                7
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                17
+            ],
+            [
+                8,
+                5,
+                15
+            ],
+            [
+                8,
+                12,
+                6,
+                9
+            ],
+            [
+                12,
+                6,
+                11
             ]
         ]
     }

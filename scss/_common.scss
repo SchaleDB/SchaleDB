@@ -233,6 +233,14 @@ p a {
 
 }
 
+.dropdown-item {
+    &:active, &.active {
+        img.invert-light {
+            filter: var(--var-invert-dark) !important;
+        }
+    }
+}
+
 .bond-small {
 
     position: relative;

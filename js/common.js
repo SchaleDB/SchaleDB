@@ -560,6 +560,7 @@ String.prototype.escapeHtml = function() {
         this.stats['EnhanceExplosionRate'] = [10000,0,1,0]
         this.stats['EnhancePierceRate'] = [10000,0,1,0]
         this.stats['EnhanceMysticRate'] = [10000,0,1,0]
+        this.stats['EnhanceSonicRate'] = [10000,0,1,0]
         this.stats['ExtendBuffDuration'] = [10000,0,1,0]
         this.stats['ExtendDebuffDuration'] = [10000,0,1,0]
         this.stats['ExtendCCDuration'] = [10000,0,1,0]
@@ -880,6 +881,11 @@ String.prototype.escapeHtml = function() {
             case 'Mystic':
                 if (armorType == 'Unarmed') {
                     effMod += (this.getTotal('EnhanceMysticRate') - 10000)
+                }
+                break
+            case 'Sonic':
+                if (armorType == 'ElasticArmor') {
+                    effMod += (this.getTotal('EnhanceSonicRate') - 10000)
                 }
                 break
         }
@@ -2898,7 +2904,7 @@ class SkillDamageInfo {
                     html += this.addStaticRow(index, `${dotEffectIcon} ${translateUI('dmginfo_dmg')}`, '', 'dmg-range')
                 }
 
-                if (this.skill.SkillType == 'autoattack' || effect.Type == "FormChange") {
+                if ((this.skill.SkillType == 'autoattack' && this.skill.Effects[0].Frames.AttackIngDuration != 0) || effect.Type == "FormChange") {
                     html += this.addSeparator()
 
                     html += this.addStaticRow(index, formChangeIcon + translateUI('dmginfo_rate_of_fire'), '', 'auto-duration', 'has-tooltip')
@@ -3776,6 +3782,10 @@ function loadModule(moduleName, entry=null) {
 
             $('#raid-enemy-list').on('click', '.dropdown-item', function() {
                 changeRaidEnemy($(this).data('enemy-index'))
+            })
+
+            $('#ba-raid-season-list').on('click', '.dropdown-item', function() {
+                loadRaidSeasonRewards($(this).data('season'))
             })
 
             populateRaidList()
@@ -5590,27 +5600,39 @@ function loadRaid(raidId) {
             changeRaidDifficulty(raid_difficulty)
             //populate raid seasons
             const raidSeasons = find(data.raids["RaidSeasons"][regionID]["Seasons"], "RaidId", raid.Id)
-            let optionsHtml = `<option value="0" disabled selected>${translateUI('raid_season_select')}</option>`
-            const dateOptions = {year: "numeric", month: "numeric", day: "numeric"}
+            let optionsHtml = ''
+            const dateOptions = {year: "2-digit", month: "numeric", day: "numeric"}
 
-            optionsHtml += `<option value="0" disabled>---${getLocalizedString('StageType', 'Raid')}---</option>`
+            //optionsHtml += `<option value="0" disabled>---${getLocalizedString('StageType', 'Raid')}---</option>`
+            optionsHtml += `<li><h6 class="dropdown-header">${getLocalizedString('StageType', 'Raid')}</h6></li>`
+
+            const rewardMaxDifficulty = {36: 'HC', 40: 'EXT', 44: 'INS', 48: 'TOR', 54: 'TOR'}
+
             raidSeasons.forEach((season) => {
                 const start = new Date(season.Start*1000).toLocaleString([], dateOptions)
                 const end = new Date(season.End*1000).toLocaleString([], dateOptions)
-                optionsHtml += `<option value="${season.Season}">${translateUI('raid_season',[season.Season, getLocalizedString("AdaptationType", season.Terrain)]) + " [" + start + "~"+end+"]"}</option>`
+
+                const difficulty = rewardMaxDifficulty[season.RewardSetMax]
+
+                optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${season.Season}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.Season])}</span><img class="inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small class="text-bold">${difficulty}</small><small class="ms-1">${start} - ${end}</small></div></a></li>`
             })
 
             if (data.raids["RaidSeasons"][regionID]["EliminateSeasons"].length) {
-                optionsHtml += `<option value="0" disabled>---${getLocalizedString('StageType', 'EliminateRaid')}---</option>`
                 const eliminateRaidSeasons = find(data.raids["RaidSeasons"][regionID]["EliminateSeasons"], "RaidId", raid.Id)
+
+                if (eliminateRaidSeasons.length) {
+                    optionsHtml += `<li><h6 class="dropdown-header">${getLocalizedString('StageType', 'EliminateRaid')}</h6></li>`
+                }
+
                 eliminateRaidSeasons.forEach((season) => {
                     const start = new Date(season.Start*1000).toLocaleString([], dateOptions)
                     const end = new Date(season.End*1000).toLocaleString([], dateOptions)
-                    optionsHtml += `<option value="${10000 + season.Season}">${translateUI('raid_season',[season.Season, getLocalizedString("AdaptationType", season.Terrain) + ', ' + season.ArmorTypes.map(a => getLocalizedString('ArmorType', a)).join('/')]) + " [" + start + "~"+end+"]"}</option>`
+                    optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${season.Season}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.Season])}</span><div class="d-flex align-self-center">${season.ArmorTypes.map((type) => `<span class="icon-type bg-def-${type.toLowerCase()}"><img src="images/ui/Type_Defense_s.png"></span>`).join('')}</div><img class=" inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small>${start} - ${end}</small></div></a></li>`
                 })
             }
             $('#ba-raid-season').show()
-            $('#ba-raid-season-select').html(optionsHtml)
+            $('#ba-raid-season-list .btn-pill .label').html(translateUI('raid_season_select'))
+            $('#ba-raid-season-list .dropdown-menu').html(optionsHtml)
             $('#ba-raid-season-rewards').html("")
         } else if (raidId < 800000) {
             //Time Attack
@@ -5678,9 +5700,8 @@ function loadRaid(raidId) {
     }
 }
 
-function loadRaidSeasonRewards(el) {
+function loadRaidSeasonRewards(seasonId) {
     let season
-    const seasonId = parseInt($(el).val())
     if (seasonId > 10000) {
         season = find(data.raids["RaidSeasons"][regionID]["EliminateSeasons"], "Season", seasonId - 10000)[0]
     } else {
@@ -5689,7 +5710,7 @@ function loadRaidSeasonRewards(el) {
 
     if (season) {
         let html = ""
-        const rewardSet = data.raids["RaidSeasons"][regionID][el > 10000 ? "EliminateRewardSets": "RewardSets"][`${season.RewardSet}`]
+        const rewardSet = data.raids["RaidSeasons"][regionID][seasonId > 10000 ? "EliminateRewardSets": "RewardSets"][`${season.RewardSet}`]
         rewardSet.forEach(([points, rewards], rewardIndex) => {
             if (rewardIndex > season.RewardSetMax) return
             if (html != "") html += '<div class="ba-panel-separator"></div>'
@@ -5702,6 +5723,10 @@ function loadRaidSeasonRewards(el) {
         $('#ba-raid-season-rewards').html(html)
         $('#ba-raid-season-rewards .season-rewards>div').tooltip({html: true})
         $('#ba-raid-season-rewards').show()
+
+        $('#ba-raid-season-list .btn-pill .label').html($(`#ba-raid-season-list a.dropdown-item[data-season="${seasonId}"]`).html())
+        $(`#ba-raid-season-list a.dropdown-item`).toggleClass('active', false)
+        $(`#ba-raid-season-list a.dropdown-item[data-season="${seasonId}"]`).toggleClass('active', true)
     }
 }
 
@@ -7625,19 +7650,7 @@ function getEventCardHTML(eventId) {
     let eventIdImg = eventId % 10000
     let name = getLocalizedString("EventName", eventIdImg) + (eventId > 10000 ? translateUI('event_rerun') : '')
 
-    let logoLang
-    if (regionID == 0 || !region.events.includes(eventIdImg)) {
-        //always use JP logo for Japan server
-        logoLang = 'Jp'
-    } else {
-        if (userLang == 'Cn') {
-            logoLang = 'Tw'
-        } else if (userLang == 'Vi') {
-            logoLang = 'Jp'
-        } else {
-            logoLang = userLang
-        }
-    }
+    const logoLang = getEventlogoLang(eventIdImg)
 
     let onClick
     switch (eventId) {
@@ -7656,9 +7669,25 @@ function getEventCardHTML(eventId) {
     <div id="event-select-${eventId}" class="selection-grid-card card-event" onclick="${onClick}">
         <div class="card-bg"><div style="background-image:url('images/campaign/Campaign_Event_${eventIdImg}_Normal.png');"></div>
         </div>
+        ${eventId > 10000 ? '<img class="event-revival" src="images/ui/Event_Revival.png">' : ''}
         <div class="card-img"><img src="images/eventlogo/${eventIdImg}_${logoLang}.webp"></div>`
     html += `<div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${name}</span></div></div>`
     return html
+}
+
+function getEventlogoLang(eventId) {
+    if (regionID == 0 || !region.events.includes(eventId)) {
+        //always use JP logo for Japan server
+        return 'Jp'
+    } else {
+        if (userLang == 'Cn') {
+            return 'Tw'
+        } else if (userLang == 'Vi' || userLang == 'Zh') {
+            return 'Jp'
+        } else {
+            return userLang
+        }
+    }
 }
 
 function getStageIcon(stage, type) {
@@ -7854,7 +7883,7 @@ function getMaterialIconHTML(id, amount) {
 function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dropType=null, appendDescription=null) {
     let item, type, group, haslink, itemType
     if (id >= 4000000 && id < 5000000) {
-        groups = find(data.common.GachaGroup, "Id", id-4000000)
+        const groups = find(data.config.GachaGroups, "Id", id-4000000)
         if (groups.length > 0) {
             group = groups[0]
             type = 'GachaGroup'
@@ -7927,6 +7956,30 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                     tier += `T${(gear.Id%10)+1}`
                 }
                 name = translateUI('item_randombox_tier', [tier, gearType])
+            } else if (group.Id >= 400000 && group.Id < 410000) {
+                // Random Tiered Equipment Boxes
+                
+                desc = translateUI('item_equipment_box') + '\n'
+                iconPath = 'items'
+                icon = 'item_icon_equipment_random'
+                rarity = 'N'
+
+                const tier = (group.Id % 10) + 1
+
+                name = translateUI('item_randombox_tier', ['T' + tier, getLocalizedString('ItemCategory', 'Equipment')])
+
+                // Count the total probability
+                const totalProb = group.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
+
+                for (let i = 0; i < group.ItemList.length; i++) {
+
+                    let gear = find(data.equipment, 'Id', group.ItemList[i][0]-2000000)[0]
+                    desc += `${getTranslatedString(gear, 'Name')} (${getProbabilityText(group.ItemList[i][1]/totalProb)})\n`
+
+                    // maxTier = Math.max(item.Id % 10, maxTier)
+                    // itemType = Math.floor(item.Id / 1000)             
+                }
+
             } else if (group.Id >= 300000 && group.Id < 360000) {
                 // Equipment boxes that contain a random piece for an equipment slot (same tier)
                 desc = translateUI('item_equipment_box') + "\n"
@@ -8488,19 +8541,9 @@ function populateEventStageList(eventId) {
         eventId = eventId % 10000
         let diffPrev = 0
         let eventPrev = 0
-        let logoLang
-        if (regionID == 0  || !region.events.includes(eventId)) {
-            //always use JP logo for Japan server
-            logoLang = 'Jp'
-        } else {
-            if (userLang == 'Cn') {
-                logoLang = 'Tw'
-            } else if (userLang == 'Vi') {
-                logoLang = 'Jp'
-            } else {
-                logoLang = userLang
-            }
-        }
+
+        const logoLang = getEventlogoLang(eventId)
+
         let html = `<div class="ba-grid-header ba-panel p-2 eventlist-header" style="grid-column: 1/-1;order: 0;"><button id="stages-eventlist-back" type="button" class="btn btn-dark me-2" style="min-width:fit-content;" onclick="populateStageList('events')"><i class="fa-solid fa-chevron-left"></i><span class="d-inline ms-2">${getLocalizedString('StageType', 'Event')}</span></button><img class="mx-auto mx-lg-1" src="images/eventlogo/${eventId}_${logoLang}.webp"><h4 class="flex-fill text-center px-1 mb-0">${getLocalizedString('EventName',''+eventId)}</h4></div></div>`
     
         if (conquest_events.includes(eventId)) {
@@ -8822,7 +8865,7 @@ function getItemDropStages(itemID, includeEvents = false) {
 
                 if (rewardList[i][0] >= 4000000 && rewardList[i][0] < 5000000) {
                     // Reward is an Item Box
-                    const box = find(data.common.GachaGroup, "Id", rewardList[i][0] - 4000000)[0]
+                    const box = find(data.config.GachaGroups, "Id", rewardList[i][0] - 4000000)[0]
 
                     // Count the total probability
                     const totalProb = box.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)

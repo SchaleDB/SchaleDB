@@ -18511,7 +18511,7 @@
                             ]
                         ],
                         "Stat": "MoveSpeed_Coefficient",
-                        "Channel": 612
+                        "Channel": 11512
                     },
                     {
                         "Type": "BuffTarget",
@@ -23067,7 +23067,7 @@
             {
                 "SkillType": "normal",
                 "Name": "긴급 구호 세트 B",
-                "Desc": "35초마다 아군 1인에게 치유력 <?1> 회복",
+                "Desc": "35초마다 체력이 가장 낮은 아군 1인에게 치유력 <?1> 회복",
                 "Parameters": [
                     [
                         "94%",
@@ -40668,7 +40668,7 @@
             {
                 "SkillType": "normal",
                 "Name": "보급 작전 플랜B",
-                "Desc": "45초마다 아군 1인에게 치유력 <?1> 회복",
+                "Desc": "45초마다 체력이 가장 낮은 아군 1인에게 치유력 <?1> 회복",
                 "Parameters": [
                     [
                         "129%",
@@ -78408,7 +78408,7 @@
             [
                 [
                     9106,
-                    0
+                    3
                 ]
             ],
             [],
@@ -85983,7 +85983,7 @@
         "CharacterAge": "15세",
         "Birthday": "8월 7일",
         "CharacterSSRNew": "",
-        "ProfileIntroduction": "붉은겨울 학원의 도서관에서 지식을 위해 투쟁하는 문학 소녀.\n\n빵과 간식을 위해 싸우는 붉은겨울 학원 대부분의 학생들과는 달리, 그녀는 도서관에 더 많은 장서를 유치하기 위해 싸우고 있다. 실상은 중증의 오타쿠로, 사무국에 구입을 요청하는 대부분의 책이 사리사욕에 따라 신청한 도서들이며, 그 덕에 요청의 대부분이 기각되기 마련이지만, 모미지는 포기하지 않는다.",
+        "ProfileIntroduction": "붉은겨울 학원의 도서관에서 지식을 위해 투쟁하는 문학소녀.\n\n빵과 간식을 위해 싸우는 붉은겨울 학원 대부분의 학생들과는 달리, 그녀는 도서관에 더 많은 장서를 유치하기 위해 싸우고 있다. 실상은 중증의 오타쿠로, 사무국에 구입을 요청하는 대부분의 책이 사리사욕에 따라 신청한 도서들이며, 그 덕에 요청의 대부분이 기각되기 마련이지만, 모미지는 포기하지 않는다.",
         "Hobby": "만화책 수집",
         "CharacterVoice": "大亀あすか",
         "BirthDay": "8/7",
@@ -87513,6 +87513,1070 @@
                 12,
                 7,
                 13
+            ]
+        ]
+    },
+    {
+        "Id": 10077,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 156,
+        "PathName": "Ichika",
+        "DevName": "CH0071",
+        "Name": "이치카",
+        "School": "Trinity",
+        "Club": "Justice",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Sonic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "weapon_icon_ch0071",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Trinity_Collection",
+        "FamilyName": "나카마사",
+        "FamilyNameRuby": "",
+        "PersonalName": "이치카",
+        "SchoolYear": "2학년",
+        "CharacterAge": "16세",
+        "Birthday": "11월 11일",
+        "CharacterSSRNew": "어라? 약속 시간 아직 멀었죠? 기다리셨슴까?",
+        "ProfileIntroduction": "항상 여유로운 표정의 정의실현부의 부원.\n\n다양한 학생들이 있는 정의실현부 내에서도, 융통성과 조율을 곧잘 담당하고 있다. 다른 학원과의 관계도 좋은 편. 나긋나긋한 표정과 친절함으로 알려졌지만, 천성이 아니라 노력의 일환이다. ",
+        "Hobby": "남 돕기, 이것저것 도전해보는 중",
+        "CharacterVoice": "鷲見友美ジェナ",
+        "BirthDay": "11/11",
+        "Illustrator": "7peach",
+        "Designer": "7peach",
+        "CharHeightMetric": "163cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1380,
+        "AttackPower1": 280,
+        "AttackPower100": 2803,
+        "MaxHP1": 2223,
+        "MaxHP100": 22230,
+        "DefensePower1": 19,
+        "DefensePower100": 118,
+        "HealPower1": 1416,
+        "HealPower100": 4249,
+        "DodgePoint": 790,
+        "AccuracyPoint": 708,
+        "CriticalPoint": 202,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 20,
+        "AmmoCost": 4,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            2500,
+                            2500,
+                            2500,
+                            2500
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "잠깐 부탁하겠슴다",
+                "Desc": "부채꼴범위 내의 적에게 공격력 <?1> 대미지",
+                "Parameters": [
+                    [
+                        "726%",
+                        "835%",
+                        "1053%",
+                        "1162%",
+                        "1380%",
+                        "1489%",
+                        "1707%",
+                        "1816%",
+                        "2034%",
+                        "2143%"
+                    ]
+                ],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    6
+                ],
+                "Icon": "COMMON_SKILLICON_FAN",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            72674,
+                            83573,
+                            105378,
+                            116277,
+                            138075,
+                            148981,
+                            170779,
+                            181678,
+                            203483,
+                            214382
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "정의실현부의 연락망",
+                "Desc": "30초마다 진동 특효 <?1> 가산(<?2>간)",
+                "Parameters": [
+                    [
+                        "32.9%",
+                        "34.6%",
+                        "36.2%",
+                        "42.8%",
+                        "44.5%",
+                        "46.1%",
+                        "52.7%",
+                        "54.3%",
+                        "56%",
+                        "63.1%"
+                    ],
+                    [
+                        "20초",
+                        "20초",
+                        "20초",
+                        "20초",
+                        "20초",
+                        "20초",
+                        "20초",
+                        "20초",
+                        "20초",
+                        "25초"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3296,
+                                3460,
+                                3626,
+                                4284,
+                                4450,
+                                4614,
+                                5273,
+                                5438,
+                                5602,
+                                6313
+                            ]
+                        ],
+                        "Stat": "EnhanceSonicRate_Base",
+                        "Channel": 43
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "예리한 본성",
+                "Desc": "<b:HIT> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AccuracyPoint_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "예리한 본성+",
+                "Desc": "<b:ATK> <?1> 증가/\n추가로 <b:HIT> <?2> 증가",
+                "Parameters": [
+                    [
+                        "336",
+                        "353",
+                        "370",
+                        "437",
+                        "454",
+                        "471",
+                        "538",
+                        "555",
+                        "572",
+                        "639"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            336,
+                            353,
+                            370,
+                            437,
+                            454,
+                            471,
+                            538,
+                            555,
+                            572,
+                            639
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "그럴 수도 있죠",
+                "Desc": "공격 시 엄폐하지 않은 적에게 공격력 <?1> 추가 대미지",
+                "Parameters": [
+                    [
+                        "2.3%",
+                        "2.4%",
+                        "2.5%",
+                        "3%",
+                        "3.1%",
+                        "3.2%",
+                        "3.7%",
+                        "3.8%",
+                        "3.9%",
+                        "4.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_EXTRADAMAGE",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            238,
+                            245,
+                            259,
+                            308,
+                            315,
+                            329,
+                            378,
+                            385,
+                            399,
+                            448
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                6,
+                56
+            ],
+            [
+                7,
+                67
+            ],
+            [
+                2,
+                11
+            ],
+            [
+                3,
+                17
+            ],
+            [
+                4,
+                28
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            6,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 192",
+        "FurnitureInteraction": [
+            [
+                [
+                    10206,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Electronic",
+            "Fashion",
+            "Cosmetics"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Ichika",
+            "F_Ichika2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "레드 드래곤",
+            "Desc": "온갖 일들을 함께해 온 이치카의 돌격소총.\n\n소박하고 단정 단아하게 정돈된 외모과 달리, 내면은 과격하고 강렬한 일들도 거뜬하게끔 준비돼 있다.",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 123,
+            "AttackPower100": 1231,
+            "MaxHP1": 639,
+            "MaxHP100": 6392,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                170
+            ],
+            [
+                3021,
+                3020,
+                171,
+                230
+            ],
+            [
+                3022,
+                3021,
+                172,
+                231
+            ],
+            [
+                3023,
+                3022,
+                173,
+                232
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                17
+            ],
+            [
+                12,
+                18,
+                16,
+                27
+            ],
+            [
+                12,
+                18,
+                9,
+                25
+            ],
+            [
+                8,
+                18,
+                10,
+                23
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                170
+            ],
+            [
+                4021,
+                171,
+                230
+            ],
+            [
+                4022,
+                4021,
+                171,
+                230
+            ],
+            [
+                4022,
+                172,
+                231
+            ],
+            [
+                4023,
+                4022,
+                173,
+                232
+            ],
+            [
+                4023,
+                173,
+                232
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                14
+            ],
+            [
+                5,
+                12,
+                9,
+                18
+            ],
+            [
+                8,
+                3,
+                15
+            ],
+            [
+                8,
+                12,
+                4,
+                10
+            ],
+            [
+                12,
+                8,
+                12
+            ]
+        ]
+    },
+    {
+        "Id": 10078,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 157,
+        "PathName": "Kasumi",
+        "DevName": "CH0089",
+        "Name": "카스미",
+        "School": "Gehenna",
+        "Club": "HotSpringsDepartment",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Sonic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_ch0089",
+        "Cover": true,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Gehenna_Collection",
+        "FamilyName": "키누가와",
+        "FamilyNameRuby": "",
+        "PersonalName": "카스미",
+        "SchoolYear": "2학년",
+        "CharacterAge": "16세",
+        "Birthday": "5월 24일",
+        "CharacterSSRNew": "내가 온천 개발의 정의에 대해 말해줬던가?",
+        "ProfileIntroduction": "게헨나 온천개발부의 부장.\n\n온천수가 흐르는 땅은 모두 온천이 돼야 한다고 주장하며, 정한 자리엔 무엇이 있든 가리지 않고 폭파해버린다. 부원들에게는 전폭적인 지지를 받고 있지만 공식적으로는 수배 중인 범죄자일 뿐이다.",
+        "Hobby": "폭파, 온천 개발",
+        "CharacterVoice": "上坂すみれ ",
+        "BirthDay": "5/24",
+        "Illustrator": "Mx2J",
+        "Designer": "Mx2J",
+        "CharHeightMetric": "148cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 956,
+        "AttackPower1": 208,
+        "AttackPower100": 2089,
+        "MaxHP1": 2153,
+        "MaxHP100": 24950,
+        "DefensePower1": 19,
+        "DefensePower100": 114,
+        "HealPower1": 1459,
+        "HealPower100": 4378,
+        "DodgePoint": 1053,
+        "AccuracyPoint": 104,
+        "CriticalPoint": 208,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 8,
+        "AmmoCost": 2,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            5000,
+                            5000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "자이언트 힐 크러시",
+                "Desc": "원형범위 내의 적에게 <d:DEF> <?1> 감소(25초간)/\n공격력 <?2> 대미지",
+                "Parameters": [
+                    [
+                        "17.6%",
+                        "20.3%",
+                        "25.6%",
+                        "28.2%",
+                        "33.5%",
+                        "36.1%",
+                        "41.4%",
+                        "44.1%",
+                        "49.4%",
+                        "52%"
+                    ],
+                    [
+                        "227.6%",
+                        "261.9%",
+                        "330.1%",
+                        "363.9%",
+                        "432.5%",
+                        "466.4%",
+                        "534.5%",
+                        "568.8%",
+                        "637%",
+                        "671.3%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            1428,
+                            1428,
+                            1428,
+                            1428,
+                            1428,
+                            1428,
+                            1428
+                        ],
+                        "HitsParameter": 2,
+                        "Scale": [
+                            22764,
+                            26194,
+                            33012,
+                            36393,
+                            43253,
+                            46641,
+                            53452,
+                            56882,
+                            63700,
+                            67130
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -1766,
+                                -2030,
+                                -2560,
+                                -2825,
+                                -3354,
+                                -3619,
+                                -4149,
+                                -4413,
+                                -4942,
+                                -5208
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "중요한 건 메시지야",
+                "Desc": "35초마다 원형범위 내의 적에게 공격력 <?1> 대미지",
+                "Parameters": [
+                    [
+                        "227%",
+                        "238%",
+                        "250%",
+                        "295%",
+                        "307%",
+                        "318%",
+                        "363%",
+                        "375%",
+                        "386%",
+                        "432%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            22741,
+                            23880,
+                            25019,
+                            29561,
+                            30701,
+                            31840,
+                            36382,
+                            37521,
+                            38661,
+                            43210
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "미치광이 전략",
+                "Desc": "<b:CriticalChance> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "미치광이 전략+",
+                "Desc": "<b:CriticalDamage> <?1> 증가/\n추가로 <b:CriticalChance> <?2> 증가",
+                "Parameters": [
+                    [
+                        "2000",
+                        "2100",
+                        "2200",
+                        "2600",
+                        "2700",
+                        "2800",
+                        "3200",
+                        "3300",
+                        "3400",
+                        "3800"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Base",
+                        "Scale": [
+                            2000,
+                            2100,
+                            2200,
+                            2600,
+                            2700,
+                            2800,
+                            3200,
+                            3300,
+                            3400,
+                            3800
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "굴착기는 소음을 멈췄나?",
+                "Desc": "Ex 스킬 사용 3회마다 공격력 <?1> 추가 대미지",
+                "Parameters": [
+                    [
+                        "633%",
+                        "665%",
+                        "697%",
+                        "824%",
+                        "855%",
+                        "887%",
+                        "1014%",
+                        "1045%",
+                        "1077%",
+                        "1204%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0089_EXTRAPASSIVESKILL",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            63391,
+                            66556,
+                            69728,
+                            82404,
+                            85576,
+                            88741,
+                            101416,
+                            104589,
+                            107761,
+                            120436
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                62
+            ],
+            [
+                5,
+                75
+            ],
+            [
+                1,
+                12
+            ],
+            [
+                2,
+                18
+            ],
+            [
+                3,
+                31
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            2,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Shady Girls",
+        "FurnitureInteraction": [
+            [
+                [
+                    9106,
+                    3
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Observational",
+            "Mystery",
+            "Roman"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Kasumi",
+            "F_Kasumi2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "레드 렉터",
+            "Desc": "카스미가 항상 휴대하고 다니는 권총.\n\n분위기를 띄우기 위해 허공에 발표하는 경우가 대부분이지만, 작고 귀여운 외관과 달리 실제 위력도 요란하고 강직하다.",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 92,
+            "AttackPower100": 918,
+            "MaxHP1": 714,
+            "MaxHP100": 7139,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                150
+            ],
+            [
+                3031,
+                3030,
+                151,
+                260
+            ],
+            [
+                3032,
+                3031,
+                152,
+                261
+            ],
+            [
+                3033,
+                3032,
+                153,
+                262
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                16,
+                27
+            ],
+            [
+                12,
+                18,
+                9,
+                24
+            ],
+            [
+                8,
+                18,
+                10,
+                22
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                150
+            ],
+            [
+                4031,
+                151,
+                260
+            ],
+            [
+                4032,
+                4031,
+                151,
+                260
+            ],
+            [
+                4032,
+                152,
+                261
+            ],
+            [
+                4033,
+                4032,
+                153,
+                262
+            ],
+            [
+                4033,
+                153,
+                262
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                7
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                17
+            ],
+            [
+                8,
+                5,
+                15
+            ],
+            [
+                8,
+                12,
+                6,
+                9
+            ],
+            [
+                12,
+                6,
+                11
             ]
         ]
     }
