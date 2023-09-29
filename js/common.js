@@ -5627,7 +5627,7 @@ function loadRaid(raidId) {
                 eliminateRaidSeasons.forEach((season) => {
                     const start = new Date(season.Start*1000).toLocaleString([], dateOptions)
                     const end = new Date(season.End*1000).toLocaleString([], dateOptions)
-                    optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${season.Season}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.Season])}</span><div class="d-flex align-self-center">${season.ArmorTypes.map((type) => `<span class="icon-type bg-def-${type.toLowerCase()}"><img src="images/ui/Type_Defense_s.png"></span>`).join('')}</div><img class=" inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small>${start} - ${end}</small></div></a></li>`
+                    optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${10000 + season.Season}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.Season])}</span><div class="d-flex align-self-center">${season.ArmorTypes.map((type) => `<span class="icon-type bg-def-${type.toLowerCase()}"><img src="images/ui/Type_Defense_s.png"></span>`).join('')}</div><img class=" inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small>${start} - ${end}</small></div></a></li>`
                 })
             }
             $('#ba-raid-season').show()
