@@ -17394,7 +17394,7 @@
         "SchoolYear": "第2年",
         "CharacterAge": "16岁",
         "Birthday": "2月2日",
-        "CharacterSSRNew": "谨遵先生旨意。",
+        "CharacterSSRNew": "谨遵主人旨意。",
         "ProfileIntroduction": "千禧年科技的秘密组织——“C&C”的特工。\n\n她的代号为02，负责利用强大的火力在后方进行支援。\n虽然她的外貌看上去有些咄咄逼人，但其实在所有C&C特工中行事风格最为慎重，作战中时常为了阻止明日奈或者茜的暴走而苦恼。",
         "Hobby": "清洁",
         "CharacterVoice": "沼仓爱美/喵酱",
@@ -87473,12 +87473,12 @@
                             10000
                         ],
                         "Frames": {
-                            "AttackEnterDuration": 0,
-                            "AttackStartDuration": 0,
-                            "AttackEndDuration": 0,
-                            "AttackBurstRoundOverDelay": 0,
-                            "AttackIngDuration": 0,
-                            "AttackReloadDuration": 0
+                            "AttackEnterDuration": 40,
+                            "AttackStartDuration": 20,
+                            "AttackEndDuration": 15,
+                            "AttackBurstRoundOverDelay": 30,
+                            "AttackIngDuration": 35,
+                            "AttackReloadDuration": 78
                         },
                         "CriticalCheck": "Check"
                     }
@@ -87512,8 +87512,19 @@
                 "Icon": "COMMON_SKILLICON_FAN",
                 "Effects": [
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Check",
+                        "Hits": [
+                            1250,
+                            1250,
+                            1250,
+                            1250,
+                            1250,
+                            1250,
+                            1250,
+                            1250
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             72674,
                             83573,
@@ -87991,12 +88002,12 @@
                             10000
                         ],
                         "Frames": {
-                            "AttackEnterDuration": 0,
-                            "AttackStartDuration": 0,
-                            "AttackEndDuration": 0,
-                            "AttackBurstRoundOverDelay": 0,
-                            "AttackIngDuration": 0,
-                            "AttackReloadDuration": 0
+                            "AttackEnterDuration": 30,
+                            "AttackStartDuration": 25,
+                            "AttackIngDuration": 30,
+                            "AttackEndDuration": 20,
+                            "AttackBurstRoundOverDelay": 30,
+                            "AttackReloadDuration": 65
                         },
                         "CriticalCheck": "Check"
                     }

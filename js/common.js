@@ -3769,7 +3769,6 @@ function loadModule(moduleName, entry=null) {
             if (regionID == 2) {
                 $('#ba-raid-list-tab-timeattack').hide()
                 $('#ba-raid-list-tab-worldraid').hide()
-                $('#ba-raid-difficulty-4').hide()
                 $('#ba-raid-difficulty-5').hide()
                 $('#ba-raid-difficulty-6').hide()
             }
@@ -5614,7 +5613,7 @@ function loadRaid(raidId) {
 
                 const difficulty = rewardMaxDifficulty[season.RewardSetMax]
 
-                optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${season.Season}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.Season])}</span><img class="inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small class="text-bold">${difficulty}</small><small class="ms-1">${start} - ${end}</small></div></a></li>`
+                optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${season.SeasonId}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.SeasonDisplay])}</span><img class="inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small class="text-bold">${difficulty}</small><small class="ms-1">${start} - ${end}</small></div></a></li>`
             })
 
             if (data.raids["RaidSeasons"][regionID]["EliminateSeasons"].length) {
@@ -5627,7 +5626,7 @@ function loadRaid(raidId) {
                 eliminateRaidSeasons.forEach((season) => {
                     const start = new Date(season.Start*1000).toLocaleString([], dateOptions)
                     const end = new Date(season.End*1000).toLocaleString([], dateOptions)
-                    optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${10000 + season.Season}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.Season])}</span><div class="d-flex align-self-center">${season.ArmorTypes.map((type) => `<span class="icon-type bg-def-${type.toLowerCase()}"><img src="images/ui/Type_Defense_s.png"></span>`).join('')}</div><img class=" inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small>${start} - ${end}</small></div></a></li>`
+                    optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${10000 + season.SeasonId}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.SeasonDisplay])}</span><div class="d-flex align-self-center">${season.ArmorTypes.map((type) => `<span class="icon-type bg-def-${type.toLowerCase()}"><img src="images/ui/Type_Defense_s.png"></span>`).join('')}</div><img class=" inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small>${start} - ${end}</small></div></a></li>`
                 })
             }
             $('#ba-raid-season').show()
@@ -5703,9 +5702,9 @@ function loadRaid(raidId) {
 function loadRaidSeasonRewards(seasonId) {
     let season
     if (seasonId > 10000) {
-        season = find(data.raids["RaidSeasons"][regionID]["EliminateSeasons"], "Season", seasonId - 10000)[0]
+        season = find(data.raids["RaidSeasons"][regionID]["EliminateSeasons"], "SeasonId", seasonId - 10000)[0]
     } else {
-        season = find(data.raids["RaidSeasons"][regionID]["Seasons"], "Season", seasonId)[0] 
+        season = find(data.raids["RaidSeasons"][regionID]["Seasons"], "SeasonId", seasonId)[0] 
     }
 
     if (season) {
