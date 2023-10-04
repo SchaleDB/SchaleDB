@@ -77,7 +77,6 @@ if (localStorage.getItem("region")) {
 let data = {}
 
 let json_list = {
-    common: getCacheVerResourceName("./data/common.min.json"),
     stages: getCacheVerResourceName("./data/stages.min.json"),
     config: getCacheVerResourceName("./data/config.min.json")
 }
@@ -1803,19 +1802,19 @@ class SupportStats {
 
         if (studentId in studentCollection) {
             const savedStudent = studentCollection[studentId]
-            supportStudent.level = Math.min(parseInt(savedStudent.l), region.studentlevel_max)
+            supportStudent.level = Math.min(parseInt(savedStudent.l), region.StudentMaxLevel)
             supportStudent.starGrade = parseInt(savedStudent.s)
-            supportStudent.weaponStarGrade = region.weaponlevel_max > 0 ? parseInt(savedStudent.ws) : 0 
-            supportStudent.weaponLevel = Math.min(parseInt(savedStudent.wl), region.weaponlevel_max)
-            supportStudent.equipment = [Math.min(parseInt(savedStudent.e1), region.gear1_max), Math.min(parseInt(savedStudent.e2), region.gear2_max), Math.min(parseInt(savedStudent.e3), region.gear3_max)]
+            supportStudent.weaponStarGrade = region.WeaponMaxLevel > 0 ? parseInt(savedStudent.ws) : 0 
+            supportStudent.weaponLevel = Math.min(parseInt(savedStudent.wl), region.WeaponMaxLevel)
+            supportStudent.equipment = [Math.min(parseInt(savedStudent.e1), region.EquipmentMaxLevel[0]), Math.min(parseInt(savedStudent.e2), region.EquipmentMaxLevel[1]), Math.min(parseInt(savedStudent.e3), region.EquipmentMaxLevel[2])]
             supportStudent.gear = false
-            supportStudent.bond = [Math.min(parseInt(savedStudent.b), region.bondlevel_max)]
+            supportStudent.bond = [Math.min(parseInt(savedStudent.b), region.BondMaxLevel)]
         } else {
-            supportStudent.level = region.studentlevel_max
+            supportStudent.level = region.StudentMaxLevel
             supportStudent.starGrade = 5
-            supportStudent.weaponStarGrade = region.weaponlevel_max > 0 ? 3 : 0
-            supportStudent.weaponLevel = region.weaponlevel_max
-            supportStudent.equipment = [region.gear1_max, region.gear2_max, region.gear3_max]
+            supportStudent.weaponStarGrade = region.WeaponMaxLevel > 0 ? 3 : 0
+            supportStudent.weaponLevel = region.WeaponMaxLevel
+            supportStudent.equipment = region.EquipmentMaxLevel
             supportStudent.gear = false
             supportStudent.bond = [20]
 
@@ -1879,7 +1878,7 @@ class SupportStats {
                 <div class="collapse${support.panelOpen ? ' show' : ''}" id="supportstats-controls-${index}">
                     <div class="d-flex flex-column gap-2 pt-3">
                         <div class="d-flex flex-row align-items-center gap-2 support-level">
-                            <input type="range" class="form-range flex-fill" value="${support.level}" min="1" max="${region.studentlevel_max}">
+                            <input type="range" class="form-range flex-fill" value="${support.level}" min="1" max="${region.StudentMaxLevel}">
                             <span class="ba-slider-label">Lv.${support.level}</span>
                         </div>  
                         <div class="d-flex flex-row flex-wrap align-items-center justify-content-center gap-2">
@@ -1889,7 +1888,7 @@ class SupportStats {
                                 <span class="ba-statpreview-star" data-val="3"><i class="fa-solid fa-star"></i></span>
                                 <span class="ba-statpreview-star" data-val="4"><i class="fa-solid fa-star"></i></span>
                                 <span class="ba-statpreview-star" data-val="5"><i class="fa-solid fa-star"></i></span>
-                                ${ region.weaponlevel_max > 0 ?
+                                ${ region.WeaponMaxLevel > 0 ?
                                 `<span class="ba-weaponpreview-star ms-2" data-val="1"><i class="fa-solid fa-star"></i></span>
                                 <span class="ba-weaponpreview-star" data-val="2"><i class="fa-solid fa-star"></i></span>
                                 <span class="ba-weaponpreview-star" data-val="3"><i class="fa-solid fa-star"></i></span>` : ''
@@ -1967,11 +1966,11 @@ class SupportStats {
     }
 
     static renderBondControls(student) {
-        let html = `<div class="d-flex align-items-center justify-content-center gap-2"><div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${student.Id}.webp"></div><input data-bond="0" class="form-control support-bond" type="number" value="1" min="1" max="${region.bondlevel_max}"></div>`
+        let html = `<div class="d-flex align-items-center justify-content-center gap-2"><div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${student.Id}.webp"></div><input data-bond="0" class="form-control support-bond" type="number" value="1" min="1" max="${region.BondMaxLevel}"></div>`
         student.FavorAlts.forEach((id, i) => {
             const alt = find(data.students, 'Id', id)[0]
             if (alt.IsReleased[regionID]) {
-                html += `<div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${alt.Id}.webp"></div><input data-bond="${i+1}" class="form-control support-bond" type="number" value="1" min="1" max="${region.bondlevel_max}"></div>`
+                html += `<div class="input-small"><div class="icon bond-small"><img src="images/student/icon/${alt.Id}.webp"></div><input data-bond="${i+1}" class="form-control support-bond" type="number" value="1" min="1" max="${region.BondMaxLevel}"></div>`
             }
         })
         html += '</div>'
@@ -2205,7 +2204,7 @@ class EnemyFinder {
         })
 
         data.stages.Event.forEach(stage => {
-            if (stage.Difficulty != 2 || !region.events.includes(stage.EventId)) return
+            if (stage.Difficulty != 2 || !region.Events.includes(stage.EventId)) return
             stage.Formations.forEach((formation) => {
                 formation.EnemyList.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
@@ -2229,7 +2228,7 @@ class EnemyFinder {
         })
 
         data.stages.ConquestMap.forEach(conquestMap => {
-            if (!region.events.includes(conquestMap.EventId)) return
+            if (!region.Events.includes(conquestMap.EventId)) return
             const mapName = getLocalizedString('ConquestMap', ''+conquestMap.EventId % 10000)
             conquestMap.Maps.filter(m => m.Difficulty == "VeryHard").forEach(challengeMap => {
                 challengeMap.Tiles.filter(t => t.Type == "Battle").forEach(tile => {
@@ -2259,7 +2258,7 @@ class EnemyFinder {
         })
 
         data.stages.SchoolDungeon.forEach(stage => {
-            if (stage.Stage > region.schooldungeon_max) return
+            if (stage.Stage > region.SchoolDungeonMax) return
             const formation = stage.Formations[0]
             formation.EnemyList.forEach(enemyId => {
                 const enemy = find(data.enemies, 'Id', enemyId)[0]
@@ -3143,7 +3142,7 @@ $.when($.ready, loadPromise).then(function() {
 
     //populate Changelog
     let changelogHtml = ""
-    $.each(data.common.changelog, function(i, el) {
+    $.each(data.config.Changelog, function(i, el) {
         changelogHtml += `<h5 class="text-emphasis px-2">${el.date}</h5>`
         changelogHtml += '<div class="p-2 mb-3">'
         for (let j = 0; j < el.contents.length; j++) {
@@ -3168,7 +3167,7 @@ $.when($.ready, loadPromise).then(function() {
     if (showLinks) {
         $("#modal-links").modal('show')
     } else {
-        const currentChangelog = parseInt(data.common.changelog[0].date.replace(/\//g,''))
+        const currentChangelog = parseInt(data.config.Changelog[0].date.replace(/\//g,''))
 
         if (localStorage.getItem("changelog_seen")) {
             if (currentChangelog > parseInt(localStorage.getItem("changelog_seen"))) {
@@ -3435,8 +3434,8 @@ function loadModule(moduleName, entry=null) {
                 for (group in data.voice[student.Id]) {
                     let html = ''
                     data.voice[student.Id][group].forEach(vc => {
-                        if (vc.EventId && !region.events.includes(vc.EventId)) return
-                        if (vc.Group == "WeaponGetIdle1" && region.weaponlevel_max == 0) return
+                        if (vc.EventId && !region.Events.includes(vc.EventId)) return
+                        if (vc.Group == "WeaponGetIdle1" && region.WeaponMaxLevel == 0) return
                         const matches = vc.Group.match(/([0-9])$/)
                         const order = matches && matches.length ? matches[1] : 1
                         const group = vc.Group.replace(/[0-9]$/, "")
@@ -3681,7 +3680,7 @@ function loadModule(moduleName, entry=null) {
         $("#loaded-module").load(html_list['items'], function() {
 
             equipmentFilters = $('#item-search-filter-equipmenttier .search-filter-group')
-            for (let i = 1; i <= region.gear1_max; i++) {
+            for (let i = 1; i <= region.EquipmentMaxLevel[0]; i++) {
                 equipmentFilters.append(`<button id="item-search-filter-equipmenttier-${i}" class="btn-pill" onclick="searchSetFilterItems('EquipmentTier','${i}')"><span class="label">T${i}</span></button>`)
             }
 
@@ -3815,7 +3814,7 @@ function loadModule(moduleName, entry=null) {
             loadLanguage(userLang)
             loadedStageList = null
             stageMapModal = new bootstrap.Modal(document.getElementById("ba-stage-modal-map"), {})
-            if (region.weaponlevel_max == 0) {
+            if (region.WeaponMaxLevel == 0) {
                 $('#ba-stages-list-tab-schooldungeon').hide()
             }
             $(".tooltip").tooltip("hide")
@@ -3951,7 +3950,7 @@ function populateEvents() {
     let currentTime = new Date().getTime() / 1000, dateOptions = { month: "numeric", day: "numeric", hour: "numeric", minute: "numeric", timeZoneName: "short" }
     let found = false
     $('#events-row-1').hide()
-    $.each(region.current_gacha, function (i, el) {
+    $.each(region.CurrentGacha, function (i, el) {
         if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
             for (let j = 0; j < el.characters.length; j++) {
                 var char = find(data.students, "Id", el.characters[j])[0]
@@ -3973,7 +3972,7 @@ function populateEvents() {
     $('#ba-home-raid').hide()
     found = false
     let raidsVisible = false
-    $.each(region.current_raid, function (i, el) {
+    $.each(region.CurrentRaid, function (i, el) {
         if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
             if (el.raid >= 1000) {
                 raidText = getLocalizedString("StageType", "TimeAttack") + "\n"
@@ -3998,7 +3997,7 @@ function populateEvents() {
     let eventText = "", eventHtml = ""
     $('#ba-home-event').hide()
     found = false
-    $.each(region.current_events, function (i, el) {
+    $.each(region.CurrentEvents, function (i, el) {
         if (((currentTime >= el.start && currentTime < el.end) || (currentTime <= el.start)) && !found) {
             eventText = getLocalizedString("StageType", "Event") + "\n"
             eventHtml += getEventCardHTML(el.event)
@@ -4177,11 +4176,11 @@ function updateStudentList(updateSortMethod = false) {
                             return
                         }
     
-                        const level = sortByCollectionStats ? studentCollection[student.Id].l : region.studentlevel_max
+                        const level = sortByCollectionStats ? studentCollection[student.Id].l : region.StudentMaxLevel
                         const starGrade = sortByCollectionStats ? studentCollection[student.Id].s : 5
-                        const equipLevel = sortByCollectionStats ? [studentCollection[student.Id].e1, studentCollection[student.Id].e2, studentCollection[student.Id].e3] : [region.gear1_max, region.gear2_max, region.gear3_max]
-                        const weaponLevel = sortByCollectionStats ? studentCollection[student.Id].wl : region.weaponlevel_max
-                        const bondLevel = sortByCollectionStats ? studentCollection[student.Id].b : region.bondlevel_max
+                        const equipLevel = sortByCollectionStats ? [studentCollection[student.Id].e1, studentCollection[student.Id].e2, studentCollection[student.Id].e3] : region.EquipmentMaxLevel
+                        const weaponLevel = sortByCollectionStats ? studentCollection[student.Id].wl : region.WeaponMaxLevel
+                        const bondLevel = sortByCollectionStats ? studentCollection[student.Id].b : region.BondMaxLevel
                         const gearLevel = 1
 
                         const charStats = new CharacterStats(student, level, starGrade)
@@ -4197,7 +4196,7 @@ function updateStudentList(updateSortMethod = false) {
                             const altStudent = find(data.students, "Id", favorAlt)[0]
                             if (!altStudent.IsReleased[regionID]) continue
 
-                            const altBondLevel = sortByCollectionStats ? studentCollection[favorAlt].b : region.bondlevel_max
+                            const altBondLevel = sortByCollectionStats ? studentCollection[favorAlt].b : region.BondMaxLevel
 
                             const altBondStats = getBondStats(altStudent, altBondLevel)
                             for (let stat in altBondStats) {
@@ -5036,20 +5035,20 @@ function renderStudent() {
     if (student.Id in studentCollection) {
         statPreviewStarGrade = studentCollection[student.Id].s
 
-        statPreviewLevel = Math.min(studentCollection[student.Id].l, region.studentlevel_max)
+        statPreviewLevel = Math.min(studentCollection[student.Id].l, region.StudentMaxLevel)
         $('#ba-statpreview-levelrange').val(statPreviewLevel)
         changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
 
-        statPreviewEquipment = [Math.min(studentCollection[student.Id].e1, region.gear1_max), Math.min(studentCollection[student.Id].e2, region.gear2_max), Math.min(studentCollection[student.Id].e3, region.gear3_max)]
+        statPreviewEquipment = [Math.min(studentCollection[student.Id].e1, region.EquipmentMaxLevel[0]), Math.min(studentCollection[student.Id].e2, region.EquipmentMaxLevel[1]), Math.min(studentCollection[student.Id].e3, region.EquipmentMaxLevel[2])]
         $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
         $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
         $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
 
-        statPreviewWeaponGrade = region.weaponlevel_max > 0 ? studentCollection[student.Id].ws : 0
-        statPreviewWeaponLevel = Math.min(studentCollection[student.Id].wl, region.weaponlevel_max)
-        $('#ba-statpreview-weapon-range').attr("max",region.weaponlevel_max).val(statPreviewWeaponLevel)
+        statPreviewWeaponGrade = region.WeaponMaxLevel > 0 ? studentCollection[student.Id].ws : 0
+        statPreviewWeaponLevel = Math.min(studentCollection[student.Id].wl, region.WeaponMaxLevel)
+        $('#ba-statpreview-weapon-range').attr("max",region.WeaponMaxLevel).val(statPreviewWeaponLevel)
 
-        statPreviewBondLevel[0] = Math.min(studentCollection[student.Id].b, region.bondlevel_max)
+        statPreviewBondLevel[0] = Math.min(studentCollection[student.Id].b, region.BondMaxLevel)
         $('#ba-statpreview-bond-0-range').val(statPreviewBondLevel[0])
         $('#ba-statpreview-passiveskill-range').val(studentCollection[student.Id].s3)
         changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
@@ -5424,10 +5423,10 @@ function loadItem(id) {
             }
         }
 
-        if (region.furniture_templates && item.Templates) {
+        if (region.FurnitureTemplateMax > 0 && item.Templates) {
             let html = ''
             item.Templates.forEach((template) => {
-                if (template[0] > region.furniture_template_max) return
+                if (template[0] > region.FurnitureTemplateMax) return
                 html += `<div class="selection-grid-card card-shop">
                 <div class="card-img"><img loading="lazy" src="images/furniture/template/${template[0]}.webp"></div>`
                 let templateName = getLocalizedString("FurnitureTemplate", template[0])
@@ -6172,7 +6171,7 @@ function loadStage(id) {
                         checkEventId = stage.EventId
                         break;
                 }
-                if (region.events.includes(checkEventId)) {
+                if (region.Events.includes(checkEventId)) {
                     versionsAvailable.push(version)
                     dropdownHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-version="${version}"><span>${translateUI('stage_' + version.toLowerCase())}</span></a></li>`
                 }
@@ -6562,7 +6561,7 @@ function changeStageVersion(version) {
 }
 
 function getServerProperty(obj, prop) {
-    const serverSuffix = region.name
+    const serverSuffix = region.Name
     return getSuffixedProperty(obj, prop, serverSuffix)
 }
 
@@ -6636,15 +6635,15 @@ function getEventStage(id) {
 
 function loadRegion(regID) {
     regionID = regID
-    region = data.common.regions[regionID]
+    region = data.config.Regions[regionID]
 
 
     if (loadedModule == 'students') {
 
-        $(".statpreview-level").attr("max",region.studentlevel_max)
-        $('#ba-statpreview-level-modal').text(`Lv.1 / ${region.studentlevel_max}`)
-        $("#ba-weaponpreview-levelrange, #ba-statpreview-weapon-range").attr("max",region.weaponlevel_max)
-        if (region.weaponlevel_max == 0) {
+        $(".statpreview-level").attr("max",region.StudentMaxLevel)
+        $('#ba-statpreview-level-modal').text(`Lv.1 / ${region.StudentMaxLevel}`)
+        $("#ba-weaponpreview-levelrange, #ba-statpreview-weapon-range").attr("max",region.WeaponMaxLevel)
+        if (region.WeaponMaxLevel == 0) {
             $("#ba-student-nav-weapon").hide()
             $("#ba-statpreview-weapon-container").hide()
             $(".weaponpreview-star-1").hide()
@@ -6660,10 +6659,10 @@ function loadRegion(regID) {
             $('#ba-student-tab-weapon').hide()
             $('#item-search-filter-equipmentcategory-weaponexpgrowth').hide()
         }
-        $("#ba-bond-levelrange").attr("max",region.bondlevel_max)
-        $("#ba-statpreview-gear1-range").attr("max",region.gear1_max)
-        $("#ba-statpreview-gear2-range").attr("max",region.gear2_max)
-        $("#ba-statpreview-gear3-range").attr("max",region.gear3_max)
+        $("#ba-bond-levelrange").attr("max",region.BondMaxLevel)
+        $("#ba-statpreview-gear1-range").attr("max",region.EquipmentMaxLevel[0])
+        $("#ba-statpreview-gear2-range").attr("max",region.EquipmentMaxLevel[1])
+        $("#ba-statpreview-gear3-range").attr("max",region.EquipmentMaxLevel[2])
 
         $('#ba-student-search-filter-bullettype-sonic').toggle(studentList.some((s) => s.IsReleased[regionID] && s.BulletType == 'Sonic'))
         $('#ba-student-search-filter-armortype-elasticarmor').toggle(studentList.some((s) => s.IsReleased[regionID] && s.ArmorType == 'ElasticArmor'))
@@ -6686,8 +6685,8 @@ function loadRegion(regID) {
     }
 
     if (loadedModule == 'items') {
-        for (let i = 101; i <= data.common.regions[0].furniture_set; i++) {
-            $(`#item-search-filter-furnitureset-${i}`).toggle(i <= region.furniture_set)
+        for (let i = 101; i <= data.config.Regions[0].FurnitureSetMax; i++) {
+            $(`#item-search-filter-furnitureset-${i}`).toggle(i <= region.FurnitureSetMax)
         }
 
     }
@@ -6710,7 +6709,7 @@ function changeGearLevel(slot, el, recalculate = true) {
     const tier = parseInt(el.value)
     const equipment = find(data.equipment, "Id", gearId[geartype]+tier-1)[0]
     statPreviewEquipment[slot-1] = tier
-    //var gearobj = find(data.common.gear, "type", geartype)[0]
+    
     $(`#ba-statpreview-gear${slot}-icon`).attr("src", `images/equipment/icon/${equipment.Icon}.webp`)
     $(`#ba-statpreview-gear${slot}-level`).text(`T${tier}`)
     $(`#ba-statpreview-gear${slot}-name`).text(getTranslatedString(equipment, 'Name'))
@@ -6893,7 +6892,7 @@ function getBondTargetsHTML(num, student) {
     <h5 class="flex-fill">${translateUI('student_bond')}</h5>
     <i class="fa-regular fa-square off"></i>
     <i class="fa-solid fa-square-check on"></i></div>
-    <div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mb-1 d-flex flex-row align-items-center"><div class="ba-bond-icon me-2" style="position: relative;"><img src="images/student/icon/${student.Id}.webp"></div><div class="flex-fill"><h5>${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${statPreviewBondLevel[num]}" min="1" max="${region.bondlevel_max}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div></div>`
+    <div id="ba-statpreview-bond-${num}" class="p-2 mb-2 ba-panel"><div class="mb-1 d-flex flex-row align-items-center"><div class="ba-bond-icon me-2" style="position: relative;"><img src="images/student/icon/${student.Id}.webp"></div><div class="flex-fill"><h5>${getTranslatedString(student, 'Name')}</h5><p id="ba-statpreview-bond-${num}-description" class="mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p></div></div><div class="d-flex flex-row align-items-center"><input id="ba-statpreview-bond-${num}-range" oninput="changeStatPreviewBondLevel(${num})" type="range" class="form-range statpreview-bond me-2 flex-fill" value="${statPreviewBondLevel[num]}" min="1" max="${region.BondMaxLevel}"><span id="ba-statpreview-bond-${num}-level" class="ba-slider-label"></span></div></div></div>`
 }
 
 function getBondToggleHTML(num, student) {
@@ -7539,7 +7538,7 @@ function recalculateSkillPreview() {
             skill = find(student.Skills, 'SkillType', 'gearnormal')[0]
             $(`#ba-skill-normal-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.webp`)
             $(`#ba-skill-normal-plus`).toggle(true)
-        } else if (skillType == 'passive' && showSkillUpgrades && region.weaponlevel_max > 0) {
+        } else if (skillType == 'passive' && showSkillUpgrades && region.WeaponMaxLevel > 0) {
             skill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
             $(`#ba-skill-passive-icon`).toggleClass('plus', true).find('img').attr("src", `images/skill/${skill.Icon}.webp`)
             $(`#ba-skill-passive-plus`).toggle(true)
@@ -7675,7 +7674,7 @@ function getEventCardHTML(eventId) {
 }
 
 function getEventlogoLang(eventId) {
-    if (regionID == 0 || !region.events.includes(eventId)) {
+    if (regionID == 0 || !region.Events.includes(eventId)) {
         //always use JP logo for Japan server
         return 'Jp'
     } else {
@@ -7828,19 +7827,39 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
 }
 
 function renderEnemySkills(enemy, container) {
+    const emphasisRegex = /[0-9.]+(?:%|s|秒|초| วินาที)/g
+ 
+    let html = ''
     if (enemy.Skills !== undefined) {
-        let html = '<div class="ba-panel-separator mb-2"></div><ul>'
+        if (html == '') html = '<div class="ba-panel-separator mb-2"></div><ul>'
+        
         for (const skill of enemy.Skills) {
-            html += `<li>${replaceBuffPlaceholders(skill)}</li>`
+            html += `<li>${replaceBuffPlaceholders(skill.replace(emphasisRegex, function(match) {return `<strong>${match}</strong>`}))}</li>`
         }
+    }
+
+    if (enemy.PhaseChange !== undefined) {
+        if (html == '') html = '<div class="ba-panel-separator mb-2"></div><ul>'
+
+        for (const phase of enemy.PhaseChange) {
+            switch (phase.Trigger) {
+                case 'HPUnder':
+                    html += `<li>${getLocalizedString('RaidChangePhase', 'HPUnder', [`<b>${phase.Phase + 1}</b>`, `<b class="text-emphasis">${phase.Argument.toLocaleString()}</b>`])}</li>`
+                    break;
+            }
+            
+        }
+    }
+    
+    if (html == '') {
+        container.empty().hide()
+    } else {
         html += '</ul>'
         container.html(html)
         container.show()
         container.find('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
             $(el).tooltip({html: true})
         })
-    } else {
-        container.empty().hide()
     }
 }
 
@@ -8173,7 +8192,7 @@ function changeStatPreviewStars(stars, weaponstars, recalculate = true) {
         $('#ba-statpreview-bond-0-range').val(maxbond[stars-1])
         changeStatPreviewBondLevel(0, false)
     }
-    $('#ba-statpreview-bond-0-range').attr("max", Math.min(maxbond[stars-1], region.bondlevel_max))
+    $('#ba-statpreview-bond-0-range').attr("max", Math.min(maxbond[stars-1], region.BondMaxLevel))
 
     if (weaponstars > 0) {
         $('#ba-statpreview-weapon').toggleClass('disabled', false)
@@ -8460,8 +8479,8 @@ function populateStageList(mode) {
     switch (mode) {
         case 'missions':
             $.each(data.stages.Campaign, function(i,el) {
-                if (el.Area > region.campaign_max) return
-                if (!region.campaign_extra && el.Stage == "A") return
+                if (el.Area > region.CampaignMax) return
+                if (!region.CampaignExtra && el.Stage == "A") return
                 html += getStageCardHTML(el)
             })
             $('.stage-list').hide()
@@ -8476,7 +8495,7 @@ function populateStageList(mode) {
                         let header = `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
                         html += header
                     }
-                    if (el.Stage <= region.bounty_max) html += getStageCardHTML(el)
+                    if (el.Stage <= region.ChaserMax) html += getStageCardHTML(el)
                     typePrev = el.Type
                 }
             })
@@ -8493,7 +8512,7 @@ function populateStageList(mode) {
                         let header = `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
                         html += header
                     }
-                    if (el.Stage <= region.commission_max) html += getStageCardHTML(el)
+                    if (el.Stage <= (el.Id >= 32000 ? region.BloodMax : region.FindGiftMax)) html += getStageCardHTML(el)
                     typePrev = el.Type
                 }
             })
@@ -8508,7 +8527,7 @@ function populateStageList(mode) {
                 if (el.Type != typePrev) {
                     html += `<div id="stages-list-grid-header-${el.Type}" class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType',''+el.Type)}</h3></div>`
                 }
-                if (el.Stage <= region.schooldungeon_max) html += getStageCardHTML(el)
+                if (el.Stage <= region.SchoolDungeonMax) html += getStageCardHTML(el)
                 typePrev = el.Type
             })
             $('.stage-list').hide()
@@ -8517,7 +8536,7 @@ function populateStageList(mode) {
             $('#stage-select-grid').html(html)
             break
         case 'events':
-            region.events.forEach(val => {
+            region.Events.forEach(val => {
                 if (val < 10000) html += getEventCardHTML(val)
             })
             $('.stage-list').hide()
@@ -8562,8 +8581,8 @@ function populateEventStageList(eventId) {
 
             let eventStages = find(data.stages.Event, 'EventId', eventId)
             eventStages.forEach(stage => {
-                if (!stage.Versions.includes("Original") && !region.events.includes(eventId + 10000)) return
-                if (!(eventId == 701 && ((stage.Difficulty == 1 && stage.Stage > region.event_701_max) || (stage.Difficulty == 2 && stage.Stage > region.event_701_challenge_max)))) {
+                if (!stage.Versions.includes("Original") && !region.Events.includes(eventId + 10000)) return
+                if (!(eventId == 701 && (stage.Stage > region.Event701Max[stage.Difficulty]))) {
                     if (stage.Difficulty != diffPrev || stage.EventId != eventPrev) {
                         let name
 
@@ -9290,7 +9309,7 @@ function changeRegion(regID) {
             $(`#ba-navbar-regionselector-${regionID}`).removeClass("active")
 
             regionID = regID
-            region = data.common.regions[regionID]
+            region = data.config.Regions[regionID]
             localStorage.setItem("region", regionID)
     
             $(`#ba-navbar-regionselector span`).text($(`#ba-navbar-regionselector-${regionID} span`).text())
@@ -9547,7 +9566,7 @@ function allSearch() {
     $.each(data.stages.Campaign, function(i,el){
         let stagecode = getStageName(el, 'Campaign')
         let stageName = getStageTitle(el, 'Campaign')
-        if ((el.Area <= region.campaign_max) && (searchContains(searchTerm, stagecode) || searchContains(searchTerm, stageName))) {
+        if ((el.Area <= region.CampaignMax) && (searchContains(searchTerm, stagecode) || searchContains(searchTerm, stageName))) {
             results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,'Campaign')+'.png', 'type': stagecode, 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
             if (results.length >= maxResults) return false
         }
@@ -9578,7 +9597,7 @@ function allSearch() {
         let stagecode = getStageName(el, 'Event')
         let searchStageCode = stagecode.replace('\n', ' ')
         let stageName = getStageTitle(el, 'Event')
-        if ((region.events.includes(el.EventId)) && (searchContains(searchTerm, searchStageCode) || searchContains(searchTerm, stageName))) {
+        if ((region.Events.includes(el.EventId)) && (searchContains(searchTerm, searchStageCode) || searchContains(searchTerm, stageName))) {
             results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,'Event')+'.png', 'type': stagecode, 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
             if (results.length >= maxResults) return false
         }
@@ -9693,17 +9712,19 @@ function getCacheVerResourceName(res) {
  */
 function stageIsReleased(stage) {
     if (stage.Id > 8000000) {
-        return (region.events.includes(stage.EventId))
+        return (region.Events.includes(stage.EventId))
     } else if (stage.Id > 1000000) {
-        if (stage.Area > region.campaign_max) return false
-        if (!region.campaign_extra && stage.Stage == "A") return false
+        if (stage.Area > region.CampaignMax) return false
+        if (!region.CampaignExtra && stage.Stage == "A") return false
         return true
     } else if (stage.Id > 60000) {
-        return (stage.Stage <= region.schooldungeon_max)
+        return (stage.Stage <= region.SchoolDungeonMax)
+    } else if (stage.Id > 32000) {
+        return (stage.Stage <= region.BloodMax)
     } else if (stage.Id > 31000) {
-        return (stage.Stage <= region.commission_max)
+        return (stage.Stage <= region.FindGiftMax)
     } else if (stage.Id > 30000) {
-        return (stage.Stage <= region.bounty_max)
+        return (stage.Stage <= region.ChaserMax)
     } else return false
 }
 
@@ -10132,12 +10153,12 @@ function studentCollectionSave() {
 function maxStudentAttributes() {
     //Set all attributes to the maximum possible value
     statPreviewStarGrade = 5
-    statPreviewLevel = region.studentlevel_max
+    statPreviewLevel = region.StudentMaxLevel
     $('#ba-statpreview-levelrange').val(statPreviewLevel)
     changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
 
     statPreviewIncludeEquipment = true
-    statPreviewEquipment = [region.gear1_max, region.gear2_max, region.gear3_max]
+    statPreviewEquipment = region.EquipmentMaxLevel
     $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
     $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
     $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
@@ -10145,10 +10166,10 @@ function maxStudentAttributes() {
     changeGearLevel(2, document.getElementById('ba-statpreview-gear2-range'), false)
     changeGearLevel(3, document.getElementById('ba-statpreview-gear3-range'), false)
 
-    if (region.weaponlevel_max > 0) {
+    if (region.WeaponMaxLevel > 0) {
         statPreviewWeaponGrade = 3
-        statPreviewWeaponLevel = region.weaponlevel_max
-        $('#ba-statpreview-weapon-range').attr("max",region.weaponlevel_max).val(statPreviewWeaponLevel)
+        statPreviewWeaponLevel = region.WeaponMaxLevel
+        $('#ba-statpreview-weapon-range').attr("max",region.WeaponMaxLevel).val(statPreviewWeaponLevel)
     } else {
         statPreviewWeaponGrade = 0
         statPreviewWeaponLevel = 0
@@ -10161,7 +10182,7 @@ function maxStudentAttributes() {
     changeStatPreviewPassiveSkillLevel(document.getElementById('ba-statpreview-passiveskill-range'), false)
 
     for (let i = 0; i <= student_bondalts.length; i++) {
-        statPreviewBondLevel[i] = region.bondlevel_max
+        statPreviewBondLevel[i] = region.BondMaxLevel
         $(`#ba-statpreview-bond-${i}-range`).val(statPreviewBondLevel[i])
         changeStatPreviewBondLevel(i, false)
         statPreviewIncludeBond[i] = true
