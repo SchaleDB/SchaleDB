@@ -5639,7 +5639,7 @@ function loadRaid(raidId) {
             $('#ba-timeattack-info').show()
             raid = findOrDefault(data.raids.TimeAttack,"Id",raidId,1000)[0]
             $(`#ba-timeattack-difficulty-${ta_difficulty}`).tab('show')
-            raidName = getLocalizedString("TimeAttackStage", raid.DungeonType)
+            raidName = `${raid.Id / 1000}: ${getLocalizedString("TimeAttackStage", raid.DungeonType)}`
             $('#ba-timeattack-name').text(raidName)
             $('#ba-timeattack-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain}.png`)
             changeTimeAttackDifficulty(ta_difficulty)
@@ -7720,7 +7720,7 @@ function getRaidCardHTML(raid, terrain='', backgroundPath=null) {
 }
 
 function getTimeAttackCardHTML(raid) {
-    let name = getLocalizedString("TimeAttackStage", raid.DungeonType)
+    let name = `${raid.Id / 1000}: ${getLocalizedString("TimeAttackStage", raid.DungeonType)}`
     let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/timeattack/${timeAttackBG[raid.DungeonType]}.png');"></div></div><div class="card-img ta-img"><img src="images/enemy/${raid.Icon}.webp"></div><div class="card-badge ta-rules">`
     // <div class="card-badge raid-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png"></div>
     // <div class="card-badge raid-terrain"><img class="invert-light" src="images/ui/Terrain_${raid.Terrain}.png"></div>`
