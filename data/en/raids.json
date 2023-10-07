@@ -295,7 +295,7 @@
                         }
                     ],
                     "Name": "Heavy Sandstorm",
-                    "Desc": "<?1>Decreases all enemies' <d:HIT> by 20% and <d:Stability> by 50%. This debuff cannot be removed.",
+                    "Desc": "<?1>Decreases all enemies' <d:HIT> by 20% and <d:Stability='Stability Rate'> by 50%. This debuff cannot be removed.",
                     "Parameters": [
                         [
                             "",
@@ -4958,8 +4958,8 @@
                             "",
                             "",
                             "",
-                            "\nEach attack will also ricochet to the nearest enemy, dealing the same damage. (Ricochet attacks do not inflict <c:Stunned> nor a stack of <s:SuddenDeath>)",
-                            "\nEach attack will also ricochet to the nearest enemy, dealing the same damage. (Ricochet attacks do not inflict <c:Stunned> nor a stack of <s:SuddenDeath>)"
+                            "\nEach attack will also bounce to the nearest enemy, dealing the same damage. (The second target will not be inflicted with <c:Stunned> or receive a stack of <s:SuddenDeath>)",
+                            "\nEach attack will also bounce to the nearest enemy, dealing the same damage. (The second target will not be inflicted with <c:Stunned> or receive a stack of <s:SuddenDeath>)"
                         ]
                     ]
                 },
@@ -5100,8 +5100,8 @@
                             "",
                             "",
                             "",
-                            "\nAdditionally, Wakamo's normal attacks will ricochet to the nearest enemy.",
-                            "\nAdditionally, Wakamo's normal attacks will ricochet to the nearest enemy."
+                            "\nAdditionally, Wakamo's normal attacks will bounce to the nearest enemy.",
+                            "\nAdditionally, Wakamo's normal attacks will bounce to the nearest enemy."
                         ]
                     ]
                 },

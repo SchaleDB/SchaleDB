@@ -7520,7 +7520,71 @@ function recalculateEXSkillPreview() {
     $('#ba-skill-ex-materials-page .item-icon-list').hide()
     $('#ba-skill-ex-materials-'+skillPreviewExSkillLevel).show()
     $('#ba-skill-ex-cost').text(skillEX.Cost[skillPreviewExSkillLevel-1])
+    let extraInfo = getSkillExtraInfo(skillEX)
+
+    $(`#ba-skill-ex-extrainfo`).html(extraInfo)
+    $(`#ba-skill-ex-extrainfo .ba-info-pill-s`).tooltip({html: true})
+
     localStorage.setItem("student_skill_ex_level", skillPreviewExSkillLevel)
+}
+
+function getSkillExtraInfo(skill) {
+    let extraInfo = ''
+    let showRange = true
+
+    if (skill.Radius) {
+
+        skill.Radius.forEach((radius) => {
+            let label = ''
+            let tooltip = ''
+            let icon = ''
+            switch (radius.Type) {
+                case 'Circle':
+                    label = `${radius.Radius / 100}m`
+                    tooltip = `${translateUI('radius')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>`
+                    icon = 'COMMON_SKILLICON_CIRCLE'
+                    if (radius.Radius == skill.Range) showRange = false
+                    break
+                case 'Donut':
+                    label = `${radius.ExcludeRadius / 100}m - ${radius.Radius / 100}m`
+                    tooltip = `${translateUI('radius')}: <b>${radius.ExcludeRadius / 100}m - ${radius.Radius / 100}m (${radius.ExcludeRadius} - ${radius.Radius})</b>\n${translateUI('angle')}: <b>${radius.Degree}&deg;</b>`
+                    icon = 'COMMON_SKILLICON_DONUT'
+                    break
+                case 'Fan':
+                    label = `${radius.Radius / 100}m`
+                    tooltip = `${translateUI('radius')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>\n${translateUI('angle')}: <b>${radius.Degree}&deg;</b>`
+                    icon = 'COMMON_SKILLICON_FAN'
+                    showRange = false
+                    break
+                case 'Obb':
+                    label = radius.Height > radius.Width ? `${radius.Height / 100}m` : `${radius.Width / 100}m &times; ${radius.Height / 100}m`
+                    tooltip = `${translateUI('length')}: <b>${radius.Height / 100}m (${radius.Height})</b>\n${translateUI('width')}: <b>${radius.Width / 100}m (${radius.Width})</b>`
+                    icon = radius.Height > radius.Width ? 'COMMON_SKILLICON_LINE' : 'COMMON_SKILLICON_RECZONE'
+                    if (radius.Height >= skill.Range) showRange = false
+                    break
+                case 'Bounce':
+                    label = `${radius.Radius / 100}m`
+                    tooltip = `${translateUI('bounce')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>`
+                    icon = 'COMMON_SKILLICON_BOUNCEPROJECTILE'
+                    break
+                default:
+                    break;
+            }
+            
+            extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(tooltip)}"><img class="icon invert-light" src="images/skill/${icon}.webp"><span class="label">${label}</span></div>`
+        })
+        
+    }
+
+    if (showRange && skill.Range) {
+        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('range') + `: <b>${skill.Range / 100}m (${skill.Range})</b>`)}"><img class="icon invert-light" src="images/staticon/Stat_Range.png"><span class="label">${skill.Range / 100}m</span></div>`
+    }
+
+    if (skill.Duration) {
+        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('skill_duration') + ':\n<b>' + translateUI('time_seconds_frames', [MathHelper.toFixedFloat(skill.Duration / 30, 2), skill.Duration]) + '</b>')}"><img class="icon invert-light py-1" src="images/ui/Common_Icon_Time.png"><span class="label">${translateUI('time_seconds', [MathHelper.toFixedFloat(skill.Duration / 30, 2)])}</span></div>`
+    }
+
+    return extraInfo
 }
 
 function recalculateSkillPreview() {
@@ -7551,6 +7615,10 @@ function recalculateSkillPreview() {
         $(`#ba-skill-${skillType}-name`).html(skill.Name)
         $(`#ba-skill-${skillType}-description`).html(getSkillText(skill, skillPreviewOtherSkillLevel, {bulletType: student.BulletType}))
         $(`#ba-skill-${skillType}-description .skill-hitinfo`).tooltip({html: true})
+        let extraInfo = getSkillExtraInfo(skill)
+    
+        $(`#ba-skill-${skillType}-extrainfo`).html(extraInfo)
+        $(`#ba-skill-${skillType}-extrainfo .ba-info-pill-s`).tooltip({html: true})
     })
 
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -9104,8 +9172,13 @@ function getSkillText(skill, level, {renderBuffs = true, bulletType = null, emph
     
     let result = skill.Desc
     const emphasisRegex = /[0-9.]+(?:%|s|秒|초| วินาที)/g
+    const knockbackRegex = /<kb:(\d+)>/g
  
     result = result.replace(emphasisRegex, function(match) {return `<strong>${match}</strong>`})
+    result = result.replace(knockbackRegex, function(match, p1) {
+        const knockbackEffect = skill.Effects.filter(e => e.Type == 'Knockback')[p1 - 1]
+        return `<strong>${knockbackEffect.Scale[level - 1] / 50}m</strong>`
+    })
 
     const parameterClass = bulletType == null ? 'ba-col-emphasis' : `ba-col-${bulletType.toLowerCase()}`
 
@@ -9157,15 +9230,15 @@ function replaceBuffPlaceholders(text, renderBuffs = true) {
     let result = text
     const buffTypes = ['Buff', 'Debuff', 'CC', 'Special']
     buffTypes.forEach(type => {
-        const buffRegex = new RegExp(`<${type.slice(0,1).toLowerCase()}:(\\w+)>`, 'g')
+        const buffRegex = new RegExp(`<${type.slice(0,1).toLowerCase()}:(\\w+)(?:='(.*)')?>`, 'g')
         if (renderBuffs) {
-            result = result.replace(buffRegex, function(match, capture) {
-                return getBuffTag(type, capture, {tooltip: true})
+            result = result.replace(buffRegex, function(match, capture, labelText) {
+                return getBuffTag(type, capture, {tooltip: true, overrideName: labelText ? labelText : null})
             })
         } else {
-            result = result.replace(buffRegex, function(match, capture) {
+            result = result.replace(buffRegex, function(match, capture, labelText) {
                 const buffName = type + '_' + capture
-                return `<b>${getLocalizedString('BuffName', buffName)}</b>`
+                return `<b>${labelText ? labelText : getLocalizedString('BuffName', buffName)}</b>`
             })
         }
 
