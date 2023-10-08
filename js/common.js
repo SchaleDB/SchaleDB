@@ -1958,7 +1958,7 @@ class SupportStats {
             <i class="caret fa-solid fa-caret-down me-2"></i>
         </button>
         <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-start">`
-        for (let i = 1; i <= region[`gear${slot}_max`]; i++) {
+        for (let i = 1; i <= region.EquipmentMaxLevel[slot - 1]; i++) {
             html += `<li><a class="dropdown-item dropdown-item-icon" data-tier="${i}" href="javascript:;"><div class="icon"><img class="ba-item-n" src="images/equipment/icon/equipment_icon_${gear.toLowerCase()}_tier${i}.webp"></div><span>T${i}</span></a></li>`
         }
         html += `</ul></div>`
