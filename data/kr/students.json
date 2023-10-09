@@ -8946,6 +8946,12 @@
                         },
                         "CriticalCheck": "Check"
                     }
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 100
+                    }
                 ]
             },
             {
@@ -21016,7 +21022,6 @@
                     ]
                 ],
                 "Duration": 60,
-                "Range": 1000,
                 "Icon": "SKILLICON_UTAHA_EXSKILL",
                 "Effects": []
             },
@@ -21039,7 +21044,6 @@
                     ]
                 ],
                 "Duration": 60,
-                "Range": 1000,
                 "Icon": "SKILLICON_UTAHA_EXSKILL",
                 "Effects": []
             },
@@ -26634,6 +26638,13 @@
                         },
                         "CriticalCheck": "Check"
                     }
+                ],
+                "Radius": [
+                    {
+                        "Type": "Obb",
+                        "Width": 40,
+                        "Height": 2000
+                    }
                 ]
             },
             {
@@ -29485,6 +29496,12 @@
                             "AttackReloadDuration": 45
                         },
                         "CriticalCheck": "Check"
+                    }
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 100
                     }
                 ]
             },
@@ -33247,13 +33264,6 @@
                     10
                 ],
                 "Duration": 60,
-                "Range": 1000,
-                "Radius": [
-                    {
-                        "Type": "Circle",
-                        "Radius": 200
-                    }
-                ],
                 "Icon": "SKILLICON_CH0058_EXSKILL",
                 "Effects": []
             },
@@ -41982,14 +41992,6 @@
                     6
                 ],
                 "Duration": 60,
-                "Range": 1000,
-                "Radius": [
-                    {
-                        "Type": "Fan",
-                        "Radius": 200,
-                        "Degree": 90
-                    }
-                ],
                 "Icon": "SKILLICON_CH0164_EXSKILL",
                 "Effects": []
             },
@@ -47157,7 +47159,6 @@
                     4
                 ],
                 "Duration": 60,
-                "Range": 1000,
                 "Radius": [
                     {
                         "Type": "Circle",
@@ -52770,13 +52771,6 @@
                     6
                 ],
                 "Duration": 60,
-                "Range": 1000,
-                "Radius": [
-                    {
-                        "Type": "Bounce",
-                        "Radius": 500
-                    }
-                ],
                 "Icon": "SKILLICON_CH0156_EXSKILL",
                 "Effects": []
             },
@@ -54443,6 +54437,12 @@
                             "AttackReloadDuration": 90
                         },
                         "CriticalCheck": "Check"
+                    }
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 100
                     }
                 ]
             },
@@ -57475,7 +57475,6 @@
                     4
                 ],
                 "Duration": 60,
-                "Range": 1000,
                 "Icon": "SKILLICON_CH0176_EXSKILL",
                 "Effects": []
             },
@@ -59680,6 +59679,12 @@
                             "AttackReloadDuration": 93
                         },
                         "CriticalCheck": "Check"
+                    }
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 100
                     }
                 ]
             },
@@ -63822,6 +63827,12 @@
                         },
                         "CriticalCheck": "Check"
                     }
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 150
+                    }
                 ]
             },
             {
@@ -67071,6 +67082,41 @@
         "Range": 650,
         "RegenCost": 700,
         "Skills": [
+            {
+                "InheritScale": {
+                    "Skill": "sub",
+                    "EffectId": 1,
+                    "Parameter": 2
+                },
+                "HideCalculation": true,
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 50,
+                            "AttackStartDuration": 21,
+                            "AttackEndDuration": 16,
+                            "AttackBurstRoundOverDelay": 50,
+                            "AttackIngDuration": 23,
+                            "AttackReloadDuration": 92
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 100
+                    }
+                ]
+            },
             {
                 "SkillType": "ex",
                 "Name": "시구레 특제 보틀 그레네이드",
@@ -72156,6 +72202,13 @@
                             "AttackReloadDuration": 64
                         },
                         "CriticalCheck": "Check"
+                    }
+                ],
+                "Radius": [
+                    {
+                        "Type": "Fan",
+                        "Radius": 500,
+                        "Degree": 45
                     }
                 ]
             },
@@ -87632,6 +87685,12 @@
                             "AttackReloadDuration": 40
                         },
                         "CriticalCheck": "Check"
+                    }
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 100
                     }
                 ]
             },

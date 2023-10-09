@@ -202,6 +202,7 @@ let statPreviewSelectedEnemyArmorType = null
 let statPreviewEnemyBookmarks = []
 let skillPreviewExSkillLevel = 1
 let skillPreviewOtherSkillLevel = 1
+let skillPreviewShowSummonSkills = {}
 let skillInfoCollection = []
 let raidSkillInfoCollection = []
 let studentCollection = {}
@@ -929,7 +930,6 @@ class MathHelper {
 
     static extractNumber(string) {
         let result = parseInt(string.replace(/[^0-9]/g))
-        console.log(result)
         return isNaN(result) ? 0 : result
     }
 
@@ -3074,6 +3074,10 @@ $.when($.ready, loadPromise).then(function() {
         skillPreviewOtherSkillLevel = JSON.parse(localStorage.getItem("student_skill_other_level"))
     }
 
+    if (localStorage.getItem("student_skill_show_summons")) {
+        skillPreviewShowSummonSkills = JSON.parse(localStorage.getItem("student_skill_show_summons"))
+    }
+
     //Bootstrap sanitiser config
     let bsAllowList = bootstrap.Tooltip.Default.allowList
     bsAllowList.ruby = []
@@ -3382,6 +3386,20 @@ function loadModule(moduleName, entry=null) {
                 $(this).toggleClass('deactivated', !showSkillUpgrades)
                 recalculateSkillPreview()
             })
+
+            $('.summon-skills.collapse').on('show.bs.collapse', function() {
+                $(`[data-bs-target="#${this.id}"] .fa-angle-down`).toggleClass('fa-rotate-180', true)
+                skillPreviewShowSummonSkills[this.dataset.type] = true
+                localStorage.setItem("student_skill_show_summons", JSON.stringify(skillPreviewShowSummonSkills))
+            }).on('hide.bs.collapse', function() {
+                $(`[data-bs-target="#${this.id}"] .fa-angle-down`).toggleClass('fa-rotate-180', false)
+                skillPreviewShowSummonSkills[this.dataset.type] = false
+                localStorage.setItem("student_skill_show_summons", JSON.stringify(skillPreviewShowSummonSkills))
+            })
+
+            for (const skillType in skillPreviewShowSummonSkills) {
+                $(`#skill-${skillType}-summon-skills`).toggleClass('show', skillPreviewShowSummonSkills[skillType])
+            }
 
             $('#skill-show-details').on('click', function(e) {
                 $('#student-stat-modal-skill-calc-toggle').toggleClass('deactivated', false)
@@ -4937,7 +4955,7 @@ function renderStudent() {
     $('#ba-profile-schoolyear-label').text(getTranslatedString(student,'SchoolYear')).toggle(getTranslatedString(student,'SchoolYear') != "")
     $('#ba-profile-portrait-img').attr("src", `images/student/collection/${student.Id}.webp`)
     var profileHtml = ''
-    profileHtml += getTranslatedString(student,'ProfileIntroduction')
+    profileHtml += student.ProfileIntroduction.escapeHtml()
     if (student.StarGrade == 3) {
         profileHtml += `\n\n<i class="text-bold">"${getTranslatedString(student,'CharacterSSRNew')}"</i>`
     }
@@ -5083,6 +5101,12 @@ function renderStudent() {
     recalculateWeaponSkillPreview()
     recalculateGearSkillPreview()
     recalculateEXSkillPreview()
+    if (student.Skills.some(s => s.SkillType == 'autoattack')) {
+        $('#ba-skill-autoattack').show()
+        recalculateNormalAttackPreview()
+    } else {
+        $('#ba-skill-autoattack').hide()
+    }
     recalculateBondPreview()
 
     changeGearLevel(1, document.getElementById('ba-statpreview-gear1-range'), false)
@@ -5120,13 +5144,14 @@ function initCharacterSkillInfo() {
 
         student.Skills.forEach((skill) => {
             if (skill.SkillType == "gearnormal" && !student.Gear.Released[regionID]) return
+            if (skill.HideCalculation) return
             if ('Effects' in skill) {
                 let show = false
                 skill.Effects.forEach(eff => {
                     if (eff.Type.startsWith('DMG') || eff.Type.startsWith("Heal") || eff.Type == "Shield" || eff.Type == "FormChange" || eff.Type == "CrowdControl") show = true
                 })
                 if (show) {
-                    if (skill.SkillType == "autoattack") addNormalAttackSkillText(skill, student.WeaponType)
+                    if (skill.SkillType == "autoattack") addNormalAttackSkillText(skill)
                     skillInfoCollection.push(new SkillDamageInfo(skill, skillInfoContainer, student))
                 }
             }
@@ -5141,7 +5166,8 @@ function initCharacterSkillInfo() {
         const summon = find(data.summons, 'Id', student.Summons[0].Id)[0]
     
         summon.Skills.forEach((skill) => {
-            if (skill.SkillType == "autoattack") addNormalAttackSkillText(skill, student.WeaponType)
+            if (skill.HideCalculation) return
+            if (skill.SkillType == "autoattack") addNormalAttackSkillText(skill)
             skillInfoCollection.push(new SkillDamageInfo(skill, skillInfoContainer, student))
         })
     
@@ -5180,7 +5206,7 @@ function initRaidSkillInfo(raidId, enemyId, raidDifficulty) {
                 ]
             }
         
-            addNormalAttackSkillText(autoAttackSkill, enemy.weaponType)
+            addNormalAttackSkillText(autoAttackSkill)
         
             raidSkillInfoCollection.push(new SkillDamageInfo(autoAttackSkill, skillInfoContainer, enemy))
         }
@@ -5210,29 +5236,28 @@ function initRaidSkillInfo(raidId, enemyId, raidDifficulty) {
     if (raidSkillInfoCollection.length == 0) $('#skill-calculation-tab-student').tab('show')
 }
 
-function addNormalAttackSkillText(skill, weaponType) {
+function addNormalAttackSkillText(skill) {
     skill["Name"] = translateUI('skill_normalattack')
     skill["Parameters"] = [["100%"]]
-    switch (weaponType) {
-        case "GL":
-        case "RL":
-        case "MT":
-        case "Cannon":
-            skill["Desc"] = translateUI('skill_normalattack_circle')
-            skill["Icon"] = "COMMON_SKILLICON_CIRCLE"
-            break
-        case "RG":
-            skill["Desc"] = translateUI('skill_normalattack_line')
-            skill["Icon"] = "COMMON_SKILLICON_LINE"
-            break
-        case "FT":
-            skill["Desc"] = translateUI('skill_normalattack_fan')
-            skill["Icon"] = "COMMON_SKILLICON_FAN"
-            break
-        default:
-            skill["Desc"] = translateUI('skill_normalattack_target')
-            skill["Icon"] = "COMMON_SKILLICON_TARGET"
-            break
+
+    if (skill.Radius && skill.Radius.length) {
+        switch (skill.Radius[0].Type) {
+            case "Circle":
+                skill["Desc"] = translateUI('skill_normalattack_circle')
+                skill["Icon"] = "COMMON_SKILLICON_CIRCLE"
+                break
+            case "Obb":
+                skill["Desc"] = translateUI('skill_normalattack_line')
+                skill["Icon"] = "COMMON_SKILLICON_LINE"
+                break
+            case "Fan":
+                skill["Desc"] = translateUI('skill_normalattack_fan')
+                skill["Icon"] = "COMMON_SKILLICON_FAN"
+                break
+        }
+    } else {
+        skill["Desc"] = translateUI('skill_normalattack_target')
+        skill["Icon"] = "COMMON_SKILLICON_TARGET"
     }
 }
 
@@ -7272,7 +7297,7 @@ function recalculateStats() {
                     if (ammo == 0) {
                         text = "-"
                     } else {
-                        text = `<span class="has-tooltip">${ammo}&nbsp;(${cost})</span>`
+                        text = `${ammo}&nbsp;(${cost})`
                     }
                 } else {
                     text = stats.getTotalString(stat)
@@ -7341,12 +7366,12 @@ function recalculateStats() {
         $('.student-stat-table .stat-CriticalPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(critChanceText), html: true, placement: 'top'})
         $('.student-stat-table .stat-StabilityPoint .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(stabilityText), html: true, placement: 'top'})
     
-        if (stats.getTotalString('AmmoCount') != 0) {
-            const autoAttackSkill = (statPreviewSelectedChar > 0 ? summon : student).Skills.find(s => s.SkillType == "autoattack")
-            if (autoAttackSkill) {
-                $('.stat-AmmoCount .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(getNormalAttackHitsText(autoAttackSkill.Effects[0].Hits, stats.getTotalString('AmmoCost'), (statPreviewSelectedChar > 0 ? summon.WeaponType : student.WeaponType), student.BulletType.toLowerCase())), html: true, placement: 'top'})
-            }
-        }
+        // if (stats.getTotalString('AmmoCount') != 0) {
+        //     const autoAttackSkill = (statPreviewSelectedChar > 0 ? summon : student).Skills.find(s => s.SkillType == "autoattack")
+        //     if (autoAttackSkill) {
+        //         $('.stat-AmmoCount .has-tooltip').tooltip('dispose').tooltip({title: getBasicTooltip(getNormalAttackHitsText(autoAttackSkill.Effects[0].Hits, stats.getTotalString('AmmoCost'), (statPreviewSelectedChar > 0 ? summon.WeaponType : student.WeaponType), student.BulletType.toLowerCase())), html: true, placement: 'top'})
+        //     }
+        // }
 
     }
 
@@ -7520,71 +7545,20 @@ function recalculateEXSkillPreview() {
     $('#ba-skill-ex-materials-page .item-icon-list').hide()
     $('#ba-skill-ex-materials-'+skillPreviewExSkillLevel).show()
     $('#ba-skill-ex-cost').text(skillEX.Cost[skillPreviewExSkillLevel-1])
-    let extraInfo = getSkillExtraInfo(skillEX)
+    let extraInfo = getSkillExtraInfo(skillEX, student)
 
-    $(`#ba-skill-ex-extrainfo`).html(extraInfo)
+    if (renderSummonSkills('ex', skillPreviewExSkillLevel)) {
+        extraInfo = `<button class="ba-info-pill-s btn btn-dark" data-bs-toggle="collapse" data-bs-target="#skill-ex-summon-skills"><span class="label">${translateUI('summon')}<i class="fa-solid fa-angle-down ${$('#skill-ex-summon-skills').hasClass('show') ? 'fa-rotate-180' : ''} ms-2"></i></span></button>` + extraInfo
+    }
+
+    $(`#ba-skill-ex-extrainfo`).html(extraInfo).toggle(extraInfo != '')
     $(`#ba-skill-ex-extrainfo .ba-info-pill-s`).tooltip({html: true})
 
+    if (student.Skills.some(s => s.SkillType == 'autoattack') && student.Skills.find(s => s.SkillType == 'autoattack').InheritScale) {
+        recalculateNormalAttackPreview()
+    }
+
     localStorage.setItem("student_skill_ex_level", skillPreviewExSkillLevel)
-}
-
-function getSkillExtraInfo(skill) {
-    let extraInfo = ''
-    let showRange = true
-
-    if (skill.Radius) {
-
-        skill.Radius.forEach((radius) => {
-            let label = ''
-            let tooltip = ''
-            let icon = ''
-            switch (radius.Type) {
-                case 'Circle':
-                    label = `${radius.Radius / 100}m`
-                    tooltip = `${translateUI('radius')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>`
-                    icon = 'COMMON_SKILLICON_CIRCLE'
-                    if (radius.Radius == skill.Range) showRange = false
-                    break
-                case 'Donut':
-                    label = `${radius.ExcludeRadius / 100}m - ${radius.Radius / 100}m`
-                    tooltip = `${translateUI('radius')}: <b>${radius.ExcludeRadius / 100}m - ${radius.Radius / 100}m (${radius.ExcludeRadius} - ${radius.Radius})</b>\n${translateUI('angle')}: <b>${radius.Degree}&deg;</b>`
-                    icon = 'COMMON_SKILLICON_DONUT'
-                    break
-                case 'Fan':
-                    label = `${radius.Radius / 100}m`
-                    tooltip = `${translateUI('radius')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>\n${translateUI('angle')}: <b>${radius.Degree}&deg;</b>`
-                    icon = 'COMMON_SKILLICON_FAN'
-                    showRange = false
-                    break
-                case 'Obb':
-                    label = radius.Height > radius.Width ? `${radius.Height / 100}m` : `${radius.Width / 100}m &times; ${radius.Height / 100}m`
-                    tooltip = `${translateUI('length')}: <b>${radius.Height / 100}m (${radius.Height})</b>\n${translateUI('width')}: <b>${radius.Width / 100}m (${radius.Width})</b>`
-                    icon = radius.Height > radius.Width ? 'COMMON_SKILLICON_LINE' : 'COMMON_SKILLICON_RECZONE'
-                    if (radius.Height >= skill.Range) showRange = false
-                    break
-                case 'Bounce':
-                    label = `${radius.Radius / 100}m`
-                    tooltip = `${translateUI('bounce')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>`
-                    icon = 'COMMON_SKILLICON_BOUNCEPROJECTILE'
-                    break
-                default:
-                    break;
-            }
-            
-            extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(tooltip)}"><img class="icon invert-light" src="images/skill/${icon}.webp"><span class="label">${label}</span></div>`
-        })
-        
-    }
-
-    if (showRange && skill.Range) {
-        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('range') + `: <b>${skill.Range / 100}m (${skill.Range})</b>`)}"><img class="icon invert-light" src="images/staticon/Stat_Range.png"><span class="label">${skill.Range / 100}m</span></div>`
-    }
-
-    if (skill.Duration) {
-        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('skill_duration') + ':\n<b>' + translateUI('time_seconds_frames', [MathHelper.toFixedFloat(skill.Duration / 30, 2), skill.Duration]) + '</b>')}"><img class="icon invert-light py-1" src="images/ui/Common_Icon_Time.png"><span class="label">${translateUI('time_seconds', [MathHelper.toFixedFloat(skill.Duration / 30, 2)])}</span></div>`
-    }
-
-    return extraInfo
 }
 
 function recalculateSkillPreview() {
@@ -7615,9 +7589,13 @@ function recalculateSkillPreview() {
         $(`#ba-skill-${skillType}-name`).html(skill.Name)
         $(`#ba-skill-${skillType}-description`).html(getSkillText(skill, skillPreviewOtherSkillLevel, {bulletType: student.BulletType}))
         $(`#ba-skill-${skillType}-description .skill-hitinfo`).tooltip({html: true})
-        let extraInfo = getSkillExtraInfo(skill)
+        let extraInfo = getSkillExtraInfo(skill, student)
     
-        $(`#ba-skill-${skillType}-extrainfo`).html(extraInfo)
+        if (renderSummonSkills(skillType, skillPreviewOtherSkillLevel)) {
+            extraInfo = `<button class="ba-info-pill-s btn btn-dark" data-bs-toggle="collapse" data-bs-target="#skill-${skillType}-summon-skills"><span class="label">${translateUI('summon')}<i class="fa-solid fa-angle-down ${$(`#skill-${skillType}-summon-skills`).hasClass('show') ? 'fa-rotate-180' : ''} ms-2"></i></span></button>` + extraInfo
+        }
+
+        $(`#ba-skill-${skillType}-extrainfo`).html(extraInfo).toggle(extraInfo != '')
         $(`#ba-skill-${skillType}-extrainfo .ba-info-pill-s`).tooltip({html: true})
     })
 
@@ -7627,7 +7605,165 @@ function recalculateSkillPreview() {
 
     $('#ba-skill-materials-page .item-icon-list').hide()
     $('#ba-skill-materials-'+skillPreviewOtherSkillLevel).show()
+
+    if (student.Skills.some(s => s.SkillType == 'autoattack') && student.Skills.find(s => s.SkillType == 'autoattack').InheritScale) {
+        recalculateNormalAttackPreview()
+    }
+
     localStorage.setItem("student_skill_other_level", skillPreviewOtherSkillLevel)
+}
+
+function renderSummonSkills(sourceskill, level) {
+    let summonSkillsHtml = ''
+    student.Summons.filter(s => s.SourceSkill == sourceskill && s.Id != 99999).forEach((summon) => {
+
+        const summonInfo = find(data.summons, 'Id', summon.Id)[0]
+
+        summonInfo.Skills.forEach((summonSkill) => {
+
+            if (summonSkill.SkillType == 'passive' || summonSkill.ShowInfo === false) {
+                return
+            }
+
+            if (summonSkill.SkillType == 'autoattack') {
+                addNormalAttackSkillText(summonSkill)
+                summonSkill.Range = summonInfo.Range
+                summonSkill.Effects[0].HitsParameter = 1
+            }
+            const skillExtraInfo = getSkillExtraInfo(summonSkill, summonInfo)
+
+            summonSkillsHtml += `<div class="ba-panel-separator"></div>
+            <div class="ps-4">
+                <div class="my-2 d-flex flex-row align-items-start gap-3 w-100">
+                    <div class="skill-icon small bg-skill ${student.BulletType.toLowerCase()}"><img src="images/skill/${summonSkill.Icon}.webp"></div>
+                    <div class="d-inline-block flex-fill">
+                        <div>
+                            <h5 class="me-2 d-inline">${summonSkill.Name} <small>(${summonInfo.Name})</small></h5>
+                        </div>
+                        <div class="pt-1 d-flex gap-3 align-items-center flex-wrap justify-content-between">
+                            <div class="position-relative">
+                                <p class="mb-1">${getSkillText(summonSkill, summonSkill.SkillType == 'autoattack' ? 1 : level, {bulletType: student.BulletType})}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                ${skillExtraInfo ? `<div class="skill-extrainfo">${skillExtraInfo}</div>` : '' }
+            </div>`
+        })
+    })
+
+    $(`#skill-${sourceskill}-summon-skills`).html(summonSkillsHtml)
+
+    if (summonSkillsHtml != '') {
+        $(`#skill-${sourceskill}-summon-skills`).find('.ba-info-pill-s, .skill-hitinfo').tooltip({html: true})
+    }
+
+    return summonSkillsHtml !== ''
+}
+
+function getSkillExtraInfo(skill, character) {
+    let extraInfo = ''
+    let showRange = true
+
+    if (skill.Radius) {
+
+        skill.Radius.forEach((radius) => {
+            let label = ''
+            let tooltip = ''
+            let icon = ''
+            switch (radius.Type) {
+                case 'Circle':
+                    label = `${radius.Radius / 100}m`
+                    tooltip = `${translateUI('radius')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>`
+                    icon = 'COMMON_SKILLICON_CIRCLE'
+                    if (radius.Radius == skill.Range) showRange = false
+                    break
+                case 'Donut':
+                    label = `${radius.ExcludeRadius / 100}m - ${radius.Radius / 100}m`
+                    tooltip = `${translateUI('radius')}: <b>${radius.ExcludeRadius / 100}m - ${radius.Radius / 100}m (${radius.ExcludeRadius} - ${radius.Radius})</b>\n${translateUI('angle')}: <b>${radius.Degree}&deg;</b>`
+                    icon = 'COMMON_SKILLICON_DONUT'
+                    if (radius.Radius >= skill.Range) showRange = false
+                    break
+                case 'Fan':
+                    label = `${radius.Radius / 100}m`
+                    tooltip = `${translateUI('radius')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>\n${translateUI('angle')}: <b>${radius.Degree}&deg;</b>`
+                    icon = 'COMMON_SKILLICON_FAN'
+                    showRange = false
+                    break
+                case 'Obb':
+                    label = radius.Height > radius.Width ? `${radius.Height / 100}m` : `${radius.Width / 100}m &times; ${radius.Height / 100}m`
+                    tooltip = `${translateUI('length')}: <b>${radius.Height / 100}m (${radius.Height})</b>\n${translateUI('width')}: <b>${radius.Width / 100}m (${radius.Width})</b>`
+                    icon = radius.Height > radius.Width ? 'COMMON_SKILLICON_LINE' : 'COMMON_SKILLICON_RECZONE'
+                    if (radius.Height >= skill.Range) showRange = false
+                    break
+                case 'Bounce':
+                    label = `${radius.Radius / 100}m`
+                    tooltip = `${translateUI('bounce')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>`
+                    icon = 'COMMON_SKILLICON_BOUNCEPROJECTILE'
+                    break
+                default:
+                    break;
+            }
+            
+            extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(tooltip)}"><img class="icon invert-light" src="images/skill/${icon}.webp"><span class="label">${label}</span></div>`
+        })
+        
+    }
+
+    if ((showRange || skill.SkillType == 'autoattack') && skill.Range) {
+        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('range') + `: <b>${skill.Range / 100}m (${skill.Range})</b>`)}"><img class="icon invert-light" src="images/staticon/Stat_Range.png"><span class="label">${skill.Range / 100}m</span></div>`
+    }
+
+    if (skill.SkillType == 'autoattack') {
+        const effect = skill.Effects[0]
+        const attackFrames = Math.ceil(effect.Frames.AttackIngDuration)
+        const attackDelayFrames = Math.ceil(effect.Frames.AttackBurstRoundOverDelay)
+        const reloadFrames = Math.ceil(effect.Frames.AttackReloadDuration)
+        const startDelay = Math.ceil(effect.Frames.AttackStartDuration)
+        const endDelay = Math.ceil(effect.Frames.AttackEndDuration)
+
+        const attackFramesString = `<b>${translateUI('time_seconds_frames', [MathHelper.toFixedFloat(attackFrames / 30, 2), attackFrames])}</b>`
+        const attackDelayFramesString = `<b>${translateUI('time_seconds_frames', [MathHelper.toFixedFloat(attackDelayFrames / 30, 2), attackDelayFrames])}</b>`
+        const startDelayString = `<b>${translateUI('time_seconds_frames', [MathHelper.toFixedFloat(startDelay / 30, 2), startDelay])}</b>`
+        const reloadFramesString = `<b>${translateUI('time_seconds_frames', [MathHelper.toFixedFloat(reloadFrames / 30, 2), reloadFrames])}</b>`
+        const endDelayString = `<b>${translateUI('time_seconds_frames', [MathHelper.toFixedFloat(endDelay / 30, 2), endDelay])}</b>`
+
+        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('dmginfo_rate_of_fire_tooltip', [attackFramesString, attackDelayFramesString]))}"><img class="icon invert-light py-1" src="images/ui/Common_Icon_Time.png"><span class="label">${translateUI('time_seconds', [MathHelper.toFixedFloat((attackFrames + attackDelayFrames) / 30, 2)])}</span></div>`
+
+        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('dmginfo_reload_time_tooltip', [reloadFramesString, startDelayString, endDelayString]))}"><img class="icon invert-light" src="images/skill/COMMON_SKILLICON_RELOAD.webp"><span class="label">${translateUI('time_seconds', [MathHelper.toFixedFloat((startDelay + reloadFrames + endDelay) / 30, 2)])}</span></div>`
+
+        extraInfo += `<div class="ba-info-pill-s bg-theme"><img class="icon invert-light" src="images/staticon/Stat_AmmoCount.png"><span class="label">${character.AmmoCount} (${character.AmmoCost})</span></div>`
+
+    } else if (skill.Duration) {
+        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('skill_duration') + ':\n<b>' + translateUI('time_seconds_frames', [MathHelper.toFixedFloat(skill.Duration / 30, 2), skill.Duration]) + '</b>')}"><img class="icon invert-light py-1" src="images/ui/Common_Icon_Time.png"><span class="label">${translateUI('time_seconds', [MathHelper.toFixedFloat(skill.Duration / 30, 2)])}</span></div>`
+    }
+
+    return extraInfo
+}
+
+function recalculateNormalAttackPreview() {
+
+    const skill = find(student.Skills, 'SkillType', 'autoattack')[0]
+    addNormalAttackSkillText(skill)
+
+    if (skill.InheritScale) {
+        const fromSkill = find(student.Skills, 'SkillType', skill.InheritScale.Skill)[0]
+        const level = skill.InheritScale.Skill == 'ex' ? skillPreviewExSkillLevel : skillPreviewOtherSkillLevel
+        skill.Parameters = [[fromSkill.Parameters[skill.InheritScale.Parameter - 1][level - 1]]]
+    }
+
+    skill.Range = student.Range
+    skill.Effects[0].HitsParameter = 1
+
+    $(`#ba-skill-autoattack-icon`).find('img').attr("src", `images/skill/${skill.Icon}.webp`)
+    $(`#ba-skill-autoattack-name`).html(skill.Name)
+    $(`#ba-skill-autoattack-description`).html(getSkillText(skill, 1, {bulletType: student.BulletType}))
+    $(`#ba-skill-autoattack-description .skill-hitinfo`).tooltip({html: true})
+    
+    const extraInfo = getSkillExtraInfo(skill, student)
+    $(`#ba-skill-autoattack-extrainfo`).html(extraInfo)
+    $(`#ba-skill-autoattack-extrainfo .ba-info-pill-s`).tooltip({html: true})
+    
 }
 
 function getStudentListCardHTML(student) {
@@ -8399,7 +8535,6 @@ function populateItemList(tab) {
     loadObserver = new IntersectionObserver(function(entries, observer) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                //console.log(entry.target.id)
                 entry.target.innerHTML = itemCardGenerator(parseInt(entry.target.id.replace('item-select-','')))
                 if (gridItemDisplayStyle == 'compact') {
                     $(entry.target).children('.card-compact').tooltip({html: true, placement: 'top', delay: { show: 200, hide: 0 }, container: $('.card-body')})
