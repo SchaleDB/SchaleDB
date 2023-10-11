@@ -67346,7 +67346,9 @@
                 28
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            20031
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -72475,7 +72477,7 @@
             [
                 [
                     6301,
-                    0
+                    3
                 ]
             ],
             [
@@ -90204,6 +90206,497 @@
                 12,
                 6,
                 11
+            ]
+        ]
+    },
+    {
+        "Id": 20031,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 158,
+        "PathName": "Shigure_HotSpring",
+        "DevName": "CH0123",
+        "Name": "シグレ（温泉）",
+        "School": "RedWinter",
+        "Club": "Class227",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "Healer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Pierce",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 0,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "GL",
+        "WeaponImg": "weapon_icon_shigure",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Badge",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_Onsen_Collection",
+        "FamilyName": "間宵",
+        "FamilyNameRuby": "まよい",
+        "PersonalName": "シグレ",
+        "SchoolYear": "2年生",
+        "CharacterAge": "16歳",
+        "Birthday": "1月22日",
+        "CharacterSSRNew": "温泉で身体を温めたら、次は心の番だね。",
+        "ProfileIntroduction": "特別クラスの生徒と共に227号温泉郷を運営しているレッドウィンター連邦学園所属、227号特別クラスの停学生。\n\n旧校舎から突然温泉が沸き出し、ノドカと一緒に巨大な温泉郷を運営することになった。ノドカと違って温泉郷を繁盛させる気はあまりない様子だが、色々な飲み物とお菓子を存分に作れる環境には満足しているようだ。",
+        "Hobby": "自家製ドリンクを作ること",
+        "CharacterVoice": "河瀬茉希",
+        "BirthDay": "1/22",
+        "Illustrator": "ミミトケ",
+        "Designer": "ミミトケ",
+        "CharHeightMetric": "156cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1040,
+        "AttackPower1": 252,
+        "AttackPower100": 2521,
+        "MaxHP1": 2832,
+        "MaxHP100": 21172,
+        "DefensePower1": 94,
+        "DefensePower100": 566,
+        "HealPower1": 2640,
+        "HealPower100": 7922,
+        "DodgePoint": 181,
+        "AccuracyPoint": 820,
+        "CriticalPoint": 273,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "シグレ特製フルーツ牛乳",
+                "Desc": "円形範囲内の味方に対して4秒毎に、治癒力の<?1>分の回復（30秒間）",
+                "Parameters": [
+                    [
+                        "21.3%",
+                        "24.5%",
+                        "30.8%",
+                        "34%",
+                        "40.4%",
+                        "43.6%",
+                        "50%",
+                        "53.2%",
+                        "59.6%",
+                        "62.8%"
+                    ]
+                ],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    5
+                ],
+                "Duration": 60,
+                "Range": 1000,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 300
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "Effects": [
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            2130,
+                            2450,
+                            3088,
+                            3408,
+                            4045,
+                            4365,
+                            5005,
+                            5323,
+                            5963,
+                            6283
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "一口、どう？",
+                "Desc": "50秒毎に、HPが最も低い味方4人に対して治癒力の<?1>分の回復",
+                "Parameters": [
+                    [
+                        "67.6%",
+                        "70.9%",
+                        "74.3%",
+                        "87.8%",
+                        "91.2%",
+                        "94.6%",
+                        "108%",
+                        "111%",
+                        "114%",
+                        "128%"
+                    ]
+                ],
+                "Duration": 60,
+                "Range": 1000,
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "Effects": [
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            6760,
+                            7098,
+                            7435,
+                            8788,
+                            9125,
+                            9465,
+                            10815,
+                            11153,
+                            11493,
+                            12843
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "四畳半の温もり",
+                "Desc": "<b:HealPower>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "四畳半の温もり+",
+                "Desc": "<b:HealPower>を<?1>増加/\nさらに<b:HealPower>を<?2>増加",
+                "Parameters": [
+                    [
+                        "1056",
+                        "1109",
+                        "1162",
+                        "1373",
+                        "1426",
+                        "1479",
+                        "1690",
+                        "1743",
+                        "1796",
+                        "2007"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Base",
+                        "Scale": [
+                            1056,
+                            1109,
+                            1162,
+                            1373,
+                            1426,
+                            1479,
+                            1690,
+                            1743,
+                            1796,
+                            2007
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "ピリッとした風味",
+                "Desc": "味方の<b:CriticalDamage>率を<?1>増加",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Channel": 311
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "HealPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                8,
+                0
+            ],
+            [
+                12,
+                0
+            ],
+            [
+                16,
+                53
+            ],
+            [
+                20,
+                64
+            ],
+            [
+                5,
+                11
+            ],
+            [
+                7,
+                16
+            ],
+            [
+                12,
+                26
+            ]
+        ],
+        "FavorAlts": [
+            10055
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 135",
+        "FurnitureInteraction": [
+            [
+                [
+                    6301,
+                    3
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Functional",
+            "Specialized"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Shigure_Onsen",
+            "F_Shigure_Onsen2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "スプリングパンチ",
+            "Desc": "シグレが常に携帯しているグレネードランチャー。\n\nシェーカーを振るように榴弾を見事にリロードするシグレの姿は227号温泉郷の見どころの一つとして、お客様から好評を博している。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 111,
+            "AttackPower100": 1108,
+            "MaxHP1": 616,
+            "MaxHP100": 6162,
+            "HealPower1": 310,
+            "HealPower100": 3104,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3010,
+                160
+            ],
+            [
+                3011,
+                3010,
+                161,
+                200
+            ],
+            [
+                3012,
+                3011,
+                162,
+                201
+            ],
+            [
+                3013,
+                3012,
+                163,
+                202
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                16
+            ],
+            [
+                12,
+                18,
+                15,
+                31
+            ],
+            [
+                12,
+                18,
+                9,
+                28
+            ],
+            [
+                8,
+                18,
+                12,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4010
+            ],
+            [
+                4010
+            ],
+            [
+                4011,
+                4010,
+                160
+            ],
+            [
+                4011,
+                161,
+                200
+            ],
+            [
+                4012,
+                4011,
+                161,
+                200
+            ],
+            [
+                4012,
+                162,
+                201
+            ],
+            [
+                4013,
+                4012,
+                163,
+                202
+            ],
+            [
+                4013,
+                163,
+                202
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                10,
+                17
+            ],
+            [
+                8,
+                5,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                7,
+                13
             ]
         ]
     }

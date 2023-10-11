@@ -5838,10 +5838,10 @@ function changeTimeAttackDifficulty(difficultyId) {
     $('#ba-stage-enemies').html(enemyHTML)
     $('#ba-stage-enemies > :first').trigger("click")
 
-    raid.Rules[difficultyId].forEach(id => {
-        rule = find(data.raids.TimeAttackRules, 'Id', id)[0]
+    raid.Rules[difficultyId].forEach((rule) => {
+        const taRule = find(data.raids.TimeAttackRules, 'Id', rule.Id)[0]
         if (rulesHTML != '') rulesHTML += '<div class="ba-panel-separator"></div>'
-        rulesHTML += `<div class="d-flex flex-row align-items-start mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/timeattack/${rule.Icon}.webp"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(rule, 'Name')}</h4><p class="mt-1 mb-2 p-1">${getSkillText({Desc: getTranslatedString(rule, 'Desc'), Parameters: []}, 0, {})}</p></div></div></div>`
+        rulesHTML += `<div class="d-flex flex-row align-items-start mt-2"><img class="ba-raid-skill d-inline-block me-3" src="images/timeattack/${taRule.Icon}.webp"><div class="d-inline-block"><div><h4 class="me-2 d-inline">${getTranslatedString(taRule, 'Name')}</h4><p class="mt-1 mb-2 p-1">${getSkillText({Desc: getTranslatedString(taRule, 'Desc'), Parameters: rule.Parameters ? rule.Parameters : []}, 1, {})}</p></div></div></div>`
     })
     $('#ba-timeattack-rules').empty().html(rulesHTML)
     $('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -7928,9 +7928,9 @@ function getTimeAttackCardHTML(raid) {
     let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/timeattack/${timeAttackBG[raid.DungeonType]}.png');"></div></div><div class="card-img ta-img"><img src="images/enemy/${raid.Icon}.webp"></div><div class="card-badge ta-rules">`
     // <div class="card-badge raid-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png"></div>
     // <div class="card-badge raid-terrain"><img class="invert-light" src="images/ui/Terrain_${raid.Terrain}.png"></div>`
-    raid.Rules[raid.Rules.length-1].forEach((ruleId) => {
-        const rule = find(data.raids.TimeAttackRules, 'Id', ruleId)[0]
-        html += `<img src="images/timeattack/${rule.Icon}.webp">`
+    raid.Rules[raid.Rules.length-1].forEach((rule) => {
+        const taRule = find(data.raids.TimeAttackRules, 'Id', rule.Id)[0]
+        html += `<img src="images/timeattack/${taRule.Icon}.webp">`
     })
     html += `</div><div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${name}</span></div></div>`
     return html

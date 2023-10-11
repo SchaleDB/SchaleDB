@@ -67481,7 +67481,9 @@
                 28
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            20031
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -72610,7 +72612,7 @@
             [
                 [
                     6301,
-                    0
+                    3
                 ]
             ],
             [
@@ -76245,7 +76247,7 @@
             {
                 "SkillType": "ex",
                 "Name": "新年的御守",
-                "Desc": "自身を除く味方1人に対して<b:EnhanceMysticRate>を<?1>加算（40秒間）/\n<s:Omamori>状態を付与",
+                "Desc": "使自己以外的1名我方神秘特效增加<?1>(40秒內)/\n給予「御守」狀態",
                 "Parameters": [
                     [
                         "48.8%",
@@ -76302,7 +76304,7 @@
             {
                 "SkillType": "normal",
                 "Name": "貓的加護",
-                "Desc": "40秒毎に、自身を除く味方1人の<b:CriticalChance>を<?1>増加（25秒間）",
+                "Desc": "每40秒，使自己以外的1名我方<b:CriticalChance>增加<?1>(25秒內)",
                 "Parameters": [
                     [
                         "20.8%",
@@ -76352,7 +76354,7 @@
             {
                 "SkillType": "passive",
                 "Name": "增加的誤會",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Desc": "<b:ATK>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -76390,7 +76392,7 @@
             {
                 "SkillType": "weaponpassive",
                 "Name": "增加的誤會+",
-                "Desc": "<b:ExtendBuffDuration>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Desc": "增益效果持續力增加<?1> /\n並且，<b:ATK>增加<?2>",
                 "Parameters": [
                     [
                         "1000",
@@ -76440,7 +76442,7 @@
             {
                 "SkillType": "sub",
                 "Name": "御守的羈絆",
-                "Desc": "味方が会心を200回成功した時、自身の<b:ATK>を<?1>増加。<s:Omamori>状態の味方に対して、<b:EnhanceMysticRate>を<?2>加算（50秒間）\nその後、味方の<s:Omamori>状態を全て除去",
+                "Desc": "我方暴擊攻擊成功200次時，自己的<b:ATK>增加<?1>，持有「御守」狀態的我方神秘特效增加<?2>(50秒內)\n之後，移除我方的所有「御守」狀態",
                 "Parameters": [
                     [
                         "13.1%",
@@ -76804,7 +76806,7 @@
             {
                 "SkillType": "ex",
                 "Name": "有人允許你嗎……！？",
-                "Desc": "敵1人の会心抵抗値と<d:CriticalDamageRateResist>率を<?1>減少（50秒間）\nさらに攻撃力の<?2>分のダメージ",
+                "Desc": "減少1名敵人<?1>的暴擊抵抗力與暴擊傷害抵抗率(50秒內)\n並且，造成攻擊力<?2>的傷害",
                 "Parameters": [
                     [
                         "21.8%",
@@ -76907,7 +76909,7 @@
             {
                 "SkillType": "normal",
                 "Name": "確實打招呼",
-                "Desc": "30秒毎に、敵1人の<d:CriticalDamageRateResist>率を<?1>減少（20秒間）",
+                "Desc": "每30秒，減少1名敵人<?1>的暴擊傷害抵抗率(20秒內)",
                 "Parameters": [
                     [
                         "16.2%",
@@ -76950,7 +76952,7 @@
             {
                 "SkillType": "passive",
                 "Name": "不可原諒不可原諒",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Desc": "<b:ATK>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -76988,7 +76990,7 @@
             {
                 "SkillType": "weaponpassive",
                 "Name": "不可原諒不可原諒+",
-                "Desc": "<b:ExtendDebuffDuration>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Desc": "減益效果持續力增加<?1> /\n並且，<b:ATK>增加<?2>",
                 "Parameters": [
                     [
                         "1000",
@@ -77038,7 +77040,7 @@
             {
                 "SkillType": "sub",
                 "Name": "懷抱真誠的心",
-                "Desc": "味方の<b:CostRegen>を<?1>増加",
+                "Desc": "我方的COST恢復力增加<?1>",
                 "Parameters": [
                     [
                         "10.6%",
@@ -77379,8 +77381,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "ファンたるもの",
-                "Desc": "敵1人に対して攻撃力の<?1>分のダメージ",
+                "Name": "身為粉絲",
+                "Desc": "對1名敵人造成攻擊力<?1>的傷害",
                 "Parameters": [
                     [
                         "745%",
@@ -77446,7 +77448,7 @@
             {
                 "SkillType": "normal",
                 "Name": "精神統一",
-                "Desc": "50秒毎に、<s:Dado>状態を付与、<b:ATK>を<?1>増加（<?2>間）",
+                "Desc": "每50秒獲得「明鏡止水」狀態，<b:ATK>增加<?1>(<?2>內)",
                 "Parameters": [
                     [
                         "27.4%",
@@ -77499,8 +77501,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "ひたむきな情熱",
-                "Desc": "<b:CriticalDamage>率を<?1>増加",
+                "Name": "始終不變的熱情",
+                "Desc": "<b:CriticalDamage>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -77537,8 +77539,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "ひたむきな情熱+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:CriticalDamage>率を<?2>増加",
+                "Name": "始終不變的熱情+",
+                "Desc": "<b:ATK>增加<?1>\n並且，<b:CriticalDamage>增加<?2>",
                 "Parameters": [
                     [
                         "293",
@@ -77587,8 +77589,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "静かなる余裕",
-                "Desc": "<s:Dado>状態での攻撃時、攻撃力の<?1>分の追加ダメージ",
+                "Name": "寧靜的餘裕",
+                "Desc": "在「明鏡止水」狀態下攻擊時，造成攻擊力<?1>的追加傷害",
                 "Parameters": [
                     [
                         "5.5%",
@@ -77917,8 +77919,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "アリス、お掃除します！",
-                "Desc": "敵1人に対して、攻撃力の<?1>分のダメージ",
+                "Name": "愛麗絲，打掃！",
+                "Desc": "對1名敵人造成攻擊力<?1>的傷害",
                 "Parameters": [
                     [
                         "594%",
@@ -77964,8 +77966,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "丁寧なお手入れ",
-                "Desc": "通常攻撃15回毎に、<b:EnhanceMysticRate>を<?1>加算、<b:ATK>を<?2>増加（<?3>間）",
+                "Name": "細心的照料",
+                "Desc": "每15次一般攻擊，神秘特效增加<?1>，<b:ATK>增加<?2> (<?3>內)",
                 "Parameters": [
                     [
                         "21.8%",
@@ -78049,8 +78051,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "ジョブボーナスです！",
-                "Desc": "<b:CriticalDamage>率を<?1>増加",
+                "Name": "這是職業加成！",
+                "Desc": "<b:CriticalDamage>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -78087,8 +78089,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "ジョブボーナスです！+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:CriticalDamage>率を<?2>増加",
+                "Name": "這是職業加成！+",
+                "Desc": "<b:ATK>增加<?1>\n並且，<b:CriticalDamage>增加<?2>",
                 "Parameters": [
                     [
                         "477",
@@ -78137,8 +78139,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "ジョブ特性：メイド勇者！",
-                "Desc": "<s:FormChange>が敵1人を攻撃するように変更/\n通常攻撃時、攻撃力の<?1>分の追加ダメージ",
+                "Name": "職業特性：女僕勇者！",
+                "Desc": "<s:FormChange>變更為攻擊1名敵人/\n一般攻擊時，造成攻擊力<?1>的追加傷害",
                 "Parameters": [
                     [
                         "15.8%",
@@ -78472,8 +78474,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "特殊武装：アームギア",
-                "Desc": "敵1人に対して、攻撃力の<?1>分のダメージ",
+                "Name": "特殊武裝：Arm-Gear",
+                "Desc": "對1名敵人造成攻擊力<?1>的傷害",
                 "Parameters": [
                     [
                         "550%",
@@ -78546,8 +78548,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "エージェントの秘密道具",
-                "Desc": "40秒毎に、敵1人に対して、攻撃力の<?1>分のダメージ\n<d:CriticalDamageRateResist>率を<?2>減少（30秒間）",
+                "Name": "特務的秘密道具",
+                "Desc": "每40秒對1名敵人造成攻擊力<?1>的傷害/\n並且，減少目標<?2>的爆擊傷害抵抗率(30秒內)",
                 "Parameters": [
                     [
                         "311%",
@@ -78617,8 +78619,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "熟練の技量",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Name": "熟練的本領",
+                "Desc": "<b:ATK>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -78655,8 +78657,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "熟練の技量+",
-                "Desc": "<b:AttackSpeed>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Name": "熟練的本領+",
+                "Desc": "<b:AttackSpeed>增加<?1>/\n並且，<b:ATK>增加<?2>",
                 "Parameters": [
                     [
                         "1400",
@@ -78705,8 +78707,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "武装の取り扱い",
-                "Desc": "Exスキルの発動と同時に、<b:EnhanceExplosionRate>を<?1>加算（20秒間）",
+                "Name": "武裝的使用",
+                "Desc": "使用EX技能時，爆炸特效增加<?1>(20秒內)",
                 "Parameters": [
                     [
                         "18.6%",
@@ -79017,8 +79019,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "潜入スタート！",
-                "Desc": "円形範囲内の敵に対して、攻撃力の<?1>分のダメージ、周囲の円環範囲に同じダメージ/\nただし重複して受けたダメージは攻撃力の<?2>分のダメージだけ適用",
+                "Name": "潛入Start！",
+                "Desc": "對圓形範圍內的敵人造成攻擊力<?1>的傷害，給予周圍圓環範圍相同的傷害/\n但是，重複受到的傷害只套用攻擊力<?2>的傷害",
                 "Parameters": [
                     [
                         "682%",
@@ -79104,8 +79106,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "ハイスコアアタック",
-                "Desc": "30秒毎に、円形範囲内の敵に対して攻撃力の<?1>分のダメージ",
+                "Name": "High Score Attack",
+                "Desc": "每30秒，對圓形範圍內的敵人造成攻擊力<?1>的傷害",
                 "Parameters": [
                     [
                         "117%",
@@ -79150,8 +79152,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "正確なコーディング",
-                "Desc": "<b:CriticalDamage>率を<?1>増加",
+                "Name": "正確的Coding",
+                "Desc": "<b:CriticalDamage>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -79188,8 +79190,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "正確なコーディング+",
-                "Desc": "<b:CriticalChance>を<?1>増加/\nさらに<b:CriticalDamage>率を<?2>増加",
+                "Name": "正確的Coding+",
+                "Desc": "<b:CriticalChance>增加<?1>/\n並且，<b:CriticalDamage>增加<?2>",
                 "Parameters": [
                     [
                         "100",
@@ -79238,8 +79240,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "ゲーム開発部の絆",
-                "Desc": "味方の<b:ATK>を<?1>増加",
+                "Name": "遊戲開發部的羈絆",
+                "Desc": "我方的<b:ATK>增加<?1>",
                 "Parameters": [
                     [
                         "9.1%",
@@ -79578,8 +79580,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "挑戦状を受け取ってください！",
-                "Desc": "扇形範囲内の敵に対して、攻撃力の<?1>分のダメージ\n自身の弱体状態を1つ解除",
+                "Name": "請收下挑戰書！",
+                "Desc": "對扇形範圍內的敵人造成攻擊力<?1>的傷害/\n並且，解除自身的1個減益效果",
                 "Parameters": [
                     [
                         "372%",
@@ -79638,8 +79640,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "勝利のポーズ！",
-                "Desc": "50秒毎に、治癒力の<?1>分の<b:DotHeal>を付与（30秒間）",
+                "Name": "勝利的姿勢！",
+                "Desc": "每50秒，<b:DotHeal>治癒力的<?1>(30秒內)",
                 "Parameters": [
                     [
                         "22.7%",
@@ -79678,8 +79680,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "一日中でも！",
-                "Desc": "攻撃力を<?1>、<b:MAXHP>を<?2>増加",
+                "Name": "一整天也沒問題！",
+                "Desc": "<b:ATK>增加<?1>、<b:MAXHP>增加<?2>",
                 "Parameters": [
                     [
                         "11.2%",
@@ -79744,8 +79746,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "一日中でも！+",
-                "Desc": "攻撃力を<?1>、<b:MAXHP>を<?2>増加/\nさらに攻撃力を<?3>、<b:MAXHP>を<?4>増加",
+                "Name": "一整天也沒問題！+",
+                "Desc": "<b:ATK>增加<?1>、<b:MAXHP>增加<?2>/\n並且，<b:ATK>增加<?3>、<b:MAXHP>增加<?4>",
                 "Parameters": [
                     [
                         "165",
@@ -79834,8 +79836,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "宇沢レイサの存在感",
-                "Desc": "Exスキルで攻撃時、対象の<d:DEF>を<?1>減少（25秒間）\nさらに<c:Provoke>を付与（1秒間）",
+                "Name": "宇沢澪紗的存在感",
+                "Desc": "使用EX技能攻擊時，減少對象<?1>的防禦力(25秒內)\n並且，給予<c:Provoke>狀態(1秒內)",
                 "Parameters": [
                     [
                         "6%",
@@ -80188,8 +80190,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "天下一味！",
-                "Desc": "自身を除く味方1人に対してチャーハンを渡して回復、対象の付近にまだ回復を受けていない味方がいる場合、チャーハンがその方向に跳ねて回復（最大4回まで）\n1番目、4番目の対象：治癒力の<?1>分の回復<?2>\n2番目、3番目の対象：治癒力の<?3>分の回復",
+                "Name": "天下第一味！",
+                "Desc": "給予自己以外的我方1人炒飯進行回復，若目標周圍有其他未受過回復的我方，則炒飯會跳向該方向進行回復(最多4次)\n第一、第四個目標：回復治癒力的<?1>\n第二、第三個目標：回復治癒力的<?2>",
                 "Parameters": [
                     [
                         "117%",
@@ -80204,22 +80206,22 @@
                         "346%"
                     ],
                     [
-                        "",
-                        "",
-                        "",
-                        "",
-                        "、弱体状態を1つ解除",
-                        "、弱体状態を1つ解除",
-                        "、弱体状態を1つ解除",
-                        "、弱体状態を1つ解除",
-                        "、弱体状態を1つ解除",
-                        "、弱体状態を1つ解除"
-                    ],
-                    [
                         "82.2%",
                         "94.5%",
                         "119%",
                         "131%",
+                        "1個",
+                        "1個",
+                        "1個",
+                        "1個",
+                        "1個",
+                        "1個"
+                    ],
+                    [
+                        "",
+                        "",
+                        "",
+                        "",
                         "156%",
                         "168%",
                         "193%",
@@ -80279,8 +80281,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "クレーマーお断り！",
-                "Desc": "30秒毎に、扇形範囲内の敵に対して攻撃力の<?1>分のダメージ",
+                "Name": "拒絕奧客！",
+                "Desc": "每30秒，對扇形範圍內的敵人造成攻擊力<?1>的傷害",
                 "Parameters": [
                     [
                         "226%",
@@ -80339,8 +80341,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "商会長の矜持",
-                "Desc": "通常攻撃の射程を100、<b:HealPower>を<?1>増加",
+                "Name": "商會長的矜持",
+                "Desc": "一般攻擊<b:Range>增加100，<b:HealPower>增加<?1>",
                 "Parameters": [
                     [
                         "11.2%",
@@ -80393,8 +80395,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "商会長の矜持+",
-                "Desc": "<b:HealPower>を<?1>増加/\nさらに通常攻撃の射程を100、<b:HealPower>を<?2>増加",
+                "Name": "商會長的矜持+",
+                "Desc": "<b:HealPower>增加<?1>/\n並且，一般攻擊<b:Range>增加100，<b:HealPower>增加<?2>",
                 "Parameters": [
                     [
                         "889",
@@ -80443,8 +80445,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "記憶に残る味",
-                "Desc": "Exスキルで回復した味方に対して、治癒力の<?1>分の<b:DotHeal>を付与（60秒間）",
+                "Name": "留在記憶中的味道",
+                "Desc": "對受到EX技能恢復的我方，<b:DotHeal>治癒力的<?1>(60秒內)",
                 "Parameters": [
                     [
                         "1.7%",
@@ -80777,8 +80779,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "竜虎相搏",
-                "Desc": "敵1人に対して、攻撃力の<?1>分のダメージ/\nさらに<d:ATK><?2>を<?3>減少（50秒間）",
+                "Name": "龍爭虎鬥",
+                "Desc": "對1名敵人造成攻擊力<?1>的傷害/\n並且，減少目標<?2>的攻擊力(50秒內)",
                 "Parameters": [
                     [
                         "312%",
@@ -80791,18 +80793,6 @@
                         "781%",
                         "874%",
                         "921%"
-                    ],
-                    [
-                        "",
-                        "、<d:Dodge>",
-                        "、<d:Dodge>",
-                        "、<d:Dodge>、<d:HIT>",
-                        "、<d:Dodge>、<d:HIT>",
-                        "、<d:Dodge>、<d:HIT>",
-                        "、<d:Dodge>、<d:HIT>",
-                        "、<d:Dodge>、<d:HIT>",
-                        "、<d:Dodge>、<d:HIT>",
-                        "、<d:Dodge>、<d:HIT>"
                     ],
                     [
                         "15.9%",
@@ -80911,8 +80901,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "破竹之勢",
-                "Desc": "通常攻撃8回毎に、発動後すぐにリロード/\n敵1人に対して、攻撃力の<?1>分のダメージ/\n対象のデバフ数によって追加ダメージ\nデバフ3つ：攻撃力の<?2>分のダメージ\nデバフ4つ：攻撃力の<?3>分のダメージ\nデバフ5つ以上：攻撃力の<?4>分のダメージ",
+                "Name": "勢如破竹",
+                "Desc": "每8次一般攻擊，技能發動後立刻重新裝填/\n對1名敵人造成攻擊力<?1>的傷害/\n依目標具有的減益數量造成追加傷害\n3個減益：造成攻擊力<?2>的傷害\n4個減益：造成攻擊力<?3>的傷害\n5個以上減益：造成攻擊力<?4>的傷害",
                 "Parameters": [
                     [
                         "222%",
@@ -81047,7 +81037,7 @@
             {
                 "SkillType": "passive",
                 "Name": "一志不退",
-                "Desc": "<b:Dodge>を<?1>増加",
+                "Desc": "<b:Dodge>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -81085,7 +81075,7 @@
             {
                 "SkillType": "weaponpassive",
                 "Name": "一志不退+",
-                "Desc": "<b:HIT>を<?1>増加/\nさらに<b:Dodge>を<?2>増加",
+                "Desc": "<b:HIT>增加<?1>/\n並且，<b:Dodge>增加<?2>",
                 "Parameters": [
                     [
                         "160",
@@ -81135,7 +81125,7 @@
             {
                 "SkillType": "sub",
                 "Name": "騎虎之勢",
-                "Desc": "Exスキルの発動と同時に攻撃力、回避値、<b:HIT>を<?1>増加（20秒間）",
+                "Desc": "發動EX技能時，攻擊力、迴避數值、<b:HIT>增加<?1>(20秒內)",
                 "Parameters": [
                     [
                         "18.8%",
@@ -81482,8 +81472,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "奮い立て！",
-                "Desc": "円形範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n追加で最大3コストを消耗して、1コストあたりのダメージが35%増加します。/\n（コスト増減スキルの効果は基本コストを基準として計算します）",
+                "Name": "奮起吧！",
+                "Desc": "對圓形範圍內的敵人造成攻擊力<?1>的傷害/\n最多可額外消耗3COST使用，每1COST增加35%的傷害/\n(COST增減技能效果以基本COST為基準計算)",
                 "Parameters": [
                     [
                         "462%",
@@ -81595,8 +81585,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "一つになった意志",
-                "Desc": "25秒毎に、円形範囲内の敵に対して攻撃力の<?1>分のダメージ",
+                "Name": "合而為一的意志",
+                "Desc": "每25秒，對圓形範圍內的敵人造成攻擊力<?1>的傷害",
                 "Parameters": [
                     [
                         "77.8%",
@@ -81641,8 +81631,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "手を取り合って",
-                "Desc": "<b:HIT>を<?1>増加",
+                "Name": "手牽著手",
+                "Desc": "<b:HIT>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -81679,8 +81669,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "手を取り合って+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:HIT>を<?2>増加",
+                "Name": "手牽著手+",
+                "Desc": "<b:ATK>增加<?1>/\n並且，<b:HIT>增加<?2>",
                 "Parameters": [
                     [
                         "363",
@@ -81729,8 +81719,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "労働の結実",
-                "Desc": "味方の<b:EnhanceExplosionRate>を<?1>加算",
+                "Name": "勞動的成果",
+                "Desc": "我方的爆炸特效增加<?1>",
                 "Parameters": [
                     [
                         "15.9%",
@@ -82068,8 +82058,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "飛行ドローン稼働",
-                "Desc": "敵1人の<d:CriticalDamageRateResist>率を<?1>減少（50秒間）/\nさらに攻撃力の<?2>分のダメージ",
+                "Name": "啟動飛行無人機",
+                "Desc": "使1名敵人的<d:CriticalDamageRateResist>減少<?1>(50秒內)/\n並且，造成攻擊力<?2>的傷害",
                 "Parameters": [
                     [
                         "10.7%",
@@ -82151,8 +82141,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "紫外線対策",
-                "Desc": "30秒毎に、<b:Dodge>を<?1>増加（25秒間）",
+                "Name": "紫外線對策",
+                "Desc": "每30秒，<b:Dodge>增加<?1>(25秒內)",
                 "Parameters": [
                     [
                         "18.4%",
@@ -82193,8 +82183,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "地道なトレーニング",
-                "Desc": "<b:MAXHP>を<?1>増加",
+                "Name": "堅持不懈的訓練",
+                "Desc": "<b:MAXHP>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -82231,8 +82221,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "地道なトレーニング+",
-                "Desc": "<b:Dodge>を<?1>増加/\nさらに<b:MAXHP>を<?2>増加",
+                "Name": "堅持不懈的訓練+",
+                "Desc": "<b:Dodge>增加<?1>/\n並且，<b:MAXHP>增加 <?2>",
                 "Parameters": [
                     [
                         "160",
@@ -82281,8 +82271,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "戦術機動",
-                "Desc": "回避を50回成功した時、<b:CostRegen>を<?1>増加（10秒間）",
+                "Name": "戰術機動",
+                "Desc": "成功迴避50次時，COST恢復力增加<?1>(10秒內)",
                 "Parameters": [
                     [
                         "332",
@@ -82623,8 +82613,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "シグナルフレア、投擲！",
-                "Desc": "敵1人に対して、攻撃力の<?1>分のダメージ/\nさらに<d:DEF>、<d:ATK>、<d:CriticalChanceResistPoint>を<?2>減少（50秒間）",
+                "Name": "信號彈，投擲！",
+                "Desc": "對1名敵人造成攻擊力<?1>的傷害/\n並且，使防禦力、攻擊力、<d:CriticalChanceResistPoint>減少<?2>(50秒內)",
                 "Parameters": [
                     [
                         "290%",
@@ -82739,8 +82729,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "援護射撃",
-                "Desc": "通常攻撃15回毎に、扇形範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n中型の敵に対して攻撃力の<?2>分の追加ダメージ ",
+                "Name": "援護射擊",
+                "Desc": "每15次一般攻擊，對扇形範圍內的敵人造成攻擊力<?1>的傷害/\n對中型敵人造成攻擊力<?2>的追加傷害",
                 "Parameters": [
                     [
                         "195%",
@@ -82850,8 +82840,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "丁寧な整備",
-                "Desc": "<b:HIT>を<?1>増加",
+                "Name": "細心的整備",
+                "Desc": "<b:HIT>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -82888,8 +82878,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "丁寧な整備+",
-                "Desc": "<b:ExtendDebuffDuration>を<?1>増加/\nさらに<b:HIT>を<?2>増加",
+                "Name": "細心的整備+",
+                "Desc": "減益效果持續力增加<?1>/\n並且，<b:HIT>增加<?2>",
                 "Parameters": [
                     [
                         "1000",
@@ -82938,8 +82928,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "戦友への愛",
-                "Desc": "自身とスペシャル生徒の<b:ATK>を<?1>増加",
+                "Name": "同袍之情",
+                "Desc": "自身和SPECIAL學生的<b:ATK>增加<?1>",
                 "Parameters": [
                     [
                         "16.1%",
@@ -83253,8 +83243,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "カモメの襲撃",
-                "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分の確定会心ダメージ",
+                "Name": "海鷗的襲擊",
+                "Desc": "對直線範圍內的敵人造成攻擊力<?1>的必定暴擊傷害",
                 "Parameters": [
                     [
                         "388%",
@@ -83318,8 +83308,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "密やかな一撃",
-                "Desc": "70秒毎に、扇形範囲内の敵に対して攻撃力の<?1>分のダメージ",
+                "Name": "隱密的一擊",
+                "Desc": "每70秒，對扇形範圍內的敵人造成攻擊力<?1>的傷害",
                 "Parameters": [
                     [
                         "369%",
@@ -83365,8 +83355,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "水中用複合弾",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Name": "水下用複合彈藥",
+                "Desc": "<b:ATK>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -83403,8 +83393,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "水中用複合弾+",
-                "Desc": "<b:CriticalDamage>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Name": "水下用複合彈藥+",
+                "Desc": "<b:CriticalDamage>增加<?1>\n並且，<b:ATK>增加<?2>",
                 "Parameters": [
                     [
                         "2000",
@@ -83453,8 +83443,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "観測状況報告",
-                "Desc": "味方の<b:CriticalDamage>率を<?1>増加",
+                "Name": "狀況觀測報告",
+                "Desc": "我方的<b:CriticalDamage>增加<?1>",
                 "Parameters": [
                     [
                         "9.1%",
@@ -83767,8 +83757,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "大物だ",
-                "Desc": "敵1人の<d:DEF>を<?1>減少（30秒間）/\nさらに攻撃力の<?2>分のダメージ",
+                "Name": "是條大魚",
+                "Desc": "減少1名敵人<?1>的防禦力(30秒內)/\n並且，造成攻擊力<?2>的傷害",
                 "Parameters": [
                     [
                         "18%",
@@ -83845,8 +83835,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "「ちょうどここに」",
-                "Desc": "戦闘開始時、自身を除く味方の<b:CriticalChance>を<?1>増加（60秒間）、スキルコストを1減少（Exスキルの使用1回分）\n（戦闘中に1回のみ）",
+                "Name": "「就是這裡」",
+                "Desc": "戰鬥開始時，除了自身以外的我方<b:CriticalChance>增加<?1>(60秒內)，技能COST減少1(可使用1次EX技能)\n(每場戰鬥1次)",
                 "Parameters": [
                     [
                         "11.5%",
@@ -83888,8 +83878,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "少し浮かれて",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Name": "略顯興奮",
+                "Desc": "<b:ATK>增加<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -83926,8 +83916,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "少し浮かれて＋",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Name": "略顯興奮+",
+                "Desc": "<b:ATK>增加<?1>/\n並且，<b:ATK>增加<?2>",
                 "Parameters": [
                     [
                         "365",
@@ -83976,8 +83966,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "鍛えられた肉体",
-                "Desc": "味方の<b:CostRegen>を<?1>増加",
+                "Name": "經過鍛鍊的肉體",
+                "Desc": "我方的COST恢復力增加<?1>",
                 "Parameters": [
                     [
                         "10.6%",
@@ -90339,6 +90329,497 @@
                 12,
                 6,
                 11
+            ]
+        ]
+    },
+    {
+        "Id": 20031,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 158,
+        "PathName": "Shigure_HotSpring",
+        "DevName": "CH0123",
+        "Name": "シグレ（温泉）",
+        "School": "RedWinter",
+        "Club": "Class227",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "Healer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Pierce",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 0,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "GL",
+        "WeaponImg": "weapon_icon_shigure",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Badge",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_Onsen_Collection",
+        "FamilyName": "間宵",
+        "FamilyNameRuby": "まよい",
+        "PersonalName": "シグレ",
+        "SchoolYear": "2年生",
+        "CharacterAge": "16歳",
+        "Birthday": "1月22日",
+        "CharacterSSRNew": "温泉で身体を温めたら、次は心の番だね。",
+        "ProfileIntroduction": "特別クラスの生徒と共に227号温泉郷を運営しているレッドウィンター連邦学園所属、227号特別クラスの停学生。\n\n旧校舎から突然温泉が沸き出し、ノドカと一緒に巨大な温泉郷を運営することになった。ノドカと違って温泉郷を繁盛させる気はあまりない様子だが、色々な飲み物とお菓子を存分に作れる環境には満足しているようだ。",
+        "Hobby": "自家製ドリンクを作ること",
+        "CharacterVoice": "河瀬茉希",
+        "BirthDay": "1/22",
+        "Illustrator": "ミミトケ",
+        "Designer": "ミミトケ",
+        "CharHeightMetric": "156cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1040,
+        "AttackPower1": 252,
+        "AttackPower100": 2521,
+        "MaxHP1": 2832,
+        "MaxHP100": 21172,
+        "DefensePower1": 94,
+        "DefensePower100": 566,
+        "HealPower1": 2640,
+        "HealPower100": 7922,
+        "DodgePoint": 181,
+        "AccuracyPoint": 820,
+        "CriticalPoint": 273,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "シグレ特製フルーツ牛乳",
+                "Desc": "円形範囲内の味方に対して4秒毎に、治癒力の<?1>分の回復（30秒間）",
+                "Parameters": [
+                    [
+                        "21.3%",
+                        "24.5%",
+                        "30.8%",
+                        "34%",
+                        "40.4%",
+                        "43.6%",
+                        "50%",
+                        "53.2%",
+                        "59.6%",
+                        "62.8%"
+                    ]
+                ],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    5
+                ],
+                "Duration": 60,
+                "Range": 1000,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 300
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "Effects": [
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            2130,
+                            2450,
+                            3088,
+                            3408,
+                            4045,
+                            4365,
+                            5005,
+                            5323,
+                            5963,
+                            6283
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "一口、どう？",
+                "Desc": "50秒毎に、HPが最も低い味方4人に対して治癒力の<?1>分の回復",
+                "Parameters": [
+                    [
+                        "67.6%",
+                        "70.9%",
+                        "74.3%",
+                        "87.8%",
+                        "91.2%",
+                        "94.6%",
+                        "108%",
+                        "111%",
+                        "114%",
+                        "128%"
+                    ]
+                ],
+                "Duration": 60,
+                "Range": 1000,
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "Effects": [
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            6760,
+                            7098,
+                            7435,
+                            8788,
+                            9125,
+                            9465,
+                            10815,
+                            11153,
+                            11493,
+                            12843
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "四畳半の温もり",
+                "Desc": "<b:HealPower>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "四畳半の温もり+",
+                "Desc": "<b:HealPower>を<?1>増加/\nさらに<b:HealPower>を<?2>増加",
+                "Parameters": [
+                    [
+                        "1056",
+                        "1109",
+                        "1162",
+                        "1373",
+                        "1426",
+                        "1479",
+                        "1690",
+                        "1743",
+                        "1796",
+                        "2007"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "HealPower_Base",
+                        "Scale": [
+                            1056,
+                            1109,
+                            1162,
+                            1373,
+                            1426,
+                            1479,
+                            1690,
+                            1743,
+                            1796,
+                            2007
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "ピリッとした風味",
+                "Desc": "味方の<b:CriticalDamage>率を<?1>増加",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Channel": 311
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "HealPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                8,
+                0
+            ],
+            [
+                12,
+                0
+            ],
+            [
+                16,
+                53
+            ],
+            [
+                20,
+                64
+            ],
+            [
+                5,
+                11
+            ],
+            [
+                7,
+                16
+            ],
+            [
+                12,
+                26
+            ]
+        ],
+        "FavorAlts": [
+            10055
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 135",
+        "FurnitureInteraction": [
+            [
+                [
+                    6301,
+                    3
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Functional",
+            "Specialized"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Shigure_Onsen",
+            "F_Shigure_Onsen2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "スプリングパンチ",
+            "Desc": "シグレが常に携帯しているグレネードランチャー。\n\nシェーカーを振るように榴弾を見事にリロードするシグレの姿は227号温泉郷の見どころの一つとして、お客様から好評を博している。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 111,
+            "AttackPower100": 1108,
+            "MaxHP1": 616,
+            "MaxHP100": 6162,
+            "HealPower1": 310,
+            "HealPower100": 3104,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3010,
+                160
+            ],
+            [
+                3011,
+                3010,
+                161,
+                200
+            ],
+            [
+                3012,
+                3011,
+                162,
+                201
+            ],
+            [
+                3013,
+                3012,
+                163,
+                202
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                16
+            ],
+            [
+                12,
+                18,
+                15,
+                31
+            ],
+            [
+                12,
+                18,
+                9,
+                28
+            ],
+            [
+                8,
+                18,
+                12,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4010
+            ],
+            [
+                4010
+            ],
+            [
+                4011,
+                4010,
+                160
+            ],
+            [
+                4011,
+                161,
+                200
+            ],
+            [
+                4012,
+                4011,
+                161,
+                200
+            ],
+            [
+                4012,
+                162,
+                201
+            ],
+            [
+                4013,
+                4012,
+                163,
+                202
+            ],
+            [
+                4013,
+                163,
+                202
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                10,
+                17
+            ],
+            [
+                8,
+                5,
+                16
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                7,
+                13
             ]
         ]
     }
