@@ -7628,7 +7628,9 @@ function renderSummonSkills(sourceskill, level) {
             if (summonSkill.SkillType == 'autoattack') {
                 addNormalAttackSkillText(summonSkill)
                 summonSkill.Range = summonInfo.Range
-                summonSkill.Effects[0].HitsParameter = 1
+                if (summonSkill.Effects[0].Type == "DMGMulti") {
+                    summonSkill.Effects[0].HitsParameter = 1
+                }
             }
             const skillExtraInfo = getSkillExtraInfo(summonSkill, summonInfo)
 
@@ -7753,7 +7755,10 @@ function recalculateNormalAttackPreview() {
     }
 
     skill.Range = student.Range
-    skill.Effects[0].HitsParameter = 1
+
+    if (skill.Effects[0].Type == "DMGMulti") {
+        skill.Effects[0].HitsParameter = 1
+    }
 
     $(`#ba-skill-autoattack-icon`).find('img').attr("src", `images/skill/${skill.Icon}.webp`)
     $(`#ba-skill-autoattack-name`).html(skill.Name)
