@@ -3786,8 +3786,6 @@ function loadModule(moduleName, entry=null) {
             if (regionID == 2) {
                 $('#ba-raid-list-tab-timeattack').hide()
                 $('#ba-raid-list-tab-worldraid').hide()
-                $('#ba-raid-difficulty-5').hide()
-                $('#ba-raid-difficulty-6').hide()
             }
 
             $(".tooltip").tooltip("hide")
@@ -5597,10 +5595,8 @@ function loadRaid(raidId) {
                 raid_difficulty = raid.MaxDifficulty[regionID]
             }
 
-            if (raid.MaxDifficulty[regionID] < 6) {
-                $('#ba-raid-difficulty-6').toggleClass('disabled', true)
-            } else {
-                $('#ba-raid-difficulty-6').toggleClass('disabled', false)
+            for (let i = 0; i <= 6; i++) {
+                $(`#ba-raid-difficulty-${i}`).toggle(i <= raid.MaxDifficulty[regionID])
             }
 
             $(`#ba-raid-difficulty-${raid_difficulty}`).tab('show')
@@ -7675,31 +7671,31 @@ function getSkillExtraInfo(skill, character) {
             let icon = ''
             switch (radius.Type) {
                 case 'Circle':
-                    label = `${radius.Radius / 100}m`
+                    label = `${radius.Radius}`
                     tooltip = `${translateUI('radius')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>`
                     icon = 'COMMON_SKILLICON_CIRCLE'
                     if (radius.Radius == skill.Range) showRange = false
                     break
                 case 'Donut':
-                    label = `${radius.ExcludeRadius / 100}m - ${radius.Radius / 100}m`
+                    label = `${radius.ExcludeRadius} - ${radius.Radius} / ${radius.Degree}&deg;`
                     tooltip = `${translateUI('radius')}: <b>${radius.ExcludeRadius / 100}m - ${radius.Radius / 100}m (${radius.ExcludeRadius} - ${radius.Radius})</b>\n${translateUI('angle')}: <b>${radius.Degree}&deg;</b>`
                     icon = 'COMMON_SKILLICON_DONUT'
                     if (radius.Radius >= skill.Range) showRange = false
                     break
                 case 'Fan':
-                    label = `${radius.Radius / 100}m`
+                    label = `${radius.Radius} / ${radius.Degree}&deg;`
                     tooltip = `${translateUI('radius')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>\n${translateUI('angle')}: <b>${radius.Degree}&deg;</b>`
                     icon = 'COMMON_SKILLICON_FAN'
                     showRange = false
                     break
                 case 'Obb':
-                    label = radius.Height > radius.Width ? `${radius.Height / 100}m` : `${radius.Width / 100}m &times; ${radius.Height / 100}m`
+                    label = radius.Height > radius.Width ? `${radius.Height}` : `${radius.Width} &times; ${radius.Height}`
                     tooltip = `${translateUI('length')}: <b>${radius.Height / 100}m (${radius.Height})</b>\n${translateUI('width')}: <b>${radius.Width / 100}m (${radius.Width})</b>`
                     icon = radius.Height > radius.Width ? 'COMMON_SKILLICON_LINE' : 'COMMON_SKILLICON_RECZONE'
                     if (radius.Height >= skill.Range) showRange = false
                     break
                 case 'Bounce':
-                    label = `${radius.Radius / 100}m`
+                    label = `${radius.Radius}`
                     tooltip = `${translateUI('bounce')}: <b>${radius.Radius / 100}m (${radius.Radius})</b>`
                     icon = 'COMMON_SKILLICON_BOUNCEPROJECTILE'
                     break
@@ -7713,7 +7709,7 @@ function getSkillExtraInfo(skill, character) {
     }
 
     if ((showRange || skill.SkillType == 'autoattack') && skill.Range) {
-        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('range') + `: <b>${skill.Range / 100}m (${skill.Range})</b>`)}"><img class="icon invert-light" src="images/staticon/Stat_Range.png"><span class="label">${skill.Range / 100}m</span></div>`
+        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('range') + `: <b>${skill.Range / 100}m (${skill.Range})</b>`)}"><img class="icon invert-light" src="images/staticon/Stat_Range.png"><span class="label">${skill.Range}</span></div>`
     }
 
     if (skill.SkillType == 'autoattack') {
@@ -9317,7 +9313,7 @@ function getSkillText(skill, level, {renderBuffs = true, bulletType = null, emph
     result = result.replace(emphasisRegex, function(match) {return `<strong>${match}</strong>`})
     result = result.replace(knockbackRegex, function(match, p1) {
         const knockbackEffect = skill.Effects.filter(e => e.Type == 'Knockback')[p1 - 1]
-        return `<strong>${knockbackEffect.Scale[level - 1] / 50}m</strong>`
+        return `<strong>${knockbackEffect.Scale[level - 1] * 2}</strong>`
     })
 
     const parameterClass = bulletType == null ? 'ba-col-emphasis' : `ba-col-${bulletType.toLowerCase()}`

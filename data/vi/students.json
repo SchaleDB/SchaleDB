@@ -59339,7 +59339,7 @@
                             10000,
                             10000
                         ],
-                        "HitsParameter": 1,
+                        "HitsParameter": 3,
                         "Scale": [
                             46535,
                             53520,
@@ -76814,7 +76814,7 @@
         "Id": 10065,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 135,
@@ -76843,7 +76843,7 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "桑上",
-        "FamilyNameRuby": "くわかみ",
+        "FamilyNameRuby": "",
         "PersonalName": "カホ",
         "SchoolYear": "3年生",
         "CharacterAge": "17歳",
@@ -76856,7 +76856,7 @@
         "Illustrator": "7peach",
         "Designer": "7peach",
         "CharHeightMetric": "173cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'7\"",
         "StabilityPoint": 1388,
         "AttackPower1": 244,
         "AttackPower100": 2446,
@@ -76902,7 +76902,7 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "One Who is a Fan",
+                "Name": "Fanatical Behavior",
                 "Desc": "Deals <?1> damage to one enemy.",
                 "Parameters": [
                     [
@@ -76968,7 +76968,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "Concentration of Mind",
+                "Name": "Disciplined Preparation",
                 "Desc": "Every 50s, gains the effect of <s:Dado> and increases <b:ATK> by <?1> for <?2>.",
                 "Parameters": [
                     [
@@ -77110,7 +77110,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "Tranquility",
+                "Name": "Serene Relaxation",
                 "Desc": "Deals <?1> damage as an additional hit while under the effect of <s:Dado>.",
                 "Parameters": [
                     [
@@ -77184,7 +77184,7 @@
         "FavorAlts": [],
         "MemoryLobby": [
             6,
-            0,
+            6,
             0
         ],
         "MemoryLobbyBGM": "Walkthrough",
@@ -77195,7 +77195,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    209302,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -87765,7 +87770,7 @@
             {
                 "SkillType": "ex",
                 "Name": "祝砲の由来は……",
-                "Desc": "Deals <?1> damage to enemies in a fan-shaped area. Each hit knocks back enemies <kb:1>.",
+                "Desc": "Deals <?1> damage to enemies in a fan-shaped area. Each hit knocks back enemies a distance of <kb:1>.",
                 "Parameters": [
                     [
                         "205%",
