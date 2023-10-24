@@ -50504,7 +50504,7 @@
             {
                 "SkillType": "gearnormal",
                 "Name": "Claymore Burst+",
-                "Desc": "Every 40s, deploys a claymore that explodes into 5 fragments spread across a fan-shaped area in front of it, each fragment deals <?1> damage and decreases <d:OppressionResist> by <?2> for 30s.",
+                "Desc": "Every 40s, deploys a claymore that explodes into 5 fragments spread across a fan-shaped area in front of it, each fragment deals <?1> damage and decreases the <d:OppressionResist> of enemies hit by <?2> for 30s.",
                 "Parameters": [
                     [
                         "92%",
@@ -50539,11 +50539,11 @@
                         "Type": "DMGMulti",
                         "CriticalCheck": "Check",
                         "Hits": [
-                            2000,
-                            2000,
-                            2000,
-                            2000,
-                            2000
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ],
                         "HitsParameter": 1,
                         "Scale": [

@@ -4909,7 +4909,7 @@ function renderStudent() {
     if ("Released" in student.Gear && student.Gear.Released[regionID]) {
         $('#ba-student-tab-gear, #ba-statpreview-ex-gear-container').show()
         $("#ba-student-gear-name, #ba-statpreview-gear4-name").html(student.Gear.Name)
-        $("#ba-student-gear-description").html(`${student.Gear.Desc}\n\n<i>${translateUI('bond_req_equip',['20', student.Name])}`)
+        $("#ba-student-gear-description").html(`${student.Gear.Desc}\n\n<i>${translateUI('bond_req_equip',[region.GearBondReq[0], student.Name])}`)
         $("#ba-student-gear-icon").attr("src", `images/gear/full/${student.Id}.webp`)
         $("#ba-statpreview-gear4-icon, #ba-student-gear-4-icon").attr("src", `images/gear/icon/${student.Id}.webp`)
         $("#ba-student-gear-4-icon").tooltip('dispose').tooltip({title: getRichTooltip(`images/gear/icon/${student.Id}.webp`, getTranslatedString(student.Gear, 'Name').escapeHtml(), translateUI('student_ex_gear'), null, getTranslatedString(student.Gear, 'Desc').escapeHtml() + `\n\n<b>${translateUI("stat_info")}:</b>\n` + getGearStatsText(student.Gear, '\n'), 50, 'img-scale-larger'), placement: 'top', html: true}).toggleClass("gear-disabled", statPreviewGearLevel == 0)
@@ -4932,7 +4932,7 @@ function renderStudent() {
         $("#ba-statpreview-gear4-description").html(getGearStatsText(student.Gear, ", "))
         $("#ba-student-gear-materials-t2").html(gearMaterialsHtml)
         $("#ba-student-gear-materials-t2>div").tooltip({html: true})
-        $("#ba-student-bondreq-t2").html(translateUI('bond_req_upgrade',['25', student.Name]))
+        $("#ba-student-bondreq-t2").html(translateUI('bond_req_upgrade',[region.GearBondReq[1], student.Name]))
     } else {
         $('#ba-student-tab-gear, #ba-statpreview-ex-gear-container').hide()
         if ($('#ba-student-tab-gear').hasClass('active')) {
@@ -7953,8 +7953,12 @@ function getEnemyCardHTML(enemy, level, terrain, grade, scaletype=0, data=true) 
     let smallTextThreshold = getSmallTextThreshold(name, label_enemy_smalltext_threshold)
     let html = `<div class="selection-grid-card card-enemy" ${data ? `data-enemy='${enemy.Id}_${level}_${grade}_${scaletype}'` : ''} onclick='showEnemyInfo(${enemy.Id},${level},"${terrain}",${grade},${scaletype},${!data})'><div class="card-img"><img src="images/enemy/${enemy.Icon}.webp"></div>`
 
-    if (enemy.Rank == 'Elite') html += `<div class="card-badge enemy-rank"><img src="images/ui/Common_Icon_Enemy_Elite.png" style="width:22px;"></div>`
-    else if (enemy.Rank == 'Champion') html += `<div class="card-badge enemy-rank"><img src="images/ui/Common_Icon_Enemy_Champion.png" style="width:31px;"></div>`
+    if (enemy.IsNPC) {
+        html += `<span class="card-badge enemy-npc">NPC</span>`
+    } else {
+        if (enemy.Rank == 'Elite') html += `<div class="card-badge enemy-rank"><img src="images/ui/Common_Icon_Enemy_Elite.png" style="width:22px;"></div>`
+        else if (enemy.Rank == 'Champion') html += `<div class="card-badge enemy-rank"><img src="images/ui/Common_Icon_Enemy_Champion.png" style="width:31px;"></div>`    
+    }
 
     html += `<div class="card-badge enemy-level">Lv.${level}</div><div class="card-badge enemy-atk bg-atk-${enemy.BulletType.toLowerCase()}"><img src="images/ui/Type_Attack_s.png" style="width:100%;"></div>
     <div class="card-badge enemy-def bg-def-${enemy.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense_s.png" style="width:100%;"></div><div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? 'smalltext' : ''}">${name}</span></div></div>`

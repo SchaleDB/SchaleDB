@@ -7338,8 +7338,8 @@
             },
             {
                 "SkillType": "gearnormal",
-                "Name": "ウォーミングアップ+",
-                "Desc": "40秒毎に、<b:ATK>を<?1>増加（20秒間）/\n<b:DEF>を<?2>増加（20秒間）",
+                "Name": "热身运动+",
+                "Desc": "每40秒，<b:ATK>提升<?1>(持续20秒)\n<b:DEF>提升<?2>(持续20秒)",
                 "Parameters": [
                     [
                         "27.5%",
@@ -30716,8 +30716,8 @@
             },
             {
                 "SkillType": "gearnormal",
-                "Name": "固くなあれ♪+",
-                "Desc": "20秒毎に、HPが最も低い味方2人の<b:DEF>を<?1>増加（13秒間）/\n治癒力の<?2>分の回復",
+                "Name": "变坚固吧♪+",
+                "Desc": "每20秒令1名<b>当前生命值百分比</b>最低的我方单位<b:DEF>提升<?1>(持续13秒)/\n回复其治愈力<?2>的生命值",
                 "Parameters": [
                     [
                         "29%",
@@ -35349,8 +35349,8 @@
             },
             {
                 "SkillType": "gearnormal",
-                "Name": "甘酸っぱくて美味しい！+",
-                "Desc": "35秒毎に、<b:ATK>を<?1>増加（30秒間）",
+                "Name": "酸甜可口！+",
+                "Desc": "每35秒，<b:ATK>提升<?1>(持续30秒)",
                 "Parameters": [
                     [
                         "31.7%",
@@ -50847,8 +50847,8 @@
             },
             {
                 "SkillType": "gearnormal",
-                "Name": "クレイモア＋",
-                "Desc": "40秒毎に、小型クレイモアから5つの破片が飛散し、それぞれ攻撃力の<?1>分のダメージ/\n<d:OppressionResist>を<?2>減少（30秒間）",
+                "Name": "阔刀地雷+",
+                "Desc": "每40秒引爆1个小型阔刀反步兵地雷，产生5块破片并向前方扇形区域扩散，每块破片造成攻击力<?1>的伤害\n令目标<d:OppressionResist>降低<?2>(持续30秒)",
                 "Parameters": [
                     [
                         "92%",
@@ -50883,11 +50883,11 @@
                         "Type": "DMGMulti",
                         "CriticalCheck": "Check",
                         "Hits": [
-                            2000,
-                            2000,
-                            2000,
-                            2000,
-                            2000
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ],
                         "HitsParameter": 1,
                         "Scale": [
@@ -91031,7 +91031,7 @@
             {
                 "SkillType": "ex",
                 "Name": "常盤台の超電磁砲",
-                "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ",
+                "Desc": "对直线范围内的敌方单位造成攻击力<?1>的伤害",
                 "Parameters": [
                     [
                         "544%",
@@ -91085,7 +91085,7 @@
             {
                 "SkillType": "normal",
                 "Name": "ちょっと痺れるわよ！",
-                "Desc": "50秒毎に、円形範囲内の敵に攻撃力の<?1>分のダメージ\n攻撃力の<?2>分の<d:ElectricShock>持続ダメージを付与（<?3>間）",
+                "Desc": "每50秒，对圆形范围内的敌方单位造成攻击力<?1>的伤害\n对其施加攻击力<?2>的<d:ElectricShock>状态(持续<?3>)",
                 "Parameters": [
                     [
                         "120%",
@@ -91173,7 +91173,7 @@
             {
                 "SkillType": "passive",
                 "Name": "電撃操作能力",
-                "Desc": "<b:HIT>を<?1>増加/\n食蜂操祈の<c:Confusion>効果は適用されません",
+                "Desc": "<b:HIT>提升<?1>\n免疫食蜂操祈施加的<c:Confusion>状态",
                 "Parameters": [
                     [
                         "14%",
@@ -91211,7 +91211,7 @@
             {
                 "SkillType": "weaponpassive",
                 "Name": "電撃操作能力+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:HIT>を<?2>増加/\n食蜂操祈の<c:Confusion>効果は適用されません",
+                "Desc": "<b:ATK>提升<?1>\n<b:HIT>提升<?2>\n免疫食蜂操祈施加的<c:Confusion>状态",
                 "Parameters": [
                     [
                         "290",
@@ -91261,7 +91261,7 @@
             {
                 "SkillType": "sub",
                 "Name": "何度も言わせんじゃないわよ",
-                "Desc": "ノーマルスキルの発動と同時に、<b:ATK>を<?1>増加（<?2>間）",
+                "Desc": "自身使用普通技能时，令自身<b:ATK>提升<?1>(持续<?2>)",
                 "Parameters": [
                     [
                         "10%",
@@ -91626,7 +91626,7 @@
             {
                 "SkillType": "ex",
                 "Name": "心理掌握",
-                "Desc": "指定した相手およびその円形範囲内の最も近い敵2人に対して、攻撃力の<?1>分のダメージ/\n<c:Confusion>状態を付与（<?2>間）",
+                "Desc": "对1名敌方单位及其周围圆形范围内距离其最近的2名敌方单位造成攻击力<?1>的伤害\n对其施加<c:Confusion>状态(持续<?2>)",
                 "Parameters": [
                     [
                         "772%",
@@ -91708,7 +91708,7 @@
             {
                 "SkillType": "normal",
                 "Name": "少し手伝ってくれるかしら？",
-                "Desc": "30秒毎に、円形範囲内の敵に攻撃力の<?1>分のダメージ",
+                "Desc": "每30秒对圆形范围内的敌方单位造成攻击力<?1>的伤害",
                 "Parameters": [
                     [
                         "318%",
@@ -91767,7 +91767,7 @@
             {
                 "SkillType": "passive",
                 "Name": "常盤台の女王",
-                "Desc": "<b:OppressionPower>を<?1>増加",
+                "Desc": "<b:OppressionPower>提升<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -91805,7 +91805,7 @@
             {
                 "SkillType": "weaponpassive",
                 "Name": "常盤台の女王+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:OppressionPower>を<?2>増加",
+                "Desc": "<b:ATK>提升<?1>増加\n<b:OppressionPower>提升<?2>",
                 "Parameters": [
                     [
                         "152",
@@ -91855,7 +91855,7 @@
             {
                 "SkillType": "sub",
                 "Name": "私は頭脳派だしぃ",
-                "Desc": "食蜂操祈のExスキルで相手に<c:Confusion>状態を適用する度に防御力と<b:Dodge>を<?1>増加（20秒間）",
+                "Desc": "自身使用EX技能成功对目标施加<c:Confusion>状态时，令自身<b:DEF>与<b:Dodge>提升<?1>(持续20秒)",
                 "Parameters": [
                     [
                         "19.3%",
@@ -92147,7 +92147,7 @@
         "DefaultOrder": 161,
         "PathName": "Saten_Ruiko",
         "DevName": "CH9996",
-        "Name": "佐天涙子",
+        "Name": "佐天泪子",
         "School": "Sakugawa",
         "Club": "EmptyClub",
         "StarGrade": 1,
@@ -92204,7 +92204,7 @@
             {
                 "SkillType": "ex",
                 "Name": "フルスイング",
-                "Desc": "円形範囲内の敵に攻撃力の<?1>分のダメージ",
+                "Desc": "对圆形范围内的敌方单位造成攻击力<?1>的伤害",
                 "Parameters": [
                     [
                         "446%",
@@ -92257,7 +92257,7 @@
             {
                 "SkillType": "normal",
                 "Name": "秘伝のサバカレー",
-                "Desc": "45秒毎に、味方1人に対して<b:ATK>を<?1>増加（20秒間）\nノーマルスキルを使用する度に効果適用の対象が1人ずつ増加（最大3人分まで）",
+                "Desc": "每45秒令1名我方单位<b:ATK>提升<?1>(持续20秒)\n每使用1次该技能，令下次该技能作用目标人数提升1(最多3人)",
                 "Parameters": [
                     [
                         "10.9%",
@@ -92300,7 +92300,7 @@
             {
                 "SkillType": "passive",
                 "Name": "思いっきり！",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Desc": "<b:ATK>提升<?1>",
                 "Parameters": [
                     [
                         "14%",
@@ -92338,7 +92338,7 @@
             {
                 "SkillType": "weaponpassive",
                 "Name": "思いっきり！+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Desc": "<b:ATK>提升<?1>\n<b:ATK>提升<?2>",
                 "Parameters": [
                     [
                         "279",
@@ -92388,7 +92388,7 @@
             {
                 "SkillType": "sub",
                 "Name": "私だって！",
-                "Desc": "味方の<b:ATK>を<?1>増加",
+                "Desc": "编队内所有学生<b:ATK>提升<?1>",
                 "Parameters": [
                     [
                         "9.1%",
