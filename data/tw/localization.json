@@ -43,7 +43,9 @@
         "SRT": "SRT",
         "Trinity": "三一",
         "Valkyrie": "女武神",
-        "ETC": "其他"
+        "ETC": "其他",
+        "Tokiwadai": "Tokiwadai",
+        "Sakugawa": "Sakugawa"
     },
     "AdaptationType": {
         "Street": "市區",
@@ -61,7 +63,9 @@
         "SRT": "SRT特殊學園",
         "Trinity": "三一綜合學園",
         "Valkyrie": "女武神警察學園",
-        "ETC": "其他"
+        "ETC": "其他",
+        "Tokiwadai": "Tokiwadai Middle School",
+        "Sakugawa": "Sakugawa Middle School"
     },
     "Club": {
         "Kohshinjo68": "便利屋68",
@@ -175,7 +179,8 @@
         "10": "大運動會",
         "11": "阿拜多斯教室",
         "12": "遊戲開發部",
-        "13": "Sunshine Resort"
+        "13": "Sunshine Resort",
+        "14": "Department Store"
     },
     "FurnitureSet": {
         "0": "無",
@@ -191,7 +196,8 @@
         "109": "大運動會主題",
         "110": "阿拜多斯教室組合",
         "111": "遊戲開發部組合",
-        "112": "Sunshine Resort Set"
+        "112": "Sunshine Resort Set",
+        "113": "Department Store Set"
     },
     "ItemCategory": {
         "Furnitures": "家具",
@@ -292,7 +298,8 @@
         "827": "夏日特殊作戰！RABBIT小隊與消失的蝦子之謎",
         "828": "In Search of a Hidden Heritage",
         "829": "Gakuman Doujin Monogatari: Two Seeking the Final Episode",
-        "830": "Trip Trap Train"
+        "830": "Trip Trap Train",
+        "831": "A Certain Scientific Youth Record"
     },
     "StageType": {
         "Campaign": "任務",
@@ -455,6 +462,7 @@
         "Debuff_Penetration": "防禦貫穿數值",
         "Debuff_Poison": "中毒",
         "Debuff_Range": "射程",
+        "Debuff_ElectricShock": "Shock",
         "Debuff_Stability": "安定數值",
         "Debuff_CostRegen": "COST恢復力",
         "CC_Fear": "恐懼",
@@ -462,6 +470,7 @@
         "CC_Provoke": "挑釁",
         "CC_Paralysis": "癱瘓",
         "CC_Emp": "EMP",
+        "CC_Confusion": "Confusion",
         "Special_EnergyBatteryHalf": "能量",
         "Special_FormChange": "一般攻擊",
         "Special_Immortal": "不死",
@@ -563,6 +572,7 @@
         "Debuff_Penetration": "防禦貫穿數值下降",
         "Debuff_Poison": "中毒",
         "Debuff_Range": "射程下降",
+        "Debuff_ElectricShock": "Electric Shock",
         "Debuff_Stability": "安定數值下降",
         "Debuff_CostRegen": "COST恢復力下降",
         "CC_Fear": "恐懼",
@@ -570,6 +580,7 @@
         "CC_Provoke": "挑釁",
         "CC_Paralysis": "癱瘓",
         "CC_Emp": "EMP",
+        "CC_Confusion": "Confusion",
         "Special_EnergyBatteryHalf": "能量",
         "Special_FormChange": "一般攻擊",
         "Special_Immortal": "不死",
@@ -672,12 +683,14 @@
         "Debuff_Penetration": "Decreases the amount of enemy defense that will be ignored by attacks.",
         "Debuff_Poison": "Continuously receives poison damage at set intervals. This damage cannot critically hit.",
         "Debuff_Range": "Decreases the distance from which Normal Attacks can be performed.",
+        "Debuff_ElectricShock": "Continuously receives Electric Shock damage at set intervals. This damage cannot critically hit.",
         "Debuff_Stability": "Decreases the minimum damage dealt by attacks due to random damage variance.",
         "CC_Fear": "Unable to act and will slowly move away from whoever inflicted fear on them. Also interrupts any active skills.",
         "CC_Stunned": "Unable to act and interrupts any active skills.",
         "CC_Provoke": "Forced to attack whoever inflicted taunt on them. Also interrupts any active skills.",
         "CC_Paralysis": "無法行動並打斷任何主動技能。",
         "CC_Emp": "無法行動並打斷任何主動技能。",
+        "CC_Confusion": "Attacks allies instead of enemies. Also interrupts any active skills.",
         "Special_EnergyBatteryHalf": "Increases the effectiveness of Aris's EX and Sub skills by 1.5&times; (half) or 2&times; (full).\nCharge level resets to empty after EX skill use.",
         "Special_FormChange": "Augments Normal Attacks.",
         "Special_Immortal": "Able to withstand most attacks without being defeated for the duration of the effect.",
@@ -780,6 +793,7 @@
         "UIEventBoxGachaShopEnter": "Prize Exchange Entry {0}",
         "UIEventBoxGachaShopIdle": "Prize Exchange Idle {0}",
         "UIEventBoxGachaShopBoxGachaPrize": "Prize Exchange Win {0}",
+        "UIEventBoxGachaShopBoxGachaFinish": "Prize Exchange Ended {0}",
         "UIEventMissionEnter": "Event Mission Entry {0}",
         "UIEventMissionIdle": "Event Mission Idle {0}",
         "UIEventMissionBuy": "Event Mission Completion {0}",

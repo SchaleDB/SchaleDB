@@ -30,7 +30,7 @@ const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','Accur
 const studentStatListFull = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','AttackSpeed','BlockRate','DefensePenetration', 'AmmoCount']
 const enemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','DefensePenetration','DamagedRatio','OppressionPower','OppressionResist']
 const raidEnemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','DefensePenetration','DamagedRatio','GroggyGauge','GroggyTime']
-const enemyCalculationStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','DefensePenetration','DamagedRatio']
+const enemyCalculationStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','DefensePenetration','DamagedRatio']
 
 const staticAssetURL = "https://static.schale.gg"
 
@@ -3837,7 +3837,7 @@ function loadModule(moduleName, entry=null) {
             var urlVars = new URL(window.location.href).searchParams
         
             if (localStorage.getItem("show_event_currency_bonus")) {
-                showEventCurrencyBonus = localStorage.getItem("show_event_currency_bonus")
+                showEventCurrencyBonus = parseInt(localStorage.getItem("show_event_currency_bonus"))
             }
 
             generateStatTable('#ba-stage-enemy-stat-table', enemyStatList, 6)
@@ -4824,7 +4824,7 @@ function renderStudent() {
     $("#ba-student-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-elasticarmor").addClass(`bg-def-${student.ArmorType.toLowerCase()}`)
     
     $("#ba-student-academy-label").text(`${getLocalizedString('School',student.School)} / ${getLocalizedString('Club',student.Club)}`)
-    $("#ba-student-school-img, #ba-student-academy-icon").attr("src", `images/schoolicon/School_Icon_${student.School.toUpperCase()}_W.png`)
+    $("#ba-student-school-img, #ba-student-academy-icon").attr("src", `images/schoolicon/School_Icon_${student.School.replace('Sakugawa', 'Etc').toUpperCase()}_W.png`)
     $("#ba-student-position-label").text(student.Position.toUpperCase())
     $("#ba-student-attacktype-label").text(getLocalizedString('BulletType',student.BulletType))
     $('#ba-student-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',student.BulletType)}`, translateUI('attacktype'), null, getAttackTypeText(student.BulletType), 32), placement: 'top',  html: true})
@@ -4946,7 +4946,9 @@ function renderStudent() {
     if (userLang != 'Jp') {
         $('#ba-student-fullname').text(getTranslatedString(student,'FamilyName')+' '+getTranslatedString(student,'PersonalName'))
     } else {
-        $('#ba-student-fullname').html(`<ruby>${getTranslatedString(student,'FamilyName')}<rp>(</rp><rt>${getTranslatedString(student,'FamilyNameRuby')}</rt><rp>)</rp></ruby> `+getTranslatedString(student,'PersonalName'))
+        $('#ba-student-fullname').html(
+            `<ruby>${getTranslatedString(student,'FamilyName')}<rp>(</rp><rt>${getTranslatedString(student,'FamilyNameRuby')}</rt><rp>)</rp></ruby> `
+            + (getTranslatedString(student,'PersonalNameRuby') == "" ? getTranslatedString(student,'PersonalName') : `<ruby>${getTranslatedString(student,'PersonalName')}<rp>(</rp><rt>${getTranslatedString(student,'PersonalNameRuby')}</rt><rp>)</rp></ruby> `))
     }
     $('#ba-profile-school-label').text(getLocalizedString('SchoolLong',student.School))
     $('#ba-profile-club-label').text(getLocalizedString('Club',student.Club))
@@ -4982,7 +4984,7 @@ function renderStudent() {
     allTags.push(student.FavorItemUniqueTags[0])
     allTags.push(student.FavorItemUniqueTags[0] + "2")
 
-    const genericTags = ["Gift1", "Gift2"]
+    const genericTags = ["Gift1", "Gift2", "Gift3"]
     const allGifts = data.items.filter(x => x.Category == "Favor" && x.IsReleased[regionID]).sort((a,b) => b.ExpValue - a.ExpValue)
     let favoriteGifts = ["", "", ""]
 
@@ -6463,21 +6465,28 @@ function loadStage(id) {
         let html = ''
         let enemyList = {}
         const enemyRanks = ['Minion','Elite','Champion','Boss']
-        getSuffixedProperty(stage, "Formations", loadedStageVersion).forEach(el => {
-            for (let i = 0; i < el.EnemyList.length; i++) {
-                let enemy = find(data.enemies, "Id", el.EnemyList[i])[0]
-                let rankId = enemyRanks.indexOf(enemy.Rank)
-                enemyList[`${4-rankId}_${enemy.Id}_${el.Level[rankId]}_${el.Grade[rankId]}`] = enemy
-            }
-        })
+        const stageFormations = getSuffixedProperty(stage, "Formations", loadedStageVersion)
+        if (stageFormations.length) {
+            $('#ba-stage-enemy-list, #ba-stage-enemy-info').show()
 
-        Object.keys(enemyList).sort().forEach(el => {
-            e_level = el.split('_')[2]
-            e_grade = el.split('_')[3]
-            html += getEnemyCardHTML(enemyList[el], e_level, stage.Terrain, e_grade)
-        })
-        $('#ba-stage-enemies').html(html)
-        $('#ba-stage-enemies > :first').trigger("click")
+            stageFormations.forEach(el => {
+                for (let i = 0; i < el.EnemyList.length; i++) {
+                    let enemy = find(data.enemies, "Id", el.EnemyList[i])[0]
+                    let rankId = enemyRanks.indexOf(enemy.Rank)
+                    enemyList[`${4-rankId}_${enemy.Id}_${el.Level[rankId]}_${el.Grade[rankId]}`] = enemy
+                }
+            })
+
+            Object.keys(enemyList).sort().forEach(el => {
+                e_level = el.split('_')[2]
+                e_grade = el.split('_')[3]
+                html += getEnemyCardHTML(enemyList[el], e_level, stage.Terrain, e_grade)
+            })
+            $('#ba-stage-enemies').html(html)
+            $('#ba-stage-enemies > :first').trigger("click")
+        } else {
+            $('#ba-stage-enemy-list, #ba-stage-enemy-info').hide()
+        }
 
         conditionsHtml = ""
         const starIcon = `<i class="fa-solid fa-star me-2 stage-star"></i>`
@@ -6694,6 +6703,8 @@ function loadRegion(regID) {
         $('#ba-student-search-filter-school-etc').toggle(studentList.some((s) => s.IsReleased[regionID] && s.School == 'ETC'))
         $('#ba-student-search-filter-school-srt').toggle(studentList.some((s) => s.IsReleased[regionID] && s.School == 'SRT'))
         $('#ba-student-search-filter-school-arius').toggle(studentList.some((s) => s.IsReleased[regionID] && s.School == 'Arius'))
+        $('#ba-student-search-filter-school-tokiwadai').toggle(studentList.some((s) => s.IsReleased[regionID] && s.School == 'Tokiwadai'))
+        $('#ba-student-search-filter-school-sakugawa').toggle(studentList.some((s) => s.IsReleased[regionID] && s.School == 'Sakugawa'))
 
         $('#ba-student-search-filter-weapontype-rl').toggle(studentList.some((s) => s.IsReleased[regionID] && s.WeaponType == 'RL'))
         $('#ba-student-search-filter-weapontype-ft').toggle(studentList.some((s) => s.IsReleased[regionID] && s.WeaponType == 'FT'))
@@ -8577,8 +8588,8 @@ function populateItemList(tab) {
     
     function getItemGridCardCompactInnerHTML(linkid) {
         const item = find(data[loadedItemList], 'Id', linkid >= 20000000 ? linkid : linkid % 1000000)[0]
-        const name = getTranslatedString(item, "Name")
-        return `<div class="card-compact ba-item-${item.Rarity.toLowerCase()}" title="${getBasicTooltip(getTranslatedString(item, 'Name'))}"><img loading="lazy" src="images/${loadedItemList}/icon/${item.Icon}.webp"></div>`
+        const name = getTranslatedString(item, "Name").escapeHtml().replace(/"/g, '&quot;')
+        return `<div class="card-compact ba-item-${item.Rarity.toLowerCase()}" title="${getBasicTooltip(name)}"><img loading="lazy" src="images/${loadedItemList}/icon/${item.Icon}.webp"></div>`
     }
 }
 
@@ -9010,7 +9021,7 @@ function getEquipmentRecipe(item) {
 function getLikedByStudents(item) {
     let favorStudents = ["", "", ""]
     let bondGearStudentsHtml = ""
-    const genericTags = ["Gift1", "Gift2"]
+    const genericTags = ["Gift1", "Gift2", "Gift3"]
     const genericTagCount = item.Tags.filter(x => genericTags.includes(x)).length
     
     data.students.forEach((student) => {

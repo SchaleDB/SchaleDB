@@ -43,7 +43,9 @@
         "SRT": "SRT",
         "Trinity": "トリニティ",
         "Valkyrie": "ヴァルキューレ",
-        "ETC": "その他"
+        "ETC": "その他",
+        "Tokiwadai": "常盤台中学",
+        "Sakugawa": "柵川中学"
     },
     "AdaptationType": {
         "Street": "市街地",
@@ -61,7 +63,9 @@
         "SRT": "SRT特殊学園",
         "Trinity": "トリニティ総合学園",
         "Valkyrie": "ヴァルキューレ警察学校",
-        "ETC": "その他"
+        "ETC": "その他",
+        "Tokiwadai": "常盤台中学",
+        "Sakugawa": "柵川中学"
     },
     "Club": {
         "Kohshinjo68": "便利屋68",
@@ -175,7 +179,8 @@
         "10": "大運動会",
         "11": "アビドス教室",
         "12": "ゲーム開発部",
-        "13": "サンシャインリゾート"
+        "13": "サンシャインリゾート",
+        "14": "デパート"
     },
     "FurnitureSet": {
         "0": "なし",
@@ -191,7 +196,8 @@
         "109": "大運動会シリーズ",
         "110": "アビドス教室シリーズ",
         "111": "ゲーム開発部シリーズ",
-        "112": "サンシャインリゾートシリーズ"
+        "112": "サンシャインリゾートシリーズ",
+        "113": "デパートシリーズ"
     },
     "ItemCategory": {
         "Furnitures": "家具",
@@ -292,7 +298,8 @@
         "827": "夏の特殊作戦！RABBIT小隊と消えたエビの謎",
         "828": "隠されし遺産を求めて～トリニティの課外活動～",
         "829": "学漫同人物語～2人が求める最終回～",
-        "830": "Trip-Trap-Train"
+        "830": "Trip-Trap-Train",
+        "831": "とある科学の青春記録"
     },
     "StageType": {
         "Campaign": "任務",
@@ -455,6 +462,7 @@
         "Debuff_Penetration": "防御貫通値",
         "Debuff_Poison": "中毒系",
         "Debuff_Range": "通常攻撃射程",
+        "Debuff_ElectricShock": "感電",
         "Debuff_Stability": "安定値",
         "Debuff_CostRegen": "コスト回復力",
         "CC_Fear": "恐怖状態",
@@ -462,6 +470,7 @@
         "CC_Provoke": "挑発状態",
         "CC_Paralysis": "麻痺状態",
         "CC_Emp": "EMP",
+        "CC_Confusion": "混乱",
         "Special_EnergyBatteryHalf": "エネルギー",
         "Special_FormChange": "通常攻撃",
         "Special_Immortal": "不死身状態",
@@ -563,6 +572,7 @@
         "Debuff_Penetration": "防御貫通値減少",
         "Debuff_Poison": "中毒状態",
         "Debuff_Range": "通常攻撃射程減少",
+        "Debuff_ElectricShock": "感電",
         "Debuff_Stability": "安定値減少",
         "Debuff_CostRegen": "コスト回復力減少",
         "CC_Fear": "恐怖状態",
@@ -570,6 +580,7 @@
         "CC_Provoke": "挑発状態",
         "CC_Paralysis": "麻痺状態",
         "CC_Emp": "EMP",
+        "CC_Confusion": "混乱",
         "Special_EnergyBatteryHalf": "エネルギーチャージ",
         "Special_FormChange": "通常攻撃強化",
         "Special_Immortal": "不死身状態",
@@ -672,12 +683,14 @@
         "Debuff_Penetration": "攻撃時に無視される敵の防御力の量が減少する。",
         "Debuff_Poison": "一定間隔で中毒ダメージを受ける。このダメージでは会心は発生しない。",
         "Debuff_Range": "通常攻撃を行える距離が減少する。",
+        "Debuff_ElectricShock": "Continuously receives Electric Shock damage at set intervals. This damage cannot critically hit.",
         "Debuff_Stability": "乱数による与ダメージの下限が低下する。",
         "CC_Fear": "行為不能になり恐怖を付与してきた対象からゆっくりと遠ざかる。発生中のスキルも妨害される。",
         "CC_Stunned": "行為不能になり発生中のスキルが妨害される。",
         "CC_Provoke": "挑発状態を付与してきた対象を強制的に攻撃する。発生中のスキルも妨害される。",
         "CC_Paralysis": "行為不能になり発生中のスキルが妨害される。",
         "CC_Emp": "行為不能になり発生中のスキルが妨害される。",
+        "CC_Confusion": "Attacks allies instead of enemies. Also interrupts any active skills.",
         "Special_EnergyBatteryHalf": "アリスのEXスキルとサブスキルの効果を1.5倍（1段階チャージ時）または2倍（2段階チャージ時）に増加する。EXスキルを使用すると初期化される。",
         "Special_FormChange": "通常攻撃を強化する。",
         "Special_Immortal": "効果時間中は致死ダメージを受けても倒されずに持ちこたえる。",
@@ -780,6 +793,7 @@
         "UIEventBoxGachaShopEnter": "報酬交換入場{0}",
         "UIEventBoxGachaShopIdle": "報酬交換一般{0}",
         "UIEventBoxGachaShopBoxGachaPrize": "報酬当選{0}",
+        "UIEventBoxGachaShopBoxGachaFinish": "Prize Exchange Ended {0}",
         "UIEventMissionEnter": "イベントミッション入場{0}",
         "UIEventMissionIdle": "イベントミッション一般{0}",
         "UIEventMissionBuy": "イベントミッション完了{0}",

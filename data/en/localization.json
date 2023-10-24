@@ -43,7 +43,9 @@
         "SRT": "SRT",
         "Trinity": "Trinity",
         "Valkyrie": "Valkyrie",
-        "ETC": "Etc."
+        "ETC": "Etc.",
+        "Tokiwadai": "Tokiwadai",
+        "Sakugawa": "Sakugawa"
     },
     "AdaptationType": {
         "Street": "Street",
@@ -61,7 +63,9 @@
         "SRT": "SRT Special Academy",
         "Trinity": "Trinity General School",
         "Valkyrie": "Valkyrie Police School",
-        "ETC": "Etc."
+        "ETC": "Etc.",
+        "Tokiwadai": "Tokiwadai Middle School",
+        "Sakugawa": "Sakugawa Middle School"
     },
     "Club": {
         "Kohshinjo68": "Problem Solver 68",
@@ -166,8 +170,8 @@
         "1": "Momo Friends Cafe",
         "2": "Jellies Arcade",
         "3": "Valentine",
-        "4": "Summer Resort",
-        "5": "Jack-O-Lantern",
+        "4": "Summer Pool Party",
+        "5": "Jack-O-Lantern Cafe",
         "6": "Hot Springs Resort",
         "7": "New Year House",
         "8": "Military Campground",
@@ -175,7 +179,8 @@
         "10": "Field Day",
         "11": "Abydos Classroom",
         "12": "Game Development Department",
-        "13": "Sunshine Resort"
+        "13": "Sunshine Resort",
+        "14": "Department Store"
     },
     "FurnitureSet": {
         "0": "None",
@@ -191,7 +196,8 @@
         "109": "Field Day Set",
         "110": "Abydos Classroom Set",
         "111": "Game Development Department Set",
-        "112": "Sunshine Resort Set"
+        "112": "Sunshine Resort Set",
+        "113": "Department Store Set"
     },
     "ItemCategory": {
         "Furnitures": "Furniture",
@@ -287,12 +293,13 @@
         "822": "The Ark of Atrahasis Conquest",
         "823": "Phrenapates Showdown",
         "824": "Restoration Project: D.U. Shiratori City",
-        "825": "Chalk White Calling Card: The Mansion of Empty Aesthetics",
-        "826": "Ryubu Doushu: Vision of a Lone Future",
-        "827": "RABBIT Squad and The Mystery of the Missing Shrimp",
+        "825": "Alabaster Calling Card ~Mansion Masquerade and the Essence of Beauty~",
+        "826": "Dragon & Tortoise, Working Together for a Better Future",
+        "827": "Special Summer Mission! RABBIT Squad and the Mystery of the Missing Shrimp",
         "828": "In Search of a Hidden Heritage",
         "829": "Gakuman Doujin Monogatari: Two Seeking the Final Episode",
-        "830": "Trip Trap Train"
+        "830": "Trip Trap Train",
+        "831": "A Certain Scientific Youth Record"
     },
     "StageType": {
         "Campaign": "Missions",
@@ -455,6 +462,7 @@
         "Debuff_Penetration": "Defense Piercing",
         "Debuff_Poison": "Poison",
         "Debuff_Range": "Normal Atk. Range",
+        "Debuff_ElectricShock": "Shock",
         "Debuff_Stability": "Stability",
         "Debuff_CostRegen": "Cost Recovery",
         "CC_Fear": "Fear",
@@ -462,6 +470,7 @@
         "CC_Provoke": "Taunt",
         "CC_Paralysis": "Paralysis",
         "CC_Emp": "EMP",
+        "CC_Confusion": "Confusion",
         "Special_EnergyBatteryHalf": "Energy",
         "Special_FormChange": "Normal Attack",
         "Special_Immortal": "Invincible",
@@ -563,6 +572,7 @@
         "Debuff_Penetration": "Defense Piercing Down",
         "Debuff_Poison": "Poison",
         "Debuff_Range": "Normal Atk. Range Down",
+        "Debuff_ElectricShock": "Electric Shock",
         "Debuff_Stability": "Stability Down",
         "Debuff_CostRegen": "Cost Recovery Down",
         "CC_Fear": "Fear",
@@ -570,6 +580,7 @@
         "CC_Provoke": "Taunt",
         "CC_Paralysis": "Paralysis",
         "CC_Emp": "EMP",
+        "CC_Confusion": "Confusion",
         "Special_EnergyBatteryHalf": "Energy Charge",
         "Special_FormChange": "Form Change",
         "Special_Immortal": "Invincible",
@@ -672,12 +683,14 @@
         "Debuff_Penetration": "Decreases the amount of enemy defense that will be ignored by attacks.",
         "Debuff_Poison": "Continuously receives poison damage at set intervals. This damage cannot critically hit.",
         "Debuff_Range": "Decreases the distance from which Normal Attacks can be performed.",
+        "Debuff_ElectricShock": "Continuously receives Electric Shock damage at set intervals. This damage cannot critically hit.",
         "Debuff_Stability": "Decreases the minimum damage dealt by attacks due to random damage variance.",
         "CC_Fear": "Unable to act and will slowly move away from whoever inflicted fear on them. Also interrupts any active skills.",
         "CC_Stunned": "Unable to act and interrupts any active skills.",
         "CC_Provoke": "Forced to attack whoever inflicted taunt on them. Also interrupts any active skills.",
         "CC_Paralysis": "Unable to act and interrupts any active skills.",
         "CC_Emp": "Unable to act and interrupts any active skills.",
+        "CC_Confusion": "Attacks allies instead of enemies. Also interrupts any active skills.",
         "Special_EnergyBatteryHalf": "Increases the effectiveness of Aris's EX and Sub skills by 1.5&times; (half) or 2&times; (full).\nCharge level resets to empty after EX skill use.",
         "Special_FormChange": "Augments Normal Attacks.",
         "Special_Immortal": "Able to withstand most attacks without being defeated for the duration of the effect.",
@@ -780,6 +793,7 @@
         "UIEventBoxGachaShopEnter": "Prize Exchange Entry {0}",
         "UIEventBoxGachaShopIdle": "Prize Exchange Idle {0}",
         "UIEventBoxGachaShopBoxGachaPrize": "Prize Exchange Win {0}",
+        "UIEventBoxGachaShopBoxGachaFinish": "Prize Exchange Ended {0}",
         "UIEventMissionEnter": "Event Mission Entry {0}",
         "UIEventMissionIdle": "Event Mission Idle {0}",
         "UIEventMissionBuy": "Event Mission Completion {0}",

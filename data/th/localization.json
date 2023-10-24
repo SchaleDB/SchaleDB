@@ -43,7 +43,9 @@
         "SRT": "SRT",
         "Trinity": "ทรีนิตี้",
         "Valkyrie": "วัลคิรี่",
-        "ETC": "อื่นๆ"
+        "ETC": "อื่นๆ",
+        "Tokiwadai": "Tokiwadai",
+        "Sakugawa": "Sakugawa"
     },
     "AdaptationType": {
         "Street": "เขตเมือง",
@@ -61,7 +63,9 @@
         "SRT": "สถาบันพิเศษ SRT",
         "Trinity": "โรงเรียนสามัญทรีนิตี้",
         "Valkyrie": "สถาบันฝึกตำรวจวัลคิรี่",
-        "ETC": "อื่นๆ"
+        "ETC": "อื่นๆ",
+        "Tokiwadai": "Tokiwadai Middle School",
+        "Sakugawa": "Sakugawa Middle School"
     },
     "Club": {
         "Kohshinjo68": "หน่วยรับจ้างสารพัด 68",
@@ -175,7 +179,8 @@
         "10": "งานแข่งขันกีฬา",
         "11": "ห้องเรียนอะบิดอส",
         "12": "ชมรมพัฒนาเกม",
-        "13": "Sunshine Resort"
+        "13": "Sunshine Resort",
+        "14": "Department Store"
     },
     "FurnitureSet": {
         "0": "ไม่มี",
@@ -191,7 +196,8 @@
         "109": "เซ็ตงานแข่งขันกีฬา",
         "110": "เซ็ตห้องเรียนอะบิดอส",
         "111": "เซ็ตชมรมพัฒนาเกม",
-        "112": "Sunshine Resort Set"
+        "112": "Sunshine Resort Set",
+        "113": "Department Store Set"
     },
     "ItemCategory": {
         "Furnitures": "เฟอร์นิเจอร์",
@@ -292,7 +298,8 @@
         "827": "ปฏิบัติการพิเศษ! การไล่ล่าของกระต่าย และเรื่องเร้นลับของกุ้งที่หายไป",
         "828": "In Search of a Hidden Heritage",
         "829": "Gakuman Doujin Monogatari: Two Seeking the Final Episode",
-        "830": "Trip Trap Train"
+        "830": "Trip Trap Train",
+        "831": "A Certain Scientific Youth Record"
     },
     "StageType": {
         "Campaign": "ภารกิจ",
@@ -455,6 +462,7 @@
         "Debuff_Penetration": "ค่าเจาะเกราะ",
         "Debuff_Poison": "พิษ",
         "Debuff_Range": "ระยะโจมตีทั่วไป",
+        "Debuff_ElectricShock": "Shock",
         "Debuff_Stability": "ค่าความเสถียร",
         "Debuff_CostRegen": "ค่าฟื้นฟู Cost",
         "CC_Fear": "กลัว",
@@ -462,6 +470,7 @@
         "CC_Provoke": "ยั่วยุ",
         "CC_Paralysis": "อัมพาต",
         "CC_Emp": "EMP",
+        "CC_Confusion": "Confusion",
         "Special_EnergyBatteryHalf": "ชาร์จ",
         "Special_FormChange": "โจมตีทั่วไป",
         "Special_Immortal": "เป็นอมตะ",
@@ -563,6 +572,7 @@
         "Debuff_Penetration": "ค่าเจาะเกราะลดลง",
         "Debuff_Poison": "พิษ",
         "Debuff_Range": "ระยะโจมตีลดลง",
+        "Debuff_ElectricShock": "Electric Shock",
         "Debuff_Stability": "ค่าความเสถียรลดลง",
         "Debuff_CostRegen": "ค่าฟื้นฟู Cost ลดลง",
         "CC_Fear": "กลัว",
@@ -570,6 +580,7 @@
         "CC_Provoke": "ยั่วยุ",
         "CC_Paralysis": "อัมพาต",
         "CC_Emp": "EMP",
+        "CC_Confusion": "Confusion",
         "Special_EnergyBatteryHalf": "ชาร์จ",
         "Special_FormChange": "เปลี่ยนรูปแบบการโจมตี",
         "Special_Immortal": "อมตะ",
@@ -672,12 +683,14 @@
         "Debuff_Penetration": "ลดจำนวนค่าป้องกันที่จะไม่สนใจในการโจมตี",
         "Debuff_Poison": "ได้รับความเสียหายพิษต่อเนื่อง<br>ความเสียหายนี้ไม่สามารถติดคริติคอลได้",
         "Debuff_Range": "ลดระยะในการโจมตีทั่วไป",
+        "Debuff_ElectricShock": "Continuously receives Electric Shock damage at set intervals. This damage cannot critically hit.",
         "Debuff_Stability": "ลดความเสียหายขั้นต่ำที่สามารถทำได้ในการโจมตี",
         "CC_Fear": "ไม่สามารถตอบสนองได้และจะค่อยๆ เคลื่อนที่ออกจากคนที่ส่งผลเอฟเฟกต์กลัว นอกจากนี้การใช้งานสกิลทั้งหมดจะถูกยกเลิก",
         "CC_Stunned": "ไม่สามารถตอบสนองได้ นอกจากนี้การใช้งานสกิลทั้งหมดจะถูกยกเลิก",
         "CC_Provoke": "ถูกบังคับให้โจมตีใส่คนที่ส่งผลเอฟเฟกต์ยั่วยุ นอกจากนี้การใช้งานสกิลทั้งหมดจะถูกยกเลิก",
         "CC_Paralysis": "ไม่สามารถตอบสนองได้ นอกจากนี้การใช้งานสกิลทั้งหมดจะถูกยกเลิก",
         "CC_Emp": "ไม่สามารถตอบสนองได้ นอกจากนี้การใช้งานสกิลทั้งหมดจะถูกยกเลิก",
+        "CC_Confusion": "Attacks allies instead of enemies. Also interrupts any active skills.",
         "Special_EnergyBatteryHalf": "เพิ่มประสิทธิภาพสกิล EX และสกิลรองของอาริสึขึ้น 1.5 เท่า (ครึ่งหนึ่ง) หรือ 2 เท่า (เต็ม)\nระดับการชาร์จจะถูกรีเซ็ทเป็น 0 หลังการใช้งานสกิล EX",
         "Special_FormChange": "เปลี่ยนรูปแบบของการโจมตีทั่วไป",
         "Special_Immortal": "HP จะไม่ลดลงไปต่ำกว่า 1 จนกว่าระยะเวลาของเอฟเฟกต์จะหมดลงหรือได้รับความเสียหายพิเศษที่ไม่สนใจเอฟเฟกต์นี้",
@@ -780,6 +793,7 @@
         "UIEventBoxGachaShopEnter": "เข้าหน้าแลกรางวัลอีเวนท์ {0}",
         "UIEventBoxGachaShopIdle": "หน้าแลกรางวัลอีเวนท์ {0}",
         "UIEventBoxGachaShopBoxGachaPrize": "ได้รับรางวัลหลักจากกล่องแลกรางวัลอีเวนท์ {0}",
+        "UIEventBoxGachaShopBoxGachaFinish": "Prize Exchange Ended {0}",
         "UIEventMissionEnter": "เข้าหน้าภารกิจอีเวนท์ {0}",
         "UIEventMissionIdle": "หน้าภารกิจอีเวนท์ {0}",
         "UIEventMissionBuy": "รับรางวัลภารกิจอีเวนท์ {0}",

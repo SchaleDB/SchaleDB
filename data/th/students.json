@@ -32,7 +32,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "ริคุฮาชิมะ",
-        "FamilyNameRuby": "",
         "PersonalName": "อารุ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -709,7 +708,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "อิซุมิโมโตะ",
-        "FamilyNameRuby": "",
         "PersonalName": "เอมิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -1325,7 +1323,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "คุโรดาเตะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮารุนะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -1854,7 +1851,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "อะจิทานิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮิฟุมิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -2419,7 +2415,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "โซระซากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮินะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -2948,7 +2943,6 @@
         ],
         "CollectionBG": "BG_Abydos_Collection",
         "FamilyName": "ทาคานาชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "โฮชิโนะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -3519,7 +3513,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "ชิโรมิ",
-        "FamilyNameRuby": "",
         "PersonalName": "อิโอริ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -4033,7 +4026,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "โคนูริ",
-        "FamilyNameRuby": "",
         "PersonalName": "มากิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -4586,7 +4578,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "มิคาโมะ",
-        "FamilyNameRuby": "",
         "PersonalName": "เนรุ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -5367,7 +5358,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "ชิชิโทอุ",
-        "FamilyNameRuby": "",
         "PersonalName": "อิซุมิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -6023,7 +6013,6 @@
         ],
         "CollectionBG": "BG_Abydos_Collection",
         "FamilyName": "สึนาโอกามิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชิโรโกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -6635,7 +6624,6 @@
         ],
         "CollectionBG": "BG_Sanhaijing_Collection",
         "FamilyName": "สึโนฮาระ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชุน",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "ลับสุดยอด",
@@ -7187,7 +7175,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "โอโทฮานะ",
-        "FamilyNameRuby": "",
         "PersonalName": "สึมิเระ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -7346,6 +7333,79 @@
                         ],
                         "Stat": "AttackPower_Coefficient",
                         "Channel": 2
+                    }
+                ]
+            },
+            {
+                "SkillType": "gearnormal",
+                "Name": "ウォーミングアップ+",
+                "Desc": "40秒毎に、<b:ATK>を<?1>増加（20秒間）/\n<b:DEF>を<?2>増加（20秒間）",
+                "Parameters": [
+                    [
+                        "27.5%",
+                        "28.9%",
+                        "30.2%",
+                        "35.7%",
+                        "37.1%",
+                        "38.5%",
+                        "44%",
+                        "45.4%",
+                        "46.7%",
+                        "52.2%"
+                    ],
+                    [
+                        "11%",
+                        "11.5%",
+                        "12.1%",
+                        "14.3%",
+                        "14.8%",
+                        "15.4%",
+                        "17.6%",
+                        "18.1%",
+                        "18.7%",
+                        "20.9%"
+                    ]
+                ],
+                "Duration": 65,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2752,
+                                2890,
+                                3027,
+                                3578,
+                                3715,
+                                3853,
+                                4403,
+                                4541,
+                                4679,
+                                5229
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1102,
+                                1156,
+                                1211,
+                                1432,
+                                1487,
+                                1542,
+                                1762,
+                                1817,
+                                1872,
+                                2092
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 3
                     }
                 ]
             },
@@ -7545,7 +7605,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base"
+            ],
+            "StatValue": [
+                [
+                    1000,
+                    1000
+                ]
+            ],
+            "Name": "トレーニング用砂袋",
+            "Desc": "腕や足に巻けるよう作られた砂袋。中には鉄粉も含まれているので、意外と重い。",
+            "TierUpMaterial": [
+                [
+                    5016,
+                    170,
+                    171
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3050,
@@ -7708,7 +7799,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "เคนซากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ซึรุกิ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -8359,7 +8449,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "มุโรคาสะ",
-        "FamilyNameRuby": "",
         "PersonalName": "อาคาเนะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -8893,7 +8982,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "วาราคุ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชิเซะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -9431,7 +9519,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "วานิบูชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "อาคาริ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -9943,7 +10030,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "ฮาเนกาวะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮาสุมิ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -10449,7 +10535,6 @@
         ],
         "CollectionBG": "BG_Abydos_Collection",
         "FamilyName": "อิซาโยอิ",
-        "FamilyNameRuby": "",
         "PersonalName": "โนโนมิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -10978,7 +11063,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "โอนิคาตะ",
-        "FamilyNameRuby": "",
         "PersonalName": "คาโยโกะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "18 ปี",
@@ -11531,7 +11615,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "อาซากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "มุสึกิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -12061,7 +12144,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "อาคาชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "จุนโกะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -12635,7 +12717,6 @@
         ],
         "CollectionBG": "BG_Abydos_Collection",
         "FamilyName": "คุโรมิ",
-        "FamilyNameRuby": "",
         "PersonalName": "เซริกะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -13256,7 +13337,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "คาซึกะ",
-        "FamilyNameRuby": "",
         "PersonalName": "สึบากิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -13775,7 +13855,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "ฮายาเสะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ยูกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -14413,7 +14492,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "อิคุสะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮารุกะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -14950,7 +15028,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "อิชิโนเสะ",
-        "FamilyNameRuby": "",
         "PersonalName": "อาสึนะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -15499,7 +15576,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "โทโยมิ",
-        "FamilyNameRuby": "",
         "PersonalName": "โคโทริ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -16043,7 +16119,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "โมริซึกิ",
-        "FamilyNameRuby": "",
         "PersonalName": "สึซึมิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -16693,7 +16768,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "อาซาฮินะ",
-        "FamilyNameRuby": "",
         "PersonalName": "พีน่า",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "17 ปี",
@@ -17238,7 +17312,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "เนโกสึกะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮิบิกิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -17738,7 +17811,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "คาคุดาเตะ",
-        "FamilyNameRuby": "",
         "PersonalName": "คาริน",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -18264,7 +18336,6 @@
         ],
         "CollectionBG": "BG_Sanhaijing_Collection",
         "FamilyName": "ยาคูชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ซายะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -18792,7 +18863,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "คุริมูระ",
-        "FamilyNameRuby": "",
         "PersonalName": "ไอริ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -19339,7 +19409,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "ไอกิโยะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฟูกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -19828,7 +19897,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "อาซากาโอะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮานาเอะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -20312,7 +20380,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "โอมาการิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮาเระ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -20941,7 +21008,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "ชิราอิชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "อุทาฮะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -21440,7 +21506,6 @@
         ],
         "CollectionBG": "BG_Abydos_Collection",
         "FamilyName": "โอคุโซระ",
-        "FamilyNameRuby": "",
         "PersonalName": "อายาเนะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -21944,7 +22009,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "ฮิโนมิยะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชินัตสึ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -22440,7 +22504,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "โอโทเซะ",
-        "FamilyNameRuby": "",
         "PersonalName": "โคทามะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -22947,7 +23010,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "อุชิมากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "จูริ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -23437,7 +23499,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "สึมิ",
-        "FamilyNameRuby": "",
         "PersonalName": "เซรินะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -23941,7 +24002,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "เอ็นโดะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชิมิโกะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -24439,7 +24499,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "อิบารากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "โยชิมิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -24973,7 +25032,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "ชิสึยามะ",
-        "FamilyNameRuby": "",
         "PersonalName": "มาชิโระ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -25500,7 +25558,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "คุดะ",
-        "FamilyNameRuby": "",
         "PersonalName": "อิซุนะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -26043,7 +26100,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "คาวาวะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชิซุโกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -26585,7 +26641,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "เทนโด",
-        "FamilyNameRuby": "",
         "PersonalName": "อาริสึ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "?? ปี",
@@ -27191,7 +27246,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "ไซบะ",
-        "FamilyNameRuby": "",
         "PersonalName": "มิโดริ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -27768,7 +27822,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "ไซบะ",
-        "FamilyNameRuby": "",
         "PersonalName": "โมโมอิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -28345,7 +28398,6 @@
         ],
         "CollectionBG": "BG_Redwinter_Collection",
         "FamilyName": "เรนคาวะ",
-        "FamilyNameRuby": "",
         "PersonalName": "เชริโน่",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "?? ปี",
@@ -28913,7 +28965,6 @@
         ],
         "CollectionBG": "BG_Redwinter_Collection",
         "FamilyName": "อามามิ",
-        "FamilyNameRuby": "",
         "PersonalName": "โนโดกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -29434,7 +29485,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "ฮานาโอกะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ยูสึ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "16 ปี",
@@ -29961,7 +30011,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "ชิราสึ",
-        "FamilyNameRuby": "",
         "PersonalName": "อาซึสะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -30510,7 +30559,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "อุราวะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮานาโกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -30641,6 +30689,76 @@
                         ],
                         "Stat": "DefensePower_Coefficient",
                         "Channel": 103
+                    }
+                ]
+            },
+            {
+                "SkillType": "gearnormal",
+                "Name": "固くなあれ♪+",
+                "Desc": "20秒毎に、HPが最も低い味方2人の<b:DEF>を<?1>増加（13秒間）/\n治癒力の<?2>分の回復",
+                "Parameters": [
+                    [
+                        "29%",
+                        "30.5%",
+                        "31.9%",
+                        "37.8%",
+                        "39.2%",
+                        "40.7%",
+                        "46.5%",
+                        "47.9%",
+                        "49.4%",
+                        "55.2%"
+                    ],
+                    [
+                        "16.7%",
+                        "17.6%",
+                        "18.4%",
+                        "21.7%",
+                        "22.6%",
+                        "23.4%",
+                        "26.8%",
+                        "27.6%",
+                        "28.4%",
+                        "31.8%"
+                    ]
+                ],
+                "Duration": 90,
+                "Range": 1000,
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                2909,
+                                3054,
+                                3199,
+                                3781,
+                                3927,
+                                4072,
+                                4653,
+                                4799,
+                                4945,
+                                5526
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 103
+                    },
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            1675,
+                            1760,
+                            1843,
+                            2178,
+                            2260,
+                            2345,
+                            2680,
+                            2763,
+                            2848,
+                            3183
+                        ]
                     }
                 ]
             },
@@ -30844,7 +30962,38 @@
             "HealPower100": 2522,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "HealPower_Base"
+            ],
+            "StatValue": [
+                [
+                    500,
+                    500
+                ]
+            ],
+            "Name": "怪しげな文学書",
+            "Desc": "色々と意味深なハナコの愛蔵書。よく没収されているが、ハナコはそのたび、様々な方法で取り戻している。",
+            "TierUpMaterial": [
+                [
+                    5003,
+                    170,
+                    171
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3020,
@@ -31007,7 +31156,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "ชิโมเอะ",
-        "FamilyNameRuby": "",
         "PersonalName": "โคฮารุ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -31544,7 +31692,6 @@
         ],
         "CollectionBG": "BG_Swimsuit_Collection",
         "FamilyName": "ชิราสึ",
-        "FamilyNameRuby": "",
         "PersonalName": "อาซึสะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -32093,7 +32240,6 @@
         ],
         "CollectionBG": "BG_Swimsuit_Collection",
         "FamilyName": "ชิสึยามะ",
-        "FamilyNameRuby": "",
         "PersonalName": "มาชิโระ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -32620,7 +32766,6 @@
         ],
         "CollectionBG": "BG_Swimsuit_Collection",
         "FamilyName": "เคนซากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ซึรุกิ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -33184,7 +33329,6 @@
         ],
         "CollectionBG": "BG_Swimsuit_Collection",
         "FamilyName": "อะจิทานิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮิฟุมิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -33772,7 +33916,6 @@
         ],
         "CollectionBG": "BG_Swimsuit_Collection",
         "FamilyName": "โซระซากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮินะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -34454,7 +34597,6 @@
         ],
         "CollectionBG": "BG_Swimsuit_Collection",
         "FamilyName": "ชิโรมิ",
-        "FamilyNameRuby": "",
         "PersonalName": "อิโอริ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -35001,7 +35143,6 @@
         ],
         "CollectionBG": "BG_Swimsuit_Collection",
         "FamilyName": "ชิชิโทอุ",
-        "FamilyNameRuby": "",
         "PersonalName": "อิซุมิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -35177,6 +35318,48 @@
                                 3338,
                                 3439,
                                 3843
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
+                "SkillType": "gearnormal",
+                "Name": "甘酸っぱくて美味しい！+",
+                "Desc": "35秒毎に、<b:ATK>を<?1>増加（30秒間）",
+                "Parameters": [
+                    [
+                        "31.7%",
+                        "33.3%",
+                        "34.8%",
+                        "41.2%",
+                        "42.8%",
+                        "44.4%",
+                        "50.7%",
+                        "52.3%",
+                        "53.9%",
+                        "60.2%"
+                    ]
+                ],
+                "Duration": 75,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3172,
+                                3331,
+                                3489,
+                                4124,
+                                4282,
+                                4441,
+                                5075,
+                                5234,
+                                5393,
+                                6027
                             ]
                         ],
                         "Stat": "AttackPower_Coefficient",
@@ -35383,7 +35566,43 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "AttackSpeed_Base",
+                "AttackPower_Base"
+            ],
+            "StatValue": [
+                [
+                    1500,
+                    1500
+                ],
+                [
+                    300,
+                    300
+                ]
+            ],
+            "Name": "真夏のクーラーボックス",
+            "Desc": "真夏のクーラーボックス。フルーツやドリンク……イズミ特製・秘伝スパイスがたっぷり入っているという。",
+            "TierUpMaterial": [
+                [
+                    5013,
+                    140,
+                    141
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3030,
@@ -35546,7 +35765,6 @@
         ],
         "CollectionBG": "BG_Ridingsuit_Collection",
         "FamilyName": "สึนาโอกามิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชิโรโกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -36116,7 +36334,6 @@
         ],
         "CollectionBG": "BG_CH0066_Collection",
         "FamilyName": "สึโนฮาระ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชุน",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "ลับสุดยอด",
@@ -36751,7 +36968,6 @@
         ],
         "CollectionBG": "BG_Valkyrie_Collection",
         "FamilyName": "นาคาสึคาสะ",
-        "FamilyNameRuby": "",
         "PersonalName": "คิริโนะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -37322,7 +37538,6 @@
         ],
         "CollectionBG": "BG_Saya_casual_Collection",
         "FamilyName": "ยาคูชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ซายะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -37950,7 +38165,6 @@
         ],
         "CollectionBG": "BG_BunnyGirl_Collection",
         "FamilyName": "มิคาโมะ",
-        "FamilyNameRuby": "",
         "PersonalName": "เนรุ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -38571,7 +38785,6 @@
         ],
         "CollectionBG": "BG_BunnyGirl_Collection",
         "FamilyName": "คาคุดาเตะ",
-        "FamilyNameRuby": "",
         "PersonalName": "คาริน",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -39146,7 +39359,6 @@
         ],
         "CollectionBG": "BG_BunnyGirl_Collection",
         "FamilyName": "อิชิโนเสะ",
-        "FamilyNameRuby": "",
         "PersonalName": "อาสึนะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -39786,7 +39998,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "ยูโทริ",
-        "FamilyNameRuby": "",
         "PersonalName": "นัตสึ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -40312,7 +40523,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "อิโอจิ",
-        "FamilyNameRuby": "",
         "PersonalName": "มารี",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -40816,7 +41026,6 @@
         ],
         "CollectionBG": "BG_CH9999_Collection",
         "FamilyName": "ฮัตสึเนะ",
-        "FamilyNameRuby": "",
         "PersonalName": "มิกุ",
         "SchoolYear": "",
         "CharacterAge": "16 ปี",
@@ -41361,7 +41570,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "อามาอุ",
-        "FamilyNameRuby": "",
         "PersonalName": "อาโกะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -41900,7 +42108,6 @@
         ],
         "CollectionBG": "BG_Onsen_Collection",
         "FamilyName": "เรนคาวะ",
-        "FamilyNameRuby": "",
         "PersonalName": "เชริโน่",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "?? ปี",
@@ -42520,7 +42727,6 @@
         ],
         "CollectionBG": "BG_Onsen_Collection",
         "FamilyName": "ฮิโนมิยะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชินัตสึ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -43051,7 +43257,6 @@
         ],
         "CollectionBG": "BG_Redwinter_Collection",
         "FamilyName": "ซาชิโระ",
-        "FamilyNameRuby": "",
         "PersonalName": "โทโมเอะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -43657,7 +43862,6 @@
         ],
         "CollectionBG": "BG_Onsen_Collection",
         "FamilyName": "อามามิ",
-        "FamilyNameRuby": "",
         "PersonalName": "โนโดกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -44165,7 +44369,6 @@
         ],
         "CollectionBG": "BG_Newyear_Collection",
         "FamilyName": "ริคุฮาชิมะ",
-        "FamilyNameRuby": "",
         "PersonalName": "อารุ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -44729,7 +44932,6 @@
         ],
         "CollectionBG": "BG_Newyear_Collection",
         "FamilyName": "อาซากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "มุสึกิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -45336,7 +45538,6 @@
         ],
         "CollectionBG": "BG_Newyear_Collection",
         "FamilyName": "คุโรมิ",
-        "FamilyNameRuby": "",
         "PersonalName": "เซริกะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -45887,7 +46088,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "โคซากะ",
-        "FamilyNameRuby": "",
         "PersonalName": "วาคาโมะ",
         "SchoolYear": "พักการเรียน",
         "CharacterAge": "18 ปี",
@@ -46511,7 +46711,6 @@
         ],
         "CollectionBG": "BG_Valkyrie_Collection",
         "FamilyName": "เนมุคากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฟุบุกิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -47079,7 +47278,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "ฮิมูโระ",
-        "FamilyNameRuby": "",
         "PersonalName": "เซนะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -47604,7 +47802,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "คากามิ",
-        "FamilyNameRuby": "",
         "PersonalName": "จิฮิโระ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -48115,7 +48312,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "มิซุฮะ",
-        "FamilyNameRuby": "",
         "PersonalName": "มิโมริ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -48777,7 +48973,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "โคเซกิ",
-        "FamilyNameRuby": "",
         "PersonalName": "อุย",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -49312,7 +49507,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "วาคาบะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮินาตะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -49963,7 +50157,6 @@
         ],
         "CollectionBG": "BG_Redwinter_Collection",
         "FamilyName": "อิเคะคุระ",
-        "FamilyNameRuby": "",
         "PersonalName": "มารินะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -50537,7 +50730,6 @@
         ],
         "CollectionBG": "BG_SRT_Collection",
         "FamilyName": "สึคิยูกิ",
-        "FamilyNameRuby": "",
         "PersonalName": "มิยาโกะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -50717,6 +50909,85 @@
                             14318,
                             16003
                         ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "gearnormal",
+                "Name": "クレイモア＋",
+                "Desc": "40秒毎に、小型クレイモアから5つの破片が飛散し、それぞれ攻撃力の<?1>分のダメージ/\n<d:OppressionResist>を<?2>減少（30秒間）",
+                "Parameters": [
+                    [
+                        "92%",
+                        "96%",
+                        "101%",
+                        "119%",
+                        "124%",
+                        "129%",
+                        "147%",
+                        "152%",
+                        "156%",
+                        "174%"
+                    ],
+                    [
+                        "8.6%",
+                        "9%",
+                        "9.5%",
+                        "11.2%",
+                        "11.6%",
+                        "12%",
+                        "13.8%",
+                        "14.2%",
+                        "14.6%",
+                        "16.4%"
+                    ]
+                ],
+                "Duration": 90,
+                "Range": 350,
+                "Icon": "COMMON_SKILLICON_FAN",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            9189,
+                            9649,
+                            10108,
+                            11946,
+                            12404,
+                            12863,
+                            14701,
+                            15161,
+                            15620,
+                            17458
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -864,
+                                -907,
+                                -950,
+                                -1123,
+                                -1166,
+                                -1209,
+                                -1382,
+                                -1425,
+                                -1468,
+                                -1641
+                            ]
+                        ],
+                        "Stat": "OppressionResist_Coefficient",
+                        "Channel": 629
                     }
                 ]
             },
@@ -50930,7 +51201,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "MaxHP_Base"
+            ],
+            "StatValue": [
+                [
+                    10000,
+                    10000
+                ]
+            ],
+            "Name": "ぼろぼろの名札",
+            "Desc": "ミヤコが訓練生時代に使っていた、ぼろぼろの名札。一見ただの布切れのようにも見えるが、ミヤコにとっては過去の夢が詰まった大切なものだ。",
+            "TierUpMaterial": [
+                [
+                    5009,
+                    170,
+                    171
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3080,
@@ -51093,7 +51395,6 @@
         ],
         "CollectionBG": "BG_SRT_Collection",
         "FamilyName": "โซราอิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ซากิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -51663,7 +51964,6 @@
         ],
         "CollectionBG": "BG_SRT_Collection",
         "FamilyName": "คาซุมิซาวะ",
-        "FamilyNameRuby": "",
         "PersonalName": "มิยุ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -52178,7 +52478,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "อิซามิ",
-        "FamilyNameRuby": "",
         "PersonalName": "คาเอเดะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -52693,7 +52992,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "นัตสึเมะ",
-        "FamilyNameRuby": "",
         "PersonalName": "อิโรฮะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -53189,7 +53487,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "จิโดริ",
-        "FamilyNameRuby": "",
         "PersonalName": "มิจิรุ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -53793,7 +54090,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "โอโนะ",
-        "FamilyNameRuby": "",
         "PersonalName": "สึคุโยะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -54377,7 +54673,6 @@
         ],
         "CollectionBG": "BG_Arius_Collection",
         "FamilyName": "อิมาชิโนะ",
-        "FamilyNameRuby": "",
         "PersonalName": "มิซากิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -54979,7 +55274,6 @@
         ],
         "CollectionBG": "BG_Arius_Collection",
         "FamilyName": "สึจินากะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮิโยริ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -55560,7 +55854,6 @@
         ],
         "CollectionBG": "BG_Arius_Collection",
         "FamilyName": "ฮาคาริ",
-        "FamilyNameRuby": "",
         "PersonalName": "อาสึโกะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -56088,7 +56381,6 @@
         ],
         "CollectionBG": "BG_Swimsuit02_Collection",
         "FamilyName": "โคซากะ",
-        "FamilyNameRuby": "",
         "PersonalName": "วาคาโมะ",
         "SchoolYear": "พักการเรียน",
         "CharacterAge": "18 ปี",
@@ -56752,7 +57044,6 @@
         ],
         "CollectionBG": "BG_Swimsuit02_Collection",
         "FamilyName": "อิซาโยอิ",
-        "FamilyNameRuby": "",
         "PersonalName": "โนโนมิ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -57373,7 +57664,6 @@
         ],
         "CollectionBG": "BG_Swimsuit02_Collection",
         "FamilyName": "โอคุโซระ",
-        "FamilyNameRuby": "",
         "PersonalName": "อายาเนะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -57908,7 +58198,6 @@
         ],
         "CollectionBG": "BG_Swimsuit02_Collection",
         "FamilyName": "ทาคานาชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "โฮชิโนะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -58561,7 +58850,6 @@
         ],
         "CollectionBG": "BG_Swimsuit03_Collection",
         "FamilyName": "คาวาวะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชิซุโกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -59061,7 +59349,6 @@
         ],
         "CollectionBG": "BG_Swimsuit03_Collection",
         "FamilyName": "คุดะ",
-        "FamilyNameRuby": "",
         "PersonalName": "อิซุนะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -59619,7 +59906,6 @@
         ],
         "CollectionBG": "BG_Swimsuit03_Collection",
         "FamilyName": "วาราคุ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชิเซะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -60418,7 +60704,6 @@
         ],
         "CollectionBG": "BG_Arius_Collection",
         "FamilyName": "โจมาเอะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ซาโอริ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "17 ปี",
@@ -60995,7 +61280,6 @@
         ],
         "CollectionBG": "BG_SRT_Collection",
         "FamilyName": "คาเซะคุระ",
-        "FamilyNameRuby": "",
         "PersonalName": "โมเอะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -61568,7 +61852,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "เคียวยามะ",
-        "FamilyNameRuby": "",
         "PersonalName": "คาซึสะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -62123,7 +62406,6 @@
         ],
         "CollectionBG": "BG_Sanhaijing_Collection",
         "FamilyName": "สึโนฮาระ",
-        "FamilyNameRuby": "",
         "PersonalName": "โคโคน่า",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "11 ปี",
@@ -62647,7 +62929,6 @@
         ],
         "CollectionBG": "BG_Cheerleading_Collection",
         "FamilyName": "ชิราอิชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "อุทาฮะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -63236,7 +63517,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "อุชิโอะ",
-        "FamilyNameRuby": "",
         "PersonalName": "โนอา",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -63764,7 +64044,6 @@
         ],
         "CollectionBG": "BG_Cheerleading_Collection",
         "FamilyName": "เนโกสึกะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮิบิกิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -64340,7 +64619,6 @@
         ],
         "CollectionBG": "BG_BunnyGirl_Collection",
         "FamilyName": "มุโรคาสะ",
-        "FamilyNameRuby": "",
         "PersonalName": "อาคาเนะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -64851,7 +65129,6 @@
         ],
         "CollectionBG": "BG_Cheerleading_Collection",
         "FamilyName": "ฮายาเสะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ยูกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -65416,7 +65693,6 @@
         ],
         "CollectionBG": "BG_Cheerleading_Collection",
         "FamilyName": "อิโอจิ",
-        "FamilyNameRuby": "",
         "PersonalName": "มารี",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -65963,7 +66239,6 @@
         ],
         "CollectionBG": "BG_Cheerleading_Collection",
         "FamilyName": "ฮาเนกาวะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮาสุมิ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -66518,7 +66793,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "อาเกโบชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮิมาริ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -67042,7 +67316,6 @@
         ],
         "CollectionBG": "BG_Redwinter_Collection",
         "FamilyName": "มาโยอิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ชิกุเระ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -67670,7 +67943,6 @@
         ],
         "CollectionBG": "BG_Holiday_Collection",
         "FamilyName": "สึมิ",
-        "FamilyNameRuby": "",
         "PersonalName": "เซรินะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -68468,7 +68740,6 @@
         ],
         "CollectionBG": "BG_Holiday_Collection",
         "FamilyName": "อาซากาโอะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮานาเอะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -69223,7 +69494,6 @@
         ],
         "CollectionBG": "BG_NewYearFestival2",
         "FamilyName": "คุโรดาเตะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮารุนะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -69792,7 +70062,6 @@
         ],
         "CollectionBG": "BG_NewYearFestival2",
         "FamilyName": "ไอกิโยะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฟูกะ",
         "SchoolYear": "ชั้นปีที่ 2",
         "CharacterAge": "16 ปี",
@@ -70287,7 +70556,6 @@
         ],
         "CollectionBG": "BG_NewYearFestival2",
         "FamilyName": "อาคาชิ",
-        "FamilyNameRuby": "",
         "PersonalName": "จุนโกะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -70823,7 +71091,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "อาโอโมริ",
-        "FamilyNameRuby": "",
         "PersonalName": "มิเนะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -71519,7 +71786,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "มิโซโนะ",
-        "FamilyNameRuby": "",
         "PersonalName": "มิกะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -72140,7 +72406,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "ชิโมคุระ",
-        "FamilyNameRuby": "",
         "PersonalName": "เมกุ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -72788,7 +73053,6 @@
         ],
         "CollectionBG": "BG_Valkyrie_Collection",
         "FamilyName": "โอกาตะ",
-        "FamilyNameRuby": "",
         "PersonalName": "คันนะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -73355,7 +73619,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "อุทะซุมิ",
-        "FamilyNameRuby": "",
         "PersonalName": "ซากุระโกะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -73921,7 +74184,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "อะซุมะ",
-        "FamilyNameRuby": "",
         "PersonalName": "โทคิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "16 ปี",
@@ -74879,7 +75141,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "คิริฟุจิ",
-        "FamilyNameRuby": "",
         "PersonalName": "นางิสะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -75469,7 +75730,6 @@
         ],
         "CollectionBG": "BG_Millennium_Collection",
         "FamilyName": "คุโรซากิ",
-        "FamilyNameRuby": "",
         "PersonalName": "โคยูกิ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -76169,7 +76429,6 @@
         ],
         "CollectionBG": "BG_Newyear_Collection",
         "FamilyName": "โอนิคาตะ",
-        "FamilyNameRuby": "",
         "PersonalName": "คาโยโกะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "18 ปี",
@@ -76452,7 +76711,7 @@
                 "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
                 "Effects": [
                     {
-                        "Type": "BuffAlly",
+                        "Type": "BuffSelf",
                         "Restrictions": [
                             {
                                 "Property": "Id",
@@ -76751,7 +77010,6 @@
         ],
         "CollectionBG": "BG_Newyear_Collection",
         "FamilyName": "อิคุสะ",
-        "FamilyNameRuby": "",
         "PersonalName": "ฮารุกะ",
         "SchoolYear": "ชั้นปีที่ 1",
         "CharacterAge": "15 ปี",
@@ -77302,7 +77560,6 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "คุวาคามิ",
-        "FamilyNameRuby": "",
         "PersonalName": "คาโฮะ",
         "SchoolYear": "ชั้นปีที่ 3",
         "CharacterAge": "17 ปี",
@@ -77847,7 +78104,6 @@
         ],
         "CollectionBG": "BG_OldHouseOutside_Collection",
         "FamilyName": "天童",
-        "FamilyNameRuby": "てんどう",
         "PersonalName": "アリス",
         "SchoolYear": "1年生",
         "CharacterAge": "??歳",
@@ -78400,7 +78656,6 @@
         ],
         "CollectionBG": "BG_BunnyGirl_Collection",
         "FamilyName": "飛鳥馬",
-        "FamilyNameRuby": "あすま",
         "PersonalName": "トキ",
         "SchoolYear": "1年生",
         "CharacterAge": "16歳",
@@ -78970,7 +79225,6 @@
         ],
         "CollectionBG": "BG_OldHouseOutside_Collection",
         "FamilyName": "花岡",
-        "FamilyNameRuby": "はなおか",
         "PersonalName": "ユズ",
         "SchoolYear": "1年生",
         "CharacterAge": "16歳",
@@ -79503,7 +79757,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "宇沢",
-        "FamilyNameRuby": "うざわ",
         "PersonalName": "レイサ",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
@@ -80115,7 +80368,6 @@
         ],
         "CollectionBG": "BG_Sanhaijing_Collection",
         "FamilyName": "朱城",
-        "FamilyNameRuby": "あけしろ",
         "PersonalName": "ルミ",
         "SchoolYear": "3年生",
         "CharacterAge": "17歳",
@@ -80704,7 +80956,6 @@
         ],
         "CollectionBG": "BG_Sanhaijing_Collection",
         "FamilyName": "近衛",
-        "FamilyNameRuby": "このえ",
         "PersonalName": "ミナ",
         "SchoolYear": "2年生",
         "CharacterAge": "16歳",
@@ -81435,7 +81686,6 @@
         ],
         "CollectionBG": "BG_Redwinter_Collection",
         "FamilyName": "安守",
-        "FamilyNameRuby": "やすもり",
         "PersonalName": "ミノリ",
         "SchoolYear": "3年生",
         "CharacterAge": "17歳",
@@ -81993,7 +82243,6 @@
         ],
         "CollectionBG": "BG_FishingVillage2_Collection",
         "FamilyName": "月雪",
-        "FamilyNameRuby": "つきゆき",
         "PersonalName": "ミヤコ",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
@@ -82548,7 +82797,6 @@
         ],
         "CollectionBG": "BG_FishingVillage2_Collection",
         "FamilyName": "空井",
-        "FamilyNameRuby": "そらい",
         "PersonalName": "サキ",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
@@ -83206,7 +83454,6 @@
         ],
         "CollectionBG": "BG_FishingVillage2_Collection",
         "FamilyName": "霞沢",
-        "FamilyNameRuby": "かすみざわ",
         "PersonalName": "ミユ",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
@@ -83720,7 +83967,6 @@
         ],
         "CollectionBG": "BG_Swimsuit02_Collection",
         "FamilyName": "砂狼",
-        "FamilyNameRuby": "すなおおかみ",
         "PersonalName": "シロコ",
         "SchoolYear": "2年生",
         "CharacterAge": "16歳",
@@ -84243,7 +84489,6 @@
         ],
         "CollectionBG": "BG_WaterFall",
         "FamilyName": "古関",
-        "FamilyNameRuby": "こぜき",
         "PersonalName": "ウイ",
         "SchoolYear": "3年生",
         "CharacterAge": "17歳",
@@ -84768,7 +85013,6 @@
         ],
         "CollectionBG": "BG_WaterFall",
         "FamilyName": "若葉",
-        "FamilyNameRuby": "わかば",
         "PersonalName": "ヒナタ",
         "SchoolYear": "3年生",
         "CharacterAge": "17歳",
@@ -85336,7 +85580,6 @@
         ],
         "CollectionBG": "BG_WaterFall",
         "FamilyName": "下江",
-        "FamilyNameRuby": "しもえ",
         "PersonalName": "コハル",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
@@ -85859,7 +86102,6 @@
         ],
         "CollectionBG": "BG_WaterFall",
         "FamilyName": "浦和",
-        "FamilyNameRuby": "うらわ",
         "PersonalName": "ハナコ",
         "SchoolYear": "2年生",
         "CharacterAge": "16歳",
@@ -86518,7 +86760,6 @@
         ],
         "CollectionBG": "BG_Swimsuit03_Collection",
         "FamilyName": "水羽",
-        "FamilyNameRuby": "みずは",
         "PersonalName": "ミモリ",
         "SchoolYear": "2年生",
         "CharacterAge": "16歳",
@@ -87028,7 +87269,6 @@
         ],
         "CollectionBG": "BG_Redwinter_Collection",
         "FamilyName": "姫木",
-        "FamilyNameRuby": "ひめき",
         "PersonalName": "メル",
         "SchoolYear": "2年生",
         "CharacterAge": "16歳",
@@ -87632,7 +87872,6 @@
         ],
         "CollectionBG": "BG_Redwinter_Collection",
         "FamilyName": "秋泉",
-        "FamilyNameRuby": "あきいずみ",
         "PersonalName": "モミジ",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
@@ -88167,7 +88406,6 @@
         ],
         "CollectionBG": "BG_Cheerleading_Collection",
         "FamilyName": "豊見",
-        "FamilyNameRuby": "とよみ",
         "PersonalName": " コトリ",
         "SchoolYear": "1年生",
         "CharacterAge": "15歳",
@@ -88736,7 +88974,6 @@
         ],
         "CollectionBG": "BG_Cheerleading_Collection",
         "FamilyName": "黒舘",
-        "FamilyNameRuby": "くろだて",
         "PersonalName": "ハルナ",
         "SchoolYear": "3年生",
         "CharacterAge": "17歳",
@@ -89261,7 +89498,6 @@
         ],
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "仲正",
-        "FamilyNameRuby": "なかまさ",
         "PersonalName": "イチカ",
         "SchoolYear": "2年生",
         "CharacterAge": "16歳",
@@ -89802,7 +90038,6 @@
         ],
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "鬼怒川",
-        "FamilyNameRuby": "きぬがわ",
         "PersonalName": "カスミ",
         "SchoolYear": "2年生",
         "CharacterAge": "16歳",
@@ -90362,7 +90597,6 @@
         ],
         "CollectionBG": "BG_Onsen_Collection",
         "FamilyName": "間宵",
-        "FamilyNameRuby": "まよい",
         "PersonalName": "シグレ",
         "SchoolYear": "2年生",
         "CharacterAge": "16歳",
@@ -90817,6 +91051,1718 @@
                 12,
                 7,
                 13
+            ]
+        ]
+    },
+    {
+        "Id": 10079,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 159,
+        "PathName": "Misaka_Mikoto",
+        "DevName": "CH9998",
+        "Name": "御坂美琴",
+        "School": "Tokiwadai",
+        "Club": "EmptyClub",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Pierce",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "AR",
+        "WeaponImg": "weapon_icon_ch9998",
+        "Cover": false,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_BigPlaza_Collection",
+        "FamilyName": "御坂",
+        "PersonalName": " 美琴",
+        "SchoolYear": "3年生",
+        "CharacterAge": "14歳",
+        "Birthday": "5月2日",
+        "CharacterSSRNew": "まったく……ここでも色々やるのは変わらないのね",
+        "ProfileIntroduction": "常盤台中学所属の女子中学生。\n\n多くの超能力者が存在する「学園都市」の中で7人しか存在しないトップクラスの超能力者「レベル5」の一人。使用する超能力は、強力な電気を自在に操る「電撃使い（エレクトロマスター）」。しかし、キヴォトスに転移してからは能力を思いのまま発揮できていない様子。誰にでもフランクな言葉遣いで接し、優しい心の持ち主のため他の生徒からは親しまれている。カエルのキャラクター、「ゲコ太」のファン。",
+        "Hobby": "コンビニ雑誌の立ち読み、ゲコ太グッズ集め",
+        "CharacterVoice": "佐藤利奈",
+        "BirthDay": "5/2",
+        "Illustrator": "ミミトケ",
+        "Designer": "-",
+        "CharHeightMetric": "161cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1336,
+        "AttackPower1": 235,
+        "AttackPower100": 2358,
+        "MaxHP1": 2149,
+        "MaxHP100": 21490,
+        "DefensePower1": 19,
+        "DefensePower100": 114,
+        "HealPower1": 1462,
+        "HealPower100": 4387,
+        "DodgePoint": 764,
+        "AccuracyPoint": 731,
+        "CriticalPoint": 208,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 30,
+        "AmmoCost": 3,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            3333,
+                            3333,
+                            3334
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 30,
+                            "AttackStartDuration": 15,
+                            "AttackEndDuration": 13,
+                            "AttackBurstRoundOverDelay": 40,
+                            "AttackIngDuration": 24,
+                            "AttackReloadDuration": 72
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "常盤台の超電磁砲",
+                "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "544%",
+                        "626%",
+                        "789%",
+                        "871%",
+                        "1034%",
+                        "1116%",
+                        "1279%",
+                        "1361%",
+                        "1524%",
+                        "1606%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Duration": 148,
+                "Range": 850,
+                "Radius": [
+                    {
+                        "Type": "Obb",
+                        "Width": 200,
+                        "Height": 1500
+                    }
+                ],
+                "Icon": "SKILLICON_CH9998_EXSKILL",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            54458,
+                            62622,
+                            78960,
+                            87125,
+                            103463,
+                            111636,
+                            127966,
+                            136139,
+                            152469,
+                            160642
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "ちょっと痺れるわよ！",
+                "Desc": "50秒毎に、円形範囲内の敵に攻撃力の<?1>分のダメージ\n攻撃力の<?2>分の<d:ElectricShock>持続ダメージを付与（<?3>間）",
+                "Parameters": [
+                    [
+                        "120%",
+                        "126%",
+                        "132%",
+                        "156%",
+                        "162%",
+                        "168%",
+                        "192%",
+                        "198%",
+                        "204%",
+                        "228%"
+                    ],
+                    [
+                        "113%",
+                        "119%",
+                        "124%",
+                        "130%",
+                        "135%",
+                        "140%",
+                        "143%",
+                        "148%",
+                        "152%",
+                        "157%"
+                    ],
+                    [
+                        "20秒",
+                        "20秒",
+                        "20秒",
+                        "25秒",
+                        "25秒",
+                        "25秒",
+                        "30秒",
+                        "30秒",
+                        "30秒",
+                        "40秒"
+                    ]
+                ],
+                "Duration": 81,
+                "Range": 850,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 150
+                    }
+                ],
+                "Icon": "SKILLICON_CH9998_PUBLICSKILL",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            12021,
+                            12617,
+                            13222,
+                            15624,
+                            16221,
+                            16826,
+                            19228,
+                            19824,
+                            20429,
+                            22832
+                        ]
+                    },
+                    {
+                        "Type": "DMGDot",
+                        "Duration": "40000",
+                        "Period": "4000",
+                        "Icon": "ElectricShock",
+                        "Scale": [
+                            11333,
+                            11900,
+                            12467,
+                            13014,
+                            13514,
+                            14016,
+                            14375,
+                            14823,
+                            15272,
+                            15734
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "電撃操作能力",
+                "Desc": "<b:HIT>を<?1>増加/\n食蜂操祈の<c:Confusion>効果は適用されません",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AccuracyPoint_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "電撃操作能力+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:HIT>を<?2>増加/\n食蜂操祈の<c:Confusion>効果は適用されません",
+                "Parameters": [
+                    [
+                        "290",
+                        "304",
+                        "319",
+                        "376",
+                        "391",
+                        "405",
+                        "463",
+                        "478",
+                        "492",
+                        "550"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            290,
+                            304,
+                            319,
+                            376,
+                            391,
+                            405,
+                            463,
+                            478,
+                            492,
+                            550
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "何度も言わせんじゃないわよ",
+                "Desc": "ノーマルスキルの発動と同時に、<b:ATK>を<?1>増加（<?2>間）",
+                "Parameters": [
+                    [
+                        "10%",
+                        "11.2%",
+                        "12.4%",
+                        "13.4%",
+                        "14.7%",
+                        "16%",
+                        "17.2%",
+                        "18.5%",
+                        "20%",
+                        "21.4%"
+                    ],
+                    [
+                        "20秒",
+                        "20秒",
+                        "20秒",
+                        "25秒",
+                        "25秒",
+                        "25秒",
+                        "30秒",
+                        "30秒",
+                        "30秒",
+                        "40秒"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1008,
+                                1123,
+                                1243,
+                                1346,
+                                1473,
+                                1605,
+                                1721,
+                                1858,
+                                2000,
+                                2146
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                54
+            ],
+            [
+                6,
+                64
+            ],
+            [
+                1,
+                11
+            ],
+            [
+                2,
+                16
+            ],
+            [
+                4,
+                27
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Guruguru Usagi",
+        "FurnitureInteraction": [
+            [
+                [
+                    210322,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [],
+        "FavorItemUniqueTags": [
+            "F_Misaka_Mikoto",
+            "F_Misaka_Mikoto2"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "ガンボルト",
+            "Desc": "御坂美琴のためにエンジニア部が作った専用銃器。\n\n電気能力者向けの「特別な」機能も搭載されている。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 104,
+            "AttackPower100": 1036,
+            "MaxHP1": 618,
+            "MaxHP100": 6180,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                3070,
+                3050,
+                3040
+            ],
+            [
+                3061,
+                3011,
+                3001,
+                3081
+            ],
+            [
+                3022,
+                3072,
+                3052,
+                3042
+            ],
+            [
+                3063,
+                3013,
+                3003,
+                3083
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                10,
+                10,
+                10,
+                10
+            ],
+            [
+                9,
+                9,
+                9,
+                9
+            ],
+            [
+                8,
+                8,
+                8,
+                8
+            ],
+            [
+                3,
+                3,
+                3,
+                3
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4060,
+                4000,
+                4020,
+                4070
+            ],
+            [
+                4040,
+                4050,
+                4080,
+                4010
+            ],
+            [
+                4061,
+                4001,
+                4021,
+                4071
+            ],
+            [
+                4041,
+                4051,
+                4081,
+                4011
+            ],
+            [
+                4062,
+                4002,
+                4022,
+                4072
+            ],
+            [
+                4042,
+                4052,
+                4082,
+                4012
+            ],
+            [
+                4063,
+                4003,
+                4023,
+                4073
+            ],
+            [
+                4043,
+                4053,
+                4083,
+                4013
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                10,
+                10,
+                10,
+                10
+            ],
+            [
+                10,
+                10,
+                10,
+                10
+            ],
+            [
+                9,
+                9,
+                9,
+                9
+            ],
+            [
+                9,
+                9,
+                9,
+                9
+            ],
+            [
+                8,
+                8,
+                8,
+                8
+            ],
+            [
+                8,
+                8,
+                8,
+                8
+            ],
+            [
+                7,
+                7,
+                7,
+                7
+            ],
+            [
+                7,
+                7,
+                7,
+                7
+            ]
+        ]
+    },
+    {
+        "Id": 10080,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 160,
+        "PathName": "Shokuhou_Misaki",
+        "DevName": "CH9997",
+        "Name": "食蜂操祈",
+        "School": "Tokiwadai",
+        "Club": "EmptyClub",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Explosion",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 1,
+        "IndoorBattleAdaptation": 1,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_ch9997",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Hairpin",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_BigPlaza_Collection",
+        "FamilyName": "食蜂",
+        "PersonalName": "操祈",
+        "SchoolYear": "3年生",
+        "CharacterAge": "14歳",
+        "Birthday": "-",
+        "CharacterSSRNew": "う～ん、どうしようかしら？ああ、こちらの話よぉ？",
+        "ProfileIntroduction": "常盤台中学所属の気品溢れる女子中学生。\n\n名門校である常盤台中学の中でも最大派閥を率いる実力者で、学園都市に7人しか存在しない超能力者「レベル5」の一人。使用する超能力は他人の精神を操る「心理掌握（メンタルアウト）」。しかし、キヴォトスに転移してからは能力を思いのまま発揮できていない様子。同じく「レベル5」の超能力者で、自分の能力が通じない御坂美琴が実は少し苦手。",
+        "Hobby": "お茶を飲むこと、オーガニック食品を食べること",
+        "CharacterVoice": "浅倉杏美",
+        "BirthDay": "-",
+        "Illustrator": "ミミトケ",
+        "Designer": "-",
+        "CharHeightMetric": "-",
+        "CharHeightImperial": null,
+        "StabilityPoint": 908,
+        "AttackPower1": 213,
+        "AttackPower100": 2139,
+        "MaxHP1": 2044,
+        "MaxHP100": 23680,
+        "DefensePower1": 18,
+        "DefensePower100": 109,
+        "HealPower1": 1527,
+        "HealPower100": 4583,
+        "DodgePoint": 999,
+        "AccuracyPoint": 109,
+        "CriticalPoint": 218,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 76,
+                            "AttackStartDuration": 20,
+                            "AttackEndDuration": 23,
+                            "AttackBurstRoundOverDelay": 40,
+                            "AttackIngDuration": 52,
+                            "AttackReloadDuration": 65
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "心理掌握",
+                "Desc": "指定した相手およびその円形範囲内の最も近い敵2人に対して、攻撃力の<?1>分のダメージ/\n<c:Confusion>状態を付与（<?2>間）",
+                "Parameters": [
+                    [
+                        "772%",
+                        "888%",
+                        "1120%",
+                        "1236%",
+                        "1468%",
+                        "1584%",
+                        "1815%",
+                        "1931%",
+                        "2163%",
+                        "2279%"
+                    ],
+                    [
+                        "5秒",
+                        "5秒",
+                        "7秒",
+                        "7秒",
+                        "7秒",
+                        "7秒",
+                        "7秒",
+                        "7秒",
+                        "7秒",
+                        "7秒"
+                    ]
+                ],
+                "Cost": [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                ],
+                "Duration": 81,
+                "Range": 750,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 200
+                    }
+                ],
+                "Icon": "SKILLICON_CH9997_EXSKILL",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            77272,
+                            88864,
+                            112048,
+                            123640,
+                            146816,
+                            158408,
+                            181592,
+                            193184,
+                            216359,
+                            227951
+                        ]
+                    },
+                    {
+                        "Type": "CrowdControl",
+                        "Chance": "10000",
+                        "Icon": "Confusion",
+                        "Scale": [
+                            5000,
+                            5000,
+                            7000,
+                            7000,
+                            7000,
+                            7000,
+                            7000,
+                            7000,
+                            7000,
+                            7000
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "少し手伝ってくれるかしら？",
+                "Desc": "30秒毎に、円形範囲内の敵に攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "318%",
+                        "334%",
+                        "350%",
+                        "413%",
+                        "429%",
+                        "445%",
+                        "509%",
+                        "525%",
+                        "541%",
+                        "604%"
+                    ]
+                ],
+                "Duration": 170,
+                "Range": 750,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 150
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000,
+                            1000
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            31828,
+                            33424,
+                            35012,
+                            41379,
+                            42966,
+                            44562,
+                            50921,
+                            52517,
+                            54105,
+                            60472
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "常盤台の女王",
+                "Desc": "<b:OppressionPower>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "OppressionPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "常盤台の女王+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:OppressionPower>を<?2>増加",
+                "Parameters": [
+                    [
+                        "152",
+                        "159",
+                        "167",
+                        "197",
+                        "205",
+                        "212",
+                        "242",
+                        "250",
+                        "258",
+                        "288"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            152,
+                            159,
+                            167,
+                            197,
+                            205,
+                            212,
+                            242,
+                            250,
+                            258,
+                            288
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "私は頭脳派だしぃ",
+                "Desc": "食蜂操祈のExスキルで相手に<c:Confusion>状態を適用する度に防御力と<b:Dodge>を<?1>増加（20秒間）",
+                "Parameters": [
+                    [
+                        "19.3%",
+                        "20.3%",
+                        "21.3%",
+                        "25.1%",
+                        "26.1%",
+                        "27.1%",
+                        "30.9%",
+                        "31.9%",
+                        "32.9%",
+                        "36.7%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH9997_EXSKILL",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1936,
+                                2033,
+                                2130,
+                                2517,
+                                2614,
+                                2710,
+                                3097,
+                                3194,
+                                3291,
+                                3678
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 3
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1936,
+                                2033,
+                                2130,
+                                2517,
+                                2614,
+                                2710,
+                                3097,
+                                3194,
+                                3291,
+                                3678
+                            ]
+                        ],
+                        "Stat": "DodgePoint_Coefficient",
+                        "Channel": 7
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                59
+            ],
+            [
+                5,
+                71
+            ],
+            [
+                1,
+                12
+            ],
+            [
+                2,
+                18
+            ],
+            [
+                3,
+                29
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 103",
+        "FurnitureInteraction": [
+            [
+                [
+                    210323,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [],
+        "FavorItemUniqueTags": [
+            "F_Shokuho_Misaki",
+            "F_Shokuho_Misaki2"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "メンタルポインター",
+            "Desc": "食蜂操祈のためにエンジニア部が作った専用銃器。\n\n女子高生のファッションアイテムにぴったりのスッキリとした拳銃。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 94,
+            "AttackPower100": 940,
+            "MaxHP1": 678,
+            "MaxHP100": 6775,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3050,
+                3000,
+                3030,
+                3010
+            ],
+            [
+                3071,
+                3081,
+                3041,
+                3061
+            ],
+            [
+                3052,
+                3002,
+                3032,
+                3012
+            ],
+            [
+                3073,
+                3083,
+                3043,
+                3063
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                10,
+                10,
+                10,
+                10
+            ],
+            [
+                9,
+                9,
+                9,
+                9
+            ],
+            [
+                8,
+                8,
+                8,
+                8
+            ],
+            [
+                3,
+                3,
+                3,
+                3
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4070,
+                4040,
+                4050,
+                4080
+            ],
+            [
+                4010,
+                4030,
+                4060,
+                4000
+            ],
+            [
+                4071,
+                4041,
+                4051,
+                4081
+            ],
+            [
+                4011,
+                4031,
+                4061,
+                4001
+            ],
+            [
+                4072,
+                4042,
+                4052,
+                4082
+            ],
+            [
+                4012,
+                4032,
+                4062,
+                4002
+            ],
+            [
+                4073,
+                4043,
+                4053,
+                4083
+            ],
+            [
+                4013,
+                4033,
+                4063,
+                4003
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                10,
+                10,
+                10,
+                10
+            ],
+            [
+                10,
+                10,
+                10,
+                10
+            ],
+            [
+                9,
+                9,
+                9,
+                9
+            ],
+            [
+                9,
+                9,
+                9,
+                9
+            ],
+            [
+                8,
+                8,
+                8,
+                8
+            ],
+            [
+                8,
+                8,
+                8,
+                8
+            ],
+            [
+                7,
+                7,
+                7,
+                7
+            ],
+            [
+                7,
+                7,
+                7,
+                7
+            ]
+        ]
+    },
+    {
+        "Id": 26011,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 161,
+        "PathName": "Saten_Ruiko",
+        "DevName": "CH9996",
+        "Name": "佐天涙子",
+        "School": "Sakugawa",
+        "Club": "EmptyClub",
+        "StarGrade": 1,
+        "SquadType": "Support",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Pierce",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 1,
+        "OutdoorBattleAdaptation": 3,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "SMG",
+        "WeaponImg": "weapon_icon_ch9996",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Bag",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_BigPlaza_Collection",
+        "FamilyName": "佐天",
+        "PersonalName": "涙子",
+        "SchoolYear": "1年生",
+        "CharacterAge": "12歳",
+        "Birthday": "-",
+        "CharacterSSRNew": "",
+        "ProfileIntroduction": "柵川中学所属の陽気な女子中学生。\n\n同級生の初春飾利の親友で、彼女に常盤台中学の先輩である御坂美琴を紹介してもらった。レベル0の無能力者だが、勘が良く、決定的な手がかりを見つけることが多い。好きなものは都市伝説とスイーツ。休日になるとよくスイーツ調査に出かけているのだとか。",
+        "Hobby": "ネット麻雀、スイーツ調査",
+        "CharacterVoice": "伊藤かな恵",
+        "BirthDay": "-",
+        "Illustrator": "ミミトケ",
+        "Designer": "-",
+        "CharHeightMetric": "160cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1582,
+        "AttackPower1": 233,
+        "AttackPower100": 2339,
+        "MaxHP1": 3078,
+        "MaxHP100": 23012,
+        "DefensePower1": 102,
+        "DefensePower100": 615,
+        "HealPower1": 1633,
+        "HealPower100": 4900,
+        "DodgePoint": 1182,
+        "AccuracyPoint": 659,
+        "CriticalPoint": 253,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "フルスイング",
+                "Desc": "円形範囲内の敵に攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "446%",
+                        "513%",
+                        "646%",
+                        "713%",
+                        "847%",
+                        "914%",
+                        "1048%",
+                        "1115%",
+                        "1249%",
+                        "1315%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    3
+                ],
+                "Duration": 105,
+                "Range": 10000,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 200
+                    }
+                ],
+                "Icon": "SKILLICON_CH9996_EXSKILL",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            44611,
+                            51303,
+                            64680,
+                            71372,
+                            84756,
+                            91441,
+                            104825,
+                            111517,
+                            124901,
+                            131586
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "秘伝のサバカレー",
+                "Desc": "45秒毎に、味方1人に対して<b:ATK>を<?1>増加（20秒間）\nノーマルスキルを使用する度に効果適用の対象が1人ずつ増加（最大3人分まで）",
+                "Parameters": [
+                    [
+                        "10.9%",
+                        "11.4%",
+                        "11.9%",
+                        "14.1%",
+                        "14.7%",
+                        "15.2%",
+                        "17.4%",
+                        "17.9%",
+                        "18.5%",
+                        "20.6%"
+                    ]
+                ],
+                "Duration": 60,
+                "Range": 1000,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1090,
+                                1144,
+                                1198,
+                                1416,
+                                1470,
+                                1525,
+                                1743,
+                                1797,
+                                1851,
+                                2069
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "思いっきり！",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "思いっきり！+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "279",
+                        "293",
+                        "307",
+                        "362",
+                        "376",
+                        "390",
+                        "446",
+                        "460",
+                        "474",
+                        "529"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            279,
+                            293,
+                            307,
+                            362,
+                            376,
+                            390,
+                            446,
+                            460,
+                            474,
+                            529
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "私だって！",
+                "Desc": "味方の<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 302
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                58
+            ],
+            [
+                6,
+                69
+            ],
+            [
+                1,
+                11
+            ],
+            [
+                2,
+                17
+            ],
+            [
+                4,
+                29
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Irasshaimase",
+        "FurnitureInteraction": [
+            [
+                [
+                    210324,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [],
+        "FavorItemUniqueTags": [
+            "F_Saten_Ruiko",
+            "F_Saten_Ruiko2"
+        ],
+        "IsLimited": 2,
+        "Weapon": {
+            "Name": "バレット·スウィンガー",
+            "Desc": "佐天涙子のためにエンジニア部が作った専用銃器。\n\n手で直接振っても壊れないほど丈夫だ。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 82,
+            "AttackPower100": 822,
+            "MaxHP1": 536,
+            "MaxHP100": 5358,
+            "HealPower1": 154,
+            "HealPower100": 1536,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                3040,
+                3020,
+                3000
+            ],
+            [
+                3081,
+                3061,
+                3011,
+                3071
+            ],
+            [
+                3032,
+                3042,
+                3022,
+                3002
+            ],
+            [
+                3083,
+                3063,
+                3013,
+                3073
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                10,
+                10,
+                10,
+                10
+            ],
+            [
+                9,
+                9,
+                9,
+                9
+            ],
+            [
+                8,
+                8,
+                8,
+                8
+            ],
+            [
+                3,
+                3,
+                3,
+                3
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4080,
+                4010,
+                4030,
+                4060
+            ],
+            [
+                4000,
+                4020,
+                4070,
+                4040
+            ],
+            [
+                4081,
+                4011,
+                4031,
+                4061
+            ],
+            [
+                4001,
+                4021,
+                4071,
+                4041
+            ],
+            [
+                4082,
+                4012,
+                4032,
+                4062
+            ],
+            [
+                4002,
+                4022,
+                4072,
+                4042
+            ],
+            [
+                4083,
+                4013,
+                4033,
+                4063
+            ],
+            [
+                4003,
+                4023,
+                4073,
+                4043
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                10,
+                10,
+                10,
+                10
+            ],
+            [
+                10,
+                10,
+                10,
+                10
+            ],
+            [
+                9,
+                9,
+                9,
+                9
+            ],
+            [
+                9,
+                9,
+                9,
+                9
+            ],
+            [
+                8,
+                8,
+                8,
+                8
+            ],
+            [
+                8,
+                8,
+                8,
+                8
+            ],
+            [
+                7,
+                7,
+                7,
+                7
+            ],
+            [
+                7,
+                7,
+                7,
+                7
             ]
         ]
     }

@@ -43,7 +43,9 @@
         "SRT": "SRT",
         "Trinity": "트리니티",
         "Valkyrie": "발키리",
-        "ETC": "그 외"
+        "ETC": "그 외",
+        "Tokiwadai": "토키와다이 중학교",
+        "Sakugawa": "사쿠가와 중학교"
     },
     "AdaptationType": {
         "Street": "시가지",
@@ -61,7 +63,9 @@
         "SRT": "SRT 특수학원",
         "Trinity": "트리니티 종합학원",
         "Valkyrie": "발키리 경찰학교",
-        "ETC": "그 외"
+        "ETC": "그 외",
+        "Tokiwadai": "토키와다이 중학교",
+        "Sakugawa": "사쿠가와 중학교"
     },
     "Club": {
         "Kohshinjo68": "흥신소 68",
@@ -175,7 +179,8 @@
         "10": "대운동회",
         "11": "아비도스 교실",
         "12": "게임개발부",
-        "13": "선샤인 리조트"
+        "13": "선샤인 리조트",
+        "14": "쇼핑몰"
     },
     "FurnitureSet": {
         "0": "없음",
@@ -191,7 +196,8 @@
         "109": "대운동회 세트",
         "110": "아비도스 교실 세트",
         "111": "게임개발부 세트",
-        "112": "선샤인 리조트 세트"
+        "112": "선샤인 리조트 세트",
+        "113": "쇼핑몰 세트"
     },
     "ItemCategory": {
         "Furnitures": "가구",
@@ -292,7 +298,8 @@
         "827": "여름 특수 작전! 사라진 새우를 향한 토끼의 추적",
         "828": "숨겨진 유산을 찾아서 ~트리니티 과외 활동~",
         "829": "학원 동인 이야기 ~두 명이 도달한 최종회~",
-        "830": "Trip-Trap-Train"
+        "830": "Trip-Trap-Train",
+        "831": "어떤 과학의 청춘기록"
     },
     "StageType": {
         "Campaign": "임무",
@@ -455,6 +462,7 @@
         "Debuff_Penetration": "방어관통 수치",
         "Debuff_Poison": "중독",
         "Debuff_Range": "사거리",
+        "Debuff_ElectricShock": "감전",
         "Debuff_Stability": "안정 수치",
         "Debuff_CostRegen": "코스트 회복력",
         "CC_Fear": "공포",
@@ -462,6 +470,7 @@
         "CC_Provoke": "도발",
         "CC_Paralysis": "마비",
         "CC_Emp": "EMP",
+        "CC_Confusion": "혼란",
         "Special_EnergyBatteryHalf": "에너지",
         "Special_FormChange": "일반 공격",
         "Special_Immortal": "불사",
@@ -563,6 +572,7 @@
         "Debuff_Penetration": "방어관통 수치 감소",
         "Debuff_Poison": "중독",
         "Debuff_Range": "사거리 감소",
+        "Debuff_ElectricShock": "감전",
         "Debuff_Stability": "안정 수치 감소",
         "Debuff_CostRegen": "코스트 회복력 감소",
         "CC_Fear": "공포",
@@ -570,6 +580,7 @@
         "CC_Provoke": "도발",
         "CC_Paralysis": "마비",
         "CC_Emp": "EMP",
+        "CC_Confusion": "혼란",
         "Special_EnergyBatteryHalf": "에너지 충전",
         "Special_FormChange": "일반 공격 강화",
         "Special_Immortal": "불사",
@@ -672,12 +683,14 @@
         "Debuff_Penetration": "공격할 때 적의 방어력을 덜 관통합니다.",
         "Debuff_Poison": "지속적으로 정해진 주기마다 중독 대미지를 받습니다. 이 대미지는 치명타가 적용되지 않습니다.",
         "Debuff_Range": "일반 공격의 사거리가 감소합니다.",
+        "Debuff_ElectricShock": "Continuously receives Electric Shock damage at set intervals. This damage cannot critically hit.",
         "Debuff_Stability": "안정치가 감소해 공격이 더 높은 대미지를 줄 확률이 감소합니다.",
         "CC_Fear": "어떤 행동도 할 수 없으며 공포를 부여한 대상으로부터 느리게 도망칩니다. 사용 중인 스킬이 취소됩니다.",
         "CC_Stunned": "어떤 행동도 할 수 없으며 사용 중인 스킬이 취소됩니다.",
         "CC_Provoke": "도발을 부여한 대상을 강제로 공격합니다. 사용 중인 스킬이 취소됩니다.",
         "CC_Paralysis": "어떤 행동도 할 수 없으며 사용 중인 스킬이 취소됩니다.",
         "CC_Emp": "어떤 행동도 할 수 없으며 사용 중인 스킬이 취소됩니다.",
+        "CC_Confusion": "Attacks allies instead of enemies. Also interrupts any active skills.",
         "Special_EnergyBatteryHalf": "아리스의 EX 와 서브 스킬의 효과가 1.5배 / 2배 증가합니다. EX 스킬을 사용하면 충전된 에너지가 모두 소모됩니다.",
         "Special_FormChange": "일반 공격을 강화합니다.",
         "Special_Immortal": "지속시간 동안 HP가 1 미만으로 감소되지 않습니다.",
@@ -780,6 +793,7 @@
         "UIEventBoxGachaShopEnter": "경품 교환 입장 {0}",
         "UIEventBoxGachaShopIdle": "경품 교환 일반 {0}",
         "UIEventBoxGachaShopBoxGachaPrize": "경품 당첨 {0}",
+        "UIEventBoxGachaShopBoxGachaFinish": "Prize Exchange Ended {0}",
         "UIEventMissionEnter": "이벤트 미션 입장 {0}",
         "UIEventMissionIdle": "이벤트 미션 일반 {0}",
         "UIEventMissionBuy": "이벤트 미션 완료 {0}",
