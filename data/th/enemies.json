@@ -5413,7 +5413,10 @@
         "CriticalResistPoint": 100,
         "CriticalDamageResistRate": 5000,
         "Range": 400,
-        "DamagedRatio": 10000
+        "DamagedRatio": 10000,
+        "Skills": [
+            "Stops attacking and decreases <b:DamagedRatio> by 50% for 10s."
+        ]
     },
     {
         "Id": 7010111,
@@ -35806,7 +35809,10 @@
         "CriticalResistPoint": 100,
         "CriticalDamageResistRate": 5000,
         "Range": 300,
-        "DamagedRatio": 10000
+        "DamagedRatio": 10000,
+        "Skills": [
+            "Stops attacking and decreases <b:DamagedRatio> by 50% for 10s."
+        ]
     },
     {
         "Id": 8200032,
@@ -41350,7 +41356,10 @@
         "CriticalResistPoint": 100,
         "CriticalDamageResistRate": 5000,
         "Range": 400,
-        "DamagedRatio": 10000
+        "DamagedRatio": 10000,
+        "Skills": [
+            "Stops attacking and decreases <b:DamagedRatio> by 50% for 10s."
+        ]
     },
     {
         "Id": 8310019,
@@ -41667,7 +41676,10 @@
         "CriticalResistPoint": 100,
         "CriticalDamageResistRate": 5000,
         "Range": 400,
-        "DamagedRatio": 10000
+        "DamagedRatio": 10000,
+        "Skills": [
+            "Stops attacking and decreases <b:DamagedRatio> by 50% for 10s."
+        ]
     },
     {
         "Id": 8310104,
@@ -42015,7 +42027,11 @@
         "CriticalResistPoint": 100,
         "CriticalDamageResistRate": 5000,
         "Range": 1200,
-        "DamagedRatio": 10000
+        "DamagedRatio": 10000,
+        "Skills": [
+            "Stops attacking and decreases <b:DamagedRatio> by 50% for 10s.",
+            "Allies will take greatly reduced damage until defeated."
+        ]
     },
     {
         "Id": 8310402,
@@ -42086,6 +42102,83 @@
         "CriticalDamageResistRate": 5000,
         "Range": 1200,
         "DamagedRatio": 10000
+    },
+    {
+        "Id": 8310404,
+        "DevName": "NPC_Sweeper_Decagram_Taser_Yellow_831Event04",
+        "Name": "หุ่นดูดฝุ่นดัดแปลง",
+        "SquadType": "Main",
+        "Rank": "Elite",
+        "BulletType": "Normal",
+        "ArmorType": "HeavyArmor",
+        "WeaponType": "Taser",
+        "Tags": [
+            "EnemySmall",
+            "Decagram",
+            "Sweeper",
+            "SweeperYellow",
+            "Automata",
+            "NewAutomata",
+            "NewAutomataYellow"
+        ],
+        "Icon": "enemyinfo_sweeper_decagram_taser_yellow",
+        "IsNPC": true,
+        "StabilityPoint": 300,
+        "StabilityRate": 9999,
+        "AttackPower1": 483,
+        "AttackPower100": 4833,
+        "MaxHP1": 40010,
+        "MaxHP100": 40010,
+        "DefensePower1": 0,
+        "DefensePower100": 0,
+        "HealPower1": 1222,
+        "HealPower100": 8560,
+        "DodgePoint": 70,
+        "AccuracyPoint": 1400,
+        "CriticalPoint": 200,
+        "CriticalDamageRate": 20000,
+        "CriticalResistPoint": 9999,
+        "CriticalDamageResistRate": 5000,
+        "Range": 150,
+        "DamagedRatio": 10000,
+        "Skills": [
+            "Receives continuous 1000 <d:Burn> damage every 1s.",
+            "When HP falls below 1%, fully restores own HP and deals 500% damage, increases <d:DamagedRatio> by 200% for 20s and inflicts <c:Stunned> for 15s to all enemies and allies in a circular area around it.\nAlso either increases or decreases own <b:MoveSpeed> for 10s."
+        ]
+    },
+    {
+        "Id": 8310405,
+        "DevName": "NPC_Totem03_831Event04",
+        "Name": "หุ่นไล่กา",
+        "Icon": "enemyinfo_totem03_timeattack",
+        "SquadType": "Main",
+        "Rank": "Elite",
+        "BulletType": "Normal",
+        "ArmorType": "LightArmor",
+        "WeaponType": "Relic",
+        "Tags": [],
+        "IsNPC": true,
+        "StabilityPoint": 0,
+        "StabilityRate": 9999,
+        "AttackPower1": 0,
+        "AttackPower100": 0,
+        "MaxHP1": 20000,
+        "MaxHP100": 20000,
+        "DefensePower1": 1,
+        "DefensePower100": 1,
+        "HealPower1": 1,
+        "HealPower100": 1,
+        "DodgePoint": 300,
+        "AccuracyPoint": 1200,
+        "CriticalPoint": 0,
+        "CriticalDamageRate": 20000,
+        "CriticalResistPoint": 9999,
+        "CriticalDamageResistRate": 5000,
+        "Range": 2000,
+        "DamagedRatio": 10000,
+        "Skills": [
+            "When HP is fully restored, deals damage to the Sweeper and decreases own HP to 0."
+        ]
     },
     {
         "Id": 7611013,
@@ -51348,6 +51441,7 @@
             "HoverObject",
             "Raid_Normal"
         ],
+        "IsNPC": true,
         "StabilityPoint": 1000,
         "StabilityRate": 8000,
         "AttackPower1": 500,
@@ -51616,6 +51710,7 @@
             "HoverObject",
             "Raid_Hard"
         ],
+        "IsNPC": true,
         "StabilityPoint": 1000,
         "StabilityRate": 8000,
         "AttackPower1": 1100,
@@ -51754,6 +51849,7 @@
             "HoverObject",
             "Raid_VeryHard"
         ],
+        "IsNPC": true,
         "StabilityPoint": 1000,
         "StabilityRate": 8000,
         "AttackPower1": 2200,
@@ -51892,6 +51988,7 @@
             "HoverObject",
             "Raid_HardCore"
         ],
+        "IsNPC": true,
         "StabilityPoint": 1000,
         "StabilityRate": 8000,
         "AttackPower1": 3000,
@@ -52030,6 +52127,7 @@
             "HoverObject",
             "Raid_Extreme"
         ],
+        "IsNPC": true,
         "StabilityPoint": 1000,
         "StabilityRate": 8000,
         "AttackPower1": 7000,
@@ -52168,6 +52266,7 @@
             "HoverObject",
             "Raid_Insane"
         ],
+        "IsNPC": true,
         "StabilityPoint": 1000,
         "StabilityRate": 8000,
         "AttackPower1": 18000,
@@ -52340,6 +52439,7 @@
             "HoverObject",
             "Raid_Torment"
         ],
+        "IsNPC": true,
         "StabilityPoint": 1000,
         "StabilityRate": 8000,
         "AttackPower1": 25000,
