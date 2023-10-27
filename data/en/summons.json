@@ -274,8 +274,20 @@
             },
             {
                 "Name": "Emergency Dispatch",
-                "Desc": "Continuously restores the HP of allies in a circular area by <?1> of Healing every 10s",
+                "Desc": "Increases the <b:ATK> of all allies in a circular area by <?1> and continuously restores their HP by <?2> of Healing every 10s as long as they stay within range.",
                 "Parameters": [
+                    [
+                        "17%",
+                        "17.9%",
+                        "18.3%",
+                        "21.7%",
+                        "22.1%",
+                        "23%",
+                        "24.7%",
+                        "25.6%",
+                        "26%",
+                        "29.4%"
+                    ],
                     [
                         "18.7%",
                         "18.7%",
@@ -288,6 +300,12 @@
                         "22%",
                         "22%"
                     ]
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 300
+                    }
                 ],
                 "Icon": "COMMON_SKILLICON_DOTHEAL",
                 "SkillType": "passive",

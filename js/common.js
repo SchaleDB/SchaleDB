@@ -7628,7 +7628,7 @@ function renderSummonSkills(sourceskill, level) {
 
         summonInfo.Skills.forEach((summonSkill) => {
 
-            if (summonSkill.SkillType == 'passive' || summonSkill.ShowInfo === false) {
+            if (summonSkill.ShowInfo === false) {
                 return
             }
 
@@ -7662,6 +7662,9 @@ function renderSummonSkills(sourceskill, level) {
     })
 
     $(`#skill-${sourceskill}-summon-skills`).html(summonSkillsHtml)
+    $(`#skill-${sourceskill}-summon-skills`).find('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+        $(el).tooltip({html: true})
+    })
 
     if (summonSkillsHtml != '') {
         $(`#skill-${sourceskill}-summon-skills`).find('.ba-info-pill-s, .skill-hitinfo').tooltip({html: true})
@@ -9381,7 +9384,7 @@ function replaceBuffPlaceholders(text, renderBuffs = true) {
     let result = text
     const buffTypes = ['Buff', 'Debuff', 'CC', 'Special']
     buffTypes.forEach(type => {
-        const buffRegex = new RegExp(`<${type.slice(0,1).toLowerCase()}:(\\w+)(?:='(.*)')?>`, 'g')
+        const buffRegex = new RegExp(`<${type.slice(0,1).toLowerCase()}:(\\w+)(?:='([^']*)')?>`, 'g')
         if (renderBuffs) {
             result = result.replace(buffRegex, function(match, capture, labelText) {
                 return getBuffTag(type, capture, {tooltip: true, overrideName: labelText ? labelText : null})
