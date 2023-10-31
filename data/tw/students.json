@@ -1102,7 +1102,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -5652,7 +5652,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -8009,7 +8009,7 @@
         "IsLimited": 0,
         "Weapon": {
             "Name": "Blood & Gunpowder",
-            "Desc": "弦生所使用的二把霰彈槍。\n\n雖然各自有著「Blood」和「Gunpowder」的名字，\n然而旁人幾乎無法區分。",
+            "Desc": "弦生使用的兩把霰彈槍。\n\n雖然各自有著「Blood」和「Gunpowder」的名字，然而旁人幾乎無法區分。",
             "AdaptationType": "Indoor",
             "AdaptationValue": 1,
             "AttackPower1": 170,
@@ -20232,7 +20232,7 @@
                 ]
             ],
             "Name": "雅典娜3號",
-            "Desc": "總是在晴附近徘徊的球體無人機。\n就如同他的名字是以智慧女神來取名一樣，雖然裝載著會自己學習經驗的人工智慧，但偶爾的行動與主人晴的意志相反，時常與她的期待背道而馳。",
+            "Desc": "總是在晴附近徘徊的球體無人機。\n如同它的名字是以智慧女神來取名一樣，雖然裝載著會自己學習經驗的人工智慧，偶爾卻會採取與主人晴的意圖背道而馳的行動，違背她的期待。",
             "TierUpMaterial": [
                 [
                     5004,
@@ -26328,6 +26328,10 @@
                 [
                     207307,
                     0
+                ],
+                [
+                    12207,
+                    0
                 ]
             ],
             []
@@ -26883,6 +26887,10 @@
             [
                 [
                     2301,
+                    0
+                ],
+                [
+                    12301,
                     0
                 ]
             ],
@@ -27449,6 +27457,10 @@
             [
                 [
                     2301,
+                    0
+                ],
+                [
+                    12301,
                     0
                 ]
             ],
@@ -28708,7 +28720,7 @@
         "PersonalName": "柚子",
         "SchoolYear": "1年級",
         "CharacterAge": "16歲",
-        "Birthday": "08月12日",
+        "Birthday": "8月12日",
         "CharacterSSRNew": "被，被發現了……",
         "ProfileIntroduction": "千年科學學園所屬，遊戲開發部的部長。\n\n非常害怕與人對話，因此幾乎沒有到外面去，大部分的時間都是在遊戲開發部的置物櫃中度過。\n製作遊戲和玩遊戲都很喜歡，對遊戲的熱情非同小可。",
         "Hobby": "遊戲製作",
@@ -29034,7 +29046,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210301,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -32253,7 +32270,7 @@
         "IsLimited": 2,
         "Weapon": {
             "Name": "Blood & Gunpowder",
-            "Desc": "弦生使用的雙持霰彈槍。\n\n在水中也沒有任何問題，擁有超高火力。",
+            "Desc": "弦生使用的兩把霰彈槍。\n\n在水中也依然擁有超高火力。",
             "AdaptationType": "Outdoor",
             "AdaptationValue": 1,
             "AttackPower1": 121,
@@ -32830,7 +32847,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -33501,7 +33518,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -38745,7 +38762,7 @@
                 ]
             ],
             "Name": "兔尾手榴彈",
-            "Desc": "明日奈穿著兔女郎服裝時配戴的兔尾巴模樣的手榴彈。\n因為有著柔軟的毛覆蓋著，所以乍看之下可能覺得無害，但卻有著跟其他手榴彈一樣大的破壞力。",
+            "Desc": "明日奈穿著兔女郎服裝時配戴的兔尾巴模樣的手榴彈。\n因為有柔軟的毛覆蓋著，所以乍看之下可能覺得無害，卻有著跟其他手榴彈一樣大的破壞力。",
             "TierUpMaterial": [
                 [
                     5026,
@@ -52798,9 +52815,9 @@
                         "Type": "BuffTarget",
                         "Restrictions": [
                             {
-                                "Property": "Tags",
-                                "Operand": "Contains",
-                                "Value": "EnemyMedium"
+                                "Property": "Size",
+                                "Operand": "Equal",
+                                "Value": "Medium"
                             }
                         ],
                         "Value": [
@@ -69122,6 +69139,13 @@
                     },
                     {
                         "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "NotEqual",
+                                "Value": "Medium"
+                            }
+                        ],
                         "Value": [
                             [
                                 -686,
@@ -69129,7 +69153,21 @@
                                 -995,
                                 -1098,
                                 -1304
-                            ],
+                            ]
+                        ],
+                        "Stat": "DodgePoint_Coefficient",
+                        "Channel": 607
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "Equal",
+                                "Value": "Medium"
+                            }
+                        ],
+                        "Value": [
                             [
                                 -1715,
                                 -1972,
@@ -69143,6 +69181,13 @@
                     },
                     {
                         "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "NotEqual",
+                                "Value": "Medium"
+                            }
+                        ],
                         "Value": [
                             [
                                 -686,
@@ -69150,7 +69195,21 @@
                                 -995,
                                 -1098,
                                 -1304
-                            ],
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "Equal",
+                                "Value": "Medium"
+                            }
+                        ],
+                        "Value": [
                             [
                                 -1715,
                                 -1972,
@@ -75705,7 +75764,7 @@
         "Id": 10066,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 136,
@@ -75734,19 +75793,19 @@
         ],
         "CollectionBG": "BG_OldHouseOutside_Collection",
         "FamilyName": "天童",
-        "PersonalName": "アリス",
-        "SchoolYear": "1年生",
-        "CharacterAge": "??歳",
+        "PersonalName": "愛麗絲",
+        "SchoolYear": "1年級",
+        "CharacterAge": "??歲",
         "Birthday": "3月25日",
-        "CharacterSSRNew": "ぱんぱかぱーん！\nアリスはメイド勇者にジョブチェンジしました！",
-        "ProfileIntroduction": "色々あってメイド服を着ることになったミレニアムサイエンススクール所属、ゲーム開発部の部員。\n\n相変わらずメイド服にあまり慣れていないものの、克服して一人前のメイド勇者になるべく日々修行中のようだ。",
-        "Hobby": "ゲーム（特にRPG）",
+        "CharacterSSRNew": "乓啪喀乓──！\n愛麗絲轉職成女僕勇者了！",
+        "ProfileIntroduction": "因為各種原因穿上女僕裝的千年科學學園所屬，遊戲開發部的成員。\n\n仍然處於不習慣女僕裝的狀態，為了加以克服並成為女僕勇者，似乎正在日夜修行之中。",
+        "Hobby": "遊戲（特別是RPG）",
         "CharacterVoice": "田中美海",
         "BirthDay": "3/25",
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
         "CharHeightMetric": "152cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "4'11\"",
         "StabilityPoint": 1384,
         "AttackPower1": 397,
         "AttackPower100": 3975,
@@ -76076,7 +76135,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Koi is Love",
@@ -76087,7 +76146,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210303,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -76101,8 +76165,8 @@
         ],
         "IsLimited": 0,
         "Weapon": {
-            "Name": "光の剣：スーパーノヴァ",
-            "Desc": "アリスのレールガン。\n\nその出力と火力を生かし、今回は狙撃用として使うことになった。レールガンで狙撃は難しい？とにかく、目標を粉砕できれば狙撃といえるだろう。",
+            "Name": "光之劍：Supernova",
+            "Desc": "愛麗絲的電磁砲。\n維持其功率和火力，這次被用於狙擊。用電磁砲很難狙擊？反正只要能粉碎目標就是狙擊吧。",
             "AdaptationType": "Street",
             "AdaptationValue": 1,
             "AttackPower1": 175,
@@ -76247,7 +76311,7 @@
         "Id": 10067,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 137,
@@ -76276,19 +76340,19 @@
         ],
         "CollectionBG": "BG_BunnyGirl_Collection",
         "FamilyName": "飛鳥馬",
-        "PersonalName": "トキ",
-        "SchoolYear": "1年生",
-        "CharacterAge": "16歳",
+        "PersonalName": "季",
+        "SchoolYear": "1年級",
+        "CharacterAge": "16歲",
         "Birthday": "8月16日",
-        "CharacterSSRNew": "作戦遂行準備、完了。いつでも行けます。\nこの格好……？何か問題でも？",
-        "ProfileIntroduction": "潜入作戦なら当然バニーガール服だと信じてやまない、ミレニアムサイエンススクール所属、秘密組織「C&C」のエージェント。\n\n普段特殊な立ち位置にいたからか、あまり縁がなかった潜入任務を任されたことに、いつもより少しテンションが上がっている模様。C&Cの先輩と同じような任務ができる事に内心嬉しそうな姿を見せるが、本人は平静を装っている。",
-        "Hobby": "探している最中",
+        "CharacterSSRNew": "作戰執行準備完畢。隨時都能出發。\n 這副打扮……？有什麼問題嗎？",
+        "ProfileIntroduction": "對潛入作戰當然要穿兔女郎裝深信不疑的千年科學學園所屬，秘密組織「C&C」的特務。\n\n平常擔任特殊職務而少有機會能接觸潛入任務，因此心情似乎比平常更高昂。對於能夠執行與C&C的前輩們相同的任務顯得相當開心，但本人卻故作鎮定。",
+        "Hobby": "尋找中",
         "CharacterVoice": "石川由依",
         "BirthDay": "8/16",
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
         "CharHeightMetric": "165cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'4\"",
         "StabilityPoint": 1384,
         "AttackPower1": 268,
         "AttackPower100": 2682,
@@ -76636,7 +76700,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Midsummer cat",
@@ -76647,7 +76711,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210302,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -76660,8 +76729,8 @@
         ],
         "IsLimited": 0,
         "Weapon": {
-            "Name": "シークレットタイム",
-            "Desc": "トキ専用のアサルトライフル。\n\n通常の任務だけでなく秘密作戦にも適していると彼女は主張している。彼女自身の手によって、その主張が正しいものであると証明してくれる。",
+            "Name": "Secret Time",
+            "Desc": "季專用的突擊步槍。\n\n不只是一般任務，此武器也很適合執行隱密作戰是她的主張。這個主張將會由她親自證明。",
             "AdaptationType": "Outdoor",
             "AdaptationValue": 1,
             "AttackPower1": 118,
@@ -76806,7 +76875,7 @@
         "Id": 26009,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 138,
@@ -76835,19 +76904,19 @@
         ],
         "CollectionBG": "BG_OldHouseOutside_Collection",
         "FamilyName": "花岡",
-        "PersonalName": "ユズ",
-        "SchoolYear": "1年生",
-        "CharacterAge": "16歳",
+        "PersonalName": "柚子",
+        "SchoolYear": "1年級",
+        "CharacterAge": "16歲",
         "Birthday": "8月12日",
         "CharacterSSRNew": "",
-        "ProfileIntroduction": "色々あってメイド服を着ることになったミレニアムサイエンススクール所属、ゲーム開発部の部長。\n\n普段と違う格好でもユズはユズのままではあるが、少しだけできる事が広がった模様。ゲーム開発部のみんなと一緒に、様々な困難に立ち向かうことに。",
-        "Hobby": "ゲーム制作",
+        "ProfileIntroduction": "因為各種原因穿上女僕裝的千年科學學園所屬，遊戲開發部的部長。\n\n就算服裝與平時不同，柚子依然還是柚子，不過能做的事似乎變多了。決定和遊戲開發部的大家一起面對各式各樣的困難。",
+        "Hobby": "遊戲製作",
         "CharacterVoice": "寺澤百花",
         "BirthDay": "8/12",
         "Illustrator": "YutokaMizu",
         "Designer": "YutokaMizu",
         "CharHeightMetric": "150cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "4'11\"",
         "StabilityPoint": 1095,
         "AttackPower1": 240,
         "AttackPower100": 2407,
@@ -76868,7 +76937,7 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "潛入Start！",
+                "Name": "潛入Start!",
                 "Desc": "對圓形範圍內的敵人造成攻擊力<?1>的傷害，給予周圍圓環範圍相同的傷害/\n但是，重複受到的傷害只套用攻擊力<?2>的傷害",
                 "Parameters": [
                     [
@@ -77148,7 +77217,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Guruguru Usagi",
@@ -77159,7 +77228,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210304,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -77172,8 +77246,8 @@
         ],
         "IsLimited": 2,
         "Weapon": {
-            "Name": "にゃん's ダッシュ",
-            "Desc": "ユズのグレネードランチャー。\n\nいつでもどこでも、箱の中からでさえも、彼女の榴弾が火を吹くだろう。",
+            "Name": "喵's Dash",
+            "Desc": "柚子的榴彈發射器。\n\n無論何時何地，甚至在箱子裡也是，她的榴彈依然會點火吧。",
             "AdaptationType": "Outdoor",
             "AdaptationValue": 2,
             "AttackPower1": 85,

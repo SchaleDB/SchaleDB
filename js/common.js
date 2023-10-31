@@ -2301,7 +2301,6 @@ class EnemyFinder {
 
         const enemyListItem = statPreviewEnemyList[index]
         const enemy = find(data.enemies, 'Id', enemyListItem.id)[0]
-        const enemysize = getEnemySize(enemy)
 
         statPreviewSelectedEnemyId = enemyListItem.id
         statPreviewSelectedEnemyGrade = enemyListItem.grade
@@ -2321,8 +2320,8 @@ class EnemyFinder {
 
         $('#statpreview-enemy-icon').removeClass('elite champion boss').addClass(enemyListItem.rank.toLowerCase())
 
-        $('#statpreview-enemy-size').toggle(enemysize != null)
-        $('#statpreview-enemy-size .label').text(enemysize != null ? getLocalizedString('EnemyTags', enemysize) : '')
+        $('#statpreview-enemy-size').toggle(enemy.Size != null)
+        $('#statpreview-enemy-size .label').text(enemy.Size != null ? getLocalizedString('CharacterSize', enemy.Size) : '')
 
         $("#statpreview-enemy-attacktype .icon-type").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-sonic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
         $("#statpreview-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
@@ -6026,9 +6025,7 @@ function changeRaidEnemy(num) {
     $("#ba-raid-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
     $("#ba-raid-enemy-defensetype .label").text(getLocalizedString('ArmorType',enemy.ArmorType))
 
-    let enemysize = getEnemySize(enemy)
-
-    $('#ba-raid-enemy-size').toggle(enemysize != null).find('.label').text(enemysize != null ? getLocalizedString('EnemyTags', enemysize) : '')
+    $('#ba-raid-enemy-size').toggle(enemy.Size != null).find('.label').text(enemy.Size != null ? getLocalizedString('CharacterSize', enemy.Size) : '')
     $('#ba-raid-enemy-name').html(getTranslatedString(enemy, 'Name'))
     // $('#ba-raid-enemy-class').removeClass("ba-class-main ba-class-support").addClass(`ba-class-${enemy.SquadType.toLowerCase()}`)
     // $('#ba-raid-enemy-class .label').text(getLocalizedString('SquadType', enemy.SquadType))
@@ -6096,11 +6093,6 @@ function addRaidEnemyBonusStats(id, enemyStats, raidDifficulty, statsTableElemen
         $(`${statsTableElement} .stat-MaxHP .stat-value`).text(maxHPDisplay)
     }
 
-}
-
-function getEnemySize(enemy) {
-    let size = enemy.Tags.filter(x => x.includes("Enemy"))
-    return (size.length == 0) ? null : size[0]
 }
 
 function loadStage(id) {
@@ -7982,10 +7974,8 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
     $('#ba-stage-enemy-class').removeClass("ba-class-main ba-class-support").addClass(`ba-class-${enemy.SquadType.toLowerCase()}`)
     $('#ba-stage-enemy-class .label').text(getLocalizedString('SquadType', enemy.SquadType))
 
-    let enemysize = getEnemySize(enemy)
-
-    $('#ba-stage-enemy-size .label').text(enemysize != null ? getLocalizedString('EnemyTags', enemysize) : '')
-    $('#ba-stage-enemy-size').toggle(enemysize != null)
+    $('#ba-stage-enemy-size .label').text(enemy.Size != null ? getLocalizedString('CharacterSize', enemy.Size) : '')
+    $('#ba-stage-enemy-size').toggle(enemy.Size != null)
     $("#ba-stage-enemy-attacktype .icon-type").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-sonic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
     $("#ba-stage-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
     $("#ba-stage-enemy-attacktype .label").text(getLocalizedString('BulletType',enemy.BulletType))

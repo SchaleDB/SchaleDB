@@ -320,7 +320,7 @@
                 180
             ],
             "Name": "Binah",
-            "Profile": "Decagrammaton is an artificial intelligence system claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\n\nBinah, the third prophet of Decagrammaton, was first seen in the desert district of Abyd"
+            "Profile": "Decagrammaton is an artificial intelligence system claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\n\nBinah, the third prophet of Decagrammaton, was first seen in the desert district of Abydos.\nWhy Binah came here is unknown, but it's too dangerous to be left to do as it pleases."
         },
         {
             "Id": 2,
@@ -574,7 +574,7 @@
                 240
             ],
             "Name": "Chesed",
-            "Profile": "Decagrammaton is an artificial intelligence system claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\n\nChesed, the fourth prophet of Decagrammaton, has control of an abandoned munitions facto"
+            "Profile": "Decagrammaton is an artificial intelligence system claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\n\nChesed, the fourth prophet of Decagrammaton, has control of an abandoned munitions factory on the outskirts of Millennium.\nKivotos will face unprecedented disaster if Chesed produces an unlimited supply of troops."
         },
         {
             "Id": 3,
@@ -585,7 +585,7 @@
             ],
             "MaxDifficulty": [
                 6,
-                5,
+                6,
                 4
             ],
             "PathName": "Shirokuro",
@@ -1350,7 +1350,7 @@
                 240
             ],
             "Name": "Shiro & Kuro",
-            "Profile": "A mysterious phenomenon has been reported in Slumpia, a theme park that went bankrupt long ago. Rumor has it that the animatronics and other attractions have now come back to life in the middle of the night to attack people.\n\nIt is unknown why the ani"
+            "Profile": "A mysterious phenomenon has been reported in Slumpia, a theme park that went bankrupt long ago. Rumor has it that the animatronics and other attractions have now come back to life in the middle of the night to attack people.\n\nIt is unknown why the animatronics, Shiro and Kuro, are active again, but it seems clear that they are trying to recreate the wonderful festivals of the theme park's past."
         },
         {
             "Id": 4,
@@ -1767,7 +1767,7 @@
                 240
             ],
             "Name": "Hieronymus",
-            "Profile": "An unknown entity was discovered beneath the old cathedral ruins in Trinity, supposedly a test subject created by Gematria based on ancient doctrines.\nIt is Hieronymus, the final form of the artificial angel Communio Sanctorum. We can't leave its incredi"
+            "Profile": "An unknown entity was discovered beneath the old cathedral ruins in Trinity, supposedly a test subject created by Gematria based on ancient doctrines.\nIt is Hieronymus, the final form of the artificial angel Communio Sanctorum. We can't leave its incredible power unchecked. For the safety of Kivotos!"
         },
         {
             "Id": 5,
@@ -2514,7 +2514,7 @@
                 180
             ],
             "Name": "KAITEN FX Mk.0",
-            "Profile": "The Kaitengers' secret weapon has appeared to block the road to their base. The Kaitengers plan to use the stolen funds and technologies to build a giant combination mecha: KAITEN FX Mk.0. It may look cool, but no good can come of letting them have someth"
+            "Profile": "The Kaitengers' secret weapon has appeared to block the road to their base. The Kaitengers plan to use the stolen funds and technologies to build a giant combination mecha: KAITEN FX Mk.0. It may look cool, but no good can come of letting them have something like that. Time to put a stop to it."
         },
         {
             "Id": 6,
@@ -2705,7 +2705,7 @@
                             "",
                             "",
                             "",
-                            "\nIf the defense reduction debuff is not removed before the end of the skill's duration, deals 250% damage to enemies in a fan-shaped area."
+                            "\nIf the DEF reduction debuff is not removed before the end of the skill's duration, deals 250% damage to enemies in a fan-shaped area."
                         ]
                     ]
                 },
@@ -2813,6 +2813,16 @@
                             ],
                             "CriticalCheck": "Check",
                             "CanEvade": false
+                        },
+                        {
+                            "Type": "BuffAlly",
+                            "Value": [
+                                [
+                                    -5000
+                                ]
+                            ],
+                            "Stat": "AttackPower_Coefficient",
+                            "Channel": 602
                         }
                     ],
                     "EffectCombine": [
@@ -2826,7 +2836,7 @@
                         ]
                     },
                     "Name": "White-Hot Heat Vision",
-                    "Desc": "Emits White-Hot Heat Vision against one enemy that chains to the nearest enemy (up to 2 times).\n<b>1st target</b>: Decreases the <d:DEF> of the target by <b>9,999</b> for 60s and continuously deals 100% damage to them every 1s for 10s. If the defense reduction debuff is not removed before the end of the skill's duration, deals 250% damage to enemies in a fan-shaped area.\n<b>2nd target</b>: Continuously deals 20% damage to them every 1s for 10s.\n<b>3rd target</b>: Continuously deals 10% damage to them every 1s for 10s."
+                    "Desc": "Emits White-Hot Heat Vision against one enemy that chains to the nearest enemy (up to 2 times).\n<b>1st target</b>: Decreases the <d:DEF> of the target by <b>9,999</b> for 60s and continuously deals 100% damage to them every 1s for 10s. If the DEF reduction debuff is not removed before the end of the skill's duration, deals 250% damage to enemies in a fan-shaped area and decreases their <d:ATK> by 50% for 40s.\n<b>2nd target</b>: Continuously deals 20% damage to them every 1s for 10s.\n<b>3rd target</b>: Continuously deals 10% damage to them every 1s for 10s."
                 },
                 {
                     "Id": "Perorozilla01Ex02",
@@ -3427,7 +3437,7 @@
                 240
             ],
             "Name": "Hod",
-            "Profile": "Decagrammaton is an AI claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\nHod was originally a built-in network unit at Millennium, but now claims to be the eighth prophet of Decagrammaton sinc"
+            "Profile": "Decagrammaton is an AI claiming to be a divine seeker of truth. It is followed by ten prophets who make appearances all over Kivotos.\nHod was originally a built-in network unit at Millennium, but now claims to be the eighth prophet of Decagrammaton since being hacked by an unidentified AI.\nThe district's safety is in jeopardy until this computing unit powered by Millennium technology is stopped."
         },
         {
             "Id": 8,
@@ -3576,7 +3586,7 @@
                     ],
                     "EffectCombineLabel": {
                         "Icon": [
-                            "buff/Combat_Icon_Buff_Shield"
+                            "buff/Buff_Shield.webp"
                         ],
                         "StackLabelTranslated": [
                             "setting_off",
@@ -3667,7 +3677,7 @@
                     ],
                     "EffectCombineLabel": {
                         "Icon": [
-                            "buff/Combat_Icon_Buff_Shield"
+                            "buff/Buff_Shield.webp"
                         ],
                         "StackLabelTranslated": [
                             "setting_off",
@@ -3782,7 +3792,7 @@
                     ],
                     "EffectCombineLabel": {
                         "Icon": [
-                            "buff/Combat_Icon_Buff_Shield"
+                            "buff/Buff_Shield.webp"
                         ],
                         "StackLabelTranslated": [
                             "setting_off",
@@ -3874,7 +3884,7 @@
                     ],
                     "EffectCombineLabel": {
                         "Icon": [
-                            "buff/Combat_Icon_Buff_Shield"
+                            "buff/Buff_Shield.webp"
                         ],
                         "StackLabelTranslated": [
                             "setting_off",
@@ -3965,7 +3975,7 @@
                     ],
                     "EffectCombineLabel": {
                         "Icon": [
-                            "buff/Combat_Icon_Buff_Shield"
+                            "buff/Buff_Shield.webp"
                         ],
                         "StackLabelTranslated": [
                             "setting_off",
@@ -4073,7 +4083,7 @@
                     ],
                     "EffectCombineLabel": {
                         "Icon": [
-                            "buff/Combat_Icon_Buff_Shield"
+                            "buff/Buff_Shield.webp"
                         ],
                         "StackLabelTranslated": [
                             "setting_off",
@@ -4159,7 +4169,7 @@
                     ],
                     "EffectCombineLabel": {
                         "Icon": [
-                            "buff/Combat_Icon_Buff_Shield"
+                            "buff/Buff_Shield.webp"
                         ],
                         "StackLabelTranslated": [
                             "setting_off",
@@ -4237,7 +4247,7 @@
                 240
             ],
             "Name": "Goz",
-            "Profile": "A mysterious phenomenon has been reported in Slumpia, a now-desolate theme park that went bankrupt long ago. Rumor has it that the park's decaying animatronics and other attractions are coming to life in the middle of the night, and they have violent stre"
+            "Profile": "A mysterious phenomenon has been reported in Slumpia, a now-desolate theme park that went bankrupt long ago. Rumor has it that the park's decaying animatronics and other attractions are coming to life in the middle of the night, and they have violent streak.\n\nIn the midst of this mystery, Goz seems intent on keeping the show running. What intentions are hidden behind that bizarre smile? It will be a challenge to find out."
         },
         {
             "Id": 9,
@@ -25198,6 +25208,16 @@
                     "End": 1698087600,
                     "RewardSet": 3700,
                     "RewardSetMax": 48
+                },
+                {
+                    "SeasonId": 50,
+                    "SeasonDisplay": 48,
+                    "RaidId": 3,
+                    "Terrain": "Street",
+                    "Start": 1698717600,
+                    "End": 1699297200,
+                    "RewardSet": 3000,
+                    "RewardSetMax": 48
                 }
             ],
             "EliminateSeasons": [],
@@ -32937,6 +32957,584 @@
                             ],
                             [
                                 142,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        80000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        90000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        100000000,
+                        [
+                            [
+                                3000001,
+                                1500000
+                            ]
+                        ]
+                    ],
+                    [
+                        120000000,
+                        [
+                            [
+                                3000001,
+                                2000000
+                            ]
+                        ]
+                    ],
+                    [
+                        150000000,
+                        [
+                            [
+                                3000001,
+                                2500000
+                            ]
+                        ]
+                    ],
+                    [
+                        180000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        210000000,
+                        [
+                            [
+                                2000003,
+                                32
+                            ]
+                        ]
+                    ],
+                    [
+                        240000000,
+                        [
+                            [
+                                9998,
+                                5
+                            ]
+                        ]
+                    ],
+                    [
+                        270000000,
+                        [
+                            [
+                                2000004,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        310000000,
+                        [
+                            [
+                                100008,
+                                1
+                            ]
+                        ]
+                    ]
+                ],
+                "3000": [
+                    [
+                        250000,
+                        [
+                            [
+                                2000001,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        500000,
+                        [
+                            [
+                                10,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        750000,
+                        [
+                            [
+                                130,
+                                6
+                            ],
+                            [
+                                100,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1000000,
+                        [
+                            [
+                                3000001,
+                                300000
+                            ]
+                        ]
+                    ],
+                    [
+                        1250000,
+                        [
+                            [
+                                2000002,
+                                8
+                            ]
+                        ]
+                    ],
+                    [
+                        1500000,
+                        [
+                            [
+                                11,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        1750000,
+                        [
+                            [
+                                131,
+                                3
+                            ],
+                            [
+                                101,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        2000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        2500000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ]
+                        ]
+                    ],
+                    [
+                        3000000,
+                        [
+                            [
+                                12,
+                                3
+                            ]
+                        ]
+                    ],
+                    [
+                        3500000,
+                        [
+                            [
+                                132,
+                                2
+                            ],
+                            [
+                                102,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        4000000,
+                        [
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        4500000,
+                        [
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5000000,
+                        [
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        5500000,
+                        [
+                            [
+                                133,
+                                1
+                            ],
+                            [
+                                103,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        6000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        7000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        8000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        9000000,
+                        [
+                            [
+                                130,
+                                12
+                            ],
+                            [
+                                100,
+                                12
+                            ],
+                            [
+                                131,
+                                6
+                            ],
+                            [
+                                101,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        10000000,
+                        [
+                            [
+                                3000001,
+                                500000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        12000000,
+                        [
+                            [
+                                2000003,
+                                4
+                            ],
+                            [
+                                2000004,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        14000000,
+                        [
+                            [
+                                12,
+                                3
+                            ],
+                            [
+                                13,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        16000000,
+                        [
+                            [
+                                132,
+                                2
+                            ],
+                            [
+                                102,
+                                2
+                            ],
+                            [
+                                133,
+                                1
+                            ],
+                            [
+                                103,
+                                1
+                            ]
+                        ]
+                    ],
+                    [
+                        18000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        20000000,
+                        [
+                            [
+                                2000001,
+                                32
+                            ],
+                            [
+                                2000002,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        22000000,
+                        [
+                            [
+                                10,
+                                24
+                            ],
+                            [
+                                11,
+                                12
+                            ]
+                        ]
+                    ],
+                    [
+                        24000000,
+                        [
+                            [
+                                130,
+                                12
+                            ],
+                            [
+                                100,
+                                12
+                            ],
+                            [
+                                131,
+                                6
+                            ],
+                            [
+                                101,
+                                6
+                            ]
+                        ]
+                    ],
+                    [
+                        26000000,
+                        [
+                            [
+                                3000001,
+                                1200000
+                            ],
+                            [
+                                3000003,
+                                150
+                            ]
+                        ]
+                    ],
+                    [
+                        29000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        32000000,
+                        [
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        35000000,
+                        [
+                            [
+                                132,
+                                4
+                            ],
+                            [
+                                102,
+                                4
+                            ],
+                            [
+                                133,
+                                2
+                            ],
+                            [
+                                103,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        38000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        41000000,
+                        [
+                            [
+                                3000001,
+                                3000000
+                            ]
+                        ]
+                    ],
+                    [
+                        44000000,
+                        [
+                            [
+                                2000002,
+                                32
+                            ],
+                            [
+                                2000003,
+                                16
+                            ]
+                        ]
+                    ],
+                    [
+                        47000000,
+                        [
+                            [
+                                3000003,
+                                200
+                            ]
+                        ]
+                    ],
+                    [
+                        50000000,
+                        [
+                            [
+                                23,
+                                20
+                            ]
+                        ]
+                    ],
+                    [
+                        60000000,
+                        [
+                            [
+                                2000003,
+                                8
+                            ],
+                            [
+                                2000004,
+                                2
+                            ],
+                            [
+                                12,
+                                6
+                            ],
+                            [
+                                13,
+                                2
+                            ]
+                        ]
+                    ],
+                    [
+                        70000000,
+                        [
+                            [
+                                131,
+                                6
+                            ],
+                            [
+                                101,
+                                6
+                            ],
+                            [
+                                132,
+                                4
+                            ],
+                            [
+                                102,
                                 4
                             ]
                         ]

@@ -1102,7 +1102,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -5652,7 +5652,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -26328,6 +26328,10 @@
                 [
                     207307,
                     0
+                ],
+                [
+                    12207,
+                    0
                 ]
             ],
             []
@@ -26883,6 +26887,10 @@
             [
                 [
                     2301,
+                    0
+                ],
+                [
+                    12301,
                     0
                 ]
             ],
@@ -27449,6 +27457,10 @@
             [
                 [
                     2301,
+                    0
+                ],
+                [
+                    12301,
                     0
                 ]
             ],
@@ -29034,7 +29046,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210301,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -32830,7 +32847,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -33501,7 +33518,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -52791,9 +52808,9 @@
                         "Type": "BuffTarget",
                         "Restrictions": [
                             {
-                                "Property": "Tags",
-                                "Operand": "Contains",
-                                "Value": "EnemyMedium"
+                                "Property": "Size",
+                                "Operand": "Equal",
+                                "Value": "Medium"
                             }
                         ],
                         "Value": [
@@ -69115,6 +69132,13 @@
                     },
                     {
                         "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "NotEqual",
+                                "Value": "Medium"
+                            }
+                        ],
                         "Value": [
                             [
                                 -686,
@@ -69122,7 +69146,21 @@
                                 -995,
                                 -1098,
                                 -1304
-                            ],
+                            ]
+                        ],
+                        "Stat": "DodgePoint_Coefficient",
+                        "Channel": 607
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "Equal",
+                                "Value": "Medium"
+                            }
+                        ],
+                        "Value": [
                             [
                                 -1715,
                                 -1972,
@@ -69136,6 +69174,13 @@
                     },
                     {
                         "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "NotEqual",
+                                "Value": "Medium"
+                            }
+                        ],
                         "Value": [
                             [
                                 -686,
@@ -69143,7 +69188,21 @@
                                 -995,
                                 -1098,
                                 -1304
-                            ],
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "Equal",
+                                "Value": "Medium"
+                            }
+                        ],
+                        "Value": [
                             [
                                 -1715,
                                 -1972,
@@ -75698,7 +75757,7 @@
         "Id": 10066,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 136,
@@ -75739,7 +75798,7 @@
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
         "CharHeightMetric": "152cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "4'11\"",
         "StabilityPoint": 1384,
         "AttackPower1": 397,
         "AttackPower100": 3975,
@@ -76069,7 +76128,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Koi is Love",
@@ -76080,7 +76139,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210303,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -76240,7 +76304,7 @@
         "Id": 10067,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 137,
@@ -76281,7 +76345,7 @@
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
         "CharHeightMetric": "165cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'4\"",
         "StabilityPoint": 1384,
         "AttackPower1": 268,
         "AttackPower100": 2682,
@@ -76629,7 +76693,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Midsummer cat",
@@ -76640,7 +76704,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210302,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -76799,7 +76868,7 @@
         "Id": 26009,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 138,
@@ -76840,7 +76909,7 @@
         "Illustrator": "YutokaMizu",
         "Designer": "YutokaMizu",
         "CharHeightMetric": "150cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "4'11\"",
         "StabilityPoint": 1095,
         "AttackPower1": 240,
         "AttackPower100": 2407,
@@ -77141,7 +77210,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Guruguru Usagi",
@@ -77152,7 +77221,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210304,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [

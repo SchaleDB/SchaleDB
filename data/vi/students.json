@@ -1102,7 +1102,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -5652,7 +5652,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -26328,6 +26328,10 @@
                 [
                     207307,
                     0
+                ],
+                [
+                    12207,
+                    0
                 ]
             ],
             []
@@ -26883,6 +26887,10 @@
             [
                 [
                     2301,
+                    0
+                ],
+                [
+                    12301,
                     0
                 ]
             ],
@@ -27449,6 +27457,10 @@
             [
                 [
                     2301,
+                    0
+                ],
+                [
+                    12301,
                     0
                 ]
             ],
@@ -29034,7 +29046,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210301,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -32830,7 +32847,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -33501,7 +33518,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -52777,9 +52794,9 @@
                         "Type": "BuffTarget",
                         "Restrictions": [
                             {
-                                "Property": "Tags",
-                                "Operand": "Contains",
-                                "Value": "EnemyMedium"
+                                "Property": "Size",
+                                "Operand": "Equal",
+                                "Value": "Medium"
                             }
                         ],
                         "Value": [
@@ -69173,6 +69190,13 @@
                     },
                     {
                         "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "NotEqual",
+                                "Value": "Medium"
+                            }
+                        ],
                         "Value": [
                             [
                                 -686,
@@ -69180,7 +69204,21 @@
                                 -995,
                                 -1098,
                                 -1304
-                            ],
+                            ]
+                        ],
+                        "Stat": "DodgePoint_Coefficient",
+                        "Channel": 607
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "Equal",
+                                "Value": "Medium"
+                            }
+                        ],
+                        "Value": [
                             [
                                 -1715,
                                 -1972,
@@ -69194,6 +69232,13 @@
                     },
                     {
                         "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "NotEqual",
+                                "Value": "Medium"
+                            }
+                        ],
                         "Value": [
                             [
                                 -686,
@@ -69201,7 +69246,21 @@
                                 -995,
                                 -1098,
                                 -1304
-                            ],
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Restrictions": [
+                            {
+                                "Property": "Size",
+                                "Operand": "Equal",
+                                "Value": "Medium"
+                            }
+                        ],
+                        "Value": [
                             [
                                 -1715,
                                 -1972,
@@ -75756,7 +75815,7 @@
         "Id": 10066,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 136,
@@ -75797,7 +75856,7 @@
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
         "CharHeightMetric": "152cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "4'11\"",
         "StabilityPoint": 1384,
         "AttackPower1": 397,
         "AttackPower100": 3975,
@@ -75841,7 +75900,7 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "Aris, Cleaning Up!",
+                "Name": "Aris, Clean Up!",
                 "Desc": "Deals <?1> damage to one enemy.",
                 "Parameters": [
                     [
@@ -75878,7 +75937,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "Meticulous Care",
+                "Name": "Earnest Handiwork",
                 "Desc": "Every 15 normal attacks, increases <b:EnhanceMysticRate> by <?1> and <b:ATK> by <?2> for <?3>.",
                 "Parameters": [
                     [
@@ -75963,7 +76022,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "Job Bonus!",
+                "Name": "Paycheck Bonus!",
                 "Desc": "Increases <b:CriticalDamage> by <?1>.",
                 "Parameters": [
                     [
@@ -76001,7 +76060,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "Job Bonus!+",
+                "Name": "Paycheck Bonus!+",
                 "Desc": "Increases <b:ATK> by <?1> and <b:CriticalDamage> by <?2>.",
                 "Parameters": [
                     [
@@ -76051,7 +76110,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "Job Trait: Maid Hero!",
+                "Name": "Class Change: Hero Maid!",
                 "Desc": "Aris' normal attack changes to damage one enemy and deals <?1> damage as an additional hit.",
                 "Parameters": [
                     [
@@ -76127,7 +76186,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Koi is Love",
@@ -76138,7 +76197,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210303,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -76298,7 +76362,7 @@
         "Id": 10067,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 137,
@@ -76339,7 +76403,7 @@
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
         "CharHeightMetric": "165cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'4\"",
         "StabilityPoint": 1384,
         "AttackPower1": 268,
         "AttackPower100": 2682,
@@ -76385,7 +76449,7 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "Special Armament: Arm Gear",
+                "Name": "Special Weapon: Gauntlet",
                 "Desc": "Deals <?1> damage to one enemy.",
                 "Parameters": [
                     [
@@ -76449,7 +76513,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "Agent's Secret Tools",
+                "Name": "Covert Agent Tool",
                 "Desc": "Every 40s, deals <?1> damage to one enemy and decreases their <d:CriticalDamageRateResist> by <?2> for 30s.",
                 "Parameters": [
                     [
@@ -76520,7 +76584,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "Expertise",
+                "Name": "Agent's Expertise",
                 "Desc": "Increases <b:ATK> by <?1>.",
                 "Parameters": [
                     [
@@ -76558,7 +76622,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "Expertise+",
+                "Name": "Agent's Expertise+",
                 "Desc": "Increases <b:AttackSpeed> by <?1> and <b:ATK> by <?2>.",
                 "Parameters": [
                     [
@@ -76608,7 +76672,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "Armament Handling",
+                "Name": "Weapon Mastery",
                 "Desc": "Whenever Toki uses her EX skill, increases <b:EnhanceExplosionRate> by <?1> for 20s.",
                 "Parameters": [
                     [
@@ -76687,7 +76751,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Midsummer cat",
@@ -76698,7 +76762,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210302,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -76857,7 +76926,7 @@
         "Id": 26009,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 138,
@@ -76898,7 +76967,7 @@
         "Illustrator": "YutokaMizu",
         "Designer": "YutokaMizu",
         "CharHeightMetric": "150cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "4'11\"",
         "StabilityPoint": 1095,
         "AttackPower1": 240,
         "AttackPower100": 2407,
@@ -76919,7 +76988,7 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "Infiltration Start!",
+                "Name": "Infiltration, Start!",
                 "Desc": "Deals <?1> damage to enemies in a circular area and then deals the same damage to enemies in a surrounding donut-shaped area. Enemies that overlap both areas only receive <?2> damage on the second hit.",
                 "Parameters": [
                     [
@@ -76986,7 +77055,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "High Score Attack",
+                "Name": "High Score Combo",
                 "Desc": "Every 30s, deals <?1> damage to enemies in a circular area.",
                 "Parameters": [
                     [
@@ -77032,7 +77101,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "Precision Coding",
+                "Name": "Precise Coding",
                 "Desc": "Increases <b:CriticalDamage> by <?1>.",
                 "Parameters": [
                     [
@@ -77070,7 +77139,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "Precision Coding+",
+                "Name": "Precise Coding+",
                 "Desc": "Increases <b:CriticalChance> by <?1> and <b:CriticalDamage> by <?2>.",
                 "Parameters": [
                     [
@@ -77120,7 +77189,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "Game Development Department Bonds",
+                "Name": "Game Developers' Bond",
                 "Desc": "Increases all allies' <b:ATK> by <?1>.",
                 "Parameters": [
                     [
@@ -77199,7 +77268,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Guruguru Usagi",
@@ -77210,7 +77279,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210304,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
