@@ -20,7 +20,7 @@ const conquest_events = [815, 822, 10815]
 const module_list = ['home','students','raids','stages','items','craft']
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
-const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_02", "Defense": "TimeAttack_SlotBG_01", "Destruction": "TimeAttack_SlotBG_03"}
+const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_02", "Defense": "TimeAttack_SlotBG_01", "Destruction": "TimeAttack_SlotBG_03", "Escort": "TimeAttack_SlotBG_03"}
 const searchDelay = 100
 const searchMaxResults = 40
 const altSprite = [10017, 10033, 10041, 10042, 10043, 10048, 20009, 20014, 10062, 10071, 10072, 26010]
@@ -2180,7 +2180,7 @@ class EnemyFinder {
 
         data.raids.WorldRaid.forEach(raid => {
             raid.EnemyList.forEach((difficulty, difficultyId) => {
-                if (!raid.IsReleased[regionID] || difficultyId > raid.DifficultyMax[regionID]) return
+                if (!raid.IsReleased[regionID] || difficultyId > raid.MaxDifficulty[regionID]) return
                 difficulty.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && !enemy.DevName.includes('_Resort_') && !enemy.DevName.includes('_HolyRelic_') && !enemy.DevName.includes('_HolyRelic02_')) {
@@ -5678,7 +5678,7 @@ function loadRaid(raidId) {
             }
             $('#ba-raid-info-tab-profile').hide()
             raid = findOrDefault(data.raids.WorldRaid,"Id",raidId,814000)[0]
-            const maxDifficulty = raid.DifficultyMax[regionID]
+            const maxDifficulty = raid.MaxDifficulty[regionID]
             if (raid_difficulty > maxDifficulty)  {
                 raid_difficulty = 0
             }
@@ -6057,8 +6057,10 @@ function addRaidEnemyBonusStats(id, enemyStats, raidDifficulty, statsTableElemen
         case 7965031:
             maxHPDisplay = enemyStats.getTotalString('MaxHP')
 
+            tooltipText += `<div class="active-buff me-2"><img src="images/buff/Buff_MAXHP.webp" width="22" height="26" class=""></div><b>${enemyStats.getTotalString('MaxHP')}</b>`
+
             enemyStats.addBuff('MaxHP_Coefficient', 10000)
-            tooltipText += `<div class="active-buff me-2"><img src="images/buff/Buff_MAXHP.webp" width="22" height="26" class=""><span class="stack-count">2</span></div><b>${enemyStats.getTotalString('MaxHP')}</b>`
+            tooltipText += `\n<div class="active-buff me-2"><img src="images/buff/Buff_MAXHP.webp" width="22" height="26" class=""><span class="stack-count">2</span></div><b>${enemyStats.getTotalString('MaxHP')}</b>`
 
             enemyStats.addBuff('MaxHP_Coefficient', 10000)
             tooltipText += `\n<div class="active-buff me-2"><img src="images/buff/Buff_MAXHP.webp" width="22" height="26" class=""><span class="stack-count">3</span></div><b>${enemyStats.getTotalString('MaxHP')}</b>`
@@ -6066,11 +6068,10 @@ function addRaidEnemyBonusStats(id, enemyStats, raidDifficulty, statsTableElemen
             break
         case 7305101:
         case 7965002:
-            maxHPDisplay = enemyStats.getTotalString('MaxHP')
             if (raidDifficulty == 4) {
-                enemyStats.addBuff('MaxHP_Coefficient', 11000)
-                tooltipText += `<div class="active-buff me-2"><img src="images/buff/Buff_MAXHP.webp" width="22" height="26" class=""></div><b>${enemyStats.getTotalString('MaxHP')}</b>`
+                enemyStats.addBuff('MaxHP_Coefficient', 11000)                
             }
+            maxHPDisplay = enemyStats.getTotalString('MaxHP')
             break
 
         case 610220107:

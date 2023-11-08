@@ -60152,7 +60152,7 @@
         "CharacterVoice": "夏吉ゆうこ",
         "BirthDay": "8/5",
         "Illustrator": "Mx2J",
-        "Designer": "mimo",
+        "Designer": "ミモザ",
         "CharHeightMetric": "155cm",
         "CharHeightImperial": "5'1\"",
         "StabilityPoint": 1388,
@@ -88400,7 +88400,7 @@
         "CollectionBG": "BG_BigPlaza_Collection",
         "FamilyName": "미사카",
         "PersonalName": "미코토",
-        "SchoolYear": "3학년",
+        "SchoolYear": "2학년",
         "CharacterAge": "14세",
         "Birthday": "5월 2일",
         "CharacterSSRNew": "정말이지, 이곳도 정신없긴 매한가지네.",
@@ -88987,7 +88987,7 @@
         "CollectionBG": "BG_BigPlaza_Collection",
         "FamilyName": "쇼쿠호",
         "PersonalName": "미사키",
-        "SchoolYear": "3학년",
+        "SchoolYear": "2학년",
         "CharacterAge": "14세",
         "Birthday": "-",
         "CharacterSSRNew": "음~ 어떡할까나? 아아, 이쪽 이야기야?",
@@ -90035,6 +90035,601 @@
                 7,
                 7,
                 7
+            ]
+        ]
+    },
+    {
+        "Id": 10081,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 162,
+        "PathName": "Yukari",
+        "DevName": "CH0161",
+        "Name": "유카리",
+        "School": "Hyakkiyako",
+        "Club": "Hyakkayouran",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Sonic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "SR",
+        "WeaponImg": "weapon_icon_ch0161",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Hyakkiyako_Collection",
+        "FamilyName": "카데노코지",
+        "PersonalName": "유카리",
+        "SchoolYear": "1학년",
+        "CharacterAge": "15세",
+        "Birthday": "6월 16일",
+        "CharacterSSRNew": "저 유카리! 쾌진격의 시간이어요!",
+        "ProfileIntroduction": "백귀야행 학원 백화요란 분쟁조정위원회의 1학년 부원\n\n유서 깊은 카데노코지 가문의 후계자이지만, 가문의 업을 잇기보다 과거 자신이 동경하게 된 백화요란에 입부하기를 선택한 소녀. 거기에 강한 자부심을 가지고 있으며, 행동력만큼은 타의 추종을 불허한다. 때로는 문제에 부닥쳐 쓰러질 때도 있지만, 금세 밝은 얼굴로 훌훌 털고 일어나기를 주저하지 않는 장한 성격. 백화요란의 선배들을 존경하고 있으며, 그중에서도 특히나 나구사를 존경하고 있다. ",
+        "Hobby": "기도, 막과자 탐방",
+        "CharacterVoice": "村上まなつ",
+        "BirthDay": "6/16",
+        "Illustrator": "Mx2J",
+        "Designer": "Mx2J",
+        "CharHeightMetric": "155cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1988,
+        "AttackPower1": 328,
+        "AttackPower100": 3284,
+        "MaxHP1": 2236,
+        "MaxHP100": 19390,
+        "DefensePower1": 19,
+        "DefensePower100": 119,
+        "HealPower1": 1408,
+        "HealPower100": 4224,
+        "DodgePoint": 198,
+        "AccuracyPoint": 905,
+        "CriticalPoint": 201,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 35,
+                            "AttackStartDuration": 30,
+                            "AttackIngDuration": 40,
+                            "AttackEndDuration": 30,
+                            "AttackBurstRoundOverDelay": 30,
+                            "AttackReloadDuration": 80
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "올곧게 피어난 결의",
+                "Desc": "원형범위 내의 적에게 공격력 <?1> 대미지/\n추가로 자신이 가진 <s:Pray>을 10개 단위로 가능한만큼 소모하며, 소모한 <s:Pray> 10개마다 공격력 <?2> 확정 치명 대미지",
+                "Parameters": [
+                    [
+                        "159%",
+                        "183%",
+                        "230%",
+                        "254%",
+                        "302%"
+                    ],
+                    [
+                        "117%",
+                        "135%",
+                        "170%",
+                        "188%",
+                        "223%"
+                    ]
+                ],
+                "Cost": [
+                    7,
+                    7,
+                    7,
+                    7,
+                    7
+                ],
+                "Duration": 177,
+                "Range": 950,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 250
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            15927,
+                            18312,
+                            23092,
+                            25478,
+                            30257
+                        ]
+                    },
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Always",
+                        "Scale": [
+                            11760,
+                            13524,
+                            17052,
+                            18816,
+                            22344
+                        ]
+                    },
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Always",
+                        "Scale": [
+                            23520,
+                            27048,
+                            34104,
+                            37632,
+                            44680
+                        ]
+                    },
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Always",
+                        "Scale": [
+                            35280,
+                            40564,
+                            51148,
+                            56440,
+                            67024
+                        ]
+                    },
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Always",
+                        "Scale": [
+                            47032,
+                            54088,
+                            68200,
+                            75256,
+                            89360
+                        ]
+                    },
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Always",
+                        "Scale": [
+                            58792,
+                            67612,
+                            85244,
+                            94064,
+                            111704
+                        ]
+                    }
+                ],
+                "EffectCombine": [
+                    "DMGEcho"
+                ],
+                "EffectCombineLabel": {
+                    "Icon": [
+                        "buff/Special_Pray.webp"
+                    ],
+                    "StackLabel": [
+                        "&times;10",
+                        "&times;20",
+                        "&times;30",
+                        "&times;40",
+                        "&times;50"
+                    ]
+                }
+            },
+            {
+                "SkillType": "normal",
+                "Name": "애타게 기다려온 재회",
+                "Desc": "40초마다 <s:Pray> <?1> 획득(<s:Pray>은 최대 50개까지 중첩)/\n<b:ATK> <?2> 증가(30초간)",
+                "Parameters": [
+                    [
+                        "10개",
+                        "10개",
+                        "10개",
+                        "10개",
+                        "10개",
+                        "10개",
+                        "20개",
+                        "20개",
+                        "20개",
+                        "20개"
+                    ],
+                    [
+                        "5.4%",
+                        "6.3%",
+                        "7.2%",
+                        "9.2%",
+                        "10.3%",
+                        "11.5%",
+                        "14%",
+                        "15.3%",
+                        "16.7%",
+                        "19.7%"
+                    ]
+                ],
+                "Duration": 100,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                548,
+                                633,
+                                724,
+                                926,
+                                1035,
+                                1151,
+                                1402,
+                                1536,
+                                1676,
+                                1977
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "백화요란의 엘리~트",
+                "Desc": "<b:CriticalDamage> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "백화요란의 엘리~트+",
+                "Desc": "<b:ATK> <?1> 증가/\n추가로 <b:CriticalDamage> <?2> 증가",
+                "Parameters": [
+                    [
+                        "309",
+                        "324",
+                        "340",
+                        "401",
+                        "417",
+                        "432",
+                        "494",
+                        "509",
+                        "525",
+                        "586"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            309,
+                            324,
+                            340,
+                            401,
+                            417,
+                            432,
+                            494,
+                            509,
+                            525,
+                            586
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "고개 들어 마주한 책무",
+                "Desc": "자신을 제외한 아군이 소모한 코스트만큼 <s:Pray> 획득(<s:Pray>은 최대 50개까지 중첩)/\n<s:Pray>을 10개 획득할 때마다 <b:CriticalDamage> <?1> 증가(15초간)",
+                "Parameters": [
+                    [
+                        "8.1%",
+                        "8.5%",
+                        "8.9%",
+                        "10.6%",
+                        "11%",
+                        "11.4%",
+                        "13%",
+                        "13.4%",
+                        "13.8%",
+                        "15.5%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0161_EXTRAPASSIVESKILL",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                817,
+                                858,
+                                899,
+                                1062,
+                                1103,
+                                1144,
+                                1307,
+                                1348,
+                                1389,
+                                1552
+                            ]
+                        ],
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Channel": 11
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                7,
+                48
+            ],
+            [
+                8,
+                58
+            ],
+            [
+                2,
+                10
+            ],
+            [
+                3,
+                14
+            ],
+            [
+                5,
+                24
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            6,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Hue",
+        "FurnitureInteraction": [
+            [
+                [
+                    210321,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Dessert",
+            "Fashion",
+            "Simplicity"
+        ],
+        "FavorItemUniqueTags": [
+            "F_Yukari",
+            "F_Yukari2"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "백화요란 제식 소총 - 소녀의 결의",
+            "Desc": "유카리가 사용하는 백화요란의 제식 소총.\n\n과거 중학생 때 처음으로 눈에 각인한 동경의 상징이자, 소녀가 꿈을 꾼 끝에 각고의 노력을 통해 마침내 손에 넣은 결의의 증거. 거기에 담겨 있는 마음은 결코 그 누구에게도 지지 않는다.",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 144,
+            "AttackPower100": 1443,
+            "MaxHP1": 561,
+            "MaxHP100": 5607,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3000,
+                100
+            ],
+            [
+                3001,
+                3000,
+                101,
+                210
+            ],
+            [
+                3002,
+                3001,
+                102,
+                211
+            ],
+            [
+                3003,
+                3002,
+                103,
+                212
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                14,
+                29
+            ],
+            [
+                12,
+                18,
+                8,
+                23
+            ],
+            [
+                8,
+                18,
+                9,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4000
+            ],
+            [
+                4000
+            ],
+            [
+                4001,
+                4000,
+                100
+            ],
+            [
+                4001,
+                101,
+                210
+            ],
+            [
+                4002,
+                4001,
+                101,
+                210
+            ],
+            [
+                4002,
+                102,
+                211
+            ],
+            [
+                4003,
+                4002,
+                103,
+                212
+            ],
+            [
+                4003,
+                103,
+                212
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                5,
+                12
+            ],
+            [
+                5,
+                12,
+                8,
+                17
+            ],
+            [
+                8,
+                4,
+                15
+            ],
+            [
+                8,
+                12,
+                4,
+                8
+            ],
+            [
+                12,
+                8,
+                13
             ]
         ]
     }
