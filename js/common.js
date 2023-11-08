@@ -2157,11 +2157,11 @@ class EnemyFinder {
         })
 
         data.raids.TimeAttack.forEach(stage => {
-            if (!stage.IsReleased[regionID] || stage.Id > 9000) return
+            if (!stage.IsReleased[regionID]) return
             stage.Formations.forEach((formation, formationId) => {
                 formation.EnemyList.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
-                    if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned") {
+                    if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned" && statPreviewEnemyList.findIndex((e) => e.id == enemy.Id) == -1) {
                         statPreviewEnemyList.push({
                             id: enemy.Id,
                             name: `${enemy.Name}`,
@@ -6083,7 +6083,7 @@ function addRaidEnemyBonusStats(id, enemyStats, raidDifficulty, statsTableElemen
             break
 
         default:
-            maxHPDisplay = enemyStats.getBaseString('MaxHP')
+            maxHPDisplay = enemyStats.getTotalString('MaxHP')
             break
     }
 
