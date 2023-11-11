@@ -3037,6 +3037,8 @@ if (localStorage.getItem("theme")) {
     applyThemeToBody(localStorage.getItem("theme"))
 }
 
+$("#ba-navbar-logo").load("./images/logo_schalegg.svg")
+
 $.when($.ready, loadPromise).then(function() {
 
     //service worker
@@ -3951,7 +3953,7 @@ function loadModule(moduleName, entry=null) {
                 url.searchParams.forEach((v,k) => url.searchParams.delete(k))
                 history.pushState(null, '', url)
             }
-            $('title').html(`${translateUI('navbar_home')} | Schale`)
+            $('title').html(`${translateUI('navbar_home')} | Schale DB`)
             $('#ba-navbar-content').collapse('hide')
             window.scrollTo({top: 0, left: 0, behavior: 'instant'})
 
@@ -4079,7 +4081,7 @@ function finalizeLoad(pageTitle, searchParamKey, searchParamValue, gtagEvent = n
         history.pushState(null, '', url)
     }
 
-    $('title').html(`${pageTitle} | Schale`)
+    $('title').html(`${pageTitle} | Schale DB`)
     $('#ba-navbar-content').collapse('hide')
     localStorage.setItem(searchParamKey, searchParamValue)
 

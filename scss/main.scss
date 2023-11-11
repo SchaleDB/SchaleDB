@@ -1246,3 +1246,19 @@ a.nav-link.disabled {
 .ba-node-quality-2, .ba-item-node-2 {
     background-color: var(--col-bg-node-rare);
 }
+
+.navbar-logo {
+    height: 40px;
+    
+    svg {
+        height: 34px;
+        width: auto;
+    
+        path.fill-primary {
+            fill: var(--col-theme-text);
+        }
+        path.fill-secondary {
+            fill: var(--col-theme-logo);
+        }
+    }
+}
