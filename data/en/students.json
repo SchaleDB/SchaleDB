@@ -42761,7 +42761,7 @@
             {
                 "SkillType": "normal",
                 "Name": "The Hostess' Welcome",
-                "Desc": "Every 25s, increases the <b:HealEffectiveness> of the ally with the lowest HP by <?1>.",
+                "Desc": "Every 25s, increases the <b:HealEffectiveness> of the ally with the lowest HP by <?1> for 20s.",
                 "Parameters": [
                     [
                         "16.6%",
@@ -77443,7 +77443,7 @@
         "Id": 10068,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 139,
@@ -77475,16 +77475,16 @@
         "PersonalName": "Reisa",
         "SchoolYear": "1st Year",
         "CharacterAge": "15 years old",
-        "Birthday": "5月31日",
-        "CharacterSSRNew": "正義を求める人の元に……私あり……そう私こそがスーパースター。\n宇沢レイサ、見参です！",
-        "ProfileIntroduction": "トリニティのあちこちに出没し、治安の維持活動をしているトリニティ総合学園所属、自警団のメンバー。\n\n掴みどころのない事を言うため、いたずら通報だと思われる時もあるが、誰よりも真剣に自警団活動をしているのだとか。名乗りあげる口上が、毎回少しずつ変わる模様。",
-        "Hobby": "決闘申込み、自己紹介",
+        "Birthday": "May 31st",
+        "CharacterSSRNew": "The ace, hero, arbitrator, knight, and star. I am...Uzawa Reisa!",
+        "ProfileIntroduction": "A member of the Vigilante Crew who tends to show up suddenly and unannounced.\n\nReisa is rambunctious and loud, so much so that she's often taken for a joke. But there's no one more passionate about Vigilante Crew activities than she is. She likes to make an entrance when she bursts on to the scene, and is always testing out different heroic introductions.",
+        "Hobby": "Challenging people to duels, self-introductions",
         "CharacterVoice": "Miyari Nemoto",
         "BirthDay": "5/31",
         "Illustrator": "kokosando",
         "Designer": "kokosando",
         "CharHeightMetric": "153cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'0\"",
         "StabilityPoint": 1812,
         "AttackPower1": 171,
         "AttackPower100": 1711,
@@ -77533,7 +77533,7 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "Accept My Challenge!",
+                "Name": "Duel Me!",
                 "Desc": "Deals <?1> damage to enemies in a fan-shaped area. Removes one debuff from self.",
                 "Parameters": [
                     [
@@ -77623,7 +77623,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "All Day Long!",
+                "Name": "I Can Do This All Day",
                 "Desc": "Increases <b:ATK> by <?1> and <b:MAXHP> by <?2>.",
                 "Parameters": [
                     [
@@ -77689,7 +77689,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "All Day Long!+",
+                "Name": "I Can Do This All Day+",
                 "Desc": "Increases <b:ATK> by <?1> plus a further <?3> and <b:MAXHP> by <?2> plus a further <?4>.",
                 "Parameters": [
                     [
@@ -77779,7 +77779,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "Uzawa Reisa's Presence",
+                "Name": "The Reisa Effect",
                 "Desc": "Reisa's EX skill also decreases the <d:DEF> of enemies hit by <?1> for 25s and inflicts <c:Provoke> for 1s.",
                 "Parameters": [
                     [
@@ -77873,7 +77873,7 @@
         "FavorAlts": [],
         "MemoryLobby": [
             6,
-            0,
+            6,
             0
         ],
         "MemoryLobbyBGM": "someday, sometime",
@@ -77884,7 +77884,12 @@
                     3
                 ]
             ],
-            [],
+            [
+                [
+                    9106,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -77898,8 +77903,8 @@
         ],
         "IsLimited": 0,
         "Weapon": {
-            "Name": "シューティング☆スター",
-            "Desc": "レイサの大切なショットガン。丁寧にカスタマイズされた銃身は誰が見てもレイサの銃だ。\n\nかわいい外観とは異なり、数々の戦場をくぐり抜けたであろう痕跡が見て取れる。",
+            "Name": "Shooting☆Star",
+            "Desc": "Reisa's precious shotgun.\n\nIt's immediately obvious whose weapon this is with the carefully customized gun barrel. She may be small and cute, but her experience defending justice in Trinity makes her just as fierce!",
             "AdaptationType": "Indoor",
             "AdaptationValue": 1,
             "AttackPower1": 75,
