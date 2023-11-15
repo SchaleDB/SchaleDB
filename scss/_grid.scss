@@ -364,12 +364,23 @@
 
         &.raid-def {
 
+            display: flex;
+            align-items: center;
             height: 26px;
-            width: 26px;
 
             left: 4px;
             top: 4px;
             padding: 4px;
+
+            .label {
+                padding: 0 4px;
+                font-size: 12px;
+                font-style: italic;
+            }
+
+            img {
+                height: 100%
+            }
         }
 
         &.raid-terrain {

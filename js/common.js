@@ -2719,7 +2719,7 @@ class SkillDamageInfo {
 
             } else if (effect.Type.startsWith('CrowdControl')) {
                 const ccDuration = parseFloat((effect.Scale[this.skillLevel-1] / 1000).toFixed(2))
-                const ccGaugeFill = parseFloat((effect.Scale[this.skillLevel-1] * (studentStats.getTotal("OppressionPower") / 100)  / 1000).toFixed(2))
+                const ccGaugeFill = parseFloat((effect.Scale[this.skillLevel-1] * ((100 + studentStats.getTotal("OppressionPower") - enemyStats.getTotal("OppressionResist")) / 100)  / 1000).toFixed(2))
                 const modifiedChance = Math.min(Math.max(parseFloat((effect.Chance * (1 + studentStats.getTotal("OppressionPower")/100 - enemyStats.getTotal("OppressionResist")/100) / 100).toFixed(2)), 0), 100)
                 this.element.find(`.row-value[data-key="${index}-cc-chance"]`).text(`${modifiedChance}%`)
 
@@ -3998,7 +3998,9 @@ function populateEvents() {
             } else {
                 raidText = getLocalizedString("StageType", el.type) + "\n"
                 let raid = find(data.raids.Raid, "Id", el.raid)[0]
-                raidHtml += getRaidCardHTML(raid, el.terrain)
+                const season = find(data.raids.RaidSeasons[regionID][`${el.type == 'EliminateRaid' ? 'Eliminate' : ''}Seasons`], 'SeasonId', el.season)[0]
+                raidHtml += getRaidCardHTML(raid, season)
+                
             }
             $('#events-row-2').show()
             $('#ba-home-raid').show()
@@ -5628,7 +5630,7 @@ function loadRaid(raidId) {
             //optionsHtml += `<option value="0" disabled>---${getLocalizedString('StageType', 'Raid')}---</option>`
             optionsHtml += `<li><h6 class="dropdown-header">${getLocalizedString('StageType', 'Raid')}</h6></li>`
 
-            const rewardMaxDifficulty = {36: 'HC', 40: 'EXT', 44: 'INS', 48: 'TOR', 54: 'TOR'}
+            const rewardMaxDifficulty = {36: 'HC', 40: 'EXT', 44: 'INS', 48: 'TOR', 54: 'TOR', 56: 'TOR'}
 
             raidSeasons.forEach((season) => {
                 const start = new Date(season.Start*1000).toLocaleString([], dateOptions)
@@ -5649,7 +5651,8 @@ function loadRaid(raidId) {
                 eliminateRaidSeasons.forEach((season) => {
                     const start = new Date(season.Start*1000).toLocaleString([], dateOptions)
                     const end = new Date(season.End*1000).toLocaleString([], dateOptions)
-                    optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${10000 + season.SeasonId}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.SeasonDisplay])}</span><div class="d-flex align-self-center">${season.ArmorTypes.map((type) => `<span class="icon-type bg-def-${type.toLowerCase()}"><img src="images/ui/Type_Defense_s.png"></span>`).join('')}</div><img class=" inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small>${start} - ${end}</small></div></a></li>`
+
+                    optionsHtml += `<li><a class="dropdown-item" href="javascript:;" class="btn btn-dark" data-season="${10000 + season.SeasonId}"><div class="d-flex gap-1 align-items-end"><span class="label p-0">${translateUI('raid_season',[season.SeasonDisplay])}</span><img class=" inline-img invert-light" src="images/ui/Terrain_${season.Terrain}.png"><small class="text-bold ba-col-${season.TormentArmorType.toLowerCase()}">TOR</small><small>${start} - ${end}</small></div></a></li>`
                 })
             }
             $('#ba-raid-season').show()
@@ -7915,8 +7918,12 @@ function getStageIcon(stage, type) {
     }
 }
 
-function getRaidCardHTML(raid, terrain='', backgroundPath=null) {
+function getRaidCardHTML(raid, season=null, backgroundPath=null) {
     let name = getTranslatedString(raid, 'Name')
+
+    console.log(season)
+    const terrain = season ? season.Terrain : ''
+
     if (!backgroundPath) {
         // Check if it's the alternative terrain background
         if (raid.Terrain.length > 1 && terrain == raid.Terrain[1]) {
@@ -7925,10 +7932,19 @@ function getRaidCardHTML(raid, terrain='', backgroundPath=null) {
             backgroundPath = `Boss_Portrait_${raid.PathName}_LobbyBG`
         }
     }
-    let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/raid/${backgroundPath}.png');"></div></div><div class="card-img ${raid.Id > 100000 ? "worldraid" : ""}"><img src="images/raid/Boss_Portrait_${raid.PathName}_Lobby.png"></div><div class="card-badge raid-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png" style="width:100%;"></div>`
+
+    let html = `<div id="raid-select-${raid.Id}" class="selection-grid-card card-raid" onclick="loadRaid(${raid.Id});"><div class="card-bg"><div style="background-image:url('images/raid/${backgroundPath}.png');"></div></div><div class="card-img ${raid.Id > 100000 ? "worldraid" : ""}"><img src="images/raid/Boss_Portrait_${raid.PathName}_Lobby.png"></div>`
+
+    if (season && season.TormentArmorType) {
+        html += `<div class="card-badge raid-def bg-def-${season.TormentArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png"><span class="label">TOR</span></div>`
+    } else {
+        html += `<div class="card-badge raid-def bg-def-${raid.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense.png"></div>`
+    }
+    
     if (terrain != '') {
         html += `<div class="card-badge raid-terrain"><img class="invert-light" src="images/ui/Terrain_${terrain}.png"></div>`
     }
+
     html += `<div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${getTranslatedString(raid, 'Name')}</span></div></div>`
     return html
 }
@@ -8862,7 +8878,7 @@ function populateRaidList() {
     html = ''
     $.each(data.raids.WorldRaid, function(i,el) {
         if (el.IsReleased[regionID])
-        html += getRaidCardHTML(el, '', el.IconBG)
+        html += getRaidCardHTML(el, null, el.IconBG)
     })
     $('#worldraid-select-grid').html(html)
 

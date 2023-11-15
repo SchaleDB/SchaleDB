@@ -99,7 +99,7 @@
             ]
         }
     ],
-    "build": 1699961422,
+    "build": 1700069181,
     "Regions": [
         {
             "Name": "Jp",
@@ -180,13 +180,6 @@
             "CurrentGacha": [
                 {
                     "characters": [
-                        10081
-                    ],
-                    "start": 1699408800,
-                    "end": 1700013600
-                },
-                {
-                    "characters": [
                         10048,
                         20017
                     ],
@@ -197,15 +190,10 @@
             "CurrentEvents": [],
             "CurrentRaid": [
                 {
-                    "type": "TimeAttack",
-                    "raid": 21000,
-                    "start": 1699408800,
-                    "end": 1699988400
-                },
-                {
                     "type": "EliminateRaid",
                     "raid": 7,
                     "terrain": "Street",
+                    "season": 7,
                     "start": 1700013600,
                     "end": 1700593200
                 }
@@ -301,6 +289,7 @@
                     "type": "Raid",
                     "raid": 5,
                     "terrain": "Outdoor",
+                    "season": 51,
                     "start": 1699927200,
                     "end": 1700506800
                 }
@@ -355,6 +344,7 @@
                     "type": "Raid",
                     "raid": 2,
                     "terrain": "Indoor",
+                    "season": 8,
                     "start": 1699509600,
                     "end": 1700078400
                 }
@@ -362,6 +352,12 @@
         }
     ],
     "Changelog": [
+        {
+            "date": "2023/11/15",
+            "contents": [
+                "<ul><li>Adjusted the calculation for Insane/Torment CC Gauge fill to include target CC RES.</li></ul>"
+            ]
+        },
         {
             "date": "2023/10/09",
             "contents": [
@@ -418,15 +414,6 @@
             "date": "2023/07/12",
             "contents": [
                 "<ul><li>Target enemy's armor type can now be changed on the calculations screen.</li></ul>"
-            ]
-        },
-        {
-            "date": "2023/06/23",
-            "contents": [
-                "<h6>Voice Lines Gallery (Beta)</h6>",
-                "<ul><li>Added gallery for playing student voice lines.</li><li>Transcriptions for voice lines that are subtitled in-game.</li></ul>",
-                "<h6>Other Improvements</h6>",
-                "<ul><li>Improved the average damage calculation of Mika's EX Skill \"Kyrie Eleison\". Calculation will now use the target's HP to more closely simulate the damage of each hit, and the target's initial HP can be adjusted.</li><li>Added a button to quickly set all of a student's attributes to the maximum value.</li><li>Added the ability to lock saved students' attributes. While locked, changing level, mystic unlock etc. will not overwrite the saved values.</li><li>Added display of battle duration to raids.</li><li>Added several new sort options to the student list.</li></ul>"
             ]
         }
     ],
