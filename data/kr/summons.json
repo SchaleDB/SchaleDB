@@ -588,7 +588,54 @@
     },
     {
         "Id": 40002,
-        "Skills": [],
+        "Skills": [
+            {
+                "Name": "",
+                "Desc": "Inflicts <c:Provoke> on enemies in a circular area for <?1>.",
+                "Parameters": [
+                    [
+                        "3.4s",
+                        "3.4s",
+                        "3.4s",
+                        "3.4s",
+                        "3.9s",
+                        "3.9s",
+                        "3.9s",
+                        "3.9s",
+                        "3.9s",
+                        "3.9s"
+                    ]
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 300
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_PROVOKE",
+                "SkillType": "passive",
+                "IsSummonSkill": true,
+                "Effects": [
+                    {
+                        "Type": "CrowdControl",
+                        "Chance": "10000",
+                        "Icon": "Provoke",
+                        "Scale": [
+                            3400,
+                            3400,
+                            3400,
+                            3400,
+                            3900,
+                            3900,
+                            3900,
+                            3900,
+                            3900,
+                            3900
+                        ]
+                    }
+                ]
+            }
+        ],
         "Name": "페로로 인형",
         "DevName": "HihumiDecoy_default",
         "Type": "Summoned",
