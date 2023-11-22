@@ -4987,7 +4987,7 @@ function renderStudent() {
     allTags.push(student.FavorItemUniqueTags[0])
     allTags.push(student.FavorItemUniqueTags[0] + "2")
 
-    const genericTags = ["Gift1", "Gift2", "Gift3"]
+    const genericTags = data.config.CommonFavorItemTags
     const allGifts = data.items.filter(x => x.Category == "Favor" && x.IsReleased[regionID]).sort((a,b) => b.ExpValue - a.ExpValue)
     let favoriteGifts = ["", "", ""]
 
@@ -9037,7 +9037,7 @@ function getEquipmentRecipe(item) {
 function getLikedByStudents(item) {
     let favorStudents = ["", "", ""]
     let bondGearStudentsHtml = ""
-    const genericTags = ["Gift1", "Gift2", "Gift3"]
+    const genericTags = data.config.CommonFavorItemTags
     const genericTagCount = item.Tags.filter(x => genericTags.includes(x)).length
     
     data.students.forEach((student) => {
