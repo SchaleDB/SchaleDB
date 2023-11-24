@@ -7920,8 +7920,6 @@ function getStageIcon(stage, type) {
 
 function getRaidCardHTML(raid, season=null, backgroundPath=null) {
     let name = getTranslatedString(raid, 'Name')
-
-    console.log(season)
     const terrain = season ? season.Terrain : ''
 
     if (!backgroundPath) {
