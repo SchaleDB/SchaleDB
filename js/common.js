@@ -6298,13 +6298,14 @@ function loadStage(id) {
                     const item = find(data.items, 'Id', reward[0])[0]
                     let maxBonus = 0
                     let useStudents = ''
+                    let serverBonus = getServerProperty(item, 'EventBonus')
 
                     if (mode == "Event") {
 
                         const studentBonus = {"Main": Array(teams*4).fill(0), "Support": Array(teams*2).fill(0)}
                         const chosenStudent = {"Main": Array(teams*4).fill(null), "Support": Array(teams*2).fill(null)}
     
-                        for (bonus of item.EventBonus) {
+                        for (bonus of serverBonus) {
         
                             if (showEventCurrencyBonus == 1 || bonus[0] in studentCollection) {
         
@@ -8965,7 +8966,7 @@ function getUsedByStudents(item, mode) {
             html += getStudentIconSmall(chara)
         } else if (item.Category == 'Coin' && item.EventBonus !== undefined) {
             headerText = translateUI('item_eventbonus')
-            item.EventBonus.forEach(bonus => {
+            getServerProperty(item, 'EventBonus').forEach(bonus => {
                 const bonusStudents = find(data.students, 'Id', bonus[0])
                 if (bonusStudents.length) {
                     html += getStudentIconSmall(bonusStudents[0], `+${bonus[1]/100}%`)
