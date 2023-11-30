@@ -5253,7 +5253,7 @@
             ],
             "PathName": "EN0006",
             "GroupName": "EN0006",
-            "Faction": "",
+            "Faction": "HundredGhostTales",
             "Icon": "Boss_Portrait_EN0006_Lobby",
             "IconBG": "Boss_Portrait_EN0006_LobbyBG",
             "Terrain": [
@@ -5316,7 +5316,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL02",
                     "Name": "Myouki's Roar",
-                    "Desc": "Deals 250% damage to enemies in multiple circular areas. Damage does not stack multiple times."
+                    "Desc": "Deals 250% damage to enemies in multiple circular areas. Enemies in overlapping areas do not receive damage multiple times."
                 },
                 {
                     "Id": "EN0006Ex03",
@@ -5363,7 +5363,7 @@
                     "ATGCost": 3,
                     "Icon": "SKILLICON_EN0006_EXSKILL05",
                     "Name": "Spreading Rumors",
-                    "Desc": "Kurokage burns the area, dealing 250% damage to all enemies and pulling them together, then pushing them away and dealing another 250% damage.\nAny enemies that are currently affected by <i>Intimidation</i> will receive damage equal to 20% of their current amount of <i>Intimidation</i>, and decreasing their amount of <i>Intimidation</i> by 300 every 1s (up to 20s)."
+                    "Desc": "Kurokage burns the area, dealing 250% damage to all enemies and pulling them towards Kurokage, before pushing them away and dealing another 250% damage.\nAny enemies that are currently affected by <i>Intimidation</i> will be inflicted with the following effect:\nReceives damage equal to 20% of their current amount of <i>Intimidation</i> while decreasing <i>Intimidation</i> by <b>300</b>.\nThis effect occurs every 1s (lasts up to 20s or until <i>Intimidation</i> is completely removed) and can be dispelled."
                 },
                 {
                     "Id": "EN0006ExtraPassive01",
@@ -5392,7 +5392,7 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_PASSIVESKILL03",
                     "Name": "Fragments of Myouki",
-                    "Desc": "Around Kurokage exist several of its fragments (Fragments can only be seen when targeting EX Skills).\nFragments can be attacked and 100% of the damage taken by them will also be taken by Kurokage, and effective attacks against them will also fill Kurokage's groggy gauge. (Kurokage cannot become groggy until moving into his territory).\nWhen becoming groggy, Kurokage will split into 4 fragments which can each be attacked, and all enemies' <b:CriticalChance> will be increased to the maximum."
+                    "Desc": "Around Kurokage exist several of its fragments (Fragments can only be seen when targeting EX Skills).\nFragments can be attacked and 100% of the damage taken by them will also be taken by Kurokage, and effective attacks against them will also fill Kurokage's groggy gauge. (Kurokage cannot become groggy until moving into his territory).\nWhile groggy, Kurokage will split into 4 fragments which can each be attacked, and all enemies' <b>Crit</b> will be increased to the maximum value."
                 },
                 {
                     "Id": "EN0006ExtraPassive04",
@@ -5401,8 +5401,26 @@
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_PASSIVESKILL01",
                     "Name": "Myouki's Intimidation",
-                    "Desc": "During the battle with Kurokage, certain attacks will apply <i>Intimidation</i> to enemies:\n- While in the area around Kurokage's Eye\n- While in Kurokage's Territory\n<i>Intimidation</i> erodes enemies' Maximum HP, preventing it from being recovered via Healing abilities. Restoring HP above their current maximum will decrease the amount of <i>Intimidation</i> by an amount equal to <?1>the excess HP restored.",
+                    "Desc": "During the battle with Kurokage, certain attacks will apply <i>Intimidation</i> to enemies:\n- Kurokage's Eye will periodically appear underneath an enemy. After a short duration, increases the <i>Intimidation</i> of all enemies in a circular area around the eye by <b><?1></b>.\n- While in Kurokage's territory, all enemies' <i>Intimidation</i> increases by <b><?2></b> every 6s.\n<i>Intimidation</i> reduces Maximum HP by 1% for every <b>100</b> Intimidation. Restoring HP above their current maximum will remove <i>Intimidation</i> by an amount equal to <?3>the excess HP restored.",
                     "Parameters": [
+                        [
+                            "350",
+                            "500",
+                            "650",
+                            "800",
+                            "1,100",
+                            "1,500",
+                            "1,500"
+                        ],
+                        [
+                            "150",
+                            "200",
+                            "250",
+                            "300",
+                            "350",
+                            "500",
+                            "500"
+                        ],
                         [
                             "",
                             "1/2 of ",

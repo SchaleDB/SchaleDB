@@ -5969,6 +5969,9 @@ function changeRaidEnemy(num) {
                     case 'Unarmed':
                         weakTo = 'Mystic'
                         break
+                    case 'ElasticArmor':
+                        weakTo = 'Sonic'
+                        break
                 }
 
                 if (weakTo != '') {
