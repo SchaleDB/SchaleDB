@@ -715,7 +715,7 @@ String.prototype.escapeHtml = function() {
 
     getHitChance(evade) {
         const hit = this.getTotal('AccuracyPoint')
-        return MathHelper.clamp(700 / Math.max(evade - hit + 700, 700), 0, 1)
+        return MathHelper.clamp(2000 / (Math.max(evade - hit, 0) * 3 + 2000), 0, 1)
     }
 
     getHitChanceString(evade) {
