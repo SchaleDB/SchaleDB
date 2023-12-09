@@ -4484,9 +4484,9 @@ function checkFilters(student, filterList, selectFilterList, searchTerm) {
         } else if (filterList[i] == 'Cover') {
             if (!search_options.filter.Cover[student.Cover ? 'Uses': 'DoesntUse']) return false
         } else if (filterList[i] == 'HasCC') {
-            if (search_options['filter'][filterList[i]] && student.Skills.find(s => s.Effects !== undefined && s.Effects.find(e => e.Type == "CrowdControl") !== undefined) === undefined) return false
+            if (search_options['filter'][filterList[i]] && getStudentAndSummonSkills(student).find(s => s.Effects !== undefined && s.Effects.find(e => e.Type == "CrowdControl")) === undefined) return false
         } else if (filterList[i] == 'HasDebuff') {
-            if (search_options['filter'][filterList[i]] && student.Skills.find(s => s.Effects !== undefined && s.Effects.find(e => e.Type == "BuffTarget" || e.Type == "DMGDot") !== undefined) === undefined) return false
+            if (search_options['filter'][filterList[i]] && getStudentAndSummonSkills(student).find(s => s.Effects !== undefined && s.Effects.find(e => e.Type == "BuffTarget" || e.Type == "DMGDot")) === undefined) return false
         } else if (filterList[i].endsWith('Adaptation') && search_options['filter']['TerrainUpgrades'] && filterList[i].startsWith(student.Weapon.AdaptationType)) {
             if (!search_options['filter'][filterList[i]][student[filterList[i]]] && !search_options['filter'][filterList[i]][student[filterList[i]] + student.Weapon.AdaptationValue]) return false
         } else {
@@ -4516,6 +4516,17 @@ function checkFilters(student, filterList, selectFilterList, searchTerm) {
     }
     
     return (searchTerm == "" || getTranslatedString(student, 'Name').toLowerCase().includes(searchTerm.toLowerCase()))
+}
+
+function getStudentAndSummonSkills(student) {
+    const allSkills = [...student.Skills]
+    student.Summons.forEach(s => {
+        const summon = find(data.summons, 'Id', s.Id)[0]
+        if (summon.Skills) {
+            allSkills.push(...summon.Skills)
+        }
+    })
+    return allSkills
 }
 
 /**
