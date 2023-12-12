@@ -70027,8 +70027,14 @@
                 "Icon": "COMMON_SKILLICON_TARGET",
                 "Effects": [
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Always",
+                        "Hits": [
+                            3333,
+                            3333,
+                            3334
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             8945,
                             9395,
@@ -70043,14 +70049,8 @@
                         ]
                     },
                     {
-                        "Type": "DMGMulti",
+                        "Type": "DMGSingle",
                         "CriticalCheck": "Always",
-                        "Hits": [
-                            3333,
-                            3333,
-                            3334
-                        ],
-                        "HitsParameter": 1,
                         "Scale": [
                             17889,
                             18783,
@@ -79405,7 +79405,7 @@
         "Id": 20026,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 142,
@@ -79446,7 +79446,7 @@
         "Illustrator": "7peach",
         "Designer": "二色こぺ",
         "CharHeightMetric": "158cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'2\"",
         "StabilityPoint": 1592,
         "AttackPower1": 302,
         "AttackPower100": 3028,
@@ -79467,7 +79467,7 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "Onward and Upward!",
+                "Name": "Onward and Onward!",
                 "Desc": "Deals <?1> damage to enemies in a circular area. Consumes up to <b>3</b> additional units of skill cost, increasing the damage dealt by 35% for each additional unit of cost consumed. (EX Cost increase/decrease effects will be calculated using the base cost)",
                 "Parameters": [
                     [
@@ -79689,7 +79689,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "Fruits of Our Labor",
+                "Name": "Fruits of Labor",
                 "Desc": "Increases all allies' <b:EnhanceExplosionRate> by <?1>.",
                 "Parameters": [
                     [

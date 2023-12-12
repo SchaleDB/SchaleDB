@@ -69969,8 +69969,14 @@
                 "Icon": "COMMON_SKILLICON_TARGET",
                 "Effects": [
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Always",
+                        "Hits": [
+                            3333,
+                            3333,
+                            3334
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             8945,
                             9395,
@@ -69985,14 +69991,8 @@
                         ]
                     },
                     {
-                        "Type": "DMGMulti",
+                        "Type": "DMGSingle",
                         "CriticalCheck": "Always",
-                        "Hits": [
-                            3333,
-                            3333,
-                            3334
-                        ],
-                        "HitsParameter": 1,
                         "Scale": [
                             17889,
                             18783,
@@ -79347,7 +79347,7 @@
         "Id": 20026,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 142,
@@ -79388,7 +79388,7 @@
         "Illustrator": "7peach",
         "Designer": "二色こぺ",
         "CharHeightMetric": "158cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'2\"",
         "StabilityPoint": 1592,
         "AttackPower1": 302,
         "AttackPower100": 3028,

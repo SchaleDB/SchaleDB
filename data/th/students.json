@@ -69981,8 +69981,14 @@
                 "Icon": "COMMON_SKILLICON_TARGET",
                 "Effects": [
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Always",
+                        "Hits": [
+                            3333,
+                            3333,
+                            3334
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             8945,
                             9395,
@@ -69997,14 +70003,8 @@
                         ]
                     },
                     {
-                        "Type": "DMGMulti",
+                        "Type": "DMGSingle",
                         "CriticalCheck": "Always",
-                        "Hits": [
-                            3333,
-                            3333,
-                            3334
-                        ],
-                        "HitsParameter": 1,
                         "Scale": [
                             17889,
                             18783,
@@ -79359,7 +79359,7 @@
         "Id": 20026,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 142,
@@ -79387,20 +79387,20 @@
             "Watch"
         ],
         "CollectionBG": "BG_Redwinter_Collection",
-        "FamilyName": "安守",
-        "PersonalName": "ミノリ",
-        "SchoolYear": "3年生",
-        "CharacterAge": "17歳",
-        "Birthday": "7月14日",
-        "CharacterSSRNew": "キヴォトス中のすべてのプリンは\n闘争する生徒のためのものだ！",
-        "ProfileIntroduction": "レッドウィンター連邦学園所属、工務部の部長。\n\n大規模な土木工事や建築など、人力が必要な所ならどこにだって人を派遣し現場を指揮する。仕事の手腕はたしかだが、些細なことでストライキやデモを起こすため雇い主たちから悪名高い模様。",
-        "Hobby": "ストライキ、デモ、工作",
+        "FamilyName": "ยาสุโมริ",
+        "PersonalName": "มิโนริ",
+        "SchoolYear": "ชั้นปีที่ 3",
+        "CharacterAge": "17 ปี",
+        "Birthday": "14 ก.ค.",
+        "CharacterSSRNew": "พุดดิ้งทุกอันของคิโวทอส\nมีไว้เพื่อนักเรียนที่ออกรบ!",
+        "ProfileIntroduction": "หัวหน้าผู้เป็นหัวเรือใหญ่ของชมรมผู้รับจ้างของสถาบันสหพันธ์เรดวินเทอร์\n\nเธอไปทุกที่ที่ต้องการแรงงานก่อสร้างโยธาขนาดใหญ่ ทำหน้าที่ส่งแรงงาน และสั่งการหน้าไซต์งานก่อสร้าง ทำงานที่ได้รับมอบหมายอย่างดีเยี่ยม แต่เธอมีชื่อเสียงในแง่ลบสำหรับเหล่านายจ้าง เพราะหยุดงานประท้วงเป็นประจำ",
+        "Hobby": "หยุดงานประท้วง, ประท้วง, ก่อสร้าง",
         "CharacterVoice": "菊池紗矢香",
         "BirthDay": "7/14",
         "Illustrator": "7peach",
         "Designer": "二色こぺ",
         "CharHeightMetric": "158cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'2\"",
         "StabilityPoint": 1592,
         "AttackPower1": 302,
         "AttackPower100": 3028,
@@ -79421,7 +79421,7 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "จงลุกขึ้นสู้!",
+                "Name": "เดินหน้าต่อเนื่อง!",
                 "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรูในรัศมี\nสกิลนี้สามารถใช้ค่าใช้สกิล EX เพิ่มได้สูงสุดอีก <b>3</b> เพื่อเพิ่มความเสียหายอีก 35% ต่อจำนวนค่าใช้สกิล EX ที่ใช้เพิ่ม\n(ผลของการเพิ่ม/ลดค่าใช้สกิล EX จะคำนวนจากค่าใช้สกิล EX ตั้งต้นของสกิลนี้)",
                 "Parameters": [
                     [
@@ -79509,7 +79509,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "รวมใจเป็นหนึ่งเดียว",
+                "Name": "รวมใจเป็นหนึ่ง",
                 "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรูในรัศมีทุก 25 วินาที",
                 "Parameters": [
                     [
@@ -79555,7 +79555,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "ร่วมมือเป็นหนึ่งเดียว",
+                "Name": "จับมือรวมพลัง",
                 "Desc": "เพิ่ม<b:HIT> <?1>",
                 "Parameters": [
                     [
@@ -79593,7 +79593,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "ร่วมมือเป็นหนึ่งเดียว+",
+                "Name": "จับมือรวมพลัง+",
                 "Desc": "เพิ่ม<b:ATK> <?1>\nเพิ่ม<b:HIT>เพิ่มเติม <?2>",
                 "Parameters": [
                     [
@@ -79643,7 +79643,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "รางวัลของหงาดเหงื่อ",
+                "Name": "รางวัลของหยาดเหงื่อ",
                 "Desc": "เพิ่ม<b:EnhanceExplosionRate>ของฝ่ายเรา <?1>",
                 "Parameters": [
                     [
@@ -79750,8 +79750,8 @@
         ],
         "IsLimited": 0,
         "Weapon": {
-            "Name": "鋼鉄の松明",
-            "Desc": "ミノリが愛用する頑丈なアサルトライフル。\n\nシンプルな構造のこのアサルトライフルは、その名の通りミノリが進む闘争の道の前で黙々と火を灯してきた。",
+            "Name": "Steel Torch",
+            "Desc": "ปืนไรเฟิลจู่โจมประจำตัวมิโนริ\n\nปืนไรเฟิลจู่โจมกระบอกนี้ที่มีองค์ประกอบเรียบง่าย คอยส่องสว่างบอกเส้นทางลงสนามรบของมิโนริมาตลอด",
             "AdaptationType": "Indoor",
             "AdaptationValue": 1,
             "AttackPower1": 133,

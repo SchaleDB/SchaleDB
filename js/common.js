@@ -4109,7 +4109,13 @@ function getNextBirthdayDate(birthday) {
 }
 
 function convertToDate(dateString) {
-    return new Date(0, parseInt(dateString.split('/')[0])-1, parseInt(dateString.split('/')[1]))
+    const [month, day] = dateString.split('/')
+
+    if (isNaN(month) || isNaN(day)) {
+        return null
+    }
+
+    return new Date(0, month-1, day)
 }
 
 function duration(seconds) {
@@ -4300,8 +4306,8 @@ function updateStudentList(updateSortMethod = false) {
                     $('#student-select-'+el.Id+' .label-text:not(.hover)').text(age == 0 ? "??" : age).toggleClass('smalltext', false).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else if (search_options["sortby"] == "BirthDay") {
-                    const birthDate = convertToDate(el.BirthDay).toLocaleDateString([], { month: "numeric", day: "numeric"})
-                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(birthDate).toggleClass('smalltext', false).toggleClass('unhover', true)
+                    const birthDate = convertToDate(el.BirthDay)
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(birthDate ? birthDate.toLocaleDateString([], { month: "numeric", day: "numeric"}) : '-').toggleClass('smalltext', false).toggleClass('unhover', true)
                     $('#student-select-'+el.Id+' .label-text.hover').show()
                 } else if (search_options["sortby"] == "CollectionStars") {
                     const stars = el.Id in studentCollection ? studentCollection[el.Id].s : 0

@@ -70027,8 +70027,14 @@
                 "Icon": "COMMON_SKILLICON_TARGET",
                 "Effects": [
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Always",
+                        "Hits": [
+                            3333,
+                            3333,
+                            3334
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             8945,
                             9395,
@@ -70043,14 +70049,8 @@
                         ]
                     },
                     {
-                        "Type": "DMGMulti",
+                        "Type": "DMGSingle",
                         "CriticalCheck": "Always",
-                        "Hits": [
-                            3333,
-                            3333,
-                            3334
-                        ],
-                        "HitsParameter": 1,
                         "Scale": [
                             17889,
                             18783,
@@ -79405,7 +79405,7 @@
         "Id": 20026,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 142,
@@ -79437,16 +79437,16 @@
         "PersonalName": "Minori",
         "SchoolYear": "3rd Year",
         "CharacterAge": "17 years old",
-        "Birthday": "7月14日",
-        "CharacterSSRNew": "キヴォトス中のすべてのプリンは\n闘争する生徒のためのものだ！",
-        "ProfileIntroduction": "レッドウィンター連邦学園所属、工務部の部長。\n\n大規模な土木工事や建築など、人力が必要な所ならどこにだって人を派遣し現場を指揮する。仕事の手腕はたしかだが、些細なことでストライキやデモを起こすため雇い主たちから悪名高い模様。",
-        "Hobby": "ストライキ、デモ、工作",
+        "Birthday": "July 14th",
+        "CharacterSSRNew": "All the pudding in Kivotos for the students\nwho fight the good fight!",
+        "ProfileIntroduction": "Head of the Red Winter Federal Academy's Labor Party.\n\nShe dispatches and manages laborers wherever they are needed, including large-scale construction sites. Despite her ability to get any job done, she has a bad reputation with employers due to being prone to leading strikes and protests at the slightest hint of trouble.",
+        "Hobby": "Strikes, Protests, Demonstrations",
         "CharacterVoice": "Sayaka Kikuchi",
         "BirthDay": "7/14",
         "Illustrator": "7peach",
         "Designer": "二色こぺ",
         "CharHeightMetric": "158cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'2\"",
         "StabilityPoint": 1592,
         "AttackPower1": 302,
         "AttackPower100": 3028,
@@ -79467,7 +79467,7 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "Onward and Upward!",
+                "Name": "Onward and Onward!",
                 "Desc": "Deals <?1> damage to enemies in a circular area. Consumes up to <b>3</b> additional units of skill cost, increasing the damage dealt by 35% for each additional unit of cost consumed. (EX Cost increase/decrease effects will be calculated using the base cost)",
                 "Parameters": [
                     [
@@ -79689,7 +79689,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "Fruits of Our Labor",
+                "Name": "Fruits of Labor",
                 "Desc": "Increases all allies' <b:EnhanceExplosionRate> by <?1>.",
                 "Parameters": [
                     [
@@ -79796,8 +79796,8 @@
         ],
         "IsLimited": 0,
         "Weapon": {
-            "Name": "鋼鉄の松明",
-            "Desc": "ミノリが愛用する頑丈なアサルトライフル。\n\nシンプルな構造のこのアサルトライフルは、その名の通りミノリが進む闘争の道の前で黙々と火を灯してきた。",
+            "Name": "Torch of Steel",
+            "Desc": "Minori's favorite sturdy assault rifle.\n\nAs its name suggests, this simple assault rifle has continued to faithfully light up Minori's path of struggle.",
             "AdaptationType": "Indoor",
             "AdaptationValue": 1,
             "AttackPower1": 133,
