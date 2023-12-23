@@ -4982,7 +4982,12 @@
                     3
                 ]
             ],
-            []
+            [
+                [
+                    2302,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "al"
@@ -12155,7 +12160,12 @@
                     0
                 ]
             ],
-            []
+            [
+                [
+                    5203,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "aJ",
@@ -16414,13 +16424,38 @@
                 "Icon": "COMMON_SKILLICON_IGNOREDELAY",
                 "Effects": [
                     {
-                        "Type": "IgnoreDelay",
-                        "Scale": [
+                        "Type": "FormChange",
+                        "Frames": {
+                            "AttackEnterDuration": 56,
+                            "AttackStartDuration": 21,
+                            "AttackEndDuration": 32,
+                            "AttackBurstRoundOverDelay": 42,
+                            "AttackIngDuration": 19,
+                            "AttackReadyStartDuration": 30,
+                            "AttackReadyEndDuration": 30,
+                            "AttackReloadDuration": 52
+                        },
+                        "Hits": [
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ],
+                        "IgnoreDelay": [
                             3,
                             3,
                             4,
                             4,
                             5
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ]
                     },
                     {
@@ -18694,7 +18729,12 @@
                     0
                 ]
             ],
-            []
+            [
+                [
+                    5205,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "aJ"
@@ -32017,6 +32057,14 @@
                         "Hits": [
                             5000,
                             5000
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ]
                     },
                     {
@@ -38914,7 +38962,7 @@
         "IsReleased": [
             true,
             true,
-            false
+            true
         ],
         "DefaultOrder": 71,
         "PathName": "Natsu",
@@ -39255,7 +39303,7 @@
         "MemoryLobby": [
             5,
             5,
-            0
+            5
         ],
         "MemoryLobbyBGM": "Koi is Love",
         "FurnitureInteraction": [
@@ -39271,7 +39319,12 @@
                     0
                 ]
             ],
-            []
+            [
+                [
+                    3301,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "aJ",
@@ -39429,7 +39482,7 @@
         "IsReleased": [
             true,
             true,
-            false
+            true
         ],
         "DefaultOrder": 72,
         "PathName": "Mari",
@@ -39740,7 +39793,7 @@
         "MemoryLobby": [
             3,
             3,
-            0
+            3
         ],
         "MemoryLobbyBGM": "Aira",
         "FurnitureInteraction": [
@@ -39764,7 +39817,12 @@
                     2
                 ]
             ],
-            []
+            [
+                [
+                    1105,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "aN",
@@ -40446,7 +40504,7 @@
         "IsReleased": [
             true,
             true,
-            false
+            true
         ],
         "DefaultOrder": 74,
         "PathName": "Ako",
@@ -40773,7 +40831,7 @@
         "MemoryLobby": [
             5,
             5,
-            0
+            5
         ],
         "MemoryLobbyBGM": "Guruguru Usagi",
         "FurnitureInteraction": [
@@ -40789,7 +40847,12 @@
                     0
                 ]
             ],
-            []
+            [
+                [
+                    1101,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "ak",
@@ -55695,13 +55758,36 @@
                         ]
                     },
                     {
-                        "Type": "IgnoreDelay",
-                        "Scale": [
+                        "Type": "FormChange",
+                        "Frames": {
+                            "AttackEnterDuration": 65,
+                            "AttackStartDuration": 35,
+                            "AttackEndDuration": 37,
+                            "AttackBurstRoundOverDelay": 40,
+                            "AttackIngDuration": 23,
+                            "AttackReloadDuration": 90
+                        },
+                        "Hits": [
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ],
+                        "IgnoreDelay": [
                             2,
                             2,
                             3,
                             3,
                             4
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ]
                     }
                 ]
@@ -70615,6 +70701,39 @@
                         ],
                         "Stat": "AttackPower_Coefficient",
                         "Channel": 2
+                    },
+                    {
+                        "Type": "FormChange",
+                        "Frames": {
+                            "AttackEnterDuration": 26,
+                            "AttackStartDuration": 15,
+                            "AttackIngDuration": 55,
+                            "AttackEndDuration": 22,
+                            "AttackBurstRoundOverDelay": 45,
+                            "AttackReloadDuration": 64
+                        },
+                        "Hits": [
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ],
+                        "IgnoreDelay": [
+                            8492,
+                            8492,
+                            8492,
+                            8492,
+                            8492
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
+                        ]
                     }
                 ]
             },
@@ -72345,6 +72464,14 @@
                             2213,
                             2213,
                             2219
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ]
                     },
                     {

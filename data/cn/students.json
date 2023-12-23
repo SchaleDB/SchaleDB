@@ -4982,7 +4982,12 @@
                     3
                 ]
             ],
-            []
+            [
+                [
+                    2302,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "al"
@@ -12155,7 +12160,12 @@
                     0
                 ]
             ],
-            []
+            [
+                [
+                    5203,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "aJ",
@@ -16414,13 +16424,38 @@
                 "Icon": "COMMON_SKILLICON_IGNOREDELAY",
                 "Effects": [
                     {
-                        "Type": "IgnoreDelay",
-                        "Scale": [
+                        "Type": "FormChange",
+                        "Frames": {
+                            "AttackEnterDuration": 56,
+                            "AttackStartDuration": 21,
+                            "AttackEndDuration": 32,
+                            "AttackBurstRoundOverDelay": 42,
+                            "AttackIngDuration": 19,
+                            "AttackReadyStartDuration": 30,
+                            "AttackReadyEndDuration": 30,
+                            "AttackReloadDuration": 52
+                        },
+                        "Hits": [
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ],
+                        "IgnoreDelay": [
                             3,
                             3,
                             4,
                             4,
                             5
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ]
                     },
                     {
@@ -18694,7 +18729,12 @@
                     0
                 ]
             ],
-            []
+            [
+                [
+                    5205,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "aJ"
@@ -32017,6 +32057,14 @@
                         "Hits": [
                             5000,
                             5000
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ]
                     },
                     {
@@ -38914,7 +38962,7 @@
         "IsReleased": [
             true,
             true,
-            false
+            true
         ],
         "DefaultOrder": 71,
         "PathName": "Natsu",
@@ -38943,13 +38991,13 @@
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "柚鸟",
         "PersonalName": "夏",
-        "SchoolYear": "1年级",
+        "SchoolYear": "第1年",
         "CharacterAge": "15岁",
         "Birthday": "12月4日",
-        "CharacterSSRNew": "你对奶油蛋糕有什么研究吗？老师，",
-        "ProfileIntroduction": "三一放学后甜点部的一员，麻烦制造者之首，自称浪漫主义者。\n\n习惯是说些很哲学的妙语，以及用甜点作比喻来表达观点。纵使老是说些令人摸不着头绪的话，让身边的人感到为难，不过其中包含着她想和所有人共享浪漫的纯真心意。只是她所谓的“浪漫”定义经常变来变去，因此从旁观者的角度看来，也无法否认所有人都被夏“耍着玩”的印象。",
-        "Hobby": "浪漫的事物、思索",
-        "CharacterVoice": "长绳麻理亚",
+        "CharacterSSRNew": "……老师，你有没有研究过奶油蛋糕？",
+        "ProfileIntroduction": "崔尼蒂甜点部的一员，惹是生非第一名，却自称为浪漫主义者。\n\n会莫名其妙地说出一些有哲理的话，凡事都喜欢用甜点来打比方。每当她说出天马行空的话时，周围的人都会觉得很尴\n尬 ，但其实她只是单纯地想和大家一起分享浪漫而已。由于她对“浪漫”的定义总是不断变化，因此在旁人看来，所有人都被夏搞得晕头转向。",
+        "Hobby": "浪漫的东西、思考",
+        "CharacterVoice": "长绳麻理亚/鱼一",
         "BirthDay": "12/4",
         "Illustrator": "kokosando",
         "Designer": "kokosando",
@@ -39004,7 +39052,7 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "此刻的珍藏",
+                "Name": "秘藏王牌",
                 "Desc": "回复自身治愈力<?1>的生命值/\n并解除1个减益状态",
                 "Parameters": [
                     [
@@ -39039,7 +39087,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "吃下去后就打起精神来——",
+                "Name": "来口这个吧！",
                 "Desc": "每30秒向<b>距离自身</b>最近的1名我方单位抛出馅饼，令其<b:ATK>提升<?1>(持续20秒)/\n目标周围存在除自身外的我方单位时，馅饼将继续弹跳至该单位并造成同样的效果(至多弹跳3次)",
                 "Parameters": [
                     [
@@ -39088,7 +39136,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "肚子饿了的话……！",
+                "Name": "要吃饱才行！",
                 "Desc": "<b:MAXHP>提升<?1>",
                 "Parameters": [
                     [
@@ -39126,7 +39174,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "肚子饿了的话……！+",
+                "Name": "要吃饱才行！+",
                 "Desc": "<b:MAXHP>提升<?1>/\n<b:MAXHP>提升<?2>",
                 "Parameters": [
                     [
@@ -39176,7 +39224,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "大饱口福",
+                "Name": "填满嘴巴的幸福感",
                 "Desc": "使用EX技能后，<b:HealEffectiveness>提升<?1>(至多叠加3次)",
                 "Parameters": [
                     [
@@ -39255,7 +39303,7 @@
         "MemoryLobby": [
             5,
             5,
-            0
+            5
         ],
         "MemoryLobbyBGM": "Koi is Love",
         "FurnitureInteraction": [
@@ -39271,7 +39319,12 @@
                     0
                 ]
             ],
-            []
+            [
+                [
+                    3301,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "aJ",
@@ -39429,7 +39482,7 @@
         "IsReleased": [
             true,
             true,
-            false
+            true
         ],
         "DefaultOrder": 72,
         "PathName": "Mari",
@@ -39458,13 +39511,13 @@
         "CollectionBG": "BG_Trinity_Collection",
         "FamilyName": "伊落",
         "PersonalName": "玛丽",
-        "SchoolYear": "1年级",
+        "SchoolYear": "第1年",
         "CharacterAge": "15岁",
         "Birthday": "9月12日",
         "CharacterSSRNew": "",
-        "ProfileIntroduction": "隶属于修女会，慈祥可爱的少女。\n\n无论何时都以善良且温和的微笑迎接三一的学生们。即使给人可爱的印象，其实个性稳重，有着让人放松的气质，所以许多学生都会来找她谘商。总是深感于自己有所不足，梦想着有一天能成为像其他前辈一样了不起的修女。",
-        "Hobby": "祈祷、思索",
-        "CharacterVoice": "小泽亚李",
+        "ProfileIntroduction": "姐妹会的成员，正直又仁慈的少女。\n\n总是以善良温柔的微笑对待崔尼蒂的所有人。外表温婉可爱，有一种能让人平心静气的氛围，因此有很多人找她倾诉烦恼。总是认为自己有很多不足之处，梦想是成为和其他前辈一样优秀的修女。",
+        "Hobby": "祷告、思考",
+        "CharacterVoice": "小泽亚李/曹雅雯",
         "BirthDay": "9/12",
         "Illustrator": "DoReMi",
         "Designer": "Vinoker",
@@ -39490,7 +39543,7 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "神圣加护",
+                "Name": "神圣的庇护",
                 "Desc": "赋予1名我方单位治愈力<?1>的<b:Shield>(持续20秒)/\n并解除1个减益状态",
                 "Parameters": [
                     [
@@ -39526,7 +39579,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "净化洗礼",
+                "Name": "净化的洗礼",
                 "Desc": "每25秒对圆形范围内的敌方单位造成攻击力<?1>的伤害",
                 "Parameters": [
                     [
@@ -39572,7 +39625,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "决然之意",
+                "Name": "坚定的决心",
                 "Desc": "<b:CriticalChance>提升<?1>",
                 "Parameters": [
                     [
@@ -39610,7 +39663,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "决然之意+",
+                "Name": "坚定的决心+",
                 "Desc": "<b:CriticalChance>提升<?1>/\n<b:CriticalChance>提升<?2>",
                 "Parameters": [
                     [
@@ -39660,7 +39713,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "慈爱之心",
+                "Name": "慈爱的祝福",
                 "Desc": "编队内所有学生<b:MAXHP>提升<?1>",
                 "Parameters": [
                     [
@@ -39740,7 +39793,7 @@
         "MemoryLobby": [
             3,
             3,
-            0
+            3
         ],
         "MemoryLobbyBGM": "Aira",
         "FurnitureInteraction": [
@@ -39764,7 +39817,12 @@
                     2
                 ]
             ],
-            []
+            [
+                [
+                    1105,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "aN",
@@ -40446,7 +40504,7 @@
         "IsReleased": [
             true,
             true,
-            false
+            true
         ],
         "DefaultOrder": 74,
         "PathName": "Ako",
@@ -40475,13 +40533,13 @@
         "CollectionBG": "BG_Gehenna_Collection",
         "FamilyName": "天雨",
         "PersonalName": "亚子",
-        "SchoolYear": "3年级",
+        "SchoolYear": "第3年",
         "CharacterAge": "17岁",
         "Birthday": "12月22日",
-        "CharacterSSRNew": "只要有我在，就绝不容许任何失误。",
-        "ProfileIntroduction": "格黑娜学园风纪委员会的上级行政官，也是风纪委员长日奈的秘书。\n形影不离地在日奈身边辅佐她。乍看之下给人亲切善良的印象，不过处置违反校规者时会露出冷酷无情的一面，不留任何情面。时常被格黑娜的学生们蔑称为“委员长的狗”，然而本人不怎么放在心上。",
+        "CharacterSSRNew": "既然我出面协助了，就绝不容许出现失误哦？",
+        "ProfileIntroduction": "歌赫娜风纪委员会的首席行政官，风纪委员长日奈的秘书。\n\n总是在日奈的身边辅佐她。看起来好像是一名温柔善良的少女，但对违反规章的人丝毫不会手下留情。在歌赫娜常被人称为“日奈的宠物”，但她本人对此并不在意。",
         "Hobby": "日奈",
-        "CharacterVoice": "高野麻里佳",
+        "CharacterVoice": "高野麻里佳/括号君",
         "BirthDay": "12/22",
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
@@ -40507,7 +40565,7 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "侦察情报共享",
+                "Name": "共享侦察数据",
                 "Desc": "令1名我方单位<b:CriticalChance>提升<?1>，<b:CriticalDamage>提升<?2>(持续16秒)",
                 "Parameters": [
                     [
@@ -40568,7 +40626,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "补给计划B",
+                "Name": "补给作战B计划",
                 "Desc": "每45秒令1名<b>当前生命值百分比</b>最低的我方单位回复治愈力<?1>的生命值",
                 "Parameters": [
                     [
@@ -40607,7 +40665,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "支援作战开始",
+                "Name": "补给支援，开始",
                 "Desc": "<b:HealPower>提升<?1>",
                 "Parameters": [
                     [
@@ -40645,7 +40703,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "支援作战开始+",
+                "Name": "补给支援，开始+",
                 "Desc": "<b:HealPower>提升<?1>/\n<b:HealPower>提升<?2>",
                 "Parameters": [
                     [
@@ -40695,7 +40753,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "支援就交给我吧",
+                "Name": "战术辅助，开始",
                 "Desc": "编队内所有学生<b:CriticalDamage>提升<?1>",
                 "Parameters": [
                     [
@@ -40773,7 +40831,7 @@
         "MemoryLobby": [
             5,
             5,
-            0
+            5
         ],
         "MemoryLobbyBGM": "Guruguru Usagi",
         "FurnitureInteraction": [
@@ -40789,7 +40847,12 @@
                     0
                 ]
             ],
-            []
+            [
+                [
+                    1101,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "ak",
@@ -55695,13 +55758,36 @@
                         ]
                     },
                     {
-                        "Type": "IgnoreDelay",
-                        "Scale": [
+                        "Type": "FormChange",
+                        "Frames": {
+                            "AttackEnterDuration": 65,
+                            "AttackStartDuration": 35,
+                            "AttackEndDuration": 37,
+                            "AttackBurstRoundOverDelay": 40,
+                            "AttackIngDuration": 23,
+                            "AttackReloadDuration": 90
+                        },
+                        "Hits": [
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ],
+                        "IgnoreDelay": [
                             2,
                             2,
                             3,
                             3,
                             4
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ]
                     }
                 ]
@@ -70615,6 +70701,39 @@
                         ],
                         "Stat": "AttackPower_Coefficient",
                         "Channel": 2
+                    },
+                    {
+                        "Type": "FormChange",
+                        "Frames": {
+                            "AttackEnterDuration": 26,
+                            "AttackStartDuration": 15,
+                            "AttackIngDuration": 55,
+                            "AttackEndDuration": 22,
+                            "AttackBurstRoundOverDelay": 45,
+                            "AttackReloadDuration": 64
+                        },
+                        "Hits": [
+                            2000,
+                            2000,
+                            2000,
+                            2000,
+                            2000
+                        ],
+                        "IgnoreDelay": [
+                            8492,
+                            8492,
+                            8492,
+                            8492,
+                            8492
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
+                        ]
                     }
                 ]
             },
@@ -72345,6 +72464,14 @@
                             2213,
                             2213,
                             2219
+                        ],
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            10000,
+                            10000,
+                            10000,
+                            10000,
+                            10000
                         ]
                     },
                     {
