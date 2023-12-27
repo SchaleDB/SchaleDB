@@ -20287,7 +20287,9 @@
                 21
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10085
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -22326,7 +22328,9 @@
                 22
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10084
+        ],
         "MemoryLobby": [
             6,
             6,
@@ -88491,7 +88495,7 @@
         "FamilyNameRuby": "まよい",
         "PersonalNameRuby": "",
         "Birthday": "1月22日",
-        "CharacterSSRNew": "温泉で身体を温めたら、次は心の番だね。",
+        "CharacterSSRNew": "温泉で身体を温めたら、次は心の番だね",
         "ProfileIntroduction": "特別クラスの生徒と共に227号温泉郷を運営しているレッドウィンター連邦学園所属、227号特別クラスの停学生。\n\n旧校舎から突然温泉が沸き出し、ノドカと一緒に巨大な温泉郷を運営することになった。ノドカと違って温泉郷を繁盛させる気はあまりない様子だが、色々な飲み物とお菓子を存分に作れる環境には満足しているようだ。",
         "Hobby": "自家製ドリンクを作ること",
         "CharacterVoice": "河瀬茉希",
@@ -92408,7 +92412,7 @@
         "FamilyNameRuby": "いずみもと",
         "PersonalNameRuby": "",
         "Birthday": "5月1日",
-        "CharacterSSRNew": "海だから水着を着ないとね。",
+        "CharacterSSRNew": "海だから水着を着ないとね",
         "ProfileIntroduction": "ミレニアムサイエンススクール所属、特異現象捜査部のメンバー。\n\n何を考えているのか分かりづらいが、酷寒地に到着してからは普段とは違って多少浮かれているようだ。と言いつつも、彼女のファッションセンスはいつも通りな模様。",
         "Hobby": "ボーっとすること、音楽鑑賞",
         "CharacterVoice": "松永あかね",
@@ -92875,6 +92879,1035 @@
                 12,
                 7,
                 13
+            ]
+        ]
+    },
+    {
+        "Id": 10084,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 166,
+        "PathName": "Kotama_Camping",
+        "DevName": "CH0232",
+        "Name": "コタマ（キャンプ）",
+        "School": "Millennium",
+        "Club": "Veritas",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Pierce",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_26001",
+        "Cover": true,
+        "Equipment": [
+            "Gloves",
+            "Badge",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_CampSite_Collection",
+        "FamilyName": "音瀬",
+        "PersonalName": "コタマ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "17歳",
+        "FamilyNameRuby": "おとせ",
+        "PersonalNameRuby": "",
+        "Birthday": "1月5日",
+        "CharacterSSRNew": "先生の足音が近づいてくるのを待っていました",
+        "ProfileIntroduction": "寒い冬にあわせて暖かい格好に着替えたヴェリタスのメンバー。\n\n外出する気はなかったものの、普段は録音しづらい環境音を収録するチャンスだとポジティブに切り替えている。自然環境で収録できるあらゆる音が好きだが、一番好きなのはやはり先生の声なのだとか。",
+        "Hobby": "無線通信、盗聴",
+        "CharacterVoice": "高川みな",
+        "BirthDay": "1/5",
+        "Illustrator": "kokosando",
+        "Designer": "kokosando",
+        "CharHeightMetric": "158cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 944,
+        "AttackPower1": 134,
+        "AttackPower100": 1342,
+        "MaxHP1": 2128,
+        "MaxHP100": 24650,
+        "DefensePower1": 18,
+        "DefensePower100": 113,
+        "HealPower1": 1475,
+        "HealPower100": 4426,
+        "DodgePoint": 1040,
+        "AccuracyPoint": 105,
+        "CriticalPoint": 210,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 20,
+        "AmmoCost": 2,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            5000,
+                            5000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 34,
+                            "AttackStartDuration": 18,
+                            "AttackIngDuration": 28,
+                            "AttackEndDuration": 19,
+                            "AttackBurstRoundOverDelay": 40,
+                            "AttackReloadDuration": 74
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "熊よけ鈴投げ",
+                "Desc": "敵1人に対して、攻撃力の<?1>分のダメージ。<c:Confusion>状態を付与（<?2>間）",
+                "Parameters": [
+                    [
+                        "477%",
+                        "548%",
+                        "691%",
+                        "763%",
+                        "906%"
+                    ],
+                    [
+                        "7.2秒",
+                        "7.2秒",
+                        "9.4秒",
+                        "9.4秒",
+                        "11.5秒"
+                    ]
+                ],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    6
+                ],
+                "Duration": 160,
+                "Range": 750,
+                "Icon": "COMMON_SKILLICON_CONFUSION",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            47721,
+                            54885,
+                            69198,
+                            76355,
+                            90676
+                        ]
+                    },
+                    {
+                        "Type": "CrowdControl",
+                        "Chance": "10000",
+                        "Icon": "Confusion",
+                        "Scale": [
+                            7200,
+                            7200,
+                            9400,
+                            9400,
+                            11500
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "共鳴効果",
+                "Desc": "45秒毎に、自身を除く味方1人と自身の<b:ATK>を<?1>増加（35秒間）",
+                "Parameters": [
+                    [
+                        "5.9%",
+                        "6.2%",
+                        "6.5%",
+                        "7.7%",
+                        "8%",
+                        "8.3%",
+                        "9.5%",
+                        "9.8%",
+                        "10.1%",
+                        "11.3%"
+                    ]
+                ],
+                "Duration": 120,
+                "Range": 750,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                598,
+                                627,
+                                657,
+                                776,
+                                806,
+                                836,
+                                955,
+                                985,
+                                1015,
+                                1134
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "ノイズ増幅",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "ノイズ増幅+",
+                "Desc": "<b:OppressionPower>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "14",
+                        "15",
+                        "16",
+                        "19",
+                        "19",
+                        "20",
+                        "23",
+                        "24",
+                        "24",
+                        "27"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "OppressionPower_Base",
+                        "Scale": [
+                            14,
+                            15,
+                            16,
+                            19,
+                            19,
+                            20,
+                            23,
+                            24,
+                            24,
+                            27
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "電波干渉",
+                "Desc": "敵を攻撃した時、攻撃力の<?1>分の追加ダメージ",
+                "Parameters": [
+                    [
+                        "24.1%",
+                        "25.3%",
+                        "26.5%",
+                        "31.4%",
+                        "32.6%",
+                        "33.8%",
+                        "38.6%",
+                        "39.8%",
+                        "41%",
+                        "45.8%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_EXTRADAMAGE",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            2415,
+                            2536,
+                            2657,
+                            3140,
+                            3261,
+                            3381,
+                            3864,
+                            3985,
+                            4106,
+                            4589
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                1,
+                0
+            ],
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                62
+            ],
+            [
+                3,
+                74
+            ],
+            [
+                1,
+                12
+            ],
+            [
+                1,
+                18
+            ],
+            [
+                2,
+                31
+            ]
+        ],
+        "FavorAlts": [
+            26001
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Aira",
+        "FurnitureInteraction": [
+            [
+                [
+                    210328,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "al",
+            "aw"
+        ],
+        "FavorItemUniqueTags": [
+            "Fy",
+            "FZ"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "エコーリンク",
+            "Desc": "コタマがいつも持ち歩いている拳銃。\n\n発砲音を極限まで抑えたこの拳銃は、静かな山の中でも野生動物から警戒されることなく、作戦を遂行することができる。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 59,
+            "AttackPower100": 590,
+            "MaxHP1": 705,
+            "MaxHP100": 7053,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3050,
+                260
+            ],
+            [
+                3051,
+                3050,
+                261,
+                150
+            ],
+            [
+                3052,
+                3051,
+                262,
+                151
+            ],
+            [
+                3053,
+                3052,
+                263,
+                152
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                13
+            ],
+            [
+                12,
+                18,
+                13,
+                30
+            ],
+            [
+                12,
+                18,
+                8,
+                29
+            ],
+            [
+                8,
+                18,
+                7,
+                23
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4050
+            ],
+            [
+                4050
+            ],
+            [
+                4051,
+                4050,
+                260
+            ],
+            [
+                4051,
+                261,
+                150
+            ],
+            [
+                4052,
+                4051,
+                261,
+                150
+            ],
+            [
+                4052,
+                262,
+                151
+            ],
+            [
+                4053,
+                4052,
+                263,
+                152
+            ],
+            [
+                4053,
+                263,
+                152
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                6,
+                14
+            ],
+            [
+                5,
+                12,
+                7,
+                19
+            ],
+            [
+                8,
+                3,
+                17
+            ],
+            [
+                8,
+                12,
+                5,
+                10
+            ],
+            [
+                12,
+                7,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 10085,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 167,
+        "PathName": "Hare_Camping",
+        "DevName": "CH0233",
+        "Name": "ハレ（キャンプ）",
+        "School": "Millennium",
+        "Club": "Veritas",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Explosion",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "AR",
+        "WeaponImg": "weapon_icon_23003",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Charm"
+        ],
+        "CollectionBG": "BG_CampSite_Collection",
+        "FamilyName": "小鈎",
+        "PersonalName": "ハレ",
+        "SchoolYear": "2年生",
+        "CharacterAge": "16歳",
+        "FamilyNameRuby": "おまがり",
+        "PersonalNameRuby": "",
+        "Birthday": "4月19日",
+        "CharacterSSRNew": "どんなに寒くても、ぬるい妖怪MAXだけは受け入れられないよ",
+        "ProfileIntroduction": "寒い冬にあわせて暖かい格好に着替えたヴェリタスのメンバー。\n\n久々に外出することになった上、電波がほとんど通じないキャンプ場に足を運ぶことになり、いつもよりテンションが下がっている様子。屋外の不便さには大体耐えられるものの、エナジードリンクを飲むことだけは諦められない模様。",
+        "Hobby": "ゲーム、映画鑑賞",
+        "CharacterVoice": "貝原怜奈",
+        "BirthDay": "4/19",
+        "Illustrator": "9ml",
+        "Designer": "9ml",
+        "CharHeightMetric": "153cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1376,
+        "AttackPower1": 158,
+        "AttackPower100": 1589,
+        "MaxHP1": 2214,
+        "MaxHP100": 22140,
+        "DefensePower1": 19,
+        "DefensePower100": 118,
+        "HealPower1": 1422,
+        "HealPower100": 4267,
+        "DodgePoint": 787,
+        "AccuracyPoint": 711,
+        "CriticalPoint": 203,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 10,
+        "AmmoCost": 1,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 40,
+                            "AttackStartDuration": 24,
+                            "AttackEndDuration": 25,
+                            "AttackBurstRoundOverDelay": 20,
+                            "AttackIngDuration": 36,
+                            "AttackReloadDuration": 85
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "焚き火の甘味",
+                "Desc": "自身を除く味方1人に対して、<b:ATK>を<?1>増加（26秒間）/\nさらに自身に<s:CH0233_ExtraPassive>を5個付与（最大15個まで重複）",
+                "Parameters": [
+                    [
+                        "42.3%",
+                        "48.6%",
+                        "61.3%",
+                        "67.7%",
+                        "80.4%"
+                    ]
+                ],
+                "Cost": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                ],
+                "Duration": 120,
+                "Range": 850,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                4232,
+                                4867,
+                                6136,
+                                6771,
+                                8040
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "広がる温もり",
+                "Desc": "50秒毎に、円形範囲内の味方の<b:ATK>を<?1>増加（30秒間）",
+                "Parameters": [
+                    [
+                        "14.5%",
+                        "14.9%",
+                        "15.2%",
+                        "18.1%",
+                        "18.5%",
+                        "18.9%",
+                        "20.3%",
+                        "21%",
+                        "21.4%",
+                        "24.3%"
+                    ]
+                ],
+                "Duration": 120,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 250
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1454,
+                                1491,
+                                1527,
+                                1818,
+                                1854,
+                                1890,
+                                2036,
+                                2109,
+                                2145,
+                                2436
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "デトックス効果",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "デトックス効果+",
+                "Desc": "<b:ExtendBuffDuration>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "1000",
+                        "1050",
+                        "1100",
+                        "1300",
+                        "1350",
+                        "1400",
+                        "1600",
+                        "1650",
+                        "1700",
+                        "1900"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "ExtendBuffDuration_Base",
+                        "Scale": [
+                            1000,
+                            1050,
+                            1100,
+                            1300,
+                            1350,
+                            1400,
+                            1600,
+                            1650,
+                            1700,
+                            1900
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "キャンプの醍醐味",
+                "Desc": "<s:CH0233_ExtraPassive>を保有している状態で敵を攻撃した時、攻撃力の<?1>分の追加ダメージ/\nさらに自身の<s:CH0233_ExtraPassive>が1個減少",
+                "Parameters": [
+                    [
+                        "51.6%",
+                        "54.2%",
+                        "56.8%",
+                        "67.1%",
+                        "69.6%",
+                        "72.2%",
+                        "82.5%",
+                        "85.2%",
+                        "87.7%",
+                        "98%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0233_ExtraPassive",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            5160,
+                            5425,
+                            5681,
+                            6713,
+                            6968,
+                            7224,
+                            8256,
+                            8521,
+                            8776,
+                            9808
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                1,
+                0
+            ],
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                55
+            ],
+            [
+                4,
+                66
+            ],
+            [
+                1,
+                11
+            ],
+            [
+                1,
+                16
+            ],
+            [
+                2,
+                27
+            ]
+        ],
+        "FavorAlts": [
+            23003
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 193",
+        "FurnitureInteraction": [
+            [
+                [
+                    210329,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aR"
+        ],
+        "FavorItemUniqueTags": [
+            "Fz",
+            "fA"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "オートエイマー",
+            "Desc": "ハレが使用するブルパップ方式のアサルトライフル。\n\n屋外でも簡単に点火できる着火機能が付いており、猛獣が現れた時は自動的にサポートしてくれる標的照準装置などが搭載されている。しかし、実際に熊が現れた時のハレは慌ててしまい、その機能をまともに使ったことはないのだとか。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 70,
+            "AttackPower100": 698,
+            "MaxHP1": 637,
+            "MaxHP100": 6366,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3050,
+                250
+            ],
+            [
+                3051,
+                3050,
+                251,
+                170
+            ],
+            [
+                3052,
+                3051,
+                252,
+                171
+            ],
+            [
+                3053,
+                3052,
+                253,
+                172
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                11,
+                30
+            ],
+            [
+                12,
+                18,
+                7,
+                28
+            ],
+            [
+                8,
+                18,
+                8,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4050
+            ],
+            [
+                4050
+            ],
+            [
+                4051,
+                4050,
+                250
+            ],
+            [
+                4051,
+                251,
+                170
+            ],
+            [
+                4052,
+                4051,
+                251,
+                170
+            ],
+            [
+                4052,
+                252,
+                171
+            ],
+            [
+                4053,
+                4052,
+                253,
+                172
+            ],
+            [
+                4053,
+                253,
+                172
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                13
+            ],
+            [
+                5,
+                12,
+                10,
+                19
+            ],
+            [
+                8,
+                3,
+                18
+            ],
+            [
+                8,
+                12,
+                6,
+                10
+            ],
+            [
+                12,
+                6,
+                14
             ]
         ]
     }

@@ -20213,7 +20213,9 @@
                 21
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10085
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -22244,7 +22246,9 @@
                 22
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10084
+        ],
         "MemoryLobby": [
             6,
             6,
@@ -92543,6 +92547,1031 @@
                 12,
                 7,
                 13
+            ]
+        ]
+    },
+    {
+        "Id": 10084,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 166,
+        "PathName": "Kotama_Camping",
+        "DevName": "CH0232",
+        "Name": "코타마(캠핑)",
+        "School": "Millennium",
+        "Club": "Veritas",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Pierce",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_26001",
+        "Cover": true,
+        "Equipment": [
+            "Gloves",
+            "Badge",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_CampSite_Collection",
+        "FamilyName": "오토세",
+        "PersonalName": "코타마",
+        "SchoolYear": "3학년",
+        "CharacterAge": "17세",
+        "Birthday": "1월 5일",
+        "CharacterSSRNew": "선생님의 발소리가 가까워져 오는 것을 기다리고 있었습니다.",
+        "ProfileIntroduction": "추운 겨울을 맞아 따듯한 옷으로 갈아입은 베리타스의 부원.\n\n치히로의 권유로 떠밀리듯 야외에 나오게 되었지만, 평소에는 녹음하기 어려운 환경음을 녹음할 모처럼의 기회라는 생각에 조금은 들떠있다. 자연환경에서 녹음할 수 있는 모든 종류의 소리를 선호하지만, 제일 좋아하는 것은 역시 선생님의 목소리이다.",
+        "Hobby": "무선 통신, 도청",
+        "CharacterVoice": "高川みな",
+        "BirthDay": "1/5",
+        "Illustrator": "kokosando",
+        "Designer": "kokosando",
+        "CharHeightMetric": "158cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 944,
+        "AttackPower1": 134,
+        "AttackPower100": 1342,
+        "MaxHP1": 2128,
+        "MaxHP100": 24650,
+        "DefensePower1": 18,
+        "DefensePower100": 113,
+        "HealPower1": 1475,
+        "HealPower100": 4426,
+        "DodgePoint": 1040,
+        "AccuracyPoint": 105,
+        "CriticalPoint": 210,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 20,
+        "AmmoCost": 2,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            5000,
+                            5000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 34,
+                            "AttackStartDuration": 18,
+                            "AttackIngDuration": 28,
+                            "AttackEndDuration": 19,
+                            "AttackBurstRoundOverDelay": 40,
+                            "AttackReloadDuration": 74
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "베어 벨 투척",
+                "Desc": "적 1인에게 공격력 <?1> 대미지, <c:Confusion> (<?2>간)",
+                "Parameters": [
+                    [
+                        "477%",
+                        "548%",
+                        "691%",
+                        "763%",
+                        "906%"
+                    ],
+                    [
+                        "7.2초",
+                        "7.2초",
+                        "9.4초",
+                        "9.4초",
+                        "11.5초"
+                    ]
+                ],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    6
+                ],
+                "Duration": 160,
+                "Range": 750,
+                "Icon": "COMMON_SKILLICON_CONFUSION",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            47721,
+                            54885,
+                            69198,
+                            76355,
+                            90676
+                        ]
+                    },
+                    {
+                        "Type": "CrowdControl",
+                        "Chance": "10000",
+                        "Icon": "Confusion",
+                        "Scale": [
+                            7200,
+                            7200,
+                            9400,
+                            9400,
+                            11500
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "공명 효과",
+                "Desc": "45초마다 자신을 제외한 아군 1인과 자신의 <b:ATK> <?1> 증가 (35초간)",
+                "Parameters": [
+                    [
+                        "5.9%",
+                        "6.2%",
+                        "6.5%",
+                        "7.7%",
+                        "8%",
+                        "8.3%",
+                        "9.5%",
+                        "9.8%",
+                        "10.1%",
+                        "11.3%"
+                    ]
+                ],
+                "Duration": 120,
+                "Range": 750,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                598,
+                                627,
+                                657,
+                                776,
+                                806,
+                                836,
+                                955,
+                                985,
+                                1015,
+                                1134
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "노이즈 증폭",
+                "Desc": "<b:ATK> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "노이즈 증폭+",
+                "Desc": "<b:OppressionPower> <?1> 증가/\n추가로 <b:ATK> <?2> 증가",
+                "Parameters": [
+                    [
+                        "14",
+                        "15",
+                        "16",
+                        "19",
+                        "19",
+                        "20",
+                        "23",
+                        "24",
+                        "24",
+                        "27"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "OppressionPower_Base",
+                        "Scale": [
+                            14,
+                            15,
+                            16,
+                            19,
+                            19,
+                            20,
+                            23,
+                            24,
+                            24,
+                            27
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "전파 간섭",
+                "Desc": "적 공격 시 공격력 <?1> 추가 대미지",
+                "Parameters": [
+                    [
+                        "24.1%",
+                        "25.3%",
+                        "26.5%",
+                        "31.4%",
+                        "32.6%",
+                        "33.8%",
+                        "38.6%",
+                        "39.8%",
+                        "41%",
+                        "45.8%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_EXTRADAMAGE",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            2415,
+                            2536,
+                            2657,
+                            3140,
+                            3261,
+                            3381,
+                            3864,
+                            3985,
+                            4106,
+                            4589
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                1,
+                0
+            ],
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                62
+            ],
+            [
+                3,
+                74
+            ],
+            [
+                1,
+                12
+            ],
+            [
+                1,
+                18
+            ],
+            [
+                2,
+                31
+            ]
+        ],
+        "FavorAlts": [
+            26001
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Aira",
+        "FurnitureInteraction": [
+            [
+                [
+                    210328,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "al",
+            "aw"
+        ],
+        "FavorItemUniqueTags": [
+            "Fy",
+            "FZ"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "에코 링크",
+            "Desc": "코타마가 늘 휴대하고 다니는 권총.\n\n격발 소음을 극도로 억제한 이 권총은 조용한 산속에서도 야생 동물들의 경계를 사지 않고도 작전을 수행할 수 있다.",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 59,
+            "AttackPower100": 590,
+            "MaxHP1": 705,
+            "MaxHP100": 7053,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3050,
+                260
+            ],
+            [
+                3051,
+                3050,
+                261,
+                150
+            ],
+            [
+                3052,
+                3051,
+                262,
+                151
+            ],
+            [
+                3053,
+                3052,
+                263,
+                152
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                13
+            ],
+            [
+                12,
+                18,
+                13,
+                30
+            ],
+            [
+                12,
+                18,
+                8,
+                29
+            ],
+            [
+                8,
+                18,
+                7,
+                23
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4050
+            ],
+            [
+                4050
+            ],
+            [
+                4051,
+                4050,
+                260
+            ],
+            [
+                4051,
+                261,
+                150
+            ],
+            [
+                4052,
+                4051,
+                261,
+                150
+            ],
+            [
+                4052,
+                262,
+                151
+            ],
+            [
+                4053,
+                4052,
+                263,
+                152
+            ],
+            [
+                4053,
+                263,
+                152
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                6,
+                14
+            ],
+            [
+                5,
+                12,
+                7,
+                19
+            ],
+            [
+                8,
+                3,
+                17
+            ],
+            [
+                8,
+                12,
+                5,
+                10
+            ],
+            [
+                12,
+                7,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 10085,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 167,
+        "PathName": "Hare_Camping",
+        "DevName": "CH0233",
+        "Name": "하레(캠핑)",
+        "School": "Millennium",
+        "Club": "Veritas",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Explosion",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "AR",
+        "WeaponImg": "weapon_icon_23003",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Charm"
+        ],
+        "CollectionBG": "BG_CampSite_Collection",
+        "FamilyName": "오마가리",
+        "PersonalName": "하레",
+        "SchoolYear": "2학년",
+        "CharacterAge": "16세",
+        "Birthday": "4월 19일",
+        "CharacterSSRNew": "아무리 날씨가 추워도 미적지근한 요괴 MAX는 용납할 수 없지.",
+        "ProfileIntroduction": "추운 겨울을 대비하여 따듯한 아웃웨어를 차려입은 베리타스의 부원.\n\n간만에 안락한 실내를 떠나 전파도 거의 터지지 않는 캠핑장에 오게 되어 평소보다 텐션이 떨어져 있다. 야외에서의 불편함은 대부분 감내할 준비가 되어 있지만, 탄산이 가득 찬 에너지 드링크를 마시는 것만큼은 야외에서도 포기할 수 없다.",
+        "Hobby": "게임, 영화감상",
+        "CharacterVoice": "貝原怜奈",
+        "BirthDay": "4/19",
+        "Illustrator": "9ml",
+        "Designer": "9ml",
+        "CharHeightMetric": "153cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1376,
+        "AttackPower1": 158,
+        "AttackPower100": 1589,
+        "MaxHP1": 2214,
+        "MaxHP100": 22140,
+        "DefensePower1": 19,
+        "DefensePower100": 118,
+        "HealPower1": 1422,
+        "HealPower100": 4267,
+        "DodgePoint": 787,
+        "AccuracyPoint": 711,
+        "CriticalPoint": 203,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 10,
+        "AmmoCost": 1,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 40,
+                            "AttackStartDuration": 24,
+                            "AttackEndDuration": 25,
+                            "AttackBurstRoundOverDelay": 20,
+                            "AttackIngDuration": 36,
+                            "AttackReloadDuration": 85
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "모닥불 안의 별미",
+                "Desc": "자신을 제외한 아군 1인에게 <b:ATK> <?1> 증가 (26초간)/\n추가로 자신에게 <s:CH0233_ExtraPassive> 5개 부여 (최대 15개까지 중첩)",
+                "Parameters": [
+                    [
+                        "42.3%",
+                        "48.6%",
+                        "61.3%",
+                        "67.7%",
+                        "80.4%"
+                    ]
+                ],
+                "Cost": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                ],
+                "Duration": 120,
+                "Range": 850,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                4232,
+                                4867,
+                                6136,
+                                6771,
+                                8040
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "퍼지는 온기",
+                "Desc": "50초마다 원형범위 내의 아군에게 <b:ATK> <?1> 증가 (30초간)",
+                "Parameters": [
+                    [
+                        "14.5%",
+                        "14.9%",
+                        "15.2%",
+                        "18.1%",
+                        "18.5%",
+                        "18.9%",
+                        "20.3%",
+                        "21%",
+                        "21.4%",
+                        "24.3%"
+                    ]
+                ],
+                "Duration": 120,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 250
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1454,
+                                1491,
+                                1527,
+                                1818,
+                                1854,
+                                1890,
+                                2036,
+                                2109,
+                                2145,
+                                2436
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "디톡스 효과",
+                "Desc": "<b:ATK> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "디톡스 효과+",
+                "Desc": "이로운 효과 유지력 <?1> 증가/\n추가로 <b:ATK> <?2> 증가",
+                "Parameters": [
+                    [
+                        "1000",
+                        "1050",
+                        "1100",
+                        "1300",
+                        "1350",
+                        "1400",
+                        "1600",
+                        "1650",
+                        "1700",
+                        "1900"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "ExtendBuffDuration_Base",
+                        "Scale": [
+                            1000,
+                            1050,
+                            1100,
+                            1300,
+                            1350,
+                            1400,
+                            1600,
+                            1650,
+                            1700,
+                            1900
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "캠핑의 묘미",
+                "Desc": "<s:CH0233_ExtraPassive> 보유 중 적 공격 시 공격력 <?1> 추가 대미지/\n추가로 자신의 <s:CH0233_ExtraPassive> 1개 감소",
+                "Parameters": [
+                    [
+                        "51.6%",
+                        "54.2%",
+                        "56.8%",
+                        "67.1%",
+                        "69.6%",
+                        "72.2%",
+                        "82.5%",
+                        "85.2%",
+                        "87.7%",
+                        "98%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0233_ExtraPassive",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            5160,
+                            5425,
+                            5681,
+                            6713,
+                            6968,
+                            7224,
+                            8256,
+                            8521,
+                            8776,
+                            9808
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                1,
+                0
+            ],
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                55
+            ],
+            [
+                4,
+                66
+            ],
+            [
+                1,
+                11
+            ],
+            [
+                1,
+                16
+            ],
+            [
+                2,
+                27
+            ]
+        ],
+        "FavorAlts": [
+            23003
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 193",
+        "FurnitureInteraction": [
+            [
+                [
+                    210329,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aR"
+        ],
+        "FavorItemUniqueTags": [
+            "Fz",
+            "fA"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "자동 표적 조준 장치",
+            "Desc": "하레가 사용하는 불펍 방식의 돌격소총.\n\n야외에서도 쉽게 불을 피울 수 있도록 해주는 착화 기능을 포함하여, 맹수가 나타났을 때 자동으로 조준을 돕는 표적 조준 장치 등이 탑재되어 있다. 하지만 정작 실제로 곰이 나타났을 때의 하레는 당황해서 총기의 기능을 제대로 사용하지 못했다.",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 70,
+            "AttackPower100": 698,
+            "MaxHP1": 637,
+            "MaxHP100": 6366,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3050,
+                250
+            ],
+            [
+                3051,
+                3050,
+                251,
+                170
+            ],
+            [
+                3052,
+                3051,
+                252,
+                171
+            ],
+            [
+                3053,
+                3052,
+                253,
+                172
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                11,
+                30
+            ],
+            [
+                12,
+                18,
+                7,
+                28
+            ],
+            [
+                8,
+                18,
+                8,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4050
+            ],
+            [
+                4050
+            ],
+            [
+                4051,
+                4050,
+                250
+            ],
+            [
+                4051,
+                251,
+                170
+            ],
+            [
+                4052,
+                4051,
+                251,
+                170
+            ],
+            [
+                4052,
+                252,
+                171
+            ],
+            [
+                4053,
+                4052,
+                253,
+                172
+            ],
+            [
+                4053,
+                253,
+                172
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                13
+            ],
+            [
+                5,
+                12,
+                10,
+                19
+            ],
+            [
+                8,
+                3,
+                18
+            ],
+            [
+                8,
+                12,
+                6,
+                10
+            ],
+            [
+                12,
+                6,
+                14
             ]
         ]
     }
