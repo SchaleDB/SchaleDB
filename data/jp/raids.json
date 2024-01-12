@@ -48326,6 +48326,149 @@
                 130,
                 100
             ]
+        },
+        {
+            "Id": 23000,
+            "IsReleased": [
+                true,
+                false,
+                false
+            ],
+            "DungeonType": "Shooting",
+            "Icon": "enemyinfo_boxcat_terror",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 910100001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811001
+                    ]
+                },
+                {
+                    "Id": 910100002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811002
+                    ]
+                },
+                {
+                    "Id": 910100003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811003
+                    ]
+                },
+                {
+                    "Id": 910100004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 2541640336
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 2541640336
+                    },
+                    {
+                        "Id": 1734625393
+                    }
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                180,
+                170
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -48610,6 +48753,18 @@
             "Icon": "timeattack_icon_buff_defensepower_enemy_01",
             "Name": "HP減少、防御力増加",
             "Desc": "敵のHPが減少する代わりに、防御力が増加します。"
+        },
+        {
+            "Id": 2541640336,
+            "Icon": "timeattackgeas_ally_statchange_criticalpoint_up_fixed",
+            "Name": "味方の会心値増加、敵のHP増加",
+            "Desc": "敵のHPが増加する代わりに、味方の会心値が増加します。"
+        },
+        {
+            "Id": 1734625393,
+            "Icon": "timeattack_icon_debuff_attackpower_ally_01",
+            "Name": "トリニティ攻撃力減少",
+            "Desc": "トリニティ所属生徒の攻撃力が減少します。"
         }
     ],
     "WorldRaid": [
