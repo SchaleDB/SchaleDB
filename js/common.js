@@ -9240,7 +9240,7 @@ function getItemCraftNodes(itemId, itemType) {
 function getItemConsumables(itemId) {
     let itemHtml = ["", ""]
     let returnHtml = ""
-    data.items.filter(i => "ConsumeType" in i && !i.ImmediateUse).forEach((consumableItem) => {
+    data.items.filter(i => "ConsumeType" in i && i.IsReleased[regionID] && !i.ImmediateUse).forEach((consumableItem) => {
         const containsList = getServerProperty(consumableItem, 'Contains')
         containsList.forEach(containItem => {
 
