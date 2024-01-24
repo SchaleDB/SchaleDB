@@ -8675,7 +8675,7 @@ function populateCraftList() {
         const itemList = recipe.ResultId >= 1000000 ? 'furniture' : 'items'
         const item = find(data[itemList], 'Id', recipe.ResultId % 1000000)[0]
 
-        if (recipe.Released[regionID] && item.IsReleased[regionID]) {
+        if (item.IsReleased[regionID]) {
             html += getFusionRecipeCardHTML(recipe)
         }
     })
@@ -9226,7 +9226,7 @@ function getItemCraftNodes(itemId, itemType) {
     }
 
     fusionRecipe = find(data.crafting.Fusion, 'ResultId', itemId + getItemIdOffset(itemType))
-    if (fusionRecipe.length > 0 && fusionRecipe[0].Released[regionID]) {
+    if (fusionRecipe.length > 0) {
         nodesHtml += `<div class="mb-2"><i>${translateUI('item_obtainedfrom_fusion')}</i></div>`
         nodesHtml += `<div class="selection-grid craft selection-grid-flex my-2">${getFusionRecipeCardHTML(fusionRecipe[0])}</div>`
         $('#ba-item-craftnodes').show()
