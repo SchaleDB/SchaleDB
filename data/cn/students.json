@@ -7040,7 +7040,7 @@
                     3
                 ],
                 "Duration": 114,
-                "Range": 400,
+                "Range": 450,
                 "Radius": [
                     {
                         "Type": "Fan",
@@ -10390,6 +10390,40 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "じゃ～ん☆+",
+                "Desc": "30秒毎に、攻撃力を<?1>、<b:HIT>を<?2>増加（20秒間）",
+                "Parameters": [
+                    [
+                        "22.3%",
+                        "23.4%",
+                        "24.5%",
+                        "29%",
+                        "30.1%",
+                        "31.2%",
+                        "35.7%",
+                        "36.8%",
+                        "37.9%",
+                        "42.4%"
+                    ],
+                    [
+                        "19.3%",
+                        "20.3%",
+                        "21.2%",
+                        "25.1%",
+                        "26.1%",
+                        "27%",
+                        "30.9%",
+                        "31.9%",
+                        "32.9%",
+                        "36.7%"
+                    ]
+                ],
+                "Duration": 59,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": []
+            },
+            {
                 "SkillType": "passive",
                 "Name": "这样可不乖哦！",
                 "Desc": "<b:CriticalDamage>提升<?1>",
@@ -10595,7 +10629,43 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base",
+                "AccuracyPoint_Base"
+            ],
+            "StatValue": [
+                [
+                    500,
+                    500
+                ],
+                [
+                    200,
+                    200
+                ]
+            ],
+            "Name": "秘密のウィッシュリスト",
+            "Desc": "ノノミがこっそり記入していたノート。いつか対策委員会のメンバーたちと一緒にしたいことが書かれている。",
+            "TierUpMaterial": [
+                [
+                    5005,
+                    100,
+                    101
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3040,
@@ -40114,6 +40184,35 @@
                             14498
                         ]
                     }
+                ],
+                "ExtraSkills": [
+                    {
+                        "SkillType": "passive",
+                        "Name": "この一瞬一瞬に、心を込めて！",
+                        "Desc": "ミクを中心とした円形範囲内の味方の<b:ATK>を<?1>増加（26秒間）（範囲内にいる間だけ効果を維持）",
+                        "Parameters": [
+                            [
+                                "21.2%",
+                                "24.4%",
+                                "27.6%",
+                                "30.8%",
+                                "34%",
+                                "37.2%",
+                                "40.4%",
+                                "43.6%",
+                                "46.8%",
+                                "50%"
+                            ]
+                        ],
+                        "Radius": [
+                            {
+                                "Type": "Circle",
+                                "Radius": 300
+                            }
+                        ],
+                        "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                        "Effects": []
+                    }
                 ]
             },
             {
@@ -40841,7 +40940,9 @@
                 21
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10087
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -53458,6 +53559,40 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "早く終わらせたい+",
+                "Desc": "50秒毎に、<b:ATK>を<?1>増加/\n<b:Penetration>を<?2>増加（40秒間）",
+                "Parameters": [
+                    [
+                        "26.6%",
+                        "28%",
+                        "29.3%",
+                        "34.6%",
+                        "36%",
+                        "37.3%",
+                        "42.6%",
+                        "44%",
+                        "45.3%",
+                        "50.6%"
+                    ],
+                    [
+                        "344",
+                        "361",
+                        "378",
+                        "446",
+                        "463",
+                        "481",
+                        "549",
+                        "566",
+                        "584",
+                        "652"
+                    ]
+                ],
+                "Duration": 82,
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": []
+            },
+            {
                 "SkillType": "passive",
                 "Name": "无谓的技术",
                 "Desc": "<b:ATK>提升<?1>",
@@ -53776,7 +53911,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base"
+            ],
+            "StatValue": [
+                [
+                    2000,
+                    2000
+                ]
+            ],
+            "Name": "木の彫像",
+            "Desc": "幼い頃、サオリがナイフで彫って作ってくれた拙い木彫り。サオリ本人もすっかり忘れているほど古いものだ。",
+            "TierUpMaterial": [
+                [
+                    5020,
+                    100,
+                    101
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3060,
@@ -61597,7 +61763,32 @@
                         "setting_on"
                     ],
                     "DisableFirst": true
-                }
+                },
+                "ExtraSkills": [
+                    {
+                        "SkillType": "normal",
+                        "Name": "情熱砲",
+                        "Desc": "ターレット強化状態の場合は、通常攻撃6回毎に、敵1人に対して攻撃力の<?1>分のダメージ",
+                        "Parameters": [
+                            [
+                                "284%",
+                                "298%",
+                                "312%",
+                                "369%",
+                                "383%",
+                                "397%",
+                                "454%",
+                                "468%",
+                                "483%",
+                                "539%"
+                            ]
+                        ],
+                        "Duration": 90,
+                        "Range": 650,
+                        "Icon": "COMMON_SKILLICON_TARGET",
+                        "Effects": []
+                    }
+                ]
             },
             {
                 "SkillType": "passive",
@@ -67382,6 +67573,41 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "元気出してください！+",
+                "Desc": "35秒毎に、HPが低い味方4人の<b:HealEffectiveness>率を<?1>増加/\n治癒力の<?2>分の<b:DotHeal>を付与(20秒間)",
+                "Parameters": [
+                    [
+                        "24.8%",
+                        "26%",
+                        "27.3%",
+                        "32.2%",
+                        "33.5%",
+                        "34.7%",
+                        "39.7%",
+                        "40.9%",
+                        "42.2%",
+                        "47.1%"
+                    ],
+                    [
+                        "5.9%",
+                        "6.2%",
+                        "6.5%",
+                        "7.6%",
+                        "7.9%",
+                        "8.2%",
+                        "9.4%",
+                        "9.7%",
+                        "10%",
+                        "11.2%"
+                    ]
+                ],
+                "Duration": 60,
+                "Range": 1000,
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": []
+            },
+            {
                 "SkillType": "passive",
                 "Name": "祝福救护",
                 "Desc": "<b:HealPower>提升<?1>",
@@ -67591,7 +67817,38 @@
             "HealPower100": 3091,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "HealPower_Base"
+            ],
+            "StatValue": [
+                [
+                    500,
+                    500
+                ]
+            ],
+            "Name": "ハナエのプレゼント袋",
+            "Desc": "ハナエのプレゼントがいっぱい詰まっている袋。人々が必要そうなものを、ハナエがたくさん詰め込んでいる。",
+            "TierUpMaterial": [
+                [
+                    5016,
+                    110,
+                    111
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3020,
@@ -72476,18 +72733,6 @@
                     2
                 ],
                 "Duration": 100,
-                "Radius": [
-                    {
-                        "Type": "Obb",
-                        "Width": 50,
-                        "Height": 850
-                    },
-                    {
-                        "Type": "Obb",
-                        "Width": 200,
-                        "Height": 1400
-                    }
-                ],
                 "Icon": "SKILLICON_CH0187_EXSKILL",
                 "Effects": [
                     {
@@ -72636,6 +72881,66 @@
                             4000
                         ]
                     }
+                ],
+                "ExtraSkills": [
+                    {
+                        "SkillType": "ex",
+                        "Name": "システム：アビ・エシュフ",
+                        "Desc": "1、2撃目の攻撃は直線範囲内の敵に対して、攻撃力の<?1>分のダメージ\n最後の攻撃は直線範囲内の指定した敵に対して、攻撃力の<?2>分のダメージ、その他の敵に対して、攻撃力の<?3>分のダメージ\n（3回攻撃全て敵の防御力を<?4>無視）",
+                        "Parameters": [
+                            [
+                                "87.5%",
+                                "101%",
+                                "127%",
+                                "140.5%",
+                                "167%"
+                            ],
+                            [
+                                "607%",
+                                "698%",
+                                "880%",
+                                "971%",
+                                "1153%"
+                            ],
+                            [
+                                "121%",
+                                "139%",
+                                "176%",
+                                "194%",
+                                "230%"
+                            ],
+                            [
+                                "40%",
+                                "40%",
+                                "50%",
+                                "50%",
+                                "60%"
+                            ]
+                        ],
+                        "Cost": [
+                            5,
+                            5,
+                            5,
+                            5,
+                            5
+                        ],
+                        "Duration": 166,
+                        "Range": 850,
+                        "Radius": [
+                            {
+                                "Type": "Obb",
+                                "Width": 50,
+                                "Height": 850
+                            },
+                            {
+                                "Type": "Obb",
+                                "Width": 200,
+                                "Height": 1400
+                            }
+                        ],
+                        "Icon": "COMMON_SKILLICON_BEAM",
+                        "Effects": []
+                    }
                 ]
             },
             {
@@ -72764,7 +73069,44 @@
                         "setting_on"
                     ],
                     "DisableFirst": true
-                }
+                },
+                "ExtraSkills": [
+                    {
+                        "SkillType": "normal",
+                        "Name": "戦術的判断",
+                        "Desc": "<s:CH0187Mod>では35秒毎に、敵1人に対して攻撃力の<?1>分のダメージ（この攻撃は敵の防御力を<?2>無視します)",
+                        "Parameters": [
+                            [
+                                "486%",
+                                "511%",
+                                "535%",
+                                "584%",
+                                "608%",
+                                "632%",
+                                "681%",
+                                "705%",
+                                "730%",
+                                "778%"
+                            ],
+                            [
+                                "30%",
+                                "30%",
+                                "30%",
+                                "40%",
+                                "40%",
+                                "40%",
+                                "50%",
+                                "50%",
+                                "50%",
+                                "60%"
+                            ]
+                        ],
+                        "Duration": 140,
+                        "Range": 850,
+                        "Icon": "COMMON_SKILLICON_TARGET",
+                        "Effects": []
+                    }
+                ]
             },
             {
                 "SkillType": "passive",
@@ -93694,6 +94036,1480 @@
                 12,
                 6,
                 14
+            ]
+        ]
+    },
+    {
+        "Id": 10087,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 168,
+        "PathName": "Ako_Dress",
+        "DevName": "CH0231",
+        "Name": "アコ（ドレス）",
+        "School": "Gehenna",
+        "Club": "Fuuki",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Explosion",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_20008",
+        "Cover": true,
+        "Equipment": [
+            "Shoes",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_GehennaPartyRoom_Collection",
+        "FamilyName": "天雨",
+        "PersonalName": "アコ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "17歳",
+        "Birthday": "12月22日",
+        "CharacterSSRNew": "今回のミッションに隙なんてありませんとも",
+        "ProfileIntroduction": "ゲヘナ学園所属、風紀委員会の行政官であり、風紀委員長ヒナにとって秘書のような存在。\n\nゲヘナのパーティーでもヒナを補佐すべく、ドレスを着ることになった。日頃から丁寧な仕事ぶりで多くの風紀委員から尊敬されている。今回は完璧なエージェントとして活躍する予定である……とアコは自信満々に語っている。",
+        "Hobby": "ヒナ委員長",
+        "CharacterVoice": "高野麻里佳",
+        "BirthDay": "12/22",
+        "Illustrator": "DoReMi",
+        "Designer": "DoReMi",
+        "CharHeightMetric": "165cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 900,
+        "AttackPower1": 144,
+        "AttackPower100": 1449,
+        "MaxHP1": 2025,
+        "MaxHP100": 23470,
+        "DefensePower1": 18,
+        "DefensePower100": 108,
+        "HealPower1": 1539,
+        "HealPower100": 4617,
+        "DodgePoint": 720,
+        "AccuracyPoint": 439,
+        "CriticalPoint": 219,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 8,
+        "AmmoCost": 2,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            5000,
+                            5000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 45,
+                            "AttackStartDuration": 20,
+                            "AttackEndDuration": 20,
+                            "AttackBurstRoundOverDelay": 30,
+                            "AttackIngDuration": 20,
+                            "AttackReloadDuration": 70
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "完璧なエージェント",
+                "Desc": "円形範囲内の味方の<b:CriticalChance>を<?1>増加、<b:CriticalDamage>率を<?2>増加（30秒間）/\nさらに味方1人当たり、自身の<s:CH0231_ExtraPassive>を1個追加（最大15個まで）",
+                "Parameters": [
+                    [
+                        "11.3%",
+                        "12.1%",
+                        "15.5%",
+                        "16.4%",
+                        "19.8%"
+                    ],
+                    [
+                        "32.8%",
+                        "35.3%",
+                        "45.2%",
+                        "47.6%",
+                        "57.5%"
+                    ]
+                ],
+                "Cost": [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                ],
+                "Duration": 125,
+                "Range": 750,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 350
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": []
+            },
+            {
+                "SkillType": "normal",
+                "Name": "ターゲットは逃しません！",
+                "Desc": "35秒毎に、敵1人の<d:DEF>を<?1>減少（22秒間）/\nさらに自身の<s:CH0231_ExtraPassive>数によって与えるダメージが変更\n3個以下：攻撃力の<?2>分のダメージ\n4個～7個：攻撃力の<?3>分のダメージ\n8個～11個：攻撃力の<?4>分のダメージ\n12個以上：攻撃力の<?5>分のダメージ",
+                "Parameters": [
+                    [
+                        "18.5%",
+                        "18.5%",
+                        "18.5%",
+                        "20.3%",
+                        "20.3%",
+                        "20.3%",
+                        "22.2%",
+                        "22.2%",
+                        "22.2%",
+                        "24%"
+                    ],
+                    [
+                        "496%",
+                        "521%",
+                        "545%",
+                        "645%",
+                        "670%",
+                        "694%",
+                        "794%",
+                        "818%",
+                        "843%",
+                        "942%"
+                    ],
+                    [
+                        "531%",
+                        "558%",
+                        "584%",
+                        "691%",
+                        "717%",
+                        "744%",
+                        "850%",
+                        "877%",
+                        "903%",
+                        "1010%"
+                    ],
+                    [
+                        "584%",
+                        "614%",
+                        "643%",
+                        "760%",
+                        "789%",
+                        "818%",
+                        "935%",
+                        "965%",
+                        "994%",
+                        "1111%"
+                    ],
+                    [
+                        "638%",
+                        "670%",
+                        "701%",
+                        "829%",
+                        "861%",
+                        "893%",
+                        "1020%",
+                        "1052%",
+                        "1084%",
+                        "1212%"
+                    ]
+                ],
+                "Duration": 138,
+                "Range": 750,
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": []
+            },
+            {
+                "SkillType": "passive",
+                "Name": "エージェントの自信",
+                "Desc": "<b:MAXHP>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "エージェントの自信+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:MAXHP>を<?2>増加",
+                "Parameters": [
+                    [
+                        "173",
+                        "182",
+                        "191",
+                        "225",
+                        "234",
+                        "242",
+                        "277",
+                        "286",
+                        "294",
+                        "329"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            173,
+                            182,
+                            191,
+                            225,
+                            234,
+                            242,
+                            277,
+                            286,
+                            294,
+                            329
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "作戦の成果",
+                "Desc": "<s:CH0231_ExtraPassive>1個毎に、<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "3%",
+                        "3.1%",
+                        "3.3%",
+                        "3.9%",
+                        "4%",
+                        "4.2%",
+                        "4.8%",
+                        "4.9%",
+                        "5.1%",
+                        "5.7%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0231_EXTRAPASSIVESKILL",
+                "Effects": []
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                1,
+                0
+            ],
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                59
+            ],
+            [
+                4,
+                70
+            ],
+            [
+                1,
+                12
+            ],
+            [
+                1,
+                17
+            ],
+            [
+                2,
+                29
+            ]
+        ],
+        "FavorAlts": [
+            20008
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Poppin' Memories",
+        "FurnitureInteraction": [
+            [
+                [
+                    15306,
+                    0
+                ],
+                [
+                    15306,
+                    1
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "ak",
+            "Ba",
+            "au"
+        ],
+        "FavorItemUniqueTags": [
+            "fC",
+            "fc"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "ホットショット",
+            "Desc": "アコが携帯している拳銃。\n\n行政官としての能力を証明するもの。アコがいつも大切に扱っている銃であると同時に、今はゲヘナの特別なエージェントの秘密兵器として活躍している……という設定が増えている。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 64,
+            "AttackPower100": 637,
+            "MaxHP1": 672,
+            "MaxHP100": 6715,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                140
+            ],
+            [
+                3031,
+                3030,
+                141,
+                220
+            ],
+            [
+                3032,
+                3031,
+                142,
+                221
+            ],
+            [
+                3033,
+                3032,
+                143,
+                222
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                13,
+                28
+            ],
+            [
+                12,
+                18,
+                10,
+                28
+            ],
+            [
+                8,
+                18,
+                8,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                140
+            ],
+            [
+                4031,
+                141,
+                220
+            ],
+            [
+                4032,
+                4031,
+                141,
+                220
+            ],
+            [
+                4032,
+                142,
+                221
+            ],
+            [
+                4033,
+                4032,
+                143,
+                222
+            ],
+            [
+                4033,
+                143,
+                222
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                5,
+                14
+            ],
+            [
+                5,
+                12,
+                10,
+                17
+            ],
+            [
+                8,
+                5,
+                16
+            ],
+            [
+                8,
+                12,
+                6,
+                9
+            ],
+            [
+                12,
+                7,
+                11
+            ]
+        ]
+    },
+    {
+        "Id": 16014,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 169,
+        "PathName": "Ibuki",
+        "DevName": "CH0077",
+        "Name": "イブキ",
+        "School": "Gehenna",
+        "Club": "PandemoniumSociety",
+        "StarGrade": 1,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Mystic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 1,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 3,
+        "WeaponType": "AR",
+        "WeaponImg": "weapon_icon_ibuki",
+        "Cover": true,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_Gehenna_Collection",
+        "FamilyName": "丹花",
+        "PersonalName": "イブキ",
+        "SchoolYear": "1年生",
+        "CharacterAge": "11歳",
+        "Birthday": "4月14日",
+        "CharacterSSRNew": "",
+        "ProfileIntroduction": "ゲヘナ学園所属、「万魔殿」の議員であり、マスコット的な少女。\n\n元々ゲヘナ学園初等部所属だったが、能力を認められゲヘナでも優秀な生徒のみが入れるという「万魔殿」に加入した。「万魔殿」の中では最年少だが、ひたむきな可愛さで皆から愛されている。その分、先輩たちの迷惑にならないよう、今日も頑張っている品行方正な女の子。",
+        "Hobby": "予習・復習、ぬいぐるみ集め",
+        "CharacterVoice": "春瀬なつみ",
+        "BirthDay": "4/14",
+        "Illustrator": "ビョルチ",
+        "Designer": "ビョルチ",
+        "CharHeightMetric": "128cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1324,
+        "AttackPower1": 236,
+        "AttackPower100": 2360,
+        "MaxHP1": 2127,
+        "MaxHP100": 21280,
+        "DefensePower1": 18,
+        "DefensePower100": 113,
+        "HealPower1": 1475,
+        "HealPower100": 4427,
+        "DodgePoint": 756,
+        "AccuracyPoint": 737,
+        "CriticalPoint": 210,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            3333,
+                            3333,
+                            3334
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 36,
+                            "AttackStartDuration": 15,
+                            "AttackEndDuration": 13,
+                            "AttackBurstRoundOverDelay": 50,
+                            "AttackIngDuration": 36,
+                            "AttackReloadDuration": 67
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "イブキのお絵描きタイム！",
+                "Desc": "自身を除く円形範囲内の味方の<b:ATK>を<?1>増加（35秒間）",
+                "Parameters": [
+                    [
+                        "26.4%",
+                        "30.4%",
+                        "38.3%",
+                        "42.3%",
+                        "50.2%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Duration": 145,
+                "Range": 350,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 350
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [],
+                "ExtraSkills": [
+                    {
+                        "SkillType": "ex",
+                        "Name": "イロハ先輩とパトロール！",
+                        "Desc": "イロハの虎丸に搭乗した時、円形範囲内の敵に対して攻撃力の<?1>分のダメージ",
+                        "Parameters": [
+                            [
+                                "246%",
+                                "256%",
+                                "274%",
+                                "283%",
+                                "302%"
+                            ]
+                        ],
+                        "Cost": [
+                            5,
+                            5,
+                            5,
+                            5,
+                            5
+                        ],
+                        "Duration": 131,
+                        "Range": 1300,
+                        "Radius": [
+                            {
+                                "Type": "Circle",
+                                "Radius": 550
+                            }
+                        ],
+                        "Icon": "COMMON_SKILLICON_CIRCLE",
+                        "Effects": []
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "悪い子はメッだよ！",
+                "Desc": "30秒毎に、敵1人に対して攻撃力の<?1>分のダメージ/\nさらに<d:ATK>を<?2>減少（20秒間）",
+                "Parameters": [
+                    [
+                        "204%",
+                        "214%",
+                        "225%",
+                        "266%",
+                        "276%",
+                        "286%",
+                        "327%",
+                        "337%",
+                        "347%",
+                        "388%"
+                    ],
+                    [
+                        "18.6%",
+                        "18.6%",
+                        "18.6%",
+                        "20.4%",
+                        "20.4%",
+                        "20.4%",
+                        "22.3%",
+                        "22.3%",
+                        "22.3%",
+                        "24.1%"
+                    ]
+                ],
+                "Duration": 85,
+                "Range": 850,
+                "Icon": "COMMON_SKILLICON_WEAPONDEBUFF",
+                "Effects": []
+            },
+            {
+                "SkillType": "passive",
+                "Name": "品行方正な女の子",
+                "Desc": "<b:MAXHP>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "品行方正な女の子+",
+                "Desc": "<b:MAXHP>を<?1>増加/\nさらに<b:MAXHP>を<?2>増加",
+                "Parameters": [
+                    [
+                        "3404",
+                        "3574",
+                        "3744",
+                        "4425",
+                        "4595",
+                        "4765",
+                        "5446",
+                        "5616",
+                        "5786",
+                        "6467"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Base",
+                        "Scale": [
+                            3404,
+                            3574,
+                            3744,
+                            4425,
+                            4595,
+                            4765,
+                            5446,
+                            5616,
+                            5786,
+                            6467
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "万魔殿のマスコット",
+                "Desc": "EXスキル使用開始時、自身に対して治癒力の<?1>分の回復",
+                "Parameters": [
+                    [
+                        "90%",
+                        "94.5%",
+                        "99%",
+                        "117%",
+                        "121%",
+                        "126%",
+                        "144%",
+                        "148%",
+                        "153%",
+                        "171%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "Effects": []
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                53
+            ],
+            [
+                6,
+                64
+            ],
+            [
+                2,
+                11
+            ],
+            [
+                2,
+                16
+            ],
+            [
+                4,
+                26
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            6,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Hue",
+        "FurnitureInteraction": [
+            [
+                [
+                    210330,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "al",
+            "aw",
+            "ax",
+            "aJ",
+            "ao"
+        ],
+        "FavorItemUniqueTags": [
+            "fD",
+            "fd"
+        ],
+        "IsLimited": 2,
+        "Weapon": {
+            "Name": "バンバーン！ちゃん",
+            "Desc": "イブキが大切にしている銃。\n\n「万魔殿」の先輩から受け継いだ制式小銃に、イブキがお気に入りのステッカーを貼ったり、アクセサリーをつけたもの。イブキにとってかけがえのない大切な宝物なのだとか。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 2,
+            "AttackPower1": 83,
+            "AttackPower100": 829,
+            "MaxHP1": 490,
+            "MaxHP100": 4895,
+            "HealPower1": 139,
+            "HealPower100": 1387,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                120
+            ],
+            [
+                3031,
+                3030,
+                121,
+                200
+            ],
+            [
+                3032,
+                3031,
+                122,
+                201
+            ],
+            [
+                3033,
+                3032,
+                123,
+                202
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                16
+            ],
+            [
+                12,
+                18,
+                13,
+                32
+            ],
+            [
+                12,
+                18,
+                11,
+                22
+            ],
+            [
+                8,
+                18,
+                12,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                120
+            ],
+            [
+                4031,
+                121,
+                200
+            ],
+            [
+                4032,
+                4031,
+                121,
+                200
+            ],
+            [
+                4032,
+                122,
+                201
+            ],
+            [
+                4033,
+                4032,
+                123,
+                202
+            ],
+            [
+                4033,
+                123,
+                202
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                9,
+                17
+            ],
+            [
+                8,
+                3,
+                17
+            ],
+            [
+                8,
+                12,
+                5,
+                10
+            ],
+            [
+                12,
+                7,
+                12
+            ]
+        ]
+    },
+    {
+        "Id": 20033,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 170,
+        "PathName": "Makoto",
+        "DevName": "CH0079",
+        "Name": "マコト",
+        "School": "Gehenna",
+        "Club": "PandemoniumSociety",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Pierce",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "SR",
+        "WeaponImg": "weapon_icon_ch0079",
+        "Cover": false,
+        "Equipment": [
+            "Gloves",
+            "Bag",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Gehenna_Collection",
+        "FamilyName": "羽沼",
+        "PersonalName": "マコト",
+        "SchoolYear": "3年生",
+        "CharacterAge": "18歳",
+        "Birthday": "3月19日",
+        "CharacterSSRNew": "さあ！先生よ！\n我々「万魔殿」と共に邁進する時だ！",
+        "ProfileIntroduction": "ゲヘナ学園所属、「万魔殿」の議長。\n\n欲しいものがあれば、どんな謀も厭わない、欲望に忠実な野心家であり陰謀家。時にはその態度のせいで痛い目に遭い挫けることも多いが、すぐさま立ち直る芯の強い少女。イブキを妹のように可愛がっており、同じくイロハのことも妹のようにこき使っている。",
+        "Hobby": "計略、悪巧み、イブキと遊ぶこと",
+        "CharacterVoice": "浅川悠",
+        "BirthDay": "3/19",
+        "Illustrator": "DoReMi",
+        "Designer": "春夏冬ゆう",
+        "CharHeightMetric": "169cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 2162,
+        "AttackPower1": 317,
+        "AttackPower100": 3171,
+        "MaxHP1": 1883,
+        "MaxHP100": 14076,
+        "DefensePower1": 62,
+        "DefensePower100": 376,
+        "HealPower1": 1703,
+        "HealPower100": 5111,
+        "DodgePoint": 188,
+        "AccuracyPoint": 529,
+        "CriticalPoint": 264,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "ま、間違えたあ！",
+                "Desc": "円形範囲内の敵の数によって、範囲内の敵に対して、\n4人以下：攻撃力の<?1>分のダメージ\n5人～9人：攻撃力の<?2>分のダメージ\n10人以上：攻撃力の<?3>分のダメージ",
+                "Parameters": [
+                    [
+                        "155%",
+                        "179%",
+                        "226%",
+                        "249%",
+                        "296%"
+                    ],
+                    [
+                        "311%",
+                        "358%",
+                        "451%",
+                        "498%",
+                        "592%"
+                    ],
+                    [
+                        "519%",
+                        "597%",
+                        "753%",
+                        "831%",
+                        "987%"
+                    ]
+                ],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    6
+                ],
+                "Duration": 265,
+                "Range": 1000,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 500
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": []
+            },
+            {
+                "SkillType": "normal",
+                "Name": "聞くが良い！",
+                "Desc": "55秒毎に、円形範囲内の敵の<d:DEF>を<?1>減少（35秒間）",
+                "Parameters": [
+                    [
+                        "8.3%",
+                        "8.7%",
+                        "9.2%",
+                        "10.8%",
+                        "11.2%",
+                        "11.7%",
+                        "13.3%",
+                        "13.8%",
+                        "14.2%",
+                        "15.8%"
+                    ]
+                ],
+                "Duration": 61,
+                "Range": 1000,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 200
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": []
+            },
+            {
+                "SkillType": "passive",
+                "Name": "万魔殿の偉大な議長",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "万魔殿の偉大な議長+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "381",
+                        "400",
+                        "419",
+                        "495",
+                        "514",
+                        "533",
+                        "609",
+                        "628",
+                        "647",
+                        "723"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            381,
+                            400,
+                            419,
+                            495,
+                            514,
+                            533,
+                            609,
+                            628,
+                            647,
+                            723
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "天下無敵！ゲヘナの真のリーダー！",
+                "Desc": "味方の<b:EnhancePierceRate>を<?1>加算",
+                "Parameters": [
+                    [
+                        "15.9%",
+                        "16.7%",
+                        "17.5%",
+                        "20.7%",
+                        "21.5%",
+                        "22.3%",
+                        "25.5%",
+                        "26.3%",
+                        "27%",
+                        "30.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": []
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                6,
+                35
+            ],
+            [
+                8,
+                42
+            ],
+            [
+                2,
+                7
+            ],
+            [
+                3,
+                10
+            ],
+            [
+                5,
+                17
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            2,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 199",
+        "FurnitureInteraction": [
+            [
+                [
+                    210331,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "ak",
+            "aV",
+            "aW",
+            "av"
+        ],
+        "FavorItemUniqueTags": [
+            "fE",
+            "fe"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "唯我独尊",
+            "Desc": "マコトが使用するスナイパーライフル。\n\n自身の権威を示すべく、ゲヘナでも有名な職人に直接依頼して作った正真正銘の逸品である。だが、マコト自身は表に出るより、後ろから指示するのを好むことから、実際に使用することは滅多にない模様。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 139,
+            "AttackPower100": 1393,
+            "MaxHP1": 410,
+            "MaxHP100": 4097,
+            "HealPower1": 200,
+            "HealPower100": 2002,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                100
+            ],
+            [
+                3031,
+                3030,
+                101,
+                210
+            ],
+            [
+                3032,
+                3031,
+                102,
+                211
+            ],
+            [
+                3033,
+                3032,
+                103,
+                212
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                16
+            ],
+            [
+                12,
+                18,
+                14,
+                28
+            ],
+            [
+                12,
+                18,
+                10,
+                25
+            ],
+            [
+                8,
+                18,
+                10,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                100
+            ],
+            [
+                4031,
+                101,
+                210
+            ],
+            [
+                4032,
+                4031,
+                101,
+                210
+            ],
+            [
+                4032,
+                102,
+                211
+            ],
+            [
+                4033,
+                4032,
+                103,
+                212
+            ],
+            [
+                4033,
+                103,
+                212
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                7
+            ],
+            [
+                8,
+                5,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                17
+            ],
+            [
+                8,
+                3,
+                15
+            ],
+            [
+                8,
+                12,
+                5,
+                9
+            ],
+            [
+                12,
+                8,
+                12
             ]
         ]
     }

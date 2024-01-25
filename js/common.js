@@ -3388,7 +3388,7 @@ function loadModule(moduleName, entry=null) {
                 recalculateSkillPreview()
             })
 
-            $('.summon-skills.collapse').on('show.bs.collapse', function() {
+            $('.extra-skills.collapse').on('show.bs.collapse', function() {
                 $(`[data-bs-target="#${this.id}"] .fa-angle-down`).toggleClass('fa-rotate-180', true)
                 skillPreviewShowSummonSkills[this.dataset.type] = true
                 localStorage.setItem("student_skill_show_summons", JSON.stringify(skillPreviewShowSummonSkills))
@@ -3399,7 +3399,7 @@ function loadModule(moduleName, entry=null) {
             })
 
             for (const skillType in skillPreviewShowSummonSkills) {
-                $(`#skill-${skillType}-summon-skills`).toggleClass('show', skillPreviewShowSummonSkills[skillType])
+                $(`#skill-${skillType}-extra-skills`).toggleClass('show', skillPreviewShowSummonSkills[skillType])
             }
 
             $('#skill-show-details').on('click', function(e) {
@@ -7573,8 +7573,8 @@ function recalculateEXSkillPreview() {
     $('#ba-skill-ex-cost').text(skillEX.Cost[skillPreviewExSkillLevel-1])
     let extraInfo = getSkillExtraInfo(skillEX, student)
 
-    if (renderSummonSkills('ex', skillPreviewExSkillLevel)) {
-        extraInfo = `<button class="ba-info-pill-s btn btn-dark" data-bs-toggle="collapse" data-bs-target="#skill-ex-summon-skills"><span class="label">${translateUI('summon')}<i class="fa-solid fa-angle-down ${$('#skill-ex-summon-skills').hasClass('show') ? 'fa-rotate-180' : ''} ms-2"></i></span></button>` + extraInfo
+    if (renderExtraSkills('ex', skillPreviewExSkillLevel)) {
+        //extraInfo = `<button class="ba-info-pill-s btn btn-dark" data-bs-toggle="collapse" data-bs-target="#skill-ex-extra-skills"><span class="label">${translateUI('summon')}<i class="fa-solid fa-angle-down ${$('#skill-ex-extra-skills').hasClass('show') ? 'fa-rotate-180' : ''} ms-2"></i></span></button>` + extraInfo
     }
 
     $(`#ba-skill-ex-extrainfo`).html(extraInfo).toggle(extraInfo != '')
@@ -7617,8 +7617,8 @@ function recalculateSkillPreview() {
         $(`#ba-skill-${skillType}-description .skill-hitinfo`).tooltip({html: true})
         let extraInfo = getSkillExtraInfo(skill, student)
     
-        if (renderSummonSkills(skillType, skillPreviewOtherSkillLevel)) {
-            extraInfo = `<button class="ba-info-pill-s btn btn-dark" data-bs-toggle="collapse" data-bs-target="#skill-${skillType}-summon-skills"><span class="label">${translateUI('summon')}<i class="fa-solid fa-angle-down ${$(`#skill-${skillType}-summon-skills`).hasClass('show') ? 'fa-rotate-180' : ''} ms-2"></i></span></button>` + extraInfo
+        if (renderExtraSkills(skillType, skillPreviewOtherSkillLevel)) {
+            //extraInfo = `<button class="ba-info-pill-s btn btn-dark" data-bs-toggle="collapse" data-bs-target="#skill-${skillType}-extra-skills"><span class="label">${translateUI('summon')}<i class="fa-solid fa-angle-down ${$(`#skill-${skillType}-extra-skills`).hasClass('show') ? 'fa-rotate-180' : ''} ms-2"></i></span></button>` + extraInfo
         }
 
         $(`#ba-skill-${skillType}-extrainfo`).html(extraInfo).toggle(extraInfo != '')
@@ -7639,8 +7639,8 @@ function recalculateSkillPreview() {
     localStorage.setItem("student_skill_other_level", skillPreviewOtherSkillLevel)
 }
 
-function renderSummonSkills(sourceskill, level) {
-    let summonSkillsHtml = ''
+function renderExtraSkills(sourceskill, level) {
+    let extraSkillsHtml = ''
     student.Summons.filter(s => s.SourceSkill == sourceskill && s.Id != 99999).forEach((summon) => {
 
         const summonInfo = find(data.summons, 'Id', summon.Id)[0]
@@ -7660,7 +7660,7 @@ function renderSummonSkills(sourceskill, level) {
             }
             const skillExtraInfo = getSkillExtraInfo(summonSkill, summonInfo)
 
-            summonSkillsHtml += `<div class="ba-panel-separator"></div>
+            extraSkillsHtml += `<div class="ba-panel-separator"></div>
             <div class="ps-4">
                 <div class="my-2 d-flex flex-row align-items-start gap-3 w-100">
                     <div class="skill-icon small bg-skill ${student.BulletType.toLowerCase()}"><img src="images/skill/${summonSkill.Icon}.webp"></div>
@@ -7668,6 +7668,7 @@ function renderSummonSkills(sourceskill, level) {
                         <div>
                             <h5 class="me-2 d-inline">${summonSkill.Name} <small>(${summonInfo.Name})</small></h5>
                         </div>
+                        ${summonSkill.SkillType != 'autoattack' ? `<div class="d-flex mt-1"><span class="text-italic">${translateUI(`student_skill_${summonSkill.SkillType}`)}</span></div>` : ''}
                         <div class="pt-1 d-flex gap-3 align-items-center flex-wrap justify-content-between">
                             <div class="position-relative">
                                 <p class="mb-1">${getSkillText(summonSkill, summonSkill.SkillType == 'autoattack' ? 1 : level, {bulletType: student.BulletType})}</p>
@@ -7680,16 +7681,45 @@ function renderSummonSkills(sourceskill, level) {
         })
     })
 
-    $(`#skill-${sourceskill}-summon-skills`).html(summonSkillsHtml)
-    $(`#skill-${sourceskill}-summon-skills`).find('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
+    studentExtraSkills = student.Skills.find(s => s.SkillType == sourceskill).ExtraSkills || []
+
+    for (const extraSkill of studentExtraSkills) {
+
+        const skillExtraInfo = getSkillExtraInfo(extraSkill, student)
+
+        extraSkillsHtml += `<div class="ba-panel-separator"></div>
+        <div class="ps-4">
+            <div class="my-2 d-flex flex-row align-items-start gap-3 w-100">
+                <div class="skill-icon small bg-skill ${student.BulletType.toLowerCase()}"><img src="images/skill/${extraSkill.Icon}.webp"></div>
+                <div class="d-inline-block flex-fill">
+                    <div>
+                        <h5 class="me-2 d-inline">${extraSkill.Name}</h5>
+                    </div>
+                    <div class="d-flex mt-1">
+                        <span class="text-italic">${translateUI(`student_skill_${extraSkill.SkillType}`)}</span>
+                        ${extraSkill.SkillType == 'ex' ? `<span class="text-bold">&nbsp;・&nbsp;<i>COST:</i> ${extraSkill.Cost[level - 1]}</span>` : ''}
+                    </div>
+                    <div class="pt-1 d-flex gap-3 align-items-center flex-wrap justify-content-between">
+                        <div class="position-relative">
+                            <p class="mb-1">${getSkillText(extraSkill, level, {bulletType: student.BulletType})}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ${skillExtraInfo ? `<div class="skill-extrainfo">${skillExtraInfo}</div>` : '' }
+        </div>`
+    }
+
+    $(`#skill-${sourceskill}-extra-skills`).html(extraSkillsHtml)
+    $(`#skill-${sourceskill}-extra-skills`).find('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
         $(el).tooltip({html: true})
     })
 
-    if (summonSkillsHtml != '') {
-        $(`#skill-${sourceskill}-summon-skills`).find('.ba-info-pill-s, .skill-hitinfo').tooltip({html: true})
+    if (extraSkillsHtml != '') {
+        $(`#skill-${sourceskill}-extra-skills`).find('.ba-info-pill-s, .skill-hitinfo').tooltip({html: true})
     }
 
-    return summonSkillsHtml !== ''
+    return extraSkillsHtml !== ''
 }
 
 function getSkillExtraInfo(skill, character) {

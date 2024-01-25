@@ -32,21 +32,8 @@
             },
             {
                 "Name": "2磅砲已裝填榴彈！",
-                "Desc": "Every 20s, deals <?1> damage to enemies in a circular area.",
-                "Parameters": [
-                    [
-                        "266%",
-                        "279%",
-                        "292%",
-                        "345%",
-                        "359%",
-                        "372%",
-                        "425%",
-                        "438%",
-                        "452%",
-                        "505%"
-                    ]
-                ],
+                "Desc": "",
+                "Parameters": [],
                 "Duration": 134,
                 "Range": 1300,
                 "Radius": [
@@ -139,33 +126,8 @@
             },
             {
                 "Name": "全數擊潰吧！",
-                "Desc": "Every 3 normal attacks, fires a shot that deals <?1> damage to one enemy plus <?2> damage to the target and enemies in a fan-shaped area behind them.",
-                "Parameters": [
-                    [
-                        "184%",
-                        "188%",
-                        "193%",
-                        "211%",
-                        "216%",
-                        "221%",
-                        "239%",
-                        "244%",
-                        "248%",
-                        "267%"
-                    ],
-                    [
-                        "276%",
-                        "282%",
-                        "289%",
-                        "317%",
-                        "324%",
-                        "331%",
-                        "358%",
-                        "365%",
-                        "372%",
-                        "400%"
-                    ]
-                ],
+                "Desc": "",
+                "Parameters": [],
                 "Duration": 125,
                 "Range": 1300,
                 "Radius": [
@@ -273,21 +235,24 @@
                 ]
             },
             {
-                "Name": "",
-                "Desc": "Increases the <b:ATK> of all allies in a circular area by <?1> and continuously restores their HP by <?2> of Healing every 10s as long as they stay within range.",
+                "Name": "現場支援",
+                "Desc": "",
+                "Parameters": [],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 300
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "SkillType": "passive",
+                "IsSummonSkill": true,
+                "Effects": []
+            },
+            {
+                "Name": "On-Site Vehicle Support",
+                "Desc": "Continuously restores the HP of all allies in a circular area around Tactical Ambulance 11 (except self) by <?1> of Healing every 10s.",
                 "Parameters": [
-                    [
-                        "17%",
-                        "17.9%",
-                        "18.3%",
-                        "21.7%",
-                        "22.1%",
-                        "23%",
-                        "24.7%",
-                        "25.6%",
-                        "26%",
-                        "29.4%"
-                    ],
                     [
                         "18.7%",
                         "18.7%",
@@ -307,7 +272,7 @@
                         "Radius": 300
                     }
                 ],
-                "Icon": "COMMON_SKILLICON_DOTHEAL",
+                "Icon": "COMMON_SKILLICON_HEAL",
                 "SkillType": "passive",
                 "IsSummonSkill": true,
                 "Effects": [
@@ -391,21 +356,8 @@
             },
             {
                 "Name": "主砲瞄準，發射",
-                "Desc": "Every 15s, fires a shell that deals <?1> damage to one enemy and splits, dealing the same damage to up to 2 nearby enemies (up to 2 times).",
-                "Parameters": [
-                    [
-                        "279%",
-                        "293%",
-                        "307%",
-                        "363%",
-                        "377%",
-                        "391%",
-                        "447%",
-                        "461%",
-                        "475%",
-                        "531%"
-                    ]
-                ],
+                "Desc": "",
+                "Parameters": [],
                 "Duration": 125,
                 "Range": 1300,
                 "Radius": [
@@ -499,33 +451,8 @@
             },
             {
                 "Name": "豪雨導彈",
-                "Desc": "Every 12s, deals <?1> damage to one enemy. This attack ignores <?2> of the enemy's DEF.",
-                "Parameters": [
-                    [
-                        "297%",
-                        "312%",
-                        "327%",
-                        "386%",
-                        "401%",
-                        "416%",
-                        "476%",
-                        "490%",
-                        "505%",
-                        "565%"
-                    ],
-                    [
-                        "68%",
-                        "68%",
-                        "76%",
-                        "76%",
-                        "84%",
-                        "84%",
-                        "92%",
-                        "92%",
-                        "100%",
-                        "100%"
-                    ]
-                ],
+                "Desc": "",
+                "Parameters": [],
                 "Duration": 76,
                 "Range": 1300,
                 "Icon": "COMMON_SKILLICON_TARGET",
@@ -602,8 +529,8 @@
         "Id": 40002,
         "Skills": [
             {
-                "Name": "",
-                "Desc": "Inflicts <c:Provoke> on enemies in a circular area for <?1>.",
+                "Name": "Help Me, Peroro!",
+                "Desc": "Peroro plush inflicts <c:Provoke> on enemies in a circular area for <?1> when it appears.",
                 "Parameters": [
                     [
                         "3.4s",
@@ -802,30 +729,8 @@
         "Skills": [
             {
                 "Name": "給您上菜了！",
-                "Desc": "Every 3s, Nodoka throws one of three snacks that restore HP by different amounts of Healing, to the ally with the lowest HP in range.\n<b>Hot Spring Manju</b>: <?1> of Healing.\n<b>Corn Stick</b>: <?2> of Healing.\n<b>Milk</b>: <?3> of Healing.",
-                "Parameters": [
-                    [
-                        "20.3%",
-                        "23.3%",
-                        "29.4%",
-                        "32.5%",
-                        "38.6%"
-                    ],
-                    [
-                        "24.8%",
-                        "28.5%",
-                        "36%",
-                        "39.7%",
-                        "47.1%"
-                    ],
-                    [
-                        "29.3%",
-                        "33.7%",
-                        "42.5%",
-                        "46.9%",
-                        "55.7%"
-                    ]
-                ],
+                "Desc": "",
+                "Parameters": [],
                 "Duration": 77,
                 "Range": 350,
                 "Icon": "COMMON_SKILLICON_HEAL",
@@ -877,8 +782,7 @@
                             8653
                         ]
                     }
-                ],
-                "ShowInfo": false
+                ]
             }
         ],
         "Name": "和香",

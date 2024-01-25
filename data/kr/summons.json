@@ -273,8 +273,36 @@
                 ]
             },
             {
-                "Name": "응급차량 출동",
-                "Desc": "자신을 중심으로 원형범위 내의 자신을 제외한 아군을 10초 마다 치유력의 <?1> 회복합니다.",
+                "Name": "차량 현장 지원",
+                "Desc": "응급돌파 11호가 전투에 등장한 동안 자신을 중심으로 원형범위 내의 자신을 제외한 아군에게 <b:ATK> <?1> 증가 (범위 내에 있는 동안에만 효과 유지)",
+                "Parameters": [
+                    [
+                        "17%",
+                        "17.9%",
+                        "18.3%",
+                        "21.7%",
+                        "22.1%",
+                        "23%",
+                        "24.7%",
+                        "25.6%",
+                        "26%",
+                        "29.4%"
+                    ]
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 300
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "SkillType": "passive",
+                "IsSummonSkill": true,
+                "Effects": []
+            },
+            {
+                "Name": "차량 현장 지원",
+                "Desc": "응급돌파 11호가 전투에 등장한 동안 자신을 중심으로 원형범위 내의 자신을 제외한 아군에게 10초마다 치유력 <?1> 회복",
                 "Parameters": [
                     [
                         "18.7%",
@@ -295,7 +323,7 @@
                         "Radius": 300
                     }
                 ],
-                "Icon": "COMMON_SKILLICON_DOTHEAL",
+                "Icon": "COMMON_SKILLICON_HEAL",
                 "SkillType": "passive",
                 "IsSummonSkill": true,
                 "Effects": [
@@ -590,20 +618,20 @@
         "Id": 40002,
         "Skills": [
             {
-                "Name": "",
-                "Desc": "Inflicts <c:Provoke> on enemies in a circular area for <?1>.",
+                "Name": "도와줘요, 페로로 님!",
+                "Desc": "페로로 인형이 등장할 때 페로로 인형을 중심으로 원형범위 내 적에게 <c:Provoke> (<?1>간)",
                 "Parameters": [
                     [
-                        "3.4s",
-                        "3.4s",
-                        "3.4s",
-                        "3.4s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s"
+                        "3.4초",
+                        "3.4초",
+                        "3.4초",
+                        "3.4초",
+                        "3.9초",
+                        "3.9초",
+                        "3.9초",
+                        "3.9초",
+                        "3.9초",
+                        "3.9초"
                     ]
                 ],
                 "Radius": [
@@ -790,28 +818,43 @@
         "Skills": [
             {
                 "Name": "특제 요리입니다!",
-                "Desc": "Every 3s, Nodoka throws one of three snacks that restore HP by different amounts of Healing, to the ally with the lowest HP in range.\n<b>Hot Spring Manju</b>: <?1> of Healing.\n<b>Corn Stick</b>: <?2> of Healing.\n<b>Milk</b>: <?3> of Healing.",
+                "Desc": "노도카(온천)은 3초 마다, 자신을 중심으로 원형 범위 내 체력이 가장 낮은 아군 1인에게 간식 투척\n온천만주: 치유력의 <?1> 회복\n운메에봉: 치유력의 <?2> 회복\n흰 우유: 치유력의 <?3> 회복",
                 "Parameters": [
                     [
                         "20.3%",
                         "23.3%",
                         "29.4%",
                         "32.5%",
-                        "38.6%"
+                        "38.6%",
+                        "41.6%",
+                        "47.7%",
+                        "50.7%",
+                        "56.8%",
+                        "59.9%"
                     ],
                     [
                         "24.8%",
                         "28.5%",
                         "36%",
                         "39.7%",
-                        "47.1%"
+                        "47.1%",
+                        "50.8%",
+                        "58.3%",
+                        "62%",
+                        "69.5%",
+                        "73.2%"
                     ],
                     [
                         "29.3%",
                         "33.7%",
                         "42.5%",
                         "46.9%",
-                        "55.7%"
+                        "55.7%",
+                        "60.1%",
+                        "68.9%",
+                        "73.3%",
+                        "82.1%",
+                        "86.5%"
                     ]
                 ],
                 "Duration": 77,
@@ -865,8 +908,7 @@
                             8653
                         ]
                     }
-                ],
-                "ShowInfo": false
+                ]
             }
         ],
         "Name": "노도카",

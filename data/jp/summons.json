@@ -273,8 +273,36 @@
                 ]
             },
             {
-                "Name": "緊急出動",
-                "Desc": "10秒毎に、円形範囲内の味方に対して、治癒力の<?1>分の回復。",
+                "Name": "現場支援",
+                "Desc": "緊急車両11号の登場中、緊急車両11号を中心とした円形範囲内の自身を除く味方の<b:ATK>を<?1>増加（範囲内にいる間だけ効果を維持）",
+                "Parameters": [
+                    [
+                        "17%",
+                        "17.9%",
+                        "18.3%",
+                        "21.7%",
+                        "22.1%",
+                        "23%",
+                        "24.7%",
+                        "25.6%",
+                        "26%",
+                        "29.4%"
+                    ]
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 300
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "SkillType": "passive",
+                "IsSummonSkill": true,
+                "Effects": []
+            },
+            {
+                "Name": "現場支援",
+                "Desc": "緊急車両11号の登場中、緊急車両11号を中心とした円形範囲内の自身を除く味方に10秒毎に、治癒力の<?1>分の回復",
                 "Parameters": [
                     [
                         "18.7%",
@@ -295,7 +323,7 @@
                         "Radius": 300
                     }
                 ],
-                "Icon": "COMMON_SKILLICON_DOTHEAL",
+                "Icon": "COMMON_SKILLICON_HEAL",
                 "SkillType": "passive",
                 "IsSummonSkill": true,
                 "Effects": [
@@ -590,20 +618,20 @@
         "Id": 40002,
         "Skills": [
             {
-                "Name": "",
-                "Desc": "Inflicts <c:Provoke> on enemies in a circular area for <?1>.",
+                "Name": "助けて、ペロロ様！",
+                "Desc": "ペロロ人形が出現する際、ペロロ人形を中心とした円形範囲内の敵に対して<c:Provoke>を付与（<?1>間）",
                 "Parameters": [
                     [
-                        "3.4s",
-                        "3.4s",
-                        "3.4s",
-                        "3.4s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s"
+                        "3.4秒",
+                        "3.4秒",
+                        "3.4秒",
+                        "3.4秒",
+                        "3.9秒",
+                        "3.9秒",
+                        "3.9秒",
+                        "3.9秒",
+                        "3.9秒",
+                        "3.9秒"
                     ]
                 ],
                 "Radius": [
@@ -865,8 +893,7 @@
                             8653
                         ]
                     }
-                ],
-                "ShowInfo": false
+                ]
             }
         ],
         "Name": "ノドカ",

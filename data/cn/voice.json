@@ -1341,7 +1341,50 @@
                 "Transcription": "其实我不怎么了解万圣节。而且也从来没参加过万圣节庆典。\n不过，我完全可以感受到那种热烈的气氛。"
             }
         ],
-        "Event": []
+        "Event": [
+            {
+                "Group": "UIEventMiniGameMissionEnter1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0230/ch0230_eventmission_login_1.mp3",
+                "Transcription": "あ、先生。ちょうど解決してほしい仕事が溜まってたの。\n少し手伝ってくれるかしら？"
+            },
+            {
+                "Group": "UIEventMiniGameMissionEnter2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0230/ch0230_eventmission_login_2.mp3",
+                "Transcription": "いらっしゃい、先生。\nパーティーとは別に、風紀委員としてやるべきことがあるの。"
+            },
+            {
+                "Group": "UIEventMiniGameMissionIdle1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0230/ch0230_eventmission_1_1.mp3",
+                "Transcription": "仕事って、いつまでたっても終わらないものね。"
+            },
+            {
+                "Group": "UIEventMiniGameMissionIdle1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0230/ch0230_eventmission_1_2.mp3",
+                "Transcription": "ん、本当に、心から共感する？ふふっ、先生も大変なんだね……"
+            },
+            {
+                "Group": "UIEventMiniGameMissionIdle2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0230/ch0230_eventmission_2.mp3",
+                "Transcription": "仕事の手を抜くつもりはないよ。\n私は、ゲヘナの風紀委員長だから。"
+            },
+            {
+                "Group": "UIEventMiniGameMissionBuy1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0230/ch0230_eventmission_get_1.mp3",
+                "Transcription": "あ、ありがとう。\nこれは手伝ってくれたお礼。受け取って。"
+            },
+            {
+                "Group": "UIEventMiniGameMissionBuy2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0230/ch0230_eventmission_get_2.mp3",
+                "Transcription": "さすが先生。完璧だった。おかげで安心できそう……\nこれは手伝ってくれたお礼。はい。"
+            }
+        ]
     },
     "10005": {
         "Normal": [
@@ -46231,7 +46274,7 @@
                 "Group": "UIEventMissionIdle2",
                 "EventId": 832,
                 "AudioClip": "jp_ch0232/ch0232_eventmission_2_2.mp3",
-                "Transcription": "少々お待ちください、録音の準備を しますので。"
+                "Transcription": "少々お待ちください、録音の準備をしますので。"
             },
             {
                 "Group": "UIEventMissionBuy1",
@@ -46714,7 +46757,7 @@
                 "Group": "UIEventFortuneGachaShopLuck41",
                 "EventId": 832,
                 "AudioClip": "jp_ch0233/ch0233_cookingshop_cooking_5.mp3",
-                "Transcription": "…！すごく美味しい！\nカレーでこんな味が出せるなんて…。"
+                "Transcription": "あっ…！すごく美味しい！\nカレーでこんな味が出せるなんて…。"
             },
             {
                 "Group": "UIEventFortuneGachaShopLuck32",
@@ -46739,6 +46782,962 @@
                 "EventId": 832,
                 "AudioClip": "jp_ch0233/ch0233_cookingshop_cooking_1.mp3",
                 "Transcription": "うっ…ごめん、これは、食べられない…。"
+            }
+        ]
+    },
+    "10087": {
+        "Normal": [
+            {
+                "Group": "UITitleIdle1",
+                "AudioClip": "jp_ch0231/ch0231_title.mp3",
+                "Transcription": "ブルーアーカイブ。"
+            },
+            {
+                "Group": "CharacterGetIdle1",
+                "AudioClip": "jp_ch0231/ch0231_gachaget.mp3",
+                "Transcription": "ふふ、先生、どうでしょうこのドレス？…ここは素直に褒めてくださればいいんですよ。…まあ、といっても先生の意見はあくまで参考にするだけですが。"
+            },
+            {
+                "Group": "CafeIdle1",
+                "AudioClip": "jp_ch0231/ch0231_cafe_monolog_1.mp3",
+                "Transcription": "今の私は…一人のスパイ…ふふん。"
+            },
+            {
+                "Group": "CafeIdle2",
+                "AudioClip": "jp_ch0231/ch0231_cafe_monolog_2.mp3",
+                "Transcription": "ヒナ委員長は、どこにいらっしゃるのでしょうか。"
+            },
+            {
+                "Group": "CafeIdle3",
+                "AudioClip": "jp_ch0231/ch0231_cafe_monolog_3.mp3",
+                "Transcription": "この格好、動きやすくて好きなんですが…少しだけ寒いような…。"
+            },
+            {
+                "Group": "CafeIdle4",
+                "AudioClip": "jp_ch0231/ch0231_cafe_monolog_4.mp3",
+                "Transcription": "ふぅ、今日だけは、トラブルがないといいのですが…"
+            },
+            {
+                "Group": "CafeIdle5",
+                "AudioClip": "jp_ch0231/ch0231_cafe_monolog_5.mp3",
+                "Transcription": "（ふふ、ここでは余裕をもって…）"
+            },
+            {
+                "Group": "WeaponGetIdle1",
+                "AudioClip": "jp_ch0231/ch0231_exweapon_get.mp3",
+                "Transcription": "変わらぬご支援、ありがとうございます。先生はもうすでにご存知でしょうけれど――私、天雨アコはあなたを決して失望させません。これまでも、これからも。今後の私にどうぞご期待くださいね。"
+            },
+            {
+                "Group": "Growup1",
+                "AudioClip": "jp_ch0231/ch0231_growup_1.mp3"
+            },
+            {
+                "Group": "Growup2",
+                "AudioClip": "jp_ch0231/ch0231_growup_2.mp3"
+            },
+            {
+                "Group": "Growup3",
+                "AudioClip": "jp_ch0231/ch0231_growup_3.mp3"
+            },
+            {
+                "Group": "Growup4",
+                "AudioClip": "jp_ch0231/ch0231_growup_4.mp3"
+            },
+            {
+                "Group": "RelationshipUp1",
+                "AudioClip": "jp_ch0231/ch0231_relationship_up_1.mp3"
+            },
+            {
+                "Group": "RelationshipUp2",
+                "AudioClip": "jp_ch0231/ch0231_relationship_up_2.mp3"
+            },
+            {
+                "Group": "RelationshipUp3",
+                "AudioClip": "jp_ch0231/ch0231_relationship_up_3.mp3"
+            },
+            {
+                "Group": "RelationshipUp4",
+                "AudioClip": "jp_ch0231/ch0231_relationship_up_4.mp3"
+            }
+        ],
+        "Battle": [
+            {
+                "Group": "FormationIn1",
+                "AudioClip": "jp_ch0231/ch0231_formation_in_1.mp3"
+            },
+            {
+                "Group": "FormationIn2",
+                "AudioClip": "jp_ch0231/ch0231_formation_in_2.mp3"
+            },
+            {
+                "Group": "FormationSelect",
+                "AudioClip": "jp_ch0231/ch0231_formation_select.mp3"
+            },
+            {
+                "Group": "TacticIn1",
+                "AudioClip": "jp_ch0231/ch0231_tactic_in_1.mp3"
+            },
+            {
+                "Group": "TacticIn2",
+                "AudioClip": "jp_ch0231/ch0231_tactic_in_2.mp3"
+            },
+            {
+                "Group": "TacticVictory1",
+                "AudioClip": "jp_ch0231/ch0231_tactic_victory_1.mp3"
+            },
+            {
+                "Group": "TacticVictory2",
+                "AudioClip": "jp_ch0231/ch0231_tactic_victory_2.mp3"
+            },
+            {
+                "Group": "TacticDefeat1",
+                "AudioClip": "jp_ch0231/ch0231_tactic_defeat_1.mp3"
+            },
+            {
+                "Group": "TacticDefeat2",
+                "AudioClip": "jp_ch0231/ch0231_tactic_defeat_2.mp3"
+            },
+            {
+                "Group": "BattleIn1",
+                "AudioClip": "jp_ch0231/ch0231_battle_in_1.mp3"
+            },
+            {
+                "Group": "BattleIn2",
+                "AudioClip": "jp_ch0231/ch0231_battle_in_2.mp3"
+            },
+            {
+                "Group": "BattleRecovery1",
+                "AudioClip": "jp_ch0231/ch0231_battle_recovery_1.mp3"
+            },
+            {
+                "Group": "BattleVictory1",
+                "AudioClip": "jp_ch0231/ch0231_battle_victory_1.mp3"
+            },
+            {
+                "Group": "BattleVictory2",
+                "AudioClip": "jp_ch0231/ch0231_battle_victory_2.mp3"
+            },
+            {
+                "Group": "CommonSkill",
+                "AudioClip": "jp_ch0231/ch0231_commonskill.mp3"
+            },
+            {
+                "Group": "BattleRetire",
+                "AudioClip": "jp_ch0231/ch0231_battle_retire.mp3"
+            },
+            {
+                "Group": "BattleDefense1",
+                "AudioClip": "jp_ch0231/ch0231_battle_defense_1.mp3"
+            },
+            {
+                "Group": "BattleBuffed1",
+                "AudioClip": "jp_ch0231/ch0231_battle_buffed_1.mp3"
+            },
+            {
+                "Group": "BattleBuffSelf1",
+                "AudioClip": "jp_ch0231/ch0231_battle_buffself_1.mp3"
+            },
+            {
+                "Group": "BattleTacticalAction1",
+                "AudioClip": "jp_ch0231/ch0231_battle_tacticalaction_1.mp3"
+            },
+            {
+                "Group": "BattleMove1",
+                "AudioClip": "jp_ch0231/ch0231_battle_move_1.mp3"
+            },
+            {
+                "Group": "BattleMove2",
+                "AudioClip": "jp_ch0231/ch0231_battle_move_2.mp3"
+            },
+            {
+                "Group": "BattleCovered1",
+                "AudioClip": "jp_ch0231/ch0231_battle_covered_1.mp3"
+            },
+            {
+                "Group": "ExSkill1",
+                "AudioClip": "jp_ch0231/ch0231_exskill_1.mp3"
+            },
+            {
+                "Group": "ExSkill2",
+                "AudioClip": "jp_ch0231/ch0231_exskill_2.mp3"
+            },
+            {
+                "Group": "ExSkill3",
+                "AudioClip": "jp_ch0231/ch0231_exskill_3.mp3"
+            },
+            {
+                "Group": "ExSkillLevel1",
+                "AudioClip": "jp_ch0231/ch0231_exskill_level_1.mp3"
+            },
+            {
+                "Group": "ExSkillLevel2",
+                "AudioClip": "jp_ch0231/ch0231_exskill_level_2.mp3"
+            },
+            {
+                "Group": "ExSkillLevel3",
+                "AudioClip": "jp_ch0231/ch0231_exskill_level_3.mp3"
+            }
+        ],
+        "Lobby": [
+            {
+                "Group": "UILobbyEnter1",
+                "AudioClip": "jp_ch0231/ch0231_login_1.mp3",
+                "Transcription": "おかえりなさい、先生。\n今日は私、天雨アコが、特・別・に、あなたを手伝って差し上げます♪"
+            },
+            {
+                "Group": "UILobbyEnter2",
+                "AudioClip": "jp_ch0231/ch0231_login_2.mp3",
+                "Transcription": "あら、先生。少し遅くないですか？\nまあ、構いませんが…\n今日は私が先生を補佐いたします。よろしくお願いしますね。"
+            },
+            {
+                "Group": "UILobbyIdle1",
+                "AudioClip": "jp_ch0231/ch0231_lobby_1.mp3",
+                "Transcription": "ついに自ら現場に赴いた優秀な行政官。\nええ…それが私です。"
+            },
+            {
+                "Group": "UILobbyIdle2",
+                "AudioClip": "jp_ch0231/ch0231_lobby_2_1.mp3",
+                "Transcription": "ええ。このドレスは私の覚悟です。\nこれを身にまとっている間は、私は完璧なエージェントなのです。"
+            },
+            {
+                "Group": "UILobbyIdle2",
+                "AudioClip": "jp_ch0231/ch0231_lobby_2_2.mp3",
+                "Transcription": "もっと詳しくいえば…今の私はスパイ映画のヒロイン…\nそのくらい強靭な心を持っているのです。"
+            },
+            {
+                "Group": "UILobbyIdle3",
+                "AudioClip": "jp_ch0231/ch0231_lobby_3.mp3",
+                "Transcription": "ドレスに着替えたとしても私は私です。\n先生の業務補佐に隙などありません。\n…ですから、仕事に集中してください。"
+            },
+            {
+                "Group": "UILobbyIdle4",
+                "AudioClip": "jp_ch0231/ch0231_lobby_4_1.mp3",
+                "Transcription": "え？なんだかいつもより浮かれてる？\n…それは勘違いでは？身に纏うものが変わったとしても私は私ですよ。"
+            },
+            {
+                "Group": "UILobbyIdle4",
+                "AudioClip": "jp_ch0231/ch0231_lobby_4_2.mp3",
+                "Transcription": "強いていうのであれば、「これでもっとヒナ委員長の補佐ができるチャンス」とか思ってる程度です。本当に。"
+            },
+            {
+                "Group": "UILobbyIdle5",
+                "AudioClip": "jp_ch0231/ch0231_lobby_5_1.mp3",
+                "Transcription": "え？手伝ってもらってとても助かった…？\nそ、そうですか…私の補佐にご満足いただけたようで何よりです。\n…もっと私の価値を理解して、感謝してくださってもいいんですよ？"
+            },
+            {
+                "Group": "UILobbyIdle5",
+                "AudioClip": "jp_ch0231/ch0231_lobby_5_2.mp3",
+                "Transcription": "ふふっ…"
+            },
+            {
+                "Group": "UILobbyUserBDay",
+                "AudioClip": "jp_ch0231/ch0231_season_birthday_player_1.mp3",
+                "Transcription": "先生、お誕生日おめでとうございます。\nせっかくですから…今日は私と一緒に過ごしませんか？"
+            },
+            {
+                "Group": "UILobbyUserBDay",
+                "AudioClip": "jp_ch0231/ch0231_season_birthday_player_2.mp3",
+                "Transcription": "具体的に何をするか…\nそうですね…その…ひ、一晩中クロスワードを、する、とか…？\nわ、笑わないでください！まさか聞かれるとは思わなかったんです！"
+            },
+            {
+                "Group": "UILobbyStudentBDay",
+                "AudioClip": "jp_ch0231/ch0231_season_birthday_1.mp3",
+                "Transcription": "あら、私の誕生日を祝ってくださるのですね？\nありがとうございます。それでは、誕生日ですから…"
+            },
+            {
+                "Group": "UILobbyStudentBDay",
+                "AudioClip": "jp_ch0231/ch0231_season_birthday_2.mp3",
+                "Transcription": "…何でもお願いしていい？\nふふ…そんなこと言っていいんですか？私が、どういうお願いをするのか…知らないくせに。"
+            },
+            {
+                "Group": "UILobbyNewYear",
+                "AudioClip": "jp_ch0231/ch0231_season_newyear.mp3",
+                "Transcription": "明けましておめでとうございます。先生。\nこうしてまた一緒に新年を迎えることができましたね。\n…初めてお会いした時は、こんな風に時を過ごせるだなんて思いもしなかったのに。\nなんだか、感無量です。"
+            },
+            {
+                "Group": "UILobbyXmas",
+                "AudioClip": "jp_ch0231/ch0231_season_xmas.mp3",
+                "Transcription": "メリークリスマスです、先生。\n聖誕祭という名前だけでもなんだか特別な感じがしますね。\nもしよかったら、一緒にイルミネーションが輝く街を歩いたりなんて、どうでしょう？\n…ここはすぐOKしてくださいよ。"
+            },
+            {
+                "Group": "UILobbyHalloween",
+                "AudioClip": "jp_ch0231/ch0231_season_halloween_1.mp3",
+                "Transcription": "ええ、分かっていますとも。今日はハロウィーン。\nお菓子かいたずらかを選んで人々が交流する日…\n先生はどちらにしますか？"
+            },
+            {
+                "Group": "UILobbyHalloween",
+                "AudioClip": "jp_ch0231/ch0231_season_halloween_2.mp3",
+                "Transcription": "…まさか、いたずらを選んだりなんて…しませんよね？"
+            }
+        ],
+        "Event": [
+            {
+                "Group": "UIEventLobbyEnter1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventlogin_1.mp3",
+                "Transcription": "おかえりなさい、先生。\n準備はちゃんとできましたか？\n覚悟をしっかりと決めてくださいね。"
+            },
+            {
+                "Group": "UIEventLobbyEnter2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventlogin_2.mp3",
+                "Transcription": "準備ならつつがなく完了しました。\nゲヘナ風紀委員会の行政官として…\n今こそ立ち上がる時かと。"
+            },
+            {
+                "Group": "UIEventLobbyEnter3",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventlogin_season_1.mp3",
+                "Transcription": "簡単には終わらない……ということですね。\nまあ、だからといって諦めるわけにはいきませんが。"
+            },
+            {
+                "Group": "UIEventLobbyEnter4",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventlogin_season_2.mp3",
+                "Transcription": "ほんっとう～に！しつこいですね！\nはぁ……まあ、いいでしょう！\nそれならこちらも最後までやってやる覚悟はできていますから！\nさあ、引き続きよろしくお願いいたします！先生！"
+            },
+            {
+                "Group": "UIEventLobbyEnter5",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventlogin_season_end.mp3",
+                "Transcription": "やっと終わりましたか……。\n本当に色々あったというか…\nもう疲れ果てたといいますか。\n……帰ってコーヒーでも一杯、いかがですか？先生。"
+            },
+            {
+                "Group": "UIEventLobbyIdle1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventlobby_1.mp3",
+                "Transcription": "今回のパーティーも結局こんな事に……。\n本当、どうなってしまうんでしょうか。"
+            },
+            {
+                "Group": "UIEventLobbyIdle2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventlobby_2.mp3",
+                "Transcription": "まあ、構いません……\n何が起こっても、私たち風紀委員会が……。\nいえ、私が解決してみせます！"
+            },
+            {
+                "Group": "UIEventLobbyIdle3",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventlobby_3.mp3",
+                "Transcription": "今の私はヒナ委員長を補佐するもう一人のスパイ。\nであれば、今まで隠していた真の実力をお見せする時でしょう。\nふふ、楽しみにしていてくださいね。"
+            },
+            {
+                "Group": "UIEventLobbyIdle4",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventlobby_4.mp3",
+                "Transcription": "今年は静かにしていたと思ったら……\nいえ、ゲヘナではどだい無茶な話だったのでしょうか……はあ。"
+            },
+            {
+                "Group": "UIEventMissionEnter1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventmission_login_1.mp3",
+                "Transcription": "おかえりなさい、先生。\nちょうど解決していただきたい仕事があるのです。\nお願いしても良いですか？"
+            },
+            {
+                "Group": "UIEventMissionEnter2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventmission_login_2.mp3",
+                "Transcription": "ふふ、ここまで来たのですから、逃げられると思わないでくださいね。\nはい、業務リストがい～っぱい♪ですよ。"
+            },
+            {
+                "Group": "UIEventMissionIdle1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventmission_1.mp3",
+                "Transcription": "はーい、サボるつもりでしたら諦めてください。\n私がすぐ隣で監視……失礼、補佐していますので。"
+            },
+            {
+                "Group": "UIEventMissionIdle2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventmission_2.mp3",
+                "Transcription": "目の前の仕事をする前に、他のことをしたい気持ちはわかります。\nでも……そういうのは仕事が全部終わってから。\n……いいですね？"
+            },
+            {
+                "Group": "UIEventMissionBuy1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventmission_get_1.mp3",
+                "Transcription": "へぇ、やるじゃないですか。\nはい、働いた報酬はちゃんとありますよ。当然です。"
+            },
+            {
+                "Group": "UIEventMissionBuy2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0231/ch0231_eventmission_get_2.mp3",
+                "Transcription": "なんと……一気に解決したのですか。\nへぇ……正直感心しました。さすが先生ですね。"
+            }
+        ]
+    },
+    "16014": {
+        "Normal": [
+            {
+                "Group": "UITitleIdle1",
+                "AudioClip": "jp_ibuki/ibuki_title.mp3",
+                "Transcription": "ブルーアーカイブ！えへへ！"
+            },
+            {
+                "Group": "CharacterGetIdle1",
+                "AudioClip": "jp_ibuki/ibuki_gachaget.mp3",
+                "Transcription": "イブキ登場！先生、おっまたせー！"
+            },
+            {
+                "Group": "CafeIdle1",
+                "AudioClip": "jp_ibuki/ibuki_cafe_monolog_1.mp3",
+                "Transcription": "しちいちが…しち…しちに…じゅうし…。"
+            },
+            {
+                "Group": "CafeIdle2",
+                "AudioClip": "jp_ibuki/ibuki_cafe_monolog_2.mp3",
+                "Transcription": "なあにここ？イブキ、探検してもいい～？"
+            },
+            {
+                "Group": "CafeIdle3",
+                "AudioClip": "jp_ibuki/ibuki_cafe_monolog_3.mp3",
+                "Transcription": "先生と何して遊ぼっかなあ……。"
+            },
+            {
+                "Group": "CafeIdle4",
+                "AudioClip": "jp_ibuki/ibuki_cafe_monolog_4.mp3",
+                "Transcription": "大人ってこういうのが好きなの……？うーん、よく分かんない……。"
+            },
+            {
+                "Group": "CafeIdle5",
+                "AudioClip": "jp_ibuki/ibuki_cafe_monolog_5.mp3",
+                "Transcription": "イブキ、一人はつまんな～い……。"
+            },
+            {
+                "Group": "WeaponGetIdle1",
+                "AudioClip": "jp_ibuki/ibuki_exweapon_get.mp3",
+                "Transcription": "うわぁ……うわああっ！これ、イブキにくれるの？本当に？……えっ、イブキだから……？うわあっ！先生！嬉しい！大事にするね！"
+            },
+            {
+                "Group": "Growup1",
+                "AudioClip": "jp_ibuki/ibuki_growup_1.mp3"
+            },
+            {
+                "Group": "Growup2",
+                "AudioClip": "jp_ibuki/ibuki_growup_2.mp3"
+            },
+            {
+                "Group": "Growup3",
+                "AudioClip": "jp_ibuki/ibuki_growup_3.mp3"
+            },
+            {
+                "Group": "Growup4",
+                "AudioClip": "jp_ibuki/ibuki_growup_4.mp3"
+            },
+            {
+                "Group": "RelationshipUp1",
+                "AudioClip": "jp_ibuki/ibuki_relationship_up_1.mp3"
+            },
+            {
+                "Group": "RelationshipUp2",
+                "AudioClip": "jp_ibuki/ibuki_relationship_up_2.mp3"
+            },
+            {
+                "Group": "RelationshipUp3",
+                "AudioClip": "jp_ibuki/ibuki_relationship_up_3.mp3"
+            },
+            {
+                "Group": "RelationshipUp4",
+                "AudioClip": "jp_ibuki/ibuki_relationship_up_4.mp3"
+            }
+        ],
+        "Battle": [
+            {
+                "Group": "FormationIn1",
+                "AudioClip": "jp_ibuki/ibuki_formation_in_1.mp3"
+            },
+            {
+                "Group": "FormationIn2",
+                "AudioClip": "jp_ibuki/ibuki_formation_in_2.mp3"
+            },
+            {
+                "Group": "FormationSelect",
+                "AudioClip": "jp_ibuki/ibuki_formation_select.mp3"
+            },
+            {
+                "Group": "TacticIn1",
+                "AudioClip": "jp_ibuki/ibuki_tactic_in_1.mp3"
+            },
+            {
+                "Group": "TacticIn2",
+                "AudioClip": "jp_ibuki/ibuki_tactic_in_2.mp3"
+            },
+            {
+                "Group": "TacticVictory1",
+                "AudioClip": "jp_ibuki/ibuki_tactic_victory_1.mp3"
+            },
+            {
+                "Group": "TacticVictory2",
+                "AudioClip": "jp_ibuki/ibuki_tactic_victory_2.mp3"
+            },
+            {
+                "Group": "TacticDefeat1",
+                "AudioClip": "jp_ibuki/ibuki_tactic_defeat_1.mp3"
+            },
+            {
+                "Group": "TacticDefeat2",
+                "AudioClip": "jp_ibuki/ibuki_tactic_defeat_2.mp3"
+            },
+            {
+                "Group": "BattleIn1",
+                "AudioClip": "jp_ibuki/ibuki_battle_in_1.mp3"
+            },
+            {
+                "Group": "BattleIn2",
+                "AudioClip": "jp_ibuki/ibuki_battle_in_2.mp3"
+            },
+            {
+                "Group": "BattleRecovery1",
+                "AudioClip": "jp_ibuki/ibuki_battle_recovery_1.mp3"
+            },
+            {
+                "Group": "BattleVictory1",
+                "AudioClip": "jp_ibuki/ibuki_battle_victory_1.mp3"
+            },
+            {
+                "Group": "BattleVictory2",
+                "AudioClip": "jp_ibuki/ibuki_battle_victory_2.mp3"
+            },
+            {
+                "Group": "CommonSkill",
+                "AudioClip": "jp_ibuki/ibuki_commonskill.mp3"
+            },
+            {
+                "Group": "BattleRetire",
+                "AudioClip": "jp_ibuki/ibuki_battle_retire.mp3"
+            },
+            {
+                "Group": "BattleDefense1",
+                "AudioClip": "jp_ibuki/ibuki_battle_defense_1.mp3"
+            },
+            {
+                "Group": "BattleBuffed1",
+                "AudioClip": "jp_ibuki/ibuki_battle_buffed_1.mp3"
+            },
+            {
+                "Group": "BattleBuffSelf1",
+                "AudioClip": "jp_ibuki/ibuki_battle_buffself_1.mp3"
+            },
+            {
+                "Group": "BattleTacticalAction1",
+                "AudioClip": "jp_ibuki/ibuki_battle_tacticalaction_1.mp3"
+            },
+            {
+                "Group": "BattleMove1",
+                "AudioClip": "jp_ibuki/ibuki_battle_move_1.mp3"
+            },
+            {
+                "Group": "BattleMove2",
+                "AudioClip": "jp_ibuki/ibuki_battle_move_2.mp3"
+            },
+            {
+                "Group": "BattleCovered1",
+                "AudioClip": "jp_ibuki/ibuki_battle_covered_1.mp3"
+            },
+            {
+                "Group": "ExSkill1",
+                "AudioClip": "jp_ibuki/ibuki_exskill_1.mp3"
+            },
+            {
+                "Group": "ExSkill2",
+                "AudioClip": "jp_ibuki/ibuki_exskill_2.mp3"
+            },
+            {
+                "Group": "ExSkill3",
+                "AudioClip": "jp_ibuki/ibuki_exskill_3.mp3"
+            },
+            {
+                "Group": "ExSkillLevel1",
+                "AudioClip": "jp_ibuki/ibuki_exskill_level_1.mp3"
+            },
+            {
+                "Group": "ExSkillLevel2",
+                "AudioClip": "jp_ibuki/ibuki_exskill_level_2.mp3"
+            },
+            {
+                "Group": "ExSkillLevel3",
+                "AudioClip": "jp_ibuki/ibuki_exskill_level_3.mp3"
+            }
+        ],
+        "Lobby": [
+            {
+                "Group": "UILobbyEnter1",
+                "AudioClip": "jp_ibuki/ibuki_login_1.mp3",
+                "Transcription": "あ！先生だ！おかえりなさーい！"
+            },
+            {
+                "Group": "UILobbyEnter2",
+                "AudioClip": "jp_ibuki/ibuki_login_2.mp3",
+                "Transcription": "イブキ、おとなしく待ってたよ！ほめてほめて？"
+            },
+            {
+                "Group": "UILobbyIdle1",
+                "AudioClip": "jp_ibuki/ibuki_lobby_1_1.mp3",
+                "Transcription": "イブキ、お手伝いにきたよ！何すればいい～？"
+            },
+            {
+                "Group": "UILobbyIdle1",
+                "AudioClip": "jp_ibuki/ibuki_lobby_1_2.mp3",
+                "Transcription": "その前に、おやつタイムにしよう……？うん！イブキも、それがいい！"
+            },
+            {
+                "Group": "UILobbyIdle2",
+                "AudioClip": "jp_ibuki/ibuki_lobby_2.mp3",
+                "Transcription": "「事業費執行精算内訳書」…………って、どういう意味……？"
+            },
+            {
+                "Group": "UILobbyIdle3",
+                "AudioClip": "jp_ibuki/ibuki_lobby_3.mp3",
+                "Transcription": "えへへっ、イブキにお話があるの～？"
+            },
+            {
+                "Group": "UILobbyIdle4",
+                "AudioClip": "jp_ibuki/ibuki_lobby_4.mp3",
+                "Transcription": "はいっ！イブキも、よろしくお願いします！"
+            },
+            {
+                "Group": "UILobbyIdle5",
+                "AudioClip": "jp_ibuki/ibuki_lobby_5.mp3",
+                "Transcription": "先生、お仕事大変ってきいたの！イブキも手伝う！\nイブキもできるよ！なんでも言って～！"
+            },
+            {
+                "Group": "UILobbyUserBDay",
+                "AudioClip": "jp_ibuki/ibuki_season_birthday_player.mp3",
+                "Transcription": "先生！お誕生日おめでとう！プレゼントいっぱいもらったの～？\nじゃあイブキは、先生をぎゅーってしてあげるね！"
+            },
+            {
+                "Group": "UILobbyStudentBDay",
+                "AudioClip": "jp_ibuki/ibuki_season_birthday.mp3",
+                "Transcription": "わわっ、イブキの誕生日、覚えててくれたの？ありがとう、先生！\nすっごく嬉しい！今ならお空も飛べちゃうかも！"
+            },
+            {
+                "Group": "UILobbyNewYear",
+                "AudioClip": "jp_ibuki/ibuki_season_newyear_1.mp3",
+                "Transcription": "明けましておめでとう、先生！うん……？これはなあに？\nお年玉？イブキの欲しいものを買うのに使う……お小遣い……？"
+            },
+            {
+                "Group": "UILobbyNewYear",
+                "AudioClip": "jp_ibuki/ibuki_season_newyear_2.mp3",
+                "Transcription": "じゃあ、イブキは先生が欲しい！はい、お年玉です！どーぞ！"
+            },
+            {
+                "Group": "UILobbyXmas",
+                "AudioClip": "jp_ibuki/ibuki_season_xmas.mp3",
+                "Transcription": "イブキ、ちゃんといい子にしてたよ……！サンタさんからプレゼント、ほしいなあ……。"
+            },
+            {
+                "Group": "UILobbyHalloween",
+                "AudioClip": "jp_ibuki/ibuki_season_halloween.mp3",
+                "Transcription": "がおー！いたずらしなきゃ、お菓子をたべちゃうぞー！\n……あれ？違う……？"
+            }
+        ],
+        "Event": [
+            {
+                "Group": "UIEventShopEnter1",
+                "EventId": 833,
+                "AudioClip": "jp_ibuki/ibuki_eventshop_login_1.mp3",
+                "Transcription": "いらっしゃいませ、先生～！えへへっ！"
+            },
+            {
+                "Group": "UIEventShopEnter2",
+                "EventId": 833,
+                "AudioClip": "jp_ibuki/ibuki_eventshop_login_2.mp3",
+                "Transcription": "なんか探し物～？イブキも手伝ってあげる！"
+            },
+            {
+                "Group": "UIEventShopEnter3",
+                "EventId": 833,
+                "AudioClip": "jp_ibuki/ibuki_eventshop_end.mp3",
+                "Transcription": "イブキ、先生とパーティーで踊るの、すっごく楽しかった！\nまた一緒に来ようね！約束だよ！"
+            },
+            {
+                "Group": "UIEventShopIdle1",
+                "EventId": 833,
+                "AudioClip": "jp_ibuki/ibuki_eventshop_1.mp3",
+                "Transcription": "うん？イブキは売ってないよ～？"
+            },
+            {
+                "Group": "UIEventShopIdle2",
+                "EventId": 833,
+                "AudioClip": "jp_ibuki/ibuki_eventshop_2.mp3",
+                "Transcription": "えっと、イブキはね！あれがいいと思う！"
+            },
+            {
+                "Group": "UIEventShopBuy1",
+                "EventId": 833,
+                "AudioClip": "jp_ibuki/ibuki_eventshop_buy_1.mp3",
+                "Transcription": "ご利用、ありがとうございました～！\nまた来てね！先生！"
+            },
+            {
+                "Group": "UIEventShopBuy2",
+                "EventId": 833,
+                "AudioClip": "jp_ibuki/ibuki_eventshop_buy_2.mp3",
+                "Transcription": "プレゼント用……？もしかして……イブキに？"
+            },
+            {
+                "Group": "UIEventShopBuy3",
+                "EventId": 833,
+                "AudioClip": "jp_ibuki/ibuki_eventshop_buy_3.mp3",
+                "Transcription": "それ！イブキも好き！"
+            },
+            {
+                "Group": "UIEventShopBuy4",
+                "EventId": 833,
+                "AudioClip": "jp_ibuki/ibuki_eventshop_buy_4.mp3",
+                "Transcription": "わっ！イブキ、初めて見た！そんなのもあったんだね！"
+            }
+        ]
+    },
+    "20033": {
+        "Normal": [
+            {
+                "Group": "UITitleIdle1",
+                "AudioClip": "jp_ch0079/ch0079_title.mp3",
+                "Transcription": "キキキッ。ブルー……アーカイブ！"
+            },
+            {
+                "Group": "CharacterGetIdle1",
+                "AudioClip": "jp_ch0079/ch0079_gachaget.mp3",
+                "Transcription": "遂に降臨してやったぞ！キキキッ、万魔殿の羽沼マコト様が直々に足を運んでやったのだ、手厚く歓待するが良い。"
+            },
+            {
+                "Group": "CafeIdle1",
+                "AudioClip": "jp_ch0079/ch0079_cafe_monolog_1.mp3",
+                "Transcription": "シャーレ……。キキッ、いつみても狭苦しい場所だな。"
+            },
+            {
+                "Group": "CafeIdle2",
+                "AudioClip": "jp_ch0079/ch0079_cafe_monolog_2.mp3",
+                "Transcription": "イブキの遊び場を……計画的に作らねば……。"
+            },
+            {
+                "Group": "CafeIdle3",
+                "AudioClip": "jp_ch0079/ch0079_cafe_monolog_3.mp3",
+                "Transcription": "イロハのやつを、確実に捕獲するには……。"
+            },
+            {
+                "Group": "CafeIdle4",
+                "AudioClip": "jp_ch0079/ch0079_cafe_monolog_4.mp3",
+                "Transcription": "サツキとチアキ、サボってなどいないといいが……。"
+            },
+            {
+                "Group": "CafeIdle5",
+                "AudioClip": "jp_ch0079/ch0079_cafe_monolog_5.mp3",
+                "Transcription": "この雰囲気、なかなかいいじゃないか。"
+            },
+            {
+                "Group": "WeaponGetIdle1",
+                "AudioClip": "jp_ch0079/ch0079_exweapon_get.mp3",
+                "Transcription": "キッ……キキッ……キャヒャヒャヒャヒャッ！まったく、侮れないな、先生。こんなプレゼントを用意しているだなんて。……信頼の証として受け取っておこうじゃないか。これからも頼んだぞ、先生。"
+            },
+            {
+                "Group": "Growup1",
+                "AudioClip": "jp_ch0079/ch0079_growup_1.mp3"
+            },
+            {
+                "Group": "Growup2",
+                "AudioClip": "jp_ch0079/ch0079_growup_2.mp3"
+            },
+            {
+                "Group": "Growup3",
+                "AudioClip": "jp_ch0079/ch0079_growup_3.mp3"
+            },
+            {
+                "Group": "Growup4",
+                "AudioClip": "jp_ch0079/ch0079_growup_4.mp3"
+            },
+            {
+                "Group": "RelationshipUp1",
+                "AudioClip": "jp_ch0079/ch0079_relationship_up_1.mp3"
+            },
+            {
+                "Group": "RelationshipUp2",
+                "AudioClip": "jp_ch0079/ch0079_relationship_up_2.mp3"
+            },
+            {
+                "Group": "RelationshipUp3",
+                "AudioClip": "jp_ch0079/ch0079_relationship_up_3.mp3"
+            },
+            {
+                "Group": "RelationshipUp4",
+                "AudioClip": "jp_ch0079/ch0079_relationship_up_4.mp3"
+            }
+        ],
+        "Battle": [
+            {
+                "Group": "CommonSkill",
+                "AudioClip": "jp_ch0079/ch0079_commonskill.mp3"
+            },
+            {
+                "Group": "ExSkill1",
+                "AudioClip": "jp_ch0079/ch0079_exskill_1.mp3"
+            },
+            {
+                "Group": "ExSkill2",
+                "AudioClip": "jp_ch0079/ch0079_exskill_2.mp3"
+            },
+            {
+                "Group": "ExSkill3",
+                "AudioClip": "jp_ch0079/ch0079_exskill_3.mp3"
+            },
+            {
+                "Group": "ExSkillLevel1",
+                "AudioClip": "jp_ch0079/ch0079_exskill_level_1.mp3"
+            },
+            {
+                "Group": "ExSkillLevel2",
+                "AudioClip": "jp_ch0079/ch0079_exskill_level_2.mp3"
+            },
+            {
+                "Group": "ExSkillLevel3",
+                "AudioClip": "jp_ch0079/ch0079_exskill_level_3.mp3"
+            }
+        ],
+        "Lobby": [
+            {
+                "Group": "UILobbyEnter1",
+                "AudioClip": "jp_ch0079/ch0079_login_1.mp3",
+                "Transcription": "やっと来たか、先生。あんまり万魔殿のリーダーを待たせるんじゃないぞ。\nキキキッ、まあいい。では、マコト様の偉業の話をはじめよう。"
+            },
+            {
+                "Group": "UILobbyEnter2",
+                "AudioClip": "jp_ch0079/ch0079_login_2.mp3",
+                "Transcription": "遅いじゃないか、先生。ちょうどキヴォトス征服の画期的な構想が浮かんだところだ。\n今から説明をする、早く席につけ。"
+            },
+            {
+                "Group": "UILobbyIdle1",
+                "AudioClip": "jp_ch0079/ch0079_lobby_1.mp3",
+                "Transcription": "キキッ、まさかこの私が直々に当番を行う日がくるとはな。\nまあ、雑務がキヴォトス征服計画に発展することも……十分に、あり得る。キキキッ。"
+            },
+            {
+                "Group": "UILobbyIdle2",
+                "AudioClip": "jp_ch0079/ch0079_lobby_2.mp3",
+                "Transcription": "有能な指導者であるマコト様が、先生の協力を得た日には……\nもはや鬼に金棒、虎に翼だな！キキキッ！"
+            },
+            {
+                "Group": "UILobbyIdle3",
+                "AudioClip": "jp_ch0079/ch0079_lobby_3_1.mp3",
+                "Transcription": "ふむ？今は急用があって、私の手伝いができない、だと？\nキシシッ、案ずるな。先生の多忙具合は、理解しているぞ。"
+            },
+            {
+                "Group": "UILobbyIdle3",
+                "AudioClip": "jp_ch0079/ch0079_lobby_3_2.mp3",
+                "Transcription": "時には、偉業よりもイブキのプリンの行方のほうが大事なときもある。\nああ……そういう日も、あるとも。"
+            },
+            {
+                "Group": "UILobbyIdle4",
+                "AudioClip": "jp_ch0079/ch0079_lobby_4.mp3",
+                "Transcription": "キキッ、先生みたいな人は、初めてだ。\n私の意見に賛同するわけでも、反対するわけでもなく、かと言って口出しもしてこない……。\n……実に、興味深い。クックックッ。"
+            },
+            {
+                "Group": "UILobbyIdle5",
+                "AudioClip": "jp_ch0079/ch0079_lobby_5_1.mp3",
+                "Transcription": "偉業は一夜にして成らず。マコト様は、絶対に諦めないからな。"
+            },
+            {
+                "Group": "UILobbyIdle5",
+                "AudioClip": "jp_ch0079/ch0079_lobby_5_2.mp3",
+                "Transcription": "いつか必ず、先生を私のものにしてみせよう。\n今から覚悟しておくがいい、キキキッ。"
+            },
+            {
+                "Group": "UILobbyUserBDay",
+                "AudioClip": "jp_ch0079/ch0079_season_birthday_player.mp3",
+                "Transcription": "ククッ……キキキッ…！話は聞いている、今日は先生の誕生日らしいな。\n万魔殿主催で祝いのパーティーを開いた。もたもたしてる暇はない。行くぞ先生！キキキッ！"
+            },
+            {
+                "Group": "UILobbyStudentBDay",
+                "AudioClip": "jp_ch0079/ch0079_season_birthday_1.mp3",
+                "Transcription": "マコト様の誕生祝い……？\nクックックッ、分かってるじゃないか、先生！偉大なる指導者の生誕を讃えるのは、至極当然のこと。"
+            },
+            {
+                "Group": "UILobbyStudentBDay",
+                "AudioClip": "jp_ch0079/ch0079_season_birthday_2.mp3",
+                "Transcription": "先生がそう言うのなら、続けようじゃあないか！\n今から、このマコト様の生誕祭を開くぞ！"
+            },
+            {
+                "Group": "UILobbyNewYear",
+                "AudioClip": "jp_ch0079/ch0079_season_newyear.mp3",
+                "Transcription": "あけましておめでとう。年が明けたな、先生。\n新たなキヴォトス征服計画について話し合おうじゃないか。\n記念すべき新年初会議だ！遅れないように！"
+            },
+            {
+                "Group": "UILobbyXmas",
+                "AudioClip": "jp_ch0079/ch0079_season_xmas_1.mp3",
+                "Transcription": "キキッ、メリークリスマスだ、先生。\n今日はソリに乗った怪人がマッハの速度で空を飛び、良い子にプレゼントをばら撒く日、だという。"
+            },
+            {
+                "Group": "UILobbyXmas",
+                "AudioClip": "jp_ch0079/ch0079_season_xmas_2.mp3",
+                "Transcription": "……負けるわけにはいかない。今からイブキのプレゼントを買いに出かけるぞ！\n先生も一緒に行くか？"
+            },
+            {
+                "Group": "UILobbyHalloween",
+                "AudioClip": "jp_ch0079/ch0079_season_halloween.mp3",
+                "Transcription": "ハロウィーンか。エイプリルフールの次に気に入っている日だ。\nいたずらが全面的に許されるからな。\nキッキッキッ、先生も一緒にどうだ？トリックオアトリート。"
+            }
+        ],
+        "Event": [
+            {
+                "Group": "UIEventShopEnter1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_login_1.mp3",
+                "Transcription": "ゲヘナの宴を記念し、特別に開店した店舗だ。\n思う存分見ていくがいい、キキッ。"
+            },
+            {
+                "Group": "UIEventShopEnter2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_login_2.mp3",
+                "Transcription": "……誰かと思ったら、先生か。購入する品は、もう決めたのか？"
+            },
+            {
+                "Group": "UIEventShopEnter3",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_end.mp3",
+                "Transcription": "キキッ、残念だが、臨時店舗はここまでだ。\nそう寂しい顔をするでない。\n次は更に規模を拡張し、盛大かつ豪華に帰ってくるからな、キキキッ！"
+            },
+            {
+                "Group": "UIEventShopIdle1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_1.mp3",
+                "Transcription": "ここにある品はすべて、我が万魔殿が用意したものだ。\nああ、我々に財力があるからこそ可能だったということだ。\n驚くのはまだ早いぞ、クックックッ。"
+            },
+            {
+                "Group": "UIEventShopIdle2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_2_1.mp3",
+                "Transcription": "うむ？品はどうした？\nキキキッ、もしかして、先生の目当てはこのマコト様のほうだったりするのか？"
+            },
+            {
+                "Group": "UIEventShopIdle2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_2_2.mp3",
+                "Transcription": "……特に用はない……？……そうか。"
+            },
+            {
+                "Group": "UIEventShopBuy1",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_buy_1.mp3",
+                "Transcription": "ほお、それを選ぶとは。その審美眼、高く評価してやろう。"
+            },
+            {
+                "Group": "UIEventShopBuy2",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_buy_2.mp3",
+                "Transcription": "それは私のオススメだ。\nキッキッキッ、いいものを選んだな。"
+            },
+            {
+                "Group": "UIEventShopBuy3",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_buy_3_1.mp3",
+                "Transcription": "キキキッ、今日の私は気分がいい。\nおまけをつけてやろう！万魔殿の協力提案書だ！"
+            },
+            {
+                "Group": "UIEventShopBuy3",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_buy_3_2.mp3",
+                "Transcription": "……何？要らない、だと？"
+            },
+            {
+                "Group": "UIEventShopBuy4",
+                "EventId": 833,
+                "AudioClip": "jp_ch0079/ch0079_eventshop_buy_4.mp3",
+                "Transcription": "それが欲しかったのか、先生。キッキッ、変わった人だな。"
             }
         ]
     }

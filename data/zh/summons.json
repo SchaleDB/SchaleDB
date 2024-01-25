@@ -273,6 +273,34 @@
                 ]
             },
             {
+                "Name": "On-Site Vehicle Support",
+                "Desc": "Increases the <b:ATK> of all allies in a circular area around Tactical Ambulance 11 (except self) by <?1> as long as they stay within range.",
+                "Parameters": [
+                    [
+                        "17%",
+                        "17.9%",
+                        "18.3%",
+                        "21.7%",
+                        "22.1%",
+                        "23%",
+                        "24.7%",
+                        "25.6%",
+                        "26%",
+                        "29.4%"
+                    ]
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 300
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "SkillType": "passive",
+                "IsSummonSkill": true,
+                "Effects": []
+            },
+            {
                 "Name": "紧急出动",
                 "Desc": "每10秒令自身周围圆形范围内的我方单位回复治愈力<?1>的生命值",
                 "Parameters": [
@@ -295,7 +323,7 @@
                         "Radius": 300
                     }
                 ],
-                "Icon": "COMMON_SKILLICON_DOTHEAL",
+                "Icon": "COMMON_SKILLICON_HEAL",
                 "SkillType": "passive",
                 "IsSummonSkill": true,
                 "Effects": [
@@ -591,7 +619,7 @@
         "Skills": [
             {
                 "Name": "Help Me, Peroro!",
-                "Desc": "Inflicts <c:Provoke> on enemies in a circular area for <?1>.",
+                "Desc": "Peroro plush inflicts <c:Provoke> on enemies in a circular area for <?1> when it appears.",
                 "Parameters": [
                     [
                         "3.4s",
@@ -880,8 +908,7 @@
                             8653
                         ]
                     }
-                ],
-                "ShowInfo": false
+                ]
             }
         ],
         "Name": "ノドカ",

@@ -273,7 +273,35 @@
                 ]
             },
             {
-                "Name": "",
+                "Name": "現場支援",
+                "Desc": "Increases the <b:ATK> of all allies in a circular area around Tactical Ambulance 11 (except self) by <?1> as long as they stay within range.",
+                "Parameters": [
+                    [
+                        "17%",
+                        "17.9%",
+                        "18.3%",
+                        "21.7%",
+                        "22.1%",
+                        "23%",
+                        "24.7%",
+                        "25.6%",
+                        "26%",
+                        "29.4%"
+                    ]
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 300
+                    }
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "SkillType": "passive",
+                "IsSummonSkill": true,
+                "Effects": []
+            },
+            {
+                "Name": "紧急出动",
                 "Desc": "每10秒令自身周围圆形范围内的我方单位回复治愈力<?1>的生命值",
                 "Parameters": [
                     [
@@ -295,7 +323,7 @@
                         "Radius": 300
                     }
                 ],
-                "Icon": "COMMON_SKILLICON_DOTHEAL",
+                "Icon": "COMMON_SKILLICON_HEAL",
                 "SkillType": "passive",
                 "IsSummonSkill": true,
                 "Effects": [
@@ -590,8 +618,8 @@
         "Id": 40002,
         "Skills": [
             {
-                "Name": "",
-                "Desc": "Inflicts <c:Provoke> on enemies in a circular area for <?1>.",
+                "Name": "Help Me, Peroro!",
+                "Desc": "Peroro plush inflicts <c:Provoke> on enemies in a circular area for <?1> when it appears.",
                 "Parameters": [
                     [
                         "3.4s",
@@ -789,7 +817,7 @@
         "Id": 40007,
         "Skills": [
             {
-                "Name": "我带来了一些料理！",
+                "Name": "这是特制菜肴！",
                 "Desc": "和香(温泉)每3秒对自身周围圆形范围内1名<b>当前生命值百分比</b>最低的我方单位投掷零食(持续32秒)\n<b>温泉馒头</b>：回复治愈力<?1>的生命值\n<b>谷物棒</b>：回复治愈力<?2>的生命值\n<b>牛奶</b>：回复治愈力<?3>的生命值",
                 "Parameters": [
                     [
@@ -880,8 +908,7 @@
                             8653
                         ]
                     }
-                ],
-                "ShowInfo": false
+                ]
             }
         ],
         "Name": "和香",
