@@ -5898,11 +5898,20 @@ function changeWorldRaidDifficulty(difficultyId) {
 
     let html = ''
     const rewardsArray = getServerProperty(raid, 'Rewards')
-    html += `<div class="item-icon-list">`
+    html += `<h5 class="p-2">${translateUI('stage_original')}</h5><div class="item-icon-list">`
     rewardsArray[raid_difficulty].Items.forEach(val => {
         html += getDropIconHTML(val[0], val[1], val[2], val[2], true)
     })
     html += `</div>`
+
+    if (raid.RewardsRerun) {
+        const rewardsArray = getServerProperty(raid, 'RewardsRerun')
+        html += `<h5 class="p-2">${translateUI('stage_rerun')}</h5><div class="item-icon-list">`
+        rewardsArray[raid_difficulty].Items.forEach(val => {
+            html += getDropIconHTML(val[0], val[1], val[2], val[2], true)
+        })
+        html += `</div>`
+    }
 
     if (rewardsArray[raid_difficulty].Groups.length > 0) {
         html += `<div class="item-icon-list mt-2">`
