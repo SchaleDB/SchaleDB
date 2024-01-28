@@ -812,6 +812,20 @@
     }
 }
 
+.tsa-stats {
+    @extend .support-stats;
+
+    &::after {
+        background-image: none;
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        content: "\f0c1";
+        font-size: 14px;
+        text-align: center;
+        background-color: var(--col-bg-striker);
+    }
+}
+
 .skill-calculation {
 
     .row-name {

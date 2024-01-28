@@ -99,7 +99,7 @@
             ]
         }
     ],
-    "build": 1706304845,
+    "build": 1706461144,
     "Regions": [
         {
             "Name": "Jp",
@@ -197,7 +197,16 @@
                     "end": 1707271200
                 }
             ],
-            "CurrentRaid": []
+            "CurrentRaid": [
+                {
+                    "type": "Raid",
+                    "raid": 4,
+                    "terrain": "Indoor",
+                    "season": 66,
+                    "start": 1706666400,
+                    "end": 1707246000
+                }
+            ]
         },
         {
             "Name": "Global",
@@ -353,6 +362,12 @@
     ],
     "Changelog": [
         {
+            "date": "2024/01/28",
+            "contents": [
+                "<ul><li>Added support for T.S.A Boarding bonus stats.</li><li>Added calculation support for T.S.A skills. To view, the vehicle must be selected and \"T.S.A Boarding\" must be enabled under \"Buffs\".</li><li>Separated certain EX/Basic skills to reflect changes to in game descriptions.</li></ul>"
+            ]
+        },
+        {
             "date": "2023/11/17",
             "contents": [
                 "<ul><li>Moved the taunt effect from Hifumi's EX Skill to the Peroro Plush. (Change to the Peroro Plush summon to see the effect duration calculation).</li></ul>"
@@ -408,12 +423,6 @@
                 "<ul><li>Show material synthesis nodes or fusion recipes that can produce an item or furniture.</li><li>Show consumable items that can reward an item or furniture.</li><li>Added more information such as furniture size, templates, item expiry and furniture interactions that require multiple students.</li><li>Expired and immediate use items are now hidden by default (Can be displayed by switching on in filters).</li><li>Added filters for items which can be obtained via synthesis, stage reward or purchased from shops.</li></ul>",
                 "<h6>Other Improvements & Bug Fixes</h6>",
                 "<ul><li>Show boosted skill heal amounts in brackets when adding a Recovery Boost buff to a student.</li><li>Fixed incorrect HP amounts shown on some raid enemies in skill calculations.</li></ul>"
-            ]
-        },
-        {
-            "date": "2023/07/24",
-            "contents": [
-                "<ul><li>Sorting the student list by stats will now use the calculated value at maximum level, equipment, weapon, bond (inc. alts) and unique item.</li><li>Added the option to sort by their saved collection stats.</li><li>Added Elastic Armor as an option when changing the target enemy's armor type.</li></ul>"
             ]
         }
     ],
@@ -1437,6 +1446,598 @@
                 ],
                 [
                     2109004,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300660,
+            "ItemList": [
+                [
+                    4030,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4010,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300661,
+            "ItemList": [
+                [
+                    4031,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4011,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300662,
+            "ItemList": [
+                [
+                    4032,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4012,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300663,
+            "ItemList": [
+                [
+                    4033,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4013,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300664,
+            "ItemList": [
+                [
+                    4020,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4060,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300665,
+            "ItemList": [
+                [
+                    4021,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4061,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300666,
+            "ItemList": [
+                [
+                    4022,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4062,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300667,
+            "ItemList": [
+                [
+                    4023,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4063,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300668,
+            "ItemList": [
+                [
+                    4050,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4040,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300669,
+            "ItemList": [
+                [
+                    4051,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4041,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300670,
+            "ItemList": [
+                [
+                    4052,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4042,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300671,
+            "ItemList": [
+                [
+                    4053,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4043,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300672,
+            "ItemList": [
+                [
+                    4070,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4000,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4080,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300673,
+            "ItemList": [
+                [
+                    4071,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4001,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4081,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300674,
+            "ItemList": [
+                [
+                    4072,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4002,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4082,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300675,
+            "ItemList": [
+                [
+                    4073,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4003,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    4083,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300676,
+            "ItemList": [
+                [
+                    3030,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3010,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300677,
+            "ItemList": [
+                [
+                    3031,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3011,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300678,
+            "ItemList": [
+                [
+                    3032,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3012,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300679,
+            "ItemList": [
+                [
+                    3033,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3013,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300680,
+            "ItemList": [
+                [
+                    3020,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3060,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300681,
+            "ItemList": [
+                [
+                    3021,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3061,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300682,
+            "ItemList": [
+                [
+                    3022,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3062,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300683,
+            "ItemList": [
+                [
+                    3023,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3063,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300684,
+            "ItemList": [
+                [
+                    3050,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3040,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300685,
+            "ItemList": [
+                [
+                    3051,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3041,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300686,
+            "ItemList": [
+                [
+                    3052,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3042,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300687,
+            "ItemList": [
+                [
+                    3053,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3043,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300688,
+            "ItemList": [
+                [
+                    3070,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3000,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3080,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300689,
+            "ItemList": [
+                [
+                    3071,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3001,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3081,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300690,
+            "ItemList": [
+                [
+                    3072,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3002,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3082,
+                    1,
+                    1,
+                    1
+                ]
+            ]
+        },
+        {
+            "Id": 300691,
+            "ItemList": [
+                [
+                    3073,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3003,
+                    1,
+                    1,
+                    1
+                ],
+                [
+                    3083,
                     1,
                     1,
                     1

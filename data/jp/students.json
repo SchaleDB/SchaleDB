@@ -10452,7 +10452,46 @@
                 ],
                 "Duration": 59,
                 "Icon": "COMMON_SKILLICON_WEAPONBUFF",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2230,
+                                2340,
+                                2450,
+                                2900,
+                                3010,
+                                3120,
+                                3570,
+                                3680,
+                                3790,
+                                4240
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1930,
+                                2030,
+                                2120,
+                                2510,
+                                2610,
+                                2700,
+                                3090,
+                                3190,
+                                3290,
+                                3670
+                            ]
+                        ],
+                        "Stat": "AccuracyPoint_Coefficient",
+                        "Channel": 5
+                    }
+                ]
             },
             {
                 "SkillType": "passive",
@@ -40302,6 +40341,7 @@
                 ],
                 "ExtraSkills": [
                     {
+                        "Id": "SM999901Passive01",
                         "SkillType": "passive",
                         "Name": "この一瞬一瞬に、心を込めて！",
                         "Desc": "ミクを中心とした円形範囲内の味方の<b:ATK>を<?1>増加（26秒間）（範囲内にいる間だけ効果を維持）",
@@ -51866,6 +51906,7 @@
                 ]
             }
         ],
+        "TSAId": 16014,
         "Position": "Back",
         "BulletType": "Mystic",
         "ArmorType": "HeavyArmor",
@@ -53703,7 +53744,46 @@
                 ],
                 "Duration": 82,
                 "Icon": "COMMON_SKILLICON_WEAPONBUFF",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2660,
+                                2800,
+                                2930,
+                                3460,
+                                3600,
+                                3730,
+                                4260,
+                                4400,
+                                4530,
+                                5060
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                344,
+                                361,
+                                378,
+                                446,
+                                463,
+                                481,
+                                549,
+                                566,
+                                584,
+                                652
+                            ]
+                        ],
+                        "Stat": "DefensePenetration_Base",
+                        "Channel": 1731
+                    }
+                ]
             },
             {
                 "SkillType": "passive",
@@ -61769,46 +61849,11 @@
                             28242,
                             31564
                         ]
-                    },
-                    {
-                        "Type": "DMGMulti",
-                        "CriticalCheck": "Check",
-                        "Hits": [
-                            2500,
-                            2500,
-                            2500,
-                            2500
-                        ],
-                        "HitsParameter": 1,
-                        "Scale": [
-                            28424,
-                            29841,
-                            31264,
-                            36950,
-                            38367,
-                            39790,
-                            45471,
-                            46893,
-                            48316,
-                            53997
-                        ]
                     }
                 ],
-                "EffectCombine": [
-                    "DMGMulti"
-                ],
-                "EffectCombineLabel": {
-                    "Icon": [
-                        "buff/Special_FormChange.webp"
-                    ],
-                    "StackLabelTranslated": [
-                        "setting_off",
-                        "setting_on"
-                    ],
-                    "DisableFirst": true
-                },
                 "ExtraSkills": [
                     {
+                        "Id": "CH0182Public02",
                         "SkillType": "normal",
                         "Name": "情熱砲",
                         "Desc": "ターレット強化状態の場合は、通常攻撃6回毎に、敵1人に対して攻撃力の<?1>分のダメージ",
@@ -61829,7 +61874,31 @@
                         "Duration": 90,
                         "Range": 650,
                         "Icon": "COMMON_SKILLICON_TARGET",
-                        "Effects": []
+                        "Effects": [
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "Hits": [
+                                    2500,
+                                    2500,
+                                    2500,
+                                    2500
+                                ],
+                                "HitsParameter": 1,
+                                "Scale": [
+                                    28424,
+                                    29841,
+                                    31264,
+                                    36950,
+                                    38367,
+                                    39790,
+                                    45471,
+                                    46893,
+                                    48316,
+                                    53997
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -67668,7 +67737,44 @@
                 "Duration": 60,
                 "Range": 1000,
                 "Icon": "COMMON_SKILLICON_STATBUFF",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                2480,
+                                2600,
+                                2730,
+                                3220,
+                                3350,
+                                3470,
+                                3970,
+                                4090,
+                                4220,
+                                4710
+                            ]
+                        ],
+                        "Stat": "HealEffectivenessRate_Coefficient",
+                        "Channel": 121
+                    },
+                    {
+                        "Type": "HealDot",
+                        "Duration": "10000",
+                        "Period": "4000",
+                        "Scale": [
+                            590,
+                            620,
+                            650,
+                            760,
+                            790,
+                            820,
+                            940,
+                            970,
+                            1000,
+                            1120
+                        ]
+                    }
+                ]
             },
             {
                 "SkillType": "passive",
@@ -72857,86 +72963,11 @@
                         ],
                         "Stat": "DodgePoint_Coefficient",
                         "Channel": 7
-                    },
-                    {
-                        "Type": "DMGSingle",
-                        "CriticalCheck": "Check",
-                        "Scale": [
-                            8791,
-                            10110,
-                            12747,
-                            14066,
-                            16704
-                        ],
-                        "IgnoreDef": [
-                            6000,
-                            6000,
-                            5000,
-                            5000,
-                            4000
-                        ]
-                    },
-                    {
-                        "Type": "DMGMulti",
-                        "CriticalCheck": "Check",
-                        "Hits": [
-                            1250,
-                            1250,
-                            1250,
-                            1250,
-                            1250,
-                            1250,
-                            1250,
-                            1250
-                        ],
-                        "HitsParameter": 4,
-                        "Scale": [
-                            60707,
-                            69813,
-                            88024,
-                            97130,
-                            115341
-                        ],
-                        "IgnoreDef": [
-                            6000,
-                            6000,
-                            5000,
-                            5000,
-                            4000
-                        ]
-                    },
-                    {
-                        "Type": "DMGMulti",
-                        "CriticalCheck": "Check",
-                        "Hits": [
-                            1250,
-                            1250,
-                            1250,
-                            1250,
-                            1250,
-                            1250,
-                            1250,
-                            1250
-                        ],
-                        "HitsParameter": 5,
-                        "Scale": [
-                            12147,
-                            13970,
-                            17607,
-                            19430,
-                            23075
-                        ],
-                        "IgnoreDef": [
-                            6000,
-                            6000,
-                            5000,
-                            5000,
-                            4000
-                        ]
                     }
                 ],
                 "ExtraSkills": [
                     {
+                        "Id": "CH0187Ex02",
                         "SkillType": "ex",
                         "Name": "システム：アビ・エシュフ",
                         "Desc": "1、2撃目の攻撃は直線範囲内の敵に対して、攻撃力の<?1>分のダメージ\n最後の攻撃は直線範囲内の指定した敵に対して、攻撃力の<?2>分のダメージ、その他の敵に対して、攻撃力の<?3>分のダメージ\n（3回攻撃全て敵の防御力を<?4>無視）",
@@ -72992,7 +73023,84 @@
                             }
                         ],
                         "Icon": "COMMON_SKILLICON_BEAM",
-                        "Effects": []
+                        "Effects": [
+                            {
+                                "Type": "DMGSingle",
+                                "CriticalCheck": "Check",
+                                "Scale": [
+                                    8791,
+                                    10110,
+                                    12747,
+                                    14066,
+                                    16704
+                                ],
+                                "IgnoreDef": [
+                                    6000,
+                                    6000,
+                                    5000,
+                                    5000,
+                                    4000
+                                ]
+                            },
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "Hits": [
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250
+                                ],
+                                "HitsParameter": 2,
+                                "Scale": [
+                                    60707,
+                                    69813,
+                                    88024,
+                                    97130,
+                                    115341
+                                ],
+                                "IgnoreDef": [
+                                    6000,
+                                    6000,
+                                    5000,
+                                    5000,
+                                    4000
+                                ]
+                            },
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "Hits": [
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250,
+                                    1250
+                                ],
+                                "HitsParameter": 3,
+                                "Scale": [
+                                    12147,
+                                    13970,
+                                    17607,
+                                    19430,
+                                    23075
+                                ],
+                                "IgnoreDef": [
+                                    6000,
+                                    6000,
+                                    5000,
+                                    5000,
+                                    4000
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -73045,57 +73153,6 @@
                             73005,
                             77868
                         ]
-                    },
-                    {
-                        "Type": "DMGMulti",
-                        "CriticalCheck": "Check",
-                        "Hits": [
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500,
-                            500
-                        ],
-                        "HitsParameter": -1,
-                        "Scale": [
-                            48670,
-                            51106,
-                            53534,
-                            58406,
-                            60833,
-                            63269,
-                            68133,
-                            70569,
-                            73005,
-                            77868
-                        ],
-                        "IgnoreDef": [
-                            7000,
-                            7000,
-                            7000,
-                            6000,
-                            6000,
-                            6000,
-                            5000,
-                            5000,
-                            5000,
-                            4000
-                        ]
                     }
                 ],
                 "EffectCombine": [
@@ -73113,6 +73170,7 @@
                 },
                 "ExtraSkills": [
                     {
+                        "Id": "CH0187Public02",
                         "SkillType": "normal",
                         "Name": "戦術的判断",
                         "Desc": "<s:CH0187Mod>では35秒毎に、敵1人に対して攻撃力の<?1>分のダメージ（この攻撃は敵の防御力を<?2>無視します)",
@@ -73145,7 +73203,59 @@
                         "Duration": 140,
                         "Range": 850,
                         "Icon": "COMMON_SKILLICON_TARGET",
-                        "Effects": []
+                        "Effects": [
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "Hits": [
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500,
+                                    500
+                                ],
+                                "HitsParameter": 1,
+                                "Scale": [
+                                    48670,
+                                    51106,
+                                    53534,
+                                    58406,
+                                    60833,
+                                    63269,
+                                    68133,
+                                    70569,
+                                    73005,
+                                    77868
+                                ],
+                                "IgnoreDef": [
+                                    7000,
+                                    7000,
+                                    7000,
+                                    6000,
+                                    6000,
+                                    6000,
+                                    5000,
+                                    5000,
+                                    5000,
+                                    4000
+                                ]
+                            }
+                        ]
                     }
                 ]
             },
@@ -94280,7 +94390,36 @@
                     }
                 ],
                 "Icon": "COMMON_SKILLICON_WEAPONBUFF",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1130,
+                                1210,
+                                1550,
+                                1640,
+                                1980
+                            ]
+                        ],
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Channel": 109
+                    },
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                3280,
+                                3530,
+                                4520,
+                                4760,
+                                5750
+                            ]
+                        ],
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Channel": 111
+                    }
+                ]
             },
             {
                 "SkillType": "normal",
@@ -94351,7 +94490,105 @@
                 "Duration": 138,
                 "Range": 750,
                 "Icon": "COMMON_SKILLICON_TARGET",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -1850,
+                                -1850,
+                                -1850,
+                                -2030,
+                                -2030,
+                                -2030,
+                                -2220,
+                                -2220,
+                                -2220,
+                                -2400
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            49600,
+                            52100,
+                            54500,
+                            64500,
+                            67000,
+                            69400,
+                            79400,
+                            81800,
+                            84300,
+                            94200
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            53100,
+                            55800,
+                            58400,
+                            69100,
+                            71700,
+                            74400,
+                            85000,
+                            87700,
+                            90300,
+                            101000
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            58400,
+                            61400,
+                            64300,
+                            76000,
+                            78900,
+                            81800,
+                            93500,
+                            96500,
+                            99400,
+                            111100
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            63800,
+                            67000,
+                            70100,
+                            82900,
+                            86100,
+                            89300,
+                            102000,
+                            105200,
+                            108400,
+                            121200
+                        ]
+                    }
+                ],
+                "EffectCombine": [
+                    "DMGSingle"
+                ],
+                "EffectCombineLabel": {
+                    "Icon": [
+                        "buff/Special_CH0231_ExtraPassive.webp"
+                    ],
+                    "StackLabel": [
+                        "0~3",
+                        "4~7",
+                        "8~11",
+                        "12+"
+                    ]
+                }
             },
             {
                 "SkillType": "passive",
@@ -94460,7 +94697,29 @@
                     ]
                 ],
                 "Icon": "SKILLICON_CH0231_EXTRAPASSIVESKILL",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "StackSame": 15,
+                        "Icon": "Special_CH0231_ExtraPassive",
+                        "Value": [
+                            [
+                                300,
+                                310,
+                                330,
+                                390,
+                                400,
+                                420,
+                                480,
+                                490,
+                                510,
+                                570
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 1002
+                    }
+                ]
             }
         ],
         "FavorStatType": [
@@ -94793,9 +95052,25 @@
                     }
                 ],
                 "Icon": "COMMON_SKILLICON_WEAPONBUFF",
-                "Effects": [],
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                2640,
+                                3040,
+                                3830,
+                                4230,
+                                5020
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
+                    }
+                ],
                 "ExtraSkills": [
                     {
+                        "Id": "CH0077RidingEx01",
                         "SkillType": "ex",
                         "Name": "イロハ先輩とパトロール！",
                         "Desc": "イロハの虎丸に搭乗した時、円形範囲内の敵に対して攻撃力の<?1>分のダメージ",
@@ -94824,7 +95099,25 @@
                             }
                         ],
                         "Icon": "COMMON_SKILLICON_CIRCLE",
-                        "Effects": []
+                        "Effects": [
+                            {
+                                "Type": "DMGSingle",
+                                "CriticalCheck": "Check",
+                                "Scale": [
+                                    24600,
+                                    25600,
+                                    27400,
+                                    28300,
+                                    30200,
+                                    31100,
+                                    33000,
+                                    33900,
+                                    35800,
+                                    36700
+                                ]
+                            }
+                        ],
+                        "TSAId": 20016
                     }
                 ]
             },
@@ -94861,7 +95154,43 @@
                 "Duration": 85,
                 "Range": 850,
                 "Icon": "COMMON_SKILLICON_WEAPONDEBUFF",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -1860,
+                                -1860,
+                                -1860,
+                                -2040,
+                                -2040,
+                                -2040,
+                                -2230,
+                                -2230,
+                                -2230,
+                                -2410
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 602
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            20400,
+                            21400,
+                            22500,
+                            26600,
+                            27600,
+                            28600,
+                            32700,
+                            33700,
+                            34700,
+                            38800
+                        ]
+                    }
+                ]
             },
             {
                 "SkillType": "passive",
@@ -94970,7 +95299,23 @@
                     ]
                 ],
                 "Icon": "COMMON_SKILLICON_HEAL",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            9000,
+                            9450,
+                            9900,
+                            11700,
+                            12100,
+                            12600,
+                            14400,
+                            14800,
+                            15300,
+                            17100
+                        ]
+                    }
+                ]
             }
         ],
         "FavorStatType": [
@@ -95288,7 +95633,123 @@
                     }
                 ],
                 "Icon": "COMMON_SKILLICON_CIRCLE",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            2000
+                        ],
+                        "HitsParameter": 1,
+                        "Scale": [
+                            15500,
+                            17900,
+                            22600,
+                            24900,
+                            29600
+                        ]
+                    },
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            2000
+                        ],
+                        "HitsParameter": 2,
+                        "Scale": [
+                            31100,
+                            35800,
+                            45100,
+                            49800,
+                            59200
+                        ]
+                    },
+                    {
+                        "Type": "DMGMulti",
+                        "CriticalCheck": "Check",
+                        "Hits": [
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            400,
+                            2000
+                        ],
+                        "HitsParameter": 3,
+                        "Scale": [
+                            51900,
+                            59700,
+                            75300,
+                            83100,
+                            98700
+                        ]
+                    }
+                ],
+                "EffectCombine": [
+                    "DMGMulti"
+                ],
+                "EffectCombineLabel": {
+                    "StackLabel": [
+                        "&times;1~4",
+                        "&times;5~9",
+                        "&times;10+"
+                    ]
+                }
             },
             {
                 "SkillType": "normal",
@@ -95317,7 +95778,27 @@
                     }
                 ],
                 "Icon": "COMMON_SKILLICON_STATDEBUFF",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -830,
+                                -870,
+                                -920,
+                                -1080,
+                                -1120,
+                                -1170,
+                                -1330,
+                                -1380,
+                                -1420,
+                                -1580
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ]
             },
             {
                 "SkillType": "passive",
@@ -95426,7 +95907,27 @@
                     ]
                 ],
                 "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1594,
+                                1674,
+                                1753,
+                                2073,
+                                2152,
+                                2232,
+                                2550,
+                                2630,
+                                2709,
+                                3029
+                            ]
+                        ],
+                        "Stat": "EnhancePierceRate_Base",
+                        "Channel": 333
+                    }
+                ]
             }
         ],
         "FavorStatType": [

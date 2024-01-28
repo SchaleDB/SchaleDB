@@ -19,6 +19,7 @@ const max_gifts_ssr = 13
 const conquest_events = [815, 822, 10815]
 const module_list = ['home','students','raids','stages','items','craft']
 const striker_bonus_coefficient = {'MaxHP': 0.1, 'AttackPower': 0.1, 'DefensePower': 0.05, 'HealPower': 0.05,}
+const tsaBonusCoefficient = {'MaxHP': 0.35, 'AttackPower': 0.2, 'DefensePower': 0.5, 'HealPower': 0.1,}
 const gearId = {'Hat': 1000,'Gloves': 2000,'Shoes': 3000,'Bag': 4000,'Badge': 5000,'Hairpin': 6000,'Charm': 7000,'Watch': 8000,'Necklace': 9000,}
 const timeAttackBG = {"Shooting": "TimeAttack_SlotBG_02", "Defense": "TimeAttack_SlotBG_01", "Destruction": "TimeAttack_SlotBG_03", "Escort": "TimeAttack_SlotBG_03"}
 const searchDelay = 100
@@ -686,6 +687,10 @@ String.prototype.escapeHtml = function() {
         return Math.floor(this.getTotal(stat)*striker_bonus_coefficient[stat])
     }
 
+    getTSABonus(stat) {
+        return Math.floor(this.getTotal(stat)*tsaBonusCoefficient[stat])
+    }
+
     getStabilityMinDamageMod() {
         let stability =  this.getTotal('StabilityPoint')
         return MathHelper.clamp((stability / (stability + 1000)) + (this.getTotal('StabilityRate') / 10000), 0, 1)
@@ -725,7 +730,7 @@ String.prototype.escapeHtml = function() {
 
     addActiveBuffIcon(stat, value, stacks = 1) {
         if (value == 0) return
-        stat = stat.replace('_Coefficient','').replace('_Base','').replace('100','').replace('1','')
+        stat = stat.replace('_Coefficient','').replace('_Base','')
         let buffIconKey
         if (stat.startsWith('Special_')) {
             buffIconKey = stat
@@ -1980,6 +1985,198 @@ class SupportStats {
 
 let statPreviewSupportStats = SupportStats
 
+class TSAStats {
+
+    elements = {
+        controls: null,
+    }
+    tsaStudent = null
+    enabled = false
+
+    constructor(elements) {
+        //populate the list
+        this.elements = elements
+
+        //Bind controls
+        $(this.elements.controls).on('input', '.support-level input', (e) => {
+            this.tsaStudent.level = e.currentTarget.value
+            $(`#tsastats-controls .support-level .ba-slider-label`).text(`Lv.${this.tsaStudent.level}`)
+            recalculateStatsWithDelay()
+        })
+        $(this.elements.controls).on('click', '.ba-statpreview-star', (e) => {
+            const stars = parseInt(e.currentTarget.dataset.val)
+            this.tsaStudent.starGrade = stars
+            this.tsaStudent.weaponStarGrade = 0
+            this.updateControlValues()
+        })
+
+        $(this.elements.controls).on('click', '.ba-weaponpreview-star', (e) => {
+            const weaponStars = parseInt(e.currentTarget.dataset.val)
+            this.tsaStudent.starGrade = 5
+            this.tsaStudent.weaponStarGrade = weaponStars
+            this.tsaStudent.weaponLevel = 20 + (weaponStars*10)
+            this.updateControlValues()
+        })
+
+        $(this.elements.controls).on('change', '.support-bond', (e) => {
+            const bondNum = e.currentTarget.dataset.bond
+            const level = Math.min(Math.max(parseInt(e.currentTarget.value), 1), parseInt(e.currentTarget.max))
+            this.tsaStudent.bond[bondNum] = level
+            this.updateControlValues()
+        }).on('click', '.support-bond', (e) => {e.currentTarget.select()})
+
+        $(this.elements.controls).on('change', '.support-stat-weapon-level', (e) => {
+            const weaponLevel = Math.min(Math.max(parseInt(e.currentTarget.value), 1), parseInt(e.currentTarget.max))
+            this.tsaStudent.weaponLevel = weaponLevel
+            this.updateControlValues()
+        })
+
+        $(this.elements.controls).on('click', '.support-gear .dropdown-item', (e) => {
+            const slot = $(e.currentTarget).closest('[data-slot]').data('slot')
+            this.tsaStudent.equipment[slot-1] = parseInt(e.currentTarget.dataset.tier)
+            this.updateControlValues()
+        })
+
+        $(this.elements.controls).on('click', '.support-ex-gear', (e) => {
+            this.tsaStudent.gear = !this.tsaStudent.gear
+            $(e.currentTarget).toggleClass('deactivated', !this.tsaStudent.gear)
+            this.updateControlValues()
+        })
+
+        $(this.elements.controls).on('click', 'button.panel-collapse', (e) => {
+            if ($(`#tsastats-controls`).hasClass('collapsing')) return
+            this.tsaStudent.panelOpen = !this.tsaStudent.panelOpen
+            $(e.currentTarget).toggleClass('active', this.tsaStudent.panelOpen)
+            $(`#tsastats-controls`).collapse(this.tsaStudent.panelOpen ? 'show' : 'hide')
+        })
+
+    }
+
+    setStudent(studentId) {
+
+        const student = find(data.students, 'Id', studentId)[0]
+        //initialise using the saved stats
+        const tsaStudent = {"student": student}
+
+        if (studentId in studentCollection) {
+            const savedStudent = studentCollection[studentId]
+            tsaStudent.level = Math.min(parseInt(savedStudent.l), region.StudentMaxLevel)
+            tsaStudent.starGrade = parseInt(savedStudent.s)
+            tsaStudent.weaponStarGrade = region.WeaponMaxLevel > 0 ? parseInt(savedStudent.ws) : 0 
+            tsaStudent.weaponLevel = Math.min(parseInt(savedStudent.wl), region.WeaponMaxLevel)
+            tsaStudent.equipment = [Math.min(parseInt(savedStudent.e1), region.EquipmentMaxLevel[0]), Math.min(parseInt(savedStudent.e2), region.EquipmentMaxLevel[1]), Math.min(parseInt(savedStudent.e3), region.EquipmentMaxLevel[2])]
+            tsaStudent.gear = false
+            tsaStudent.bond = [Math.min(parseInt(savedStudent.b), region.BondMaxLevel)]
+        } else {
+            tsaStudent.level = region.StudentMaxLevel
+            tsaStudent.starGrade = 5
+            tsaStudent.weaponStarGrade = region.WeaponMaxLevel > 0 ? 3 : 0
+            tsaStudent.weaponLevel = region.WeaponMaxLevel
+            tsaStudent.equipment = region.EquipmentMaxLevel
+            tsaStudent.gear = false
+            tsaStudent.bond = [20]
+
+        }
+        student.FavorAlts.forEach(altId => {
+            tsaStudent.bond.push(altId in studentCollection ? studentCollection[altId].b : 1)
+        })
+        tsaStudent.panelOpen = false
+        this.tsaStudent = tsaStudent
+
+        this.renderControls()
+    }
+
+    renderControls() {
+        let html = `
+        <div class="ba-panel p-2${this.enabled ? '' : ' disabled'}">
+            <div class="d-flex flex-row align-items-center gap-2">
+                <div class="tsa-stats">
+                    <img src="images/student/icon/${this.tsaStudent.student.Id}.webp">
+                </div>
+                <div class="flex-fill">
+                    <h5 class="support-stats-name">${this.tsaStudent.student.Name}</h5>
+                    <p class="support-stats-desc mb-0" style="font-size: 0.875rem; line-height: 1rem;"></p>
+                </div>
+                <div class="d-flex flex-column justify-content-between align-self-stretch">
+                    <button class="btn btn-sm btn-dark stat-panel-btn-sm no-wrap panel-collapse ${this.tsaStudent.panelOpen ? ' active' : ''}"><i class="fa-solid fa-gear"></i></button>
+                </div>
+            </div>
+            <div class="collapse${this.tsaStudent.panelOpen ? ' show' : ''}" id="tsastats-controls">
+                <div class="d-flex flex-column gap-2 pt-3">
+                    <div class="d-flex flex-row align-items-center gap-2 support-level">
+                        <input type="range" class="form-range flex-fill" value="${this.tsaStudent.level}" min="1" max="${region.StudentMaxLevel}">
+                        <span class="ba-slider-label">Lv.${this.tsaStudent.level}</span>
+                    </div>  
+                    <div class="d-flex flex-row flex-wrap align-items-center justify-content-center gap-2">
+                        <div class="d-inline-block ba-panel statpreview-stars px-2 d-flex align-items-center">
+                            <span class="ba-statpreview-star" data-val="1"><i class="fa-solid fa-star"></i></span>
+                            <span class="ba-statpreview-star" data-val="2"><i class="fa-solid fa-star"></i></span>
+                            <span class="ba-statpreview-star" data-val="3"><i class="fa-solid fa-star"></i></span>
+                            <span class="ba-statpreview-star" data-val="4"><i class="fa-solid fa-star"></i></span>
+                            <span class="ba-statpreview-star" data-val="5"><i class="fa-solid fa-star"></i></span>
+                            ${ region.WeaponMaxLevel > 0 ?
+                            `<span class="ba-weaponpreview-star ms-2" data-val="1"><i class="fa-solid fa-star"></i></span>
+                            <span class="ba-weaponpreview-star" data-val="2"><i class="fa-solid fa-star"></i></span>
+                            <span class="ba-weaponpreview-star" data-val="3"><i class="fa-solid fa-star"></i></span>` : ''
+                            }
+                        </div>
+                        ${SupportStats.renderBondControls(this.tsaStudent.student)}
+                        <input style="display:none;" type="number" class="support-stat-weapon-level form-control" value="${this.tsaStudent.weaponLevel}" min="1" step="1" max="50"></span>
+                        
+
+                        
+                    </div>
+                    <div class="d-flex flex-row flex-wrap align-items-center justify-content-center gap-2 text-bold">
+                        ${SupportStats.renderGearDropdown(1, this.tsaStudent.student.Equipment[0])}
+                        ${SupportStats.renderGearDropdown(2, this.tsaStudent.student.Equipment[1])}
+                        ${SupportStats.renderGearDropdown(3, this.tsaStudent.student.Equipment[2])}`
+
+        if ("Released" in this.tsaStudent.student.Gear && this.tsaStudent.student.Gear.Released[regionID]) {
+            html += `
+            <button class="btn-pill support-ex-gear ${ this.tsaStudent.gear ? '' : 'deactivated'}">
+                <div class="icon"><img class="ba-item-n" src="images/gear/icon/${this.tsaStudent.student.Id}.webp" width="28" height="28"></div>
+                <i class="fa-regular fa-square off mx-2"></i>
+                <i class="fa-solid fa-square-check on mx-2"></i>
+            </button>
+            `
+        }
+        html += `  </div>
+                </div>
+            </div>
+        </div>
+        `
+        $(this.elements.controls).html(html)
+        this.updateControlValues(false)
+        //recalculateStats()
+    }
+
+    updateControlValues(recalculate = true) {
+        //const panel = $(this.elements.controls).find(`> div[data-index="${index}"]`)
+        const panel = $(`#tsastats-controls`)
+        const support = this.tsaStudent
+        panel.find('.support-level .ba-slider-label').text(`Lv.${support.level}`)
+        for (let i = 1; i <= 5; i++) {
+            panel.find(`.ba-statpreview-star[data-val="${i}"]`).toggleClass('active', i <= support.starGrade)
+        }
+        for (let i = 1; i <= 3; i++) {
+            panel.find(`.ba-weaponpreview-star[data-val="${i}"]`).toggleClass('active', i <= support.weaponStarGrade)
+        }
+        for (let i = 0; i < support.bond.length; i++) {
+            panel.find(`.support-bond[data-bond="${i}"]`).val(support.bond[i])
+        }
+        panel.find('.support-stat-weapon-level').attr('max', 20 + (support.weaponStarGrade*10)).val(support.weaponLevel).attr('disabled', support.weaponStarGrade == 0)
+        panel.find('.support-gear .dropdown-item.active').removeClass('active')
+        for (let i = 1; i <= 3; i++) {
+            panel.find(`.support-gear[data-slot="${i}"] .dropdown-item[data-tier="${support.equipment[i-1]}"]`).addClass('active')
+            panel.find(`.support-gear[data-slot="${i}"] .support-gear-icon`).attr('src', `images/equipment/icon/equipment_icon_${support.student.Equipment[i-1].toLowerCase()}_tier${support.equipment[i-1]}.webp`)
+            panel.find(`.support-gear[data-slot="${i}"] .support-gear-label`).text(`T${support.equipment[i-1]}`)
+        }
+        if (recalculate) recalculateStats()
+    }
+}
+
+let statPreviewTSAStats = TSAStats
+
 class EnemyFinder {
 
     armorTypes = ['Normal', 'LightArmor', 'HeavyArmor', 'Unarmed', 'ElasticArmor']
@@ -2205,6 +2402,7 @@ class EnemyFinder {
 
         data.stages.Event.forEach(stage => {
             if (stage.Difficulty != 2 || !region.Events.includes(stage.EventId)) return
+            let stageType = stage.Field ? 'Field' : 'Event'
             stage.Formations.forEach((formation) => {
                 formation.EnemyList.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
@@ -2213,9 +2411,9 @@ class EnemyFinder {
                             statPreviewEnemyList.push({
                                 id: enemy.Id,
                                 name: `${enemy.Name}`,
-                                searchTerms: [getStageName(stage, 'Event'), enemy.Name + ' challenge'],
+                                searchTerms: [getStageName(stage, stageType), enemy.Name + ' challenge'],
                                 source: 'event',
-                                sourceName: getStageName(stage, 'Event'),
+                                sourceName: getStageName(stage, stageType),
                                 rank: enemy.Rank,
                                 icon: `images/enemy/${enemy.Icon}.webp`,
                                 level: formation.Level[enemy_rank[enemy.Rank]],
@@ -2435,11 +2633,13 @@ class SkillDamageInfo {
     rows
     element
     character
+    tsa
 
-    constructor(skill, container, character) {
+    constructor(skill, container, character, tsa = null) {
         this.skill = skill
         this.container = container
         this.character = character
+        this.tsa = tsa
 
         if (skill.IsRaidSkill) {
             this.maxLevel = 1
@@ -2802,8 +3002,7 @@ class SkillDamageInfo {
     render() {
         this.rows = []
         let html = '', controlsHtml = ''
-        let skillUniqueKey = `${this.character.Id}_${this.skill.SkillType}`
-        if (this.skill.Id) skillUniqueKey += `_${this.skill.Id}`
+        let skillUniqueKey = this.skill.Id ? this.skill.Id : `${this.character.DevName}${this.skill.SkillType}`
 
         let iconPath, iconClass
         if (!this.skill.IsRaidSkill || this.skill.Icon.startsWith('COMMON_')) {
@@ -2815,7 +3014,7 @@ class SkillDamageInfo {
         } 
         
         html += `
-        <div class="p-2 ba-panel mb-2 skill-info-${this.skill.SkillType}" data-skill-key="${skillUniqueKey}">
+        <div class="p-2 ba-panel mb-2 skill-info-${this.skill.SkillType}${this.tsa ? ' skill-info-tsa' : ''}" data-skill-key="${skillUniqueKey}">
         <div class="d-flex flex-column">
             <div class="d-flex flex-row align-items-start mb-1 gap-3">
                 <div class="skill-icon ${iconClass} small ${this.skill.SkillType == 'gearnormal' ? 'plus' : ''}">
@@ -3506,6 +3705,10 @@ function loadModule(moduleName, entry=null) {
                 searchBox: $('#statpreview-supportstats-search-text')[0],
                 searchButton: $('#statpreview-supportstats-search-btn')[0],
                 searchResults: $('#statpreview-supportstats-search-list')[0],
+            })
+
+            statPreviewTSAStats = new TSAStats({
+                controls: $('#statpreview-tsastats-controls')[0]
             })
 
             statPreviewEnemyFinder = new EnemyFinder({
@@ -5053,6 +5256,12 @@ function renderStudent() {
     }
     $('#ba-statpreview-status-strikerbonus').toggleClass("deactivated", !statPreviewViewSupportStats)
     
+    if (student.TSAId && find(data.students, 'Id', student.TSAId)[0].IsReleased[regionID]) {
+        statPreviewTSAStats.setStudent(student.TSAId)
+        $('#statpreview-tsastats').toggle(statPreviewSelectedChar > 0)
+    }
+    $('#statpreview-tsastats').hide()
+
     $('#ba-statpreview-bond-targets').empty().html(getBondTargetsHTML(0, student))
     $('#statpreview-status-bond').empty().html(getBondToggleHTML(0, student))
 
@@ -5175,6 +5384,14 @@ function initCharacterSkillInfo() {
                     skillInfoCollection.push(new SkillDamageInfo(skill, skillInfoContainer, student))
                 }
             }
+
+            if (skill.ExtraSkills) {
+                for (const extraSkill of skill.ExtraSkills.filter(s => s.Effects && !s.TSAId)) {
+                    if (extraSkill.Effects.find(eff => eff.Type.startsWith('DMG') || eff.Type.startsWith("Heal") || eff.Type == "Shield" || eff.Type == "FormChange" || eff.Type == "CrowdControl")) {
+                        skillInfoCollection.push(new SkillDamageInfo(extraSkill, skillInfoContainer, student))
+                    }
+                }
+            }
         })
 
         if (student.Gear.Released != undefined && student.Gear.Released[regionID]) {
@@ -5185,11 +5402,28 @@ function initCharacterSkillInfo() {
     } else {
         const summon = find(data.summons, 'Id', student.Summons[0].Id)[0]
     
-        summon.Skills.forEach((skill) => {
-            if (skill.HideCalculation) return
-            if (skill.SkillType == "autoattack") addNormalAttackSkillText(skill)
-            skillInfoCollection.push(new SkillDamageInfo(skill, skillInfoContainer, student))
+        summon.Skills.filter(s => s.Effects).forEach((skill) => {
+            if (skill.Effects.find(eff => eff.Type.startsWith('DMG') || eff.Type.startsWith("Heal") || eff.Type == "Shield" || eff.Type == "FormChange" || eff.Type == "CrowdControl")) {
+                if (skill.HideCalculation) return
+                if (skill.SkillType == "autoattack") addNormalAttackSkillText(skill)
+                skillInfoCollection.push(new SkillDamageInfo(skill, skillInfoContainer, student))
+            }
         })
+
+        if (student.TSAId) {
+            const tsaStudent = find(data.students, 'Id', student.TSAId)[0]
+
+            if (tsaStudent.IsReleased[regionID]) {
+                for (const extraSkill of tsaStudent.Skills.filter(s => s.ExtraSkills)) {
+                    for (const tsaSkill of extraSkill.ExtraSkills.filter(s => s.TSAId == student.Id)) {
+                        skillInfoCollection.push(new SkillDamageInfo(tsaSkill, skillInfoContainer, student, tsaStudent))
+                    }
+                }
+            }
+
+            skillInfoContainer.find('.skill-info-tsa').toggle(statPreviewTSAStats.enabled)
+            
+        }
     
     }
 
@@ -6169,6 +6403,7 @@ function loadStage(id) {
             } else {
                 mode = 'Event'
                 stage = findOrDefault(data.stages.Event, "Id", id, 8012301)[0]
+                if (stage.Field) mode = 'Field'
                 loadedStage = stage
                 if (loadedStageList != '' + stage.EventId % 10000) populateEventStageList(stage.EventId)
             }
@@ -6205,7 +6440,7 @@ function loadStage(id) {
         $('#ba-stage-tab-conquest').toggle(mode == 'Conquest')
         $('#ba-stage-tab-map').toggle(mode != 'Conquest')
 
-        if (mode == "Event" && stage.EventId != 701) {
+        if ((mode == "Event" || mode == "Field") && stage.EventId != 701) {
             let dropdownHtml = ''
             let versionsAvailable = []
             stage.Versions.forEach(version => {
@@ -6541,23 +6776,25 @@ function loadStage(id) {
                     conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_defeatalltime', [starCondition[1]])}</span></div>`
                     conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_allsurvive')}</span></div>`
                 }
-            } else if (stage.Type.slice(0,6) == "Chaser") {
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_clear')}</span></div>`
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_allsurvive')}</span></div>`
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_cleartime', ['150'])}</span></div>`
-            } else if (stage.Type == "Blood") {
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_clear')}</span></div>`
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_allsurvive')}</span></div>`
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_cleartime', ['120'])}</span></div>`
-            } else if (stage.Type == "FindGift") {
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_earnrewards', ['1'])}</span></div>`
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_earnrewards', ['4'])}</span></div>`
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_earnrewards', ['5'])}</span></div>`
-            } else if (stage.Type.slice(0,6) == "School"){
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_clear')}</span></div>`
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_allsurvive')}</span></div>`
-                conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_cleartime', ['120'])}</span></div>`
-            }
+            } else if (stage.Type) {
+                if (stage.Type.slice(0,6) == "Chaser") {
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_clear')}</span></div>`
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_allsurvive')}</span></div>`
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_cleartime', ['150'])}</span></div>`
+                } else if (stage.Type == "Blood") {
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_clear')}</span></div>`
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_allsurvive')}</span></div>`
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_cleartime', ['120'])}</span></div>`
+                } else if (stage.Type == "FindGift") {
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_earnrewards', ['1'])}</span></div>`
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_earnrewards', ['4'])}</span></div>`
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_earnrewards', ['5'])}</span></div>`
+                } else if (stage.Type.slice(0,6) == "School"){
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_clear')}</span></div>`
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_allsurvive')}</span></div>`
+                    conditionsHtml += `<div>${starIcon}<span>${translateUI('starcondition_cleartime', ['120'])}</span></div>`
+                }
+            } 
         }
 
         if (challengeCondition !== undefined && challengeCondition.length > 0) {
@@ -6655,6 +6892,8 @@ function getStageName(stage, type, excludeEventName = false) {
     switch (type) {
         case "Event":
             return `${excludeEventName ? '' : getLocalizedString('EventName', ''+stage.EventId % 10000) + ' '}${stage.Difficulty == 0 ? getLocalizedString('StageType', 'Story') : (stage.Difficulty == 1 ? getLocalizedString('StageType', 'Quest') : getLocalizedString('StageType', 'Challenge'))} ${stage.Stage.toString().padStart(2,'0')}`
+        case "Field":
+            return `${excludeEventName ? '' : getLocalizedString('EventName', ''+stage.EventId % 10000) + ' '}${getLocalizedString("StageType", 'Field', [stage.Area])}`
         case "Campaign":
             return `${stage.Area}-${stage.Stage} ${stage.Difficulty == 1 ? getLocalizedString('StageType', 'Hard') : getLocalizedString('StageType', 'Normal')}`
         case "WeekDungeon":
@@ -6672,6 +6911,7 @@ function getStageTitle(stage, type) {
         case "Event":
         case "Campaign":
         case "Conquest":
+        case "Field":
             return getTranslatedString(stage, 'Name')
         case "WeekDungeon":
         case "SchoolDungeon":
@@ -6840,6 +7080,18 @@ function togglePassiveSkill() {
     $('#ba-statpreview-passiveskill-toggle').toggleClass("checked", statPreviewIncludePassive)
     $('#ba-statpreview-passiveskill').toggleClass("disabled", !statPreviewIncludePassive)
     $('#ba-statpreview-passiveskill input').prop("disabled", !statPreviewIncludePassive)
+    recalculateStats()
+}
+
+function toggleTSAStats() {
+    statPreviewTSAStats.enabled = !statPreviewTSAStats.enabled
+    $('#ba-statpreview-tsastats-toggle').toggleClass("checked", statPreviewTSAStats.enabled)
+    $('#statpreview-tsastats-controls .ba-panel').toggleClass("disabled", !statPreviewTSAStats.enabled)
+
+    if (statPreviewSelectedChar > 0) {
+        $('#student-stat-modal-skill-calculations .skill-info-tsa').toggle(statPreviewTSAStats.enabled)
+    }
+
     recalculateStats()
 }
 
@@ -7233,48 +7485,7 @@ function recalculateStats() {
     if (student.SquadType == 'Main' && statPreviewSupportStats !== undefined && !statPreviewViewSupportStats && !compareMode) {
         statPreviewSupportStats.supportStudents.forEach((support, index) => {
 
-            const supportStats = new CharacterStats(support.student, support.level, support.starGrade)
-
-            //equipment
-            for (let i = 0; i < 3; i++) {
-                const tier = support.equipment[i]
-                const gear = find(data.equipment, "Id", gearId[support.student.Equipment[i]]+tier-1)[0]
-
-                if (support.level >= gear_minlevelreq[i]) {
-                    for (let j = 0; j < gear.StatType.length; j++) {
-                        supportStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
-                    }
-                }
-            }
-
-            //bond gear
-            if (support.gear && "Released" in support.student.Gear && support.student.Gear.Released[regionID]) {
-                supportStats.addGearBonuses(support.student.Gear)
-            }
-
-            //weapon
-            if ((support.starGrade == 5) && (support.weaponStarGrade > 0)) {
-                const weaponStats = getWeaponStats(support.student, support.weaponLevel)
-                Object.entries(weaponStats).forEach(el => {
-                    supportStats.addBuff(el[0], el[1])
-                })
-            }
-
-            //bond level
-            const bondBonus = getBondStats(support.student, Math.min(maxbond[support.starGrade-1], support.bond[0]))
-            Object.entries(bondBonus).forEach(el => {
-                supportStats.addBuff(el[0], el[1])
-            })
-
-            for (let i = 1; i < support.bond.length; i++) {
-                const bondAlt = find(data.students, 'Id', support.student.FavorAlts[i-1])[0]
-                if (bondAlt.IsReleased[regionID]) {
-                    const bondBonus = getBondStats(bondAlt, support.bond[i])
-                    Object.entries(bondBonus).forEach(el => {
-                        supportStats.addBuff(el[0], el[1])
-                    })
-                }
-            }
+            const supportStats = getSupportStats(support)
 
             const bonusMaxHP = supportStats.getStrikerBonus('MaxHP')
             const bonusAttackPower = supportStats.getStrikerBonus('AttackPower')
@@ -7295,6 +7506,33 @@ function recalculateStats() {
             studentStats.addBuff('HealPower_Base', bonusHealPower)
 
         })
+    }
+
+    //TSA Stats
+    if (student.TSAId && statPreviewTSAStats !== undefined && !statPreviewViewSupportStats && !compareMode && find(data.students, 'Id', student.TSAId)[0].IsReleased[regionID]) {
+
+        const supportStats = getSupportStats(statPreviewTSAStats.tsaStudent)
+
+        const bonusMaxHP = supportStats.getTSABonus('MaxHP')
+        const bonusAttackPower = supportStats.getTSABonus('AttackPower')
+        const bonusDefensePower = supportStats.getTSABonus('DefensePower')
+        const bonusHealPower = supportStats.getTSABonus('HealPower')
+
+        let desc = ''
+        desc += getStatName('MaxHP') + ` +<b>${bonusMaxHP}</b>, `
+        desc += getStatName('AttackPower') + ` +<b>${bonusAttackPower}</b>, `
+        desc += getStatName('DefensePower') + ` +<b>${bonusDefensePower}</b>, `
+        desc += getStatName('HealPower') + ` +<b>${bonusHealPower}</b>`
+
+        $(statPreviewTSAStats.elements.controls).find(`.support-stats-desc`).html(desc)
+
+        if (statPreviewSelectedChar > 0 && statPreviewTSAStats.enabled) {
+            summonStats.addBuff('MaxHP_Base', bonusMaxHP)
+            summonStats.addBuff('AttackPower_Base', bonusAttackPower)
+            summonStats.addBuff('DefensePower_Base', bonusDefensePower)
+            summonStats.addBuff('HealPower_Base', bonusHealPower)
+        }
+        
     }
 
     //Summon Inheritance
@@ -7430,6 +7668,53 @@ function recalculateStats() {
             statPreviewSettingsSave()
         }, 50)
     }
+}
+
+function getSupportStats(support) {
+    const supportStats = new CharacterStats(support.student, support.level, support.starGrade)
+
+    //equipment
+    for (let i = 0; i < 3; i++) {
+        const tier = support.equipment[i]
+        const gear = find(data.equipment, "Id", gearId[support.student.Equipment[i]]+tier-1)[0]
+
+        if (support.level >= gear_minlevelreq[i]) {
+            for (let j = 0; j < gear.StatType.length; j++) {
+                supportStats.addBuff(gear.StatType[j], gear.StatValue[j][1])
+            }
+        }
+    }
+
+    //bond gear
+    if (support.gear && "Released" in support.student.Gear && support.student.Gear.Released[regionID]) {
+        supportStats.addGearBonuses(support.student.Gear)
+    }
+
+    //weapon
+    if ((support.starGrade == 5) && (support.weaponStarGrade > 0)) {
+        const weaponStats = getWeaponStats(support.student, support.weaponLevel)
+        Object.entries(weaponStats).forEach(el => {
+            supportStats.addBuff(el[0], el[1])
+        })
+    }
+
+    //bond level
+    const bondBonus = getBondStats(support.student, Math.min(maxbond[support.starGrade-1], support.bond[0]))
+    Object.entries(bondBonus).forEach(el => {
+        supportStats.addBuff(el[0], el[1])
+    })
+
+    for (let i = 1; i < support.bond.length; i++) {
+        const bondAlt = find(data.students, 'Id', support.student.FavorAlts[i-1])[0]
+        if (bondAlt.IsReleased[regionID]) {
+            const bondBonus = getBondStats(bondAlt, support.bond[i])
+            Object.entries(bondBonus).forEach(el => {
+                supportStats.addBuff(el[0], el[1])
+            })
+        }
+    }
+
+    return supportStats
 }
 
 function calculateEnemyStats() {
@@ -7706,8 +7991,14 @@ function renderExtraSkills(sourceskill, level) {
                     </div>
                     <div class="d-flex mt-1">
                         <span class="text-italic">${translateUI(`student_skill_${extraSkill.SkillType}`)}</span>
-                        ${extraSkill.SkillType == 'ex' ? `<span class="text-bold">&nbsp;・&nbsp;<i>COST:</i> ${extraSkill.Cost[level - 1]}</span>` : ''}
-                    </div>
+                        ${extraSkill.SkillType == 'ex' ? `<span class="text-bold">&nbsp;・&nbsp;<i>COST:</i> ${extraSkill.Cost[level - 1]}</span>` : ''}`
+
+        if (extraSkill.TSAId) {
+            const tsaStudent = find(data.students, "Id", extraSkill.TSAId)[0]
+            extraSkillsHtml += `<span class="ms-auto" onclick="loadStudent('${tsaStudent.PathName}')" style="cursor:pointer;"><i class="fa-solid fa-link me-1"></i><img class="inline-img circle me-1" src="images/student/icon/${extraSkill.TSAId}.webp">${tsaStudent.Name}</span>`
+        }
+
+        extraSkillsHtml += `</div>
                     <div class="pt-1 d-flex gap-3 align-items-center flex-wrap justify-content-between">
                         <div class="position-relative">
                             <p class="mb-1">${getSkillText(extraSkill, level, {bulletType: student.BulletType})}</p>
@@ -7718,6 +8009,58 @@ function renderExtraSkills(sourceskill, level) {
             ${skillExtraInfo ? `<div class="skill-extrainfo">${skillExtraInfo}</div>` : '' }
         </div>`
     }
+
+    if (student.TSAId && sourceskill == 'ex') {
+
+        const tsaStudent = find(data.students, "Id", student.TSAId)[0]
+
+        if (tsaStudent.IsReleased[regionID]) {
+            studentTSASkills = []
+            tsaStudent.Skills.forEach((skill) => {
+                if (skill.ExtraSkills) {
+                    studentTSASkills.push(skill.ExtraSkills.filter(s => s.TSAId == student.Id))
+                }
+                
+            })
+
+            for (const extraSkill of tsaStudent.Skills.filter(s => s.ExtraSkills)) {
+
+                for (const tsaSkill of extraSkill.ExtraSkills.filter(s => s.TSAId == student.Id)) {
+                    const skillExtraInfo = getSkillExtraInfo(tsaSkill, student)
+            
+                    extraSkillsHtml += `<div class="ba-panel-separator"></div>
+                    <div class="ps-4">
+                        <div class="my-2 d-flex flex-row align-items-start gap-3 w-100">
+                            <div class="skill-icon small bg-skill ${student.BulletType.toLowerCase()}"><img src="images/skill/${tsaSkill.Icon}.webp"></div>
+                            <div class="d-inline-block flex-fill">
+                                <div>
+                                    <h5 class="me-2 d-inline">${tsaSkill.Name}</h5>
+                                </div>
+                                <div class="d-flex mt-1">
+                                    <span class="text-italic">${translateUI(`student_skill_${tsaSkill.SkillType}`)}</span>
+                                    ${tsaSkill.SkillType == 'ex' ? `<span class="text-bold">&nbsp;・&nbsp;<i>COST:</i> ${tsaSkill.Cost[level - 1]}</span>` : ''}`
+                    extraSkillsHtml += `<span class="ms-auto" onclick="loadStudent('${tsaStudent.PathName}')" style="cursor:pointer;"><i class="fa-solid fa-link me-1"></i><img class="inline-img circle me-1" src="images/student/icon/${tsaStudent.Id}.webp">${tsaStudent.Name}</span>`
+                    extraSkillsHtml += `</div>
+                                <div class="pt-1 d-flex gap-3 align-items-center flex-wrap justify-content-between">
+                                    <div class="position-relative">
+                                        <p class="mb-1">${getSkillText(tsaSkill, level, {bulletType: student.BulletType})}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        ${skillExtraInfo ? `<div class="skill-extrainfo">${skillExtraInfo}</div>` : '' }
+                    </div>`                    
+                }
+
+
+            }
+        }
+
+    }
+
+    
+
+
 
     $(`#skill-${sourceskill}-extra-skills`).html(extraSkillsHtml)
     $(`#skill-${sourceskill}-extra-skills`).find('.ba-skill-debuff, .ba-skill-buff, .ba-skill-special, .ba-skill-cc').each(function(i,el) {
@@ -7862,7 +8205,7 @@ function getStageCardHTML(stage, dropChance = 0, includeEventName = false) {
     let type = ''
     let smallTextThreshold = label_enemy_smalltext_threshold["En"]
     if (stage.Id >= 7000000) {
-        type = 'Event'
+        type = stage.Field ? 'Field' : 'Event'
     } else if (stage.Id >= 1000000) {
         type = 'Campaign'
     } else if (stage.Id >= 60000) {
@@ -7879,7 +8222,7 @@ function getStageCardHTML(stage, dropChance = 0, includeEventName = false) {
         html += `<span class="card-badge stage-droprate">${getProbabilityText(dropChance)}</span>`
     }
     html += `<div class="card-label">`
-    html += `<span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
+    html += `<span class="label-text ${type == 'Field' || name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
     html += `</div></div>`
     return html
 
@@ -7888,6 +8231,8 @@ function getStageCardHTML(stage, dropChance = 0, includeEventName = false) {
             case "Event":
             case "Campaign":
                 return getStageName(stage, type, true)
+            case "Field":
+                return getStageTitle(stage, type)
             case "WeekDungeon":
             case "SchoolDungeon":
                 return `${getLocalizedString('StageTitle', stage.Type, [String.fromCharCode(64+stage.Stage)])}`
@@ -7968,6 +8313,7 @@ function getEventlogoLang(eventId) {
 function getStageIcon(stage, type) {
     switch (type) {
         case "Event":
+        case "Field":
             return `Campaign_Event_${stage.EventId > 10000 ? stage.EventId - 10000 : stage.EventId}_${stage.Difficulty == 2 ? 'Hard' : 'Normal'}`
         case "Campaign":
             return `Campaign_Image_${stage.Area.toString().padStart(2,'0')}_${stage.Difficulty == 1 ? 'Hard' : 'Normal'}`
@@ -8288,7 +8634,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                     // itemType = Math.floor(item.Id / 1000)             
                 }
 
-            } else if (group.Id >= 300000 && group.Id < 360000) {
+            } else if (group.Id >= 300000 && group.Id <= 300075) {
                 // Equipment boxes that contain a random piece for an equipment slot (same tier)
                 desc = translateUI('item_equipment_box') + "\n"
                 iconPath = 'equipment'
@@ -8311,7 +8657,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                     gearType += getLocalizedString('ItemCategory', gear.Category)                
                 }
                 name = translateUI('item_randombox_tier', [tier, gearType])
-            } else if (group.Id >= 360000 && group.Id < 370000) {
+            } else if (group.Id >= 300660 && group.Id < 370000) {
                 // Random Tech Notes/BD
                 desc = translateUI('item_contains_random') + "\n" + translateUI('item_is_immediateuse') + "\n"
                 iconPath = 'items'
@@ -8847,6 +9193,7 @@ function populateEventStageList(eventId) {
     if (loadedModule == 'stages') {
         eventId = eventId % 10000
         let diffPrev = 0
+        let areaPrev = 0
         let eventPrev = 0
 
         const logoLang = getEventlogoLang(eventId)
@@ -8872,29 +9219,40 @@ function populateEventStageList(eventId) {
             eventStages.forEach(stage => {
                 if (!stage.Versions.includes("Original") && !region.Events.includes(eventId + 10000)) return
                 if (!(eventId == 701 && (stage.Stage > region.Event701Max[stage.Difficulty]))) {
-                    if (stage.Difficulty != diffPrev || stage.EventId != eventPrev) {
-                        let name
 
-                        switch (stage.Difficulty) {
-                            case 0:
-                                name = getLocalizedString('StageType', 'Story')
-                                break;
-                            case 1:
-                                name = getLocalizedString('StageType', 'Quest')
-                                break;
-                            case 2:
-                                name = getLocalizedString('StageType', 'Challenge')
-                                break;
+                    if (stage.Field) {
+                        if (stage.Area != areaPrev) {
+                            html += `<div class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${getLocalizedString('StageType', 'Field', [stage.Area])}</h3></div>`
                         }
-                        let header = `<div class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${name}</h3></div>`
-                        html += header
+                        html += getStageCardHTML(stage)
+                        areaPrev = stage.Area  
+                    } else {
+                        if (stage.Difficulty != diffPrev || stage.EventId != eventPrev) {
+                            let name
+
+                            switch (stage.Difficulty) {
+                                case 0:
+                                    name = getLocalizedString('StageType', 'Story')
+                                    break;
+                                case 1:
+                                    name = getLocalizedString('StageType', 'Quest')
+                                    break;
+                                case 2:
+                                    name = getLocalizedString('StageType', 'Challenge')
+                                    break;
+                            }
+                            let header = `<div class="ba-grid-header p-2" style="grid-column: 1/-1;order: 0;"><h3 class="mb-0">${name}</h3></div>`
+                            html += header
+                        }
+                        html += getStageCardHTML(stage)
+                        diffPrev = stage.Difficulty
+                        eventPrev = stage.EventId                        
                     }
-                    html += getStageCardHTML(stage)
-                    diffPrev = stage.Difficulty
-                    eventPrev = stage.EventId
+
+
                 }
             })
-            
+
             $('.stage-list').hide()
             $('#stage-list').show()
             $('#stage-select-grid').html(html)
@@ -9888,11 +10246,12 @@ function allSearch() {
 
     if (results.length < maxResults)
     $.each(data.stages.Event, function(i,el){
-        let stagecode = getStageName(el, 'Event')
+        let stageType = el.Field ? 'Field' : 'Event'
+        let stagecode = getStageName(el, stageType)
         let searchStageCode = stagecode.replace('\n', ' ')
-        let stageName = getStageTitle(el, 'Event')
+        let stageName = getStageTitle(el, stageType)
         if ((region.Events.includes(el.EventId)) && (searchContains(searchTerm, searchStageCode) || searchContains(searchTerm, stageName))) {
-            results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,'Event')+'.png', 'type': stagecode, 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
+            results.push({'name': stageName, 'icon': 'images/campaign/'+getStageIcon(el,stageType)+'.png', 'type': stagecode, 'rarity': '', 'rarity_text': '', 'onclick': `loadStage('${el.Id}')`})
             if (results.length >= maxResults) return false
         }
     })
@@ -10043,6 +10402,10 @@ function changeStudentSummon(id, recalculate = true) {
     } else {
         $('.summon-list .active-name').html(getTranslatedString(student, "Name"))
         $('.summon-list .active-icon img').attr('src', `images/student/icon/${student.Id}.webp`).removeClass("bg-skill explosion pierce mystic sonic")
+    }
+
+    if (student.TSAId && find(data.students, 'Id', student.TSAId)[0].IsReleased[regionID]) {
+        $('#statpreview-tsastats').toggle(statPreviewSelectedChar > 0)
     }
 
     updateSummonSourceSkill()
