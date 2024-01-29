@@ -27,7 +27,7 @@ const searchMaxResults = 40
 const altSprite = [10017, 10033, 10041, 10042, 10043, 10048, 20009, 20014, 10062, 10071, 10072, 26010]
 const raidDifficultyName = ["Normal", "Hard", "VeryHard", "HardCore", "Extreme", "Insane", "Torment"]
 const buffIconKeys = {"AttackPower": "ATK","DefensePower": "DEF","CriticalPoint": "CriticalChance","CriticalDamageRate": "CriticalDamage","CriticalDamageResistRate": "CriticalDamageRateResist","DodgePoint": "Dodge","HealEffectivenessRate": "HealEffectiveness","AccuracyPoint": "HIT","MaxHP": "MAXHP","DefensePenetration": "Penetration","StabilityPoint": "Stability","StabilityRate": "Stability","RegenCost": "CostRegen"}
-const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','AmmoCount']
+const studentStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','DefensePenetration','AmmoCount']
 const studentStatListFull = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','OppressionPower','OppressionResist','HealEffectivenessRate','RegenCost','AttackSpeed','BlockRate','DefensePenetration', 'AmmoCount']
 const enemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','DefensePenetration','DamagedRatio','OppressionPower','OppressionResist']
 const raidEnemyStatList = ['MaxHP','AttackPower','DefensePower','HealPower','AccuracyPoint','DodgePoint','CriticalPoint','CriticalChanceResistPoint','CriticalDamageRate','CriticalDamageResistRate','StabilityPoint','Range','DefensePenetration','DamagedRatio','GroggyGauge','GroggyTime']
@@ -78,8 +78,8 @@ if (localStorage.getItem("region")) {
 let data = {}
 
 let json_list = {
-    stages: getCacheVerResourceName("./data/stages.min.json"),
-    config: getCacheVerResourceName("./data/config.min.json")
+    config: getCacheVerResourceName("./data/config.min.json"),
+    groups: getCacheVerResourceName("./data/groups.min.json")
 }
 
 let json_lang_list = getLanguageJSONList(userLang.toLowerCase())
@@ -93,7 +93,8 @@ function getLanguageJSONList(lang) {
         equipment: getCacheVerResourceName(`./data/${lang}/equipment.min.json`),
         currency: getCacheVerResourceName(`./data/${lang}/currency.min.json`),
         summons: getCacheVerResourceName(`./data/${lang}/summons.min.json`),
-        raids: getCacheVerResourceName(`./data/${lang}/raids.min.json`)
+        raids: getCacheVerResourceName(`./data/${lang}/raids.min.json`),
+        stages: getCacheVerResourceName(`./data/${lang}/stages.min.json`)
     }
 }
 
@@ -2768,7 +2769,7 @@ class SkillDamageInfo {
                 const sourceStat = effect.SourceStat !== undefined ? effect.SourceStat : 'AttackPower'
                 const critChance = effect.CriticalCheck == 'Never' ? 0 : studentStats.getCriticalRate(enemyStats.getTotal("CriticalChanceResistPoint"))
                 const critBonusMod = ((studentStats.getTotal('CriticalDamageRate') - enemyStats.getTotal('CriticalDamageResistRate')) / 10000) - 1
-                const stabMod = studentStats.getStabilityMinDamageMod()
+                const stabMod = (effect.ApplyStability === false) ? 1 : studentStats.getStabilityMinDamageMod()
 
                 let baseDmgMax, critBonusDmgMax, hitRate, suffix, expDmgMax, expDmgMin, avgDmg
 
@@ -3800,7 +3801,7 @@ function loadModule(moduleName, entry=null) {
 
             data.items.filter(i => i.Id >= 100 && i.Id < 1000 && i.Rarity == 'SSR' && i.IsReleased[regionID]).forEach(item => {
                 const classId = Math.floor(item.Id/10)
-                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="UsesArtifact" data-filter-select-value="${classId}" class="btn btn-dark"><div class="icon"><img src="images/items/icon/${item.Icon}.webp"></div><span>${getLocalizedString('ArtifactClass', classId)}</span></a></li>`
+                const listItem = `<li><a class="dropdown-item dropdown-item-icon" href="javascript:;" data-filter-select-prop="UsesArtifact" data-filter-select-value="${classId}" class="btn btn-dark"><div class="icon"><img src="images/item/icon/${item.Icon}.webp"></div><span>${getLocalizedString('ArtifactClass', classId)}</span></a></li>`
                 $('#ba-student-search-select-usesartifact-list').append(listItem)
             })
 
@@ -5566,17 +5567,19 @@ function loadStudentById(studentId) {
 
 function loadItem(id) {
     if (loadedModule == 'items') {
-        var mode = '', item
+        var mode = '', item, iconPath
         $(".tooltip").tooltip("hide")
         $('#item-select-grid .card-items.selected').removeClass('selected')
         $('#ba-furniture-details').hide()
 
         if (id >= 2000000 && id < 3000000) {
             mode = 'equipment'
+            iconPath = 'equipment'
             item = findOrDefault(data.equipment, "Id", id-2000000, 1)[0]
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.Category))
         } else if (id >= 1000000 && id < 2000000) {
             mode = 'furniture'
+            iconPath = 'furniture'
             item = findOrDefault(data.furniture, "Id", id-1000000, 1)[0]
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.SubCategory))
 
@@ -5587,6 +5590,7 @@ function loadItem(id) {
             
         } else {
             mode = 'items'
+            iconPath = 'item'
             item = findOrDefault(data.items, "Id", id, 1)[0]
             $('#ba-item-type').html(getLocalizedString('ItemCategory', item.Category))
         }
@@ -5602,8 +5606,8 @@ function loadItem(id) {
         }
         
         $('#ba-item-icon').removeClass('ba-item-n ba-item-r ba-item-sr ba-item-ssr').addClass('ba-item-'+item.Rarity.toLowerCase())
-        $('#ba-item-icon-img, #item-icon-full').attr('src', `images/${mode}/icon/${item.Icon}.webp`)
-        $('#item-icon-full').attr('src', `images/${mode}/full/${item.Icon}.webp`)
+        $('#ba-item-icon-img, #item-icon-full').attr('src', `images/${iconPath}/icon/${item.Icon}.webp`)
+        $('#item-icon-full').attr('src', `images/${iconPath}/full/${item.Icon}.webp`)
 
         let description = getTranslatedString(item, 'Desc').escapeHtml()
         if (item.ImmediateUse) {
@@ -5783,6 +5787,7 @@ function loadCraft(id) {
         } else {
             const recipe = findOrDefault(data.crafting.Fusion, "Id", id % 100000, 1)[0]
             const itemList = recipe.ResultId >= 1000000 ? 'furniture' : 'items'
+            const iconPath = itemList == 'items' ? 'item' : itemList
             const item = find(data[itemList], 'Id', recipe.ResultId % 1000000)[0]
             loadedCraftNode = recipe
             loadedCraftId = recipe.Id + 100000
@@ -5791,7 +5796,7 @@ function loadCraft(id) {
             $('#ba-craft-type').html(translateUI('craft_fusion'))
             $('#ba-craft-rarity .label').html(getRarityTier(item.Rarity))
             $('#ba-craft-icon').removeClass('ba-node-quality-1 ba-node-quality-2 ba-item-n ba-item-r ba-item-sr ba-item-ssr').addClass('ba-item-'+item.Rarity.toLowerCase())
-            $('#ba-craft-icon-img').attr('src', `images/${itemList}/icon/${item.Icon}.webp`)
+            $('#ba-craft-icon-img').attr('src', `images/${iconPath}/icon/${item.Icon}.webp`)
             $('#ba-craft-description').text(getTranslatedString(item, 'Desc'))
             $('#ba-craft-rewards-title').text(translateUI('craft_recipe_items'))
             $('#ba-craft-rewards').empty()
@@ -5803,13 +5808,13 @@ function loadCraft(id) {
 
             data.items.forEach(item => {
                 if (item.IsReleased[regionID] && item.Tags.filter(tag => recipe.IngredientTag.includes(tag)).length > 0) {
-                    html += getDropIconHTML(item.Id, item.SynthQuality[regionID] / recipe.IngredientExp, 1, 1, true)
+                    html += getDropIconHTML(item.Id, item.ShiftingCraftQuality[regionID] / recipe.IngredientExp, 1, 1, true)
                 }
             })
 
             data.furniture.forEach(item => {
                 if (item.IsReleased[regionID] && item.Tags.filter(tag => recipe.IngredientTag.includes(tag)).length > 0) {
-                    html += getDropIconHTML(item.Id+1000000, item.SynthQuality[regionID] / recipe.IngredientExp, 1, 1, true)
+                    html += getDropIconHTML(item.Id+1000000, item.ShiftingCraftQuality[regionID] / recipe.IngredientExp, 1, 1, true)
                 }
             })
 
@@ -6174,7 +6179,7 @@ function changeWorldRaidDifficulty(difficultyId) {
 
 function getStageEntryCurrency(currencyId, amount) {
     const currency = find(data.currency, 'Id', currencyId)[0]
-    return `<span class="ba-info-pill bg-theme my-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/icon/${currency.Icon}.webp`, getTranslatedString(currency, 'Name').escapeHtml(), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img src="images/items/icon/${currency.Icon}.webp" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${amount}</span></span>`
+    return `<span class="ba-info-pill bg-theme my-0 me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/item/icon/${currency.Icon}.webp`, getTranslatedString(currency, 'Name').escapeHtml(), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img src="images/item/icon/${currency.Icon}.webp" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${amount}</span></span>`
 }
 
 function populateRaidSkills(container, skills, difficulty) {
@@ -6495,29 +6500,16 @@ function loadStage(id) {
         $('#ba-stage-terrain-img').attr('src', `images/ui/Terrain_${stage.Terrain}.png`)
         $('#ba-stage-fog').toggle(mode == "Campaign" && stage.Difficulty == 1)
 
-        const stageTypes = ["Default","FirstClear","ThreeStar"]
+        const rewardTypes = ["Default","FirstClear","ThreeStar"]
         let dropsHtml = ''
 
-        let rewardsArray
-
-        if (loadedStageVersion == "Rerun") {
-            if (regionID == 1 && stage.RewardsGlobalRerun) {
-                rewardsArray = stage.RewardsGlobalRerun
-            } else if (regionID == 2 && stage.RewardsCnRerun) {
-                rewardsArray = stage.RewardsCnRerun
-            } else {
-                rewardsArray = stage.RewardsRerun
-            }
-        }
-
-        if (rewardsArray == undefined) {
-            rewardsArray = getServerProperty(stage, 'Rewards')
-        }
+        let stageRewards = getVersionProperty(stage, 'Rewards', loadedStageVersion)
+        let rewardsArray = (region.Name in stageRewards) ? stageRewards[region.Name] : stageRewards.Jp
 
         const eventCurrencies = []
 
-        stageTypes.forEach(el => {
-            if (el in stage.Rewards && stage.Rewards[el].length > 0) {
+        rewardTypes.forEach(el => {
+            if (el in rewardsArray && rewardsArray[el].length > 0) {
                 let labelText = null
 
                 if (mode == "Conquest") {
@@ -6547,9 +6539,9 @@ function loadStage(id) {
             }
         })
 
-        const hexaMap = getSuffixedProperty(stage, "HexaMap", loadedStageVersion)
-        const starCondition = getSuffixedProperty(stage, "StarCondition", loadedStageVersion)
-        const challengeCondition = getSuffixedProperty(stage, "ChallengeCondition", loadedStageVersion)
+        const hexaMap = getVersionProperty(stage, "HexaMap", loadedStageVersion)
+        const starCondition = getVersionProperty(stage, "StarCondition", loadedStageVersion)
+        const challengeCondition = getVersionProperty(stage, "ChallengeCondition", loadedStageVersion)
 
         if (eventCurrencies.length) {
 
@@ -6663,15 +6655,15 @@ function loadStage(id) {
                 tileInfoTable += '</div></td>'
 
                 tileInfoTable += '<td><div class="item-icon-list">'
-                if (stage.Rewards[`Upgrade${i+1}`]) {
-                    stage.Rewards[`Upgrade${i+1}`].forEach(reward => {
+                if (rewardsArray[`Upgrade${i+1}`]) {
+                    rewardsArray[`Upgrade${i+1}`].forEach(reward => {
                         tileInfoTable += getDropIconHTML(reward[0], reward[1], 1, 1)
                     })
                 }
                 tileInfoTable += '</div></td>'
 
                 tileInfoTable += '<td><div class="item-icon-list">'
-                stage.Rewards.Calculate[i].forEach(reward => {
+                rewardsArray.Calculate[i].forEach(reward => {
                     tileInfoTable += getDropIconHTML(reward[0], reward[1], 1, 1)
                 })
                 tileInfoTable += '</div></td>'
@@ -6728,7 +6720,7 @@ function loadStage(id) {
         let html = ''
         let enemyList = {}
         const enemyRanks = ['Minion','Elite','Champion','Boss']
-        const stageFormations = getSuffixedProperty(stage, "Formations", loadedStageVersion)
+        const stageFormations = getVersionProperty(stage, "Formations", loadedStageVersion)
         if (stageFormations.length) {
             $('#ba-stage-enemy-list, #ba-stage-enemy-info').show()
 
@@ -6815,7 +6807,7 @@ function loadStage(id) {
         $('#ba-stage-conditions').toggle(conditionsHtml != "").html(`<div class="d-flex flex-column">${conditionsHtml}</div>`)
 
         html = ''
-        let entryCost = getSuffixedProperty(stage, "EntryCost", loadedStageVersion)
+        let entryCost = getVersionProperty(stage, "EntryCost", loadedStageVersion)
         if (entryCost && entryCost.length > 0) {
             entryCost.forEach((ec, i) => {
                 let currency
@@ -6834,7 +6826,7 @@ function loadStage(id) {
                     }
                 }
 
-                html += `<span class="ba-info-pill bg-theme my-0" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/icon/${currency.Icon}.webp`, getTranslatedString(currency, 'Name').escapeHtml(), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img src="images/items/icon/${currency.Icon}.webp" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${ec[1]}${currencyType}</span></span>`
+                html += `<span class="ba-info-pill bg-theme my-0" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/item/icon/${currency.Icon}.webp`, getTranslatedString(currency, 'Name').escapeHtml(), getLocalizedString('ItemCategory', 'Currency'), '', getTranslatedString(currency, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img src="images/item/icon/${currency.Icon}.webp" style="height:26px;width:auto;"><span class="label ps-0 text-bold">&times;${ec[1]}${currencyType}</span></span>`
             })
             
         }
@@ -6853,6 +6845,14 @@ function loadStage(id) {
 function changeStageVersion(version) {
     loadedStageVersion = version
     loadStage(loadedStage.Id)
+}
+
+function getVersionProperty(obj, prop, version) {
+    if (obj.VersionData && version in obj.VersionData && prop in obj.VersionData[version]) {
+        return obj.VersionData[version][prop]
+    } else {
+        return obj[prop]
+    }
 }
 
 function getServerProperty(obj, prop) {
@@ -8259,7 +8259,7 @@ function getShopCardHTML(shop) {
     let html = `<div class="selection-grid-card card-shop">
     <div class="card-img"><img loading="lazy" src="images/ui/BG_Shop.png"></div>`
 
-    html += `<span class="card-badge shop-cost" title="${getRichTooltip(`images/items/icon/${costItem.Icon}.webp`, getTranslatedString(costItem, 'Name').escapeHtml(), getLocalizedString('ItemCategory', costType), getRarityTier(costItem.Rarity), getTranslatedString(costItem, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img src="images/items/icon/${costItem.Icon}.webp"><span>&times;${abbreviateNumber(shop.CostAmount)}${shop.Amount > 1 ? ` (${shop.Amount})` : ''}</span></span>`
+    html += `<span class="card-badge shop-cost" title="${getRichTooltip(`images/item/icon/${costItem.Icon}.webp`, getTranslatedString(costItem, 'Name').escapeHtml(), getLocalizedString('ItemCategory', costType), getRarityTier(costItem.Rarity), getTranslatedString(costItem, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img src="images/item/icon/${costItem.Icon}.webp"><span>&times;${abbreviateNumber(shop.CostAmount)}${shop.Amount > 1 ? ` (${shop.Amount})` : ''}</span></span>`
     html += `<div class="card-label">`
     html += `<span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span>`
     html += `</div></div>`
@@ -8530,26 +8530,26 @@ function getMaterialIconHTML(id, amount) {
         item = find(data.items, "Id", id)[0]
         itemType = item.Category
     }
-    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/icon/${item.Icon}.webp`, getTranslatedString(item, 'Name').escapeHtml(), getLocalizedString('ItemCategory', itemType), getRarityTier(item.Rarity), getTranslatedString(item, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/items/icon/${item.Icon}.webp" alt="${item.Name}">${amount != 0 ? `<span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span>` : ''}</div>`
+    html = `<div class="drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${item.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/item/icon/${item.Icon}.webp`, getTranslatedString(item, 'Name').escapeHtml(), getLocalizedString('ItemCategory', itemType), getRarityTier(item.Rarity), getTranslatedString(item, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${item.Rarity.toLowerCase()}" src="images/item/icon/${item.Icon}.webp" alt="${item.Name}">${amount != 0 ? `<span class="ba-material-label" style="cursor:pointer;">&times;${amount}</span>` : ''}</div>`
     return html
 }
 
 function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dropType=null, appendDescription=null) {
     let item, type, group, haslink, itemType
     if (id >= 4000000 && id < 5000000) {
-        const groups = find(data.config.GachaGroups, "Id", id-4000000)
+        const groups = find(data.groups, "Id", id-4000000)
         if (groups.length > 0) {
             group = groups[0]
             type = 'GachaGroup'
             itemType = 'Box'
-            iconPath = 'items'
+            iconPath = 'item'
             haslink = false
         } else return ''
     } else if (id >= 3000000 && id < 4000000) {
         item = find(data.currency, "Id", id-3000000)[0]
         type = 'Currency'
         itemType = 'Currency'
-        iconPath = 'items'
+        iconPath = 'item'
         haslink = false
     } else if (id >= 2000000 && id < 3000000) {
         item = find(data.equipment, "Id", id-2000000)[0]
@@ -8567,7 +8567,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
         item = find(data.items, "Id", id)[0]
         type = 'Item'
         itemType = item.Category
-        iconPath = 'items'
+        iconPath = 'item'
         haslink = true
     }
     let rarityText = ''
@@ -8614,7 +8614,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
                 // Random Tiered Equipment Boxes
                 
                 desc = translateUI('item_equipment_box') + '\n'
-                iconPath = 'items'
+                iconPath = 'item'
                 icon = 'item_icon_equipment_random'
                 rarity = 'N'
 
@@ -8660,7 +8660,7 @@ function getDropIconHTML(id, chance, qtyMin=1, qtyMax=1, forcePercent=false, dro
             } else if (group.Id >= 300660 && group.Id < 370000) {
                 // Random Tech Notes/BD
                 desc = translateUI('item_contains_random') + "\n" + translateUI('item_is_immediateuse') + "\n"
-                iconPath = 'items'
+                iconPath = 'item'
                 let maxTier = 0, itemType = 0
 
                 // Count the total probability
@@ -8746,7 +8746,7 @@ function getStudentIconSmall(student, label=null, description=null) {
 }
 
 function getFavourIconHTML(gift, grade) {
-    return `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/items/icon/${gift.Icon}.webp`, getTranslatedString(gift, 'Name').escapeHtml(), getLocalizedString('ItemCategory', gift.Category), getRarityTier(gift.Rarity), getTranslatedString(gift, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${gift.Rarity.toLowerCase()}" src="images/items/icon/${gift.Icon}.webp" alt="${gift.Name}"><img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade+1}.png"></div>`
+    return `<div class="ba-favor-item drop-shadow" style="position: relative; cursor:pointer;" onclick="loadItem(${gift.Id})" data-bs-toggle="tooltip" data-bs-placement="top" title="${getRichTooltip(`images/item/icon/${gift.Icon}.webp`, getTranslatedString(gift, 'Name').escapeHtml(), getLocalizedString('ItemCategory', gift.Category), getRarityTier(gift.Rarity), getTranslatedString(gift, 'Desc').escapeHtml().replace('&','&amp;'), 50, 'img-scale-larger')}"><img class="ba-item-icon ba-item-${gift.Rarity.toLowerCase()}" src="images/item/icon/${gift.Icon}.webp" alt="${gift.Name}"><img class="ba-favor-label" src="images/ui/Cafe_Interaction_Gift_0${grade+1}.png"></div>`
 }
 
 function getFurnitureIconHTML(item) {
@@ -8983,10 +8983,11 @@ function populateItemList(tab) {
 
     function getItemGridCardDetailedInnerHTML(linkid) {
         const item = find(data[loadedItemList], 'Id', linkid >= 20000000 ? linkid : linkid % 1000000)[0]
+        const iconPath = loadedItemList == 'items' ? 'item' : loadedItemList
         const name = getTranslatedString(item, "Name")
         const smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
         
-        let html = `<div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${loadedItemList}/icon/${item.Icon}.webp"></div>`
+        let html = `<div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${iconPath}/icon/${item.Icon}.webp"></div>`
         if (loadedItemList == 'furniture' && item.Interaction[regionID]) {
             html += '<div class="card-badge furniture-interaction"><img src="images/ui/Cafe_Icon_Interaction.png"></div>'
         }
@@ -9008,8 +9009,9 @@ function populateItemList(tab) {
     
     function getItemGridCardCompactInnerHTML(linkid) {
         const item = find(data[loadedItemList], 'Id', linkid >= 20000000 ? linkid : linkid % 1000000)[0]
+        const iconPath = loadedItemList == 'items' ? 'item' : loadedItemList
         const name = getTranslatedString(item, "Name").escapeHtml().replace(/"/g, '&quot;')
-        return `<div class="card-compact ba-item-${item.Rarity.toLowerCase()}" title="${getBasicTooltip(name)}"><img loading="lazy" src="images/${loadedItemList}/icon/${item.Icon}.webp"></div>`
+        return `<div class="card-compact ba-item-${item.Rarity.toLowerCase()}" title="${getBasicTooltip(name)}"><img loading="lazy" src="images/${iconPath}/icon/${item.Icon}.webp"></div>`
     }
 }
 
@@ -9092,10 +9094,11 @@ function getCraftingCardHTML(node, chance = -1, chanceVisible = false, qtyMin = 
 function getFusionRecipeCardHTML(recipe) {
     const itemList = recipe.ResultId >= 1000000 ? 'furniture' : 'items'
     const item = find(data[itemList], 'Id', recipe.ResultId % 1000000)[0]
+    const iconPath = itemList == 'items' ? 'item' : itemList
     const name = getTranslatedString(item, "Name")
     const smallTextThreshold = getSmallTextThreshold(name, label_craft_smalltext_threshold)
 
-    return `<div id="craft-select-${recipe.Id+100000}" data-itemid="${recipe.Id+100000}" class="selection-grid-card card-items"><div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${itemList}/icon/${item.Icon}.webp"></div><div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span></div></div>`
+    return `<div id="craft-select-${recipe.Id+100000}" data-itemid="${recipe.Id+100000}" class="selection-grid-card card-items"><div class="card-img ba-item-${item.Rarity.toLowerCase()}"><img loading="lazy" src="images/${iconPath}/icon/${item.Icon}.webp"></div><div class="card-label"><span class="label-text ${name.length > smallTextThreshold ? "smalltext" : "" }">${name}</span></div></div>`
 
 }
 
@@ -9506,31 +9509,23 @@ function getItemDropStages(itemID, includeEvents = false) {
     $.each(stageList, function(i, stageType) {
         stageType.forEach(dropStage => {
             if (!stageIsReleased(dropStage)) return
-            let drop = false, dropChance = 0, isItemBox = false, dropCertainCount = 0
+            let drop = false, dropChance = 0, isItemBox = false, dropCertainCount = 0, rewardList = []
 
-            let rewardList
-            if (regionID == 1 && "RewardsGlobal" in dropStage) {
-                rewardList = dropStage.RewardsGlobal.Default
-                if ("RewardsGlobalRerun" in dropStage) {
-                    rewardList = rewardList.concat(dropStage.RewardsGlobalRerun.Default)
-                }
-            } else if (regionID == 2 && "RewardsCn" in dropStage) {
-                rewardList = dropStage.RewardsCn.Default
-                if ("RewardsCnRerun" in dropStage) {
-                    rewardList = rewardList.concat(dropStage.RewardsCnRerun.Default)
+            if (dropStage.Versions) {
+                for (const version of dropStage.Versions) {
+                    let stageRewards = getVersionProperty(dropStage, 'Rewards', version)
+                    rewardList.push(...((region.Name in stageRewards) ? stageRewards[region.Name] : stageRewards.Jp).Default)
                 }
             } else {
-                rewardList = dropStage.Rewards.Default
-                if ("RewardsRerun" in dropStage) {
-                    rewardList = rewardList.concat(dropStage.RewardsRerun.Default)
-                }
+                rewardList.push(...((region.Name in dropStage.Rewards) ? dropStage.Rewards[region.Name] : dropStage.Rewards.Jp).Default)
             }
+
 
             for (let i = 0; i < rewardList.length; i++) {
 
                 if (rewardList[i][0] >= 4000000 && rewardList[i][0] < 5000000) {
                     // Reward is an Item Box
-                    const box = find(data.config.GachaGroups, "Id", rewardList[i][0] - 4000000)[0]
+                    const box = find(data.groups, "Id", rewardList[i][0] - 4000000)[0]
 
                     // Count the total probability
                     const totalProb = box.ItemList.reduce((pv, cv) => {return pv + cv[1]}, 0)
@@ -10185,7 +10180,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.items, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/items/icon/'+el.Icon+'.webp', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id})`})
+            results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/item/icon/'+el.Icon+'.webp', 'type': getLocalizedString('ItemCategory', el.Category), 'rarity': el.Rarity, 'rarity_text': getRarityTier(el.Rarity), 'onclick': `loadItem(${el.Id})`})
             if (results.length >= maxResults) return false
         }
     })

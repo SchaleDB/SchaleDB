@@ -773,14 +773,22 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "1000",
+                        "Duration": 20000,
+                        "Period": 1000,
+                        "ExtraStatSource": "TargetLostHP",
                         "Scale": [
                             864,
                             994,
                             1253,
                             1383,
                             1642
+                        ],
+                        "ExtraStatRate": [
+                            346,
+                            346,
+                            346,
+                            346,
+                            346
                         ]
                     }
                 ]
@@ -2669,7 +2677,8 @@
             ]
         ],
         "FavorAlts": [
-            10022
+            10022,
+            10086
         ],
         "MemoryLobby": [
             8,
@@ -2993,7 +3002,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             0,
@@ -3028,8 +3037,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Scale": [
                             10060,
                             10563,
@@ -5567,6 +5576,7 @@
                     {
                         "Type": "DMGEchoWithScaling",
                         "CriticalCheck": "Check",
+                        "MultiplySource": "InvokerCurrentHP",
                         "Scale": [
                             220,
                             230,
@@ -5578,6 +5588,18 @@
                             362,
                             373,
                             417
+                        ],
+                        "MultiplierConstant": [
+                            41,
+                            43,
+                            45,
+                            53,
+                            55,
+                            57,
+                            66,
+                            68,
+                            70,
+                            78
                         ]
                     }
                 ]
@@ -9018,8 +9040,8 @@
                 "Effects": [
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             5371,
@@ -11004,7 +11026,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Fear",
                         "Scale": [
                             3900,
@@ -11056,7 +11078,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "3000",
+                        "Chance": 3000,
                         "Icon": "Fear",
                         "Scale": [
                             3600,
@@ -12229,6 +12251,7 @@
                     {
                         "Type": "DMGEchoWithScaling",
                         "CriticalCheck": "Check",
+                        "MultiplySource": "InvokerLostHP",
                         "Scale": [
                             495,
                             520,
@@ -12240,6 +12263,18 @@
                             817,
                             842,
                             941
+                        ],
+                        "MultiplierConstant": [
+                            92,
+                            97,
+                            102,
+                            120,
+                            125,
+                            129,
+                            148,
+                            152,
+                            157,
+                            175
                         ]
                     }
                 ]
@@ -12939,7 +12974,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -13245,7 +13280,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Provoke",
                         "Scale": [
                             4700,
@@ -15965,7 +16000,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             0,
@@ -16083,7 +16118,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             3000,
@@ -17663,7 +17698,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "5000",
+                        "Chance": 5000,
                         "Icon": "Stunned",
                         "Scale": [
                             3100,
@@ -18181,8 +18216,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Poison",
                         "Scale": [
                             3652,
@@ -19628,8 +19663,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Scale": [
                             5415,
                             6228,
@@ -20127,7 +20162,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2700,
@@ -22693,8 +22728,8 @@
                 "Effects": [
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Poison",
                         "Scale": [
                             5899,
@@ -24181,7 +24216,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2200,
@@ -26862,8 +26897,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Poison",
                         "Scale": [
                             3987,
@@ -27436,8 +27471,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             7204,
@@ -31239,8 +31274,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Chill",
                         "Scale": [
                             40666,
@@ -33488,7 +33523,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1600,
@@ -33557,7 +33592,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1600,
@@ -33740,7 +33775,8 @@
             ]
         ],
         "FavorAlts": [
-            10004
+            10004,
+            10086
         ],
         "MemoryLobby": [
             5,
@@ -34137,8 +34173,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Chill",
                         "Scale": [
                             5105,
@@ -34265,8 +34301,8 @@
                 "Effects": [
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Chill",
                         "Scale": [
                             3412,
@@ -34628,7 +34664,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2400,
@@ -34834,7 +34870,7 @@
                 "Effects": [
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1230,
@@ -37048,8 +37084,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Poison",
                         "Scale": [
                             2642,
@@ -37269,7 +37305,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -37628,7 +37664,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Provoke",
                         "Scale": [
                             0,
@@ -45597,7 +45633,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -45943,7 +45979,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1900,
@@ -46910,7 +46946,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             5700,
@@ -47462,8 +47498,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Scale": [
                             2288,
                             2402,
@@ -47533,8 +47569,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Scale": [
                             2648,
                             2781,
@@ -47803,7 +47839,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -49816,7 +49852,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             4200,
@@ -50455,7 +50491,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             3900,
@@ -50519,8 +50555,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             5341,
@@ -52515,8 +52551,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             14973,
@@ -55437,7 +55473,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             800,
@@ -55449,7 +55485,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             3200,
@@ -58884,7 +58920,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2100,
@@ -58913,7 +58949,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             4100,
@@ -58991,7 +59027,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2400,
@@ -59072,7 +59108,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2400,
@@ -59218,8 +59254,8 @@
                 "Effects": [
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Chill",
                         "Scale": [
                             3003,
@@ -59321,7 +59357,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -60174,8 +60210,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             5095,
@@ -60247,7 +60283,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1200,
@@ -62905,8 +62941,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "120000",
-                        "Period": "4000",
+                        "Duration": 120000,
+                        "Period": 4000,
                         "Icon": "Cheerleading",
                         "Scale": [
                             2998,
@@ -66116,8 +66152,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             6400,
@@ -67478,8 +67514,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             741,
                             852,
@@ -67490,8 +67526,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             776,
                             893,
@@ -67502,8 +67538,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             812,
                             933,
@@ -67514,8 +67550,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             847,
                             974,
@@ -67526,8 +67562,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             882,
                             1014,
@@ -67538,8 +67574,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             917,
                             1055,
@@ -67550,8 +67586,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             953,
                             1096,
@@ -67562,8 +67598,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             988,
                             1136,
@@ -67574,8 +67610,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1023,
                             1177,
@@ -67586,8 +67622,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1059,
                             1217,
@@ -67598,8 +67634,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1094,
                             1258,
@@ -67610,8 +67646,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1129,
                             1298,
@@ -67622,8 +67658,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1164,
                             1339,
@@ -67634,8 +67670,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1200,
                             1380,
@@ -67646,8 +67682,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1235,
                             1420,
@@ -70164,8 +70200,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "10000",
-                        "Period": "4000",
+                        "Duration": 10000,
+                        "Period": 4000,
                         "Scale": [
                             6480,
                             6804,
@@ -71526,7 +71562,7 @@
             [
                 [
                     6301,
-                    0
+                    3
                 ]
             ],
             []
@@ -78393,8 +78429,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "30000",
-                        "Period": "4000",
+                        "Duration": 30000,
+                        "Period": 4000,
                         "Scale": [
                             2271,
                             2384,
@@ -78607,7 +78643,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Provoke",
                         "Scale": [
                             1000,
@@ -78676,7 +78712,7 @@
             [
                 [
                     9106,
-                    0
+                    3
                 ]
             ],
             []
@@ -79178,8 +79214,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             174,
                             182,
@@ -82843,7 +82879,7 @@
         "Id": 10073,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 147,
@@ -82886,7 +82922,7 @@
         "Illustrator": "CHILD",
         "Designer": "CHILD",
         "CharHeightMetric": "165cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'4\"",
         "StabilityPoint": 1800,
         "AttackPower1": 257,
         "AttackPower100": 2573,
@@ -83186,10 +83222,10 @@
         ],
         "MemoryLobby": [
             3,
-            0,
+            3,
             0
         ],
-        "MemoryLobbyBGM": "Theme 173",
+        "MemoryLobbyBGM": "Takaramonogatari",
         "FurnitureInteraction": [
             [
                 [
@@ -83197,7 +83233,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210313,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -83359,7 +83400,7 @@
         "Id": 20028,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 148,
@@ -83402,7 +83443,7 @@
         "Illustrator": "kokosando",
         "Designer": "kokosando",
         "CharHeightMetric": "166cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'5\"",
         "StabilityPoint": 1145,
         "AttackPower1": 300,
         "AttackPower100": 3000,
@@ -83735,7 +83776,7 @@
         ],
         "MemoryLobby": [
             2,
-            0,
+            2,
             0
         ],
         "MemoryLobbyBGM": "Guruguru Usagi",
@@ -83746,7 +83787,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210314,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -83908,7 +83954,7 @@
         "Id": 16013,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 149,
@@ -83951,7 +83997,7 @@
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
         "CharHeightMetric": "148cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "4'10\"",
         "StabilityPoint": 1888,
         "AttackPower1": 286,
         "AttackPower100": 2869,
@@ -84250,10 +84296,10 @@
         ],
         "MemoryLobby": [
             2,
-            0,
+            2,
             0
         ],
-        "MemoryLobbyBGM": "Theme 173",
+        "MemoryLobbyBGM": "Takaramonogatari",
         "FurnitureInteraction": [
             [
                 [
@@ -84261,7 +84307,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210315,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -84422,7 +84473,7 @@
         "Id": 10074,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 150,
@@ -84465,7 +84516,7 @@
         "Illustrator": "Mx2J",
         "Designer": "Mx2J",
         "CharHeightMetric": "161cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'3\"",
         "StabilityPoint": 1396,
         "AttackPower1": 303,
         "AttackPower100": 3033,
@@ -84876,7 +84927,7 @@
         ],
         "MemoryLobby": [
             3,
-            0,
+            3,
             0
         ],
         "MemoryLobbyBGM": "Midsummer cat",
@@ -84891,7 +84942,16 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210316,
+                    0
+                ],
+                [
+                    210315,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -85714,8 +85774,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "30000",
-                        "Period": "4000",
+                        "Duration": 30000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             17357,
@@ -85790,8 +85850,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "30000",
-                        "Period": "4000",
+                        "Duration": 30000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             4799,
@@ -89496,8 +89556,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "40000",
-                        "Period": "4000",
+                        "Duration": 40000,
+                        "Period": 4000,
                         "Icon": "ElectricShock",
                         "Scale": [
                             11333,
@@ -90019,7 +90079,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Confusion",
                         "Scale": [
                             5000,
@@ -91718,8 +91778,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             1458,
@@ -93369,7 +93429,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Confusion",
                         "Scale": [
                             7200,
@@ -96126,6 +96186,763 @@
                 8,
                 12,
                 5,
+                9
+            ],
+            [
+                12,
+                8,
+                12
+            ]
+        ]
+    },
+    {
+        "Id": 10086,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 171,
+        "PathName": "Hina_Dress",
+        "DevName": "CH0230",
+        "Name": "ヒナ（ドレス）",
+        "School": "Gehenna",
+        "Club": "Fuuki",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Explosion",
+        "ArmorType": "ElasticArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 3,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "MG",
+        "WeaponImg": "weapon_icon_10004",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Badge",
+            "Watch"
+        ],
+        "CollectionBG": "BG_GehennaPartyRoom_Collection",
+        "FamilyName": "空崎",
+        "PersonalName": "ヒナ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "17歳",
+        "FamilyNameRuby": "そらさき",
+        "PersonalNameRuby": "",
+        "Birthday": "2月19日",
+        "CharacterSSRNew": "あなたのために、頑張るわ",
+        "ProfileIntroduction": "パーティーに参加すべくドレスに着替えた、ゲヘナ学園所属の風紀委員長。\n\n基本的には面倒くさがり屋さんの少女だが、先生がゲヘナのパーティーを楽しみにしているという話を耳にし、普段より少し張り切っている。先生の前で演奏すると決まった日から、苦手なピアノの練習も、いつもより頑張っているのだとか。",
+        "Hobby": "睡眠、休憩",
+        "CharacterVoice": "広橋涼",
+        "BirthDay": "2/19",
+        "Illustrator": "DoReMi",
+        "Designer": "DoReMi",
+        "CharHeightMetric": "142cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1372,
+        "AttackPower1": 346,
+        "AttackPower100": 3467,
+        "MaxHP1": 1963,
+        "MaxHP100": 17020,
+        "DefensePower1": 68,
+        "DefensePower100": 412,
+        "HealPower1": 1425,
+        "HealPower100": 4276,
+        "DodgePoint": 176,
+        "AccuracyPoint": 101,
+        "CriticalPoint": 203,
+        "CriticalDamageRate": 20000,
+        "DefensePenetration1": 357,
+        "DefensePenetration100": 357,
+        "AmmoCount": 49,
+        "AmmoCost": 7,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            1428,
+                            1428,
+                            1428,
+                            1429,
+                            1429,
+                            1429,
+                            1429
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 27,
+                            "AttackStartDuration": 26,
+                            "AttackEndDuration": 18,
+                            "AttackBurstRoundOverDelay": 30,
+                            "AttackIngDuration": 36,
+                            "AttackReloadDuration": 75
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "開演：イシュ・ボシェテ",
+                "Desc": "集中射撃体勢に転換（10秒間）/\n集中射撃体勢では<s:FormChange>と移動することはできない/\n（CC状態になった場合、集中射撃体勢は解除される）",
+                "Parameters": [],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    6
+                ],
+                "Duration": 45,
+                "Range": 950,
+                "Icon": "SKILLICON_CH0230_EXSKILL",
+                "Effects": [],
+                "ExtraSkills": [
+                    {
+                        "Id": "CH0230Ex02",
+                        "SkillType": "ex",
+                        "Name": "旋律の一音目",
+                        "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n敵を貫通する度にダメージが45%減少（最少で10%ダメージまで）/\nこの攻撃は安定値に影響されず最大ダメージが適用される/\n次の射撃のため集中射撃体勢を維持したままフォーム転換（10秒間）",
+                        "Parameters": [
+                            [
+                                "324%",
+                                "372%",
+                                "471%",
+                                "519%",
+                                "618%"
+                            ]
+                        ],
+                        "Cost": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Duration": 65,
+                        "Range": 950,
+                        "Radius": [
+                            {
+                                "Type": "Obb",
+                                "Width": 40,
+                                "Height": 2000
+                            }
+                        ],
+                        "Icon": "COMMON_SKILLICON_LINE",
+                        "Effects": [
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "ApplyStability": false,
+                                "Hits": [
+                                    3333,
+                                    3333,
+                                    3333
+                                ],
+                                "HitsParameter": 1,
+                                "Scale": [
+                                    32400,
+                                    37200,
+                                    47100,
+                                    51900,
+                                    61800
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "CH0230Ex03",
+                        "SkillType": "ex",
+                        "Name": "旋律の二音目",
+                        "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n敵を貫通する度にダメージが45%減少（最少で10%ダメージまで）/\nこの攻撃は安定値に影響されず最大ダメージが適用される/\n次の射撃のため集中射撃体勢を維持したままフォーム転換（10秒間）",
+                        "Parameters": [
+                            [
+                                "324%",
+                                "372%",
+                                "471%",
+                                "519%",
+                                "618%"
+                            ]
+                        ],
+                        "Cost": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Duration": 85,
+                        "Range": 950,
+                        "Radius": [
+                            {
+                                "Type": "Obb",
+                                "Width": 40,
+                                "Height": 2000
+                            }
+                        ],
+                        "Icon": "COMMON_SKILLICON_LINE",
+                        "Effects": [
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "ApplyStability": false,
+                                "Hits": [
+                                    3333,
+                                    3333,
+                                    3333
+                                ],
+                                "HitsParameter": 1,
+                                "Scale": [
+                                    32400,
+                                    37200,
+                                    47100,
+                                    51900,
+                                    61800
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "CH0230Ex04",
+                        "SkillType": "ex",
+                        "Name": "終演の旋律",
+                        "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n敵を貫通する度にダメージが45%減少（最少で10%ダメージまで）/\nこの攻撃は安定値に影響されず最大ダメージが適用される/\n射撃後、集中射撃体勢解除",
+                        "Parameters": [
+                            [
+                                "680.4%",
+                                "777%",
+                                "987%",
+                                "1085%",
+                                "1288%"
+                            ]
+                        ],
+                        "Cost": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Duration": 35,
+                        "Range": 950,
+                        "Radius": [
+                            {
+                                "Type": "Obb",
+                                "Width": 60,
+                                "Height": 2000
+                            }
+                        ],
+                        "Icon": "COMMON_SKILLICON_LINE",
+                        "Effects": [
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "ApplyStability": false,
+                                "Hits": [
+                                    1429,
+                                    1429,
+                                    1429,
+                                    1429,
+                                    1429,
+                                    1429,
+                                    1429
+                                ],
+                                "HitsParameter": 1,
+                                "Scale": [
+                                    68040,
+                                    77700,
+                                    98700,
+                                    108500,
+                                    128800
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "抜かりない準備",
+                "Desc": "戦闘開始時、<b:EnhanceExplosionRate>を<?1>加算、<b:HIT>を<?2>増加（戦闘中に1回のみ）",
+                "Parameters": [
+                    [
+                        "34.17%",
+                        "35.88%",
+                        "37.59%",
+                        "44.43%",
+                        "46.12%",
+                        "47.83%",
+                        "54.67%",
+                        "56.38%",
+                        "58.09%",
+                        "64.91%"
+                    ],
+                    [
+                        "238",
+                        "250",
+                        "261",
+                        "309",
+                        "321",
+                        "333",
+                        "380",
+                        "392",
+                        "404",
+                        "451"
+                    ]
+                ],
+                "Duration": 135,
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3417,
+                                3588,
+                                3759,
+                                4443,
+                                4612,
+                                4783,
+                                5467,
+                                5638,
+                                5809,
+                                6491
+                            ]
+                        ],
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Channel": 32
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                238,
+                                250,
+                                261,
+                                309,
+                                321,
+                                333,
+                                380,
+                                392,
+                                404,
+                                451
+                            ]
+                        ],
+                        "Stat": "AccuracyPoint_Base",
+                        "Channel": 5
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "演奏に臨む心",
+                "Desc": "攻撃力を<?1>、<b:CriticalChance>を<?2>増加",
+                "Parameters": [
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1120,
+                            1148,
+                            1176,
+                            1288,
+                            1316,
+                            1344,
+                            1456,
+                            1484,
+                            1512,
+                            1624
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Scale": [
+                            1120,
+                            1148,
+                            1176,
+                            1288,
+                            1316,
+                            1344,
+                            1456,
+                            1484,
+                            1512,
+                            1624
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "演奏に臨む心+",
+                "Desc": "攻撃力を<?1>、<b:CriticalChance>を<?2>増加/\nさらに攻撃力を<?3>、<b:CriticalChance>を<?4>増加",
+                "Parameters": [
+                    [
+                        "266",
+                        "280",
+                        "293",
+                        "346",
+                        "359",
+                        "373",
+                        "426",
+                        "439",
+                        "453",
+                        "506"
+                    ],
+                    [
+                        "80",
+                        "84",
+                        "88",
+                        "104",
+                        "108",
+                        "112",
+                        "128",
+                        "132",
+                        "136",
+                        "152"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            266,
+                            280,
+                            293,
+                            346,
+                            359,
+                            373,
+                            426,
+                            439,
+                            453,
+                            506
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalPoint_Base",
+                        "Scale": [
+                            80,
+                            84,
+                            88,
+                            104,
+                            108,
+                            112,
+                            128,
+                            132,
+                            136,
+                            152
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "想いをここに",
+                "Desc": "集中射撃体勢中、<b:EnhanceExplosionRate>を<?1>加算、<c:Provoke>を無効化",
+                "Parameters": [
+                    [
+                        "36.29%",
+                        "37.21%",
+                        "38.11%",
+                        "45.36%",
+                        "46.28%",
+                        "47.18%",
+                        "54.44%",
+                        "55.35%",
+                        "56.25%",
+                        "63.51%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3629,
+                                3721,
+                                3811,
+                                4536,
+                                4628,
+                                4718,
+                                5444,
+                                5535,
+                                5625,
+                                6351
+                            ]
+                        ],
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Channel": 32
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                7,
+                43
+            ],
+            [
+                9,
+                51
+            ],
+            [
+                2,
+                8
+            ],
+            [
+                3,
+                13
+            ],
+            [
+                5,
+                21
+            ]
+        ],
+        "FavorAlts": [
+            10004,
+            10022
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 179 (Instrumental)",
+        "FurnitureInteraction": [
+            [
+                [
+                    15305,
+                    3
+                ],
+                [
+                    15306,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aW",
+            "aM"
+        ],
+        "FavorItemUniqueTags": [
+            "fB",
+            "fb"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "終幕：デストロイヤー",
+            "Desc": "ヒナが自身の手足のように扱うマシンガン。\n\n普段、校則を違反したり風紀を乱す者に対して、無慈悲さを見せる代物だが、今回だけは、誰かのために心を込めて丁寧に扱っている。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 152,
+            "AttackPower100": 1523,
+            "MaxHP1": 492,
+            "MaxHP100": 4921,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                110
+            ],
+            [
+                3031,
+                3030,
+                111,
+                290
+            ],
+            [
+                3032,
+                3031,
+                112,
+                291
+            ],
+            [
+                3033,
+                3032,
+                113,
+                292
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                14,
+                30
+            ],
+            [
+                12,
+                18,
+                10,
+                26
+            ],
+            [
+                8,
+                18,
+                7,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                110
+            ],
+            [
+                4031,
+                111,
+                290
+            ],
+            [
+                4032,
+                4031,
+                111,
+                290
+            ],
+            [
+                4032,
+                112,
+                291
+            ],
+            [
+                4033,
+                4032,
+                113,
+                292
+            ],
+            [
+                4033,
+                113,
+                292
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                7
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                18
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                6,
                 9
             ],
             [

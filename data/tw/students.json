@@ -769,14 +769,22 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "1000",
+                        "Duration": 20000,
+                        "Period": 1000,
+                        "ExtraStatSource": "TargetLostHP",
                         "Scale": [
                             864,
                             994,
                             1253,
                             1383,
                             1642
+                        ],
+                        "ExtraStatRate": [
+                            346,
+                            346,
+                            346,
+                            346,
+                            346
                         ]
                     }
                 ]
@@ -2666,7 +2674,8 @@
             ]
         ],
         "FavorAlts": [
-            10022
+            10022,
+            10086
         ],
         "MemoryLobby": [
             8,
@@ -2988,7 +2997,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             0,
@@ -3023,8 +3032,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Scale": [
                             10060,
                             10563,
@@ -5554,6 +5563,7 @@
                     {
                         "Type": "DMGEchoWithScaling",
                         "CriticalCheck": "Check",
+                        "MultiplySource": "InvokerCurrentHP",
                         "Scale": [
                             220,
                             230,
@@ -5565,6 +5575,18 @@
                             362,
                             373,
                             417
+                        ],
+                        "MultiplierConstant": [
+                            41,
+                            43,
+                            45,
+                            53,
+                            55,
+                            57,
+                            66,
+                            68,
+                            70,
+                            78
                         ]
                     }
                 ]
@@ -8993,8 +9015,8 @@
                 "Effects": [
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             5371,
@@ -10971,7 +10993,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Fear",
                         "Scale": [
                             3900,
@@ -11023,7 +11045,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "3000",
+                        "Chance": 3000,
                         "Icon": "Fear",
                         "Scale": [
                             3600,
@@ -12192,6 +12214,7 @@
                     {
                         "Type": "DMGEchoWithScaling",
                         "CriticalCheck": "Check",
+                        "MultiplySource": "InvokerLostHP",
                         "Scale": [
                             495,
                             520,
@@ -12203,6 +12226,18 @@
                             817,
                             842,
                             941
+                        ],
+                        "MultiplierConstant": [
+                            92,
+                            97,
+                            102,
+                            120,
+                            125,
+                            129,
+                            148,
+                            152,
+                            157,
+                            175
                         ]
                     }
                 ]
@@ -12637,7 +12672,7 @@
             },
             {
                 "SkillType": "gearnormal",
-                "Name": "狙い撃ち+",
+                "Name": "狙擊+",
                 "Desc": "25秒毎に、敵1人に対して攻撃力の<?1>分のダメージ",
                 "Parameters": [
                     [
@@ -12900,7 +12935,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -12917,8 +12952,8 @@
                     500
                 ]
             ],
-            "Name": "セリカのスポーツバッグ",
-            "Desc": "セリカの黒いスポーツバッグ。勉強用、アルバイト用、運動用、整備用……何でも入れて持ち出せる万能バッグだ。",
+            "Name": "茜香的運動包",
+            "Desc": "茜香的黑色運動包。唸書用、打工用、運動用、整備用……不管什麼都裝得下的萬能包包。",
             "TierUpMaterial": [
                 [
                     5029,
@@ -13204,7 +13239,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Provoke",
                         "Scale": [
                             4700,
@@ -15914,7 +15949,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             0,
@@ -16032,7 +16067,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             3000,
@@ -17606,7 +17641,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "5000",
+                        "Chance": 5000,
                         "Icon": "Stunned",
                         "Scale": [
                             3100,
@@ -18122,8 +18157,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Poison",
                         "Scale": [
                             3652,
@@ -19563,8 +19598,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Scale": [
                             5415,
                             6228,
@@ -20060,7 +20095,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2700,
@@ -22616,8 +22651,8 @@
                 "Effects": [
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Poison",
                         "Scale": [
                             5899,
@@ -24098,7 +24133,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2200,
@@ -26769,8 +26804,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Poison",
                         "Scale": [
                             3987,
@@ -27341,8 +27376,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             7204,
@@ -31130,8 +31165,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Chill",
                         "Scale": [
                             40666,
@@ -33378,7 +33413,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1600,
@@ -33447,7 +33482,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1600,
@@ -33630,7 +33665,8 @@
             ]
         ],
         "FavorAlts": [
-            10004
+            10004,
+            10086
         ],
         "MemoryLobby": [
             5,
@@ -34025,8 +34061,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Chill",
                         "Scale": [
                             5105,
@@ -34153,8 +34189,8 @@
                 "Effects": [
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Chill",
                         "Scale": [
                             3412,
@@ -34514,7 +34550,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2400,
@@ -34720,7 +34756,7 @@
                 "Effects": [
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1230,
@@ -36870,7 +36906,7 @@
             },
             {
                 "SkillType": "gearnormal",
-                "Name": "探究に終わりはない！+",
+                "Name": "探究沒有終點！+",
                 "Desc": "30秒毎に、円形範囲内の敵に対して攻撃力の<?1>分のダメージ/\nさらに攻撃力の<?2>分の<d:Poison>持続ダメージを付与（20秒間）",
                 "Parameters": [
                     [
@@ -36926,8 +36962,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Poison",
                         "Scale": [
                             2642,
@@ -37147,7 +37183,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -37159,8 +37195,8 @@
                     1000
                 ]
             ],
-            "Name": "サヤのスケートボード",
-            "Desc": "サヤ専用に飾られたスケートボード。自転車やスクーターと違って両手が自由に使えるが、その分熟練度も求められる。",
+            "Name": "沙耶的滑板",
+            "Desc": "專為沙耶裝飾設計的滑板。和自行車或滑板車不同，可以自由地使用雙手，相對地也十分講求熟練度。",
             "TierUpMaterial": [
                 [
                     5018,
@@ -37504,7 +37540,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Provoke",
                         "Scale": [
                             0,
@@ -45242,7 +45278,7 @@
             },
             {
                 "SkillType": "gearnormal",
-                "Name": "乱れ散る花吹雪+",
+                "Name": "落英繽紛+",
                 "Desc": "25秒毎に、敵1人に対して攻撃力の<?1>分のダメージ",
                 "Parameters": [
                     [
@@ -45495,7 +45531,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -45507,8 +45543,8 @@
                     2000
                 ]
             ],
-            "Name": "秘密を隠すキツネのお面",
-            "Desc": "ワカモが普段から愛用しているキツネのお面。ワカモのお気に入りのアイテムで、元々その用途は余計なことに巻き込まれないように自分の正体を隠すためだったが、今ではマスクの向こうに隠された秘密はそれだけではない。溢れる少女の純情を隠すのにも最適な、ファッショナブルなアイテム。",
+            "Name": "隱藏祕密的狐狸面具",
+            "Desc": "若藻平時愛用的狐狸面具。令若藻十分滿意的物品，本來的用途是為了隱藏自己的真實身分，避免被捲入無謂的事件之中，但如今隱藏在面具底下的祕密早已遠遠不止如此。是一款非常適合用來掩藏滿溢少女純情的時尚單品。",
             "TierUpMaterial": [
                 [
                     5020,
@@ -45839,7 +45875,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1900,
@@ -46816,7 +46852,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             5700,
@@ -47366,8 +47402,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Scale": [
                             2288,
                             2402,
@@ -47385,7 +47421,7 @@
             },
             {
                 "SkillType": "gearnormal",
-                "Name": "お弁当を作ってきたんです+",
+                "Name": "我做了便當+",
                 "Desc": "45秒毎に、自身を除きHPが最も低い味方1人に対して、お弁当を投擲して治癒力の<?1>分の<b:DotHeal>を付与、<b:AttackSpeed>を<?2>増加（それぞれ20秒間）\nさらに対象の付近に自身を除く味方がいる場合、お弁当がその方向へ跳ねて<b:AttackSpeed>を<?3>増加（20秒間）（最大2回まで）",
                 "Parameters": [
                     [
@@ -47437,8 +47473,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Scale": [
                             2648,
                             2781,
@@ -47707,7 +47743,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -47719,8 +47755,8 @@
                     1000
                 ]
             ],
-            "Name": "夢が詰まった桜色エプロン",
-            "Desc": "ミモリの桜色のエプロン。掃除の時も、料理の時も。家事全般の友とも言えるエプロンだ。",
+            "Name": "充滿夢想的櫻花色圍裙",
+            "Desc": "三森的櫻花色圍裙。無論是打掃還是煮飯的時候，都可說是最得力的好夥伴。",
             "TierUpMaterial": [
                 [
                     5024,
@@ -49712,7 +49748,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             4200,
@@ -50349,7 +50385,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             3900,
@@ -50413,8 +50449,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             5341,
@@ -52408,8 +52444,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             14973,
@@ -55320,7 +55356,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             800,
@@ -55332,7 +55368,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             3200,
@@ -58769,7 +58805,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2100,
@@ -58798,7 +58834,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             4100,
@@ -58876,7 +58912,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2400,
@@ -58895,7 +58931,7 @@
             },
             {
                 "SkillType": "gearnormal",
-                "Name": "びーちぼーる、しゅ～と～+",
+                "Name": "沙灘排球，咻～咚～+",
                 "Desc": "50秒毎に、敵1人に対して、攻撃力の<?1>分のダメージ/\nさらに<c:Stunned>を付与（<?2>間）/\nさらに自身の<b:ATK>を<?3>増加（40秒間）",
                 "Parameters": [
                     [
@@ -58957,7 +58993,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             2400,
@@ -59103,8 +59139,8 @@
                 "Effects": [
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Chill",
                         "Scale": [
                             3003,
@@ -59206,7 +59242,7 @@
         "Gear": {
             "Released": [
                 true,
-                false,
+                true,
                 false
             ],
             "StatType": [
@@ -59218,8 +59254,8 @@
                     55
                 ]
             ],
-            "Name": "宝物いっぱいポーチ",
-            "Desc": "チセが海辺に遊びに来た時に持ってきた、可愛くてファンシーなデザインのポーチ。外側には、忘れてしまうのではないかと、カホが心配してつけてくれた名札が付いている。チセは、海辺で見つけた数々の思い出をこのポーチに詰め込んだ。うっかり入れそびれたのもあったが、それでもその思い出は永遠に消えない。",
+            "Name": "裝滿寶物的包包",
+            "Desc": "去海邊時，知世帶來的可愛時尚小包包。外面掛著佳穗因為擔心會弄丟而親手掛上的名牌。知世把在海邊獲得的無數回憶裝進了這個包包裡。雖然也有些東西沒能裝進去，但那份回憶永遠不會消失。",
             "TierUpMaterial": [
                 [
                     5023,
@@ -60055,8 +60091,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             5095,
@@ -60128,7 +60164,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Stunned",
                         "Scale": [
                             1200,
@@ -61572,7 +61608,7 @@
         "CharacterAge": "17歲",
         "Birthday": "11月13日",
         "CharacterSSRNew": "注入熊熊燃燒的熱情！",
-        "ProfileIntroduction": "千年科學學園所屬，為了迎接大運動會，打扮成應援團的工程師部部長。\n\n儘管是突然被賦予了應援的任務，她仍不失巨匠的風範，只要接下委託就會全力以赴。她的熱情比任何應援團都還要強烈。但有時候為因為熱情過頭了，反而忘了原本的目的……",
+        "ProfileIntroduction": "千年科學學園所屬，為了迎接大運動會，打扮成應援團的工程師部部長。\n\n儘管是突然被賦予了應援的任務，她仍不失巨匠的風範，只要接下委託就會全力以赴。她的熱情比任何應援團都還要強烈。但有時候會因為熱情過頭了，反而忘了原本的目的……",
         "Hobby": "發明、修理",
         "CharacterVoice": "青地希望",
         "BirthDay": "11/13",
@@ -62788,8 +62824,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "120000",
-                        "Period": "4000",
+                        "Duration": 120000,
+                        "Period": 4000,
                         "Icon": "Cheerleading",
                         "Scale": [
                             2998,
@@ -65987,8 +66023,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             6400,
@@ -67345,8 +67381,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             741,
                             852,
@@ -67357,8 +67393,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             776,
                             893,
@@ -67369,8 +67405,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             812,
                             933,
@@ -67381,8 +67417,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             847,
                             974,
@@ -67393,8 +67429,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             882,
                             1014,
@@ -67405,8 +67441,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             917,
                             1055,
@@ -67417,8 +67453,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             953,
                             1096,
@@ -67429,8 +67465,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             988,
                             1136,
@@ -67441,8 +67477,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1023,
                             1177,
@@ -67453,8 +67489,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1059,
                             1217,
@@ -67465,8 +67501,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1094,
                             1258,
@@ -67477,8 +67513,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1129,
                             1298,
@@ -67489,8 +67525,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1164,
                             1339,
@@ -67501,8 +67537,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1200,
                             1380,
@@ -67513,8 +67549,8 @@
                     },
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             1235,
                             1420,
@@ -70023,8 +70059,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "10000",
-                        "Period": "4000",
+                        "Duration": 10000,
+                        "Period": 4000,
                         "Scale": [
                             6480,
                             6804,
@@ -71381,7 +71417,7 @@
             [
                 [
                     6301,
-                    0
+                    3
                 ]
             ],
             []
@@ -78278,8 +78314,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "30000",
-                        "Period": "4000",
+                        "Duration": 30000,
+                        "Period": 4000,
                         "Scale": [
                             2271,
                             2384,
@@ -78492,7 +78528,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Provoke",
                         "Scale": [
                             1000,
@@ -78561,7 +78597,7 @@
             [
                 [
                     9106,
-                    0
+                    3
                 ]
             ],
             []
@@ -79061,8 +79097,8 @@
                 "Effects": [
                     {
                         "Type": "HealDot",
-                        "Duration": "60000",
-                        "Period": "4000",
+                        "Duration": 60000,
+                        "Period": 4000,
                         "Scale": [
                             174,
                             182,
@@ -82707,13 +82743,13 @@
         "Id": 10073,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 147,
         "PathName": "Ui_Swimsuit",
         "DevName": "CH0204",
-        "Name": "ウイ（水着）",
+        "Name": "憂(泳裝)",
         "School": "Trinity",
         "Club": "BookClub",
         "StarGrade": 3,
@@ -82736,19 +82772,19 @@
         ],
         "CollectionBG": "BG_WaterFall",
         "FamilyName": "古関",
-        "PersonalName": "ウイ",
-        "SchoolYear": "3年生",
-        "CharacterAge": "17歳",
+        "PersonalName": "憂",
+        "SchoolYear": "3年級",
+        "CharacterAge": "17歲",
         "Birthday": "4月23日",
-        "CharacterSSRNew": "はあ、はあ……暑い……\n最悪……",
-        "ProfileIntroduction": "遺跡調査に来たトリニティ総合学園所属、図書委員会の委員長。\n\n外に出て体を動かす事は苦手だが、古書や遺跡、遺物好きのため調査自体には真面目に取り組んでいる模様。",
-        "Hobby": "読書、書籍の管理、古書の研究",
+        "CharacterSSRNew": "哈啊，哈啊……好熱……\n糟透了……",
+        "ProfileIntroduction": "在與修女會的交易下，前來調查遺跡的三一綜合學園所屬，圖書委員會的委員長。\n\n雖然不喜歡在戶外活動身體，但出於對古書、遺跡和遺物的喜好，對調查工作似乎相當認真。",
+        "Hobby": "讀書、管理書、古書研究",
         "CharacterVoice": "後藤沙緒里",
         "BirthDay": "4/23",
         "Illustrator": "CHILD",
         "Designer": "CHILD",
         "CharHeightMetric": "165cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'4\"",
         "StabilityPoint": 1800,
         "AttackPower1": 257,
         "AttackPower100": 2573,
@@ -82792,7 +82828,7 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "プライベートカフェ",
+                "Name": "無人島咖啡廳",
                 "Desc": "自身を中心とした円形範囲内の自身を除く味方4人を自身の位置に移動させた後、<b:EnhancePierceRate>を<?1>加算（45秒間）",
                 "Parameters": [
                     [
@@ -82838,7 +82874,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "決定的な手がかり",
+                "Name": "決定性的線索",
                 "Desc": "<s:OldBook>を3個獲得時、ストライカーの味方に<b:EnhancePierceRate>を<?1>加算（30秒間）/\n<s:OldBook>を3個消耗",
                 "Parameters": [
                     [
@@ -82881,7 +82917,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "探求者の意志",
+                "Name": "探究者的意志",
                 "Desc": "<b:ATK>を<?1>増加",
                 "Parameters": [
                     [
@@ -82919,7 +82955,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "探求者の意志+",
+                "Name": "探究者的意志+",
                 "Desc": "<b:MAXHP>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
                 "Parameters": [
                     [
@@ -82969,7 +83005,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "手がかりの把握",
+                "Name": "掌握線索",
                 "Desc": "自身を除く味方のExスキルを2回使用時、該当スキルの発動と同時に<b:ATK>を<?1>増加（30秒間）/\n<s:OldBook>を1個獲得",
                 "Parameters": [
                     [
@@ -83048,10 +83084,10 @@
         ],
         "MemoryLobby": [
             3,
-            0,
+            3,
             0
         ],
-        "MemoryLobbyBGM": "Theme 173",
+        "MemoryLobbyBGM": "Takaramonogatari",
         "FurnitureInteraction": [
             [
                 [
@@ -83059,7 +83095,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210313,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -83075,8 +83116,8 @@
         ],
         "IsLimited": 1,
         "Weapon": {
-            "Name": "ボリュームサプレッサー",
-            "Desc": "久しぶりの外出でも一緒のウイのスナイパーライフル。\n\n騒がしくない場所のはずなのに、なぜか使うことが多い。",
+            "Name": "消音器",
+            "Desc": "久違外出時也一起陪同的憂的狙擊步槍。\n\n明明是在安靜的無人島，卻莫名地經常用上。",
             "AdaptationType": "Indoor",
             "AdaptationValue": 1,
             "AttackPower1": 113,
@@ -83221,13 +83262,13 @@
         "Id": 20028,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 148,
         "PathName": "Hinata_Swimsuit",
         "DevName": "CH0210",
-        "Name": "ヒナタ（水着）",
+        "Name": "日向(泳裝)",
         "School": "Trinity",
         "Club": "SisterHood",
         "StarGrade": 3,
@@ -83250,19 +83291,19 @@
         ],
         "CollectionBG": "BG_WaterFall",
         "FamilyName": "若葉",
-        "PersonalName": "ヒナタ",
-        "SchoolYear": "3年生",
-        "CharacterAge": "17歳",
+        "PersonalName": "日向",
+        "SchoolYear": "3年級",
+        "CharacterAge": "17歲",
         "Birthday": "5月17日",
-        "CharacterSSRNew": "よかったら、荷物をお持ちしましょうか？",
-        "ProfileIntroduction": "遺跡調査を手伝うべく、共に島に向かったトリニティ総合学園所属、シスターフッドの少女。\n\n場所や状況が変わっても、彼女の人助けの本質は変わらない。のんびりとした島の空気に当てられて普段より少し浮かれている模様。",
-        "Hobby": "お祈り、整理整頓",
+        "CharacterSSRNew": "不介意的話，\n要不要幫您拿行李呢？",
+        "ProfileIntroduction": "為了協助調查遺跡而一同前往島上的三一綜合學園所屬，修女會的少女。\n\n即使地點與情況有所改變，照顧他人的天性仍一如既往。儘管並非本意，但慵懶島嶼的氣氛似乎使他略顯興奮。",
+        "Hobby": "祈禱、整理整頓",
         "CharacterVoice": "日高里菜",
         "BirthDay": "5/17",
         "Illustrator": "kokosando",
         "Designer": "kokosando",
         "CharHeightMetric": "166cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'5\"",
         "StabilityPoint": 1145,
         "AttackPower1": 300,
         "AttackPower100": 3000,
@@ -83283,7 +83324,7 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "楽しい水遊び",
+                "Name": "激烈的冷水澡",
                 "Desc": "円形範囲内の敵に対して、攻撃力の<?1>分のダメージ（この攻撃は敵の防御力を<?2>無視します）",
                 "Parameters": [
                     [
@@ -83358,7 +83399,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "涼しい水浴び",
+                "Name": "痛快的冷水澡",
                 "Desc": "40秒毎に、敵1人に対して、水風船を投擲して攻撃力の<?1>分のダメージ。投擲された水風船を中心として周囲にまだ攻撃が当たっていない敵がいる場合、水風船がその方向へ跳ねて同じダメージ（最大6回まで）\n（この攻撃は敵の防御力を<?2>無視します）",
                 "Parameters": [
                     [
@@ -83428,7 +83469,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "遠征隊の情熱",
+                "Name": "遠征隊的熱情",
                 "Desc": "<b:ATK>を<?1>増加",
                 "Parameters": [
                     [
@@ -83466,7 +83507,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "遠征隊の情熱+",
+                "Name": "遠征隊的熱情+",
                 "Desc": "<b:EnhanceExplosionRate>を<?1>加算/\nさらに<b:ATK>を<?2>増加",
                 "Parameters": [
                     [
@@ -83516,7 +83557,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "慈愛の手",
+                "Name": "不分你我的援手",
                 "Desc": "味方の<b:ATK>を<?1>増加",
                 "Parameters": [
                     [
@@ -83595,7 +83636,7 @@
         ],
         "MemoryLobby": [
             2,
-            0,
+            2,
             0
         ],
         "MemoryLobbyBGM": "Guruguru Usagi",
@@ -83606,7 +83647,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210314,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -83622,8 +83668,8 @@
         ],
         "IsLimited": 1,
         "Weapon": {
-            "Name": "ブレッシング",
-            "Desc": "いつも身につけているヒナタの拳銃。\n\n高いところの実を取るなど、戦闘以外に使われることが多い。",
+            "Name": "Blessing",
+            "Desc": "即使是夏天也從不離身的日向的手槍。\n\n主要用於摘取高處的水果這類戰鬥外的用途。",
             "AdaptationType": "Outdoor",
             "AdaptationValue": 1,
             "AttackPower1": 132,
@@ -83768,13 +83814,13 @@
         "Id": 16013,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 149,
         "PathName": "Koharu_Swimsuit",
         "DevName": "CH0205",
-        "Name": "コハル（水着）",
+        "Name": "小春(泳裝)",
         "School": "Trinity",
         "Club": "RemedialClass",
         "StarGrade": 1,
@@ -83797,19 +83843,19 @@
         ],
         "CollectionBG": "BG_WaterFall",
         "FamilyName": "下江",
-        "PersonalName": "コハル",
-        "SchoolYear": "1年生",
-        "CharacterAge": "15歳",
+        "PersonalName": "小春",
+        "SchoolYear": "1年級",
+        "CharacterAge": "15歲",
         "Birthday": "4月16日",
         "CharacterSSRNew": "",
-        "ProfileIntroduction": "先生を監視すべく島にやってきたトリニティ総合学園所属、補習授業部の一員。\n\n正義実現委員会の一人として、風紀を乱すものを許さない！という使命感を持っているが、島でのバカンスも悪くないと思っている模様。",
-        "Hobby": "空想、妄想、エッチな雑誌集め",
+        "ProfileIntroduction": "認為有必要監視老師而來到島上的三一綜合學園所屬，補課部的一員。\n\n儘管宣稱自己背負著「身為實現正義部的一員，不能允許有人擾亂風紀！」的使命感，卻似乎認為在島上的度假也還不賴。",
+        "Hobby": "幻想、妄想、收集色情雜誌",
         "CharacterVoice": "赤尾ひかる",
         "BirthDay": "4/16",
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
         "CharHeightMetric": "148cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "4'10\"",
         "StabilityPoint": 1888,
         "AttackPower1": 286,
         "AttackPower100": 2869,
@@ -83853,7 +83899,7 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "そんな事ないんだから！",
+                "Name": "真的不是那樣啦！",
                 "Desc": "円形範囲内の敵に攻撃力の<?1>分のダメージ",
                 "Parameters": [
                     [
@@ -83901,7 +83947,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "見ちゃダメなんだから！",
+                "Name": "不可以看哦！",
                 "Desc": "30秒毎に、<b:CriticalChance>を<?1>増加（25秒間）",
                 "Parameters": [
                     [
@@ -83944,7 +83990,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "エリートの使命感",
+                "Name": "菁英的使命感",
                 "Desc": "<b:CriticalChance>を<?1>増加",
                 "Parameters": [
                     [
@@ -83982,7 +84028,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "エリートの使命感+",
+                "Name": "菁英的使命感+",
                 "Desc": "<b:ATK>を<?1>増加/\nさらに<b:CriticalChance>を<?2>増加",
                 "Parameters": [
                     [
@@ -84032,7 +84078,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "エッチなのはダメ！死刑！",
+                "Name": "不可以色色！死刑！",
                 "Desc": "攻撃時、中型の敵に対して攻撃力の<?1>分の追加ダメージ",
                 "Parameters": [
                     [
@@ -84108,10 +84154,10 @@
         ],
         "MemoryLobby": [
             2,
-            0,
+            2,
             0
         ],
-        "MemoryLobbyBGM": "Theme 173",
+        "MemoryLobbyBGM": "Takaramonogatari",
         "FurnitureInteraction": [
             [
                 [
@@ -84119,7 +84165,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210315,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -84134,8 +84185,8 @@
         ],
         "IsLimited": 2,
         "Weapon": {
-            "Name": "ジャスティス・ブラック",
-            "Desc": "調査のために再整備したコハルのスナイパーライフル。\n\n湿気や海風の対策はバッチリのようだ。",
+            "Name": "Justice Black",
+            "Desc": "為了調查島嶼而重新整備過的小春的狙擊步槍。\n\n針對濕氣和海風的應對意外的完善。",
             "AdaptationType": "Indoor",
             "AdaptationValue": 1,
             "AttackPower1": 101,
@@ -84280,13 +84331,13 @@
         "Id": 10074,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 150,
         "PathName": "Hanako_Swimsuit",
         "DevName": "CH0209",
-        "Name": "ハナコ（水着）",
+        "Name": "花子(泳裝)",
         "School": "Trinity",
         "Club": "RemedialClass",
         "StarGrade": 3,
@@ -84309,19 +84360,19 @@
         ],
         "CollectionBG": "BG_WaterFall",
         "FamilyName": "浦和",
-        "PersonalName": "ハナコ",
-        "SchoolYear": "2年生",
-        "CharacterAge": "16歳",
+        "PersonalName": "花子",
+        "SchoolYear": "2年級",
+        "CharacterAge": "16歲",
         "Birthday": "1月3日",
-        "CharacterSSRNew": "あら……。\nこんなにびっしょり……♡",
-        "ProfileIntroduction": "夏を迎えて島を訪れたトリニティ総合学園所属、補習授業部の女の子。\n\n多少大胆な格好をしているものの、普段の人を試すような言動は鳴りを潜め、素直に心の内を開いてくれている模様。",
-        "Hobby": "徘徊",
+        "CharacterSSRNew": "哎呀……\n居然變得這麼濕……♡",
+        "ProfileIntroduction": "為了迎接夏天而來到島上的三一綜合學園所屬，補課部的女孩。\n\n也許是和親近的人來到無拘無束的地方，因此服裝多少有些大膽，不過平時試探般的言行有所收斂，似乎正坦率地展現自己內心的面貌。",
+        "Hobby": "散步",
         "CharacterVoice": "豊田萌絵",
         "BirthDay": "1/3",
         "Illustrator": "Mx2J",
         "Designer": "Mx2J",
         "CharHeightMetric": "161cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "5'3\"",
         "StabilityPoint": 1396,
         "AttackPower1": 303,
         "AttackPower100": 3033,
@@ -84367,7 +84418,7 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "たっぷりかけちゃいますね♡",
+                "Name": "我會多灑一點的♡",
                 "Desc": "扇形範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n水ゲージが1つ以上の場合、Exスキルをすぐにドローした後、水ゲージを1つ差し引きます。",
                 "Parameters": [
                     [
@@ -84420,7 +84471,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "上手に受け取ってください♡",
+                "Name": "請收下吧♡",
                 "Desc": "30秒毎に、円形範囲内の敵に対して攻撃力の<?1>分のダメージ/\nさらに<d:DEF>を<?2>減少（20秒間）（範囲内にいる間だけ効果を維持）",
                 "Parameters": [
                     [
@@ -84497,7 +84548,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "真夏に隠された本音",
+                "Name": "藏於仲夏的心聲",
                 "Desc": "攻撃力を<?1>、<b:CriticalDamage>率を<?2>増加",
                 "Parameters": [
                     [
@@ -84563,7 +84614,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "真夏に隠された本音+",
+                "Name": "藏於仲夏的心聲+",
                 "Desc": "攻撃力を<?1>、<b:CriticalDamage>を<?2>増加/\nさらに攻撃力を<?3>、<b:CriticalDamage>率を<?4>増加",
                 "Parameters": [
                     [
@@ -84653,7 +84704,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "準備は万端です♡",
+                "Name": "補水時間",
                 "Desc": "自身を除く味方がExスキルを使用時、水ゲージを40%チャージ\n100%チャージされる毎に、<b:ATK>を<?1>増加（20秒間）\n（水ゲージのチャージ数は最大2ゲージまで）",
                 "Parameters": [
                     [
@@ -84732,7 +84783,7 @@
         ],
         "MemoryLobby": [
             3,
-            0,
+            3,
             0
         ],
         "MemoryLobbyBGM": "Midsummer cat",
@@ -84747,7 +84798,16 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210316,
+                    0
+                ],
+                [
+                    210315,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -84763,8 +84823,8 @@
         ],
         "IsLimited": 1,
         "Weapon": {
-            "Name": "オネストウィッシュ",
-            "Desc": "海にも持ってきたハナコのアサルトライフル。\n\n相変わらず名前の意味は教えてくれないが、今は少しだけ分かるような気もする。",
+            "Name": "Honest Wish",
+            "Desc": "與花子一同來到海邊的突擊步槍。\n\n儘管依舊沒有說出名字的意義，但現在好像稍微能夠明白了。",
             "AdaptationType": "Street",
             "AdaptationValue": 1,
             "AttackPower1": 133,
@@ -84915,7 +84975,7 @@
         "DefaultOrder": 151,
         "PathName": "Mimori_Swimsuit",
         "DevName": "CH0183",
-        "Name": "ミモリ（水着）",
+        "Name": "三森(泳裝)",
         "School": "Hyakkiyako",
         "Club": "Shugyobu",
         "StarGrade": 3,
@@ -85428,7 +85488,7 @@
         "DefaultOrder": 152,
         "PathName": "Meru",
         "DevName": "CH0124",
-        "Name": "メル",
+        "Name": "愛瑠",
         "School": "RedWinter",
         "Club": "KnowledgeLiberationFront",
         "StarGrade": 3,
@@ -85566,8 +85626,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "30000",
-                        "Period": "4000",
+                        "Duration": 30000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             17357,
@@ -85642,8 +85702,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "30000",
-                        "Period": "4000",
+                        "Duration": 30000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             4799,
@@ -86001,7 +86061,7 @@
         "DefaultOrder": 153,
         "PathName": "Momiji",
         "DevName": "Momiji",
-        "Name": "モミジ",
+        "Name": "紅葉",
         "School": "RedWinter",
         "Club": "KnowledgeLiberationFront",
         "StarGrade": 2,
@@ -86525,7 +86585,7 @@
         "DefaultOrder": 154,
         "PathName": "Kotori_Cheerleader",
         "DevName": "CH0185",
-        "Name": "コトリ（応援団）",
+        "Name": "亞都梨(應援團)",
         "School": "Millennium",
         "Club": "Engineer",
         "StarGrade": 3,
@@ -87078,7 +87138,7 @@
         "DefaultOrder": 155,
         "PathName": "Haruna_Track",
         "DevName": "CH0193",
-        "Name": "ハルナ（体操服）",
+        "Name": "羽留奈(體育服)",
         "School": "Gehenna",
         "Club": "GourmetClub",
         "StarGrade": 3,
@@ -87592,7 +87652,7 @@
         "DefaultOrder": 156,
         "PathName": "Ichika",
         "DevName": "CH0071",
-        "Name": "イチカ",
+        "Name": "一花",
         "School": "Trinity",
         "Club": "Justice",
         "StarGrade": 3,
@@ -88122,7 +88182,7 @@
         "DefaultOrder": 157,
         "PathName": "Kasumi",
         "DevName": "CH0089",
-        "Name": "カスミ",
+        "Name": "佳澄",
         "School": "Gehenna",
         "Club": "HotSpringsDepartment",
         "StarGrade": 3,
@@ -88661,7 +88721,7 @@
         "DefaultOrder": 158,
         "PathName": "Shigure_HotSpring",
         "DevName": "CH0123",
-        "Name": "シグレ（温泉）",
+        "Name": "時雨(溫泉)",
         "School": "RedWinter",
         "Club": "Class227",
         "StarGrade": 3,
@@ -89334,8 +89394,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "40000",
-                        "Period": "4000",
+                        "Duration": 40000,
+                        "Period": 4000,
                         "Icon": "ElectricShock",
                         "Scale": [
                             11333,
@@ -89855,7 +89915,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Confusion",
                         "Scale": [
                             5000,
@@ -91548,8 +91608,8 @@
                     },
                     {
                         "Type": "DMGDot",
-                        "Duration": "20000",
-                        "Period": "4000",
+                        "Duration": 20000,
+                        "Period": 4000,
                         "Icon": "Burn",
                         "Scale": [
                             1458,
@@ -93193,7 +93253,7 @@
                     },
                     {
                         "Type": "CrowdControl",
-                        "Chance": "10000",
+                        "Chance": 10000,
                         "Icon": "Confusion",
                         "Scale": [
                             7200,
@@ -95942,6 +96002,761 @@
                 8,
                 12,
                 5,
+                9
+            ],
+            [
+                12,
+                8,
+                12
+            ]
+        ]
+    },
+    {
+        "Id": 10086,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 171,
+        "PathName": "Hina_Dress",
+        "DevName": "CH0230",
+        "Name": "ヒナ（ドレス）",
+        "School": "Gehenna",
+        "Club": "Fuuki",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Explosion",
+        "ArmorType": "ElasticArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 3,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "MG",
+        "WeaponImg": "weapon_icon_10004",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Badge",
+            "Watch"
+        ],
+        "CollectionBG": "BG_GehennaPartyRoom_Collection",
+        "FamilyName": "空崎",
+        "PersonalName": "ヒナ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "17歳",
+        "Birthday": "2月19日",
+        "CharacterSSRNew": "あなたのために、頑張るわ",
+        "ProfileIntroduction": "パーティーに参加すべくドレスに着替えた、ゲヘナ学園所属の風紀委員長。\n\n基本的には面倒くさがり屋さんの少女だが、先生がゲヘナのパーティーを楽しみにしているという話を耳にし、普段より少し張り切っている。先生の前で演奏すると決まった日から、苦手なピアノの練習も、いつもより頑張っているのだとか。",
+        "Hobby": "睡眠、休憩",
+        "CharacterVoice": "広橋涼",
+        "BirthDay": "2/19",
+        "Illustrator": "DoReMi",
+        "Designer": "DoReMi",
+        "CharHeightMetric": "142cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1372,
+        "AttackPower1": 346,
+        "AttackPower100": 3467,
+        "MaxHP1": 1963,
+        "MaxHP100": 17020,
+        "DefensePower1": 68,
+        "DefensePower100": 412,
+        "HealPower1": 1425,
+        "HealPower100": 4276,
+        "DodgePoint": 176,
+        "AccuracyPoint": 101,
+        "CriticalPoint": 203,
+        "CriticalDamageRate": 20000,
+        "DefensePenetration1": 357,
+        "DefensePenetration100": 357,
+        "AmmoCount": 49,
+        "AmmoCost": 7,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            1428,
+                            1428,
+                            1428,
+                            1429,
+                            1429,
+                            1429,
+                            1429
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 27,
+                            "AttackStartDuration": 26,
+                            "AttackEndDuration": 18,
+                            "AttackBurstRoundOverDelay": 30,
+                            "AttackIngDuration": 36,
+                            "AttackReloadDuration": 75
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "開演：イシュ・ボシェテ",
+                "Desc": "集中射撃体勢に転換（10秒間）/\n集中射撃体勢では<s:FormChange>と移動することはできない/\n（CC状態になった場合、集中射撃体勢は解除される）",
+                "Parameters": [],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    6
+                ],
+                "Duration": 45,
+                "Range": 950,
+                "Icon": "SKILLICON_CH0230_EXSKILL",
+                "Effects": [],
+                "ExtraSkills": [
+                    {
+                        "Id": "CH0230Ex02",
+                        "SkillType": "ex",
+                        "Name": "旋律の一音目",
+                        "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n敵を貫通する度にダメージが45%減少（最少で10%ダメージまで）/\nこの攻撃は安定値に影響されず最大ダメージが適用される/\n次の射撃のため集中射撃体勢を維持したままフォーム転換（10秒間）",
+                        "Parameters": [
+                            [
+                                "324%",
+                                "372%",
+                                "471%",
+                                "519%",
+                                "618%"
+                            ]
+                        ],
+                        "Cost": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Duration": 65,
+                        "Range": 950,
+                        "Radius": [
+                            {
+                                "Type": "Obb",
+                                "Width": 40,
+                                "Height": 2000
+                            }
+                        ],
+                        "Icon": "COMMON_SKILLICON_LINE",
+                        "Effects": [
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "ApplyStability": false,
+                                "Hits": [
+                                    3333,
+                                    3333,
+                                    3333
+                                ],
+                                "HitsParameter": 1,
+                                "Scale": [
+                                    32400,
+                                    37200,
+                                    47100,
+                                    51900,
+                                    61800
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "CH0230Ex03",
+                        "SkillType": "ex",
+                        "Name": "旋律の二音目",
+                        "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n敵を貫通する度にダメージが45%減少（最少で10%ダメージまで）/\nこの攻撃は安定値に影響されず最大ダメージが適用される/\n次の射撃のため集中射撃体勢を維持したままフォーム転換（10秒間）",
+                        "Parameters": [
+                            [
+                                "324%",
+                                "372%",
+                                "471%",
+                                "519%",
+                                "618%"
+                            ]
+                        ],
+                        "Cost": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Duration": 85,
+                        "Range": 950,
+                        "Radius": [
+                            {
+                                "Type": "Obb",
+                                "Width": 40,
+                                "Height": 2000
+                            }
+                        ],
+                        "Icon": "COMMON_SKILLICON_LINE",
+                        "Effects": [
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "ApplyStability": false,
+                                "Hits": [
+                                    3333,
+                                    3333,
+                                    3333
+                                ],
+                                "HitsParameter": 1,
+                                "Scale": [
+                                    32400,
+                                    37200,
+                                    47100,
+                                    51900,
+                                    61800
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "Id": "CH0230Ex04",
+                        "SkillType": "ex",
+                        "Name": "終演の旋律",
+                        "Desc": "直線範囲内の敵に対して、攻撃力の<?1>分のダメージ/\n敵を貫通する度にダメージが45%減少（最少で10%ダメージまで）/\nこの攻撃は安定値に影響されず最大ダメージが適用される/\n射撃後、集中射撃体勢解除",
+                        "Parameters": [
+                            [
+                                "680.4%",
+                                "777%",
+                                "987%",
+                                "1085%",
+                                "1288%"
+                            ]
+                        ],
+                        "Cost": [
+                            0,
+                            0,
+                            0,
+                            0,
+                            0
+                        ],
+                        "Duration": 35,
+                        "Range": 950,
+                        "Radius": [
+                            {
+                                "Type": "Obb",
+                                "Width": 60,
+                                "Height": 2000
+                            }
+                        ],
+                        "Icon": "COMMON_SKILLICON_LINE",
+                        "Effects": [
+                            {
+                                "Type": "DMGMulti",
+                                "CriticalCheck": "Check",
+                                "ApplyStability": false,
+                                "Hits": [
+                                    1429,
+                                    1429,
+                                    1429,
+                                    1429,
+                                    1429,
+                                    1429,
+                                    1429
+                                ],
+                                "HitsParameter": 1,
+                                "Scale": [
+                                    68040,
+                                    77700,
+                                    98700,
+                                    108500,
+                                    128800
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "抜かりない準備",
+                "Desc": "戦闘開始時、<b:EnhanceExplosionRate>を<?1>加算、<b:HIT>を<?2>増加（戦闘中に1回のみ）",
+                "Parameters": [
+                    [
+                        "34.17%",
+                        "35.88%",
+                        "37.59%",
+                        "44.43%",
+                        "46.12%",
+                        "47.83%",
+                        "54.67%",
+                        "56.38%",
+                        "58.09%",
+                        "64.91%"
+                    ],
+                    [
+                        "238",
+                        "250",
+                        "261",
+                        "309",
+                        "321",
+                        "333",
+                        "380",
+                        "392",
+                        "404",
+                        "451"
+                    ]
+                ],
+                "Duration": 135,
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3417,
+                                3588,
+                                3759,
+                                4443,
+                                4612,
+                                4783,
+                                5467,
+                                5638,
+                                5809,
+                                6491
+                            ]
+                        ],
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Channel": 32
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                238,
+                                250,
+                                261,
+                                309,
+                                321,
+                                333,
+                                380,
+                                392,
+                                404,
+                                451
+                            ]
+                        ],
+                        "Stat": "AccuracyPoint_Base",
+                        "Channel": 5
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "演奏に臨む心",
+                "Desc": "攻撃力を<?1>、<b:CriticalChance>を<?2>増加",
+                "Parameters": [
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1120,
+                            1148,
+                            1176,
+                            1288,
+                            1316,
+                            1344,
+                            1456,
+                            1484,
+                            1512,
+                            1624
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalPoint_Coefficient",
+                        "Scale": [
+                            1120,
+                            1148,
+                            1176,
+                            1288,
+                            1316,
+                            1344,
+                            1456,
+                            1484,
+                            1512,
+                            1624
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "演奏に臨む心+",
+                "Desc": "攻撃力を<?1>、<b:CriticalChance>を<?2>増加/\nさらに攻撃力を<?3>、<b:CriticalChance>を<?4>増加",
+                "Parameters": [
+                    [
+                        "266",
+                        "280",
+                        "293",
+                        "346",
+                        "359",
+                        "373",
+                        "426",
+                        "439",
+                        "453",
+                        "506"
+                    ],
+                    [
+                        "80",
+                        "84",
+                        "88",
+                        "104",
+                        "108",
+                        "112",
+                        "128",
+                        "132",
+                        "136",
+                        "152"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ],
+                    [
+                        "11.2%",
+                        "11.4%",
+                        "11.7%",
+                        "12.8%",
+                        "13.1%",
+                        "13.4%",
+                        "14.5%",
+                        "14.8%",
+                        "15.1%",
+                        "16.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            266,
+                            280,
+                            293,
+                            346,
+                            359,
+                            373,
+                            426,
+                            439,
+                            453,
+                            506
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalPoint_Base",
+                        "Scale": [
+                            80,
+                            84,
+                            88,
+                            104,
+                            108,
+                            112,
+                            128,
+                            132,
+                            136,
+                            152
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "想いをここに",
+                "Desc": "集中射撃体勢中、<b:EnhanceExplosionRate>を<?1>加算、<c:Provoke>を無効化",
+                "Parameters": [
+                    [
+                        "36.29%",
+                        "37.21%",
+                        "38.11%",
+                        "45.36%",
+                        "46.28%",
+                        "47.18%",
+                        "54.44%",
+                        "55.35%",
+                        "56.25%",
+                        "63.51%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3629,
+                                3721,
+                                3811,
+                                4536,
+                                4628,
+                                4718,
+                                5444,
+                                5535,
+                                5625,
+                                6351
+                            ]
+                        ],
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Channel": 32
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                7,
+                43
+            ],
+            [
+                9,
+                51
+            ],
+            [
+                2,
+                8
+            ],
+            [
+                3,
+                13
+            ],
+            [
+                5,
+                21
+            ]
+        ],
+        "FavorAlts": [
+            10004,
+            10022
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 179 (Instrumental)",
+        "FurnitureInteraction": [
+            [
+                [
+                    15305,
+                    3
+                ],
+                [
+                    15306,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aW",
+            "aM"
+        ],
+        "FavorItemUniqueTags": [
+            "fB",
+            "fb"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "終幕：デストロイヤー",
+            "Desc": "ヒナが自身の手足のように扱うマシンガン。\n\n普段、校則を違反したり風紀を乱す者に対して、無慈悲さを見せる代物だが、今回だけは、誰かのために心を込めて丁寧に扱っている。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 152,
+            "AttackPower100": 1523,
+            "MaxHP1": 492,
+            "MaxHP100": 4921,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                110
+            ],
+            [
+                3031,
+                3030,
+                111,
+                290
+            ],
+            [
+                3032,
+                3031,
+                112,
+                291
+            ],
+            [
+                3033,
+                3032,
+                113,
+                292
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                14,
+                30
+            ],
+            [
+                12,
+                18,
+                10,
+                26
+            ],
+            [
+                8,
+                18,
+                7,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                110
+            ],
+            [
+                4031,
+                111,
+                290
+            ],
+            [
+                4032,
+                4031,
+                111,
+                290
+            ],
+            [
+                4032,
+                112,
+                291
+            ],
+            [
+                4033,
+                4032,
+                113,
+                292
+            ],
+            [
+                4033,
+                113,
+                292
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                7
+            ],
+            [
+                8,
+                4,
+                12
+            ],
+            [
+                5,
+                12,
+                10,
+                18
+            ],
+            [
+                8,
+                3,
+                16
+            ],
+            [
+                8,
+                12,
+                6,
                 9
             ],
             [
