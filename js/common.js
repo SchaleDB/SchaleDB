@@ -9757,6 +9757,7 @@ function getSkillText(skill, level, {renderBuffs = true, bulletType = null, emph
     const parameterClass = bulletType == null ? 'ba-col-emphasis' : `ba-col-${bulletType.toLowerCase()}`
 
     let skillHits = {}
+    let skillRawScale = {}
     if ("Effects" in skill) {
         skill.Effects.filter(e => "HitsParameter" in e).forEach(effect => {
             if ("HitFrames" in effect) {
@@ -9770,6 +9771,8 @@ function getSkillText(skill, level, {renderBuffs = true, bulletType = null, emph
             } else {
                 skillHits[effect.HitsParameter] = effect.Hits
             }
+
+            skillRawScale[effect.HitsParameter] = [...effect.Scale]
         })
     }
 
@@ -9785,7 +9788,13 @@ function getSkillText(skill, level, {renderBuffs = true, bulletType = null, emph
                     }
                 } else {
                     if (renderSkillHits && i in skillHits) {
-                        result = result.replace(`<?${i}>`, `<span class="${parameterClass} skill-hitinfo" data-bs-toggle="tooltip" data-bs-placement="top" title="${getBasicTooltip(getSkillHitsText(skillHits[i], skill.Parameters[i-1][level-1], bulletType.toLowerCase()))}">${skill.Parameters[i-1][level-1]}</span>`)
+                        let totalDamage
+                        if (i in skillRawScale) {
+                            totalDamage = skillRawScale[i][level-1]
+                        } else {
+                            totalDamage = parseFloat(skill.Parameters[i-1][level-1].replace('%', '')) * 100
+                        }
+                        result = result.replace(`<?${i}>`, `<span class="${parameterClass} skill-hitinfo" data-bs-toggle="tooltip" data-bs-placement="top" title="${getBasicTooltip(getSkillHitsText(skillHits[i], totalDamage, bulletType.toLowerCase()))}">${skill.Parameters[i-1][level-1]}</span>`)
 
                     } else {
                         result = result.replace(`<?${i}>`, `<span class="${parameterClass}">${skill.Parameters[i-1][level-1]}</span>`)
@@ -9828,9 +9837,8 @@ function getBuffTag(type, name, {tooltip, overrideName = null}) {
 function getSkillHitsText(damageDist, totalDamage, type) {
     let hits = {}
     let hitsText = ''
-    totalDamage = parseFloat(totalDamage.replace('%', ''))
     damageDist.forEach((hit) => {
-        hit = parseFloat(((hit / 10000) * totalDamage).toFixed(1)) + '%'
+        hit = parseFloat(((hit / 10000) * (totalDamage / 100)).toFixed(1)) + '%'
         hits[hit] = hits[hit] ? hits[hit]+1 : 1
     })
     Object.keys(hits).forEach((hit) => {
