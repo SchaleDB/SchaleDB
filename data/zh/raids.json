@@ -50326,7 +50326,7 @@
             "Id": 18000,
             "IsReleased": [
                 true,
-                false,
+                true,
                 false
             ],
             "DungeonType": "Destruction",
@@ -51249,6 +51249,157 @@
                 180,
                 170
             ]
+        },
+        {
+            "Id": 24000,
+            "IsReleased": [
+                true,
+                false,
+                false
+            ],
+            "DungeonType": "Defense",
+            "Icon": "enemyinfo_sweeper_decagram_taser_white",
+            "MaxDifficulty": 4,
+            "Terrain": "Outdoor",
+            "BulletType": "Normal",
+            "ArmorType": "LightArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 901000001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7800101,
+                        7800201,
+                        7800001
+                    ]
+                },
+                {
+                    "Id": 901000002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7800102,
+                        7800202,
+                        7800002
+                    ]
+                },
+                {
+                    "Id": 901000003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7800103,
+                        7800203,
+                        7800003
+                    ]
+                },
+                {
+                    "Id": 901000004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7800104,
+                        7800204,
+                        7800004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    {
+                        "Id": 990306261
+                    },
+                    {
+                        "Id": 2060888564
+                    }
+                ],
+                [
+                    {
+                        "Id": 990306261
+                    },
+                    {
+                        "Id": 2060888564
+                    }
+                ],
+                [
+                    {
+                        "Id": 990306261
+                    },
+                    {
+                        "Id": 2060888564
+                    },
+                    {
+                        "Id": 883675310
+                    }
+                ],
+                [
+                    {
+                        "Id": 990306261
+                    },
+                    {
+                        "Id": 2060888564
+                    },
+                    {
+                        "Id": 883675310
+                    },
+                    {
+                        "Id": 3605118168
+                    }
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                160,
+                180
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -51545,6 +51696,18 @@
             "Icon": "timeattack_icon_debuff_attackpower_ally_01",
             "Name": "我方 - 攻击力下降：三一",
             "Desc": "三一综合学园所属的学生<d:ATK>减少90%."
+        },
+        {
+            "Id": 883675310,
+            "Icon": "timeattack_icon_buff_attackpower_ally_01",
+            "Name": "敵のHP増加、味方Frontの攻撃力増加",
+            "Desc": "味方Front生徒の攻撃力が増加する代わりに、敵のHPが増加します。"
+        },
+        {
+            "Id": 3605118168,
+            "Icon": "timeattack_icon_buff_attackpower_enemy_01",
+            "Name": "敌方 - 攻击力上升、移速上升",
+            "Desc": "所有敌方单位<b:ATK>增加??、<b:MoveSpeed>增加??."
         }
     ],
     "WorldRaid": [
