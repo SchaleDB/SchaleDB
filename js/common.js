@@ -2,7 +2,7 @@ const raid_level = [17, 25, 35, 50, 70, 80, 90]
 const maxbond = [10, 10, 20, 20, 50]
 const gear_minlevelreq = [0, 15, 35]
 const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40],[160,60]]
-const languages = ['En', 'Jp', 'Kr', 'Tw', 'Cn', 'Zh', 'Th', 'Vi']
+const languages = ['En', 'Jp', 'Kr', 'Tw', 'Cn', 'Zh', 'Th']
 const label_smalltext_threshold = {'En':10, 'Jp':5, 'Kr':5, 'Tw':5, 'Cn': 5, 'Zh': 5, 'Th': 11, 'Vi': 11}
 const label_craft_smalltext_threshold = {'En':8, 'Jp':4, 'Kr':4, 'Tw':4, 'Cn': 4, 'Zh': 4, 'Th': 8, 'Vi': 8}
 const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6, 'Cn':6, 'Zh':6, 'Th': 12, 'Vi': 12}
@@ -59,9 +59,6 @@ if (localStorage.getItem("language") && languages.includes(localStorage.getItem(
             } else {
                 userLang = 'Tw'
             }
-            break;
-        case 'vi':
-            userLang = 'Vi'
             break;
         default:
             userLang = 'En'
