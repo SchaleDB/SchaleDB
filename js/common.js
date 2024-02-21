@@ -8138,10 +8138,17 @@ function getSkillExtraInfo(skill, character) {
         const reloadFramesString = `<b>${translateUI('time_seconds_frames', [MathHelper.toFixedFloat(reloadFrames / 30, 2), reloadFrames])}</b>`
         const endDelayString = `<b>${translateUI('time_seconds_frames', [MathHelper.toFixedFloat(endDelay / 30, 2), endDelay])}</b>`
 
-        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('dmginfo_rate_of_fire_tooltip', [attackFramesString, attackDelayFramesString]))}"><i class="fa-solid fa-circle-play ms-2" style="font-size: 14px;"></i><span class="label">${translateUI('time_seconds', [MathHelper.toFixedFloat((attackFrames + attackDelayFrames) / 30, 2)])}</span></div>`
+        const fireRate = MathHelper.toFixedFloat((attackFrames + attackDelayFrames) / 30, 2)
+        const reload = MathHelper.toFixedFloat((startDelay + reloadFrames + endDelay) / 30, 2)
 
-        extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('dmginfo_reload_time_tooltip', [reloadFramesString, startDelayString, endDelayString]))}"><img class="icon invert-light" src="images/skill/COMMON_SKILLICON_RELOAD.webp"><span class="label">${translateUI('time_seconds', [MathHelper.toFixedFloat((startDelay + reloadFrames + endDelay) / 30, 2)])}</span></div>`
+        if (fireRate != 0) {
+            extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('dmginfo_rate_of_fire_tooltip', [attackFramesString, attackDelayFramesString]))}"><i class="fa-solid fa-circle-play ms-2" style="font-size: 14px;"></i><span class="label">${translateUI('time_seconds', [fireRate])}</span></div>`
+        }
 
+        if (reload != 0) {
+            extraInfo += `<div class="ba-info-pill-s bg-theme" title="${getBasicTooltip(translateUI('dmginfo_reload_time_tooltip', [reloadFramesString, startDelayString, endDelayString]))}"><img class="icon invert-light" src="images/skill/COMMON_SKILLICON_RELOAD.webp"><span class="label">${translateUI('time_seconds', [reload])}</span></div>`
+        }
+        
         extraInfo += `<div class="ba-info-pill-s bg-theme"><img class="icon invert-light" src="images/staticon/Stat_AmmoCount.png"><span class="label">${character.AmmoCount} (${character.AmmoCost})</span></div>`
 
     } else if (skill.Duration) {

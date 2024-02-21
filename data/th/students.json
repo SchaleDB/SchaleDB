@@ -460,7 +460,8 @@
             ]
         ],
         "FavorAlts": [
-            10031
+            10031,
+            10089
         ],
         "MemoryLobby": [
             6,
@@ -11217,7 +11218,8 @@
             ]
         ],
         "FavorAlts": [
-            10064
+            10064,
+            10088
         ],
         "MemoryLobby": [
             6,
@@ -43734,7 +43736,8 @@
             ]
         ],
         "FavorAlts": [
-            10000
+            10000,
+            10089
         ],
         "MemoryLobby": [
             5,
@@ -75167,7 +75170,8 @@
             ]
         ],
         "FavorAlts": [
-            13005
+            13005,
+            10088
         ],
         "MemoryLobby": [
             3,
@@ -96652,6 +96656,1056 @@
                 12,
                 8,
                 12
+            ]
+        ]
+    },
+    {
+        "Id": 10088,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 172,
+        "PathName": "Kayoko_Dress",
+        "DevName": "CH0239",
+        "Name": "カヨコ（ドレス）",
+        "School": "Gehenna",
+        "Club": "Kohshinjo68",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Pierce",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_13005",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_OperaHouse_Collection",
+        "FamilyName": "鬼方",
+        "PersonalName": "カヨコ",
+        "SchoolYear": "3年生",
+        "CharacterAge": "18歳",
+        "Birthday": "3月17日",
+        "CharacterSSRNew": "心配だけど……\n大丈夫。全て上手くいく",
+        "ProfileIntroduction": "オペラハウスに潜入した、ゲヘナ学園所属、便利屋68の課長。\n\n慣れない服装だとは言ったものの、そういった様子は全然感じられない。本人は周りの視線など気にせず、やるべき仕事を淡々とこなしていく。",
+        "Hobby": "音楽CD収集",
+        "CharacterVoice": "藤井ゆきよ",
+        "BirthDay": "3/17",
+        "Illustrator": "DoReMi",
+        "Designer": "DoReMi",
+        "CharHeightMetric": "157cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 988,
+        "AttackPower1": 186,
+        "AttackPower100": 1861,
+        "MaxHP1": 2230,
+        "MaxHP100": 25830,
+        "DefensePower1": 19,
+        "DefensePower100": 118,
+        "HealPower1": 1412,
+        "HealPower100": 4236,
+        "DodgePoint": 793,
+        "AccuracyPoint": 403,
+        "CriticalPoint": 201,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 1,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "シャドウショット",
+                "Desc": "敵1人に対して、攻撃力の<?1>分のダメージ（この攻撃は敵の防御力を<?2>無視します）/\n自身が<s:CH0239_ExtraPassive>状態の場合、この攻撃は確定会心に変更。以後、自身の<s:CH0239_ExtraPassive>状態を解除",
+                "Parameters": [
+                    [
+                        "762%",
+                        "876%",
+                        "990%",
+                        "1104%",
+                        "1219%"
+                    ],
+                    [
+                        "48%",
+                        "48%",
+                        "56%",
+                        "56%",
+                        "64%"
+                    ]
+                ],
+                "Cost": [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            76205,
+                            87636,
+                            99067,
+                            110497,
+                            121928
+                        ],
+                        "IgnoreDef": [
+                            5200,
+                            5200,
+                            4400,
+                            4400,
+                            3600
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Always",
+                        "Scale": [
+                            76205,
+                            87636,
+                            99067,
+                            110497,
+                            121928
+                        ],
+                        "IgnoreDef": [
+                            5200,
+                            5200,
+                            4400,
+                            4400,
+                            3600
+                        ]
+                    }
+                ],
+                "EffectCombine": [
+                    "DMGSingle"
+                ],
+                "EffectCombineLabel": {
+                    "Icon": [
+                        "buff/Special_CH0239_ExtraPassive.webp"
+                    ],
+                    "StackLabelTranslated": [
+                        "setting_off",
+                        "setting_on"
+                    ],
+                    "DisableFirst": true
+                }
+            },
+            {
+                "SkillType": "normal",
+                "Name": "取り戻した感覚",
+                "Desc": "25秒毎に、<b:CriticalDamage>率を<?1>増加（16秒間）",
+                "Parameters": [
+                    [
+                        "13.5%",
+                        "14.2%",
+                        "14.9%",
+                        "17.6%",
+                        "18.3%",
+                        "19%",
+                        "21.7%",
+                        "22.4%",
+                        "23%",
+                        "25.8%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1358,
+                                1426,
+                                1494,
+                                1766,
+                                1834,
+                                1902,
+                                2173,
+                                2241,
+                                2309,
+                                2581
+                            ]
+                        ],
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Channel": 11
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "暗殺者の目",
+                "Desc": "<b:CriticalDamage>率を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "暗殺者の目+",
+                "Desc": "<b:CriticalDamage>を<?1>増加/\nさらに<b:CriticalDamage>率を<?2>増加",
+                "Parameters": [
+                    [
+                        "2000",
+                        "2100",
+                        "2200",
+                        "2600",
+                        "2700",
+                        "2800",
+                        "3200",
+                        "3300",
+                        "3400",
+                        "3800"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Base",
+                        "Scale": [
+                            2000,
+                            2100,
+                            2200,
+                            2600,
+                            2700,
+                            2800,
+                            3200,
+                            3300,
+                            3400,
+                            3800
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "潜入行動",
+                "Desc": "戦闘開始時、直ちに<s:CH0239_ExtraPassive>状態になり、攻撃を受けたら<s:CH0239_ExtraPassive>状態を解除/\n<s:CH0239_ExtraPassive>が解除された後、10秒間攻撃を受けなかったら、再び<s:CH0239_ExtraPassive>状態に変更/\n<s:CH0239_ExtraPassive>状態の場合、自身の<b:CriticalDamage>率を<?1>増加",
+                "Parameters": [
+                    [
+                        "33.6%",
+                        "35.2%",
+                        "36.9%",
+                        "43.6%",
+                        "45.3%",
+                        "47%",
+                        "53.7%",
+                        "55.4%",
+                        "57.1%",
+                        "63.8%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0239_EXTRAPASSIVESKILL",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3360,
+                                3528,
+                                3696,
+                                4368,
+                                4536,
+                                4704,
+                                5376,
+                                5544,
+                                5712,
+                                6384
+                            ]
+                        ],
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Channel": 11
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                65
+            ],
+            [
+                5,
+                77
+            ],
+            [
+                1,
+                13
+            ],
+            [
+                2,
+                19
+            ],
+            [
+                3,
+                32
+            ]
+        ],
+        "FavorAlts": [
+            13005,
+            10064
+        ],
+        "MemoryLobby": [
+            2,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Fruitful Blossom",
+        "FurnitureInteraction": [
+            [
+                [
+                    15303,
+                    0
+                ],
+                [
+                    210333,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aL",
+            "aQ"
+        ],
+        "FavorItemUniqueTags": [
+            "ff",
+            "fG"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "デモンズロア",
+            "Desc": "カヨコが普段持ち歩いている拳銃。\n\nサイレンサーつきで、密かな潜入任務でも実用的だ。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 82,
+            "AttackPower100": 818,
+            "MaxHP1": 739,
+            "MaxHP100": 7390,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                270
+            ],
+            [
+                3031,
+                3030,
+                271,
+                180
+            ],
+            [
+                3032,
+                3031,
+                272,
+                181
+            ],
+            [
+                3033,
+                3032,
+                273,
+                182
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                14,
+                32
+            ],
+            [
+                12,
+                18,
+                9,
+                26
+            ],
+            [
+                8,
+                18,
+                7,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                270
+            ],
+            [
+                4031,
+                271,
+                180
+            ],
+            [
+                4032,
+                4031,
+                271,
+                180
+            ],
+            [
+                4032,
+                272,
+                181
+            ],
+            [
+                4033,
+                4032,
+                273,
+                182
+            ],
+            [
+                4033,
+                273,
+                182
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                13
+            ],
+            [
+                5,
+                12,
+                10,
+                19
+            ],
+            [
+                8,
+                3,
+                18
+            ],
+            [
+                8,
+                12,
+                5,
+                9
+            ],
+            [
+                12,
+                8,
+                12
+            ]
+        ]
+    },
+    {
+        "Id": 10089,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 173,
+        "PathName": "Aru_Dress",
+        "DevName": "CH0240",
+        "Name": "アル（ドレス）",
+        "School": "Gehenna",
+        "Club": "Kohshinjo68",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Pierce",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "SR",
+        "WeaponImg": "weapon_icon_10000",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Necklace"
+        ],
+        "CollectionBG": "BG_OperaHouse_Collection",
+        "FamilyName": "陸八魔",
+        "PersonalName": "アル",
+        "SchoolYear": "2年生",
+        "CharacterAge": "16歳",
+        "Birthday": "3月12日",
+        "CharacterSSRNew": "ついにこの日が来たわね。\nまあ、見ていてちょうだい",
+        "ProfileIntroduction": "潜入任務の依頼を請けた、ゲヘナ学園所属、便利屋68の社長。\n\n普段はあまり着ることのない服装だが完璧に着こなしている。願ってもないハードボイルドな仕事を請けて心を弾ませているが、顔には出さない。",
+        "Hobby": "経営の勉強",
+        "CharacterVoice": "近藤玲奈",
+        "BirthDay": "3/12",
+        "Illustrator": "DoReMi",
+        "Designer": "DoReMi",
+        "CharHeightMetric": "160cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1980,
+        "AttackPower1": 282,
+        "AttackPower100": 2820,
+        "MaxHP1": 1980,
+        "MaxHP100": 17160,
+        "DefensePower1": 17,
+        "DefensePower100": 103,
+        "HealPower1": 1413,
+        "HealPower100": 4241,
+        "DodgePoint": 198,
+        "AccuracyPoint": 908,
+        "CriticalPoint": 201,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "興味深い提案",
+                "Desc": "自身の除く味方1人に対して、<b:CriticalDamage>率を<?1>増加（30秒間）",
+                "Parameters": [
+                    [
+                        "47.7%",
+                        "51.2%",
+                        "65.5%",
+                        "69.1%",
+                        "83.4%"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                4770,
+                                5127,
+                                6558,
+                                6916,
+                                8347
+                            ]
+                        ],
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Channel": 111
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "有意義な取引",
+                "Desc": "50秒毎に、自身を除くHPが最も低い味方1人に対して治癒力の<?1>分の回復",
+                "Parameters": [
+                    [
+                        "79.8%",
+                        "83.8%",
+                        "87.8%",
+                        "103%",
+                        "107%",
+                        "111%",
+                        "127%",
+                        "131%",
+                        "135%",
+                        "151%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_HEAL",
+                "Effects": [
+                    {
+                        "Type": "Heal",
+                        "Scale": [
+                            7983,
+                            8380,
+                            8780,
+                            10375,
+                            10775,
+                            11175,
+                            12770,
+                            13170,
+                            13568,
+                            15165
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "ドレスアップ",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "ドレスアップ+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "312",
+                        "328",
+                        "344",
+                        "406",
+                        "422",
+                        "437",
+                        "500",
+                        "515",
+                        "531",
+                        "593"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            312,
+                            328,
+                            344,
+                            406,
+                            422,
+                            437,
+                            500,
+                            515,
+                            531,
+                            593
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "有利な取引",
+                "Desc": "攻撃時、30%の確率で<d:CriticalChanceResistPoint>を<?1>減少（13秒間）（クールタイム5秒）",
+                "Parameters": [
+                    [
+                        "8%",
+                        "8.4%",
+                        "8.8%",
+                        "10.4%",
+                        "10.8%",
+                        "11.2%",
+                        "12.8%",
+                        "13.3%",
+                        "13.7%",
+                        "15.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -806,
+                                -847,
+                                -887,
+                                -1048,
+                                -1088,
+                                -1128,
+                                -1289,
+                                -1330,
+                                -1370,
+                                -1531
+                            ]
+                        ],
+                        "Stat": "CriticalChanceResistPoint_Coefficient",
+                        "Channel": 622
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                6,
+                43
+            ],
+            [
+                7,
+                51
+            ],
+            [
+                2,
+                8
+            ],
+            [
+                3,
+                13
+            ],
+            [
+                4,
+                21
+            ]
+        ],
+        "FavorAlts": [
+            10000,
+            10031
+        ],
+        "MemoryLobby": [
+            3,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Midnight Trip",
+        "FurnitureInteraction": [
+            [
+                [
+                    210333,
+                    0
+                ],
+                [
+                    210333,
+                    1
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "ak",
+            "aV"
+        ],
+        "FavorItemUniqueTags": [
+            "fg",
+            "fH"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "ワインレッド・アドマイアー",
+            "Desc": "特別な任務でも手放さないアルのスナイパーライフル。\n\nゴージャスな場面で、その美しさはより一段と輝く。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 124,
+            "AttackPower100": 1239,
+            "MaxHP1": 496,
+            "MaxHP100": 4962,
+            "HealPower1": 166,
+            "HealPower100": 1662,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                280
+            ],
+            [
+                3031,
+                3030,
+                281,
+                130
+            ],
+            [
+                3032,
+                3031,
+                282,
+                131
+            ],
+            [
+                3033,
+                3032,
+                283,
+                132
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                14,
+                31
+            ],
+            [
+                12,
+                18,
+                10,
+                28
+            ],
+            [
+                8,
+                18,
+                8,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                280
+            ],
+            [
+                4031,
+                281,
+                130
+            ],
+            [
+                4032,
+                4031,
+                281,
+                130
+            ],
+            [
+                4032,
+                282,
+                131
+            ],
+            [
+                4033,
+                4032,
+                283,
+                132
+            ],
+            [
+                4033,
+                283,
+                132
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                4,
+                13
+            ],
+            [
+                5,
+                12,
+                9,
+                17
+            ],
+            [
+                8,
+                3,
+                17
+            ],
+            [
+                8,
+                12,
+                5,
+                9
+            ],
+            [
+                12,
+                8,
+                11
             ]
         ]
     }
