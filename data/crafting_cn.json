@@ -2324,7 +2324,7 @@
             "DescCn": "可以生成最高等级的物质。",
             "NameZh": "辉煌",
             "DescZh": "生成最高级品质物品。",
-            "Weight": 320000,
+            "Weight": 330000,
             "Groups": [
                 {
                     "GroupId": 303,
@@ -2337,6 +2337,10 @@
                 {
                     "GroupId": 343,
                     "Weight": 40000
+                },
+                {
+                    "GroupId": 344,
+                    "Weight": 10000
                 },
                 {
                     "GroupId": 333,
@@ -2437,7 +2441,7 @@
             "DescCn": "可以生成高级以上的技术笔记。",
             "NameZh": "铂",
             "DescZh": "生成高级或以上品质的技术笔记。\n低概率生成秘传笔记残页。",
-            "Weight": 220000,
+            "Weight": 230000,
             "Groups": [
                 {
                     "GroupId": 342,
@@ -2446,6 +2450,10 @@
                 {
                     "GroupId": 343,
                     "Weight": 40000
+                },
+                {
+                    "GroupId": 344,
+                    "Weight": 10000
                 }
             ],
             "Icon": "CraftNode_Item"
@@ -2596,6 +2604,33 @@
                 }
             ],
             "Icon": "CraftNode_SecretStone"
+        },
+        {
+            "Id": 3010,
+            "Tier": 3,
+            "Quality": 2,
+            "NameEn": "Diamond",
+            "DescEn": "Can create a Secret Tech Sheet fragment.",
+            "NameJp": "ダイヤモンド",
+            "DescJp": "秘伝ノートの断片を生成することができます。",
+            "NameKr": "다이아몬드",
+            "DescKr": "비의서 조각을 생성할 수 있습니다.",
+            "NameTw": "鑽石",
+            "DescTw": "可製造奧秘之書碎片。",
+            "NameTh": "เพชร",
+            "DescTh": "สร้างเศษตำราสกิลลับ",
+            "NameCn": "钻石",
+            "DescCn": "可以生成秘仪之书碎片。",
+            "NameZh": "钻石",
+            "DescZh": "生成秘传笔记残页。",
+            "Weight": 10000,
+            "Groups": [
+                {
+                    "GroupId": 380,
+                    "Weight": 10000
+                }
+            ],
+            "Icon": "CraftNode_UltimateSkill"
         },
         {
             "Id": 3011,
@@ -2876,7 +2911,7 @@
     "TotalWeight": [
         3035996,
         6981982,
-        4080000
+        4110000
     ],
     "Groups": {
         "100": [
@@ -6121,6 +6156,16 @@
                 "Weight": 1
             }
         ],
+        "344": [
+            {
+                "Type": "Item",
+                "Rarity": "SSR",
+                "ItemId": 9998,
+                "AmountMin": 1,
+                "AmountMax": 3,
+                "Weight": 1
+            }
+        ],
         "352": [
             {
                 "Type": "Furniture",
@@ -7729,6 +7774,16 @@
                 "Rarity": "SSR",
                 "ItemId": 26005,
                 "AmountMin": 1,
+                "AmountMax": 5,
+                "Weight": 1
+            }
+        ],
+        "380": [
+            {
+                "Type": "Item",
+                "Rarity": "SSR",
+                "ItemId": 9998,
+                "AmountMin": 3,
                 "AmountMax": 5,
                 "Weight": 1
             }
@@ -11574,5 +11629,683 @@
             }
         ]
     },
-    "Fusion": []
+    "Fusion": [
+        {
+            "Id": 41,
+            "ResultId": 9999,
+            "RequireItem": [
+                83,
+                0
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cR"
+            ],
+            "IngredientExp": 300
+        },
+        {
+            "Id": 1,
+            "ResultId": 190020,
+            "RequireItem": [
+                80,
+                1
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "cr",
+                "h"
+            ],
+            "IngredientExp": 10
+        },
+        {
+            "Id": 2,
+            "ResultId": 190021,
+            "RequireItem": [
+                81,
+                1
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "cS",
+                "h"
+            ],
+            "IngredientExp": 20
+        },
+        {
+            "Id": 3,
+            "ResultId": 190022,
+            "RequireItem": [
+                82,
+                1
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "cs",
+                "h"
+            ],
+            "IngredientExp": 50
+        },
+        {
+            "Id": 4,
+            "ResultId": 190023,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cT",
+                "h"
+            ],
+            "IngredientExp": 80
+        },
+        {
+            "Id": 5,
+            "ResultId": 190010,
+            "RequireItem": [
+                80,
+                1
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "ct",
+                "h"
+            ],
+            "IngredientExp": 30
+        },
+        {
+            "Id": 6,
+            "ResultId": 190011,
+            "RequireItem": [
+                81,
+                1
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "cU",
+                "h"
+            ],
+            "IngredientExp": 60
+        },
+        {
+            "Id": 7,
+            "ResultId": 190012,
+            "RequireItem": [
+                82,
+                1
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "cu",
+                "h"
+            ],
+            "IngredientExp": 150
+        },
+        {
+            "Id": 8,
+            "ResultId": 190013,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cV",
+                "h"
+            ],
+            "IngredientExp": 200
+        },
+        {
+            "Id": 9,
+            "ResultId": 190000,
+            "RequireItem": [
+                80,
+                1
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "cv",
+                "h"
+            ],
+            "IngredientExp": 10
+        },
+        {
+            "Id": 10,
+            "ResultId": 190001,
+            "RequireItem": [
+                81,
+                1
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "cW",
+                "h"
+            ],
+            "IngredientExp": 20
+        },
+        {
+            "Id": 11,
+            "ResultId": 190002,
+            "RequireItem": [
+                82,
+                1
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "cw",
+                "h"
+            ],
+            "IngredientExp": 50
+        },
+        {
+            "Id": 12,
+            "ResultId": 190003,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cX",
+                "h"
+            ],
+            "IngredientExp": 80
+        },
+        {
+            "Id": 14,
+            "ResultId": 191001,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 200
+        },
+        {
+            "Id": 15,
+            "ResultId": 191002,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 200
+        },
+        {
+            "Id": 16,
+            "ResultId": 191003,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 200
+        },
+        {
+            "Id": 17,
+            "ResultId": 191004,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 200
+        },
+        {
+            "Id": 18,
+            "ResultId": 191005,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 200
+        },
+        {
+            "Id": 19,
+            "ResultId": 191006,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 200
+        },
+        {
+            "Id": 20,
+            "ResultId": 191007,
+            "RequireItem": [
+                83,
+                1
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 200
+        },
+        {
+            "Id": 13,
+            "ResultId": 191000,
+            "RequireItem": [
+                80,
+                1
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 50
+        },
+        {
+            "Id": 21,
+            "ResultId": 150008,
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "cr",
+                "h"
+            ],
+            "IngredientExp": 20
+        },
+        {
+            "Id": 22,
+            "ResultId": 150009,
+            "RequireItem": [
+                81,
+                3
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "cS",
+                "h"
+            ],
+            "IngredientExp": 40
+        },
+        {
+            "Id": 23,
+            "ResultId": 150010,
+            "RequireItem": [
+                82,
+                3
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "cs",
+                "h"
+            ],
+            "IngredientExp": 100
+        },
+        {
+            "Id": 24,
+            "ResultId": 150011,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cT",
+                "h"
+            ],
+            "IngredientExp": 160
+        },
+        {
+            "Id": 25,
+            "ResultId": 150004,
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "ct",
+                "h"
+            ],
+            "IngredientExp": 60
+        },
+        {
+            "Id": 26,
+            "ResultId": 150005,
+            "RequireItem": [
+                81,
+                3
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "cU",
+                "h"
+            ],
+            "IngredientExp": 120
+        },
+        {
+            "Id": 27,
+            "ResultId": 150006,
+            "RequireItem": [
+                82,
+                3
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "cu",
+                "h"
+            ],
+            "IngredientExp": 300
+        },
+        {
+            "Id": 28,
+            "ResultId": 150007,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cV",
+                "h"
+            ],
+            "IngredientExp": 400
+        },
+        {
+            "Id": 29,
+            "ResultId": 150000,
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "cv",
+                "h"
+            ],
+            "IngredientExp": 20
+        },
+        {
+            "Id": 30,
+            "ResultId": 150001,
+            "RequireItem": [
+                81,
+                3
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "cW",
+                "h"
+            ],
+            "IngredientExp": 40
+        },
+        {
+            "Id": 31,
+            "ResultId": 150002,
+            "RequireItem": [
+                82,
+                3
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "cw",
+                "h"
+            ],
+            "IngredientExp": 100
+        },
+        {
+            "Id": 32,
+            "ResultId": 150003,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cX",
+                "h"
+            ],
+            "IngredientExp": 160
+        },
+        {
+            "Id": 34,
+            "ResultId": 151001,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 400
+        },
+        {
+            "Id": 35,
+            "ResultId": 151002,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 400
+        },
+        {
+            "Id": 36,
+            "ResultId": 151003,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 400
+        },
+        {
+            "Id": 37,
+            "ResultId": 151004,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 400
+        },
+        {
+            "Id": 38,
+            "ResultId": 151005,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 400
+        },
+        {
+            "Id": 39,
+            "ResultId": 151006,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 400
+        },
+        {
+            "Id": 40,
+            "ResultId": 151007,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 400
+        },
+        {
+            "Id": 33,
+            "ResultId": 151000,
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "cx",
+                "h"
+            ],
+            "IngredientExp": 100
+        },
+        {
+            "Id": 42,
+            "ResultId": 1301001,
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "cY"
+            ],
+            "IngredientExp": 60
+        },
+        {
+            "Id": 43,
+            "ResultId": 1301101,
+            "RequireItem": [
+                81,
+                3
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "cy"
+            ],
+            "IngredientExp": 120
+        },
+        {
+            "Id": 44,
+            "ResultId": 1301201,
+            "RequireItem": [
+                82,
+                3
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "cZ"
+            ],
+            "IngredientExp": 180
+        },
+        {
+            "Id": 45,
+            "ResultId": 1301301,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "cz"
+            ],
+            "IngredientExp": 240
+        },
+        {
+            "Id": 51,
+            "ResultId": 1301002,
+            "RequireItem": [
+                80,
+                3
+            ],
+            "RequireGold": 3000,
+            "IngredientTag": [
+                "dt"
+            ],
+            "IngredientExp": 60
+        },
+        {
+            "Id": 52,
+            "ResultId": 1301102,
+            "RequireItem": [
+                81,
+                3
+            ],
+            "RequireGold": 6000,
+            "IngredientTag": [
+                "dU"
+            ],
+            "IngredientExp": 120
+        },
+        {
+            "Id": 53,
+            "ResultId": 1301202,
+            "RequireItem": [
+                82,
+                3
+            ],
+            "RequireGold": 12000,
+            "IngredientTag": [
+                "du"
+            ],
+            "IngredientExp": 180
+        },
+        {
+            "Id": 54,
+            "ResultId": 1301302,
+            "RequireItem": [
+                83,
+                3
+            ],
+            "RequireGold": 24000,
+            "IngredientTag": [
+                "dV"
+            ],
+            "IngredientExp": 240
+        }
+    ]
 }

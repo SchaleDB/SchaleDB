@@ -4088,10 +4088,6 @@ function loadModule(moduleName, entry=null) {
                 showNodeProbability = (localStorage.getItem("show_node_probability") == 'true')
             }
 
-            if (regionID == 2) {
-                $('#ba-craft-list-tabs').hide()
-            }
-
             if (entry != null) {
                 loadCraft(entry)
             } else if (urlVars.has("craftnode")) {
@@ -5740,7 +5736,7 @@ function loadCraft(id) {
 
         if (loadedCraftId > 0) $('#craft-select-'+loadedCraftId).removeClass('selected')
 
-        if (id < 100000 || regionID == 2) {
+        if (id < 100000) {
             const craftNode = findOrDefault(data.crafting.Nodes, "Id", id, 1)[0]
             loadedCraftNode = craftNode
             loadedCraftId = craftNode.Id
@@ -5805,13 +5801,13 @@ function loadCraft(id) {
 
             data.items.forEach(item => {
                 if (item.IsReleased[regionID] && item.Tags.filter(tag => recipe.IngredientTag.includes(tag)).length > 0) {
-                    html += getDropIconHTML(item.Id, item.ShiftingCraftQuality[regionID] / recipe.IngredientExp, 1, 1, true)
+                    html += getDropIconHTML(item.Id, getServerProperty(item, 'ShiftingCraftQuality') / recipe.IngredientExp, 1, 1, true)
                 }
             })
 
             data.furniture.forEach(item => {
                 if (item.IsReleased[regionID] && item.Tags.filter(tag => recipe.IngredientTag.includes(tag)).length > 0) {
-                    html += getDropIconHTML(item.Id+1000000, item.ShiftingCraftQuality[regionID] / recipe.IngredientExp, 1, 1, true)
+                    html += getDropIconHTML(item.Id+1000000, getServerProperty(item, 'ShiftingCraftQuality') / recipe.IngredientExp, 1, 1, true)
                 }
             })
 
