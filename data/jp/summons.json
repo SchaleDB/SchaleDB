@@ -482,6 +482,111 @@
         "RegenCost": 0
     },
     {
+        "Id": 30004,
+        "Skills": [
+            {
+                "Name": "特別な榴弾、心を込めて！",
+                "Desc": "給食推進車両に搭乗したアカリは13秒毎に、スキル「特別な榴弾、心を込めて！」を発動し、円形範囲内の敵に対して攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "409%",
+                        "430%",
+                        "450%",
+                        "532%",
+                        "553%",
+                        "573%",
+                        "655%",
+                        "676%",
+                        "696%",
+                        "778%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "SkillType": "normal",
+                "IsSummonSkill": true,
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Scale": [
+                            40978,
+                            43022,
+                            45073,
+                            53263,
+                            55314,
+                            57365,
+                            65555,
+                            67606,
+                            69657,
+                            77847
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "今日はそういう気分ですから？",
+                "Desc": "給食推進車両の登場中、自身を中心とした円形範囲内の自身を除く味方の<b:AttackSpeed>を<?1>増加、<b:EnhanceMysticRate>を<?2>加算（範囲内にいる間だけ効果を維持）",
+                "Parameters": [
+                    [
+                        "28.9%",
+                        "30.3%",
+                        "31.8%",
+                        "37.5%",
+                        "39%",
+                        "40.4%",
+                        "46.2%",
+                        "47.7%",
+                        "49.1%",
+                        "54.9%"
+                    ],
+                    [
+                        "23.3%",
+                        "24.5%",
+                        "25.7%",
+                        "30.3%",
+                        "31.5%",
+                        "32.7%",
+                        "37.3%",
+                        "38.5%",
+                        "39.7%",
+                        "44.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "SkillType": "passive",
+                "IsSummonSkill": true,
+                "Effects": []
+            }
+        ],
+        "Name": "給食推進車両",
+        "DevName": "SM019601",
+        "Type": "Vehicle",
+        "BulletType": "Mystic",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "StabilityPoint": 1084,
+        "StabilityRate": 2000,
+        "AttackPower1": 642,
+        "AttackPower100": 6429,
+        "MaxHP1": 4482,
+        "MaxHP100": 36440,
+        "DefensePower1": 181,
+        "DefensePower100": 1086,
+        "HealPower1": 1824,
+        "HealPower100": 5472,
+        "DodgePoint": 181,
+        "AccuracyPoint": 109,
+        "CriticalPoint": 218,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 9999,
+        "AmmoCost": 1,
+        "Range": 550,
+        "MoveSpeed": 180,
+        "RegenCost": 0
+    },
+    {
         "Id": 36001,
         "Skills": [
             {

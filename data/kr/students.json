@@ -9565,7 +9565,9 @@
                 30
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            20034
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -97719,6 +97721,514 @@
                 12,
                 8,
                 11
+            ]
+        ]
+    },
+    {
+        "Id": 20034,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 174,
+        "PathName": "Akari_NewYear",
+        "DevName": "CH0196",
+        "Name": "아카리(새해)",
+        "School": "Gehenna",
+        "Club": "GourmetClub",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "Vehicle",
+        "Summons": [
+            {
+                "Id": 30004,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "MaxHP"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        2765,
+                        3180,
+                        4009,
+                        4424,
+                        5254
+                    ]
+                ]
+            }
+        ],
+        "Position": "Back",
+        "BulletType": "Mystic",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "weapon_icon_13002",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Bag",
+            "Watch"
+        ],
+        "CollectionBG": "BG_NewYearFestival2",
+        "FamilyName": "와니부치",
+        "PersonalName": "아카리",
+        "SchoolYear": "3학년",
+        "CharacterAge": "17세",
+        "Birthday": "12월 9일",
+        "CharacterSSRNew": "새해에는 무엇부터 먹어 볼지를 결정해야겠죠.\n얼마나 먹을지도요.",
+        "ProfileIntroduction": "새해를 맞아 새롭게 차려 입은 아카리.\n\n언제나처럼 생글생글 웃는 표정을 유지하고 있지만, 그 표정이 평소보다 조금 더 들뜬 듯이 보이기도 한다. 새해를 맞는다는 기대감에 부풀어 있기 때문일까, 아니면……",
+        "Hobby": "많이 먹기",
+        "CharacterVoice": "森嶋優花",
+        "BirthDay": "12/9",
+        "Illustrator": "9ml",
+        "Designer": "9ml",
+        "CharHeightMetric": "167cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1454,
+        "AttackPower1": 252,
+        "AttackPower100": 2523,
+        "MaxHP1": 2828,
+        "MaxHP100": 21149,
+        "DefensePower1": 94,
+        "DefensePower100": 565,
+        "HealPower1": 1761,
+        "HealPower100": 5285,
+        "DodgePoint": 724,
+        "AccuracyPoint": 711,
+        "CriticalPoint": 273,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "잠시 빌렸답니다!",
+                "Desc": "아카리가 급양추진차량에 탑승하여 전투에 등장, 아카리 최대 체력의 <?1>를 급양추진차량이 추가로 가집니다. (30초간)\n(급양추진차량은 일반 공격을 하지 않습니다.)\n(택티컬 서포트의 탑승물은 중복 등장하지 않습니다.)",
+                "Parameters": [
+                    [
+                        "27.6%",
+                        "31.8%",
+                        "40%",
+                        "44.2%",
+                        "52.5%"
+                    ]
+                ],
+                "Cost": [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                ],
+                "Icon": "COMMON_SKILLICON_TRUCK",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                2891,
+                                3036,
+                                3181,
+                                3759,
+                                3904
+                            ]
+                        ],
+                        "Stat": "AttackSpeed_Coefficient",
+                        "Channel": 11023
+                    },
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                2337,
+                                2454,
+                                2571,
+                                3039,
+                                3156
+                            ]
+                        ],
+                        "Stat": "EnhanceMysticRate_Base",
+                        "Channel": 11033
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "이런 건 어떠신가요?",
+                "Desc": "40초마다 체력이 가장 낮은 아군 중심으로 원형 범위내의 아군에게 <b:DEF> <?1> 증가(30초간) (범위 내에 있는 동안에만 효과 유지)",
+                "Parameters": [
+                    [
+                        "12.8%",
+                        "13.5%",
+                        "14.1%",
+                        "16.7%",
+                        "17.3%",
+                        "18%",
+                        "20.5%",
+                        "21.2%",
+                        "21.8%",
+                        "24.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1286,
+                                1350,
+                                1414,
+                                1671,
+                                1736,
+                                1800,
+                                2057,
+                                2121,
+                                2186,
+                                2443
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 103
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "잘 먹겠습니다!",
+                "Desc": "<b:MAXHP> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "잘 먹겠습니다!+",
+                "Desc": "<b:MAXHP> <?1> 증가/\n추가로 <b:MAXHP> <?2> 증가",
+                "Parameters": [
+                    [
+                        "4708",
+                        "4943",
+                        "5178",
+                        "6120",
+                        "6355",
+                        "6591",
+                        "7532",
+                        "7767",
+                        "8003",
+                        "8944"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Base",
+                        "Scale": [
+                            4708,
+                            4943,
+                            5178,
+                            6120,
+                            6355,
+                            6591,
+                            7532,
+                            7767,
+                            8003,
+                            8944
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "더 필요하신 분?",
+                "Desc": "아군의 <b:EnhanceMysticRate> <?1> 가산",
+                "Parameters": [
+                    [
+                        "15.9%",
+                        "16.7%",
+                        "17.5%",
+                        "20.7%",
+                        "21.5%",
+                        "22.3%",
+                        "25.5%",
+                        "26.3%",
+                        "27%",
+                        "30.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1594,
+                                1674,
+                                1753,
+                                2073,
+                                2152,
+                                2232,
+                                2550,
+                                2630,
+                                2709,
+                                3029
+                            ]
+                        ],
+                        "Stat": "EnhanceMysticRate_Base",
+                        "Channel": 334
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "MaxHP",
+            "AttackPower"
+        ],
+        "FavorStatValue": [
+            [
+                21,
+                0
+            ],
+            [
+                32,
+                0
+            ],
+            [
+                42,
+                6
+            ],
+            [
+                53,
+                7
+            ],
+            [
+                13,
+                1
+            ],
+            [
+                19,
+                2
+            ],
+            [
+                32,
+                3
+            ]
+        ],
+        "FavorAlts": [
+            13002
+        ],
+        "MemoryLobby": [
+            3,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Midsummer cat",
+        "FurnitureInteraction": [
+            [
+                [
+                    210334,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "az"
+        ],
+        "FavorItemUniqueTags": [
+            "fh",
+            "fI"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "탐식의 징표",
+            "Desc": "아카리가 애용하는 돌격소총.\n\n그녀의 여행과 음식을 저해하는 모든 것은, 우선 이 총과 대화를 나누어야 할 것이다.",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 111,
+            "AttackPower100": 1109,
+            "MaxHP1": 616,
+            "MaxHP100": 6156,
+            "HealPower1": 207,
+            "HealPower100": 2071,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                240
+            ],
+            [
+                3031,
+                3030,
+                241,
+                250
+            ],
+            [
+                3032,
+                3031,
+                242,
+                251
+            ],
+            [
+                3033,
+                3032,
+                243,
+                252
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                14,
+                32
+            ],
+            [
+                12,
+                18,
+                13,
+                21
+            ],
+            [
+                8,
+                18,
+                11,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                240
+            ],
+            [
+                4031,
+                241,
+                250
+            ],
+            [
+                4032,
+                4031,
+                241,
+                250
+            ],
+            [
+                4032,
+                242,
+                251
+            ],
+            [
+                4033,
+                4032,
+                243,
+                252
+            ],
+            [
+                4033,
+                243,
+                252
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                10,
+                16
+            ],
+            [
+                8,
+                3,
+                17
+            ],
+            [
+                8,
+                12,
+                4,
+                10
+            ],
+            [
+                12,
+                7,
+                13
             ]
         ]
     }

@@ -53692,7 +53692,7 @@
             "Id": 19000,
             "IsReleased": [
                 true,
-                false,
+                true,
                 false
             ],
             "DungeonType": "Shooting",
@@ -54603,6 +54603,161 @@
                 160,
                 180
             ]
+        },
+        {
+            "Id": 25000,
+            "IsReleased": [
+                true,
+                false,
+                false
+            ],
+            "DungeonType": "Escort",
+            "Icon": "enemyinfo_avantgardekun_millenium_ar",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 930100001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7831101,
+                        7831201,
+                        7831301,
+                        7831401
+                    ]
+                },
+                {
+                    "Id": 930100002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7831102,
+                        7831202,
+                        7831302,
+                        7831402
+                    ]
+                },
+                {
+                    "Id": 930100003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7831103,
+                        7831203,
+                        7831303,
+                        7831403
+                    ]
+                },
+                {
+                    "Id": 930100004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7831104,
+                        7831204,
+                        7831304,
+                        7831404
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 573359085
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 573359085
+                    },
+                    {
+                        "Id": 1931829290
+                    }
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                180,
+                180
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -54911,6 +55066,18 @@
             "Icon": "timeattack_icon_buff_attackpower_enemy_01",
             "Name": "적 공격력 증가, 이동속도 증가",
             "Desc": "적의 공격력과 이동속도가 증가합니다."
+        },
+        {
+            "Id": 573359085,
+            "Icon": "timeattack_icon_buff_forceapplystatchangetoally_01",
+            "Name": "아방가르드군 이로운 효과 복제",
+            "Desc": "아방가르드군의 능력치를 변경하는 이로운 효과 적용 시, 동일한 효과가 스페셜 학생을 제외한 아군에게도 복제됩니다."
+        },
+        {
+            "Id": 1931829290,
+            "Icon": "timeattack_icon_debuff_healeffectiveness_ally_01",
+            "Name": "아방가르드군 받는 회복량 감소, 적 공격력 감소",
+            "Desc": "아방가르드군이 받는 회복량이 감소합니다.\n적 공격력이 감소합니다."
         }
     ],
     "WorldRaid": [

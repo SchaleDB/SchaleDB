@@ -53746,7 +53746,7 @@
             "Id": 19000,
             "IsReleased": [
                 true,
-                false,
+                true,
                 false
             ],
             "DungeonType": "Shooting",
@@ -54657,6 +54657,161 @@
                 160,
                 180
             ]
+        },
+        {
+            "Id": 25000,
+            "IsReleased": [
+                true,
+                false,
+                false
+            ],
+            "DungeonType": "Escort",
+            "Icon": "enemyinfo_avantgardekun_millenium_ar",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 930100001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7831101,
+                        7831201,
+                        7831301,
+                        7831401
+                    ]
+                },
+                {
+                    "Id": 930100002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7831102,
+                        7831202,
+                        7831302,
+                        7831402
+                    ]
+                },
+                {
+                    "Id": 930100003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7831103,
+                        7831203,
+                        7831303,
+                        7831403
+                    ]
+                },
+                {
+                    "Id": 930100004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7831104,
+                        7831204,
+                        7831304,
+                        7831404
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 573359085
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 573359085
+                    },
+                    {
+                        "Id": 1931829290
+                    }
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                180,
+                180
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -54965,6 +55120,18 @@
             "Icon": "timeattack_icon_buff_attackpower_enemy_01",
             "Name": "Enemy ATK and MOV SPD Increase",
             "Desc": "All enemies' <b:ATK> is increased by 600% and <b:MoveSpeed> is increased by 25%."
+        },
+        {
+            "Id": 573359085,
+            "Icon": "timeattack_icon_buff_forceapplystatchangetoally_01",
+            "Name": "Avant Guard Buff Replication",
+            "Desc": "If Avant Guard is granted a stat-increasing buff, the same effect is replicated on all allies."
+        },
+        {
+            "Id": 1931829290,
+            "Icon": "timeattack_icon_debuff_healeffectiveness_ally_01",
+            "Name": "Avant Guard Recovery Boost Decrease, Enemy ATK Decrease",
+            "Desc": "Avant Guard's <d:HealEffectiveness> is decreased by 90%.\nAll enemies' <d:ATK> is decreased by 40%."
         }
     ],
     "WorldRaid": [

@@ -482,6 +482,111 @@
         "RegenCost": 0
     },
     {
+        "Id": 30004,
+        "Skills": [
+            {
+                "Name": "ระเบิดพิเศษจากใจ!",
+                "Desc": "รถสนับสนุนเสบียงมื้อเที่ยงจะสร้างความเสียหาย <?1> ของค่าโจมตีให้กับศัตรูในรัศมีทุก 13 วินาที",
+                "Parameters": [
+                    [
+                        "409%",
+                        "430%",
+                        "450%",
+                        "532%",
+                        "553%",
+                        "573%",
+                        "655%",
+                        "676%",
+                        "696%",
+                        "778%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "SkillType": "normal",
+                "IsSummonSkill": true,
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Scale": [
+                            40978,
+                            43022,
+                            45073,
+                            53263,
+                            55314,
+                            57365,
+                            65555,
+                            67606,
+                            69657,
+                            77847
+                        ]
+                    }
+                ]
+            },
+            {
+                "Name": "วันนี้รู้สึกยังไงน้า?",
+                "Desc": "รถสนับสนุนเสบียงมื้อเที่ยงจะเพิ่ม<b:AttackSpeed> <?1> และ<b:EnhanceMysticRate> <?2> ให้กับฝ่ายเราในรัศมีรอบตัวเอง ยกเว้นตัวเอง โดยเอฟเฟกต์นี้มีผลตลอดตราบใดฝ่ายเรายังคงอยู่ในพื้นที่รอบตัวของรถสนับสนุนเสบียงมื้อเที่ยง",
+                "Parameters": [
+                    [
+                        "28.9%",
+                        "30.3%",
+                        "31.8%",
+                        "37.5%",
+                        "39%",
+                        "40.4%",
+                        "46.2%",
+                        "47.7%",
+                        "49.1%",
+                        "54.9%"
+                    ],
+                    [
+                        "23.3%",
+                        "24.5%",
+                        "25.7%",
+                        "30.3%",
+                        "31.5%",
+                        "32.7%",
+                        "37.3%",
+                        "38.5%",
+                        "39.7%",
+                        "44.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "SkillType": "passive",
+                "IsSummonSkill": true,
+                "Effects": []
+            }
+        ],
+        "Name": "รถสนับสนุนเสบียงมื้อเที่ยง",
+        "DevName": "SM019601",
+        "Type": "Vehicle",
+        "BulletType": "Mystic",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "StabilityPoint": 1084,
+        "StabilityRate": 2000,
+        "AttackPower1": 642,
+        "AttackPower100": 6429,
+        "MaxHP1": 4482,
+        "MaxHP100": 36440,
+        "DefensePower1": 181,
+        "DefensePower100": 1086,
+        "HealPower1": 1824,
+        "HealPower100": 5472,
+        "DodgePoint": 181,
+        "AccuracyPoint": 109,
+        "CriticalPoint": 218,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 9999,
+        "AmmoCost": 1,
+        "Range": 550,
+        "MoveSpeed": 180,
+        "RegenCost": 0
+    },
+    {
         "Id": 36001,
         "Skills": [
             {

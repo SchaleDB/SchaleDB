@@ -7539,9 +7539,14 @@ function recalculateStats() {
         
     }
 
-    if (student.SquadType == "Support") {
+    if (statPreviewSelectedChar == 0 && !student.Skills.find(s => s.SkillType == 'autoattack')) {
         studentStats.stats["AmmoCount"][0] = 0
     }
+
+    if (statPreviewSelectedChar > 0 && !summon.Skills.find(s => s.SkillType == 'autoattack')) {
+        summonStats.stats["AmmoCount"][0] = 0
+    }
+
     if (compareMode && studentCompare.SquadType == "Support") {
         studentCompareStats.stats["AmmoCount"][0] = 0
     }
