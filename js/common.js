@@ -7366,7 +7366,9 @@ function recalculateStats() {
         statPreviewExternalBuffs.buffs.forEach((buff, index) => {
             buff.Skill.Effects.filter(e => statPreviewExternalBuffs.effectTypeFilter.includes(e.Type)).forEach((effect, effectIndex) => {
                 if (effect.Type == "BuffSelf" && buff.StudentId != student.Id) return
+
                 //check conditions
+                const skillSlot = effect.OverrideSlot ? effect.OverrideSlot : buff.Skill.SkillType
                 let compatible = ExternalBuffs.checkRestrictions(student, effect)
                 
                 if (!compatible || (student.SquadType == 'Support' && statPreviewSelectedChar == 0 && buff.Skill.SkillType != 'sub' && !buff.RaidId)) {
@@ -7374,7 +7376,7 @@ function recalculateStats() {
                     $('#statpreview-buff-transferable-incompatible').toggle(statPreviewIncludeBuffs)
                     $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
                 } else {
-                    if (uniqueChannels.find(e => e.type == buff.Skill.SkillType && e.channel == effect.Channel)) {
+                    if (uniqueChannels.find(e => e.slot == skillSlot && e.channel == effect.Channel)) {
                         //discount the buff if there is a channel conflict
                         $('#statpreview-buff-transferable-conflict').toggle(statPreviewIncludeBuffs)
                         $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
@@ -7391,12 +7393,11 @@ function recalculateStats() {
                                 studentStats.addActiveBuffIcon(effect.Stat, value, 'StackSame' in effect ? buff.Stacks : 1)
                             }
         
-                            
                             if (statPreviewSelectedChar > 0 && summon.Id != 99999) {
                                 summonStats.addBuff(effect.Stat, value)
                             }
                         }
-                        uniqueChannels.push({type: buff.Skill.SkillType, channel: effect.Channel})
+                        uniqueChannels.push({slot: skillSlot, channel: effect.Channel})
                     }
                 }
             })
@@ -7729,11 +7730,15 @@ function calculateEnemyStats() {
     statPreviewEnemyBuffs.buffs.forEach((buff, index) => {
         let buffIncompatible = true
         buff.Skill.Effects.filter(e => statPreviewEnemyBuffs.effectTypeFilter.includes(e.Type)).forEach((effect, effectIndex) => {
+            const skillSlot = effect.OverrideSlot ? effect.OverrideSlot : buff.Skill.SkillType
+
             if ((effect.RestrictTo && !effect.RestrictTo.includes(statPreviewSelectedEnemyId)) || effect.Type != "BuffTarget" || !ExternalBuffs.checkRestrictions(enemy, effect, {"ArmorType": statPreviewSelectedEnemyArmorType})) {
                 $(`#statpreview-enemy-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
             } else {
+
                 buffIncompatible = false
-                if (uniqueChannels.find(e => e.type == buff.Skill.SkillType && e.channel == effect.Channel)) {
+
+                if (uniqueChannels.find(e => e.slot == skillSlot && e.channel == effect.Channel)) {
                     //discount the buff if there is a channel conflict
                     $('#statpreview-enemy-buff-transferable-conflict').show()
                     $(`#statpreview-enemy-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
@@ -7747,7 +7752,7 @@ function calculateEnemyStats() {
                     } else {
                         enemyStats.addActiveBuffIcon(effect.Stat, value, 'StackSame' in effect ? buff.Stacks : 1)
                     }
-                    uniqueChannels.push({type: buff.Skill.SkillType, channel: effect.Channel})
+                    uniqueChannels.push({slot: skillSlot, channel: effect.Channel})
                 }
             }
         })
@@ -10823,7 +10828,7 @@ function maxStudentAttributes() {
     changeStatPreviewLevel(document.getElementById('ba-statpreview-levelrange'), false)
 
     statPreviewIncludeEquipment = true
-    statPreviewEquipment = region.EquipmentMaxLevel
+    statPreviewEquipment = [...region.EquipmentMaxLevel]
     $('#ba-statpreview-gear1-range').val(statPreviewEquipment[0])
     $('#ba-statpreview-gear2-range').val(statPreviewEquipment[1])
     $('#ba-statpreview-gear3-range').val(statPreviewEquipment[2])
