@@ -3986,7 +3986,6 @@ function loadModule(moduleName, entry=null) {
             loadLanguage(userLang)
 
             if (regionID == 2) {
-                $('#ba-raid-list-tab-timeattack').hide()
                 $('#ba-raid-list-tab-worldraid').hide()
             }
 
