@@ -32,8 +32,21 @@
             },
             {
                 "Name": "2磅砲已裝填榴彈！",
-                "Desc": "",
-                "Parameters": [],
+                "Desc": "每20秒，對圓形範圍內的敵方單位造成攻擊力<?1>的傷害.",
+                "Parameters": [
+                    [
+                        "266%",
+                        "279%",
+                        "292%",
+                        "345%",
+                        "359%",
+                        "372%",
+                        "425%",
+                        "438%",
+                        "452%",
+                        "505%"
+                    ]
+                ],
                 "Duration": 134,
                 "Range": 1300,
                 "Radius": [
@@ -64,7 +77,7 @@
                 ]
             }
         ],
-        "Name": "十字軍醬",
+        "Name": "載具-十字軍醬",
         "DevName": "SM005801",
         "Type": "Vehicle",
         "BulletType": "Pierce",
@@ -72,7 +85,7 @@
         "StreetBattleAdaptation": 0,
         "OutdoorBattleAdaptation": 2,
         "IndoorBattleAdaptation": 4,
-        "WeaponType": "Cannon",
+        "WeaponType": "AR",
         "StabilityPoint": 1164,
         "StabilityRate": 2000,
         "AttackPower1": 1423,
@@ -126,8 +139,33 @@
             },
             {
                 "Name": "全數擊潰吧！",
-                "Desc": "",
-                "Parameters": [],
+                "Desc": "自身每進行3次普通攻擊，對1名敵方單位造成攻擊力<?1>的傷害；對該目標及其後方扇形範圍內的其他目標造成攻擊力<?2>的傷害.",
+                "Parameters": [
+                    [
+                        "184%",
+                        "188%",
+                        "193%",
+                        "211%",
+                        "216%",
+                        "221%",
+                        "239%",
+                        "244%",
+                        "248%",
+                        "267%"
+                    ],
+                    [
+                        "276%",
+                        "282%",
+                        "289%",
+                        "317%",
+                        "324%",
+                        "331%",
+                        "358%",
+                        "365%",
+                        "372%",
+                        "400%"
+                    ]
+                ],
                 "Duration": 125,
                 "Range": 1300,
                 "Radius": [
@@ -174,7 +212,7 @@
                 ]
             }
         ],
-        "Name": "肅清君1號",
+        "Name": "載具-肅清君1號",
         "DevName": "SM016401",
         "Type": "Vehicle",
         "BulletType": "Explosion",
@@ -182,7 +220,7 @@
         "StreetBattleAdaptation": 4,
         "OutdoorBattleAdaptation": 2,
         "IndoorBattleAdaptation": 0,
-        "WeaponType": "Cannon",
+        "WeaponType": "HG",
         "StabilityPoint": 1184,
         "StabilityRate": 2000,
         "AttackPower1": 1098,
@@ -236,8 +274,21 @@
             },
             {
                 "Name": "現場支援",
-                "Desc": "",
-                "Parameters": [],
+                "Desc": "每10秒，令以自身為中心的圓形範圍內除自身外的我方單位回復治癒力<?1>的生命值.",
+                "Parameters": [
+                    [
+                        "18.7%",
+                        "18.7%",
+                        "19.2%",
+                        "19.2%",
+                        "19.7%",
+                        "19.7%",
+                        "21.6%",
+                        "21.6%",
+                        "22%",
+                        "22%"
+                    ]
+                ],
                 "Radius": [
                     {
                         "Type": "Circle",
@@ -251,19 +302,19 @@
             },
             {
                 "Name": "On-Site Vehicle Support",
-                "Desc": "Continuously restores the HP of all allies in a circular area around Tactical Ambulance 11 (except self) by <?1> of Healing every 10s.",
+                "Desc": "令以自身為中心的圓形範圍(持續至自身退場)內除自身外的我方單位<b:ATK>增加<?1>増加.",
                 "Parameters": [
                     [
-                        "18.7%",
-                        "18.7%",
-                        "19.2%",
-                        "19.2%",
-                        "19.7%",
-                        "19.7%",
-                        "21.6%",
-                        "21.6%",
-                        "22%",
-                        "22%"
+                        "17%",
+                        "17.9%",
+                        "18.3%",
+                        "21.7%",
+                        "22.1%",
+                        "23%",
+                        "24.7%",
+                        "25.6%",
+                        "26%",
+                        "29.4%"
                     ]
                 ],
                 "Radius": [
@@ -294,7 +345,7 @@
                 ]
             }
         ],
-        "Name": "急救突破11號",
+        "Name": "載具-緊急車輛11號",
         "DevName": "SM008101",
         "Type": "Vehicle",
         "BulletType": "Mystic",
@@ -356,8 +407,21 @@
             },
             {
                 "Name": "主砲瞄準，發射",
-                "Desc": "",
-                "Parameters": [],
+                "Desc": "對1名敵方單位造成攻擊力<?2>的傷害；\n隨後炮彈分裂，對該目標附近最多2名其他目標造成相同效果(最多分裂2次).",
+                "Parameters": [
+                    [
+                        "279%",
+                        "293%",
+                        "307%",
+                        "363%",
+                        "377%",
+                        "391%",
+                        "447%",
+                        "461%",
+                        "475%",
+                        "531%"
+                    ]
+                ],
                 "Duration": 125,
                 "Range": 1300,
                 "Radius": [
@@ -388,7 +452,7 @@
                 ]
             }
         ],
-        "Name": "虎丸",
+        "Name": "載具-虎丸",
         "DevName": "SM015601",
         "Type": "Vehicle",
         "BulletType": "Mystic",
@@ -396,7 +460,7 @@
         "StreetBattleAdaptation": 0,
         "OutdoorBattleAdaptation": 2,
         "IndoorBattleAdaptation": 4,
-        "WeaponType": "Cannon",
+        "WeaponType": "HG",
         "StabilityPoint": 1188,
         "StabilityRate": 2000,
         "AttackPower1": 872,
@@ -421,8 +485,8 @@
         "Id": 30004,
         "Skills": [
             {
-                "Name": "特別な榴弾、心を込めて！",
-                "Desc": "Every 13s, Akari aboard the School Lunch Promotion Vehicle deals <?1> damage to enemies in a circular area.",
+                "Name": "特別的榴彈，心意滿滿！",
+                "Desc": "每13秒，對圓形範圍內的敵方單位造成自身攻擊力<?1>的傷害.",
                 "Parameters": [
                     [
                         "409%",
@@ -459,8 +523,8 @@
                 ]
             },
             {
-                "Name": "今日はそういう気分ですから？",
-                "Desc": "Increases the <b:AttackSpeed> by <?1> and <b:EnhanceMysticRate> by <?2> of all allies except self in a circular area around the School Lunch Promotion Vehicle, as long as they stay within range.",
+                "Name": "因為我今天的心情就是這樣？",
+                "Desc": "自身入場後，立即令以自身為中心的圓形範圍(持續至自身退場)內的我方單位<b:AttackSpeed>增加<?1>，<b:EnhanceMysticRate>加算<?2>.",
                 "Parameters": [
                     [
                         "28.9%",
@@ -493,7 +557,7 @@
                 "Effects": []
             }
         ],
-        "Name": "給食推進車両",
+        "Name": "載具-供給推進車輛",
         "DevName": "SM019601",
         "Type": "Vehicle",
         "BulletType": "Mystic",
@@ -556,8 +620,33 @@
             },
             {
                 "Name": "豪雨導彈",
-                "Desc": "",
-                "Parameters": [],
+                "Desc": "每12秒，對1名敵方單位造成攻擊力<?1>的傷害(無視目標<?2>防禦力).",
+                "Parameters": [
+                    [
+                        "297%",
+                        "312%",
+                        "327%",
+                        "386%",
+                        "401%",
+                        "416%",
+                        "476%",
+                        "490%",
+                        "505%",
+                        "565%"
+                    ],
+                    [
+                        "68%",
+                        "68%",
+                        "76%",
+                        "76%",
+                        "84%",
+                        "84%",
+                        "92%",
+                        "92%",
+                        "100%",
+                        "100%"
+                    ]
+                ],
                 "Duration": 76,
                 "Range": 1300,
                 "Icon": "COMMON_SKILLICON_TARGET",
@@ -601,7 +690,7 @@
                 ]
             }
         ],
-        "Name": "烏雲號",
+        "Name": "載具-雨雲號",
         "DevName": "SM017601",
         "Type": "Vehicle",
         "BulletType": "Pierce",
@@ -609,7 +698,7 @@
         "StreetBattleAdaptation": 1,
         "OutdoorBattleAdaptation": 3,
         "IndoorBattleAdaptation": 2,
-        "WeaponType": "MG",
+        "WeaponType": "HG",
         "StabilityPoint": 1184,
         "StabilityRate": 2000,
         "AttackPower1": 938,
@@ -635,19 +724,19 @@
         "Skills": [
             {
                 "Name": "Help Me, Peroro!",
-                "Desc": "Peroro plush inflicts <c:Provoke> on enemies in a circular area for <?1> when it appears.",
+                "Desc": "自身出現時，對以自身為中心的圓形範圍內的敵方單位施加<c:Provoke>狀態(持續<?1>)",
                 "Parameters": [
                     [
-                        "3.4s",
-                        "3.4s",
-                        "3.4s",
-                        "3.4s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s",
-                        "3.9s"
+                        "3.4秒",
+                        "3.4秒",
+                        "3.4秒",
+                        "3.4秒",
+                        "3.9秒",
+                        "3.9秒",
+                        "3.9秒",
+                        "3.9秒",
+                        "3.9秒",
+                        "3.9秒"
                     ]
                 ],
                 "Radius": [
@@ -680,7 +769,7 @@
                 ]
             }
         ],
-        "Name": "佩洛洛人偶",
+        "Name": "召喚物-佩洛洛人偶",
         "DevName": "HihumiDecoy_default",
         "Type": "Summoned",
         "BulletType": "Normal",
@@ -688,7 +777,7 @@
         "StreetBattleAdaptation": 0,
         "OutdoorBattleAdaptation": 4,
         "IndoorBattleAdaptation": 2,
-        "WeaponType": "None",
+        "WeaponType": "AR",
         "StabilityPoint": 300,
         "StabilityRate": 7500,
         "AttackPower1": 0,
@@ -740,7 +829,7 @@
                 ]
             }
         ],
-        "Name": "雷霆",
+        "Name": "召喚物-雷醬",
         "DevName": "Utaha_Turret_default",
         "Type": "Summoned",
         "BulletType": "Pierce",
@@ -748,7 +837,7 @@
         "StreetBattleAdaptation": 3,
         "OutdoorBattleAdaptation": 0,
         "IndoorBattleAdaptation": 3,
-        "WeaponType": "MG",
+        "WeaponType": "SMG",
         "StabilityPoint": 300,
         "StabilityRate": 2000,
         "AttackPower1": 0,
@@ -800,7 +889,7 @@
                 ]
             }
         ],
-        "Name": "雷霆MK-II",
+        "Name": "召喚物-雷醬MK-II",
         "DevName": "Utaha_Turret_Public",
         "Type": "Summoned",
         "BulletType": "Pierce",
@@ -808,7 +897,7 @@
         "StreetBattleAdaptation": 3,
         "OutdoorBattleAdaptation": 0,
         "IndoorBattleAdaptation": 3,
-        "WeaponType": "MG",
+        "WeaponType": "SMG",
         "StabilityPoint": 300,
         "StabilityRate": 2000,
         "AttackPower1": 0,
@@ -834,8 +923,30 @@
         "Skills": [
             {
                 "Name": "給您上菜了！",
-                "Desc": "",
-                "Parameters": [],
+                "Desc": "每3秒，對以自身為中心的圓形範圍內1名生命值百分比最低的我方單位投擲點心(持續至自身退場)回復生命值.\n溫泉饅頭：回復治癒力<?1>的生命值；\n味美棒：回復治癒力<?2>的生命值；\n牛奶：回復治癒力<?3>的生命值.",
+                "Parameters": [
+                    [
+                        "20.3%",
+                        "23.3%",
+                        "29.4%",
+                        "32.5%",
+                        "38.6%"
+                    ],
+                    [
+                        "24.8%",
+                        "28.5%",
+                        "36%",
+                        "39.7%",
+                        "47.1%"
+                    ],
+                    [
+                        "29.3%",
+                        "33.7%",
+                        "42.5%",
+                        "46.9%",
+                        "55.7%"
+                    ]
+                ],
                 "Duration": 77,
                 "Range": 350,
                 "Icon": "COMMON_SKILLICON_HEAL",
@@ -890,7 +1001,7 @@
                 ]
             }
         ],
-        "Name": "和香",
+        "Name": "召喚物-和香(溫泉)",
         "DevName": "SM016501",
         "Type": "Summoned",
         "BulletType": "Explosion",
@@ -917,6 +1028,77 @@
         "AmmoCost": 3,
         "Range": 1000,
         "MoveSpeed": 180,
+        "RegenCost": 0
+    },
+    {
+        "Id": 40009,
+        "Skills": [
+            {
+                "Name": "打ち上げ……花火！",
+                "Desc": "When a firework launcher receives an order to fire from Umika, deals <?1> damage to one enemy. Removes order to fire after activation. (Damage is calculated using the firework launcher's stat values)",
+                "Parameters": [
+                    [
+                        "2138%",
+                        "2245%",
+                        "2352%",
+                        "2780%",
+                        "2887%",
+                        "2994%",
+                        "3421%",
+                        "3528%",
+                        "3635%",
+                        "4063%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "SkillType": "normal",
+                "IsSummonSkill": true,
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Scale": [
+                            213871,
+                            224563,
+                            235256,
+                            278033,
+                            288725,
+                            299417,
+                            342194,
+                            352887,
+                            363579,
+                            406349
+                        ]
+                    }
+                ]
+            }
+        ],
+        "Name": "花火発射台",
+        "DevName": "SM011001",
+        "Type": "Summoned",
+        "BulletType": "Mystic",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "StabilityPoint": 349,
+        "StabilityRate": 2000,
+        "AttackPower1": 232,
+        "AttackPower100": 2325,
+        "MaxHP1": 2244,
+        "MaxHP100": 22440,
+        "DefensePower1": 86,
+        "DefensePower100": 518,
+        "HealPower1": 1403,
+        "HealPower100": 4210,
+        "DodgePoint": 249,
+        "AccuracyPoint": 701,
+        "CriticalPoint": 250,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 650,
+        "MoveSpeed": 200,
         "RegenCost": 0
     },
     {
@@ -947,6 +1129,6 @@
         "MoveSpeed": 0,
         "RegenCost": 0,
         "Skills": [],
-        "Name": "掩蔽物"
+        "Name": "掩體"
     }
 ]

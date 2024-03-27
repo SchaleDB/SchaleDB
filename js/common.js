@@ -7368,9 +7368,15 @@ function recalculateStats() {
 
                 //check conditions
                 const skillSlot = effect.OverrideSlot ? effect.OverrideSlot : buff.Skill.SkillType
-                let compatible = ExternalBuffs.checkRestrictions(student, effect)
+
+                let compatibleWithStudent = ExternalBuffs.checkRestrictions(student, effect)
+                if (student.SquadType == 'Support' && buff.Skill.SkillType != 'sub' && !buff.RaidId) {
+                    compatibleWithStudent = false
+                }
+
+                let compatibleWithSummon = (statPreviewSelectedChar > 0) ? ExternalBuffs.checkRestrictions(summon, effect) : false
                 
-                if (!compatible || (student.SquadType == 'Support' && statPreviewSelectedChar == 0 && buff.Skill.SkillType != 'sub' && !buff.RaidId)) {
+                if (!(compatibleWithStudent || compatibleWithSummon)) {
                     //exclude other character's Ex/Basic skills on Special characters
                     $('#statpreview-buff-transferable-incompatible').toggle(statPreviewIncludeBuffs)
                     $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
@@ -7380,20 +7386,28 @@ function recalculateStats() {
                         $('#statpreview-buff-transferable-conflict').toggle(statPreviewIncludeBuffs)
                         $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
                     } else {
-                        const value = ExternalBuffs.getEffectValue(buff, effect)// ('StackSame' in effect ? effect.Value[0][buff.Level-1] * buff.Stacks : effect.Value[buff.Stacks-1][buff.Level-1])
-                        studentStats.addBuff(effect.Stat, value)
-    
-                        if (statPreviewSelectedChar > 0 && buff.Skill.SkillType == 'sub') {
-                            //for summoned entities, only apply the buff to the character and not the summon
-                        } else {
+                        const value = ExternalBuffs.getEffectValue(buff, effect)
+
+                        if (compatibleWithStudent) {
+                            studentStats.addBuff(effect.Stat, value)
                             if ('Icon' in effect) {
                                 studentStats.addActiveBuffIcon(effect.Icon, 1, 'StackSame' in effect ? buff.Stacks : 1)
                             } else {
                                 studentStats.addActiveBuffIcon(effect.Stat, value, 'StackSame' in effect ? buff.Stacks : 1)
                             }
-        
-                            if (statPreviewSelectedChar > 0 && summon.Id != 99999) {
+                        }
+    
+                        if (statPreviewSelectedChar > 0 && buff.Skill.SkillType == 'sub') {
+                            //for summoned entities, only apply the buff to the character and not the summon
+                        } else {
+
+                            if (statPreviewSelectedChar > 0 && compatibleWithSummon && summon.Id != 99999) {
                                 summonStats.addBuff(effect.Stat, value)
+                                if ('Icon' in effect) {
+                                    summonStats.addActiveBuffIcon(effect.Icon, 1, 'StackSame' in effect ? buff.Stacks : 1)
+                                } else {
+                                    summonStats.addActiveBuffIcon(effect.Stat, value, 'StackSame' in effect ? buff.Stacks : 1)
+                                }
                             }
                         }
                         uniqueChannels.push({slot: skillSlot, channel: effect.Channel})
@@ -7409,18 +7423,14 @@ function recalculateStats() {
         const passiveSkill = find(student.Skills, 'SkillType', 'passive')[0]
         passiveSkill.Effects.forEach(eff => {
             studentStats.addBuff(eff.Stat, eff.Scale[skillLevel-1])
-            if (statPreviewSelectedChar == 0) {
-                studentStats.addActiveBuffIcon(eff.Stat, eff.Scale[skillLevel-1])
-            }
+            studentStats.addActiveBuffIcon(eff.Stat, eff.Scale[skillLevel-1])
         })
 
         if (statPreviewWeaponGrade >= 2) {
             const weaponPassiveSkill = find(student.Skills, 'SkillType', 'weaponpassive')[0]
             weaponPassiveSkill.Effects.forEach(eff => {
                 studentStats.addBuff(eff.Stat, eff.Scale[skillLevel-1], eff.Stat === "CriticalPoint_Base")
-                if (statPreviewSelectedChar == 0) {
-                    studentStats.addActiveBuffIcon(eff.Stat, eff.Scale[skillLevel-1])
-                }
+                studentStats.addActiveBuffIcon(eff.Stat, eff.Scale[skillLevel-1])
             })
         }
 
@@ -7534,7 +7544,7 @@ function recalculateStats() {
         const summon = student.Summons[statPreviewSelectedChar-1]
         for (let i = 0; i < summon.InheritCasterStat.length; i++) {
             summonStats.addCharacterStatsAsBuff(studentStats, summon.InheritCasterStat[i], summon.InheritCasterAmount[i][summonLevel-1])
-            studentStats.addActiveBuffIcon(summon.InheritCasterStat[i], 1)
+            summonStats.addActiveBuffIcon(summon.InheritCasterStat[i], 1)
         }
         
     }
@@ -7646,7 +7656,7 @@ function recalculateStats() {
 
     }
 
-    studentStats.renderActiveBuffs('.active-buffs', 7)
+    stats.renderActiveBuffs('.active-buffs', 7)
 
     calculateSkills()
     calculateRaidSkills()

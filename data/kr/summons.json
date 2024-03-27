@@ -85,7 +85,7 @@
         "StreetBattleAdaptation": 0,
         "OutdoorBattleAdaptation": 2,
         "IndoorBattleAdaptation": 4,
-        "WeaponType": "Cannon",
+        "WeaponType": "AR",
         "StabilityPoint": 1164,
         "StabilityRate": 2000,
         "AttackPower1": 1423,
@@ -220,7 +220,7 @@
         "StreetBattleAdaptation": 4,
         "OutdoorBattleAdaptation": 2,
         "IndoorBattleAdaptation": 0,
-        "WeaponType": "Cannon",
+        "WeaponType": "HG",
         "StabilityPoint": 1184,
         "StabilityRate": 2000,
         "AttackPower1": 1098,
@@ -302,7 +302,7 @@
             },
             {
                 "Name": "차량 현장 지원",
-                "Desc": "응급돌파 11호가 전투에 등장한 동안 자신을 중심으로 원형범위 내의 자신을 제외한 아군에게 10초마다 치유력 <?1> 회복",
+                "Desc": "응급돌파 11호가 전투에 등장한 동안 자신을 중심으로 원형범위 내의 자신을 제외한 아군에게 10초마다 치유력 <?1> 회복/\n(응급돌파 11호의 능력치로 계산)",
                 "Parameters": [
                     [
                         "18.7%",
@@ -460,7 +460,7 @@
         "StreetBattleAdaptation": 0,
         "OutdoorBattleAdaptation": 2,
         "IndoorBattleAdaptation": 4,
-        "WeaponType": "Cannon",
+        "WeaponType": "HG",
         "StabilityPoint": 1188,
         "StabilityRate": 2000,
         "AttackPower1": 872,
@@ -486,7 +486,7 @@
         "Skills": [
             {
                 "Name": "특별한 유탄, 마음 가득히!",
-                "Desc": "급양추진차량에 탑승한 아카리는 13초 마다 '특별한 유탄, 마음 가득히!'를 발동하여 원형 범위 내 적에게 공격력 <?1> 대미지",
+                "Desc": "급양추진차량에 탑승한 아카리는 13초 마다 '특별한 유탄, 마음 가득히!'를 발동하여 원형 범위 내 적에게 공격력 <?1> 대미지/\n(급양추진차량의 능력치로 계산)",
                 "Parameters": [
                     [
                         "409%",
@@ -698,7 +698,7 @@
         "StreetBattleAdaptation": 1,
         "OutdoorBattleAdaptation": 3,
         "IndoorBattleAdaptation": 2,
-        "WeaponType": "MG",
+        "WeaponType": "HG",
         "StabilityPoint": 1184,
         "StabilityRate": 2000,
         "AttackPower1": 938,
@@ -777,7 +777,7 @@
         "StreetBattleAdaptation": 0,
         "OutdoorBattleAdaptation": 4,
         "IndoorBattleAdaptation": 2,
-        "WeaponType": "None",
+        "WeaponType": "AR",
         "StabilityPoint": 300,
         "StabilityRate": 7500,
         "AttackPower1": 0,
@@ -837,7 +837,7 @@
         "StreetBattleAdaptation": 3,
         "OutdoorBattleAdaptation": 0,
         "IndoorBattleAdaptation": 3,
-        "WeaponType": "MG",
+        "WeaponType": "SMG",
         "StabilityPoint": 300,
         "StabilityRate": 2000,
         "AttackPower1": 0,
@@ -897,7 +897,7 @@
         "StreetBattleAdaptation": 3,
         "OutdoorBattleAdaptation": 0,
         "IndoorBattleAdaptation": 3,
-        "WeaponType": "MG",
+        "WeaponType": "SMG",
         "StabilityPoint": 300,
         "StabilityRate": 2000,
         "AttackPower1": 0,
@@ -1043,6 +1043,77 @@
         "AmmoCost": 3,
         "Range": 1000,
         "MoveSpeed": 180,
+        "RegenCost": 0
+    },
+    {
+        "Id": 40009,
+        "Skills": [
+            {
+                "Name": "불꽃…… 놀이예요!",
+                "Desc": "불꽃 발사장치는 우미카의 발사신호를 받으면 '불꽃…… 놀이예요!'을 발동하여 적 1인에게 공격력 <?1> 대미지/\n이후 자신의 발사신호를 해제/\n(불꽃 발사장치의 능력치로 계산)",
+                "Parameters": [
+                    [
+                        "2138%",
+                        "2245%",
+                        "2352%",
+                        "2780%",
+                        "2887%",
+                        "2994%",
+                        "3421%",
+                        "3528%",
+                        "3635%",
+                        "4063%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "SkillType": "normal",
+                "IsSummonSkill": true,
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Scale": [
+                            213871,
+                            224563,
+                            235256,
+                            278033,
+                            288725,
+                            299417,
+                            342194,
+                            352887,
+                            363579,
+                            406349
+                        ]
+                    }
+                ]
+            }
+        ],
+        "Name": "폭죽 발사장치",
+        "DevName": "SM011001",
+        "Type": "Summoned",
+        "BulletType": "Mystic",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "StabilityPoint": 349,
+        "StabilityRate": 2000,
+        "AttackPower1": 232,
+        "AttackPower100": 2325,
+        "MaxHP1": 2244,
+        "MaxHP100": 22440,
+        "DefensePower1": 86,
+        "DefensePower100": 518,
+        "HealPower1": 1403,
+        "HealPower100": 4210,
+        "DodgePoint": 249,
+        "AccuracyPoint": 701,
+        "CriticalPoint": 250,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 650,
+        "MoveSpeed": 200,
         "RegenCost": 0
     },
     {
