@@ -96810,8 +96810,14 @@
                 "Icon": "COMMON_SKILLICON_TARGET",
                 "Effects": [
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Check",
+                        "Hits": [
+                            3000,
+                            3000,
+                            4000
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             76205,
                             87636,
@@ -96828,8 +96834,14 @@
                         ]
                     },
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Always",
+                        "Hits": [
+                            3000,
+                            3000,
+                            4000
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             76205,
                             87636,
@@ -96847,7 +96859,7 @@
                     }
                 ],
                 "EffectCombine": [
-                    "DMGSingle"
+                    "DMGMulti"
                 ],
                 "EffectCombineLabel": {
                     "Icon": [

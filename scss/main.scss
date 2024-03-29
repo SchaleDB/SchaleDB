@@ -573,6 +573,11 @@ h1 small {
     object-position: center;
 }
 
+.multifloor-skill {
+    background-color: #1e2a42;
+    border-radius: 4px;
+}
+
 .bg-skill {
 
     &.explosion {
@@ -614,7 +619,7 @@ h1 small {
     pointer-events: none;
 }
 
-#ba-statpreview-gear:not(.disabled) {
+#ba-statpreview-gear:not(.disabled), #ba-statpreview-potential:not(.disabled) {
     div.disabled {
         filter: grayscale(1);
         opacity: 0.5;

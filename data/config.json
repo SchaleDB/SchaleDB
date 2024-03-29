@@ -99,7 +99,7 @@
             ]
         }
     ],
-    "build": 1711558488,
+    "build": 1711713611,
     "Regions": [
         {
             "Name": "Jp",
@@ -116,6 +116,7 @@
                 15,
                 20
             ],
+            "PotentialMax": 25,
             "CampaignMax": 25,
             "CampaignExtra": true,
             "Events": [
@@ -202,7 +203,16 @@
                     "end": 1712800800
                 }
             ],
-            "CurrentRaid": []
+            "CurrentRaid": [
+                {
+                    "type": "Raid",
+                    "raid": 6,
+                    "terrain": "Indoor",
+                    "season": 68,
+                    "start": 1712109600,
+                    "end": 1712775600
+                }
+            ]
         },
         {
             "Name": "Global",
@@ -219,6 +229,7 @@
                 15,
                 20
             ],
+            "PotentialMax": 0,
             "CampaignMax": 23,
             "CampaignExtra": true,
             "Events": [
@@ -313,6 +324,7 @@
                 20,
                 25
             ],
+            "PotentialMax": 0,
             "CampaignMax": 17,
             "CampaignExtra": false,
             "Events": [
@@ -360,16 +372,7 @@
                     "end": 1712210400
                 }
             ],
-            "CurrentRaid": [
-                {
-                    "type": "Raid",
-                    "raid": 5,
-                    "terrain": "Outdoor",
-                    "season": 17,
-                    "start": 1711000800,
-                    "end": 1711569600
-                }
-            ]
+            "CurrentRaid": []
         }
     ],
     "CommonFavorItemTags": [
@@ -378,6 +381,12 @@
         "ew"
     ],
     "Changelog": [
+        {
+            "date": "2024/03/29",
+            "contents": [
+                "<ul><li>Added support for 制約解除決戦 (Limit Break Assault) raid information. These are grouped with Allied Operations under the Raids 'Other' tab.</li><li>Added suport for enhancing stats through Ability Release.</li><li>Raised the number of Specials that can be set to 4. Adding 3 or more will automatically change the stat inheritance to match 'Limit Break Assault' formations.</li></ul>"
+            ]
+        },
         {
             "date": "2024/01/28",
             "contents": [
@@ -431,15 +440,6 @@
             "date": "2023/09/07",
             "contents": [
                 "<ul><li>Added option to sort student list by Normal Attack and Basic Skill number of hits.</li><li>Added enemy skill calculations for Shiroko Terror.</li></ul>"
-            ]
-        },
-        {
-            "date": "2023/09/05",
-            "contents": [
-                "<h6>Items page improvements</h6>",
-                "<ul><li>Show material synthesis nodes or fusion recipes that can produce an item or furniture.</li><li>Show consumable items that can reward an item or furniture.</li><li>Added more information such as furniture size, templates, item expiry and furniture interactions that require multiple students.</li><li>Expired and immediate use items are now hidden by default (Can be displayed by switching on in filters).</li><li>Added filters for items which can be obtained via synthesis, stage reward or purchased from shops.</li></ul>",
-                "<h6>Other Improvements & Bug Fixes</h6>",
-                "<ul><li>Show boosted skill heal amounts in brackets when adding a Recovery Boost buff to a student.</li><li>Fixed incorrect HP amounts shown on some raid enemies in skill calculations.</li></ul>"
             ]
         }
     ],

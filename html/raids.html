@@ -5,9 +5,9 @@
                 <div id="ba-raid-list-container" class="card p-2 screen-height mobile-scroll">
                     <div class="card-header">
                         <nav id="ba-raid-list-tabs" class="nav nav-pills nav-justified">
-                            <a id="ba-raid-list-tab-raid" class="nav-link active" data-bs-toggle="tab" href="#ba-raid-list-raid" data-localize-id="StageType,Raid"></a>
+                            <a id="ba-raid-list-tab-raid" class="nav-link active" data-bs-toggle="tab" href="#ba-raid-list-raid" data-localize-id="ui,raid_tab"></a>
                             <a id="ba-raid-list-tab-timeattack" class="nav-link" data-bs-toggle="tab" href="#ba-raid-list-timeattack" data-localize-id="StageType,TimeAttack"></a>
-                            <a id="ba-raid-list-tab-worldraid" class="nav-link" data-bs-toggle="tab" href="#ba-raid-list-worldraid" data-localize-id="StageType,WorldRaid"></a>
+                            <a id="ba-raid-list-tab-worldraid" class="nav-link" data-bs-toggle="tab" href="#ba-raid-list-worldraid" data-localize-id="ui,others"></a>
                         </nav>
                     </div>
                     <div class="card-body">
@@ -42,7 +42,9 @@
                                     <span id="ba-raid-terrain-alt" class="ba-panel me-2"><img id="ba-raid-terrain-alt-img" class="ba-student-terrain-icon invert-light" src=""></span>
                                     <span id="ba-raid-level" class="ba-student-info ba-panel text-bold my-0"></span>
                                     <span class="ba-student-info ba-panel text-bold my-0"><i class="fa-solid fa-stopwatch me-1"></i><span id="ba-raid-duration"></span></span>
-                                    <span id="ba-raid-entrycost" class="d-flex align-items-center justify-content-center"></span>                           
+                                    <div id="ba-raid-entrycost-container">
+                                        <span id="ba-raid-entrycost" class="d-flex align-items-center justify-content-center"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -59,9 +61,8 @@
                         </nav>
                     </div>
     
-                    <div class="card-body">                      
+                    <div class="card-body">
                         <div id="ba-raid-page-stats" class="tab-pane fade show active" style="border-radius: 0 0 .25em .25em;">
-
                             <div class="row g-1">
                                 <div class="col">
                                     <div id="ba-raid-enemy-info" class="enemy-info-panel mb-2">
@@ -93,6 +94,12 @@
                                         <div id="ba-raid-enemy-stats" class="ba-stats">
                                         </div>
                                         <div id="ba-raid-enemy-skills" class="enemy-skills mb-0">
+                                        </div>
+                                    </div>
+                                    <div id="multifloor-raid-floor">
+                                        <div class="d-flex flex-row align-items-center my-3">
+                                            <input id="multifloor-raid-floor-range" oninput="changeRaidFloor(this)" type="range" class="form-range me-2 flex-fill" value="0" min="0" max="24">
+                                            <span id="multifloor-raid-floor-label" class="ba-slider-label"></span>
                                         </div>
                                     </div>
                                 </div>

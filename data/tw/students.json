@@ -96944,8 +96944,14 @@
                 "Icon": "COMMON_SKILLICON_TARGET",
                 "Effects": [
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Check",
+                        "Hits": [
+                            3000,
+                            3000,
+                            4000
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             76205,
                             87636,
@@ -96962,8 +96968,14 @@
                         ]
                     },
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
                         "CriticalCheck": "Always",
+                        "Hits": [
+                            3000,
+                            3000,
+                            4000
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             76205,
                             87636,
@@ -96981,7 +96993,7 @@
                     }
                 ],
                 "EffectCombine": [
-                    "DMGSingle"
+                    "DMGMulti"
                 ],
                 "EffectCombineLabel": {
                     "Icon": [
@@ -98397,7 +98409,7 @@
         "DefaultOrder": 175,
         "PathName": "Umika",
         "DevName": "CH0110",
-        "Name": "ウミカ",
+        "Name": "海香",
         "School": "Hyakkiyako",
         "Club": "MatsuriOffice",
         "StarGrade": 3,
@@ -98437,14 +98449,14 @@
         ],
         "CollectionBG": "BG_Hyakkiyako_Collection",
         "FamilyName": "里浜",
-        "PersonalName": "ウミカ",
-        "SchoolYear": "1年生",
-        "CharacterAge": "15歳",
+        "PersonalName": "海香",
+        "SchoolYear": "1年級",
+        "CharacterAge": "15歲",
         "Birthday": " 7月1日",
-        "CharacterSSRNew": "お祭りが開かれるって聞いて駆けつけてきました！\nあれ……違いますか？",
-        "ProfileIntroduction": "百鬼夜行連合学院所属、お祭り運営委員会の1年生部員。\n\n田舎出身で、昔から都会で開催されるお祭りに興味津々だという。キヴォトス全域で行われるお祭りは全て覚えているほどの専門家。口を開けばマイナーなお祭りの話題で早口になりがちで、黙っていれば美人だとよく言われる。",
-        "Hobby": "お祭り体験、お祭り関連グッズ（パンフレット）集め",
-        "CharacterVoice": "新田ひより",
+        "CharacterSSRNew": "我聽說這裡要過節馬上就跑來啦！\n欸……我弄錯了嗎？",
+        "ProfileIntroduction": "百鬼夜行聯合學院所屬，「節慶營運管理部」的1年級成員。\n\n出身鄉下，據說以前就對在大城市裡舉行的節慶饒有興趣。\n是一位能記住在奇普托斯各地舉行的一切節日的節慶專家。\n一開口就經常小節日的話題口若懸河，因此經常被人說只要閉上嘴就是一位美人。",
+        "Hobby": "體驗節慶、收集節慶相關周邊（小冊子）",
+        "CharacterVoice": "新田日和",
         "BirthDay": "7/1",
         "Illustrator": "eno",
         "Designer": "eno",
@@ -98493,8 +98505,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "お祭り開始です！",
-                "Desc": "花火発射台を召喚（50秒間）（最大5個まで）/\n花火発射台はウミカのHPの<?1>分の値が追加されたHPを持ちます。",
+                "Name": "節慶開始！",
+                "Desc": "在指定位置召喚煙花發射架(持續50秒)(最多存在5架)；\n煙花發射架額外擁有海香生命值<?1>的<b:MAXHP>.",
                 "Parameters": [
                     [
                         "22.3%",
@@ -98516,8 +98528,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "た～まや～！です！",
-                "Desc": "通常攻撃10回毎に、<b:ATK><?1>増加（30秒間）/\nさらに味方の花火発射台全体に<b:ATK>を<?2>増加（7秒間）。発射命令を送信",
+                "Name": "煙～花～！來嘍！",
+                "Desc": "自身每進行10次普通攻擊，令自身<b:ATK>增加<?1>(持續30秒)；\n令我方全體煙花發射架<b:ATK>增加<?2>(持續7秒)，並下達發射命令.",
                 "Parameters": [
                     [
                         "11.9%",
@@ -98602,8 +98614,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "現地の熱気",
-                "Desc": "<b:MAXHP>を<?1>増加",
+                "Name": "現場的熱鬧",
+                "Desc": "<b:MAXHP>增加<?1>.",
                 "Parameters": [
                     [
                         "14%",
@@ -98640,8 +98652,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "現地の熱気+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:MAXHP>を<?2>増加",
+                "Name": "現場的熱鬧＋",
+                "Desc": "<b:ATK>增加<?1>；\n<b:MAXHP>增加<?2>.",
                 "Parameters": [
                     [
                         "326",
@@ -98690,8 +98702,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "お祭りのときめき",
-                "Desc": "通常攻撃55回毎に、<b:ATK>を<?1>増加（40秒間）/\nさらに自身のスキルコストを3減少（Exスキルの使用1回分）",
+                "Name": "節慶的心動",
+                "Desc": "自身每進行55次普通攻擊，令自身<b:ATK>增加<?1>(持續40秒)；\n令自身<b:CostChange>減少3(EX技能使用1次後失效)",
                 "Parameters": [
                     [
                         "32.2%",
@@ -98791,8 +98803,8 @@
         ],
         "IsLimited": 0,
         "Weapon": {
-            "Name": "お祭りの熱気",
-            "Desc": "ウミカが愛用するアサルトライフル。\n\nお祭りの始まりを告げる時、お祭りで起こるちょっとしたトラブルを解決する時、どんな時でもぴったりなお祭り用品だと、彼女は主張している。",
+            "Name": "節慶的熱鬧",
+            "Desc": "海香愛用的突擊步槍。\n\n她聲稱，無論是宣佈節日開始時，還是解決節日裡發生的小衝突時，這把槍都是能完美應對的節日用品。",
             "AdaptationType": "Outdoor",
             "AdaptationValue": 1,
             "AttackPower1": 119,
@@ -98943,7 +98955,7 @@
         "DefaultOrder": 176,
         "PathName": "Tsubaki_Guide",
         "DevName": "CH0255",
-        "Name": "ツバキ（ガイド）",
+        "Name": "椿（導游）",
         "School": "Hyakkiyako",
         "Club": "Shugyobu",
         "StarGrade": 3,
@@ -98966,13 +98978,13 @@
         ],
         "CollectionBG": "BG_HyakkiyakoTreeSquare_Collection",
         "FamilyName": "春日",
-        "PersonalName": "ツバキ",
-        "SchoolYear": "2年生",
-        "CharacterAge": "16歳",
+        "PersonalName": "椿",
+        "SchoolYear": "2年級",
+        "CharacterAge": "16歲",
         "Birthday": " 2月3日",
-        "CharacterSSRNew": "みんな……こっちだよ……\n並んで、並んで……",
-        "ProfileIntroduction": "いつでも何処でも眠る修行をやめない百鬼夜行連合学院所属、修行部の部長。\n\n修学旅行を迎え百鬼夜行を案内するガイドの役割につくが、睡眠の修行も諦めない。時には居眠りをしたり、時には鋭く核心を突いたりするなど、さりげなく両方をこなしている。",
-        "Hobby": "昼寝",
+        "CharacterSSRNew": "在這邊哦……大家……\n排好隊，排好隊……",
+        "ProfileIntroduction": "百鬼夜行聯合學院所屬，無論何時何地都不停下睡眠修行的「修行部」部長。\n\n迎接修學旅行到來，當上了在百鬼夜行內導遊的導遊，但也沒有放棄睡眠的修行。時而打瞌睡，時而一針見血，若無其事地做好這兩種任務。",
+        "Hobby": "午睡",
         "CharacterVoice": "白砂沙帆",
         "BirthDay": "2/3",
         "Illustrator": "Mx2J",
@@ -98999,8 +99011,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "修行部長のガイド",
-                "Desc": "円形範囲内の味方の<b:ATK>を<?1>増加（45秒間）（範囲内にいる間だけ効果を維持）",
+                "Name": "修行部部長的導遊",
+                "Desc": "令圓形範圍(持續45秒)內的我方單位<b:ATK>增加<?1>.",
                 "Parameters": [
                     [
                         "37.2%",
@@ -99037,8 +99049,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "安眠のご案内",
-                "Desc": "45秒毎に、HPが最も低い味方1人に対して治癒力の<?1>分の回復/\nさらに<b:CriticalChanceResistPoint>を<?2>増加（30秒間）",
+                "Name": "安眠指南",
+                "Desc": "每45秒，令生命值百分比最低的1名我方單位回復治癒力<?1>的生命值，\n<b:CriticalChanceResistPoint>增加<?2>(持續30秒).",
                 "Parameters": [
                     [
                         "54.9%",
@@ -99105,8 +99117,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "ガイドの自負",
-                "Desc": "<b:HealPower>を<?1>増加",
+                "Name": "導遊的自豪",
+                "Desc": "<b:HealPower>增加<?1>.",
                 "Parameters": [
                     [
                         "14%",
@@ -99143,8 +99155,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "ガイドの自負+",
-                "Desc": "<b:HealPower>を<?1>増加/\nさらに<b:HealPower>を<?2>増加",
+                "Name": "導遊的自豪＋",
+                "Desc": "<b:HealPower>增加<?1>；\n<b:HealPower>增加<?2>.",
                 "Parameters": [
                     [
                         "704",
@@ -99193,8 +99205,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "サービス、サービス",
-                "Desc": "味方の<b:ATK>を<?1>増加",
+                "Name": "接待，接待",
+                "Desc": "令編隊內的學生<b:ATK>增加<?1>.",
                 "Parameters": [
                     [
                         "9.1%",
@@ -99296,8 +99308,8 @@
         ],
         "IsLimited": 0,
         "Weapon": {
-            "Name": "安眠のお供Ⅱ",
-            "Desc": "ツバキのサブマシンガン。\n\n普段の修行を妨げることの無い小さい銃は、ガイドの役割においても十分役に立っているようだ。",
+            "Name": "安眠的同伴Ⅱ",
+            "Desc": "椿的衝鋒槍。\n\n這把毫不妨礙平時修行的小槍，對當導遊而言也是很有用的。",
             "AdaptationType": "Outdoor",
             "AdaptationValue": 1,
             "AttackPower1": 111,
