@@ -9,6 +9,7 @@
 @import 'items';
 @import 'stages';
 @import 'raids';
+@import 'pixel';
 
 #ba-content {
     width: 100%;
@@ -220,7 +221,6 @@ h1 small {
 }
 
 .ba-type-weapon {
-    height: 78px;
     min-width: 198px;
     padding: .1rem .5rem !important;
     background-size: contain;
@@ -332,12 +332,12 @@ h1 small {
     color: #fff;
 }
 
-.bg-striker-t, .bg-main-t {
-    background-color: var(--col-bg-striker-t);
+.bg-striker, .bg-main {
+    background-color: var(--col-bg-striker);
 }
 
-.bg-special-t, .bg-support-t {
-    background-color: var(--col-bg-special-t);
+.bg-special, .bg-support {
+    background-color: var(--col-bg-special);
 }
 
 .bg-atk-explosion-t, .bg-def-lightarmor-t {

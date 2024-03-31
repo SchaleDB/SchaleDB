@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Sans+KR:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400;1,700&display=swap" rel="stylesheet"> 
-    <link href="css/main.css?v=255" rel="stylesheet">
+    <link href="css/main.css?v=256" rel="stylesheet">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XQEWDXR13H"></script>
     <script>
@@ -35,7 +35,7 @@
         gtag('config', 'G-XQEWDXR13H');
     </script>
 </head>
-<body class="reduced-motion">
+<body>
     <div id="loading-cover">
         <noscript class="d-flex justify-content-center text-center mb-1 text-light">Schale DB requires JavaScript in order to function correctly.<br>Please enable JavaScript for this site and reload the page.</noscript>
         <div id="loading-spinner" class="d-flex justify-content-center" style="display:none!important;">
@@ -101,6 +101,7 @@
                                         <button type="button" id="ba-navbar-themeswitcher-auto" class="btn btn-sm btn-dark" onclick="toggleDarkTheme('auto')">Auto</button>
                                         <button type="button" id="ba-navbar-themeswitcher-light" class="btn btn-sm btn-dark" onclick="toggleDarkTheme('light')"><i class="fa-solid fa-sun px-2"></i></button>
                                         <button type="button" id="ba-navbar-themeswitcher-dark" class="btn btn-sm btn-dark" onclick="toggleDarkTheme('dark')"><i class="fa-solid fa-moon px-2"></i></button>
+                                        <button type="button" id="ba-navbar-themeswitcher-pixel" class="btn btn-sm btn-dark" onclick="setPixelTheme()"><i class="fa-solid fa-gamepad px-2"></i></button>
                                     </div>
                                 </span>
                             </div>
@@ -247,9 +248,9 @@
     </div>
 </body>
 <script>
-    const cache_ver = 255;
+    const cache_ver = 256;
     document.getElementById('loading-spinner').style.display = null;
     window.setTimeout(x => {document.getElementById('loading-skipmsg').style.display = null;}, 10000);
 </script>
-<script src="js/common.min.js?v=255"></script>
+<script src="js/common.min.js?v=256"></script>
 </html>

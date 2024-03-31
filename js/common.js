@@ -3,10 +3,10 @@ const maxbond = [10, 10, 20, 20, 50]
 const gear_minlevelreq = [0, 15, 35]
 const raid_reward_coin = [[40,0],[60,0],[80,0],[100,10],[120,20],[140,40],[160,60]]
 const languages = ['En', 'Jp', 'Kr', 'Tw', 'Cn', 'Zh', 'Th']
-const label_smalltext_threshold = {'En':10, 'Jp':5, 'Kr':5, 'Tw':5, 'Cn': 5, 'Zh': 5, 'Th': 11, 'Vi': 11}
-const label_craft_smalltext_threshold = {'En':8, 'Jp':4, 'Kr':4, 'Tw':4, 'Cn': 4, 'Zh': 4, 'Th': 8, 'Vi': 8}
-const label_enemy_smalltext_threshold = {'En':12, 'Jp':6, 'Kr':6, 'Tw':6, 'Cn':6, 'Zh':6, 'Th': 12, 'Vi': 12}
-const label_raid_smalltext_threshold = {'En':19, 'Jp':10, 'Kr':11, 'Tw':10, 'Cn':10, 'Zh':10, 'Th': 20, 'Vi': 20}
+const label_smalltext_threshold = {'En':8, 'Jp':5, 'Kr':5, 'Tw':5, 'Cn': 5, 'Zh': 5, 'Th': 11, 'Vi': 11}
+const label_craft_smalltext_threshold = {'En':7, 'Jp':4, 'Kr':4, 'Tw':4, 'Cn': 4, 'Zh': 4, 'Th': 8, 'Vi': 8}
+const label_enemy_smalltext_threshold = {'En':10, 'Jp':6, 'Kr':6, 'Tw':6, 'Cn':6, 'Zh':6, 'Th': 12, 'Vi': 12}
+const label_raid_smalltext_threshold = {'En':16, 'Jp':10, 'Kr':11, 'Tw':10, 'Cn':10, 'Zh':10, 'Th': 20, 'Vi': 20}
 const adaptationAmount = {0: "D", 1: "C", 2: "B", 3: "A", 4: "S", 5: "SS"}
 const terrain_dmg_bonus = {D: 0.8, C: 0.9, B: 1, A: 1.1, S: 1.2, SS: 1.3}
 const terrain_block_bonus = {D: 0, C: 15, B: 30, A: 45, S: 60, SS: 75}
@@ -246,6 +246,7 @@ let loadObserver
 let region
 let student_bondalts
 let darkTheme
+let pixelMode
 let highContrast
 let raid
 let selectedEnemy = 0
@@ -3272,7 +3273,8 @@ if (localStorage.getItem("theme")) {
     applyThemeToBody(localStorage.getItem("theme"))
 }
 
-$("#ba-navbar-logo").load("./images/logo_schalegg.svg")
+//$("#ba-navbar-logo").load("./images/logo_schalegg.svg")
+$("#ba-navbar-logo").html("<img src='./images/logo_pixel.png'>")
 
 $.when($.ready, loadPromise).then(function() {
 
@@ -3331,15 +3333,25 @@ $.when($.ready, loadPromise).then(function() {
     } else {
         darkTheme = 'auto'
     }
-    toggleDarkTheme(darkTheme)
+
+    if (localStorage.getItem("pixel")) {
+        pixelMode = (localStorage.getItem("pixel") == "true")
+    } else {
+        pixelMode = true
+    }
+    
+    if (pixelMode) {
+        setPixelTheme()
+    } else {
+        toggleDarkTheme(darkTheme)
+    }
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-        if (darkTheme == 'auto') {
+        if (darkTheme == 'auto' && !pixelMode) {
             applyThemeToBody('auto')
         }
     })
 
-    $('body').toggleClass("reduced-motion", false)
     if (localStorage.getItem("high_contrast")) {
         highContrast = (localStorage.getItem("high_contrast") == "true")
     } else {
@@ -3361,7 +3373,6 @@ $.when($.ready, loadPromise).then(function() {
     $(`#ba-navbar-regionselector-${regionID}`).addClass("active")
     $(`#ba-navbar-languageselector span`).text($(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).text())
     $(`#ba-navbar-languageselector-${userLang.toLowerCase()}`).addClass("active")
-    $(`#ba-navbar-themeswitcher-${darkTheme}`).addClass("active")
     $(`#ba-navbar-contrast-toggle-${highContrast}`).addClass("active")
 
     $('#ba-navbar-search').on('input', function() {
@@ -3939,7 +3950,7 @@ function loadModule(moduleName, entry=null) {
         bgimg.onload = function(){
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
-        bgimg.src = `images/background/BG_MainOffice_Night.jpg`
+        bgimg.src = `images/background/${pixelMode ? 'pixel/BG_GameDevRoom.png' : 'BG_MainOffice_Night.jpg'}`
         $("#loaded-module").load(html_list['items'], function() {
 
             equipmentFilters = $('#item-search-filter-equipmenttier .search-filter-group')
@@ -4024,7 +4035,7 @@ function loadModule(moduleName, entry=null) {
         bgimg.onload = function(){
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
-        bgimg.src = `images/background/BG_Raid.jpg`
+        bgimg.src = `images/background/${pixelMode ? 'pixel/' + 'BG_Raid.png' : 'BG_Raid.jpg'}`
         $("#loaded-module").load(html_list['raids'], function() {
             loadLanguage(userLang)
 
@@ -4069,7 +4080,7 @@ function loadModule(moduleName, entry=null) {
         bgimg.onload = function(){
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
-        bgimg.src = `images/background/BG_HQ.jpg`
+        bgimg.src = `images/background/${pixelMode ? 'pixel/' + 'BG_HQ.png' : 'BG_HQ.jpg'}`
         $("#loaded-module").load(html_list['stages'], function() {
             loadLanguage(userLang)
             loadedStageList = null
@@ -4120,7 +4131,7 @@ function loadModule(moduleName, entry=null) {
         bgimg.onload = function(){
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
-        bgimg.src = `images/background/BG_CraftChamber_Night.jpg`
+        bgimg.src = `images/background/${pixelMode ? 'pixel/' + 'BG_CraftChamber_Night.png' : 'BG_CraftChamber_Night.jpg'}`
         $("#loaded-module").load(html_list['craft'], function() {
             loadLanguage(userLang)
             $(".tooltip").tooltip("hide")
@@ -4175,12 +4186,27 @@ function loadModule(moduleName, entry=null) {
         bgimg.onload = function(){
             $("#ba-background").css('background-image', `url('${bgimg.src}')`)
         }
-        bgimg.src = `images/background/BG_ReceptionRoom.jpg`
+        bgimg.src = `images/background/${pixelMode ? 'pixel/BG_GameDevRoom.png' : 'BG_ReceptionRoom.jpg'}`
         $("#loaded-module").load(html_list['home'], function() {
             loadLanguage(userLang)
             loadRegion(regionID)
 
             populateEvents()
+
+            if (pixelMode) {
+                switch (Math.floor(Math.random() * 3)) {
+                    case 0:
+                        $('#home-character-img').attr('src', 'images/ui/aris_pixel.png')
+                        break
+                    case 1:
+                        $('#home-character-img').attr('src', 'images/ui/momoi_pixel.png')
+                        break
+                    case 2:
+                        $('#home-character-img').attr('src', 'images/ui/midori_pixel.png')
+                        break
+                }
+                
+            }
 
             eventRefreshInterval = window.setInterval(updateEventTimers, 60000)
 
@@ -5052,7 +5078,7 @@ function renderStudent() {
     bgimg.onload = function(){
         $("#ba-background").css('background-image', `url('${bgimg.src}')`)
     }
-    bgimg.src = `images/background/${student.CollectionBG}.jpg`
+    bgimg.src = `images/background/${pixelMode ? 'pixel/' + student.CollectionBG + '.png' : student.CollectionBG + '.jpg'}`
 
     $('#ba-student-name').html(getTranslatedString(student, 'Name').replace(/([(（].+[)）])/,'<small>$1</small>'))
     $("#ba-student-class").removeClass("ba-class-main ba-class-support").addClass(`ba-class-${student.SquadType.toLowerCase()}`).find('.label').text(getLocalizedString('SquadType', student.SquadType))
@@ -8460,9 +8486,9 @@ function getStudentListCardHTML(student) {
         <div class="card-img">
             <img src="images/student/collection/${student.Id}.webp">
         </div>
-        <span class="card-badge student-role top-left bg-${student.SquadType.toLowerCase()}-t"><img src="images/ui/Role_${student.TacticRole}.png"></span>
-        <span class="card-badge student-type atk bg-atk-${student.BulletType.toLowerCase()}-t"><img src="images/ui/Type_Attack_s.png"></span>
-        <span class="card-badge student-type def bg-def-${student.ArmorType.toLowerCase()}-t"><img src="images/ui/Type_Defense_s.png"></span>
+        <span class="card-badge student-role top-left bg-${student.SquadType.toLowerCase()}"><img src="images/ui/Role_${student.TacticRole}.png"></span>
+        <span class="card-badge student-type atk bg-atk-${student.BulletType.toLowerCase()}"><img src="images/ui/Type_Attack_s.png"></span>
+        <span class="card-badge student-type def bg-def-${student.ArmorType.toLowerCase()}"><img src="images/ui/Type_Defense_s.png"></span>
         <span class="card-badge student-rarity">${'<i class="fa-solid fa-star"></i>'.repeat(student.StarGrade)}</span>
         <div class="card-label">
             <span class="label-text ${name.length > label_smalltext_threshold[userLang] ? "smalltext" : ""}">${name}</span>
@@ -10220,17 +10246,36 @@ function abbreviateNumber(number) {
 }
 
 function toggleDarkTheme(theme) {
+    pixelMode = false
     darkTheme = theme
     $(`#ba-navbar-themeswitcher button`).removeClass("active")
     $(`#ba-navbar-themeswitcher-${theme}`).addClass("active")
     localStorage.setItem("theme", theme)
+    localStorage.setItem("pixel", false)
     applyThemeToBody(theme)
 }
 
+function setPixelTheme() {
+    pixelMode = true
+    $(`#ba-navbar-themeswitcher button`).removeClass("active")
+    $(`#ba-navbar-themeswitcher-pixel`).addClass("active")
+    localStorage.setItem("pixel", true)
+    applyThemeToBody('pixel')
+}
+
 function applyThemeToBody(theme) {
-    const applyDarkTheme = (theme == 'auto') ? window.matchMedia('(prefers-color-scheme: dark)').matches : theme == 'dark'
-    $('body').toggleClass("theme-dark", applyDarkTheme)
-    $('meta[name="theme-color"]').attr('content', applyDarkTheme ? '#212529' : '#dee2e6')
+    if (theme == 'pixel') {
+        $('body').toggleClass("pixel", true)
+        $('body').toggleClass("theme-dark", false)
+        $('meta[name="theme-color"]').attr('content', '#21009c')
+        $("#ba-navbar-logo").html("<img src='./images/logo_pixel.png'>")
+    } else {
+        $("#ba-navbar-logo").load("./images/logo_schalegg.svg")
+        const applyDarkTheme = (theme == 'auto') ? window.matchMedia('(prefers-color-scheme: dark)').matches : theme == 'dark'
+        $('body').toggleClass("pixel", false)
+        $('body').toggleClass("theme-dark", applyDarkTheme)
+        $('meta[name="theme-color"]').attr('content', applyDarkTheme ? '#212529' : '#dee2e6')
+    }
 }
 
 function toggleHighContrast(state) {
