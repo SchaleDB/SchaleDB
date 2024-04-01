@@ -150,10 +150,12 @@ body.pixel {
         border-radius: 2px !important;
     }
 
-    font-family: 'FF6 Font', 'Fusion Pixel JA', sans-serif;
-    font-style: normal !important;
-    font-weight: 400 !important;
-    text-shadow: 1px 1px 0 #000;
+    &, .ba-tooltip {
+        font-family: 'FF6 Font', 'Fusion Pixel JA', sans-serif;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        text-shadow: 1px 1px 0 #000;
+    }
 
     .title-text {
         font-family: 'FF6 Font', 'Fusion Pixel JA', sans-serif;
@@ -469,10 +471,6 @@ body.pixel {
     }
 
     .ba-tooltip {
-        font-family: "FF6 Font";
-        font-style: normal !important;
-        font-weight: 400 !important;
-        text-shadow: 2px 1px 0 #000;
 
         .ba-tooltip-body {
             border: 1px solid #fff;
