@@ -3335,9 +3335,9 @@ $.when($.ready, loadPromise).then(function() {
     }
 
     if (localStorage.getItem("pixel")) {
-        pixelMode = (localStorage.getItem("pixel") == "true")
+        pixelMode = (localStorage.getItem("cheat_code") == "true")
     } else {
-        pixelMode = true
+        pixelMode = false
     }
     
     if (pixelMode) {
@@ -10246,20 +10246,22 @@ function abbreviateNumber(number) {
 }
 
 function toggleDarkTheme(theme) {
-    pixelMode = false
     darkTheme = theme
     $(`#ba-navbar-themeswitcher button`).removeClass("active")
     $(`#ba-navbar-themeswitcher-${theme}`).addClass("active")
     localStorage.setItem("theme", theme)
-    localStorage.setItem("pixel", false)
+
+    if (pixelMode) {
+        pixelMode = false
+        localStorage.setItem("cheat_code", false)
+        loadModule(loadedModule)
+    }
+    
     applyThemeToBody(theme)
 }
 
 function setPixelTheme() {
-    pixelMode = true
     $(`#ba-navbar-themeswitcher button`).removeClass("active")
-    $(`#ba-navbar-themeswitcher-pixel`).addClass("active")
-    localStorage.setItem("pixel", true)
     applyThemeToBody('pixel')
 }
 
@@ -10480,6 +10482,16 @@ function searchContains(substring, string) {
 
 function allSearch() {
     let searchTerm = $('#ba-navbar-search').val().toLowerCase()
+
+    if (searchTerm == 'uuddlrlrba') {
+        pixelMode = true
+        localStorage.setItem("cheat_code", true)
+        setPixelTheme()
+        loadModule(loadedModule)
+        searchTerm = ""
+        $('#ba-navbar-search').val("")
+    }
+
     $('#navbar-search-results').scrollTop(0)
     if (searchTerm == "") {
         $('#navbar-search-results').html('').hide()
