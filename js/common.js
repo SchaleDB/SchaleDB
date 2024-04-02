@@ -3334,7 +3334,7 @@ $.when($.ready, loadPromise).then(function() {
         darkTheme = 'auto'
     }
 
-    if (localStorage.getItem("pixel")) {
+    if (localStorage.getItem("cheat_code")) {
         pixelMode = (localStorage.getItem("cheat_code") == "true")
     } else {
         pixelMode = false
