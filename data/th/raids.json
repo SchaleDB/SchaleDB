@@ -58258,7 +58258,7 @@
             "Id": 20000,
             "IsReleased": [
                 true,
-                false,
+                true,
                 false
             ],
             "DungeonType": "Defense",
@@ -59181,6 +59181,169 @@
                 180,
                 180
             ]
+        },
+        {
+            "Id": 26000,
+            "IsReleased": [
+                true,
+                false,
+                false
+            ],
+            "DungeonType": "Destruction",
+            "Icon": "enemyinfo_totem03_timeattack",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "ElasticArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 920300001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7823001,
+                        7823101,
+                        7823201,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 920300002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7823002,
+                        7823102,
+                        7823202,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 920300003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7823003,
+                        7823103,
+                        7823203,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 920300004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7823004,
+                        7823104,
+                        7823204,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2093623496
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2093623496
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2093623496
+                    },
+                    {
+                        "Id": 4286826379
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2093623496
+                    },
+                    {
+                        "Id": 4286826379
+                    },
+                    {
+                        "Id": 2937631326
+                    }
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                130,
+                140
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -59501,6 +59664,18 @@
             "Icon": "timeattack_icon_debuff_healeffectiveness_ally_01",
             "Name": "ลดอัตราการฟื้นฟูของหุ่นล้ำยุค, ลดค่าโจมตีของศัตรู",
             "Desc": "หุ่นล้ำยุคจะมี<d:HealEffectiveness>ลดลง 90%\n<d:ATK>ของศัตรูทั้งหมดลดลง 40%"
+        },
+        {
+            "Id": 4286826379,
+            "Icon": "timeattack_icon_ally_special_healwhenhealed",
+            "Name": "味方回復時にかかし回復、かかしのHP増加",
+            "Desc": "味方が回復を受けると、かかしのHPが回復します。\nかかしのHPが増加します。"
+        },
+        {
+            "Id": 2937631326,
+            "Icon": "timeattack_icon_buff_attackpower_ally_01",
+            "Name": "SR武器の攻撃力が増加、敵のHP増加",
+            "Desc": "SR武器を使用する味方生徒の攻撃力が増加します。\n敵のHPが増加します。"
         }
     ],
     "WorldRaid": [
