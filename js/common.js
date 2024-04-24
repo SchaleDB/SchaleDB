@@ -2558,8 +2558,8 @@ class EnemyFinder {
         $('#statpreview-enemy-size').toggle(enemy.Size != null)
         $('#statpreview-enemy-size .label').text(enemy.Size != null ? getLocalizedString('CharacterSize', enemy.Size) : '')
 
-        $("#statpreview-enemy-attacktype .icon-type").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-sonic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
-        $("#statpreview-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
+        setAttackTypeClass($("#statpreview-enemy-attacktype .icon-type"), enemy.BulletType)
+        setDefenseTypeClass($("#statpreview-enemy-defensetype .icon-type"), enemy.ArmorType)
         $("#statpreview-enemy-attacktype .label").text(getLocalizedString('BulletType',enemy.BulletType))
         $("#statpreview-enemy-defensetype .label").text(getLocalizedString('ArmorType',enemy.ArmorType))
         
@@ -2593,7 +2593,7 @@ class EnemyFinder {
 
         $('#statpreview-enemy-defensetype-list .dropdown-item').removeClass('active')
         $(`#statpreview-enemy-defensetype-list .dropdown-item[data-value="${armorType}"]`).addClass('active')
-        $("#statpreview-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${statPreviewSelectedEnemyArmorType.toLowerCase()}`)
+        setDefenseTypeClass($("#statpreview-enemy-defensetype .icon-type"), statPreviewSelectedEnemyArmorType)
         $("#statpreview-enemy-defensetype .label").text(getLocalizedString('ArmorType',statPreviewSelectedEnemyArmorType))
 
         calculateEnemyStats()
@@ -5104,10 +5104,10 @@ function renderStudent() {
 
     $("#ba-student-role-label").text(getLocalizedString('TacticRole', student.TacticRole))
     $("#ba-student-role-icon").attr("src", `images/ui/Role_${student.TacticRole}.png`)
-
-    $("#ba-student-attacktype").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-sonic").addClass(`bg-atk-${student.BulletType.toLowerCase()}`)
-    $("#ba-student-defensetype").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-elasticarmor").addClass(`bg-def-${student.ArmorType.toLowerCase()}`)
     
+    setAttackTypeClass($("#ba-student-attacktype"), student.BulletType)
+    setDefenseTypeClass($("#ba-student-defensetype"), student.ArmorType)
+
     $("#ba-student-academy-label").text(`${getLocalizedString('School',student.School)} / ${getLocalizedString('Club',student.Club)}`)
     $("#ba-student-school-img, #ba-student-academy-icon").attr("src", `images/schoolicon/School_Icon_${student.School.replace('Sakugawa', 'Etc').toUpperCase()}_W.png`)
     $("#ba-student-position-label").text(student.Position.toUpperCase())
@@ -6389,16 +6389,19 @@ function changeRaidEnemy(num) {
     selectedEnemy = num
     let enemy = find(data.enemies, 'Id', raid.EnemyList[raid_difficulty][num])[0], grade = 1
     let level
-    let bulletType
+    let bulletType, armorType
     if (raid.Id < 1000) {
         level = raid_level[raid_difficulty]
         bulletType = (raid_difficulty < 5) ? raid.BulletType : raid.BulletTypeInsane
+        armorType = enemy.ArmorType
     } else if (raid.Id < 1000000) {
         level = raid.Level[raid_difficulty]
         bulletType = (raid_difficulty < 5) ? raid.BulletType : raid.BulletTypeInsane
+        armorType = enemy.ArmorType
     } else {
         level = raid.RaidFloors[multiFloorRaidFloor].Level
         bulletType = raid.BulletType[raid_difficulty]
+        armorType = raid.ArmorType
     }
 
     let enemyStats = new CharacterStats(enemy, level, 1, (enemy.Transcendence ? enemy.Transcendence : []))
@@ -6485,15 +6488,13 @@ function changeRaidEnemy(num) {
         $('#ba-raid-enemy-icon img').attr('src', `images/raid/icon/Icon_${raid.PathName}${raid.Id < 1000 && raid_difficulty >= 5 ? '_Insane' : ''}.png`)
     }
 
-    
-
     $("#ba-raid-enemy-attacktype").tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType', bulletType)}`, translateUI('attacktype'), null, getAttackTypeText(bulletType), 32), placement: 'top', html: true})
-    $("#ba-raid-enemy-attacktype .icon-type").removeClass("bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-normal bg-atk-sonic").addClass(`bg-atk-${bulletType.toLowerCase()}`)
+    setAttackTypeClass($("#ba-raid-enemy-attacktype .icon-type"), bulletType)
     $("#ba-raid-enemy-attacktype .label").text(getLocalizedString('BulletType',bulletType))
 
-    $("#ba-raid-enemy-defensetype").tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType', enemy.ArmorType)}`, translateUI('defensetype'), null, getDefenseTypeText(enemy.ArmorType), 32), placement: 'top', html: true})
-    $("#ba-raid-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
-    $("#ba-raid-enemy-defensetype .label").text(getLocalizedString('ArmorType',enemy.ArmorType))
+    $("#ba-raid-enemy-defensetype").tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('ArmorType', armorType)}`, translateUI('defensetype'), null, getDefenseTypeText(armorType), 32), placement: 'top', html: true})
+    setDefenseTypeClass($("#ba-raid-enemy-defensetype .icon-type"), armorType)
+    $("#ba-raid-enemy-defensetype .label").text(getLocalizedString('ArmorType',armorType))
 
     $('#ba-raid-enemy-size').toggle(enemy.Size != null).find('.label').text(enemy.Size != null ? getLocalizedString('CharacterSize', enemy.Size) : '')
     $('#ba-raid-enemy-name').html(getTranslatedString(enemy, 'Name'))
@@ -8702,8 +8703,8 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
 
     $('#ba-stage-enemy-size .label').text(enemy.Size != null ? getLocalizedString('CharacterSize', enemy.Size) : '')
     $('#ba-stage-enemy-size').toggle(enemy.Size != null)
-    $("#ba-stage-enemy-attacktype .icon-type").removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-sonic").addClass(`bg-atk-${enemy.BulletType.toLowerCase()}`)
-    $("#ba-stage-enemy-defensetype .icon-type").removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor").addClass(`bg-def-${enemy.ArmorType.toLowerCase()}`)
+    setAttackTypeClass($("#ba-stage-enemy-attacktype .icon-type"), enemy.BulletType)
+    setDefenseTypeClass($("#ba-stage-enemy-defensetype .icon-type"), enemy.ArmorType)
     $("#ba-stage-enemy-attacktype .label").text(getLocalizedString('BulletType',enemy.BulletType))
     $("#ba-stage-enemy-defensetype .label").text(getLocalizedString('ArmorType',enemy.ArmorType))
     $('#ba-stage-enemy-attacktype').tooltip('dispose').tooltip({title: getRichTooltip(null, `${getLocalizedString('BulletType',enemy.BulletType)}`, translateUI('attacktype'), null, getAttackTypeText(enemy.BulletType), 32), placement: 'top', html: true})
@@ -10027,7 +10028,9 @@ function findOrDefault(obj, key, value, default_value) {
 
 function getAttackTypeText(bulletType) {
     let text = ''
-    if (bulletType == "Normal") {
+    if (bulletType == "Mixed") {
+        text = translateUI("attack_type_mixed_desc")
+    } else if (bulletType == "Normal") {
         text = translateUI("attack_type_normal_desc")
     } else for (armorType in data.config.TypeEffectiveness[bulletType]) {
         if (armorType == "Structure") continue
@@ -10043,7 +10046,9 @@ function getAttackTypeText(bulletType) {
 function getDefenseTypeText(armorType) {
 
     let text = ''
-    if (armorType == "Normal") {
+    if (armorType == "Mixed") {
+        text = translateUI("defense_type_mixed_desc")
+    } else if (armorType == "Normal") {
         text = translateUI("defense_type_normal_desc")
     } else for (bulletType in data.config.TypeEffectiveness) {
         if (bulletType == "Sonic" && regionID == 2) continue
@@ -10054,6 +10059,14 @@ function getDefenseTypeText(armorType) {
         }
     }
     return text
+}
+
+function setAttackTypeClass($el, type) {
+    $el.removeClass("bg-atk-normal bg-atk-explosion bg-atk-pierce bg-atk-mystic bg-atk-sonic bg-atk-mixed").addClass(`bg-atk-${type.toLowerCase()}`)
+}
+
+function setDefenseTypeClass($el, type) {
+    $el.removeClass("bg-def-lightarmor bg-def-heavyarmor bg-def-unarmed bg-def-normal bg-def-elasticarmor bg-def-mixed").addClass(`bg-def-${type.toLowerCase()}`)
 }
 
 function getSkillText(skill, level, {renderBuffs = true, bulletType = null, emphasiseChange = false, renderSkillHits = true}) {

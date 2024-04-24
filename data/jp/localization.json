@@ -8,14 +8,16 @@
         "Pierce": "貫通",
         "Mystic": "神秘",
         "Normal": "ノーマル",
-        "Sonic": "振動"
+        "Sonic": "振動",
+        "Mixed": "様々"
     },
     "ArmorType": {
         "LightArmor": "軽装備",
         "HeavyArmor": "重装甲",
         "Unarmed": "特殊装甲",
         "ElasticArmor": "弾力装甲",
-        "Normal": "通常装甲"
+        "Normal": "通常装甲",
+        "Mixed": "様々"
     },
     "ArmorTypeLong": {
         "LightArmor": "軽装備",
@@ -23,7 +25,8 @@
         "Unarmed": "特殊装甲",
         "Structure": "構造物",
         "ElasticArmor": "弾力装甲",
-        "Normal": "通常装甲"
+        "Normal": "通常装甲",
+        "Mixed": "様々"
     },
     "TacticRole": {
         "DamageDealer": "アタッカー",
@@ -183,7 +186,8 @@
         "12": "ゲーム開発部",
         "13": "サンシャインリゾート",
         "14": "デパート",
-        "15": "ゲヘナパーティー"
+        "15": "ゲヘナパーティー",
+        "16": "トリニティ教室"
     },
     "FurnitureSet": {
         "0": "なし",
@@ -201,7 +205,8 @@
         "111": "ゲーム開発部シリーズ",
         "112": "サンシャインリゾートシリーズ",
         "113": "デパートシリーズ",
-        "114": "ゲヘナパーティーシリーズ"
+        "114": "ゲヘナパーティーシリーズ",
+        "115": "トリニティ教室シリーズ"
     },
     "ItemCategory": {
         "Furnitures": "家具",
@@ -309,7 +314,8 @@
         "832": "（電脳）新春行進曲",
         "833": "陽ひらく彼女たちの小夜曲",
         "834": "0068 オペラより愛をこめて！",
-        "835": "にぎにぎと ゆきゆきて"
+        "835": "にぎにぎと ゆきゆきて",
+        "836": "-ive aLIVE!"
     },
     "StageType": {
         "Campaign": "任務",
@@ -515,7 +521,8 @@
         "Special_CH0233_ExtraPassive": "ホクホクの焼き芋",
         "Special_CH0231_ExtraPassive": "「警護成功」",
         "Special_CH0239_ExtraPassive": "潜入行動",
-        "Special_EN0008_Obelisk": "「帯電」"
+        "Special_EN0008_Obelisk": "「帯電」",
+        "Special_CH0220_Public": "「シュガーラッシュ」"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "救護の心構え",
@@ -635,7 +642,8 @@
         "Special_CH0233_ExtraPassive": "ホクホクの焼き芋",
         "Special_CH0231_ExtraPassive": "「警護成功」",
         "Special_CH0239_ExtraPassive": "潜入行動",
-        "Special_EN0008_Obelisk": "「帯電」"
+        "Special_EN0008_Obelisk": "「帯電」",
+        "Special_CH0220_Public": "「シュガーラッシュ」"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "一定間隔でHPを持続的に回復する。\n解除後にミネのノーマルスキルを発動する。",
@@ -753,9 +761,10 @@
         "Special_CH0224_Public": "攻撃は追加ダメージを与える。",
         "Special_CH0225_ExtraPassive": "3個所持している時、EXスキルが味方のスキルコストを減少させる。",
         "Special_CH0233_ExtraPassive": "攻撃は追加ダメージを与える。",
-        "Special_CH0231_ExtraPassive": "Increases Ako (Dress)'s ATK and the damage dealt by her Basic Skill.",
-        "Special_CH0239_ExtraPassive": "Increases Kayoko (Dress)'s Crit DMG and changes EX Skill to be guaranteed critical.",
-        "Special_EN0008_Obelisk": "Cannot be targeted by the Fury of Set's lightning strikes."
+        "Special_CH0231_ExtraPassive": "アコ（ドレス）の攻撃力とノーマルスキルが与えるダメージが増加する。",
+        "Special_CH0239_ExtraPassive": "カヨコ（ドレス）の会心ダメージ率が増加し、EXスキルによる攻撃を確定会心に変更する。",
+        "Special_EN0008_Obelisk": "セトの憤怒による落雷の対象にならない。",
+        "Special_CH0220_Public": "Enhances various aspects of the Sugar Rush band members' skills."
     },
     "ServerName": {
         "0": "日本",
@@ -959,6 +968,8 @@
         "attack_type_normal_desc": "<b class='ba-col-explosion'>軽装備</b>、<b class='ba-col-pierce'>重装甲</b>、<b class='ba-col-mystic'>特殊装甲</b>および<b class='ba-col-elasticarmor'>弾力装甲</b>に対して<b>1倍</b>のダメージを与える。",
         "defense_type_desc": "{1}攻撃から<b>{0}倍</b>のダメージを受ける。",
         "defense_type_normal_desc": "<b class='ba-col-explosion'>爆発</b>、<b class='ba-col-pierce'>貫通</b>、<b class='ba-col-mystic'>神秘</b>および<b class='ba-col-sonic'>振動</b>攻撃から<b>1倍</b>のダメージを受ける。",
+        "attack_type_mixed_desc": "シーズン毎に攻撃タイプが異なる。",
+        "defense_type_mixed_desc": "シーズン毎に防御タイプが異なる。",
         "comfort": "快適度",
         "age": "年齢",
         "birthday": "誕生日",
@@ -1068,7 +1079,7 @@
         "own_bonus": "所属生徒のみ",
         "max_bonus_amount": "最大ボーナス {0}",
         "rewards_season": "総合ランキングPt報酬",
-        "raid_tab": "Total/Grand Assault",
+        "raid_tab": "総力戦/大決戦",
         "raid_season": "シーズン{0}",
         "raid_season_select": "シーズンを選択",
         "item_tab_materials": "素材",

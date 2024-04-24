@@ -12047,7 +12047,7 @@
             {
                 "SkillType": "normal",
                 "Name": "อย่ามาคุยตอนหิวนะ!",
-                "Desc": "เมื่อ HP ต่ำกว่า 20% จะ<s:Immortal> (เป็นเวลา <?1>)\n(การต่อสู้ละ 1 ครั้ง)",
+                "Desc": "เมื่อ HP ต่ำกว่า 20% จะ<s:Immortal> (เป็นเวลา <?1>) (การต่อสู้ละ 1 ครั้ง)",
                 "Parameters": [
                     [
                         "12.8 วินาที",
@@ -18852,7 +18852,9 @@
                 2
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            16015
+        ],
         "MemoryLobby": [
             6,
             6,
@@ -24191,6 +24193,75 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "痛い目に遭ってみる？！+",
+                "Desc": "25秒毎に、円形範囲内の敵に対して攻撃力の<?1>分のダメージ/\n<d:OppressionResist>を<?2>減少（20秒間）",
+                "Parameters": [
+                    [
+                        "261%",
+                        "274%",
+                        "287%",
+                        "339%",
+                        "353%",
+                        "366%",
+                        "418%",
+                        "431%",
+                        "444%",
+                        "496%"
+                    ],
+                    [
+                        "10.2%",
+                        "10.8%",
+                        "11.3%",
+                        "13.3%",
+                        "13.8%",
+                        "14.4%",
+                        "16.4%",
+                        "16.9%",
+                        "17.4%",
+                        "19.5%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            26145,
+                            27454,
+                            28763,
+                            33992,
+                            35301,
+                            36603,
+                            41832,
+                            43141,
+                            44450,
+                            49679
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -1029,
+                                -1081,
+                                -1132,
+                                -1337,
+                                -1389,
+                                -1440,
+                                -1646,
+                                -1697,
+                                -1748,
+                                -1954
+                            ]
+                        ],
+                        "Stat": "OppressionResist_Coefficient",
+                        "Channel": 629
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "อย่ามาหัวเราะเยาะนะ!",
                 "Desc": "เพิ่ม<b:CriticalChance> <?1>",
@@ -24354,7 +24425,9 @@
                 22
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10092
+        ],
         "MemoryLobby": [
             6,
             6,
@@ -24386,7 +24459,43 @@
             "HealPower100": 2212,
             "StatLevelUpType": "LateBloom"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base",
+                "OppressionPower_Base"
+            ],
+            "StatValue": [
+                [
+                    250,
+                    250
+                ],
+                [
+                    40,
+                    40
+                ]
+            ],
+            "Name": "スイーツ・ハンター",
+            "Desc": "ヨシミ専用のフォークスプーン。いざという時に即座に対応できるよう、常に懐に置いている。長い間使い続けられる名品のようだ。",
+            "TierUpMaterial": [
+                [
+                    5008,
+                    130,
+                    131
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3020,
@@ -42183,8 +42292,8 @@
             "AttackPower100": 490,
             "MaxHP1": 590,
             "MaxHP100": 5896,
-            "HealPower1": 0,
-            "HealPower100": 0,
+            "HealPower1": 179,
+            "HealPower100": 1791,
             "StatLevelUpType": "Standard"
         },
         "Gear": {},
@@ -44589,7 +44698,7 @@
             {
                 "SkillType": "ex",
                 "Name": "มันรบกวนงานพาร์ทไทม์นะ!",
-                "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีกับศัตรูในพื้นที่รูปทรงกรวย /\nลด<d:CriticalDamage> <?2> (เป็นเวลา 30 วินาที)",
+                "Desc": "สร้างความเสียหาย <?1> ของค่าโจมตีกับศัตรูในพื้นที่รูปทรงกรวย / ลด<d:CriticalDamage> <?2> (เป็นเวลา 30 วินาที)",
                 "Parameters": [
                     [
                         "247%",
@@ -50980,6 +51089,72 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "予期せぬ角度からの一撃+",
+                "Desc": "通常攻撃5回毎に、敵1人に対して攻撃力の<?1>分のダメージ/\nさらに<d:DamageByHit_Damaged>を付与（5秒間）\n<d:DamageByHit_Damaged>の敵への攻撃時に、ミユの攻撃力の<?2>分の追加ダメージ\\（このダメージにおいては、会心が発動しません）\n（最大50発分まで適用されます）",
+                "Parameters": [
+                    [
+                        "223%",
+                        "234%",
+                        "245%",
+                        "290%",
+                        "301%",
+                        "312%",
+                        "357%",
+                        "368%",
+                        "379%",
+                        "424%"
+                    ],
+                    [
+                        "15.5%",
+                        "16.3%",
+                        "17.1%",
+                        "20.2%",
+                        "20.9%",
+                        "21.7%",
+                        "24.8%",
+                        "25.6%",
+                        "26.4%",
+                        "29.5%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            22344,
+                            23462,
+                            24579,
+                            29048,
+                            30165,
+                            31282,
+                            35745,
+                            36862,
+                            37979,
+                            42448
+                        ]
+                    },
+                    {
+                        "Type": "DMGByHit",
+                        "Icon": "DamageByHit_Damaged",
+                        "Scale": [
+                            1555,
+                            1633,
+                            1711,
+                            2021,
+                            2099,
+                            2177,
+                            2488,
+                            2566,
+                            2643,
+                            2954
+                        ]
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "ลมหายใจลุ่มลึก",
                 "Desc": "เพิ่ม<b:CriticalDamage> <?1>",
@@ -51194,7 +51369,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base"
+            ],
+            "StatValue": [
+                [
+                    1500,
+                    1500
+                ]
+            ],
+            "Name": "サッドバニーポット",
+            "Desc": "ミユがいつも持ち歩いているコンパクトサイズのポット。悲しそうな表情のうさぎが描かれたポーチに大切に保管されている。",
+            "TierUpMaterial": [
+                [
+                    5031,
+                    200,
+                    201
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3080,
@@ -51474,6 +51680,47 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "カブトムシシールド！+",
+                "Desc": "40秒毎に、防御力が最も高い味方1人の<b:DEF>を<?1>増加（33秒間）/\nさらに自身のスキルコストを減少（Exスキルの使用1回分）/\n減少するコストの量はノーマルスキルの使用回数によって変更\n1回：Exスキルコストを1減少\n2回：Exスキルコストを2減少\n3回：Exスキルコストを3減少\n4回以降：Exスキルコスト減少効果なし",
+                "Parameters": [
+                    [
+                        "21.5%",
+                        "22.6%",
+                        "23.7%",
+                        "28%",
+                        "29.1%",
+                        "30.1%",
+                        "34.4%",
+                        "35.5%",
+                        "36.6%",
+                        "40.9%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                2156,
+                                2264,
+                                2372,
+                                2803,
+                                2910,
+                                3018,
+                                3449,
+                                3557,
+                                3665,
+                                4096
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 103
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "รับไปเลย! คลื่นแห่งการบำบัด!",
                 "Desc": "เพิ่ม<b:HealPower> <?1>",
@@ -51686,7 +51933,38 @@
             "HealPower100": 1990,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "HealPower_Base"
+            ],
+            "StatValue": [
+                [
+                    500,
+                    500
+                ]
+            ],
+            "Name": "ムシクイーンカードスリーブ",
+            "Desc": "カードの損傷を防ぐために作られたスリーブ。その中でもカエデが初めて購入したムシクイーンカードスリーブの通常版。正式な大会では、カードスリーブを使わないと出場できないことが多いという。",
+            "TierUpMaterial": [
+                [
+                    5018,
+                    190,
+                    191
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3000,
@@ -60905,7 +61183,9 @@
                 25
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10091
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -70175,8 +70455,8 @@
             "AttackPower100": 731,
             "MaxHP1": 1291,
             "MaxHP100": 12910,
-            "HealPower1": 0,
-            "HealPower100": 0,
+            "HealPower1": 180,
+            "HealPower100": 1796,
             "StatLevelUpType": "Standard"
         },
         "Gear": {},
@@ -76139,6 +76419,83 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "精神統一+",
+                "Desc": "戦術入場時、<s:Dado>状態を付与、<b:ATK>を<?1>増加（<?2>間）/\n以後、50秒毎に<s:Dado>状態を付与、<b:ATK>を<?3>増加（<?4>間）",
+                "Parameters": [
+                    [
+                        "31.4%",
+                        "32.7%",
+                        "34.1%",
+                        "36.7%",
+                        "38.1%",
+                        "39.5%",
+                        "41.5%",
+                        "43%",
+                        "44.5%",
+                        "45.5%"
+                    ],
+                    [
+                        "25秒",
+                        "25秒",
+                        "25秒",
+                        "30秒",
+                        "30秒",
+                        "30秒",
+                        "35秒",
+                        "35秒",
+                        "35秒",
+                        "40秒"
+                    ],
+                    [
+                        "31.4%",
+                        "32.7%",
+                        "34.1%",
+                        "36.7%",
+                        "38.1%",
+                        "39.5%",
+                        "41.5%",
+                        "43%",
+                        "44.5%",
+                        "45.5%"
+                    ],
+                    [
+                        "25秒",
+                        "25秒",
+                        "25秒",
+                        "30秒",
+                        "30秒",
+                        "30秒",
+                        "35秒",
+                        "35秒",
+                        "35秒",
+                        "40秒"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3144,
+                                3278,
+                                3412,
+                                3673,
+                                3816,
+                                3959,
+                                4154,
+                                4303,
+                                4450,
+                                4550
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "ความมุ่งมั่นแน่วแน่",
                 "Desc": "เพิ่ม<b:CriticalDamage> <?1>",
@@ -76343,7 +76700,43 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base",
+                "CriticalPoint_Base"
+            ],
+            "StatValue": [
+                [
+                    800,
+                    800
+                ],
+                [
+                    300,
+                    300
+                ]
+            ],
+            "Name": "生徒たちからの感謝状",
+            "Desc": "百鬼夜行の生徒たちがカホに贈った感謝状。額に入れて大切に保管している。",
+            "TierUpMaterial": [
+                [
+                    5023,
+                    110,
+                    111
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3000,
@@ -99379,6 +99772,1682 @@
             [
                 12,
                 8,
+                13
+            ]
+        ]
+    },
+    {
+        "Id": 10091,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 177,
+        "PathName": "Kazusa_Band",
+        "DevName": "CH0250",
+        "Name": "カズサ（バンド）",
+        "School": "Trinity",
+        "Club": "HoukagoDessert",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Explosion",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "MG",
+        "WeaponImg": "weapon_icon_ch0075",
+        "Cover": false,
+        "Equipment": [
+            "Gloves",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_PracticeRoom_Collection",
+        "FamilyName": "杏山",
+        "PersonalName": "カズサ",
+        "SchoolYear": "1年生",
+        "CharacterAge": "15歳",
+        "Birthday": "8月5日",
+        "CharacterSSRNew": "ほんと、毎日飽きないんだから",
+        "ProfileIntroduction": "トリニティ総合学園所属、放課後スイーツ部の部員であり、急遽結成されたバンド「シュガーラッシュ」のメインボーカル兼ベース。\n\n口が滑ったせいで、メインボーカルを担当することになる。しかし彼女の性格上、逃げたりはしない。みんなと駆け抜ける騒がしい出来事も今はすっかり慣れていて、バンドのことも平然と受け入れている。",
+        "Hobby": "「普通に」スイーツを食べること",
+        "CharacterVoice": "夏吉ゆうこ",
+        "BirthDay": "8/5",
+        "Illustrator": "Mx2J",
+        "Designer": "Mx2J",
+        "CharHeightMetric": "155cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1340,
+        "AttackPower1": 273,
+        "AttackPower100": 2739,
+        "MaxHP1": 2157,
+        "MaxHP100": 18700,
+        "DefensePower1": 76,
+        "DefensePower100": 460,
+        "HealPower1": 1457,
+        "HealPower100": 4372,
+        "DodgePoint": 191,
+        "AccuracyPoint": 104,
+        "CriticalPoint": 260,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 40,
+        "AmmoCost": 5,
+        "Range": 750,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "歴史的一小節",
+                "Desc": "自身を中心とした円形範囲内の味方の<b:AttackSpeed>を<?1>増加/\nさらに、自身に<s:CH0220_Public>を<?2>付与（40秒間）（最大2個まで）",
+                "Parameters": [
+                    [
+                        "18.9%",
+                        "21.7%",
+                        "27.4%",
+                        "30.2%",
+                        "35.9%"
+                    ],
+                    [
+                        "1個",
+                        "1個",
+                        "1個",
+                        "1個",
+                        "2個"
+                    ]
+                ],
+                "Cost": [
+                    3,
+                    3,
+                    3,
+                    3,
+                    3
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1891,
+                                2175,
+                                2742,
+                                3026,
+                                3593
+                            ]
+                        ],
+                        "Stat": "AttackSpeed_Coefficient",
+                        "Channel": 124
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "ベースチューニング",
+                "Desc": "35秒毎に、自身の<b:ATK>を<?1>増加（26秒間）",
+                "Parameters": [
+                    [
+                        "19.6%",
+                        "20.6%",
+                        "21.5%",
+                        "25.5%",
+                        "26.5%",
+                        "27.4%",
+                        "31.4%",
+                        "32.3%",
+                        "33.3%",
+                        "37.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1963,
+                                2061,
+                                2159,
+                                2552,
+                                2650,
+                                2748,
+                                3140,
+                                3239,
+                                3337,
+                                3729
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "慣れ親しんできた舞台",
+                "Desc": "<b:AttackSpeed>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackSpeed_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "慣れ親しんできた舞台+",
+                "Desc": "<b:EnhanceExplosionRate>を<?1>加算/\nさらに<b:AttackSpeed>を<?2>増加",
+                "Parameters": [
+                    [
+                        "26%",
+                        "27.3%",
+                        "28.6%",
+                        "33.8%",
+                        "35.1%",
+                        "36.4%",
+                        "41.6%",
+                        "42.9%",
+                        "44.2%",
+                        "49.4%"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Scale": [
+                            2600,
+                            2730,
+                            2860,
+                            3380,
+                            3510,
+                            3640,
+                            4160,
+                            4290,
+                            4420,
+                            4940
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "スイーツボーカル",
+                "Desc": "自身の<s:CH0220_Public>1個毎に、攻撃した時、攻撃力の<?1>分の追加ダメージ（最大2個まで）",
+                "Parameters": [
+                    [
+                        "5.6%",
+                        "5.9%",
+                        "6.2%",
+                        "7.3%",
+                        "7.5%",
+                        "7.8%",
+                        "8.9%",
+                        "9.2%",
+                        "9.5%",
+                        "10.6%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0250_EXTRAPASSIVESKILL",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            560,
+                            595,
+                            620,
+                            732,
+                            758,
+                            784,
+                            896,
+                            922,
+                            956,
+                            1068
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                62
+            ],
+            [
+                7,
+                75
+            ],
+            [
+                2,
+                12
+            ],
+            [
+                2,
+                18
+            ],
+            [
+                4,
+                31
+            ]
+        ],
+        "FavorAlts": [
+            10049
+        ],
+        "MemoryLobby": [
+            3,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 210",
+        "FurnitureInteraction": [
+            [
+                [
+                    210336,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aJ",
+            "aQ"
+        ],
+        "FavorItemUniqueTags": [
+            "fX",
+            "fx"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "マビノギオン",
+            "Desc": "カズサと共に新しい歴史を刻んでいくマシンガン。\n\nカズサの様々な姿をすべて記憶している一番身近な目撃者でもある。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 120,
+            "AttackPower100": 1203,
+            "MaxHP1": 541,
+            "MaxHP100": 5407,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                240
+            ],
+            [
+                3021,
+                3020,
+                241,
+                280
+            ],
+            [
+                3022,
+                3021,
+                242,
+                281
+            ],
+            [
+                3023,
+                3022,
+                243,
+                282
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                16,
+                32
+            ],
+            [
+                12,
+                18,
+                11,
+                27
+            ],
+            [
+                8,
+                18,
+                6,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                240
+            ],
+            [
+                4021,
+                241,
+                280
+            ],
+            [
+                4022,
+                4021,
+                241,
+                280
+            ],
+            [
+                4022,
+                242,
+                281
+            ],
+            [
+                4023,
+                4022,
+                243,
+                282
+            ],
+            [
+                4023,
+                243,
+                282
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                7
+            ],
+            [
+                8,
+                6,
+                10
+            ],
+            [
+                5,
+                12,
+                10,
+                19
+            ],
+            [
+                8,
+                6,
+                15
+            ],
+            [
+                8,
+                12,
+                5,
+                10
+            ],
+            [
+                12,
+                8,
+                12
+            ]
+        ]
+    },
+    {
+        "Id": 10092,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 178,
+        "PathName": "Yoshimi_Band",
+        "DevName": "CH0220",
+        "Name": "ヨシミ（バンド）",
+        "School": "Trinity",
+        "Club": "HoukagoDessert",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Explosion",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "weapon_icon_26005",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_PracticeRoom_Collection",
+        "FamilyName": "伊原木",
+        "PersonalName": "ヨシミ",
+        "SchoolYear": "1年生",
+        "CharacterAge": "15歳",
+        "Birthday": "8月29日",
+        "CharacterSSRNew": "ちゃんと見ててよね！\n次はないんだから！",
+        "ProfileIntroduction": "トリニティ総合学園所属、放課後スイーツ部の部員であり、急遽結成されたバンド「シュガーラッシュ」のギタリスト。\n\n場の空気に流されバンドを始めることになったが、「やるならきちんと」という心構えを持っている。バンドのアイコンやシンボル、衣装などのビジュアル面も担当している。",
+        "Hobby": "イベントごと、限定スイーツ巡り",
+        "CharacterVoice": "真野あゆみ",
+        "BirthDay": "8/29",
+        "Illustrator": "Mx2J",
+        "Designer": "Mx2J",
+        "CharHeightMetric": "146cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1384,
+        "AttackPower1": 263,
+        "AttackPower100": 2631,
+        "MaxHP1": 2225,
+        "MaxHP100": 22250,
+        "DefensePower1": 19,
+        "DefensePower100": 118,
+        "HealPower1": 1414,
+        "HealPower100": 4244,
+        "DodgePoint": 791,
+        "AccuracyPoint": 707,
+        "CriticalPoint": 252,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "爆発クライマックス",
+                "Desc": "攻撃力と<b:AttackSpeed>を<?1>増加（50秒間）/\nさらに<s:CH0220_Public>を5個付与（最大5個まで）/\n<s:CH0220_Public>は10秒毎に1個ずつ解除",
+                "Parameters": [
+                    [
+                        "59.1%",
+                        "68%",
+                        "85.8%",
+                        "94.6%",
+                        "112%"
+                    ]
+                ],
+                "Cost": [
+                    10,
+                    10,
+                    10,
+                    10,
+                    10
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                5918,
+                                6804,
+                                8580,
+                                9467,
+                                11242
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                5918,
+                                6804,
+                                8580,
+                                9467,
+                                11242
+                            ]
+                        ],
+                        "Stat": "AttackSpeed_Coefficient",
+                        "Channel": 24
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "ビジュアルメーカー",
+                "Desc": "通常攻撃10回毎に、敵1人に対して攻撃力の<?1>分のダメージ/\nさらに味方全体の<s:CH0220_Public>1個毎に、ダメージが5%分増加（最大8個まで）",
+                "Parameters": [
+                    [
+                        "508%",
+                        "534%",
+                        "559%",
+                        "661%",
+                        "686%",
+                        "711%",
+                        "813%",
+                        "839%",
+                        "864%",
+                        "966%"
+                    ]
+                ],
+                "Icon": "SKILLICON_CH0220_PUBLICSKILL",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            50859,
+                            53400,
+                            55942,
+                            66115,
+                            68656,
+                            71198,
+                            81371,
+                            83913,
+                            86454,
+                            96627
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            53400,
+                            56069,
+                            58738,
+                            69421,
+                            72090,
+                            74759,
+                            85441,
+                            88110,
+                            90779,
+                            101455
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            55942,
+                            58738,
+                            61535,
+                            72727,
+                            75523,
+                            78320,
+                            89505,
+                            92302,
+                            95098,
+                            106290
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            58483,
+                            61407,
+                            64331,
+                            76033,
+                            78957,
+                            81880,
+                            93576,
+                            96500,
+                            99423,
+                            111119
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            61031,
+                            64083,
+                            67134,
+                            79339,
+                            82390,
+                            85441,
+                            97646,
+                            100697,
+                            103749,
+                            115954
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            63573,
+                            66752,
+                            69930,
+                            82639,
+                            85817,
+                            88996,
+                            101710,
+                            104889,
+                            108068,
+                            120782
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            66115,
+                            69421,
+                            72727,
+                            85945,
+                            89251,
+                            92557,
+                            105781,
+                            109087,
+                            112393,
+                            125611
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            68656,
+                            72090,
+                            75523,
+                            89251,
+                            92684,
+                            96117,
+                            109851,
+                            113278,
+                            116712,
+                            130445
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            71198,
+                            74759,
+                            78320,
+                            92557,
+                            96117,
+                            99678,
+                            113915,
+                            117476,
+                            121037,
+                            135274
+                        ]
+                    }
+                ],
+                "EffectCombine": [
+                    "DMGSingle"
+                ],
+                "EffectCombineLabel": {
+                    "Icon": [
+                        "buff/Special_CH0220_Public.webp"
+                    ],
+                    "StackLabel": [
+                        "&times;0",
+                        "&times;1",
+                        "&times;2",
+                        "&times;3",
+                        "&times;4",
+                        "&times;5",
+                        "&times;6",
+                        "&times;7",
+                        "&times;8"
+                    ],
+                    "DisableFirst": true
+                }
+            },
+            {
+                "SkillType": "passive",
+                "Name": "ロックンロール",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "ロックンロール+",
+                "Desc": "<b:CriticalDamage>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "2000",
+                        "2100",
+                        "2200",
+                        "2600",
+                        "2700",
+                        "2800",
+                        "3200",
+                        "3300",
+                        "3400",
+                        "3800"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Base",
+                        "Scale": [
+                            2000,
+                            2100,
+                            2200,
+                            2600,
+                            2700,
+                            2800,
+                            3200,
+                            3300,
+                            3400,
+                            3800
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "スイーツハーモニクス",
+                "Desc": "ノーマルスキルの発動3回毎に、ノーマルスキルで攻撃した時、攻撃力の<?1>分の追加ダメージ",
+                "Parameters": [
+                    [
+                        "63%",
+                        "66.2%",
+                        "69.3%",
+                        "81.9%",
+                        "85.1%",
+                        "88.2%",
+                        "100%",
+                        "104%",
+                        "107%",
+                        "119%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_EXTRADAMAGE",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            6307,
+                            6625,
+                            6937,
+                            8199,
+                            8517,
+                            8829,
+                            10091,
+                            10409,
+                            10721,
+                            11982
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                56
+            ],
+            [
+                7,
+                67
+            ],
+            [
+                2,
+                11
+            ],
+            [
+                2,
+                17
+            ],
+            [
+                4,
+                28
+            ]
+        ],
+        "FavorAlts": [
+            26005
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 215",
+        "FurnitureInteraction": [
+            [
+                [
+                    210337,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aJ",
+            "ar"
+        ],
+        "FavorItemUniqueTags": [
+            "fY",
+            "fy"
+        ],
+        "IsLimited": 1,
+        "Weapon": {
+            "Name": "スイーツドライバー",
+            "Desc": "ヨシミが常に持ち歩いているアサルトライフル。\n\n普段はスイーツを巡る争いに勝つための武器として使用されている。ヨシミが演奏するギターの音と同じくらい、軽快な銃声を響かせる代物。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 116,
+            "AttackPower100": 1156,
+            "MaxHP1": 640,
+            "MaxHP100": 6398,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                290
+            ],
+            [
+                3021,
+                3020,
+                291,
+                130
+            ],
+            [
+                3022,
+                3021,
+                292,
+                131
+            ],
+            [
+                3023,
+                3022,
+                293,
+                132
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                13,
+                31
+            ],
+            [
+                12,
+                18,
+                10,
+                25
+            ],
+            [
+                8,
+                18,
+                7,
+                21
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                290
+            ],
+            [
+                4021,
+                291,
+                130
+            ],
+            [
+                4022,
+                4021,
+                291,
+                130
+            ],
+            [
+                4022,
+                292,
+                131
+            ],
+            [
+                4023,
+                4022,
+                293,
+                132
+            ],
+            [
+                4023,
+                293,
+                132
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                4,
+                13
+            ],
+            [
+                5,
+                12,
+                10,
+                18
+            ],
+            [
+                8,
+                3,
+                17
+            ],
+            [
+                8,
+                12,
+                5,
+                10
+            ],
+            [
+                12,
+                8,
+                14
+            ]
+        ]
+    },
+    {
+        "Id": 16015,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 179,
+        "PathName": "Airi_Band",
+        "DevName": "CH0251",
+        "Name": "アイリ（バンド）",
+        "School": "Trinity",
+        "Club": "HoukagoDessert",
+        "StarGrade": 1,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Front",
+        "BulletType": "Explosion",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 3,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "SMG",
+        "WeaponImg": "weapon_icon_23000",
+        "Cover": true,
+        "Equipment": [
+            "Hat",
+            "Hairpin",
+            "Charm"
+        ],
+        "CollectionBG": "BG_PracticeRoom_Collection",
+        "FamilyName": "栗村",
+        "PersonalName": "アイリ",
+        "SchoolYear": "1年生",
+        "CharacterAge": "15歳",
+        "Birthday": "1月30日",
+        "CharacterSSRNew": "",
+        "ProfileIntroduction": "トリニティ総合学園所属、放課後スイーツ部の部員であり、急遽結成されたバンド「シュガーラッシュ」のリーダー。\n\n地味な自分を変えたいと思い、みんなを率いてバンドイベントに参加する。実は部をまとめる主要人物でありながらも、本人だけが気付いていない模様。",
+        "Hobby": "美味しいスイーツ探し、お茶会",
+        "CharacterVoice": "杉村ちか子",
+        "BirthDay": "1/30",
+        "Illustrator": "Mx2J",
+        "Designer": "Mx2J",
+        "CharHeightMetric": "160cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1376,
+        "AttackPower1": 286,
+        "AttackPower100": 2861,
+        "MaxHP1": 2459,
+        "MaxHP100": 34090,
+        "DefensePower1": 22,
+        "DefensePower100": 132,
+        "HealPower1": 1422,
+        "HealPower100": 4268,
+        "DodgePoint": 1062,
+        "AccuracyPoint": 111,
+        "CriticalPoint": 254,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 450,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "幸せのメロディ",
+                "Desc": "<b:EnhanceExplosionRate>を<?1>加算、<s:CH0220_Public>を付与（30秒間）",
+                "Parameters": [
+                    [
+                        "95.8%",
+                        "110%",
+                        "138%",
+                        "153%",
+                        "182%"
+                    ]
+                ],
+                "Cost": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                ],
+                "Icon": "SKILLICON_CH0251_EXSKILL",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                9582,
+                                11018,
+                                13893,
+                                15329,
+                                18204
+                            ]
+                        ],
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Channel": 32
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "チョコミントな音の階段",
+                "Desc": "通常攻撃12回毎に、敵1人に対して攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "710%",
+                        "745%",
+                        "781%",
+                        "923%",
+                        "958%",
+                        "994%",
+                        "1136%",
+                        "1171%",
+                        "1207%",
+                        "1349%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            71012,
+                            74566,
+                            78114,
+                            92317,
+                            95865,
+                            99419,
+                            113616,
+                            117170,
+                            120718,
+                            134921
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "もっと大きく、もっと遠く",
+                "Desc": "通常攻撃の射程を100、<b:AttackSpeed>を<?1>増加",
+                "Parameters": [
+                    [
+                        "11.2%",
+                        "11.7%",
+                        "12.3%",
+                        "14.5%",
+                        "15.1%",
+                        "15.6%",
+                        "17.9%",
+                        "18.4%",
+                        "19%",
+                        "21.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackSpeed_Coefficient",
+                        "Scale": [
+                            1120,
+                            1176,
+                            1232,
+                            1456,
+                            1512,
+                            1568,
+                            1792,
+                            1848,
+                            1904,
+                            2128
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "Range_Base",
+                        "Scale": [
+                            100,
+                            100,
+                            100,
+                            100,
+                            100,
+                            100,
+                            100,
+                            100,
+                            100,
+                            100
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "もっと大きく、もっと遠く+",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに通常攻撃の射程を100、<b:AttackSpeed>を<?2>増加",
+                "Parameters": [
+                    [
+                        "356",
+                        "373",
+                        "391",
+                        "462",
+                        "480",
+                        "498",
+                        "569",
+                        "587",
+                        "604",
+                        "675"
+                    ],
+                    [
+                        "11.2%",
+                        "11.7%",
+                        "12.3%",
+                        "14.5%",
+                        "15.1%",
+                        "15.6%",
+                        "17.9%",
+                        "18.4%",
+                        "19%",
+                        "21.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            356,
+                            373,
+                            391,
+                            462,
+                            480,
+                            498,
+                            569,
+                            587,
+                            604,
+                            675
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "染み込む感情",
+                "Desc": "<s:CH0220_Public>を保有した状態での攻撃時、10%の確率で<d:CriticalDamageRateResist>率を<?1>減少（16秒間）（クールタイム5秒）",
+                "Parameters": [
+                    [
+                        "12.8%",
+                        "13.5%",
+                        "14.1%",
+                        "16.7%",
+                        "17.3%",
+                        "18%",
+                        "20.5%",
+                        "21.2%",
+                        "21.8%",
+                        "24.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -1287,
+                                -1351,
+                                -1416,
+                                -1673,
+                                -1737,
+                                -1802,
+                                -2058,
+                                -2123,
+                                -2187,
+                                -2445
+                            ]
+                        ],
+                        "Stat": "CriticalDamageResistRate_Coefficient",
+                        "Channel": 623
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                6,
+                85
+            ],
+            [
+                7,
+                102
+            ],
+            [
+                2,
+                17
+            ],
+            [
+                3,
+                25
+            ],
+            [
+                4,
+                42
+            ]
+        ],
+        "FavorAlts": [
+            23000
+        ],
+        "MemoryLobby": [
+            3,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 222",
+        "FurnitureInteraction": [
+            [
+                [
+                    210338,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aJ",
+            "BA"
+        ],
+        "FavorItemUniqueTags": [
+            "fZ",
+            "fz"
+        ],
+        "IsLimited": 2,
+        "Weapon": {
+            "Name": "爽やかチョコミント",
+            "Desc": "アイリが大切にしているサブマシンガン。\n\nいつもの姿で飾られている外観は、アイリ自身すら見逃していた何かを思い出させてくれる。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 2,
+            "AttackPower1": 101,
+            "AttackPower100": 1006,
+            "MaxHP1": 776,
+            "MaxHP100": 7763,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3020,
+                220
+            ],
+            [
+                3021,
+                3020,
+                221,
+                110
+            ],
+            [
+                3022,
+                3021,
+                222,
+                111
+            ],
+            [
+                3023,
+                3022,
+                223,
+                112
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                13,
+                31
+            ],
+            [
+                12,
+                18,
+                14,
+                22
+            ],
+            [
+                8,
+                18,
+                12,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4020
+            ],
+            [
+                4020
+            ],
+            [
+                4021,
+                4020,
+                220
+            ],
+            [
+                4021,
+                221,
+                110
+            ],
+            [
+                4022,
+                4021,
+                221,
+                110
+            ],
+            [
+                4022,
+                222,
+                111
+            ],
+            [
+                4023,
+                4022,
+                223,
+                112
+            ],
+            [
+                4023,
+                223,
+                112
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                5,
+                14
+            ],
+            [
+                5,
+                12,
+                9,
+                19
+            ],
+            [
+                8,
+                3,
+                18
+            ],
+            [
+                8,
+                12,
+                4,
+                11
+            ],
+            [
+                12,
+                7,
                 13
             ]
         ]
