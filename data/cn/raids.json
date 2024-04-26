@@ -89280,6 +89280,7 @@
                 100,
                 125
             ],
+            "PathName": "EN0008",
             "Terrain": [
                 "Outdoor"
             ],
@@ -92192,8 +92193,2942 @@
                         }
                     }
                 }
+            ]
+        },
+        {
+            "Id": 1000001,
+            "IsReleased": [
+                true,
+                false,
+                false
             ],
-            "PathName": "EN0008"
+            "MaxDifficulty": [
+                4,
+                0,
+                0
+            ],
+            "DifficultyStartFloor": [
+                1,
+                25,
+                50,
+                75,
+                100,
+                125
+            ],
+            "PathName": "EN0008",
+            "Terrain": [
+                "Outdoor"
+            ],
+            "BulletType": [
+                "Normal",
+                "Normal",
+                "Explosion",
+                "Explosion",
+                "Explosion"
+            ],
+            "ArmorType": "LightArmor",
+            "EnemyList": [
+                [
+                    701210101,
+                    701230103
+                ],
+                [
+                    701210102,
+                    701210106,
+                    701230109
+                ],
+                [
+                    701210103,
+                    701210106,
+                    701230111
+                ],
+                [
+                    701210104,
+                    701210106,
+                    701230113
+                ],
+                [
+                    701210105,
+                    701210106,
+                    701230115
+                ]
+            ],
+            "RaidSkill": [
+                {
+                    "Id": "EN0008Ex01",
+                    "SkillType": "EX",
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_EN0008_EXSKILL01",
+                    "Name": "苍雷咆哮",
+                    "Desc": "赛特的愤怒在地面散布电流，\n对除方尖碑外的全体敌方单位造成自身攻击力230%的伤害<?1>.",
+                    "Parameters": [
+                        [
+                            "",
+                            "",
+                            "",
+                            "",
+                            "；\n自身ATG满66%时，降下落雷对生命值百分比最高的方尖碑造成自身攻击力450%的伤害."
+                        ]
+                    ]
+                },
+                {
+                    "Id": "EN0008Ex02First",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "MaxDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_EN0008_EXSKILL02",
+                    "Name": "过隙之矢",
+                    "Desc": "赛特的愤怒降下闪电，\n对全体敌方单位造成自身攻击力315%的伤害."
+                },
+                {
+                    "Id": "EN0008Ex02Center",
+                    "SkillType": "EX",
+                    "MinDifficulty": 1,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_EN0008_EXSKILL02",
+                    "Name": "过隙之矢",
+                    "Desc": "赛特的愤怒降下闪电，召唤赤红电球，\n闪电对全体敌方单位造成自身攻击力475%的伤害.\n※ 赤红电球仅可使用EX技能对其造成伤害，被破坏时令以自身为中心的圆形范围内的敌方单位<b:DamageRatio>增加30%(持续35秒).\n※ 赤红电球会对自身周围的敌方单位造成攻击力45%的伤害.\n※ 赤红电球抵达赛特的愤怒处时，大幅填充赛特的愤怒的雷电计量槽."
+                },
+                {
+                    "Id": "EN0008Ex03Strong",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_EN0008_EXSKILL03",
+                    "Name": "破裂光彩",
+                    "Desc": "赛特的愤怒在两手之间释放电流，\n对直线范围内的敌方单位造成自身攻击力480%的伤害."
+                },
+                {
+                    "Id": "EN0008Ex04Strong",
+                    "SkillType": "EX",
+                    "MinDifficulty": 3,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_EN0008_EXSKILL04",
+                    "Name": "苍雷漩涡",
+                    "Desc": "赛特的愤怒吸收周围的电力，\n对除方尖碑外的全体敌方单位造成自身攻击力390%的伤害；\n大幅填充自身的雷电计量槽<?1>.",
+                    "Parameters": [
+                        [
+                            "",
+                            "",
+                            "",
+                            "",
+                            "；\n自身ATG满66%时，降下落雷对生命值百分比最高的方尖碑造成自身攻击力450%的伤害"
+                        ]
+                    ]
+                },
+                {
+                    "Id": "EN0008Ex05",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 3,
+                    "Icon": "SKILLICON_EN0008_EXSKILL05",
+                    "Name": "愤怒雷枪",
+                    "Desc": "自身ATG满100%时使用该技能.\n赛特的愤怒投出雷枪，\n对全体敌方单位造成自身攻击力410%的伤害.\n\n※ 赛特的愤怒使用完该技能后，虚弱计量槽上升至100%."
+                },
+                {
+                    "Id": "EN0008Passive08",
+                    "SkillType": "Public",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_EN0008_Passive01",
+                    "Name": "贯鹰闪光",
+                    "Desc": "赛特的愤怒在场上定期降下落雷.\n对生命值百分比最高的方尖碑及其周围圆形范围内的敌方单位造成以下效果：\n- 造成攻击力35%的伤害；\n  ※ 目标为方尖碑时，再对其造成攻击力200%的追加伤害，并施加<s:EN0008_Obelisk>状态.\n- <b:DamageRatio>减少70%(持续40秒).\n\n※ 方尖碑生命值回复至100%时，解除自身拥有的<s:EN0008_Obelisk>状态.\n※ 场上的2座方尖碑均拥有<s:EN0008_Obelisk>状态时，该技能的攻击目标改为生命值百分比最高的敌方单位.\n※ 方尖碑的生命值仅可通过使用EX技能对其进行回复.\n ※ 该技能不受技能「噬晓暴风」的效果的影响."
+                },
+                {
+                    "Id": "EN0008Passive01",
+                    "SkillType": "Passive",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_EN0008_Passive02",
+                    "Name": "噬晓暴风",
+                    "Desc": "赛特的愤怒卷起暴风，\n立即对自身造成以下效果(持续至本场战斗结束)：\n- EX技能承伤率减少80%；\n- 根据自身ATG值，造成以下效果中的1种：\n-- ＜33%：<d:DamageRatio>减少70%；\n-- ≥66：<b:DamageRatio>增加80%."
+                },
+                {
+                    "Id": "EN0008Passive10",
+                    "SkillType": "Passive",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "Icon": "SKILLICON_EN0008_Passive03",
+                    "Name": "永恒之力",
+                    "Desc": "赛特的愤怒从大气中吸取能量，持续填充雷电计量槽.\n赛特的愤怒受到伤害时将减少雷电计量槽的值，值减少至0%时，赛特的愤怒将立即召唤苍蓝电球.\n苍蓝电球入场时，立即对全体敌方单位造成以下效果：\n- <b:DamageRatio>增加30%(持续30秒).\n赛特的愤怒陷入虚弱期间，立即对全体敌方单位造成以下效果：\n- <b:CostRegen>增加500；\n- 造成的伤害不受伤害浮动区间影响<?1>.",
+                    "Parameters": [
+                        [
+                            "",
+                            "；\n- ???召唤赤红电球",
+                            "；\n- ???召唤赤红电球",
+                            "；\n- ???召唤赤红电球",
+                            "；\n- ???召唤赤红电球"
+                        ]
+                    ]
+                }
+            ],
+            "HasNormalAttack": [],
+            "Name": "赛特的愤怒",
+            "BattleDuration": 270,
+            "RaidFloors": [
+                {
+                    "Level": 25,
+                    "StatChange": {
+                        "701210106": {},
+                        "701230103": {},
+                        "701210101": {}
+                    }
+                },
+                {
+                    "Level": 25,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Coefficient": 937
+                        },
+                        "701230103": {
+                            "AttackPower_Coefficient": 937
+                        },
+                        "701210101": {
+                            "AttackPower_Coefficient": 937,
+                            "MaxHP_Coefficient": 3852
+                        }
+                    }
+                },
+                {
+                    "Level": 35,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Coefficient": 1874
+                        },
+                        "701230103": {
+                            "AttackPower_Coefficient": 1874
+                        },
+                        "701210101": {
+                            "AttackPower_Coefficient": 1874,
+                            "MaxHP_Coefficient": 7704
+                        }
+                    }
+                },
+                {
+                    "Level": 35,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Coefficient": 2811
+                        },
+                        "701230103": {
+                            "AttackPower_Coefficient": 2811
+                        },
+                        "701210101": {
+                            "AttackPower_Coefficient": 2811,
+                            "MaxHP_Coefficient": 11556
+                        }
+                    }
+                },
+                {
+                    "Level": 35,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 300
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 300
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 300,
+                            "MaxHP_Base": 1580000
+                        }
+                    }
+                },
+                {
+                    "Level": 40,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 1272,
+                            "MaxHP_Coefficient": 6000
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 1272,
+                            "MaxHP_Coefficient": 3600
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 1272,
+                            "MaxHP_Base": 1580000,
+                            "MaxHP_Coefficient": 2938
+                        }
+                    }
+                },
+                {
+                    "Level": 40,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 2544,
+                            "MaxHP_Coefficient": 12000
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 2544,
+                            "MaxHP_Coefficient": 7200
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 2544,
+                            "MaxHP_Base": 1580000,
+                            "MaxHP_Coefficient": 5876
+                        }
+                    }
+                },
+                {
+                    "Level": 45,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 3816,
+                            "MaxHP_Coefficient": 18000
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 3816,
+                            "MaxHP_Coefficient": 10800
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 3816,
+                            "MaxHP_Base": 1580000,
+                            "MaxHP_Coefficient": 8814
+                        }
+                    }
+                },
+                {
+                    "Level": 45,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 5088,
+                            "MaxHP_Coefficient": 24000
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 5088,
+                            "MaxHP_Coefficient": 14400
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 300,
+                            "AttackPower_Coefficient": 5088,
+                            "MaxHP_Base": 1580000,
+                            "MaxHP_Coefficient": 11752
+                        }
+                    }
+                },
+                {
+                    "Level": 50,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "MaxHP_Base": 15000
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "MaxHP_Base": 9000
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "MaxHP_Base": 5150000
+                        }
+                    }
+                },
+                {
+                    "Level": 50,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 527,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 875
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 527,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 678
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 527,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 1250
+                        }
+                    }
+                },
+                {
+                    "Level": 50,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 1054,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 1750
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 1054,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 1356
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 1054,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 2500
+                        }
+                    }
+                },
+                {
+                    "Level": 50,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 1581,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 2625
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 1581,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 2034
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 1581,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 3750
+                        }
+                    }
+                },
+                {
+                    "Level": 50,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 2108,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 3500
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 2108,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 2712
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 2108,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 5000
+                        }
+                    }
+                },
+                {
+                    "Level": 55,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 2635,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 4375
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 2635,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 3390
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 2635,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 6250
+                        }
+                    }
+                },
+                {
+                    "Level": 55,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 3162,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 5250
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 3162,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 4068
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 3162,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 7500
+                        }
+                    }
+                },
+                {
+                    "Level": 55,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 3689,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 6125
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 3689,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 4746
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 3689,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 8750
+                        }
+                    }
+                },
+                {
+                    "Level": 55,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 4216,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 7000
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 4216,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 5424
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 4216,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 10000
+                        }
+                    }
+                },
+                {
+                    "Level": 55,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 4743,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 7875
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 4743,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 6102
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 4743,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 11250
+                        }
+                    }
+                },
+                {
+                    "Level": 60,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 5270,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 8750
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 5270,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 6780
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 5270,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 12500
+                        }
+                    }
+                },
+                {
+                    "Level": 60,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 5797,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 9625
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 5797,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 7458
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 5797,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 13750
+                        }
+                    }
+                },
+                {
+                    "Level": 60,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 6324,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 10500
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 6324,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 8136
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 6324,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 15000
+                        }
+                    }
+                },
+                {
+                    "Level": 60,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 6851,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 11375
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 6851,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 8814
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 6851,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 16250
+                        }
+                    }
+                },
+                {
+                    "Level": 60,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 7378,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 12250
+                        },
+                        "701230103": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 7378,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 9492
+                        },
+                        "701210101": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 7378,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 17500
+                        }
+                    }
+                },
+                {
+                    "Level": 65,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 7905,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 13125
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 7905,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 10170
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 7905,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 18750
+                        }
+                    }
+                },
+                {
+                    "Level": 65,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 8432,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 14000
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 8432,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 10848
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 8432,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 20000
+                        }
+                    }
+                },
+                {
+                    "Level": 65,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 8959,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 14875
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 8959,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 11526
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 8959,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 21250
+                        }
+                    }
+                },
+                {
+                    "Level": 65,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 9486,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 15750
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 9486,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 12204
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 9486,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 22500
+                        }
+                    }
+                },
+                {
+                    "Level": 65,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 10013,
+                            "MaxHP_Base": 15000,
+                            "MaxHP_Coefficient": 16625
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 10013,
+                            "MaxHP_Base": 9000,
+                            "MaxHP_Coefficient": 12882
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 1000,
+                            "AttackPower_Coefficient": 10013,
+                            "MaxHP_Base": 5150000,
+                            "MaxHP_Coefficient": 23750
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "MaxHP_Base": 50000
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "MaxHP_Base": 28000
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "MaxHP_Base": 20150000
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 467,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 430
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 467,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 393
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 467,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 1005
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 934,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 860
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 934,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 786
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 934,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 2010
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 1401,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 1290
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 1401,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 1179
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 1401,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 3015
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 1868,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 1720
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 1868,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 1572
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 1868,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 4020
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 2335,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 2150
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 2335,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 1965
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 2335,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 5025
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 2802,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 2580
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 2802,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 2358
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 2802,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 6030
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 3269,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 3010
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 3269,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 2751
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 3269,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 7035
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 3736,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 3440
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 3736,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 3144
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 3736,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 8040
+                        }
+                    }
+                },
+                {
+                    "Level": 70,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 4203,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 3870
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 4203,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 3537
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 4203,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 9045
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 4670,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 4300
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 4670,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 3930
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 4670,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 10050
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 5137,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 4730
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 5137,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 4323
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 5137,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 11055
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 5604,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 5160
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 5604,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 4716
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 5604,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 12060
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 6071,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 5590
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 6071,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 5109
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 6071,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 13065
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 6538,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 6020
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 6538,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 5502
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 6538,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 14070
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 7005,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 6450
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 7005,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 5895
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 7005,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 15075
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 7472,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 6880
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 7472,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 6288
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 7472,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 16080
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 7939,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 7310
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 7939,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 6681
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 7939,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 17085
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 8406,
+                            "MaxHP_Base": 50000,
+                            "MaxHP_Coefficient": 7740
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 8406,
+                            "MaxHP_Base": 28000,
+                            "MaxHP_Coefficient": 7074
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 2900,
+                            "AttackPower_Coefficient": 8406,
+                            "MaxHP_Base": 20150000,
+                            "MaxHP_Coefficient": 18090
+                        }
+                    }
+                },
+                {
+                    "Level": 75,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 6200,
+                            "MaxHP_Base": 95000
+                        },
+                        "701230109": {
+                            "AttackPower_Base": 6200,
+                            "MaxHP_Base": 53000
+                        },
+                        "701210102": {
+                            "AttackPower_Base": 6200,
+                            "MaxHP_Base": 60250000
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "MaxHP_Base": 105000
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "MaxHP_Base": 54000
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "MaxHP_Base": 64150000
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 76,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 77
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 76,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 48
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 76,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 180
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 152,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 154
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 152,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 96
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 152,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 360
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 228,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 231
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 228,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 144
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 228,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 540
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 304,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 308
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 304,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 192
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 304,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 720
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 380,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 385
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 380,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 240
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 380,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 900
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 456,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 462
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 456,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 288
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 456,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 1080
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 532,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 539
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 532,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 336
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 532,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 1260
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 608,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 616
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 608,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 384
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 608,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 1440
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 684,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 693
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 684,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 432
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 684,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 1620
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 760,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 770
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 760,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 480
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 760,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 1800
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 836,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 847
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 836,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 528
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 836,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 1980
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 912,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 924
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 912,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 576
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 912,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 2160
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 988,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1001
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 988,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 624
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 988,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 2340
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1064,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1078
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1064,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 672
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1064,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 2520
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1140,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1155
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1140,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 720
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1140,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 2700
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1216,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1232
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1216,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 768
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1216,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 2880
+                        }
+                    }
+                },
+                {
+                    "Level": 80,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1292,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1309
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1292,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 816
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1292,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 3060
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1368,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1386
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1368,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 864
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1368,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 3240
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1444,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1463
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1444,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 912
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1444,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 3420
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1520,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1540
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1520,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 960
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1520,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 3600
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1596,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1617
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1596,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1008
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1596,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 3780
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1672,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1694
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1672,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1056
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1672,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 3960
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1748,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1771
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1748,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1104
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1748,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 4140
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1824,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1848
+                        },
+                        "701230111": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1824,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1152
+                        },
+                        "701210103": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1824,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 4320
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1900,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 1925
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1900,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1200
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1900,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 4500
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1976,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 2002
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1976,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1248
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 1976,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 4680
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2052,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 2079
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2052,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1296
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2052,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 4860
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2128,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 2156
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2128,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1344
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2128,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 5040
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2204,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 2233
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2204,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1392
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2204,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 5220
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2280,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 2310
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2280,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1440
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2280,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 5400
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2356,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 2387
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2356,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1488
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2356,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 5580
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2432,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 2464
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2432,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1536
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2432,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 5760
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2508,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 2541
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2508,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1584
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2508,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 5940
+                        }
+                    }
+                },
+                {
+                    "Level": 85,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2584,
+                            "MaxHP_Base": 105000,
+                            "MaxHP_Coefficient": 2618
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2584,
+                            "MaxHP_Base": 54000,
+                            "MaxHP_Coefficient": 1632
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 14200,
+                            "AttackPower_Coefficient": 2584,
+                            "MaxHP_Base": 64150000,
+                            "MaxHP_Coefficient": 6120
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "MaxHP_Base": 135000
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "MaxHP_Base": 64000
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "MaxHP_Base": 105325000
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 140,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 71
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 140,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 38
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 140,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 150
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 280,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 142
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 280,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 76
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 280,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 300
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 420,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 213
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 420,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 114
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 420,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 450
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 560,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 284
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 560,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 152
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 560,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 600
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 700,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 355
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 700,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 190
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 700,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 750
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 840,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 426
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 840,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 228
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 840,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 900
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 980,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 497
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 980,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 266
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 980,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 1050
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1120,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 568
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1120,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 304
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1120,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 1200
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1260,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 639
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1260,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 342
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1260,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 1350
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1400,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 710
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1400,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 380
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1400,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 1500
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1540,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 781
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1540,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 418
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1540,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 1650
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1680,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 852
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1680,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 456
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1680,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 1800
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1820,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 923
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1820,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 494
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1820,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 1950
+                        }
+                    }
+                },
+                {
+                    "Level": 90,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1960,
+                            "MaxHP_Base": 135000,
+                            "MaxHP_Coefficient": 994
+                        },
+                        "701230113": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1960,
+                            "MaxHP_Base": 64000,
+                            "MaxHP_Coefficient": 532
+                        },
+                        "701210104": {
+                            "AttackPower_Base": 18200,
+                            "AttackPower_Coefficient": 1960,
+                            "MaxHP_Base": 105325000,
+                            "MaxHP_Coefficient": 2100
+                        }
+                    }
+                },
+                {
+                    "Level": 95,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "MaxHP_Base": 150000
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "MaxHP_Base": 68000
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "MaxHP_Base": 129350000
+                        }
+                    }
+                },
+                {
+                    "Level": 95,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 200,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 100
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 200,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 200
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 200,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 350
+                        }
+                    }
+                },
+                {
+                    "Level": 95,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 400,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 200
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 400,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 400
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 400,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 700
+                        }
+                    }
+                },
+                {
+                    "Level": 95,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 600,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 300
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 600,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 600
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 600,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 1050
+                        }
+                    }
+                },
+                {
+                    "Level": 95,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 400
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 1400
+                        }
+                    }
+                },
+                {
+                    "Level": 100,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 1300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 500
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 1300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 1300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 1300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 1900
+                        }
+                    }
+                },
+                {
+                    "Level": 100,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 1800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 600
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 1800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 1800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 1800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 2400
+                        }
+                    }
+                },
+                {
+                    "Level": 100,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 2300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 700
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 2300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 2300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 2300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 2900
+                        }
+                    }
+                },
+                {
+                    "Level": 100,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 2800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 800
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 2800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 2800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 2800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 3400
+                        }
+                    }
+                },
+                {
+                    "Level": 100,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 3300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 900
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 3300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 3300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 3300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 3900
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 3800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1000
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 3800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 3800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 3800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 4400
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 4300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1100
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 4300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 4300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 4300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 4900
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 4800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1200
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 4800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 4800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 4800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 5400
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 5300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1300
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 5300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 5300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 5300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 5900
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 5800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1400
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 5800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 5800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 5800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 6400
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 6300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1500
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 6300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 6300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 6300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 6900
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 6800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1600
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 6800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 6800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 6800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 7400
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 7300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1700
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 7300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 7300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 7300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 7900
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 7800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1800
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 7800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 7800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 7800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 8400
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 8300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 1900
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 8300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 8300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 8300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 8900
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 8800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 2000
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 8800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 8800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 8800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 9400
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 9300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 2100
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 9300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 9300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 9300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 9900
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 9800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 2200
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 9800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 9800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 9800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 10400
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 10300,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 2300
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 10300,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 10300
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 10300,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 10900
+                        }
+                    }
+                },
+                {
+                    "Level": 105,
+                    "StatChange": {
+                        "701210106": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 10800,
+                            "MaxHP_Base": 150000,
+                            "MaxHP_Coefficient": 2400
+                        },
+                        "701230115": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 10800,
+                            "MaxHP_Base": 68000,
+                            "MaxHP_Coefficient": 10800
+                        },
+                        "701210105": {
+                            "AttackPower_Base": 22200,
+                            "AttackPower_Coefficient": 10800,
+                            "MaxHP_Base": 129350000,
+                            "MaxHP_Coefficient": 11400
+                        }
+                    }
+                }
+            ]
         }
     ]
 }

@@ -200,6 +200,7 @@ let statPreviewSelectedEnemyLevel = 1
 let statPreviewSelectedEnemyGrade = 1
 let statPreviewSelectedEnemyRaid = 0
 let statPreviewSelectedEnemyRaidDifficulty = 0
+let statPreviewSelectedEnemyRaidFloor = 0
 let statPreviewSelectedEnemyLevelFixed = false
 let statPreviewSelectedEnemyArmorType = null
 let statPreviewEnemyBookmarks = []
@@ -2437,6 +2438,32 @@ class EnemyFinder {
             })
         })
 
+
+        data.raids.MultiFloorRaid.forEach(raid => {
+            raid.EnemyList.forEach((difficulty, difficultyId) => {
+                if (!raid.IsReleased[regionID] || difficultyId > raid.MaxDifficulty[regionID]) return
+                difficulty.forEach(enemyId => {
+                    const enemy = find(data.enemies, 'Id', enemyId)[0]
+                    if (enemy.SquadType == 'Main' && !enemy.IsNPC) {
+                        const raidIcon = (enemy.Icon !== undefined && enemy.Icon != "") ? `images/enemy/${enemy.Icon}.webp` : `images/raid/icon/Icon_${raid.PathName}.png`
+                        statPreviewEnemyList.push({
+                            id: enemy.Id,
+                            name: enemy.Name,
+                            searchTerms: [getTranslatedString(raid, 'Name')],
+                            source: 'multifloorraid',
+                            sourceName: `${getLocalizedString("StageType", "MultiFloorRaid")} (${getLocalizedString('ArmorType', raid.ArmorType)}) / ${raid.DifficultyStartFloor[difficultyId]} ~ ${raid.DifficultyStartFloor[difficultyId+1] - 1}`,
+                            rank: enemy.Rank,
+                            icon: raidIcon,
+                            level: -1,
+                            grade: 1,
+                            raidId: raid.Id,
+                            raidDifficulty: difficultyId
+                        })
+                    }
+                })
+            })
+        })
+
         data.stages.Event.forEach(stage => {
             if (stage.Difficulty != 2 || !region.Events.includes(stage.EventId)) return
             let stageType = stage.Field ? 'Field' : 'Event'
@@ -2579,6 +2606,23 @@ class EnemyFinder {
         } else {
             $('#calculation-enemy-level').toggleClass('disabled', false)
             statPreviewSelectedEnemyLevelFixed = false
+        }
+
+        if (enemyListItem.source == 'multifloorraid') {
+            const raid = find(data.raids.MultiFloorRaid, 'Id', enemyListItem.raidId)[0]
+            $('#calculation-enemy-floor').show()
+            $('#calculation-enemy-floor input').val(0).attr('max', raid.DifficultyStartFloor[enemyListItem.raidDifficulty + 1] - raid.DifficultyStartFloor[enemyListItem.raidDifficulty] - 1).off('input').on('input', function (e) {
+                statPreviewSelectedEnemyRaidFloor = raid.DifficultyStartFloor[enemyListItem.raidDifficulty] - 1 + parseInt(this.value)
+                $('#calculation-enemy-floor .ba-slider-label').text(`${statPreviewSelectedEnemyRaidFloor + 1}`)
+                calculateEnemyStats()
+            })
+
+            statPreviewSelectedEnemyRaidFloor = raid.DifficultyStartFloor[enemyListItem.raidDifficulty] - 1
+            $('#calculation-enemy-floor .ba-slider-label').text(`${statPreviewSelectedEnemyRaidFloor + 1}`)
+
+            $('#calculation-enemy-level').toggleClass('disabled', true)
+        } else {
+            $('#calculation-enemy-floor').hide()
         }
 
         //set bookmark button
@@ -3626,6 +3670,10 @@ function loadModule(moduleName, entry=null) {
                 calculateEnemyStats()
             }).on('click', (e) => {e.currentTarget.select()})
             $('#calculation-enemy-level').toggleClass('disabled', statPreviewSelectedEnemyLevelFixed)
+
+            $('#calculation-enemy-floor input').on('change', function(e) {
+
+            })
 
             $('#skill-calculation-tab-student').on('click', calculateSkills)
             $('#skill-calculation-tab-enemy').on('click', calculateRaidSkills)
@@ -5513,7 +5561,7 @@ function initRaidSkillInfo(raidId, enemyId, raidDifficulty) {
     const skillInfoContainer = $('#calculation-enemy-skills').empty()
     raidSkillInfoCollection = []
 
-    if (raidId) {
+    if (raidId < 1000000) {
 
         const raid = find(raidId < 800000 ? data.raids.Raid : data.raids.WorldRaid, "Id", raidId)[0]
         const enemy = find(data.enemies, "Id", enemyId)[0]
@@ -6007,7 +6055,7 @@ function loadRaid(raidId) {
             $('#ba-timeattack-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain}.png`)
             changeTimeAttackDifficulty(ta_difficulty)
         } else if (raidId < 1000000) {
-            //Multifloor
+            //World Raid
             $('#ba-raid-list-tab-worldraid').tab('show')
             $('#ba-raid-info').show()
             $('#ba-timeattack-info').hide()
@@ -6082,7 +6130,7 @@ function loadRaid(raidId) {
         
             $('#ba-raid-affiliation').text(getLocalizedString('StageType', 'MultiFloorRaid'))
             raidName = getTranslatedString(raid, 'Name')
-            $('#ba-raid-name').text(raidName)      
+            $('#ba-raid-name').html(raidName + ` <small>(${getLocalizedString('ArmorTypeLong', raid.ArmorType)})</small>`)      
             $('#ba-raid-terrain-img').attr('src', `images/ui/Terrain_${raid.Terrain[0]}.png`)
             if (raid.Terrain.length > 1) {
                 $('#ba-raid-terrain-alt-img').attr('src', `images/ui/Terrain_${raid.Terrain[1]}.png`)
@@ -6101,7 +6149,7 @@ function loadRaid(raidId) {
         loadedRaid = raid
         $('#raid-select-'+raid.Id).addClass('selected')
 
-        finalizeLoad(raidName, "raid", raid.Id, 'View Raid', raid.Id)
+        finalizeLoad(raidName+ ` (${getLocalizedString('ArmorTypeLong', raid.ArmorType)})`, "raid", raid.Id, 'View Raid', raid.Id)
 
         if (!raid.IsReleased[regionID]) {
             showReleaseWarning()
@@ -7996,8 +8044,25 @@ function getSupportStats(support) {
 function calculateEnemyStats() {
 
     const enemy = find(data.enemies, "Id", statPreviewSelectedEnemyId)[0]
-    const enemyLevel = statPreviewSelectedEnemyLevel
-    const enemyStats = new CharacterStats(enemy, enemyLevel, statPreviewSelectedEnemyGrade, (enemy.Transcendence ? enemy.Transcendence : []))
+    let enemyLevel, enemyStats
+
+    if (statPreviewSelectedEnemyRaid >= 1000000) {
+        const raid = find(data.raids.MultiFloorRaid, 'Id', statPreviewSelectedEnemyRaid)[0]
+        enemyLevel = raid.RaidFloors[statPreviewSelectedEnemyRaidFloor].Level
+        enemyStats = new CharacterStats(enemy, enemyLevel, statPreviewSelectedEnemyGrade, (enemy.Transcendence ? enemy.Transcendence : []))
+        $('#calculation-enemy-level input').val(enemyLevel)
+
+        if (enemy.Id in raid.RaidFloors[statPreviewSelectedEnemyRaidFloor].StatChange) {
+            const statChange = raid.RaidFloors[statPreviewSelectedEnemyRaidFloor].StatChange[enemy.Id]
+            for (const stat in statChange) {
+                enemyStats.addBuff(stat, statChange[stat])
+            }
+        }
+
+    } else {
+        enemyLevel = statPreviewSelectedEnemyLevel
+        enemyStats = new CharacterStats(enemy, enemyLevel, statPreviewSelectedEnemyGrade, (enemy.Transcendence ? enemy.Transcendence : []))
+    }
 
     //include Enemy Debuffs
     $('#statpreview-enemy-buff-transferable-conflict').hide()
@@ -8626,6 +8691,10 @@ function getRaidCardHTML(raid, season=null, backgroundPath=null) {
     let name = getTranslatedString(raid, 'Name')
     const terrain = season ? season.Terrain : ''
 
+    if (raid.Id >= 1000000) {
+        name += ` (${getLocalizedString('ArmorTypeLong', raid.ArmorType)})`
+    }
+
     if (!backgroundPath) {
 
         if (raid.Id >= 1000000) {
@@ -8653,7 +8722,7 @@ function getRaidCardHTML(raid, season=null, backgroundPath=null) {
         html += `<div class="card-badge raid-terrain"><img class="invert-light" src="images/ui/Terrain_${terrain}.png"></div>`
     }
 
-    html += `<div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${getTranslatedString(raid, 'Name')}</span></div></div>`
+    html += `<div class="card-label"><span class="label-text ${name.length > label_raid_smalltext_threshold[userLang] ? 'smalltext' : ''}">${name}</span></div></div>`
     return html
 }
 
@@ -10546,7 +10615,7 @@ function allSearch() {
     if (results.length < maxResults)
     $.each(data.raids.MultiFloorRaid, function(i,el){
         if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
-            results.push({'name': getTranslatedString(el, 'Name'), 'icon': `images/raid/icon/Icon_${el.PathName}.png`, 'type': getLocalizedString('StageType', 'MultiFloorRaid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
+            results.push({'name': getTranslatedString(el, 'Name') + ` (${getLocalizedString('ArmorTypeLong', el.ArmorType)})`, 'icon': `images/raid/icon/Icon_${el.PathName}.png`, 'type': getLocalizedString('StageType', 'MultiFloorRaid'), 'rarity': '', 'rarity_text': '', 'onclick': `loadRaid(${el.Id})`})
             if (results.length >= maxResults) return false
         }
     })
