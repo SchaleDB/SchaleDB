@@ -40384,7 +40384,7 @@
         "IsReleased": [
             true,
             true,
-            false
+            true
         ],
         "DefaultOrder": 73,
         "PathName": "Hatsune_Miku",
@@ -40749,7 +40749,7 @@
         "MemoryLobby": [
             6,
             6,
-            0
+            6
         ],
         "MemoryLobbyBGM": "Blue New World",
         "FurnitureInteraction": [
@@ -63362,6 +63362,13 @@
                 "Effects": [
                     {
                         "Type": "BuffAlly",
+                        "Restrictions": [
+                            {
+                                "Property": "Id",
+                                "Operand": "NotEqual",
+                                "Value": 16010
+                            }
+                        ],
                         "Value": [
                             [
                                 1552,
@@ -63378,6 +63385,25 @@
                         ],
                         "Stat": "AttackPower_Coefficient",
                         "Channel": 102
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1552,
+                                1591,
+                                1629,
+                                1784,
+                                1823,
+                                1862,
+                                2017,
+                                2056,
+                                2095,
+                                2250
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
                     }
                 ]
             },
@@ -94017,7 +94043,7 @@
                 "Icon": "COMMON_SKILLICON_WEAPONBUFF",
                 "Effects": [
                     {
-                        "Type": "BuffAlly",
+                        "Type": "BuffSelf",
                         "Value": [
                             [
                                 598,
@@ -94034,6 +94060,32 @@
                         ],
                         "Stat": "AttackPower_Coefficient",
                         "Channel": 2
+                    },
+                    {
+                        "Type": "BuffAlly",
+                        "Restrictions": [
+                            {
+                                "Property": "Id",
+                                "Operand": "NotEqual",
+                                "Value": 10084
+                            }
+                        ],
+                        "Value": [
+                            [
+                                598,
+                                627,
+                                657,
+                                776,
+                                806,
+                                836,
+                                955,
+                                985,
+                                1015,
+                                1134
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
                     }
                 ]
             },

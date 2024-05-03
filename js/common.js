@@ -7668,8 +7668,7 @@ function recalculateStats() {
         let uniqueChannels = []
         statPreviewExternalBuffs.buffs.forEach((buff, index) => {
             buff.Skill.Effects.filter(e => statPreviewExternalBuffs.effectTypeFilter.includes(e.Type)).forEach((effect, effectIndex) => {
-                if (effect.Type == "BuffSelf" && buff.StudentId != student.Id) return
-
+                
                 //check conditions
                 const skillSlot = effect.OverrideSlot ? effect.OverrideSlot : buff.Skill.SkillType
 
@@ -7680,15 +7679,19 @@ function recalculateStats() {
 
                 let compatibleWithSummon = (statPreviewSelectedChar > 0) ? ExternalBuffs.checkRestrictions(summon, effect) : false
                 
+                if (effect.Type == "BuffSelf" && buff.StudentId != student.Id) {
+                    compatibleWithStudent = false
+                    compatibleWithSummon = false
+                }
+
                 if (!(compatibleWithStudent || compatibleWithSummon)) {
                     //exclude other character's Ex/Basic skills on Special characters
-                    $('#statpreview-buff-transferable-incompatible').toggle(statPreviewIncludeBuffs)
-                    $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
+                    $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('incompatible', true)
                 } else {
                     if (uniqueChannels.find(e => e.slot == skillSlot && e.channel == effect.Channel)) {
                         //discount the buff if there is a channel conflict
                         $('#statpreview-buff-transferable-conflict').toggle(statPreviewIncludeBuffs)
-                        $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
+                        $(`#statpreview-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('conflict', true)
                     } else {
                         const value = ExternalBuffs.getEffectValue(buff, effect)
 
@@ -8075,7 +8078,7 @@ function calculateEnemyStats() {
             const skillSlot = effect.OverrideSlot ? effect.OverrideSlot : buff.Skill.SkillType
 
             if ((effect.RestrictTo && !effect.RestrictTo.includes(statPreviewSelectedEnemyId)) || effect.Type != "BuffTarget" || !ExternalBuffs.checkRestrictions(enemy, effect, {"ArmorType": statPreviewSelectedEnemyArmorType})) {
-                $(`#statpreview-enemy-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
+                $(`#statpreview-enemy-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('incompatible', true)
             } else {
 
                 buffIncompatible = false
@@ -8083,7 +8086,7 @@ function calculateEnemyStats() {
                 if (uniqueChannels.find(e => e.slot == skillSlot && e.channel == effect.Channel)) {
                     //discount the buff if there is a channel conflict
                     $('#statpreview-enemy-buff-transferable-conflict').show()
-                    $(`#statpreview-enemy-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('invalid', true)
+                    $(`#statpreview-enemy-buff-transferable-controls div[data-index='${index}'] .buff-description span[data-effect='${effectIndex}']`).toggleClass('conflict', true)
                 } else {
                     const value = ExternalBuffs.getEffectValue(buff, effect) // ('StackSame' in effect ? effect.Value[0][buff.Level-1] * buff.Stacks : effect.Value[buff.Stacks-1][buff.Level-1])
                     enemyStats.addBuff(effect.Stat, value)

@@ -40269,7 +40269,7 @@
         "IsReleased": [
             true,
             true,
-            false
+            true
         ],
         "DefaultOrder": 73,
         "PathName": "Hatsune_Miku",
@@ -40301,9 +40301,9 @@
         "SchoolYear": "",
         "CharacterAge": "16岁",
         "Birthday": "8月31日",
-        "CharacterSSRNew": "请聆听我的歌唱！",
-        "ProfileIntroduction": "永远开朗，最喜欢唱歌的虚拟歌手。\n\n原本只是没有现实身体的虚拟存在，但通过使用基沃托斯的技术获得了实打实的躯体，来到了这个世界。\n虚拟歌手有着能超越时间与空间传达歌唱的特点，自然基沃托斯也有很多她的隐藏粉丝，看来可以满怀期待未来在这个世界举办的演唱会了。",
-        "Hobby": "歌唱、舞蹈",
+        "CharacterSSRNew": "请聆听我的歌声吧！",
+        "ProfileIntroduction": "喜欢唱歌，性格开朗的虚拟歌手。\n\n本来是没有实体的虚拟存在，借助基沃托斯的科学技术，获得了身体，降临在这个世界。作为虚拟歌手的她，能够超越时间和空间，传递自己的歌声。据说她在基沃托斯也有不少粉丝，粉丝们都期待着她在基沃托斯的第一场演出。",
+        "Hobby": "唱歌，跳舞",
         "CharacterVoice": "藤田咲",
         "BirthDay": "8/31",
         "Illustrator": "YutokaMizu",
@@ -40330,7 +40330,7 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "将每一刻都珍藏于心！",
+                "Name": "每时每刻，倾注真心！",
                 "Desc": "初音未来入场(持续26秒)，令以初音未来为中心的圆形范围内的我方单位回复治愈力<?1>的生命值.",
                 "Parameters": [
                     [
@@ -40504,7 +40504,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "初音未来的声援＋",
+                "Name": "初音未来的声援+",
                 "Desc": "<b:HealPower>增加<?1>；\n<b:HealPower>增加<?2>.",
                 "Parameters": [
                     [
@@ -40632,7 +40632,7 @@
         "MemoryLobby": [
             6,
             6,
-            0
+            6
         ],
         "MemoryLobbyBGM": "Blue New World",
         "FurnitureInteraction": [
@@ -40646,8 +40646,8 @@
         ],
         "IsLimited": 1,
         "Weapon": {
-            "Name": "演唱会用空气炮",
-            "Desc": "初音未来参加演唱会时，用于发放T恤之类的周边时使用的巨型大炮。\n外表装有发光二极管之类的东西，随演唱会的音乐而放出绚丽的光芒。",
+            "Name": "演出用T恤加农炮",
+            "Desc": "初音未来在演出中给观众们分发T恤和周边时使用的大炮。\n\n枪身镶嵌着发光二极管，会随着演出的音乐旋律闪耀出美丽的光芒。",
             "AdaptationType": "Street",
             "AdaptationValue": 1,
             "AttackPower1": 81,
@@ -63268,6 +63268,13 @@
                 "Effects": [
                     {
                         "Type": "BuffAlly",
+                        "Restrictions": [
+                            {
+                                "Property": "Id",
+                                "Operand": "NotEqual",
+                                "Value": 16010
+                            }
+                        ],
                         "Value": [
                             [
                                 1552,
@@ -63284,6 +63291,25 @@
                         ],
                         "Stat": "AttackPower_Coefficient",
                         "Channel": 102
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1552,
+                                1591,
+                                1629,
+                                1784,
+                                1823,
+                                1862,
+                                2017,
+                                2056,
+                                2095,
+                                2250
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
                     }
                 ]
             },
@@ -93817,7 +93843,7 @@
                 "Icon": "COMMON_SKILLICON_WEAPONBUFF",
                 "Effects": [
                     {
-                        "Type": "BuffAlly",
+                        "Type": "BuffSelf",
                         "Value": [
                             [
                                 598,
@@ -93834,6 +93860,32 @@
                         ],
                         "Stat": "AttackPower_Coefficient",
                         "Channel": 2
+                    },
+                    {
+                        "Type": "BuffAlly",
+                        "Restrictions": [
+                            {
+                                "Property": "Id",
+                                "Operand": "NotEqual",
+                                "Value": 10084
+                            }
+                        ],
+                        "Value": [
+                            [
+                                598,
+                                627,
+                                657,
+                                776,
+                                806,
+                                836,
+                                955,
+                                985,
+                                1015,
+                                1134
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
                     }
                 ]
             },
