@@ -61589,7 +61589,12 @@
                         "Id": 2075498290
                     },
                     {
-                        "Id": 3693849978
+                        "Id": 3693849978,
+                        "Parameters": [
+                            [
+                                "700%"
+                            ]
+                        ]
                     }
                 ],
                 [
@@ -61600,7 +61605,12 @@
                         "Id": 2075498290
                     },
                     {
-                        "Id": 3693849978
+                        "Id": 3693849978,
+                        "Parameters": [
+                            [
+                                "700%"
+                            ]
+                        ]
                     },
                     {
                         "Id": 3900019006
@@ -63161,6 +63171,159 @@
                 130,
                 140
             ]
+        },
+        {
+            "Id": 27000,
+            "IsReleased": [
+                true,
+                false,
+                false
+            ],
+            "DungeonType": "Shooting",
+            "Icon": "enemyinfo_boxcat_terror",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 910100001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811001
+                    ]
+                },
+                {
+                    "Id": 910100002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811002
+                    ]
+                },
+                {
+                    "Id": 910100003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811003
+                    ]
+                },
+                {
+                    "Id": 910100004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 3693849978,
+                        "Parameters": [
+                            [
+                                "900%"
+                            ]
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 3693849978,
+                        "Parameters": [
+                            [
+                                "900%"
+                            ]
+                        ]
+                    },
+                    {
+                        "Id": 3669168958
+                    }
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                130,
+                90
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -63384,7 +63547,7 @@
             "Id": 3693849978,
             "Icon": "timeattack_icon_buff_attackpower_ally_01",
             "Name": "我方 - 攻擊力上升：SPECIAL",
-            "Desc": "戰略定位為SPECIAL的學生<b:ATK>增加700%."
+            "Desc": "戰略定位為SPECIAL的學生<b:ATK>增加<?1>."
         },
         {
             "Id": 3900019006,
@@ -63493,6 +63656,12 @@
             "Icon": "timeattack_icon_buff_attackpower_ally_01",
             "Name": "我方 - 攻擊力上升：SR 敵方 - 生命值上升",
             "Desc": "武器種類為SR的我方單位<b:ATK>增加200%.\n全體敵方單位<b:MAXHP>增加150%."
+        },
+        {
+            "Id": 3669168958,
+            "Icon": "timeattack_icon_enemy_debuff_damagedratio2increase",
+            "Name": "敵の弱体状態数に比例し敵の被ダメージ量増加",
+            "Desc": "敵が保有する弱体状態の数に比例して被ダメージ量が増加します。（最大で4つまで適用）"
         }
     ],
     "WorldRaid": [

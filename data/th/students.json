@@ -101494,5 +101494,532 @@
                 13
             ]
         ]
+    },
+    {
+        "Id": 10093,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 180,
+        "PathName": "Kirara",
+        "DevName": "kirara",
+        "Name": "キララ",
+        "School": "Gehenna",
+        "Club": "ShinySparkleSociety",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Sonic",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 4,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "AR",
+        "WeaponImg": "weapon_icon_kirara",
+        "Cover": true,
+        "Equipment": [
+            "Gloves",
+            "Badge",
+            "Watch"
+        ],
+        "CollectionBG": "BG_Gehenna_Collection",
+        "FamilyName": "夜桜",
+        "PersonalName": "キララ",
+        "SchoolYear": "2年生",
+        "CharacterAge": "16歳",
+        "Birthday": "2月24日",
+        "CharacterSSRNew": "今日はどんなドキドキが待ってるかな～？",
+        "ProfileIntroduction": "ゲヘナ学園所属、明るい性格の持ち主の女子高生。\n\nいつも目新しさやドキドキすることを待ち望んでいる少女。初めて出会った人とも仲良くおしゃべりできるくらい、社交性が高い性格。",
+        "Hobby": "おしゃべり",
+        "CharacterVoice": "山下七海",
+        "BirthDay": "2/24",
+        "Illustrator": "Mx2J",
+        "Designer": "桧野ひなこ",
+        "CharHeightMetric": "159cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1320,
+        "AttackPower1": 256,
+        "AttackPower100": 2566,
+        "MaxHP1": 2124,
+        "MaxHP100": 21240,
+        "DefensePower1": 18,
+        "DefensePower100": 113,
+        "HealPower1": 1477,
+        "HealPower100": 4433,
+        "DodgePoint": 755,
+        "AccuracyPoint": 738,
+        "CriticalPoint": 263,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 15,
+        "AmmoCost": 3,
+        "Range": 650,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "ゲヘナのセレブリティー！",
+                "Desc": "<s:FormChange>を、攻撃力の<?1>分の追加ダメージを与える攻撃に変更、<b:ATK>を<?2>増加（40秒間）/\n発動後すぐにリロード",
+                "Parameters": [
+                    [
+                        "15.2%",
+                        "17.5%",
+                        "22%",
+                        "24.3%",
+                        "28.9%"
+                    ],
+                    [
+                        "39.6%",
+                        "39.6%",
+                        "45.5%",
+                        "45.5%",
+                        "51.4%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "Icon": "COMMON_SKILLICON_FORMCHANGE",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            1522,
+                            1755,
+                            2206,
+                            2432,
+                            2890
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                3960,
+                                3960,
+                                4554,
+                                4554,
+                                5148
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "いつもキラキラ！",
+                "Desc": "30秒毎に、敵1人に対して攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "391%",
+                        "411%",
+                        "430%",
+                        "509%",
+                        "528%",
+                        "548%",
+                        "626%",
+                        "646%",
+                        "665%",
+                        "744%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            39172,
+                            41136,
+                            43092,
+                            50925,
+                            52881,
+                            54845,
+                            62678,
+                            64634,
+                            66590,
+                            74423
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "クレープの甘さ",
+                "Desc": "<b:CriticalDamage>率を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "クレープの甘さ+",
+                "Desc": "<b:CriticalDamage>を<?1>増加/\nさらに<b:CriticalDamage>率を<?2>増加",
+                "Parameters": [
+                    [
+                        "2000",
+                        "2100",
+                        "2200",
+                        "2600",
+                        "2700",
+                        "2800",
+                        "3200",
+                        "3300",
+                        "3400",
+                        "3800"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "CriticalDamageRate_Base",
+                        "Scale": [
+                            2000,
+                            2100,
+                            2200,
+                            2600,
+                            2700,
+                            2800,
+                            3200,
+                            3300,
+                            3400,
+                            3800
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "トキメキ☆って感じ？",
+                "Desc": "<s:FormChange>が変更された状態の場合、<b:HIT>を<?1>増加、通常攻撃のディレイ<?2>無視",
+                "Parameters": [
+                    [
+                        "16.1%",
+                        "16.9%",
+                        "17.7%",
+                        "20.9%",
+                        "21.7%",
+                        "22.5%",
+                        "25.8%",
+                        "26.6%",
+                        "27.4%",
+                        "30.6%"
+                    ],
+                    [
+                        "2回",
+                        "2回",
+                        "2回",
+                        "2回",
+                        "2回",
+                        "2回",
+                        "2回",
+                        "2回",
+                        "2回",
+                        "4回"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_IGNOREDELAY",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1613,
+                                1694,
+                                1775,
+                                2098,
+                                2178,
+                                2259,
+                                2581,
+                                2662,
+                                2742,
+                                3065
+                            ]
+                        ],
+                        "Stat": "AccuracyPoint_Coefficient",
+                        "Channel": 5
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                4,
+                0
+            ],
+            [
+                5,
+                53
+            ],
+            [
+                6,
+                64
+            ],
+            [
+                2,
+                11
+            ],
+            [
+                2,
+                16
+            ],
+            [
+                4,
+                26
+            ]
+        ],
+        "FavorAlts": [],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 210",
+        "FurnitureInteraction": [
+            [
+                [
+                    210339,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "Bb",
+            "aS",
+            "an"
+        ],
+        "FavorItemUniqueTags": [
+            "GA",
+            "Ga"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "チョコレート&ストロベリー",
+            "Desc": "キララがいつも持ち歩いている銃。\n\nキララの好みで飾られていて、銃器よりファッションアイテムの一種に見える。名前はキララが一番好きなクレープのメニューから取ったものだという。",
+            "AdaptationType": "Street",
+            "AdaptationValue": 1,
+            "AttackPower1": 113,
+            "AttackPower100": 1127,
+            "MaxHP1": 611,
+            "MaxHP100": 6108,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3030,
+                250
+            ],
+            [
+                3031,
+                3030,
+                251,
+                270
+            ],
+            [
+                3032,
+                3031,
+                252,
+                271
+            ],
+            [
+                3033,
+                3032,
+                253,
+                272
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                16,
+                31
+            ],
+            [
+                12,
+                18,
+                12,
+                25
+            ],
+            [
+                8,
+                18,
+                3,
+                22
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4030
+            ],
+            [
+                4030
+            ],
+            [
+                4031,
+                4030,
+                250
+            ],
+            [
+                4031,
+                251,
+                270
+            ],
+            [
+                4032,
+                4031,
+                251,
+                270
+            ],
+            [
+                4032,
+                252,
+                271
+            ],
+            [
+                4033,
+                4032,
+                253,
+                272
+            ],
+            [
+                4033,
+                253,
+                272
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                11,
+                17
+            ],
+            [
+                8,
+                4,
+                16
+            ],
+            [
+                8,
+                12,
+                2,
+                9
+            ],
+            [
+                12,
+                5,
+                12
+            ]
+        ]
     }
 ]

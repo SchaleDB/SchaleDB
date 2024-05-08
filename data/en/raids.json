@@ -61571,7 +61571,12 @@
                         "Id": 2075498290
                     },
                     {
-                        "Id": 3693849978
+                        "Id": 3693849978,
+                        "Parameters": [
+                            [
+                                "700%"
+                            ]
+                        ]
                     }
                 ],
                 [
@@ -61582,7 +61587,12 @@
                         "Id": 2075498290
                     },
                     {
-                        "Id": 3693849978
+                        "Id": 3693849978,
+                        "Parameters": [
+                            [
+                                "700%"
+                            ]
+                        ]
                     },
                     {
                         "Id": 3900019006
@@ -63143,6 +63153,159 @@
                 130,
                 140
             ]
+        },
+        {
+            "Id": 27000,
+            "IsReleased": [
+                true,
+                false,
+                false
+            ],
+            "DungeonType": "Shooting",
+            "Icon": "enemyinfo_boxcat_terror",
+            "MaxDifficulty": 4,
+            "Terrain": "Street",
+            "BulletType": "Normal",
+            "ArmorType": "HeavyArmor",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 910100001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811001
+                    ]
+                },
+                {
+                    "Id": 910100002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811002
+                    ]
+                },
+                {
+                    "Id": 910100003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811003
+                    ]
+                },
+                {
+                    "Id": 910100004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7811004
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 3693849978,
+                        "Parameters": [
+                            [
+                                "900%"
+                            ]
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "Id": 3938056289
+                    },
+                    {
+                        "Id": 2075498290
+                    },
+                    {
+                        "Id": 3693849978,
+                        "Parameters": [
+                            [
+                                "900%"
+                            ]
+                        ]
+                    },
+                    {
+                        "Id": 3669168958
+                    }
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                130,
+                90
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -63366,7 +63529,7 @@
             "Id": 3693849978,
             "Icon": "timeattack_icon_buff_attackpower_ally_01",
             "Name": "Special Student ATK Increase",
-            "Desc": "All Special students' <b:ATK> is increased by 700%."
+            "Desc": "All Special students' <b:ATK> is increased by <?1>."
         },
         {
             "Id": 3900019006,
@@ -63475,6 +63638,12 @@
             "Icon": "timeattack_icon_buff_attackpower_ally_01",
             "Name": "SR Weapon ATK Increase, Enemy Max HP Increase",
             "Desc": "Increases <b:ATK> for all students who use SR weapons by 200%.\nAll enemies' <b:MAXHP> is increased by 150%."
+        },
+        {
+            "Id": 3669168958,
+            "Icon": "timeattack_icon_enemy_debuff_damagedratio2increase",
+            "Name": "Enemy Damage Taken Increases With Number Of Debuffs",
+            "Desc": "Enemies' <d:DamagedRatio> is increased by 25% for each debuff they are currently inflicted with (up to a maximum of 4)."
         }
     ],
     "WorldRaid": [
