@@ -5338,11 +5338,68 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "EN0006Normal01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "ShowInfo": false,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                3333,
+                                3333,
+                                3334
+                            ]
+                        }
+                    ],
+                    "Name": "Normal Attack",
+                    "Desc": "Deals 100% damage divided between the three closest targets."
+                },
+                {
                     "Id": "EN0006Ex01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "묘귀의 땅울림",
                     "Desc": "원형 범위 내 적에게 공격력 200% 만큼 대미지"
                 },
@@ -5352,6 +5409,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "묘귀의 울음소리",
                     "Desc": "다수의 원형 범위 내 적에게 공격력 250% 만큼 대미지, 대미지는 중첩해서 받지 않습니다."
                 },
@@ -5361,6 +5439,39 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140102,
+                                611140202,
+                                611140302,
+                                611140402,
+                                611140502
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140602,
+                                611140702
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "화신을 부르는 귀곡성",
                     "Desc": "쿠로카게의 분신을 소환합니다. 분신은 가장 가까운 적에게 돌진한 뒤 자폭하여 원형 범위 내 적에게 공격력 <?1> 만큼 대미지를 <?2>.",
                     "Parameters": [
@@ -5390,6 +5501,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "질주하는 묘귀야행",
                     "Desc": "쿠로카게가 돌진하여 경로 상에 있는 적에게 공격력 300% 만큼 대미지를 주고 밀쳐냅니다."
                 },
@@ -5399,6 +5531,57 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_EN0006_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1200
+                            ]
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "퍼져 나가는 가담항설",
                     "Desc": "쿠로카게가 영역을 불태워 모든 대상에게 공격력 250% 만큼 대미지를 입히면서 끌어 당기고, 마지막에 밀쳐내면서 공격력 250% 만큼 대미지를 입힙니다.\n대상에게 묘귀의 위압이 남아있을 경우 위압 수치가 1초마다 300씩 감소하는 대신 현재 위압 수치의 20% 만큼의 대미지를 받습니다.(최대 20초)"
                 },

@@ -5392,11 +5392,68 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "EN0006Normal01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "ShowInfo": false,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                3333,
+                                3333,
+                                3334
+                            ]
+                        }
+                    ],
+                    "Name": "Normal Attack",
+                    "Desc": "Deals 100% damage divided between the three closest targets."
+                },
+                {
                     "Id": "EN0006Ex01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "貓鬼之地鳴",
                     "Desc": "對圓形範圍內的敵方單位造成攻擊力200%的傷害."
                 },
@@ -5406,6 +5463,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "貓鬼之咆哮",
                     "Desc": "對多個圓形範圍內的敵方單位造成攻擊力250%的傷害(每個目標最多僅受到1次該次技能的傷害)."
                 },
@@ -5415,6 +5493,39 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140102,
+                                611140202,
+                                611140302,
+                                611140402,
+                                611140502
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140602,
+                                611140702
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "鬼哭喚化身",
                     "Desc": "黑影召喚化身.\n化身衝向距離自身最近的目標後自爆，對以自身為中心的圓形範圍內的敵方單位造成攻擊力<?1>的傷害<?2>.",
                     "Parameters": [
@@ -5444,6 +5555,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "疾衝鋒貓鬼夜行",
                     "Desc": "黑影開始猛衝，對其路徑上的敵方單位造成攻擊力300%的傷害並擊退."
                 },
@@ -5453,6 +5585,57 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_EN0006_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1200
+                            ]
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "廣流傳街談巷議",
                     "Desc": "黑影焚燒自身的領域，對該範圍內所有敵方單位造成以下效果：\n- 造成攻擊力250%的傷害並吸引至自身，該技能結束時擊退所有目標並造成攻擊力250%的傷害；\n- 目標擁有威壓值時，令該目標擁有的威壓值每秒降低300，並每秒對其造成當前威壓值20%的傷害(最多持續20秒)(目標未擁有威壓值時該效果解除)."
                 },

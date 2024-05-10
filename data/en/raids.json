@@ -5374,11 +5374,68 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "EN0006Normal01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "ShowInfo": false,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                3333,
+                                3333,
+                                3334
+                            ]
+                        }
+                    ],
+                    "Name": "Normal Attack",
+                    "Desc": "Deals 100% damage divided between the three closest targets."
+                },
+                {
                     "Id": "EN0006Ex01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Myouki's Quake",
                     "Desc": "Deals 200% damage to enemies in a circular area."
                 },
@@ -5388,6 +5445,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Myouki's Roar",
                     "Desc": "Deals 250% damage to enemies in multiple circular areas. Enemies in overlapping areas do not receive damage multiple times."
                 },
@@ -5397,6 +5475,39 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140102,
+                                611140202,
+                                611140302,
+                                611140402,
+                                611140502
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140602,
+                                611140702
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Demonic Call",
                     "Desc": "Summons a shadow of Kurokage. The shadow rushes the nearest enemy to it and self-destructs, dealing <?1> damage to enemies in a circular area<?2>.",
                     "Parameters": [
@@ -5426,6 +5537,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Myoukiyako Rush",
                     "Desc": "Kurokage rushes forward, dealing 300% damage to enemies in its path and knocking them back."
                 },
@@ -5435,6 +5567,57 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_EN0006_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1200
+                            ]
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "Spreading Rumors",
                     "Desc": "Kurokage burns the area, dealing 250% damage to all enemies and pulling them towards Kurokage, before pushing them away and dealing another 250% damage.\nAny enemies that are currently affected by <i>Intimidation</i> will be inflicted with the following effect:\nReceives damage equal to 20% of their current amount of <i>Intimidation</i> while decreasing <i>Intimidation</i> by <b>300</b>.\nThis effect occurs every 1s (lasts up to 20s or until <i>Intimidation</i> is completely removed) and can be dispelled."
                 },

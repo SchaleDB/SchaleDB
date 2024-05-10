@@ -5327,11 +5327,68 @@
             ],
             "RaidSkill": [
                 {
+                    "Id": "EN0006Normal01",
+                    "SkillType": "EX",
+                    "MinDifficulty": 0,
+                    "ATGCost": 0,
+                    "ShowInfo": false,
+                    "Icon": "SKILLICON_BINAH_NORMALSKILL",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    10000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                3333,
+                                3333,
+                                3334
+                            ]
+                        }
+                    ],
+                    "Name": "Normal Attack",
+                    "Desc": "Deals 100% damage divided between the three closest targets."
+                },
+                {
                     "Id": "EN0006Ex01",
                     "SkillType": "EX",
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL01",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "猫鬼の地響き",
                     "Desc": "円形範囲内の敵に対して攻撃力の200%分のダメージ"
                 },
@@ -5341,6 +5398,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL02",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "猫鬼の咆哮",
                     "Desc": "多数の円形範囲内の敵に対して攻撃力の250%分のダメージ、ダメージは重複されません。"
                 },
@@ -5350,6 +5428,39 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL03",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    20000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140102,
+                                611140202,
+                                611140302,
+                                611140402,
+                                611140502
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    40000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140602,
+                                611140702
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "化身を呼ぶ鬼哭",
                     "Desc": "クロカゲの分身を召喚します。分身は最も近い敵に突進した後に自爆し、円形範囲内の敵に対して攻撃力の<?1>分のダメージを与え<?2>ます。",
                     "Parameters": [
@@ -5379,6 +5490,27 @@
                     "MinDifficulty": 0,
                     "ATGCost": 0,
                     "Icon": "SKILLICON_EN0006_EXSKILL04",
+                    "Effects": [
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    30000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "疾走する猫鬼夜行",
                     "Desc": "クロカゲが突進し経路上の敵に対して攻撃力の300%分のダメージを与え、押し出します。"
                 },
@@ -5388,6 +5520,57 @@
                     "MinDifficulty": 0,
                     "ATGCost": 3,
                     "Icon": "SKILLICON_EN0006_EXSKILL05",
+                    "Effects": [
+                        {
+                            "Type": "DMGMulti",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true,
+                            "Hits": [
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1100,
+                                1200
+                            ]
+                        },
+                        {
+                            "Type": "DMGSingle",
+                            "Scale": [
+                                [
+                                    25000
+                                ]
+                            ],
+                            "RestrictTo": [
+                                611140101,
+                                611140201,
+                                611140301,
+                                611140401,
+                                611140501,
+                                611140601,
+                                611140701
+                            ],
+                            "CriticalCheck": "Never",
+                            "CanEvade": true
+                        }
+                    ],
                     "Name": "広がる街談巷説",
                     "Desc": "クロカゲが領域を燃やし、すべての対象に攻撃力の250%分のダメージを与えながら引き寄せ、最後に押し出しながら攻撃力の250%分のダメージを与えます。\n対象に猫鬼の威圧が残っている場合、威圧値が1秒毎に300ずつ減少する代わりに現在の威圧値の20%分のダメージを受けます。（最大20秒）"
                 },
