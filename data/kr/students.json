@@ -91288,7 +91288,7 @@
         "Id": 10081,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 162,
@@ -91329,7 +91329,7 @@
         "Illustrator": "Mx2J",
         "Designer": "Mx2J",
         "CharHeightMetric": "155cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "155 cm",
         "StabilityPoint": 1988,
         "AttackPower1": 328,
         "AttackPower100": 3284,
@@ -91712,7 +91712,7 @@
         "FavorAlts": [],
         "MemoryLobby": [
             6,
-            0,
+            6,
             0
         ],
         "MemoryLobbyBGM": "Hue",
@@ -91723,7 +91723,12 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    210321,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -93550,7 +93555,7 @@
             false
         ],
         "DefaultOrder": 166,
-        "PathName": "Kotama_Camping",
+        "PathName": "Kotama_Camp",
         "DevName": "CH0232",
         "Name": "코타마(캠핑)",
         "School": "Millennium",
@@ -94095,7 +94100,7 @@
             false
         ],
         "DefaultOrder": 167,
-        "PathName": "Hare_Camping",
+        "PathName": "Hare_Camp",
         "DevName": "CH0233",
         "Name": "하레(캠핑)",
         "School": "Millennium",
@@ -99921,7 +99926,7 @@
             {
                 "SkillType": "ex",
                 "Name": "역사적인 첫 소절",
-                "Desc": "자신을 중심으로 원형 범위 내의 아군에게 <b:AttackSpeed> <?1> 증가/\n추가로 자신에게 슈가러시 <?2> 부여(40초간)(최대 2개까지)",
+                "Desc": "자신을 중심으로 원형 범위 내의 아군에게 <b:AttackSpeed> <?1> 증가/\n추가로 자신에게 <s:CH0220_Public> <?2> 부여(40초간)(최대 2개까지)",
                 "Parameters": [
                     [
                         "18.9%",
@@ -100095,7 +100100,7 @@
             {
                 "SkillType": "sub",
                 "Name": "달콤한 목소리",
-                "Desc": "자신의 슈가러시 1개마다 공격 시 공격력 <?1> 추가 대미지(최대 2개까지)",
+                "Desc": "자신의 <s:CH0220_Public> 1개마다 공격 시 공격력 <?1> 추가 대미지(최대 2개까지)",
                 "Parameters": [
                     [
                         "5.6%",
@@ -100426,7 +100431,7 @@
             {
                 "SkillType": "ex",
                 "Name": "폭발적인 클라이막스",
-                "Desc": "공격력과 <b:AttackSpeed> <?1> 증가(50초간)/\n추가로 슈가러시 5개 부여(최대 5개까지)/\n슈가러시는 10초마다 1개씩 해제",
+                "Desc": "공격력과 <b:AttackSpeed> <?1> 증가(50초간)/\n추가로 <s:CH0220_Public> 5개 부여(최대 5개까지)/\n<s:CH0220_Public>는 10초마다 1개씩 해제",
                 "Parameters": [
                     [
                         "59.1%",
@@ -100478,7 +100483,7 @@
             {
                 "SkillType": "normal",
                 "Name": "비주얼 메이커",
-                "Desc": "일반 공격 10회마다 적 1인에게 공격력 <?1> 대미지/\n추가로 아군 전체의 슈가러시 1개마다 대미지가 5%만큼 증가(최대 8개까지)",
+                "Desc": "일반 공격 10회마다 적 1인에게 공격력 <?1> 대미지/\n추가로 아군 전체의 <s:CH0220_Public> 1개마다 대미지가 5%만큼 증가(최대 8개까지)",
                 "Parameters": [
                     [
                         "508%",
@@ -101083,7 +101088,7 @@
             {
                 "SkillType": "ex",
                 "Name": "행복한 멜로디",
-                "Desc": "<b:EnhanceExplosionRate> <?1> 가산, 슈가러시 부여(30초간)",
+                "Desc": "<b:EnhanceExplosionRate> <?1> 가산, <s:CH0220_Public> 부여(30초간)",
                 "Parameters": [
                     [
                         "95.8%",
@@ -101263,7 +101268,7 @@
             {
                 "SkillType": "sub",
                 "Name": "스며드는 감정",
-                "Desc": "슈가러시를 보유한 상태에서 공격 시 10% 확률로 <d:CriticalDamageRateResist> <?1> 감소(16초간)(쿨타임 5초)",
+                "Desc": "<s:CH0220_Public>를 보유한 상태에서 공격 시 10% 확률로 <d:CriticalDamageRateResist> <?1> 감소(16초간)(쿨타임 5초)",
                 "Parameters": [
                     [
                         "12.8%",
