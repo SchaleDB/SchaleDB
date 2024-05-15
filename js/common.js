@@ -8784,7 +8784,7 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
 
     let enemyStats = new CharacterStats(enemy, level, grade, (enemy.Transcendence ? enemy.Transcendence : []), scaletype == 1 ? 'TimeAttack' : 'Standard')
 
-    //override je #8 HP values
+    //override joint exercise HP values
     if (loadedModule == 'raids') {
 
         if (raid.Id == 8000) {
@@ -8806,6 +8806,32 @@ function showEnemyInfo(id, level, terrain, grade=1, scaletype=0, switchTab=false
                 case 7810003:
                 case 7810004:
                     enemyStats.setBase('MaxHP', 250)
+                    break
+            }
+        }
+
+        if (raid.Id == 21000) {
+            switch (id) {
+                case 7832101:
+                case 7832102:
+                case 7832103:
+                case 7832104:
+                    enemyStats.setBase('DefensePower', 2000)
+                    enemyStats.setBase('DodgePoint', 1500)
+                    break
+                case 7832201:
+                case 7832202:
+                case 7832203:
+                case 7832204:
+                    enemyStats.setBase('DefensePower', 2000)
+                    enemyStats.setBase('DodgePoint', 1000)
+                    break
+                case 7832301:
+                case 7832302:
+                case 7832303:
+                case 7832304:
+                    enemyStats.setBase('DefensePower', 2000)
+                    enemyStats.setBase('DodgePoint', 500)
                     break
             }
         }
