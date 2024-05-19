@@ -502,6 +502,30 @@ String.prototype.escapeHtml = function() {
     constructor(character, level, stargrade, transcendence=[], statGrowthType='Standard') {
         this.stats = {}
 
+        function getRawStat(stat) {
+            if (character[`Stat${region.Name}`] && character[`Stat${region.Name}`][stat] !== undefined) {
+                return character[`Stat${region.Name}`][stat]
+            } else if (character[stat] !== undefined) {
+                return character[stat]
+            } else {
+                //return default value
+                switch (stat) {
+                    case 'CriticalResistPoint': return 100
+                    case 'CriticalDamageResistRate': return 5000
+                    case 'StabilityRate': return 2000
+                    case 'DamageRatio': return 10000
+                    case 'DamagedRatio': return 10000
+                    case 'OppressionPower': return 100
+                    case 'OppressionResist': return 100
+                    case 'MoveSpeed': return 200
+                    case 'StreetBattleAdaptation': return 2
+                    case 'OutdoorBattleAdaptation': return 2
+                    case 'IndoorBattleAdaptation': return 2
+                    default: return 0
+                }
+            }
+        }
+
         if (transcendence.length == 0) {
             transcendence = [[0, 1000, 1200, 1400, 1700], [0, 500, 700, 900, 1400], [0, 750, 1000, 1200, 1500]]
         }
@@ -516,21 +540,21 @@ String.prototype.escapeHtml = function() {
             transcendenceHeal += transcendence[2][i] / 10000
         }
 
-        let MaxHP = CharacterStats.interpolateStat(character.MaxHP1, character.MaxHP100, level, transcendenceHP, statGrowthType)
-        let AttackPower = CharacterStats.interpolateStat(character.AttackPower1, character.AttackPower100, level, transcendenceAttack, statGrowthType)
-        let DefensePower = CharacterStats.interpolateStat(character.DefensePower1, character.DefensePower100, level, 1, statGrowthType)
-        let HealPower = CharacterStats.interpolateStat(character.HealPower1, character.HealPower100, level, transcendenceHeal, statGrowthType) 
+        let MaxHP = CharacterStats.interpolateStat(getRawStat('MaxHP1'), getRawStat('MaxHP100'), level, transcendenceHP, statGrowthType)
+        let AttackPower = CharacterStats.interpolateStat(getRawStat('AttackPower1'), getRawStat('AttackPower100'), level, transcendenceAttack, statGrowthType)
+        let DefensePower = CharacterStats.interpolateStat(getRawStat('DefensePower1'), getRawStat('DefensePower100'), level, 1, statGrowthType)
+        let HealPower = CharacterStats.interpolateStat(getRawStat('HealPower1'), getRawStat('HealPower100'), level, transcendenceHeal, statGrowthType) 
 
         let DefensePenetration = 0
-        if (character.DefensePenetration100 !== undefined) {
-            DefensePenetration = CharacterStats.interpolateStat(character.DefensePenetration1, character.DefensePenetration100, level, 1, statGrowthType)
+        if (getRawStat('DefensePenetration100') !== undefined) {
+            DefensePenetration = CharacterStats.interpolateStat(getRawStat('DefensePenetration1'), getRawStat('DefensePenetration100'), level, 1, statGrowthType)
         }
 
         this.level = level
         this.terrain = {
-            Street: character.StreetBattleAdaptation !== undefined ? character.StreetBattleAdaptation : 2,
-            Outdoor: character.OutdoorBattleAdaptation !== undefined ? character.OutdoorBattleAdaptation : 2,
-            Indoor: character.IndoorBattleAdaptation !== undefined ? character.IndoorBattleAdaptation : 2
+            Street: getRawStat('StreetBattleAdaptation'),
+            Outdoor: getRawStat('OutdoorBattleAdaptation'),
+            Indoor: getRawStat('IndoorBattleAdaptation')
         }
 
         this.activeBuffs = {}
@@ -542,27 +566,27 @@ String.prototype.escapeHtml = function() {
         this.stats['AttackPower'] = [AttackPower,0,1,0]
         this.stats['DefensePower'] = [DefensePower,0,1,0]
         this.stats['HealPower'] = [HealPower,0,1,0]
-        this.stats['AccuracyPoint'] = [character.AccuracyPoint,0,1,0]
-        this.stats['DodgePoint'] = [character.DodgePoint,0,1,0]
-        this.stats['CriticalPoint'] = [character.CriticalPoint,0,1,0]
-        this.stats['CriticalDamageRate'] = [character.CriticalDamageRate,0,1,0]
-        this.stats['CriticalChanceResistPoint'] = [character.CriticalResistPoint !== undefined ? character.CriticalResistPoint : 100,0,1,0]
-        this.stats['CriticalDamageResistRate'] = [character.CriticalDamageResistRate !== undefined ? character.CriticalDamageResistRate : 5000,0,1,0]
-        this.stats['StabilityPoint'] = [character.StabilityPoint,0,1,0]
-        this.stats['StabilityRate'] = [character.StabilityRate !== undefined ? character.StabilityRate : 2000, 0,1,0]
-        this.stats['AmmoCount'] = [character.AmmoCount,0,1,0]
-        this.stats['AmmoCost'] = [character.AmmoCost,0,1,0]
-        this.stats['Range'] = [character.Range,0,1,0]
-        this.stats['RegenCost'] = [character.RegenCost,0,1,0]
-        this.stats['DamageRatio'] = [character.DamageRatio !== undefined ? character.DamageRatio : 10000,0,1,0]
-        this.stats['DamagedRatio'] = [character.DamagedRatio !== undefined ? character.DamagedRatio : 10000,0,1,0]
+        this.stats['AccuracyPoint'] = [getRawStat('AccuracyPoint'),0,1,0]
+        this.stats['DodgePoint'] = [getRawStat('DodgePoint'),0,1,0]
+        this.stats['CriticalPoint'] = [getRawStat('CriticalPoint'),0,1,0]
+        this.stats['CriticalDamageRate'] = [getRawStat('CriticalDamageRate'),0,1,0]
+        this.stats['CriticalChanceResistPoint'] = [getRawStat('CriticalResistPoint'),0,1,0]
+        this.stats['CriticalDamageResistRate'] = [getRawStat('CriticalDamageResistRate'),0,1,0]
+        this.stats['StabilityPoint'] = [getRawStat('StabilityPoint'),0,1,0]
+        this.stats['StabilityRate'] = [getRawStat('StabilityRate'), 0,1,0]
+        this.stats['AmmoCount'] = [getRawStat('AmmoCount'),0,1,0]
+        this.stats['AmmoCost'] = [getRawStat('AmmoCost'),0,1,0]
+        this.stats['Range'] = [getRawStat('Range'),0,1,0]
+        this.stats['RegenCost'] = [getRawStat('RegenCost'),0,1,0]
+        this.stats['DamageRatio'] = [getRawStat('DamageRatio'),0,1,0]
+        this.stats['DamagedRatio'] = [getRawStat('DamagedRatio'),0,1,0]
         this.stats['HealEffectivenessRate'] = [10000,0,1,0]
-        this.stats['OppressionPower'] = [character.OppressionPower !== undefined ? character.OppressionPower : 100,0,1,0]
-        this.stats['OppressionResist'] = [character.OppressionResist !== undefined ? character.OppressionResist : 100,0,1,0]
+        this.stats['OppressionPower'] = [getRawStat('OppressionPower'),0,1,0]
+        this.stats['OppressionResist'] = [getRawStat('OppressionResist'),0,1,0]
         this.stats['AttackSpeed'] = [10000,0,1,0]
         this.stats['BlockRate'] = [0,0,1,0]
         this.stats['DefensePenetration'] = [DefensePenetration,0,1,0]
-        this.stats['MoveSpeed'] = [character.MoveSpeed ? character.MoveSpeed : 200,0,1,0]
+        this.stats['MoveSpeed'] = [getRawStat('MoveSpeed'),0,1,0]
         this.stats['EnhanceExplosionRate'] = [10000,0,1,0]
         this.stats['EnhancePierceRate'] = [10000,0,1,0]
         this.stats['EnhanceMysticRate'] = [10000,0,1,0]
@@ -2393,7 +2417,8 @@ class EnemyFinder {
 
         data.raids.TimeAttack.forEach(stage => {
             if (!stage.IsReleased[regionID]) return
-            stage.Formations.forEach((formation, formationId) => {
+            const formations = getServerProperty(stage, 'Formations')
+            formations.forEach((formation, formationId) => {
                 formation.EnemyList.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.SquadType == 'Main' && enemy.Rank != "Summoned" && statPreviewEnemyList.findIndex((e) => e.id == enemy.Id) == -1) {
@@ -2467,7 +2492,8 @@ class EnemyFinder {
         data.stages.Event.forEach(stage => {
             if (stage.Difficulty != 2 || !region.Events.includes(stage.EventId)) return
             let stageType = stage.Field ? 'Field' : 'Event'
-            stage.Formations.forEach((formation) => {
+            const formations = getServerProperty(stage, 'Formations')
+            formations.forEach((formation) => {
                 formation.EnemyList.forEach(enemyId => {
                     const enemy = find(data.enemies, 'Id', enemyId)[0]
                     if (enemy.Id >= 8010000 && enemy.SquadType == 'Main') {
@@ -2495,7 +2521,8 @@ class EnemyFinder {
             conquestMap.Maps.filter(m => m.Difficulty == "VeryHard").forEach(challengeMap => {
                 challengeMap.Tiles.filter(t => t.Type == "Battle").forEach(tile => {
                     const stage = find(data.stages.Conquest, "Id", tile.StageId)[0]
-                    stage.Formations.forEach((formation) => {
+                    const formations = getServerProperty(stage, 'Formations')
+                    formations.forEach((formation) => {
                         formation.EnemyList.forEach(enemyId => {
                             const enemy = find(data.enemies, 'Id', enemyId)[0]
                             if (enemy.Id >= 8010000 && enemy.SquadType == 'Main') {
@@ -2521,7 +2548,7 @@ class EnemyFinder {
 
         data.stages.SchoolDungeon.forEach(stage => {
             if (stage.Stage > region.SchoolDungeonMax) return
-            const formation = stage.Formations[0]
+            const formation = getServerProperty(stage, 'Formations')[0]
             formation.EnemyList.forEach(enemyId => {
                 const enemy = find(data.enemies, 'Id', enemyId)[0]
                 if (enemy.SquadType == 'Main') {
@@ -6742,7 +6769,7 @@ function loadStage(id) {
 
         $('#ba-stage-name').html(getStageName(stage, mode))
         $('#ba-stage-title').html(getStageTitle(stage, mode))
-        $('#ba-stage-level').text(translateUI('rec_level') + ' Lv.'+ stage.Level)
+        $('#ba-stage-level').text(translateUI('rec_level') + ' Lv.'+ getServerProperty(stage, 'Level'))
         $('#ba-stage-terrain-img').attr('src', `images/ui/Terrain_${stage.Terrain}.png`)
         $('#ba-stage-fog').toggle(mode == "Campaign" && stage.Difficulty == 1)
 
@@ -6966,7 +6993,7 @@ function loadStage(id) {
         let html = ''
         let enemyList = {}
         const enemyRanks = ['Minion','Elite','Champion','Boss']
-        const stageFormations = getVersionProperty(stage, "Formations", loadedStageVersion)
+        const stageFormations = getVersionServerProperty(stage, "Formations", loadedStageVersion)
         if (stageFormations.length) {
             $('#ba-stage-enemy-list, #ba-stage-enemy-info').show()
 
@@ -7098,6 +7125,15 @@ function getVersionProperty(obj, prop, version) {
         return obj.VersionData[version][prop]
     } else {
         return obj[prop]
+    }
+}
+
+function getVersionServerProperty(obj, prop, version) {
+    const serverSuffix = region.Name
+    if (obj.VersionData && version in obj.VersionData && prop in obj.VersionData[version]) {
+        return getSuffixedProperty(obj.VersionData[version], prop, serverSuffix)
+    } else {
+        return getSuffixedProperty(obj, prop, serverSuffix)
     }
 }
 
