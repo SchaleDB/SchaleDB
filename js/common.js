@@ -5626,12 +5626,18 @@ function initRaidSkillInfo(raidId, enemyId, raidDifficulty) {
                 if (show) {
                     raidSkill.IsRaidSkill = true
                     raidSkill.RaidDifficulty = raidDifficulty
+
                     if (raidSkill.SkillType == "raidautoattack") {
                         raidSkill.RaidDifficulty = 0
                         raidSkill.Name = translateUI('skill_normalattack')
                         raidSkill.Desc = translateUI('skill_normalattack_target')
                         raidSkill.Parameters = [[`${parseInt(raidSkill.Effects[0].Scale[0][0] / 100)}%`]]
                     }
+
+                    if (!raidSkill.Name) {
+                        raidSkill.Name = translateUI(`student_skill_${raidSkill.SkillType.toLowerCase()}`)
+                    }
+
                     raidSkillInfoCollection.push(new SkillDamageInfo(raidSkill, skillInfoContainer, enemy))
                 }
             }
@@ -7395,7 +7401,7 @@ function toggleTSAStats() {
     $('#statpreview-tsastats-controls .ba-panel').toggleClass("disabled", !statPreviewTSAStats.enabled)
 
     if (statPreviewSelectedChar > 0) {
-        $('#student-stat-modal-skill-calculations .skill-info-tsa').toggle(statPreviewTSAStats.enabled)
+        $('#calculation-student-skills .skill-info-tsa').toggle(statPreviewTSAStats.enabled)
     }
 
     recalculateStats()
@@ -7409,8 +7415,8 @@ function changeExGearLevel(el, recalculate = true) {
     $('#ba-statpreview-gear4-level').text(statPreviewGearLevel > 0 ? `T${tier}` : translateUI('setting_off'))
 
     if (statPreviewSelectedChar == 0) {
-        $('#student-stat-modal-skill-calculations .skill-info-gearnormal').toggle(statPreviewGearLevel >= 2)
-        $('#student-stat-modal-skill-calculations .skill-info-normal').toggle(statPreviewGearLevel < 2)
+        $('#calculation-student-skills .skill-info-gearnormal').toggle(statPreviewGearLevel >= 2)
+        $('#calculation-student-skills .skill-info-normal').toggle(statPreviewGearLevel < 2)
     }
 
     updateGearIcon()
