@@ -4114,9 +4114,6 @@ function loadModule(moduleName, entry=null) {
         $("#loaded-module").load(html_list['raids'], function() {
             loadLanguage(userLang)
 
-            if (regionID == 2) {
-                $('#ba-raid-list-tab-worldraid').hide()
-            }
 
             $(".tooltip").tooltip("hide")
             let urlVars = new URL(window.location.href).searchParams
