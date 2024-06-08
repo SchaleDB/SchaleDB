@@ -6179,7 +6179,7 @@ function loadRaid(raidId) {
         loadedRaid = raid
         $('#raid-select-'+raid.Id).addClass('selected')
 
-        finalizeLoad(raidName+ ` (${getLocalizedString('ArmorTypeLong', raid.ArmorType)})`, "raid", raid.Id, 'View Raid', raid.Id)
+        finalizeLoad(raidName + (raidId >= 1000000 ? ` (${getLocalizedString('ArmorTypeLong', raid.ArmorType)})` : ''), "raid", raid.Id, 'View Raid', raid.Id)
 
         if (!raid.IsReleased[regionID]) {
             showReleaseWarning()
