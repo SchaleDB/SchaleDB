@@ -2507,6 +2507,47 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "리로드 앤 디스트로이+",
+                "Desc": "탄약 모두 소모 시 즉시 재장전/\n<b:ATK> <?1> 증가(16초간)",
+                "Parameters": [
+                    [
+                        "22.9%",
+                        "24.1%",
+                        "25.2%",
+                        "29.8%",
+                        "30.9%",
+                        "32.1%",
+                        "36.7%",
+                        "37.8%",
+                        "39%",
+                        "43.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_RELOAD",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2296,
+                                2411,
+                                2525,
+                                2985,
+                                3099,
+                                3213,
+                                3673,
+                                3787,
+                                3902,
+                                4361
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "선도부의 냉철",
                 "Desc": "<b:AttackSpeed> <?1> 증가",
@@ -2703,7 +2744,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "LateBloom"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "EnhanceExplosionRate_Base"
+            ],
+            "StatValue": [
+                [
+                    2000,
+                    2000
+                ]
+            ],
+            "Name": "히나의 선도부 완장",
+            "Desc": "히나가 평소 착용하고 있는 선도부의 완장. 누군가에겐 단순히 선도부 소속임을 보여주는 물건일지도 모르지만, 히나에게 있어서만큼은 선도부장으로서 책임감을 일깨워주는 물건. 그 완장에 담긴 무게는 결코 가볍지 않다.",
+            "TierUpMaterial": [
+                [
+                    5019,
+                    180,
+                    181
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3030,
@@ -3044,6 +3116,76 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "응급 치료+",
+                "Desc": "체력 30% 이하 시 치유력 <?1> <b:DotHeal>, 치명 대미지 저항률 <?2> 가산(20초간)\n(전투 당 2회)",
+                "Parameters": [
+                    [
+                        "137%",
+                        "144%",
+                        "150%",
+                        "178%",
+                        "185%",
+                        "192%",
+                        "219%",
+                        "226%",
+                        "233%",
+                        "260%"
+                    ],
+                    [
+                        "15.79%",
+                        "16.58%",
+                        "17.37%",
+                        "20.53%",
+                        "21.32%",
+                        "22.11%",
+                        "25.26%",
+                        "26.05%",
+                        "26.84%",
+                        "30%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_DOTHEAL",
+                "Effects": [
+                    {
+                        "Type": "HealDot",
+                        "Duration": 20000,
+                        "Period": 4000,
+                        "Scale": [
+                            13718,
+                            14403,
+                            15090,
+                            17832,
+                            18519,
+                            19204,
+                            21948,
+                            22634,
+                            23319,
+                            26063
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1579,
+                                1658,
+                                1737,
+                                2053,
+                                2132,
+                                2211,
+                                2526,
+                                2605,
+                                2684,
+                                3000
+                            ]
+                        ],
+                        "Stat": "CriticalDamageResistRate_Base",
+                        "Channel": 23
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "대책위원회의 부장",
                 "Desc": "<b:DEF> <?1> 증가",
@@ -3248,7 +3390,38 @@
             "HealPower100": 1687,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "CriticalDamageResistRate_Base"
+            ],
+            "StatValue": [
+                [
+                    2000,
+                    2000
+                ]
+            ],
+            "Name": "어디서든 입장권",
+            "Desc": "호시노가 \"어디서든 꿈나라로 입장할 수 있다\"고 주장하는 베개. 호시노의 말 대로 굉장히 부드럽고 푹신하지만, 지금은 같은 제품을 구할 수 없다고 한다.",
+            "TierUpMaterial": [
+                [
+                    5017,
+                    100,
+                    101
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3040,
@@ -8900,6 +9073,44 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "쏠 거야~+",
+                "Desc": "25초마다 원형범위 내의 적에게 공격력 <?1> 대미지",
+                "Parameters": [
+                    [
+                        "298%",
+                        "313%",
+                        "328%",
+                        "388%",
+                        "403%",
+                        "418%",
+                        "478%",
+                        "493%",
+                        "508%",
+                        "567%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            29899,
+                            31391,
+                            32883,
+                            38866,
+                            40358,
+                            41850,
+                            47833,
+                            49324,
+                            50816,
+                            56799
+                        ]
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "영차, 힘내자~",
                 "Desc": "<b:ATK> <?1> 증가",
@@ -9097,7 +9308,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base"
+            ],
+            "StatValue": [
+                [
+                    500,
+                    500
+                ]
+            ],
+            "Name": "바람이 오는 소리",
+            "Desc": "치세가 매달아둔 풍령. 치세가 기다리는 맑고 청량한 소리는 시원한 바람이 오는 신호라고 한다.",
+            "TierUpMaterial": [
+                [
+                    5023,
+                    190,
+                    191
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3000,
@@ -36676,7 +36918,9 @@
                 31
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            26012
+        ],
         "MemoryLobby": [
             6,
             6,
@@ -46135,7 +46379,9 @@
                 25
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            20037
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -72291,7 +72537,9 @@
                 21
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10096
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -90807,7 +91055,7 @@
         "IsLimited": 1,
         "Weapon": {
             "Name": "멘탈 포인터",
-            "Desc": "쇼쿠호 미사키를 위해 엔지니어 부에서 만들어 준 전용 총기.\n\n여고생의 패션 아이템으로서 안성맞춤인, 깔끔하고 예쁜 권총이다.",
+            "Desc": "쇼쿠호 미사키를 위해 엔지니어 부에서 만들어 준 전용 총기.\n\n패션 아이템으로서 안성맞춤인, 깔끔하고 예쁜 권총이다.",
             "AdaptationType": "Street",
             "AdaptationValue": 1,
             "AttackPower1": 94,
@@ -103735,6 +103983,1572 @@
                 12,
                 7,
                 13
+            ]
+        ]
+    },
+    {
+        "Id": 10096,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 184,
+        "PathName": "Kanna_Swimsuit",
+        "DevName": "CH0260",
+        "Name": "칸나(수영복)",
+        "School": "Valkyrie",
+        "Club": "PublicPeaceBureau",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Explosion",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_ch0170",
+        "Cover": true,
+        "Equipment": [
+            "Shoes",
+            "Hairpin",
+            "Charm"
+        ],
+        "CollectionBG": "BG_WaterParkOutside_Collection",
+        "FamilyName": "오가타",
+        "PersonalName": "칸나",
+        "SchoolYear": "3학년",
+        "CharacterAge": "17세",
+        "Birthday": "9월 7일",
+        "CharacterSSRNew": "긴급상황엔 신속히 호출하도록. 즉시 출동하겠다.",
+        "ProfileIntroduction": "라이프가드로서 파견된 발키리 경찰학교의 공안국장.\n\n수영 실력도, 위험 감지 능력이나 상황 판단 능력도 평균 이상이지만 특유의 사나운 인상 때문에 대민 업무에 어려움을 겪고 있다.",
+        "Hobby": "독서, 영화 감상 (추리물)",
+        "CharacterVoice": "松岡美里",
+        "BirthDay": "9/7",
+        "Illustrator": "kokosando",
+        "Designer": "kokosando",
+        "CharHeightMetric": "166cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 904,
+        "AttackPower1": 149,
+        "AttackPower100": 1492,
+        "MaxHP1": 2041,
+        "MaxHP100": 23640,
+        "DefensePower1": 18,
+        "DefensePower100": 108,
+        "HealPower1": 1529,
+        "HealPower100": 4589,
+        "DodgePoint": 998,
+        "AccuracyPoint": 109,
+        "CriticalPoint": 218,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "수상안전, 실시!",
+                "Desc": "적 1인에게 공격력 <?1> 대미지/\n<d:DEF> <?2> 감소(20초간)",
+                "Parameters": [
+                    [
+                        "488%",
+                        "561%",
+                        "707%",
+                        "781%",
+                        "927%"
+                    ],
+                    [
+                        "25.1%",
+                        "28.9%",
+                        "36.4%",
+                        "40.2%",
+                        "47.8%"
+                    ]
+                ],
+                "Cost": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            48824,
+                            56141,
+                            70792,
+                            78108,
+                            92759
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -2517,
+                                -2894,
+                                -3649,
+                                -4026,
+                                -4781
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "철저한 준비운동",
+                "Desc": "40초마다 <b:DamagedRatio> <?1> 감소(30초간)",
+                "Parameters": [
+                    [
+                        "10.3%",
+                        "10.8%",
+                        "11.3%",
+                        "13.4%",
+                        "13.9%",
+                        "14.4%",
+                        "16.5%",
+                        "17%",
+                        "17.5%",
+                        "19.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1033,
+                                1085,
+                                1137,
+                                1343,
+                                1395,
+                                1446,
+                                1653,
+                                1705,
+                                1756,
+                                1963
+                            ]
+                        ],
+                        "Stat": "DamagedRatio_Coefficient",
+                        "Channel": 42
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "라이프가드의 마음가짐",
+                "Desc": "<b:MAXHP> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "라이프가드의 마음가짐+",
+                "Desc": "<b:ExtendDebuffDuration> <?1> 증가/\n추가로 <b:MAXHP> <?2> 증가",
+                "Parameters": [
+                    [
+                        "1000",
+                        "1050",
+                        "1100",
+                        "1300",
+                        "1350",
+                        "1400",
+                        "1600",
+                        "1650",
+                        "1700",
+                        "1900"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "ExtendDebuffDuration_Base",
+                        "Scale": [
+                            1000,
+                            1050,
+                            1100,
+                            1300,
+                            1350,
+                            1400,
+                            1600,
+                            1650,
+                            1700,
+                            1900
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "어색한 미소",
+                "Desc": "자신과 스페셜 학생의 <b:ATK> <?1> 증가",
+                "Parameters": [
+                    [
+                        "16.1%",
+                        "16.9%",
+                        "17.7%",
+                        "20.9%",
+                        "21.7%",
+                        "22.5%",
+                        "25.7%",
+                        "26.5%",
+                        "27.3%",
+                        "30.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1611,
+                                1692,
+                                1773,
+                                2095,
+                                2175,
+                                2256,
+                                2578,
+                                2658,
+                                2739,
+                                3061
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                1,
+                0
+            ],
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                59
+            ],
+            [
+                3,
+                71
+            ],
+            [
+                1,
+                12
+            ],
+            [
+                1,
+                18
+            ],
+            [
+                2,
+                29
+            ]
+        ],
+        "FavorAlts": [
+            20023
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 216",
+        "FurnitureInteraction": [
+            [
+                [
+                    210343,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "BB",
+            "au",
+            "CX",
+            "Cx"
+        ],
+        "FavorItemUniqueTags": [
+            "Ge",
+            "GF"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "발키리 제식 권총 17호",
+            "Desc": "칸나가 발키리 경찰학교에서 지급받은 제식 권총.\n\n파견지에서 사용하기 위해 꼼꼼한 방수 처리를 거쳤다.",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 66,
+            "AttackPower100": 656,
+            "MaxHP1": 676,
+            "MaxHP100": 6764,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3080,
+                220
+            ],
+            [
+                3081,
+                3080,
+                221,
+                120
+            ],
+            [
+                3082,
+                3081,
+                222,
+                121
+            ],
+            [
+                3083,
+                3082,
+                223,
+                122
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                12,
+                34
+            ],
+            [
+                12,
+                18,
+                10,
+                24
+            ],
+            [
+                8,
+                18,
+                9,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4080
+            ],
+            [
+                4080
+            ],
+            [
+                4081,
+                4080,
+                220
+            ],
+            [
+                4081,
+                221,
+                120
+            ],
+            [
+                4082,
+                4081,
+                221,
+                120
+            ],
+            [
+                4082,
+                222,
+                121
+            ],
+            [
+                4083,
+                4082,
+                223,
+                122
+            ],
+            [
+                4083,
+                223,
+                122
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                6,
+                16
+            ],
+            [
+                5,
+                12,
+                8,
+                16
+            ],
+            [
+                8,
+                3,
+                17
+            ],
+            [
+                8,
+                12,
+                5,
+                10
+            ],
+            [
+                12,
+                6,
+                13
+            ]
+        ]
+    },
+    {
+        "Id": 20037,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 185,
+        "PathName": "Fubuki_Swimsuit",
+        "DevName": "CH0261",
+        "Name": "후부키(수영복)",
+        "School": "Valkyrie",
+        "Club": "anzenkyoku",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Explosion",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "SR",
+        "WeaponImg": "weapon_icon_16008",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Bag",
+            "Watch"
+        ],
+        "CollectionBG": "BG_WaterParkOutside_Collection",
+        "FamilyName": "네무가키",
+        "PersonalName": "후부키",
+        "SchoolYear": "1학년",
+        "CharacterAge": "15세",
+        "Birthday": "10월 21일",
+        "CharacterSSRNew": "귀찮아…... 꼭 내가 가야 해?",
+        "ProfileIntroduction": "라이프가드 임무를 맡아 파견된 생활안전국의 게으름뱅이 경찰 학생.\n\n더운 여름, 워터파크에 갈 수 있다는 말에 가벼운 마음으로 따라나섰다. 워터파크에서도 어떻게 해야 수고를 덜 수 있을지 항상 고민하는 중.",
+        "Hobby": "십자말풀이, 라디오 듣기",
+        "CharacterVoice": "平山笑美",
+        "BirthDay": "10/21",
+        "Illustrator": "nemoga",
+        "Designer": "nemoga",
+        "CharHeightMetric": "148cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 2272,
+        "AttackPower1": 303,
+        "AttackPower100": 3030,
+        "MaxHP1": 1976,
+        "MaxHP100": 14778,
+        "DefensePower1": 65,
+        "DefensePower100": 395,
+        "HealPower1": 1628,
+        "HealPower100": 4884,
+        "DodgePoint": 197,
+        "AccuracyPoint": 505,
+        "CriticalPoint": 252,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "시원한 꼼수",
+                "Desc": "3개의 원형 범위 내의 적에게 대미지\n작은 원: 공격력 <?1> 대미지\n중간 원: 공격력 <?2> 대미지\n큰 원: 공격력 <?3> 대미지\n(이 공격은 적의 <b:Shield>을 관통)",
+                "Parameters": [
+                    [
+                        "580%",
+                        "667%",
+                        "841%",
+                        "928%",
+                        "1102%"
+                    ],
+                    [
+                        "122%",
+                        "140%",
+                        "176%",
+                        "195%",
+                        "231%"
+                    ],
+                    [
+                        "99.7%",
+                        "114%",
+                        "144%",
+                        "159%",
+                        "189%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            58009,
+                            66710,
+                            84112,
+                            92813,
+                            110215
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            12208,
+                            14035,
+                            17696,
+                            19523,
+                            23184
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            9975,
+                            11473,
+                            14462,
+                            15960,
+                            18956
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "꼭 해야 해?",
+                "Desc": "45초마다 적 1인에게 공격력 <?1> 대미지/\n원형범위 내의 적에게 공격력 <?2> 대미지",
+                "Parameters": [
+                    [
+                        "476%",
+                        "500%",
+                        "524%",
+                        "619%",
+                        "643%",
+                        "667%",
+                        "763%",
+                        "786%",
+                        "810%",
+                        "906%"
+                    ],
+                    [
+                        "48.6%",
+                        "51.1%",
+                        "53.4%",
+                        "63.2%",
+                        "65.6%",
+                        "68.1%",
+                        "77.8%",
+                        "80.2%",
+                        "82.6%",
+                        "92.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            47691,
+                            50078,
+                            52458,
+                            61999,
+                            64379,
+                            66766,
+                            76300,
+                            78687,
+                            81074,
+                            90608
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            4865,
+                            5110,
+                            5348,
+                            6321,
+                            6566,
+                            6811,
+                            7784,
+                            8022,
+                            8267,
+                            9240
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "땡땡이의 미학",
+                "Desc": "<b:ATK> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "땡땡이의 미학+",
+                "Desc": "<b:ATK> <?1> 증가/\n추가로 <b:ATK> <?2> 증가",
+                "Parameters": [
+                    [
+                        "364",
+                        "382",
+                        "400",
+                        "473",
+                        "491",
+                        "510",
+                        "582",
+                        "600",
+                        "619",
+                        "691"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            364,
+                            382,
+                            400,
+                            473,
+                            491,
+                            510,
+                            582,
+                            600,
+                            619,
+                            691
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "부탁 좀 할게~",
+                "Desc": "아군의 <b:EnhanceExplosionRate> <?1> 가산",
+                "Parameters": [
+                    [
+                        "15.9%",
+                        "16.7%",
+                        "17.5%",
+                        "20.7%",
+                        "21.5%",
+                        "22.3%",
+                        "25.5%",
+                        "26.3%",
+                        "27%",
+                        "30.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1594,
+                                1674,
+                                1753,
+                                2073,
+                                2152,
+                                2232,
+                                2550,
+                                2630,
+                                2709,
+                                3029
+                            ]
+                        ],
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Channel": 332
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                6,
+                37
+            ],
+            [
+                8,
+                44
+            ],
+            [
+                2,
+                7
+            ],
+            [
+                3,
+                11
+            ],
+            [
+                5,
+                18
+            ]
+        ],
+        "FavorAlts": [
+            16008
+        ],
+        "MemoryLobby": [
+            3,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 214",
+        "FurnitureInteraction": [
+            [
+                [
+                    210344,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aJ",
+            "aR",
+            "aP",
+            "CX",
+            "Cx"
+        ],
+        "FavorItemUniqueTags": [
+            "Gg",
+            "GH"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "발키리 제식 소총 14호",
+            "Desc": "후부키가 발키리 경찰학교에서 지급받은 제식 소총.\n\n파견지에서는 쓸 일이 없기를 바라고 있다.",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 133,
+            "AttackPower100": 1331,
+            "MaxHP1": 430,
+            "MaxHP100": 4301,
+            "HealPower1": 191,
+            "HealPower100": 1914,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3080,
+                150
+            ],
+            [
+                3081,
+                3080,
+                151,
+                290
+            ],
+            [
+                3082,
+                3081,
+                152,
+                291
+            ],
+            [
+                3083,
+                3082,
+                153,
+                292
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                15,
+                33
+            ],
+            [
+                12,
+                18,
+                12,
+                22
+            ],
+            [
+                8,
+                18,
+                11,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4080
+            ],
+            [
+                4080
+            ],
+            [
+                4081,
+                4080,
+                150
+            ],
+            [
+                4081,
+                151,
+                290
+            ],
+            [
+                4082,
+                4081,
+                151,
+                290
+            ],
+            [
+                4082,
+                152,
+                291
+            ],
+            [
+                4083,
+                4082,
+                153,
+                292
+            ],
+            [
+                4083,
+                153,
+                292
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                7
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                9,
+                16
+            ],
+            [
+                8,
+                3,
+                19
+            ],
+            [
+                8,
+                12,
+                5,
+                10
+            ],
+            [
+                12,
+                6,
+                13
+            ]
+        ]
+    },
+    {
+        "Id": 26012,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 186,
+        "PathName": "Kirino_Swimsuit",
+        "DevName": "CH0262",
+        "Name": "키리노(수영복)",
+        "School": "Valkyrie",
+        "Club": "anzenkyoku",
+        "StarGrade": 1,
+        "SquadType": "Support",
+        "TacticRole": "Supporter",
+        "Summons": [
+            {
+                "Id": 99999,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "MaxHP"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        2968,
+                        3414,
+                        4304,
+                        4749,
+                        5640
+                    ]
+                ],
+                "ObstacleMaxHP1": 700,
+                "ObstacleMaxHP100": 15000
+            }
+        ],
+        "Position": "Back",
+        "BulletType": "Mystic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_13012",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Badge",
+            "Watch"
+        ],
+        "CollectionBG": "BG_WaterParkOutside_Collection",
+        "FamilyName": "나카츠카사",
+        "PersonalName": "키리노",
+        "SchoolYear": "1학년",
+        "CharacterAge": "15세",
+        "Birthday": "10월 22일",
+        "CharacterSSRNew": "",
+        "ProfileIntroduction": "발키리 경찰학교 생활안전국의 열혈 경찰 학생. 이번에는 라이프가드 모드.\n\n임무에 대한 의욕은 넘치지만 실력은 그에 미치지 못한다. 그럼에도 불구하고 업무에 성실히 임하고 있으며, 라이프가드 역할을 수행하기 위해 노력을 아끼지 않고 있다.",
+        "Hobby": "맛집 탐방",
+        "CharacterVoice": "中島優衣",
+        "BirthDay": "10/22",
+        "Illustrator": "nemoga",
+        "Designer": "nemoga",
+        "CharHeightMetric": "161cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1053,
+        "AttackPower1": 249,
+        "AttackPower100": 2491,
+        "MaxHP1": 2871,
+        "MaxHP100": 21471,
+        "DefensePower1": 95,
+        "DefensePower100": 574,
+        "HealPower1": 1740,
+        "HealPower100": 5220,
+        "DodgePoint": 1011,
+        "AccuracyPoint": 810,
+        "CriticalPoint": 270,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "본관이 지켜보겠습니다!",
+                "Desc": "엄폐물 소환/\n원형 범위 내의 아군에게 <b:ATK> <?1> 증가(45초간) (범위 내에 있는 동안에만 효과 유지)/\n키리노(수영복) 최대 체력의 <?2>를 엄폐물이 추가로 가집니다.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "16.2%",
+                        "20.4%",
+                        "22.5%",
+                        "26.7%"
+                    ],
+                    [
+                        "29.6%",
+                        "34.1%",
+                        "43%",
+                        "47.4%",
+                        "56.4%"
+                    ]
+                ],
+                "Cost": [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                ],
+                "Icon": "COMMON_SKILLICON_OBSTACLE",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1409,
+                                1620,
+                                2043,
+                                2254,
+                                2677
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 11002
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "비상사태입니다!",
+                "Desc": "50초마다 스페셜 학생을 제외한 아군 6인에게 <b:ATK> <?1> 증가 (40초간)",
+                "Parameters": [
+                    [
+                        "6.5%",
+                        "6.8%",
+                        "7.1%",
+                        "8.4%",
+                        "8.7%",
+                        "9.1%",
+                        "10.4%",
+                        "10.7%",
+                        "11%",
+                        "12.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                650,
+                                683,
+                                715,
+                                845,
+                                878,
+                                910,
+                                1040,
+                                1072,
+                                1105,
+                                1235
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "실전과 같은 훈련",
+                "Desc": "<b:MAXHP> <?1> 증가",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "실전과 같은 훈련+",
+                "Desc": "<b:MAXHP> <?1> 증가/\n추가로 <b:MAXHP> <?2> 증가",
+                "Parameters": [
+                    [
+                        "4594",
+                        "4824",
+                        "5053",
+                        "5972",
+                        "6202",
+                        "6432",
+                        "7350",
+                        "7580",
+                        "7810",
+                        "8728"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Base",
+                        "Scale": [
+                            4594,
+                            4824,
+                            5053,
+                            5972,
+                            6202,
+                            6432,
+                            7350,
+                            7580,
+                            7810,
+                            8728
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "본관이 응원합니다!",
+                "Desc": "아군의 <b:ATK> <?1> 증가",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 302
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "MaxHP",
+            "AttackPower"
+        ],
+        "FavorStatValue": [
+            [
+                21,
+                0
+            ],
+            [
+                32,
+                0
+            ],
+            [
+                43,
+                6
+            ],
+            [
+                54,
+                7
+            ],
+            [
+                13,
+                1
+            ],
+            [
+                20,
+                2
+            ],
+            [
+                33,
+                3
+            ]
+        ],
+        "FavorAlts": [
+            13012
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 220",
+        "FurnitureInteraction": [
+            [
+                [
+                    210345,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aj",
+            "ao",
+            "CX",
+            "Cx"
+        ],
+        "FavorItemUniqueTags": [
+            "Gh",
+            "GI"
+        ],
+        "IsLimited": 2,
+        "Weapon": {
+            "Name": "발키리 제식 권총 3호",
+            "Desc": "키리노가 발키리 경찰학교에서 지급받은 제식 권총.\n\n라이프가드로서의 사명감 덕분에 명중률이 올라간 기분이다.",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 88,
+            "AttackPower100": 876,
+            "MaxHP1": 500,
+            "MaxHP100": 4999,
+            "HealPower1": 164,
+            "HealPower100": 1636,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3080,
+                270
+            ],
+            [
+                3081,
+                3080,
+                271,
+                130
+            ],
+            [
+                3082,
+                3081,
+                272,
+                131
+            ],
+            [
+                3083,
+                3082,
+                273,
+                132
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                14,
+                26
+            ],
+            [
+                12,
+                18,
+                10,
+                27
+            ],
+            [
+                8,
+                18,
+                10,
+                23
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4080
+            ],
+            [
+                4080
+            ],
+            [
+                4081,
+                4080,
+                270
+            ],
+            [
+                4081,
+                271,
+                130
+            ],
+            [
+                4082,
+                4081,
+                271,
+                130
+            ],
+            [
+                4082,
+                272,
+                131
+            ],
+            [
+                4083,
+                4082,
+                273,
+                132
+            ],
+            [
+                4083,
+                273,
+                132
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                6,
+                14
+            ],
+            [
+                5,
+                12,
+                9,
+                17
+            ],
+            [
+                8,
+                3,
+                18
+            ],
+            [
+                8,
+                12,
+                5,
+                9
+            ],
+            [
+                12,
+                6,
+                11
             ]
         ]
     }

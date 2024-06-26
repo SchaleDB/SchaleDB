@@ -2514,6 +2514,47 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "换弹与摧毁＋",
+                "Desc": "自身弹匣弹药耗尽时，立即换弹；\n令自身<b:ATK>增加<?1>(持续16秒).",
+                "Parameters": [
+                    [
+                        "22.9%",
+                        "24.1%",
+                        "25.2%",
+                        "29.8%",
+                        "30.9%",
+                        "32.1%",
+                        "36.7%",
+                        "37.8%",
+                        "39%",
+                        "43.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_RELOAD",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2296,
+                                2411,
+                                2525,
+                                2985,
+                                3099,
+                                3213,
+                                3673,
+                                3787,
+                                3902,
+                                4361
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "冷静的风纪委员会",
                 "Desc": "<b:AttackSpeed>增加<?1>.",
@@ -2710,7 +2751,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "LateBloom"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "EnhanceExplosionRate_Base"
+            ],
+            "StatValue": [
+                [
+                    2000,
+                    2000
+                ]
+            ],
+            "Name": "日奈的风纪委员会袖章",
+            "Desc": "日奈平时戴在身上的袖章。对其他人而言可能只是个表示所属的东西，但对日奈来说却能让她想起身为风纪委员长的责任感。这个袖章里蕴含的意愿绝不是什么轻浮之物。",
+            "TierUpMaterial": [
+                [
+                    5019,
+                    180,
+                    181
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3030,
@@ -3051,6 +3123,76 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "急救＋",
+                "Desc": "自身生命值低于30%时，赋予自身治愈力<?1>的<b:DotHeal>状态，<b:CriticalDamageRateResist>增加<?2>(持续20秒)\n(每场战斗仅2次).",
+                "Parameters": [
+                    [
+                        "137%",
+                        "144%",
+                        "150%",
+                        "178%",
+                        "185%",
+                        "192%",
+                        "219%",
+                        "226%",
+                        "233%",
+                        "260%"
+                    ],
+                    [
+                        "15.79%",
+                        "16.58%",
+                        "17.37%",
+                        "20.53%",
+                        "21.32%",
+                        "22.11%",
+                        "25.26%",
+                        "26.05%",
+                        "26.84%",
+                        "30%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_DOTHEAL",
+                "Effects": [
+                    {
+                        "Type": "HealDot",
+                        "Duration": 20000,
+                        "Period": 4000,
+                        "Scale": [
+                            13718,
+                            14403,
+                            15090,
+                            17832,
+                            18519,
+                            19204,
+                            21948,
+                            22634,
+                            23319,
+                            26063
+                        ]
+                    },
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1579,
+                                1658,
+                                1737,
+                                2053,
+                                2132,
+                                2211,
+                                2526,
+                                2605,
+                                2684,
+                                3000
+                            ]
+                        ],
+                        "Stat": "CriticalDamageResistRate_Base",
+                        "Channel": 23
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "对策委员长",
                 "Desc": "<b:DEF>增加<?1>.",
@@ -3255,7 +3397,38 @@
             "HealPower100": 1687,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "CriticalDamageResistRate_Base"
+            ],
+            "StatValue": [
+                [
+                    2000,
+                    2000
+                ]
+            ],
+            "Name": "随地入场券",
+            "Desc": "星野声称「无论在哪都能访问梦之国度」的枕头。非常柔软而蓬松，但现在似乎已经停产了。",
+            "TierUpMaterial": [
+                [
+                    5017,
+                    100,
+                    101
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3040,
@@ -8907,6 +9080,44 @@
                 ]
             },
             {
+                "SkillType": "gearnormal",
+                "Name": "我要射击喽～＋",
+                "Desc": "每25秒，对圆形范围内的敌方单位造成攻击力<?1>的伤害.",
+                "Parameters": [
+                    [
+                        "298%",
+                        "313%",
+                        "328%",
+                        "388%",
+                        "403%",
+                        "418%",
+                        "478%",
+                        "493%",
+                        "508%",
+                        "567%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            29899,
+                            31391,
+                            32883,
+                            38866,
+                            40358,
+                            41850,
+                            47833,
+                            49324,
+                            50816,
+                            56799
+                        ]
+                    }
+                ]
+            },
+            {
                 "SkillType": "passive",
                 "Name": "好嘞，要加油啦~",
                 "Desc": "<b:ATK>增加<?1>.",
@@ -9104,7 +9315,38 @@
             "HealPower100": 0,
             "StatLevelUpType": "Standard"
         },
-        "Gear": {},
+        "Gear": {
+            "Released": [
+                true,
+                false,
+                false
+            ],
+            "StatType": [
+                "AttackPower_Base"
+            ],
+            "StatValue": [
+                [
+                    500,
+                    500
+                ]
+            ],
+            "Name": "风到来之音",
+            "Desc": "千世挂好的风铃。据说，千世等待的那纯洁而清脆的声音，就是凉风吹来的信号。",
+            "TierUpMaterial": [
+                [
+                    5023,
+                    190,
+                    191
+                ]
+            ],
+            "TierUpMaterialAmount": [
+                [
+                    4,
+                    80,
+                    25
+                ]
+            ]
+        },
         "SkillExMaterial": [
             [
                 3000,
@@ -36707,7 +36949,9 @@
                 31
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            26012
+        ],
         "MemoryLobby": [
             6,
             6,
@@ -46159,7 +46403,9 @@
                 25
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            20037
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -72096,8 +72342,8 @@
         "CharacterAge": "17岁",
         "Birthday": "9月7日",
         "CharacterSSRNew": "诚心诚意为市民服务",
-        "ProfileIntroduction": "瓦尔基里警察学校所属，担任「公安局」局长一职的学生。\n\n对决定负责的犯罪案件，就像字典里没有放弃这个词一样地探听线索，查明真相，由此得到「狂犬」这一为世间所知的外号。\n因为严厉的气质和外号的缘故常常被误认为容易过激，但实际上是个总是冷静且现实的人。",
-        "Hobby": "阅读、电影鉴赏（推理）",
+        "ProfileIntroduction": "瓦尔基里警察学校所属，担任「公共安全局」局长一职的学生。\n\n对决定负责的犯罪案件，就像字典里没有放弃这个词一样地探听线索，查明真相，由此得到「狂犬」这一为世间所知的外号。\n因为严厉的气质和外号的缘故常常被误认为容易过激，但实际上是个总是冷静且现实的人。",
+        "Hobby": "阅读、电影鉴赏（推理类）",
         "CharacterVoice": "松冈美里",
         "BirthDay": "9/7",
         "Illustrator": "kokosando",
@@ -72425,7 +72671,9 @@
                 21
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10096
+        ],
         "MemoryLobby": [
             5,
             5,
@@ -90941,7 +91189,7 @@
         "IsLimited": 1,
         "Weapon": {
             "Name": "精神向导",
-            "Desc": "千年工程部为食蜂操祈制作的专用枪械。\n\n正好适合用作女高中生的时尚道具的手枪。",
+            "Desc": "千年工程部为食蜂操祈制作的专用枪械。\n\n正好适合用作时尚道具的手枪。",
             "AdaptationType": "Street",
             "AdaptationValue": 1,
             "AttackPower1": 94,
@@ -103869,6 +104117,1572 @@
                 12,
                 7,
                 13
+            ]
+        ]
+    },
+    {
+        "Id": 10096,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 184,
+        "PathName": "Kanna_Swimsuit",
+        "DevName": "CH0260",
+        "Name": "叶渚（泳装）",
+        "School": "Valkyrie",
+        "Club": "PublicPeaceBureau",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "Supporter",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Explosion",
+        "ArmorType": "LightArmor",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_ch0170",
+        "Cover": true,
+        "Equipment": [
+            "Shoes",
+            "Hairpin",
+            "Charm"
+        ],
+        "CollectionBG": "BG_WaterParkOutside_Collection",
+        "FamilyName": "尾刃",
+        "PersonalName": "叶渚",
+        "SchoolYear": "3年级",
+        "CharacterAge": "17岁",
+        "Birthday": "9月7日",
+        "CharacterSSRNew": "已确认紧急请求。立即出动。",
+        "ProfileIntroduction": "瓦尔基里警察学校所属，作为救生员派出的「公共安全局」局长。\n\n游泳本领、危机洞察力和状况分析力都很强，但不知是不是因为特有的严厉印象，仍然难以和市民们融洽相处。",
+        "Hobby": "阅读、电影鉴赏（推理类）",
+        "CharacterVoice": "松冈美里",
+        "BirthDay": "9/7",
+        "Illustrator": "kokosando",
+        "Designer": "kokosando",
+        "CharHeightMetric": "166cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 904,
+        "AttackPower1": 149,
+        "AttackPower100": 1492,
+        "MaxHP1": 2041,
+        "MaxHP100": 23640,
+        "DefensePower1": 18,
+        "DefensePower100": 108,
+        "HealPower1": 1529,
+        "HealPower100": 4589,
+        "DodgePoint": 998,
+        "AccuracyPoint": 109,
+        "CriticalPoint": 218,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 5,
+        "AmmoCost": 1,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "水上安全，确保！",
+                "Desc": "对1名敌方单位造成自身攻击力<?1>的伤害；\n令该目标<d:DEF>减少<?2>(持续20秒).",
+                "Parameters": [
+                    [
+                        "488%",
+                        "561%",
+                        "707%",
+                        "781%",
+                        "927%"
+                    ],
+                    [
+                        "25.1%",
+                        "28.9%",
+                        "36.4%",
+                        "40.2%",
+                        "47.8%"
+                    ]
+                ],
+                "Cost": [
+                    2,
+                    2,
+                    2,
+                    2,
+                    2
+                ],
+                "Icon": "COMMON_SKILLICON_STATDEBUFF",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            48824,
+                            56141,
+                            70792,
+                            78108,
+                            92759
+                        ]
+                    },
+                    {
+                        "Type": "BuffTarget",
+                        "Value": [
+                            [
+                                -2517,
+                                -2894,
+                                -3649,
+                                -4026,
+                                -4781
+                            ]
+                        ],
+                        "Stat": "DefensePower_Coefficient",
+                        "Channel": 603
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "周到的热身运动",
+                "Desc": "每40秒，令自身<b:DamagedRatio>减少<?1>(持续30秒).",
+                "Parameters": [
+                    [
+                        "10.3%",
+                        "10.8%",
+                        "11.3%",
+                        "13.4%",
+                        "13.9%",
+                        "14.4%",
+                        "16.5%",
+                        "17%",
+                        "17.5%",
+                        "19.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                1033,
+                                1085,
+                                1137,
+                                1343,
+                                1395,
+                                1446,
+                                1653,
+                                1705,
+                                1756,
+                                1963
+                            ]
+                        ],
+                        "Stat": "DamagedRatio_Coefficient",
+                        "Channel": 42
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "救生员的思想准备",
+                "Desc": "<b:MAXHP>增加<?1>.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "救生员的思想准备＋",
+                "Desc": "<b:ExtendDebuffDuration>增加<?1>；\n<b:MAXHP>增加<?2>.",
+                "Parameters": [
+                    [
+                        "1000",
+                        "1050",
+                        "1100",
+                        "1300",
+                        "1350",
+                        "1400",
+                        "1600",
+                        "1650",
+                        "1700",
+                        "1900"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "ExtendDebuffDuration_Base",
+                        "Scale": [
+                            1000,
+                            1050,
+                            1100,
+                            1300,
+                            1350,
+                            1400,
+                            1600,
+                            1650,
+                            1700,
+                            1900
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "笨拙的笑容",
+                "Desc": "令自身及后援学生<b:ATK>增加<?1>.",
+                "Parameters": [
+                    [
+                        "16.1%",
+                        "16.9%",
+                        "17.7%",
+                        "20.9%",
+                        "21.7%",
+                        "22.5%",
+                        "25.7%",
+                        "26.5%",
+                        "27.3%",
+                        "30.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1611,
+                                1692,
+                                1773,
+                                2095,
+                                2175,
+                                2256,
+                                2578,
+                                2658,
+                                2739,
+                                3061
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 2
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                1,
+                0
+            ],
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                59
+            ],
+            [
+                3,
+                71
+            ],
+            [
+                1,
+                12
+            ],
+            [
+                1,
+                18
+            ],
+            [
+                2,
+                29
+            ]
+        ],
+        "FavorAlts": [
+            20023
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 216",
+        "FurnitureInteraction": [
+            [
+                [
+                    210343,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "BB",
+            "au",
+            "CX",
+            "Cx"
+        ],
+        "FavorItemUniqueTags": [
+            "Ge",
+            "GF"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "第17号瓦尔基里制式手枪",
+            "Desc": "从瓦尔基里警察学校接受配给时收到的制式手枪。\n\n为了能在调度现场使用而进行了防水加工。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 66,
+            "AttackPower100": 656,
+            "MaxHP1": 676,
+            "MaxHP100": 6764,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3080,
+                220
+            ],
+            [
+                3081,
+                3080,
+                221,
+                120
+            ],
+            [
+                3082,
+                3081,
+                222,
+                121
+            ],
+            [
+                3083,
+                3082,
+                223,
+                122
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                12,
+                34
+            ],
+            [
+                12,
+                18,
+                10,
+                24
+            ],
+            [
+                8,
+                18,
+                9,
+                20
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4080
+            ],
+            [
+                4080
+            ],
+            [
+                4081,
+                4080,
+                220
+            ],
+            [
+                4081,
+                221,
+                120
+            ],
+            [
+                4082,
+                4081,
+                221,
+                120
+            ],
+            [
+                4082,
+                222,
+                121
+            ],
+            [
+                4083,
+                4082,
+                223,
+                122
+            ],
+            [
+                4083,
+                223,
+                122
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                6,
+                16
+            ],
+            [
+                5,
+                12,
+                8,
+                16
+            ],
+            [
+                8,
+                3,
+                17
+            ],
+            [
+                8,
+                12,
+                5,
+                10
+            ],
+            [
+                12,
+                6,
+                13
+            ]
+        ]
+    },
+    {
+        "Id": 20037,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 185,
+        "PathName": "Fubuki_Swimsuit",
+        "DevName": "CH0261",
+        "Name": "吹雪（泳装）",
+        "School": "Valkyrie",
+        "Club": "anzenkyoku",
+        "StarGrade": 3,
+        "SquadType": "Support",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Back",
+        "BulletType": "Explosion",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 4,
+        "IndoorBattleAdaptation": 0,
+        "WeaponType": "SR",
+        "WeaponImg": "weapon_icon_16008",
+        "Cover": false,
+        "Equipment": [
+            "Hat",
+            "Bag",
+            "Watch"
+        ],
+        "CollectionBG": "BG_WaterParkOutside_Collection",
+        "FamilyName": "合欢垣",
+        "PersonalName": "吹雪",
+        "SchoolYear": "1年级",
+        "CharacterAge": "15岁",
+        "Birthday": "10月21日",
+        "CharacterSSRNew": "麻烦死了……我也非得去干么～？",
+        "ProfileIntroduction": "瓦尔基里警察学校所属，作为救生员派出的「生活安全局」的懒虫学生。\n\n抱着能够摸鱼的轻浮想法而接受了水上乐园的任务。在任务现场也总是在研究该怎么做才能忙里偷闲。",
+        "Hobby": "纵横字谜、听收音机",
+        "CharacterVoice": "平山笑美",
+        "BirthDay": "10/21",
+        "Illustrator": "nemoga",
+        "Designer": "nemoga",
+        "CharHeightMetric": "148cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 2272,
+        "AttackPower1": 303,
+        "AttackPower100": 3030,
+        "MaxHP1": 1976,
+        "MaxHP100": 14778,
+        "DefensePower1": 65,
+        "DefensePower100": 395,
+        "HealPower1": 1628,
+        "HealPower100": 4884,
+        "DodgePoint": 197,
+        "AccuracyPoint": 505,
+        "CriticalPoint": 252,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "要冷静下吗",
+                "Desc": "对3个圆形范围内的敌方单位造成伤害.\n- 小圆形范围：造成自身攻击力<?1>的伤害；\n- 中圆形范围：造成自身攻击力<?2>的伤害；\n- 大圆形范围：造成自身攻击力<?3>的伤害\n※ 上述攻击均无视目标的<b:Shield>.",
+                "Parameters": [
+                    [
+                        "580%",
+                        "667%",
+                        "841%",
+                        "928%",
+                        "1102%"
+                    ],
+                    [
+                        "122%",
+                        "140%",
+                        "176%",
+                        "195%",
+                        "231%"
+                    ],
+                    [
+                        "99.7%",
+                        "114%",
+                        "144%",
+                        "159%",
+                        "189%"
+                    ]
+                ],
+                "Cost": [
+                    4,
+                    4,
+                    4,
+                    4,
+                    4
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            58009,
+                            66710,
+                            84112,
+                            92813,
+                            110215
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            12208,
+                            14035,
+                            17696,
+                            19523,
+                            23184
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            9975,
+                            11473,
+                            14462,
+                            15960,
+                            18956
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "非做不可嘛～？",
+                "Desc": "每45秒，对1名敌方单位造成自身攻击力<?1>的伤害，\n对圆形范围内的敌方单位造成自身攻击力<?2>的伤害.",
+                "Parameters": [
+                    [
+                        "476%",
+                        "500%",
+                        "524%",
+                        "619%",
+                        "643%",
+                        "667%",
+                        "763%",
+                        "786%",
+                        "810%",
+                        "906%"
+                    ],
+                    [
+                        "48.6%",
+                        "51.1%",
+                        "53.4%",
+                        "63.2%",
+                        "65.6%",
+                        "68.1%",
+                        "77.8%",
+                        "80.2%",
+                        "82.6%",
+                        "92.4%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            47691,
+                            50078,
+                            52458,
+                            61999,
+                            64379,
+                            66766,
+                            76300,
+                            78687,
+                            81074,
+                            90608
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            4865,
+                            5110,
+                            5348,
+                            6321,
+                            6566,
+                            6811,
+                            7784,
+                            8022,
+                            8267,
+                            9240
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "摸鱼法则",
+                "Desc": "<b:ATK>增加<?1>.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "摸鱼法则＋",
+                "Desc": "<b:ATK>增加<?1>；\n<b:ATK>增加<?2>.",
+                "Parameters": [
+                    [
+                        "364",
+                        "382",
+                        "400",
+                        "473",
+                        "491",
+                        "510",
+                        "582",
+                        "600",
+                        "619",
+                        "691"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            364,
+                            382,
+                            400,
+                            473,
+                            491,
+                            510,
+                            582,
+                            600,
+                            619,
+                            691
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "稍微麻烦下你啦～",
+                "Desc": "令编队内的学生<b:EnhanceExplosionRate>加算<?1>.",
+                "Parameters": [
+                    [
+                        "15.9%",
+                        "16.7%",
+                        "17.5%",
+                        "20.7%",
+                        "21.5%",
+                        "22.3%",
+                        "25.5%",
+                        "26.3%",
+                        "27%",
+                        "30.2%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1594,
+                                1674,
+                                1753,
+                                2073,
+                                2152,
+                                2232,
+                                2550,
+                                2630,
+                                2709,
+                                3029
+                            ]
+                        ],
+                        "Stat": "EnhanceExplosionRate_Base",
+                        "Channel": 332
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                0
+            ],
+            [
+                6,
+                37
+            ],
+            [
+                8,
+                44
+            ],
+            [
+                2,
+                7
+            ],
+            [
+                3,
+                11
+            ],
+            [
+                5,
+                18
+            ]
+        ],
+        "FavorAlts": [
+            16008
+        ],
+        "MemoryLobby": [
+            3,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 214",
+        "FurnitureInteraction": [
+            [
+                [
+                    210344,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aJ",
+            "aR",
+            "aP",
+            "CX",
+            "Cx"
+        ],
+        "FavorItemUniqueTags": [
+            "Gg",
+            "GH"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "第14号瓦尔基里制式步枪",
+            "Desc": "吹雪从瓦尔基里警察学校接受配给时收到的制式步枪。\n\n使用者本人希望这把枪不会有出场的机会。",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 133,
+            "AttackPower100": 1331,
+            "MaxHP1": 430,
+            "MaxHP100": 4301,
+            "HealPower1": 191,
+            "HealPower100": 1914,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3080,
+                150
+            ],
+            [
+                3081,
+                3080,
+                151,
+                290
+            ],
+            [
+                3082,
+                3081,
+                152,
+                291
+            ],
+            [
+                3083,
+                3082,
+                153,
+                292
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                15,
+                33
+            ],
+            [
+                12,
+                18,
+                12,
+                22
+            ],
+            [
+                8,
+                18,
+                11,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4080
+            ],
+            [
+                4080
+            ],
+            [
+                4081,
+                4080,
+                150
+            ],
+            [
+                4081,
+                151,
+                290
+            ],
+            [
+                4082,
+                4081,
+                151,
+                290
+            ],
+            [
+                4082,
+                152,
+                291
+            ],
+            [
+                4083,
+                4082,
+                153,
+                292
+            ],
+            [
+                4083,
+                153,
+                292
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                7
+            ],
+            [
+                8,
+                5,
+                13
+            ],
+            [
+                5,
+                12,
+                9,
+                16
+            ],
+            [
+                8,
+                3,
+                19
+            ],
+            [
+                8,
+                12,
+                5,
+                10
+            ],
+            [
+                12,
+                6,
+                13
+            ]
+        ]
+    },
+    {
+        "Id": 26012,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 186,
+        "PathName": "Kirino_Swimsuit",
+        "DevName": "CH0262",
+        "Name": "桐乃（泳装）",
+        "School": "Valkyrie",
+        "Club": "anzenkyoku",
+        "StarGrade": 1,
+        "SquadType": "Support",
+        "TacticRole": "Supporter",
+        "Summons": [
+            {
+                "Id": 99999,
+                "SourceSkill": "ex",
+                "InheritCasterStat": [
+                    "MaxHP"
+                ],
+                "InheritCasterAmount": [
+                    [
+                        2968,
+                        3414,
+                        4304,
+                        4749,
+                        5640
+                    ]
+                ],
+                "ObstacleMaxHP1": 700,
+                "ObstacleMaxHP100": 15000
+            }
+        ],
+        "Position": "Back",
+        "BulletType": "Mystic",
+        "ArmorType": "HeavyArmor",
+        "StreetBattleAdaptation": 2,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 2,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_13012",
+        "Cover": false,
+        "Equipment": [
+            "Shoes",
+            "Badge",
+            "Watch"
+        ],
+        "CollectionBG": "BG_WaterParkOutside_Collection",
+        "FamilyName": "中务",
+        "PersonalName": "桐乃",
+        "SchoolYear": "1年级",
+        "CharacterAge": "15岁",
+        "Birthday": "10月22日",
+        "CharacterSSRNew": "",
+        "ProfileIntroduction": "瓦尔基里警察学校所属，作为救生员派出的「生活安全局」的热血系学生。\n\n积极性无可挑剔，可奈何没有实力。但她也并没有气馁，全心全意地履行自己救生员的职责。",
+        "Hobby": "美食寻访",
+        "CharacterVoice": "中岛优衣",
+        "BirthDay": "10/22",
+        "Illustrator": "nemoga",
+        "Designer": "nemoga",
+        "CharHeightMetric": "161cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 1053,
+        "AttackPower1": 249,
+        "AttackPower100": 2491,
+        "MaxHP1": 2871,
+        "MaxHP100": 21471,
+        "DefensePower1": 95,
+        "DefensePower100": 574,
+        "HealPower1": 1740,
+        "HealPower100": 5220,
+        "DodgePoint": 1011,
+        "AccuracyPoint": 810,
+        "CriticalPoint": 270,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 1,
+        "AmmoCost": 1,
+        "Range": 1000,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "ex",
+                "Name": "本官会照看你们的！",
+                "Desc": "部署掩体，\n令以掩体为中心的圆形范围(持续45秒)内的我方单位<b:ATK>增加<?1>.\n掩体额外拥有桐乃(泳装)生命值<?2>的生命值.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "16.2%",
+                        "20.4%",
+                        "22.5%",
+                        "26.7%"
+                    ],
+                    [
+                        "29.6%",
+                        "34.1%",
+                        "43%",
+                        "47.4%",
+                        "56.4%"
+                    ]
+                ],
+                "Cost": [
+                    5,
+                    5,
+                    5,
+                    5,
+                    5
+                ],
+                "Icon": "COMMON_SKILLICON_OBSTACLE",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                1409,
+                                1620,
+                                2043,
+                                2254,
+                                2677
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 11002
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "紧急情况！",
+                "Desc": "每50秒，令6名除后援学生外的我方单位<b:ATK>增加<?1>(持续40秒).",
+                "Parameters": [
+                    [
+                        "6.5%",
+                        "6.8%",
+                        "7.1%",
+                        "8.4%",
+                        "8.7%",
+                        "9.1%",
+                        "10.4%",
+                        "10.7%",
+                        "11%",
+                        "12.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                650,
+                                683,
+                                715,
+                                845,
+                                878,
+                                910,
+                                1040,
+                                1072,
+                                1105,
+                                1235
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 102
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "练习要当成实战",
+                "Desc": "<b:MAXHP>增加<?1>.",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "练习要当成实战＋",
+                "Desc": "<b:MAXHP>增加<?1>；\n<b:MAXHP>增加<?2>.",
+                "Parameters": [
+                    [
+                        "4594",
+                        "4824",
+                        "5053",
+                        "5972",
+                        "6202",
+                        "6432",
+                        "7350",
+                        "7580",
+                        "7810",
+                        "8728"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_STATBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "MaxHP_Base",
+                        "Scale": [
+                            4594,
+                            4824,
+                            5053,
+                            5972,
+                            6202,
+                            6432,
+                            7350,
+                            7580,
+                            7810,
+                            8728
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "本官会为你们应援的！",
+                "Desc": "令编队内的学生<b:ATK>增加<?1>.",
+                "Parameters": [
+                    [
+                        "9.1%",
+                        "9.5%",
+                        "10%",
+                        "11.8%",
+                        "12.3%",
+                        "12.7%",
+                        "14.5%",
+                        "15%",
+                        "15.5%",
+                        "17.3%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffAlly",
+                        "Value": [
+                            [
+                                912,
+                                957,
+                                1003,
+                                1186,
+                                1231,
+                                1277,
+                                1459,
+                                1504,
+                                1550,
+                                1732
+                            ]
+                        ],
+                        "Stat": "AttackPower_Coefficient",
+                        "Channel": 302
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "MaxHP",
+            "AttackPower"
+        ],
+        "FavorStatValue": [
+            [
+                21,
+                0
+            ],
+            [
+                32,
+                0
+            ],
+            [
+                43,
+                6
+            ],
+            [
+                54,
+                7
+            ],
+            [
+                13,
+                1
+            ],
+            [
+                20,
+                2
+            ],
+            [
+                33,
+                3
+            ]
+        ],
+        "FavorAlts": [
+            13012
+        ],
+        "MemoryLobby": [
+            5,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 220",
+        "FurnitureInteraction": [
+            [
+                [
+                    210345,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "aj",
+            "ao",
+            "CX",
+            "Cx"
+        ],
+        "FavorItemUniqueTags": [
+            "Gh",
+            "GI"
+        ],
+        "IsLimited": 2,
+        "Weapon": {
+            "Name": "第3号瓦尔基里制式手枪",
+            "Desc": "桐乃从瓦尔基里警察学校接受配给时收到的制式手枪。\n\n射击水平是不是因为救生员的使命感，变得比平时更厉害了？",
+            "AdaptationType": "Outdoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 88,
+            "AttackPower100": 876,
+            "MaxHP1": 500,
+            "MaxHP100": 4999,
+            "HealPower1": 164,
+            "HealPower100": 1636,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3080,
+                270
+            ],
+            [
+                3081,
+                3080,
+                271,
+                130
+            ],
+            [
+                3082,
+                3081,
+                272,
+                131
+            ],
+            [
+                3083,
+                3082,
+                273,
+                132
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                14
+            ],
+            [
+                12,
+                18,
+                14,
+                26
+            ],
+            [
+                12,
+                18,
+                10,
+                27
+            ],
+            [
+                8,
+                18,
+                10,
+                23
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4080
+            ],
+            [
+                4080
+            ],
+            [
+                4081,
+                4080,
+                270
+            ],
+            [
+                4081,
+                271,
+                130
+            ],
+            [
+                4082,
+                4081,
+                271,
+                130
+            ],
+            [
+                4082,
+                272,
+                131
+            ],
+            [
+                4083,
+                4082,
+                273,
+                132
+            ],
+            [
+                4083,
+                273,
+                132
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                6
+            ],
+            [
+                8,
+                6,
+                14
+            ],
+            [
+                5,
+                12,
+                9,
+                17
+            ],
+            [
+                8,
+                3,
+                18
+            ],
+            [
+                8,
+                12,
+                5,
+                9
+            ],
+            [
+                12,
+                6,
+                11
             ]
         ]
     }
