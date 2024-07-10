@@ -13643,7 +13643,27 @@
                     ]
                 ],
                 "Icon": "COMMON_SKILLICON_STATBUFF",
-                "Effects": []
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Value": [
+                            [
+                                2400,
+                                2520,
+                                2640,
+                                3120,
+                                3240,
+                                3360,
+                                3840,
+                                3960,
+                                4080,
+                                4560
+                            ]
+                        ],
+                        "Stat": "DamagedRatio_Coefficient",
+                        "Channel": 42
+                    }
+                ]
             }
         ],
         "FavorStatType": [
@@ -61069,7 +61089,9 @@
                 22
             ]
         ],
-        "FavorAlts": [],
+        "FavorAlts": [
+            10097
+        ],
         "MemoryLobby": [
             6,
             6,
@@ -61252,7 +61274,7 @@
         "IsReleased": [
             true,
             true,
-            false
+            true
         ],
         "DefaultOrder": 109,
         "PathName": "Kazusa",
@@ -61623,7 +61645,7 @@
         "MemoryLobby": [
             5,
             5,
-            0
+            5
         ],
         "MemoryLobbyBGM": "Poppin' Memories",
         "FurnitureInteraction": [
@@ -61639,7 +61661,12 @@
                     0
                 ]
             ],
-            []
+            [
+                [
+                    3103,
+                    0
+                ]
+            ]
         ],
         "FavorItemTags": [
             "aJ",
@@ -105698,6 +105725,519 @@
                 12,
                 6,
                 11
+            ]
+        ]
+    },
+    {
+        "Id": 10097,
+        "IsReleased": [
+            true,
+            false,
+            false
+        ],
+        "DefaultOrder": 187,
+        "PathName": "Moe_Swimsuit",
+        "DevName": "CH0216",
+        "Name": "モエ（水着）",
+        "School": "SRT",
+        "Club": "RabbitPlatoon",
+        "StarGrade": 3,
+        "SquadType": "Main",
+        "TacticRole": "DamageDealer",
+        "Summons": [],
+        "Position": "Middle",
+        "BulletType": "Sonic",
+        "ArmorType": "Unarmed",
+        "StreetBattleAdaptation": 0,
+        "OutdoorBattleAdaptation": 2,
+        "IndoorBattleAdaptation": 4,
+        "WeaponType": "HG",
+        "WeaponImg": "weapon_icon_ch0143",
+        "Cover": true,
+        "Equipment": [
+            "Shoes",
+            "Hairpin",
+            "Watch"
+        ],
+        "CollectionBG": "BG_FishingVillage2_Collection",
+        "FamilyName": "風倉",
+        "PersonalName": "モエ",
+        "SchoolYear": "1年生",
+        "CharacterAge": "15歳",
+        "Birthday": "9月13日",
+        "CharacterSSRNew": "こちらRABBIT3。\nミサイル発射していい～？",
+        "ProfileIntroduction": "潜入作戦のため漁村を訪れたSRT特殊学園所属RABBIT小隊のオペレーター。\n\n普段とは違う環境で武器を試せることに興奮している様子。他の小隊員とは違い、際どいデザインの水着を着ているが、本人曰くこれも破滅の一部だと主張しているのだとか。",
+        "Hobby": "打ち上げ花火",
+        "CharacterVoice": "井澤詩織",
+        "BirthDay": "9/13",
+        "Illustrator": "Mx2J",
+        "Designer": "Mx2J",
+        "CharHeightMetric": "163cm",
+        "CharHeightImperial": null,
+        "StabilityPoint": 916,
+        "AttackPower1": 234,
+        "AttackPower100": 2340,
+        "MaxHP1": 2067,
+        "MaxHP100": 23940,
+        "DefensePower1": 18,
+        "DefensePower100": 110,
+        "HealPower1": 1513,
+        "HealPower100": 4540,
+        "DodgePoint": 735,
+        "AccuracyPoint": 432,
+        "CriticalPoint": 216,
+        "CriticalDamageRate": 20000,
+        "AmmoCount": 16,
+        "AmmoCost": 8,
+        "Range": 550,
+        "RegenCost": 700,
+        "Skills": [
+            {
+                "SkillType": "autoattack",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "Hits": [
+                            10000
+                        ],
+                        "Scale": [
+                            10000
+                        ],
+                        "Frames": {
+                            "AttackEnterDuration": 0,
+                            "AttackStartDuration": 0,
+                            "AttackEndDuration": 0,
+                            "AttackBurstRoundOverDelay": 0,
+                            "AttackIngDuration": 0,
+                            "AttackReloadDuration": 0
+                        },
+                        "CriticalCheck": "Check"
+                    }
+                ]
+            },
+            {
+                "SkillType": "ex",
+                "Name": "弾道ミサイル砲撃",
+                "Desc": "円形範囲内の指定した敵に対して攻撃力の<?1>分のダメージ、その他の敵に対して攻撃力の<?2>分のダメージ",
+                "Parameters": [
+                    [
+                        "995%",
+                        "1145%",
+                        "1443%",
+                        "1593%",
+                        "1892%"
+                    ],
+                    [
+                        "199%",
+                        "229%",
+                        "288%",
+                        "318%",
+                        "378%"
+                    ]
+                ],
+                "Cost": [
+                    6,
+                    6,
+                    6,
+                    6,
+                    6
+                ],
+                "Icon": "COMMON_SKILLICON_CIRCLE",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            99584,
+                            114520,
+                            144399,
+                            159334,
+                            189206
+                        ]
+                    },
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            19917,
+                            22910,
+                            28881,
+                            31867,
+                            37846
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "normal",
+                "Name": "ハイドロストライク",
+                "Desc": "35秒毎に、敵1人に対して攻撃力の<?1>分のダメージ",
+                "Parameters": [
+                    [
+                        "312%",
+                        "327%",
+                        "343%",
+                        "405%",
+                        "421%",
+                        "437%",
+                        "499%",
+                        "515%",
+                        "530%",
+                        "593%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_TARGET",
+                "Effects": [
+                    {
+                        "Type": "DMGSingle",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            31222,
+                            32785,
+                            34348,
+                            40592,
+                            42155,
+                            43711,
+                            49955,
+                            51518,
+                            53081,
+                            59325
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "passive",
+                "Name": "破滅の美学",
+                "Desc": "<b:ATK>を<?1>増加",
+                "Parameters": [
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Coefficient",
+                        "Scale": [
+                            1400,
+                            1470,
+                            1540,
+                            1820,
+                            1890,
+                            1960,
+                            2240,
+                            2310,
+                            2380,
+                            2660
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "weaponpassive",
+                "Name": "破滅の美学＋",
+                "Desc": "<b:ATK>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Parameters": [
+                    [
+                        "281",
+                        "295",
+                        "309",
+                        "366",
+                        "380",
+                        "394",
+                        "450",
+                        "464",
+                        "478",
+                        "534"
+                    ],
+                    [
+                        "14%",
+                        "14.7%",
+                        "15.4%",
+                        "18.2%",
+                        "18.9%",
+                        "19.6%",
+                        "22.4%",
+                        "23.1%",
+                        "23.8%",
+                        "26.6%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_WEAPONBUFF",
+                "Effects": [
+                    {
+                        "Type": "BuffSelf",
+                        "Stat": "AttackPower_Base",
+                        "Scale": [
+                            281,
+                            295,
+                            309,
+                            366,
+                            380,
+                            394,
+                            450,
+                            464,
+                            478,
+                            534
+                        ]
+                    }
+                ]
+            },
+            {
+                "SkillType": "sub",
+                "Name": "爆破のスペシャリスト",
+                "Desc": "攻撃時、大型と超大型の敵に対して攻撃力の<?1>分の追加ダメージ",
+                "Parameters": [
+                    [
+                        "9.3%",
+                        "9.8%",
+                        "10.3%",
+                        "12.1%",
+                        "12.6%",
+                        "13.1%",
+                        "14.9%",
+                        "15.4%",
+                        "15.9%",
+                        "17.7%"
+                    ]
+                ],
+                "Icon": "COMMON_SKILLICON_EXTRADAMAGE",
+                "Effects": [
+                    {
+                        "Type": "DMGEcho",
+                        "CriticalCheck": "Check",
+                        "Scale": [
+                            938,
+                            985,
+                            1031,
+                            1217,
+                            1264,
+                            1311,
+                            1497,
+                            1543,
+                            1590,
+                            1776
+                        ]
+                    }
+                ]
+            }
+        ],
+        "FavorStatType": [
+            "AttackPower",
+            "MaxHP"
+        ],
+        "FavorStatValue": [
+            [
+                2,
+                0
+            ],
+            [
+                3,
+                0
+            ],
+            [
+                5,
+                60
+            ],
+            [
+                6,
+                72
+            ],
+            [
+                1,
+                12
+            ],
+            [
+                2,
+                18
+            ],
+            [
+                4,
+                30
+            ]
+        ],
+        "FavorAlts": [
+            20018
+        ],
+        "MemoryLobby": [
+            6,
+            0,
+            0
+        ],
+        "MemoryLobbyBGM": "Theme 186",
+        "FurnitureInteraction": [
+            [
+                [
+                    210346,
+                    0
+                ]
+            ],
+            [],
+            []
+        ],
+        "FavorItemTags": [
+            "as",
+            "av",
+            "aL",
+            "CX",
+            "Cx"
+        ],
+        "FavorItemUniqueTags": [
+            "Gf",
+            "GG"
+        ],
+        "IsLimited": 0,
+        "Weapon": {
+            "Name": "RABBIT-224式拳銃",
+            "Desc": "モエがSRT特殊学園から支給された制式拳銃。\n\nフレームは頑丈なモリブデン合金で造られており、高温多湿な海辺でも高速で連射することができる。",
+            "AdaptationType": "Indoor",
+            "AdaptationValue": 1,
+            "AttackPower1": 103,
+            "AttackPower100": 1028,
+            "MaxHP1": 685,
+            "MaxHP100": 6850,
+            "HealPower1": 0,
+            "HealPower100": 0,
+            "StatLevelUpType": "Standard"
+        },
+        "Gear": {},
+        "SkillExMaterial": [
+            [
+                3080,
+                210
+            ],
+            [
+                3081,
+                3080,
+                211,
+                140
+            ],
+            [
+                3082,
+                3081,
+                212,
+                141
+            ],
+            [
+                3083,
+                3082,
+                213,
+                142
+            ]
+        ],
+        "SkillExMaterialAmount": [
+            [
+                12,
+                15
+            ],
+            [
+                12,
+                18,
+                11,
+                32
+            ],
+            [
+                12,
+                18,
+                11,
+                27
+            ],
+            [
+                8,
+                18,
+                8,
+                19
+            ]
+        ],
+        "SkillMaterial": [
+            [
+                4080
+            ],
+            [
+                4080
+            ],
+            [
+                4081,
+                4080,
+                210
+            ],
+            [
+                4081,
+                211,
+                140
+            ],
+            [
+                4082,
+                4081,
+                211,
+                140
+            ],
+            [
+                4082,
+                212,
+                141
+            ],
+            [
+                4083,
+                4082,
+                213,
+                142
+            ],
+            [
+                4083,
+                213,
+                142
+            ]
+        ],
+        "SkillMaterialAmount": [
+            [
+                5
+            ],
+            [
+                8
+            ],
+            [
+                5,
+                12,
+                5
+            ],
+            [
+                8,
+                7,
+                15
+            ],
+            [
+                5,
+                12,
+                7,
+                17
+            ],
+            [
+                8,
+                3,
+                15
+            ],
+            [
+                8,
+                12,
+                5,
+                11
+            ],
+            [
+                12,
+                8,
+                13
             ]
         ]
     }
