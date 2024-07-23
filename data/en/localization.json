@@ -110,8 +110,9 @@
         "Genryumon": "Genryumon",
         "LaborParty": "Labor Party",
         "KnowledgeLiberationFront": "Knowledge Liberation Front",
-        "Hyakkayouran": "Hyakkayouran Resolution Council",
+        "Hyakkayouran": "Hyakkaryouran Resolution Council",
         "ShinySparkleSociety": "Sparkle Club",
+        "AbydosStudentCouncil": "Abydos Student Council",
         "EmptyClub": "None"
     },
     "BossFaction": {
@@ -188,7 +189,8 @@
         "13": "Sunshine Resort",
         "14": "Shopping Mall",
         "15": "Gehenna Party",
-        "16": "Trinity Classroom"
+        "16": "Trinity Classroom",
+        "17": "DJ Party Venue"
     },
     "FurnitureSet": {
         "0": "None",
@@ -207,7 +209,8 @@
         "112": "Sunshine Resort Set",
         "113": "Shopping Mall Set",
         "114": "Gehenna Party Set",
-        "115": "Trinity Classroom Set"
+        "115": "Trinity Classroom Set",
+        "116": "DJ Party Venue Set"
     },
     "ItemCategory": {
         "Furnitures": "Furniture",
@@ -313,11 +316,12 @@
         "830": "Trip-Trap-Train",
         "831": "A Certain Scientific Record of Youth",
         "832": "Cyber New Year March",
-        "833": "Serenade of the Sunshine Girls",
+        "833": "Basking in the Brilliance of Their Serenade",
         "834": "0068: From Opera with Love!",
         "835": "にぎにぎと ゆきゆきて",
         "836": "-ive aLIVE!",
-        "837": "Say-Bing!"
+        "837": "Say-Bing!",
+        "838": "Sheside Outside"
     },
     "StageType": {
         "Campaign": "Missions",
@@ -486,6 +490,10 @@
         "Debuff_ElectricShock": "Shock",
         "Debuff_Stability": "Stability",
         "Debuff_CostRegen": "Cost Recovery",
+        "Debuff_BurnDamagedIncrease": "Burn DMG Taken",
+        "Debuff_ChillDamagedIncrease": "Chill DMG Taken",
+        "Debuff_ElectricShockDamagedIncrease": "Shock DMG Taken",
+        "Debuff_PoisonDamagedIncrease": "Poison DMG Taken",
         "CC_Fear": "Fear",
         "CC_Stunned": "Stun",
         "CC_Provoke": "Taunt",
@@ -524,7 +532,9 @@
         "Special_CH0231_ExtraPassive": "Security Success",
         "Special_CH0239_ExtraPassive": "Infiltration",
         "Special_EN0008_Obelisk": "Electrified",
-        "Special_CH0220_Public": "Sugar Rush"
+        "Special_CH0220_Public": "Sugar Rush",
+        "Special_CH0258_Public": "Bulletproof Plate",
+        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "Aiding Mindset",
@@ -607,6 +617,10 @@
         "Debuff_ElectricShock": "Electric Shock",
         "Debuff_Stability": "Stability Down",
         "Debuff_CostRegen": "Cost Recovery Down",
+        "Debuff_BurnDamagedIncrease": "Burn Damage Taken",
+        "Debuff_ChillDamagedIncrease": "Chill Damage Taken",
+        "Debuff_ElectricShockDamagedIncrease": "Shock Damage Taken",
+        "Debuff_PoisonDamagedIncrease": "Poison Damage Taken",
         "CC_Fear": "Fear",
         "CC_Stunned": "Stun",
         "CC_Provoke": "Taunt",
@@ -645,7 +659,9 @@
         "Special_CH0231_ExtraPassive": "Security Success",
         "Special_CH0239_ExtraPassive": "Infiltration",
         "Special_EN0008_Obelisk": "Electrified",
-        "Special_CH0220_Public": "Sugar Rush"
+        "Special_CH0220_Public": "Sugar Rush",
+        "Special_CH0258_Public": "Bulletproof Plate",
+        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "Continuously restores HP at set intervals.\nActivates Mine's Basic Skill upon expiring.",
@@ -728,6 +744,10 @@
         "Debuff_Range": "Decreases the distance from which Normal Attacks can be performed.",
         "Debuff_ElectricShock": "Continuously receives Electric Shock damage at set intervals. This damage cannot critically hit.",
         "Debuff_Stability": "Decreases the minimum damage dealt by attacks due to random damage variance.",
+        "Debuff_BurnDamagedIncrease": "Increases the continuous damage received by Burn debuffs.",
+        "Debuff_ChillDamagedIncrease": "Increases the continuous damage received by Chill debuffs.",
+        "Debuff_ElectricShockDamagedIncrease": "Increases the continuous damage received by Shock debuffs.",
+        "Debuff_PoisonDamagedIncrease": "Increases the continuous damage received by Poison debuffs.",
         "CC_Fear": "Unable to act and will slowly move away from whoever inflicted fear on them. Also interrupts any active skills.",
         "CC_Stunned": "Unable to act and interrupts any active skills.",
         "CC_Provoke": "Forced to attack whoever inflicted taunt on them. Also interrupts any active skills.",
@@ -766,7 +786,9 @@
         "Special_CH0231_ExtraPassive": "Increases Ako (Dress)'s ATK and the damage dealt by her Basic Skill.",
         "Special_CH0239_ExtraPassive": "Increases Kayoko (Dress)'s Crit DMG and changes EX Skill to be guaranteed critical.",
         "Special_EN0008_Obelisk": "Cannot be targeted by the Fury of Set's lightning strikes.",
-        "Special_CH0220_Public": "Enhances various aspects of the Sugar Rush band members' skills."
+        "Special_CH0220_Public": "Enhances various aspects of the Sugar Rush band members' skills.",
+        "Special_CH0258_Public": "Reduces damage taken by Hoshino (Battle).",
+        "Special_CH0263_ExtraPassive_02": "Shiroko Terror cannot be defeated for the duration of the effect, but will be defeated once it expires if HP is not fully recovered."
     },
     "ServerName": {
         "0": "JP",
@@ -839,6 +861,7 @@
         "BattleCovered": "Entering Cover {0}",
         "ExSkill": "EX Skill {0}",
         "ExSkillLevel": "EX Skill (Field) {0}",
+        "Formchange": "Switch Combat Style",
         "UIEventLobbyEnter": "Event Lobby Entry {0}",
         "UIEventLobbyIdle": "Event Lobby Idle {0}",
         "UIEventShopEnter": "Event Shop Entry {0}",
@@ -1238,6 +1261,7 @@
         "width": "Width",
         "bounce": "Bounce Range",
         "skill_duration": "Skill Animation",
-        "tsa_board": "T.S.A Boarding"
+        "tsa_board": "T.S.A Boarding",
+        "tooltip_combat_style": "Switch Combat Style"
     }
 }

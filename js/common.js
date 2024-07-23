@@ -4601,7 +4601,8 @@ function updateStudentList(updateSortMethod = false) {
             if (updateSortMethod) {
                 $('#student-select-'+el.Id).css("order", i)
                 if (search_options["sortby"] == "Default" || search_options["sortby"] == "Name") {
-                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(getTranslatedString(el, 'Name')).toggleClass('smalltext', getTranslatedString(el, 'Name').length > label_smalltext_threshold[userLang]).toggleClass('unhover', false)
+                    let name = getTranslatedString(el, 'Name')
+                    $('#student-select-'+el.Id+' .label-text:not(.hover)').text(name).toggleClass('smalltext', getTranslatedString(el, 'Name').length > label_smalltext_threshold[userLang]).toggleClass('unhover', false)
                     $('#student-select-'+el.Id+' .label-text.hover').hide()
                 } else if (search_options["sortby"] == "EXCost") {
                     const cost = find(el.Skills, "SkillType", "ex")[0].Cost
@@ -5336,6 +5337,8 @@ function renderStudent() {
     $('#ba-student-profile-illustrator').html(student.Illustrator)
 
     $('#ba-student-toggle-sprite-btn').toggle(altSprite.includes(student.Id))
+    $('#style-switch-btn').toggle(Boolean(student.LinkedCharacterId || student.SubCharacterId))
+    $('#style-switch-btn-bg').css('background-image', `url('images/combatstyle/${student.Id}.png')`)
 
     let allTags = student.FavorItemTags
     allTags.push(student.FavorItemUniqueTags[0])
@@ -9760,6 +9763,7 @@ function getUsedByStudents(item, mode) {
     if (mode == 'equipment') {
         $.each(data.students, function(i,el){
             if (!el.IsReleased[regionID]) return
+            if (el.StyleId > 0) return
             if (el.Equipment[0] == item.Category || el.Equipment[1] == item.Category || el.Equipment[2] == item.Category)
             html += getStudentIconSmall(el)
         })
@@ -9768,8 +9772,8 @@ function getUsedByStudents(item, mode) {
         headerText = `<img class="inline-img" src="images/ui/Cafe_Icon_Interaction.png"> ${translateUI('furniture_interaction_list')}`
         interactiveStudents = []
         $.each(data.students, function(i,el){
-            if (!el.IsReleased[regionID])
-            return
+            if (!el.IsReleased[regionID]) return
+            if (el.StyleId > 0) return
 
             for (let i = 0; i < el.FurnitureInteraction[regionID].length; i++) {
                 if (item.Id == el.FurnitureInteraction[regionID][i][0]) {
@@ -9800,8 +9804,9 @@ function getUsedByStudents(item, mode) {
         if (item.Category == 'Material') {
             headerText = translateUI('item_usedby_skill')
             $.each(data.students, function(i,el) {
-                if (!el.IsReleased[regionID])
-                return
+                if (!el.IsReleased[regionID]) return
+                if (el.StyleId > 0) return
+
                 let amount = [0, 0]
                 for (let i = 0; i < el.SkillExMaterial.length; i++) {
                     for (let j = 0; j < el.SkillExMaterial[i].length; j++) {
@@ -9913,8 +9918,8 @@ function getLikedByStudents(item) {
     
     data.students.forEach((student) => {
 
-        if (!student.IsReleased[regionID])
-        return
+        if (!student.IsReleased[regionID]) return
+        if (student.StyleId > 0) return
 
         const allTags = [...student.FavorItemTags, ...student.FavorItemUniqueTags, ...genericTags]
 
@@ -10658,7 +10663,7 @@ function allSearch() {
     let results = [], maxResults = 25
 
     $.each(data.students, function(i,el){
-        if (el.IsReleased[regionID] && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
+        if (el.IsReleased[regionID] && !el.StyleId && searchContains(searchTerm, getTranslatedString(el, 'Name'))) {
             results.push({'name': getTranslatedString(el, 'Name'), 'icon': 'images/student/icon/'+el.Id+'.webp', 'type': translateUI('student'), 'rarity': '', 'rarity_text': getRarityStars(el.StarGrade), 'onclick': `loadStudent('${el.PathName}')`})
             if (results.length >= maxResults) return false
         }
@@ -11287,6 +11292,12 @@ function toggleOwned() {
     if (search_options.filter.Collection.Owned || search_options.filter.Collection.NotOwned) updateStudentList()
     localStorage.setItem('student_collection', JSON.stringify(studentCollection))
     $('#ba-student-search-filter-collection').toggle(Object.keys(studentCollection).length > 0)
+}
+
+function changeCombatStyle() {
+    if (student.LinkedCharacterId) {
+        loadStudentById(student.LinkedCharacterId)
+    }
 }
 
 function studentCollectionSave() {

@@ -5,20 +5,29 @@
                 <img id="ba-student-img">
             </div>
             <div class="student-portrait-buttons">
-                <button id="ba-student-list-btn" type="button" class="btn btn-dark" style="display:none;">
-                    <i class="fa-solid fa-grip me-1"></i>
-                    <span class="d-none d-md-inline" data-localize-id="ui,student_list"></span>
-                    <span class="d-inline d-md-none" data-localize-id="ui,student_list_short"></span>
-                </button>
-                <button id="ba-student-collection-btn" type="button" class="btn btn-dark" onclick="toggleOwned()"></button>
-                <div class="d-md-none flex-fill"></div>
-                <button id="ba-student-toggle-sprite-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,tooltip_sprite_toggle"><i class="fa-solid fa-repeat"></i></button>
-                <button id="student-voice-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,voicegallery"><i class="fa-solid fa-microphone" style="width:16px;"></i></button>
-                <button id="btn-midokuni-link" class="btn btn-dark tooltip-button py-1 px-2" data-tooltip-id="ui,midokuni_link">
-                    <div class="icon"><img src="images/ui/midokuni.png" width="25" height="25"></div>
-                </button>
+                <div class="d-flex flex-row gap-2">
+                    <button id="ba-student-list-btn" type="button" class="btn btn-dark" style="display:none;">
+                        <i class="fa-solid fa-grip me-1"></i>
+                        <span class="d-none d-md-inline" data-localize-id="ui,student_list"></span>
+                        <span class="d-inline d-md-none" data-localize-id="ui,student_list_short"></span>
+                    </button>
+
+                    <button id="ba-student-collection-btn" type="button" class="btn btn-dark" onclick="toggleOwned()"></button>
+                    <div class="d-md-none flex-fill"></div>
+                    <button id="ba-student-toggle-sprite-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,tooltip_sprite_toggle"><i class="fa-solid fa-repeat"></i></button>
+                    <button id="student-voice-btn" type="button" class="btn btn-dark tooltip-button" data-tooltip-id="ui,voicegallery"><i class="fa-solid fa-microphone" style="width:16px;"></i></button>
+                    <button id="btn-midokuni-link" class="btn btn-dark tooltip-button py-1 px-2" data-tooltip-id="ui,midokuni_link">
+                        <div class="icon"><img src="images/ui/midokuni.png" width="25" height="25"></div>
+                    </button>                    
+                </div>
+                <div>
+                    <button id="style-switch-btn" type="button" class="btn btn-dark p-0" onclick="changeCombatStyle()" data-tooltip-id="ui,tooltip_combat_style">
+                        <div id="style-switch-btn-bg" class="d-flex align-items-center justify-content-end">
+                            <i class="fa-solid fa-repeat me-2"></i>
+                        </div>
+                    </button>                    
+                </div>
             </div>
-            <div class="d-block d-md-none" style="height: 412px;"></div>
         </div>
         <div id="ba-student" class="col-12 col-md-6 ba-page" style="display:none;">
             <div class="px-0 ps-xl-3">

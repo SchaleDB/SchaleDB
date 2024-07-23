@@ -112,6 +112,7 @@
         "KnowledgeLiberationFront": "知識解放戦線",
         "Hyakkayouran": "百花繚乱紛争調停委員会",
         "ShinySparkleSociety": "キラキラ部",
+        "AbydosStudentCouncil": "アビドス生徒会",
         "EmptyClub": "無し"
     },
     "BossFaction": {
@@ -188,7 +189,8 @@
         "13": "サンシャインリゾート",
         "14": "デパート",
         "15": "ゲヘナパーティー",
-        "16": "トリニティ教室"
+        "16": "トリニティ教室",
+        "17": "DJパーティー会場"
     },
     "FurnitureSet": {
         "0": "なし",
@@ -207,7 +209,8 @@
         "112": "サンシャインリゾートシリーズ",
         "113": "デパートシリーズ",
         "114": "ゲヘナパーティーシリーズ",
-        "115": "トリニティ教室シリーズ"
+        "115": "トリニティ教室シリーズ",
+        "116": "DJパーティー会場シリーズ"
     },
     "ItemCategory": {
         "Furnitures": "家具",
@@ -317,7 +320,8 @@
         "834": "0068 オペラより愛をこめて！",
         "835": "にぎにぎと ゆきゆきて",
         "836": "-ive aLIVE!",
-        "837": "Say-Bing!"
+        "837": "Say-Bing!",
+        "838": "Sheside outside"
     },
     "StageType": {
         "Campaign": "任務",
@@ -486,6 +490,10 @@
         "Debuff_ElectricShock": "感電",
         "Debuff_Stability": "安定値",
         "Debuff_CostRegen": "コスト回復力",
+        "Debuff_BurnDamagedIncrease": "Burn DMG Taken",
+        "Debuff_ChillDamagedIncrease": "Chill DMG Taken",
+        "Debuff_ElectricShockDamagedIncrease": "Shock DMG Taken",
+        "Debuff_PoisonDamagedIncrease": "Poison DMG Taken",
         "CC_Fear": "恐怖状態",
         "CC_Stunned": "気絶状態",
         "CC_Provoke": "挑発状態",
@@ -524,7 +532,9 @@
         "Special_CH0231_ExtraPassive": "「警護成功」",
         "Special_CH0239_ExtraPassive": "潜入行動",
         "Special_EN0008_Obelisk": "「帯電」",
-        "Special_CH0220_Public": "「シュガーラッシュ」"
+        "Special_CH0220_Public": "「シュガーラッシュ」",
+        "Special_CH0258_Public": "Bulletproof Plate",
+        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "救護の心構え",
@@ -607,6 +617,10 @@
         "Debuff_ElectricShock": "感電",
         "Debuff_Stability": "安定値減少",
         "Debuff_CostRegen": "コスト回復力減少",
+        "Debuff_BurnDamagedIncrease": "Burn Damage Taken",
+        "Debuff_ChillDamagedIncrease": "Chill Damage Taken",
+        "Debuff_ElectricShockDamagedIncrease": "Shock Damage Taken",
+        "Debuff_PoisonDamagedIncrease": "Poison Damage Taken",
         "CC_Fear": "恐怖状態",
         "CC_Stunned": "気絶状態",
         "CC_Provoke": "挑発状態",
@@ -645,7 +659,9 @@
         "Special_CH0231_ExtraPassive": "「警護成功」",
         "Special_CH0239_ExtraPassive": "潜入行動",
         "Special_EN0008_Obelisk": "「帯電」",
-        "Special_CH0220_Public": "「シュガーラッシュ」"
+        "Special_CH0220_Public": "「シュガーラッシュ」",
+        "Special_CH0258_Public": "Bulletproof Plate",
+        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "一定間隔でHPを持続的に回復する。\n解除後にミネのノーマルスキルを発動する。",
@@ -728,6 +744,10 @@
         "Debuff_Range": "通常攻撃を行える距離が減少する。",
         "Debuff_ElectricShock": "一定の間隔で感電ダメージを受ける。このダメージでは会心は発生しない。",
         "Debuff_Stability": "乱数による与ダメージの下限が低下する。",
+        "Debuff_BurnDamagedIncrease": "Increases the continuous damage received by Burn debuffs.",
+        "Debuff_ChillDamagedIncrease": "Increases the continuous damage received by Chill debuffs.",
+        "Debuff_ElectricShockDamagedIncrease": "Increases the continuous damage received by Shock debuffs.",
+        "Debuff_PoisonDamagedIncrease": "Increases the continuous damage received by Poison debuffs.",
         "CC_Fear": "行動不能になり恐怖を付与してきた対象からゆっくりと遠ざかる。発生中のスキルも妨害される。",
         "CC_Stunned": "行動不能になり発生中のスキルが妨害される。",
         "CC_Provoke": "挑発状態を付与してきた対象を強制的に攻撃する。発生中のスキルも妨害される。",
@@ -766,7 +786,9 @@
         "Special_CH0231_ExtraPassive": "アコ（ドレス）の攻撃力とノーマルスキルが与えるダメージが増加する。",
         "Special_CH0239_ExtraPassive": "カヨコ（ドレス）の会心ダメージ率が増加し、EXスキルによる攻撃を確定会心に変更する。",
         "Special_EN0008_Obelisk": "セトの憤怒による落雷の対象にならない。",
-        "Special_CH0220_Public": "シュガーラッシュメンバーの様々なスキルを強化する。"
+        "Special_CH0220_Public": "シュガーラッシュメンバーの様々なスキルを強化する。",
+        "Special_CH0258_Public": "Reduces damage taken by Hoshino (Battle).",
+        "Special_CH0263_ExtraPassive_02": "Shiroko Terror cannot be defeated for the duration of the effect, but will be defeated once it expires if HP is not fully recovered."
     },
     "ServerName": {
         "0": "日本",
@@ -839,6 +861,7 @@
         "BattleCovered": "遮蔽物使用{0}",
         "ExSkill": "EXスキル{0}",
         "ExSkillLevel": "EXスキル（フィールド）{0}",
+        "Formchange": "スタイル変更",
         "UIEventLobbyEnter": "イベントロビー入場{0}",
         "UIEventLobbyIdle": "イベントロビー一般{0}",
         "UIEventShopEnter": "イベントショップ入場{0}",
@@ -1238,6 +1261,7 @@
         "width": "横幅",
         "bounce": "連鎖距離",
         "skill_duration": "スキルモーション",
-        "tsa_board": "T.S.A搭乗"
+        "tsa_board": "T.S.A搭乗",
+        "tooltip_combat_style": "Switch Combat Style"
     }
 }

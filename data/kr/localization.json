@@ -112,6 +112,7 @@
         "KnowledgeLiberationFront": "지식해방전선",
         "Hyakkayouran": "백화요란 분쟁조정위원회",
         "ShinySparkleSociety": "반짝반짝부",
+        "AbydosStudentCouncil": "아비도스 학생회",
         "EmptyClub": "없음"
     },
     "BossFaction": {
@@ -188,7 +189,8 @@
         "13": "선샤인 리조트",
         "14": "쇼핑몰",
         "15": "게헨나 파티",
-        "16": "트리니티 교실"
+        "16": "트리니티 교실",
+        "17": "DJ 파티장"
     },
     "FurnitureSet": {
         "0": "없음",
@@ -207,7 +209,8 @@
         "112": "선샤인 리조트 세트",
         "113": "쇼핑몰 세트",
         "114": "게헨나 파티 세트",
-        "115": "트리니티 교실 세트"
+        "115": "트리니티 교실 세트",
+        "116": "DJ 파티장 세트"
     },
     "ItemCategory": {
         "Furnitures": "가구",
@@ -317,7 +320,8 @@
         "834": "0068 오페라로부터 사랑을 담아서!",
         "835": "와글와글하며 오손도손하게",
         "836": "-ive aLIVE!",
-        "837": "Say-Bing!"
+        "837": "Say-Bing!",
+        "838": "Sheside outside"
     },
     "StageType": {
         "Campaign": "임무",
@@ -486,6 +490,10 @@
         "Debuff_ElectricShock": "감전",
         "Debuff_Stability": "안정 수치",
         "Debuff_CostRegen": "코스트 회복력",
+        "Debuff_BurnDamagedIncrease": "Burn DMG Taken",
+        "Debuff_ChillDamagedIncrease": "Chill DMG Taken",
+        "Debuff_ElectricShockDamagedIncrease": "Shock DMG Taken",
+        "Debuff_PoisonDamagedIncrease": "Poison DMG Taken",
         "CC_Fear": "공포",
         "CC_Stunned": "기절",
         "CC_Provoke": "도발",
@@ -524,7 +532,9 @@
         "Special_CH0231_ExtraPassive": "경호 성공",
         "Special_CH0239_ExtraPassive": "잠입행동",
         "Special_EN0008_Obelisk": "'과전하'",
-        "Special_CH0220_Public": "슈가러시"
+        "Special_CH0220_Public": "슈가러시",
+        "Special_CH0258_Public": "Bulletproof Plate",
+        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "구호의 마음가짐",
@@ -607,6 +617,10 @@
         "Debuff_ElectricShock": "감전",
         "Debuff_Stability": "안정 수치 감소",
         "Debuff_CostRegen": "코스트 회복력 감소",
+        "Debuff_BurnDamagedIncrease": "Burn Damage Taken",
+        "Debuff_ChillDamagedIncrease": "Chill Damage Taken",
+        "Debuff_ElectricShockDamagedIncrease": "Shock Damage Taken",
+        "Debuff_PoisonDamagedIncrease": "Poison Damage Taken",
         "CC_Fear": "공포",
         "CC_Stunned": "기절",
         "CC_Provoke": "도발",
@@ -645,7 +659,9 @@
         "Special_CH0231_ExtraPassive": "경호 성공",
         "Special_CH0239_ExtraPassive": "잠입행동",
         "Special_EN0008_Obelisk": "'과전하'",
-        "Special_CH0220_Public": "슈가러시"
+        "Special_CH0220_Public": "슈가러시",
+        "Special_CH0258_Public": "Bulletproof Plate",
+        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "정해진 시간마다 HP를 지속적으로 회복합니다.",
@@ -728,6 +744,10 @@
         "Debuff_Range": "일반 공격의 사거리가 감소합니다.",
         "Debuff_ElectricShock": "Continuously receives Electric Shock damage at set intervals. This damage cannot critically hit.",
         "Debuff_Stability": "안정치가 감소해 공격이 더 높은 대미지를 줄 확률이 감소합니다.",
+        "Debuff_BurnDamagedIncrease": "Increases the continuous damage received by Burn debuffs.",
+        "Debuff_ChillDamagedIncrease": "Increases the continuous damage received by Chill debuffs.",
+        "Debuff_ElectricShockDamagedIncrease": "Increases the continuous damage received by Shock debuffs.",
+        "Debuff_PoisonDamagedIncrease": "Increases the continuous damage received by Poison debuffs.",
         "CC_Fear": "어떤 행동도 할 수 없으며 공포를 부여한 대상으로부터 느리게 도망칩니다. 사용 중인 스킬이 취소됩니다.",
         "CC_Stunned": "어떤 행동도 할 수 없으며 사용 중인 스킬이 취소됩니다.",
         "CC_Provoke": "도발을 부여한 대상을 강제로 공격합니다. 사용 중인 스킬이 취소됩니다.",
@@ -766,7 +786,9 @@
         "Special_CH0231_ExtraPassive": "아코(드레스)의 공격력이 증가하고, 일반 스킬의 대미지가 증가합니다.",
         "Special_CH0239_ExtraPassive": "카요코(드레스)의 치명 대미지가 증가하고, EX 스킬이 확정 치명으로 변경됩니다.",
         "Special_EN0008_Obelisk": "세트의 분노의 낙뢰의 대상으로 선정되지 않습니다.",
-        "Special_CH0220_Public": "Enhances various aspects of the Sugar Rush band members' skills."
+        "Special_CH0220_Public": "Enhances various aspects of the Sugar Rush band members' skills.",
+        "Special_CH0258_Public": "Reduces damage taken by Hoshino (Battle).",
+        "Special_CH0263_ExtraPassive_02": "Shiroko Terror cannot be defeated for the duration of the effect, but will be defeated once it expires if HP is not fully recovered."
     },
     "ServerName": {
         "0": "일본",
@@ -839,6 +861,7 @@
         "BattleCovered": "엄폐 {0}",
         "ExSkill": "EX 스킬 {0}",
         "ExSkillLevel": "EX 스킬(필드) {0}",
+        "Formchange": "스타일 변경",
         "UIEventLobbyEnter": "이벤트 로비 입장 {0}",
         "UIEventLobbyIdle": "이벤트 로비 일반 {0}",
         "UIEventShopEnter": "이벤트 상점 입장 {0}",
@@ -1238,6 +1261,7 @@
         "width": "너비",
         "bounce": "튕기는 거리",
         "skill_duration": "스킬 사용 시간",
-        "tsa_board": "T.S.A 탑승"
+        "tsa_board": "T.S.A 탑승",
+        "tooltip_combat_style": "Switch Combat Style"
     }
 }

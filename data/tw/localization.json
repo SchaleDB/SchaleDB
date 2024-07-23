@@ -112,6 +112,7 @@
         "KnowledgeLiberationFront": "知識解放戰線",
         "Hyakkayouran": "百花繚亂紛爭調解委員會",
         "ShinySparkleSociety": "閃耀部",
+        "AbydosStudentCouncil": "Abydos Student Council",
         "EmptyClub": "無"
     },
     "BossFaction": {
@@ -188,7 +189,8 @@
         "13": "陽光渡假勝地",
         "14": "百貨商場",
         "15": "格黑娜宴會",
-        "16": "Trinity Classroom"
+        "16": "Trinity Classroom",
+        "17": "DJ Party Venue"
     },
     "FurnitureSet": {
         "0": "無系列",
@@ -207,7 +209,8 @@
         "112": "陽光渡假勝地系列",
         "113": "百貨商場系列",
         "114": "格黑娜宴會系列",
-        "115": "Trinity Classroom Set"
+        "115": "Trinity Classroom Set",
+        "116": "DJ Party Venue Set"
     },
     "ItemCategory": {
         "Furnitures": "家具",
@@ -313,11 +316,12 @@
         "830": "Trip-Trap-Train",
         "831": "科學青春紀錄",
         "832": "電腦新春行進曲",
-        "833": "逐光少女們的小夜曲",
+        "833": "向陽前行 她們的小夜曲",
         "834": "0068：歌劇之戀！",
         "835": "熙熙攘攘 和和睦睦",
         "836": "-ive aLIVE!",
-        "837": "Say-Bing!"
+        "837": "Say-Bing!",
+        "838": "Sheside Outside"
     },
     "StageType": {
         "Campaign": "任務",
@@ -486,6 +490,10 @@
         "Debuff_ElectricShock": "觸電",
         "Debuff_Stability": "穩定值",
         "Debuff_CostRegen": "COST回復力",
+        "Debuff_BurnDamagedIncrease": "Burn DMG Taken",
+        "Debuff_ChillDamagedIncrease": "Chill DMG Taken",
+        "Debuff_ElectricShockDamagedIncrease": "Shock DMG Taken",
+        "Debuff_PoisonDamagedIncrease": "Poison DMG Taken",
         "CC_Fear": "恐懼",
         "CC_Stunned": "昏厥",
         "CC_Provoke": "挑釁",
@@ -524,7 +532,9 @@
         "Special_CH0231_ExtraPassive": "「護衛成功」",
         "Special_CH0239_ExtraPassive": "潛入行動",
         "Special_EN0008_Obelisk": "「帶電」",
-        "Special_CH0220_Public": "「SugarRush」"
+        "Special_CH0220_Public": "「SugarRush」",
+        "Special_CH0258_Public": "Bulletproof Plate",
+        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "救護意志",
@@ -607,6 +617,10 @@
         "Debuff_ElectricShock": "觸電",
         "Debuff_Stability": "穩定值減少/穩定率減少",
         "Debuff_CostRegen": "COST回復力減少",
+        "Debuff_BurnDamagedIncrease": "Burn Damage Taken",
+        "Debuff_ChillDamagedIncrease": "Chill Damage Taken",
+        "Debuff_ElectricShockDamagedIncrease": "Shock Damage Taken",
+        "Debuff_PoisonDamagedIncrease": "Poison Damage Taken",
         "CC_Fear": "恐懼",
         "CC_Stunned": "昏厥",
         "CC_Provoke": "挑釁",
@@ -645,7 +659,9 @@
         "Special_CH0231_ExtraPassive": "護衛成功",
         "Special_CH0239_ExtraPassive": "潛入行動",
         "Special_EN0008_Obelisk": "帶電",
-        "Special_CH0220_Public": "「SugarRush」"
+        "Special_CH0220_Public": "「SugarRush」",
+        "Special_CH0258_Public": "Bulletproof Plate",
+        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "效果：以一定時間間隔，持續回復該單位的生命值.\n※ 美禰失去該狀態時，將使用普通技能.",
@@ -728,6 +744,10 @@
         "Debuff_Range": "效果：減少該單位可進行普通攻擊的最遠距離.",
         "Debuff_ElectricShock": "效果：令該單位以一定時間間隔受到觸電的持續傷害.\n※ 該持續傷害無法暴擊.",
         "Debuff_Stability": "效果：減少該單位造成傷害時，影響傷害量的傷害浮動區間的左端點的值.",
+        "Debuff_BurnDamagedIncrease": "Increases the continuous damage received by Burn debuffs.",
+        "Debuff_ChillDamagedIncrease": "Increases the continuous damage received by Chill debuffs.",
+        "Debuff_ElectricShockDamagedIncrease": "Increases the continuous damage received by Shock debuffs.",
+        "Debuff_PoisonDamagedIncrease": "Increases the continuous damage received by Poison debuffs.",
         "CC_Fear": "效果：令該單位無法進行一切主動行為(普通攻擊、需要主動觸發/使用的技能等)，並打斷一切被施加該狀態時正在進行的主動行為；逐漸遠離對該單位施加該狀態的單位.",
         "CC_Stunned": "效果：令該單位無法進行一切主動行為(普通攻擊、需要主動觸發/使用的技能等)，並打斷一切被施加該狀態時正在進行的主動行為.",
         "CC_Provoke": "效果：強制將該單位的攻擊目標轉為施加該狀態的單位，並打斷一切被施加該狀態時正在進行的主動行為；無法使用該單位的EX技能.",
@@ -766,7 +786,9 @@
         "Special_CH0231_ExtraPassive": "[特殊狀態 亞子(禮服)]\n效果：根據計數，增加亞子(禮服)的普通技能造成的傷害.",
         "Special_CH0239_ExtraPassive": "[特殊狀態 佳世子(禮服)]\n效果：增加佳世子(禮服)的暴擊傷害；\n佳世子(禮服)使用EX技能時，造成的傷害必定暴擊，隨後移除該狀態.",
         "Special_EN0008_Obelisk": "效果：自身無法成為賽特的憤怒的落雷的目標.",
-        "Special_CH0220_Public": "[特殊狀態 (樂隊)]\n效果：強化SugarRush樂隊成員的各種技能的效果."
+        "Special_CH0220_Public": "[特殊狀態 (樂隊)]\n效果：強化SugarRush樂隊成員的各種技能的效果.",
+        "Special_CH0258_Public": "Reduces damage taken by Hoshino (Battle).",
+        "Special_CH0263_ExtraPassive_02": "Shiroko Terror cannot be defeated for the duration of the effect, but will be defeated once it expires if HP is not fully recovered."
     },
     "ServerName": {
         "0": "日服",
@@ -839,6 +861,7 @@
         "BattleCovered": "進入掩體 {0}",
         "ExSkill": "EX技能 {0}",
         "ExSkillLevel": "EX技能（戰場） {0}",
+        "Formchange": "Switch Combat Style",
         "UIEventLobbyEnter": "活動大廳入場 {0}",
         "UIEventLobbyIdle": "活動大廳閒置 {0}",
         "UIEventShopEnter": "活動商店入場 {0}",
@@ -1238,6 +1261,7 @@
         "width": "寬",
         "bounce": "抛射範圍",
         "skill_duration": "技能動畫時長",
-        "tsa_board": "搭乘戰術支援軍備"
+        "tsa_board": "搭乘戰術支援軍備",
+        "tooltip_combat_style": "Switch Combat Style"
     }
 }

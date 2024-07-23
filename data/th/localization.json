@@ -110,8 +110,9 @@
         "Genryumon": "มังกรดำ",
         "LaborParty": "ชมรมผู้รับจ้าง",
         "KnowledgeLiberationFront": "ชมรมแนวร่วมปลดปล่อยความรู้",
-        "Hyakkayouran": "คณะไกลเกลี่ยข้อพิพาท เฮียกกะเรียวรัน",
+        "Hyakkayouran": "คณะไกล่เกลี่ยข้อพิพาท เฮียกกะเรียวรัน",
         "ShinySparkleSociety": "ชมรมระยิบระยับ",
+        "AbydosStudentCouncil": "สภานักเรียนอบิดอส",
         "EmptyClub": "ไม่มี"
     },
     "BossFaction": {
@@ -187,8 +188,9 @@
         "12": "ชมรมพัฒนาเกม",
         "13": "รีสอร์ตซันไชน์",
         "14": "ช็อปปิ้งมอลล์",
-        "15": "Gehenna Party",
-        "16": "Trinity Classroom"
+        "15": "ปาร์ตี้เกเฮนน่า",
+        "16": "Trinity Classroom",
+        "17": "DJ Party Venue"
     },
     "FurnitureSet": {
         "0": "ไม่มี",
@@ -206,8 +208,9 @@
         "111": "เซ็ตชมรมพัฒนาเกม",
         "112": "เซ็ตรีสอร์ตซันไชน์",
         "113": "เซ็ตช็อปปิ้งมอลล์",
-        "114": "Gehenna Party Set",
-        "115": "Trinity Classroom Set"
+        "114": "เซ็ตปาร์ตี้เกเฮนน่า",
+        "115": "Trinity Classroom Set",
+        "116": "DJ Party Venue Set"
     },
     "ItemCategory": {
         "Furnitures": "เฟอร์นิเจอร์",
@@ -313,11 +316,12 @@
         "830": "Trip-Trap-Train",
         "831": "แฟ้มลับวัยรุ่น คดีวิทยาศาสตร์",
         "832": "แก๊งสมองกล ชมภูเขารับฤดูใบไม้ผลิ",
-        "833": "บทบรรเลงยามราตรีของเหล่าสาวน้อยยามรุ่งสาง",
+        "833": "แสงแห่งประกาย บทเพลงของเหล่าเด็กสาวยามค่ำคืน",
         "834": "0068: จากโอเปร่าด้วยรัก!",
         "835": "ทัศนศึกษาหฤหรรษ์ ณ เฮียกคิยาโค",
         "836": "-ive aLIVE!",
-        "837": "Say-Bing!"
+        "837": "Say-Bing!",
+        "838": "Sheside Outside"
     },
     "StageType": {
         "Campaign": "ภารกิจ",
@@ -486,6 +490,10 @@
         "Debuff_ElectricShock": "ไฟฟ้าช็อต",
         "Debuff_Stability": "ค่าความเสถียร",
         "Debuff_CostRegen": "ค่าฟื้นฟู Cost",
+        "Debuff_BurnDamagedIncrease": "ความเสียหายเผาไหม้",
+        "Debuff_ChillDamagedIncrease": "ความเสียหายหนาวสั่น",
+        "Debuff_ElectricShockDamagedIncrease": "ความเสียหายไฟฟ้าช็อต",
+        "Debuff_PoisonDamagedIncrease": "ความเสียหายพิษ",
         "CC_Fear": "กลัว",
         "CC_Stunned": "หมดสติ",
         "CC_Provoke": "ยั่วยุ",
@@ -520,11 +528,13 @@
         "Special_Pray": "คำภาวนา",
         "Special_CH0224_Public": "เร่าร้อน",
         "Special_CH0225_ExtraPassive": "ฟูรินคะซัน",
-        "Special_CH0233_ExtraPassive": "มันเผาร้อนๆ",
+        "Special_CH0233_ExtraPassive": "มันเผาอุ่นๆ",
         "Special_CH0231_ExtraPassive": "คุ้มกันสำเร็จ",
         "Special_CH0239_ExtraPassive": "แทรกซึม",
         "Special_EN0008_Obelisk": "ประจุตกค้าง",
-        "Special_CH0220_Public": "ชูการ์ รัช"
+        "Special_CH0220_Public": "ชูการ์ รัช",
+        "Special_CH0258_Public": "เกราะกันกระสุน",
+        "Special_CH0263_ExtraPassive_02": "ล่าถอยช้าลง"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "ความตั้งใจบรรเทาทุกข์",
@@ -607,6 +617,10 @@
         "Debuff_ElectricShock": "ไฟฟ้าช็อต",
         "Debuff_Stability": "ค่าความเสถียรลดลง",
         "Debuff_CostRegen": "ค่าฟื้นฟู Cost ลดลง",
+        "Debuff_BurnDamagedIncrease": "ความเสียหายเผาไหม้เพิ่มขึ้น",
+        "Debuff_ChillDamagedIncrease": "ความเสียหายหนาวสั่นเพิ่มขึ้น",
+        "Debuff_ElectricShockDamagedIncrease": "ความเสียหายไฟฟ้าช็อตเพิ่มขึ้น",
+        "Debuff_PoisonDamagedIncrease": "ความเสียหายพิษเพิ่มขึ้น",
         "CC_Fear": "กลัว",
         "CC_Stunned": "หมดสติ",
         "CC_Provoke": "ยั่วยุ",
@@ -645,7 +659,9 @@
         "Special_CH0231_ExtraPassive": "คุ้มกันสำเร็จ",
         "Special_CH0239_ExtraPassive": "แทรกซึม",
         "Special_EN0008_Obelisk": "ประจุตกค้าง",
-        "Special_CH0220_Public": "ชูการ์ รัช"
+        "Special_CH0220_Public": "ชูการ์ รัช",
+        "Special_CH0258_Public": "เกราะกันกระสุน",
+        "Special_CH0263_ExtraPassive_02": "ล่าถอยช้าลง"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "ฟื้นฟู HP ช้าๆ เป็นเวลาต่อเนื่อง",
@@ -728,6 +744,10 @@
         "Debuff_Range": "ลดระยะในการโจมตีทั่วไป",
         "Debuff_ElectricShock": "ได้รับความเสียหายไฟฟ้าช็อตต่อเนื่อง<br>ความเสียหายนี้ไม่สามารถติดคริติคอลได้",
         "Debuff_Stability": "ลดความเสียหายขั้นต่ำที่สามารถทำได้ในการโจมตี",
+        "Debuff_BurnDamagedIncrease": "เพิ่มความเสียหายเผาไหม้ที่ได้รับ",
+        "Debuff_ChillDamagedIncrease": "เพิ่มความเสียหายหนาวสั่นที่ได้รับ",
+        "Debuff_ElectricShockDamagedIncrease": "เพิ่มความเสียหายไฟฟ้าช็อตที่ได้รับ",
+        "Debuff_PoisonDamagedIncrease": "เพิ่มความเสียหายพิษที่ได้รับ",
         "CC_Fear": "ไม่สามารถตอบสนองได้และจะค่อยๆ เคลื่อนที่ออกจากคนที่ส่งผลเอฟเฟกต์กลัว นอกจากนี้การใช้งานสกิลทั้งหมดจะถูกยกเลิก",
         "CC_Stunned": "ไม่สามารถตอบสนองได้ นอกจากนี้การใช้งานสกิลทั้งหมดจะถูกยกเลิก",
         "CC_Provoke": "ถูกบังคับให้โจมตีใส่คนที่ส่งผลเอฟเฟกต์ยั่วยุ นอกจากนี้การใช้งานสกิลทั้งหมดจะถูกยกเลิก",
@@ -766,7 +786,9 @@
         "Special_CH0231_ExtraPassive": "เพิ่มค่าโจมตีและความเสียหายที่ทำได้ของสกิลพื้นฐานของอาโกะ (ชุดเดรส)",
         "Special_CH0239_ExtraPassive": "เพิ่มความเสียหายคริและทำให้สกิล EX ของคาโยโกะ (เดรส) การันตีสร้างความเสียหายคริแน่นอน",
         "Special_EN0008_Obelisk": "ไม่สามารถตกเป็นเป้าหมายของสายฟ้าฟาดจากสกิลของความพิโรธของเซทได้",
-        "Special_CH0220_Public": "เสริมประสิทธิภาพของสกิลบางสกิลของสมาชิกวงชูการ์ รัช"
+        "Special_CH0220_Public": "เสริมประสิทธิภาพของสกิลบางสกิลของสมาชิกวงชูการ์ รัช",
+        "Special_CH0258_Public": "ลดความเสียหายที่ได้รับของโฮชิโนะ (พร้อมรบ)",
+        "Special_CH0263_ExtraPassive_02": "ชิโรโกะ (เทอเรอร์) จะไม่ล่าถอยตราบที่เอฟเฟกต์นี้ยังมีผลอยู่ แต่จะล่าถอยทันทีที่ระยะเวลาของเอฟเฟกต์นี้หมดลงและ HP ของชิโรโกะ (เทอเรอร์) ไม่ได้รับการฟื้นฟูจนเต็ม"
     },
     "ServerName": {
         "0": "ญี่ปุ่น",
@@ -839,6 +861,7 @@
         "BattleCovered": "เข้าที่กำบัง {0}",
         "ExSkill": "คัทซีนสกิล EX {0}",
         "ExSkillLevel": "สกิล EX (บนสนาม) {0}",
+        "Formchange": "Switch Combat Style",
         "UIEventLobbyEnter": "เข้าหน้าล็อบบี้อีเวนท์ {0}",
         "UIEventLobbyIdle": "หน้าล๊อบบี้อีเวนท์ {0}",
         "UIEventShopEnter": "เข้าหน้าร้านค้าอีเวนท์ {0}",
@@ -1238,6 +1261,7 @@
         "width": "ความกว้าง",
         "bounce": "ระยะในการชิ่ง",
         "skill_duration": "ระยะเวลาใช้สกิล",
-        "tsa_board": "T.S.A ที่มี"
+        "tsa_board": "T.S.A ที่มี",
+        "tooltip_combat_style": "Switch Combat Style"
     }
 }

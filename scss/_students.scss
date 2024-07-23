@@ -195,10 +195,15 @@
 
 #student-portrait-panel {
 
+    @include sm-down {
+        height: 462px;
+    }
+
     .student-portrait-buttons {
         position: sticky;
         top: calc(56px + 1rem);
         display: flex;
+        flex-direction: column;
         gap: 0.5rem;
     
         button, a {
@@ -221,7 +226,7 @@
                 background-color: var(--col-btn-active-secondary);
             }
 
-            &#ba-student-list-btn {
+            &#ba-student-list-btn, &#style-switch-btn {
                 opacity: 0.6;
             }
         
@@ -235,6 +240,15 @@
                 opacity: 1 !important;
             }
         }
+    }
+
+    #style-switch-btn-bg {
+        width: 110px;
+        height: 36px;
+        background-size: cover;
+        background-position: left;
+        background-repeat: no-repeat;
+        border-radius: 0.25rem;
     }
 
     &:hover {
@@ -891,4 +905,3 @@
     }
 
 }
-
