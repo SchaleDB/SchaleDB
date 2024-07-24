@@ -106138,7 +106138,7 @@
         "IsLimited": 0,
         "Weapon": {
             "Name": "RABBIT-224式手槍",
-            "Desc": "SRT特殊學園配給給萌的制式手槍。\n\n\n\n槍身由堅硬的鉬合金製成，在高溫潮溼的海邊也能實現高速連射。",
+            "Desc": "SRT特殊學園配給給萌的制式手槍。\n\n槍身由堅硬的鉬合金製成，在高溫潮溼的海邊也能實現高速連射。",
             "AdaptationType": "Indoor",
             "AdaptationValue": 1,
             "AttackPower1": 103,
@@ -106291,7 +106291,7 @@
         "DefaultOrder": 188,
         "PathName": "Hoshino_Battle_Tank",
         "DevName": "CH0258_02",
-        "Name": "ホシノ（臨戦）",
+        "Name": "星野（臨戰）",
         "School": "Abydos",
         "Club": "Countermeasure",
         "StarGrade": 3,
@@ -106314,13 +106314,13 @@
         ],
         "CollectionBG": "BG_AbydosCouncilRoom3_Sunset_Collection",
         "FamilyName": "小鳥遊",
-        "PersonalName": "ホシノ",
-        "SchoolYear": "3年生",
-        "CharacterAge": "17歳",
+        "PersonalName": "星野",
+        "SchoolYear": "3年級",
+        "CharacterAge": "17歲",
         "Birthday": "1月2日",
-        "CharacterSSRNew": "おじさん、ちょっとだけ真面目にいくよ。\nうへ～、ちょっと恥ずかしいんだけどね",
-        "ProfileIntroduction": "アビドス高等学校所属、アビドス生徒会の元副会長であり、対策委員会の委員長を務める怠け者の少女。\n\n保管していた武装を装備し、より戦闘に適したスタイルになった。それ以外は普段のホシノと変わらないが、武装状態になったことで真剣な眼差しが垣間見える。",
-        "Hobby": "昼寝、ゴロゴロすること",
+        "CharacterSSRNew": "大叔我，稍微要認真起來咯。\n唔嘿～就是有點害羞",
+        "ProfileIntroduction": "阿拜多斯高中所屬，原「阿拜多斯學生會」副會長，現任「對策委員會」委員長的懶蟲少女。\n\n裝備上了保管起來的武器裝備，切換至了更加適合戰鬥的形態。除此之外就和平時的星野沒什麼區別了，但從此之中也能見到她認真的眼神。",
+        "Hobby": "午睡、無所事事",
         "CharacterVoice": "花守ゆみり",
         "BirthDay": "1/2",
         "Illustrator": "9ml",
@@ -106370,8 +106370,8 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "防御姿勢強化",
-                "Desc": "指定した位置に移動した後、遮蔽物の役割をする盾を持ち上げて遮蔽状態を付与、さらに<b:ATK>を<?1>増加（40秒間）/\n遮蔽物は、ホシノ（臨戦）のHPの<?2>の分の値が追加されたHPを持ちます。\n（遮蔽物の防御タイプはホシノ（臨戦）と同じです）",
+                "Name": "防禦姿勢強化",
+                "Desc": "令自身移動至指定位置，隨後對自身造成以下效果(持續40秒)：\n- 舉起具有掩體作用的盾牌進入掩體掩護狀態；\n- <b:ATK>增加<?1>.\n※ 掩體額外擁有星野(臨戰)生命值<?2>的生命值.\n※ 掩體的防禦屬性與星野(臨戰)相同.",
                 "Parameters": [
                     [
                         "82.5%",
@@ -106415,8 +106415,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "プレート交換",
-                "Desc": "40秒毎に、防弾プレートを装着して<b:DamagedRatio>を<?1>減少/\n（防弾プレートは25回攻撃を受けたら解除）",
+                "Name": "更換護板",
+                "Desc": "每40秒，裝上<s:CH0258_Public>，持有期間對自身造成以下效果：\n- <b:DamagedRatio>減少<?1>.\n※ <s:CH0258_Public>在自身受到25次傷害後解除.",
                 "Parameters": [
                     [
                         "12.7%",
@@ -106456,8 +106456,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "近距離戦闘システム",
-                "Desc": "攻撃力を<?1>、<b:MAXHP>を<?2>増加",
+                "Name": "近戰系統",
+                "Desc": "<b:ATK>增加<?1>、<b:MAXHP>增加<?2>.",
                 "Parameters": [
                     [
                         "11.2%",
@@ -106522,8 +106522,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "近距離戦闘システム+",
-                "Desc": "攻撃力を<?1>、<b:MAXHP>を<?2>増加/\nさらに攻撃力を<?3>、<b:MAXHP>を<?4>増加",
+                "Name": "近戰系統＋",
+                "Desc": "<b:ATK>增加<?1>、<b:MAXHP>增加<?2>；\n<b:ATK>增加<?3>、<b:MAXHP>增加<?4>.",
                 "Parameters": [
                     [
                         "117",
@@ -106612,8 +106612,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "有効戦術",
-                "Desc": "攻撃時、20%の確率で<d:DEF>を<?1>減少（20秒間）（クールタイム5秒）",
+                "Name": "有效戰術",
+                "Desc": "自身攻擊時，20%機率立即對目標造成以下效果(持續20秒)(冷卻5秒)：\n- <d:DEF>減少<?1>(持續20秒)(冷卻5秒).",
                 "Parameters": [
                     [
                         "10.1%",
@@ -106717,7 +106717,7 @@
         "IsLimited": 1,
         "Weapon": {
             "Name": "Eye of Horus",
-            "Desc": "ホシノが愛用しているシンプルなデザインのショットガン。\n\nホシノの装備の中核を担っている。",
+            "Desc": "星野愛用的設計簡約的霰彈槍。\n\n星野的裝備中的中流砥柱。",
             "AdaptationType": "Outdoor",
             "AdaptationValue": 1,
             "AttackPower1": 54,
@@ -106870,7 +106870,7 @@
         "DefaultOrder": 189,
         "PathName": "Hoshino_Battle_Dealer",
         "DevName": "CH0258_01",
-        "Name": "ホシノ（臨戦）",
+        "Name": "星野（臨戰）",
         "School": "Abydos",
         "Club": "Countermeasure",
         "StarGrade": 3,
@@ -106950,7 +106950,7 @@
             {
                 "SkillType": "ex",
                 "Name": "集中突破",
-                "Desc": "敵1人に対して、攻撃力の<?1>分のダメージ/\n円形範囲内の敵に対して、攻撃力の<?2>分のダメージ",
+                "Desc": "對1名敵方單位造成以下效果：\n- 造成自身攻擊力<?1>的傷害.\n對以上述目標為中心的圓形範圍內的敵方單位造成以下效果：\n- 造成自身攻擊力<?2>的傷害.",
                 "Parameters": [
                     [
                         "78.5%",
@@ -107052,8 +107052,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "拳銃速射",
-                "Desc": "ファストローディング用の残弾数が0になった時、敵1人に対して攻撃力の<?1>分のダメージ",
+                "Name": "手槍速射",
+                "Desc": "自身快速裝填彈藥耗盡時，對1名敵方單位造成以下效果：\n- 造成自身攻擊力<?1>的傷害.",
                 "Parameters": [
                     [
                         "211%",
@@ -107130,8 +107130,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "戦術的視野の拡大",
-                "Desc": "通常攻撃の射程を300、<b:CriticalDamage>率を<?1>増加",
+                "Name": "戰術視野擴大",
+                "Desc": "<b:Range>增加300、<b:CriticalDamage>增加<?1>.",
                 "Parameters": [
                     [
                         "11.2%",
@@ -107184,8 +107184,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "戦術的視野の拡大+",
-                "Desc": "<b:ATK>を<?1>増加/\nさらに通常攻撃の射程を300、<b:CriticalDamage>率を<?2>増加",
+                "Name": "戰術視野擴大＋",
+                "Desc": "<b:ATK>增加<?1>；\n<b:Range>增加300、<b:CriticalDamage>增加<?2>.",
                 "Parameters": [
                     [
                         "390",
@@ -107234,8 +107234,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "制圧攻撃",
-                "Desc": "全ての攻撃が敵の防御力を<?1>無視/\n<b:ATK>を<?2>増加/\nExスキル、またはノーマルスキルの使用時、すぐにリロードした後、最初の<s:FormChange>は扇形範囲内の敵に対して攻撃力の<?3>分のダメージ",
+                "Name": "鎮壓攻擊",
+                "Desc": "<b:ATK>增加<?2>.\n自身的所有攻擊均無視目標<?1>的防禦力.\n自身使用EX技能及普通技能時，立即換彈，換彈後的第1次普通攻擊改為：對扇形範圍內的敵方單位造成自身攻擊力<?3>的傷害.",
                 "Parameters": [
                     [
                         "60%",
@@ -107542,7 +107542,7 @@
         "DefaultOrder": 190,
         "PathName": "Shiroko_Terror",
         "DevName": "CH0263",
-        "Name": "シロコ＊テラー",
+        "Name": "白子＊恐怖",
         "School": "Abydos",
         "Club": "AbydosStudentCouncil",
         "StarGrade": 3,
@@ -107565,13 +107565,13 @@
         ],
         "CollectionBG": "BG_AbydosResidence2_Collection",
         "FamilyName": "砂狼",
-        "PersonalName": "シロコ",
-        "SchoolYear": "3年生",
-        "CharacterAge": "17歳",
+        "PersonalName": "白子",
+        "SchoolYear": "3年級",
+        "CharacterAge": "17歲",
         "Birthday": "5月16日",
-        "CharacterSSRNew": "ん、だからまだ……\n大丈夫",
-        "ProfileIntroduction": "プレナパテスと共にやってきた別世界線のシロコ。\n\nこの世界のシロコと同じ存在ではあるが、少し成長した姿をしている。アビドスを大切にしており、学校や自治区の復興のためならどんな手段を厭わないが、たまに突拍子もない姿を見せる時も。",
-        "Hobby": "ジョギング、体力トレーニング、ロードバイク",
+        "CharacterSSRNew": "嗯、都說了我還……\n我沒事",
+        "ProfileIntroduction": "和誘騙者一同來自另一世界線的白子。\n\n與這一世界的白子是相同的存在，但外貌更為成熟。\n重視阿拜多斯，如果是為了復興學校和自治區的話不惜使用任何手段，但有時也能見到她出人意料的樣子。",
+        "Hobby": "慢跑、體力訓練、公路自行車",
         "CharacterVoice": "小倉唯",
         "BirthDay": "5/16",
         "Illustrator": "Doremsan2j",
@@ -107622,7 +107622,7 @@
             {
                 "SkillType": "ex",
                 "Name": "火力強化",
-                "Desc": "ドローンを召喚（40秒間）\nドローンが維持される間、<s:FormChange>は攻撃力の120%分のダメージを与えるように変更/\n会心値を<?1>、<b:CriticalDamage>率を<?2>増加（40秒間）/\n自身に対して最大HPの20%分ダメージ\n（このスキルでシロコ＊テラーは退却しません）",
+                "Desc": "召喚無人機(持續40秒)，\n無人機在場期間，對自身造成以下效果：\n- <s:FormChange>改為：對1名敵方單位造成自身攻擊力120%的傷害.\n對自身造成以下效果：\n- <b:CriticalChance>增加<?1>(持續40秒)\n- <b:CriticalDamage>增加<?2>(持續40秒)；\n- 造成自身最大生命值20%的傷害.\n※ 使用該技能不會令白子＊恐怖退場.",
                 "Parameters": [
                     [
                         "42%",
@@ -107691,8 +107691,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "手榴弾投擲・改",
-                "Desc": "40秒毎に、敵1人に対して攻撃力の<?1>分のダメージ/\nExスキルの使用時、「ドローン召喚：十字砲火」にスキルが変更されます。",
+                "Name": "手榴彈投擲・改",
+                "Desc": "(<s:FormChange='無人機'>不在場期間)\n每40秒，對1名敵方單位造成以下效果：\n- 造成自身攻擊力<?1>的傷害.",
                 "Parameters": [
                     [
                         "370%",
@@ -107730,8 +107730,8 @@
                     {
                         "Id": "CH0263Public02",
                         "SkillType": "normal",
-                        "Name": "ドローン召喚：十字砲火",
-                        "Desc": "Exスキルの使用時、敵1人に対して攻撃力の<?1>分のダメージ/\nExスキルのドローンが消失すると、「手榴弾投擲・改」にスキルが変更されます。",
+                        "Name": "無人機召喚：十字炮火",
+                        "Desc": "(<s:FormChange='無人機'>在場期間)\n自身使用EX技能後，對1名敵方單位造成以下效果：\n- 造成自身攻擊力<?1>的傷害.",
                         "Parameters": [
                             [
                                 "474%",
@@ -107770,8 +107770,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "精密照準",
-                "Desc": "<b:ATK>を<?1>増加",
+                "Name": "精密瞄準",
+                "Desc": "<b:ATK>增加<?1>.",
                 "Parameters": [
                     [
                         "14%",
@@ -107808,8 +107808,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "精密照準+",
-                "Desc": "<b:CriticalDamage>を<?1>増加/\nさらに<b:ATK>を<?2>増加",
+                "Name": "精密瞄準＋",
+                "Desc": "<b:CriticalDamage>增加<?1>；\n<b:ATK>增加<?2>.",
                 "Parameters": [
                     [
                         "2000",
@@ -107858,8 +107858,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "呼吸を整える時間",
-                "Desc": "<b:EnhanceMysticRate>を<?1>加算/\nシロコ＊テラーの現在のHPが1%以下の時、15秒間、退却猶予を適用（クールタイム90秒）\n退却猶予中にHPを全て回復できなかった場合、即退却",
+                "Name": "喘息之時",
+                "Desc": "<b:EnhanceMysticRate>加算<?1>.\n自身當前生命值低於1%時，立即對自身造成以下效果(冷卻90秒)：\n- 15秒內每秒賦予自身1層<s:CH0263_ExtraPassive_02>狀態(共15層).\n※ 自身擁有<s:CH0263_ExtraPassive_02>狀態期間，自身不會退場；自身生命值回復至100%時，立即移除自身擁有的所有<s:CH0263_ExtraPassive_02>層數且停止繼續賦予層數；自身擁有<s:CH0263_ExtraPassive_02>15層後，立即退場.",
                 "Parameters": [
                     [
                         "25.92%",
@@ -107880,20 +107880,20 @@
                         "Type": "BuffSelf",
                         "Value": [
                             [
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0
+                                2592,
+                                2722,
+                                2852,
+                                3370,
+                                3500,
+                                3629,
+                                4148,
+                                4277,
+                                4407,
+                                4925
                             ]
                         ],
-                        "Stat": "None_Base",
-                        "Channel": 90081
+                        "Stat": "EnhanceMysticRate_Base",
+                        "Channel": 34
                     }
                 ]
             }
@@ -107959,7 +107959,7 @@
         "IsLimited": 1,
         "Weapon": {
             "Name": "BLACK FANG 465",
-            "Desc": "シロコが愛用するアサルトライフル。\n\nところどころ修理した痕跡があるものの、こまめに手入れしているため運用に問題はない。",
+            "Desc": "白子愛用的突擊步槍。\n\n雖說槍身各處佈滿了修理的痕跡，但並未疏於保養，仍可正常使用。",
             "AdaptationType": "Outdoor",
             "AdaptationValue": 1,
             "AttackPower1": 103,
@@ -108110,7 +108110,7 @@
         "DefaultOrder": 191,
         "PathName": "Atsuko_Swimsuit",
         "DevName": "CH0267",
-        "Name": "アツコ（水着）",
+        "Name": "敦子（泳裝）",
         "School": "Arius",
         "Club": "AriusSqud",
         "StarGrade": 1,
@@ -108133,13 +108133,13 @@
         ],
         "CollectionBG": "BG_BeachStage_Collection",
         "FamilyName": "秤",
-        "PersonalName": "アツコ",
-        "SchoolYear": "1年生",
-        "CharacterAge": "15歳",
+        "PersonalName": "敦子",
+        "SchoolYear": "1年級",
+        "CharacterAge": "15歲",
         "Birthday": "1月20日",
         "CharacterSSRNew": "",
-        "ProfileIntroduction": "ビーチに遊びに来たアリウススクワッドの一員\n\n海も、お祭りも初めてなので、いつもより楽しそうにしている。ブラックマーケットで買ったデジタルカメラで海の思い出を残そうとしている。",
-        "Hobby": "花のお手入れ",
+        "ProfileIntroduction": "奧利斯分校所屬，來到沙灘遊玩的「奧利斯小隊」一員。\n\n無論來到海邊還是參加節日都是第一次，因此看上去比平時更加開心。\n正用著從黑市買來的數碼相機打算將海邊的回憶珍藏起來。",
+        "Hobby": "栽培花朵",
         "CharacterVoice": "花澤香菜",
         "BirthDay": "1/20",
         "Illustrator": "Paruru",
@@ -108166,8 +108166,8 @@
         "Skills": [
             {
                 "SkillType": "ex",
-                "Name": "夏の思い出",
-                "Desc": "味方1人に対して、治癒力の<?1>分の回復",
+                "Name": "夏日的回憶",
+                "Desc": "對1名我方單位造成以下效果：\n- 回復自身治癒力<?1>的生命值.",
                 "Parameters": [
                     [
                         "153%",
@@ -108200,8 +108200,8 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "この花をあなたに",
-                "Desc": "30秒毎に、HPが最も低い味方1人の<b:HealEffectiveness>率を<?1>増加（20秒間）",
+                "Name": "此花獻給你",
+                "Desc": "每30秒，對1名生命值百分比最低的我方單位造成以下效果(持續20秒)：\n- <b:HealEffectiveness>增加<?1>(持續20秒).",
                 "Parameters": [
                     [
                         "18.9%",
@@ -108241,8 +108241,8 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "爽やかな海風",
-                "Desc": "<b:HealPower>を<?1>増加",
+                "Name": "清爽的海風",
+                "Desc": "<b:HealPower>增加<?1>.",
                 "Parameters": [
                     [
                         "14%",
@@ -108279,8 +108279,8 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "爽やかな海風+",
-                "Desc": "<b:HealPower>を<?1>増加/\nさらに<b:HealPower>を<?2>増加",
+                "Name": "清爽的海風＋",
+                "Desc": "<b:HealPower>增加<?1>；\n<b:HealPower>增加<?2>.",
                 "Parameters": [
                     [
                         "1044",
@@ -108329,8 +108329,8 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "ビーチのお姫様",
-                "Desc": "味方の<b:AttackSpeed>を<?1>増加",
+                "Name": "沙灘的公主大人",
+                "Desc": "令編隊內的學生<b:AttackSpeed>增加<?1>.",
                 "Parameters": [
                     [
                         "9.1%",
@@ -108435,8 +108435,8 @@
         ],
         "IsLimited": 2,
         "Weapon": {
-            "Name": "スコルピウス",
-            "Desc": "アツコが使用するサブマシンガン。\n\nスクワッドの夏を守るのに一役買っている。",
+            "Name": "Scorpius",
+            "Desc": "敦子使用的衝鋒槍。\n\n為了守護小隊的夏日時光而挺身而出的槍。",
             "AdaptationType": "Outdoor",
             "AdaptationValue": 1,
             "AttackPower1": 88,

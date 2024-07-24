@@ -106660,7 +106660,7 @@
             {
                 "SkillType": "normal",
                 "Name": "プレート交換",
-                "Desc": "40秒毎に、防弾プレートを装着して<b:DamagedRatio>を<?1>減少/\n（防弾プレートは25回攻撃を受けたら解除）",
+                "Desc": "40秒毎に、<s:CH0258_Public>を装着して<b:DamagedRatio>を<?1>減少/\n（<s:CH0258_Public>は25回攻撃を受けたら解除）",
                 "Parameters": [
                     [
                         "12.7%",
@@ -108107,7 +108107,7 @@
             {
                 "SkillType": "sub",
                 "Name": "呼吸を整える時間",
-                "Desc": "<b:EnhanceMysticRate>を<?1>加算/\nシロコ＊テラーの現在のHPが1%以下の時、15秒間、退却猶予を適用（クールタイム90秒）\n退却猶予中にHPを全て回復できなかった場合、即退却",
+                "Desc": "<b:EnhanceMysticRate>を<?1>加算/\nシロコ＊テラーの現在のHPが1%以下の時、15秒間、<s:CH0263_ExtraPassive_02>を適用（クールタイム90秒）\n<s:CH0263_ExtraPassive_02>中にHPを全て回復できなかった場合、即退却",
                 "Parameters": [
                     [
                         "25.92%",
@@ -108128,20 +108128,20 @@
                         "Type": "BuffSelf",
                         "Value": [
                             [
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0,
-                                0
+                                2592,
+                                2722,
+                                2852,
+                                3370,
+                                3500,
+                                3629,
+                                4148,
+                                4277,
+                                4407,
+                                4925
                             ]
                         ],
-                        "Stat": "None_Base",
-                        "Channel": 90081
+                        "Stat": "EnhanceMysticRate_Base",
+                        "Channel": 34
                     }
                 ]
             }

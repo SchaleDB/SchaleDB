@@ -490,10 +490,10 @@
         "Debuff_ElectricShock": "感電",
         "Debuff_Stability": "安定値",
         "Debuff_CostRegen": "コスト回復力",
-        "Debuff_BurnDamagedIncrease": "Burn DMG Taken",
-        "Debuff_ChillDamagedIncrease": "Chill DMG Taken",
-        "Debuff_ElectricShockDamagedIncrease": "Shock DMG Taken",
-        "Debuff_PoisonDamagedIncrease": "Poison DMG Taken",
+        "Debuff_BurnDamagedIncrease": "火傷被ダメージ",
+        "Debuff_ChillDamagedIncrease": "悪寒被ダメージ",
+        "Debuff_ElectricShockDamagedIncrease": "感電被ダメージ",
+        "Debuff_PoisonDamagedIncrease": "中毒被ダメージ",
         "CC_Fear": "恐怖状態",
         "CC_Stunned": "気絶状態",
         "CC_Provoke": "挑発状態",
@@ -533,8 +533,8 @@
         "Special_CH0239_ExtraPassive": "潜入行動",
         "Special_EN0008_Obelisk": "「帯電」",
         "Special_CH0220_Public": "「シュガーラッシュ」",
-        "Special_CH0258_Public": "Bulletproof Plate",
-        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
+        "Special_CH0258_Public": "防弾プレート",
+        "Special_CH0263_ExtraPassive_02": "退却猶予"
     },
     "BuffNameLong": {
         "Buff_AidAttitude": "救護の心構え",
@@ -617,10 +617,10 @@
         "Debuff_ElectricShock": "感電",
         "Debuff_Stability": "安定値減少",
         "Debuff_CostRegen": "コスト回復力減少",
-        "Debuff_BurnDamagedIncrease": "Burn Damage Taken",
-        "Debuff_ChillDamagedIncrease": "Chill Damage Taken",
-        "Debuff_ElectricShockDamagedIncrease": "Shock Damage Taken",
-        "Debuff_PoisonDamagedIncrease": "Poison Damage Taken",
+        "Debuff_BurnDamagedIncrease": "火傷被ダメージ",
+        "Debuff_ChillDamagedIncrease": "悪寒被ダメージ",
+        "Debuff_ElectricShockDamagedIncrease": "感電被ダメージ",
+        "Debuff_PoisonDamagedIncrease": "中毒被ダメージ",
         "CC_Fear": "恐怖状態",
         "CC_Stunned": "気絶状態",
         "CC_Provoke": "挑発状態",
@@ -660,8 +660,8 @@
         "Special_CH0239_ExtraPassive": "潜入行動",
         "Special_EN0008_Obelisk": "「帯電」",
         "Special_CH0220_Public": "「シュガーラッシュ」",
-        "Special_CH0258_Public": "Bulletproof Plate",
-        "Special_CH0263_ExtraPassive_02": "Postponed Retreat"
+        "Special_CH0258_Public": "防弾プレート",
+        "Special_CH0263_ExtraPassive_02": "退却猶予"
     },
     "BuffTooltip": {
         "Buff_AidAttitude": "一定間隔でHPを持続的に回復する。\n解除後にミネのノーマルスキルを発動する。",
@@ -787,8 +787,8 @@
         "Special_CH0239_ExtraPassive": "カヨコ（ドレス）の会心ダメージ率が増加し、EXスキルによる攻撃を確定会心に変更する。",
         "Special_EN0008_Obelisk": "セトの憤怒による落雷の対象にならない。",
         "Special_CH0220_Public": "シュガーラッシュメンバーの様々なスキルを強化する。",
-        "Special_CH0258_Public": "Reduces damage taken by Hoshino (Battle).",
-        "Special_CH0263_ExtraPassive_02": "Shiroko Terror cannot be defeated for the duration of the effect, but will be defeated once it expires if HP is not fully recovered."
+        "Special_CH0258_Public": "ホシノ（臨戦）の被ダメージを減少する。",
+        "Special_CH0263_ExtraPassive_02": "この状態の持続中シロコ＊テラーは退却しない。この状態の持続中にHPを全て回復できなかった場合、持続終了時に退却する。"
     },
     "ServerName": {
         "0": "日本",
@@ -861,7 +861,7 @@
         "BattleCovered": "遮蔽物使用{0}",
         "ExSkill": "EXスキル{0}",
         "ExSkillLevel": "EXスキル（フィールド）{0}",
-        "Formchange": "スタイル変更",
+        "Formchange": "戦闘スタイル切り替え",
         "UIEventLobbyEnter": "イベントロビー入場{0}",
         "UIEventLobbyIdle": "イベントロビー一般{0}",
         "UIEventShopEnter": "イベントショップ入場{0}",
@@ -1262,6 +1262,6 @@
         "bounce": "連鎖距離",
         "skill_duration": "スキルモーション",
         "tsa_board": "T.S.A搭乗",
-        "tooltip_combat_style": "Switch Combat Style"
+        "tooltip_combat_style": "戦闘スタイル切り替え"
     }
 }
