@@ -292,7 +292,7 @@
                 "Radius": [
                     {
                         "Type": "Circle",
-                        "Radius": 300
+                        "Radius": 400
                     }
                 ],
                 "Icon": "COMMON_SKILLICON_WEAPONBUFF",
@@ -320,7 +320,7 @@
                 "Radius": [
                     {
                         "Type": "Circle",
-                        "Radius": 300
+                        "Radius": 400
                     }
                 ],
                 "Icon": "COMMON_SKILLICON_HEAL",
@@ -501,6 +501,14 @@
                         "778%"
                     ]
                 ],
+                "Duration": 103,
+                "Range": 750,
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 200
+                    }
+                ],
                 "Icon": "COMMON_SKILLICON_CIRCLE",
                 "SkillType": "normal",
                 "IsSummonSkill": true,
@@ -550,6 +558,12 @@
                         "39.7%",
                         "44.4%"
                     ]
+                ],
+                "Radius": [
+                    {
+                        "Type": "Circle",
+                        "Radius": 400
+                    }
                 ],
                 "Icon": "COMMON_SKILLICON_BULLETTYPEBUFF",
                 "SkillType": "passive",
@@ -1065,12 +1079,25 @@
                         "4063%"
                     ]
                 ],
+                "Duration": 86,
+                "Range": 850,
                 "Icon": "COMMON_SKILLICON_TARGET",
                 "SkillType": "normal",
                 "IsSummonSkill": true,
                 "Effects": [
                     {
-                        "Type": "DMGSingle",
+                        "Type": "DMGMulti",
+                        "Hits": [
+                            1250,
+                            1250,
+                            1250,
+                            1250,
+                            1250,
+                            1250,
+                            1250,
+                            1250
+                        ],
+                        "HitsParameter": 1,
                         "Scale": [
                             213871,
                             224563,
