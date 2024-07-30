@@ -97075,7 +97075,7 @@
         "Id": 10086,
         "IsReleased": [
             true,
-            false,
+            true,
             false
         ],
         "DefaultOrder": 171,
@@ -97108,15 +97108,15 @@
         "SchoolYear": "3rd Year",
         "CharacterAge": "17 years old",
         "Birthday": "February 19th",
-        "CharacterSSRNew": "あなたのために、頑張るわ",
-        "ProfileIntroduction": "パーティーに参加すべくドレスに着替えた、ゲヘナ学園所属の風紀委員長。\n\n基本的には面倒くさがり屋さんの少女だが、先生がゲヘナのパーティーを楽しみにしているという話を耳にし、普段より少し張り切っている。先生の前で演奏すると決まった日から、苦手なピアノの練習も、いつもより頑張っているのだとか。",
-        "Hobby": "睡眠、休憩",
+        "CharacterSSRNew": "All my efforts are yours.",
+        "ProfileIntroduction": "The Head Prefect of the Gehenna Academy sporting a beautiful dress for the upcoming party.\n\nThis is the type of event she'd usually think of as a bother, but the promise of Sensei's presence at Gehenna's party has piqued her interest. She might not even be aware of the enthusiasm oozing out of her as she diligently practices her piano solo.",
+        "Hobby": "Sleeping, rest and relaxation",
         "CharacterVoice": "Ryō Hirohashi",
         "BirthDay": "2/19",
         "Illustrator": "DoReMi",
         "Designer": "DoReMi",
         "CharHeightMetric": "142cm",
-        "CharHeightImperial": null,
+        "CharHeightImperial": "4'8\"",
         "StabilityPoint": 1372,
         "AttackPower1": 346,
         "AttackPower100": 3467,
@@ -97168,7 +97168,7 @@
             },
             {
                 "SkillType": "ex",
-                "Name": "開演：イシュ・ボシェテ",
+                "Name": "Opening: Ishbosheth",
                 "Desc": "Adopts a concentrated firing stance for 10s.\nWhile in this stance, movement and normal attacks are disabled, and changes EX Skill for the next three uses (skill is immediately redrawn each time).\nCC effects will cancel the concentrated firing stance.",
                 "Parameters": [],
                 "Cost": [
@@ -97186,7 +97186,7 @@
                     {
                         "Id": "CH0230Ex02",
                         "SkillType": "ex",
-                        "Name": "旋律の一音目",
+                        "Name": "Melody's First Note",
                         "Desc": "Deals <?1> damage to enemies in a straight line. Damage to subsequent enemies is reduced by 45% per enemy hit (to a minimum of 10% of the original damage).\nThis attack ignores Stability and will always deal its maximum damage.\nIncreases the remaining duration of concentrated firing stance to 10s.",
                         "Parameters": [
                             [
@@ -97238,7 +97238,7 @@
                     {
                         "Id": "CH0230Ex03",
                         "SkillType": "ex",
-                        "Name": "旋律の二音目",
+                        "Name": "Melody's Second Note",
                         "Desc": "Deals <?1> damage to enemies in a straight line. Damage to subsequent enemies is reduced by 45% per enemy hit (to a minimum of 10% of the original damage).\nThis attack ignores Stability and will always deal its maximum damage.\nIncreases the remaining duration of concentrated firing stance to 10s.",
                         "Parameters": [
                             [
@@ -97290,7 +97290,7 @@
                     {
                         "Id": "CH0230Ex04",
                         "SkillType": "ex",
-                        "Name": "終演の旋律",
+                        "Name": "The Final Song",
                         "Desc": "Deals <?1> damage to enemies in a straight line. Damage to subsequent enemies is reduced by 45% per enemy hit (to a minimum of 10% of the original damage).\nThis attack ignores Stability and will always deal its maximum damage.\nEnds concentrated firing stance after activation.",
                         "Parameters": [
                             [
@@ -97347,7 +97347,7 @@
             },
             {
                 "SkillType": "normal",
-                "Name": "抜かりない準備",
+                "Name": "Thorough Preparation",
                 "Desc": "Increases <b:EnhanceExplosionRate> by <?1> and <b:HIT> by <?2> at the start of battle. (Activates only once per battle)",
                 "Parameters": [
                     [
@@ -97420,7 +97420,7 @@
             },
             {
                 "SkillType": "passive",
-                "Name": "演奏に臨む心",
+                "Name": "A Performer's Mindset",
                 "Desc": "Increases <b:ATK> by <?1> and <b:CriticalChance> by <?2>.",
                 "Parameters": [
                     [
@@ -97486,7 +97486,7 @@
             },
             {
                 "SkillType": "weaponpassive",
-                "Name": "演奏に臨む心+",
+                "Name": "A Performer's Mindset+",
                 "Desc": "Increases <b:ATK> by <?1> plus a further <?3> and <b:CriticalChance> by <?2> plus a further <?4>.",
                 "Parameters": [
                     [
@@ -97576,7 +97576,7 @@
             },
             {
                 "SkillType": "sub",
-                "Name": "想いをここに",
+                "Name": "My Sincere Feelings",
                 "Desc": "While in concentrated firing stance, increases <b:EnhanceExplosionRate> by <?1> and become immune to <c:Provoke>.",
                 "Parameters": [
                     [
@@ -97656,7 +97656,7 @@
         ],
         "MemoryLobby": [
             5,
-            0,
+            5,
             0
         ],
         "MemoryLobbyBGM": "Theme 179 (Instrumental)",
@@ -97671,7 +97671,16 @@
                     0
                 ]
             ],
-            [],
+            [
+                [
+                    15305,
+                    3
+                ],
+                [
+                    15306,
+                    0
+                ]
+            ],
             []
         ],
         "FavorItemTags": [
@@ -97684,8 +97693,8 @@
         ],
         "IsLimited": 1,
         "Weapon": {
-            "Name": "終幕：デストロイヤー",
-            "Desc": "ヒナが自身の手足のように扱うマシンガン。\n\n普段、校則を違反したり風紀を乱す者に対して、無慈悲さを見せる代物だが、今回だけは、誰かのために心を込めて丁寧に扱っている。",
+            "Name": "Destroyer of Denouement",
+            "Desc": "A multipurpose machine gun Hina wields as naturally as any limb.\n\nIt's a merciless weapon built for punishing wrongdoers, but Hina's compassion tempers how she handles such power. As long as no one gets on her bad side, that is.",
             "AdaptationType": "Indoor",
             "AdaptationValue": 1,
             "AttackPower1": 152,
