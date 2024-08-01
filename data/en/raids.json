@@ -1688,7 +1688,7 @@
                         }
                     ],
                     "Name": "Holy Light (Relic)",
-                    "Desc": "When a relic is healed to 100% HP, it loses 95% of its HP while decreasing its <d:HealEffectiveness> by 50% for 20s and activates one of the following effects depending on the relic:\n<b>Green Relic</b>: Increases Hieronymus's <d:DamagedRatio> by 55% until the end of battle. Effect can stack up to 5 times.<?1>",
+                    "Desc": "When a relic is healed to 100% HP, activates one of the following effects depending on the relic.\nAfter activation, the relic is damaged by an amount equal to <?2> of its Max HP and its <d:HealEffectiveness> is decreased by 50% for 20s.\n<b>Green Relic</b>: Increases Hieronymus's <d:DamagedRatio> by 55% until the end of battle. Effect can stack up to 5 times.<?1>",
                     "Parameters": [
                         [
                             "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, fills Hieronymus's groggy gauge to the maximum and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
@@ -1698,6 +1698,15 @@
                             "\n<b>Red Relic</b>: Interrupts Hieronymus's currently active skill. If a skill is successfully interrupted, fills Hieronymus's groggy gauge to the maximum and increases the <b:CostRegen> of up to 4 students by <b>2500</b> for 1s.",
                             "",
                             ""
+                        ],
+                        [
+                            "95%",
+                            "95%",
+                            "95%",
+                            "95%",
+                            "95%",
+                            "250%",
+                            "250%"
                         ]
                     ]
                 },
