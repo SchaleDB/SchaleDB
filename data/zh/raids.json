@@ -3502,12 +3502,12 @@
             "IsReleased": [
                 true,
                 true,
-                false
+                true
             ],
             "MaxDifficulty": [
                 6,
                 6,
-                0
+                5
             ],
             "PathName": "Goz",
             "GroupName": "Goz",
@@ -59902,6 +59902,16 @@
                     "End": 1722456000,
                     "RewardSet": 2500,
                     "RewardSetMax": 44
+                },
+                {
+                    "SeasonId": 29,
+                    "SeasonDisplay": 28,
+                    "RaidId": 8,
+                    "Terrain": "Indoor",
+                    "Start": 1723096800,
+                    "End": 1723665600,
+                    "RewardSet": 2600,
+                    "RewardSetMax": 44
                 }
             ],
             "EliminateSeasons": [],
@@ -71028,7 +71038,12 @@
                         "Id": 159710181
                     },
                     {
-                        "Id": 200078526
+                        "Id": 200078526,
+                        "Parameters": [
+                            [
+                                "80%"
+                            ]
+                        ]
                     }
                 ]
             ],
@@ -71813,7 +71828,7 @@
             "Id": 24000,
             "IsReleased": [
                 true,
-                false,
+                true,
                 false
             ],
             "DungeonType": "Defense",
@@ -72757,6 +72772,179 @@
                 180,
                 180
             ]
+        },
+        {
+            "Id": 30000,
+            "IsReleased": [
+                true,
+                false,
+                false
+            ],
+            "DungeonType": "Destruction",
+            "Icon": "enemyinfo_totem03_timeattack",
+            "MaxDifficulty": 4,
+            "Terrain": "Outdoor",
+            "BulletType": "Normal",
+            "ArmorType": "Unarmed",
+            "EnemyLevel": [
+                25,
+                40,
+                65,
+                78
+            ],
+            "Formations": [
+                {
+                    "Id": 921200001,
+                    "Level": [
+                        25,
+                        25,
+                        25,
+                        25
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7822001,
+                        7822101,
+                        7822201,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 921200002,
+                    "Level": [
+                        40,
+                        40,
+                        40,
+                        40
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7822002,
+                        7822102,
+                        7822202,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 921200003,
+                    "Level": [
+                        65,
+                        65,
+                        65,
+                        65
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7822003,
+                        7822103,
+                        7822203,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                },
+                {
+                    "Id": 921200004,
+                    "Level": [
+                        78,
+                        78,
+                        78,
+                        78
+                    ],
+                    "Grade": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "EnemyList": [
+                        7822004,
+                        7822104,
+                        7822204,
+                        7823099,
+                        7823199,
+                        7823299
+                    ]
+                }
+            ],
+            "Rules": [
+                [
+                    {
+                        "Id": 990306261
+                    },
+                    {
+                        "Id": 2570956929
+                    }
+                ],
+                [
+                    {
+                        "Id": 990306261
+                    },
+                    {
+                        "Id": 2570956929
+                    }
+                ],
+                [
+                    {
+                        "Id": 990306261
+                    },
+                    {
+                        "Id": 2570956929
+                    },
+                    {
+                        "Id": 200078526,
+                        "Parameters": [
+                            [
+                                "40%"
+                            ]
+                        ]
+                    }
+                ],
+                [
+                    {
+                        "Id": 990306261
+                    },
+                    {
+                        "Id": 2570956929
+                    },
+                    {
+                        "Id": 200078526,
+                        "Parameters": [
+                            [
+                                "40%"
+                            ]
+                        ]
+                    },
+                    {
+                        "Id": 27528739
+                    }
+                ]
+            ],
+            "BattleDuration": [
+                180,
+                180,
+                80,
+                90
+            ]
         }
     ],
     "TimeAttackRules": [
@@ -73010,7 +73198,7 @@
             "Id": 200078526,
             "Icon": "timeattackgeas_icon_npc_special_healconvertdamage",
             "Name": "我方 - 稻草人：回复伤害",
-            "Desc": "稻草人受到回复时，对全体敌方单位造成该次回复生命值回复量80%的伤害(无视目标免伤率)."
+            "Desc": "稻草人受到回复时，对全体敌方单位造成该次回复生命值回复量<?1>的伤害(无视目标免伤率)."
         },
         {
             "Id": 1463735831,
@@ -73058,7 +73246,7 @@
             "Id": 883675310,
             "Icon": "timeattackgeas_icon_ally_buff_attackpower",
             "Name": "我方 - 攻击力上升：FRONT 敌方 - 生命值上升",
-            "Desc": "站位为FRONT的学生<b:ATK>增加70,000.\n全体敌方单位<b:MAXHP>增加500%."
+            "Desc": "站位为FRONT的学生<b:ATK>增加35,000.\n全体敌方单位<b:MAXHP>增加500%."
         },
         {
             "Id": 3605118168,
@@ -73107,6 +73295,12 @@
             "Icon": "timeattackgeas_icon_npc_debuff_elctricshock",
             "Name": "我方 - 前卫君：过载",
             "Desc": "前卫君每??秒获得<d:ElectricShock>状态，效果为每4秒受到伤害(可叠加)."
+        },
+        {
+            "Id": 27528739,
+            "Icon": "timeattackgeas_icon_enemy_special_damage_triggerheal",
+            "Name": "かかし回復時、味方にダメージ",
+            "Desc": "かかしを回復時、味方にダメージを与えます。"
         }
     ],
     "WorldRaid": [
