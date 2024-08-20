@@ -99,7 +99,7 @@
             ]
         }
     ],
-    "build": 1723320495,
+    "build": 1723935982,
     "Regions": [
         {
             "Name": "Jp",
@@ -194,27 +194,22 @@
             "CurrentGacha": [
                 {
                     "characters": [
-                        10075,
-                        10017,
-                        10037
+                        20026,
+                        20031
                     ],
-                    "start": 1722996000,
-                    "end": 1723600800
+                    "start": 1723600800,
+                    "end": 1724205600
                 }
             ],
-            "CurrentEvents": [
-                {
-                    "event": 10829,
-                    "start": 1722996000,
-                    "end": 1723600800
-                }
-            ],
+            "CurrentEvents": [],
             "CurrentRaid": [
                 {
-                    "type": "TimeAttack",
-                    "raid": 30000,
-                    "start": 1722996000,
-                    "end": 1723575600
+                    "type": "EliminateRaid",
+                    "raid": 8,
+                    "terrain": "Outdoor",
+                    "season": 16,
+                    "start": 1723600800,
+                    "end": 1724180400
                 }
             ]
         },
@@ -233,7 +228,7 @@
                 15,
                 20
             ],
-            "PotentialMax": 25,
+            "PotentialMax": 0,
             "CampaignMax": 25,
             "CampaignExtra": true,
             "Events": [
@@ -301,27 +296,22 @@
             "CurrentGacha": [
                 {
                     "characters": [
-                        10056,
-                        20021
+                        20013,
+                        20012,
+                        10058
                     ],
-                    "start": 1722909600,
-                    "end": 1723514400
+                    "start": 1723514400,
+                    "end": 1724119200
                 }
             ],
             "CurrentEvents": [
                 {
-                    "event": 10819,
-                    "start": 1722909600,
-                    "end": 1723514400
+                    "event": 834,
+                    "start": 1724119200,
+                    "end": 1725328800
                 }
             ],
             "CurrentRaid": [
-                {
-                    "type": "TimeAttack",
-                    "raid": 24000,
-                    "start": 1722909600,
-                    "end": 1723489200
-                },
                 {
                     "type": "EliminateRaid",
                     "raid": 5,
@@ -371,7 +361,8 @@
                 818,
                 10801,
                 10802,
-                10803
+                10803,
+                10805
             ],
             "Event701Max": [
                 12,
@@ -387,28 +378,28 @@
             "CurrentGacha": [
                 {
                     "characters": [
-                        10053,
-                        10054
+                        10050,
+                        10025,
+                        20006,
+                        10011
                     ],
-                    "start": 1722492000,
-                    "end": 1723701600
+                    "start": 1723701600,
+                    "end": 1724306400
                 }
             ],
             "CurrentEvents": [
                 {
-                    "event": 818,
-                    "start": 1722492000,
-                    "end": 1723701600
+                    "event": 10805,
+                    "start": 1723701600,
+                    "end": 1724306400
                 }
             ],
             "CurrentRaid": [
                 {
-                    "type": "Raid",
-                    "raid": 8,
-                    "terrain": "Indoor",
-                    "season": 29,
-                    "start": 1723096800,
-                    "end": 1723665600
+                    "type": "TimeAttack",
+                    "raid": 6000,
+                    "start": 1723701600,
+                    "end": 1724270400
                 }
             ]
         }
@@ -419,6 +410,12 @@
         "ew"
     ],
     "Changelog": [
+        {
+            "date": "2024/08/19",
+            "contents": [
+                "<h5>Schale DB v1.0.0 Launched!</h5><p>The new version of Schale DB has launched and is now accessible at <a href=\"https://schaledb.com\">schaledb.com</a>.<br/>Schale.gg will no longer be receiving updates but will be accessible for a while before automatically redirecting. To bring collection data over, you can generate an export string first by selecting \"Manage Collection Data\" from the settings menu.<br />If you have publicly available resources that point to schale.gg, please update them to point to the correct schaledb.com URL (please be aware page routes are different).<br/>If you haven't already, please consider joining our <a href=\"https://discord.gg/QB7wdyYf4u\">Discord community</a> for the latest announcements or to provide feedback.</p>"
+            ]
+        },
         {
             "date": "2024/05/09",
             "contents": [
@@ -471,13 +468,6 @@
             "date": "2023/09/15",
             "contents": [
                 "<ul><li>Added an option to display the bonus event currency earned on event stages.</li><li>Bonus can be displayed based on either the maximum possible amount or the maximum amount attainable with the currently owned students.</li><li>Fixed issue with some stage maps not displaying linked tiles correctly.</li></ul>"
-            ]
-        },
-        {
-            "date": "2023/09/11",
-            "contents": [
-                "<h6>CN Server Mode</h6>",
-                "<ul><li>Added a CN server mode that will use the maximum level, drop rates and visible content on the CN server.</li><li>(Please note that currently, the \"Current Events\" section and Raid season information will not be available for the CN server mode. Translations and names may differ from those found in the official Chinese release.)</li></ul>"
             ]
         }
     ],

@@ -3489,17 +3489,7 @@ $.when($.ready, loadPromise).then(function() {
     if (showLinks) {
         $("#modal-links").modal('show')
     } else {
-        const currentChangelog = parseInt(data.config.Changelog[0].date.replace(/\//g,''))
-
-        if (localStorage.getItem("changelog_seen")) {
-            if (currentChangelog > parseInt(localStorage.getItem("changelog_seen"))) {
-                $("#modal-changelog").modal('show')
-                localStorage.setItem("changelog_seen", currentChangelog)
-            } 
-        } else {
-            $("#modal-changelog").modal('show')
-            localStorage.setItem("changelog_seen", currentChangelog)
-        }
+        $("#modal-changelog").modal('show')
     }
 
     //Keyboard Shortcut for search
